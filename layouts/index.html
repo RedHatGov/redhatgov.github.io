@@ -1,0 +1,46 @@
+{{ .Scratch.Set "BodyClass" "cards-pf" }}
+
+{{ partial "header" . }}
+
+<div class="jumbotron jumbotron-home text-center">
+  <h1>{{ .Site.Title }}</h1>
+  <h2>{{ .Site.Params.Description }}</h2>
+</div>
+
+<div class="container container-cards-pf">
+  <div class="row row-cards-pf">
+    {{ range where .Site.Menus.main "Identifier" "workshops" }}
+      {{ range .Children }}
+        <div class="col-xs-6 col-md-4">
+          <div class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select">
+            <div class="card-pf-body">
+              <div class="card-pf-top-element">
+                <span class="{{ .Pre | default "pficon pficon-bundle" }} card-pf-icon-circle"></span>
+              </div>
+              <h2 class="card-pf-title text-center">{{ .Name }}</h2>
+              <p class="card-pf-info text-center">
+                <a class="view-workshop-url" href="{{ .URL }}">View Workshop</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
+
+<script>
+  $(function() {
+    // matchHeight the contents of each .card-pf and then the .card-pf itself
+    $(".row-cards-pf > [class*='col'] > .card-pf .card-pf-title").matchHeight();
+    $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-body").matchHeight();
+    $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-footer").matchHeight();
+    $(".row-cards-pf > [class*='col'] > .card-pf").matchHeight();
+
+    $('.card-pf-view-single-select').click(function(event) {
+      window.location.href = $('a.view-workshop-url', this).attr('href');
+    });
+  });
+</script>
+
+{{ partial "footer" . }}

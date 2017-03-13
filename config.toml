@@ -1,0 +1,24 @@
+title = "Red Hat | Public Sector"
+baseURL = "http://redhatgov.github.io/"
+theme = "redhatgov"
+languageCode = "en-us"
+metaDataFormat = "yaml"
+
+[params]
+    description = "We know workshops, we have the best workshops."
+
+[taxonomies]
+    workshop = "workshops"
+
+[blackfriday]
+    smartypants = false
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "Workshops"
+    identifier = "workshops"
+    weight = 100

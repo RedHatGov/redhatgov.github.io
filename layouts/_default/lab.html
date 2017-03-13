@@ -1,0 +1,22 @@
+{{ partial "header" . }}
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>{{ .Title }}</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    {{ partial "prev_next_links" . }}
+
+    {{ .Content }}
+
+    {{ partial "prev_next_links" . }}
+
+    <p class="text-center">
+      {{ $mainLabPage := delimit (slice "/workshops" .Params.workshops) "/" }}
+      <a href="{{ $mainLabPage | absURL }}">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+{{ partial "footer" . }}

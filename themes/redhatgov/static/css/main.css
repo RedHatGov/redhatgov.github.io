@@ -1,0 +1,26 @@
+body {
+    padding-top: 51px;
+}
+
+#footer {
+    margin-top: 50px;
+}
+
+.navbar-brand {
+    padding: 5px 20px;
+}
+
+.navbar-no-margin {
+    margin-bottom: 0;
+}
+
+.jumbotron-home {
+    background-color: #cc0000;
+    color: #ffffff;
+}
+
+.jumbotron-page {
+    background: url("/img/jumbotron-page-bg.png") center center repeat;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}

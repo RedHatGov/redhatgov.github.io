@@ -1,0 +1,22 @@
+{{ $taxonomy := .Params.workshops }}
+{{ $sortByField := "workshop_weight" }}
+
+{{ $firstLab := (index (first 1 ((index $.Site.Taxonomies.workshops $taxonomy).Pages.ByParam $sortByField)) 0) }}
+{{ $lastLab := (index (last 1 ((index $.Site.Taxonomies.workshops $taxonomy).Pages.ByParam $sortByField)) 0) }}
+{{ $prevLab := (((index $.Site.Taxonomies.workshops $taxonomy).Pages.ByParam $sortByField).Prev .) }}
+{{ $nextLab := (((index $.Site.Taxonomies.workshops $taxonomy).Pages.ByParam $sortByField).Next .) }}
+
+<nav>
+  <ul class="pager">
+    {{ if ne $prevLab $lastLab }}
+      <li class="previous">
+        <a href="{{ $prevLab.Permalink }}">&larr; Previous: {{ $prevLab.Title }}</a>
+      </li>
+    {{ end }}
+    {{ if ne $nextLab $firstLab }}
+      <li class="next">
+        <a href="{{ $nextLab.Permalink }}">Next: {{ $nextLab.Title }} &rarr;</a>
+      </li>
+    {{ end }}
+  </ul>
+</nav>

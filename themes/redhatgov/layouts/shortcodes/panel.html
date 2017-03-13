@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" href="#collapse{{ md5 .Inner }}" class="collapsed">
+        {{ .Get 0 }}
+      </a>
+    </h4>
+  </div>
+  <div id="collapse{{ md5 .Inner }}" class="panel-collapse collapse">
+    <div class="panel-body">
+       {{ .Inner }}
+    </div>
+  </div>
+</div>
