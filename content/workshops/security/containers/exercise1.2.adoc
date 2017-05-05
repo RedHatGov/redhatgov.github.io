@@ -1,0 +1,120 @@
+---
+title: "Docker `USER`"
+workshops: containers
+workshop_weight: 40
+layout: lab
+---
+
+:imagesdir: /workshops/security/containers/images
+
+= Exercise 1.2 - Docker `USER`
+
+---
+
+****
+
+
+
+====
+
+image::term.png[]
+
+[.lead]
+Now that you've gotten a sense of software provenance in Dockerfiles lets take alook at the `USER` in `Dockerfiles`.
+
+By default docker containers run as root. A docker container running as root has full control of the host system. As docker matures, more secure default options may become available. For now, requiring root is dangerous for others and may not be available in all environments. Your image should use the USER instruction to specify a *non-root* user for containers to run as. If your software does not create its own user, you can create a user and group in the Dockerfile.
+
+
+====
+
+[.lead]
+User in Dockerfiles
+
+====
+
+**Step 1:**
+
+*Reusing an Image with a Non-root User*
+
+The default user in a Dockerfile is the user of the parent image. For example, if your image is derived from an image that uses a non-root user  example: `swuser`, then `RUN` commands in your `Dockerfile` will run as `swuser`.
+
+If you need to run as root, you should change the user to root at the beginning of your Dockerfile then change back to the correct user with another `USER` instruction:
+
+.Example Dockerfile
+[source,bash]
+----
+FROM fedora:25
+
+RUN groupadd -r swuser -g 433 && \
+    useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
+
+USER root <1>
+
+RUN dnf install -y vim
+
+USER swuser <2>
+----
+
+<1> Switch to the root user to perform actions that need elevated permissions such as installing software via yum/dnf.
+
+<2> Then switch back to a lower permissions user to run the image.
+
+Now we can test this out by building the following `Dockerfile`
+
+.Dockerfile
+[source,bash]
+----
+FROM fedora:25
+
+RUN groupadd -r swuser -g 433 && \
+    useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
+
+USER root
+
+RUN dnf install -y vim
+
+USER swuser
+----
+
+*Step 2:*
+
+Build the `Dockerfile`
+
+.Make new directory & Build Dockerfile
+[source,bash]
+----
+mkdir user-test
+
+cd user-test
+
+vim Dockerfile <1>
+----
+
+[NOTE]
+Copy the `Dockerfile` above. Press `i` for Insert, then cut and paste `control + v`, then escape and write the file `esc`, `:wq`.
+
+
+Now build the image
+
+.build the image
+[source,bash]
+----
+sudo docker build -t user-test:1 .
+----
+
+Now run and test the image to see who the container is running as. What do you see?
+
+.run the image
+[source,bash]
+----
+sudo docker run --rm -it user-test:1 whoami
+----
+For more information on Containers and correct users to use here are a few good articles.
+
+http://www.projectatomic.io/blog/2015/08/why-we-dont-let-non-root-users-run-docker-in-centos-fedora-or-rhel/[Why we don't let non-root users run Docker in CentOS, Fedora, or RHEL]
+
+http://www.projectatomic.io/docs/docker-image-author-guidance/[Guidance for Docker Image Authors]
+
+image::redhat.svg[Red Hat]
+
+====

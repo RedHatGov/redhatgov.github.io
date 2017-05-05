@@ -1,0 +1,28 @@
+---
+title: "Wrap Up"
+workshops: containers
+workshop_weight: 90
+layout: lab
+---
+
+:figure-caption!:
+:source-highlighter: highlight.js
+:imagesdir: /workshops/security/containers/images
+
+
+= Wrap Up and Q&A
+
+That wraps up what we have planned for today.  We hope you've learned something valuable +
+about Container Security that you can apply in your daily role.
+
+What do you think? How can we help you understand Container Security better?
+
+Before you leave, check out the *Resources* page that is part of this guide.  There you can +
+find a ton of links that will further your Container education.
+
+This *Participant Guide* will remain active for the next two weeks.  Please take advantage +
+of it by creating your own Container Security environment back at your organization.
+
+Thank you for your time and participation!
+
+image::redhat.svg[Red Hat]

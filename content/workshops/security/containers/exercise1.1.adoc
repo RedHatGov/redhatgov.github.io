@@ -1,0 +1,205 @@
+---
+title: "Reproducible and Trustworthy Dockerfiles"
+workshops: containers
+workshop_weight: 30
+layout: lab
+---
+
+:imagesdir: /workshops/security/containers/images
+
+= Exercise 1.1 - Reproducible and Trustworthy Dockerfiles
+
+---
+
+****
+
+====
+
+image::file.png[]
+
+Now that you've gotten a sense of how Cockpit works, we are going to start digging in at the commandline on Container security. You can use either the Terminal in Cockpit from your browser, a SSH terminal or Terminal client like PuTTy. The choice is yours.
+
+
+====
+
+[.lead]
+Best Practices
+
+====
+*Step 1:*
+
+Always specify a `tag` in `FROM` instructions. `FROM redis` is bad, because it pulls the `latest` tag, which changes over time and can be expected to move with major version changes. `FROM redis:3.0` is better, but can still be expected to change with minor updates and bug fixes (which may be exactly what you want). If you want to be certain that the image you are pulling has not been tampered with, you can pull your images by hash rather than tag. This is can also be done from after you make changes to a image and want to specifically pull that image; for example:
+
+.Pull a image by sha256
+[source,bash]
+----
+sudo docker images
+
+sudo docker pull centos@sha256:be5b4a93f116a57ab3fd454ada72421eac892a3a4925627ac9a44f65fcd69cf8
+----
+
+*Securely Downloading Software in Dockerfiles*
+
+In the majority of cases, vendors will make signed checksums avail‐ able for verifying downloads.
+For example, the Dockerfile for the official Node.js image includes the following:
+
+.Example of signed checksums in a Dockerfile
+[source,bash]
+----
+RUN gpg --keyserver pool.sks-keyservers.net \ <1>
+--recv-keys 7937DFD2AB06298B2293C3187D33FF9D0246406D \
+                        114F43EE0176B71C7BC219DD50A3051F888C628D
+ENV NODE_VERSION 0.10.38
+ENV NPM_VERSION 2.10.0
+RUN curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/node-v\
+$NODE_VERSION-linux-x64.tar.gz" \ <2>
+&& curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/\
+SHASUMS256.txt.asc" \ <3>
+&& gpg --verify SHASUMS256.txt.asc \ <4>
+&& grep " node-v$NODE_VERSION-linux-x64.tar.gz\$" \
+            SHASUMS256.txt.asc | sha256sum -c - <5>
+----
+
+<1> Gets the GNU Privacy Guard (GPG) keys used to sign the Node.js download. Here, we do have to trust that these are the correct keys.
+Downloads the Node.js tarball. Downloads the checksum for the tarball.
+Uses GPG to verify that the checksum was signed by whoever owns the keys we obtained.
+Tests that the checksum matches the tarball by using the sha256sum tool.
+
+<2> Downloads the Node.js tarball.
+
+<3> Downloads the checksum for the tarball.
+
+<4> Uses GPG to verify that the checksum was signed by whoever owns the keys we obtained.
+
+<5> Tests that the checksum matches the tarball by using the sha256sum tool.
+
+
+
+
+
+Assuming no signed package or checksum is available, creating your own is easy. For example, to create a checksum for a Redis release:
+
+[source,bash]
+----
+curl -s -o redis.tar.gz \
+http://download.redis.io/releases/redis-3.2.8.tar.gz
+----
+
+
+[source,bash]
+----
+sha1sum -b redis.tar.gz
+
+  6780d1abb66f33a97aad0edbe020403d0a15b67f *redis.tar.gz
+----
+
+Here, we’re creating a 160-bit SHA-1 checksum. The -b flag tells the sha1sum utility that we are dealing with binary data, not text.
+
+Once you’ve tested and verified the software, you can add something like the following first RUN command to your Dockerfile: (about 2-3min build time)
+
+.Dockerfile Redis with verified software download
+[source,bash]
+----
+FROM fedora:25
+
+# Verified sha1sum
+RUN cd /tmp && \
+    curl -sSL -o redis.tar.gz \
+    http://download.redis.io/releases/redis-3.2.8.tar.gz && \
+    echo "6780d1abb66f33a97aad0edbe020403d0a15b67f *redis.tar.gz" | sha1sum -c -
+
+RUN cd /tmp && \
+    tar xvzf redis.tar.gz && \
+    cd redis-3.2.8 && \
+    dnf install -y make gcc && \
+    make && \
+    make install && \
+    cp -f src/redis-sentinel /usr/local/bin && \
+    mkdir -p /etc/redis && \
+    cp -f *.conf /etc/redis && \
+    rm -rf /tmp/redis-3.2.8* && \
+    sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
+    sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
+    sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
+    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
+
+# Define mountable directories.
+VOLUME ["/data"]
+
+# Define working directory.
+WORKDIR /data
+
+# Define default command.
+CMD ["redis-server", "/etc/redis/redis.conf"]
+
+# Expose ports.
+EXPOSE 6379
+----
+
+You can use your choice of [ Vi | Vim | Nano ] to copy and paste this into a new file called `Dockerfile`. Notice the `.` it just means build in the current directory.
+
+
+.Build the Dockerfile
+[source,bash]
+----
+mkdir redis
+
+cd redis
+
+vim Dockerfile <1>
+----
+
+[NOTE]
+Copy the text above. Type `vim Dockerfile`, Press `i` for Insert, then cut and paste `control + v`, then escape and write the file `esc`, `:wq`.
+
+Now build the image.
+
+.built the image
+[source,bash]
+----
+sudo docker build -t redis:3.2.8 .
+----
+
+
+After about 2-3 minutes (Depending on how AWS is feeling today) you should see something similar to below;
+
+.Successfully built `redis` container
+[source,bash]
+----
+make[1]: Leaving directory '/tmp/redis-3.2.8/src'
+---> 3f0fbb2cffc7
+Removing intermediate container 2723d408fca1
+Step 4 : VOLUME /data
+---> Running in a0dba76fe7e3
+---> df656c4567c6
+Removing intermediate container a0dba76fe7e3
+Step 5 : WORKDIR /data
+---> Running in 8f17d79f5d29
+---> 972733d86348
+Removing intermediate container 8f17d79f5d29
+Step 6 : CMD redis-server /etc/redis/redis.conf
+---> Running in e54f055547de
+---> 9a2d24686f5f
+Removing intermediate container e54f055547de
+Step 7 : EXPOSE 6379
+---> Running in f0178e2d39a8
+---> 6b6864a5e3ba
+Removing intermediate container f0178e2d39a8
+Successfully built 6b6864a5e3ba
+----
+
+Then run the container to look around and when your done type `exit` to quit. Then we will move on to our next exercise.
+[source,bash]
+----
+sudo docker run --rm -it redis:3.2.8 bash
+----
+
+.Type `exit` to quit
+[source,bash]
+----
+exit
+----
+
+
+image::redhat.svg[Red Hat]
+====

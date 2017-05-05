@@ -1,0 +1,244 @@
+---
+title: "SCC & Seccomp"
+workshops: openshift
+workshop_weight: 70
+layout: lab
+---
+
+:source-highlighter: highlight.js
+:source-language: bash
+:imagesdir: /workshops/security/openshift/images
+
+= Exercise 1.6 - SCC & Seccomp
+---
+
+****
+
+====
+
+In addition to authorization policies that control what a user can do, OpenShift Container Platform provides security context constraints (SCC) that control the actions that a pod can perform and what it has the ability to access. Administrators can manage SCCs using the CLI.
+
+SCCs are objects that define a set of conditions that a pod must run with in order to be accepted into the system. They allow an administrator to control the following:
+
+- Running of privileged containers.
+
+- Capabilities a container can request to be added.
+
+- Use of host directories as volumes.
+
+- The SELinux context of the container.
+
+- The user ID.
+
+- The use of host namespaces and networking.
+
+- Allocating an FSGroup that owns the pod’s volumes
+
+- Configuring allowable supplemental groups
+
+- Requiring the use of a read only root file system
+
+- Controlling the usage of volume types
+
+- Configuring allowable seccomp profiles
+
+
+
+====
+
+[.lead]
+SCC
+
+====
+
+*Step 1:*
+
+
+.get a current list of SCCs
+[source]
+----
+oc get scc
+----
+
+.closer look at the `restricted` SCC
+[source]
+----
+oc describe scc restricted
+----
+
+*Step 2:*
+
+*Create a SCC*
+
+As most people at this workshop are security minded people we will skip over *adding* permissions and capabilities to containers, let's look at how tighten things up. We will look at *dropping* certain Linux Capabilities in this SCC file.
+
+.dc17-drop-capabilities.yml
+[source]
+----
+kind: SecurityContextConstraints
+apiVersion: v1
+metadata:
+  name: dc17-drop
+allowPrivilegedContainer: false
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+users:
+- dc17-user
+groups:
+- dc17-group
+requiredDropCapabilities:
+- KILL
+- MKNOD
+- SYS_CHROOT
+- SETPCAP
+- NET_BIND_SERVICE
+- NET_RAW
+- SYS_CHROOT
+- MKNOD
+- AUDIT_WRITE
+- SETFCAP
+----
+
+[NOTE]
+Copy the text above. Type `vim dc17-drop-capabilities.yml`, Press `i` for Insert, then cut and paste `control + v`, then escape and write the file `esc`, `:wq`.
+
+[source]
+----
+oc create -f dc17-drop-capabilities.yml
+----
+
+*Step 3:*
+
+*Add SCC to a service account*
+
+Create `Service Account`
+
+.create service account https://en.wikipedia.org/wiki/Public_Security_Section_9[Section9]
+[source]
+----
+oc create serviceaccount section9
+----
+
+.describe service account
+[source]
+----
+oc describe serviceaccount section9
+----
+
+Add to service account
+
+
+.add the policy to the service account
+[source]
+----
+oc adm policy add-scc-to-user dc17-drop  \
+    system:serviceaccount:sso:section9
+----
+
+Now lets view the policy again and see that our service account was added.
+
+Under:
+[source]
+----
+oc describe scc dc17-drop
+
+...
+
+Access:
+  Users: dc17-user,system:serviceaccount:sso:section9
+----
+
+
+====
+
+[.lead]
+Seccomp
+
+====
+
+Seccomp (secure computing mode) is used to restrict the set of system calls applications can make, allowing cluster administrators greater control over the security of workloads running in OpenShift Container Platform. Seccomp support is achieved via two annotations in the pod configuration:
+
+- seccomp.security.alpha.kubernetes.io/pod: profile applies to all containers in the pod that do not override
+
+- container.seccomp.security.alpha.kubernetes.io/<container_name>: container-specific profile override
+
+
+Applications use `seccomp` to restrict the set of system calls they can make. Recently, container runtimes have begun adding features to allow the runtime to interact with `seccomp` on behalf of the application, which eliminates the need for applications to link against `libseccomp` directly. Adding support in the Kubernetes API for describing `seccomp` `profiles` will allow administrators greater control over the security of workloads running in Kubernetes.
+
+The systemd seccomp facility is based on a whitelist of system calls that can be made, rather than a full filter specification.
+
+
+*Containers are run with unconfined seccomp settings by default.*
+
+.check to see if seccomp is enabled
+[source]
+----
+cat /boot/config-`uname -r` | grep CONFIG_SECCOMP=
+----
+
+Policy Examples:
+
+*Unconfined profile*
+
+Here's an example of a pod that uses the unconfined profile:
+
+.unconfined
+[source]
+----
+apiVersion: v1
+kind: Pod
+metadata:
+  name: trustworthy-pod
+  annotations:
+    seccomp.security.alpha.kubernetes.io/pod: unconfined
+spec:
+  containers:
+    - name: trustworthy-container
+      image: sotrustworthy:latest
+----
+
+*Custom profile*
+
+Here's an example of a pod that uses a profile called example-explorer profile using the container-level annotation:
+
+.custom
+[source]
+----
+apiVersion: v1
+kind: Pod
+metadata:
+  name: explorer
+  annotations:
+    container.seccomp.security.alpha.kubernetes.io/explorer: localhost/example-explorer-profile <1>
+spec:
+  containers:
+    - name: explorer
+      image: gcr.io/google_containers/explorer:1.0
+      args: ["-port=8080"]
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+      volumeMounts:
+        - mountPath: "/mount/test-volume"
+          name: test-volume
+  volumes:
+    - name: test-volume
+      emptyDir: {}
+----
+
+<1> This refers to a custom file policy that resides on the localhost. If you would like to see what the default `seccomp` profile is for OpenShift look https://github.com/docker/docker/blob/master/profiles/seccomp/default.json[here].
+
+https://github.com/docker/docker/blob/master/profiles/seccomp/default.json[Docker Default Seccomp]
+
+https://github.com/kubernetes/kubernetes/blob/release-1.4/docs/design/seccomp.md[Seccomp Design]
+
+https://github.com/seccomp/libseccomp[libseccomp]
+
+image::redhat.svg[Red Hat]
+====
