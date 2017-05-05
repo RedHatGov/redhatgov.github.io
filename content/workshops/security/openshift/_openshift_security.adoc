@@ -1,0 +1,407 @@
+
+
+![OpenShift Overview](img/openshift-lab.003.png)
+
+
+# OpenShift Feature Walk through [](https://blog.openshift.com/whats-new-in-openshift-3-4-enhanced-usability/)
+
+
+
+
+# Overview
+
+1. Learn about Linux Capabilities
+
+2. Learn how to Profile application and its capabilities
+
+3. Learn how to write a Dockerfile
+
+4. Learn OC commands for SCC
+
+5. Learn Secrets
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Linux Capabilities
+
+Provide Additional Capabilities
+In some cases, an image may require capabilities that Docker does not provide out of the box. You can provide the ability to request additional capabilities in the pod specification which will be validated against an SCC.
+
+This allows images to run with elevated capabilities and should be used only if necessary. You should not edit the default restricted SCC to enable additional capabilities.
+When used in conjunction with a non-root user, you must also ensure that the file that requires the additional capability is granted the capabilities using the setcap command. For example, in the Dockerfile of the image:
+
+setcap cap_net_raw,cap_net_admin+p /usr/bin/ping
+Further, if a capability is provided by default in Docker, you do not need to modify the pod specification to request it. For example, NET_RAW is provided by default and capabilities should already be set on ping, therefore no special steps should be required to run ping.
+
+To provide additional capabilities:
+
+Create a new SCC
+
+Add the allowed capability using the allowedCapabilities field.
+
+When creating the pod, request the capability in the securityContext.capabilities.add field.
+
+
+# Kubernetes Templates
+
+# Building Secure Templates
+
+# Container Scanning
+
+# Pipelines
+
+# Building a Security Pipeline
+
+# Running your Pipeline
+
+# Aggregated Container Logging
+
+
+
+
+# Profiling Applications Linux Capabilities
+
+https://developers.redhat.com/blog/2017/02/16/find-what-capabilities-an-application-requires-to-successful-run-in-a-container/
+
+  - container_check.stp
+  - libcap-ng-utils
+  - pscap
+
+
+```
+sudo yum install -y systemtap systemtap-runtime
+sudo yum install -y libcap-ng-utils
+sudo yum install -y kernel-devel-3.10.0-514.el7.x86_64
+
+
+sudo ./container_check.stp -DKRETACTIVE=100 -c "sudo strace -c -f ping -c 1 people.redhat.com"
+
+./gogs web &
+
+pgrep gogs
+17688
+
+sudo ./container_check.stp -DKRETACTIVE=100 -c "17688"
+
+
+pscap (No process running yet)
+
+docker run -d --name sleepy fedora sleep 9999
+
+pscap | grep sleep
+
+docker inspect $(docker ps -q) | jq  '.'
+docker inspect $(docker ps -q) | jq  '.[]'
+docker inspect $(docker ps -q) | jq  '.[].Id'
+
+sudo docker inspect 6c45eac8ca52 | jq '.[].NetworkSettings.IPAddress'
+```
+Then run `container_check.stp` to see what capabilities it is using.
+
+```
+sudo ./container_check.stp  -x <>
+```
+
+When you are finished, stop then remove the sleepy container.
+
+```
+docker stop sleepy
+
+docker rm sleepy
+```
+
+# TODO
+
+Dropbox/Workshops/OpenShift_Security/code
+
+- Change OpenShift enterprise to OCP
+- Install Metrics
+- Install Logging
+
+
+
+
+
+ http://www.projectatomic.io/docs/docker-image-author-guidance/
+	- https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/
+	- https://felipec.wordpress.com/2013/11/04/init/
+	- https://docs.openshift.com/container-platform/3.4/creating_images/guidelines.html
+
+Running containers as Root
+	- OpenShift will not run as root
+	-
+
+
+
+- [https://docs.openshift.com/enterprise/latest/dev_guide/secrets.html][1]
+
+[1]: https://docs.openshift.com/enterprise/latest/dev_guide/secrets.html
+
+
+## Keep it Secret, Keep it Safe
+Secrets are...  In this lab we will go through a couple common uses of secrets.
+
+
+### Setup a secret access key for enterprise github access
+Coming soon...
+
+oc secrets new NAME
+oc get secrets
+oc get bc
+oc edit bc/dc-metro-map -o yaml
+
+
+### Add private files as secrets and give a pod access to the secret files
+Coming soon...
+TBD mount key files and expose as volumes in a deployment config
+
+
+## Summary
+Coming soon...
+TBD
+
+
+[1]: https://docs.openshift.com/enterprise/latest/dev_guide/secrets.html
+
+
+# Skopeo
+
+
+```
+subscription-manager repos --enable=rhel-7-server-optional-rpms
+
+yum install -y skopeo
+
+skopeo inspect docker://docker.io/fedora
+
+skopeo inspect docker://docker.io/fedora | jq '.Digest'
+
+mkdir busybox
+
+skopeo copy docker://busybox:latest dir:/home/vagrant/busybox
+
+mkdir oci
+
+skopeo copy docker://busybox:latest oci:/home/vagrant/busybox_ocilayout
+```
+
+
+# Registry
+
+```
+yum install –y docker-registry
+
+
+```
+
+# Security API
+
+
+```
+{
+  "number": "2008-A-0045",
+  "severity": "CAT I",
+  "title": "DNS Protocol Cache Poisoning Vulnerability",
+  "cvelist": [
+    "CVE-2008-1447"
+  ],
+  "resource_url": "https://access.redhat.com/labs/securitydataapi/iava/2008-A-0045.json"
+}
+```
+
+
+
+```
+curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.'
+
+curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[]'
+
+curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[] | select(.severity == "CAT I")'
+
+curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[] | select(.severity == "CAT I") | { CAT 1 Name: .title }'
+
+```
+
+
+# Container Scanning
+
+### Atomic Scan
+
+```
+sudo atomic scan --list
+
+atomic pull rhel7.2
+
+sudo atomic scan --scan_type standards_compliance rhel7.2
+```
+
+
+
+https://developers.redhat.com/blog/2016/05/20/creating-a-custom-atomic-scan-plug-in/
+
+`OpenSCAP Scanner (Default)`
+
+```
+type: scanner
+scanner_name: openscap
+image_name: registry.access.redhat.com/rhel7/openscap
+default_scan: cve
+custom_args: ['-v', '/etc/oscapd:/etc/oscapd:ro']
+scans: [
+      { name: cve,
+        args: ['oscapd-evaluate', 'scan',  '--no-standard-compliance', '--targets', 'chroots-in-dir:///scanin',  '--output', '/scanout', '-j1'],
+        description: "Performs a CVE scan based on Red Hat relesead CVE OVAL. !WARNING! This CVE is built into container image and it might be out-of-date. Change config.ini to configure the scanner to fetch latest CVE data"},
+      { name: standards_compliance,
+        args: ['oscapd-evaluate', 'scan', '--targets', 'chroots-in-dir:///scanin',  '--output', '/scanout', '--no-cve-scan', '-j1'],
+        description: "Performs scan with Standard Profile, as present in Scap Security Guide shipped in Red Hat Enterprise Linux"
+      }
+]
+```
+
+`/etc/atomic.d/example_plugin`
+
+```
+type: scanner
+scanner_name: example_plugin
+image_name: example_plugin
+default_scan: rpm-list
+custom_args: ['-v', '/tmp/foobar:/foobar']
+scans: [
+ { name: rpm-list,
+ args: ['python', 'list_rpms.py', 'list-rpms'],
+ description: "List all RPMS",
+ },
+ { name: get-os,
+ args: ['python', 'list_rpms.py', 'get-os'],
+ description: "Get the OS of the object",
+ }
+]
+```
+
+
+`install.sh`
+
+```
+#/bin/bash
+echo "Copying example_plugin configuration file to host filesystem..."
+cp -v /example_plugin /host/etc/atomic.d/
+```
+
+`list_rpms.py`
+
+```python
+import os
+import subprocess
+from datetime import datetime
+import json
+from sys import argv
+
+class ScanForInfo(object):
+    INDIR = '/scanin'
+    OUTDIR = '/scanout'
+
+    def __init__(self):
+        self._dirs = [ _dir for _dir in os.listdir(self.INDIR) if os.path.isdir(os.path.join(self.INDIR, _dir))]
+
+    def list_rpms(self):
+        for _dir in self._dirs:
+            full_indir = os.path.join(self.INDIR, _dir)
+            # If the chroot has the rpm command
+            if os.path.exists(os.path.join(full_indir, 'usr/bin/rpm')):
+                full_outdir = os.path.join(self.OUTDIR, _dir)
+
+                # Get the RPMs
+                cmd = ['rpm', '--root', full_indir, '-qa']
+                rpms = subprocess.check_output(cmd).split()
+
+                # Construct the JSON
+                rpms_out = {'Custom': {}}
+                rpms_out['Custom']['rpms'] = rpms
+
+                # Make the outdir
+                os.makedirs(full_outdir)
+
+                # Writing JSON data
+                self.write_json_to_file(full_outdir, rpms_out, _dir)
+
+    def get_os(self):
+        for _dir in self._dirs:
+            full_indir = os.path.join(self.INDIR, _dir)
+            os_release = None
+            for location in ['etc/release', 'etc/redhat-release','etc/debian_version']:
+                try:
+                    os_release = open(os.path.join(full_indir, location), 'r').read()
+                except IOError:
+                    pass
+                if os_release is not None:
+                    break
+
+            full_outdir = os.path.join(self.OUTDIR, _dir)
+
+            # Construct the JSON
+            out = {'Custom': {}}
+            out['Custom']['os_release'] = os_release
+
+            # Make the outdir
+            os.makedirs(full_outdir)
+
+            # Writing JSON data
+            self.write_json_to_file(full_outdir, out, _dir)
+
+    @staticmethod
+    def write_json_to_file(outdir, json_data, uuid):
+        current_time = datetime.now().strftime('%Y-%m-%d-%H-%M-%S-%f')
+        json_out = {
+            "Time": current_time,
+            "Finished Time": current_time,
+            "Successful": "true",
+            "Scan Type": "List RPMs",
+            "UUID": "/scanin/{}".format(uuid),
+            "CVE Feed Last Updated": "NA",
+            "Scanner": "example_plugin",
+            "Results": [json_data],
+        }
+        with open(os.path.join(outdir, 'json'), 'w') as f:
+             json.dump(json_out, f)
+
+
+scan = ScanForInfo()
+if argv[1] == 'list-rpms':
+    scan.list_rpms()
+elif argv[1] == 'get-os':
+    scan.get_os()
+```
+
+`Dockerfile`
+
+```
+FROM registry.access.redhat.com/rhel7:latest
+LABEL INSTALL='docker run -it --rm --privileged -v /etc/atomic.d/:/host/etc/atomic.d/ $IMAGE sh /install.sh'
+ADD example_plugin /
+ADD list_rpms.py /
+ADD install.sh /
+```
+
+
+
+
+
+# Links:
+
+https://developers.redhat.com/blog/2017/01/24/container-images-compliance-what-we-built-at-manageiq-to-remove-a-security-pain-point-part-1/
+
+https://developers.redhat.com/blog/2017/01/25/container-images-compliance-what-we-built-at-manageiq-to-remove-a-security-pain-point-part-2/
+

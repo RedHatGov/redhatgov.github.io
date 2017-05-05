@@ -1,0 +1,129 @@
+---
+title: OpenShift Security Workshop
+menu:
+  main:
+    parent: workshops
+    pre: fa fa-rocket
+---
+
+:badges:
+:icons:
+:iconsdir: http://people.redhat.com/~jduncan/images/icons
+:imagesdir: images
+:date: 01-04-2017
+:source-highlighter: highlight.js
+:source-language: yaml
+
+= OpenShift Security Workshop
+
+---
+
+.Today's Agenda
+****
+* Arrivals
+* Introductions / Agenda
+* Presentation
+* Setup
+* Exercise 1.0 - Linux Kernel Capabilities
+* Exercise 1.1 - SELinux
+* Exercise 1.2 - Deploy OpenShift
+* Break
+* Exercise 1.3 - Image Streams & Secrets
+* Exercise 1.4 - Skopeo
+* Exercise 1.5 - Atomic Scanner
+* Exercise 1.6 - SCC & Seccomp
+* Exercise 1.7 - Red Hat Security API
+
+
+* Wrap Up
+
+****
+
+.Before We Get Started
+****
+[.lead]
+Overview
+
+Today is meant for anyone who has any exposure to Containers, whether you have used them or not. We are going to start with a short overview (yes, slideware) and then we'll get into the lab as soon as possible. That is where we will spend most of our time.
+
+[.lead]
+Your Responsibilities
+
+* Have a discussion. This will be boring if it's just us up here talking for over 4 hours.
+* Participate. We are going to cut you loose with Containers here in just a little while. Have questions. Have opinions.
+
+Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy. See? Not only can we dig into Containers but you can make a new friend!
+
+[.lead]
+Conventions Used in This Document
+[TIP]
+.Whenever you see a section like this, please pay close attention.  We are leading you through a process.
+====
+
+====
+
+====
+*Step 1:* Run this command to do something or other
+[source,bash]
+----
+sudo docker run
+----
+*Step 2:* Edit this file in this specific way
+
+[source,bash]
+----
+#/bin/bash
+echo "Copying example_plugin configuration file to host filesystem..."
+cp -v /example_plugin /host/etc/atomic.d/
+----
+
+====
+
+====
+[.lead]
+Location-Specific Information
+[NOTE]
+.WiFi Access
+----
+ssid     : ``
+
+password : ``
+----
+
+====
+****
+
+.Today's Team
+****
+[.lead]
+Brad Sollar - Solutions Architect
+
+Brad Sollar is a Solutions Architect at Red Hat where he works primarily with OpenShift & Ansible and is a fan of all kinds of automation. Previously before joining Red Hat Brad worked at MITRE, had his own company and did a lot of running in the Army. In his spare time he sells a lot of credit spreads and stays theta positive.
+
+[IMPORTANT]
+Special Thanks to:
+
+- *Dan Walsh*
+
+- *Bob Kozdemba*
+
+- *Brent Baude*
+
+- *Adrian Mouat*
+****
+
+
+= **Labs:**
+
+
+
+{{< labs openshift >}}
+
+
+== Document Copyright
+
+This document was created by and for Red Hat, Inc. It is being released under link:https://creativecommons.org/licenses/by/4.0/[Creative Commons License 4.0]. You are free to re-use it in whole or in part.
+
+You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+image::redhat.svg[Red Hat]

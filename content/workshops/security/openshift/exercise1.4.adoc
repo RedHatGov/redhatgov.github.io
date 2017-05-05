@@ -1,0 +1,138 @@
+---
+title: "Skopeo"
+workshops: openshift
+workshop_weight: 50
+layout: lab
+---
+
+
+:source-highlighter: highlight.js
+:source-language: bash
+:imagesdir: /workshops/security/openshift/images
+
+= Exercise 1.4 - Skopeo
+
+---
+
+****
+
+====
+image::skopeo.png[]
+
+*Skopeo* is a command line utility for various operations on container images and image repositories.
+
+Skopeo is able to inspect a repository on a Docker registry and fetch images layers. By inspect I mean it fetches the repository's manifest and it is able to show you a docker inspect-like json output about a whole repository or a tag.
+
+This tool, in contrast to docker inspect, helps you gather useful information about a repository or a tag before pulling it (using disk space) - e.g. - which tags are available for the given repository? which labels the image has?
+
+
+
+====
+
+[.lead]
+Skopeo
+
+====
+
+*Step 0:*
+
+Login as ec2-user, if you are `root` just type exit.
+
+.switch to ec2-user
+[source]
+----
+exit
+----
+
+---
+
+*Step 1:*
+
+image::x.png[]
+
+Lets use Skopeo to inspect a Fedora image on  Docker Hub. Additionally we are using the https://stedolan.github.io/jq/[`jq`] tool to parse the response and make it look better.
+
+.inspect fedora on Docker Hub
+[source]
+----
+skopeo inspect docker://docker.io/fedora | jq '.'
+----
+
+`jq` is easy to use, lets parse the just the digest out of this response.
+
+.parse Digest
+[source]
+----
+skopeo inspect docker://docker.io/fedora | jq '.Digest'
+----
+
+
+*Step 2:*
+
+*Download images to the filesystem*
+
+Skopeo can be used to download and copy images to either a local filesystem or to other remote registries.
+
+
+.copy to filesystem
+[source]
+----
+mkdir /home/ec2-user/busybox
+
+skopeo copy docker://busybox:latest dir:/home/ec2-user/busybox
+----
+
+Now lets download a image into the https://www.opencontainers.org/[OCI format] so we can compare them.
+
+.copy OCI image
+[source]
+----
+mkdir busybox_ocilayout
+
+skopeo copy docker://busybox:latest oci:/home/ec2-user/busybox_ocilayout
+----
+
+You can see that the busybox default image is laid out differently compared to the OCI image.
+
+.examine the diffrent layouts
+[source]
+----
+ls -la /home/ec2-user/busybox
+
+ls -la /home/ec2-user/busybox_ocilayout
+----
+
+The Runtime Specification outlines how to run a “filesystem bundle” that is unpacked on disk. At a high-level an OCI implementation would download an OCI Image then unpack that image into an OCI Runtime filesystem bundle. At this point the OCI Runtime Bundle would be run by an OCI Runtime.
+
+This helps to bring standards on how to bundle and run containers across the industry.
+
+*Step 3:*
+
+*Image Metadata*
+
+Defining image metadata helps OpenShift better consume your Docker images, allowing OpenShift to create a better experience for developers using your image. For example, you can add metadata to provide helpful descriptions of your image, or offer suggestions on other images that may also be needed.
+
+Examine images with Labels.
+
+.Mongodb image with Kubernetes labels
+[source]
+----
+skopeo inspect docker://centos/mongodb-26-centos7  | jq '.'
+
+skopeo inspect docker:// | jq '.Labels'
+----
+
+.Wildfly image with Kubernetes labels
+[source]
+----
+skopeo inspect docker://openshift/wildfly-101-centos7  | jq '.'
+
+skopeo inspect docker://openshift/wildfly-101-centos7 | jq '.Labels'
+----
+
+
+
+https://access.redhat.com/documentation/en-us/openshift_enterprise/3.0/html/creating_images/creating-images-metadata[OpenShift & Kubernetes Labels]
+
+image::redhat.svg[Red Hat]
+====
