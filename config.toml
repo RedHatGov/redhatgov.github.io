@@ -5,7 +5,7 @@ languageCode = "en-us"
 metaDataFormat = "yaml"
 
 [params]
-    description = "We know workshops, we have the best workshops."
+    description = "Tried. Tested. Trusted."
 
 [taxonomies]
     workshop = "workshops"
