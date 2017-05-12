@@ -5,7 +5,7 @@ workshop_weight: 30
 layout: lab
 ---
 
-:imagesdir: /workshops/security/containers/images
+:imagesdir: /workshops/security_containers/images
 
 = Exercise 1.1 - Reproducible and Trustworthy Dockerfiles
 

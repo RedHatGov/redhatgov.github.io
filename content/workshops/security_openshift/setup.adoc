@@ -7,7 +7,7 @@ layout: lab
 
 :source-highlighter: highlight.js
 :source-language: bash
-:imagesdir: /workshops/security/openshift/images
+:imagesdir: /workshops/security_openshift/images
 
 
 = Workshop Lab Setup

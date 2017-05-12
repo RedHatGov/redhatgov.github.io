@@ -6,7 +6,7 @@ layout: lab
 ---
 
 :source-language: bash
-:imagesdir: /workshops/security/containers/images
+:imagesdir: /workshops/security_containers/images
 
 = Exercise 1.6 - SELinux
 

@@ -6,7 +6,7 @@ layout: lab
 ---
 
 :source-highlighter: highlight.js
-:imagesdir: /workshops/security/containers/images
+:imagesdir: /workshops/security_containers/images
 
 = Exercise 1.0 - Intro to Cockpit
 

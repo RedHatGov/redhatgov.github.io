@@ -5,7 +5,7 @@ workshop_weight: 40
 layout: lab
 ---
 
-:imagesdir: /workshops/security/containers/images
+:imagesdir: /workshops/security_containers/images
 
 = Exercise 1.2 - Docker `USER`
 

@@ -1,23 +1,17 @@
 ---
 title: "Linux Kernel Capabilities"
-workshops: openshift
-workshop_weight: 10
+workshops: containers
+workshop_weight: 60
 layout: lab
 ---
 
 :source-highlighter: highlight.js
-:source-language: bash
-:imagesdir: /workshops/security/openshift/images
+:imagesdir: /workshops/security_containers/images
 
-= Exercise 1.0 - Linux Kernel Capabilities
+= Exercise 1.4 - Linux Kernel Capabilities
 
 ---
 ****
-
-
-[.lead]
-Before we get into OpenShift lets explore what `Linux Kernel Capabilities` are and some of the steps that OpenShift has taken to remove certain capabilities by default.
-
 
 ====
 
@@ -37,13 +31,13 @@ Most capabilities are required to manipulate the kernel/system, and these are us
 
 Luckily we also use additional tools like https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/SELinux_Users_and_Administrators_Guide/[SELinux], https://en.wikipedia.org/wiki/Seccomp[seccomp], and http://rhelblog.redhat.com/2015/07/07/whats-next-for-containers-user-namespaces/[namespaces] to protect the host system from the containers.
 
-*OpenShift Container Platform and OpenShift Dedicated have removed most of the default 38 capabilities from root users running inside a container.*
+*Bottom line: dropping more of the capabilities from your container is a good idea from a security point of view.*
 
 
 ====
 
 [.lead]
-Linux Kernel Capabilities
+Linux Capabilities
 
 ====
 
@@ -52,37 +46,33 @@ Linux Kernel Capabilities
 So, how can we drop these capabilities using docker? First, let’s see what capabilities a process has. There is a cool tool in Linux that can help you view what capabilities a process has called `pscap`, available in the `libcap-ng-utils` package on Fedora.
 
 .See current processes
-[source]
+[source,bash]
 ----
 pscap | head -10
 ----
 
 .See processes of a normal container
-[source]
+[source,bash]
 ----
 sudo docker run -d fedora sleep 5 >/dev/null; pscap | grep sleep
 ----
 
 *Step 2:*
 
-*Blacklisting*
-
 If I wanted to drop `setfcap`, `audit_write`, and `mknod`, I could use `--cap-drop=setfcap`  `--cap-drop=audit_write` `--cap-drop=mknod`:
 
 .Dropping setfcap, audit_write, mknod
-[source]
+[source,bash]
 ----
 sudo docker run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod fedora sleep 5 > /dev/null; pscap | grep sleep
 ----
 
 *Step 3:*
 
-*Whitelisting*
-
 Better yet, if you know your container only needs setuid and setgid, you can drop all capabilities and just add setgid and setuid back in.
 
 .Whitelisting Capabilities
-[source]
+[source,bash]
 ----
 sudo docker run -d --cap-drop=all --cap-add=setuid --cap-add=setgid fedora sleep 5 > /dev/null; pscap | grep sleep
 ----
@@ -92,7 +82,7 @@ sudo docker run -d --cap-drop=all --cap-add=setuid --cap-add=setgid fedora sleep
 The following bellow is a comparison of the out put form blacklisting vs. whitelisting.
 
 .Compare the output
-[source]
+[source,bash]
 ----
 chown, dac_override, fowner, fsetid, kill, setgid, setuid, setpcap, net_bind_service, net_raw, sys_chroot <1>
 
@@ -106,30 +96,6 @@ setgid, setuid <2>
 <2> Whitelisting: Droping all and adding back the ones you need.
 
 
-.stop & delete images
-[source]
-----
-sudo docker ps -a
-
-...
-
-CONTAINER ID   IMAGE   COMMAND    CREATED   STATUS   PORTS   NAMES
-fdf41302efbc  <1>
-
-----
-
-<1> Container ID to copy
-
-
-Then stop and remove the Container.
-
-[source]
-----
-sudo docker stop fdf41302efbc
-
-sudo docker rm fdf41302efbc
-----
-
 image::redhat.svg[Red Hat]
 ====
 
@@ -138,7 +104,8 @@ Deep Dive into Capabilities
 
 ====
 
-Lets look deeper into each of these remaining capabilities.
+
+Lets look deeper into each of these capabilities.
 
 `*chown*`
 

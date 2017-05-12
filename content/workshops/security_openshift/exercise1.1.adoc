@@ -8,7 +8,7 @@ layout: lab
 
 :source-highlighter: highlight.js
 :source-language: bash
-:imagesdir: /workshops/security/openshift/images
+:imagesdir: /workshops/security_openshift/images
 
 = Exercise 1.1 - SELinux
 
