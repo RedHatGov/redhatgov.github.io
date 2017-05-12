@@ -6,6 +6,11 @@
 
 <div class="container">
   <div class="row">
+    <p class="text-center">
+      {{ $mainLabPage := delimit (slice "/workshops" .Params.workshops) "/" }}
+      <a href="{{ $mainLabPage | absURL }}">Return to Workshop</a>
+    </p>
+    
     {{ partial "prev_next_links" .Page }}
 
     {{ .Content }}
