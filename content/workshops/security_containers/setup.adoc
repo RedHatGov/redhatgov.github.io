@@ -1,65 +1,47 @@
 ---
 title: Setup
-workshops: containers
+workshops: security_containers
 workshop_weight: 10
 layout: lab
 ---
 
+:icons: font
 :source-highlighter: highlight.js
 :imagesdir: /workshops/security_containers/images
 
-= Workshop Lab Setup
-
----
-****
-
 image::container-lab.001.png['Red Hat']
 
+Today's workshop infrastructure is being run in Amazon EC2. Each student will
+have a single instance to use. Each of you should have received an email.
+It has the following information on it. Your student number will be substituted
+where you see this `< student# >`. Example: if you are student 21:
+`http://dc17.21.redhat-fierce.io`
 
+- Web URL for each of your EC2 instances.
+- Username and password
 
-Today's workshop infrastructure is being run in Amazon EC2. +
-Each student will have a single instance to use. +
-Each of you should have received an email.  It has the following information on it. +
-Your student number will be substituted where you see this `< student# >`.
-Example: if you are student 21: `http://dc17.21.redhat-fierce.io`
+If you didn't get one of these emails, let us know so we can give you the
+information about your lab environment.
 
-- Web URL for each of your EC2 instances. +
-
-- Username and password +
-
-
-If you didn't get one of these emails, let us know so we can give you the information about your lab environment.
-
-
-
-****
-
-
-[.lead]
-Workshop Infrastructure
-
-
-
+== Workshop Infrastructure
 
 Each student's personal EC2 lab is equipped with the following:
-****
-*  A directory containing all files used in this workshop.
 
+*  A directory containing all files used in this workshop.
 ** _All nodes are running Red Hat Enterprise Linux 7.3_
 
+== Setup Your Environment
 
-.Setup Your Environment
-****
-Before we can begin doing super-cool automations and such, we've got to get a few basics out of the way.
-Namely... ssh access to your EC2 nodes.
-
-
+Before we can begin doing super-cool automations and such, we've got to get a
+few basics out of the way. Namely... ssh access to your EC2 nodes.
 
 [IMPORTANT]
-Be sure you can log in to your ec2 instances.  If you can't log in start shouting, loudly, and waving your hands!
+===============================================================================
+Be sure you can log in to your ec2 instances.  If you can't log in start
+shouting, loudly, and waving your hands!
+===============================================================================
 
+== End Result
 
-[.lead]
-End Result
-
-At this point, everyone should have logged into your node.  If you haven't, let us know so we can get you fixed up.
+At this point, everyone should have logged into your node.  If you haven't,
+let us know so we can get you fixed up.

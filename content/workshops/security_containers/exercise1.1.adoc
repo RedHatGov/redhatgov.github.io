@@ -1,6 +1,6 @@
 ---
-title: "Reproducible and Trustworthy Dockerfiles"
-workshops: containers
+title: "Exercise 1.1 - Reproducible and Trustworthy Dockerfiles"
+workshops: security_containers
 workshop_weight: 30
 layout: lab
 ---
@@ -9,26 +9,25 @@ layout: lab
 
 = Exercise 1.1 - Reproducible and Trustworthy Dockerfiles
 
----
-
-****
-
-====
-
 image::file.png[]
 
-Now that you've gotten a sense of how Cockpit works, we are going to start digging in at the commandline on Container security. You can use either the Terminal in Cockpit from your browser, a SSH terminal or Terminal client like PuTTy. The choice is yours.
+Now that you've gotten a sense of how Cockpit works, we are going to start
+digging in at the commandline on Container security. You can use either the
+Terminal in Cockpit from your browser, a SSH terminal or Terminal client like
+PuTTy. The choice is yours.
 
+== Best Practices
 
-====
+=== Step 1:
 
-[.lead]
-Best Practices
-
-====
-*Step 1:*
-
-Always specify a `tag` in `FROM` instructions. `FROM redis` is bad, because it pulls the `latest` tag, which changes over time and can be expected to move with major version changes. `FROM redis:3.0` is better, but can still be expected to change with minor updates and bug fixes (which may be exactly what you want). If you want to be certain that the image you are pulling has not been tampered with, you can pull your images by hash rather than tag. This is can also be done from after you make changes to a image and want to specifically pull that image; for example:
+Always specify a `tag` in `FROM` instructions. `FROM redis` is bad, because it
+pulls the `latest` tag, which changes over time and can be expected to move
+with major version changes. `FROM redis:3.0` is better, but can still be
+expected to change with minor updates and bug fixes (which may be exactly what
+you want). If you want to be certain that the image you are pulling has not
+been tampered with, you can pull your images by hash rather than tag. This is
+can also be done from after you make changes to a image and want to
+specifically pull that image; for example:
 
 .Pull a image by sha256
 [source,bash]
@@ -40,8 +39,9 @@ sudo docker pull centos@sha256:be5b4a93f116a57ab3fd454ada72421eac892a3a4925627ac
 
 *Securely Downloading Software in Dockerfiles*
 
-In the majority of cases, vendors will make signed checksums avail‐ able for verifying downloads.
-For example, the Dockerfile for the official Node.js image includes the following:
+In the majority of cases, vendors will make signed checksums available for
+verifying downloads. For example, the Dockerfile for the official Node.js image
+includes the following:
 
 .Example of signed checksums in a Dockerfile
 [source,bash]
@@ -60,10 +60,11 @@ SHASUMS256.txt.asc" \ <3>
             SHASUMS256.txt.asc | sha256sum -c - <5>
 ----
 
-<1> Gets the GNU Privacy Guard (GPG) keys used to sign the Node.js download. Here, we do have to trust that these are the correct keys.
-Downloads the Node.js tarball. Downloads the checksum for the tarball.
-Uses GPG to verify that the checksum was signed by whoever owns the keys we obtained.
-Tests that the checksum matches the tarball by using the sha256sum tool.
+<1> Gets the GNU Privacy Guard (GPG) keys used to sign the Node.js download.
+Here, we do have to trust that these are the correct keys. Downloads the
+Node.js tarball. Downloads the checksum for the tarball. Uses GPG to verify
+that the checksum was signed by whoever owns the keys we obtained. Tests that
+the checksum matches the tarball by using the sha256sum tool.
 
 <2> Downloads the Node.js tarball.
 
@@ -73,18 +74,14 @@ Tests that the checksum matches the tarball by using the sha256sum tool.
 
 <5> Tests that the checksum matches the tarball by using the sha256sum tool.
 
-
-
-
-
-Assuming no signed package or checksum is available, creating your own is easy. For example, to create a checksum for a Redis release:
+Assuming no signed package or checksum is available, creating your own is easy.
+For example, to create a checksum for a Redis release:
 
 [source,bash]
 ----
 curl -s -o redis.tar.gz \
 http://download.redis.io/releases/redis-3.2.8.tar.gz
 ----
-
 
 [source,bash]
 ----
@@ -93,9 +90,11 @@ sha1sum -b redis.tar.gz
   6780d1abb66f33a97aad0edbe020403d0a15b67f *redis.tar.gz
 ----
 
-Here, we’re creating a 160-bit SHA-1 checksum. The -b flag tells the sha1sum utility that we are dealing with binary data, not text.
+Here, we’re creating a 160-bit SHA-1 checksum. The -b flag tells the sha1sum
+utility that we are dealing with binary data, not text.
 
-Once you’ve tested and verified the software, you can add something like the following first RUN command to your Dockerfile: (about 2-3min build time)
+Once you’ve tested and verified the software, you can add something like the
+following first RUN command to your Dockerfile: (about 2-3min build time)
 
 .Dockerfile Redis with verified software download
 [source,bash]
@@ -136,8 +135,9 @@ CMD ["redis-server", "/etc/redis/redis.conf"]
 EXPOSE 6379
 ----
 
-You can use your choice of [ Vi | Vim | Nano ] to copy and paste this into a new file called `Dockerfile`. Notice the `.` it just means build in the current directory.
-
+You can use your choice of [ Vi | Vim | Nano ] to copy and paste this into a
+new file called `Dockerfile`. Notice the `.` it just means build in the
+current directory.
 
 .Build the Dockerfile
 [source,bash]
@@ -150,7 +150,8 @@ vim Dockerfile <1>
 ----
 
 [NOTE]
-Copy the text above. Type `vim Dockerfile`, Press `i` for Insert, then cut and paste `control + v`, then escape and write the file `esc`, `:wq`.
+Copy the text above. Type `vim Dockerfile`, Press `i` for Insert, then cut and
+paste `control + v`, then escape and write the file `esc`, `:wq`.
 
 Now build the image.
 
@@ -160,8 +161,8 @@ Now build the image.
 sudo docker build -t redis:3.2.8 .
 ----
 
-
-After about 2-3 minutes (Depending on how AWS is feeling today) you should see something similar to below;
+After about 2-3 minutes (Depending on how AWS is feeling today) you should see
+something similar to below;
 
 .Successfully built `redis` container
 [source,bash]
@@ -188,7 +189,9 @@ Removing intermediate container f0178e2d39a8
 Successfully built 6b6864a5e3ba
 ----
 
-Then run the container to look around and when your done type `exit` to quit. Then we will move on to our next exercise.
+Then run the container to look around and when your done type `exit` to quit.
+Then we will move on to our next exercise.
+
 [source,bash]
 ----
 sudo docker run --rm -it redis:3.2.8 bash
@@ -199,7 +202,3 @@ sudo docker run --rm -it redis:3.2.8 bash
 ----
 exit
 ----
-
-
-image::redhat.svg[Red Hat]
-====

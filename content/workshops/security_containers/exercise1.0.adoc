@@ -1,6 +1,6 @@
 ---
-title: "Intro to Cockpit"
-workshops: containers
+title: "Exercise 1.0 - Intro to Cockpit"
+workshops: security_containers
 workshop_weight: 20
 layout: lab
 ---
@@ -10,45 +10,42 @@ layout: lab
 
 = Exercise 1.0 - Intro to Cockpit
 
----
-
-****
-
-====
-
 image::cockpit.png[]
 
-*Cockpit*
+== Cockpit
 
 A remote manager for GNU/Linux servers
 
-http://cockpit-project.org/[Cockpit] is a server manager that makes it easy to administer your GNU/Linux servers via a web browser.
+http://cockpit-project.org/[Cockpit] is a server manager that makes it easy to
+administer your GNU/Linux servers via a web browser.
 
-Cockpit makes it easy for any sysadmin to perform simple tasks, such as administering storage, inspecting journals and starting and stopping services.
+Cockpit makes it easy for any sysadmin to perform simple tasks, such as
+administering storage, inspecting journals and starting and stopping services.
 
-Jumping between the terminal and the web tool is no problem. A service started via Cockpit can be stopped via the terminal. Likewise, if an error occurs in the terminal, it can be seen in the Cockpit journal interface.
+Jumping between the terminal and the web tool is no problem. A service started
+via Cockpit can be stopped via the terminal. Likewise, if an error occurs in
+the terminal, it can be seen in the Cockpit journal interface.
 
-You can monitor and administer several servers at the same time. Just add them with a single click and your machines will look after its buddies.
+You can monitor and administer several servers at the same time. Just add them
+with a single click and your machines will look after its buddies.
 
-*Cockpit and Docker*
+== Cockpit and Docker
 
-Cockpit also makes it easy to monitor and administer Docker containers running on Cockpit-managed servers such as Project Atomic hosts.
+Cockpit also makes it easy to monitor and administer Docker containers running
+on Cockpit-managed servers such as Project Atomic hosts.
 
-- Monitor resources consumed by containers +
-- Adjust resources available to containers +
-- Resource limits enforced by the CGroup subsystem in the Linux kernel +
-- Adjust CPU shares +
-- Assign memory limits +
-- More CGroup policy controls to come +
-- Stop, Start, Delete and Commit container instances +
-- Run and Delete container images +
-====
+- Monitor resources consumed by containers
+- Adjust resources available to containers
+- Resource limits enforced by the CGroup subsystem in the Linux kernel
+- Adjust CPU shares
+- Assign memory limits
+- More CGroup policy controls to come
+- Stop, Start, Delete and Commit container instances
+- Run and Delete container images
 
-[.lead]
-Cockpit
+== Cockpit
 
-====
-*Step 0:*
+=== Step 0:
 
 image::login.png[Login to Cockpit]
 
@@ -60,10 +57,11 @@ Username: cockpit
 Password: DC17!
 ----
 
+=== Step 1:
 
-*Step 1:*
-
-*System:* Shows information about the system that Cockpit is running on. This includes CPU usage, memory usage, disk I/O, and network traffic, as well as hardware and operating system details.
+*System:* Shows information about the system that Cockpit is running on. This
+includes CPU usage, memory usage, disk I/O, and network traffic, as well as
+hardware and operating system details.
 
 [source,bash]
 ----
@@ -72,9 +70,11 @@ Show Fingerprints | System Time | Power Options | Performance Profile
 
 image::overview.png[System]
 
-*Step 2:*
+=== Step 2:
 
-*Services:* Shows the systemd services running on the Cockpit server. You can see which are active/enabled or inactive. You can also see other systemd features: Targets, sockets, timers, and paths.
+*Services:* Shows the systemd services running on the Cockpit server. You can
+see which are active/enabled or inactive. You can also see other systemd
+features: Targets, sockets, timers, and paths.
 
 [source,bash]
 ----
@@ -83,9 +83,11 @@ Targets | System Services | Sockets | Timers | Paths
 
 image::services.png[Services]
 
-*Step 3:*
+=== Step 3:
 
-*Containers:* Lists all images available on the system, all running and non-running containers, combined CPU & memory usage graphs, and a storage usage bar.
+*Containers:* Lists all images available on the system, all running and
+non-running containers, combined CPU & memory usage graphs, and a storage
+usage bar.
 
 .Click to Launch a image
 [source,bash]
@@ -95,7 +97,7 @@ Get new image
 
 image::containers1.png[Containers]
 
-*Step 4:*
+=== Step 4:
 
 Search & Download for Fedora
 
@@ -106,7 +108,7 @@ fedora, download
 
 image::search.png[Search for Fedora]
 
-*Step 5:*
+=== Step 5:
 
 Run the Fedora image
 
@@ -121,19 +123,20 @@ Add a command to run the image. Sleep is generic enough command.
 
 [source,bash]
 ----
-Command:  sleep 999
+Command: sleep 999
 ----
 
 image::run-image.png[Run with options]
 
-*Step 6:*
+=== Step 6:
 
-Click on the newly created container and see all of the metadata about the container. Shows the state, the command executed, the container’s and image’s IDs, a timestamp, as well as the container’s own terminal:
+Click on the newly created container and see all of the metadata about the
+container. Shows the state, the command executed, the container's and image's
+IDs, a timestamp, as well as the container's own terminal:
 
 image::detail.png[Image Detail]
 
 When your done taking a look around go ahead and stop & delete the container.
-
 
 [source,bash]
 ----
@@ -142,17 +145,17 @@ Stop, Delete
 
 image::delete.png[Stop & Delete]
 
+=== Step 7:
 
-*Step 7:*
-
-*Tools:* (Terminal)
-
-*Subscriptions:* Displays what Red Hat products are installed and subscribed.
-*Accounts:* Shows which administrative (root) and other users have accounts on the system.
-*Diagnostic report:* Collects system configuration and diagnostics information and prepares a report in an XZ format.
-
-*Terminal:* Opens a Terminal (command line) session to the Cockpit system. From there, you can run any commands available to the user you are logged in as. For example, as cockpit, you could run docker commands.
-
+*Tools:* (Terminal) +
+*Subscriptions:* Displays what Red Hat products are installed and subscribed. +
+*Accounts:* Shows which administrative (root) and other users have accounts on
+the system. +
+*Diagnostic report:* Collects system configuration and diagnostics information
+and prepares a report in an XZ format. +
+*Terminal:* Opens a Terminal (command line) session to the Cockpit system.
+From there, you can run any commands available to the user you are logged in
+as. For example, as cockpit, you could run docker commands. +
 
 [source,bash]
 ----
@@ -161,11 +164,10 @@ sudo docker ps -a
 
 image::terminal.png[Terminal]
 
+=== OPTIONAL
 
-
-**OPTIONAL**
-
-You can even change your shell to Zsh or use the popular http://ohmyz.sh/[Oh-my-zsh] to get customized shell prompts and other cool functions.
+You can even change your shell to Zsh or use the popular http://ohmyz.sh/[Oh-my-zsh]
+to get customized shell prompts and other cool functions.
 
 .Cool kids use Zsh
 [source,bash]
@@ -174,7 +176,3 @@ sh .install.sh
 ----
 
 image::zsh.png[Oh-my-zsh]
-
-
-image::redhat.svg[Red Hat]
-====
