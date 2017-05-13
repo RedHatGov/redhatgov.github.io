@@ -1,5 +1,5 @@
 ---
-title: "SCC & Seccomp"
+title: "Exercise 1.6 - SCC & Seccomp"
 workshops: openshift
 workshop_weight: 70
 layout: lab
@@ -10,49 +10,31 @@ layout: lab
 :imagesdir: /workshops/security_openshift/images
 
 = Exercise 1.6 - SCC & Seccomp
----
 
-****
+In addition to authorization policies that control what a user can do,
+OpenShift Container Platform provides security context constraints (SCC) that
+control the actions that a pod can perform and what it has the ability to
+access. Administrators can manage SCCs using the CLI.
 
-====
-
-In addition to authorization policies that control what a user can do, OpenShift Container Platform provides security context constraints (SCC) that control the actions that a pod can perform and what it has the ability to access. Administrators can manage SCCs using the CLI.
-
-SCCs are objects that define a set of conditions that a pod must run with in order to be accepted into the system. They allow an administrator to control the following:
+SCCs are objects that define a set of conditions that a pod must run with in
+order to be accepted into the system. They allow an administrator to control
+the following:
 
 - Running of privileged containers.
-
 - Capabilities a container can request to be added.
-
 - Use of host directories as volumes.
-
 - The SELinux context of the container.
-
 - The user ID.
-
 - The use of host namespaces and networking.
-
 - Allocating an FSGroup that owns the pod’s volumes
-
 - Configuring allowable supplemental groups
-
 - Requiring the use of a read only root file system
-
 - Controlling the usage of volume types
-
 - Configuring allowable seccomp profiles
 
+== SCC
 
-
-====
-
-[.lead]
-SCC
-
-====
-
-*Step 1:*
-
+=== Step 1:
 
 .get a current list of SCCs
 [source]
@@ -66,11 +48,14 @@ oc get scc
 oc describe scc restricted
 ----
 
-*Step 2:*
+=== Step 2:
 
 *Create a SCC*
 
-As most people at this workshop are security minded people we will skip over *adding* permissions and capabilities to containers, let's look at how tighten things up. We will look at *dropping* certain Linux Capabilities in this SCC file.
+As most people at this workshop are security minded people we will skip over
+*adding* permissions and capabilities to containers, let's look at how tighten
+things up. We will look at *dropping* certain Linux Capabilities in this SCC
+file.
 
 .dc17-drop-capabilities.yml
 [source]
@@ -106,7 +91,9 @@ requiredDropCapabilities:
 ----
 
 [NOTE]
-Copy the text above. Type `vim dc17-drop-capabilities.yml`, Press `i` for Insert, then cut and paste `control + v`, then escape and write the file `esc`, `:wq`.
+Copy the text above. Type `vim dc17-drop-capabilities.yml`, Press `i` for
+Insert, then cut and paste `control + v`, then escape and write the file `esc`,
+`:wq`.
 
 [source]
 ----
@@ -119,7 +106,8 @@ oc create -f dc17-drop-capabilities.yml
 
 Create `Service Account`
 
-.create service account https://en.wikipedia.org/wiki/Public_Security_Section_9[Section9]
+.create service account
+https://en.wikipedia.org/wiki/Public_Security_Section_9[Section9]
 [source]
 ----
 oc create serviceaccount section9
@@ -132,7 +120,6 @@ oc describe serviceaccount section9
 ----
 
 Add to service account
-
 
 .add the policy to the service account
 [source]
@@ -154,25 +141,27 @@ Access:
   Users: dc17-user,system:serviceaccount:sso:section9
 ----
 
+== Seccomp
 
-====
+Seccomp (secure computing mode) is used to restrict the set of system calls
+applications can make, allowing cluster administrators greater control over the
+security of workloads running in OpenShift Container Platform. Seccomp support
+is achieved via two annotations in the pod configuration:
 
-[.lead]
-Seccomp
+- seccomp.security.alpha.kubernetes.io/pod: profile applies to all containers
+in the pod that do not override
+- container.seccomp.security.alpha.kubernetes.io/<container_name>:
+container-specific profile override
 
-====
+Applications use `seccomp` to restrict the set of system calls they can make.
+Recently, container runtimes have begun adding features to allow the runtime to
+interact with `seccomp` on behalf of the application, which eliminates the need
+for applications to link against `libseccomp` directly. Adding support in the
+Kubernetes API for describing `seccomp` `profiles` will allow administrators
+greater control over the security of workloads running in Kubernetes.
 
-Seccomp (secure computing mode) is used to restrict the set of system calls applications can make, allowing cluster administrators greater control over the security of workloads running in OpenShift Container Platform. Seccomp support is achieved via two annotations in the pod configuration:
-
-- seccomp.security.alpha.kubernetes.io/pod: profile applies to all containers in the pod that do not override
-
-- container.seccomp.security.alpha.kubernetes.io/<container_name>: container-specific profile override
-
-
-Applications use `seccomp` to restrict the set of system calls they can make. Recently, container runtimes have begun adding features to allow the runtime to interact with `seccomp` on behalf of the application, which eliminates the need for applications to link against `libseccomp` directly. Adding support in the Kubernetes API for describing `seccomp` `profiles` will allow administrators greater control over the security of workloads running in Kubernetes.
-
-The systemd seccomp facility is based on a whitelist of system calls that can be made, rather than a full filter specification.
-
+The systemd seccomp facility is based on a whitelist of system calls that can
+be made, rather than a full filter specification.
 
 *Containers are run with unconfined seccomp settings by default.*
 
@@ -205,7 +194,8 @@ spec:
 
 *Custom profile*
 
-Here's an example of a pod that uses a profile called example-explorer profile using the container-level annotation:
+Here's an example of a pod that uses a profile called example-explorer profile
+using the container-level annotation:
 
 .custom
 [source]
@@ -215,7 +205,8 @@ kind: Pod
 metadata:
   name: explorer
   annotations:
-    container.seccomp.security.alpha.kubernetes.io/explorer: localhost/example-explorer-profile <1>
+    container.seccomp.security.alpha.kubernetes.io/explorer:
+localhost/example-explorer-profile <1>
 spec:
   containers:
     - name: explorer
@@ -232,13 +223,14 @@ spec:
       emptyDir: {}
 ----
 
-<1> This refers to a custom file policy that resides on the localhost. If you would like to see what the default `seccomp` profile is for OpenShift look https://github.com/docker/docker/blob/master/profiles/seccomp/default.json[here].
+<1> This refers to a custom file policy that resides on the localhost. If you
+would like to see what the default `seccomp` profile is for OpenShift look
+https://github.com/docker/docker/blob/master/profiles/seccomp/default.json[here].
 
-https://github.com/docker/docker/blob/master/profiles/seccomp/default.json[Docker Default Seccomp]
+https://github.com/docker/docker/blob/master/profiles/seccomp/default.json[Docker
+Default Seccomp]
 
-https://github.com/kubernetes/kubernetes/blob/release-1.4/docs/design/seccomp.md[Seccomp Design]
+https://github.com/kubernetes/kubernetes/blob/release-1.4/docs/design/seccomp.md[Seccomp
+Design]
 
 https://github.com/seccomp/libseccomp[libseccomp]
-
-image::redhat.svg[Red Hat]
-====

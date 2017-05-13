@@ -1,10 +1,9 @@
 ---
-title: "Deploy OpenShift"
+title: "Exercise 1.2 - Deploy OpenShift"
 workshops: openshift
 workshop_weight: 30
 layout: lab
 ---
-
 
 :source-highlighter: highlight.js
 :source-language: bash
@@ -12,31 +11,23 @@ layout: lab
 
 = Exercise 1.2 - Deploy OpenShift
 
----
-
-****
-
-====
-
 image::openshift-ocp.svg[]
 
-OpenShift v3 is a layered system designed to expose underlying Docker-formatted container image and Kubernetes concepts as accurately as possible, with a focus on easy composition of applications by a developer. For example, install Ruby, push code, and add MySQL.
+OpenShift v3 is a layered system designed to expose underlying Docker-formatted
+container image and Kubernetes concepts as accurately as possible, with a focus
+on easy composition of applications by a developer. For example, install Ruby,
+push code, and add MySQL.
 
+== OpenShift
 
-====
-
-[.lead]
-OpenShift
-
-====
-
-*Step 1:*
+=== Step 1:
 
 *Use the `oc` command*
 
-These instances have been preconfigured with `docker` and the `oc` command. The `oc` command makes deploying OpenShift for development purposes incredibly easy. The `oc cluster up` command starts a OpenShift all-in-one cluster with a configured registry, router, image streams, and default templates.
-
-
+These instances have been preconfigured with `docker` and the `oc` command. The
+`oc` command makes deploying OpenShift for development purposes incredibly
+easy. The `oc cluster up` command starts a OpenShift all-in-one cluster with a
+configured registry, router, image streams, and default templates.
 
 .switch to root
 [source]
@@ -52,10 +43,10 @@ mkdir /data
 
 Next use the following command to bring up the cluster on your local machine.
 
-
 [IMPORTANT]
-But first! export your student number to sync up with the wildcard DNS mapped to your instance. For example below, if you are student `0` then `export STUDENT=0`.
-
+But first! export your student number to sync up with the wildcard DNS mapped
+to your instance. For example below, if you are student `0` then `export
+STUDENT=0`.
 
 .DO NOT CUT AND PASTE THIS, ok you can but change the number
 [source]
@@ -63,22 +54,22 @@ But first! export your student number to sync up with the wildcard DNS mapped to
 export STUDENT=0
 ----
 
-
-
-
 .run the oc command (you can cut & paste this)
 [source]
 ----
-oc cluster up --public-hostname=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) --routing-suffix=apps.ose.$STUDENT.redhat-fierce.io --host-pv-dir=/data --host-data-dir=/data  --image=registry.access.redhat.com/openshift3/ose --version=v3.5
+oc cluster up --public-hostname=$(curl -s
+http://169.254.169.254/latest/meta-data/public-ipv4)
+--routing-suffix=apps.ose.$STUDENT.redhat-fierce.io --host-pv-dir=/data
+--host-data-dir=/data  --image=registry.access.redhat.com/openshift3/ose
+--version=v3.5
 ----
-
-
 
 .Details on the `oc` command
 [source]
 ----
 oc cluster up \
-   --public-hostname=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) \ <1>
+   --public-hostname=$(curl -s
+http://169.254.169.254/latest/meta-data/public-ipv4) \ <1>
    --routing-suffix=apps.ose.$STUDENT.redhat-fierce.io \ <2>
    --host-pv-dir=/data \ <3>
    --host-data-dir=/data  <4>
@@ -86,15 +77,20 @@ oc cluster up \
    --version=v3.5 <6>
 ----
 
-<1> This sets OpenShift's public name to the public ip of the AMI, via the AWS metadata service (169.254.169.254).
+<1> This sets OpenShift's public name to the public ip of the AMI, via the AWS
+metadata service (169.254.169.254).
 
-<2> This sets the wildcard domain for all of the applications you provision in OpenShift.
+<2> This sets the wildcard domain for all of the applications you provision in
+OpenShift.
 
-<3> Cluster up creates a set of persistent volumes by default. It exposes a new flag that allows setting the directory on the host for these volumes.
+<3> Cluster up creates a set of persistent volumes by default. It exposes a new
+flag that allows setting the directory on the host for these volumes.
 
-<4> To persist data across restarts, specify a valid host directory when starting your cluster with `oc` cluster up.
+<4> To persist data across restarts, specify a valid host directory when
+starting your cluster with `oc` cluster up.
 
-<5> Pull from the Red Hat registry to run OpenShift Container Platform. Default is to use Origin.
+<5> Pull from the Red Hat registry to run OpenShift Container Platform. Default
+is to use Origin.
 
 <6> Get the latest version of OCP 3.5.
 
@@ -118,9 +114,10 @@ oc cluster up \
        oc login -u system:admin
 ----
 
-<1> OpenShift Web Console, Example: `https://184.73.9.149:8443`  (open in browser)
+<1> OpenShift Web Console, Example: `https://184.73.9.149:8443`  (open in
+browser)
 
-*Step 2:*
+=== Step 2:
 
 *Launch your first application.*
 
@@ -132,20 +129,27 @@ oc whoami
 
 You should be logged in as `developer`
 
-Create a new https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/projects_and_users.html[Project] for your first app.
+Create a new
+https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/projects_and_users.html[Project]
+for your first app.
 
 .create new project
 [source]
 ----
-oc new-project flask --description="Python Flask App" --display-name="Flask App"
+oc new-project flask --description="Python Flask App" --display-name="Flask
+App"
 ----
 
-Now use the `new-app` command to create the new app from a simple Python flask repository on GitHub. By using the `--strategy=source` we can pass it the type of container to build and launch the app. In this case we are using `python:3.3`.
+Now use the `new-app` command to create the new app from a simple Python flask
+repository on GitHub. By using the `--strategy=source` we can pass it the type
+of container to build and launch the app. In this case we are using
+`python:3.3`.
 
 .create the app
 [source]
 ----
-oc new-app --strategy=source python:3.3~https://github.com/RedHatGov/DC17-Flask --name=dc17-flask
+oc new-app --strategy=source python:3.3~https://github.com/RedHatGov/DC17-Flask
+--name=dc17-flask
 ----
 
 Now follow the logs as its being built.
@@ -158,7 +162,7 @@ oc logs -f bc/dc17-flask
 
 *Open a browser next to the terminal so you can see the app get created*
 
-*Step 3:*
+=== Step 3:
 
 *Login to OpenShift*
 
@@ -170,25 +174,26 @@ Username:  developer
 Password:  developer
 ----
 
-
 .OpenShift Main Login
 image::login-origin.png[]
-
 
 Click on the new project you created `Flask App`.
 
 .Flask App
 image::flask-app.png[]
 
-Now we need to create a https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/routes.html[`route`] to see the app.
+Now we need to create a
+https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/routes.html[`route`]
+to see the app.
 
-Click `Create Route` in the top right corner. Accept the defaults and click `create`.
+Click `Create Route` in the top right corner. Accept the defaults and click
+`create`.
 
 .create route
 image::create-route.png[]
 
-
-Now lets see your first app. Click the new route. It should look similar to this `http://dc17-flask-flask.apps.ose.0.redhat-fierce.io`.
+Now lets see your first app. Click the new route. It should look similar to
+this `http://dc17-flask-flask.apps.ose.0.redhat-fierce.io`.
 
 image::route.png[]
 
@@ -197,11 +202,7 @@ Congratulations! You have launched your first app in OpenShift!
 To recap:
 
 - You just launched OpenShift on AWS
-
 - You launched a containerized python app
 
 
 https://github.com/openshift/origin/blob/master/docs/cluster_up_down.md#specifying-images-to-use[oc guide]
-
-image::redhat.svg[Red Hat]
-====

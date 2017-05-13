@@ -1,11 +1,9 @@
 ---
-title: "Atomic Scanner"
+title: "Exercise 1.5 - Atomic Scanner"
 workshops: openshift
 workshop_weight: 60
 layout: lab
 ---
-
-
 
 :source-highlighter: highlight.js
 :source-language: bash
@@ -13,33 +11,31 @@ layout: lab
 
 = Exercise 1.5 - Atomic Scanner
 
----
-
-****
-
-====
-
 image::atomic-scan.png[]
 
-The atomic command-line tool provides a way to interact and manage Atomic Host systems and containers. It provides a high level, coherent entrypoint to the system and makes it easier to interact with special kinds of containers, such as super-privileged containers, and debugging tools.
+The atomic command-line tool provides a way to interact and manage Atomic Host
+systems and containers. It provides a high level, coherent entrypoint to the
+system and makes it easier to interact with special kinds of containers, such
+as super-privileged containers, and debugging tools.
 
-The atomic command uses tools such as `docker`, `ostree` and `skopeo` to manage containers and container host systems. There are also a lot of features built into the atomic command that are not available in the docker command. These features allow you to use special commands for image signing, image verification, the ability to install a container - mounting file systems and opening privileges.
+The atomic command uses tools such as `docker`, `ostree` and `skopeo` to manage
+containers and container host systems. There are also a lot of features built
+into the atomic command that are not available in the docker command. These
+features allow you to use special commands for image signing, image
+verification, the ability to install a container - mounting file systems and
+opening privileges.
 
-Before containers are run, it makes good sense to be able to scan container images for known vulnerabilities and configuration problems. A number of container scanning tools are beginning to appear including RHEL’s  `atomic scan` command.
+Before containers are run, it makes good sense to be able to scan container
+images for known vulnerabilities and configuration problems. A number of
+container scanning tools are beginning to appear including RHEL’s  `atomic
+scan` command.
 
+== Atomic Scan
 
+This lab will get you familiar with the `atomic scan` command and also how to
+extend `atomic scan` with a custom scanner.
 
-====
-
-[.lead]
-Atomic Scan
-
-====
-
-This lab will get you familiar with the `atomic scan` command and also how to extend `atomic scan` with a custom scanner.
-
-*Step 1:*
-
+=== Step 1:
 
 *Pull some images*
 
@@ -59,7 +55,6 @@ Let's see what types of scanners are available
 sudo atomic scan --list
 ----
 
-
 First lets take a look at RHEL7.1
 
 .Atomic default scan OpenSCAP
@@ -71,7 +66,8 @@ sudo atomic scan registry.access.redhat.com/rhel7.1
 .Atomic Compliance scan
 [source]
 ----
-sudo atomic scan --scan_type standards_compliance registry.access.redhat.com/rhel7.1
+sudo atomic scan --scan_type standards_compliance
+registry.access.redhat.com/rhel7.1
 ----
 
 Now let's take a look at RHEL7.3 (latest)
@@ -85,22 +81,27 @@ sudo atomic scan registry.access.redhat.com/rhel7.3
 .Atomic Compliance scan
 [source]
 ----
-sudo atomic scan --scan_type standards_compliance registry.access.redhat.com/rhel7.3
+sudo atomic scan --scan_type standards_compliance
+registry.access.redhat.com/rhel7.3
 ----
 
-You will notice that over time vulnerabilities are found in OS and applications. So you can see that security is more of a race against time to find and patch vulnerabilities before an attacker can exploit them. This is where containers can really help to enhance security by being able to make a security fix to a base image and have OpenShift deploy that image to all containers that are running outdated versions.
+You will notice that over time vulnerabilities are found in OS and
+applications. So you can see that security is more of a race against time to
+find and patch vulnerabilities before an attacker can exploit them. This is
+where containers can really help to enhance security by being able to make a
+security fix to a base image and have OpenShift deploy that image to all
+containers that are running outdated versions.
 
-
-*Step 2:*
+=== Step 2:
 
 *Writing a Custom Scanner*
 
-The atomic scanner was designed with a pluggable architecture to allow developers to write custom scanners using any programming language supported by RHEL. Adding a scanner plugin involves the following:
+The atomic scanner was designed with a pluggable architecture to allow
+developers to write custom scanners using any programming language supported by
+RHEL. Adding a scanner plugin involves the following:
 
 - Make atomic aware of your plug­in.
-
 - Ensure the plugin obtains the proper input from the / scanin directory.
-
 - Ensure the plugin writes the results to the  /scanout directory.
 
 .cd  into `/home/ec2-user/workshopfiles`
@@ -108,7 +109,6 @@ The atomic scanner was designed with a pluggable architecture to allow developer
 ----
 cd /home/ec2-user/workshopfiles
 ----
-
 
 .build the `Dockerfile`
 [source]
@@ -118,7 +118,6 @@ sudo docker build --rm=true --force-rm=true --tag=example_plugin .
 
 [IMPORTANT]
 Notice `.` it means in the current directory.
-
 
 .see the newly built container
 [source]
@@ -148,12 +147,20 @@ Now lets try the get rpms scan
 .rpm-list
 [source]
 ----
-sudo atomic scan --scanner example_plugin --scan_type=rpm-list registry.access.redhat.com/rhel7.3
+sudo atomic scan --scanner example_plugin --scan_type=rpm-list
+registry.access.redhat.com/rhel7.3
 ----
 
-*Additional Fun*
+== Additional Fun
 
-Have a look at the files in the `/home/ec2-user/workshopfiles` directory. They contain the files that make up your new `example_scanner`. The meat of the scanner is the `list_rpms.py` Python file. This is a similar architecture to writing http://docs.ansible.com/ansible/dev_guide/developing_modules.html[Ansible Module], by that as long as you adhere to the api you can write the plugin in any language you like. Basically returning proper json that is defined in `example_plugin`. Let see that now;
+Have a look at the files in the `/home/ec2-user/workshopfiles` directory. They
+contain the files that make up your new `example_scanner`. The meat of the
+scanner is the `list_rpms.py` Python file. This is a similar architecture to
+writing
+http://docs.ansible.com/ansible/dev_guide/developing_modules.html[Ansible
+Module], by that as long as you adhere to the api you can write the plugin in
+any language you like. Basically returning proper json that is defined in
+`example_plugin`. Let see that now;
 
 .example_plugin
 [source]
@@ -175,12 +182,11 @@ scans: [
 ]
 ----
 
-So you can see that as long as you package up the scanner code in the container and adhere to the api it should be easy to add your own custom scanner.
+So you can see that as long as you package up the scanner code in the container
+and adhere to the api it should be easy to add your own custom scanner.
 
-https://developers.redhat.com/blog/2016/05/20/creating-a-custom-atomic-scan-plug-in/#more-421256[Creating a custom atomic scan plugin]
+https://developers.redhat.com/blog/2016/05/20/creating-a-custom-atomic-scan-plug-in/#more-421256[Creating
+a custom atomic scan plugin]
 
-https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/cli_reference/atomic_commands[Atomic Scan Commands]
-
-
-image::redhat.svg[Red Hat]
-====
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/cli_reference/atomic_commands[Atomic
+Scan Commands]

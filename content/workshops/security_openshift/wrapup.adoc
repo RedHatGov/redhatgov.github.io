@@ -10,19 +10,18 @@ layout: lab
 :source-language: bash
 :imagesdir: /workshops/security_openshift/images
 
-= Wrap Up and Q&A
+= Wrap Up
 
-That wraps up what we have planned for today.  We hope you've learned something valuable +
-about OpenShift Security that you can apply in your daily role.
+That wraps up what we have planned for today.  We hope you've learned something
+valuable about OpenShift Security that you can apply in your daily role.
 
 What do you think? How can we help you understand OpenShift Security better?
 
-Before you leave, check out the *Resources* page that is part of this guide.  There you can +
-find a ton of links that will further your OpenShift education.
+Before you leave, check out the *Resources* page that is part of this guide.
+There you can find a ton of links that will further your OpenShift education.
 
-This *Participant Guide* will remain active for the next two weeks.  Please take advantage +
-of it by creating your own OpenShift Security environment back at your organization.
+This *Participant Guide* will remain active for the next two weeks.  Please
+take advantage of it by creating your own OpenShift Security environment back
+at your organization.
 
 Thank you for your time and participation!
-
-image::redhat.svg[Red Hat]
