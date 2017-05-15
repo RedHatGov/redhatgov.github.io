@@ -41,7 +41,7 @@ You got it!
 
 ## Step 1
 
-Go to https://github.com/spf13/hugo/releases/tag/v0.19 and scroll to the
+Go to https://github.com/spf13/hugo/releases/tag/v0.20.7 and scroll to the
 **Downloads** section (it's near the bottom).
 
 Here are direct links for the common ones:
@@ -95,8 +95,8 @@ browser for you.
 That's all there is to it to getting up and running!
 
 
-[hugo_download_linux64]: https://github.com/spf13/hugo/releases/download/v0.19/hugo_0.19_Linux-64bit.tar.gz
-[hugo_download_macos64]: https://github.com/spf13/hugo/releases/download/v0.19/hugo_0.19_macOS-64bit.zip
-[hugo_download_windows64]: https://github.com/spf13/hugo/releases/download/v0.19/hugo_0.19_Windows-64bit.zip
+[hugo_download_linux64]: https://github.com/spf13/hugo/releases/download/v0.20.7/hugo_0.20.7_Linux-64bit.tar.gz
+[hugo_download_macos64]: https://github.com/spf13/hugo/releases/download/v0.20.7/hugo_0.20.7_macOS-64bit.tar.gz
+[hugo_download_windows64]: https://github.com/spf13/hugo/releases/download/v0.20.7/hugo_0.20.7_Windows-64bit.zip
 [hugo_install]: https://gohugo.io/overview/installing/
 [hugo_intro]: https://gohugo.io/overview/introduction/
