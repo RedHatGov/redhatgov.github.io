@@ -1,6 +1,6 @@
 ---
 title: Lab - Building and Deploying a Fast-Moving Monolith
-workshops: stranglingthemonolith
+workshops: strangling_the_monolith
 workshop_weight: 40
 layout: lab
 ---
@@ -42,7 +42,7 @@ $ oc process -f src/main/openshift/template.json | oc create -f -
 {{< panel_group >}}
 {{% panel "OpenShift Dev Deployment" %}}
 
-<img src="../img/lab1_oc_coolstore_dev1.png" alt="OC Coolstore Dev" width="1000" />
+<img src="../img/lab1_oc_coolstore_dev1.png" width="1000" />
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -95,7 +95,7 @@ $ oc start-build coolstore --from-file deployments/ROOT.war --follow
 - Log into the database pod (with postgresql in the pod name) and inspect the values stored (you will need to copy/paste the password from the POSTGRESQL_PASSWORD environment variable when running the psql command):
 
 ```
-% oc env dc/coolstore-dev-postgresql --list       # copy value of POSTGRESQL_PASSWORD to clipboard
+$ oc env dc/coolstore-dev-postgresql --list       # copy value of POSTGRESQL_PASSWORD to clipboard
 $ oc get pods
 $ oc rsh coolstore-dev-postgresql-1-3rfuw
 sh-4.2$ psql -h $HOSTNAME -d $POSTGRESQL_DATABASE -U $POSTGRESQL_USER
@@ -189,7 +189,7 @@ You should now have two identical copies of the app deployed, along with two dat
 
 {{% alert info %}}
 
-If your the build pipeline fails to start, you can manually tag the images:
+If your build pipeline fails to start, you can manually tag the images:
 
 ```
 $ oc tag coolstore:latest coolstore:prod
