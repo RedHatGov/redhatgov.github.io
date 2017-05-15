@@ -10,6 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "highlight.js": "^9.10.0",
-    "patternfly": "^3.22.1"
+    "patternfly": "^3.24.0"
   }
 }
