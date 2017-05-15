@@ -1,6 +1,6 @@
 ---
 title: "Exercise 1.5 - Atomic Scanner"
-workshops: openshift
+workshops: security_openshift
 workshop_weight: 60
 layout: lab
 ---

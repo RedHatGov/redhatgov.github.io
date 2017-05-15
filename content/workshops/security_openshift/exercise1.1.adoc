@@ -1,6 +1,6 @@
 ---
 title: "Exercise 1.1 - SELinux"
-workshops: openshift
+workshops: security_openshift
 workshop_weight: 20
 layout: lab
 ---

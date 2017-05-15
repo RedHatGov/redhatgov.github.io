@@ -1,6 +1,6 @@
 ---
 title: "Exercise 1.7 - Red Hat Security API"
-workshops: openshift
+workshops: security_openshift
 workshop_weight: 80
 layout: lab
 ---

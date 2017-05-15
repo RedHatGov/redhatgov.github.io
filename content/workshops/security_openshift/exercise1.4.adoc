@@ -1,6 +1,6 @@
 ---
 title: "Exercise 1.4 - Skopeo"
-workshops: openshift
+workshops: security_openshift
 workshop_weight: 50
 layout: lab
 ---

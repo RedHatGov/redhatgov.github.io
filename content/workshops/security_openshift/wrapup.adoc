@@ -1,6 +1,6 @@
 ---
 title: Wrap Up
-workshops: openshift
+workshops: security_openshift
 workshop_weight: 90
 layout: lab
 ---

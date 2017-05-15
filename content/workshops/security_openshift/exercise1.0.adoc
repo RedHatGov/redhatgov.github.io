@@ -1,6 +1,6 @@
 ---
 title: "Exercise 1.0 - Linux Kernel Capabilities"
-workshops: openshift
+workshops: security_openshift
 workshop_weight: 10
 layout: lab
 ---

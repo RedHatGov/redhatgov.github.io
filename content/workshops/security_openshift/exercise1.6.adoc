@@ -1,6 +1,6 @@
 ---
 title: "Exercise 1.6 - SCC & Seccomp"
-workshops: openshift
+workshops: security_openshift
 workshop_weight: 70
 layout: lab
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Exercise 1.2 - Deploy OpenShift"
-workshops: openshift
+workshops: security_openshift
 workshop_weight: 30
 layout: lab
 ---
