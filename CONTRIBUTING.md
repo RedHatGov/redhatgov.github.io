@@ -17,7 +17,7 @@ Push to your fork and [submit a pull request][pr].
 
 At this point you're waiting on us. We may suggest some changes or improvements
 or alternatives. We'll do our best to review and at least comment within 3
-business day (often much sooner).
+business days (often much sooner).
 
 
 [pr]: https://github.com/RedHatGov/redhatgov.github.io/compare/
