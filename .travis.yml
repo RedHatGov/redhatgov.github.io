@@ -1,4 +1,5 @@
 install:
+  - gem install asciidoctor
   - rm -rf public || exit 0
 
 script:
