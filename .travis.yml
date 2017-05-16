@@ -1,0 +1,17 @@
+install:
+  - rm -rf public || exit 0
+
+script:
+  - ./bin/hugo
+  - cd public
+  - touch .nojekyll
+  - echo "redhatgov.io" > CNAME
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: public
+  target_branch: master
+  on:
+    branch: docs
