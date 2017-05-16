@@ -1,0 +1,69 @@
+---
+title: "Setup"
+workshops: ansible_tower
+workshop_weight: 1
+layout: lab
+---
+
+:badges:
+:icons: font
+:iconsdir: http://people.redhat.com/~jduncan/images/icons
+:imagesdir: /workshops/ansible_tower/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+:domain_name: redhatgov.io
+:workshop_prefix: company-name
+:tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
+:ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
+
+= Workshop Lab Setup
+
+
+
+[IMPORTANT]
+Today's workshop infrastructure is being run in Amazon EC2. +
+Each student will have two instances to use. +
+Each of you should have received an email.  It has the following information on it. +
+
+If you didn't get one of these emails, let us know so we can give you the information about your lab environment.
+
+
+
+
+
+[.lead]
+Workshop Infrastructure
+
+Each student's personal EC2 lab is equipped with the following:
+
+* (1) Control node (to run ansible plays and install Ansible Tower).
+* (1) Endpoint nodes (to execute ansible playbooks upon).
+** _All three of the afore mentioned nodes are running Red Hat Enterprise Linux 7.3_
+* Ansible Core 2.2
+* Ansible Tower 3.0.3
+
+.Setup Your Environment
+
+Before we can begin doing super-cool automations and such, we've got to get a few basics out of the way.
+Namely... ssh access to your EC2 nodes.
+
+[.lead]
+Testing your environment
+
+Loginto your instances via the following links:
+
+
+{tower_url}
+
+{ssh_url}
+
+
+[IMPORTANT]
+Be sure you can log in to your ec2 instances.  If you can't log in start shouting, loudly, and waving your hands!
+
+
+[.lead]
+End Result
+
+At this point, everyone should have logged into each of your 2 nodes.  If you haven't, let us know so we can get you fixed up.
