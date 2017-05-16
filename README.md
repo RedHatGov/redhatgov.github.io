@@ -1,5 +1,7 @@
 # RedHatGov.io
 
+[![Build Status](https://travis-ci.org/RedHatGov/redhatgov.github.io.svg?branch=docs)](https://travis-ci.org/RedHatGov/redhatgov.github.io)
+
 This repository contains the content for the [RedHatGov.io][redhatgov] site.
 At present, the [RedHatGov.io][redhatgov] site contains a collection of
 workshops that cover various topics relating to Red Hat solutions.
