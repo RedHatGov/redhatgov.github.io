@@ -20,3 +20,6 @@ deploy:
   target_branch: master
   on:
     branch: docs
+
+notifications:
+  slack: redhat:9meDz4fnYsXtr3krfjmSXADX
