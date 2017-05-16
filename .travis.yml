@@ -1,3 +1,7 @@
+branches:
+  only:
+    - docs
+
 install:
   - gem install asciidoctor
   - rm -rf public || exit 0
@@ -13,7 +17,6 @@ deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: public
   target_branch: master
   on:
     branch: docs
