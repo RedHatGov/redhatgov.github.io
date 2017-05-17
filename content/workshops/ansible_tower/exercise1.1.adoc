@@ -32,8 +32,8 @@ can have one or multiple tasks.  The goal of a *play* is to map a group of hosts
 
 For our first playbook, we are only going to write one play and two tasks.
 
-[.lead]
-Section 1 - Creating a Directory Structure and Files for your Playbook
+
+== Section 1: Creating a Directory Structure and Files for your Playbook
 
 There is a link:{dir_url}[best practice] on the preferred directory structures for playbooks.  We strongly encourage
 you to read and understand these practices as you develop your Ansible ninja skills.  That said,
@@ -54,8 +54,8 @@ cd ~/apache_basic
 
 
 
-[.lead]
-Section 2 - Defining Your Play
+
+== Section 2: Defining Your Play
 
 Now that you are editing `install_apache.yml`, let's begin by defining the play and then understanding what each line accomplishes
 
@@ -76,8 +76,8 @@ Now that you are editing `install_apache.yml`, let's begin by defining the play 
 - `name: Install the apache web service` This describes our play
 - `become: yes` Enables user privilege escalation.  The default is sudo, but su, pbrun, and link:{become_url}[several others] are also supported.
 
-[.lead]
-Section 3: Adding Tasks to Your Play
+
+== Section 3: Adding Tasks to Your Play
 
 Now that we've defined your play, let's add some tasks to get some things done.  Align (vertically) the *t* in `task` with the *b* `become`.  +
 Yes, it does actually matter.  In fact, you should make sure all of your playbook statements are aligned in the way shown here. +
@@ -134,8 +134,8 @@ is the preferred way of controlling services on remote hosts.  link:{service_url
 about the *service* module.
 
 
-[.lead]
-Section 4: Saving your Playbook
+
+== Section 4: Saving your Playbook
 
 Now that you've completed writing your playbook, it would be a shame not to keep it.
 

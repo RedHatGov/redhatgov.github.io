@@ -38,8 +38,8 @@ However, we are only going to focus on a few of the key contructs that are requi
 
 
 
-[.lead]
-Logging into Tower and Installing the License Key
+
+== Logging into Tower and Installing the License Key
 
 
 *Step 1:* To log in, use the username `admin` and and the password `ansibleWS`.
@@ -66,8 +66,8 @@ recently downloaded license file into Tower. +
 
 
 
-[.lead]
-Creating a Credential
+
+== Creating a Credential
 
 Credentials are utilized by Tower for authentication when launching jobs against machines,
 synchronizing with inventory sources, and importing project content from a version control system.
@@ -107,8 +107,8 @@ image::at_cred_detail.png[Cred_Detail, 900,caption="Figure 5: ",title="Adding a 
 *Step 5:* Select SAVE     image:at_save.png[Save,35,25] +
 
 
-[.lead]
-Creating a Project
+
+== Creating a Project
 
 A Project is a logical collection of Ansible playbooks, represented in Tower.
 You can manage playbooks and playbook directories by either placing them manually
@@ -146,8 +146,8 @@ image::at_project_detail.png[Cred_Detail, 900,caption="Figure 6: ",title="Defini
 
 
 
-[.lead]
-Creating a Inventory
+
+== Creating a Inventory
 
 An inventory is a collection of hosts against which jobs may be launched.
 Inventories are divided into groups and these groups contain the actual hosts.
