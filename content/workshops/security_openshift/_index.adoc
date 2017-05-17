@@ -86,8 +86,8 @@ password : ``
 
 == Today's Team
 
-[.lead]
-Brad Sollar - Solutions Architect
+
+== Brad Sollar - Solutions Architect
 
 Brad Sollar is a Solutions Architect at Red Hat where he works primarily with
 OpenShift & Ansible and is a fan of all kinds of automation. Previously before
