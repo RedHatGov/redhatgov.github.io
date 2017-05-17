@@ -17,31 +17,37 @@ this workshop as we have time.
 
 # Content Ideas
 
-- How to use the \_index.md page
-- How to display labs using shortcode
-- List the available shortcodes with examples
-    - built-in - https://gohugo.io/extras/shortcodes/#built-in-shortcodes
-        - highlight
-        - figure
-        - ref, relref
-        - tweet
-        - youtube
-        - vimeo
-        - gist
-        - speakerdeck
-        - instagram
-    - custom
-        - alert
-        - labs
+- Have a page that lists all shortcodes available with examples of how to use
+  them
+    - Hugo built-in - https://gohugo.io/extras/shortcodes/#built-in-shortcodes
+        - `highlight`
+        - `figure`
+        - `ref`
+        - `relref`
+        - `tweet`
+        - `youtube`
+        - `vimeo`
+        - `gist`
+        - `speakerdeck`
+        - `instagram`
+    - Included in theme
+        - `alert`
+        - `blockquote`
+        - `formspree`
+        - `img`
+        - `panel_group`
+        - `panel`
+        - `well`
+        - `year`
+    - Custom
+        - `labs`
 - The difference between \{\{< shortcode >\}\} and \{\{% shortcode %\}\}
-- How to use weight to define order of labs
-- Describe how to change order of pages for each workshop it's part of
 
 # Shortcode Ideas
 
-- pficon
-- fa icon
+- PatternFly icons
+- Font Awesome icons
 
 # Current Limitations
 
-- Syntax highlighting not setup yet
+- Syntax highlighting not setup yet (currently displays as plain text)
