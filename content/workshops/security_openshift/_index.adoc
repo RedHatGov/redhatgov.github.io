@@ -19,18 +19,7 @@ menu:
 * Arrivals
 * Introductions / Agenda
 * Presentation
-* Setup
-* Exercise 1.0 - Linux Kernel Capabilities
-* Exercise 1.1 - SELinux
-* Exercise 1.2 - Deploy OpenShift
-* Break
-* Exercise 1.3 - Image Streams & Secrets
-* Exercise 1.4 - Skopeo
-* Exercise 1.5 - Atomic Scanner
-* Exercise 1.6 - SCC & Seccomp
-* Exercise 1.7 - Red Hat Security API
-* Wrap Up
-
+{{< labs security_openshift >}}
 == Before We Get Started
 
 === Overview
