@@ -20,6 +20,8 @@ menu:
 * Introductions / Agenda
 * Presentation
 {{< labs security_openshift >}}
+
+
 == Before We Get Started
 
 === Overview
