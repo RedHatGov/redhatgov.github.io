@@ -21,7 +21,6 @@ menu:
 * Presentation
 {{< labs security_openshift >}}
 
-
 == Before We Get Started
 
 === Overview
@@ -92,11 +91,6 @@ stays theta positive.
 - Bob Kozdemba
 - Brent Baude
 - Adrian Mouat
-
-
-== Labs
-
-{{< labs security_openshift >}}
 
 == Document Copyright
 
