@@ -1,5 +1,5 @@
 ---
-title: "= Exercise 1.3 - Image Streams & Secrets"
+title: "Exercise 1.3 - Image Streams & Secrets"
 workshops: security_openshift
 workshop_weight: 40
 layout: lab
