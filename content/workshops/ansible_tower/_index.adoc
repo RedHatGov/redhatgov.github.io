@@ -7,7 +7,7 @@ menu:
 ---
 
 :domain_name: redhatgov.io
-:workshop_prefix: company-name
+:workshop_prefix: workshop
 :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
 :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
 
@@ -20,24 +20,16 @@ menu:
 
 
 
-.Today's Agenda
+== Today's Agenda
 
-- Arrivals
-- Introductions / Agenda
-- Presentation
-- Setup
-- Exercise 1.0 - Ad-Hoc Commands
-- Break
-- Exercise 1.1 - Writing Your First Playbook
-- Exercise 1.2 - Running Your First Playbook
-- Exercise 1.3 - Installing Ansible Tower
-- Exercise 1.4 - Configuring Ansible Tower
-- Exercise 1.4 - Creating and Running a Job Template
-- Wrap Up
+* Arrivals
+* Introductions / Agenda
+* Presentation
+{{< labs ansible_tower >}}
 
 
 
-.Before We Get Started
+=== Before We Get Started
 
 
 == Overview
@@ -83,12 +75,11 @@ ansible web -m setup
 Do not cut and paste text from this document.  We really want you to learn ansible during this workshop,
 and part of that experience is typing out YAML and understanding it's syntax, spacing, and alignments.
 
+== Workshop Deployment
 
+Here is the link to deploy this workshop in AWS via Ansible.
 
-== Labs
-
-{{< labs ansible_tower >}}
-
+https://github.com/RedHatGov/redhatgov.workshops/tree/master/ansible_tower[GitHub Repo]
 
 == Document Copyright
 

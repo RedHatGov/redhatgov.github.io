@@ -92,6 +92,12 @@ stays theta positive.
 - Brent Baude
 - Adrian Mouat
 
+== Workshop Deployment
+
+Here is the link to deploy this workshop in AWS via Ansible.
+
+https://github.com/RedHatGov/redhatgov.workshops/tree/master/security_openshift[GitHub Repo]
+
 == Document Copyright
 
 This document was created by and for Red Hat, Inc. It is being released under

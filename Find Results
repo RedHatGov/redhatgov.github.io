@@ -1,0 +1,103 @@
+Searching 3378 files for "melbourne"
+
+/Users/bsollar/Dropbox/redhatgov.github.io/content/workshops/ansible_tower/exercise1.2.adoc:
+   32  [source,bash]
+   33  ----
+   34: ansible-playbook --private-key=~/.ssh/melbourne-tower -i ../hosts install_apache.yml
+   35  ----
+   36  
+   ..
+   48  [source,bash]
+   49  ----
+   50: ansible-playbook --private-key=~/.ssh/melbourne-tower -i ../hosts install_apache.yml --syntax-check
+   51  ----
+   52  
+
+/Users/bsollar/Dropbox/redhatgov.github.io/content/workshops/ansible_tower/exercise1.4.adoc:
+   13  :icons: font
+   14  :imagesdir: /workshops/ansible_tower/images
+   15: :license_url: https://s3.amazonaws.com/ansible-workshop-melbourne.redhatgov.io/license
+   16  :image_links: https://s3.amazonaws.com/ansible-workshop-bos.redhatgov.io/_images
+   17  :cred_url: http://docs.ansible.com/ansible-tower/latest/html/userguide/credentials.html#credential-types
+   ..
+  147  |===
+  148  |NAME |Ansible Workshop Project
+  149: |DESCRIPTION|melbourne workshop playbooks
+  150  |ORGANIZATION|Default
+  151  |SCM TYPE|Git
+  ...
+  198  |===
+  199  |NAME |Ansible Workshop Inventory
+  200: |DESCRIPTION|melbourne workshop hosts
+  201  |ORGANIZATION|Default
+  202  |===
+
+/Users/bsollar/Dropbox/redhatgov.github.io/themes/redhatgov/static/node_modules/patternfly/node_modules/c3/htdocs/js/test.js:
+ 3058  
+ 3059  /*
+ 3060: var data = {"x":["x","(No store found for this ID)","Preston","Moorabbin","Smith Street","Croydon","Head Office","Brisbane","Essendon","Spencer","Jindalee","Torquay","Canberra","(No store found for this ID)","Spare Store2","Gold Coast HT","South Wharf","Adelaide HT","Melbourne Central","Highpoint","Prahran","Prahran Reserve"],"y":["total",405,131,203,157,139,129,90,74,59,86,68,67,69,67,62,50,43,50,32,20,7]}; 
+ 3061  
+ 3062  window.chart = c3.generate({
+
+6 matches across 3 files
+
+
+Searching 3378 files for "workshop"
+
+/Users/bsollar/Dropbox/redhatgov.github.io/content/workshops/ansible_tower/_index.adoc:
+    8  
+    9  :domain_name: redhatgov.io
+   10: :workshop_prefix: workshop
+   11  :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
+   12  :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
+
+/Users/bsollar/Dropbox/redhatgov.github.io/content/workshops/ansible_tower/exercise1.0.adoc:
+    7  
+    8  :domain_name: redhatgov.io
+    9: :workshop_prefix: workshop
+   10  :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
+   11  :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
+
+/Users/bsollar/Dropbox/redhatgov.github.io/content/workshops/ansible_tower/exercise1.1.adoc:
+    7  
+    8  :domain_name: redhatgov.io
+    9: :workshop_prefix: workshop
+   10  :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
+   11  :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
+
+/Users/bsollar/Dropbox/redhatgov.github.io/content/workshops/ansible_tower/exercise1.2.adoc:
+    7  
+    8  :domain_name: redhatgov.io
+    9: :workshop_prefix: workshop
+   10  :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
+   11  :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
+
+/Users/bsollar/Dropbox/redhatgov.github.io/content/workshops/ansible_tower/exercise1.3.adoc:
+    7  
+    8  :domain_name: redhatgov.io
+    9: :workshop_prefix: workshop
+   10  :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
+   11  :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
+
+/Users/bsollar/Dropbox/redhatgov.github.io/content/workshops/ansible_tower/exercise1.4.adoc:
+    7  
+    8  :domain_name: redhatgov.io
+    9: :workshop_prefix: workshop
+   10  :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
+   11  :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
+
+/Users/bsollar/Dropbox/redhatgov.github.io/content/workshops/ansible_tower/exercise1.5.adoc:
+    7  
+    8  :domain_name: redhatgov.io
+    9: :workshop_prefix: workshop
+   10  :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
+   11  :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
+
+/Users/bsollar/Dropbox/redhatgov.github.io/content/workshops/ansible_tower/setup.adoc:
+   14  
+   15  :domain_name: redhatgov.io
+   16: :workshop_prefix: workshop
+   17  :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
+   18  :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
+
+8 matches across 8 files

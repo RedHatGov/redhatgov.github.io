@@ -19,16 +19,8 @@ menu:
 * Arrivals
 * Introductions / Agenda
 * Presentation
-* Setup
-* Exercise 1.0 - Intro to Cockpit
-* Exercise 1.1 - Reproducible and Trustworthy Dockerfiles
-* Exercise 1.2 - Docker `USER`
-* Break
-* Exercise 1.3 - Remove setuid/setgid Binaries
-* Exercise 1.4 - Linux Kernel Capabilities
-* Exercise 1.5 - Read Only Containers
-* Exercise 1.6 - SELinux
-* Wrap Up
+{{< labs security_containers >}}
+
 
 == Before We Get Started
 
@@ -97,9 +89,13 @@ stays theta positive.
 - Brent Baude
 - Adrian Mouat
 
-== Labs
+== Workshop Deployment
 
-{{< labs security_containers >}}
+Here is the link to deploy this workshop in AWS via Ansible.
+
+https://github.com/RedHatGov/redhatgov.workshops/tree/master/security_containers[GitHub Repo]
+
+
 
 == Document Copyright
 
