@@ -15,7 +15,7 @@ Today's workshop infrastructure is being run in Amazon EC2. Each student will
 have a single instance to use. Each of you should have received an email.
 It has the following information on it. Your student number will be substituted
 where you see this `< student# >`. Example: if you are student 21:
-`http://dc17.21.redhat-fierce.io`
+`http://dc17.21.redhatgov.io`
 
 - Web URL for each of your EC2 instances.
 - Username and password

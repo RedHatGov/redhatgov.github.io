@@ -13,7 +13,7 @@ layout: lab
 :source-language: yaml
 
 :domain_name: redhatgov.io
-:workshop_prefix: company-name
+:workshop_prefix: workshop
 :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
 :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
 
