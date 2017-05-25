@@ -6,7 +6,7 @@ layout: lab
 ---
 
 :domain_name: redhatgov.io
-:workshop_prefix: company-name
+:workshop_prefix: workshop
 :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
 :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
 :license_url: http://ansible-workshop-bos.redhatgov.io/ansible-license.json
@@ -125,4 +125,3 @@ You can access Tower at {tower_url}
 You know you were successful if you are able to browse to your Ansible Tower's url (_control node's IP address_) and get something like this
 
 image::ansible-lab-figure01-logon-screen.png[caption="Figure 2: ", title="Ansible Tower Login Screen"]
-

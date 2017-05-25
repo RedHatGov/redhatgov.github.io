@@ -6,7 +6,7 @@ layout: lab
 ---
 
 :domain_name: redhatgov.io
-:workshop_prefix: company-name
+:workshop_prefix: workshop
 :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
 :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
 
@@ -17,6 +17,7 @@ layout: lab
 = Exercise 1.0 - Running Ad-hoc commands
 
 
+== Section 1: Ad-hoc commands
 
 For our first exercise, we are going to run some ad-hoc commands to help you get
 a feel for how Ansible works.  Ansible Ad-Hoc commands enable you to perform tasks
@@ -25,59 +26,75 @@ simply need to do one or two things quickly and often, to many remote nodes.
 
 
 
-*Step 0:* Define your inventory.  Inventories are crucial to Ansible as they define remote machines on which you wish to run
+=== Step 0:
+
+Define your inventory.  Inventories are crucial to Ansible as they define remote machines on which you wish to run
 commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`.  Then, add the appropriate definitions for the node that will function as a web node.
 
 .hosts (example)
 [source,bash]
 ----
 [web]
-node-2 ansible_host=melbourne.node.2.redhat-fierce.io
+node-2 ansible_host=workshop.node.2.redhatgov.io
 ----
 
-*Step 1:* Let's start with something really basic - pinging a host.  The `ping` module makes sure our web hosts are responsive.
+=== Step 1:
+
+Let's start with something really basic - pinging a host.  The `ping` module makes sure our web hosts are responsive.
 
 [source,bash]
 ----
 ansible web -m ping
 ----
 
-*Step 2:*  Now let's see how we can run a good ol' fashioned Linux command and format the output using the `command` module.
+=== Step 2:
+
+Now let's see how we can run a good ol' fashioned Linux command and format the output using the `command` module.
 
 [source,bash]
 ----
 ansible web -m command -a "uptime" -o
 ----
 
-*Step 3:* Take a look at your web node's configuration.  The `setup` module displays ansible facts (and a lot of them) about an endpoint.
+=== Step 3:
+
+Take a look at your web node's configuration.  The `setup` module displays ansible facts (and a lot of them) about an endpoint.
 
 [source,bash]
 ----
 ansible web -m setup
 ----
 
-*Step 4:* Now, let's install Apache using the `yum` module.
+=== Step 4:
+
+Now, let's install Apache using the `yum` module.
 
 [source,bash]
 ----
 ansible web -m yum -a "name=httpd state=present" -b
 ----
 
-*Step 5:* OK, Apache is installed now so let's start it up using the `service` module.
+=== Step 5:
+
+OK, Apache is installed now so let's start it up using the `service` module.
 
 [source,bash]
 ----
 ansible web -m service -a "name=httpd state=started" -b
 ----
 
-*Step 6:* Finally, let's clean up after ourselves.  First, stop the httpd service.
+=== Step 6:
+
+Finally, let's clean up after ourselves.  First, stop the httpd service.
 
 [source,bash]
 ----
 ansible web -m service -a "name=httpd state=stopped" -b
 ----
 
-*Step 7:* Next, remove the Apache package.
+=== Step 7:
+
+Next, remove the Apache package.
 
 [source,bash]
 ----

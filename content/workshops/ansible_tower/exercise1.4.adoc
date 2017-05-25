@@ -6,7 +6,7 @@ layout: lab
 ---
 
 :domain_name: redhatgov.io
-:workshop_prefix: company-name
+:workshop_prefix: workshop
 :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
 :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
 
@@ -42,7 +42,9 @@ However, we are only going to focus on a few of the key contructs that are requi
 == Logging into Tower and Installing the License Key
 
 
-*Step 1:* To log in, use the username `admin` and and the password `ansibleWS`.
+=== Step 1:
+
+To log in, use the username `admin` and and the password `ansibleWS`.
 
 
 
@@ -58,11 +60,22 @@ image::at_lic_prompt.png[caption="Figure 4: ", title="Uploading a License"]
 
 
 
-*Step 2:* In a seperate browser tab, download your license key by browsing to {license_url} +
-*Step 3:* Back in the Tower UI, choose BROWSE image:at_browse.png[LicB,35,25] and upload your
-recently downloaded license file into Tower. +
-*Step 4:* Select "_I agree to the End User License Agreement_" +
-*Step 5:* Click on SUBMIT image:at_submit.png[Sub,35,25] +
+=== Step 2:
+
+In a seperate browser tab, download your license key by browsing to {license_url}
+
+=== Step 3:
+
+Back in the Tower UI, choose BROWSE image:at_browse.png[LicB,35,25] and upload your
+recently downloaded license file into Tower.
+
+=== Step 4:
+
+Select "_I agree to the End User License Agreement_"
+
+=== Step 5:
+
+Click on SUBMIT image:at_submit.png[Sub,35,25]
 
 
 
@@ -76,16 +89,24 @@ There are many link:{cred_url}[types of credentials] including machine, network,
 workshop, we are using a *machine* credential.
 
 
-*Step 1:* Select the gear icon     image:at_gear.png[Gear,20,20] +
+=== Step 1:
 
-*Step 2:* Select CREDENTIALS +
+Select the gear icon     image:at_gear.png[Gear,20,20]
 
-*Step 3:* Click on ADD     image:at_add.png[Add,35,25] +
+=== Step 2:
 
-*Step 4:* Complete the form using the following entries, by cating pout your private SSH key to place into Tower. +
+Select CREDENTIALS
+
+=== Step 3:
+
+Click on ADD     image:at_add.png[Add,35,25]
+
+=== Step 4:
+
+Complete the form using the following entries, by cating pout your private SSH key to place into Tower.
 
 ----
-cat ~/.ssh/melbourne-tower
+cat ~/.ssh/workshop-tower
 ----
 
 |===
@@ -104,7 +125,9 @@ image::at_cred_detail.png[Cred_Detail, 900,caption="Figure 5: ",title="Adding a 
 
 
 
-*Step 5:* Select SAVE     image:at_save.png[Save,35,25] +
+=== Step 5:
+
+Select SAVE     image:at_save.png[Save,35,25] +
 
 
 
@@ -115,15 +138,21 @@ You can manage playbooks and playbook directories by either placing them manuall
 under the Project Base Path on your Tower server, or by placing your playbooks into
 a source code management (SCM) system supported by Tower, including Git, Subversion, and Mercurial.
 
-*Step 1:* Click on PROJECTS +
+=== Step 1:
 
-*Step 2:* Select ADD     image:at_add.png[Add,35,25] +
+Click on PROJECTS
 
-*Step 3:* Complete the form using the following entries +
+=== Step 2:
+
+Select ADD     image:at_add.png[Add,35,25]
+
+=== Step 3:
+
+Complete the form using the following entries
 
 |===
 |NAME |Ansible Workshop Project
-|DESCRIPTION|melbourne workshop playbooks
+|DESCRIPTION|workshop playbooks
 |ORGANIZATION|Default
 |SCM TYPE|Git
 |SCM URL| https://github.com/ansible/lightbulb
@@ -142,7 +171,9 @@ image::at_project_detail.png[Cred_Detail, 900,caption="Figure 6: ",title="Defini
 
 
 
-*Step 4:* Select SAVE     image:at_save.png[Save,35,25] +
+=== Step 4:
+
+Select SAVE     image:at_save.png[Save,35,25]
 
 
 
@@ -158,15 +189,21 @@ An Inventory can also be imported into Tower using the `tower-manage` command
 and this is how we are going to add an inventory for this workshop.
 
 
-*Step 1:* Click on INVENTORIES +
+=== Step 1:
 
-*Step 2:* Select ADD     image:at_add.png[Add,35,25] +
+Click on INVENTORIES
 
-*Step 3:* Complete the form using the following entries +
+=== Step 2:
+
+Select ADD     image:at_add.png[Add,35,25]
+
+=== Step 3:
+
+Complete the form using the following entries
 
 |===
 |NAME |Ansible Workshop Inventory
-|DESCRIPTION|melbourne workshop hosts
+|DESCRIPTION|workshop hosts
 |ORGANIZATION|Default
 |===
 
@@ -176,14 +213,20 @@ image::at_inv_create.png[Cred_Detail,900,caption="Figure 7: ",title="Create an I
 
 
 
-*Step 4:* Select SAVE     image:at_save.png[Save,35,25] +
+=== Step 4:
 
-*Step 5:* Using ssh, login to your control node +
+Select SAVE     image:at_save.png[Save,35,25]
+
+=== Step 5:
+
+Using ssh, login to your control node
 ----
 ssh -i ~/.ssh/melbourne-tower ec2-user@melbourne.tower-node.<student#>.redhat-fierce.io
 ----
 
-*Step 6:* Use the `tower-manage` command to import an existing inventory.  (_Be sure to replace <username> with your actual username_)
+=== Step 6:
+
+Use the `tower-manage` command to import an existing inventory.  (_Be sure to replace <username> with your actual username_)
 ----
 sudo tower-manage inventory_import --source=/home/ec2-user/hosts --inventory-name="Ansible Workshop Inventory"
 ----
@@ -210,5 +253,3 @@ image::at_inv_group.png[Cred_Detail,900,caption="Figure 9: ",title="Inventory wi
 
 At this point, we are doing with our basic configuration of Ansible Tower.  In exercise 1.5, we will be soley focused on
 creating and running a job template so you can see Tower in action.
-
-

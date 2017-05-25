@@ -155,7 +155,7 @@ You will see two pods with different
 https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/routes.html[routes]
 being built, the first is for a plain `http` route to the app, the second is
 via a `https` route. Click the top url (example for student 0:
-`https://secure-sso-sso.apps.ose.0.redhat-fierce.io`).
+`https://secure-sso-sso.apps.ose.0.redhatgov.io`).
 
 .SSO Keycloak Project
 image::sso-overview.png[]
