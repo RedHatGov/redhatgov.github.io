@@ -59,7 +59,7 @@ export STUDENT=0
 ----
 oc cluster up --public-hostname=$(curl -s
 http://169.254.169.254/latest/meta-data/public-ipv4)
---routing-suffix=apps.ose.$STUDENT.redhat-fierce.io --host-pv-dir=/data
+--routing-suffix=apps.ose.$STUDENT.redhatgov.io --host-pv-dir=/data
 --host-data-dir=/data  --image=registry.access.redhat.com/openshift3/ose
 --version=v3.5
 ----
@@ -70,7 +70,7 @@ http://169.254.169.254/latest/meta-data/public-ipv4)
 oc cluster up \
    --public-hostname=$(curl -s
 http://169.254.169.254/latest/meta-data/public-ipv4) \ <1>
-   --routing-suffix=apps.ose.$STUDENT.redhat-fierce.io \ <2>
+   --routing-suffix=apps.ose.$STUDENT.redhatgov.io \ <2>
    --host-pv-dir=/data \ <3>
    --host-data-dir=/data  <4>
    --image=registry.access.redhat.com/openshift3/ose <5>
@@ -193,7 +193,7 @@ Click `Create Route` in the top right corner. Accept the defaults and click
 image::create-route.png[]
 
 Now lets see your first app. Click the new route. It should look similar to
-this `http://dc17-flask-flask.apps.ose.0.redhat-fierce.io`.
+this `http://dc17-flask-flask.apps.ose.0.redhatgov.io`.
 
 image::route.png[]
 

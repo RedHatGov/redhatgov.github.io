@@ -6,7 +6,7 @@ layout: lab
 ---
 
 :domain_name: redhatgov.io
-:workshop_prefix: company-name
+:workshop_prefix: workshop
 :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
 :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
 
@@ -19,14 +19,19 @@ layout: lab
 = Exercise 1.2 - Running Your Playbook
 
 
+== Section 1: Running the Playbook
+
+
 We are now going to run you're brand spankin' new playbook on your two web nodes.  To do this,
  you are going to use the `ansible-playbook` command.
 
-*Step 1:* From your playbook directory ( `~/apache_basic` ), run your playbook.
+=== Step 1:
+
+From your playbook directory ( `~/apache_basic` ), run your playbook.
 
 [source,bash]
 ----
-ansible-playbook --private-key=~/.ssh/melbourne-tower -i ../hosts install_apache.yml
+ansible-playbook --private-key=~/.ssh/workshop-tower -i ../hosts install_apache.yml
 ----
 
 
@@ -42,7 +47,7 @@ However, before you go ahead and run that command, lets take a few moments to un
 
 [source,bash]
 ----
-ansible-playbook --private-key=~/.ssh/melbourne-tower -i ../hosts install_apache.yml --syntax-check
+ansible-playbook --private-key=~/.ssh/workshop-tower -i ../hosts install_apache.yml --syntax-check
 ----
 
 
@@ -69,7 +74,9 @@ runs by default.  To turn if off, you can specify link:{gather_facts-url}[gather
 
 
 
-*Step 2:* Remove Apache
+=== Step 2:
+
+Remove Apache
 
 OK, for the next several minutes or as much time as we can afford, we want to to experiment a little.
 We would like you to reverse what you've done, i.e. stop and uninstall apache on your web nodes.
