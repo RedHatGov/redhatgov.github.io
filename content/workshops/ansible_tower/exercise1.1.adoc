@@ -5,11 +5,6 @@ workshop_weight: 20
 layout: lab
 ---
 
-:domain_name: redhatgov.io
-:workshop_prefix: workshop
-:tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
-:ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
-
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
 :figure-caption!:
