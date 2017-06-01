@@ -134,7 +134,7 @@ Click on ADD     image:at_add.png[Add,35,25]
 
 === Step 4:
 
-Complete the form using the following entries, by cating pout your private SSH key to place into Tower.
+Complete the form using the following entries, by cating out your private SSH key to place into Tower.
 
 ----
 cat ~/.ssh/workshop-tower
