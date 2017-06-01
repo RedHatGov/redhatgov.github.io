@@ -152,7 +152,7 @@ cat ~/.ssh/workshop-tower
 
 
 
-image::at_cred_detail.png[Cred_Detail, 900,caption="Figure 5: ",title="Adding a Credential", link="{image_links}/at_cred_detail.png"]
+image::at_cred_detail.png[Cred_Detail, 900,caption="Figure 5: ",title="Adding a Credential"]
 
 
 
@@ -198,7 +198,7 @@ a|
 
 
 
-image::at_project_detail.png[Cred_Detail, 900,caption="Figure 6: ",title="Defining a Project",link="{image_links}/at_project_detail.png"]
+image::at_project_detail.png[Cred_Detail, 900,caption="Figure 6: ",title="Defining a Project"]
 
 
 
@@ -240,7 +240,7 @@ Complete the form using the following entries
 
 
 
-image::at_inv_create.png[Cred_Detail,900,caption="Figure 7: ",title="Create an Inventory",link="{image_links}/at_inv_create.png"]
+image::at_inv_create.png[Cred_Detail,900,caption="Figure 7: ",title="Create an Inventory"]
 
 
 
@@ -281,7 +281,7 @@ Feel free to browse your inventory in Tower.  You should now notice that the inv
 each of those groups contain hosts.
 
 
-image::at_inv_group.png[Cred_Detail,900,caption="Figure 9: ",title="Inventory with Groups",link="{image_links}/at_inv_group.png"]
+image::at_inv_group.png[Cred_Detail,900,caption="Figure 9: ",title="Inventory with Groups"]
 
 
 
