@@ -9,8 +9,7 @@ layout: lab
 
 {{% alert success %}}
 
-# If we provided you a laptop or cloud environment
-We already set all this up for you — feel free to skip everything below!
+If we provided you a laptop or cloud environment.  We already set all this up for you — feel free to skip everything below!
 
 {{% /alert %}}
 
