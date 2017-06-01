@@ -8,7 +8,6 @@ layout: lab
 :license_url: http://ansible-workshop-bos.redhatgov.io/wslic.txt
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
-:image_links: https://s3.amazonaws.com/ansible-workshop-bos.redhatgov.io/_images
 
 = Exercise 1.5 - Creating and Running a Job Template
 
@@ -49,7 +48,7 @@ a|
 
 
 
-image::at_jt_detail.png[caption="Figure 11: ",900,title="Job Template Form",link="{image_links}/at_jt_detail.png"]
+image::at_jt_detail.png[caption="Figure 11: ",900,title="Job Template Form"]
 
 
 
@@ -72,7 +71,7 @@ Complete the survey form with following values
 
 
 
-image::at_survey_detail.png[caption="Figure 12: ",500,title="Survey Form",link="{image_links}/at_survey_detail.png"]
+image::at_survey_detail.png[caption="Figure 12: ",500,title="Survey Form"]
 
 
 
@@ -132,7 +131,7 @@ your job such as who launched it, what playbook it's running, what the status is
 
 
 
-image::at_job_status.png[caption="Figure 14: ",title="Job Summary",link="{image_links}/at_job_status.png"]
+image::at_job_status.png[caption="Figure 14: ",title="Job Summary"]
 
 
 
@@ -140,7 +139,7 @@ Scrolling down, you will be able to see details on the play and each task in the
 
 
 
-image::at_job_tasklist.png[caption="Figure 15: ",title="Play and Task Details",link="{image_links}/at_job_tasklist.png"]
+image::at_job_tasklist.png[caption="Figure 15: ",title="Play and Task Details"]
 
 
 
@@ -149,7 +148,7 @@ from the command line.
 
 
 
-image::at_job_stdout.png[caption="Figure 16: ",900,title="Job Standard Output",link="{image_links}/at_job_stdout.png"]
+image::at_job_stdout.png[caption="Figure 16: ",900,title="Job Standard Output"]
 
 
 
