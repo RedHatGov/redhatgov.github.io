@@ -5,7 +5,7 @@ menu:
     parent: workshops
 ---
 
-Introduction
+# Introduction
 
 Hands-on lab demonstrating the deployment of a legacy monolithic application onto a container, and then breaking it into microservices to deploy on OpenShift Container Platform.
 
@@ -21,11 +21,11 @@ Use Guacamole through the browser or install the utilities in the prerequisites 
 
 # Workshop Login Info
 
-- [Environment Logins](http://naps-redhat.com/cf_lab_info.xlsx)
+- [Environment Logins](http://naps-redhat.com/files/lab_info.xlsx)
 
 # Environment Links
 
-- [OpenShift Login](https://master.ose.naps-redhat.com:8443/console)
+- [OpenShift Login](https://master.ocp.naps-redhat.com:8443/console)
 
 - [Guacamole Login 1](https://85.190.178.119/guacamole/#/)
 
