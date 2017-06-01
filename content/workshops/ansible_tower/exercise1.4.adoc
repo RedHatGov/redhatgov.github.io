@@ -7,7 +7,7 @@ layout: lab
 
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
-:license_url: https://s3.amazonaws.com/ansible-workshop-melbourne.redhatgov.io/license
+:license_url: https://s3.amazonaws.com/ansible-tower-workshop-license/license
 :image_links: https://s3.amazonaws.com/ansible-workshop-bos.redhatgov.io/_images
 :cred_url: http://docs.ansible.com/ansible-tower/latest/html/userguide/credentials.html#credential-types
 
@@ -57,20 +57,48 @@ image::at_lic_prompt.png[caption="Figure 4: ", title="Uploading a License"]
 
 === Step 2:
 
-In a seperate browser tab, download your license key by browsing to {license_url}
+At the commandline in you Tower instance download the encrypted license file via the curl command.
 
-=== Step 3:
+[source,bash]
+----
+curl -O https://s3.amazonaws.com/ansible-tower-workshop-license/license
+----
 
-Back in the Tower UI, choose BROWSE image:at_browse.png[LicB,35,25] and upload your
-recently downloaded license file into Tower.
+Then Decrypt the license file via Ansible Vault.   **The instructor should provide the password**
 
-=== Step 4:
+[source,bash]
+----
+ansible-vault decrypt license
 
-Select "_I agree to the End User License Agreement_"
+...
 
-=== Step 5:
+Vault password:
+----
 
-Click on SUBMIT image:at_submit.png[Sub,35,25]
+Now use curl to POST the license to the Tower API endpoint. Please edit this command to the use the `workshop_prefix` and `tower_admin_passwd` for your workshop.
+
+[source,bash]
+----
+curl -k https://<workshop_prefix>.0.redhatgov.io/api/v1/config/ \
+     -H 'Content-Type: application/json' \
+     -X POST \
+     --data @license \
+     --user admin:<tower_admin_passwd>
+----
+
+
+// === Step 3:
+
+// Back in the Tower UI, choose BROWSE image:at_browse.png[LicB,35,25] and upload your
+// recently downloaded license file into Tower.
+
+// === Step 4:
+
+// Select "_I agree to the End User License Agreement_"
+
+// === Step 5:
+
+// Click on SUBMIT image:at_submit.png[Sub,35,25]
 
 
 

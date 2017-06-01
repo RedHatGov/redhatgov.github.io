@@ -12,14 +12,12 @@ layout: lab
 :source-highlighter: highlight.js
 :source-language: yaml
 
-:domain_name: redhatgov.io
-:workshop_prefix: workshop
-:tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
-:ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
 
 = Workshop Lab Setup
 
 image::tower.002.png['Tower']
+
+== Setup
 
 [IMPORTANT]
 - Today's workshop infrastructure is being run in Amazon EC2.
