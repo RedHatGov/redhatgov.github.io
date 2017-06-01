@@ -5,12 +5,7 @@ workshop_weight: 60
 layout: lab
 ---
 
-:domain_name: redhatgov.io
-:workshop_prefix: workshop
-:tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
-:ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
 :license_url: http://ansible-workshop-bos.redhatgov.io/wslic.txt
-
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
 :image_links: https://s3.amazonaws.com/ansible-workshop-bos.redhatgov.io/_images
@@ -162,9 +157,12 @@ image::at_job_stdout.png[caption="Figure 16: ",900,title="Job Standard Output",l
 
 Once your job is sucessful, navigate to your new website
 
+[source,bash]
 ----
-http://<IP_of_node-1_or_node-2>
+http://workshopname.0.redhatgov.io
 ----
+
+
 If all went well, you should see something like this, but with your own custom message of course.
 
 

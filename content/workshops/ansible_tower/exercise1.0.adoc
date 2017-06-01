@@ -6,10 +6,6 @@ layout: lab
 ---
 
 :domain_name: redhatgov.io
-:workshop_prefix: workshop
-:tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
-:ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
-
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
 
@@ -35,7 +31,7 @@ commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`
 [source,bash]
 ----
 [web]
-node-2 ansible_host=workshop.node.2.redhatgov.io
+node-1 ansible_host=workshopname.0.redhatgov.io
 ----
 
 === Step 1:

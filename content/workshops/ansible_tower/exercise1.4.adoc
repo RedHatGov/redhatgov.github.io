@@ -5,14 +5,9 @@ workshop_weight: 50
 layout: lab
 ---
 
-:domain_name: redhatgov.io
-:workshop_prefix: workshop
-:tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
-:ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
-
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
-:license_url: https://s3.amazonaws.com/ansible-workshop-melbourne.redhatgov.io/license
+:license_url: https://s3.amazonaws.com/ansible-tower-workshop-license/license
 :image_links: https://s3.amazonaws.com/ansible-workshop-bos.redhatgov.io/_images
 :cred_url: http://docs.ansible.com/ansible-tower/latest/html/userguide/credentials.html#credential-types
 
@@ -62,20 +57,57 @@ image::at_lic_prompt.png[caption="Figure 4: ", title="Uploading a License"]
 
 === Step 2:
 
-In a seperate browser tab, download your license key by browsing to {license_url}
+At the commandline in you Tower instance download the encrypted license file via the curl command.
 
-=== Step 3:
+[source,bash]
+----
+curl -O https://s3.amazonaws.com/ansible-tower-workshop-license/license
+----
 
-Back in the Tower UI, choose BROWSE image:at_browse.png[LicB,35,25] and upload your
-recently downloaded license file into Tower.
+Then Decrypt the license file via Ansible Vault.   **The instructor should provide the password**
 
-=== Step 4:
+[source,bash]
+----
+ansible-vault decrypt license
 
-Select "_I agree to the End User License Agreement_"
+...
 
-=== Step 5:
+Vault password:
+----
 
-Click on SUBMIT image:at_submit.png[Sub,35,25]
+Now use curl to POST the license to the Tower API endpoint. Please edit this command to the use the `workshop_prefix` and `tower_admin_passwd` for your workshop. This command exports your workshop prefix and Tower pasword so that the next command can use that data in the curl command.
+
+[source,bash]
+----
+export WORKSHOP_PREFIX=" "
+export TOWER_ADMIN_PASSWD=" "
+----
+
+Now send the `license` to Tower via the API.
+
+[source,bash]
+----
+curl -k https://$WORKSHOP_PREFIX.0.redhatgov.io/api/v1/config/ \
+     -H 'Content-Type: application/json' \
+     -X POST \
+     --data @license \
+     --user admin:$TOWER_ADMIN_PASSWD
+
+----
+
+
+// === Step 3:
+
+// Back in the Tower UI, choose BROWSE image:at_browse.png[LicB,35,25] and upload your
+// recently downloaded license file into Tower.
+
+// === Step 4:
+
+// Select "_I agree to the End User License Agreement_"
+
+// === Step 5:
+
+// Click on SUBMIT image:at_submit.png[Sub,35,25]
 
 
 
@@ -220,9 +252,15 @@ Select SAVE     image:at_save.png[Save,35,25]
 === Step 5:
 
 Using ssh, login to your control node
+
+
+[source,bash]
 ----
-ssh -i ~/.ssh/melbourne-tower ec2-user@melbourne.tower-node.<student#>.redhat-fierce.io
+https://workshopname.tower.0.redhatgov.io:8888/wetty/ssh/ec2-user
 ----
+
+
+
 
 === Step 6:
 

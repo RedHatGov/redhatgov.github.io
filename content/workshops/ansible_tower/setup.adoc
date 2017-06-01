@@ -12,19 +12,33 @@ layout: lab
 :source-highlighter: highlight.js
 :source-language: yaml
 
-:domain_name: redhatgov.io
-:workshop_prefix: workshop
-:tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
-:ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
 
 = Workshop Lab Setup
 
+image::tower.002.png['Tower']
 
+== Setup
 
 [IMPORTANT]
-Today's workshop infrastructure is being run in Amazon EC2. +
-Each student will have two instances to use. +
-Each of you should have received an email.  It has the following information on it. +
+- Today's workshop infrastructure is being run in Amazon EC2.
+
+- Each student will have two instances to use.
+
+=== Tower
+
+[source,bash]
+----
+https://workshopname.tower.0.redhatgov.io:8888/wetty/ssh/ec2-user
+----
+
+=== Node 1
+
+[source,bash]
+----
+http://workshopname.0.redhatgov.io
+----
+
+- Each of you should have received an email.  It has the following information on it.
 
 If you didn't get one of these emails, let us know so we can give you the information about your lab environment.
 
@@ -51,17 +65,18 @@ Namely... ssh access to your EC2 nodes.
 
 == Testing your environment
 
-Loginto your instances via the following links:
+Log into your Tower instance via the following link:
 
+=== Tower
 
-{tower_url}
-
-{ssh_url}
+[source,bash]
+----
+https://workshopname.tower.0.redhatgov.io:8888/wetty/ssh/ec2-user
+----
 
 
 [IMPORTANT]
 Be sure you can log in to your ec2 instances.  If you can't log in start shouting, loudly, and waving your hands!
-
 
 
 == End Result
