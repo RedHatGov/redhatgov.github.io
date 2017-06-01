@@ -75,15 +75,24 @@ ansible-vault decrypt license
 Vault password:
 ----
 
-Now use curl to POST the license to the Tower API endpoint. Please edit this command to the use the `workshop_prefix` and `tower_admin_passwd` for your workshop.
+Now use curl to POST the license to the Tower API endpoint. Please edit this command to the use the `workshop_prefix` and `tower_admin_passwd` for your workshop. This command exports your workshop prefix and Tower pasword so that the next command can use that data in the curl command.
 
 [source,bash]
 ----
-curl -k https://<workshop_prefix>.0.redhatgov.io/api/v1/config/ \
+export WORKSHOP_PREFIX=" "
+export TOWER_ADMIN_PASSWD=" "
+----
+
+Now send the `license` to Tower via the API.
+
+[source,bash]
+----
+curl -k https://$WORKSHOP_PREFIX.0.redhatgov.io/api/v1/config/ \
      -H 'Content-Type: application/json' \
      -X POST \
      --data @license \
-     --user admin:<tower_admin_passwd>
+     --user admin:$TOWER_ADMIN_PASSWD
+
 ----
 
 
