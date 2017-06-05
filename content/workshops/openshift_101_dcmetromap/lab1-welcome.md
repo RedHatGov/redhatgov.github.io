@@ -5,6 +5,8 @@ workshop_weight: 11
 layout: lab
 ---
 
+:imagesdir: /workshops/openshift_101_dcmetromap/images
+
 # Welcome to OpenShift!
 This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.  If you are already familiar with the basics of OpenShift you can skip this lab - after making sure you can login.
 
@@ -24,12 +26,12 @@ We will be using the following terms throughout the workshop labs so here are so
 * Node - Where the compute happens, your software is run on nodes
 
 # Accessing OpenShift
-OpenShift provides a web console that allow you to perform various tasks via a web browser.  Additionally, you can utilize a command line tool to perfrom tasks.  Let's get started by logging into both of these and checking the status of the platform.
+OpenShift provides a web console that allows you to perform various tasks via a web browser.  Additionally, you can utilize a command line tool to perfrom tasks.  Let's get started by logging into both of these and checking the status of the platform.
 
 ## Let's Login
 > Navigate to the URI provided by your instructor and login with the user/password provided (if there's an icon on the Desktop, just double click that)
 
-<img src="{{ site.baseurl }}/www/3.3/default/screenshots/ose-login.png" width="600"/><br/>
+<img src="/static/openshift_101_dcmetromap/ocp-login.png" width="600"><br/>
 *Login Webpage*
 
 Once logged in you should see your available projects - or a button to create a project if none exist already.
