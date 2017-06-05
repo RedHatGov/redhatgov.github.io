@@ -4,7 +4,7 @@ branches:
 
 install:
   - gem install asciidoctor
-  - pip install Pygments
+  - sudo pip install Pygments
   - rm -rf public || exit 0
 
 script:
