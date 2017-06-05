@@ -5,18 +5,16 @@ workshop_weight: 30
 layout: lab
 ---
 
-## SETTING EXPECTATIONS FOR YOUR AUDIENCE
-
-----
+## Setting Expectations For Your Audience
 
 - Clearly tell your audience what the lab is, what things they will be doing, and what kind of skills are required to be successful at your workshop.
 
 - Examples of expectation setting:
-	- “This is a hands-on workshop.”
-	- “You should be comfortable with the command line.”
-	- “You should be comfortable being a Java developer.”
-	- “You understand classes and how to create them.”
-	- “You can write, understand and create html/jsp/servlets.”
+	- 'This is a hands-on workshop.'
+	- 'You should be comfortable with the command line.'
+	- 'You should be comfortable being a Java developer.'
+	- 'You understand classes and how to create them.'
+	- 'You can write, understand and create html/jsp/servlets.'
 
 
 - Teaching someone something about the why you are doing the things in you workshop and possibly some history on why this way is better compared to previous version. 
@@ -27,14 +25,11 @@ layout: lab
 
 - Every lab should end with a writeup of what was accomplished. 
 
-## WORKSHOP DESIGN: Format
+## Workshop Design: Format
 
-----
-
-#### ScreenShots:
+#### Screenshots:
 
 Each lab should include plenty of screen shots and use the built-in image or accordion short codes. All images should be less than `1000px`, and placed in the `images` directory inside your current workshop, for example;
-
 
 {{< panel_group >}}
 {{% panel "OpenShift Dev Deployment" %}}
@@ -56,14 +51,13 @@ Here is a sample of the code that renders the accordion.
 {{</* /panel_group */>}}
 ```
 
-
 #### Numbering:
 
 Number the tasks they should do to accomplish that particular part of the lab. Be consistent in your numbering if you start with something like exercise 1, dont jump to lab 2 or section 2, it will confuse students. Keep a clean and concise numbering scheme that is easy to follow (especially if you get lost). 
 
 Be careful with how much content you put on one page, it can be confusing if there is multiple topics or labs on one page. It is sometimes better to keep it short and concise with one topic or similar exercises on one page. It also helps the students to feel progress as they advance to new pages in the lab. 
 
-##### ASCIIDOC:
+##### Asciidoc:
 
 ```bash
 = Exercise 1.0 - Running Ad-hoc commands
@@ -81,7 +75,7 @@ Define your inventory...
 Let's start with something really basic - pinging a host...
 ```
 
-##### MARKDOWN:
+##### Markdown:
 
 ```bash
 # Exercise 1.0 - Running Ad-hoc commands
@@ -113,17 +107,11 @@ We dont want to bind everyone to a ridged format to the point where people dont 
 - exercise1.5.md
 - wrapup.md
 
-
-
-
-## RUN THIS AT HOME
-
-----
+## Run This At Home
 
 This is an optional page.  You might use it – for example - to provide your students additional information that is required to get the lab going at home. 
 
 Example, several of the workshop deployment repos have `Vagrant` files in them with bindings to run the Ansible playbook against a local virtualmachine, (currently `RHEL 7.3`, but `Fedora` or `CentOS` could be used).  
-
 
 ```bash
 vagrant up

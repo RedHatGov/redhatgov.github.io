@@ -72,8 +72,13 @@ Hugo ships with a set of predefined shortcodes.
 
 ### Highlight
 
-This shortcode will convert the source code provided into syntax highlighted
-HTML. Read more on [highlighting](/extras/highlighting/).
+This shortcode will convert the source code provided into syntax highlighted HTML.
+
+#### Dependencies
+
+1. Install Python from python.org. Version 2.7.x is already sufficient.
+2. Run `pip install Pygments` in order to install Pygments. Once installed, Pygments gives you a command pygmentize. Make sure it sits in your PATH, otherwise Hugo cannot find it.
+
 
 #### Usage
 
@@ -105,7 +110,6 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
 
 #### Example Output
 
-
 {{< highlight javascript >}}
 //  OpenShift sample Node application
 var express = require('express'),
@@ -124,10 +128,6 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
     mongoURLLabel = "";
 {{< /highlight >}}
-
-
-
-
 
 
 ### Figure
