@@ -187,7 +187,7 @@ Complete the form using the following entries
 |ORGANIZATION|Default
 |SCM TYPE|Git
 |SCM URL| https://github.com/ansible/lightbulb
-|SCM BRANCH| v2
+|SCM BRANCH| 
 |SCM UPDATE OPTIONS
 a|
 
@@ -250,7 +250,7 @@ Select SAVE     image:at_save.png[Save,35,25]
 
 === Step 5:
 
-Using ssh, login to your control node
+Using ssh, login to your control node, if by any chance you closed the wetty browser window.
 
 
 [source,bash]
@@ -288,5 +288,4 @@ image::at_inv_group.png[Cred_Detail,900,caption="Figure 9: ",title="Inventory wi
 
 === End Result
 
-At this point, we are doing with our basic configuration of Ansible Tower.  In exercise 1.5, we will be soley focused on
-creating and running a job template so you can see Tower in action.
+At this point, we are doing with our basic configuration of Ansible Tower.  In exercise 2.2, we will be soley focused on creating and running a job template so you can see Tower in action.
