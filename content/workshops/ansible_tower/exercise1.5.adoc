@@ -11,84 +11,224 @@ layout: lab
 :service_url: http://docs.ansible.com/ansible/service_module.html
 
 
-= Exercise 1.5 - Running the apache-basic-playbook
+= Exercise 1.5 - Roles: Making your playbooks reusable
 
+While it is possible to write a playbook in one file as we've done throughout this workshop, eventually you’ll want to reuse files and start to organize things.
 
-== Section 1: Running the Playbook
+Ansible Roles is the way we do this.  When you create a role, you deconstruct your playbook into parts and those parts sit in a directory structure.  "Wha??  You mean that seemingly useless link:{dir_url}[best practice] you mentioned in exercise 1.2?".  Yep, that one.
 
+For this exercise, you are going to take the playbook you just wrote and refactor it into a role.  In addition, you'll learn to use Ansible Galaxy.
 
-We are now going to run you're brand spankin' new playbook on your two web nodes.  To do this,
- you are going to use the `ansible-playbook` command.
+Let's begin with seeing how your apache-basic-playbook will break down into a role.
+
+image::roledir_1.png[apache-basic-playbook role directory structure]
+
+Fortunately, you don't have to create all of these directories and files by hand.  That's where Ansible Galaxy comes in.
+
+== Section 1: Using Ansible Galaxy to initialize a new role
+
+Ansible Galaxy is a free site for finding, downloading, and sharing roles.  It's also pretty handy for creating them which is what we are about to do here.
+
 
 === Step 1:
 
-From your playbook directory ( `~/apache_basic` ), run your playbook.
+Navigate to your `apache-basic-playbook` project.
 
 [source,bash]
 ----
-ansible-playbook --private-key=~/.ssh/workshopname-tower -i ../hosts install_apache.yml
+cd ~/apache-basic-playbook
 ----
 
 
-However, before you go ahead and run that command, lets take a few moments to understand the options.
+=== Step 2:
 
-- *--private-key* This option ask for the private ssh key to connect to the remote machine.
-- *-i* This option allows you to specify the inventory file you wish to use.
-- *-v* Altough not used here, this increases verbosity.  Try running your playbook a second time using `-v` or `-vv` to increase the verbosity
-
-
-[NOTE]
-- *--syntax-check* If you run into any issues with your playbook running properly; you know, from that copy/pasting that you didn't do because we said "_don't do that_"; you could use this option to help find those issues like so...
+Create a directory called `roles` and `cd` into it.
 
 [source,bash]
 ----
-ansible-playbook --private-key=~/.ssh/workshopname-tower -i ../hosts install_apache.yml --syntax-check
+mkdir roles
+cd roles
 ----
 
 
----
-OK, go ahead and run your playbook as specified in *Step 1*
+=== Step 3:
 
-In standard output, you should see something that looks very similar to the following:
+Use the `ansible-galaxy` command to initialize a new role called `apache-simple`.
 
-image::stdout_1.png[caption="Figure 1: ", title="apache_basic playbook stdout",328]
+[source,bash]
+----
+ansible-galaxy init apache-simple
+----
 
-Notice that the play and each task is named so that you can see what is being done and to which node it is being done to.
-You also may notice a task in there that you didn't write;  <cough> `setup` <cough>.  This is because the `setup` module
-runs by default.  To turn if off, you can specify link:{gather_facts-url}[gather_facts: false] in your play definition like this:
+Take a look around the structure you just created.  It should look a lot like Figure 1 above.  However, we need to complete one more step before moving onto section 2.  It is Ansible best practice to clean out role directories and files you won't be using.  For this role, we won't be using anything from `files`, `tests`.
 
+
+=== Step 4:
+
+Remove the `files` and `tests` directories
+
+[source,bash]
+----
+cd ~/apache-basic-playbook/roles/apache-simple/
+rm -rf files tests
+----
+
+
+== Section 2: Breaking Your `site.yml` Playbook into the Newly Created `apache-simple` Role
+
+
+In this section, we will separate out the major parts of your playbook including `vars:`, `tasks:`, `template:`, and `handlers:`.
+
+=== Step 1:
+
+Make a backup copy of `site.yml`, then create a new `site.yml`.
+
+[source,bash]
+----
+mv site.yml site.yml.bkup
+vim site.yml
+----
+
+=== Step 2:
+
+Add the play definition and the invocation of a single role.
 
 [source,bash]
 ----
 ---
 - hosts: web
-  name: Install the apache web service
+  name: This is my role-based playbook
   become: yes
-  gather_facts: false
+
+  roles:
+    - apache-simple
 ----
 
+=== Step 4:
 
+Add some default variables to your role in `roles/apache-simple/defaults/main.yml`.
 
-=== Step 2:
+[source,bash]
+----
+---
+# defaults file for apache-simple
+apache_test_message: This is a test message
+apache_max_keep_alive_requests: 115
+----
 
-Remove Apache
+=== Step 5:
 
-OK, for the next several minutes or as much time as we can afford, we want to to experiment a little.
-We would like you to reverse what you've done, i.e. stop and uninstall apache on your web nodes.
-So, go ahead and edit your playbook and then when your finished, rerun it as specified in *Step 1*.
-For this exercise we aren't going to show you line by line, but we will give you a few hints.
+Add some role-specific variables to your role in `roles/apache-simple/vars/main.yml`.
+
+[source,bash]
+----
+---
+# vars file for apache-simple
+httpd_packages:
+  - httpd
+  - mod_wsgi
+----
 
 [NOTE]
+====
+*Hey, wait just a minute there buster... did you just have us put variables in two seperate places?* +
 
-- If your first task in the playbook was to install httpd and the second task was to start the service, which order do you think
-those tasks should be in now?
-- If `started` makes sure a service is started, then what option ensures it is stopped?
-- If `present` makes sure a package is installed, then what option ensures it is removed?  Er... starts with an *ab*, ends with a *sent*
+Yes... yes we did.  Variables can live in quite a few places.  Just to name a few: +
 
+- vars directory
+- defaults directory
+- group_vars directory
+- In the playbook under the `vars:` section
+- In any file which can be specified on the command line using the `--extra_vars` option
+- On a boat, in a moat, with a goat  _(disclaimer:  this is a complete lie)_
 
+Bottom line, you need to read up on link:{var_prec_url}[variable precedence] to understand both where to define variables and which locations take precedence.  In this exercise, we are using role defaults to define a couple of variables and these are the most malleable.  After that, we defined some variables in `/vars`
+which have a higher precedence than defaults and can't be overridden as a default variable.
+====
 
+=== Step 6:
 
-Feel free to browse the help pages to see a list of all options.
+Create your role handler in `roles/apache-simple/handlers/main.yml`.
 
-- link:{yum_url}[Ansible yum module]
-- link:{service_url}[Ansible service module]
+[source,bash]
+----
+---
+# handlers file for apache-simple
+- name: restart apache service
+  service:
+    name: httpd
+    state: restarted
+    enabled: yes
+----
+
+=== Step 7:
+
+Add tasks to your role in `roles/apache-simple/tasks/main.yml`.
+
+[source,bash]
+----
+---
+# tasks file for apache-simple
+- name: install httpd packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ httpd_packages }}"
+  notify: restart apache service
+
+- name: create site-enabled directory
+  file:
+    name: /etc/httpd/conf/sites-enabled
+    state: directory
+
+- name: copy httpd.conf
+  template:
+    src: templates/httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+  notify: restart apache service
+
+- name: copy index.html
+  template:
+    src: templates/index.html.j2
+    dest: /var/www/html/index.html
+
+- name: start httpd
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+----
+
+=== Step 8:
+
+Download a couple of templates into `roles/apache-simple/templates/`.  And right after that, let's clean up from exercise 2.1 by removing the old templates directory.
+
+[source,bash]
+----
+cd ~/apache-basic-playbook/roles/apache-simple/templates/
+curl -O http://ansible-workshop.redhatgov.io/workshop-files/httpd.conf.j2
+curl -O http://ansible-workshop.redhatgov.io/workshop-files/index.html.j2
+rm -rf ~/apache-basic-playbook/templates/
+----
+
+== Section 3: Running your new role-based playbook
+
+Now that you've successfully separated your original playbook into a role,
+let's run it and see how it works.
+
+=== Step 1:
+
+Run the playbook.
+
+[source,bash]
+----
+ansible-playbook --private-key=~/.ssh/workshopname-tower -i ../hosts site.yml
+----
+
+If successful, your standard output should look similar to the figure below.
+
+image::stdout_3.png[ansible-basic-playbook role-based stdout]
+
+== Section 4: Review
+
+You should now have a completed playbook, `site.yml` with a single role called `apache-simple`.  The advantage of structuring your playbook into roles is that you can now add new roles to the playbook using Ansible Galaxy or simply writing your own.  In addition, roles simplify changes to variables, tasks, templates, etc.
