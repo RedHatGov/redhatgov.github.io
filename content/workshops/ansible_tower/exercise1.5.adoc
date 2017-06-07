@@ -1,178 +1,234 @@
 ---
-title: "Exercise 1.5 - Creating and Running a Job Template"
+title: "Exercise 1.5 - Roles: Making your playbooks reusable"
 workshops: ansible_tower
-workshop_weight: 60
+workshop_weight: 30
 layout: lab
 ---
 
-:license_url: http://ansible-workshop-bos.redhatgov.io/wslic.txt
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
-
-= Exercise 1.5 - Creating and Running a Job Template
-
-
-
-A job template is a definition and set of parameters for running an Ansible job.
-Job templates are useful to execute the same job many times.
+:yum_url: http://docs.ansible.com/ansible/yum_module.html
+:service_url: http://docs.ansible.com/ansible/service_module.html
 
 
-== Creating a Job Template
+= Exercise 1.5 - Roles: Making your playbooks reusable
 
+While it is possible to write a playbook in one file as we've done throughout this workshop, eventually you’ll want to reuse files and start to organize things.
 
-=== Step 1:
+Ansible Roles is the way we do this.  When you create a role, you deconstruct your playbook into parts and those parts sit in a directory structure.  "Wha??  You mean that seemingly useless link:{dir_url}[best practice] you mentioned in exercise 1.2?".  Yep, that one.
 
-Select JOB TEMPLATES
+For this exercise, you are going to take the playbook you just wrote and refactor it into a role.  In addition, you'll learn to use Ansible Galaxy.
 
-=== Step 2:
+Let's begin with seeing how your apache-basic-playbook will break down into a role.
 
-Click on ADD image:at_add.png[Add,35,25]
+image::roledir_1.png[apache-basic-playbook role directory structure]
 
-=== Step 3:
+Fortunately, you don't have to create all of these directories and files by hand.  That's where Ansible Galaxy comes in.
 
-Complete the form using the following values
+== Section 1: Using Ansible Galaxy to initialize a new role
 
-|===
-|NAME |Apache Basic Job Template
-|DESCRIPTION|Template for the apache-basic-playbook
-|JOB TYPE|Run
-|INVENTORY|Ansible Workshop Inventory
-|PROJECT|Ansible Workshop Project
-|PLAYBOOK|examples/apache-basic-playbook/site.yml
-|MACHINE CREDENTIAL|Ansible Workshop Credential
-|LIMIT|web
-|OPTIONS
-a|
-- [*] Enable Privilege Escalation
-|===
-
-
-
-image::at_jt_detail.png[caption="Figure 11: ",900,title="Job Template Form"]
-
-
-
-=== Step 4:
-
-Select ADD SURVEY image:at_addsurvey.png[Add,35,25]
-
-=== Step 5:
-
-Complete the survey form with following values
-
-|===
-|PROMPT|Please enter a test message for your new website
-|DESCRIPTION|Website test message prompt
-|ANSWER VARIABLE NAME|apache_test_message
-|ANSWER TYPE|Text
-|MINIMUM/MAXIMUM LENGTH| Use the defaults
-|DEFAULT ANSWER| Be creative, keep it clean, we're all professionals here
-|===
-
-
-
-image::at_survey_detail.png[caption="Figure 12: ",500,title="Survey Form"]
-
-
-
-=== Step 6:
-
-Select ADD image:at_add.png[Add,35,25]
-
-=== Step 7:
-
-Select SAVE image:at_save.png[Add,35,25]
-
-=== Step 8:
-
-Back on the main Job Template page, select SAVE image:at_save.png[Add,35,25] again.
-
-
-
-
-== Running a Job Template
-
-Now that you've sucessfully creating your Job Template, you are ready to launch it.
-Once you do, you will be redirected to a job screen which is refreshing in realtime
-showing you the status of the job.
+Ansible Galaxy is a free site for finding, downloading, and sharing roles.  It's also pretty handy for creating them which is what we are about to do here.
 
 
 === Step 1:
 
-Select JOB TEMPLATES
-[NOTE]
-Alternatively, if you haven't navigated away from
-the job templates creation page, you can scroll down to see all existing job templates
-
-=== Step 2:
-
-Click on the rocketship icon image:at_launch_icon.png[Add,35,25] for the *Apache Basic Job Template*
-
-=== Step 3:
-
-When prompted, enter your desired test message
-
-
-
-image::at_survey_prompt.png[caption="Figure 13: ",title="Survey Prompt"]
-
-
-
-=== Step 4:
-
-Select LAUNCH image:at_survey_launch.png[SurveyL,35,25]
-
-=== Step 5:
-
-Sit back, watch the magic happen
-
-One of the first things you will notice is the summary section.  This gives you details about
-your job such as who launched it, what playbook it's running, what the status is, i.e. pending, running, or complete.
-
-
-
-image::at_job_status.png[caption="Figure 14: ",title="Job Summary"]
-
-
-
-Scrolling down, you will be able to see details on the play and each task in the playbook.
-
-
-
-image::at_job_tasklist.png[caption="Figure 15: ",title="Play and Task Details"]
-
-
-
-To the right, you can view standard output; the same way you could if you were running Ansible Core
-from the command line.
-
-
-
-image::at_job_stdout.png[caption="Figure 16: ",900,title="Job Standard Output"]
-
-
-
-=== Step 6:
-
-Once your job is sucessful, navigate to your new website
+Navigate to your `apache-basic-playbook` project.
 
 [source,bash]
 ----
-http://workshopname.0.redhatgov.io
+cd ~/apache-basic-playbook
 ----
 
 
-If all went well, you should see something like this, but with your own custom message of course.
+=== Step 2:
+
+Create a directory called `roles` and `cd` into it.
+
+[source,bash]
+----
+mkdir roles
+cd roles
+----
 
 
+=== Step 3:
 
-image::at_web_tm.png[caption="Figure 17: ",title="New Website with Personalized Test Message"]
+Use the `ansible-galaxy` command to initialize a new role called `apache-simple`.
+
+[source,bash]
+----
+ansible-galaxy init apache-simple
+----
+
+Take a look around the structure you just created.  It should look a lot like Figure 1 above.  However, we need to complete one more step before moving onto section 2.  It is Ansible best practice to clean out role directories and files you won't be using.  For this role, we won't be using anything from `files`, `tests`.
 
 
+=== Step 4:
+
+Remove the `files` and `tests` directories
+
+[source,bash]
+----
+cd ~/apache-basic-playbook/roles/apache-simple/
+rm -rf files tests
+----
 
 
+== Section 2: Breaking Your `site.yml` Playbook into the Newly Created `apache-simple` Role
 
-== End Result
-At this point in the workshop, you've experienced the core functionality of Ansible Tower.  But wait... there's more!
-You've just begun to explore the possibilities of Ansible Core and Tower.  Take a look at the resources page in this guide
-to explore some more features.
+
+In this section, we will separate out the major parts of your playbook including `vars:`, `tasks:`, `template:`, and `handlers:`.
+
+=== Step 1:
+
+Make a backup copy of `site.yml`, then create a new `site.yml`.
+
+[source,bash]
+----
+mv site.yml site.yml.bkup
+vim site.yml
+----
+
+=== Step 2:
+
+Add the play definition and the invocation of a single role.
+
+[source,bash]
+----
+---
+- hosts: web
+  name: This is my role-based playbook
+  become: yes
+
+  roles:
+    - apache-simple
+----
+
+=== Step 4:
+
+Add some default variables to your role in `roles/apache-simple/defaults/main.yml`.
+
+[source,bash]
+----
+---
+# defaults file for apache-simple
+apache_test_message: This is a test message
+apache_max_keep_alive_requests: 115
+----
+
+=== Step 5:
+
+Add some role-specific variables to your role in `roles/apache-simple/vars/main.yml`.
+
+[source,bash]
+----
+---
+# vars file for apache-simple
+httpd_packages:
+  - httpd
+  - mod_wsgi
+----
+
+[NOTE]
+====
+*Hey, wait just a minute there buster... did you just have us put variables in two seperate places?* +
+
+Yes... yes we did.  Variables can live in quite a few places.  Just to name a few: +
+
+- vars directory
+- defaults directory
+- group_vars directory
+- In the playbook under the `vars:` section
+- In any file which can be specified on the command line using the `--extra_vars` option
+- On a boat, in a moat, with a goat  _(disclaimer:  this is a complete lie)_
+
+Bottom line, you need to read up on link:{var_prec_url}[variable precedence] to understand both where to define variables and which locations take precedence.  In this exercise, we are using role defaults to define a couple of variables and these are the most malleable.  After that, we defined some variables in `/vars`
+which have a higher precedence than defaults and can't be overridden as a default variable.
+====
+
+=== Step 6:
+
+Create your role handler in `roles/apache-simple/handlers/main.yml`.
+
+[source,bash]
+----
+---
+# handlers file for apache-simple
+- name: restart apache service
+  service:
+    name: httpd
+    state: restarted
+    enabled: yes
+----
+
+=== Step 7:
+
+Add tasks to your role in `roles/apache-simple/tasks/main.yml`.
+
+[source,bash]
+----
+---
+# tasks file for apache-simple
+- name: install httpd packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ httpd_packages }}"
+  notify: restart apache service
+
+- name: create site-enabled directory
+  file:
+    name: /etc/httpd/conf/sites-enabled
+    state: directory
+
+- name: copy httpd.conf
+  template:
+    src: templates/httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+  notify: restart apache service
+
+- name: copy index.html
+  template:
+    src: templates/index.html.j2
+    dest: /var/www/html/index.html
+
+- name: start httpd
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+----
+
+=== Step 8:
+
+Download a couple of templates into `roles/apache-simple/templates/`.  And right after that, let's clean up from exercise 2.1 by removing the old templates directory.
+
+[source,bash]
+----
+cd ~/apache-basic-playbook/roles/apache-simple/templates/
+curl -O http://ansible-workshop.redhatgov.io/workshop-files/httpd.conf.j2
+curl -O http://ansible-workshop.redhatgov.io/workshop-files/index.html.j2
+rm -rf ~/apache-basic-playbook/templates/
+----
+
+== Section 3: Running your new role-based playbook
+
+Now that you've successfully separated your original playbook into a role,
+let's run it and see how it works.
+
+=== Step 1:
+
+Run the playbook.
+
+[source,bash]
+----
+ansible-playbook --private-key=~/.ssh/workshopname-tower -i ../hosts site.yml
+----
+
+If successful, your standard output should look similar to the figure below.
+
+image::stdout_3.png[ansible-basic-playbook role-based stdout]
+
+== Section 4: Review
+
+You should now have a completed playbook, `site.yml` with a single role called `apache-simple`.  The advantage of structuring your playbook into roles is that you can now add new roles to the playbook using Ansible Galaxy or simply writing your own.  In addition, roles simplify changes to variables, tasks, templates, etc.
