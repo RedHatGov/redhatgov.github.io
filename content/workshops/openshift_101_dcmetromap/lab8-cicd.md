@@ -27,12 +27,12 @@ $ oc new-project cicd
 <blockquote>
 Browse to original landing page, and click "New Project".
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-addToProjectButton.png" width="200"><br/>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-cicd-new-project.png" width="200"><br/>
 
 <blockquote>
-Fill in the name of the project as "cicd" and click "Create"
+Fill in the Name and Display Name of the project as "cicd" and click "Create"
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-cicd-new-project.png" width="600"><br/>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-cicd-new-project-detail.png" width="600"><br/>
 {{% /panel %}}
 
 {{< /panel_group >}}
@@ -104,7 +104,7 @@ Use Jenkins HOST/PORT to access through web browser
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Select JENKINS EPHEMERAL link from Overview page.
+Click the URL that is listed in the jenkins header
 </blockquote>
 
 <img src="/static/openshift_101_dcmetromap/ocp-lab-cicd-jenkins-overview.png" width="900"><br/>
@@ -179,6 +179,10 @@ Service web page displayed:
 
 <img src="/static/openshift_101_dcmetromap/ocp-lab-cicd-app-test.png" width="900"><br/>
 
+# Summary
+Read more about the use of Jenkins on OpenShift [here][3].
+
 [1]: https://jenkins.io/doc/book/pipeline/
 [2]: https://github.com/openshift/jenkins-plugin
+[3]: https://docs.openshift.com/enterprise/latest/using_images/other_images/jenkins.html
 

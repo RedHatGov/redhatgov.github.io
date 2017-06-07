@@ -44,7 +44,10 @@ $ oc describe pod/PODNAME | more
 ```
 
 <i class="fa fa-info-circle"></i> Here's a handy way to search through all objects and look at all the labels:<br/>
-<i class="fa fa-terminal"></i> oc describe all | grep -i "labels:"
+
+```
+$ oc describe all | grep -i "labels:
+```
 
 {{% /panel %}}
 
@@ -54,19 +57,19 @@ $ oc describe pod/PODNAME | more
 Click "Applications" and then click on "Pods"
 </blockquote>
 This is going to show basic details for all pods in this project (including the builders).
-<p><img src="{{ site.baseurl }}/www/3.1/default/screenshots/ose-lab-devman-allpods.png" width="500"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-labels-pods.png" width="900"><br/>
 Next let's look at the log for the pod running our application.
 
 <blockquote>
 Click the pod for the dc metro map webapp (it shoud have a status of Running)
 </blockquote>
-<p><img src="{{ site.baseurl }}/www/3.1/default/screenshots/ose-lab-labels-poddetails.png" width="500"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-labels-poddetails.png" width="900"><br/>
 Here, at the top, you can see the labels on this pod
 
 <blockquote>
 Click the "Actions" button, then click "Edit YAML" for the pod
 </blockquote>
-<p><img src="{{ site.baseurl }}/www/3.1/default/screenshots/ose-lab-labels-podedit.png" width="500"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-labels-podedit.png" width="900"><br/>
 You will see all the labels under the metadata->labels section.
 
 <blockquote>
