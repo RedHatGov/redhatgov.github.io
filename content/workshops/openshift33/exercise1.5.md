@@ -1,5 +1,5 @@
 ---
-title: Replication and Recovery
+title: Exercise 1.5 - Replication and Recovery
 workshops: openshift33
 workshop_weight: 150
 layout: lab
@@ -206,6 +206,6 @@ Let's scale back down to 1 replica.  If you are using the web console just click
 In this lab we learned about replication controllers and how they can be used to scale your applications and services.  We also tried to break a few things and saw how OpenShift responded to heal the system and keep it running.  This topic can get deeper than we've experimented with here, but getting deeper into application health and recovery is an advanced topic.  If you're interested you can read more about it in the documentation [here][1], [here][2], and [here][3].
 
 
-[1]: https://docs.openshift.com/enterprise/latest/dev_guide/application_health.html
-[2]: https://docs.openshift.com/enterprise/latest/dev_guide/deployments.html#scaling
+[1]: https://docs.openshift.com/container-platform/3.3/dev_guide/application_health.html
+[2]: https://docs.openshift.com/container-platform/3.3/dev_guide/deployments.html#scaling
 [3]: http://kubernetes.io/docs/user-guide/walkthrough/k8s201/#health-checking

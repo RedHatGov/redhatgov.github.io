@@ -1,5 +1,5 @@
 ---
-title: Application Templates
+title: Exercise 1.12 - Application Templates
 workshops: openshift33
 workshop_weight: 220
 layout: lab

@@ -1,5 +1,5 @@
 ---
-title: Blue-green Deployment
+title: Exercise 1.8 - Blue-green Deployment
 workshops: openshift33
 workshop_weight: 180
 layout: lab

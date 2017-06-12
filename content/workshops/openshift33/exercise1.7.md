@@ -1,5 +1,5 @@
 ---
-title: CI / CD Pipelines
+title: Exercise 1.7 - CI / CD Pipelines
 workshops: openshift33
 workshop_weight: 170
 layout: lab
@@ -207,7 +207,7 @@ Coming soon...  Read more about usage of [Jenkins on OpenShift here][4].  Read m
 [1]: https://jenkins.io/doc/pipeline/
 [2]: https://wiki.jenkins-ci.org/display/JENKINS/OpenShift+Pipeline+Plugin
 [3]: https://github.com/openshift/jenkins-plugin/
-[4]: https://docs.openshift.com/enterprise/latest/using_images/other_images/jenkins.html
+[4]: https://docs.openshift.com/container-platform/3.3/using_images/other_images/jenkins.html
 [5]: https://en.wikipedia.org/wiki/Continuous_delivery
 [6]: https://github.com/openshift/origin/blob/master/examples/jenkins/README.md
-[7]: https://docs.openshift.com/enterprise/latest/creating_images/s2i_testing.html#creating-images-s2i-testing
+[7]: https://docs.openshift.com/container-platform/3.3/creating_images/s2i_testing.html#creating-images-s2i-testing

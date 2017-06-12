@@ -1,5 +1,5 @@
 ---
-title: Deploying Java Code on JBoss EAP
+title: Exercise 1.10 - Deploying Java Code on JBoss EAP
 workshops: openshift33
 workshop_weight: 200
 layout: lab
@@ -32,12 +32,12 @@ other aspects of OpenShift.
 
 A full discussion of S2I is beyond the scope of this class, but you can find
 more information abuot it either in the [OpenShift S2I
-documentation](https://docs.openshift.com/enterprise/latest/creating_images/s2i.html#overview)
+documentation](https://docs.openshift.com/container-platform/3.3/creating_images/s2i.html#overview)
 or on GitHub (following the link above). The only key concept you need to
 remember about S2I is that it's magic.
 
 For a current list of supported runtimes, you can check out the [OpenShift
-Technologies](https://enterprise.openshift.com/features/#technologies) page.
+Technologies](https://www.openshift.com/container-platform/features.html#technologies) page.
 
 
 ### Creating a JBoss EAP application
@@ -70,7 +70,7 @@ code on GitHub.
 
 The repository that we are going to fork is located at the following URL:
 
-[https://github.com/gshipley/openshift3mlbparks.git](https://github.com/gshipley/openshift3mlbparks.git "https://github.com/gshipley/openshift3mlbparks.git")
+[https://github.com/RedHatGov/openshift3mlbparks](https://github.com/RedHatGov/openshift3mlbparks "https://github.com/RedHatGov/openshift3mlbparks")
 
 Go ahead and fork the `mlbparks` repository into your own GitHub account. Later
 in the lab, we want you to make a code change and then rebuild your application.

@@ -1,5 +1,5 @@
 ---
-title: JBoss Kitchen Sink
+title: Exercise 1.9 - JBoss Kitchen Sink
 workshops: openshift33
 workshop_weight: 190
 layout: lab

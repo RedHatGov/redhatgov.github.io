@@ -1,5 +1,5 @@
 ---
-title: BYO Docker
+title: Exercise 1.1 - BYO Docker
 workshops: openshift33
 workshop_weight: 110
 layout: lab

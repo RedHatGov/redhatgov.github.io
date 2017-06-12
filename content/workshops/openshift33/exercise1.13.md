@@ -1,5 +1,5 @@
 ---
-title: A/B Testing with HAProxy
+title: Exercise 1.13 - A/B Testing with HAProxy
 workshops: openshift33
 workshop_weight: 230
 layout: lab

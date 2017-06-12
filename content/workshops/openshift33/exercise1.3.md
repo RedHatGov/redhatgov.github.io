@@ -1,5 +1,5 @@
 ---
-title: Developing and Managing Your Application
+title: Exercise 1.3 - Developing and Managing Your Application
 workshops: openshift33
 workshop_weight: 130
 layout: lab
@@ -324,5 +324,5 @@ In this lab you've seen how to trace running software back to its roots, how to 
 
 To dig deeper in to details behind the steps you performed in this lab, check out the OSE [developer's guide][1].
 
-[1]: https://docs.openshift.com/enterprise/latest/dev_guide/index.html
+[1]: https://docs.openshift.com/container-platform/3.3/dev_guide/index.html
 [2]: ./workshop-lab-secrets.html

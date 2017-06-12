@@ -1,5 +1,5 @@
 ---
-title: Adding a Database (MongoDB)
+title: Exercise 1.11 - Adding a Database (MongoDB)
 workshops: openshift33
 workshop_weight: 210
 layout: lab

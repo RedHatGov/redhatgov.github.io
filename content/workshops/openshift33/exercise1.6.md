@@ -1,5 +1,5 @@
 ---
-title: Labels
+title: Exercise 1.6 - Labels
 workshops: openshift33
 workshop_weight: 160
 layout: lab
@@ -94,5 +94,5 @@ Your updated label will show up in the pod's list.
 That's it for this lab, now you know that all the objects in OpenShift can be labeled.  This is important because those labels can be used as part of your CI/CD process.  Advanced labs will cover using labels for Blue/Green deployments and running yours apps on specific nodes (e.g. just on SSD nodes or just on east coast nodes).  You can read more about labels [here][1] and [here][2].
 
 
-[1]: https://docs.openshift.com/enterprise/latest/architecture/core_concepts/pods_and_services.html#labels
+[1]: https://docs.openshift.com/container-platform/3.3/architecture/core_concepts/pods_and_services.html#labels
 [2]: http://kubernetes.io/docs/user-guide/labels/

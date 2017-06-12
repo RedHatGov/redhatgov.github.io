@@ -1,5 +1,5 @@
 ---
-title: Webhooks and Rollbacks
+title: Exercise 1.4 - Webhooks and Rollbacks
 workshops: openshift33
 workshop_weight: 140
 layout: lab
@@ -216,8 +216,8 @@ OpenShift has done a graceful removal of the old pod and created a new one.
 ### Summary
 In this lab we saw how you can configure a source code repository to trigger builds with webhooks.  This webhook could come from Github, Jenkins, Travis-CI, or any tool capable of sending a URL POST.  Keep in mind that there are other types of build triggers you can setup.  For example: if a new version of the upstream RHEL image changes.  We also inspected our deployment history and did a rollback of our running deployment to one based on an older image.
 
-[1]: https://docs.openshift.com/enterprise/latest/dev_guide/builds.html#build-triggers
-[2]: https://docs.openshift.com/enterprise/latest/dev_guide/deployments.html#triggers
+[1]: https://docs.openshift.com/container-platform/3.3/dev_guide/builds.html#build-triggers
+[2]: https://docs.openshift.com/container-platform/3.3/dev_guide/deployments.html#triggers
 [3]: https://github.com/join?source=header-home
-[4]: https://github.com/dudash/openshift-workshops/
-[5]: https://docs.openshift.com/enterprise/latest/rest_api/openshift_v1.html#create-a-deploymentconfigrollback-2
+[4]: https://github.com/RedHatGov/openshift-workshops
+[5]: https://docs.openshift.com/container-platform/3.3/rest_api/openshift_v1.html#create-a-deploymentconfigrollback-2
