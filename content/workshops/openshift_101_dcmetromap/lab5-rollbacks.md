@@ -127,22 +127,28 @@ Paste in the URL you copied
 <blockquote>
 Disable SSL verification by clicking the button
 </blockquote>
-<i class="fa fa-info-circle"></i> You can learn how to setup SSH in the secrets lab<br/><br/>
+
+<blockquote>
+<i class="fa fa-info-circle"></i> You can learn how to setup SSL in the secrets lab<br/><br/>
+</blockquote>
 
 <img src="/static/openshift_101_dcmetromap/ocp-lab-rollbacks-githubwebhooks-add.png" width="600"><br/>
 
 <blockquote>
-Click the button to "Add webhook"
+Click the "Add webhook" button
 </blockquote>
 
 {{% /panel %}}
 {{< /panel_group >}}
 
-Good work!  Now any "push" to the forked repository will send a webhook that triggers OpenShift to: re-build the code and image using s2i, and then perform a new pod deployment.  In fact Github should have sent a test trigger and OpenShift should have kicked off a new build already.
+Good work! Now any "push" to the forked repository will send a webhook that triggers OpenShift to: re-build the code and image using s2i, and then perform a new pod deployment.  In fact Github should have sent a test trigger and OpenShift should have kicked off a new build already.
 
 
 ## Deployment Triggers
-<i class="fa fa-info-circle"></i> In addition to setting up triggers for rebuilding code, we can setup a different type of [trigger][2] to deploy pods.  Deployment triggers can be due to a configuration change (e.g. environment variables) or due to an image change.  This powerful feature will be covered in one of the advanced labs.
+
+{{% alert info %}}
+In addition to setting up triggers for rebuilding code, we can setup a different type of trigger to deploy pods.  Deployment triggers can be due to a configuration change (e.g. environment variables) or due to an image change.  This powerful feature will be covered in one of the advanced labs. See the Triggers link under More Information below.
+{{% /alert %}}
 
 
 ## Rollbacks
@@ -193,13 +199,20 @@ You can go back to the overview page to see your previous deployment spinning do
 
 OpenShift has done a graceful removal of the old pod and created a new one.  
 
-<i class="fa fa-info-circle"></i> The old pod wasn't killed until the new pod was successfully started and ready to be used.  This is so that OpenShift could continue to route traffic to the old pod until the new one was ready.
+{{% alert info %}}
+Note that the old pod wasn't killed until the new pod was successfully started and ready to be used.  This is so that OpenShift could continue to route traffic to the old pod until the new one was ready.
+{{% /alert %}}
 
-<i class="fa fa-info-circle"></i> You can integrate your CI/CD tools to do [rollbacks with the REST API][5].
+{{% alert info %}}
+You can integrate your CI/CD tools to do rollbacks with the REST API. See the Rollbacks With the REST API link under More Information below.
+{{% /alert %}}
 
 # Summary
 In this lab we saw how you can configure a source code repository to trigger builds with webhooks.  This webhook could come from Github, Jenkins, Travis-CI, or any tool capable of sending a URL POST.  Keep in mind that there are other types of build triggers you can setup.  For example: if a new version of the upstream RHEL image changes.  We also inspected our deployment history and did a rollback of our running deployment to one based on an older image with the click of a button.
 
+# More Information
+[Triggers][2]</br>
+[Rollbacks With the REST API][5]
 
 [1]: https://docs.openshift.com/enterprise/3.1/dev_guide/builds.html#build-triggers
 [2]: https://docs.openshift.com/enterprise/3.1/dev_guide/deployments.html#triggers

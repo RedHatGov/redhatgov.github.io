@@ -6,7 +6,7 @@ layout: lab
 ---
 
 # Bring your own docker
-It's easy to get started with OpenShift whether that be using our app templates or bringing your existing docker assets.  In this quick lab we will deploy an application using an exisiting docker image.  OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.  And we will dig into the details to show how all that works.
+It's easy to get started with OpenShift whether you're using our app templates or bringing your existing docker assets.  In this quick lab we will deploy an application using an exisiting docker image.  OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.  And we will dig into the details to show how all that works.
 
 ## Let's point OpenShift to an existing built docker image
 
@@ -56,7 +56,7 @@ Select the option for "Image Name" and enter "kubernetes/guestbook", then click 
 <img src="/static/openshift_101_dcmetromap/ocp-guestbook-imagename-expand.png" width="600"><br/>
 
 <blockquote>
-Observe default values that are populated in the search results:
+Observe default values that are populated in the search results
 </blockquote>
 <img src="/static/openshift_101_dcmetromap/ocp-guestbook-create-1.png" width="600"><br/>
 <img src="/static/openshift_101_dcmetromap/ocp-guestbook-create-2.png" width="600"><br/>
@@ -76,7 +76,7 @@ Scroll to the bottom and click "Create"
 $ oc get
 ```
 
-> <i class="fa fa-terminal"></i> Now let's look at what our image stream has in it
+> <i class="fa fa-terminal"></i> Now let's look at what our image stream has in it:
 
 ```
 $ oc get is
@@ -86,10 +86,10 @@ $ oc describe is/guestbook
 ```
 
 {{% alert info %}}
-An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, such as a new version of the guestbook image, is created.
+An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, in our case a new version of the guestbook image, is created.
 {{% /alert %}}
 
-> <i class="fa fa-terminal"></i> The app is running in a pod, let's look at that
+> <i class="fa fa-terminal"></i> The app is running in a pod, let's look at that:
 
 ```
 $ oc describe pods
@@ -132,7 +132,7 @@ $ oc expose service guestbook
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-To expose via the web console, click on "Overview" to get to this view:
+To expose via the web console, click on "Overview" to get to this view
 </blockquote>
 <img src="/static/openshift_101_dcmetromap/ocp-guestbook-noroute.png" width="600"><br/>
 
@@ -154,7 +154,7 @@ Click "Create"
 {{< /panel_group >}}
 
 {{% alert info %}}
-You can also create secured HTTPS routes, but that's an advanced topic for a later lab
+You can also create secured HTTPS routes, but that's a topic for a more advanced workshop
 {{% /alert %}}
 
 ## Test out the guestbook webapp

@@ -9,7 +9,7 @@ layout: lab
 One of the useful components of OpenShift is its source-to-image capability.  S2I is a framework that makes it easy to turn your source code into runnable images.  The main advantage of using S2I for building reproducible docker images is the ease of use for developers.  You'll see just how simple it can be in this lab.
 
 ## Let's build a node.js web server using S2I
-We can do this either via the command line (CLI) or the web console.  You decide which you'd rather do and follow the steps below:
+We can do this either via the command line or the web console.  You decide which you'd rather do and follow the steps below.
 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
@@ -26,7 +26,7 @@ $ oc expose service dc-metro-map
 {{% /panel %}}
 
 {{% alert info %}}
-When using the CLI, OpenShift automatically detectxrsed the source code type and will select the nodejs builder image.
+When using the CLI, OpenShift automatically detects the source code type and select the nodejs builder image.
 {{% /alert %}}
 
 {{% panel "Web Console Steps" %}}
@@ -61,7 +61,7 @@ Scroll to the bottom and click "Create"
 ## Check out the build details
 We can see the details of what the S2I builder did.  This can be helpful to diagnose issues if builds are failing.
 
-<i class="fa fa-magic"></i> TIP: For a node.js app, running "npm shrinkwrap" is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I
+<i class="fa fa-magic fa-2x"></i> TIP: For a node.js app, running "npm shrinkwrap" is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I
 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
@@ -74,7 +74,9 @@ We can see the details of what the S2I builder did.  This can be helpful to diag
 $ oc get builds
 ```
 
-In the output, note the name of your build and use it to see the logs with:
+<blockquote>
+Note the name of your build from the above command output and use it to see the logs with:
+</blockquote>
 
 ```
 $ oc logs builds/[BUILD_NAME]
@@ -121,7 +123,7 @@ $ oc get routes
 ```
 
 <blockquote>
-Copy the HOST/PORT and paste into your favorite web browser
+Copy the HOST/PORT and paste into your favorite web browser:
 </blockquote>
 
 {{% /panel %}}
@@ -148,6 +150,6 @@ The app should look like this in your web browser:
 Clicking the checkboxes will toggle on/off the individual metro stations on each colored line.  A numbered icon indicates there is more than one metro station in that area and they have been consolidated - click the number or zoom in to see more.
 
 # Summary
-In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  In the next lab we will look at some details of this app's deployment and make some changes to see how OpenShift can help to automate our development processes.
+In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  In the next lab we will look at some details of this app's deployment and make some changes to see how OpenShift can help to automate our development processes. More information about creating new applications can be found [here][1].
 
 [1]: https://docs.openshift.com/container-platform/3.4/dev_guide/application_lifecycle/new_app.html

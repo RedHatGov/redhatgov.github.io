@@ -17,18 +17,20 @@ Let's walk through a simple example of how the replication controller can keep y
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and try the following:
 </blockquote>
-{% highlight csh %}
+
+```
 $ oc scale --replicas=4 dc/dc-metro-map
-{% endhighlight %}
+```
 
 <blockquote>
 <i class="fa fa-terminal"></i> Check out the new pods:
 </blockquote>
-{% highlight csh %}
-$ oc get pods
-{% endhighlight %}
 
-Notice that you now have 4 unique pods availble to inspect.  If you want go ahead and inspect them you can see that each have their own IP address and logs (oc describe).
+```
+$ oc get pods
+```
+
+Notice that you now have 4 unique pods availble to inspect.  If you want go ahead and inspect them, using 'oc describe pod/<POD NAME>', you can see that each have their own IP address and logs.
 
 {{% /panel %}}
 
@@ -55,7 +57,7 @@ Notice that you now have 4 unique webapp pods available to inspect.  If you want
 So you've told OpenShift that you'd like to maintain 4 running, load-balanced, instances of our web app.
 
 ## Recovery
-OK, now that we have a slightly more interesting desired replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy.  Let's force inflict an issue and see how OpenShift reponds.
+Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy.  Let's force inflict an issue and see how OpenShift reponds.
 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
@@ -63,21 +65,28 @@ OK, now that we have a slightly more interesting desired replication state, we c
 <blockquote>
 <i class="fa fa-terminal"></i> Choose a random pod and delete it:
 </blockquote>
+
 ```
 $ oc get pods
 $ oc delete pod/PODNAME
 $ oc get pods -w
 ```
 
-If you're fast enough you'll see the pod you deleted go "Terminating" and you'll also see a new pod immediately get created and from "Pending" to "Running".  If you weren't fast enough you can see that your old pod is gone and a new pod is in the list with an age of only a few seconds.
+If you're fast enough you'll see the pod you deleted go "Terminating" and you'll also see a new pod immediately get created and transition from "Pending" to "Running".  If you weren't fast enough you can see that your old pod is gone and a new pod is in the list with an age of only a few seconds.
 
-<br/><br/><i class="fa fa-info-circle"></i>  You can see the more details about your replication controller with: ```$ oc describe rc```
+<blockquote>
+<i class="fa fa-info-circle"></i>  You can see the more details about your replication controller with:
+</blockquote>
+
+```
+$ oc describe rc
+```
 
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
 
-Assuming you are in the browse pods list.
+From the browse pods list:
 
 <blockquote>
 Click one of the running pods (not a build pod)
@@ -117,14 +126,18 @@ In addition to the health of your application's pods, OpenShift will watch the c
 <blockquote>
 <i class="fa fa-terminal"></i> Choose a running pod and shell into it:
 </blockquote>
+
 ```
 $ oc get pods
 $ oc exec PODNAME -it /bin/bash
 ```
 
 You are now executing a bash shell running in the container of the pod.  Let's kill our webapp and see what happens.
-<br/><i class="fa fa-info-circle"></i> If we had multiple containers in the pod we could use "-c CONTAINER_NAME" to select the right one
-<br/><br/>
+
+<blockquote>
+<i class="fa fa-info-circle"></i> If we had multiple containers in the pod we could use "-c CONTAINER_NAME" to select the right one
+</blockquote>
+
 <blockquote>
 <i class="fa fa-terminal"></i> Choose a running pod and shell into its container:
 </blockquote>
@@ -135,7 +148,6 @@ $ pkill -9 node
 
 This will kick you out off the container with an error like "Error executing command in container"
 
-<br/><br/>
 <blockquote>
 <i class="fa fa-terminal"></i> Do it again - shell in and execute the same command to kill node
 </blockquote>
@@ -165,9 +177,11 @@ Click inside the terminal view and type $ pkill -9 node
 </blockquote>
 <img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-terminal.png" width="900"><br/>
 
-This is going to kill the node.js web server and kick you off the container.
+</br>This is going to kill the node.js web server and kick you off the container.</br></br>
 
 <img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-terminalkick.png" width="900"><br/>
+
+</br>
 
 <blockquote>
 Click the refresh button (on the terminal) and do that a couple more times
