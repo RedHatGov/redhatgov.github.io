@@ -6,7 +6,7 @@ layout: lab
 ---
 
 # Bring your own docker
-It's easy to get started with OpenShift whether that be using our app templates or bringing your existing docker assets.  In this quick lab we will deploy app using an exisiting docker image.  OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.  And we will dig into the details to show how all that works.
+It's easy to get started with OpenShift whether that be using our app templates or bringing your existing docker assets.  In this quick lab we will deploy an application using an exisiting docker image.  OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.  And we will dig into the details to show how all that works.
 
 ## Let's point OpenShift to an existing built docker image
 
@@ -43,23 +43,23 @@ The output should show something *similar* to below:
 <blockquote>
 Click "Add to Project"
 </blockquote>
-<p><img src="{{ site.baseurl }}/www/3.1/default/screenshots/ose-lab-s2i-addbutton.png" width="100"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-addToProjectButton.png" width="200"><br/>
 
 <blockquote>
 Select the tab for "Deploy Image" from the top options
 </blockquote>
-<p><img src="{{ site.baseurl }}/www/3.3/default/screenshots/ose-guestbook-deploy-image.png" width="400"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-guestbook-deploy-image.png" width="400"><br/>
 
 <blockquote>
 Select the option for "Image Name" and enter "kubernetes/guestbook", then click the magnifying glass to the far right to search for the image.
 </blockquote>
-<p><img src="{{ site.baseurl }}/www/3.3/default/screenshots/ose-guestbook-imagename-expand.png" width="600"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-guestbook-imagename-expand.png" width="600"><br/>
 
 <blockquote>
 Observe default values that are populated in the search results:
 </blockquote>
-<p><img src="{{ site.baseurl }}/www/3.3/default/screenshots/ose-guestbook-create-1.png" width="600"/></p>
-<p><img src="{{ site.baseurl }}/www/3.3/default/screenshots/ose-guestbook-create-2.png" width="600"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-guestbook-create-1.png" width="600"><br/>
+<img src="/static/openshift_101_dcmetromap/ocp-guestbook-create-2.png" width="600"><br/>
 
 <blockquote>
 Scroll to the bottom and click "Create"
@@ -110,35 +110,13 @@ Now click on the guestbook image stream
 
 You should see something similar to this:
 
-<img src="{{ site.baseurl }}/www/3.3/default/screenshots/ose-guestbook-is.png" width="600"/><br/>
+<img src="/static/openshift_101_dcmetromap/ocp-guestbook-is.png" width="600"><br/>
 
 
 ## Does this guestbook do anything?
-Good catch, your service is running but there is no way for users to access it yet.  We can fix that with the web console or the command line, you decide which you'd rather do from the steps below.
+Good catch, your service is running but there is no way for users to access it yet.  We can fix that from the web console or the command line. You decide which you'd rather do from the steps below.
 
 {{< panel_group >}}
-{{% panel "Web Console Steps" %}}
-
-<blockquote>
-To expose via the web console, click on "Overview" to get to this view:
-</blockquote>
-<img src="{{ site.baseurl }}/www/3.3/default/screenshots/ose-guestbook-noroute.png" width="600"/><br/>
-
-<p>Notice there is no exposed route </p>
-
-<blockquote>
-Click on the "Create Route" link
-</blockquote>
-
-<img src="{{ site.baseurl }}/www/3.1/default/screenshots/ose-guestbook-createroute.png" width="600"/><br/>
-
-<p>This is where you could specify route parameters, but we will just use the defaults.</p>
-
-<blockquote>
-Click "Create"
-</blockquote>
-
-{{% /panel %}}
 
 {{% panel "CLI Steps" %}}
 
@@ -149,6 +127,28 @@ Click "Create"
 ```
 $ oc expose service guestbook
 ```
+{{% /panel %}}
+
+{{% panel "Web Console Steps" %}}
+
+<blockquote>
+To expose via the web console, click on "Overview" to get to this view:
+</blockquote>
+<img src="/static/openshift_101_dcmetromap/ocp-guestbook-noroute.png" width="600"><br/>
+
+<p>Notice there is no exposed route </p>
+
+<blockquote>
+Click on the "Create Route" link
+</blockquote>
+
+<img src="/static/openshift_101_dcmetromap/ocp-guestbook-createRoute.png" width="600"><br/>
+
+<p>This is where you could specify route parameters, but we will just use the defaults.</p>
+
+<blockquote>
+Click "Create"
+</blockquote>
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -160,11 +160,9 @@ You can also create secured HTTPS routes, but that's an advanced topic for a lat
 ## Test out the guestbook webapp
 Notice that in the web console overview, you now have a URL in the service box.  There is no database setup, but you can see the webapp running by clicking the route you just exposed.
 
-> Click the link in the service box
+> Click the link in the service box. You should see:
 
-
-You should see:
-<img src="{{ site.baseurl }}/www/3.1/default/screenshots/ose-guestbook-app.png" width="600"/><br/>
+<img src="/static/openshift_101_dcmetromap/ocp-guestbook-app.png" width="600"><br/>
 
 
 ## Good work, let's clean this up

@@ -41,13 +41,13 @@ Click "Overview"
 In the deployment, click the up arrow 3 times.
 </blockquote>
 The deployment should indicate that it is scaling to 4 pods, and eventually you will have 4 running pods.  Keep in mind that each pod has it's own container which is an identical deployment of the webapp.  OpenShift is now (by default) round robin load-balancing traffic to each pod.
-<p><img src="{{ site.baseurl }}/www/3.3/default/screenshots/ose-lab-replicationrecovery-4pods.png" width="500"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-4pods.png" width="900"><br/>
 
 <blockquote>
 Hover over the pod counter (the circle) and click
 </blockquote>
 Notice that you now have 4 unique webapp pods available to inspect.  If you want go ahead and inspect them you can see that each have their own IP address and logs.
-<p><img src="{{ site.baseurl }}/www/3.1/default/screenshots/ose-lab-replicationrecovery-4podslist.png" width="500"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-4podslist.png" width="900"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -85,15 +85,24 @@ Click one of the running pods (not a build pod)
 <blockquote>
 Click the "Actions" button in the top right and then select "Delete"
 </blockquote>
-<p><img src="{{ site.baseurl }}/www/3.1/default/screenshots/ose-lab-replicationrecovery-deletepod.png" width="400"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-podaction.png" width="900"><br/>
 
 <blockquote>
-Quick switch back to the Overview
+Now click the "Delete" button in the popup to confirm the pod deletion
+</blockquote>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-deletepod.png" width="900"><br/>
+
+<blockquote>
+Quickly switch back to the Overview
 </blockquote>
 
-If you're fast enough you'll see the pod you deleted unfill a portion of the deployment circle, and then a new pod fill it back up.  You can browse the pods list again to see the old pod was deleted and a new pod with an age of "a few seconds" has been created to replace it.
+If you're fast enough you'll see the pod you deleted unfill a portion of the deployment circle, and then a new pod fill it back up.
 
-<p><img src="{{ site.baseurl }}/www/3.1/default/screenshots/ose-lab-replicationrecovery-podrecovery.png" width="600"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-poddelete.png" width="900"><br/>
+
+You can browse the pods list again to see the old pod was deleted and a new pod with an age of "a few seconds" has been created to replace it.
+
+<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-podrecovery.png" width="900"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -154,11 +163,11 @@ In the tab bar for this pod, click on "Terminal"
 <blockquote>
 Click inside the terminal view and type $ pkill -9 node
 </blockquote>
-<p><img src="{{ site.baseurl }}/www/3.1/default/screenshots/ose-lab-replicationrecovery-terminal.png" width="400"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-terminal.png" width="900"><br/>
 
 This is going to kill the node.js web server and kick you off the container.
 
-<p><img src="{{ site.baseurl }}/www/3.1/default/screenshots/ose-lab-replicationrecovery-terminalkick.png" width="400"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-terminalkick.png" width="900"><br/>
 
 <blockquote>
 Click the refresh button (on the terminal) and do that a couple more times
@@ -168,7 +177,7 @@ Click the refresh button (on the terminal) and do that a couple more times
 Go back to the pods list
 </blockquote>
 
-<p><img src="{{ site.baseurl }}/www/3.1/default/screenshots/ose-lab-replicationrecovery-backoff.png" width="500"/></p>
+<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-backoff.png" width="900"><br/>
 
 The container died multiple times so quickly that OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn't waste resources trying to restart containers that are continuously crashing.
 

@@ -5,8 +5,6 @@ workshop_weight: 11
 layout: lab
 ---
 
-:imagesdir: /workshops/openshift_101_dcmetromap/images
-
 # Welcome to OpenShift!
 This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.  If you are already familiar with the basics of OpenShift you can skip this lab - after making sure you can login.
 
