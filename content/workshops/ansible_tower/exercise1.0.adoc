@@ -27,11 +27,19 @@ simply need to do one or two things quickly and often, to many remote nodes.
 Define your inventory.  Inventories are crucial to Ansible as they define remote machines on which you wish to run
 commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`.  Then, add the appropriate definitions for the node that will function as a web node.
 
+====
+[NOTE]
+The "workshopname", in the example below, will be provided to you by your instructor.  The "#" should be replaced by your student number.
+
+For example, a recent workshop's first student used:
+*reston.node.1.redhatgov.io*
+====
+
 .hosts (example)
 [source,bash]
 ----
 [web]
-node-1 ansible_host=workshopname.0.redhatgov.io
+node-1 ansible_host=workshopname.node.#.redhatgov.io
 ----
 
 === Step 1:
