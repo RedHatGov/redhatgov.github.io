@@ -1,0 +1,48 @@
+---
+title: "Exercise 1.0 - Install Docker"
+workshops: containers_101
+workshop_weight: 20
+layout: lab
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/containers_101/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+= Exercise 1.0 - Install Docker
+
+== Install Docker
+
+.Install Docker
+[source, bash]
+----
+$ sudo -i
+# yum install -y docker
+----
+
+=== Start Docker
+
+To start the docker binary and have it managed by link:https://fedoramagazine.org/what-is-an-init-system/[`systemd`]
+we first need to enable it and tell systemd that we want it to run a boot time.
+Then to start the docker daemon right away we use the start command.
+
+[source, bash]
+----
+systemctl enable docker
+----
+
+[source, bash]
+----
+systemctl start docker
+----
+
+[source, bash]
+----
+systemctl status docker
+----
+
+Once docker starts successfully you should see a similar output as below.
+
+image::systemctl-status.png[caption="Figure 1: ", title="systemctl status docker", 330, 600]

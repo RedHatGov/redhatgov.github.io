@@ -1,0 +1,44 @@
+---
+title: "Setup"
+workshops: containers_101
+workshop_weight: 10
+layout: lab
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/containers_101/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+= Setup
+
+image::container-lab.001.png['Red Hat']
+
+Today's workshop infrastructure is being run in Amazon EC2.
+Each student will have one instances to use.
+Each of you should have received an email.  It has the following information on it.
+
+1. Web based ssh access URL for your EC2 instances.
+
+[source, bash]
+----
+workshopname.<student#>.redhatgov.io:8888/wetty/ssh/ec2-user
+----
+
+Where `<student#>` is the number that has been assigned to you by the instructor.
+
+If you didn't get one of these emails, let us know so we can give you the information about your lab environment.
+
+
+
+
+
+{{< alert warning >}}
+Be sure you can log in to your ec2 instance.  If you can't log in start shouting, loudly, and waving your hands!
+{{< /alert >}}
+
+End Result
+
+At this point, everyone should have logged into your node.  If you haven't, let us know so we can get you fixed up.
+
