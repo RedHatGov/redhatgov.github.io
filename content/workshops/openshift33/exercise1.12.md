@@ -5,7 +5,8 @@ workshop_weight: 220
 layout: lab
 ---
 
-### Application templates
+# Application templates
+
 Running individual commands can be tedious and error prone for building out
 an application. Fortunately for you, all of this configuration can be put together
 into a single *Template* which can then be processed to create a full set of
@@ -29,18 +30,19 @@ you are probably hating us now for having you go through all of that work when
 you could have issued a single command! Just remember that it is important for
 you to understand how to create, deploy, and wire resources together.
 
-<blockquote> In order
-for the magic to happen, first create a new project and add the template to the
-project:</blockquote>
+> In order for the magic to happen, first create a new project and add the template to the project:
 
 ```bash
 oc new-project userX-template
-oc create -f https://raw.githubusercontent.com/gshipley/openshift3mlbparks/master/mlbparks-template-eap.json
+```
+
+```bash
+oc create -f https://raw.githubusercontent.com/redhatgov/openshift3mlbparks/master/mlbparks-template-eap.json
 ```
 
 Now we have access to the application template in our project.  As a side note, administrators have the capability to add templates to the general *openshift* project which will in turn provide an application template to any user on the system.
 
-<blockquote>Are you ready for the magic command?  Here it is:</blockquote>
+> Are you ready for the magic command?  Here it is:
 
 ```bash
 oc new-app mlbparks-eap
@@ -53,7 +55,7 @@ You will see the following output:
      With parameters:
       APPLICATION_NAME=mlbparks
       APPLICATION_DOMAIN=
-      SOURCE_REPOSITORY_URL=https://github.com/gshipley/openshift3mlbparks
+      SOURCE_REPOSITORY_URL=https://github.com/redhatgov/openshift3mlbparks
       SOURCE_REPOSITORY_REF=master
       CONTEXT_DIR=
       HORNETQ_QUEUES=
@@ -87,8 +89,6 @@ For example, a template could define a large set of resources that make up a
 You could deploy the entire set of resources with one command, and then hack on
 them to develop new features, microservices, fix bugs, and more.
 
-<blockquote>As a final exercise, look at the template that was used to create the resources for our *mlbparks* application.</blockquote>
+> As a final exercise, look at the template that was used to create the resources for our *mlbparks* application.
 
-```bash
-https://raw.githubusercontent.com/gshipley/openshift3mlbparks/master/mlbparks-template-eap.json
-```
+<https://raw.githubusercontent.com/redhatgov/openshift3mlbparks/master/mlbparks-template-eap.json>

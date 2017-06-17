@@ -5,19 +5,19 @@ workshop_weight: 10
 layout: lab
 ---
 
-### If we provided you a laptop or cloud environment
+# If we provided you a laptop or cloud environment
 
-{{< alert warning >}}  We already set all this up for you — feel free to skip everything below! {{< /alert >}}
+<p>{{< alert warning >}}  We already set all this up for you — feel free to skip everything below! {{< /alert >}}</p>
 
-### Install `oc`
+# Install `oc`
 
 Click [here][1] for instructions on how to install the OpenShift Container Platform CLI.
 
-### Install `git`
+# Install `git`
 
 Click [here][2] for instructions on how to install Git on your workstation.
 
-### Create GitHub account
+# Create GitHub account
 
 Click [here][3] for instructions on how to setup an account.
 

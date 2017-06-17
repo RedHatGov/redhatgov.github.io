@@ -5,7 +5,7 @@ workshop_weight: 200
 layout: lab
 ---
 
-### Background: Source-to-Image (S2I)
+# Background: Source-to-Image (S2I)
 
 In lab four we learned how to deploy a pre-existing Docker image from a Docker
 registry. Now we will expand on that a bit by learning how OpenShift builds a
@@ -40,7 +40,7 @@ For a current list of supported runtimes, you can check out the [OpenShift
 Technologies](https://www.openshift.com/container-platform/features.html#technologies) page.
 
 
-### Creating a JBoss EAP application
+# Creating a JBoss EAP application
 
 The sample application that we will be deploying as part of this exercise is
 called `mlbparks`.  This application is a Java EE-based application that
@@ -48,9 +48,9 @@ performs 2D geo-spatial queries against a MongoDB database to locate and map all
 Major League Baseball stadiums in the United States. That was just a fancy way
 of saying that we are going to deploy a map of baseball stadiums.
 
-<blockquote>The first thing you need to do is create a new project called `userXX-mlbparks`: </blockquote>
+> The first thing you need to do is create a new project called `userXX-mlbparks`:
 
-**Note:** Remember to replace userXX-mlbparks with your correct user number.
+<p>{{< alert info >}} Remember to replace userXX-mlbparks with your correct user number. {{< /alert >}}</p>
 
 ```bash
 oc new-project userXX-mlbparks
@@ -62,7 +62,7 @@ You should see the following output:
 Now using project "mlbparks" on server "[URI]".
 ```
 
-### Fork application code on GitHub
+# Fork application code on GitHub
 
 OpenShift can work with Git repositories on GitHub. You can even register
 webhooks to initiate OpenShift builds triggered by any update to the application
@@ -70,7 +70,7 @@ code on GitHub.
 
 The repository that we are going to fork is located at the following URL:
 
-[https://github.com/RedHatGov/openshift3mlbparks](https://github.com/RedHatGov/openshift3mlbparks "https://github.com/RedHatGov/openshift3mlbparks")
+[https://github.com/redhatgov/openshift3mlbparks](https://github.com/redhatgov/openshift3mlbparks "https://github.com/redhatgov/openshift3mlbparks")
 
 Go ahead and fork the `mlbparks` repository into your own GitHub account. Later
 in the lab, we want you to make a code change and then rebuild your application.
@@ -78,12 +78,12 @@ If you are familiar with Java EE applications, you will notice that there is
 nothing special about our application - it is a standard, plain-old JEE
 application.
 
-**Note:** If you are not familiar with how to fork applications on GitHub, or if
+<p>{{< alert info >}} If you are not familiar with how to fork applications on GitHub, or if
 you don't have a GitHub account, please raise your hand and let your instructor
-know.  They can walk you through the process.
+know.  They can walk you through the process. {{< /alert >}}</p>
 
 
-### Combine the code with the Docker image on OpenShift
+# Combine the code with the Docker image on OpenShift
 
 While the `new-app` command makes it very easy to get OpenShift to build code
 from a GitHub repository into a Docker image, we can also use the web console to
@@ -108,17 +108,16 @@ the Git repository URL, enter:
 https://github.com/YOURUSER/openshift3mlbparks.git
 ```
 
-**Note:** Ensure that you use your repository URL if you want to see S2I and
-webhooks in action later.
+<p>{{< alert info >}} Ensure that you use your repository URL if you want to see S2I and
+webhooks in action later. {{< /alert >}}</p>
 
-**Note:** Make sure that you change `YOURUSER` to whatever your GitHub ID is
-(for example, joecoder22).
+<p>{{< alert info >}} Make sure that you change `YOURUSER` to whatever your GitHub ID is
+(for example, joecoder22). {{< /alert >}}</p>
 
-**Note:** All of these runtimes shown are made available via *Templates*, which
-will be discussed in a later lab.
+<p>{{< alert info >}} All of these runtimes shown are made available via *Templates*, which
+will be discussed in a later lab. {{< /alert >}}</p>
 
-You can then hit the button labeled *"Create"*. Then click *Continue to
-overview*. You will see this in the web console:
+You can then hit the button labeled *"Create"*. Then click *Continue to overview*. You will see this in the web console:
 
 ```bash
 Build openshift3mlbparks #1 is running. A new deployment will be created
@@ -151,14 +150,12 @@ oc build-logs openshift3mlbparks-1
 
 After the build has completed and successfully:
 
-* The S2I process will push the resulting Docker image to the internal OpenShift registry
-* The *DeploymentConfiguration* (DC) will detect that the image has changed, and this
-  will cause a new deployment to happen.
-* A *ReplicationController* (RC) will be spawned for this new deployment.
-* The RC will detect no *Pods* are running and will cause one to be deployed, as
-    our default replica count is just 1.
+*   The S2I process will push the resulting Docker image to the internal OpenShift registry.
+*   The *DeploymentConfiguration (DC)* will detect that the image has changed, and this will cause a new deployment to happen.
+*   A *ReplicationController (RC)* will be spawned for this new deployment.
+*   The RC will detect no *Pods* are running and will cause one to be deployed, as our default replica count is just 1.
 
-In the end, when issuing the `oc get pods` command, you will see that the build Pod
+In the end, when issuing the **oc get pods** command, you will see that the build Pod
 has finished (exited) and that an application *Pod* is in a ready and running state:
 
 ```bash
