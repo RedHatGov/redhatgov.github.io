@@ -5,40 +5,128 @@ workshop_weight: 14
 layout: lab
 ---
 
-# Welcome to Red Hat OpenStack Platform (RHOSP)!
-This lab provides a quick tour of the Horizon dashboard to help you get familiar with the user interface.  If you are already familiar with the basics of Horizon simply ensure you can login and have access to your student project.
+# Security Groups in OpenStack
 
-# Accessing Horizon
-RHOSP provides a web dashboard that allows you to perform various tasks via a web browser. Let's get started by logging into Horizon and checking the status of the platform.
+A security group is a named collection of network access rules that are use to limit the types of traffic that have access to instances. When you launch an instance, you can assign one or more security groups to it. If you do not create security groups, new instances are automatically assigned to the default security group, unless you explicitly specify a different security group.
 
-In later labs we will explore accomplishing some of the same tasks using the OpenStack CLI.
+The associated rules in each security group control the traffic to instances in the group. Any incoming traffic that is not matched by a rule is denied access by default. You can add rules to or remove rules from a security group, and you can modify rules for the default and any other security group.
 
-## Let's Login
-> Navigate to the URI provided by your instructor and login with the user/password provided. Ask if not sure
+You can modify the rules in a security group to allow access to instances through different ports and protocols. For example, you can modify rules to allow access to instances through SSH, to ping instances, or to allow UDP traffic; for example, for a DNS server running on an instance. You specify the following parameters for rules:
+
+**Source of traffic** - Enable traffic to instances from either IP addresses inside the cloud from other group members or from all IP addresses.  
+**Protocol** - Choose TCP for SSH, ICMP for pings, or UDP.  
+**Destination port on virtual machine** - Define a port range. To open a single port only, enter the same value twice. ICMP does not support ports; instead, you enter values to define the codes and types of ICMP traffic to be allowed.  
+**Rules** - automatically enforced as soon as you create or modify them.
 
 {{% alert info %}}
-Remember that you were assigned a number at the beginning of the workshop. Your user name will be student + your number. In the screenshot below, see that this is student1 logging in.
+You cannot delete the default security group for a project. Also, you cannot delete a security group that is assigned to a running instance.
 {{% /alert %}}
 
-{{< figure src="../images/lab1-horizon-login-screen.png" title="Lab 1 Figure 1: RHOSP Horizon Login Screen" >}}
+# Let's Look at the Default Security Group
 
-> Once logged in you should see your student project overview.
+> Navigate to Network -> Security Groups using the second level navigation tabs  
 
-{{< figure src="../images/lab1-horizon-project-overview.png" title="Lab 1 Figure 2: Horizon - Project Overview" >}}
+{{< figure src="../images/lab4-security-groups-1.png" title="Lab 4 Figure 1: Security Group Listing" >}}
 
-## So this is what an empty project looks like
+> Click **Manage Rules** on the right hand side of the row for default security group  
 
-The first screen you are taken to is the project overview. Here you can see very quickly your project usage measured against the assigned project quotas.
+{{< figure src="../images/lab4-security-groups-2.png" title="Lab 4 Figure 2: Viewing Rules for default Security Group" >}}
 
-As an example, you can see here that even though this is a brand new project, we are already using 1 of the 10 secruity groups we are allowed.
+## Now Let's Add Two Rules to the default Security Group for ICMP and SSH
 
-## Navigation within Horizon
+> On the **Manage Rules** screen for default security group, click **Add Rule**  
+> Select **All ICMP** for **Rule**  
+> Leave **Direction** set to **Ingress**  
+> Leave **Remote** set to **CIDR**
+> Enter **192.168.0.0/23** for **CIDR** (this is our external network)  
+> Click **Add**
 
-Notice at the top of the screen there are two levels of navigation.
+{{< figure src="../images/lab4-security-groups-3.png" title="Lab 4 Figure 3: Add ICMP Rule to default Security Group" >}}
 
-The very top level is for navigating between overall functions like project, identity and (if you have priviledge) admin. If you are a member of multiple projects, there is a project selector in the upper right. Lastly in the top navigation, is your user profile and sign out drop down.
+{{% alert success %}}
+You should see a green box appear in the upper right corner of the screen that says "Success: Successfully added rule: ALLOW IPv4 icmp from 192.168.0.0/23"
 
-The second level of navigation is for working within the current project. Using this secondary navigation, we can work with compute, storage, network and access resources.
+If you did not see a success message, let the intstructor know now
+{{% /alert %}}
+
+> On the **Manage Rules** screen for default security group, click **Add Rule**  
+> Select **SSH** for **Rule**  
+> Leave **Remote** set to **CIDR**
+> Enter **192.168.0.0/23** for **CIDR** (this is our external network)  
+> Click **Add**
+
+{{< figure src="../images/lab4-security-groups-4.png" title="Lab 4 Figure 4: Add SSH Rule to default Security Group" >}}
+
+{{% alert success %}}
+You should see a green box appear in the upper right corner of the screen that says "Success: Successfully added rule: ALLOW IPv4 22/tcp from 192.168.0.0/23"
+
+If you did not see a success message, let the intstructor know now
+{{% /alert %}}
+
+If we now look at the Manage Rules screen for the default security group, we will see our two new rules for ICMP and SSH ingress traffic allowed only from 192.168.0.0/23 CIDR.
+
+{{< figure src="../images/lab4-security-groups-5.png" title="Lab 4 Figure 5: Manage Rules Screen Showing Two New Rules for ICMP and SSH in the default Security Group" >}}
+
+# Now We will Create a New Security Group for Web Servers
+
+> Navigate to Network -> Security Groups using the second level navigation tabs  
+
+{{< figure src="../images/lab4-security-groups-1.png" title="Lab 4 Figure 1: Security Group Listing" >}}
+
+> Click **Create Security Group** next to the filter search box  
+> Enter **web-server** for the **Name**  
+> **Description** is optional, but as you can see below, I used it to describe the purpose of this security group  
+> Click **Create Security Group**
+
+{{< figure src="../images/lab4-security-groups-6.png" title="Lab 4 Figure 6: Create a New Security Group" >}}
+
+{{% alert success %}}
+You should see a green box appear in the upper right corner of the screen that says "Success: Successfully created security group: web-server"
+
+If you did not see a success message, let the intstructor know now
+{{% /alert %}}
+
+{{< figure src="../images/lab4-security-groups-7.png" title="Lab 4 Figure 7: Security Group Listing Showing New web-server Group" >}}
+
+## Now Let's Add Two Rules to the web-server Security Group for HTTP and HTTPS
+
+> Click **Manage Rules** in the row for the web-server security group  
+> click **Add Rule**  
+> Select **HTTP** for **Rule**  
+> Leave **Remote** set to **CIDR**
+> Leave **0.0.0.0/0** for **CIDR**  
+> Click **Add**
+
+{{< figure src="../images/lab4-security-groups-8.png" title="Lab 4 Figure 8: Add HTTP Rule to web-server Security Group" >}}
+
+{{% alert success %}}
+You should see a green box appear in the upper right corner of the screen that says "Success: Successfully added rule: ALLOW IPv4 80/tcp from 0.0.0.0/0"
+
+If you did not see a success message, let the intstructor know now
+{{% /alert %}}
+
+> On the **Manage Rules** screen for web-server security group, click **Add Rule**  
+> Select **HTTPS** for **Rule**  
+> Leave **Remote** set to **CIDR**
+> Enter **0.0.0.0/0** for **CIDR**    
+> Click **Add**
+
+{{< figure src="../images/lab4-security-groups-9.png" title="Lab 4 Figure 9: Add HTTPS Rule to web-server Security Group" >}}
+
+{{% alert success %}}
+You should see a green box appear in the upper right corner of the screen that says "Success: Successfully added rule: ALLOW IPv4 443/tcp from 0.0.0.0/0"
+
+If you did not see a success message, let the intstructor know now
+{{% /alert %}}
+
+If we now look at the Manage Rules screen for the web-server security group, we will see our two new rules for HTTP and HTTPS ingress traffic allowed from all sources.
+
+{{< figure src="../images/lab4-security-groups-10.png" title="Lab 4 Figure 10: Manage Rules Screen Showing Two New Rules for HTTP and HTTPS in the web-server Security Group" >}}
 
 # Summary
-You should now be ready to get hands-on with our workshop labs.
+
+We have now learned how to create and modify security groups in our project. We can utilize these to build up firewall sets for our resources.
+
+Note that security groups can be combined together on instances to build up a set of rules depening on the instance role in your applications.
+
+In our next lab, we will start working with images.

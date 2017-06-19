@@ -11,7 +11,11 @@ This workshop on Red Hat OpenStack Platform is designed as an introduction for s
 
 # Workshop Login Info
 
-Each student will be assigned a number at the beginning of the workshop. This number will be used throughout the labs. Anywhere you see studentX, substitute the number you were assigned for the X.
+Each student will be assigned a number at the beginning of the workshop. This number will be used throughout the labs.
+
+{{% alert warning %}}
+Anywhere you see studentX, substitute the number you were assigned at the start of the workshop for the X.
+{{% /alert %}}
 
 ## Horizon
 
@@ -25,3 +29,7 @@ Password: Instructor will give out at beginning
 # Labs
 
 {{< labs rhosp_101 >}}
+
+{{% alert info %}}
+These labs have been tailored for Red Hat OpenStack Platform 11
+{{% /alert %}}

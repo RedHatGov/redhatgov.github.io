@@ -5,40 +5,59 @@ workshop_weight: 13
 layout: lab
 ---
 
-# Welcome to Red Hat OpenStack Platform (RHOSP)!
-This lab provides a quick tour of the Horizon dashboard to help you get familiar with the user interface.  If you are already familiar with the basics of Horizon simply ensure you can login and have access to your student project.
+# Floating IP vs. Private IP Addresses
 
-# Accessing Horizon
-RHOSP provides a web dashboard that allows you to perform various tasks via a web browser. Let's get started by logging into Horizon and checking the status of the platform.
+## Private IP Address
 
-In later labs we will explore accomplishing some of the same tasks using the OpenStack CLI.
+A private IP address is assigned to an instance's network-interface by the DHCP server. The address is visible from within the instance by using a command like “ip a”. The address is typically part of a private network and is used for communication between instances in the same broadcast domain via virtual switch (L2 agent on each compute node). It can also be accessible from instances in other private networks via virtual router (L3 agent).
 
-## Let's Login
-> Navigate to the URI provided by your instructor and login with the user/password provided. Ask if not sure
+## Floating IP Address
+
+A floating IP address is a service provided by Neutron. It's not using any DHCP service or being set statically within the guest. As a matter of fact the guest's operating system has no idea that it was assigned a floating IP address. The delivery of packets to the interface with the assigned floating address is the responsibility of Neutron's L3 agent. Instances with an assigned floating IP address can be accessed from the public network by the floating IP.
+
+A floating IP address and a private IP address can be used at the same time on a single network-interface. The private IP address is likely to be used for accessing the instance by other instances in private networks while the floating IP address would be used for accessing the instance from public networks. How to configure floating IP range describes Floating IP range document.
 
 {{% alert info %}}
-Remember that you were assigned a number at the beginning of the workshop. Your user name will be student + your number. In the screenshot below, see that this is student1 logging in.
+A floating IP range was all ready created on the public-sub subnet for the public network in our workshop environment.
+
+The range is 192.168.1.70 to 192.168.1.199. Each student project has a quota of 10 Floating IP Addresses
 {{% /alert %}}
 
-{{< figure src="../images/lab1-horizon-login-screen.png" title="Lab 1 Figure 1: RHOSP Horizon Login Screen" >}}
+# Let's Go Allocate Some Floating IP Addresses
 
-> Once logged in you should see your student project overview.
+> Navigate to Network -> Floating IPs using the second level navigation tabs  
 
-{{< figure src="../images/lab1-horizon-project-overview.png" title="Lab 1 Figure 2: Horizon - Project Overview" >}}
+{{< figure src="../images/lab3-floating-ips-1.png" title="Lab 3 Figure 1: Floating IP Listing" >}}
 
-## So this is what an empty project looks like
+> Click **Allocate IP to Project** on the right hand side of the screen  
+> Make sure **public** is selected for **Pool**  
+> Click **Allocate IP**
 
-The first screen you are taken to is the project overview. Here you can see very quickly your project usage measured against the assigned project quotas.
+{{< figure src="../images/lab3-floating-ips-2.png" title="Lab 3 Figure 2: Allocate Floating IP to Project" >}}
 
-As an example, you can see here that even though this is a brand new project, we are already using 1 of the 10 secruity groups we are allowed.
+{{% alert success %}}
+You should see a green box appear in the upper right corner of the screen that says something similar to "Success: Allocated Floating IP 192.168.1.76."
 
-## Navigation within Horizon
+Note that you will get a different IP from the pool each time you go through this process.
 
-Notice at the top of the screen there are two levels of navigation.
+If you did not get an IP allocated, let the intstructor know now
+{{% /alert %}}
 
-The very top level is for navigating between overall functions like project, identity and (if you have priviledge) admin. If you are a member of multiple projects, there is a project selector in the upper right. Lastly in the top navigation, is your user profile and sign out drop down.
+{{< figure src="../images/lab3-floating-ips-3.png" title="Lab 3 Figure 3: New Floating IP Allocated to Project" >}}
 
-The second level of navigation is for working within the current project. Using this secondary navigation, we can work with compute, storage, network and access resources.
+> Go through the allocation process 2 more times so that you have a total of 3 floating IPs allocated to your project
+
+{{< figure src="../images/lab3-floating-ips-4.png" title="Lab 3 Figure 4: Floating IP List Showing 3 Allocated to Project" >}}
 
 # Summary
-You should now be ready to get hands-on with our workshop labs.
+
+We have now learned how to allocate floating IP addresses to our project. We can now associate these to instances in our project which we will do in a later lab.
+
+In these labs, we are using Horizon to complete tasks. However, remember that there are three ways to interact with OpenStack.  
+- APIs  
+- CLI  
+- Horizon
+
+We could accomplish these same tasks via the other 2 methods as well. In fact in some cases, the CLI and APIs have more options available than Horizon.
+
+In our next lab, we will start working with security groups.

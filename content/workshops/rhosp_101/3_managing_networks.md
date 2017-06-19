@@ -59,7 +59,7 @@ Be aware that because these project networks are VXLAN tunnels, they can be any 
 {{< figure src="../images/lab2-neutron-create-network-3.png" title="Lab 2 Figure 4: Enter Neutron Subnet Details" >}}
 
 {{% alert success %}}
-You should see a green succes box in the upper right corner of the screen that says **Success: Created network "private-a".** Your network topology should now show 2 networks, public and private-a
+You should see a green success box in the upper right corner of the screen that says **Success: Created network "private-a".** Your network topology should now show 2 networks, public and private-a
 
 If this is not the case, let the instructor know now
 {{% /alert %}}
@@ -82,7 +82,7 @@ In order to allow this to happen, we need to create a Neutron router.
 {{< figure src="../images/lab2-neutron-create-router-1.png" title="Lab 2 Figure 6: Create Neutron Router" >}}
 
 {{% alert success %}}
-You should see a green succes box in the upper right corner of the screen that says **Success: Router router-public was successfully created.** Your network topology should now show 2 networks, public and private-a and 1 router connected to the public network.
+You should see a green success box in the upper right corner of the screen that says **Success: Router router-public was successfully created.** Your network topology should now show 2 networks, public and private-a and 1 router connected to the public network.
 
 If this is not the case, let the instructor know now
 {{% /alert %}}
@@ -104,7 +104,7 @@ If this is not the case, let the instructor know now
 
 
 {{% alert success %}}
-You should see a green succes box in the upper right corner of the screen that says **Success: Interface added 172.16.0.1**
+You should see a green success box in the upper right corner of the screen that says **Success: Interface added 172.16.0.1**
 
 You will be taken to router-public's overview screen.
 
