@@ -12,30 +12,7 @@ Currently no traffic is routed to them.
 - If you were to re-route traffic from the monolith’s /services/products API to the new catalog service’s /services/catalog endpoint, you would be missing the inventory data.
 - In this lab we will consider different options and architectures for integrating the microservices’ functionality into our app.
 
-{{< panel_group >}}
-{{% panel "Microservice Integration Pattern Architecture" %}}
-
-<img src="../img/lab3_arch1.png" width="1000" />
-
-{{% /panel %}}
-{{< /panel_group >}}
-
-# Example of Microservice Integration Patterns
-
-- This is very similar to our CoolStore retail application!
-- UI constructed from multiple microservices implemented across business boundaries
-- Typically runs in constrained environments like mobile
-- Real-world apps consist of 100s of services
-
-{{< panel_group >}}
-{{% panel "Microservice Integration Pattern Example" %}}
-
-<img src="../img/lab3_phone1.png" width="300" />
-
-{{% /panel %}}
-{{< /panel_group >}}
-
-## Microservice Integration Patterns Option 1: Client Aggregation
+> Option 1: Client Aggregation
 
 - Microservices implement functionality previously found in monoliths
 - Some microservices depend upon other microservices
@@ -49,16 +26,9 @@ Currently no traffic is routed to them.
   - Difficulty in later refactoring microservices - the client must change too
   - Client application code complexity
 
+<img src="../img/lab3_phone2.png" width="500" />
 
-{{< panel_group >}}
-{{% panel "Option 1: Client Aggregation" %}}
-
-<img src="../img/lab3_phone2.png" width="700" />
-
-{{% /panel %}}
-{{< /panel_group >}}
-
-## Microservice Integration Patterns Option 2: Chaining
+> Option 2: Chaining
 
 - Chaining means that one microservice calls another, which calls another, etc.
 - A complete chain is typically not desirable or necessary, but short chains are OK
@@ -70,15 +40,9 @@ Currently no traffic is routed to them.
   - Complex “stack traces” when things go wrong (tracing libraries a must)
   - Exposes internal structure of app logic (the first microservice in the chain would be difficult to change)
 
-  {{< panel_group >}}
-  {{% panel "Option 2: Chaining" %}}
-
   <img src="../img/lab3_phone3.png" width="700" />
 
-  {{% /panel %}}
-  {{< /panel_group >}}
-
-## Microservice Integration Patterns Option 3: API Gateway
+> Option 3: API Gateway
 
 - The API Gateway pattern:
   - Keeps business logic on server side
@@ -90,44 +54,38 @@ Currently no traffic is routed to them.
 - Drawbacks
   - Possible bottleneck depending on difficulty of adding new services
 
-  {{< panel_group >}}
-  {{% panel "Option 3: API Gateway" %}}
-
-  <img src="../img/lab3_phone4.png" width="700" />
-
-  {{% /panel %}}
-  {{< /panel_group >}}
-  {{< panel_group >}}
-  {{% panel "API Gateway Example" %}}
-
-  <img src="../img/lab3_api_gtw_arch1.png" width="1000" />
-
-  {{% /panel %}}
-  {{< /panel_group >}}
+  <img src="../img/lab3_phone4.png" width="500" />
 
 # Step 1
 
 - In this lab, the previously developed microservices will be placed behind a gateway service
 - The client application will then call the gateway service to retrieve its data
 - This will “strangle” the monolith by replacing its catalog/inventory services with new microservices.
-- First, deploy the API gateway:
+
+> First, deploy the API gateway:
 
 ```
 $ cd ~/coolstore
+```
+```
 $ git clone -b app-partner https://github.com/epe105/gateway
+```
+```
 $ cd gateway
+```
+```
 $ oc project coolstore-<USERNAME>
+```
+```
 $ mvn clean fabric8:deploy -Popenshift -DskipTests
-
 ```
 
 # Step 2
 
 - The Coolstore Gateway microservice is a Spring Boot application that implements its logic using an Apache Camel route.
-- Take a look at the code for the Gateway:
-- In your favorite text editor, open src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java
-- Or in your browser:
-  - [https://github.com/modernize-legacy-apps/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java](https://github.com/modernize-legacy-apps/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java)
+
+> Take a look at the code for the Gateway in your browser :
+   [https://github.com/epe105/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java](https://github.com/modernize-legacy-apps/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java)
 
 ```
 restConfiguration()
@@ -208,18 +166,18 @@ public Exchange aggregate(Exchange original, Exchange resource) {
 - In this case, we already have a route that sends all traffic destined for our monolith to the monolith deployment.
 - We want to setup a route such that when the monolith’s GUI calls /services/products, it is re-routed to our new CoolStore gateway microservice, thus completing the partial strangulation of the Inventory and Product Catalog features of our app.  
 
-- Navigate to Applications → Routes to list the current routes.
-- Notice the www route is the primary route for our monolith:
+> Navigate to Applications → Routes to list the current routes.  
+ Notice the www route is the primary route for our monolith:
 
   <img src="../img/lab3_route1.png" width="1000" />
 
 
 # Step 4
 
-- Click Create Route to begin creating a new route with the following values:
+>- Click Create Route to begin creating a new route with the following values:
   - Name: gateway-redirect
-  - Hostname: The full hostname of the existing route as seen above (without the http://). For example,
-www-coolstore-user21.cloudapps.testworkshop1.openshift.opentlc.com
+  - Hostname: The full hostname of the existing route as seen above (without the http://). For example:
+      - www-coolstore-user1.apps.ocp.naps-redhat.com
   - Path: /services/products
   - Service: gateway
   - Leave other values as-is (see next page for complete example)
@@ -228,7 +186,7 @@ www-coolstore-user21.cloudapps.testworkshop1.openshift.opentlc.com
 {{< panel_group >}}
 {{% panel "Create Route" %}}
 
-<img src="../img/lab3_create_route1.png" width="1000" />
+<img src="../img/lab3_create_route.png" width="1000" />
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -249,9 +207,13 @@ www-coolstore-user21.cloudapps.testworkshop1.openshift.opentlc.com
 
 - Let’s pretend that there is a lengthy and cumbersome process for getting products and inventories into and out of the backend system.
 - We have a high priority task to remove the Red Hat Fedoras from the product list due to a manufacturing defect.
-- Let’s filter the product out of the result using our gateway. Open the gateway source code file using your preferred text editor (vi, gedit, etc) and un-comment the lines that implement a filter based on product ID (around line 80).
-- The highlighted code shows you the predicate used for the filter
-  - ~/coolstore/gateway/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.jav
+- Let’s filter the product out of the result using our gateway.
+
+>Open the gateway source code file and un-comment the lines that implement a filter based on product ID (around line 80). The highlighted code shows you the predicate used for the filter
+
+```
+$ vi ~/coolstore/gateway/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java
+```
 
 ```
 //
@@ -266,14 +228,24 @@ www-coolstore-user21.cloudapps.testworkshop1.openshift.opentlc.com
 //                })
 ```
 
+>Save your changes and quit
+
+```
+$ shift + Z
+$ shift + Z
+```
 # Step 7
 
 - Re-deploy the modified code using the same procedure as before:
 
 ```
 $ cd ~/coolstore/gateway
+```
+```
 $ mvn clean fabric8:deploy -Popenshift -DskipTests
-% oc logs -f dc/gateway
+```
+```
+$ oc logs -f dc/gateway
 ...
 --> Success       # --> wait for it!
 ```

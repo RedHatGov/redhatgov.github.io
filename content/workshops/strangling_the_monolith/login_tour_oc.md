@@ -9,6 +9,12 @@ layout: lab
 # Welcome to OpenShift!
 This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.  If you are already familiar with the basics of OpenShift you can skip this lab - after making sure you can login.
 
+# Guacamole Environment Links  
+
+Your instructor will assign you an OpenShift environment and login.  
+
+Please click "Return to Workshop" above to view the OpenShift Environment Links.
+
 # Key Terms
 We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with.  And you'll learn more terms along the way, but these are the basics to get you started.
 

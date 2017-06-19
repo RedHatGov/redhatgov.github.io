@@ -5,10 +5,18 @@ workshop_weight: 20
 layout: lab
 ---
 
+# Introduction to Guacamole CLI
 
 This lab provides a quick tour of the Guacamole CLI server to help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
 
 If you are already familiar with the basics of Guacamole you can skip this lab — after making sure you can login.
+
+# Guacamole Environment Links  
+
+Your instructor will assign you a Guacamole environment and login.  
+
+Please click "Return to Workshop" above to view the Guacamole Environment Links.
+
 
 # Accessing Guacamole
 
@@ -22,7 +30,7 @@ Navigate to the Guacamole `${URI}` and login with the your user/password.
 Both the `${URI}` and credentials should have been provided to you by your instructor.
 {{% /alert %}}
 
-After logging in, you should see`term`.
+After logging in, you should see `term`.
 
 <img src="../img/guac_welc.png" width="1000" />
 
