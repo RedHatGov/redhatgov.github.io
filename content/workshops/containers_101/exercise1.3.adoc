@@ -32,7 +32,7 @@ First get the Dockerfile from GitHub using curl.
 .Get file
 [source, bash]
 ----
-curl -s -o Dockerfile https://raw.githubusercontent.com/jason-callaway/openstackdc/master/Dockerfile_fedora-postgres
+curl -s -o Dockerfile https://raw.githubusercontent.com/RedHatGov/Dockerfile_fedora-postgres/master/Dockerfile_fedora-postgres
 ----
 
 

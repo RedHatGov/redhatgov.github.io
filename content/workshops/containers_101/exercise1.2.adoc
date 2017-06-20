@@ -36,7 +36,7 @@ Launch a container and explore inside interactively.
 docker run --rm -it registry.access.redhat.com/rhel7/rhel /bin/bash
 ----
 
-Commands to try;
+Commands to try:
 
 [source, bash]
 ----
@@ -172,7 +172,7 @@ Now create several files with a script in the host `/opt/rhel_data` directory.
 for i in {1..10}; do touch /opt/rhel_data/file${i}; done
 ----
 
-View the newly created files in '/opt/rhel_data'
+View the newly created files in `/opt/rhel_data`
 
 [source, bash]
 ----
