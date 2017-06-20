@@ -18,7 +18,7 @@ A floating IP address is a service provided by Neutron. It's not using any DHCP 
 A floating IP address and a private IP address can be used at the same time on a single network-interface. The private IP address is likely to be used for accessing the instance by other instances in private networks while the floating IP address would be used for accessing the instance from public networks. How to configure floating IP range describes Floating IP range document.
 
 {{% alert info %}}
-A floating IP range was all ready created on the public-sub subnet for the public network in our workshop environment.
+A floating IP range was already created on the public-sub subnet for the public network in our workshop environment.
 
 The range is 192.168.1.70 to 192.168.1.199. Each student project has a quota of 10 Floating IP Addresses
 {{% /alert %}}

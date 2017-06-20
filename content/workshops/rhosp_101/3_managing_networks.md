@@ -61,6 +61,8 @@ Be aware that because these project networks are VXLAN tunnels, they can be any 
 {{% alert success %}}
 You should see a green success box in the upper right corner of the screen that says **Success: Created network "private-a".** Your network topology should now show 2 networks, public and private-a
 
+Note that the success and error messages in Horizon only show briefly and then they disappear.
+
 If this is not the case, let the instructor know now
 {{% /alert %}}
 
@@ -78,6 +80,10 @@ In order to allow this to happen, we need to create a Neutron router.
 > Enter **router-public** as the **Router Name**  
 > Leave **Admin State** equal to **UP**
 > Select **public** network for **External Network** and click **Create Router**
+
+{{% alert info %}}
+Note that you may need to scroll down to see the public network in the External Network drop down.
+{{% /alert %}}
 
 {{< figure src="../images/lab2-neutron-create-router-1.png" title="Lab 2 Figure 6: Create Neutron Router" >}}
 
