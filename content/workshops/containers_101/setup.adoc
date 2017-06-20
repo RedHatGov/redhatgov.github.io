@@ -38,7 +38,7 @@ If you didn't get one of these emails, let us know so we can give you the inform
 Be sure you can log in to your ec2 instance.  If you can't log in start shouting, loudly, and waving your hands!
 {{< /alert >}}
 
-= End Result
+== End Result
 
 At this point, everyone should have logged into your node.  If you haven't, let us know so we can get you fixed up.
 
