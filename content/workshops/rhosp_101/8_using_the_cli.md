@@ -8,6 +8,7 @@ layout: lab
 # Okay. UIs Are Cool and All, But Can't I Just Use the CLI?
 
 Absolutely! There are 3 ways to interact with OpenStack.  
+
 - APIs  
 - CLIs  
 - Horizon
