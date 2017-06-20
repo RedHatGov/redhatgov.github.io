@@ -23,7 +23,7 @@ You can read more about the OpenStack CLIs at:
 https://docs.openstack.org/user-guide/common/cli-overview.html
 {{% /alert %}}
 
-## First, We Need A System with the CLIs Installed
+## First, We Need Access to a System with the CLIs Installed
 
 {{% alert warning %}}
 In order to complete this lab, you will need an SSH client.
@@ -172,4 +172,6 @@ $ watch nova list
 
 We have now gone through some of the same excercises that we accomplished in Horizon, using strictly the CLIs. The flexibility with which we can interact with OpenStack is a tremendous benefit.
 
-OpenStack have come a long way in the last few years and is making significant entry into enterprise data centers.
+What if we could now take all of these manual steps we've gone through and put them into a template that does them all for us, the same way, every time?
+
+We can do this with Heat. That will be our next lab.

@@ -1,7 +1,7 @@
 ---
 title: Fin.
 workshops: rhosp_101
-workshop_weight: 18
+workshop_weight: 19
 layout: lab
 ---
 
