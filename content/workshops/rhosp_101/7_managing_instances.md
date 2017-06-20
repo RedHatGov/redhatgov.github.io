@@ -46,41 +46,34 @@ Instances are virtual machines that run inside the OpenStack cloud. You can laun
 
 {{< figure src="../images/lab6-instances-5.png" title="Lab 6 Figure 5: Networks for New Instance" >}}
 
-> Enter **studentX-instance** for **Name**  
-> Leave **Availability** set to **nova**  
-> Enter **2** for **Count**  
+> Leave the **default** security group allocated  
 > Click **Next**
 
 {{< figure src="../images/lab6-instances-6.png" title="Lab 6 Figure 6: Security Groups for New Instance" >}}
 
-> Enter **studentX-instance** for **Name**  
-> Leave **Availability** set to **nova**  
-> Enter **2** for **Count**  
-> Click **Next**
+We need a key pair created to use when we provision instances. The public key is passed to the instance and put in the authorized_keys file on the login user account.
+
+> Click **Create Key Pair**  
 
 {{< figure src="../images/lab6-instances-7.png" title="Lab 6 Figure 7: Key Pair for New Instance" >}}
 
-> Enter **studentX-instance** for **Name**  
-> Leave **Availability** set to **nova**  
-> Enter **2** for **Count**  
-> Click **Next**
+> Enter **studentX** for **Key Pair Name**  
+> Click **Create Keypair**
 
-{{< figure src="../images/lab6-instances-8.png" title="Lab 6 Figure 8: Key Pair Created and Launching New Instance" >}}
+{{< figure src="../images/lab6-instances-8.png" title="Lab 6 Figure 8: Create New Key Pair" >}}
 
-> Leave **Architecture** empty  
-> Enter **1** for Minimum Disk (GB)  
-> Enter **512** for Minimum RAM (MB)
-> Click **Private** under **Visibility** (this image will only be available to your project)
-> Leave **Protected** set to **No**  
-> Click **Create Image**
+{{% alert warning %}}
+Note that when you create a key pair, it should get automatically downloaded. You should verify that you definitely have the pem file in your downloads.
 
-{{% alert info %}}
-You will first see the image file get uploaded via a progress bar on the create image dialog
+If you do not you can click the download button to get it.
 
-Then the image will begin processing to get uploaded to glance
+You need this key file in order to access instances later.
 {{% /alert %}}
 
-{{< figure src="../images/lab5-images-3.png" title="Lab 5 Figure 3: Details Continued for New cirros Image" >}}
+> You can ignore the rest of the option pages  
+> Click **Launch Instance**
+
+{{< figure src="../images/lab6-instances-9.png" title="Lab 6 Figure 9: Key Pair Created and Launching New Instance" >}}
 
 {{% alert success %}}
 You should see a green box appear in the upper right corner of the screen that says "Success: 2 instances launched."
@@ -88,12 +81,40 @@ You should see a green box appear in the upper right corner of the screen that s
 If you did not, let the intstructor know now
 {{% /alert %}}
 
-{{< figure src="../images/lab6-instances-9.png" title="Lab 6 Figure 9: New Instances Created and Active in Project" >}}
+{{% alert info %}}
+The instances will take a little while to become active.
+
+If for some reason they do not, let the instructor know
+{{% /alert %}}
+
+{{< figure src="../images/lab6-instances-10.png" title="Lab 6 Figure 10: New Instances Created and Active in Project" >}}
+
+# Now Let's Associate a Floating IP Address with one of our instances
+
+> Look all the way to the right in the row for your **studentX-instance-1** instance, Click the down arrow  
+> Click **Associate Floating IP**  
+> Select any one of your available floating IP addresses for **IP Address**  
+> Leave **Port to be Associated** as is
+> Click **Associate**
+
+{{< figure src="../images/lab6-instances-fip-1.png" title="Lab 6 Figure 11: Selecting Floating IP to Associate with Our Instance" >}}
+
+{{% alert success %}}
+You should see a green box appear in the upper right corner of the screen that says something similar to "Success: IP address 192.168.1.76 associated."
+
+If you did not, let the intstructor know now
+{{% /alert %}}
+
+{{< figure src="../images/lab6-instances-fip-2.png" title="Lab 6 Figure 12: Floating IP Address Associated with Our Instance" >}}
+
+{{< figure src="../images/lab6-instances-network-topology.png" title="Lab 6 Figure 13: Network Topology Showing Two New Instances" >}}
 
 # Summary
 
-We have now learned how to upload images to our project. We can now use these images in our project as a basis for launching instances.
+At this point, we now have two running instances in our project. These instances are based on the cirros image we uploaded earlier.
 
-Building images is beyond the scope of this workshop. There are many resources on this topic both officially from Red Hat and from OpenStack.org
+The instances have IP addresses on the private-a network we created and are using the default security group as a baseline firewall setup.
 
-In our next lab, we will start working with instances.
+One of our instances also has a Floating IP Address assigned and is routable on the 192.168.0.0/23 public network via both ICMP and SSH.
+
+In our next lab, we will use the CLI to go through some of the steps we have done in previous labs.
