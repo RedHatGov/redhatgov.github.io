@@ -172,4 +172,4 @@ $ watch nova list
 
 We have now gone through some of the same excercises that we accomplished in Horizon, using strictly the CLIs. The flexibility with which we can interact with OpenStack is a tremendous benefit.
 
-Next, we will walk through how our deployment with RHOSP-director works.
+OpenStack have come a long way in the last few years and is making significant entry into enterprise data centers.
