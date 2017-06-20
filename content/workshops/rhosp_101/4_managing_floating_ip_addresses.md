@@ -54,6 +54,7 @@ If you did not get an IP allocated, let the intstructor know now
 We have now learned how to allocate floating IP addresses to our project. We can now associate these to instances in our project which we will do in a later lab.
 
 In these labs, we are using Horizon to complete tasks. However, remember that there are three ways to interact with OpenStack.  
+
 - APIs  
 - CLI  
 - Horizon
