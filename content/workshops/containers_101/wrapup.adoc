@@ -1,0 +1,23 @@
+---
+title: "Wrapup"
+workshops: containers_101
+workshop_weight: 90
+layout: lab
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/containers_101/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+
+== Wrap Up, Q&A, and Free Style
+
+That wraps up what we have planned for today.
+
+What do you think? How can we help you understand Containers better?
+
+For more indepth overview and examples for working with containers and RHEL check out link:https://access.redhat.com/documentation/en/red-hat-enterprise-linux-atomic-host/7/single/getting-started-with-containers/[this link]
+
+Thank you for your time and participation!

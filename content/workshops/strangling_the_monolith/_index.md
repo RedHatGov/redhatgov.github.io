@@ -3,6 +3,7 @@ title: Strangling the Monolith Workshop
 menu:
   main:
     parent: workshops
+    pre: fa fa-pie-chart
 ---
 
 # Introduction
