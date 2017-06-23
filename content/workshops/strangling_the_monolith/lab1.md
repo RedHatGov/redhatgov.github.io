@@ -42,6 +42,12 @@ $ git clone -b app-partner https://github.com/epe105/monolith
 ```
 $ cd monolith
 ```
+{{% alert info %}}
+
+Please update ``<USERNAME>`` below with your assigned username
+
+{{% /alert %}}
+
 
 ```
 $ oc new-project coolstore-<USERNAME>
@@ -115,12 +121,18 @@ $ oc start-build coolstore --from-file deployments/ROOT.war --follow
 
 > Log into the database pod (with postgresql in the pod name) and inspect the values stored (you will need to copy/paste the password from the POSTGRESQL_PASSWORD environment variable when running the psql command):
 
+> Make note of POSTGRESQL_PASSWORD
+
 ```
 $ oc env dc/coolstore-dev-postgresql --list       # copy value of POSTGRESQL_PASSWORD to clipboard
 ```
+> Make note of postgresql pod
+
 ```
 $ oc get pods
 ```
+> oc rsh into postresql pod
+
 ```
 $ oc rsh coolstore-dev-postgresql-1-3rfuw
 sh-4.2$ psql -h $HOSTNAME -d $POSTGRESQL_DATABASE -U $POSTGRESQL_USER
@@ -133,6 +145,16 @@ monolith=> select * from PRODUCT_CATALOG;
 
 ```
 
+
+> Exit out of psql and then the postgresql pod
+
+```
+monolith=> \q
+sh-4.2$ exit
+exit
+```
+
+    
 # Step 7
 
 - The coolstore-dev build and deployment is responsible for building new versions of the app after code changes and deploying them to the development environment.
