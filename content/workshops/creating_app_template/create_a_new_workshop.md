@@ -1,6 +1,6 @@
 ---
-title: Creating an OpenShift Application
-workshops: Creating an OpenShift Application Template
+title: "Creating an OpenShift Application"
+workshops: creating_app_template
 workshop_weight: 10
 layout: lab
 ---

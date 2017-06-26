@@ -3,6 +3,7 @@ title: Creating an OpenShift Application Template
 menu:
   main:
     parent: workshops
+    pre: fa fa-rocket
 ---
 
 # Introduction

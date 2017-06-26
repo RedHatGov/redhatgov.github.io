@@ -1,6 +1,6 @@
 ---
 title: Prerequisites
-workshops: Creating an OpenShift Application Template
+workshops: creating_app_template
 workshop_weight: 10
 layout: lab
 ---
