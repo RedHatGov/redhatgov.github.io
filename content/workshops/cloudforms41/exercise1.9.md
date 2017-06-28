@@ -5,7 +5,7 @@ workshop_weight: 190
 layout: lab
 ---
 
-<p>{{% alert warning %}} The following is run as a customer (not admin) account initially. {{% /alert %}}</p>
+<p>{{% alert warning %}} The following steps are initially run as a non-admin customer account. {{% /alert %}}</p>
 
 
 # Explore Catalog Configuration

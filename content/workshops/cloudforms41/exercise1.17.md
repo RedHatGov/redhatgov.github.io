@@ -65,8 +65,7 @@ User-added domains can be individually enabled or disabled and can be ordered by
 We can export domains using rake from the command line and import them either using rake or from the WebUI.  Using rake enables us to specify more import and export options.  A typical rake import line is as follows:
 
 ```bash
-bin/rake evm:automate:import YAML_FILE=bit63.yaml IMPORT_AS=Bit63 \
-                               SYSTEM=false ENABLED=true DOMAIN=Export PREVIEW=false
+bin/rake evm:automate:import YAML_FILE=bit63.yaml IMPORT_AS=Bit63 SYSTEM=false ENABLED=true DOMAIN=Export PREVIEW=false
 ```
 
 {{% /panel %}}
@@ -98,8 +97,7 @@ cd /var/www/miq/vmdb
 ```
 
 ```bash
-bin/rake evm:automate:convert FILE=database.xml DOMAIN=SAMPLE \
-                                ZIP_FILE=/tmp/sample_converted.zip
+bin/rake evm:automate:convert FILE=database.xml DOMAIN=SAMPLE ZIP_FILE=/tmp/sample_converted.zip
 ```
 
 {{% /panel %}}
