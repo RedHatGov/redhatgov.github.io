@@ -13,7 +13,7 @@ workshops that cover various topics relating to Red Hat solutions.
 
 ## To start developing RedHatGov
 
-If you want to build RedHatGov right away::
+If you want to build RedHatGov.io right away:
 
 ##### You have a working [Hugo environment][hugo].
 
