@@ -5,9 +5,8 @@
 
 ----
 
-This repository contains the content for the [RedHatGov.io][redhatgov] site.
-At present, the RedHatGov.io site contains a collection of
-workshops that cover various topics relating to Red Hat solutions.
+[RedHatGov.io][redhatgov] is an open source collection of workshop materials that
+cover various topics relating to Red Hat's product portfolio.
 
 ----
 
