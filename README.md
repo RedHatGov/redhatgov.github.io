@@ -11,7 +11,7 @@ workshops that cover various topics relating to Red Hat solutions.
 
 ----
 
-## To start developing RedHatGov
+## To start developing RedHatGov.io
 
 If you want to build RedHatGov.io right away:
 
