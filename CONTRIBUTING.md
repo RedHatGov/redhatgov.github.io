@@ -10,6 +10,20 @@
 Fork, then clone the repo:
 
     git clone git@github.com:your-username/redhatgov.github.io.git
+    cd redhatgov.github.io
+    git remote add upstream https://github.com/RedHatGov/redhatgov.github.io
+
+    # Never push to upstream master
+    git remote set-url --push upstream no_push
+
+    # Confirm that your remotes make sense:
+    git remote -v
+
+Get your local docs up to date:
+
+    git fetch upstream
+    git checkout docs
+    git rebase upstream/docs
 
 Make your change.
 
