@@ -45,9 +45,9 @@ upstream        https://github.com/RedHatGov/redhatgov.github.io (fetch)
 upstream        no_push (push)
 ```
 
-### 3 Modify your `docs` [branch][git-branch]
+### 3 Modify your `docs`
 
-Get your local `docs` branch, up to date:
+Get your local `docs` [branch][git-branch], up to date:
 
 ```sh
 git fetch upstream
