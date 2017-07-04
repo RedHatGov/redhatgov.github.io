@@ -24,7 +24,7 @@ repo.
 git clone git@github.com:your-username/redhatgov.github.io.git
 cd redhatgov.github.io
 
-# Configure Git to sync your fork with the original repo
+# Configure git to sync your fork with the original repo
 git remote add upstream https://github.com/RedHatGov/redhatgov.github.io
 
 # Never push to upstream repo
@@ -33,7 +33,8 @@ git remote set-url --push upstream no_push
 
 ### 3 Verify your [remotes][git-remotes]
 
-Type `git remote -v`, which returns output similar to the following:
+To verify the new upstream repository you've specified for your fork, type
+`git remote -v`. You should see the URL for your fork as `origin`, and the URL for the original repository as `upstream`.
 
 ```sh
 origin  git@github.com:your-username/redhatgov.github.io.git (fetch)
