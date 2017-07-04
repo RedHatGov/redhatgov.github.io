@@ -55,7 +55,7 @@ git checkout docs
 git rebase upstream/docs
 ```
 
-Then build your local `docs` branch, make code changes, etc.
+Then build your local `docs` branch, make changes, etc.
 
 ### 4 Keep your `docs` in sync
 
