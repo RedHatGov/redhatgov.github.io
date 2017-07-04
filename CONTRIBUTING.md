@@ -45,7 +45,7 @@ upstream        https://github.com/RedHatGov/redhatgov.github.io (fetch)
 upstream        no_push (push)
 ```
 
-### 3 Modify your `docs`
+### 4 Modify your `docs`
 
 Get your local `docs` [branch][git-branch], up to date:
 
@@ -57,14 +57,14 @@ git rebase upstream/docs
 
 Then build your local `docs` branch, make changes, etc.
 
-### 4 Keep your `docs` in sync
+### 5 Keep your `docs` in sync
 
 ```sh
 git fetch upstream
 git rebase upstream/master
 ```
 
-### 5 [Commit][git-commit] your `docs`
+### 6 [Commit][git-commit] your `docs`
 
 ```sh
 git commit
@@ -72,7 +72,7 @@ git commit
 
 Likely you'll go back and edit, build, test, etc.
 
-### 6 [Push][git-push] your `docs`
+### 7 [Push][git-push] your `docs`
 
 When ready to review (or just to establish an offsite backup of your work),
 push your branch to your fork on `github.com`:
@@ -81,7 +81,7 @@ push your branch to your fork on `github.com`:
 git push
 ```
 
-### 7 Submit a [pull request][pr]
+### 8 Submit a [pull request][pr]
 
 1. Visit your fork at https://github.com/your-username/redhatgov.github.io.git
 2. Click the `Compare & Pull Request` button next to your `docs` branch.
