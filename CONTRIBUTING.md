@@ -7,7 +7,7 @@
 > This warning will be removed once we have settled on a reasonable set of
 > guidelines for contributions.
 
-### 1 [Fork][git-fork] the RedHatGov.io repo
+### 1 [Fork][git-fork] the RedHatGov.io repository
 
 Forking RedHatGov.io is a simple two-step process.
 
