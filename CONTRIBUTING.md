@@ -7,19 +7,27 @@
 > This warning will be removed once we have settled on a reasonable set of
 > guidelines for contributions.
 
-### 1 [Fork][git-fork] in the cloud
+### 1 [Fork][git-fork] the RedHatGov.io repository
 
-After visiting https://github.com/RedHatGov/redhatgov.github.io, click the
-`Fork` button (top right) to establish a cloud-based fork.
+Forking a repository (repo) is a simple two-step process.
 
-### 2 [Clone][git-clone] your fork locally
+1. On GitHub, navigate to the https://github.com/RedHatGov/redhatgov.github.io
+repo.
+2. In the top-right corner of the page, click **Fork**.
+
+That's it! Now, you have a _fork_ of the original RedHatGov/redhatgov.github.io
+repo.
+
+### 2 Create a local [clone][git-clone] of your fork
 
 ```sh
 git clone git@github.com:your-username/redhatgov.github.io.git
 cd redhatgov.github.io
+
+# Configure Git to sync your fork with the original repo
 git remote add upstream https://github.com/RedHatGov/redhatgov.github.io
 
-# Never push to upstream master
+# Never push to upstream repo
 git remote set-url --push upstream no_push
 ```
 
