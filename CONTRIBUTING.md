@@ -7,9 +7,9 @@
 > This warning will be removed once we have settled on a reasonable set of
 > guidelines for contributions.
 
-### 1 [Fork][git-fork] the RedHatGov.io repository
+### 1 [Fork][git-fork] the RedHatGov.io repo
 
-Forking a repository (repo) is a simple two-step process.
+Forking RedHatGov.io is a simple two-step process.
 
 1. On GitHub, navigate to the https://github.com/RedHatGov/redhatgov.github.io
 repo.
