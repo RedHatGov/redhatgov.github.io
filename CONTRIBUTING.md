@@ -7,7 +7,7 @@
 > This warning will be removed once we have settled on a reasonable set of
 > guidelines for contributions.
 
-### 1 [Fork][git-fork] the RedHatGov.io repository
+### 1 Fork the RedHatGov.io repository
 
 Forking RedHatGov.io is a simple two-step process.
 
@@ -15,12 +15,12 @@ Forking RedHatGov.io is a simple two-step process.
 repo.
 2. In the top-right corner of the page, click **Fork**.
 
-That's it! Now, you have a _fork_ of the original RedHatGov/redhatgov.github.io
+That's it! Now, you have a [fork][git-fork] of the original RedHatGov/redhatgov.github.io
 repo.
 
-### 2 Create a local [clone][git-clone] of your fork
+### 2 Create a local clone of your fork
 
-Right now, you have a fork of the RedHatGov.io repo, but you don't have the files in that repo on your computer. Let's create a clone of your fork locally on your computer.
+Right now, you have a fork of the RedHatGov.io repo, but you don't have the files in that repo on your computer. Let's create a [clone][git-clone] of your fork locally on your computer.
 
 ```sh
 git clone git@github.com:your-username/redhatgov.github.io.git
@@ -35,8 +35,8 @@ git remote set-url --push upstream no_push
 
 ### 3 Verify your [remotes][git-remotes]
 
-To verify the new upstream repository you've specified for your fork, type
-`git remote -v`. You should see the URL for your fork as `origin`, and the URL for the original repository as `upstream`.
+To verify the new upstream repo you've specified for your fork, type
+`git remote -v`. You should see the URL for your fork as `origin`, and the URL for the original repo as `upstream`.
 
 ```sh
 origin  git@github.com:your-username/redhatgov.github.io.git (fetch)
@@ -92,7 +92,7 @@ business days (often much sooner).
 
 _If you have upstream write access_, please refrain from using the GitHub UI
 for creating PRs, because GitHub will create the PR branch inside the main
-repository rather than inside your fork.
+repo rather than inside your fork.
 
 [git-fork]: https://help.github.com/articles/fork-a-repo/
 [git-clone]: https://git-scm.com/docs/git-clone
