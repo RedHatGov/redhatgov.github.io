@@ -36,6 +36,14 @@ the following:
 
 === Step 1:
 
+Change to `root`
+
+----
+sudo -i
+----
+
+=== Step 2:
+
 .get a current list of SCCs
 [source]
 ----
@@ -48,7 +56,7 @@ oc get scc
 oc describe scc restricted
 ----
 
-=== Step 2:
+=== Step 3:
 
 *Create a SCC*
 
@@ -100,7 +108,7 @@ Insert, then cut and paste `control + v`, then escape and write the file `esc`,
 oc create -f dc17-drop-capabilities.yml
 ----
 
-*Step 3:*
+*Step 4:*
 
 *Add SCC to a service account*
 

@@ -39,7 +39,7 @@ extend `atomic scan` with a custom scanner.
 
 *Pull some images*
 
-.Pull a RHEL 7.2 & 7.3 image
+.Pull a RHEL 7.1 & 7.3 image
 [source]
 ----
 sudo docker pull registry.access.redhat.com/rhel7.1

@@ -138,11 +138,6 @@ sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "DC17!" >>
 cat data/file1.txt
 ----
 
-.exit the container
-[source]
-----
-exit
-----
 
 == SELinux Resources
 
