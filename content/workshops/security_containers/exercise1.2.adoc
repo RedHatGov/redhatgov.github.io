@@ -85,7 +85,7 @@ mkdir user-test
 
 cd user-test
 
-vim Dockerfile <1>
+vim Dockerfile
 ----
 
 [NOTE]

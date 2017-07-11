@@ -136,14 +136,6 @@ IDs, a timestamp, as well as the container's own terminal:
 
 image::detail.png[Image Detail]
 
-When your done taking a look around go ahead and stop & delete the container.
-
-[source,bash]
-----
-Stop, Delete
-----
-
-image::delete.png[Stop & Delete]
 
 === Step 7:
 
@@ -176,3 +168,14 @@ sh .install.sh
 ----
 
 image::zsh.png[Oh-my-zsh]
+
+=== Step 8:
+
+When your done taking a look around go ahead and stop & delete the container.
+
+[source,bash]
+----
+Stop, Delete
+----
+
+image::delete.png[Stop & Delete]
