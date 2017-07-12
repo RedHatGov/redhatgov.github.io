@@ -235,8 +235,9 @@ WebRunAsRole=Admin
 The first attempt to build the project will fail, but you will fix the issues.
 
 1. From the root of the project, run the following Maven build command:  
+
 ~~~~
-    mvn clean package
+mvn clean package
 ~~~~
 
 {{% alert warning %}}

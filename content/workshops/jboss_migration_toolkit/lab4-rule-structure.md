@@ -22,7 +22,7 @@ Windup includes a substantial and increasing number of XML-based rules to provid
 
 2. Notice that the out-of-the-box Windup rules are categorized by technology.
 
-<insert github rules org image>
+<img src="../images/lab4-1.png" width="269" />
 
 {{% alert info %}}
 Windup analyzes only XML files with names ending in `.windup.xml`. Use this naming convention when creating your own custom XML-based Windup rules. In the next module, you create your own custom XML-based Windup rules.

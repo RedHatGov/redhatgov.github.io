@@ -22,6 +22,7 @@ In the XXX lab, you created a Windup report from a sample JEE application called
     * `Example Java-based Windup rules` - Working examples of Java-based rules can be found in the [here][3] GitHub repository.
 
 ## Step 1.  Analyze Existing Windup Report
+
 Start by viewing the results of executing Windup in the XXX lab.
 
 1. Open a browser and navigate to the `index.html` file of the generated Windup Report.
@@ -33,16 +34,21 @@ com.acme.anvil.service.jms.LogEventSubscriber
 
 3. Click its link.
 
-4. Observe the following:
-* There are no classifications or hints for the Windup report section that are specific to this class.
+  <img src="../images/lab5-1.png" width="924" />
 
+4. Observe the following:
+
+* There are no classifications or hints for the Windup report section that are specific to this class.
 * The use of proprietary Weblogic classes.
+
+  <img src="../images/lab5-2.png" width="814" />
 
 ## Step 2. Create a Maven Project
 
 In this section you create a custom Java rule that gets triggered on this Java class and provides a migration team with a story point.
 
 1. Create a simple maven project using the following `pom.xml`:
+
 ~~~~
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
@@ -62,13 +68,16 @@ In this section you create a custom Java rule that gets triggered on this Java c
     2. Add a folder with the name META-INF
     3. Change to the META-INF folder and create an empty file named beans.xml.
 
-<insert explorer dropdown>
+
+  <img src="../images/lab5-3.png" width="452" />
+
 
 3. Create a new Java class within the `com.example package` and name it `MyCustomRuleProvider`.
 
 4. Navigate to `MyCustomRuleProvider.java` and add the content to your custom rule.  The project should now appear as follows:
 
-<insert new explorer dropdown >
+  <img src="../images/lab5-4.png" width="452" />
+
 
 ## Step 4. Understand MyCustomRuleProvider
 
@@ -129,6 +138,8 @@ return ConfigurationBuilder.begin()                                             
 1. In JBoss Developer Studio, start Forge by entering CTRL + 4 or Command + 4 (OS X).
 
 2. Select `Build and Install an Addon`.
+
+  <img src="../images/lab5-5.png" width="462" />
 
 ## Step 6. Test the Java-Based Rule Addon
 
