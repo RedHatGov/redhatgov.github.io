@@ -25,3 +25,4 @@ If you are on-site with us, the instructor will walk you through and kick off ea
 {{% alert info %}}
 These labs have been tailored for Red Hat JBoss EAP 7.0
 {{% /alert %}}
+
