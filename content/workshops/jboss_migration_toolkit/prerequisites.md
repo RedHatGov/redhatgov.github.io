@@ -34,11 +34,11 @@ RHAMT supports application migration from several platforms to Red Hat JBoss Ent
 
 | Source Platform | Migration to JBoss EAP 6 | Migration to JBoss EAP 7 |
 | --------------- |:------------------------:|:------------------------:|
-| Oracle Weblogic |       [checkmark]        |       [checkmark]        |
-| IBM WebSphere   |       [checkmark]        |       [checkmark]        |
-| JBoss EAP 4     |       [checkmark]        |       X                  |
-| JBoss EAP 5     |       [checkmark]        |       [checkmark]        |
-| JBoss EAP 6     |       N/A                |       [checkmark]        |
+| Oracle Weblogic |       ![checkmark]       |       ![checkmark]       |
+| IBM WebSphere   |       ![checkmark]       |       ![checkmark]       |
+| JBoss EAP 4     |       ![checkmark]       |       X                  |
+| JBoss EAP 5     |       ![checkmark]       |       ![checkmark]       |
+| JBoss EAP 6     |       N/A                |       ![checkmark]       |
 
 X - Although RHAMT does not currently provide rules for this migration path, Red Hat Consulting can assist with migration from any source platform.
 

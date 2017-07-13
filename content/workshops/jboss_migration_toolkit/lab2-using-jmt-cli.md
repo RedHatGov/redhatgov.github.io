@@ -41,6 +41,8 @@ $ ./rhamt-cli --input /path/to/simple-sample-app.ear --output /path/to/output/ -
   * --target: Target technology for the application migration.
   * --packages: List of packages to evaluate.
 
+> Refer to [RHMAT Command-Line Arguments][3] for a full list of available capabilities.
+
 3.  Open the generated report.
   a. The location of the report is displayed in your terminal once the execution is complete.
 
@@ -65,3 +67,4 @@ After successfully executing RHMAT against the application archive, you should n
 
 [1]: https://developers.redhat.com/download-manager/file/migrationtoolkit-rhamt-cli-4.0.0.Beta2.1-offline.zip
 [2]: https://access.redhat.com/documentation/en-us/red_hat_application_migration_toolkit/4.0.beta2/html-single/cli_guide/#review_reports
+[3]: https://access.redhat.com/documentation/en-us/red_hat_application_migration_toolkit/4.0.beta2/html-single/cli_guide/#command_line_arguments

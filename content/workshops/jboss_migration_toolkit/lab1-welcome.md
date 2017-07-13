@@ -8,16 +8,16 @@ layout: lab
 # Welcome to JBoss Migration Toolkit!
 This lab introduces you to the key tool for assessing activities needed to migrate to JBoss EAP.  The labs will provide you various ways to initiate the assessment using the console to help you get familiar with the user interface.  These labs are designed for engineers, consultants, and others who plan to use Windup to migrate Java applications or other components.
 
-# What is Red Hat Application Migration Toolkit?
+##  What is Red Hat Application Migration Toolkit?
 Red Hat Application Migration Toolkit is an assembly of open source tools that enables large-scale application migrations and modernizations. The tooling consists of multiple individual components that provide support for each phase of a migration process. The migrations supported include application platform upgrades, migrations to a cloud-native deployment environment, and also migrations from several commercial products to the Red Hat JBoss Enterprise Application Platform.
 
-##  Command Line Tooling
+###  Command Line Tooling
 The Command line interface provides an advanced interface for performing batch analysis of many applications in an automated manner. This interface can provide detailed assessment reports that can be fed into a full assessment of the applications for prioritization and planning.
 
-##  Web Console
+###  Web Console
 The Web Console provides a simplified interface for managing large volumes of applications for assessment and analysis purposes. With this tool, the user can manage a large number of applications in order to efficiently prioritize and plan which applications to migrate, as well as to assess the difficulty involved in each migration.
 
-##  Eclipse Tooling
+###  Eclipse Tooling
 Eclipse Plugin provides interactive, implementation time assistance for developers. This streamlines the process of migrating applications by providing inline help as well as fully automated quick fixes that automate complex steps within the migration and modernization process.
 
 ## How Does Red Hat Application Migration Toolkit Simplify Migration?
@@ -62,10 +62,38 @@ RHAMT provides a comprehensive set of standard migration rules out-of-the-box. B
 # Who is this worksop designed to inform?
 This workshop is for engineers, consultants, and others who want to use Red Hat Application Migration Toolkit (RHAMT) to migrate Java applications or other components. It provides an overview of the Red Hat Application Migration Toolkit and how to get started using the tools to plan and execute your migration. 
 
+# Story Points
+Story points are an abstract metric commonly used in Agile software development to estimate the level of effort needed to implement a feature or change.
+
+Red Hat Application Migration Toolkit uses story points to express the level of effort needed to migrate particular application constructs, and the application as a whole. It does not necessarily translate to man-hours, but the value should be consistent across tasks. 
+
+## How Story Points are Estimated in Rules
+Estimating the level of effort for the story points for a rule can be tricky. The following are the general guidelines RHAMT uses when estimating the level of effort required for a rule.
+
+| Level of Effort | Story Points  | Description                                                                                         | 
+| --------------- | :-----------: | --------------------------------------------------------------------------------------------------- |
+| Information     | 0             | An informational warning with very low or no priority for migration.                                |
+| Trivial         | 1             | The migration is a trivial change or a simple library swap with no or minimal API changes.          |
+| Complex         | 3             | The changes required for the migration task are complex, but have a documented solution.            |
+| Redesign        | 5             | The migration task requires a redesign or a complete library change, with significant API changes.  |
+| Rearchitecture  | 7             | The migration requires a complete rearchitecture of the component or subsystem.                     |
+| Unknown         | 13            | The migration solution is not known and may need a complete rewrite.                                |
+
+## Task Severity
+In addition to the level of effort, you can categorize migration tasks to indicate the severity of the task. The following categories are used to indicate whether a task must be completed or can be postponed. 
+
+### Mandatory
+The task must be completed for a successful migration. If the changes are not made, the resulting application will not build or run successfully. Examples include replacement of proprietary APIs that are not supported in the target platform. 
+### Optional
+If the migration task is not completed, the application should work, but the results may not be the optimal. If the change is not made at the time of migration, it is recommended to put it on the schedule soon after migration is completed. An example of this would be the upgrade of EJB 2.x code to EJB 3. 
+
+For more information on categorizing tasks, see [Using Custom Rule Categories][4] in the [Rules Development Guide][3]. 
+
 # Summary
 You should now be ready to get hands-on with our workshop labs.
 
 [1]: https://access.redhat.com/documentation/en-us/red_hat_application_migration_toolkit/4.0.beta2/html-single/cli_guide/
 [2]: https://access.redhat.com/documentation/en-us/red_hat_application_migration_toolkit/4.0.beta2/html/getting_started_guide/supported_configurations#migration_paths
 [3]: https://access.redhat.com/documentation/en-us/red_hat_application_migration_toolkit/4.0.beta2/html-single/rules_development_guide/
+[4]: https://access.redhat.com/documentation/en-us/red_hat_application_migration_toolkit/4.0.beta2/html-single/rules_development_guide/#rule_categories
 
