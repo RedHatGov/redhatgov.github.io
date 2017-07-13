@@ -10,7 +10,7 @@ You can register your own custom rules to use during analysis of your applicatio
 
 ## Prerequisites
 
-* Completion of the Lab 5 - Using Windup
+* Completion of the Lab 5 - Using RHMAT Web Console
 
 ## Step 1. Add Custom Rules
 
