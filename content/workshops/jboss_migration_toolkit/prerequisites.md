@@ -1,13 +1,9 @@
 ---
 title: Prerequisites
-workshops: jboss_migration_toolkit
+workshops: jboss-migration-toolkit
 workshop_weight: 10
 layout: lab
 ---
-
-:imagesdir: /workshops/jboss_migration_toolkit/images
-:source-highlighter: highlight.js
-:source-language: yaml
 
 # System Requirements
 

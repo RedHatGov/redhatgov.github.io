@@ -1,6 +1,6 @@
 ---
 title: Wrap Up
-workshops: jboss_migration_toolkit
+workshops: jboss-migration-toolkit
 workshop_weight: 99
 layout: lab
 ---

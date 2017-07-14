@@ -1,6 +1,6 @@
 ---
 title: Lab 5 - Using RHMAT Web Console
-workshops: jboss_migration_toolkit
+workshops: jboss-migration-toolkit
 workshop_weight: 50
 layout: lab
 ---
@@ -29,7 +29,7 @@ $ ./rhamt-web-distribution-4.0.0.Beta2.1/run_rhamt.sh
 ~~~~
 
 ## Step 2. Access the web console.
-Go to http://jboss_migration_toolkit.{student number}.demo-dlt.com:8080/rhmat-web
+Go to http://jboss-migration-toolkit.{student number}.demo-dlt.com:8080/rhmat-web
 
 <img src="../images/web-login.png" />
 

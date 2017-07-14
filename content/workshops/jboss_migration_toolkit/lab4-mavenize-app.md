@@ -1,6 +1,6 @@
 ---
 title: Lab 4 - Mavenize Your Application
-workshops: jboss_migration_toolkit
+workshops: jboss-migration-toolkit
 workshop_weight: 40
 layout: lab
 ---

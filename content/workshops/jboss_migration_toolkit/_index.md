@@ -13,7 +13,7 @@ If you are on-site with us, the instructor will walk you through and kick off ea
 
 # Labs
 
-{{< labs jboss_migration_toolkit >}}
+{{< labs jboss-migration-toolkit >}}
 
 
 {{% alert info %}}

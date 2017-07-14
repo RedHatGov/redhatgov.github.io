@@ -1,6 +1,6 @@
 ---
 title: Lab 6 - Using Custom Rules
-workshops: jboss_migration_toolkit
+workshops: jboss-migration-toolkit
 workshop_weight: 60
 layout: lab
 ---

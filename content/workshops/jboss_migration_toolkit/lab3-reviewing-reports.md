@@ -1,6 +1,6 @@
 ---
 title: Lab 3 - Reviewing RHMAT CLI Reports
-workshops: jboss_migration_toolkit
+workshops: jboss-migration-toolkit
 workshop_weight: 30
 layout: lab
 ---
@@ -13,7 +13,7 @@ The report examples shown in the following sections are a result of analyzing th
 Successful completion of the previous lab
 
 ## Step 1. Open the RHMAT Report Landing Page
-Use a browser to open the `http://jboss_migration_toolkit.{student number}.demo-dlt.com/index.html` file located in the report output directory. This opens a landing page that lists the applications that were processed. Each row contains a high-level overview of the story points, number of incidents, and technologies encountered in that application. 
+Use a browser to open the `http://jboss-migration-toolkit.{student number}.demo-dlt.com/index.html` file located in the report output directory. This opens a landing page that lists the applications that were processed. Each row contains a high-level overview of the story points, number of incidents, and technologies encountered in that application. 
 
 <img src="../images/report-jee-example-application-list-page.png" />
 

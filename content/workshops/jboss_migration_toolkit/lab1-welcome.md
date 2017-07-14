@@ -1,6 +1,6 @@
 ---
 title: Lab 1 - Welcome
-workshops: jboss_migration_toolkit
+workshops: jboss-migration-toolkit
 workshop_weight: 11
 layout: lab
 ---

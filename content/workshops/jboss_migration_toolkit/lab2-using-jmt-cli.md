@@ -1,6 +1,6 @@
 ---
 title: Lab 2 - Using RHMAT CLI
-workshops: jboss_migration_toolkit
+workshops: jboss-migration-toolkit
 workshop_weight: 20
 layout: lab
 ---
@@ -51,7 +51,7 @@ Report created: /var/www/html
    Access it at this URL: file:///path/to/output/
 ~~~~
 
-  b. Open the report in a browser http://jboss_migration_toolkit.{student number}.demo-dlt.com 
+  b. Open the report in a browser http://jboss-migration-toolkit.{student number}.demo-dlt.com 
 
 4.  Review the reports.
   a. In the Application List, take note of the story points identified for the simple-sample-app.ear application. This helps you assess the level of effort required to migrate this application.
