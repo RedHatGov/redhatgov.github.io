@@ -14,53 +14,70 @@ These instructions are only when you are doing this lab outside of the controlle
 
 # Set Up
 1. Install the Java SE Development Kit (JDK) version 8. We recommend using the OpenJDK or the Oracle JDK.
+
 2. Install the RHAMT CLI.
+
   a. Download the [ZIP archive][1].
   b. Extract the ZIP archive.
+
+3. Download the sample application, [jee-example-app-1.0.0.ear][2], to your file system.
 
 ~~~~
 $ unzip migrationtoolkit-rhamt-cli-4.0.0.Beta2.1.zip
 ~~~~
 
-# Analyze your first application
+# Step 1. Analyze your first application
 Now that the RHAMT CLI is installed, you’re ready to try it out. We’ll show you how to run the CLI to analyze a sample WebLogic application to identify the changes necessary to migrate it to JBoss EAP 7.
 
-1.  Download the sample application, [simple-sample-app.ear][2], to your file system.
+1.  Escalate your user privileges.
+
+~~~
+$ sudo su
+~~~
+
 2.  Run the CLI with the necessary options.
   a. Navigate into the rhamt-cli-4.0.0/bin/ directory
+
+~~~~
+$ cd rhamt-cli-4-0.0.Beta2.1\bin
+~~~~
+
   b. Execute the CLI with the necessary options.
 
 ~~~~
-$ ./rhamt-cli --input /path/to/simple-sample-app.ear --output /path/to/output/ --source weblogic --target eap:7 --packages com.acme
+$ ./rhamt-cli --input /tmp/jee-example-app-1.0.0.ear --output /var/www/html/ --source weblogic --target eap:7 --packages com.acme
 ~~~~
 
-  This command uses the following options:
-  * --input: Path to the application to analyze.
-  * --output: Output directory for the generated reports.
-  * --source: Source technology of the application.
-  * --target: Target technology for the application migration.
-  * --packages: List of packages to evaluate.
+This command uses the following options:
+
+  *  --input: Path to the application to analyze.
+  *  --output: Output directory for the generated reports.
+  *  --source: Source technology of the application.
+  *  --target: Target technology for the application migration.
+  *  --packages: List of packages to evaluate.
 
 > Refer to [RHMAT Command-Line Arguments][3] for a full list of available capabilities.
 
 3.  Open the generated report.
+
   a. The location of the report is displayed in your terminal once the execution is complete.
 
 ~~~~
 Report created: /var/www/html
-   Access it at this URL: file:///path/to/output/
+   Access it at this URL: file:///var/www/html/index.html
 ~~~~
 
   b. Open the report in a browser http://jboss-migration-toolkit.{student number}.demo-dlt.com 
 
-4.  Review the reports.
-  a. In the Application List, take note of the story points identified for the simple-sample-app.ear application. This helps you assess the level of effort required to migrate this application.
-  b. Click the simple-sample-app.ear link.
-  c. Click the Migration Issues link in the top navigation bar. This report shows a summary of all migration issues identified in the application.
-  d. Click on an issue to show the list of files that contain the issue.
-  e. Click the file name to view the file contents.
-  f. The line of code affected by the issue is highlighted and information about the issue and how to resolve it are displayed.
-  g. See the Review the Reports section of the [RHAMT CLI Guide][2] to learn more about examining other available reports.
+# Step 2. Review the reports.
+
+  a.  In the Application List, take note of the story points identified for the simple-sample-app.ear application. This helps you assess the level of effort required to migrate this application.
+  b.  Click the simple-sample-app.ear link.
+  c.  Click the Migration Issues link in the top navigation bar. This report shows a summary of all migration issues identified in the application.
+  d.  Click on an issue to show the list of files that contain the issue.
+  e.  Click the file name to view the file contents.
+  f.  The line of code affected by the issue is highlighted and information about the issue and how to resolve it are displayed.
+  g.  See the Review the Reports section of the [RHAMT CLI Guide][2] to learn more about examining other available reports.
 
 # Summary
 After successfully executing RHMAT against the application archive, you should now be ready to review the assessment report.
@@ -68,3 +85,4 @@ After successfully executing RHMAT against the application archive, you should n
 [1]: https://developers.redhat.com/download-manager/file/migrationtoolkit-rhamt-cli-4.0.0.Beta2.1-offline.zip
 [2]: https://access.redhat.com/documentation/en-us/red_hat_application_migration_toolkit/4.0.beta2/html-single/cli_guide/#review_reports
 [3]: https://access.redhat.com/documentation/en-us/red_hat_application_migration_toolkit/4.0.beta2/html-single/cli_guide/#command_line_arguments
+[4]: https://github.com/windup/windup/raw/master/test-files/jee-example-app-1.0.0.ear
