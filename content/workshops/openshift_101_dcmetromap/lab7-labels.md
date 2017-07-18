@@ -59,7 +59,7 @@ $ oc describe all | grep -i "labels:
 Click "Applications" and then click on "Pods"
 </blockquote>
 This is going to show basic details for all pods in this project (including the builders).
-<img src="/static/openshift_101_dcmetromap/ocp-lab-labels-pods.png" width="900"></br>
+<img src="../images/ocp-lab-labels-pods.png" width="900"></br>
 </br>
 
 Next let's look at the log for the pod running our application.
@@ -68,13 +68,13 @@ Next let's look at the log for the pod running our application.
 <blockquote>
 Click the pod for the dc metro map webapp (it shoud have a status of Running)
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-labels-poddetails.png" width="900"></br>
+<img src="../images/ocp-lab-labels-poddetails.png" width="900"></br>
 Here, at the top, you can see the labels on this pod
 
 <blockquote>
 Click the "Actions" button, then click "Edit YAML" for the pod
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-labels-podedit.png" width="900"><br/>
+<img src="../images/ocp-lab-labels-podedit.png" width="900"><br/>
 You will see all the labels under the metadata->labels section.
 
 <blockquote>

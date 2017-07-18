@@ -29,7 +29,7 @@ OpenShift provides a web console that allows you to perform various tasks via a 
 ## Let's Login
 > Navigate to the URI provided by your instructor and login with the user/password provided (if there's an icon on the Desktop, just double click that)
 
-<img src="/static/openshift_101_dcmetromap/ocp-login.png" width="600"><br/>
+<img src="../images/ocp-login.png" width="600"><br/>
 *Login Webpage*
 
 Once logged in you should see your available projects - or a button to create a project if none exist already.
