@@ -1,6 +1,6 @@
 ---
 title: Lab 5 - Webhooks and Rollbacks
-workshops: openshift_3_5_101
+workshops: openshift_v3_5_101
 workshop_weight: 15
 layout: lab
 ---
@@ -15,7 +15,7 @@ We are going to do some integration and coding with an external git repository. 
 
 OK, let's fork the dc-metro-map app from **my** account into **your** github account.  Goto [https://github.com/dudash/openshift-workshops/][4] and look to the top right for the "Fork" button.
 
-<img src="/static/openshift_101_dcmetromap/ocp-lab-rollbacks-fork.png" width="500"><br/>
+<img src="../images/ocp-lab-rollbacks-fork.png" width="500"><br/>
 
 > Click the "Fork" button
 
@@ -33,7 +33,7 @@ Jump back to your OpenShift web console and let's add the webapp to our project.
 <blockquote>
 Click the "Add to Project" button
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-addToProjectButton.png" width="200"><br/>
+<img src="../images/ocp-addToProjectButton.png" width="200"><br/>
 <blockquote>
 Select the "Browse Catalog" tab and search for the nodejs:0.10 builder image.
 </blockquote>
@@ -75,18 +75,18 @@ Copy the Generic webhook to the clipboard
 Click on "Builds" and then click on "Builds"
 </blockquote>
 This is going to show basic details for all build configurations in this project
-<img src="/static/openshift_101_dcmetromap/ocp-lab-rollbacks-buildsList.png" width="900"><br/>
+<img src="../images/ocp-lab-rollbacks-buildsList.png" width="900"><br/>
 
 <blockquote>
 Click the "dc-metro-map" build config
 </blockquote>
 You will see the summary of builds using this build config
-<img src="/static/openshift_101_dcmetromap/ocp-lab-rollbacks-buildconfigsummary.png" width="900"><br/>
+<img src="../images/ocp-lab-rollbacks-buildconfigsummary.png" width="900"><br/>
 
 <blockquote>
 Click the "Configuration" tab (next to the active Summary tab)
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-rollbacks-deployconfigconfig.png" width="900"><br/>
+<img src="../images/ocp-lab-rollbacks-deployconfigconfig.png" width="900"><br/>
 Now you can see the various configuration details including the Github specific and Generic webhook URLs.
 
 <blockquote>
@@ -105,7 +105,7 @@ Copy the Generic webhook to the clipboard
 
 Let's put the webhook URL into the repository. At the main page for this repository (the fork), you should see a tab bar with code, pull requests, pulse, graphs, and settings.
 
-<img src="/static/openshift_101_dcmetromap/ocp-lab-rollbacks-settings.png" width="900"><br/>
+<img src="../images/ocp-lab-rollbacks-settings.png" width="900"><br/>
 
 <blockquote>
 Click the "Settings" tab
@@ -116,7 +116,7 @@ Now you will see a vertical list of settings groups.<br/><br/>
 <blockquote>
 Click the "Webhooks & services" item
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-rollbacks-githubwebhooks.png" width="900"><br/>
+<img src="../images/ocp-lab-rollbacks-githubwebhooks.png" width="900"><br/>
 
 <blockquote>
 Click the "Add webhook" button
@@ -132,7 +132,7 @@ Disable SSL verification by clicking the button
 <i class="fa fa-info-circle"></i> You can learn how to setup SSL in the secrets lab<br/><br/>
 </blockquote>
 
-<img src="/static/openshift_101_dcmetromap/ocp-lab-rollbacks-githubwebhooks-add.png" width="600"><br/>
+<img src="../images/ocp-lab-rollbacks-githubwebhooks-add.png" width="600"><br/>
 
 <blockquote>
 Click the "Add webhook" button
@@ -178,13 +178,13 @@ This is going to show basic details for all deployment configurations in this pr
 Click the "dc-metro-map" deployment config
 </blockquote>
 Toward the bottom of the screen you will see a table of deployments using this deployment config
-<img src="/static/openshift_101_dcmetromap/ocp-lab-rollbacks-deploymentconfigsummary1.png" width="900"><br/>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-rollbacks-deploymentconfigsummary2.png" width="900"><br/>
+<img src="../images/ocp-lab-rollbacks-deploymentconfigsummary1.png" width="900"><br/>
+<img src="../images/ocp-lab-rollbacks-deploymentconfigsummary2.png" width="900"><br/>
 
 <blockquote>
 In the Deployments table click the #1
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-rollbacks-deploymentconfig.png" width="600"><br/>
+<img src="../images/ocp-lab-rollbacks-deploymentconfig.png" width="600"><br/>
 
 <blockquote>
 Click the "Rollback button", accept defaults, and click "Rollback" again
@@ -192,7 +192,7 @@ Click the "Rollback button", accept defaults, and click "Rollback" again
 
 You can go back to the overview page to see your previous deployment spinning down and your new one spinning up.<br/>
 
-<img src="/static/openshift_101_dcmetromap/ocp-lab-rollbacks-rollback.png" width="900"><br/>
+<img src="../images/ocp-lab-rollbacks-rollback.png" width="900"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}

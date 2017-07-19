@@ -1,6 +1,6 @@
 ---
-title: Fin.
-workshops: openshift_3_5_101
+title: Wrap Up!
+workshops: openshift_v3_5_101
 workshop_weight: 20
 layout: lab
 ---
@@ -16,7 +16,7 @@ Here are some good resources to continue learning OpenShift:
 * [OpenShift Architecture][1]
 * [OpenShift Developer's Guide][2]
 
-[1]: https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/index.html
-[2]: https://docs.openshift.com/container-platform/3.4/dev_guide/index.html
+[1]: https://docs.openshift.com/container-platform/3.5/architecture/core_concepts/index.html
+[2]: https://docs.openshift.com/container-platform/3.5/dev_guide/index.html
 [3]: http://developers.redhat.com/products/cdk/overview/
 [4]: http://developers.redhat.com/products/cdk/docs-and-apis/
