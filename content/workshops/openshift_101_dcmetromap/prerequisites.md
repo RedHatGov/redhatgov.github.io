@@ -16,7 +16,9 @@ The officially supported instructions for installing the oc client via Red Hat a
 
 TL;DR:
 
-* Download a .tgz [from Red Hat][5] and add to your PATH
+* [Download][5] the enterprise oc client from Red Hat and add to your PATH (Requires Login).
+
+* [Download][7] the upstream oc client from OpenShift Origin. 
 
 
 # Create a Github account
@@ -29,3 +31,4 @@ Create a FREE github account by going [to this link][6] and following their inst
 [4]: http://git-scm.com/downloads
 [5]: https://access.redhat.com/downloads/content/290
 [6]: https://github.com/join?source=header-home
+[7]: https://github.com/openshift/origin/releases

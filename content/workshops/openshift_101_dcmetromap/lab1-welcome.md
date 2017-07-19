@@ -50,13 +50,13 @@ Don't worry, it's supposed to look empty right now because you currently don't h
 ## Let's try the command line (CLI)
 > <i class="fa fa-terminal"></i> Open a terminal and login using the same URI with following command:
 
-```
+```bash
 $ oc login [URI]
 ```
 
 > <i class="fa fa-terminal"></i> Check to see what projects you have access to:
 
-```
+```bash
 $ oc get projects
 ```
 
@@ -65,13 +65,13 @@ You just created a project using the web console, let's tell the terminal comman
 
 > <i class="fa fa-terminal"></i> Type the following command to use the demo project:
 
-```
+```bash
 $ oc project demo-YOUR#
 ```
 
 > <i class="fa fa-terminal"></i> Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):
 
-```
+```bash
 $ oc status
 ```
 

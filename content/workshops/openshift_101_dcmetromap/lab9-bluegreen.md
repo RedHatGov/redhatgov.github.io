@@ -11,19 +11,19 @@ When implementing continuous delivery for your software one very useful techniqu
 ## Before starting
 Before we get started with the Blue/Green deployment lab, lets clean up some of the projects from the previous lab. 
 
-```
+```bash
 $ oc delete all -l app=jenkins-ephemeral
 $ oc delete all -l app=nodejs-helloworld-sample
 ```
 
 ## Lets deploy an application
-To demonstrate Blue/Green deployments, we'll use a simple application that renders a colored box as an example. Using your GitHub account, please fork the following https://github.com/dudash/openshift-workshops [project][1].
+To demonstrate Blue/Green deployments, we'll use a simple application that renders a colored box as an example. Using your GitHub account, please fork the following https://github.com/RedHatGov/openshift-workshops [project][1].
 
 You should be comfortable deploying an app at this point, but here are the steps anyway:
 
 > <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
-```
+```bash
 $ oc new-app --name=green [your-project-repo-url] --context-dir=dc-metro-map
 $ oc expose service green
 ```
@@ -41,7 +41,7 @@ Use the same commands to deploy this new version of the app, but this time name 
 
 > <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
-```
+```bash
 $ oc new-app --name=blue [your-project-repo-url] --context-dir=dc-metro-map
 ```
 
@@ -58,7 +58,7 @@ Now that we are satisfied with our change we can do the Green/Blue switch.  With
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
 
-```
+```bash
 $ oc edit route green
 ```
 
@@ -94,5 +94,5 @@ Pretty easy, right?
 
 If you want to read more about Blue/Green check out [this post][2] with a longer description as well as links to additional resources.
 
-[1]: https://github.com/dudash/openshift-workshops
+[1]: https://github.com/RedHatGov/openshift-workshops
 [2]: http://martinfowler.com/bliki/BlueGreenDeployment.html

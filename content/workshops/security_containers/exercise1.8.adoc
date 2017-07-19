@@ -1,50 +1,19 @@
 ---
-title: "Exercise 1.1 - SELinux"
-workshops: security_openshift
-workshop_weight: 20
+title: "Exercise 1.8 - SELinux"
+workshops: security_containers
+workshop_weight: 100
 layout: lab
 ---
 
-:source-highlighter: highlight.js
 :source-language: bash
-:imagesdir: /workshops/security_openshift/images
+:imagesdir: /workshops/security_containers/images
 
-= Exercise 1.1 - SELinux
+= Exercise 1.6 - SELinux
 
 image::selinux.png[]
 
-SELinux is primarily a labeling system that assigns a label (name) to every
-process and system object. This allows every aspect of kernel operations to be
-first labeled, second classified, and then ultimately enforced by a set of
-rules that the provider maintains.
-
-BENEFITS OF RUNNING SELINUX
-
-- All processes and files are labeled with a type. A type defines a domain for
-processes, and a type for files. Processes are separated from each other by
-running in their own domains, and SELinux policy rules define how processes
-interact with files, as well as how processes interact with each other. Access
-is only allowed if an SELinux policy rule exists that specifically allows it.
-- Fine-grained access control. Stepping beyond traditional UNIX permissions
-that are controlled at user discretion and based on Linux user and group IDs,
-SELinux access decisions are based on all available information, such as an
-SELinux user, role, type, and, optionally, a level.
-- SELinux policy is administratively-defined, enforced system-wide, and is not
-set at user discretion.
-- SELinux can be used to enforce data confidentiality and integrity, as well as
-protecting processes from untrusted inputs.
-- Reduced vulnerability to privilege escalation attacks. SELinux policy rules
-define how processes access files and other processes. If a process is
-compromised, the attacker only has access to the normal functions of that
-process, and to files the process has been configured to have access to.
-
-_For example, if the Apache HTTP Server is compromised, an attacker cannot use
-that process to read files in user home directories, unless a specific SELinux
-policy rule was added or configured to allow such access._
-
-== SELinux
-
-=== Step 1:
+Now that you've gotten a sense of Read Only Containers, let's move on to
+SELinux.
 
 In this section, we’ll cover the basics of SELinux and containers. SELinux
 policy prevents a lot of break out situations where the other security
@@ -52,10 +21,12 @@ mechanisms fail. With SELinux on Docker, we write policy that says that the
 container process running as `svirt_lxc_net_t` can only read/write files with
 the `svirt_sandbox_file_t` label.
 
+== Step 1:
+
 Create the following directories.
 
 .Setup directory and file
-[source]
+[source,bash]
 ----
 mkdir selinux
 
@@ -68,23 +39,23 @@ echo "SELINUX!" > data/file1.txt
 cat data/file1.txt
 ----
 
-.Get Current SELinux policy
-[source]
+.Get SELinux policy
+[source,bash]
 ----
 sestatus | grep mode
 ----
 
-=== Step 2:
+== Step 2:
 
-.Try to cat out the file (it should fail)
-[source]
+.Try to cat out the file
+[source,bash]
 ----
 sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
 ----
 
 You can see the reason by inspecting the folder’s security context:
 
-[source]
+[source,bash]
 ----
 ls --scontext data
 ----
@@ -96,19 +67,19 @@ notifying the system that you expect these files to be consumed by containers:
 Find the selinux file context associated with containers.
 
 .Find the Containers Labels
-[source]
+[source,bash]
 ----
 sudo semanage fcontext --list | grep svirt
 ----
 
 The containers should be running at `svirt_sandbox_file_t`
 
-=== Step 3:
+== Step 3:
 
-Apply the container label to the `data` directory by using the `chcon` tool
+Apply the container label to the data by using the `chcon` tool
 
 .relable the data dir
-[source]
+[source,bash]
 ----
 chcon -Rt svirt_sandbox_file_t data
 ----
@@ -116,37 +87,32 @@ chcon -Rt svirt_sandbox_file_t data
 Try to cat out the file again from the container.
 
 .run docker again
-[source]
+[source,bash]
 ----
 sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
 ----
 
-What did you see?
-
-Now try it in reverse. Append text from the container to the file
+Append text from the container to the file
 
 .append text
-[source]
+[source,bash]
 ----
-sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "DC17!" >>
-/data/file1.txt'
+sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "Thank You For
+Attending!" >> /data/file1.txt'
 ----
 
-.see the text you appended from the container
-[source]
+[source,bash]
 ----
 cat data/file1.txt
 ----
 
-
 == SELinux Resources
 
 - https://stopdisablingselinux.com/[Seriously, stop disabling SELinux.]
--
-https://www.youtube.com/watch?v=cNoVgDqqJmM&feature=youtu.be[Security-enhanced
+- https://www.youtube.com/watch?v=cNoVgDqqJmM&feature=youtu.be[Security-enhanced
 Linux for mere mortals - 2015 Red Hat Summit]
-- https://www.nsa.gov/what-we-do/research/selinux/mailing-list.shtml[SELinux
-NSA Mailing List]
+- https://www.nsa.gov/what-we-do/research/selinux/mailing-list.shtml[SELinux NSA
+Mailing List]
 
 == SELinux Coloring Book
 
@@ -208,7 +174,7 @@ SELinux policy. It is not in layman’s terms, but it is complete.
 
 `svirt_sandbox_file_t`
 
-[source]
+[source,bash]
 ----
 system_u:system_r:svirt_lxc_net_t:s0:c186,c641
 ^      ^           ^          ^     ^--- unique category

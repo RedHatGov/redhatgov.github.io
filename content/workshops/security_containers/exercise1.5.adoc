@@ -1,73 +1,89 @@
 ---
-title: "Exercise 1.5 - Read Only Containers"
+title: "Exercise 1.5 - Seccomp"
 workshops: security_containers
 workshop_weight: 70
 layout: lab
 ---
 
-:imagesdir: /workshops/security_containers/images
 
-= Exercise 1.5 - Read Only Containers
+Apply SecComp Profile
+Permissions
+SecComp defines which system calls should and should not be allowed to be executed by a container. They're defined in a JSON file that is applied when a container starts. In this initial step we've defined seccomp permissions to disable allowing containers to run seccomp.
 
-image::readonly.png[]
+cat 1_chmod.json
 
-Now that you've gotten a sense of Linux Kernel Capabilities, let's move on to
-Readonly Containers.
+{
+    "defaultAction": "SCMP_ACT_ALLOW",
+    "architectures": [
+        "SCMP_ARCH_X86_64",
+        "SCMP_ARCH_X86",
+        "SCMP_ARCH_X32"
+    ],
+    "syscalls": [
+        {
+            "name": "chmod",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        },
+        {
+            "name": "chown",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        },
+        {
+            "name": "chown32",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        }
+    ]
+}
 
-Imagine a scenario where an application gets compromised. The first thing the
-bad guy wants to do is to write an exploit into the application, so that the
-next time the application starts up, it starts up with the exploit in place. If
-the container was read­only it would prevent leaving a backdoor in place and be
-forced to start the cycle from the beginning.
+Applying Restrictions to Containers
+Launch a container and try to run chmod.
 
-Docker added a read­only feature but it presents challenges since many
-applications need to write to temporary directories like  `/run` or `/tmp` and
-when these directories are read­only, the apps fail. Red Hat’s approach
-leverages https://en.wikipedia.org/wiki/Tmpfs[`tmpfs`].
+docker run --rm -it \
+  --security-opt seccomp:1_chmod.json \
+  benhall/strace \
+  chmod 400 /etc/hostname
 
-From Wikipedeia:
+Because our container attempted to execute chmod, the call failed with Operation not permitted. This is because our seccomp profile blocked it.
 
-*tmpfs* _is a common name for a temporary file storage facility on many
-Unix-like operating systems. It is intended to appear as a mounted file system,
-but stored in volatile memory instead of a persistent storage device._
+We can extend our seccomp profile to list all the calls we want to allow or disallow. This allows us to block potential attack vectors or close vulnerabilities without changing our application.
 
-It's a nice solution to this problem because it eliminates data exposure on the
-host.
+---------
 
-*Bottom line: As a best practice, run all applications in production with this
-mode.*
+Identify Syscalls
+SecComp is a very low level protocol. In order to block syscalls you first need to identify which calls are being made.
 
-== Readonly Containers
+strace is also used to identify the underlying syscall being made by the operating system. While the shell command is called chmod, the underlying system call could be different.
 
-=== Step 1:
+If we take our profile and apply it to Ubuntu, the command will work.
 
-Run a read­only container and specify a few writable file systems using the
-­`tmpfs` option.
+docker run --rm -it \
+  --cap-add SYS_PTRACE \
+  --security-opt seccomp:1_chmod.json \
+  benhall/strace-ubuntu \
+  chmod 400 / &&
+  echo $?
 
-[source,bash]
-----
-sudo docker run --rm -it --name readonly --read-only --tmpfs /run --tmpfs /tmp
-rhel7.3 bash
-----
+This is because Ubuntu is using a different syscall under the covers. We need to use strace to update the syscall restrictions but first we need to identify the correct name. The strace commands will output every syscall made by a process. We can use this to identify calls we need to allow / disallow.
 
-=== Step 2:
+Below there are two containers, one based on Ubuntu and one based on Alpine. Run strace and identify which syscalls are being made by each container.
 
-Now, try to the following. What fails and what succeeds? Why?
+strace on Ubuntu
+docker run --rm -it \
+  --cap-add SYS_PTRACE \
+  --security-opt seccomp:1_chmod.json \
+  benhall/strace-ubuntu \
+  strace chmod 400 /
 
-.Inside the container try these commands
-[source,bash]
-----
-mkdir /newdir
+When is chmod executed? Is it successful?
 
-mkdir /run/newdir
+strace on Apline
+docker run --rm -it \
+  --cap-add SYS_PTRACE \
+  --security-opt seccomp:1_chmod.json \
+  benhall/strace \
+  strace chmod 400 /
 
-mkdir /tmp/newdir
-----
-
-Now exit the container
-
-.exit the container
-[source,bash]
-----
-exit
-----
+Why is Alpine different?

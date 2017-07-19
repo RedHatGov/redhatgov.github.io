@@ -104,6 +104,13 @@ utilizes
 https://docs.openshift.com/container-platform/3.4/dev_guide/secrets.html#secrets-image-pull-secrets[`Secrets`]
 to hold the sensitive information.
 
+To get a feeling of what a secrets file looks like `cat` out the following file.
+
+[source]
+----
+cat secrets/sso-app-secret.json
+----
+
 This is a excerpt of the `Secret` file.
 
 .sso-app-secret.json
@@ -113,8 +120,7 @@ This is a excerpt of the `Secret` file.
 "apiVersion": "v1",
 "metadata": {
     "annotations": {
-        "description": "Default secret file with name 'jboss' and password
-'mykeystorepass'"
+        "description": "Default secret file with name 'jboss' and password 'mykeystorepass'"
       },
         "name": "sso-app-secret" <2>
       },
@@ -137,9 +143,7 @@ perform actions on behalf of a pod.
 .create `secrets` for `SSO`
 [source]
 ----
-cd sso
-
-oc create -n sso -f ../secrets/sso-app-secret.json
+oc create -n sso -f secrets/sso-app-secret.json
 ----
 
 Now lets launch the app
@@ -147,8 +151,7 @@ Now lets launch the app
 .launch `SSO`
 [source]
 ----
-oc process -f sso70-https.json -p HTTPS_NAME=jboss
-HTTPS_PASSWORD=mykeystorepass | oc create -n sso -f -
+oc process -f sso/sso71-https.json -p HTTPS_NAME=jboss HTTPS_PASSWORD=mykeystorepass | oc create -n sso -f -
 ----
 
 You will see two pods with different
