@@ -1,6 +1,6 @@
 ---
 title: Lab 2 - BYO Docker
-workshops: openshift_3.5_101
+workshops: openshift_3_5_101
 workshop_weight: 12
 layout: lab
 ---

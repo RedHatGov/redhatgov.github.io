@@ -1,6 +1,6 @@
 ---
 title: Lab 6 - Replication and Recovery
-workshops: openshift_3.5_101
+workshops: openshift_3_5_101
 workshop_weight: 16
 layout: lab
 ---

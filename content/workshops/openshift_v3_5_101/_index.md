@@ -1,5 +1,5 @@
 ---
-title: OpenShift v3.5 101 Workshop
+title: OpenShift v3_5 101 Workshop
 menu:
   main:
     parent: workshops
@@ -13,7 +13,7 @@ If you are on-site with us, the instructor will walk you through and kick off ea
 
 # Labs
 
-{{< labs openshift_3.5_101 >}}
+{{< labs openshift_3_5_101 >}}
 
 
 {{% alert info %}}

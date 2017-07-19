@@ -1,6 +1,6 @@
 ---
 title: Lab 1 - Welcome
-workshops: openshift_3.5_101
+workshops: openshift_3_5_101
 workshop_weight: 11
 layout: lab
 ---
@@ -11,7 +11,7 @@ This lab provides a quick tour of the console to help you get familiar with the 
 # Key Terms
 We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with.  You'll learn more terms along the way, but these are the basics to get you started.
 
-<img src="/static/openshift_101_dcmetromap/ocp.png" width="800"><br/>
+<img src="/static/openshift_3_5_101/ocp.png" width="800"><br/>
 
 * Container - Your software wrapped in a complete filesystem containing everything it needs to run
 * Image - We are talking about docker images; read-only and used to create containers
@@ -31,7 +31,7 @@ OpenShift provides a web console that allows you to perform various tasks via a 
 ## Let's Login
 > Navigate to the URI provided by your instructor and login with the user/password provided (if there's an icon on the Desktop, just double click that)
 
-<img src="/static/openshift_101_dcmetromap/ocp-login.png" width="600"><br/>
+<img src="/static/openshift_3_5_101/ocp-login.png" width="600"><br/>
 *Login Webpage*
 
 Once logged in you should see your available projects - or a button to create a project if none exist already.

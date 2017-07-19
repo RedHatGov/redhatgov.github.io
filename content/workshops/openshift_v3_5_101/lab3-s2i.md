@@ -1,6 +1,6 @@
 ---
 title: Lab 3 - Deploying an App with S2I
-workshops: openshift_3.5_101
+workshops: openshift_3_5_101
 workshop_weight: 13
 layout: lab
 ---

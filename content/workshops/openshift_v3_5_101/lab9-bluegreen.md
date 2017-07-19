@@ -1,6 +1,6 @@
 ---
 title: Lab 9 - Blue | Green Deployment
-workshops: openshift_3.5_101
+workshops: openshift_3_5_101
 workshop_weight: 19
 layout: lab
 ---
