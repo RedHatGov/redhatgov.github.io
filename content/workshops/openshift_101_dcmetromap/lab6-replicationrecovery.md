@@ -43,13 +43,13 @@ Click "Overview"
 In the deployment, click the up arrow 3 times.
 </blockquote>
 The deployment should indicate that it is scaling to 4 pods, and eventually you will have 4 running pods.  Keep in mind that each pod has it's own container which is an identical deployment of the webapp.  OpenShift is now (by default) round robin load-balancing traffic to each pod.
-<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-4pods.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-4pods.png" width="900"><br/>
 
 <blockquote>
 Hover over the pod counter (the circle) and click
 </blockquote>
 Notice that you now have 4 unique webapp pods available to inspect.  If you want go ahead and inspect them you can see that each have their own IP address and logs.
-<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-4podslist.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-4podslist.png" width="900"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -94,12 +94,12 @@ Click one of the running pods (not a build pod)
 <blockquote>
 Click the "Actions" button in the top right and then select "Delete"
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-podaction.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-podaction.png" width="900"><br/>
 
 <blockquote>
 Now click the "Delete" button in the popup to confirm the pod deletion
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-deletepod.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-deletepod.png" width="900"><br/>
 
 <blockquote>
 Quickly switch back to the Overview
@@ -107,11 +107,11 @@ Quickly switch back to the Overview
 
 If you're fast enough you'll see the pod you deleted unfill a portion of the deployment circle, and then a new pod fill it back up.
 
-<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-poddelete.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-poddelete.png" width="900"><br/>
 
 You can browse the pods list again to see the old pod was deleted and a new pod with an age of "a few seconds" has been created to replace it.
 
-<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-podrecovery.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-podrecovery.png" width="900"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -175,11 +175,11 @@ In the tab bar for this pod, click on "Terminal"
 <blockquote>
 Click inside the terminal view and type $ pkill -9 node
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-terminal.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-terminal.png" width="900"><br/>
 
 </br>This is going to kill the node.js web server and kick you off the container.</br></br>
 
-<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-terminalkick.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-terminalkick.png" width="900"><br/>
 
 </br>
 
@@ -191,7 +191,7 @@ Click the refresh button (on the terminal) and do that a couple more times
 Go back to the pods list
 </blockquote>
 
-<img src="/static/openshift_101_dcmetromap/ocp-lab-replicationrecovery-backoff.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-backoff.png" width="900"><br/>
 
 The container died multiple times so quickly that OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn't waste resources trying to restart containers that are continuously crashing.
 
