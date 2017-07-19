@@ -15,7 +15,7 @@ Successful completion of the previous lab
 ## Step 1. Open the RHMAT Report Landing Page
 Use a browser to open the `http://jboss-migration-toolkit.{student number}.demo-dlt.com/index.html` file located in the report output directory. This opens a landing page that lists the applications that were processed. Each row contains a high-level overview of the story points, number of incidents, and technologies encountered in that application. 
 
-<img src="../images/report-jee-example-application-list-page.png" />
+<img src="../images/report-jee-example-application-list-page.png" width="1000" />
 
 1. Click on the name of the application, jee-example-app-1.0.0.ear, to view the application report. The following table lists all of the reports that can be access from this main RHAMT landing page. 
 
@@ -26,7 +26,7 @@ The Application Report  The application report page gives an overview of the ent
   * The incidents and story points by level of effort of the suggested changes
   * The incidents by package 
 
-<img src="../images/report-jee-example-application-report-index-page.png" />
+<img src="../images/report-jee-example-application-report-index-page.png" width="1000" />
 
 At the bottom of the page is a list of reports that contain additional details about the migration of this application. 
 
@@ -54,7 +54,7 @@ The Application Details Report lists the story points, the Java incidents by pac
 
 1. Access this report from the report index by clicking the `Application Details` link. 
 
-<img src="../images/report-jee-example-application-details.png" />
+<img src="../images/report-jee-example-application-details.png" width="1000" />
 
 2. Expand the jee-example-app-1.0.0.ear/jee-example-services.jar to review the story points, Java incidents by package, and a count of the occurrences of the technologies found in this archive. This summary begins with a total of the story points assigned to its migration, followed by a table detailing the changes required for each file in the archive. The report contains the following columns. 
 
@@ -67,7 +67,7 @@ The Application Details Report lists the story points, the Java incidents by pac
 
 > Note that if an archive is duplicated several times in an application, it will be listed just once in the report and will be tagged with [Included Multiple Times]. 
 
-<img src="../images/duplicate-archive-app-report.png" />
+<img src="../images/duplicate-archive-app-report.png" width="1000" />
 
 The story points for archives that are duplicated within an application will be counted only once in the total story point count for that application. 
 
@@ -82,35 +82,35 @@ The analysis of the `jee-example-services.jar` lists the files in the JAR and th
 
 3. Notice the warnings that appear at various import statements, declarations, and method calls. Each warning describes the issue and the action that should be taken. 
 
-<img src="../images/report-jee-example-source-1.png" />
+<img src="../images/report-jee-example-source-1.png" width="1000" />
 
 ## Step 4. Explore the Archives Shared by Multiple Applications Report
 Access these reports from the report landing page by clicking the Archives shared by multiple applications link. Note that this link is only available if there are applicable shared archives. 
 
 1. Go to the landing page, review the report.
 
-<img src="../images/shared-archives-app-list.png" />
+<img src="../images/shared-archives-app-list.png" width="1000" />
 
 ## Step 5. Explore the Rule Provider Execution Report
 Access this report from the report landing page by clicking the Executed rules overview link.  This report provides the list of rules that executed when running the RHAMT migration command against the application.
 
 1. Go to the landing page, review the report.
 
-<img src="../images/report-jee-example-ruleprovider.png" />
+<img src="../images/report-jee-example-ruleprovider.png" width="1000" />
 
 ## Step 6. Review the Red Hat Application Migration Toolkit FreeMarker Functions and Directives
 Access this report from the report landing page by clicking the Red Hat Application Migration Toolkit FreeMarker methods link. This report lists all the registered functions and directives that were used to build the report. It is useful if you plan to build your own custom report or for debugging purposes. 
 
 1. Go to the landing page, review the report.
 
-<img src="../images/report-jee-example-freemarker-and-directives.png" />
+<img src="../images/report-jee-example-freemarker-and-directives.png" width="1000" />
 
 ## Step 7. Explore the Send Feedback Form
 Access this feedback form from the report landing page by clicking the Send feedback link.  This form allows you to rate the product, talk about what you like and suggestions for improvements. 
 
 1. Go to the landing page, review the report.
 
-<img src="../images/report-jee-example-send-feedback.png" />
+<img src="../images/report-jee-example-send-feedback.png" width="800" />
 
 ## Step 8. Export the Report in CSV Format
 RHAMT provides the ability to export the report data, including the classifications and hints, to a flat file on your local file system. The export function currently supports the CSV file format, which presents the report data as fields separated by commas (,).  The CSV file can be imported and manipulated by spreadsheet software such as Microsoft Excel, OpenOffice Calc, or LibreOffice Calc. Spreadsheet software provides the ability to sort, analyze, evaluate, and manage the result data from a RHAMT report. 

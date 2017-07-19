@@ -29,20 +29,21 @@ $ unzip migrationtoolkit-rhamt-cli-4.0.0.Beta2.1.zip
 # Step 1. Analyze your first application
 Now that the RHAMT CLI is installed, you’re ready to try it out. We’ll show you how to run the CLI to analyze a sample WebLogic application to identify the changes necessary to migrate it to JBoss EAP 7.
 
-1.  Escalate your user privileges.
+> <i class="fa fa-terminal"></i> Navigate to the URI provided by your instructor and login with the user/password provided
+
+1. Escalate your user privileges.
 
 ~~~
 $ sudo su
 ~~~
 
-2.  Run the CLI with the necessary options.
-  a. Navigate into the rhamt-cli-4.0.0/bin/ directory
+2. Run the CLI with the necessary options. Navigate into the rhamt-cli-4.0.0/bin/ directory by executing the following:
 
 ~~~~
 $ cd rhamt-cli-4-0.0.Beta2.1\bin
 ~~~~
 
-  b. Execute the CLI with the necessary options.
+3. Execute the CLI with the necessary options.
 
 ~~~~
 $ ./rhamt-cli --input /tmp/jee-example-app-1.0.0.ear --output /var/www/html/ --source weblogic --target eap:7 --packages com.acme
@@ -58,26 +59,30 @@ This command uses the following options:
 
 > Refer to [RHMAT Command-Line Arguments][3] for a full list of available capabilities.
 
-3.  Open the generated report.
-
-  a. The location of the report is displayed in your terminal once the execution is complete.
+4. Open the generated report. The location of the report is displayed in your terminal once the execution is complete.
 
 ~~~~
 Report created: /var/www/html
    Access it at this URL: file:///var/www/html/index.html
 ~~~~
 
-  b. Open the report in a browser http://jboss-migration-toolkit.{student number}.demo-dlt.com 
+  5. Open the report in a browser http://jboss-migration-toolkit.{student number}.demo-dlt.com 
 
 # Step 2. Review the reports.
 
-  a.  In the Application List, take note of the story points identified for the simple-sample-app.ear application. This helps you assess the level of effort required to migrate this application.
-  b.  Click the simple-sample-app.ear link.
-  c.  Click the Migration Issues link in the top navigation bar. This report shows a summary of all migration issues identified in the application.
-  d.  Click on an issue to show the list of files that contain the issue.
-  e.  Click the file name to view the file contents.
-  f.  The line of code affected by the issue is highlighted and information about the issue and how to resolve it are displayed.
-  g.  See the Review the Reports section of the [RHAMT CLI Guide][2] to learn more about examining other available reports.
+1. In the Application List, take note of the story points identified for the simple-sample-app.ear application. This helps you assess the level of effort required to migrate this application.
+
+2. Click the simple-sample-app.ear link.
+
+3. Click the Migration Issues link in the top navigation bar. This report shows a summary of all migration issues identified in the application.
+
+4. Click on an issue to show the list of files that contain the issue.
+
+5. Click the file name to view the file contents.
+
+6. The line of code affected by the issue is highlighted and information about the issue and how to resolve it are displayed.
+
+7. See the Review the Reports section of the [RHAMT CLI Guide][2] to learn more about examining other available reports.
 
 # Summary
 After successfully executing RHMAT against the application archive, you should now be ready to review the assessment report.

@@ -31,7 +31,7 @@ $ ./rhamt-web-distribution-4.0.0.Beta2.1/run_rhamt.sh
 ## Step 2. Access the web console.
 Go to http://jboss-migration-toolkit.{student number}.demo-dlt.com:8080/rhmat-web
 
-<img src="../images/web-login.png" />
+<img src="../images/web-login.png" width="1000" />
 
 By default, the web console uses a rhamt user to automatically authenticate. See [Configuring Authentication][1] for the Web Console to require individual users to authenticate in order to access the web console. 
 
@@ -45,18 +45,18 @@ In order to use the web console to analyze applications, you must create a proje
 2. Add a migration project.
 > When you first access the web console, you will be prompted to set up a new project.
 
-<img src="../images/web-no-projects.png" />
+<img src="../images/web-no-projects.png" width="1000" />
 
   a. From the welcome page, click New Project.
 
-<img src="../images/web-add-project.png" />
+<img src="../images/web-add-project.png" width="1000" />
 
   b. Enter a name for the project and press Next.
 
 3. Add the sample application to the project.
 Specify the applications to add to this project. You can either upload applications or register a server path that contains applications.  You can can use the Choose files button to select applications, or you can drag and drop applications into the area provided. This uploads the selected applications to the server. 
 
-<img src="../images/web-add-apps.png" />
+<img src="../images/web-add-apps.png" width="1000" />
 
   a. Click Choose files, select the downloaded simple-sample-app.ear file, and click Next.
 
@@ -66,7 +66,7 @@ You could also select the Server Path tab and enter a path on the server that co
 
 4. Specify the settings for the analysis.
 
-<img src="../images/web-configure-analysis.png" />
+<img src="../images/web-configure-analysis.png" width="1000" />
 
   a. Select the Migration to Red Hat JBoss EAP 7 transformation path.
 
@@ -80,7 +80,7 @@ You could also select the Server Path tab and enter a path on the server that co
 
 6. View the results of the analysis.
 
-<img src="../images/web-analysis-list.png" />
+<img src="../images/web-analysis-list.png" width="1000" />
 
   a. From the Analysis page, you can watch the progress of the execution.
 
