@@ -29,23 +29,28 @@ We will be using the following terms throughout the workshop labs so here are so
 OpenShift provides a web console that allows you to perform various tasks via a web browser.  Additionally, you can utilize a command line tool to perfrom tasks.  Let's get started by logging into both of these and checking the status of the platform.
 
 ## Let's Login
-> Navigate to the URI provided by your instructor and login with the user/password provided (if there's an icon on the Desktop, just double click that)
+> Navigate to the URI provided by your instructor and login with the username/password provided (if there's an icon on the Desktop, just double click that)
 
 <img src="../images/ocp-login.png" width="600"><br/>
 *Login Webpage*
 
 Once logged in you should see your available projects - or a button to create a project if none exist already.
 
+<img src="../images/ocp-no-projects.png" width="600"><br/>
+*OCP No Projects Webpage*
+
 ## So this is what an empty project looks like
 First let's create a new project to do our workshop work in.  We will use the student number you were given to ensure you don't clash with classmates, so in the steps below replace 'YOUR#' with your student number.
 
-> Click on the "New Project" button and give it a name of demo-YOUR#
+> Click on the "New Project" button and give it a name of demo{YOUR#}
 
-> Populate "Display Name" with "demo-YOUR#" and populate "Description" boxes with whatever you like.  And click "Create"
+> Populate "Display Name" with "demo{YOUR#}" and populate "Description" boxes with whatever you like.  And click "Create"
+
+<img src="../images/ocp-new-project.png" width="600"><br/>
 
 This is going to take you to the next logical step of adding something to the project, but we don't want to do that just yet.
 
-> Click the "demo-YOUR#" link on the top left to goto your project
+> Click the "demo{YOUR#}" link on the top left to goto your project
 
 Don't worry, it's supposed to look empty right now because you currently don't have anything in your project (we'll fix that in the next lab).
 
@@ -55,7 +60,7 @@ Don't worry, it's supposed to look empty right now because you currently don't h
 ```
 $ oc login https://master.ocp.demo-dlt.com:8443
 ```
-> You'll be prompted for a secure connection, respond 'y', then enter in your student credentials.
+> You'll be prompted for a secure connection, respond 'y', then enter in your student credentials (Username: user{YOUR#}, Password: {get password from instructor}).
 
 > <i class="fa fa-terminal"></i> Check to see what projects you have access to:
 
