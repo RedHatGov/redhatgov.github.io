@@ -52,7 +52,7 @@ Get your local `docs` [branch][git-branch], up to date:
 ```sh
 git fetch upstream
 git checkout docs
-git rebase upstream/docs
+git merge upstream/docs
 ```
 
 Then build your local `docs` branch, make changes, etc.
@@ -61,7 +61,7 @@ Then build your local `docs` branch, make changes, etc.
 
 ```sh
 git fetch upstream
-git rebase upstream/docs
+git merge upstream/docs
 ```
 
 ### 6 [Commit][git-commit] your `docs`
