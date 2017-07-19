@@ -61,7 +61,7 @@ Then build your local `docs` branch, make changes, etc.
 
 ```sh
 git fetch upstream
-git rebase upstream/master
+git rebase upstream/docs
 ```
 
 ### 6 [Commit][git-commit] your `docs`
