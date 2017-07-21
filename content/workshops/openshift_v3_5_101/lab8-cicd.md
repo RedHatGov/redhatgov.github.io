@@ -80,9 +80,10 @@ Select "Continue to overview" to display the following overview page.
 
 ## Create a sample application configuration
 
-Use the "oc new-app" command to create a simple nodejs application from a template file:
+After adjusting your project to cicd, use the "oc new-app" command to create a simple nodejs application from a template file:
 
 ```
+$ oc project cicd
 $ oc new-app -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json
 ```
 > Click on "Overview" within the OpenShift console to display the sample application configuration

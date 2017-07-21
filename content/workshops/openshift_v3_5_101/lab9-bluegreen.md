@@ -88,6 +88,9 @@ This will bring up the Route configuration yaml. Edit the element spec: to: name
 {{% /panel %}}
 {{< /panel_group >}}
 
+> This should be the result of your re-direction:
+
+<img src="../images/ocp-lab-post-bluegreen-edit.png" width="900"><br/>
 
 # Summary
 Pretty easy, right?
