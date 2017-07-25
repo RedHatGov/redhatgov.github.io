@@ -12,7 +12,7 @@ layout: lab
 
 image::cgroups.png[]
 
-= CGroups
+== CGroups
 
 The https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Resource_Management_Guide/ch01.html[Device Cgroup] is primary in isolating and limiting containers to their own shares of CPU, memory, disk I/O, network, etc., other wise it will be denied.
 
@@ -32,11 +32,21 @@ We can check using the `https://docs.docker.com/engine/reference/commandline/sta
 [source, bash]
 ----
 sudo docker stats --no-stream fedora1
+----
 
+{{< panel_group >}}
+{{% panel "Result" %}}
 
+[source, bash]
+----
 CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
 f08a3b36f550        0.00%               312 KiB / 487.1 MiB   0.06%               450 B / 1.09 kB     0 B / 0 B           1
 ----
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+
 
 Now we can place a memory limit on this second container `fedora2` with the docker flag `https://docs.docker.com/engine/admin/resource_constraints/[--memory]`.
 
@@ -50,12 +60,22 @@ Now lets check again using the `docker stats` command to see the memory restrict
 [source, bash]
 ----
 sudo docker stats --no-stream fedora1 fedora2
+----
 
+{{< panel_group >}}
+{{% panel "Result" %}}
 
+[source, bash]
+----
 CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
 e55f29717477        0.00%               268 KiB / 150 MiB     0.17%               90 B / 1.03 kB      0 B / 0 B           1
 f08a3b36f550        0.00%               312 KiB / 487.1 MiB   0.06%               1.55 kB / 1.44 kB   0 B / 0 B           1
 ----
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+
 
 Now you know how to restrict the amount of memory a container is able to use.
 
@@ -99,11 +119,22 @@ Now lets see how many shares this container is using.
 [source, bash]
 ----
 sudo docker stats --no-stream fedora1
+----
 
 
+
+{{< panel_group >}}
+{{% panel "Result" %}}
+
+[source, bash]
+----
 CONTAINER           CPU %               MEM USAGE / LIMIT       MEM %               NET I/O             BLOCK I/O           PIDS
 fedora1             177.07%             1.449 MiB / 487.1 MiB   0.30%               450 B / 1.18 kB     0 B / 0 B           11
 ----
+
+{{% /panel %}}
+{{< /panel_group >}}
+
 
 CPU shares are defined as a value between 0-1024, however when idle the container will use all availible shares untill another process needs to use the existing shares. Let's run a example where another container needs to run and we divide up the shares equally.
 
@@ -117,11 +148,23 @@ Now lets see how the processer shares get divided between the two.
 [source, bash]
 ----
 sudo docker stats --no-stream fedora1 fedora2
+----
 
+
+{{< panel_group >}}
+{{% panel "Result" %}}
+
+[source, bash]
+----
 CONTAINER           CPU %               MEM USAGE / LIMIT       MEM %               NET I/O             BLOCK I/O           PIDS
 fedora1             76.28%              1.449 MiB / 487.1 MiB   0.30%               1.47 kB / 1.46 kB   0 B / 0 B           11
 fedora2             78.52%              1.527 MiB / 487.1 MiB   0.31%               90 B / 1.02 kB      0 B / 0 B           11
 ----
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+
 
 
 Now you know how to control the amount of CPU shares a container is able to use.

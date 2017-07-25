@@ -198,8 +198,16 @@ Then we will move on to our next exercise.
 sudo docker run --rm -it redis:3.2.8 bash
 ----
 
+
+
+{{< panel_group >}}
+{{% panel "Result" %}}
+
+:icons: font
+
 Now you are inside a container. In this example you can see out command shell changed to `[root@0636c3c4ee44 data]`. Try the following command `redis-server`.
 
+.In a Container
 [source,bash]
 ----
 [root@0636c3c4ee44 data]# redis-server
@@ -235,3 +243,8 @@ control + c
 ----
 [root@0636c3c4ee44 data]# exit
 ----
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+
