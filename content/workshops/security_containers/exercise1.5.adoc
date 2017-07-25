@@ -1,89 +1,62 @@
 ---
-title: "Exercise 1.5 - Seccomp"
+title: "Exercise 1.5 - Namespaces"
 workshops: security_containers
 workshop_weight: 70
 layout: lab
 ---
 
+:icons: font
+:imagesdir: /workshops/security_containers/images
 
-Apply SecComp Profile
-Permissions
-SecComp defines which system calls should and should not be allowed to be executed by a container. They're defined in a JSON file that is applied when a container starts. In this initial step we've defined seccomp permissions to disable allowing containers to run seccomp.
+= Exercise 1.5 - Namespaces
 
-cat 1_chmod.json
+TODO---------------------
 
-{
-    "defaultAction": "SCMP_ACT_ALLOW",
-    "architectures": [
-        "SCMP_ARCH_X86_64",
-        "SCMP_ARCH_X86",
-        "SCMP_ARCH_X32"
-    ],
-    "syscalls": [
-        {
-            "name": "chmod",
-            "action": "SCMP_ACT_ERRNO",
-            "args": []
-        },
-        {
-            "name": "chown",
-            "action": "SCMP_ACT_ERRNO",
-            "args": []
-        },
-        {
-            "name": "chown32",
-            "action": "SCMP_ACT_ERRNO",
-            "args": []
-        }
-    ]
-}
 
-Applying Restrictions to Containers
-Launch a container and try to run chmod.
+Network Namespace
+While cgroups control how much resources a process can use, Namespaces control what a process and see and access.
 
-docker run --rm -it \
-  --security-opt seccomp:1_chmod.json \
-  benhall/strace \
-  chmod 400 /etc/hostname
+Example
+When containers are launched, a network interface is defined and create. This gives the container a unique IP address and interface.
 
-Because our container attempted to execute chmod, the call failed with Operation not permitted. This is because our seccomp profile blocked it.
+docker run -it alpine ip addr show
 
-We can extend our seccomp profile to list all the calls we want to allow or disallow. This allows us to block potential attack vectors or close vulnerabilities without changing our application.
+By changing the namespace to host, instead of the container's network being isolated with it's own interface, the process will have access to the host machines network interface.
 
----------
+docker run -it --net=host alpine ip addr show
 
-Identify Syscalls
-SecComp is a very low level protocol. In order to block syscalls you first need to identify which calls are being made.
+If the process listens on ports, they'll be listened on the host interface and mapped to the container.
 
-strace is also used to identify the underlying syscall being made by the operating system. While the shell command is called chmod, the underlying system call could be different.
 
-If we take our profile and apply it to Ubuntu, the command will work.
 
-docker run --rm -it \
-  --cap-add SYS_PTRACE \
-  --security-opt seccomp:1_chmod.json \
-  benhall/strace-ubuntu \
-  chmod 400 / &&
-  echo $?
+Use Pid Namespace
+As with networks, the processes a container can see depends on which namespace it belongs too. By changing the Pid namespace allows a container to interact with processes beyond it's normal scope.
 
-This is because Ubuntu is using a different syscall under the covers. We need to use strace to update the syscall restrictions but first we need to identify the correct name. The strace commands will output every syscall made by a process. We can use this to identify calls we need to allow / disallow.
+Example
+The first container will run in it's own process namespace. As such the only processes it can access are the ones launched in the container.
 
-Below there are two containers, one based on Ubuntu and one based on Alpine. Run strace and identify which syscalls are being made by each container.
+docker run -it alpine ps aux
 
-strace on Ubuntu
-docker run --rm -it \
-  --cap-add SYS_PTRACE \
-  --security-opt seccomp:1_chmod.json \
-  benhall/strace-ubuntu \
-  strace chmod 400 /
+By changing the namespace to the host, the container can also see all the other processes running on the system.
 
-When is chmod executed? Is it successful?
+docker run -it --pid=host alpine ps aux
 
-strace on Apline
-docker run --rm -it \
-  --cap-add SYS_PTRACE \
-  --security-opt seccomp:1_chmod.json \
-  benhall/strace \
-  strace chmod 400 /
 
-Why is Alpine different?
+
+Sharing Namespaces
+Providing containers access to the host namespace is sometimes required, such as for debugging tooling, but is generally regarded as bad practice. This is because you're breaking out of the container security model which may introduce vulnerabilities. Instead, if it's required, use a shared namespace to provide access to only the namespaces the container requires.
+
+Example
+The first container starts an nginx server. This will define a new network and process namespace. The nginx server will bind itself to port 80 of the newly defined network interface.
+
+docker run -d --name http nginx:alpine
+
+Other containers can now reuse this namespace using the syntax container:<name>. Below the curl command can access the HTTP server running on localhost because they share the same network interface.
+
+docker run --net=container:http benhall/curl curl -s localhost
+
+It can also see and interface with the processes in the shared container.
+
+docker run --pid=container:http alpine ps aux
+
+This is useful for debugging tools, such as strace. This allows you to give more permissions to certain containers without changing or restarting the application.

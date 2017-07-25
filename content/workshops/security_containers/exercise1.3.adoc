@@ -5,6 +5,7 @@ workshop_weight: 50
 layout: lab
 ---
 
+:icons: font
 :imagesdir: /workshops/security_containers/images
 
 = Exercise 1.3 - Remove setuid/setgid Binaries

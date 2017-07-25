@@ -7,7 +7,7 @@ layout: lab
 
 :imagesdir: /workshops/security_containers/images
 
-= Exercise 1.5 - Read Only Containers
+= Exercise 1.6 - Read Only Containers
 
 image::readonly.png[]
 

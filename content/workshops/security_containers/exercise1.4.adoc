@@ -1,84 +1,151 @@
 ---
-title: "Exercise 1.4 - CGroups & Namespaces"
+title: "Exercise 1.4 - CGroups"
 workshops: security_containers
 workshop_weight: 60
 layout: lab
 ---
 
+:icons: font
+:imagesdir: /workshops/security_containers/images
 
-Step 1 - Define Memory Limits
-CGroups control how much resources a process can use. By adding restrictions you can deliver a guaranteed Quality of Service to applications by ensuring they have enough space available. It's also possible protect the system from potentially malicious users or applications aiming to perform Denial of Service (DoS) applications via resource exhaustion. This can also help limit applications from memory leaks or other programming bugs by defining upper boundaries.
+= Exercise 1.4 - CGroups
 
-Example
-docker run -d --name mb100 --memory 100m alpine top
+image::cgroups.png[]
 
-The memory usage ad limits of containers can be identified via the docker stats command.
+= CGroups
 
-docker stats --no-stream
+The https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Resource_Management_Guide/ch01.html[Device Cgroup] is primary in isolating and limiting containers to their own shares of CPU, memory, disk I/O, network, etc., other wise it will be denied.
 
---------------
-Define CPU Shares
-While memory limits defined a set maximum, CPU limits are based on shares. These shares are a weight between how much processing time one process should get compared to another. If a CPU is idle, then the process will use all the available resources. If a second process requires the CPU then the available CPU time will be shared based on the weighting.
+== Memory Limits
 
-Example
-Below is an example of starting a container with different shares. The --cpu-shares parameter defines a share between 0-1024. If a container defines a share of 1024, while another defines a share of 512, the first container will have 50% share with the other having 25% of the available share total.
+Docker uses Cgroups to control and limit the amount of system resources a container can use. This will help to protect a system runing from potential application memory leaks or Denial of Service DoS attacks that can consume all available memory and take down a system. By running containers with special docker flags we can restrict the amount of memory a container is able to consume even when a applcation is trying to consume more memory.
 
-Below the first container will be allowed to have 75% of the share. The second container will be limited to 25%.
 
-docker run -d --name c768 --cpuset-cpus 0 --cpu-shares 768 benhall/stress
-docker run -d --name c256 --cpuset-cpus 0 --cpu-shares 256 benhall/stress
-sleep 5
-docker stats --no-stream
-docker rm -f c768 c256
+[source, bash]
+----
+sudo docker run -d --name fedora1 fedora sleep 15m
+----
 
-It's important to note that a process can have 100% of the share, no matter defined weight, if no other processes is running.
+We can check using the `https://docs.docker.com/engine/reference/commandline/stats/#description[docker stats]` command and see that this instance `fedora1` has no memory limits placed on it.
 
---------------
 
-Use Network Namespace
-While cgroups control how much resources a process can use, Namespaces control what a process and see and access.
+[source, bash]
+----
+sudo docker stats --no-stream fedora1
 
-Example
-When containers are launched, a network interface is defined and create. This gives the container a unique IP address and interface.
 
-docker run -it alpine ip addr show
+CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+f08a3b36f550        0.00%               312 KiB / 487.1 MiB   0.06%               450 B / 1.09 kB     0 B / 0 B           1
+----
 
-By changing the namespace to host, instead of the container's network being isolated with it's own interface, the process will have access to the host machines network interface.
+Now we can place a memory limit on this second container `fedora2` with the docker flag `https://docs.docker.com/engine/admin/resource_constraints/[--memory]`.
 
-docker run -it --net=host alpine ip addr show
+[source, bash]
+----
+sudo docker run -d --name fedora2 --memory 150m fedora sleep 15m
+----
 
-If the process listens on ports, they'll be listened on the host interface and mapped to the container.
+Now lets check again using the `docker stats` command to see the memory restrictions it has placed on this new container.
 
---------------
+[source, bash]
+----
+sudo docker stats --no-stream fedora1 fedora2
 
-Use Pid Namespace
-As with networks, the processes a container can see depends on which namespace it belongs too. By changing the Pid namespace allows a container to interact with processes beyond it's normal scope.
 
-Example
-The first container will run in it's own process namespace. As such the only processes it can access are the ones launched in the container.
+CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+e55f29717477        0.00%               268 KiB / 150 MiB     0.17%               90 B / 1.03 kB      0 B / 0 B           1
+f08a3b36f550        0.00%               312 KiB / 487.1 MiB   0.06%               1.55 kB / 1.44 kB   0 B / 0 B           1
+----
 
-docker run -it alpine ps aux
+Now you know how to restrict the amount of memory a container is able to use.
 
-By changing the namespace to the host, the container can also see all the other processes running on the system.
+=== Clean Up
 
-docker run -it --pid=host alpine ps aux
+Lets clean up for the next exercise.
 
---------------
+Kill all running containers
+[source, bash]
+----
+sudo docker kill $(sudo docker ps -q)
+----
 
-Sharing Namespaces
-Providing containers access to the host namespace is sometimes required, such as for debugging tooling, but is generally regarded as bad practice. This is because you're breaking out of the container security model which may introduce vulnerabilities. Instead, if it's required, use a shared namespace to provide access to only the namespaces the container requires.
+Delete exited containers
+[source, bash]
+----
+sudo docker rm $(sudo docker ps -aqf status=exited)
+----
 
-Example
-The first container starts an nginx server. This will define a new network and process namespace. The nginx server will bind itself to port 80 of the newly defined network interface.
+Make sure everything is cleared out.
+[source, bash]
+----
+sudo docker ps -a
+----
 
-docker run -d --name http nginx:alpine
 
-Other containers can now reuse this namespace using the syntax container:<name>. Below the curl command can access the HTTP server running on localhost because they share the same network interface.
+== CPU Limits
 
-docker run --net=container:http benhall/curl curl -s localhost
+By default, each container’s access to the host machine’s CPU cycles is unlimited. Various constraints can be set to limit a given
+container’s access to the host machine’s CPU cycles. Docker provides several flags for setting limits on how many shares of a proccessor a container is able to use. Previously we looked at memory restrictions and setting a maximum ceiling for memory usage, CPU limits are set by shares. We can defin share weights for each container and slit the available shares between the containers for a single processor.
 
-It can also see and interface with the processes in the shared container.
+Lets run a container with `512` limit of CPU shares.
 
-docker run --pid=container:http alpine ps aux
+[source, bash]
+----
+sudo docker run -d --name fedora1 --cpuset-cpus 0 --cpu-shares 512 dkuffner/docker-stress --cpu 10
+----
 
-This is useful for debugging tools, such as strace. This allows you to give more permissions to certain containers without changing or restarting the application.
+Now lets see how many shares this container is using.
+
+[source, bash]
+----
+sudo docker stats --no-stream fedora1
+
+
+CONTAINER           CPU %               MEM USAGE / LIMIT       MEM %               NET I/O             BLOCK I/O           PIDS
+fedora1             177.07%             1.449 MiB / 487.1 MiB   0.30%               450 B / 1.18 kB     0 B / 0 B           11
+----
+
+CPU shares are defined as a value between 0-1024, however when idle the container will use all availible shares untill another process needs to use the existing shares. Let's run a example where another container needs to run and we divide up the shares equally.
+
+[source, bash]
+----
+sudo docker run -d --name fedora2 --cpuset-cpus 0 --cpu-shares 512 dkuffner/docker-stress --cpu 10
+----
+
+Now lets see how the processer shares get divided between the two.
+
+[source, bash]
+----
+sudo docker stats --no-stream fedora1 fedora2
+
+CONTAINER           CPU %               MEM USAGE / LIMIT       MEM %               NET I/O             BLOCK I/O           PIDS
+fedora1             76.28%              1.449 MiB / 487.1 MiB   0.30%               1.47 kB / 1.46 kB   0 B / 0 B           11
+fedora2             78.52%              1.527 MiB / 487.1 MiB   0.31%               90 B / 1.02 kB      0 B / 0 B           11
+----
+
+
+Now you know how to control the amount of CPU shares a container is able to use.
+
+=== Clean Up
+
+Lets clean up for the next exercise.
+
+Kill all running containers
+[source, bash]
+----
+sudo docker kill $(sudo docker ps -q)
+----
+
+Delete exited containers
+[source, bash]
+----
+sudo docker rm $(sudo docker ps -aqf status=exited)
+----
+
+Make sure everything is cleared out.
+[source, bash]
+----
+sudo docker ps -a
+----
+
+

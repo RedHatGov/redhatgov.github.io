@@ -5,6 +5,7 @@ workshop_weight: 30
 layout: lab
 ---
 
+:icons: font
 :imagesdir: /workshops/security_containers/images
 
 = Exercise 1.1 - Reproducible and Trustworthy Dockerfiles
@@ -79,15 +80,15 @@ For example, to create a checksum for a Redis release:
 
 [source,bash]
 ----
-curl -s -o redis.tar.gz \
-http://download.redis.io/releases/redis-3.2.8.tar.gz
+curl http://download.redis.io/releases/redis-3.2.8.tar.gz --output redis.tar.gz --progress-bar
 ----
 
 [source,bash]
 ----
 sha1sum -b redis.tar.gz
 
-  6780d1abb66f33a97aad0edbe020403d0a15b67f *redis.tar.gz
+
+6780d1abb66f33a97aad0edbe020403d0a15b67f *redis.tar.gz
 ----
 
 Here, we’re creating a 160-bit SHA-1 checksum. The -b flag tells the sha1sum
@@ -197,8 +198,40 @@ Then we will move on to our next exercise.
 sudo docker run --rm -it redis:3.2.8 bash
 ----
 
+Now you are inside a container. In this example you can see out command shell changed to `[root@0636c3c4ee44 data]`. Try the following command `redis-server`.
+
+[source,bash]
+----
+[root@0636c3c4ee44 data]# redis-server
+19:C 20 Jul 13:56:30.299 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+                _._
+           _.-``__ ''-._
+      _.-``    `.  `_.  ''-._           Redis 3.2.8 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 19
+  `-._    `-._  `-./  _.-'    _.-'
+ |`-._`-._    `-.__.-'    _.-'_.-'|
+ |    `-._`-._        _.-'_.-'    |           http://redis.io
+  `-._    `-._`-.__.-'_.-'    _.-'
+ |`-._`-._    `-.__.-'    _.-'_.-'|
+ |    `-._`-._        _.-'_.-'    |
+  `-._    `-._`-.__.-'_.-'    _.-'
+      `-._    `-.__.-'    _.-'
+          `-._        _.-'
+              `-.__.-'
+
+----
+
+Type `control + c` to exit.
+[source,bash]
+----
+control + c
+----
+
 .Type `exit` to quit
 [source,bash]
 ----
-exit
+[root@0636c3c4ee44 data]# exit
 ----

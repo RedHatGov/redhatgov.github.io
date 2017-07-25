@@ -1,14 +1,15 @@
 ---
 title: "Exercise 1.8 - SELinux"
 workshops: security_containers
-workshop_weight: 100
+workshop_weight: 91
 layout: lab
 ---
 
+:icons: font
 :source-language: bash
 :imagesdir: /workshops/security_containers/images
 
-= Exercise 1.6 - SELinux
+= Exercise 1.8 - SELinux
 
 image::selinux.png[]
 

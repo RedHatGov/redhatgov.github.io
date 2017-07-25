@@ -1,284 +1,359 @@
 ---
-title: "Exercise 1.7 - Linux Kernel Capabilities"
+title: "Exercise 1.7 - Seccomp"
 workshops: security_containers
 workshop_weight: 90
 layout: lab
 ---
 
-:source-highlighter: highlight.js
+:icons: font
 :imagesdir: /workshops/security_containers/images
 
-= Exercise 1.4 - Linux Kernel Capabilities
+= Exercise 1.7 - Seccomp
 
-image::kernel.png[]
+Secure Computing Mode (seccomp) is a kernel feature that allows you to filter system calls to the kernel from a container. The combination of restricted and allowed calls are arranged in profiles, and you can pass different profiles to different containers. Seccomp provides more fine-grained control than capabilities, giving an attacker a limited number of syscalls from the container.
 
-== What are Linux Capabilities?
+The default seccomp profile for docker is a JSON file and can be viewed here: https://github.com/docker/docker/blob/master/profiles/seccomp/default.json. It blocks 44 system calls out of more than 300 available.Making the list stricter would be a trade-off with application compatibility. A table with a significant part of the blocked calls and the reasoning for blocking can be found here: https://docs.docker.com/engine/security/seccomp/.
 
-According to the capabilities man page;
+Seccomp uses the Berkeley Packet Filter (BPF) system, which is programmable on the fly so you can make a custom filter. You can also limit a certain syscall by also customizing the conditions on how or when it should be limited. A seccomp filter replaces the syscall with a pointer to a BPF program, which will execute that program instead of the syscall. All children to a process with this filter will inherit the filter as well. The docker option which is used to operate with seccomp is `--security-opt`. To explicitly use the default policy for a container, the command will be:
 
-_Capabilities are distinct units of privilege that can be independently enabled
-or disabled._
-
-Capabilities were added to the kernel around 15 or so years ago to try to
-divide up the power of root. Originally the kernel allocated a 32-bit bitmask
-to define these capabilities. A few years ago it was expanded to 64. There are
-currently around 38 capabilities defined.
-
-Capabilities are things like the ability to send raw IP packets, change
-hostnames or bind to ports below 1024. When we run containers we can drop a
-whole bunch of capabilities before running our containers without causing the
-vast majority of containerized applications to fail.
-
-Most capabilities are required to manipulate the kernel/system, and these are
-used by the container framework (docker), but seldom used by the processes
-running inside the container. However, some containers require a few
-capabilities, for example a container process needs capabilities like
-setuid/setgid to drop privileges. As with most things in the container world,
-we try to establish a compromise between security and the ability to get work
-done.
-
-Luckily we also use additional tools like
-https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/SELinux_Users_and_Administrators_Guide/[SELinux],
-https://en.wikipedia.org/wiki/Seccomp[seccomp], and
-http://rhelblog.redhat.com/2015/07/07/whats-next-for-containers-user-namespaces/[namespaces]
-to protect the host system from the containers.
-
-*Bottom line: dropping more of the capabilities from your container is a good
-idea from a security point of view.*
-
-== Linux Capabilities
+[source,bash]
+----
+docker run --security-opt seccomp=/path/to/default/profile.json <container>
+----
 
 === Step 1:
 
-So, how can we drop these capabilities using docker? First, let’s see what
-capabilities a process has. There is a cool tool in Linux that can help you
-view what capabilities a process has called `pscap`, available in the
-`libcap-ng-utils` package on Fedora.
+Lets take a look at the `1_chmod.json` file. This is a example seccomp file that will not allow the `chmod`, `chown`, or `chown32` systemcalls.
 
-.See current processes
 [source,bash]
 ----
-pscap | head -10
+cat 1_chmod.json
+
+{
+    "defaultAction": "SCMP_ACT_ALLOW",
+    "architectures": [
+        "SCMP_ARCH_X86_64",
+        "SCMP_ARCH_X86",
+        "SCMP_ARCH_X32"
+    ],
+    "syscalls": [
+        {
+            "name": "chmod",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        },
+        {
+            "name": "chown",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        },
+        {
+            "name": "chown32",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        }
+    ]
+}
 ----
 
-.See processes of a normal container
+Lets take a closer look at how this file restricts these system calls.
+
 [source,bash]
 ----
-sudo docker run -d fedora sleep 5 >/dev/null; pscap | grep sleep
+"syscalls": [
+        {
+            "name": "chmod",                <1>
+            "action": "SCMP_ACT_ERRNO",     <2>
 ----
+
+
+<1> *chmod*:  is the command and system call which may change the access permissions to file system objects (files and directories). It may also alter special mode flags. The request is filtered by the umask. The name is an abbreviation of change mode.
+<2> SCMP_ACT_ERRNO: Basically this blocks the chmod syscall. Man page: The thread will receive a return value of errno when it calls a syscall that matches the filter rule.
+
+
 
 === Step 2:
 
-If I wanted to drop `setfcap`, `audit_write`, and `mknod`, I could use
-`--cap-drop=setfcap`  `--cap-drop=audit_write` `--cap-drop=mknod`:
 
-.Dropping setfcap, audit_write, mknod
+Lets apply these restrictions to a container by using the `--security-opt` flag to point to our `1_chmod.json` file. We will start a container and try to run the chmod command on a file.
+
 [source,bash]
 ----
-sudo docker run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod
-fedora sleep 5 > /dev/null; pscap | grep sleep
+sudo docker run --rm -it --security-opt seccomp:1_chmod.json redhatgov/alpine chmod 400 /etc/hosts
 ----
+{{< panel_group >}}
+{{% panel "Result" %}}
 
-=== Step 3:
+:icons: font
 
-Better yet, if you know your container only needs setuid and setgid, you can
-drop all capabilities and just add setgid and setuid back in.
-
-.Whitelisting Capabilities
 [source,bash]
 ----
-sudo docker run -d --cap-drop=all --cap-add=setuid --cap-add=setgid fedora
-sleep 5 > /dev/null; pscap | grep sleep
+chmod: /etc/hosts: Operation not permitted
 ----
 
-The following bellow is a comparison of the out put form blacklisting vs.
-whitelisting.
+This `FAILED` because we explicitly denied this syscall to the container via the seccomp profile. This profile can be updated to enable or disable syscalls for your application.
 
-.Compare the output
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+
+
+
+== Syscall Identification
+
+Not all container operating systems use the same mappings for syscalls. While one OS may use a direct mapping of the binary `chown` to the syscall `chown` it is not always the case for other operating systems.
+
+To find out what syscalls your application or command is using under the covers we need to profile or trace the application and the syscalls it is making. To do this we use a tool called https://linux.die.net/man/1/strace[`strace`].
+
+Strace is used to identify the underlying syscall being made by the operating system. Lets walk through a example where the syscalls being made do not map directly to our syscalls in the `1_chmod.json` file.
+
+
+=== Step 1:
+
+Let's run a instance of Fedora and use the same `1_chmod.json` profile to try and limit the `chmod` command inside the container.
+
+
 [source,bash]
 ----
-chown, dac_override, fowner, fsetid, kill, setgid, setuid, setpcap,
-net_bind_service, net_raw, sys_chroot <1>
-
-vs.
-
-setgid, setuid <2>
+docker run --rm \
+           -it  \
+           --cap-add SYS_PTRACE \
+           --security-opt seccomp:1_chmod.json \
+           redhatgov/fedora \
+           chmod 400 /etc/hosts && echo $?
 ----
 
-<1> Blacklisting: Specifying each capability you want to drop.
+The command should return a zero. This means that the container was able to `chmod` the `/etc/hosts` file. We want to limit this action and need to map the correct syscall to out seccomp profile. To identify the correct syscall we need to use `strace`.
 
-<2> Whitelisting: Droping all and adding back the ones you need.
 
-== Deep Dive into Capabilities
+=== Step 2:
 
-Lets look deeper into each of these capabilities.
+Lets run the same command again and add the https://linux.die.net/man/1/strace[`strace`] program to our command to trace the `chmod` command.
 
-`*chown*`
 
-The man page describes chown as the ability to make arbitrary changes to file
-UIDs and GIDs.
+[source,bash]
+----
+sudo docker run --rm -it --cap-add SYS_PTRACE --security-opt seccomp:1_chmod.json redhatgov/fedora strace chmod 400 /etc/hosts
+----
 
-This means that root can change the ownership or group of any file system
-object. If you are not running a shell within a container and not installing
-packages into the container, you should drop this capability.
+Create a seccomp profile using the new mappings for system calls for `chmod` & `chown`. Check your answer below.
 
-I would make the argument this should never be needed in production. If you
-need to chown, allow the capability, do the work, then take it away.
 
-`*dac_override*`
+{{< panel_group >}}
+{{% panel "Seccomp Profile" %}}
 
-The man page says that dac_override allows root to bypass file read, write, and
-execute permission checks. DAC is an abbreviation of “discretionary access
-control”.
+Create the following profile using vim, or your favorite editor.
 
-This means a root capable process can read, write, and execute any file on the
-system, even if the permission and ownership fields would not allow it. Almost
-no apps need DAC_OVERRIDE, and if they do they are probably doing something
-wrong. There are probably less than ten in the whole distribution that actually
-need it. Of course the administrator shell could require DAC_OVERRIDE fixing
-bad permissions in the file system.
 
-Steve Grubb, security standards expert at Red Hat, says that “nothing should
-need this. If your container needs this, it’s probably doing something
-horrible.”
+.2_chmod_fedora.json
+[source,bash]
+----
+{
+    "defaultAction": "SCMP_ACT_ALLOW",
+    "architectures": [
+        "SCMP_ARCH_X86_64",
+        "SCMP_ARCH_X86",
+        "SCMP_ARCH_X32"
+    ],
+    "syscalls": [
+        {
+            "name": "fchmodat",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        },
+        {
+            "name": "fchownat",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        }
+    ]
+}
+----
 
-`*fowner*`
 
-According to the man page, fowner conveys the ability to bypass permission
-checks on operations that normally require the filesystem UID of the process to
-match the UID of the file. For example, chmod and utime, and excludes
-operations covered by cap_dac_override and cap_dac_read_search. Here’s more
-from the man page:
+https://linux.die.net/man/2/fchmodat[fchmodat]
 
-set extended file attributes (see chattr(1)) on arbitrary files;
-set Access Control Lists (ACLs) on arbitrary files;
-ignore directory sticky bit on file deletion;
-specify O_NOATIME for arbitrary files in open(2) and fcntl(2).
-This is similar to DAC_OVERRIDE, almost no applications need this other than,
-potentially, software installation tools. Most likely your container would run
-fine without this capability. You might need to allow this for docker build but
-it should be blocked it when you run your container is production.
+https://linux.die.net/man/2/fchownat[fchownat]
 
-`*fsetid*`
+{{% /panel %}}
+{{< /panel_group >}}
 
-The man page says “don’t clear set-user-ID and set-group-ID mode bits when a
-file is modified; set the set-group-ID bit for a file whose GID does not match
-the filesystem or any of the supplementary GIDs of the calling process.”
 
-My take: if you are not running an installation, you probably do not need this
-capability. I would disable this one by default.
+We have now found the correct syscall to add to our seccomp profile. Let's create a seccomp profile with our new syscall mapping. Now we can create a seccomp profile called `2_chmod_fedora.json` using vim, or your favorite editor. You can copy and paster the seccomp profile above into this profile.
 
-`*kill*`
+Now that you have your new profile created, let's run the container again and see if our new seccomp profile blocks `chmod` & `chown` from working.
 
-If a process has this capability it can override the restriction that “the real
-or effective user ID of a process sending a signal must match the real or
-effective user ID of the process receiving the signal.”
+.chmod
+[source,bash]
+----
+sudo docker run --rm -it --security-opt seccomp:2_chmod_fedora.json redhatgov/fedora chmod 400 /etc/hosts
+----
 
-This capability basically means that a root owned process can send kill signals
-to non root processes. If your container is running all processes as root or
-the root processes never kills processes running as non root, you do not need
-this capability. If you are running systemd as PID 1 inside of a container and
-you want to stop a container running with a different UID you might need this
-capability.
+{{< panel_group >}}
+{{% panel "Chmod Result" %}}
 
-It’s probably also worth mentioning on the danger scale, this one is on the low
-end.
+[source,bash]
+----
+chmod: changing permissions of '/etc/hosts': Operation not permitted
+----
 
-`*setgid*`
+{{% /panel %}}
+{{< /panel_group >}}
 
-The man page says that the setgid capability lets a process make arbitrary
-manipulations of process GIDs and supplementary GID list. It can also forge GID
-when passing socket credentials via UNIX domain sockets or write a group ID
-mapping in a user namespace. See user_namespaces(7) for more information.
+.chown
+[source,bash]
+----
+sudo docker run --rm -it --security-opt seccomp:2_chmod_fedora.json redhatgov/fedora chown root:root /etc/hosts
+----
 
-In short, a process with this capability can change its GID to any other GID.
-Basically allows full group access to all files on the system. If your
-container processes do not change UIDs/GIDs, they do not need this capability.
+{{< panel_group >}}
+{{% panel "Chown Result" %}}
 
-`*setuid*`
+[source,bash]
+----
+chown: changing ownership of '/etc/hosts': Operation not permitted
+----
 
-If a process has the setuid capability it can “make arbitrary manipulations of
-process UIDs (setuid(2), setreuid(2), setresuid(2), setfsuid(2)); forge UID
-when passing socket credentials via UNIX domain sockets; write a user ID
-mapping in a user namespace (see user_namespaces(7)).”
+{{% /panel %}}
+{{< /panel_group >}}
 
-A process with this capability can change its UID to any other UID. Basically,
-it allows full access to all files on the system. If your container processes
-do not change UIDs/GIDs always running as the same UID, preferably non root,
-they do not need this capability. Applications that that need setuid usually
-start as root in order to bind to ports below 1024 and then changes their UIDS
-and drop capabilities. Apache binding to port 80 requires net_bind_service,
-usually starting as root. It then needs setuid/setgid to switch to the apache
-user and drop capabilities.
+== Limit Network Syscalls
 
-Most containers can safely drop setuid/setgid capability.
+Docker presents the socket syscall to containers by default, this my not be a capability you want your containers to have in certain situations. Let's look at another example where we use the Swiss army knife of networking https://linux.die.net/man/1/nc[Netcat]. Netcat is used for just about anything under the sun involving TCP or UDP. It can open TCP connections, send UDP packets, listen on arbitrary TCP and UDP ports, do port scanning, and deal with both IPv4 and IPv6. These may not be features you want you containers to have.
 
-`*setpcap*`
 
-Let’s look at the man page description: “Add any capability from the calling
-thread’s bounding set to its inheritable set; drop capabilities from the
-bounding set (via prctl(2) PR_CAPBSET_DROP); make changes to the securebits
-flags.”
+=== Step 1:
 
-In layman’s terms, a process with this capability can change its current
-capability set within its bounding set. Meaning a process could drop
-capabilities or add capabilities if it did not currently have them, but limited
-by the bounding set capabilities.
+Let's run a container with Netcat installed in it and listen for local traffic on port 999.
 
-`*net_bind_service*`
 
-This one’s easy. If you have this capability, you can bind to privileged ports
-(e.g., those below 1024).
+[source,bash]
+----
+sudo docker run --rm -it redhatgov/fedora bash
+----
 
-If you want to bind to a port below 1024 you need this capability. If you are
-running a service that listens to a port above 1024 you should drop this
-capability.
+.In a Container
+[source,bash]
+----
+[root@2b1369bfa927 /]# nc -l 999
+^C <1>
 
-The risk of this capabilty is a rogue process interpreting a service like sshd,
-and collecting users passwords. Running a container in a different network
-namespace reduces the risk of this capability. It would be difficult for the
-container process to get to the public network interface
+[root@2b1369bfa927 /]# exit
+exit <2>
+----
 
-`*net_raw*`
+<1> Netcat successfully connected. Use `Control + C` to exit Netcat.
+<2> `exit` to exit the container.
 
-The man page says, “allow use of RAW and PACKET sockets. Allow binding to any
-address for transparent proxying.”
+We were able to bind to the localhost and listen for traffic on port 999. In step 2 lets work on disabling networking in this container.
 
-This access allows a process to spy on packets on its network. That’s bad,
-right? Most container processes would not need this access so it probably
-should be dropped. Note this would only affect the containers that share the
-same network that your container process is running on, usually preventing
-access to the real network.
 
-RAW sockets also give an attacker the ability to inject scary things onto the
-network. Depending on what you are doing with the ping command, it could
-require this access.
 
-`*sys_chroot*`
+=== Step 2:
 
-This capability allows use of chroot(). In other words, it allows your
-processes to chroot into a different rootfs. chroot is probably not used within
-your container, so it should be dropped.
+Let's run strace on the Netcat program to identify the syscalls we need for out seccomp profile that will restrict networking from our container.
 
-`*mknod*`
+[source,bash]
+----
+docker run --rm -it --cap-add SYS_PTRACE redhatgov/fedora bash
+----
 
-If you have this capability, you can create special files using mknod.
+Then from inside the container run strace and the netcat command.
 
-This allows your processes to create device nodes. Containers are usually
-provided all of the device nodes they need in /dev, the creation of device
-nodes is controlled by the device node cgroup, but I really think this should
-be dropped by default. Almost no containers ever do this, and even fewer
-containers should do this.
+[source,bash]
+----
+[root@9ad9f00480a0 /]# strace nc -l 999
+----
 
-`*audit_write*`
+{{< panel_group >}}
+{{% panel "Strace results" %}}
 
-If you have this one, you can write a message to kernel auditing log. Few
-processes attempt to write to the audit log (login programs, su, sudo) and
-processes inside of the container are probably not trusted. The audit subsystem
-is not currently namespace aware, so this should be dropped by default.
+:icons: font
 
-`*setfcap*`
+[source,bash]
+----
+execve("/usr/bin/nc", ["nc", "-l", "555"], 0x7ffd48b77df0 /* 10 vars */) = 0
+brk(NULL)                               = 0x555a8f451000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f97676cc000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
 
-Finally, the setfcap capability allows you to set file capabilities on a file
-system. Might be needed for doing installs during builds, but in production it
-should probably be dropped.
+..<SNIP>..
+
+socket(AF_INET6, SOCK_STREAM, IPPROTO_TCP) = -1 EPERM (Operation not permitted) <1>
+socket(AF_INET, SOCK_STREAM, IPPROTO_TCP) = -1 EPERM (Operation not permitted)  <2>
+write(2, "Ncat: ", 6Ncat: )                   = 6
+write(2, "Unable to open any listening soc"..., 37Unable to open any listening sockets.) = 37 <3>
+write(2, " QUITTING.\n", 11 QUITTING.
+)            = 11
+exit_group(2)                           = ?
++++ exited with 2 +++
+----
+
+<1> socket syscall
+<2> socket syscall
+<3> Failed to make socket connection message
+
+http://man7.org/linux/man-pages/man2/socket.2.html[`Socket Syscall Manpage`]
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+We have now found the correct syscall to add to our seccomp profile. Let's create a seccomp profile with our new syscall mapping.
+
+{{< panel_group >}}
+{{% panel "Seccomp Profile" %}}
+
+:icons: font
+
+[source,bash]
+----
+{
+   "defaultAction":"SCMP_ACT_ALLOW",
+   "syscalls":[
+      {
+         "name":"socket",
+         "action":"SCMP_ACT_ERRNO"
+      }
+   ]
+}
+----
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+Now we can create a seccomp profile called `3_network.json` using vim, or your favorite editor. You can copy and paster the seccomp profile above into this profile.
+
+Now that you have your new profile created, let's run the container again and see if our new seccomp profile blocks Netcat from working.
+
+{{< panel_group >}}
+{{% panel "Answer" %}}
+
+:icons: font
+
+[source,bash]
+----
+docker run --rm -it --security-opt seccomp:3_network.json redhatgov/fedora bash
+----
+
+.In a Container
+[source,bash]
+----
+[root@de51762b4213 /]# nc -l 555
+Ncat: Unable to open any listening sockets. QUITTING. <1>
+----
+
+<1> Netcat is blocked from connecting to a network socket via the seccomp profile.
+
+
+.Exit the container
+[source,bash]
+----
+[root@de51762b4213 /]# exit
+exit
+----
+
+This `FAILED` because we explicitly denied this syscall to the container via the seccomp profile. This profile can help to stop would-be attackers from being able to further compromise a container or container host.
+
+{{% /panel %}}
+{{< /panel_group >}}

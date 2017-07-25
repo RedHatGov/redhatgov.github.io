@@ -5,6 +5,7 @@ workshop_weight: 30
 layout: lab
 ---
 
+:icons: font
 :source-highlighter: highlight.js
 :source-language: bash
 :iconsdir: http://people.redhat.com/~jduncan/images/icons
@@ -64,7 +65,7 @@ oc cluster up --public-hostname=$(curl -s http://169.254.169.254/latest/meta-dat
 
 
 .Successful Build (example)
-[source]
+[source,bash]
 ----
 -- Login to server ... OK
 -- Creating initial project "myproject" ... OK
@@ -187,7 +188,7 @@ https://github.com/openshift/origin/blob/master/docs/cluster_up_down.md#specifyi
 
 [TIP]
 .Details on the oc command (Informational Only)
-[source]
+[source,bash]
 ----
 oc cluster up \
    --public-hostname=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) \ <1>
