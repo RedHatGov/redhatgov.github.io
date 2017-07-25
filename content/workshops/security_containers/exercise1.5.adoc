@@ -10,7 +10,11 @@ layout: lab
 
 = Exercise 1.5 - Namespaces
 
-== Pid Namespace
+image::namespaces.png[]
+
+== Namespaces
+
+=== Pid Namespace
 
 PID namespaces allow processes in different containers to have the same PID, so each container can have its own init (PID1) process that manages various system initialization tasks as well as containers life cycle. Also, each container has its unique /proc directory. Note that from within the container you can monitor only processes running inside this container. In other words, the container is only aware of its native processes and can not "see" the processes running in different parts of the system. On the other hand, the host operating system is aware of processes running inside of the container, but assigns them different PID numbers.
 
@@ -18,7 +22,7 @@ Let's launch a container in it's own namespace and see what process it can see f
 
 [source, bash]
 ----
-docker run -it redhatgov/alpine ps aux
+sudo docker run -it redhatgov/alpine ps aux
 ----
 
 {{< panel_group >}}
@@ -42,7 +46,7 @@ Containers can share namespaces with other containers. This has to be explicitly
 
 [source, bash]
 ----
-docker run -it --pid=host redhatgov/alpine ps aux
+sudo docker run -it --pid=host redhatgov/alpine ps aux
 ----
 
 {{< panel_group >}}
@@ -162,16 +166,16 @@ As you can see we now have access to all of the processes running on host system
 {{< /panel_group >}}
 
 
-== Network Namespace
+=== Network Namespace
 
 Network namespaces provide isolation of network controllers, system resources associated with networking, firewall and routing tables. This allows container to use separate virtual network stack, loopback device and process space. You can add virtual or real devices to the container, assign them their own IP Addresses and even full iptables rules.
 
-Network namespaces create containers with unique IP address and interfaces when containers are launched. Let's run a container and examine the default container network interface.
+Network namespaces allow containers to be created with unique IP address and interfaces. Let's run a container and examine the default container network interface.
 
 
 [source,bash]
 ----
-docker run -it redhatgov/alpine ip addr show
+sudo docker run -it redhatgov/alpine ip addr show
 ----
 
 {{< panel_group >}}
@@ -206,7 +210,7 @@ By default a container's network is isolated with it's own IP and interface. By 
 
 [source,bash]
 ----
-docker run -it --network=host redhatgov/alpine ip addr show
+sudo docker run -it --network=host redhatgov/alpine ip addr show
 ----
 
 {{< panel_group >}}
@@ -265,7 +269,7 @@ Let's examine how we can share the networking namespace between containers. We w
 
 [source,bash]
 ----
-docker run -d --name http nginx:alpine
+sudo docker run -d --name http nginx:alpine
 ----
 
 Now that we have the Nginx container running in the background as a daemon (-d) we will launch a second container and see if we can use curl to connect to the Nginx container.
@@ -341,7 +345,7 @@ It can also see and interface with the processes in the shared container.
 
 [source,bash]
 ----
-docker run --pid=container:http alpine ps aux
+sudo docker run --pid=container:http alpine ps aux
 ----
 
 {{< panel_group >}}

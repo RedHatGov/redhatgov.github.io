@@ -20,7 +20,7 @@ Seccomp uses the Berkeley Packet Filter (BPF) system, which is programmable on t
 
 [source,bash]
 ----
-docker run --security-opt seccomp=/path/to/default/profile.json <container>
+sudo docker run --security-opt seccomp=/path/to/default/profile.json <container>
 ----
 
 === Step 1:
@@ -118,12 +118,12 @@ Let's run a instance of Fedora and use the same `1_chmod.json` profile to try an
 
 [source,bash]
 ----
-docker run --rm \
-           -it  \
-           --cap-add SYS_PTRACE \
-           --security-opt seccomp:1_chmod.json \
-           redhatgov/fedora \
-           chmod 400 /etc/hosts && echo $?
+sudo docker run --rm \
+                -it  \
+                --cap-add SYS_PTRACE \
+                --security-opt seccomp:1_chmod.json \
+                redhatgov/fedora \
+                chmod 400 /etc/hosts && echo $?
 ----
 
 The command should return a zero. This means that the container was able to `chmod` the `/etc/hosts` file. We want to limit this action and need to map the correct syscall to out seccomp profile. To identify the correct syscall we need to use `strace`.
@@ -258,7 +258,7 @@ Let's run strace on the Netcat program to identify the syscalls we need for out 
 
 [source,bash]
 ----
-docker run --rm -it --cap-add SYS_PTRACE redhatgov/fedora bash
+sudo docker run --rm -it --cap-add SYS_PTRACE redhatgov/fedora bash
 ----
 
 Then from inside the container run strace and the netcat command.
@@ -335,7 +335,7 @@ Now that you have your new profile created, let's run the container again and se
 
 [source,bash]
 ----
-docker run --rm -it --security-opt seccomp:3_network.json redhatgov/fedora bash
+sudo docker run --rm -it --security-opt seccomp:3_network.json redhatgov/fedora bash
 ----
 
 .In a Container

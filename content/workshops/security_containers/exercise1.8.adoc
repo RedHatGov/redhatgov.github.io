@@ -107,15 +107,52 @@ Attending!" >> /data/file1.txt'
 cat data/file1.txt
 ----
 
-== SELinux Resources
+== DOCKER SELINUX SECURITY POLICY
 
-- https://stopdisablingselinux.com/[Seriously, stop disabling SELinux.]
-- https://www.youtube.com/watch?v=cNoVgDqqJmM&feature=youtu.be[Security-enhanced
-Linux for mere mortals - 2015 Red Hat Summit]
-- https://www.nsa.gov/what-we-do/research/selinux/mailing-list.shtml[SELinux NSA
-Mailing List]
+The Docker SELinux security policy is similar to the libvirt security policy
+and is based on the libvirt security policy.
+
+The libvirt security policy is a series of SELinux policies that defines two
+ways of isolating virtual machines. Generally, virtual machines are prevented
+from accessing parts of the network. Specifically, individual virtual machines
+are denied access to one another’s resources.
+
+Red Hat extends the libvirt-SELinux model to Docker. The Docker SELinux role
+and Docker SELinux types are based on libvirt. For example, by default, Docker
+has access to /usr/var/ and some other locations, but it has complete access to
+things that are labeled with svirt_sandbox_file_t.
+
+https://www.mankier.com/8/docker_selinux - this explains the entire Docker
+SELinux policy. It is not in layman’s terms, but it is complete.
+
+`svirt_sandbox_file_t`
+
+[source,bash]
+----
+system_u:system_r:svirt_lxc_net_t:s0:c186,c641
+^      ^           ^          ^     ^--- unique category
+|      |           |          |----  secret-level 0
+|      |           |--- a shared type
+|      |---SELinux role
+|------ SELinux user
+----
+
+If a file is labeled `svirt_sandbox_file_t`, then by default all containers can
+read it. But if the containers write into a directory that has
+`svirt_sandbox_file_t` ownership, they write using their own category (which in
+this case is `c186` , `c641`). If you start the same container twice, it will
+get a new category the second time ( a different category than it had the first
+time). The category system isolates containers from one another.
+
+Types can be applied to processes and to files.
 
 == SELinux Coloring Book
+
+{{< panel_group >}}
+{{% panel "SELinux Coloring Book" %}}
+
+:icons: font
+:imagesdir: /workshops/security_containers/images
 
 Imagine a system where we define types on objects like cats and dogs. A cat and
 dog are process types:
@@ -155,41 +192,14 @@ dog process tried to eat the cat_chow, the kernel would prevent it.
 
 image::selinux7.png[Stopped by Kernel]
 
-== DOCKER SELINUX SECURITY POLICY
+{{% /panel %}}
+{{< /panel_group >}}
 
-The Docker SELinux security policy is similar to the libvirt security policy
-and is based on the libvirt security policy.
+== SELinux Resources
 
-The libvirt security policy is a series of SELinux policies that defines two
-ways of isolating virtual machines. Generally, virtual machines are prevented
-from accessing parts of the network. Specifically, individual virtual machines
-are denied access to one another’s resources.
+- https://stopdisablingselinux.com/[Seriously, stop disabling SELinux.]
+- https://www.youtube.com/watch?v=cNoVgDqqJmM&feature=youtu.be[Security-enhanced
+Linux for mere mortals - 2015 Red Hat Summit]
+- https://www.nsa.gov/what-we-do/research/selinux/mailing-list.shtml[SELinux NSA
+Mailing List]
 
-Red Hat extends the libvirt-SELinux model to Docker. The Docker SELinux role
-and Docker SELinux types are based on libvirt. For example, by default, Docker
-has access to /usr/var/ and some other locations, but it has complete access to
-things that are labeled with svirt_sandbox_file_t.
-
-https://www.mankier.com/8/docker_selinux - this explains the entire Docker
-SELinux policy. It is not in layman’s terms, but it is complete.
-
-`svirt_sandbox_file_t`
-
-[source,bash]
-----
-system_u:system_r:svirt_lxc_net_t:s0:c186,c641
-^      ^           ^          ^     ^--- unique category
-|      |           |          |----  secret-level 0
-|      |           |--- a shared type
-|      |---SELinux role
-|------ SELinux user
-----
-
-If a file is labeled `svirt_sandbox_file_t`, then by default all containers can
-read it. But if the containers write into a directory that has
-`svirt_sandbox_file_t` ownership, they write using their own category (which in
-this case is `c186` , `c641`). If you start the same container twice, it will
-get a new category the second time ( a different category than it had the first
-time). The category system isolates containers from one another.
-
-Types can be applied to processes and to files.

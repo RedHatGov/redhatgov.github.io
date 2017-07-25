@@ -112,7 +112,10 @@ setgid, setuid <2>
 
 == Deep Dive into Capabilities
 
-Lets look deeper into each of these capabilities.
+Lets look deeper into each of these Linux Capabilities.
+
+{{< panel_group >}}
+{{% panel "Linux Capabilities" %}}
 
 `*chown*`
 
@@ -283,3 +286,6 @@ is not currently namespace aware, so this should be dropped by default.
 Finally, the setfcap capability allows you to set file capabilities on a file
 system. Might be needed for doing installs during builds, but in production it
 should probably be dropped.
+
+{{% /panel %}}
+{{< /panel_group >}}
