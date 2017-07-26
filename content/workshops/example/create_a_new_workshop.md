@@ -218,6 +218,12 @@ under your new workshop.
 - `layout`: Keep this value set to `lab` as it will ensure the proper layout of
   your content and will include forward and back buttons for your labs.
 
+{{% alert info %}}
+You may need to restart the Hugo server in order for your listing of labs to show up on the workshop index.
+
+Hit ctrl+c in the terminal window where you launched the hugo server command. Then rerun hugo server to restart.
+{{% /alert %}}
+
 ## Step 3
 
 You are now free to add your own content for your workshop.
