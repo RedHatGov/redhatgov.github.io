@@ -34,17 +34,17 @@ When using the CLI, OpenShift automatically detects the source code type and sel
 <blockquote>
 Click "Add to Project"
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-addToProjectButton.png" width="200"><br/>
+<img src="../images/ocp-addToProjectButton.png" width="200"><br/>
 
 <blockquote>
 Click "Browse Catalog" and filter for nodejs. Select Node.js version 0.10 from the Version drop down menu and then click "Select"
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-s2i-filternode.png" width="900"><br/>
+<img src="../images/ocp-lab-s2i-filternode.png" width="900"><br/>
 
 <blockquote>
 Fill out the boxes to look as follows:
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-s2i-nodejs.png" width="900"><br/>
+<img src="../images/ocp-lab-s2i-nodejs.png" width="900"><br/>
 <p>
 Notes: You will need to click to expand the "advanced options"<br/>
 The github repository URL is: https://github.com/dudash/openshift-workshops.git<br/>
@@ -90,20 +90,20 @@ The console will print out the full log for your build.  Note, you could pipe th
 <blockquote>
 Click on "Builds" and then click on "Builds"
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-s2i-builds.png" width="300"><br/>
+<img src="../images/ocp-lab-s2i-builds.png" width="300"><br/>
 
 <blockquote>
 Click on the "dc-metro-map" link
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-s2i-metromapbuild.png" width="900"><br/>
+<img src="../images/ocp-lab-s2i-metromapbuild.png" width="900"><br/>
 
 <blockquote>
 Click on the "View Log" tab to see the details of your latest build
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-s2i-viewLog.png" width="900"><br/>
+<img src="../images/ocp-lab-s2i-viewLog.png" width="900"><br/>
 
 You should see a log output similar to the one below:<br>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-s2i-logs.png" width="900"><br/>
+<img src="../images/ocp-lab-s2i-logs.png" width="900"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -133,19 +133,19 @@ Copy the HOST/PORT and paste into your favorite web browser:
 <blockquote>
 Click on Overview
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-s2i-overview.png" width="200"><br/>
+<img src="../images/ocp-lab-s2i-overview.png" width="200"><br/>
 
 <blockquote>
 Click the URL that is listed in the dc-metro-map header
 </blockquote>
-<img src="/static/openshift_101_dcmetromap/ocp-lab-s2i-dcmetromapsvc.png" width="900"><br/>
+<img src="../images/ocp-lab-s2i-dcmetromapsvc.png" width="900"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
 
 The app should look like this in your web browser:
 
-<img src="/static/openshift_101_dcmetromap/ocp-lab-s2i-apprunning.png" width="900"><br/>
+<img src="../images/ocp-lab-s2i-apprunning.png" width="900"><br/>
 
 Clicking the checkboxes will toggle on/off the individual metro stations on each colored line.  A numbered icon indicates there is more than one metro station in that area and they have been consolidated - click the number or zoom in to see more.
 

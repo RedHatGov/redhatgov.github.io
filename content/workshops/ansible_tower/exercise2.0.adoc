@@ -71,10 +71,9 @@ Fill a few variables out in an inventory file: `admin_password, pg_password, rab
 
 [subs=+quotes]
 ----
-[primary]
-localhost ansible_connection=local
 
-[secondary]
+[tower]
+localhost ansible_connection=local
 
 [database]
 
@@ -96,6 +95,7 @@ rabbitmq_cookie=cookiemonster
 
 # Needs to be true for fqdns and ip addresses
 rabbitmq_use_long_name=false
+
 ----
 
 === Step 7:

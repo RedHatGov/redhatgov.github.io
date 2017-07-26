@@ -3,6 +3,7 @@ title: Example Workshop
 menu:
   main:
     parent: workshops
+    pre: fa fa-play-circle 
 ---
 
 # Introduction

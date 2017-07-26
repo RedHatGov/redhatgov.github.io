@@ -3,6 +3,7 @@ title: OpenShift 101 - DC Metro Map Workshop
 menu:
   main:
     parent: workshops
+    pre: fa fa-map-o
 ---
 
 # Introduction

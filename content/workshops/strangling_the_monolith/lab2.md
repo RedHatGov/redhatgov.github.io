@@ -87,6 +87,12 @@ $ git clone -b app-partner https://github.com/epe105/catalog
 ```
 $ cd catalog
 ```
+{{% alert info %}}
+
+Please update ``<USERNAME>`` below with your assigned username
+
+{{% /alert %}}
+
 ```
 $ oc project coolstore-<USERNAME>
 ```
@@ -100,11 +106,13 @@ $ mvn clean fabric8:deploy -Popenshift -DskipTests
 
 ```
 $ oc get route/catalog
-NAME      HOST/PORT                                 PATH      SERVICES   PORT      TERMINATION
-catalog   catalog-coolstore.apps.127.0.0.1.nip.io             catalog    8080
+NAME      HOST/PORT                                              PATH      SERVICES   PORT      TERMINATION
+catalog   catalog-coolstore-<USERNAME>.apps.ocp.naps-redhat.com            catalog    8080
 ```
+Curl using the HOST/PORT from the previous step
+
 ```
-$ curl http://catalog-coolstore-user1.apps.ose.naps-redhat.com/api/catalog
+$ curl http://catalog-coolstore--USERNAME>.apps.ocp.naps-redhat.com/api/catalog
 
 [{"itemId":"329299","name":"Red Fedora","desc":"Official Red Hat Fedora","price":34.99},{"itemId":"329199","name":"Forge Laptop Sticker","desc":"JBoss Community Forge Project Sticker","price":8.5}
 ...
@@ -133,6 +141,12 @@ $ git clone -b app-partner https://github.com/epe105/inventory
 ```
 $ cd inventory
 ```
+{{% alert info %}}
+
+Please update ``<USERNAME>`` below with your assigned username
+
+{{% /alert %}}
+
 ```
 $ oc project coolstore-<USERNAME>
 ```
@@ -149,12 +163,17 @@ $ mvn clean fabric8:deploy -Popenshift  -DskipTests
 - This allows teams split along business concerns to independently develop, test, deploy and scale the service and its database
 >Once the new inventory service is deployed, dump its database:
 
+>Get the POSTGRESQL_PASSWORD
 ```
 $ oc env dc/inventory-database --list # get the POSTGRESQL_PASSWORD
 ```
+>Get the postgresql pod
+
 ```
 $ oc get pods
 ```
+>oc rsh into the postgresql pod from the previous step
+
 ```
 $ oc rsh inventory-database-1-kkxs2
 sh-4.2$ psql -h $HOSTNAME -d $POSTGRESQL_DATABASE -U $POSTGRESQL_USER
@@ -168,7 +187,14 @@ monolith=> select * from inventory;
  329299 | http://maps.google.com/?q=Raleigh | Raleigh  |      736
 ...
 ```
+> Exit out of psql and then the postgresql pod
+  
 
+```
+monolith=> \q
+sh-4.2$ exit
+exit
+```
 # Step 5
 
 > Once the new service is deployed, test it with curl  
@@ -176,11 +202,11 @@ You should get a JSON object representing the inventory availability of product 
 
 ```
 $ oc get route/inventory
-NAME        HOST/PORT                                   PATH      SERVICES    PORT      TERMINATION
-inventory   inventory-coolstore.apps.127.0.0.1.nip.io             inventory   8080
+NAME        HOST/PORT                                                  PATH      SERVICES    PORT      TERMINATION
+inventory   inventory-coolstore-<USERNAME>.apps.ocp.naps-redhat.com              inventory   8080
 ```
 ```
-$ curl http://inventory-coolstore.apps.127.0.0.1.nip.io/api/inventory/329299
+$ curl http://inventory-coolstore-<USERNAME>.apps.ocp.naps-redhat.com/api/inventory/329299
 {"itemId":"329299","location":"Raleigh","quantity":736,"link":"http://maps.google.com/?q=Raleigh"}
 ```
 > You can also test it by clicking on the route to the inventory service and adding /api/inventory/329299 to the URL

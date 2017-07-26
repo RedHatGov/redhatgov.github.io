@@ -1,0 +1,97 @@
+---
+title: "Exercise 1.4 - Working with Docker Registry"
+workshops: containers_101
+workshop_weight: 60
+layout: lab
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/containers_101/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+
+= Exercise 1.4 - Working with Docker Registry
+
+== What it is
+The Registry is a stateless, highly scalable server side application that stores and lets you distribute Docker images. The Registry is open-source, under the permissive Apache license.
+
+=== Why use it
+You should use the Registry if you want to:
+
+- tightly control where your images are being stored
+- fully own your images distribution pipeline
+- integrate image storage and distribution tightly into your in-house development workflow
+
+Edit docker-storage-setup script. Add the following configuration lines of `DEVS=dev/xvdb` & `VG=docker-vg` to the `/etc/sysconfig/docker-storage-setup` file.
+
+.Docker storage setup
+[source, bash]
+----
+echo -e "DEVS=/dev/xvdb\nVG=docker-vg" >> /etc/sysconfig/docker-storage-setup
+----
+
+.Install Registry
+[source, bash]
+----
+yum install –y docker-registry
+----
+
+.Enable & Start
+[source, bash]
+----
+systemctl enable docker-registry
+----
+
+[source, bash]
+----
+systemctl start docker-registry
+----
+
+.Edit Registry (Uncomment and add)
+[source, bash]
+----
+vim /etc/sysconfig/docker
+
+
+--insecure-registry 0.0.0.0/0
+----
+
+.Restart
+[source, bash]
+----
+systemctl restart docker
+----
+
+.View Current Images
+[source, bash]
+----
+docker images
+
+REPOSITORY                        TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+fedora_postgresql                 latest              93e0fb06be2b        7 minutes ago       407.3 MB
+docker.io/fedora                  latest              c7d2f0130dae        8 days ago          204.3 MB
+registry.access.redhat.com/rhel   latest              c4f590bbcbe3        12 days ago         158.2 MB
+----
+
+.Find AMI Public IP
+[source, bash]
+----
+PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
+----
+
+.Tag fedora_postgresql
+[source, bash]
+----
+docker tag 93e0fb06be2b ${PUBLIC_IP}:5000/fedora_postgresql
+----
+
+Where `93e0fb06be2b` is the IMAGE ID found when you used the `docker images` command.
+
+.Push fedora_postgresql
+[source, bash]
+----
+docker push ${PUBLIC_IP}:5000/fedora_postgresql
+----
+

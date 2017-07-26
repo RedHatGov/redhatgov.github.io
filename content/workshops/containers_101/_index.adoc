@@ -1,0 +1,54 @@
+---
+title: Containers 101 Workshop
+menu:
+  main:
+    parent: workshops
+    pre: fa fa-linux
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/containers_101/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+
+= Containers 101 Workshop
+
+== Today's Agenda
+
+* Arrivals
+* Introductions / Agenda
+* Presentation
+
+{{< labs containers_101 >}}
+
+== Before We Get Started
+
+== Overview
+
+Today is meant for anyone who has any exposure to Containers, whether you have used it or not. We are going to start with a short overview (yes, slideware) and then we'll get into the lab as soon as possible. That is where we will spend most of our time.
+
+== Your Responsibilities
+
+* Have a discussion. This will be boring if it's just us up here talking for over 2 hours.
+* Participate. Have questions. Have opinions.
+
+Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy.
+
+== Special Thanks to:
+
+- Jamie Duncan
+- Jason Callaway
+
+== Workshop Deployment
+
+Here is the link to deploy this workshop in AWS via Ansible.
+
+https://github.com/RedHatGov/redhatgov.workshops/tree/master/containers_101[GitHub Repo]
+
+== Document Copyright
+
+This document was created by and for Red Hat, Inc. It is being released under link:https://creativecommons.org/licenses/by/4.0/[Creative Commons License 4.0]. You are free to re-use it in whole or in part.
+
+You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
