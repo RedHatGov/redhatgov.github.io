@@ -32,7 +32,7 @@ OpenShift provides a web console that allows you to perform various tasks via a 
 > Navigate to the URI provided by your instructor and login with the username/password provided (if there's an icon on the Desktop, just double click that)
 
 <img src="../images/ocp-login.png" width="600"><br/>
-*Login Webpage*
+*OCP Login Webpage*
 
 Once logged in you should see your available projects - or a button to create a project if none exist already.
 
@@ -47,6 +47,7 @@ First let's create a new project to do our workshop work in.  We will use the st
 > Populate "Display Name" with "demo{YOUR#}" and populate "Description" boxes with whatever you like.  And click "Create"
 
 <img src="../images/ocp-new-project.png" width="600"><br/>
+*OCP New Project Webpage*
 
 This is going to take you to the next logical step of adding something to the project, but we don't want to do that just yet.
 
