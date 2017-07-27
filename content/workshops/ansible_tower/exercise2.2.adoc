@@ -1,7 +1,7 @@
 ---
 title: "Exercise 2.2 - Creating and Running a Job Template"
 workshops: ansible_tower
-workshop_weight: 60
+workshop_weight: 22
 layout: lab
 ---
 

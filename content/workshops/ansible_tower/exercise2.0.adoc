@@ -1,7 +1,7 @@
 ---
 title: "Exercise 2.0 - Installing Ansible Tower"
 workshops: ansible_tower
-workshop_weight: 40
+workshop_weight: 20
 layout: lab
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Exercise 2.1 - Configuring Ansible Tower"
 workshops: ansible_tower
-workshop_weight: 50
+workshop_weight: 21
 layout: lab
 ---
 

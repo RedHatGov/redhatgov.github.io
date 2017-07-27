@@ -1,7 +1,7 @@
 ---
 title: "Exercise 1.4 - Running the apache-basic-playbook"
 workshops: ansible_tower
-workshop_weight: 30
+workshop_weight: 14
 layout: lab
 ---
 

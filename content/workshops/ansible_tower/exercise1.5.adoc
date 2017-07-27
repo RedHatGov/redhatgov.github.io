@@ -1,7 +1,7 @@
 ---
 title: "Exercise 1.5 - Roles: Making your playbooks reusable"
 workshops: ansible_tower
-workshop_weight: 30
+workshop_weight: 15
 layout: lab
 ---
 
@@ -85,6 +85,7 @@ Make a backup copy of `site.yml`, then create a new `site.yml`.
 
 [source,bash]
 ----
+cd ~/apache-basic-playbook
 mv site.yml site.yml.bkup
 vim site.yml
 ----
@@ -104,7 +105,7 @@ Add the play definition and the invocation of a single role.
     - apache-simple
 ----
 
-=== Step 4:
+=== Step 3:
 
 Add some default variables to your role in `roles/apache-simple/defaults/main.yml`.
 
@@ -116,7 +117,7 @@ apache_test_message: This is a test message
 apache_max_keep_alive_requests: 115
 ----
 
-=== Step 5:
+=== Step 4:
 
 Add some role-specific variables to your role in `roles/apache-simple/vars/main.yml`.
 
@@ -146,7 +147,7 @@ Bottom line, you need to read up on link:{var_prec_url}[variable precedence] to 
 which have a higher precedence than defaults and can't be overridden as a default variable.
 ====
 
-=== Step 6:
+=== Step 5:
 
 Create your role handler in `roles/apache-simple/handlers/main.yml`.
 
@@ -161,7 +162,7 @@ Create your role handler in `roles/apache-simple/handlers/main.yml`.
     enabled: yes
 ----
 
-=== Step 7:
+=== Step 6:
 
 Add tasks to your role in `roles/apache-simple/tasks/main.yml`.
 
@@ -199,7 +200,7 @@ Add tasks to your role in `roles/apache-simple/tasks/main.yml`.
     enabled: yes
 ----
 
-=== Step 8:
+=== Step 7:
 
 Download a couple of templates into `roles/apache-simple/templates/`.  And right after that, let's clean up from exercise 2.1 by removing the old templates directory.
 
