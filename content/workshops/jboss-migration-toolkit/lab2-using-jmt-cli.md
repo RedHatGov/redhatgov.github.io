@@ -66,7 +66,7 @@ Report created: /var/www/html
    Access it at this URL: file:///var/www/html/index.html
 ~~~~
 
-  5. Open the report in a browser http://jboss-migration-toolkit.{student number}.demo-dlt.com 
+  5. Open the report in a browser http://jboss-migration-toolkit.{YOUR#}.{WORKSHOP_DOMAIN} 
 
 # Step 2. Review the reports.
 
