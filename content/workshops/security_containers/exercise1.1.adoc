@@ -146,7 +146,7 @@ mkdir redis
 
 cd redis
 
-vim Dockerfile <1>
+vim Dockerfile
 ----
 
 [NOTE]

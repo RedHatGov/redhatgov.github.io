@@ -43,23 +43,29 @@ The output should show something *similar* to below:
 <blockquote>
 Click "Add to Project"
 </blockquote>
+
 <img src="../images/ocp-addToProjectButton.png" width="200"><br/>
+
 
 <blockquote>
 Select the tab for "Deploy Image" from the top options
 </blockquote>
+
 <img src="../images/ocp-guestbook-deploy-image.png" width="400"><br/>
 
 <blockquote>
 Select the option for "Image Name" and enter "kubernetes/guestbook", then click the magnifying glass to the far right to search for the image.
 </blockquote>
+
 <img src="../images/ocp-guestbook-imagename-expand.png" width="600"><br/>
+
 
 <blockquote>
 Observe default values that are populated in the search results
 </blockquote>
+
 <img src="../images/ocp-guestbook-create-1.png" width="600"><br/>
-<img src="../images/ocp-guestbook-create-2.png" width="600"><br/>
+
 
 <blockquote>
 Scroll to the bottom and click "Create"

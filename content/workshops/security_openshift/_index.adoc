@@ -3,7 +3,7 @@ title: OpenShift Security Workshop
 menu:
   main:
     parent: workshops
-    pre: fa fa-rocket
+    pre: fa fa-shield
 ---
 
 :badges:
@@ -37,8 +37,7 @@ over 4 hours.
 * Participate. We are going to cut you loose with Containers here in just a
 little while. Have questions. Have opinions.
 
-Hopefully you have your laptop with you. If not, please find a shoulder-surfing
-buddy. See? Not only can we dig into Containers but you can make a new friend!
+Hopefully you have your laptop with you. If not, please ask a instuctor for a laptop.
 
 === Conventions Used in This Document
 

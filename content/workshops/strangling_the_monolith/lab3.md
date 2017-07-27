@@ -73,6 +73,12 @@ $ git clone -b app-partner https://github.com/epe105/gateway
 ```
 $ cd gateway
 ```
+{{% alert info %}}
+
+Please update ``<USERNAME>`` below with your assigned username
+
+{{% /alert %}}
+
 ```
 $ oc project coolstore-<USERNAME>
 ```
@@ -211,6 +217,8 @@ public Exchange aggregate(Exchange original, Exchange resource) {
 
 >Open the gateway source code file and un-comment the lines that implement a filter based on product ID (around line 80). The highlighted code shows you the predicate used for the filter
 
+Use vi to make changes in the code.  If you need help in using vi, please click [here][1]
+
 ```
 $ vi ~/coolstore/gateway/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java
 ```
@@ -268,3 +276,6 @@ $ oc logs -f dc/gateway
 - Further strangling can eventually eliminate the monolith entirely.
 
 <img src="../img/lab3_api_gtw_arch1.png" width="600" />
+
+
+[1]: https://www.cs.colostate.edu/helpdocs/vi.html

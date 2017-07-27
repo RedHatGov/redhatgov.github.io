@@ -70,6 +70,12 @@ If you do not see an available project, go ahead and click `New Project` and cre
 ```
 $ oc login [URI] --insecure-skip-tls-verify=false
 ```
+See example below:
+
+```
+$ oc login https://master.ocp.naps-redhat.com:8443 --insecure-skip-tls-verify=false
+```
+
 
 > <i class="fa fa-terminal"></i> Check to see what projects you have access to:
 
