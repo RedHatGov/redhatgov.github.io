@@ -1,0 +1,156 @@
+---
+title: "Exercise 3.0 - Using Ansible to Implement Security"
+workshops: ansible_tower
+workshop_weight: 30
+layout: lab
+---
+
+:license_url: http://ansible-workshop-bos.redhatgov.io/ansible-license.json
+
+:icons: font
+:imagesdir: /workshops/ansible_tower/images
+
+
+= Exercise 3.0 - Using Ansible to Implement Security
+
+In this exercise, we are going to use Ansible tower to run DISA STIG and NIST 800-53 evaluations of our environment.
+
+NIST 800-53 controls
+https://galaxy.ansible.com/rhtps/800-53/
+
+DISA STIG controls
+https://galaxy.ansible.com/MindPointGroup/RHEL7-STIG/
+
+== Adding the NIST 800-53 role to your tower node
+
+=== Step 1:
+
+In your wetty window (if you closed it, see the link:/workshops/ansible_tower/setup/[SETUP] step, in your workbook), type the following:
+
+[source,bash]
+----
+sudo ansible-galaxy install rhtps.800-53
+----
+
+=== Step 2:
+
+Now that you have the NIST 800-53 role installed on your Tower node, we need to create a playbook that uses it.  First, let's create a storage directory for playbooks, so that we can reference them from a Tower project, and then we'll create the playbook:
+
+[source,bash]
+----
+sudo mkdir -p /var/lib/awx/projects/playbooks
+sudo vim /var/lib/awx/projects/playbooks/800-53.yml
+----
+
+=== Step 3:
+
+Let's create the needed playbook.  You should have a pretty good understanding of playbooks by now, so we won't go over this, in detail.  Please do feel free to ask questions, though, if there is something that you don't understand.
+
+Note the use of the `register`, `with_items`, and `when` directives.  These are how Ansible implements variable creation, recursion, and conditionals, respectively.
+
+[source,bash]
+----
+---
+- hosts: web
+  become: yes
+  vars:
+    scap_reports_dir: /tmp
+  roles:
+    - rhtps.800-53 
+
+  tasks:
+    - name: determine the most recent scap report
+      command: ls -tr /tmp/scap_reports/
+      register: results
+
+    - name: create the scap directory in the web server content
+      file:
+        name: /var/www/html/scap
+        state: directory
+        mode: 0755
+
+    - name: copy SCAP reports to the web server content directory
+      copy:
+        remote_src: True
+        src: "/tmp/scap_reports/{{ item }}"
+        dest: /var/www/html/scap
+        mode: 0644
+      with_items: "{{ results.stdout_lines }}"
+      when: item | match("scan-xccdf-report-*")
+----
+
+=== Step 4:
+
+Save and quit from editing, and then we will move on to the in-Tower setup.
+
+== Configuring 800-53 in Ansible Tower
+
+=== Step 1:
+
+In your Tower window, click on image:at_projects_icon.png[PROJECTS]
+
+=== Step 2:
+
+Select ADD     image:at_add.png[Add,35,25]
+
+=== Step 3:
+
+Enter the following values into your new project.  Note that the `PLAYBOOK DIRECTORY` item should show `playbooks`, as an option, when you click on it.
+
+|===
+|NAME |NIST 800-53
+|DESCRIPTION|NIST 800-53 Project
+|ORGANIZATION|Default
+|SCM TYPE|Manual
+|PROJECT BASE PATH|/var/lib/awx/projects
+|PLAYBOOK DIRECTORY|playbooks
+|===
+
+=== Step 4:
+
+Select SAVE     image:at_save.png[Save,35,25]
+
+=== Step 5:
+
+In your Tower window, click on TEMPLATES
+
+=== Step 6:
+
+Click on ADD image:at_add.png[Add,35,25], and select JOB TEMPLATE
+
+=== Step 7:
+
+Complete the form using the following values.  Note that the PLAYBOOK field should offer `800-53.yml` as an option, when clicked.
+
+|===
+|NAME |NIST 800-53 Job Template
+|DESCRIPTION|Template for NIST 800-53
+|JOB TYPE|Run
+|INVENTORY|Ansible Workshop Inventory
+|PROJECT|NIST 800-53
+|PLAYBOOK|800-53.yml
+|MACHINE CREDENTIAL|Ansible Workshop Credential
+|LIMIT|web
+|OPTIONS
+a|
+- [*] Enable Privilege Escalation
+|===
+
+=== Step 8:
+
+Click SAVE image:at_save.png[Save], to store your new template, and we are ready to run it.
+
+Click on the rocketship icon image:at_launch_icon.png[Add,35,25] for the `NIST 800-53 Job Template`.
+
+=== End Result
+
+You can watch the scan run against your managed node.  Note that each compliance check is named and detailed.
+
+Once the check is complete, you can open a new tab in your web browser, and navigate to the following URL, where `workshopname` is the workshop prefix, and `#` is the number that your instructor gave you:
+
+[source,bash]
+----
+http://workshopname.node.#.redhatgov.io/scap
+----
+
+Click on the link called `scan-xccdf-report-...` to refiew the SCAP report that was generated.  Note the failures in the report; look at the machines, if you want, via your Wetty ssh session, to see what the problems might be.
