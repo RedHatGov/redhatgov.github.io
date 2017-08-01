@@ -16,14 +16,14 @@ It's easy to get started with OpenShift whether you're using our app templates o
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-```
+```bash
 $ oc new-app kubernetes/guestbook
 ```
 
 <blockquote>
 The output should show something *similar* to below:
 </blockquote>
-```
+```bash
 --> Found docker image a49fe18 (17 months old) from docker Hub for "kubernetes/guestbook"
     * An image stream will be created as "guestbook:latest" that will track this image
     * This image will be deployed in deployment config "guestbook"
@@ -72,16 +72,16 @@ Scroll to the bottom and click "Create"
 ## We can browse our project details with the command line
 > <i class="fa fa-terminal"></i> Try typing the following to see what is available to 'get':
 
-```
+```bash
 $ oc get
 ```
 
 > <i class="fa fa-terminal"></i> Now let's look at what our image stream has in it:
 
-```
+```bash
 $ oc get is
 ```
-```
+```bash
 $ oc describe is/guestbook
 ```
 
@@ -91,7 +91,7 @@ An image stream can be used to automatically perform an action, such as updating
 
 > <i class="fa fa-terminal"></i> The app is running in a pod, let's look at that:
 
-```
+```bash
 $ oc describe pods
 ```
 
@@ -124,7 +124,7 @@ Good catch, your service is running but there is no way for users to access it y
 <i class="fa fa-terminal"></i> In the command line type this:
 </blockquote>
 
-```
+```bash
 $ oc expose service guestbook
 ```
 {{% /panel %}}
@@ -168,7 +168,7 @@ Notice that in the web console overview, you now have a URL in the service box. 
 ## Good work, let's clean this up
 > <i class="fa fa-terminal"></i> Let's clean up all this to get ready for the next lab:
 
-```
+```bash
 $ oc delete all --all
 ```
 

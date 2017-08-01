@@ -1,0 +1,205 @@
+---
+title: "Exercise 1.8 - SELinux"
+workshops: security_containers
+workshop_weight: 91
+layout: lab
+---
+
+:icons: font
+:source-language: bash
+:imagesdir: /workshops/security_containers/images
+
+= Exercise 1.8 - SELinux
+
+image::selinux.png[]
+
+Now that you've gotten a sense of Read Only Containers, let's move on to
+SELinux.
+
+In this section, we’ll cover the basics of SELinux and containers. SELinux
+policy prevents a lot of break out situations where the other security
+mechanisms fail. With SELinux on Docker, we write policy that says that the
+container process running as `svirt_lxc_net_t` can only read/write files with
+the `svirt_sandbox_file_t` label.
+
+== Step 1:
+
+Create the following directories.
+
+.Setup directory and file
+[source,bash]
+----
+mkdir selinux
+
+cd  selinux
+
+mkdir data
+
+echo "SELINUX!" > data/file1.txt
+
+cat data/file1.txt
+----
+
+.Get SELinux policy
+[source,bash]
+----
+sestatus | grep mode
+----
+
+== Step 2:
+
+.Try to cat out the file
+[source,bash]
+----
+sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
+----
+
+You can see the reason by inspecting the folder’s security context:
+
+[source,bash]
+----
+ls --scontext data
+----
+
+The label for the data doesn’t match the label for containers. The fix is to
+apply the container label to the data by using the `chcon` tool, effectively
+notifying the system that you expect these files to be consumed by containers:
+
+Find the selinux file context associated with containers.
+
+.Find the Containers Labels
+[source,bash]
+----
+sudo semanage fcontext --list | grep svirt
+----
+
+The containers should be running at `svirt_sandbox_file_t`
+
+== Step 3:
+
+Apply the container label to the data by using the `chcon` tool
+
+.relable the data dir
+[source,bash]
+----
+chcon -Rt svirt_sandbox_file_t data
+----
+
+Try to cat out the file again from the container.
+
+.run docker again
+[source,bash]
+----
+sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
+----
+
+Append text from the container to the file
+
+.append text
+[source,bash]
+----
+sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "Thank You For
+Attending!" >> /data/file1.txt'
+----
+
+[source,bash]
+----
+cat data/file1.txt
+----
+
+== DOCKER SELINUX SECURITY POLICY
+
+The Docker SELinux security policy is similar to the libvirt security policy
+and is based on the libvirt security policy.
+
+The libvirt security policy is a series of SELinux policies that defines two
+ways of isolating virtual machines. Generally, virtual machines are prevented
+from accessing parts of the network. Specifically, individual virtual machines
+are denied access to one another’s resources.
+
+Red Hat extends the libvirt-SELinux model to Docker. The Docker SELinux role
+and Docker SELinux types are based on libvirt. For example, by default, Docker
+has access to /usr/var/ and some other locations, but it has complete access to
+things that are labeled with svirt_sandbox_file_t.
+
+https://www.mankier.com/8/docker_selinux - this explains the entire Docker
+SELinux policy. It is not in layman’s terms, but it is complete.
+
+`svirt_sandbox_file_t`
+
+[source,bash]
+----
+system_u:system_r:svirt_lxc_net_t:s0:c186,c641
+^      ^           ^          ^     ^--- unique category
+|      |           |          |----  secret-level 0
+|      |           |--- a shared type
+|      |---SELinux role
+|------ SELinux user
+----
+
+If a file is labeled `svirt_sandbox_file_t`, then by default all containers can
+read it. But if the containers write into a directory that has
+`svirt_sandbox_file_t` ownership, they write using their own category (which in
+this case is `c186` , `c641`). If you start the same container twice, it will
+get a new category the second time ( a different category than it had the first
+time). The category system isolates containers from one another.
+
+Types can be applied to processes and to files.
+
+== SELinux Coloring Book
+
+{{< panel_group >}}
+{{% panel "SELinux Coloring Book" %}}
+
+:icons: font
+:imagesdir: /workshops/security_containers/images
+
+Imagine a system where we define types on objects like cats and dogs. A cat and
+dog are process types:
+
+- Cat
+- Dog
+
+image::selinux1.png[Processes]
+
+We have a class of objects that they want to interact with which we call food.
+And I want to add types to the food;
+
+- cat_food
+- dog_food
+
+image::selinux2.png[Objects]
+
+As a policy writer, we would define that a dog has permission to eat dog_chow
+food and a cat has permission to eat cat_chow food. In SELinux we would write
+this rule in policy.
+
+- allow cat cat_chow:food eat;
+- allow dog dog_chow:food eat;
+
+image::selinux3.png[Objects]
+
+With these rules the kernel would allow the cat process to eat food labeled
+cat_chow and the dog to eat food labeled dog_chow.
+
+And processes and objects are happy.
+
+image::selinux4.png[Objects]
+
+
+But in a SELinux system everything is denied by default. This means that if the
+dog process tried to eat the cat_chow, the kernel would prevent it.
+
+image::selinux7.png[Stopped by Kernel]
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+== SELinux Resources
+
+- https://stopdisablingselinux.com/[Seriously, stop disabling SELinux.]
+- https://www.youtube.com/watch?v=cNoVgDqqJmM&feature=youtu.be[Security-enhanced
+Linux for mere mortals - 2015 Red Hat Summit]
+- https://www.nsa.gov/what-we-do/research/selinux/mailing-list.shtml[SELinux NSA
+Mailing List]
+

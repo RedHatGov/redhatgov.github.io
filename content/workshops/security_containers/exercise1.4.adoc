@@ -1,284 +1,194 @@
 ---
-title: "Exercise 1.4 - Linux Kernel Capabilities"
+title: "Exercise 1.4 - CGroups"
 workshops: security_containers
 workshop_weight: 60
 layout: lab
 ---
 
-:source-highlighter: highlight.js
+:icons: font
 :imagesdir: /workshops/security_containers/images
 
-= Exercise 1.4 - Linux Kernel Capabilities
+= Exercise 1.4 - CGroups
 
-image::kernel.png[]
+image::cgroups.png[]
 
-== What are Linux Capabilities?
+== CGroups
 
-According to the capabilities man page;
+The https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Resource_Management_Guide/ch01.html[Device Cgroup] is primary in isolating and limiting containers to their own shares of CPU, memory, disk I/O, network, etc., other wise it will be denied.
 
-_Capabilities are distinct units of privilege that can be independently enabled
-or disabled._
+== Memory Limits
 
-Capabilities were added to the kernel around 15 or so years ago to try to
-divide up the power of root. Originally the kernel allocated a 32-bit bitmask
-to define these capabilities. A few years ago it was expanded to 64. There are
-currently around 38 capabilities defined.
+Docker uses Cgroups to control and limit the amount of system resources a container can use. This will help to protect a system runing from potential application memory leaks or Denial of Service DoS attacks that can consume all available memory and take down a system. By running containers with special docker flags we can restrict the amount of memory a container is able to consume even when a applcation is trying to consume more memory.
 
-Capabilities are things like the ability to send raw IP packets, change
-hostnames or bind to ports below 1024. When we run containers we can drop a
-whole bunch of capabilities before running our containers without causing the
-vast majority of containerized applications to fail.
 
-Most capabilities are required to manipulate the kernel/system, and these are
-used by the container framework (docker), but seldom used by the processes
-running inside the container. However, some containers require a few
-capabilities, for example a container process needs capabilities like
-setuid/setgid to drop privileges. As with most things in the container world,
-we try to establish a compromise between security and the ability to get work
-done.
-
-Luckily we also use additional tools like
-https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/SELinux_Users_and_Administrators_Guide/[SELinux],
-https://en.wikipedia.org/wiki/Seccomp[seccomp], and
-http://rhelblog.redhat.com/2015/07/07/whats-next-for-containers-user-namespaces/[namespaces]
-to protect the host system from the containers.
-
-*Bottom line: dropping more of the capabilities from your container is a good
-idea from a security point of view.*
-
-== Linux Capabilities
-
-=== Step 1:
-
-So, how can we drop these capabilities using docker? First, let’s see what
-capabilities a process has. There is a cool tool in Linux that can help you
-view what capabilities a process has called `pscap`, available in the
-`libcap-ng-utils` package on Fedora.
-
-.See current processes
-[source,bash]
+[source, bash]
 ----
-pscap | head -10
+sudo docker run -d --name fedora1 fedora sleep 15m
 ----
 
-.See processes of a normal container
-[source,bash]
-----
-sudo docker run -d fedora sleep 5 >/dev/null; pscap | grep sleep
-----
+We can check using the `https://docs.docker.com/engine/reference/commandline/stats/#description[docker stats]` command and see that this instance `fedora1` has no memory limits placed on it.
 
-=== Step 2:
 
-If I wanted to drop `setfcap`, `audit_write`, and `mknod`, I could use
-`--cap-drop=setfcap`  `--cap-drop=audit_write` `--cap-drop=mknod`:
-
-.Dropping setfcap, audit_write, mknod
-[source,bash]
+[source, bash]
 ----
-sudo docker run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod
-fedora sleep 5 > /dev/null; pscap | grep sleep
+sudo docker stats --no-stream fedora1
 ----
 
-=== Step 3:
+{{< panel_group >}}
+{{% panel "Result" %}}
 
-Better yet, if you know your container only needs setuid and setgid, you can
-drop all capabilities and just add setgid and setuid back in.
-
-.Whitelisting Capabilities
-[source,bash]
+[source, bash]
 ----
-sudo docker run -d --cap-drop=all --cap-add=setuid --cap-add=setgid fedora
-sleep 5 > /dev/null; pscap | grep sleep
+CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+f08a3b36f550        0.00%               312 KiB / 487.1 MiB   0.06%               450 B / 1.09 kB     0 B / 0 B           1
 ----
 
-The following bellow is a comparison of the out put form blacklisting vs.
-whitelisting.
+{{% /panel %}}
+{{< /panel_group >}}
 
-.Compare the output
-[source,bash]
+
+
+Now we can place a memory limit on this second container `fedora2` with the docker flag `https://docs.docker.com/engine/admin/resource_constraints/[--memory]`.
+
+[source, bash]
 ----
-chown, dac_override, fowner, fsetid, kill, setgid, setuid, setpcap,
-net_bind_service, net_raw, sys_chroot <1>
-
-vs.
-
-setgid, setuid <2>
+sudo docker run -d --name fedora2 --memory 150m fedora sleep 15m
 ----
 
-<1> Blacklisting: Specifying each capability you want to drop.
+Now lets check again using the `docker stats` command to see the memory restrictions it has placed on this new container.
 
-<2> Whitelisting: Droping all and adding back the ones you need.
+[source, bash]
+----
+sudo docker stats --no-stream fedora1 fedora2
+----
 
-== Deep Dive into Capabilities
+{{< panel_group >}}
+{{% panel "Result" %}}
 
-Lets look deeper into each of these capabilities.
+[source, bash]
+----
+CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+e55f29717477        0.00%               268 KiB / 150 MiB     0.17%               90 B / 1.03 kB      0 B / 0 B           1
+f08a3b36f550        0.00%               312 KiB / 487.1 MiB   0.06%               1.55 kB / 1.44 kB   0 B / 0 B           1
+----
 
-`*chown*`
+{{% /panel %}}
+{{< /panel_group >}}
 
-The man page describes chown as the ability to make arbitrary changes to file
-UIDs and GIDs.
 
-This means that root can change the ownership or group of any file system
-object. If you are not running a shell within a container and not installing
-packages into the container, you should drop this capability.
 
-I would make the argument this should never be needed in production. If you
-need to chown, allow the capability, do the work, then take it away.
+Now you know how to restrict the amount of memory a container is able to use.
 
-`*dac_override*`
+=== Clean Up
 
-The man page says that dac_override allows root to bypass file read, write, and
-execute permission checks. DAC is an abbreviation of “discretionary access
-control”.
+Lets clean up for the next exercise.
 
-This means a root capable process can read, write, and execute any file on the
-system, even if the permission and ownership fields would not allow it. Almost
-no apps need DAC_OVERRIDE, and if they do they are probably doing something
-wrong. There are probably less than ten in the whole distribution that actually
-need it. Of course the administrator shell could require DAC_OVERRIDE fixing
-bad permissions in the file system.
+Kill all running containers
+[source, bash]
+----
+sudo docker kill $(sudo docker ps -q)
+----
 
-Steve Grubb, security standards expert at Red Hat, says that “nothing should
-need this. If your container needs this, it’s probably doing something
-horrible.”
+Delete exited containers
+[source, bash]
+----
+sudo docker rm $(sudo docker ps -aqf status=exited)
+----
 
-`*fowner*`
+Make sure everything is cleared out.
+[source, bash]
+----
+sudo docker ps -a
+----
 
-According to the man page, fowner conveys the ability to bypass permission
-checks on operations that normally require the filesystem UID of the process to
-match the UID of the file. For example, chmod and utime, and excludes
-operations covered by cap_dac_override and cap_dac_read_search. Here’s more
-from the man page:
 
-set extended file attributes (see chattr(1)) on arbitrary files;
-set Access Control Lists (ACLs) on arbitrary files;
-ignore directory sticky bit on file deletion;
-specify O_NOATIME for arbitrary files in open(2) and fcntl(2).
-This is similar to DAC_OVERRIDE, almost no applications need this other than,
-potentially, software installation tools. Most likely your container would run
-fine without this capability. You might need to allow this for docker build but
-it should be blocked it when you run your container is production.
+== CPU Limits
 
-`*fsetid*`
+By default, each container’s access to the host machine’s CPU cycles is unlimited. Various constraints can be set to limit a given
+container’s access to the host machine’s CPU cycles. Docker provides several flags for setting limits on how many shares of a proccessor a container is able to use. Previously we looked at memory restrictions and setting a maximum ceiling for memory usage, CPU limits are set by shares. We can defin share weights for each container and slit the available shares between the containers for a single processor.
 
-The man page says “don’t clear set-user-ID and set-group-ID mode bits when a
-file is modified; set the set-group-ID bit for a file whose GID does not match
-the filesystem or any of the supplementary GIDs of the calling process.”
+Lets run a container with `512` limit of CPU shares.
 
-My take: if you are not running an installation, you probably do not need this
-capability. I would disable this one by default.
+[source, bash]
+----
+sudo docker run -d --name fedora1 --cpuset-cpus 0 --cpu-shares 512 dkuffner/docker-stress --cpu 10
+----
 
-`*kill*`
+Now lets see how many shares this container is using.
 
-If a process has this capability it can override the restriction that “the real
-or effective user ID of a process sending a signal must match the real or
-effective user ID of the process receiving the signal.”
+[source, bash]
+----
+sudo docker stats --no-stream fedora1
+----
 
-This capability basically means that a root owned process can send kill signals
-to non root processes. If your container is running all processes as root or
-the root processes never kills processes running as non root, you do not need
-this capability. If you are running systemd as PID 1 inside of a container and
-you want to stop a container running with a different UID you might need this
-capability.
 
-It’s probably also worth mentioning on the danger scale, this one is on the low
-end.
 
-`*setgid*`
+{{< panel_group >}}
+{{% panel "Result" %}}
 
-The man page says that the setgid capability lets a process make arbitrary
-manipulations of process GIDs and supplementary GID list. It can also forge GID
-when passing socket credentials via UNIX domain sockets or write a group ID
-mapping in a user namespace. See user_namespaces(7) for more information.
+[source, bash]
+----
+CONTAINER           CPU %               MEM USAGE / LIMIT       MEM %               NET I/O             BLOCK I/O           PIDS
+fedora1             177.07%             1.449 MiB / 487.1 MiB   0.30%               450 B / 1.18 kB     0 B / 0 B           11
+----
 
-In short, a process with this capability can change its GID to any other GID.
-Basically allows full group access to all files on the system. If your
-container processes do not change UIDs/GIDs, they do not need this capability.
+{{% /panel %}}
+{{< /panel_group >}}
 
-`*setuid*`
 
-If a process has the setuid capability it can “make arbitrary manipulations of
-process UIDs (setuid(2), setreuid(2), setresuid(2), setfsuid(2)); forge UID
-when passing socket credentials via UNIX domain sockets; write a user ID
-mapping in a user namespace (see user_namespaces(7)).”
+CPU shares are defined as a value between 0-1024, however when idle the container will use all availible shares untill another process needs to use the existing shares. Let's run a example where another container needs to run and we divide up the shares equally.
 
-A process with this capability can change its UID to any other UID. Basically,
-it allows full access to all files on the system. If your container processes
-do not change UIDs/GIDs always running as the same UID, preferably non root,
-they do not need this capability. Applications that that need setuid usually
-start as root in order to bind to ports below 1024 and then changes their UIDS
-and drop capabilities. Apache binding to port 80 requires net_bind_service,
-usually starting as root. It then needs setuid/setgid to switch to the apache
-user and drop capabilities.
+[source, bash]
+----
+sudo docker run -d --name fedora2 --cpuset-cpus 0 --cpu-shares 512 dkuffner/docker-stress --cpu 10
+----
 
-Most containers can safely drop setuid/setgid capability.
+Now lets see how the processer shares get divided between the two.
 
-`*setpcap*`
+[source, bash]
+----
+sudo docker stats --no-stream fedora1 fedora2
+----
 
-Let’s look at the man page description: “Add any capability from the calling
-thread’s bounding set to its inheritable set; drop capabilities from the
-bounding set (via prctl(2) PR_CAPBSET_DROP); make changes to the securebits
-flags.”
 
-In layman’s terms, a process with this capability can change its current
-capability set within its bounding set. Meaning a process could drop
-capabilities or add capabilities if it did not currently have them, but limited
-by the bounding set capabilities.
+{{< panel_group >}}
+{{% panel "Result" %}}
 
-`*net_bind_service*`
+[source, bash]
+----
+CONTAINER           CPU %               MEM USAGE / LIMIT       MEM %               NET I/O             BLOCK I/O           PIDS
+fedora1             76.28%              1.449 MiB / 487.1 MiB   0.30%               1.47 kB / 1.46 kB   0 B / 0 B           11
+fedora2             78.52%              1.527 MiB / 487.1 MiB   0.31%               90 B / 1.02 kB      0 B / 0 B           11
+----
 
-This one’s easy. If you have this capability, you can bind to privileged ports
-(e.g., those below 1024).
+{{% /panel %}}
+{{< /panel_group >}}
 
-If you want to bind to a port below 1024 you need this capability. If you are
-running a service that listens to a port above 1024 you should drop this
-capability.
 
-The risk of this capabilty is a rogue process interpreting a service like sshd,
-and collecting users passwords. Running a container in a different network
-namespace reduces the risk of this capability. It would be difficult for the
-container process to get to the public network interface
 
-`*net_raw*`
 
-The man page says, “allow use of RAW and PACKET sockets. Allow binding to any
-address for transparent proxying.”
+Now you know how to control the amount of CPU shares a container is able to use.
 
-This access allows a process to spy on packets on its network. That’s bad,
-right? Most container processes would not need this access so it probably
-should be dropped. Note this would only affect the containers that share the
-same network that your container process is running on, usually preventing
-access to the real network.
+=== Clean Up
 
-RAW sockets also give an attacker the ability to inject scary things onto the
-network. Depending on what you are doing with the ping command, it could
-require this access.
+Lets clean up for the next exercise.
 
-`*sys_chroot*`
+Kill all running containers
+[source, bash]
+----
+sudo docker kill $(sudo docker ps -q)
+----
 
-This capability allows use of chroot(). In other words, it allows your
-processes to chroot into a different rootfs. chroot is probably not used within
-your container, so it should be dropped.
+Delete exited containers
+[source, bash]
+----
+sudo docker rm $(sudo docker ps -aqf status=exited)
+----
 
-`*mknod*`
+Make sure everything is cleared out.
+[source, bash]
+----
+sudo docker ps -a
+----
 
-If you have this capability, you can create special files using mknod.
 
-This allows your processes to create device nodes. Containers are usually
-provided all of the device nodes they need in /dev, the creation of device
-nodes is controlled by the device node cgroup, but I really think this should
-be dropped by default. Almost no containers ever do this, and even fewer
-containers should do this.
-
-`*audit_write*`
-
-If you have this one, you can write a message to kernel auditing log. Few
-processes attempt to write to the audit log (login programs, su, sudo) and
-processes inside of the container are probably not trusted. The audit subsystem
-is not currently namespace aware, so this should be dropped by default.
-
-`*setfcap*`
-
-Finally, the setfcap capability allows you to set file capabilities on a file
-system. Might be needed for doing installs during builds, but in production it
-should probably be dropped.

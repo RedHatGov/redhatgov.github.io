@@ -18,8 +18,8 @@ We can do this either via the command line or the web console.  You decide which
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
 
-```
-$ oc new-app --name=dc-metro-map https://github.com/dudash/openshift-workshops.git --context-dir=dc-metro-map
+```bash
+$ oc new-app --name=dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir=dc-metro-map
 $ oc expose service dc-metro-map
 ```
 
@@ -47,7 +47,7 @@ Fill out the boxes to look as follows:
 <img src="../images/ocp-lab-s2i-nodejs.png" width="900"><br/>
 <p>
 Notes: You will need to click to expand the "advanced options"<br/>
-The github repository URL is: https://github.com/dudash/openshift-workshops.git<br/>
+The github repository URL is: https://github.com/RedHatGov/openshift-workshops.git<br/>
 The github context-dir is: dc-metro-map<br/>
 </p>
 
@@ -70,7 +70,7 @@ We can see the details of what the S2I builder did.  This can be helpful to diag
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
 
-```
+```bash
 $ oc get builds
 ```
 
@@ -78,7 +78,7 @@ $ oc get builds
 Note the name of your build from the above command output and use it to see the logs with:
 </blockquote>
 
-```
+```bash
 $ oc logs builds/[BUILD_NAME]
 ```
 
@@ -118,7 +118,7 @@ Let's see this app in action!
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
 
-```
+```bash
 $ oc get routes
 ```
 

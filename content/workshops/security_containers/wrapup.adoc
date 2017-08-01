@@ -1,7 +1,7 @@
 ---
 title: "Wrap Up"
 workshops: security_containers
-workshop_weight: 90
+workshop_weight: 93
 layout: lab
 ---
 

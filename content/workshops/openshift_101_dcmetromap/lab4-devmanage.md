@@ -18,8 +18,8 @@ Only if you don't already have it running, add it with the following steps.
 
 > <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
-```
-$ oc new-app --name=dc-metro-map https://github.com/dudash/openshift-workshops.git --context-dir=dc-metro-map
+```bash
+$ oc new-app --name=dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir=dc-metro-map
 $ oc expose service dc-metro-map
 ```
 
@@ -33,7 +33,7 @@ There is no more ambiguity or confusion about where the app came from.  OpenShif
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
 
-```
+```bash
 $ oc status
 ```
 
@@ -49,7 +49,7 @@ The dc provides us details we care about to see where our application image come
 <i class="fa fa-terminal"></i> Type the following to find out more about our dc:
 </blockquote>
 
-```
+```bash
 $ oc describe dc/dc-metro-map
 ```
 
@@ -64,7 +64,8 @@ Because we built this app using S2I, we get to see the details about the build -
 <blockquote>
 <i class="fa fa-terminal"></i> Type the following to find out more about our bc:
 </blockquote>
-```
+
+```bash
 $ oc describe bc/dc-metro-map
 ```
 
@@ -73,11 +74,11 @@ Notice the information about the configuration of how this app gets built.  In p
 <blockquote>
 <i class="fa fa-terminal"></i> Type the following:
 </blockquote>
-```
+```bash
 $ oc describe build/dc-metro-map-1
 ```
 
-This shows us even more about the deployed container's build and source code including exact commit GUID for this build.  We can also can see the commit's author, and the commit message.  You can inspect the code by opening a web browser and pointing it to: https://github.com/dudash/openshift-workshops/commit/[COMMIT_GUID]
+This shows us even more about the deployed container's build and source code including exact commit GUID for this build.  We can also can see the commit's author, and the commit message.  You can inspect the code by opening a web browser and pointing it to: https://github.com/RedHatGov/openshift-workshops/commit/[COMMIT_GUID]
 
 {{% /panel %}}
 
@@ -138,7 +139,8 @@ In the S2I lab we looked at a build log to inspect the process of turning source
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-```
+
+```bash
 $ oc get pods
 ```
 
@@ -147,7 +149,8 @@ This is going to show basic details for all pods in this project (including the 
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following (replacing the POD ID with your pod's ID):
 </blockquote>
-```
+
+```bash
 $ oc logs [POD NAME]
 ```
 
@@ -193,11 +196,12 @@ Let's have a little fun.  The app has some easter eggs that get triggered when c
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-```
+
+```bash
 $ oc env dc/dc-metro-map -e BEERME=true
 ```
 
-```
+```bash
 $ oc get pods -w
 ```
 
@@ -262,25 +266,26 @@ There are situations when you might want to jump into a running pod, and OpenShi
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-```
+
+```bash
 $ oc get pods
 ```
 
 Find the pod name for your Running pod
 
-```
+```bash
 $ oc exec -it [POD NAME] /bin/bash
 ```
  
 You are now interactively attached to the container in your pod.  Let's look for the environment variables we set:
 
-```
+```bash
 $ env | grep BEER
 ```
 
 That should return the **BEERME=true** matching the value that we set in the deployment config.
 
-```
+```bash
 $ exit
 ```
 
@@ -314,7 +319,7 @@ That should return the **BEERME=true** matching the value that we set in the dep
 ## Good work, let's clean this up
 > <i class="fa fa-terminal"></i> Let's clean up all this to get ready for the next lab:
 
-```
+```bash
 $ oc delete all -l app=dc-metro-map
 ```
   

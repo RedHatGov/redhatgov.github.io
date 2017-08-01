@@ -5,6 +5,7 @@ workshop_weight: 20
 layout: lab
 ---
 
+:icons: font
 :source-highlighter: highlight.js
 :imagesdir: /workshops/security_containers/images
 
@@ -54,7 +55,7 @@ image::login.png[Login to Cockpit]
 ----
 Username: cockpit
 
-Password: DC17!
+Password: redhat!@#
 ----
 
 === Step 1:
@@ -65,7 +66,7 @@ hardware and operating system details.
 
 [source,bash]
 ----
-Show Fingerprints | System Time | Power Options | Performance Profile
+Click:  Show Fingerprints | System Time | Power Options | Performance Profile
 ----
 
 image::overview.png[System]
@@ -78,7 +79,7 @@ features: Targets, sockets, timers, and paths.
 
 [source,bash]
 ----
-Targets | System Services | Sockets | Timers | Paths
+Click:  Targets | System Services | Sockets | Timers | Paths
 ----
 
 image::services.png[Services]
@@ -92,7 +93,7 @@ usage bar.
 .Click to Launch a image
 [source,bash]
 ----
-Get new image
+Click: Get new image
 ----
 
 image::containers1.png[Containers]
@@ -103,7 +104,7 @@ Search & Download for Fedora
 
 [source,bash]
 ----
-fedora, download
+Search: fedora -> download
 ----
 
 image::search.png[Search for Fedora]
@@ -114,7 +115,7 @@ Run the Fedora image
 
 [source,bash]
 ----
-Run
+Click: Run
 ----
 
 image::run.png[Run the Fedora image]
@@ -151,23 +152,12 @@ as. For example, as cockpit, you could run docker commands. +
 
 [source,bash]
 ----
-sudo docker ps -a
+Command:  sudo docker ps -a
 ----
 
 image::terminal.png[Terminal]
 
-=== OPTIONAL
 
-You can even change your shell to Zsh or use the popular http://ohmyz.sh/[Oh-my-zsh]
-to get customized shell prompts and other cool functions.
-
-.Cool kids use Zsh
-[source,bash]
-----
-sh .install.sh
-----
-
-image::zsh.png[Oh-my-zsh]
 
 === Step 8:
 
@@ -175,7 +165,7 @@ When your done taking a look around go ahead and stop & delete the container.
 
 [source,bash]
 ----
-Stop, Delete
+Click:  Stop  ->  Delete
 ----
 
 image::delete.png[Stop & Delete]

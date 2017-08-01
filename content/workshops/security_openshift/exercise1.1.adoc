@@ -63,7 +63,7 @@ cd  selinux
 
 mkdir data
 
-echo "DC17" > data/file1.txt
+echo "SELINUX!" > data/file1.txt
 
 cat data/file1.txt
 ----

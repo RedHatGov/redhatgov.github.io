@@ -13,7 +13,7 @@ Once you have an app deployed in OpenShift you can take advantage of some contin
 ## A bit of configuration
 We are going to do some integration and coding with an external git repository.  For this lab we are going to use github, if you don't already have an account, [you can create one here][3].
 
-OK, let's fork the dc-metro-map app from **my** account into **your** github account.  Goto [https://github.com/dudash/openshift-workshops/][4] and look to the top right for the "Fork" button.
+OK, let's fork the dc-metro-map app from **my** account into **your** github account.  Goto [https://github.com/RedHatGov/openshift-workshops][4] and look to the top right for the "Fork" button.
 
 <img src="../images/ocp-lab-rollbacks-fork.png" width="500"><br/>
 
@@ -59,7 +59,7 @@ The node.js builder template creates a number of resources for you, but what we 
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
 
-```
+```bash
 $ oc describe bc/dc-metro-map | grep -i webhook
 ```
 
@@ -160,7 +160,8 @@ Well, what if something isn't quite right with the latest version of our app?  L
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-```
+
+```bash
 $ oc rollback dc-metro-map-1
 $ oc get pods -w
 ```
@@ -217,5 +218,5 @@ In this lab we saw how you can configure a source code repository to trigger bui
 [1]: https://docs.openshift.com/enterprise/3.1/dev_guide/builds.html#build-triggers
 [2]: https://docs.openshift.com/enterprise/3.1/dev_guide/deployments.html#triggers
 [3]: https://github.com/join?source=header-home
-[4]: https://github.com/dudash/openshift-workshops/
+[4]: https://github.com/RedHatGov/openshift-workshops.git
 [5]: https://docs.openshift.com/enterprise/latest/rest_api/openshift_v1.html#create-a-deploymentconfigrollback-2

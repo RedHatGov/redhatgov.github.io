@@ -49,7 +49,7 @@ Open up your **Terminal** and change to the directory where you cloned the main
 repository. This example assumes that location is
 `~/projects/redhatgov.github.io`.
 
-```
+```bash
 $ cd ~/projects/redhatgov.github.io
 ```
 
@@ -60,7 +60,7 @@ remote.
 First, let's verify that this is true. Run `git remote -v` and you should see
 the following output.
 
-```
+```bash
 $ git remote -v
 origin	https://github.com/RedHatGov/redhatgov.github.io.git (fetch)
 origin	https://github.com/RedHatGov/redhatgov.github.io.git (push)
@@ -70,7 +70,7 @@ Now we will rename the main repository from `origin` to `upstream` and add your
 fork as `origin`. Take note of `YOUR_USERNAME` and replace that before running
 the 2nd command.
 
-```
+```bash
 $ git remote rename origin upstream
 
 $ git remote add origin git@github.com:YOUR_USERNAME/redhatgov.github.io.git
@@ -78,7 +78,7 @@ $ git remote add origin git@github.com:YOUR_USERNAME/redhatgov.github.io.git
 
 Let's check `git remote -v` to verify everything looks correct.
 
-```
+```bash
 $ git remote -v                                                           
 origin	git@github.com:YOUR_USERNAME/redhatgov.github.io.git (fetch)
 origin	git@github.com:YOUR_USERNAME/redhatgov.github.io.git (push)
@@ -89,7 +89,7 @@ upstream	https://github.com/RedHatGov/redhatgov.github.io.git (push)
 Lastly, we need to update your local `docs` branch to point to the remote
 `docs` branch in your fork.
 
-```
+```bash
 $ git fetch --all
 
 $ git branch --set-upstream-to origin/docs docs
@@ -104,7 +104,7 @@ Open up your **Terminal** and change to the directory where you want to clone
 your fork of the repository. This example assumes you are in the
 `~/projects` directory.
 
-```
+```bash
 $ cd ~/projects
 
 $ $ git clone git@github.com:YOUR_USERNAME/redhatgov.github.io.git
@@ -113,13 +113,13 @@ $ $ git clone git@github.com:YOUR_USERNAME/redhatgov.github.io.git
 Next, let's add the main repository as the `upstream` remote so that you'll be
 able to pull down changes as needed.
 
-```
+```bash
 $ git remote add upstream https://github.com/RedHatGov/redhatgov.github.io.git
 ```
 
 Let's check `git remote -v` to verify everything looks correct.
 
-```
+```bash
 $ git remote -v                                                           
 origin	git@github.com:YOUR_USERNAME/redhatgov.github.io.git (fetch)
 origin	git@github.com:YOUR_USERNAME/redhatgov.github.io.git (push)
@@ -138,7 +138,7 @@ Let's start by copying this example to a new directory. You can find the source
 code for this example workshop at
 `~/projects/redhatgov.github.io/content/workshops/example`.
 
-```
+```bash
 $ cd ~/projects/redhatgov.github.io/content/workshops
 
 $ cp -rv example new_workshop
