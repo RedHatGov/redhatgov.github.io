@@ -1,0 +1,201 @@
+---
+title: "Exercise 1.8 - Red Hat Security API"
+workshops: security_openshift
+workshop_weight: 90
+layout: lab
+---
+
+:source-highlighter: highlight.js
+:source-language: bash
+:imagesdir: /workshops/security_openshift/images
+
+= Exercise 1.8 - Red Hat Security API
+
+image::sec-api.png[]
+
+Red Hat Product Security is committed to providing tools and security data to help you better understand security threats. This data has been available on our Security Data page and will now also be available in a machine-consumable format with the Security Data API. This tool will allow customers to programmatically query the API for data that was previously exposed only through files on our Security Data page.
+
+The data provided by the Security Data API is the same as what is found on the Security Data page: OVAL definitions, Common Vulnerability Reporting Framework (CVRF) documents and CVE data. All data is available in its native XML format or in a representative JSON format.
+
+== Step 1:
+
+Red Hat Security Page: `https://www.redhat.com/security/data/metrics/`
+
+Base URL: `https://access.redhat.com/labs/securitydataapi`
+
+Lets look at queries we would run to make sure our installation of OpenShift stays up to date from current threats. So we would look for either things that affect our Operating System or the Applications running on it.
+
+[NOTE]
+The `jq` utility also can clean up and propperly format json when writing to a file, other wise with out it the json would look compressed and hard to read.
+
+{{< panel_group >}}
+{{% panel "Sample API Results" %}}
+
+[source,bash]
+----
+curl https://access.redhat.com/labs/securitydataapi/cvrf.json | jq '.'
+
+
+% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100           611k    0  611k    0     0   393k      0 --:--:--  0:00:01 --:--:--  392k
+[
+  {
+    "RHSA": "RHSA-2017:1809",
+    "severity": "important",
+    "released_on": "2017-07-27T03:41:00+00:00",
+    "CVEs": [
+      "CVE-2017-5648",
+      "CVE-2017-5664"
+    ],
+    "bugzillas": [
+      "1441223",
+      "1459158"
+    ],
+    "released_packages": [
+      "tomcat-0:7.0.69-12.el7_3"
+    ],
+    "oval": {
+      "has_oval": true,
+      "resource_url": "https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1809/oval.json"
+    },
+    "resource_url": "https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1809.json"
+  },
+  {
+    "RHSA": "RHSA-2017:1809",
+    "severity": "important",
+    "released_on": "2017-07-27T03:41:00+00:00",
+    "CVEs": [
+      "CVE-2017-5648",
+      "CVE-2017-5664"
+    ],
+    "bugzillas": [
+      "1441223",
+      "1459158"
+    ],
+    "released_packages": [
+      "tomcat-0:7.0.69-12.el7_3"
+    ],
+    "oval": {
+      "has_oval": true,
+      "resource_url": "https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1809/oval.json"
+    },
+    "resource_url": "https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1809.json"
+  },
+  {
+    "RHSA": "RHSA-2017:1802",
+    "severity": "important",
+    "released_on": "2017-07-25T17:45:00+00:00",
+    "CVEs": [
+      "CVE-2017-5645",
+      "CVE-2017-5647",
+      "CVE-2017-5648",
+      "CVE-2017-5664"
+    ],
+    "bugzillas": [
+      "1443635",
+      "1441205",
+      "1441223",
+      "1459158"
+    ],
+    "released_packages": [],
+    "oval": {
+      "has_oval": false,
+      "resource_url": null
+    },
+    "resource_url": "https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1802.json"
+  },
+  {
+    "RHSA": "RHSA-2017:1802",
+    "severity": "important",
+    "released_on": "2017-07-25T17:45:00+00:00",
+    "CVEs": [
+      "CVE-2017-5645",
+      "CVE-2017-5647",
+      "CVE-2017-5648",
+      "CVE-2017-5664"
+    ],
+    "bugzillas": [
+      "1443635",
+      "1441205",
+      "1441223",
+      "1459158"
+    ],
+    "released_packages": [],
+    "oval": {
+      "has_oval": false,
+      "resource_url": null
+    },
+    "resource_url": "https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1802.json"
+  }
+----
+
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+.save API results to file
+[source]
+----
+curl https://access.redhat.com/labs/securitydataapi/cvrf.json | jq '.' > cvrf.json
+----
+
+.search the file for OpenShift
+[source]
+----
+vim cvrf.json
+----
+
+Quick and dirty way: Use the `vim` find function or what ever your favorite text editor is to find OpenShift and the related CVE, RHSA, OVAL or Bugzilla.
+
+Once in the editor just type `/` and type `openshift`.
+
+Type `n` to find the next occurrence.
+
+image::vim-find.png[]
+
+== Step 2:
+
+Examine a CVE
+
+Now that we can see all the related OpenShift advisories lets pick on a random CVE and get detains about it. We use `jq` here again to make it look nice and reformat the response into a more specific format.
+
+.CVE-2016-3703
+[source]
+----
+curl https://access.redhat.com/labs/securitydataapi/cve/CVE-2016-3703 | jq '. | {severity: .threat_severity, details: .details}'
+----
+
+.API response
+[source]
+----
+{
+  "severity": "Moderate",
+  "details": [
+    "\nRed Hat OpenShift Enterprise 3.2 and 3.1 do not properly validate the origin of a request when anonymous access is granted to a service/proxy or pod/proxy API for a specific pod, which allows remote attackers to access API credentials in the web browser localStorage via an access_token in the query parameter.\n    ",
+    "\nAn origin validation vulnerability was found in OpenShift Enterprise. An attacker could potentially access API credentials stored in a web browser's localStorage if anonymous access was granted to a service/proxy or pod/proxy API for a specific pod, and an authorized access_token was provided in the query parameter.\n    "
+  ]
+}
+----
+
+== Step 3:
+
+*CAT 1*
+
+Now we can also look just for CAT 1 severity CVE's with this query. These might be nice to have in a system that could alert administrators to take action.
+
+.CAT 1
+[source]
+----
+curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[] | select(.severity == "CAT I")'
+----
+
+Here are some helper selector `jq` filters.
+
+.get CVE & Title
+[source]
+----
+curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[] | select(.severity == "CAT I") | { CVE: .cvelist, "CAT 1 Name": .title }'
+----
+
+https://access.redhat.com/documentation/en-us/red_hat_security_data_api/0.1/html-single/red_hat_security_data_api/[Red Hat Security API Docs]
