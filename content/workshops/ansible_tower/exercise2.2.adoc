@@ -22,11 +22,11 @@ Job templates are useful to execute the same job many times.
 
 === Step 1:
 
-Select JOB TEMPLATES
+Select TEMPLATES
 
 === Step 2:
 
-Click on ADD image:at_add.png[Add,35,25]
+Click on ADD image:at_add.png[Add,35,25], and select JOB TEMPLATE
 
 === Step 3:
 
@@ -54,7 +54,7 @@ image::at_jt_detail.png[caption="Figure 11: ",900,title="Job Template Form"]
 
 === Step 4:
 
-Select ADD SURVEY image:at_addsurvey.png[Add,35,25]
+Click SAVE image:at_save.png[Save] and then select ADD SURVEY image:at_addsurvey.png[Add]
 
 === Step 5:
 
@@ -99,10 +99,9 @@ showing you the status of the job.
 
 === Step 1:
 
-Select JOB TEMPLATES
+Select TEMPLATES
 [NOTE]
-Alternatively, if you haven't navigated away from
-the job templates creation page, you can scroll down to see all existing job templates
+Alternatively, if you haven't navigated away from the job templates creation page, you can scroll down to see all existing job templates
 
 === Step 2:
 
