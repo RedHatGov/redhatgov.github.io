@@ -13,15 +13,15 @@ layout: lab
 
 = Exercise 3.0 - Using Ansible to Implement Security
 
-In this exercise, we are going to use Ansible tower to run DISA STIG and NIST 800-53 evaluations of our environment.
-
-NIST 800-53 controls
-https://galaxy.ansible.com/rhtps/800-53/
+In this exercise, we are going to use Ansible Tower to run DISA STIG and NIST 800-53 evaluations of our environment.  Note that the NIST 800-53 role also includes the execution of DISA STIG evaluation against targeted hosts.
 
 DISA STIG controls
 https://galaxy.ansible.com/MindPointGroup/RHEL7-STIG/
 
-== Adding the NIST 800-53 role to your tower node
+NIST 800-53 controls
+https://galaxy.ansible.com/rhtps/800-53/
+
+== Adding the DISA STIG and NIST 800-53 role to your Tower node
 
 === Step 1:
 
@@ -34,7 +34,7 @@ sudo ansible-galaxy install rhtps.800-53
 
 === Step 2:
 
-Now that you have the NIST 800-53 role installed on your Tower node, we need to create a playbook that uses it.  First, let's create a storage directory for playbooks, so that we can reference them from a Tower project, and then we'll create the playbook:
+Now that you have the role installed on your Tower node, we need to create a playbook that uses it.  First, let's create a storage directory for playbooks, so that we can reference them from a Tower project, and then we'll create the playbook:
 
 [source,bash]
 ----
@@ -46,7 +46,12 @@ sudo vim /var/lib/awx/projects/playbooks/800-53.yml
 
 Let's create the needed playbook.  You should have a pretty good understanding of playbooks by now, so we won't go over this, in detail.  Please do feel free to ask questions, though, if there is something that you don't understand.
 
-Note the use of the `register`, `with_items`, and `when` directives.  These are how Ansible implements variable creation, recursion, and conditionals, respectively.
+[source,bash]
+----
+sudo vim /var/lib/awx/projects/playbooks/800-53.yml
+----
+
+Note the use of the link:http://docs.ansible.com/ansible/latest/playbooks_conditionals.html#register-variables[register], link:http://docs.ansible.com/ansible/latest/playbooks_loops.html#standard-loops[with_items], and link:http://docs.ansible.com/ansible/latest/playbooks_conditionals.html#the-when-statement[when] directives.  These are how Ansible implements variable creation, recursion, and conditionals, respectively.
 
 [source,bash]
 ----
@@ -55,6 +60,7 @@ Note the use of the `register`, `with_items`, and `when` directives.  These are 
   become: yes
   vars:
     scap_reports_dir: /tmp
+    scap_profile: stig-rhel7-disa
   roles:
     - rhtps.800-53 
 
@@ -83,7 +89,7 @@ Note the use of the `register`, `with_items`, and `when` directives.  These are 
 
 Save and quit from editing, and then we will move on to the in-Tower setup.
 
-== Configuring 800-53 in Ansible Tower
+== Configuring a security project and job template in Ansible Tower
 
 === Step 1:
 
@@ -98,8 +104,8 @@ Select ADD     image:at_add.png[Add,35,25]
 Enter the following values into your new project.  Note that the `PLAYBOOK DIRECTORY` item should show `playbooks`, as an option, when you click on it.
 
 |===
-|NAME |NIST 800-53
-|DESCRIPTION|NIST 800-53 Project
+|NAME |NIST 800-53 and DISA STIG
+|DESCRIPTION|Security Project
 |ORGANIZATION|Default
 |SCM TYPE|Manual
 |PROJECT BASE PATH|/var/lib/awx/projects
@@ -112,22 +118,22 @@ Select SAVE     image:at_save.png[Save,35,25]
 
 === Step 5:
 
-In your Tower window, click on TEMPLATES
+In your Tower window, click on `TEMPLATES`
 
 === Step 6:
 
-Click on ADD image:at_add.png[Add,35,25], and select JOB TEMPLATE
+Click on ADD image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
 
 === Step 7:
 
-Complete the form using the following values.  Note that the PLAYBOOK field should offer `800-53.yml` as an option, when clicked.
+Complete the form using the following values.  Note that the `PLAYBOOK` field should offer `800-53.yml` as an option, when clicked.
 
 |===
-|NAME |NIST 800-53 Job Template
-|DESCRIPTION|Template for NIST 800-53
+|NAME |NIST 800-53 and DISA STIG Job Template
+|DESCRIPTION|Template for security playbooks
 |JOB TYPE|Run
 |INVENTORY|Ansible Workshop Inventory
-|PROJECT|NIST 800-53
+|PROJECT|NIST 800-53 and DISA STIG
 |PLAYBOOK|800-53.yml
 |MACHINE CREDENTIAL|Ansible Workshop Credential
 |LIMIT|web
@@ -140,7 +146,28 @@ a|
 
 Click SAVE image:at_save.png[Save], to store your new template, and we are ready to run it.
 
-Click on the rocketship icon image:at_launch_icon.png[Add,35,25] for the `NIST 800-53 Job Template`.
+Click on the rocketship icon image:at_launch_icon.png[Add,35,25] next to the `NIST 800-53 Job Template` entry, to launch the job.
+
+You can see what the job looks like, as it is executing, and what the SCAP results look like, when uploaded to your second node, in the panel, below.
+
+{{< panel_group >}}
+{{% panel "Job Status" %}}
+
+:icons: font
+:imagesdir: /workshops/ansible_tower/images
+
+image:at_800-53_job_status.png[Job Status]
+
+{{% /panel %}}
+{{% panel "Results" %}}
+
+:icons: font
+:imagesdir: /workshops/ansible_tower/images
+
+image:at_scap_report.png[SCAP Report]
+
+{{% /panel %}}
+{{< /panel_group >}}
 
 === End Result
 

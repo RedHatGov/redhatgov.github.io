@@ -87,7 +87,7 @@ Now send the `license` to Tower via the API.
 
 [source,bash]
 ----
-curl -k https://$WORKSHOP_PREFIX.0.redhatgov.io/api/v1/config/ \
+curl -k https://$WORKSHOP_PREFIX.tower.0.redhatgov.io/api/v1/config/ \
      -H 'Content-Type: application/json' \
      -X POST \
      --data @license \
