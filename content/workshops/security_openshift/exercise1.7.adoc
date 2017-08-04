@@ -1,95 +1,196 @@
 ---
-title: "Exercise 1.7 - Red Hat Security API"
+title: "Exercise 1.7 - Red Hat Container Catalog"
 workshops: security_openshift
 workshop_weight: 80
 layout: lab
 ---
 
+:icons: font
 :source-highlighter: highlight.js
 :source-language: bash
 :imagesdir: /workshops/security_openshift/images
 
-= Exercise 1.7 - Red Hat Security API
+= Exercise 1.7 - Red Hat Container Catalog
 
-image::sec-api.png[]
+image::catalog.png[]
 
-Red Hat Product Security is committed to providing tools and security data to help you better understand security threats. This data has been available on our Security Data page and will now also be available in a machine-consumable format with the Security Data API. This tool will allow customers to programmatically query the API for data that was previously exposed only through files on our Security Data page.
+Red Hat Container Catalog
 
-The data provided by the Security Data API is the same as what is found on the Security Data page: OVAL definitions, Common Vulnerability Reporting Framework (CVRF) documents and CVE data. All data is available in its native XML format or in a representative JSON format.
+{{< blockquote >}}
+While public registries and uncurated repositories are acceptable for some cloud-native development and proof-of-concept projects, they do not always provide content that is fit for production consumption; enterprise workloads require enterprise-ready tools.
+{{< /blockquote >}}
 
-== Step 1:
+`MATTHEW HICKSVICE PRESIDENT, ENGINEERING, OPENSHIFT AND MANAGEMENT, RED HAT`
 
-Red Hat Security Page: `https://www.redhat.com/security/data/metrics/`
+While container-based applications have begun moving into production, not all containers are created or maintained equally. Every container starts with a Linux base layer, which means that every ISV building container images is distributing Linux content. For these containers to be used in production environments, this content needs to be free from known vulnerabilities. While other companies, including several Red Hat partners, offer container scanners to help identify security flaws, Red Hat goes further by providing a comprehensive security impact metric, the Container Health Index, as well as access to updated container images addressing known security issues.
 
-Base URL: `https://access.redhat.com/labs/securitydataapi`
 
-Lets look at queries we would run to make sure our installation of OpenShift stays up to date from current threats. So we would look for either things that affect our Operating System or the Applications running on it.
+https://access.redhat.com/containers/?tab=overview&platform=sonatype#/registry.access.redhat.com/rhel7/rhel[*Red Hat Container Catalog*]
 
-[NOTE]
-The `jq` utility also can clean up and propperly format json when writing to a file, other wise with out it the json would look compressed and hard to read.
+== Get This Image
 
-.Query for OpenShift Issues
-[source]
+Red Hat systems are set to get containers from the Red Hat Registry, Click “Choose your Platform” to pick an acquire path.
+
+{{< panel_group >}}
+{{% panel "Get This Image Example" %}}
+
+:imagesdir: /workshops/security_openshift/images
+
+image::get-this-image.png[]
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+{{< panel_group >}}
+{{% panel "Multiple Methods for getting RHEL 7" %}}
+
+:imagesdir: /workshops/security_openshift/images
+:icons: font
+
+.Use Atomic to pull RHEL 7
+[source,bash]
 ----
-curl https://access.redhat.com/labs/securitydataapi/cvrf.json | jq '.' > cvrf.json
-----
-
-.search the file for OpenShift
-[source]
-----
-vim cvrf.json
-----
-
-Quick and dirty way: Use the `vim` find function or what ever your favorite text editor is to find OpenShift and the related CVE, RHSA, OVAL or Bugzilla.
-
-Once in the editor just type `/` and type `openshift`.
-
-Type `n` to find the next occurrence.
-
-image::vim-find.png[]
-
-== Step 2:
-
-Examine a CVE
-
-Now that we can see all the related OpenShift advisories lets pick on a random CVE and get detains about it. We use `jq` here again to make it look nice and reformat the response into a more specific format.
-
-.CVE-2016-3703
-[source]
-----
-curl https://access.redhat.com/labs/securitydataapi/cve/CVE-2016-3703 | jq '. | {severity: .threat_severity, details: .details}'
+atomic install registry.access.redhat.com/rhel7/rhel
 ----
 
-.API response
-[source]
+.Use Red Hat Satellite to pull RHEL 7
+[source,bash]
 ----
-{
-  "severity": "Moderate",
-  "details": [
-    "\nRed Hat OpenShift Enterprise 3.2 and 3.1 do not properly validate the origin of a request when anonymous access is granted to a service/proxy or pod/proxy API for a specific pod, which allows remote attackers to access API credentials in the web browser localStorage via an access_token in the query parameter.\n    ",
-    "\nAn origin validation vulnerability was found in OpenShift Enterprise. An attacker could potentially access API credentials stored in a web browser's localStorage if anonymous access was granted to a service/proxy or pod/proxy API for a specific pod, and an authorized access_token was provided in the query parameter.\n    "
-  ]
-}
-----
-
-== Step 3:
-
-*CAT 1*
-
-Now we can also look just for CAT 1 severity CVE's with this query. These might be nice to have in a system that could alert administrators to take action.
-
-.CAT 1
-[source]
-----
-curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[] | select(.severity == "CAT I")'
+# set the organization
+      ORG="ACME"
+      # set the product name
+      PRODUCT="redhat-images"
+      # create the product
+      hammer product create --name "${PRODUCT}" \
+      --description "container images" \
+      --organization="${ORG}" --organization "${ORG}"
 ----
 
-Here are some helper selector `jq` filters.
-
-.get CVE & Title
-[source]
+.Use OpenShift to pull RHEL 7
+[source,bash]
 ----
-curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[] | select(.severity == "CAT I") | { CVE: .cvelist, "CAT 1 Name": .title }'
+oc import-image my-rhel7/rhel --from=registry.access.redhat.com/rhel7/rhel --confirm
 ----
 
-https://access.redhat.com/documentation/en-us/red_hat_security_data_api/0.1/html-single/red_hat_security_data_api/[Red Hat Security API Docs]
+.Use docker to pull RHEL 7
+[source,bash]
+----
+docker pull registry.access.redhat.com/rhel7/rhel
+----
+
+.Use System Images (runc) to pull RHEL 7
+[source,bash]
+----
+atomic pull --storage=ostree registry.access.redhat.com/rhel7/rhel
+atomic install --system rhel7/rhel
+----
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+
+== Image Metadata
+
+Environment configuration and image metadata information for the RHEL 7 container image found on the Red Hat Container Catalog.
+
+{{< panel_group >}}
+{{% panel "Details for RHEL 7 Container" %}}
+
+[source,bash]
+----
+Env
+        PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+        container=oci
+
+Cmd
+        /bin/bash
+Labels
+        com.redhat.component rhel-server-docker
+        authoritative-source-url registry.access.redhat.com
+        distribution-scope public
+        vendor Red Hat, Inc.
+        description The Red Hat Enterprise Linux Base image is designed to be a fully supported foundation for your containerized applications.  This base image provides your operations and application teams with the packages, language runtimes and tools necessary to run, maintain, and troubleshoot all of your applications. This image is maintained by Red Hat and updated regularly. It is designed and engineered to be the base layer for all of your containerized applications, middleware and utilites. When used as the source for all of your containers, only one copy will ever be downloaded and cached in your production environment. Use this image just like you would a regular Red Hat Enterprise Linux distribution. Tools like yum, gzip, and bash are provided by default. For further information on how this image was built look at the /root/anacanda-ks.cfg file.
+        io.k8s.display-name Red Hat Enterprise Linux 7
+        summary Provides the latest release of Red Hat Enterprise Linux 7 in a fully featured and supported base image.
+        vcs-type git
+        name rhel7
+        vcs-ref b7f83830183f71d08b6d758479417bb5437877a9
+        version 7.3
+        architecture x86_64
+        release 97
+        io.openshift.tags base rhel7
+        build-date 2017-06-21T15:47:06.130692
+        com.redhat.build-host ip-10-29-120-158.ec2.internal
+----
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+== Documentation
+
+The Container Catalog contains documentation samples on how to get started with the container and any additional relevent documentation for using the container.
+
+{{< panel_group >}}
+{{% panel "Documentation Example" %}}
+
+:imagesdir: /workshops/security_openshift/images
+
+image::catalog-documentation.png[]
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+
+== Health
+
+The Container Health Index is an integrated part of the Red Hat Container Catalog, a service for discovering, distributing and consuming commercially-curated Linux container images. Providing a clear delineation between enterprise-class, production-ready containers and their potentially more risk-inducing counterparts, the Red Hat Container Catalog enables customers to easily attain a clear checklist of container contents and other detailed information including:
+
+Container Health Index, a simple system to help enterprise users quickly assess how well-maintained and secure a given image is.
+Extensive image metadata which goes far beyond image name and description to display the container’s full package list, build environment and complete registry information.
+Image documentation to help users understand image usage in multiple environments, such as Red Hat OpenShift Container Platform or distribution via Red Hat Satellite.
+Image advisories for quickly alerting users to any potential issues with a given image or included RPMs.
+
+Red Hat uses the https://access.redhat.com/containers/?tab=tags#/registry.access.redhat.com/rhel7/rhel[Container Health Index] to identify security risk with containers that Red Hat provides through the Red Hat Container Catalog. These containers consume software provided by Red Hat and our errata process, so old, stale container images are much more likely to contain security risks, while new, fresh containers are less likely.
+
+To illustrate this, we use a grading system. The criteria for determining the grade is based on the age and the criticality (rated Critical or Important) of the oldest flaw that is applicable to the container image. Applicable Moderate or Low severity flaws, of any age, do not influence the Container Health Index.
+
+
+*Grade A:* This image does not contain known unapplied errata that fix Critical or Important flaws.
+
+image::grade-a.png[]
+
+*Grade B:* This image may be missing Critical or Important security errata, but no missing Critical flaw is older than 7 days and no missing Important flaw is older than 30 days.
+
+image::grade-b.png[]
+
+*Grade C:* This image may be missing Critical or Important security errata, but no missing Critical flaw is older than 30 days and no missing Important flaw is older than 90 days.
+
+image::grade-c.png[]
+
+*Grade D:* This image may be missing Critical or Important security errata, but no missing Critical flaw is older than 90 days and no missing Important flaw is older than 365 days.
+
+image::grade-d.png[]
+
+*Grade E:* This image may be missing Critical or Important security errata, but no missing Critical or Important flaw is older than 365 days.
+
+image::grade-e.png[]
+
+*Grade F:* This image may be missing Critical or Important security errata, and they are older than 365 days. Or the container is out of its lifecycle.
+
+image::grade-f.png[]
+
+*Grade Unknown:* This image cannot be scanned as it is missing metadata required to perform the Container Health Index calculation.
+
+image::grade-unknown.png[]
+
+{{< panel_group >}}
+{{% panel "Health for RHEL 7 Container Image" %}}
+
+:imagesdir: /workshops/security_openshift/images
+
+image::rhel7-health.png[]
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+

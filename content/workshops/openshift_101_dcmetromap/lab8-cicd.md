@@ -17,9 +17,10 @@ Create a new project named “cicd”.
 
 {{% panel "CLI Steps" %}}
 
-```
+```bash
 $ oc new-project cicd
 ```
+
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
@@ -39,7 +40,7 @@ Fill in the Name and Display Name of the project as "cicd" and click "Create"
 
 ## Use the cicd project
 
-```
+```bash
 $ oc project cicd
 ```
 
@@ -49,7 +50,7 @@ $ oc project cicd
 
 {{% panel "CLI Steps" %}}
 
-```
+```bash
 $ oc new-app jenkins-ephemeral
 ```
 {{% /panel %}}
@@ -82,7 +83,7 @@ Select "Continue to overview" to display the following overview page.
 
 Use the "oc new-app" command to create a simple nodejs application from a template file:
 
-```
+```bash
 $ oc new-app -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json
 ```
 > Click on "Overview" within the OpenShift console to display the sample application configuration
@@ -101,12 +102,13 @@ $ oc new-app -f https://raw.githubusercontent.com/openshift/origin/master/exampl
 <i class="fa fa-terminal"></i> Get the route to the Jenkins server
 </blockquote>
 
-```
+```bash
 $ oc get route
 NAME       HOST/PORT                            PATH      SERVICES   PORT      TERMINATION     WILDCARD
 frontend   frontend-cicd.192.168.42.27.xip.io             frontend   <all>     edge            None
 jenkins    jenkins-cicd.192.168.42.27.xip.io              jenkins    <all>     edge/Redirect   None
 ```
+
 Use Jenkins HOST/PORT to access through web browser
 {{% /panel %}}
 
@@ -172,7 +174,7 @@ If so, Jenkins "tags" the image for production. This tagging will trigger anothe
 <i class="fa fa-terminal"></i> Use the "oc get service" command to get the internal IP and port needed to access the frontend and frontend-prod services:
 </blockquote>
 
-```
+```bash
 $ oc get services -n cicd | grep frontend
 frontend        172.30.151.206   <none>        8080/TCP    40m
 frontend-prod   172.30.230.228   <none>        8080/TCP    40m

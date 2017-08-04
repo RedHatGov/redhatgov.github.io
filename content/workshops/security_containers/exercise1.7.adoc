@@ -1,0 +1,361 @@
+---
+title: "Exercise 1.7 - Seccomp"
+workshops: security_containers
+workshop_weight: 90
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/security_containers/images
+
+= Exercise 1.7 - Seccomp
+
+== Seccomp
+
+Secure Computing Mode (seccomp) is a kernel feature that allows you to filter system calls to the kernel from a container. The combination of restricted and allowed calls are arranged in profiles, and you can pass different profiles to different containers. Seccomp provides more fine-grained control than capabilities, giving an attacker a limited number of syscalls from the container.
+
+The default seccomp profile for docker is a JSON file and can be viewed here: https://github.com/docker/docker/blob/master/profiles/seccomp/default.json. It blocks 44 system calls out of more than 300 available.Making the list stricter would be a trade-off with application compatibility. A table with a significant part of the blocked calls and the reasoning for blocking can be found here: https://docs.docker.com/engine/security/seccomp/.
+
+Seccomp uses the Berkeley Packet Filter (BPF) system, which is programmable on the fly so you can make a custom filter. You can also limit a certain syscall by also customizing the conditions on how or when it should be limited. A seccomp filter replaces the syscall with a pointer to a BPF program, which will execute that program instead of the syscall. All children to a process with this filter will inherit the filter as well. The docker option which is used to operate with seccomp is `--security-opt`. To explicitly use the default policy for a container, the command will be:
+
+[source,bash]
+----
+sudo docker run --security-opt seccomp=/path/to/default/profile.json <container>
+----
+
+=== Step 1:
+
+Lets take a look at the `1_chmod.json` file. This is a example seccomp file that will not allow the `chmod`, `chown`, or `chown32` systemcalls.
+
+[source,bash]
+----
+cat 1_chmod.json
+
+{
+    "defaultAction": "SCMP_ACT_ALLOW",
+    "architectures": [
+        "SCMP_ARCH_X86_64",
+        "SCMP_ARCH_X86",
+        "SCMP_ARCH_X32"
+    ],
+    "syscalls": [
+        {
+            "name": "chmod",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        },
+        {
+            "name": "chown",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        },
+        {
+            "name": "chown32",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        }
+    ]
+}
+----
+
+Lets take a closer look at how this file restricts these system calls.
+
+[source,bash]
+----
+"syscalls": [
+        {
+            "name": "chmod",                <1>
+            "action": "SCMP_ACT_ERRNO",     <2>
+----
+
+
+<1> *chmod*:  is the command and system call which may change the access permissions to file system objects (files and directories). It may also alter special mode flags. The request is filtered by the umask. The name is an abbreviation of change mode.
+<2> *SCMP_ACT_ERRNO*: Basically this blocks the chmod syscall. Man page: The thread will receive a return value of errno when it calls a syscall that matches the filter rule.
+
+
+
+=== Step 2:
+
+
+Lets apply these restrictions to a container by using the `--security-opt` flag to point to our `1_chmod.json` file. We will start a container and try to run the chmod command on a file.
+
+[source,bash]
+----
+sudo docker run --rm -it --security-opt seccomp:1_chmod.json redhatgov/alpine chmod 400 /etc/hosts
+----
+{{< panel_group >}}
+{{% panel "Result" %}}
+
+:icons: font
+
+[source,bash]
+----
+chmod: /etc/hosts: Operation not permitted
+----
+
+This `FAILED` because we explicitly denied this syscall to the container via the seccomp profile. This profile can be updated to enable or disable syscalls for your application.
+
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+
+
+
+== Syscall Identification
+
+Not all container operating systems use the same mappings for syscalls. While one OS may use a direct mapping of the binary `chown` to the syscall `chown` it is not always the case for other operating systems.
+
+To find out what syscalls your application or command is using under the covers we need to profile or trace the application and the syscalls it is making. To do this we use a tool called https://linux.die.net/man/1/strace[`strace`].
+
+Strace is used to identify the underlying syscall being made by the operating system. Lets walk through a example where the syscalls being made do not map directly to our syscalls in the `1_chmod.json` file.
+
+
+=== Step 1:
+
+Let's run a instance of Fedora and use the same `1_chmod.json` profile to try and limit the `chmod` command inside the container.
+
+
+[source,bash]
+----
+sudo docker run --rm \
+                -it  \
+                --cap-add SYS_PTRACE \
+                --security-opt seccomp:1_chmod.json \
+                redhatgov/fedora \
+                chmod 400 /etc/hosts && echo $?
+----
+
+The command should return a zero. This means that the container was able to `chmod` the `/etc/hosts` file. We want to limit this action and need to map the correct syscall to out seccomp profile. To identify the correct syscall we need to use `strace`.
+
+
+=== Step 2:
+
+Lets run the same command again and add the https://linux.die.net/man/1/strace[`strace`] program to our command to trace the `chmod` command.
+
+
+[source,bash]
+----
+sudo docker run --rm -it --cap-add SYS_PTRACE --security-opt seccomp:1_chmod.json redhatgov/fedora strace chmod 400 /etc/hosts
+----
+
+Create a seccomp profile using the new mappings for system calls for `chmod` & `chown`. Check your answer below.
+
+
+{{< panel_group >}}
+{{% panel "Seccomp Profile" %}}
+
+Create the following profile using vim, or your favorite editor.
+
+
+.2_chmod_fedora.json
+[source,bash]
+----
+{
+    "defaultAction": "SCMP_ACT_ALLOW",
+    "architectures": [
+        "SCMP_ARCH_X86_64",
+        "SCMP_ARCH_X86",
+        "SCMP_ARCH_X32"
+    ],
+    "syscalls": [
+        {
+            "name": "fchmodat",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        },
+        {
+            "name": "fchownat",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        }
+    ]
+}
+----
+
+
+https://linux.die.net/man/2/fchmodat[fchmodat]
+
+https://linux.die.net/man/2/fchownat[fchownat]
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+
+We have now found the correct syscall to add to our seccomp profile. Let's create a seccomp profile with our new syscall mapping. Now we can create a seccomp profile called `2_chmod_fedora.json` using vim, or your favorite editor. You can copy and paster the seccomp profile above into this profile.
+
+Now that you have your new profile created, let's run the container again and see if our new seccomp profile blocks `chmod` & `chown` from working.
+
+.chmod
+[source,bash]
+----
+sudo docker run --rm -it --security-opt seccomp:2_chmod_fedora.json redhatgov/fedora chmod 400 /etc/hosts
+----
+
+{{< panel_group >}}
+{{% panel "Chmod Result" %}}
+
+[source,bash]
+----
+chmod: changing permissions of '/etc/hosts': Operation not permitted
+----
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+.chown
+[source,bash]
+----
+sudo docker run --rm -it --security-opt seccomp:2_chmod_fedora.json redhatgov/fedora chown root:root /etc/hosts
+----
+
+{{< panel_group >}}
+{{% panel "Chown Result" %}}
+
+[source,bash]
+----
+chown: changing ownership of '/etc/hosts': Operation not permitted
+----
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+== Limit Network Syscalls
+
+Docker presents the socket syscall to containers by default, this my not be a capability you want your containers to have in certain situations. Let's look at another example where we use the Swiss army knife of networking https://linux.die.net/man/1/nc[Netcat]. Netcat is used for just about anything under the sun involving TCP or UDP. It can open TCP connections, send UDP packets, listen on arbitrary TCP and UDP ports, do port scanning, and deal with both IPv4 and IPv6. These may not be features you want you containers to have.
+
+
+=== Step 1:
+
+Let's run a container with Netcat installed in it and listen for local traffic on port 999.
+
+
+[source,bash]
+----
+sudo docker run --rm -it redhatgov/fedora bash
+----
+
+.In a Container
+[source,bash]
+----
+[root@2b1369bfa927 /]# nc -l 999
+^C <1>
+
+[root@2b1369bfa927 /]# exit
+exit <2>
+----
+
+<1> Netcat successfully connected. Use `Control + C` to exit Netcat.
+<2> `exit` to exit the container.
+
+We were able to bind to the localhost and listen for traffic on port 999. In step 2 lets work on disabling networking in this container.
+
+
+
+=== Step 2:
+
+Let's run strace on the Netcat program to identify the syscalls we need for out seccomp profile that will restrict networking from our container.
+
+[source,bash]
+----
+sudo docker run --rm -it --cap-add SYS_PTRACE redhatgov/fedora bash
+----
+
+Then from inside the container run strace and the netcat command.
+
+[source,bash]
+----
+[root@9ad9f00480a0 /]# strace nc -l 999
+----
+
+{{< panel_group >}}
+{{% panel "Strace results" %}}
+
+:icons: font
+
+[source,bash]
+----
+execve("/usr/bin/nc", ["nc", "-l", "555"], 0x7ffd48b77df0 /* 10 vars */) = 0
+brk(NULL)                               = 0x555a8f451000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f97676cc000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+
+..<SNIP>..
+
+socket(AF_INET6, SOCK_STREAM, IPPROTO_TCP) = -1 EPERM (Operation not permitted) <1>
+socket(AF_INET, SOCK_STREAM, IPPROTO_TCP) = -1 EPERM (Operation not permitted)  <2>
+write(2, "Ncat: ", 6Ncat: )                   = 6
+write(2, "Unable to open any listening soc"..., 37Unable to open any listening sockets.) = 37 <3>
+write(2, " QUITTING.\n", 11 QUITTING.
+)            = 11
+exit_group(2)                           = ?
++++ exited with 2 +++
+----
+
+<1> socket syscall
+<2> socket syscall
+<3> Failed to make socket connection message
+
+http://man7.org/linux/man-pages/man2/socket.2.html[`Socket Syscall Manpage`]
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+We have now found the correct syscall to add to our seccomp profile. Let's create a seccomp profile with our new syscall mapping.
+
+{{< panel_group >}}
+{{% panel "Seccomp Profile" %}}
+
+:icons: font
+
+[source,bash]
+----
+{
+   "defaultAction":"SCMP_ACT_ALLOW",
+   "syscalls":[
+      {
+         "name":"socket",
+         "action":"SCMP_ACT_ERRNO"
+      }
+   ]
+}
+----
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+Now we can create a seccomp profile called `3_network.json` using vim, or your favorite editor. You can copy and paster the seccomp profile above into this profile.
+
+Now that you have your new profile created, let's run the container again and see if our new seccomp profile blocks Netcat from working.
+
+{{< panel_group >}}
+{{% panel "Answer" %}}
+
+:icons: font
+
+[source,bash]
+----
+sudo docker run --rm -it --security-opt seccomp:3_network.json redhatgov/fedora bash
+----
+
+.In a Container
+[source,bash]
+----
+[root@de51762b4213 /]# nc -l 555
+Ncat: Unable to open any listening sockets. QUITTING. <1>
+----
+
+<1> Netcat is blocked from connecting to a network socket via the seccomp profile.
+
+
+.Exit the container
+[source,bash]
+----
+[root@de51762b4213 /]# exit
+exit
+----
+
+This `FAILED` because we explicitly denied this syscall to the container via the seccomp profile. This profile can help to stop would-be attackers from being able to further compromise a container or container host.
+
+{{% /panel %}}
+{{< /panel_group >}}

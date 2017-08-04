@@ -25,6 +25,7 @@ menu:
 * Arrivals
 * Introductions / Agenda
 * Presentation
+
 {{< labs ansible_tower >}}
 
 

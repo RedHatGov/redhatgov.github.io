@@ -5,8 +5,10 @@ workshop_weight: 30
 layout: lab
 ---
 
+:icons: font
 :source-highlighter: highlight.js
 :source-language: bash
+:iconsdir: http://people.redhat.com/~jduncan/images/icons
 :imagesdir: /workshops/security_openshift/images
 
 = Exercise 1.2 - Deploy OpenShift
@@ -43,12 +45,13 @@ mkdir /data
 
 Next use the following command to bring up the cluster on your local machine.
 
-[IMPORTANT]
+{{% alert warning %}}
 But first! export your student number to sync up with the wildcard DNS mapped
 to your instance. For example below, if you are student `0` then `export
 STUDENT=0`.
+{{% /alert %}}
 
-.DO NOT CUT AND PASTE THIS, ok you can but change the number
+.Change the number to your student number
 [source]
 ----
 export STUDENT=0
@@ -57,15 +60,138 @@ export STUDENT=0
 .Run the oc command (you can cut & paste this)
 [source]
 ----
-oc cluster up --public-hostname=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) --routing-suffix=apps.ose.$STUDENT.redhatgov.io --host-pv-dir=/data--host-data-dir=/data  --image=registry.access.redhat.com/openshift3/ose--version=v3.5
+oc cluster up --public-hostname=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) --routing-suffix=apps.ose.$STUDENT.redhatgov.io --host-pv-dir=/data--host-data-dir=/data  --image=registry.access.redhat.com/openshift3/ose --version=v3.5
 ----
 
-`.Details on the oc command`
+
+.Successful Build (example)
+[source,bash]
+----
+-- Login to server ... OK
+-- Creating initial project "myproject" ... OK
+-- Removing temporary directory ... OK
+-- Checking container networking ... OK
+-- Server Information ...
+   OpenShift server started.
+   The server is accessible via web console at:
+       https://184.73.9.149:8443  <1>
+
+   You are logged in as:
+       User:     developer
+       Password: developer
+
+   To login as administrator:
+       oc login -u system:admin
+----
+
+<1> OpenShift Web Console, Example: `https://184.73.9.149:8443`  (open in
+browser)
+
+
+=== Step 2:
+
+*Launch your first application.*
+
+.see what user you are loged in as
 [source]
 ----
+oc whoami
+----
+
+You should be logged in as `developer`
+
+Create a new
+https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/projects_and_users.html[Project]
+for your first app.
+
+.create new project
+[source]
+----
+oc new-project flask --description="Python Flask App" --display-name="Flask App"
+----
+
+Now use the `new-app` command to create the new app from a simple Python flask
+repository on GitHub. By using the `--strategy=source` we can pass it the type
+of container to build and launch the app. In this case we are using
+`python:3.3`.
+
+.create the app
+[source]
+----
+oc new-app --strategy=source python:3.3~https://github.com/RedHatGov/OCP-App.git --name=flask-app
+----
+
+Now follow the logs as its being built.
+
+.follow the logs
+[source]
+----
+oc logs -f bc/flask-app
+----
+
+*Open a browser next to the terminal so you can see the app get created*
+
+=== Step 3:
+
+*Login to OpenShift*
+
+.Login as developer
+[source]
+----
+Username:  developer
+
+Password:  developer
+----
+
+.OpenShift Main Login
+image::login-ocp.png[]
+
+Click on the new project you created `Flask App`.
+
+.Flask App
+image::flask-app.png[]
+
+Now we need to create a
+https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/routes.html[`route`]
+to see the app.
+
+Click `Create Route` in the top right corner. Accept the defaults and click
+`create`.
+
+.create route
+image::create-route.png[]
+
+Now lets see your first app. Click the new route. It should look similar to
+this `http://http://flask-app-flask.apps.ose.0.redhatgov.io`.
+
+{{< panel_group >}}
+{{% panel "Result!" %}}
+
+:imagesdir: /workshops/security_openshift/images
+
+image::ocp-result.png[]
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+Congratulations! You have launched your first app in OpenShift!
+
+To recap:
+
+- You just launched OpenShift on AWS
+- You launched a containerized python app
+
+https://github.com/openshift/origin/blob/master/docs/cluster_up_down.md#specifying-images-to-use[oc guide]
+
+
+== Extra credit
+
+[TIP]
+.Details on the oc command (Informational Only)
+[source,bash]
+----
 oc cluster up \
-   --public-hostname=$(curl -s
-http://169.254.169.254/latest/meta-data/public-ipv4) \ <1>
+   --public-hostname=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) \ <1>
    --routing-suffix=apps.ose.$STUDENT.redhatgov.io \ <2>
    --host-pv-dir=/data \ <3>
    --host-data-dir=/data  <4>
@@ -89,116 +215,3 @@ starting your cluster with `oc` cluster up.
 is to use Origin.
 
 <6> Get the latest version of OCP 3.5.
-
-.Successful Build (example)
-[source]
-----
--- Login to server ... OK
--- Creating initial project "myproject" ... OK
--- Removing temporary directory ... OK
--- Checking container networking ... OK
--- Server Information ...
-   OpenShift server started.
-   The server is accessible via web console at:
-       https://184.73.9.149:8443  <1>
-
-   You are logged in as:
-       User:     developer
-       Password: developer
-
-   To login as administrator:
-       oc login -u system:admin
-----
-
-<1> OpenShift Web Console, Example: `https://184.73.9.149:8443`  (open in
-browser)
-
-=== Step 2:
-
-*Launch your first application.*
-
-.see what user you are loged in as
-[source]
-----
-oc whoami
-----
-
-You should be logged in as `developer`
-
-Create a new
-https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/projects_and_users.html[Project]
-for your first app.
-
-.create new project
-[source]
-----
-oc new-project flask --description="Python Flask App" --display-name="Flask
-App"
-----
-
-Now use the `new-app` command to create the new app from a simple Python flask
-repository on GitHub. By using the `--strategy=source` we can pass it the type
-of container to build and launch the app. In this case we are using
-`python:3.3`.
-
-.create the app
-[source]
-----
-oc new-app --strategy=source python:3.3~https://github.com/RedHatGov/DC17-Flask
---name=dc17-flask
-----
-
-Now follow the logs as its being built.
-
-.follow the logs
-[source]
-----
-oc logs -f bc/dc17-flask
-----
-
-*Open a browser next to the terminal so you can see the app get created*
-
-=== Step 3:
-
-*Login to OpenShift*
-
-.Login as developer
-[source]
-----
-Username:  developer
-
-Password:  developer
-----
-
-.OpenShift Main Login
-image::login-origin.png[]
-
-Click on the new project you created `Flask App`.
-
-.Flask App
-image::flask-app.png[]
-
-Now we need to create a
-https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/routes.html[`route`]
-to see the app.
-
-Click `Create Route` in the top right corner. Accept the defaults and click
-`create`.
-
-.create route
-image::create-route.png[]
-
-Now lets see your first app. Click the new route. It should look similar to
-this `http://dc17-flask-flask.apps.ose.0.redhatgov.io`.
-
-image::route.png[]
-
-Congratulations! You have launched your first app in OpenShift!
-
-To recap:
-
-- You just launched OpenShift on AWS
-- You launched a containerized python app
-
-
-https://github.com/openshift/origin/blob/master/docs/cluster_up_down.md#specifying-images-to-use[oc guide]

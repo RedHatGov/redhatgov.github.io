@@ -18,7 +18,7 @@ Let's walk through a simple example of how the replication controller can keep y
 <i class="fa fa-terminal"></i> Goto the terminal and try the following:
 </blockquote>
 
-```
+```bash
 $ oc scale --replicas=4 dc/dc-metro-map
 ```
 
@@ -26,7 +26,7 @@ $ oc scale --replicas=4 dc/dc-metro-map
 <i class="fa fa-terminal"></i> Check out the new pods:
 </blockquote>
 
-```
+```bash
 $ oc get pods
 ```
 
@@ -66,7 +66,7 @@ Okay, now that we have a slightly more interesting replication state, we can tes
 <i class="fa fa-terminal"></i> Choose a random pod and delete it:
 </blockquote>
 
-```
+```bash
 $ oc get pods
 $ oc delete pod/PODNAME
 $ oc get pods -w
@@ -78,7 +78,7 @@ If you're fast enough you'll see the pod you deleted go "Terminating" and you'll
 <i class="fa fa-info-circle"></i>  You can see the more details about your replication controller with:
 </blockquote>
 
-```
+```bash
 $ oc describe rc
 ```
 
@@ -127,7 +127,7 @@ In addition to the health of your application's pods, OpenShift will watch the c
 <i class="fa fa-terminal"></i> Choose a running pod and shell into it:
 </blockquote>
 
-```
+```bash
 $ oc get pods
 $ oc exec PODNAME -it /bin/bash
 ```
@@ -142,7 +142,7 @@ You are now executing a bash shell running in the container of the pod.  Let's k
 <i class="fa fa-terminal"></i> Choose a running pod and shell into its container:
 </blockquote>
 
-```
+```bash
 $ pkill -9 node
 ```
 
@@ -156,7 +156,7 @@ This will kick you out off the container with an error like "Error executing com
 <i class="fa fa-terminal"></i> Watch for the container restart
 </blockquote>
 
-```
+```bash
 $ oc get pods -w
 ```
 

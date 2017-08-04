@@ -20,7 +20,7 @@ In a previous lab we added our web app using a S2I template.  When we did that, 
 <i class="fa fa-terminal"></i> Goto the terminal and try the following:
 </blockquote>
 
-```
+```bash
 $ oc get pods
 $ oc describe pod/<POD NAME> | more
 ```
@@ -31,7 +31,7 @@ You can see the Labels automatically added contain the app, deployment, and depl
 <i class="fa fa-terminal"></i> Add a label
 </blockquote>
 
-```
+```bash
 $ oc label pod/<POD NAME> testdate=4.30.2016 testedby=mylastname
 ```
 
@@ -39,7 +39,7 @@ $ oc label pod/<POD NAME> testdate=4.30.2016 testedby=mylastname
 <i class="fa fa-terminal"></i> Look at the labels
 </blockquote>
 
-```
+```bash
 $ oc describe pod/<POD NAME> | more
 ```
 
@@ -47,7 +47,7 @@ $ oc describe pod/<POD NAME> | more
 <i class="fa fa-info-circle"></i> Here's a handy way to search through all objects and look at all the labels:<br/>
 </blockquote>
 
-```
+```bash
 $ oc describe all | grep -i "labels:
 ```
 

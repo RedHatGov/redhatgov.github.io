@@ -1,22 +1,17 @@
 ---
-title: "Exercise 1.0 - Linux Kernel Capabilities"
-workshops: security_openshift
-workshop_weight: 10
+title: "Exercise 1.9 - Linux Kernel Capabilities"
+workshops: security_containers
+workshop_weight: 92
 layout: lab
 ---
 
 :icons: font
 :source-highlighter: highlight.js
-:source-language: bash
-:imagesdir: /workshops/security_openshift/images
+:imagesdir: /workshops/security_containers/images
 
-= Exercise 1.0 - Linux Kernel Capabilities
+= Exercise 1.9 - Linux Kernel Capabilities
 
 image::kernel.png[]
-
-Before we get into OpenShift lets explore what `Linux Kernel Capabilities` are
-and some of the steps that OpenShift has taken to remove certain capabilities
-by default.
 
 == What are Linux Capabilities?
 
@@ -49,12 +44,10 @@ https://en.wikipedia.org/wiki/Seccomp[seccomp], and
 http://rhelblog.redhat.com/2015/07/07/whats-next-for-containers-user-namespaces/[namespaces]
 to protect the host system from the containers.
 
-{{% alert warning %}}
-OpenShift Container Platform and OpenShift Dedicated have removed most of the
-default 38 capabilities from root users running inside a container.
-{{% /alert %}}
+*Bottom line: dropping more of the capabilities from your container is a good
+idea from a security point of view.*
 
-== Linux Kernel Capabilities
+== Linux Capabilities
 
 === Step 1:
 
@@ -77,8 +70,6 @@ sudo docker run -d fedora sleep 5 >/dev/null; pscap | grep sleep
 
 === Step 2:
 
-*Blacklisting*
-
 If I wanted to drop `setfcap`, `audit_write`, and `mknod`, I could use
 `--cap-drop=setfcap`  `--cap-drop=audit_write` `--cap-drop=mknod`:
 
@@ -90,8 +81,6 @@ fedora sleep 5 > /dev/null; pscap | grep sleep
 ----
 
 === Step 3:
-
-*Whitelisting*
 
 Better yet, if you know your container only needs setuid and setgid, you can
 drop all capabilities and just add setgid and setuid back in.
@@ -121,37 +110,12 @@ setgid, setuid <2>
 
 <2> Whitelisting: Droping all and adding back the ones you need.
 
-.stop & delete images
-[source,bash]
-----
-sudo docker ps -a
-
-...
-
-CONTAINER ID   IMAGE   COMMAND    CREATED   STATUS   PORTS   NAMES
-fdf41302efbc  <1>
-----
-
-<1> Container ID to copy
-
-Then stop and remove the Container.
-
-[source,bash]
-----
-sudo docker stop fdf41302efbc
-
-sudo docker rm fdf41302efbc
-----
-
 == Deep Dive into Capabilities
 
-Lets look deeper into each of these remaining capabilities.
+Lets look deeper into each of these Linux Capabilities.
 
 {{< panel_group >}}
 {{% panel "Linux Capabilities" %}}
-
-:icons: font
-
 
 `*chown*`
 
@@ -322,7 +286,6 @@ is not currently namespace aware, so this should be dropped by default.
 Finally, the setfcap capability allows you to set file capabilities on a file
 system. Might be needed for doing installs during builds, but in production it
 should probably be dropped.
-
 
 {{% /panel %}}
 {{< /panel_group >}}
