@@ -57,14 +57,15 @@ image::at_lic_prompt.png[caption="Figure 4: ", title="Uploading a License"]
 
 === Step 2:
 
-At the commandline in you Tower instance download the encrypted license file via the curl command.
+At the commandline in your Tower instance download the encrypted license file via the curl command.
 
 [source,bash]
 ----
 curl -O https://s3.amazonaws.com/ansible-tower-workshop-license/license
 ----
 
-Then Decrypt the license file via Ansible Vault.   **The instructor should provide the password**
+Then Decrypt the license file via Ansible Vault.
+**The instructor should provide the password**
 
 [source,bash]
 ----
@@ -86,7 +87,7 @@ Now send the `license` to Tower via the API.
 
 [source,bash]
 ----
-curl -k https://$WORKSHOP_PREFIX.0.redhatgov.io/api/v1/config/ \
+curl -k https://$WORKSHOP_PREFIX.tower.0.redhatgov.io/api/v1/config/ \
      -H 'Content-Type: application/json' \
      -X POST \
      --data @license \
@@ -134,7 +135,7 @@ Click on ADD     image:at_add.png[Add,35,25]
 
 === Step 4:
 
-Complete the form using the following entries, by cating out your private SSH key to place into Tower.
+Complete the form using the following entries, by printing out your private SSH key to place into Tower.  When you paste the key in, in the `PRIVATE KEY` field, make sure to include the `-----BEGIN RSA PRIVATE KEY-----` and `-----BEGIN RSA PRIVATE KEY-----` lines.
 
 ----
 cat ~/.ssh/workshop-tower
