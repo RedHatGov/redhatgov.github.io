@@ -5,6 +5,7 @@ workshop_weight: 10
 layout: lab
 ---
 
+:icons: font
 :source-highlighter: highlight.js
 :source-language: bash
 :imagesdir: /workshops/security_openshift/images
@@ -48,8 +49,10 @@ https://en.wikipedia.org/wiki/Seccomp[seccomp], and
 http://rhelblog.redhat.com/2015/07/07/whats-next-for-containers-user-namespaces/[namespaces]
 to protect the host system from the containers.
 
-*OpenShift Container Platform and OpenShift Dedicated have removed most of the
-default 38 capabilities from root users running inside a container.*
+{{% alert warning %}}
+OpenShift Container Platform and OpenShift Dedicated have removed most of the
+default 38 capabilities from root users running inside a container.
+{{% /alert %}}
 
 == Linux Kernel Capabilities
 
@@ -61,13 +64,13 @@ view what capabilities a process has called `pscap`, available in the
 `libcap-ng-utils` package on Fedora.
 
 .See current processes
-[source]
+[source,bash]
 ----
 pscap | head -10
 ----
 
 .See processes of a normal container
-[source]
+[source,bash]
 ----
 sudo docker run -d fedora sleep 5 >/dev/null; pscap | grep sleep
 ----
@@ -80,7 +83,7 @@ If I wanted to drop `setfcap`, `audit_write`, and `mknod`, I could use
 `--cap-drop=setfcap`  `--cap-drop=audit_write` `--cap-drop=mknod`:
 
 .Dropping setfcap, audit_write, mknod
-[source]
+[source,bash]
 ----
 sudo docker run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod
 fedora sleep 5 > /dev/null; pscap | grep sleep
@@ -94,7 +97,7 @@ Better yet, if you know your container only needs setuid and setgid, you can
 drop all capabilities and just add setgid and setuid back in.
 
 .Whitelisting Capabilities
-[source]
+[source,bash]
 ----
 sudo docker run -d --cap-drop=all --cap-add=setuid --cap-add=setgid fedora
 sleep 5 > /dev/null; pscap | grep sleep
@@ -104,7 +107,7 @@ The following bellow is a comparison of the out put form blacklisting vs.
 whitelisting.
 
 .Compare the output
-[source]
+[source,bash]
 ----
 chown, dac_override, fowner, fsetid, kill, setgid, setuid, setpcap,
 net_bind_service, net_raw, sys_chroot <1>
@@ -119,7 +122,7 @@ setgid, setuid <2>
 <2> Whitelisting: Droping all and adding back the ones you need.
 
 .stop & delete images
-[source]
+[source,bash]
 ----
 sudo docker ps -a
 
@@ -127,14 +130,13 @@ sudo docker ps -a
 
 CONTAINER ID   IMAGE   COMMAND    CREATED   STATUS   PORTS   NAMES
 fdf41302efbc  <1>
-
 ----
 
 <1> Container ID to copy
 
 Then stop and remove the Container.
 
-[source]
+[source,bash]
 ----
 sudo docker stop fdf41302efbc
 
@@ -144,6 +146,12 @@ sudo docker rm fdf41302efbc
 == Deep Dive into Capabilities
 
 Lets look deeper into each of these remaining capabilities.
+
+{{< panel_group >}}
+{{% panel "Linux Capabilities" %}}
+
+:icons: font
+
 
 `*chown*`
 
@@ -314,3 +322,7 @@ is not currently namespace aware, so this should be dropped by default.
 Finally, the setfcap capability allows you to set file capabilities on a file
 system. Might be needed for doing installs during builds, but in production it
 should probably be dropped.
+
+
+{{% /panel %}}
+{{< /panel_group >}}
