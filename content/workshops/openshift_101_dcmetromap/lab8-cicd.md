@@ -10,15 +10,17 @@ In modern software projects many teams utilize the concept of Continuous Integra
 
 In this lab we walk through creating a simple example of a CI/CD [pipeline][1] utlizing Jenkins, all running on top of OpenShift! The Jenkins job will trigger OpenShift to build and deploy a test version of the application, validate that the deployment works, and then tag the test version into production.
 
+In the steps below replace 'YOUR#' with your student number.
+
 ## Create a new project
-Create a new project named “cicd”.
+Create a new project named “cicd-YOUR#”.
 
 {{< panel_group >}}
 
 {{% panel "CLI Steps" %}}
 
 ```bash
-$ oc new-project cicd
+$ oc new-project cicd-YOUR#
 ```
 
 {{% /panel %}}
@@ -31,17 +33,17 @@ Browse to original landing page, and click "New Project".
 <img src="../images/ocp-lab-cicd-new-project.png" width="200"><br/>
 
 <blockquote>
-Fill in the Name and Display Name of the project as "cicd" and click "Create"
+Fill in the Name and Display Name of the project as "cicd-YOUR#" and click "Create"
 </blockquote>
 <img src="../images/ocp-lab-cicd-new-project-detail.png" width="600"><br/>
 {{% /panel %}}
 
 {{< /panel_group >}}
 
-## Use the cicd project
+## Use the cicd-YOUR# project
 
 ```bash
-$ oc project cicd
+$ oc project cicd-YOUR#
 ```
 
 ## Instantiate a Jenkins server in your project
@@ -175,7 +177,7 @@ If so, Jenkins "tags" the image for production. This tagging will trigger anothe
 </blockquote>
 
 ```bash
-$ oc get services -n cicd | grep frontend
+$ oc get services -n cicd-YOUR# | grep frontend
 frontend        172.30.151.206   <none>        8080/TCP    40m
 frontend-prod   172.30.230.228   <none>        8080/TCP    40m
 ```
