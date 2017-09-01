@@ -48,7 +48,7 @@ $ oc describe pod/<POD NAME> | more
 </blockquote>
 
 ```bash
-$ oc describe all | grep -i "labels:
+$ oc describe all | grep -i "labels:"
 ```
 
 {{% /panel %}}
