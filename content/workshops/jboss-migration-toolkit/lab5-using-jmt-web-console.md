@@ -29,7 +29,7 @@ $ ./rhamt-web-distribution-4.0.0.Beta2.1/run_rhamt.sh
 ~~~~
 
 ## Step 2. Access the web console.
-Go to http://jboss-migration-toolkit.{student number}.demo-dlt.com:8080/rhmat-web
+Go to http://jboss-migration-toolkit.{YOUR#}.(WORKSHOP_DOMAIN}:8080/rhmat-web
 
 <img src="../images/web-login.png" width="1000" />
 

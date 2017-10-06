@@ -1,5 +1,5 @@
-title = "DLT - Red Hat | Public Sector"
-baseURL = "http://workshops.demo-dlt.com/"
+title = "Red Hat | Public Sector"
+baseURL = "http://redhatgov.io/"
 theme = "redhatgov"
 languageCode = "en-us"
 metaDataFormat = "yaml"
