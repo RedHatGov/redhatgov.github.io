@@ -42,16 +42,16 @@ Once logged in you should see your available projects - or a button to create a 
 ## So this is what an empty project looks like
 First let's create a new project to do our workshop work in.  We will use the student number you were given to ensure you don't clash with classmates, so in the steps below replace 'YOUR#' with your student number.
 
-> Click on the "New Project" button and give it a name of demo{YOUR#}
+> Click on the "New Project" button and give it a name of demo-{YOUR#}
 
-> Populate "Display Name" with "demo{YOUR#}" and populate "Description" boxes with whatever you like.  And click "Create"
+> Populate "Display Name" with "demo-{YOUR#}" and populate "Description" boxes with whatever you like.  And click "Create"
 
 <img src="../images/ocp-new-project.png" width="600"><br/>
 *OCP New Project Webpage*
 
 This is going to take you to the next logical step of adding something to the project, but we don't want to do that just yet.
 
-> Click the "demo{YOUR#}" link on the top left to goto your project
+> Click the "demo-{YOUR#}" link on the top left to goto your project
 
 Don't worry, it's supposed to look empty right now because you currently don't have anything in your project (we'll fix that in the next lab).
 
