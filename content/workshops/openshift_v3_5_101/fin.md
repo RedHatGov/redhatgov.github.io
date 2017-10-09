@@ -1,7 +1,7 @@
 ---
 title: Wrap Up!
 workshops: openshift_v3_5_101
-workshop_weight: 20
+workshop_weight: 21
 layout: lab
 ---
 

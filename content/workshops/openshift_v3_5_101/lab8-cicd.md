@@ -1,5 +1,5 @@
 ---
-title: Lab 8 - CI / CD Pipeline
+title: Lab 8 - CI / CD 
 workshops: openshift_v3_5_101
 workshop_weight: 17
 layout: lab
@@ -8,17 +8,17 @@ layout: lab
 # CI/CD Defined
 In modern software projects many teams utilize the concept of Continuous Integration (CI) and Continuous Delivery (CD). By setting up a tool chain that continuously builds, tests, and stages software releases a team can ensure that their product can be reliably released at any time. OpenShift can be an enabler in the creation and management of this tool chain.
 
-In this lab we walk through creating a simple example of a CI/CD [pipeline][1] utlizing Jenkins, all running on top of OpenShift! The Jenkins job will trigger OpenShift to build and deploy a test version of the application, validate that the deployment works, and then tag the test version into production.
+In this lab we walk through creating a simple example of a CI/CD utlizing integrated Jenkins, all running on top of OpenShift! The Jenkins job will trigger OpenShift to build and deploy a test version of the application, validate that the deployment works, and then tag the test version into production.
 
 ## Create a new project
-Create a new project named “cicd”.
+Create a new project named “cicd-{YOUR#}”.
 
 {{< panel_group >}}
 
 {{% panel "CLI Steps" %}}
 
 ```
-$ oc new-project cicd
+$ oc new-project cicd-{YOUR#}
 ```
 {{% /panel %}}
 
@@ -30,7 +30,7 @@ Browse to original landing page, and click "New Project".
 <img src="../images/ocp-lab-cicd-new-project.png" width="200"><br/>
 
 <blockquote>
-Fill in the Name and Display Name of the project as "cicd" and click "Create"
+Fill in the Name and Display Name of the project as "cicd-{YOUR#}" and click "Create"
 </blockquote>
 <img src="../images/ocp-lab-cicd-new-project-detail.png" width="600"><br/>
 {{% /panel %}}
@@ -40,7 +40,7 @@ Fill in the Name and Display Name of the project as "cicd" and click "Create"
 ## Use the cicd project
 
 ```
-$ oc project cicd
+$ oc project cicd-{YOUR#}
 ```
 
 ## Instantiate a Jenkins server in your project
@@ -80,10 +80,10 @@ Select "Continue to overview" to display the following overview page.
 
 ## Create a sample application configuration
 
-After adjusting your project to cicd, use the "oc new-app" command to create a simple nodejs application from a template file:
+After adjusting your project to cicd-{YOUR#}, use the "oc new-app" command to create a simple nodejs application from a template file:
 
 ```
-$ oc project cicd
+$ oc project cicd-{YOUR#}
 $ oc new-app -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json
 ```
 > Click on "Overview" within the OpenShift console to display the sample application configuration
@@ -174,7 +174,7 @@ If so, Jenkins "tags" the image for production. This tagging will trigger anothe
 </blockquote>
 
 ```
-$ oc get services -n cicd | grep frontend
+$ oc get services -n cicd-{YOUR#} | grep frontend
 frontend        172.30.151.206   <none>        8080/TCP    40m
 frontend-prod   172.30.230.228   <none>        8080/TCP    40m
 ```
@@ -198,7 +198,7 @@ Service web page displayed:
 <img src="../images/ocp-lab-cicd-app-test.png" width="900"><br/>
 
 # Summary
-In this lab you have very quickly and easily constructed a basic Build/Test/Deply pipeline. Although our example was very basic it introduces you to a powerful DevOps feature of OpenShift through the leveraging of Jenkins. This can be extended to support complex real-world continuous delivery requirements. Read more about the use of Jenkins on OpenShift [here][3] and more about Jenkins [here][4].
+In this lab you have very quickly and easily constructed a basic Build/Test/Deploy pipeline. Although our example was very basic it introduces you to a powerful DevOps feature of OpenShift through the leveraging of Jenkins. This can be extended to support complex real-world continuous delivery requirements. Read more about the use of Jenkins on OpenShift [here][3] and more about Jenkins [here][4].
 
 [1]: https://jenkins.io/doc/book/pipeline/
 [2]: https://github.com/openshift/jenkins-plugin

@@ -9,11 +9,11 @@ layout: lab
 
 Your OCP environment resides here:
 
-https://master.ocp.{WORKSHOP_DOMAIN}:8443
+https://master.ocp.demo-dlt.com:8443
 
 Your terminal environment resides here:
 
-https://student_cli.{YOUR#}.{WORKSHOP_DOMAIN}.com:8888/wetty/ssh/ec2-user
+https://navy.{YOUR#}.demo-dlt.com:8888/wetty/ssh/ec2-user
 
 # Install the command line tools for your operating system
 
