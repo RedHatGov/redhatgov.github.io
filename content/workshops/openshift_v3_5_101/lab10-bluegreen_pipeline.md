@@ -57,32 +57,62 @@ Click "Add to Project"
 <img src="../images/ocp-addToProjectButton.png" width="200"><br/>
 
 <blockquote>
-Click "Import JSON/YAML" tab and copy contents of https://raw.githubusercontent.com/DLT-Solutions-JBoss/nodejs-ex/master/bluegreen-pipeline.yaml opened in a separate browser tab.
-
+Click "Import YAML/JSON" tab and copy contents of https://raw.githubusercontent.com/DLT-Solutions-JBoss/nodejs-ex/master/bluegreen-pipeline.yaml opened in a separate browser tab.
 </blockquote>
-<img src="../images/ocp-lab-s2i-filternode.png" width="900"><br/>
+
+<img src="../images/ocp-lab-cicd-pipeline-template-import.png" width="900"><br/>
 
 <blockquote>
-Scroll to the bottom and click "Create"
+Click "Create"
 </blockquote>
 
->Navigate to the Pipelines (under Builds) view from the left-hand menu:
+<img src="../images/ocp-lab-cicd-pipeline-template-process.png" width="400"><br/>
 
-<img src="../images/ocp-lab-bluegreen-navtoroutes.png" width="900"><br/>
+<blockquote>
+Click "Continue" with the "Process the template" checkbox selected.
+</blockquote>
 
->In your Pipelines page, click on the "Start Pipeline" button on the right:
+>Go to
 
-<img src="../images/ocp-lab-bluegreen-routesoverview.png" width="900">
-<br/>
+<img src="../images/ocp-lab-cicd-pipeline-template-create.png" width="900"><br/>
 
->You should see your pipline start to execute with a Build step:
+>Got to
 
-<img src="../images/ocp-lab-bluegreen-routedetail.png" width="900"><br/>
+<img src="../images/ocp-lab-cicd-pipeline-template-summary.png" width="900"><br/>
 
->Edit the Route: select the name dropdown and change the value from "green" to "blue":
+>Go to
 
-<img src="../images/ocp-lab-bluegreen-edit.png" width="900"><br/>
+<img src="../images/ocp-lab-cicd-pipeline-template-overview.png" width="900"><br/>
+
+>Go to
+
+<img src="../images/ocp-lab-cicd-pipeline-template-pipeline-start.png" width="900"><br/>
       
+>Go to
+
+<img src="../images/ocp-lab-cicd-pipeline-template-pipeline-started.png" width="900"><br/>
+
+>Go to
+
+<img src="../images/ocp-lab-cicd-pipeline-template-pipeline-jenkins-console.png" width="900"><br/>
+
+>Go to
+
+<img src="../images/ocp-lab-cicd-pipeline-template-pipeline-input-required.png" width="900"><br/>
+
+>Go to
+
+<img src="../images/ocp-lab-cicd-pipeline-template-pipeline-proceed.png" width="900"><br/>
+
+>Go to
+
+<img src="../images/ocp-lab-cicd-pipeline-template-pipeline-first-green.png" width="900"><br/>
+
+>Go to
+
+<img src="../images/ocp-lab-cicd-pipeline-template-pipeline-second-blue.png" width="900"><br/>
+
+
 {{% /panel %}}
 {{< /panel_group >}}
 
