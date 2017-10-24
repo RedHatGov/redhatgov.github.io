@@ -107,10 +107,10 @@ if ! hash pip 2>/dev/null; then
  && popd && rm -rf ${temp}
 fi
 
-# if hash pip 2>/dev/null; then
-#  pip install -q -U --user pip Pygments
-# fi
-#
-# if hash gem 2>/dev/null; then
-#  gem install -q --conservative --user-install asciidoctor
-# fi
+if hash pip 2>/dev/null; then
+ pip install -q -U --user pip Pygments
+fi
+
+if hash gem 2>/dev/null; then
+ gem install -q --conservative --user-install asciidoctor
+fi
