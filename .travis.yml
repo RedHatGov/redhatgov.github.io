@@ -3,7 +3,7 @@ branches:
     - docs
 
 install:
-  - ./hack/init.sh
+  - source ./hack/init.sh
   - rm -rf public || exit 0
 
 script:
