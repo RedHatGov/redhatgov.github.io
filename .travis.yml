@@ -3,10 +3,12 @@ branches:
     - docs
 
 install:
-  - source ./hack/init.sh
+  - gem install asciidoctor
+  - sudo pip install Pygments
   - rm -rf public || exit 0
 
 script:
+  - source ./hack/init.sh
   - ./bin/hugo
   - cd public
   - touch .nojekyll
