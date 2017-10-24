@@ -6,14 +6,14 @@
 # of this script to ensure that we do not attempt to overwrite read-only variables.
 
 # Stop script on NZEC
-set -e
+# set -e
 
 # Stop script if unbound variable found (use ${var:-} if intentional)
-set -u
+# set -u
 
 # By default cmd1 | cmd2 returns exit code of cmd2 regardless of cmd1 success
 # this is causing it to fail
-set -o pipefail
+# set -o pipefail
 
 # Checks if command in hash table exists before executing it
 shopt -s checkhash

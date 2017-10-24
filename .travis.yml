@@ -3,7 +3,6 @@ branches:
     - docs
 
 install:
-  - gem install asciidoctor
   - source ./hack/init.sh
   - rm -rf public || exit 0
 
