@@ -35,14 +35,14 @@ GITREPO="https://github.com/${GITUSER}/redhatgov.github.io/archive/docs.zip"
 ARCHIVE="$(printf "%s" "${GITREPO##*/}")"
 
 # Download and extract
-wget ${GITREPO} \
+wget $GITREPO \
 && temp="$(mktemp -d)" \
-&& unzip -d ${temp} ${ARCHIVE} \
-&& mkdir -p ${DIRPATH} \
-&& mv ${temp}/*/* ${DIRPATH} \
-&& rm -rf ${temp} ${ARCHIVE} \
-&& cd ${DIRPATH} \
-&& unset DIRPATH GITUSER GITREPO ARCHIVE
+&& unzip -d $temp $ARCHIVE \
+&& mkdir -p $DIRPATH \
+&& mv $temp/*/* $DIRPATH \
+&& rm -rf $temp $ARCHIVE \
+&& cd $DIRPATH \
+&& unset DIRPATH GITUSER GITREPO ARCHIVE temp
 ```
 
 ### Setup
