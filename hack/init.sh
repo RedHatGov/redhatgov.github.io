@@ -89,11 +89,13 @@ if ! hash hugo 2>/dev/null; then
   unarchive-download "${HUGO_GIT_RELS}" "${HUGO_BIN_PATH}"
  fi
 
- # Create symbolic link to binary file
- ln -sf "${HUGO_BIN_FILE}" "${HUGO_BIN_SYML}"
+ if [[ -f "${HUGO_BIN_FILE}" ]]; then
+  ln -sf "${HUGO_BIN_FILE}" "${HUGO_BIN_SYML}"
+ fi
 
- # Reload session
- source "${HOME}/${__BASHPROF}"
+ if [[ -f "${HOME}/${__BASHPROF}" ]]; then
+  source "${HOME}/${__BASHPROF}"
+ fi
 fi
 
 if ! hash pip 2>/dev/null; then
@@ -104,5 +106,10 @@ if ! hash pip 2>/dev/null; then
  && popd && rm -rf ${temp}
 fi
 
-pip install -q -U --user pip Pygments
-gem install -q --conservative --user-install asciidoctor
+if hash pip 2>/dev/null; then
+ pip install -q -U --user pip Pygments
+fi
+
+if hash gem 2>/dev/null; then
+ gem install -q --conservative --user-install asciidoctor
+fi
