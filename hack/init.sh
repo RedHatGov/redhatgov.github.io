@@ -82,14 +82,15 @@ if ! hash hugo 2>/dev/null; then
  HUGO_GIT_RELS=${HUGO_GIT_RELS:-"${HUGO_GIT_URIS}/${HUGO_GIT_ARCS}"}
  HUGO_BIN_PATH="${PROJECT:-"${ABSPATH}"}/bin"
  HUGO_BIN_FILE="${HUGO_BIN_PATH}/${HUGO_BINARY}"
- HUGO_BIN_SYML="${HOME}/.local/bin/${HUGO_BINARY}"
+ HUGO_PATH="${HOME}/.local/bin"
+ HUGO_BIN_SYML="${HUGO_PATH}/${HUGO_BINARY}"
 
  # Download and unpack release archive
  if [[ ! -f "${HUGO_BIN_FILE}" ]]; then
   unarchive-download "${HUGO_GIT_RELS}" "${HUGO_BIN_PATH}"
  fi
 
- if [[ -f "${HUGO_BIN_FILE}" ]]; then
+ if [[ -d "${HUGO_PATH}" ]]; then
   ln -sf "${HUGO_BIN_FILE}" "${HUGO_BIN_SYML}"
  fi
 
