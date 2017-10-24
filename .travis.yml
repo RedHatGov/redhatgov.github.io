@@ -3,8 +3,7 @@ branches:
     - docs
 
 install:
-  - gem install asciidoctor
-  - sudo pip install Pygments
+  - ./hack/init.sh
   - rm -rf public || exit 0
 
 script:
