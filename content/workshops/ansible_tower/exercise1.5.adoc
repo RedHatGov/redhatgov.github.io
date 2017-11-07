@@ -9,6 +9,8 @@ layout: lab
 :imagesdir: /workshops/ansible_tower/images
 :yum_url: http://docs.ansible.com/ansible/yum_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html
+:dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
+:var_prec_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
 
 
 = Exercise 1.5 - Roles: Making your playbooks reusable

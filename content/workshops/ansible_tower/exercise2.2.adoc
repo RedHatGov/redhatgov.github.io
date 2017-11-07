@@ -153,15 +153,15 @@ image::at_job_stdout.png[caption="Figure 16: ",900,title="Job Standard Output"]
 
 === Step 6:
 
-Once your job is sucessful, navigate to your new website
+Once your job is sucessful, navigate to your new website, where *workshopname* is the name of your workshop, and *#* is your student number:
 
 [source,bash]
 ----
-http://workshopname.0.redhatgov.io
+http://workshopname.node.#.redhatgov.io
 ----
 
 
-If all went well, you should see something like this, but with your own custom message of course.
+If all went well, you should see something like this, but with your own custom message:
 
 
 

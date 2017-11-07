@@ -24,18 +24,22 @@ image::tower.002.png['Tower']
 
 - Each student will have two instances to use.
 
+- Whenever you see *workshopname*, replace it with the name of your workshop.
+
+- Whenever you see *#*, replace it with your student number.
+
 === Tower
 
 [source,bash]
 ----
-https://workshopname.tower.0.redhatgov.io:8888/wetty/ssh/ec2-user
+https://workshopname.tower.#.redhatgov.io:8888/wetty/ssh/ec2-user
 ----
 
-=== Node 1
+=== Node
 
 [source,bash]
 ----
-http://workshopname.0.redhatgov.io
+http://workshopname.node.#.redhatgov.io
 ----
 
 - Each of you should have received an email.  It has the following information on it.
@@ -71,7 +75,7 @@ Log into your Tower instance via the following link:
 
 [source,bash]
 ----
-https://workshopname.tower.0.redhatgov.io:8888/wetty/ssh/ec2-user
+https://workshopname.tower.#.redhatgov.io:8888/wetty/ssh/ec2-user
 ----
 
 
