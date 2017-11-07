@@ -20,6 +20,7 @@ TL;DR:
 
 * [Download][7] the upstream oc client from OpenShift Origin. 
 
+* [Download][8] the git client for your operating system
 
 # Create a Github account
 Create a FREE github account by going [to this link][6] and following their instructions.
@@ -32,3 +33,4 @@ Create a FREE github account by going [to this link][6] and following their inst
 [5]: https://access.redhat.com/downloads/content/290
 [6]: https://github.com/join?source=header-home
 [7]: https://github.com/openshift/origin/releases
+[8]: https://git-scm.com/downloads
