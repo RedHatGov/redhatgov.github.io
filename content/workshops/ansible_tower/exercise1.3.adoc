@@ -246,4 +246,5 @@ looks the way you intended.  If not, now is the time for us to fix it up. The fi
       service:
         name: httpd
         state: restarted
+        enabled: yes
 ----
