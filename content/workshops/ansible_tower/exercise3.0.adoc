@@ -39,7 +39,6 @@ Now that you have the role installed on your Tower node, we need to create a pla
 [source,bash]
 ----
 sudo mkdir -p /var/lib/awx/projects/playbooks
-sudo vim /var/lib/awx/projects/playbooks/800-53.yml
 ----
 
 === Step 3:
