@@ -9,6 +9,7 @@ layout: lab
 :imagesdir: /workshops/ansible_tower/images
 :yum_url: http://docs.ansible.com/ansible/yum_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html
+:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
 
 
 = Exercise 1.2 - Running Your Playbook
@@ -26,7 +27,7 @@ From your playbook directory ( `~/apache_basic` ), run your playbook.
 
 [source,bash]
 ----
-ansible-playbook --private-key=~/.ssh/workshopname-tower -i ../hosts install_apache.yml
+ansible-playbook --private-key=~/.ssh/*-tower -i ../hosts install_apache.yml
 ----
 
 
@@ -55,7 +56,7 @@ image::stdout_1.png[caption="Figure 1: ", title="apache_basic playbook stdout",3
 
 Notice that the play and each task is named so that you can see what is being done and to which node it is being done to.
 You also may notice a task in there that you didn't write;  <cough> `setup` <cough>.  This is because the `setup` module
-runs by default.  To turn if off, you can specify link:{gather_facts-url}[gather_facts: false] in your play definition like this:
+runs by default.  To turn if off, you can specify link:{gather_facts_url}[gather_facts: false] in your play definition like this:
 
 
 [source,bash]

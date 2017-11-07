@@ -8,7 +8,7 @@ layout: lab
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
 :figure-caption!:
-:become_url: http://docs.ansible.com/ansible/become.html#new-command-line-options
+:become_url: http://docs.ansible.com/ansible/become.html
 :dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
 :yum_url: http://docs.ansible.com/ansible/yum_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html

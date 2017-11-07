@@ -76,18 +76,19 @@ ansible-vault decrypt license
 Vault password:
 ----
 
-Now use curl to POST the license to the Tower API endpoint. Please edit this command to the use the `workshop_prefix` for your workshop. This command exports your workshop prefix so that the next command can use that data in the curl command.
+Now use curl to POST the license to the Tower API endpoint. Please edit this command to the use the `WORKSHOP_PREFIX`, and `STUDENT_NUMBER`, for your workshop. This command exports both variables so that the next command can use that data in the curl command.
 
 [source,bash]
 ----
-export WORKSHOP_PREFIX=" "
+export WORKSHOP_PREFIX="workshopname "
+export STUDENT_NUMBER="#"
 ----
 
 Now send the `license` to Tower via the API.
 
 [source,bash]
 ----
-curl -k https://$WORKSHOP_PREFIX.tower.0.redhatgov.io/api/v1/config/ \
+curl -k https://${WORKSHOP_PREFIX}.tower.${STUDENT_NUMBER}.redhatgov.io/api/v1/config/ \
      -H 'Content-Type: application/json' \
      -X POST \
      --data @license \
@@ -251,12 +252,12 @@ Select SAVE     image:at_save.png[Save,35,25]
 
 === Step 5:
 
-Using ssh, login to your control node, if by any chance you closed the wetty browser window.
+Using ssh, login to your control node, if by any chance you closed the wetty browser window.  Remember to replace *workshopname* with your workshop name, and *#* with your student number.
 
 
 [source,bash]
 ----
-https://workshopname.tower.0.redhatgov.io:8888/wetty/ssh/ec2-user
+https://workshopname.tower.#.redhatgov.io:8888/wetty/ssh/ec2-user
 ----
 
 
