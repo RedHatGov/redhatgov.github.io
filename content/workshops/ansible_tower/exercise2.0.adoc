@@ -53,7 +53,7 @@ Change directories into the ansible tower package
 
 [source,bash]
 ----
-cd /tmp/ansible-tower-setup-*
+cd /tmp/ansible-tower-setup-*/
 ----
 
 === Step 5:
@@ -62,7 +62,7 @@ Using an editor of your choice, open the inventory file
 
 [source,bash]
 ----
-vi inventory
+vim inventory
 ----
 
 === Step 6:
