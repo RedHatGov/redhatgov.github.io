@@ -69,26 +69,18 @@ Then Decrypt the license file via Ansible Vault.
 
 [source,bash]
 ----
-ansible-vault decrypt license
+ansible-vault decrypt license --ask-vault-pass
 
 ...
 
 Vault password:
 ----
 
-Now use curl to POST the license to the Tower API endpoint. Please edit this command to the use the `WORKSHOP_PREFIX`, and `STUDENT_NUMBER`, for your workshop. This command exports both variables so that the next command can use that data in the curl command.
+Now use curl to POST the license to the Tower API endpoint.
 
 [source,bash]
 ----
-export WORKSHOP_PREFIX="workshopname "
-export STUDENT_NUMBER="#"
-----
-
-Now send the `license` to Tower via the API.
-
-[source,bash]
-----
-curl -k https://${WORKSHOP_PREFIX}.tower.${STUDENT_NUMBER}.redhatgov.io/api/v1/config/ \
+curl -k https://localhost/api/v1/config/ \
      -H 'Content-Type: application/json' \
      -X POST \
      --data @license \
