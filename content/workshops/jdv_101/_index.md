@@ -6,22 +6,26 @@ menu:
     pre: fa fa-database
 ---
 
-# Introduction
+# Who should attend
 
-This is the JDV 101 workshop.
-This is an example workshop to showcase what is possible when building
-workshops. You can find examples of how to organize your content, what
-shortcodes are available, and the widgets available as a part of the
-`redhatgov` theme.
+* Developers
+* People who are comfortable using the command line
+* People with knowledge of SQL
+* People who can work with Virtual Machines or Docker
+* People who understand REST services and JSON
 
-{{% alert success %}}
-**This workshop is also expected to be used as a starting point for any new
-workshop.**
+# What you will create
 
-Pay special attention to the lab on how to copy this workshop and what changes
-are required to make your workshop show up in the menus.
-{{% /alert %}}
+* Brand new JBoss Data Virtualization install
+* JBoss Developer Studio development environment
+* Consume, compose and create REST data services from several data sources
+* Apply role based security and column masking to the create REST data services
+* An AngularJS based web application to consume and view the REST data services
 
-# Labs
+# Your end product
+
+You will walk away from this workshop with a basic end to end JBoss Data Virtualization environment.  This can be used to demo JBoss Data Virtualization or as a development reference for the most popular data sources and features.
+
+# Lab Exercises
 
 {{< labs jdv_101 >}}

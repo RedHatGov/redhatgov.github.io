@@ -1,7 +1,7 @@
 ---
-title: Hugo Shortcodes
-workshops: example
-workshop_weight: 40
+title: Exercise 7 - Import Excel data
+workshops: jdv_101
+workshop_weight: 1.7
 layout: lab
 toc: true
 ---
