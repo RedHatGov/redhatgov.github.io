@@ -8,6 +8,7 @@ install:
   - rm -rf public || exit 0
 
 script:
+  - source ./hack/init.sh
   - ./bin/hugo
   - cd public
   - touch .nojekyll
