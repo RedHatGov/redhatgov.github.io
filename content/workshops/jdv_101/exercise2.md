@@ -5,128 +5,45 @@ workshop_weight: 1.2
 layout: lab
 ---
 
-# Getting Started
+# Get the course repositories
 
-JDV 101
+* There are two repositories, one that contains a sample JDV project with helper data/scripts and another which is the AngularJS frontend.
 
-This entire site, including the workshop content, is built using a tool named
-[Hugo][hugo_intro]. Hugo is known as a "static site generator" where the
-content you build is pre-compiled before being served by a web server.
-
-## The Good News
-
-The good news is that you don't have to worry about how Hugo works, how to
-configure it, or how everything gets deployed.
-
-All of that is being handled for you and you can **focus on the content of your
-workshop**.
-
-## There Is A "But"
-
-But, you will need to download the Hugo binary so that you can run Hugo on your
-laptop while you're working on your workshop. Don't worry though, because all
-you need to do is know **one command** and the rest is _magic_.
-
-That command is:
+* Pull down the JDV project
 
 ```
-$ hugo server
+git clone https://github.com/mechevarria/jdv-demo
 ```
 
-That command is what is going to let you work on your workshop content and
-preview it live in your browser so you can verify that everything looks like
-you intend it to.
-
-# That Sounds Great, Just Tell Me What To Do Already!
-
-You got it!
-
-## Step 1
-
-Hugo requires Asciidoctor in order to proccess your workshop files.
-
-Run the command below to install Asciidoctor using the Ruby gem install command (assuming you have requirements met)
+* Next pull down the AngularJS client
 
 ```
-$ gem install asciidoctor
+https://github.com/mechevarria/jdv-demo-client
 ```
 
-{{% alert info %}}
-If you want more detailed installation instructions or alternative ways to
-install Asciidoctor, check out http://asciidoctor.org/. Scroll to the Requirements and Installation sections.
+# Add the workshop data to PostgreSQL
+
+* The script that needs to be run is
+
+`jdv-demo/assets/postgres/create_insert.sql`
+
+* If you are running the instance from [TurnKey Linux](https://www.turnkeylinux.org/postgresql), you can load the data via a browser.
+
+{{% alert %}}
+When running in a Virtual Machine, I add a second network adapter in addition to the default **NAT** adapter created by VirtualBox or KVM.  The second adapter is **host-only**.  With only **NAT** you cannot connect to your VM as a separate networked device.  The second adapter allows your host machine to talk to your VM without grabbing an additional IP address.  Another option is to change the default **NAT** to **bridged**, but that will not work on restricted networks.
 {{% /alert %}}
 
-## Step 2
+* In your browser go to the IP address of your PostgreSQL VM.  The address below is the one available by using the host only network created by Docker.
+<img src="../images/2-postgres-start.png" width="640px">
+<br><br>
 
-Go to https://github.com/spf13/hugo/releases/tag/v0.20.7 and scroll to the
-**Downloads** section (it's near the bottom).
+* Login to **Adminer** as the **postgres** user
+<img src="../images/2-login-postgres.png" width="640px">
+<br><br>
 
-Here are direct links for the common ones:
+* Import into the **public** schema and select `jdv-demo/assets/postgres/create_insert.sql`
+<img src="../images/2-import-sql.png" width="640px">
+<br><br>
 
-- [Linux][hugo_download_linux64]
-- [OS X / macOS][hugo_download_macos64]
-- [Windows][hugo_download_windows64]
-
-{{% alert warning %}}
-You must have Hugo version **0.20.7** or greater. Versions older than 0.20.7
-contain a breaking change that will fail to build the site.
-{{% /alert %}}
-
-## Step 3
-
-Unpack the download and put the `hugo` binary anywhere you want.
-
-For ease of use, it's best to put it somewhere that's on your `PATH`
-(e.g. `/usr/local/bin`, `/usr/bin`), but it is not required. If you don't know
-what putting it in your `PATH` means, you can just skip that part.
-
-{{% alert info %}}
-If you want more detailed installation instructions or alternative ways to
-install Hugo, check out https://gohugo.io/overview/installing/
-{{% /alert %}}
-
-## Step 4
-
-Open up your **Terminal** and change to the directory where you want to clone
-this [repository][main_repo]. This example assumes you are in the
-`~/projects` directory.
-
-```
-$ cd ~/projects
-
-$ git clone https://github.com/RedHatGov/redhatgov.github.io.git
-```
-
-This will pull down the content of the repo into `~/projects/redhatgov.github.io`
-
-For the next steps, go ahead and change to this directory.
-
-```
-$ cd ~/projects/redhatgov.github.io
-```
-
-## Step 5
-
-From the `redhatgov.github.io` repo directory, run the Hugo server:
-
-```
-$ hugo server
-```
-
-You can now go to http://localhost:1313/ in your browser and see your own
-local copy of the workshop site.
-
-As long as the `hugo server` command stays running, anytime you make changes
-to any of the content it will automatically rebuild the site and refresh your
-browser for you.
-
-# It's That Easy
-
-That's all there is to it to getting up and running!
-
-[hugo_download_linux64]: https://github.com/spf13/hugo/releases/download/v0.20.7/hugo_0.20.7_Linux-64bit.tar.gz
-[hugo_download_macos64]: https://github.com/spf13/hugo/releases/download/v0.20.7/hugo_0.20.7_macOS-64bit.tar.gz
-[hugo_download_windows64]: https://github.com/spf13/hugo/releases/download/v0.20.7/hugo_0.20.7_Windows-64bit.zip
-[hugo_install]: https://gohugo.io/overview/installing/
-[hugo_intro]: https://gohugo.io/overview/introduction/
-[main_repo]: https://github.com/RedHatGov/redhatgov.github.io
+* To verify, check to make sure you have a **order_details** table like below
+<img src="../images/2-check-data.png" width="640px">

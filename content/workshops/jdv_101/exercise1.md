@@ -19,26 +19,22 @@ layout: lab
 # Download [JBoss Data Virtualization](https://developers.redhat.com/products/datavirt/download/) <a name="link1"></a>
 
 * `jboss-dv-6.3.0-1-installer.jar`
-
 <img src="../images/1-download-jdv.png" width="640px">
 
 # Download [JBoss Developer Studio](https://developers.redhat.com/products/devstudio/download/) <a name="link2"></a>
 
-<img src="../images/1-download-jbds.png" width="640px">
-
 * `devstudio-11.0.0.GA-installer-standalone.jar`
+<img src="../images/1-download-jbds.png" width="640px">
 
 # Install JBoss Data Virtualization (JDV) <a name="link3"></a>
 
 * In the location where you downloaded the installer, run the following command `java -jar jboss-dv-6.3.0-1-installer.jar`
 
 * Follow the default prompts with the following exceptions below
-
+<img src="../images/1-jdv-location.png" width="640px">
 {{% alert info %}}
 Take note of the directory you use to install JDV, it will be helpful when installing JBoss Developer studio.  In the instructions it will be referred to as `$JBOSS_HOME`
 {{% /alert %}}
-
-<img src="../images/1-jdv-location.png" width="640px">
 
 
 * On the **Create Users** form, enable **Check to use one password for all default passwords**
@@ -46,7 +42,6 @@ Take note of the directory you use to install JDV, it will be helpful when insta
 * Use the following password **Password1!**
 
 * Also check the Add **OData** role
-
 <img src="../images/1-user-password.png" width="640px">
 
 ## Run JDV <a name="link4"></a>
@@ -66,7 +61,6 @@ If you are connecting to this server from machines other than `localhost`.  You 
 {{% /alert %}}
 
 * Verify your installation by going to http://localhost:9990/console and logging in as `admin/Password1!`
-
 <img src="../images/1-admin.png" width="640px">
 
 # Install JBoss Developer Studio (JBDS) <a name="link5"></a>
@@ -87,7 +81,6 @@ If you are connecting to this server from machines other than `localhost`.  You 
 ```
 
 * On startup select ok add the datavirt server install you specified during installation
-
 <img src="../images/1-jbds-runtime.png" width="640px">
 
 {{% alert info %}}
@@ -131,7 +124,6 @@ To add the latest teiid designer software to JBDS 11.0 you need to add the softw
 `http://download.jboss.org/jbosstools/oxygen/stable/updates/integration-stack/teiiddesigner/11.1.0.Final/`
 
 * Select **Data Virtualization** and go through the prompts
-
 <img src="../images/1-teiid-designer.png" width="640px">
 
 {{% alert %}}
