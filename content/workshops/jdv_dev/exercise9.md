@@ -1,7 +1,7 @@
 ---
-title: Exercise 6 - Import REST data
-workshops: jdv_101
-workshop_weight: 1.6
+title: Exercise 9 - Secure Data Services
+workshops: jdv_dev
+workshop_weight: 1.9
 layout: lab
 toc: true
 ---

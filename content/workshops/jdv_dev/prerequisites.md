@@ -1,6 +1,6 @@
 ---
-title: Prerequisites for JDV 101
-workshops: jdv_101
+title: Prerequisites for JDV Development
+workshops: jdv_dev
 workshop_weight: 1
 layout: lab
 ---

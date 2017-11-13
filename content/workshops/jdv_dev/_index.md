@@ -1,5 +1,5 @@
 ---
-title: JBoss Data Virtualization 101
+title: JBoss Data Virtualization Development
 menu:
   main:
     parent: workshops
@@ -28,4 +28,4 @@ You will walk away from this workshop with a basic end to end JBoss Data Virtual
 
 # Lab Exercises
 
-{{< labs jdv_101 >}}
+{{< labs jdv_dev >}}

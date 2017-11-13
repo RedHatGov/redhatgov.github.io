@@ -1,7 +1,7 @@
 ---
-title: Exercise 4 - Create new teiid project
-workshops: jdv_101
-workshop_weight: 1.4
+title: Exercise 10 - View data in AngularJS client
+workshops: jdv_dev
+workshop_weight: 2.0
 layout: lab
 toc: true
 ---

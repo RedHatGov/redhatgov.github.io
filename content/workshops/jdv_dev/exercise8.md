@@ -1,6 +1,6 @@
 ---
 title: Exercise 8 - Federate Data
-workshops: jdv_101
+workshops: jdv_dev
 workshop_weight: 1.8
 layout: lab
 toc: true

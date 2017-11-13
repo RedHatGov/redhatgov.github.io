@@ -1,6 +1,6 @@
 ---
 title: Exercise 1 - Install JDV and JBDS
-workshops: jdv_101
+workshops: jdv_dev
 workshop_weight: 1.1
 layout: lab
 ---
@@ -19,11 +19,13 @@ layout: lab
 # Download [JBoss Data Virtualization](https://developers.redhat.com/products/datavirt/download/) <a name="link1"></a>
 
 * `jboss-dv-6.3.0-1-installer.jar`
+
 <img src="../images/1-download-jdv.png" width="640px">
 
 # Download [JBoss Developer Studio](https://developers.redhat.com/products/devstudio/download/) <a name="link2"></a>
 
 * `devstudio-11.0.0.GA-installer-standalone.jar`
+
 <img src="../images/1-download-jbds.png" width="640px">
 
 # Install JBoss Data Virtualization (JDV) <a name="link3"></a>
@@ -31,6 +33,7 @@ layout: lab
 * In the location where you downloaded the installer, run the following command `java -jar jboss-dv-6.3.0-1-installer.jar`
 
 * Follow the default prompts with the following exceptions below
+
 <img src="../images/1-jdv-location.png" width="640px">
 {{% alert info %}}
 Take note of the directory you use to install JDV, it will be helpful when installing JBoss Developer studio.  In the instructions it will be referred to as `$JBOSS_HOME`
@@ -42,6 +45,7 @@ Take note of the directory you use to install JDV, it will be helpful when insta
 * Use the following password **Password1!**
 
 * Also check the Add **OData** role
+
 <img src="../images/1-user-password.png" width="640px">
 
 ## Run JDV <a name="link4"></a>
@@ -61,7 +65,10 @@ If you are connecting to this server from machines other than `localhost`.  You 
 {{% /alert %}}
 
 * Verify your installation by going to http://localhost:9990/console and logging in as `admin/Password1!`
+
 <img src="../images/1-admin.png" width="640px">
+
+* Your server is now up!  Leave it running and proceed to the next steps
 
 # Install JBoss Developer Studio (JBDS) <a name="link5"></a>
 
@@ -70,7 +77,8 @@ If you are connecting to this server from machines other than `localhost`.  You 
 * Follow the default prompts with the following exceptions
 
 * In step 5, **Select Platforms and Servers**, add the location of `$JBOSS_HOME` to the location to scan for runtimes.  Make sure **Scan every start** is unchecked.
-<img src="../images/1-jbds-jdv-location.png" width="640px">
+
+<img src="../images/1-jbds-jdv-location.png">
 
 ## Run JBDS <a name="link6"></a>
 * The path where you installed JBoss Developer Studio will be referred to as `$STUDIO_HOME`
@@ -81,7 +89,8 @@ If you are connecting to this server from machines other than `localhost`.  You 
 ```
 
 * On startup select ok add the datavirt server install you specified during installation
-<img src="../images/1-jbds-runtime.png" width="640px">
+
+<img src="../images/1-jbds-runtime.png">
 
 {{% alert info %}}
 For Linux and/or Mac users running via the command prompt, if you see the following errors:
@@ -124,6 +133,7 @@ To add the latest teiid designer software to JBDS 11.0 you need to add the softw
 `http://download.jboss.org/jbosstools/oxygen/stable/updates/integration-stack/teiiddesigner/11.1.0.Final/`
 
 * Select **Data Virtualization** and go through the prompts
+
 <img src="../images/1-teiid-designer.png" width="640px">
 
 {{% alert %}}
@@ -146,4 +156,5 @@ This step is usually unnecessary.  The Data Virtualization tools shipped as an i
 * Enter the jdbc connection username of **teiidUser** with the password from installation, **Password1!**
 * Click **Test the JDBC connection** and check for **ok**  
 * Finally, **save** the changes by clicking the disk icon in the upper left or **ctrl+s**
+
 <img src="../images/1-teiid-settings.png" width="640px">

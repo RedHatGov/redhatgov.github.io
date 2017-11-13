@@ -1,6 +1,6 @@
 ---
 title: Exercise 7 - Import Excel data
-workshops: jdv_101
+workshops: jdv_dev
 workshop_weight: 1.7
 layout: lab
 toc: true

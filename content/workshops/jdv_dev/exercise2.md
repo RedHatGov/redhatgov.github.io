@@ -1,6 +1,6 @@
 ---
 title: Exercise 2 - Prepare the datasources
-workshops: jdv_101
+workshops: jdv_dev
 workshop_weight: 1.2
 layout: lab
 ---
@@ -34,16 +34,20 @@ When running in a Virtual Machine, I add a second network adapter in addition to
 {{% /alert %}}
 
 * In your browser go to the IP address of your PostgreSQL VM.  The address below is the one available by using the host only network created by Docker.
+
 <img src="../images/2-postgres-start.png" width="640px">
 <br><br>
 
 * Login to **Adminer** as the **postgres** user
+
 <img src="../images/2-login-postgres.png" width="640px">
 <br><br>
 
 * Import into the **public** schema and select `jdv-demo/assets/postgres/create_insert.sql`
+
 <img src="../images/2-import-sql.png" width="640px">
 <br><br>
 
 * To verify, check to make sure you have a **order_details** table like below
+
 <img src="../images/2-check-data.png" width="640px">
