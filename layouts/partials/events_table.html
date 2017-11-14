@@ -28,6 +28,11 @@
                     {{ end }}
                   </div>
                 {{ end }}
+                {{ if .Params.event_location }}
+                  <div>
+                    {{ .Params.event_location }}
+                  </div>
+                {{ end }}
               </div>
               <p class="card-pf-info text-center">
                 {{ if .Params.event_type }}
