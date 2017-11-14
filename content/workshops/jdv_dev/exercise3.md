@@ -30,7 +30,7 @@ npm run dev
 # Prepare Postman
 
 * Import the REST tests into Postman by going to
-* **file <i class="fa fa-arrow-right"></I> import**
+* **file <i class="fa fa-arrow-right"></i> import**
 * Select `jdv-demo/assets/demo-jdv.postman_collection.json`
 
 <img src="../images/3-postman.png" width="640px">

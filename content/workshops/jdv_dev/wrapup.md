@@ -8,7 +8,7 @@ toc: true
 
 # Congratulations
 
-* Good job creating federated, secured data services from 3 difference disparate sources
+* You imported 3 different disparate datasources and exposed them as data services.  You also combined them into a federated view and applied role based security.  Congratulations!
 
 # Additional resources
 

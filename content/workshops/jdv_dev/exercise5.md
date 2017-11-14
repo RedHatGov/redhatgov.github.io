@@ -8,7 +8,7 @@ toc: true
 
 # Import JDBC datasource
 
-* file <i class="fa fa-arrow-right"></I> import <i class="fa fa-arrow-right"></I> teiid designer <i class="fa fa-arrow-right"></I> JDBC Database >> source model
+* file <i class="fa fa-arrow-right"></i> import <i class="fa fa-arrow-right"></i> teiid designer <i class="fa fa-arrow-right"></i> JDBC Database >> source model
 
 <img src="../images/5-import-jdbc-1.png">
 
@@ -66,7 +66,7 @@ This is a common issue when importing tables that have existing contraints.  The
 
 * Lets now create a REST view on top of this base layer
 
-* file <i class="fa fa-arrow-right"></I> new Teiid Metadata Model
+* file <i class="fa fa-arrow-right"></i> new Teiid Metadata Model
 
 * Location **demo-jdv/views**
 

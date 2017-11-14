@@ -8,9 +8,9 @@ toc: true
 
 # Create a new JDV project
 
-* window <i class="fa fa-arrow-right"></I> perspective <i class="fa fa-arrow-right"></I> open perspective <i class="fa fa-arrow-right"></I> other <i class="fa fa-arrow-right"></I> teiid designer
+* window <i class="fa fa-arrow-right"></i> perspective <i class="fa fa-arrow-right"></i> open perspective <i class="fa fa-arrow-right"></i> other <i class="fa fa-arrow-right"></i> teiid designer
 
-* file <i class="fa fa-arrow-right"></I> new <i class="fa fa-arrow-right"></I> teiid model project
+* file <i class="fa fa-arrow-right"></i> new <i class="fa fa-arrow-right"></i> teiid model project
 
 * Name the project **jdv-demo** and its ok to leave the default location.
 
@@ -24,7 +24,7 @@ toc: true
 
 # Create a VDB
 
-* file <i class="fa fa-arrow-right"></I> New <i class="fa fa-arrow-right"></I> Teiid VDB
+* file <i class="fa fa-arrow-right"></i> New <i class="fa fa-arrow-right"></i> Teiid VDB
 
 * name the vdb **demo-jdv**
 

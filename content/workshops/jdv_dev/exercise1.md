@@ -126,7 +126,7 @@ at the very beginning of the file
 
 To add the latest teiid designer software to JBDS 11.0 you need to add the software site in JBDS
 
-* **help <i class="fa fa-arrow-right"></I> install new software**
+* **help <i class="fa fa-arrow-right"></i> install new software**
 
 * click the **add** button and put this in the url
 

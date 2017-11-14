@@ -13,5 +13,5 @@ layout: lab
 * [Node.js](https://nodejs.org/en/download/package-manager/) runtime, 6.x or higher
 * [Postman](https://www.getpostman.com/) for testing
 * An accessible [PostgreSQL](https://www.postgresql.org/) instance
-  * **Recommended:** Download a pre-built VM, ISO or docker image from [TurnKey Linux](https://www.turnkeylinux.org/postgresql).  The provided VM/ISO also provides an web interface for loading data.
+  * **Recommended:** Download a pre-built VM, ISO or docker image from [TurnKey Linux](https://www.turnkeylinux.org/postgresql).  The provided VM/ISO also provides an web interface for loading data.  Step by step instructions are provided for a Turnkey linux instance
 

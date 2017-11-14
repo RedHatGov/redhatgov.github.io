@@ -8,7 +8,7 @@ toc: true
 
 # Import REST source
 
-* file <i class="fa fa-arrow-right"></I> import <i class="fa fa-arrow-right"></I> Web Service Source >> Source and View Model (REST)
+* file <i class="fa fa-arrow-right"></i> import <i class="fa fa-arrow-right"></i> Web Service Source >> Source and View Model (REST)
 
 * Click **New** Connection Profile, then **next**
 
@@ -54,7 +54,7 @@ toc: true
 
 * Now select **id_pk** and edit the **Columns** property.  From the **Choices** column, move over **id** to **feature**.  Click **ok**
 
-* You must now edit the properties of **name,website,phone,email,username,zipcode,city and street**.  The **length** property for each must be set to **255** instead of 0
+* You must now right-click on each of **name,website,phone,email,username,zipcode,city and street** then **modeling <i class="fa fa-arrow-right"></i> set DataType** and select **string** and set length to **255**
 
 * Now save the **users** table.  There should no longer be any **red x** next to the model
 
