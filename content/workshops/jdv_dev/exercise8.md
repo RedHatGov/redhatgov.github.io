@@ -34,7 +34,7 @@ file -> new -> teiid metadata model
 
 * In the **Transformation Editor**, copy the following where clause to the end of the transformation SQL to join the added tables on the 'id' field
 
-```
+```sql
 	WHERE
 		(ExcelView.Sheet1.id = PostgresView.order_details.id) AND (PostgresView.order_details.id = RestView.users.id)
 ```
@@ -43,7 +43,7 @@ file -> new -> teiid metadata model
 
 <img src="../images/8-validate.png" width="800px">
 
-* Cleanup the unnecessary colums by right-clicking on the **id_1, id_2, ROW_ID fields and delete each one
+* Cleanup the unnecessary colums by right-clicking on the **id_1, id_2, ROW_ID** fields and delete each one
 
 * Select **pk_id** and edit the **Columns** property.  From the **Choices** column, move over **id** to **feature**.  Click **ok**
 
