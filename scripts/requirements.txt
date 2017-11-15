@@ -1,0 +1,4 @@
+awesome-slugify
+google-api-python-client
+jinja2
+python-dateutil
