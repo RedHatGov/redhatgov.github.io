@@ -30,7 +30,11 @@ layout: lab
 
 # Install JBoss Data Virtualization (JDV) <a name="link3"></a>
 
-* In the location where you downloaded the installer, run the following command `java -jar jboss-dv-6.3.0-1-installer.jar`
+* In the location where you downloaded the installer, run the following command
+
+```
+java -jar jboss-dv-6.3.0-1-installer.jar
+```
 
 * Follow the default prompts with the following exceptions below
 
@@ -72,7 +76,11 @@ If you are connecting to this server from machines other than `localhost`.  You 
 
 # Install JBoss Developer Studio (JBDS) <a name="link5"></a>
 
-* In the location where you downloaded the installer, run the following command `devstudio-11.0.0.GA-installer-standalone.jar`
+* In the location where you downloaded the installer, run the following command 
+
+```
+java -jar devstudio-11.0.0.GA-installer-standalone.jar
+```
 
 * Follow the default prompts with the following exceptions
 
