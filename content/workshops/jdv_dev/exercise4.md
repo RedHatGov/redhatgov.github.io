@@ -8,7 +8,7 @@ toc: true
 
 # Create a new JDV project
 
-* window <i class="fa fa-arrow-right"></i> perspective <i class="fa fa-arrow-right"></i> open perspective <i class="fa fa-arrow-right"></i> other <i class="fa fa-arrow-right"></i> teiid designer
+* In JBDS, do window <i class="fa fa-arrow-right"></i> perspective <i class="fa fa-arrow-right"></i> open perspective <i class="fa fa-arrow-right"></i> other <i class="fa fa-arrow-right"></i> teiid designer
 
 * file <i class="fa fa-arrow-right"></i> new <i class="fa fa-arrow-right"></i> teiid model project
 
