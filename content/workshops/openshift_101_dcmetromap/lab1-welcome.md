@@ -26,8 +26,12 @@ We will be using the following terms throughout the workshop labs so here are so
 # Accessing OpenShift
 OpenShift provides a web console that allows you to perform various tasks via a web browser.  Additionally, you can utilize a command line tool to perfrom tasks.  Let's get started by logging into both of these and checking the status of the platform.
 
-## Let's Login
-> Navigate to the URI provided by your instructor and login with the user/password provided (if there's an icon on the Desktop, just double click that)
+## Let's Login to the Web Console
+> Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.
+
+```bash
+https://<workshopname>.master.redhatgov.io:8443
+```
 
 <img src="../images/ocp-login.png" width="600"><br/>
 *Login Webpage*
@@ -51,7 +55,7 @@ Don't worry, it's supposed to look empty right now because you currently don't h
 > <i class="fa fa-terminal"></i> Open a terminal and login using the same URI with following command:
 
 ```bash
-$ oc login [URI]
+$ oc login https://<workshopname>.master.redhatgov.io:8443
 ```
 
 > <i class="fa fa-terminal"></i> Check to see what projects you have access to:
