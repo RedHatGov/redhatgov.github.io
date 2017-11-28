@@ -17,6 +17,7 @@ This workshop is done entierly through the browser, but you do need a free perso
 If you don't have a person GitHub account please sign up [here][6] to create a free account.
 
 * [Create GitHub Account][6]
+* [Download Git Client (optional)][8]
 
 
 [1]: https://docs.openshift.com/enterprise/latest/cli_reference/get_started_cli.html

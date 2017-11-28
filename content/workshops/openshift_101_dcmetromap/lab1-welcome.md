@@ -30,7 +30,7 @@ OpenShift provides a web console that allows you to perform various tasks via a 
 > Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.
 
 ```bash
-https://<workshopname>.master.redhatgov.io:8443
+https://<workshopname>.master.0.redhatgov.io:8443
 ```
 
 <img src="../images/ocp-login.png" width="600"><br/>
@@ -55,7 +55,7 @@ Don't worry, it's supposed to look empty right now because you currently don't h
 > <i class="fa fa-terminal"></i> Open a terminal and login using the same URI with following command:
 
 ```bash
-$ oc login https://<workshopname>.master.redhatgov.io:8443
+$ oc login https://<workshopname>.master.0.redhatgov.io:8443
 ```
 
 > <i class="fa fa-terminal"></i> Check to see what projects you have access to:
