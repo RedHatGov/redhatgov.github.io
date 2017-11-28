@@ -17,72 +17,29 @@ layout: lab
 
 image::tower.002.png['Tower']
 
-== Setup
+== Introduction to Wetty (Browser-based SSH)
 
-[IMPORTANT]
-- Today's workshop infrastructure is being run in Amazon EC2.
+This lab provides a quick tour of the browser based SSH client Wetty. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
 
-- Each student will have two instances to use.
 
-- Whenever you see *workshopname*, replace it with the name of your workshop.
+# Accessing Wetty
 
-- Whenever you see *#*, replace it with your student number.
-
-=== Tower
+Use this URL to access the Wetty node, just change the workshopname. Ask your instructor for the workshopname. 
 
 [source,bash]
 ----
-https://workshopname.tower.#.redhatgov.io:8888/wetty/ssh/ec2-user
+https://<workshopname>.master.<student number>.redhatgov.io:8888
 ----
 
-=== Node
+After logging in, you should see a shell.
 
-[source,bash]
-----
-http://workshopname.node.#.redhatgov.io
-----
-
-- Each of you should have received an email.  It has the following information on it.
-
-If you didn't get one of these emails, let us know so we can give you the information about your lab environment.
-
-
-
-
-
-
-== Workshop Infrastructure
-
-Each student's personal EC2 lab is equipped with the following:
-
-* (1) Control node (to run ansible plays and install Ansible Tower).
-* (1) Endpoint nodes (to execute ansible playbooks upon).
-** _All three of the afore mentioned nodes are running Red Hat Enterprise Linux 7.3_
-* Ansible Core 2.2
-* Ansible Tower 3.0.3
-
-.Setup Your Environment
-
-Before we can begin doing super-cool automations and such, we've got to get a few basics out of the way.
-Namely... ssh access to your EC2 nodes.
-
-
-== Testing your environment
-
-Log into your Tower instance via the following link:
-
-=== Tower
-
-[source,bash]
-----
-https://workshopname.tower.#.redhatgov.io:8888/wetty/ssh/ec2-user
-----
+image::wetty.png[caption="Figure 1: ", title='wetty', 500]
 
 
 [IMPORTANT]
-Be sure you can log in to your ec2 instances.  If you can't log in start shouting, loudly, and waving your hands!
+Be sure you can log in to your instances.  If you can't log in start shouting, loudly, and waving your hands!
 
 
 == End Result
 
-At this point, everyone should have logged into each of your 2 nodes.  If you haven't, let us know so we can get you fixed up.
+At this point, everyone should have logged into your node.  If you haven't, let us know so we can get you fixed up.

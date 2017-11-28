@@ -24,19 +24,6 @@ After logging in, you should see a shell.
 
 The wetty instance will already have the 'oc' command installed on them. The 'oc' command is used to connect to the OpenShift Master. 
 
-## Additional Info
-
-### oc releases
-
-To keep up woith the latest releases of the 'oc' command check here for latest binary relases.
-
-- [oc releases](https://github.com/openshift/origin/releases)
-
-### oc commands
-
-Learn more oc commands you can use with openshift via the latest docs on 'oc'.
-
-- [oc commands](https://docs.openshift.com/container-platform/latest/getting_started/developers_cli.html#developers-cli-creating-a-project)
 
 
 

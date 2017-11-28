@@ -7,10 +7,12 @@ menu:
 
 # Microservices Workshop - Strangling the Monolith
 
-## Description:  
+## Description
+
 Large organizations have a tremendous amount of resources invested in existing monolithic applications, in the workshop you will learn a sane way to capture the benefits of containers and orchestration without having to execute a complete rewrite.  
 
 ## Who should attend
+
 - Anyone who has had Containers 101
 - Architects
 - Developers
@@ -18,12 +20,14 @@ Large organizations have a tremendous amount of resources invested in existing m
  -Operations Engineers
 
 ## What you will learn
+
 Tour of Openshift
 Strangling your Monolith
 Microservice  Integration Patterns
 
 ## Agenda
-Arrivals
+
+- Arrivals
 - Introductions / Agenda
 - Presentation
 - Introduction

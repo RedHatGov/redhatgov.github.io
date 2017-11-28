@@ -39,7 +39,7 @@ For example, a recent workshop's first student used:
 [source,bash]
 ----
 [web]
-node-1 ansible_host=workshopname.node.#.redhatgov.io
+<workshopname>.node.<student number>.redhatgov.io
 ----
 
 === Step 1:

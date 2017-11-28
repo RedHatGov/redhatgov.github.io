@@ -8,7 +8,9 @@ menu:
 
 # OpenShift 101 - DC Metro Map Workshop
 
-Description:  This workshop will have you deploying and creating native docker images for a Node.js based website and learning to leverage the power of OpenShift to build, deploy, scale, and automate.
+## Description 
+
+This workshop will have you deploying and creating native docker images for a Node.js based website and learning to leverage the power of OpenShift to build, deploy, scale, and automate.
 
 ## Who should attend
 
