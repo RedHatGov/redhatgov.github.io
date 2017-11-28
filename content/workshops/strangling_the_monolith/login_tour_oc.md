@@ -68,12 +68,12 @@ If you do not see an available project, go ahead and click `New Project` and cre
 > <i class="fa fa-terminal"></i> Open a terminal and login using the same URI/user/password with following command:
 
 ```bash
-$ oc login [URI] --insecure-skip-tls-verify=false
+$ oc login [URI] --insecure-skip-tls-verify=true
 ```
 See example below:
 
 ```bash
-$ oc login https://master.ocp.naps-redhat.com:8443 --insecure-skip-tls-verify=false
+$ oc login https://<workshopname>master.0.redhatgov.io:8443 --insecure-skip-tls-verify=true
 ```
 
 
