@@ -5,38 +5,33 @@ menu:
     parent: workshops
 ---
 
-Introduction
+# Microservices Workshop - Strangling the Monolith
 
-Hands-on lab demonstrating the deployment of a legacy monolithic application onto a container, and then breaking it into microservices to deploy on OpenShift Container Platform.
+## Description:  
+Large organizations have a tremendous amount of resources invested in existing monolithic applications, in the workshop you will learn a sane way to capture the benefits of containers and orchestration without having to execute a complete rewrite.  
 
-{{% alert success %}}
-**Bring your laptop to participate.**
+## Who should attend
+- Anyone who has had Containers 101
+- Architects
+- Developers
+- Technical leads
+ -Operations Engineers
 
-Use Guacamole through the browser or install the utilities in the prerequisites to run the workshop without Guacamole.
-{{% /alert %}}
+## What you will learn
+Tour of Openshift
+Strangling your Monolith
+Microservice  Integration Patterns
 
-# Labs
+## Agenda
+Arrivals
+- Introductions / Agenda
+- Presentation
+- Introduction
+- Hands-on lab demonstrating the deployment of a legacy monolithic application onto a container, and then breaking it into microservices to deploy on OpenShift Container Platform.
+
+## Labs
 
 {{< labs strangling_the_monolith >}}  
-
-# Workshop Login Info
-
-- [Environment Logins](http://naps-redhat.com/files/lab_info.xlsx)
-
-# Environment Links
-
-- [OpenShift Login](https://master.ocp.naps-redhat.com:8443/console)
-
-- [Guacamole Login 1](https://85.190.181.16/guacamole/#/)
-
-- [Guacamole Login 2](https://31.220.69.63/guacamole/#/)
-
-- [Guacamole Login 3](https://85.190.177.63/guacamole/#/)
-
-- [Guacamole Login 4](https://85.190.180.29/guacamole/#/)
-
-- [Guacamole Login 5](https://153.92.39.111/guacamole/#/)
-
 
 
 {{% alert success %}}

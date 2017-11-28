@@ -27,19 +27,19 @@ layout: lab
 > First, deploy the coolstore monolith dev project (don’t forget to include -b app-partner when you run git clone - this is the branch in use for this lab!):
 
 
-```
+```bash
 $ mkdir ~/coolstore
 ```
 
-```
+```bash
 $ cd ~/coolstore
 ```
 
-```
+```bash
 $ git clone -b app-partner https://github.com/epe105/monolith
 ```
 
-```
+```bash
 $ cd monolith
 ```
 {{% alert info %}}
@@ -49,11 +49,11 @@ Please update ``<USERNAME>`` below with your assigned username
 {{% /alert %}}
 
 
-```
+```bash
 $ oc new-project coolstore-<USERNAME>
 ```
 
-```
+```bash
 $ oc process -f src/main/openshift/template.json | oc create -f -
 ```
 
@@ -79,13 +79,15 @@ $ oc process -f src/main/openshift/template.json | oc create -f -
 
 > Build the coolstore monolith (.war file) locally and deploy into the OpenShift via the binary build:
 
-```
+```bash
 $ cd ~/coolstore/monolith
 ```
-```
+
+```bash
 $ mvn clean package -Popenshift
 ```
-```
+
+```bash
 $ oc start-build coolstore --from-file deployments/ROOT.war --follow
 ```
 
@@ -123,17 +125,17 @@ $ oc start-build coolstore --from-file deployments/ROOT.war --follow
 
 > Make note of POSTGRESQL_PASSWORD
 
-```
+```bash
 $ oc env dc/coolstore-dev-postgresql --list       # copy value of POSTGRESQL_PASSWORD to clipboard
 ```
 > Make note of postgresql pod
 
-```
+```bash
 $ oc get pods
 ```
 > oc rsh into postresql pod
 
-```
+```bash
 $ oc rsh coolstore-dev-postgresql-1-3rfuw
 sh-4.2$ psql -h $HOSTNAME -d $POSTGRESQL_DATABASE -U $POSTGRESQL_USER
 Password for user userV31:XXXXXXXX
@@ -148,7 +150,7 @@ monolith=> select * from PRODUCT_CATALOG;
 
 > Exit out of psql and then the postgresql pod
 
-```
+```bash
 monolith=> \q
 sh-4.2$ exit
 exit
@@ -162,7 +164,7 @@ exit
 
 > Create the production deployment objects that will be used to promote builds from dev to prod using the supplied CI/CD pipeline:
 
-```
+```bash
 $ oc process -f ~/coolstore/monolith/src/main/openshift/template-prod.json | oc create -f -
 ```
 
@@ -178,7 +180,7 @@ $ oc process -f ~/coolstore/monolith/src/main/openshift/template-prod.json | oc 
 
 >Inspect the pipeline and observe the steps it executes during the pipeline run. Notice at the end of the script, the latest coolstore image is tagged with :prod, triggering a production deployment:
 
-```
+```bash
 $ oc get bc/monolith-pipeline -o yaml
 ...
           openshiftTag(sourceStream: 'coolstore', sourceTag: 'latest', namespace: '', destinationStream: 'coolstore', destinationTag: 'prod', destinationNamespace: '')
@@ -241,7 +243,7 @@ $ oc get bc/monolith-pipeline -o yaml
 
 If your build pipeline fails to start, you can manually tag the images:
 
-```
+```bash
 $ oc tag coolstore:latest coolstore:prod
 ```
 

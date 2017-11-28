@@ -64,25 +64,29 @@ Currently no traffic is routed to them.
 
 > First, deploy the API gateway:
 
-```
+```bash
 $ cd ~/coolstore
 ```
-```
+
+```bash
 $ git clone -b app-partner https://github.com/epe105/gateway
 ```
-```
+
+```bash
 $ cd gateway
 ```
-{{% alert info %}}
+
+{{% alert warning %}}
 
 Please update ``<USERNAME>`` below with your assigned username
 
 {{% /alert %}}
 
-```
+```bash
 $ oc project coolstore-<USERNAME>
 ```
-```
+
+```bash
 $ mvn clean fabric8:deploy -Popenshift -DskipTests
 ```
 
@@ -93,7 +97,7 @@ $ mvn clean fabric8:deploy -Popenshift -DskipTests
 > Take a look at the code for the Gateway in your browser :
    [https://github.com/epe105/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java](https://github.com/modernize-legacy-apps/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java)
 
-```
+{{< highlight php "linenos=inline,hl_lines=59-69,linenostart=59" >}}
 restConfiguration()
 		.contextPath("/services").apiContextPath("/services-docs")
 		.apiProperty("host", "")
@@ -102,19 +106,19 @@ restConfiguration()
 		.component("servlet")
 		.bindingMode(RestBindingMode.json);
 
-```
+{{< /highlight >}}
 
 - The beginning of this route uses the Camel Java DSL (Domain-Specific Language) to configure the REST system and define the base paths of the API itself (/services) and paths to Swagger documentation (/services-docs).
 
-```
+{{< highlight php "linenos=inline,hl_lines=67-68,linenostart=67" >}}
 rest("/products").description("Access the CoolStore products and their availability")
             .produces(MediaType.APPLICATION_JSON_VALUE)
 
-```
+{{< /highlight >}}
 
 - This begins the REST DSL portion, defining the primary access point for the catalog of products (/products) and the format of the data it produces (JSON)
 
-```
+{{< highlight php "linenos=inline,hl_lines=70-75,linenostart=70" >}}
 .get("/").description("Retrieves the product catalog, including inventory availability").outType(Product.class)
     .route().id("productRoute")
           .setBody(simple("null"))
@@ -125,11 +129,11 @@ rest("/products").description("Access the CoolStore products and their availabil
           .enrich("direct:inventory", new InventoryEnricher())
       .end()	            
 .endRest();
-```
+{{< /highlight >}}
 
 - This configures the endpoint for retrieving a list of products by first contacting the Catalog microservice, .split()ing the resulting list, and enriching (via enrich()) each of the products with its inventory by passing each product to the direct:inventory route.
 
-```
+{{< highlight php "linenos=inline,hl_lines=94-101,linenostart=94" >}}
 from("direct:inventory")
           .id("inventoryRoute")
           .setHeader("itemId", simple("${body.itemId}"))            
@@ -139,11 +143,11 @@ from("direct:inventory")
           .setHeader("CamelJacksonUnmarshalType", simple(Inventory.class.getName()))
           .unmarshal().json(JsonLibrary.Jackson, Inventory.class);
 
-```
+{{< /highlight >}}
 
 - This is the direct:inventory route, which takes in a Product object (in the body()) and calls out to the Inventory microservice to retrieve its inventory. The resulting inventory is placed back into the Camel exchange for enrichment by the enricher:
 
-```
+{{< highlight php "linenos=inline,hl_lines=108-120,linenostart=108" >}}
 @Override
 public Exchange aggregate(Exchange original, Exchange resource) {
 
@@ -158,7 +162,8 @@ public Exchange aggregate(Exchange original, Exchange resource) {
 	return original;
 
 }
-```
+{{< /highlight >}}
+
 - This is the enricher logic which takes the Product and matching Inventory objects, enriches the Product object with information from the Inventory object, and returns it.
 - The resulting list sent back to the client is the list of products, each of which is enriched with inventory information
 - The client then renders the aggregate list in the UI.
@@ -219,11 +224,11 @@ public Exchange aggregate(Exchange original, Exchange resource) {
 
 Use vi to make changes in the code.  If you need help in using vi, please click [here][1]
 
-```
+```bash
 $ vi ~/coolstore/gateway/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java
 ```
 
-```
+{{< highlight php "linenos=inline,hl_lines=77-86,linenostart=77" >}}
 //
 // Uncomment the below lines to filter out products
 //
@@ -234,25 +239,28 @@ $ vi ~/coolstore/gateway/src/main/java/com/redhat/coolstore/api_gateway/ProductG
 //						.collect(Collectors.toList());
 //                    exchange.getIn().setBody(newProductList);
 //                })
-```
+{{< /highlight >}}
 
 >Save your changes and quit
 
-```
+```bash
 $ shift + Z
 $ shift + Z
 ```
+
 # Step 7
 
 - Re-deploy the modified code using the same procedure as before:
 
-```
+```bash
 $ cd ~/coolstore/gateway
 ```
-```
+
+```bash
 $ mvn clean fabric8:deploy -Popenshift -DskipTests
 ```
-```
+
+```bash
 $ oc logs -f dc/gateway
 ...
 --> Success       # --> wait for it!
