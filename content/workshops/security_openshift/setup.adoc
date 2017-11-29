@@ -10,40 +10,34 @@ layout: lab
 :imagesdir: /workshops/security_openshift/images
 
 
-= Setup
+= Workshop Lab Setup
 
-image::container-lab.001.png['Red Hat']
+image::container-lab.001.png['Red Hat', 1000]
 
-Today's workshop infrastructure is being run in Amazon EC2. Each student will
-have a single instance to use. Each of you should have received an email.  It
-has the following information on it. Your student number will be substituted
-where you see this `< student# >`. Example: if you are student 21:
-`http://dc17.21.redhatgov.io`
+== Introduction to Wetty (Browser-based SSH)
 
-- *EC2 SSH Key*
-- Web URL for each of your EC2 instances.
-- *http://dc17.< student# >.redhatgov.io/*
+This lab provides a quick tour of the browser based SSH client Wetty. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
 
-If you didn't get one of these emails, let us know so we can give you the
-information about your lab environment.
 
-== Workshop Infrastructure
+== Accessing Wetty
 
-Each student's personal EC2 lab is equipped with the following:
+Use this URL to access the Wetty node, just change the workshopname. Ask your instructor for the workshopname. 
 
-*  A directory containing all files used in this workshop.
-** _All nodes are running Red Hat Enterprise Linux 7.3_
+[source,bash]
+----
+https://<workshopname>.master.<student number>.redhatgov.io:8888
+----
 
-== Setup Your Environment
+After logging in, you should see a shell.
 
-Before we can begin doing super-cool automations and such, we've got to get a
-few basics out of the way. Namely... ssh access to your EC2 nodes
+image::wetty.png[caption="Figure 1: ", title='wetty', 500]
+
 
 [IMPORTANT]
-Be sure you can log in to your ec2 instances.  If you can't log in start
-shouting, loudly, and waving your hands!
+Be sure you can log in to your instances.  If you can't log in start shouting, loudly, and waving your hands!
+
 
 == End Result
 
-At this point, everyone should have logged into your node.  If you haven't, let
-us know so we can get you fixed up.
+At this point, everyone should have logged into your node.  If you haven't, let us know so we can get you fixed up.
+

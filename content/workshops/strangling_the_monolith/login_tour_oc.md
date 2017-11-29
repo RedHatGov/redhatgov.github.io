@@ -9,7 +9,7 @@ layout: lab
 # Welcome to OpenShift!
 This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.  If you are already familiar with the basics of OpenShift you can skip this lab - after making sure you can login.
 
-# Guacamole Environment Links  
+# Wetty Environment Links  
 
 Your instructor will assign you an OpenShift environment and login.  
 
@@ -67,26 +67,26 @@ If you do not see an available project, go ahead and click `New Project` and cre
 # Let's try the command line
 > <i class="fa fa-terminal"></i> Open a terminal and login using the same URI/user/password with following command:
 
-```
-$ oc login [URI] --insecure-skip-tls-verify=false
+```bash
+$ oc login [URI] --insecure-skip-tls-verify=true
 ```
 See example below:
 
-```
-$ oc login https://master.ocp.naps-redhat.com:8443 --insecure-skip-tls-verify=false
+```bash
+$ oc login https://<workshopname>master.0.redhatgov.io:8443 --insecure-skip-tls-verify=true
 ```
 
 
 > <i class="fa fa-terminal"></i> Check to see what projects you have access to:
 
-```
+```bash
 $ oc get projects
 ```
 
 # It looks empty via the command line too
 > <i class="fa fa-terminal"></i> Type the following command to use the demo project (replace 'demo' with the project you want to use if there isn't a demo project):
 
-```
+```bash
 $ oc new-project demo
 ```
 {{% alert info %}}
@@ -95,7 +95,7 @@ You may recieve the message "Error from server: project "demo" already exists". 
 
 > <i class="fa fa-terminal"></i> If you create more than one project, then you can switch projects with the following command:
 
-```
+```bash
 $ oc project [NAME]
 ```
 
@@ -105,7 +105,7 @@ To see the full list of commands supported, run `oc help`.
 
 > <i class="fa fa-terminal"></i> Type the following command to read more information about services, deployment configs, build configurations, and active deployments:
 
-```
+```bash
 $ oc status -h
 ```
 

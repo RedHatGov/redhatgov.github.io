@@ -15,75 +15,30 @@ menu:
 :iconsdir: http://people.redhat.com/~jduncan/images/icons
 :imagesdir: /workshops/ansible_tower/images
 
+= Ansible Tower Workshop
 
-= Automation for Everyone
+== Description
 
+Build playbooks to build in security, empower junior staff and offload senior staff, and automate your most tedious tasks!
 
+== What you will learn
 
-== Today's Agenda
+- Running ad-hoc commands
+- Writing a playbook
+- Install and configure Ansible Tower
+- Templates and Security.
 
-* Arrivals
-* Introductions / Agenda
-* Presentation
+== Overview
+
+Today is meant for anyone who has any exposure to Ansible, whether you have used it or not. We are going to start with a short overview (yes, slideware) and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.
+Your Responsibilities
+Have a discussion. This will be boring if it’s just us up here talking for over 4 hours.
+Participate. We are going to cut you loose with Ansible here in just a little while. Have questions. Have opinions.
+Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy. See? Not only can we dig into Ansible but you can make a new friend!
+ 
+== Labs
 
 {{< labs ansible_tower >}}
 
 
 
-=== Before We Get Started
-
-
-== Overview
-
-Today is meant for anyone who has any exposure to Ansible, whether you have used it or not. We are going to start with a short overview (yes, slideware) and then we'll get into the lab as soon as possible. That is where we will spend most of our time.
-
-== Your Responsibilities
-
-* Have a discussion. This will be boring if it's just us up here talking for over 4 hours.
-* Participate. We are going to cut you loose with Ansible here in just a little while. Have questions. Have opinions.
-
-Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy. See? Not only can we dig into Ansible but you can make a new friend!
-
-
-== Conventions Used in This Document
-
-[TIP]
-.Whenever you see a section like this, please pay close attention.  We are leading you through a process.
-
-
-*Step 1:* Run this command to do something or other
-
-[source,bash]
-----
-ansible web -m setup
-----
-
-*Step 2:* Edit this file in this specific way
-
-[source,bash]
-----
----
-- hosts: web
-  name: This is a play within a playbook
-  become: yes
-  vars:
-    httpd_packages:
-      - httpd
-      - mod_wsgi
-----
-
-[IMPORTANT]
-Do not cut and paste text from this document.  We really want you to learn ansible during this workshop,
-and part of that experience is typing out YAML and understanding it's syntax, spacing, and alignments.
-
-== Workshop Deployment
-
-Here is the link to deploy this workshop in AWS via Ansible.
-
-https://github.com/RedHatGov/redhatgov.workshops/tree/master/ansible_tower[GitHub Repo]
-
-== Document Copyright
-
-This document was created by and for Red Hat, Inc. It is being released under link:https://creativecommons.org/licenses/by/4.0/[Creative Commons License 4.0]. You are free to re-use it in whole or in part.
-
-You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.

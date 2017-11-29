@@ -13,32 +13,26 @@ layout: lab
 
 = Setup
 
-image::container-lab.001.png['Red Hat']
+== Introduction to Wetty (Browser-based SSH)
 
-Today's workshop infrastructure is being run in Amazon EC2.
-Each student will have one instances to use.
-Each of you should have received an email.  It has the following information on it.
+This lab provides a quick tour of the browser based SSH client Wetty. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
 
-1. Web based ssh access URL for your EC2 instances.
 
-[source, bash]
+== Accessing Wetty
+
+Use this URL to access the Wetty node, just change the workshopname. Ask your instructor for rthe workshopname. 
+
+[source,bash]
 ----
-workshopname.<student#>.redhatgov.io:8888/wetty/ssh/ec2-user
+https://<workshopname>.master.<student number>.redhatgov.io:8888
 ----
 
-Where `<student#>` is the number that has been assigned to you by the instructor.
+After logging in, you should see a shell.
 
-If you didn't get one of these emails, let us know so we can give you the information about your lab environment.
-
-
+image::wetty.png[caption="Figure 1: ", title='wetty', 500]
 
 
 
-{{< alert warning >}}
-Be sure you can log in to your ec2 instance.  If you can't log in start shouting, loudly, and waving your hands!
-{{< /alert >}}
 
-== End Result
 
-At this point, everyone should have logged into your node.  If you haven't, let us know so we can get you fixed up.
 

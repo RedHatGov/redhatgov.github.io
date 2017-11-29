@@ -78,25 +78,29 @@ layout: lab
 
 >- First, build and deploy the catalog microservice (Based on Spring Boot)
 
-```
+```bash
 $ cd ~/coolstore
 ```
-```
+
+```bash
 $ git clone -b app-partner https://github.com/epe105/catalog
 ```
-```
+
+```bash
 $ cd catalog
 ```
-{{% alert info %}}
+
+{{% alert warning %}}
 
 Please update ``<USERNAME>`` below with your assigned username
 
 {{% /alert %}}
 
-```
+```bash
 $ oc project coolstore-<USERNAME>
 ```
-```
+
+```bash
 $ mvn clean fabric8:deploy -Popenshift -DskipTests
 ```
 
@@ -104,14 +108,15 @@ $ mvn clean fabric8:deploy -Popenshift -DskipTests
 
 >Once the new catalog service is deployed, test it with curl:
 
-```
+```bash
 $ oc get route/catalog
 NAME      HOST/PORT                                              PATH      SERVICES   PORT      TERMINATION
 catalog   catalog-coolstore-<USERNAME>.apps.ocp.naps-redhat.com            catalog    8080
 ```
+
 Curl using the HOST/PORT from the previous step
 
-```
+```bash
 $ curl http://catalog-coolstore--USERNAME>.apps.ocp.naps-redhat.com/api/catalog
 
 [{"itemId":"329299","name":"Red Fedora","desc":"Official Red Hat Fedora","price":34.99},{"itemId":"329199","name":"Forge Laptop Sticker","desc":"JBoss Community Forge Project Sticker","price":8.5}
@@ -132,25 +137,28 @@ $ curl http://catalog-coolstore--USERNAME>.apps.ocp.naps-redhat.com/api/catalog
 
 >Now we will do the same for the Inventory service, based on WildFly Swarm:
 
-```
+```bash
 $ cd ~/coolstore
 ```
-```
+
+```bash
 $ git clone -b app-partner https://github.com/epe105/inventory
 ```
-```
+
+```bash
 $ cd inventory
 ```
-{{% alert info %}}
+{{% alert warning %}}
 
 Please update ``<USERNAME>`` below with your assigned username
 
 {{% /alert %}}
 
-```
+```bash
 $ oc project coolstore-<USERNAME>
 ```
-```
+
+```bash
 $ mvn clean fabric8:deploy -Popenshift  -DskipTests
 ```
 - The catalog microservice is responsible for retrieving and returning a list of products and their descriptions (price, images, etc).
@@ -164,17 +172,19 @@ $ mvn clean fabric8:deploy -Popenshift  -DskipTests
 >Once the new inventory service is deployed, dump its database:
 
 >Get the POSTGRESQL_PASSWORD
-```
+```bash
 $ oc env dc/inventory-database --list # get the POSTGRESQL_PASSWORD
 ```
+
 >Get the postgresql pod
 
-```
+```bash
 $ oc get pods
 ```
+
 >oc rsh into the postgresql pod from the previous step
 
-```
+```bash
 $ oc rsh inventory-database-1-kkxs2
 sh-4.2$ psql -h $HOSTNAME -d $POSTGRESQL_DATABASE -U $POSTGRESQL_USER
 Password for user userV31:XXXXXXXX
@@ -187,28 +197,32 @@ monolith=> select * from inventory;
  329299 | http://maps.google.com/?q=Raleigh | Raleigh  |      736
 ...
 ```
+
 > Exit out of psql and then the postgresql pod
   
 
-```
+```bash
 monolith=> \q
 sh-4.2$ exit
 exit
 ```
+
 # Step 5
 
 > Once the new service is deployed, test it with curl  
 You should get a JSON object representing the inventory availability of product 329299
 
-```
+```bash
 $ oc get route/inventory
 NAME        HOST/PORT                                                  PATH      SERVICES    PORT      TERMINATION
 inventory   inventory-coolstore-<USERNAME>.apps.ocp.naps-redhat.com              inventory   8080
 ```
-```
+
+```bash
 $ curl http://inventory-coolstore-<USERNAME>.apps.ocp.naps-redhat.com/api/inventory/329299
 {"itemId":"329299","location":"Raleigh","quantity":736,"link":"http://maps.google.com/?q=Raleigh"}
 ```
+
 > You can also test it by clicking on the route to the inventory service and adding /api/inventory/329299 to the URL
 
 {{< panel_group >}}
