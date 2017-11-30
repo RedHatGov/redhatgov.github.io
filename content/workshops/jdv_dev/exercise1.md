@@ -138,7 +138,7 @@ To add the latest teiid designer software to JBDS 11.0 you need to add the softw
 
 * click the **add** button and put this in the url
 
-`http://download.jboss.org/jbosstools/oxygen/stable/updates/integration-stack/teiiddesigner/11.1.0.Final/`
+`http://download.jboss.org/jbosstools/oxygen/stable/updates/integration-stack/teiiddesigner`
 
 * Select **Data Virtualization** and go through the prompts
 
