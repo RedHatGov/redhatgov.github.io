@@ -1,0 +1,97 @@
+{{ range (.Pages.GroupByDate "January 2006").Reverse }}
+  <h2>{{ .Key }}</h2>
+
+  <div class="container container-cards-pf">
+    <div class="row row-cards-pf">
+      {{ range .Pages.ByDate }}
+        <div class="col-xs-12 col-md-4">
+          <div class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select">
+            <div class="card-pf-body">
+              <h3 class="card-pf-title text-center">
+                {{ .Title }}
+              </h3>
+              <div class="card-pf-info text-center">
+                <div class="card-pf-item">
+                  <span class="fa fa-calendar"></span>
+                  <span class="card-pf-item-text">
+                    {{ .Date.Format "January 02" }}
+                    {{ if ne .Params.event_start_date .Params.event_end_date }}
+                      &ndash; {{ dateFormat "January 02" .Params.event_end_date }}
+                    {{ end }}
+                  </span>
+                </div>
+                {{ if .Params.event_start_time }}
+                  <div>
+                    {{ .Params.event_start_time }}
+                    {{ if .Params.event_end_time }}
+                      &ndash; {{ .Params.event_end_time }}
+                    {{ end }}
+                  </div>
+                {{ end }}
+                {{ if .Params.event_location }}
+                  <div>
+                    {{ .Params.event_location }}
+                  </div>
+                {{ end }}
+              </div>
+              <p class="card-pf-info text-center">
+                {{ if .Params.event_type }}
+                  <strong>Type:</strong> {{ .Params.event_type }}<br />
+                {{ end }}
+                {{ if .Params.event_technology }}
+                  <strong>Technology:</strong> {{ .Params.event_technology }}
+                {{ end }}
+              </p>
+              {{ if .Params.event_link }}
+                <p class="card-pf-info text-center">
+                  <a class="view-event-url" href="{{ .Params.event_link }}" target="_blank">View Details</a>
+                </p>
+              {{ end }}
+            </div>
+            <div class="card-pf-view-checkbox">
+              <input type="checkbox">
+            </div>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+
+  <!--<div class="list-group list-view-pf list-view-pf-view">-->
+    <!--{{ range .Pages.ByDate }}-->
+      <!--<div class="list-group-item">-->
+        <!--<div class="list-group-item-header">-->
+          <!--<div class="list-view-pf-main-info">-->
+            <!--<div class="list-view-pf-left">-->
+              <!--<span class="fa fa-calendar list-view-pf-icon-lg"></span>-->
+              <!--&lt;!&ndash;<div class="list-view-pf-calendar">&ndash;&gt;-->
+                <!--&lt;!&ndash;{{ .Date.Format "January" }} <strong>{{ .Date.Format "02" }}</strong>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--</div>-->
+            <!--<div class="list-view-pf-body">-->
+              <!--<div class="list-view-pf-description">-->
+                <!--<div class="list-group-item-heading">-->
+                  <!--{{ .Title }}-->
+                  <!--<small>{{ .Date.Format "January 02, 2006" }}</small>-->
+                <!--</div>-->
+                <!--<div class="list-group-item-text">-->
+                  <!--{{ .Description | markdownify }}-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="list-group-item-container container-fluid hidden">-->
+          <!--<div class="close">-->
+            <!--<span class="pficon pficon-close"></span>-->
+          <!--</div>-->
+          <!--<div class="row">-->
+            <!--<div class="col-md-12">-->
+              <!--{{ .Content }}-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--{{ end }}-->
+  <!--</div>-->
+{{ end }}
