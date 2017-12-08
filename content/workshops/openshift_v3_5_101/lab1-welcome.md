@@ -40,7 +40,7 @@ Once logged in you should see your available projects - or a button to create a 
 *OCP No Projects Webpage*
 
 ## So this is what an empty project looks like
-First let's create a new project to do our workshop work in.  We will use the student number you were given to ensure you don't clash with classmates, so in the steps below replace 'YOUR#' with your student number.
+First let's create a new project to do our workshop work in.  We will use the student number you were given to ensure you don't clash with classmates, so in the steps below replace '{YOUR#}' with your student number.
 
 > Click on the "New Project" button and give it a name of demo-{YOUR#}
 
@@ -59,7 +59,7 @@ Don't worry, it's supposed to look empty right now because you currently don't h
 > <i class="fa fa-terminal"></i> Open a terminal and login using the same URI with following command:
 
 ```
-$ oc login https://master.ocp.{WORKSHOP_DOMAIN}:8443
+$ oc login https://master.ocp.test-demo-dlt.com:8443
 ```
 > You'll be prompted for a secure connection, respond 'y', then enter in your student credentials (Username: user{YOUR#}, Password: {get password from instructor}).
 
@@ -75,7 +75,7 @@ You just created a project using the web console, let's tell the terminal comman
 > <i class="fa fa-terminal"></i> Type the following command to use the demo project:
 
 ```
-$ oc project demo-YOUR#
+$ oc project demo-{YOUR#}
 ```
 
 > <i class="fa fa-terminal"></i> Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):

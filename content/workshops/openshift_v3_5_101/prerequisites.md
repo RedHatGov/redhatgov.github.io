@@ -7,13 +7,27 @@ layout: lab
 
 # Your environments - OpenShift Container Platform & browser-based terminal
 
-Your OCP environment resides here:
+{{% alert success %}}
+We will use the student number you were given to ensure you don't clash with classmates, so in the steps below replace 'YOUR#' with your student number.
+{{% /alert %}}
 
-https://master.ocp.demo-dlt.com:8443
+## Your OCP environment resides here:
 
-Your terminal environment resides here:
+https://master.ocp.test-demo-dlt.com:8443
 
-https://navy.{YOUR#}.demo-dlt.com:8888/wetty/ssh/ec2-user
+Your user ID will be user{YOUR#} 
+
+Your password will be "example_password"
+
+## Your terminal environment resides here:
+
+https://A_CUSTOMER.{YOUR#}.demo-dlt.com/wetty/ssh/ec2-user
+
+When your browser session appears in your browser, it will prompt you for a login ID; use "ec2-user"
+
+You will then be prompted for a password for which you will not see when typed; use "redhat!@#"
+
+After successful login, you will have a command prompt!
 
 # Install the command line tools for your operating system
 

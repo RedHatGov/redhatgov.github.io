@@ -19,7 +19,7 @@ $ oc delete all -l app=nodejs-helloworld-sample
 ## Lets deploy a set of applications using the import template function of OpenShift
 The bluegreen-pipeline.yaml template contains a pipeline that demonstrates alternating blue/green deployments with a manual approval step.
 
-You can deploy the entire set od resources using the import json/yaml feature within OpenShift
+You can deploy the entire set of resources using the import yaml/json feature within OpenShift OR skiip this step and go to web console!!!
 
 > <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
@@ -27,43 +27,22 @@ You can deploy the entire set od resources using the import json/yaml feature wi
 $ oc new-app -f https://raw.githubusercontent.com/DLT-Solutions-JBoss/nodejs-ex/master/bluegreen-pipeline.yaml
 ```
 
-## Review the results of the template processing
-Wait for the "jenkins" application to become avialable before proceeding.
+Review the results of the template processing via the console.
 
-
-## Switch from Green to Blue
-Now that we are satisfied with our change we can do the Green/Blue switch.  With OpenShift services and routes, this is super simple.  Follow the steps below to make the switch:
-
-{{< panel_group >}}
-{{% panel "CLI Steps" %}}
-      
-<blockquote>
-<i class="fa fa-terminal"></i> Goto the terminal and type the following:
-</blockquote>
-
-```
-$ oc edit route green
-```
-
-This will bring up the Route configuration yaml. Edit the element spec: to: name and change it's value from "green" to "blue".
-
-{{% /panel %}}
-
-{{% panel "Web Console Steps" %}}
-
+## To establish the pipline via the web console
 <blockquote>
 Click "Add to Project"
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="200"><br/>
 
 <blockquote>
-Click "Import YAML/JSON" tab and copy contents of https://raw.githubusercontent.com/DLT-Solutions-JBoss/nodejs-ex/master/bluegreen-pipeline.yaml opened in a separate browser tab.
+Select the "Import YAML/JSON" tab and copy contents of https://raw.githubusercontent.com/DLT-Solutions-JBoss/nodejs-ex/master/bluegreen-pipeline.yaml opened in a separate browser tab.
 </blockquote>
 
 <img src="../images/ocp-lab-cicd-pipeline-template-import.png" width="900"><br/>
 
 <blockquote>
-Click "Create"
+Click "Create".  The following dialog box will appear.
 </blockquote>
 
 <img src="../images/ocp-lab-cicd-pipeline-template-process.png" width="400"><br/>
@@ -72,58 +51,51 @@ Click "Create"
 Click "Continue" with the "Process the template" checkbox selected.
 </blockquote>
 
->Go to
+>The template will be processed and display the application configuration page.
 
 <img src="../images/ocp-lab-cicd-pipeline-template-create.png" width="900"><br/>
 
->Got to
+>Use all the default values, scroll down and select "Create", Your application will be created and its overview page will appear.
 
 <img src="../images/ocp-lab-cicd-pipeline-template-summary.png" width="900"><br/>
 
->Go to
+>Click the "Continue to overview" link.
 
 <img src="../images/ocp-lab-cicd-pipeline-template-overview.png" width="900"><br/>
 
->Go to
+>This takes you to the Overview page in the console where you see the resources created for your application.  However, you do not have any builds yet as the are produced using the OpenShift pipeline function. From the left side menu, Select "Builds", then "Pipelines" menu option on the left. The created pipeline will appear. 
 
 <img src="../images/ocp-lab-cicd-pipeline-template-pipeline-start.png" width="900"><br/>
       
->Go to
+>Select the "Start Pipeline" button on the right.  This will start your build pipeline.
 
 <img src="../images/ocp-lab-cicd-pipeline-template-pipeline-started.png" width="900"><br/>
 
->Go to
+>You can see the pipeline start.  Select the "View Log" link beneath the Build #1 node. You will be prompted to log in via Jenkins as you did in the previous lab.  Accept all permissions and/or exceptions as you did previously as you log in with your OpenShift credentials.
 
 <img src="../images/ocp-lab-cicd-pipeline-template-pipeline-jenkins-console.png" width="900"><br/>
 
->Go to
+>After seeing your console output in Jenkins, go back to your OpenShift console tab, and wait for the "Input Required" step and select it.  You will see the following page.
 
 <img src="../images/ocp-lab-cicd-pipeline-template-pipeline-input-required.png" width="900"><br/>
 
->Go to
+>If you stayed within Jenkins, the console output will show the "Input Required" step as shown.
 
 <img src="../images/ocp-lab-cicd-pipeline-template-pipeline-proceed.png" width="900"><br/>
 
->Go to
+>After proceeding with the build, go back to your web console Overview page.  You should see that the green version of your application is build and traffic is being directed at it.  Your blue version has not been built.
 
 <img src="../images/ocp-lab-cicd-pipeline-template-pipeline-first-green.png" width="900"><br/>
 
->Go to
+>Repeat the steps to start your pipleine again and you'll see the blue version get built and traffic being directed toward it now.
 
 <img src="../images/ocp-lab-cicd-pipeline-template-pipeline-second-blue.png" width="900"><br/>
 
-
-{{% /panel %}}
-{{< /panel_group >}}
-
-> This should be the result of your re-direction:
-
-<img src="../images/ocp-lab-post-bluegreen-edit.png" width="900"><br/>
+> You can repeat these steps over and over and the pipeline will toggle between green and blue!
 
 # Summary
 Using pipelines for your applications provides visibility to your build, test, deploy executions and facilitates cooperation between various IT groups and can be used as a continuous improvement tool in order to create a higher quality software product and assist your agency in becoming a DevOps shop!
 
-If you want to read more about Blue/Green check out [this post][2] with a longer description as well as links to additional resources.
 
 [1]: https://jenkins.io/doc/book/pipeline/
 [2]: http://martinfowler.com/bliki/BlueGreenDeployment.html
