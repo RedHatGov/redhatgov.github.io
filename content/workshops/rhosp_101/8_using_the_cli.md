@@ -34,13 +34,13 @@ On Linux or Mac, you can just use your favorite terminal.
 On Windows, you will need to download [putty](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe) if you don't already have it. This is an exe file that does not need to be installed. Just run.
 {{% /alert %}}
 
-> On Linux or Mac, in your terminal, ssh to rhshadowbox.hopto.org on port 1122
+> On Linux or Mac, in your terminal, ssh to 192.168.1.77 on port 22
 
 ```
-$ ssh studentX@rhshadowbox.hopto.org -p 1122
+$ ssh studentX@192.168.1.77
 ```
 
-If on Windows, run putty, enter **rhshadowbox.hopto.org** as the host and **1122** as the port.
+If on Windows, run putty, enter **192.168.1.77** as the host and **22** as the port.
 
 You will get asked if you are sure you want to connect. Type **yes** and hit enter.
 
@@ -57,7 +57,7 @@ $ source studentXrc
 > Verify that you are connected by running nova list
 
 ```
-$ nova list
+$ openstack server list
 ```
 
 You should see the two instances you created in the previous lab.
@@ -123,7 +123,7 @@ $ openstack network create private-b
 > Then let's create the private-b subnet
 
 ```
-$ openstack subnet create --network private-b --subnet-range 172.16.1.0/24 --dns-nameserver 192.168.0.1 private-b-subnet
+$ openstack subnet create --network private-b --subnet-range 172.16.1.0/24 --dns-nameserver 192.168.0.6 private-b-subnet
 ```
 
 {{< figure src="../images/lab7-using-clis-7.png" title="Lab 7 Figure 7: Adding a Subnet to the Network in the Project" >}}
@@ -143,13 +143,13 @@ $ openstack subnet list
 > First we need to get the network UUID for private-b network
 
 ```
-$ neutron net-list
+$ openstack network list
 ```
 
 {{< figure src="../images/lab7-using-clis-9.png" title="Lab 7 Figure 9: Neutron Network List with the UUID Highlighted for private-b network" >}}
 
 {{% alert info %}}
-Note that your Network UUID will be unique. In this example the value is: 8d6afc30-ac5e-4e27-8276-15998a3a917a
+Note that your Network UUID will be unique. In this example the value is: ad8293a8-fe01-4a83-a461-af663853c1f4
 {{% /alert %}}
 
 > Run the following command to boot a nova instance using the m1.tiny flavor, and the newest cirros image that we uploaded earlier in this lab.  
@@ -164,10 +164,10 @@ $ openstack server create --image studentX-cirros035 --flavor m1.tiny --key-name
 > You can watch nova list to see it go through the provisioning process and become active
 
 ```
-$ watch nova list
+$ watch openstack server list
 ```
 
-{{< figure src="../images/lab7-using-clis-11.png" title="Lab 7 Figure 11: Nova List Showing the New Instance Active" >}}
+{{< figure src="../images/lab7-using-clis-11.png" title="Lab 7 Figure 11: OpenStack Server List Showing the New Instance Active" >}}
 
 # Summary
 

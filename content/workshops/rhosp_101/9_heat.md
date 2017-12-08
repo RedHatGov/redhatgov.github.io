@@ -25,13 +25,13 @@ On Linux or Mac, you can just use your favorite terminal.
 On Windows, you will need to download [putty](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe) if you don't already have it. This is an exe file that does not need to be installed. Just run.
 {{% /alert %}}
 
-> On Linux or Mac, in your terminal, ssh to rhshadowbox.hopto.org on port 1122
+> On Linux or Mac, in your terminal, ssh to rhshadowbox.hopto.org on port 22
 
 ```
-$ ssh studentX@rhshadowbox.hopto.org -p 1122
+$ ssh studentX@192.168.1.77
 ```
 
-If on Windows, run putty, enter **rhshadowbox.hopto.org** as the host and **1122** as the port.
+If on Windows, run putty, enter **192.168.1.77** as the host and **22** as the port.
 
 You will get asked if you are sure you want to connect. Type **yes** and hit enter.
 
@@ -48,12 +48,12 @@ $ source studentXrc
 > Verify that you are connected by running nova list
 
 ```
-$ nova list
+$ openstack server list
 ```
 
-You should see the two instances you created in the previous lab.
+You should see the instances you created in the previous labs.
 
-{{< figure src="../images/lab7-using-clis-1.png" title="Lab 7 Figure 1: Logging into CLI system and Verifying Connectivity to OpenStack" >}}
+{{< figure src="../images/lab8-heat-1.png" title="Lab 8 Figure 1: Logging into CLI system and Verifying Connectivity to OpenStack" >}}
 
 ## Now Let's Examine the Heat Template
 
@@ -70,7 +70,7 @@ parameters:
     default: public
   image:
     type: string
-    default: rhel73
+    default: rhel74
   flavor:
     type: string
     default: m1.small
@@ -121,12 +121,12 @@ resources:
 > Let's Launch a Heat Stack with this Template
 
 ```
-$ openstack stack create --parameter keypair=studentX --parameter image=rhel73 -t heat-example.yaml studentX-stack
+$ openstack stack create --parameter keypair=studentX --parameter image=rhel74 -t heat-example.yaml studentX-stack
 ```
 
 Here is an example run.
 ```
-[student1@rhosp-101 ~]$ openstack stack create --parameter keypair=student1 --parameter image=rhel73 -t heat-example.yaml student1-stack
+[student1@rhosp-101 ~]$ openstack stack create --parameter keypair=student1 --parameter image=rhel74 -t heat-example.yaml student1-stack
 +---------------------+--------------------------------------+
 | Field               | Value                                |
 +---------------------+--------------------------------------+
@@ -161,13 +161,13 @@ Every 2.0s: openstack stack list                                                
 > Navigate to Orchestration -> Stacks using the second level navigation tabs  
 > Click on **studentX-stack**
 
-{{< figure src="../images/lab8-heat-1.png" title="Lab 8 Figure 1: Heat Stack Topology for the New student1-stack" >}}
+{{< figure src="../images/lab8-heat-2.png" title="Lab 8 Figure 2: Heat Stack Topology for the New student1-stack" >}}
 
 # Examining Project Network Topology
 
 > Navigate to Network -> Network Topology using the second level navigation tabs.
 
-{{< figure src="../images/lab8-heat-2.png" title="Lab 8 Figure 2: Neutron Network Topology" >}}
+{{< figure src="../images/lab8-heat-3.png" title="Lab 8 Figure 3: Neutron Network Topology" >}}
 
 # Summary
 
