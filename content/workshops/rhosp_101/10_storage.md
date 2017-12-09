@@ -52,7 +52,7 @@ If you did not, let the intstructor know now
 > On the volume listing row for studentX-vol-1, Click the **down arrow** on the far right hand side of the row  
 > Click **Manage Attachments**  
 > Select **studentX-instance-1** from the **Attach to Instance** drop down  
-> Leave **Device Name** as is
+> Leave **Device Name** as is  
 > Click **Attach Volume**
 
 {{< figure src="../images/lab9-storage-4.png" title="Lab 9 Figure 4: Attach Volume to Instance" >}}
@@ -120,7 +120,7 @@ If you did not, let the intstructor know now
 
 We have just touched the surface of what can be done with storage in this lab. The storage layer in OpenStack is extremely flexible and well developed.
 
-Note that production deployments should always use a shared storage platform as the underpinnings for the OpenStack Storage layers.
+Note that production deployments should always use a shared storage platform as the underpinnings for the OpenStack Storage services.
 
 There is a third storage type that we did not go through in this lab. That is File Share-as-a-Service. Manilla is the OpenStack project name for this service and it is a supported project in Red Hat OpenStack Platform.
 

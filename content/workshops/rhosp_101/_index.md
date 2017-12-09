@@ -9,25 +9,26 @@ menu:
 
 ## Description
 
-Launch your own cloud after this workshop,  which includes software defined networking, software defined storage, managing security groups and using heat to define stacks.  
+During this workshop, you get your first taste of using and operating a Red Hat OpenStack Platform cloud. After the workshop, you will have hands on experience working with software defined networking, software defined storage, managing security groups and using heat to define application stacks.  
 
 ## Who should attend
 
-- System Administrators who intend to implement a Cloud Computing environment
+- System Administrators
 - Architects
 - Developers
 - Technical leads
 - Operations Engineers
 
 ## What you will learn
-Installation of OpenStack
-Neutron Networks
-Managing Security, Images and Instances
-Using Heat
-Software defined Storage, Block and Object
+
+- Working in the OpenStack Dashboard and CLI
+- Managing Neutron Networks and Floating IPs
+- Managing Security Groups, Images and Instances
+- Using Heat for Orchestration
+- Using Software defined block and object Storage
  
 ## Introduction
-This workshop on Red Hat OpenStack Platform is designed as an introduction for system administrators who are intending to implement a cloud computing environment using OpenStack. Students will learn a small taste of how to operate Red Hat OpenStack Platform. In this course will use both Horizon and the unified command-line interface.
+This workshop on Red Hat OpenStack Platform is designed as an introduction for those who are intending to implement a cloud computing environment using OpenStack. Students will learn a small taste of how to operate Red Hat OpenStack Platform. In this course you will use both Horizon and the unified command-line interface.
 Labs
 
 # Workshop Login Info
@@ -45,7 +46,11 @@ Password: Instructor will give out at beginning
 
 # Environment Links
 
-[Red Hat OpenStack Platform Horizon](http://rhshadowbox.hopto.org)
+Your instructor will provide the following:
+
+- URL for OpenStack Dashboard
+- Username and Password
+- Information to access a system via SSH for the CLI lab
 
 # Labs
 

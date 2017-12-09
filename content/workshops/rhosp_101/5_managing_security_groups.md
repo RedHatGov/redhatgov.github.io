@@ -11,7 +11,9 @@ A security group is a named collection of network access rules that are used to 
 
 The associated rules in each security group control the traffic to instances in the group. Any incoming traffic that is not matched by a rule is denied access by default. You can add rules to or remove rules from a security group, and you can modify rules for the default and any other security group.
 
-You can modify the rules in a security group to allow access to instances through different ports and protocols. For example, you can modify rules to allow access to instances through SSH, to ping instances, or to allow UDP traffic; for example, for a DNS server running on an instance. You specify the following parameters for rules:
+You can modify the rules in a security group to allow access to instances through different ports and protocols. For example, you can modify rules to allow access to instances through SSH, to ping instances, or to allow UDP traffic.
+
+You specify the following parameters for rules:
 
 **Source of traffic** - Enable traffic to instances from either IP addresses inside the cloud from other group members or from all IP addresses.  
 **Protocol** - Choose TCP for SSH, ICMP for pings, or UDP.  
