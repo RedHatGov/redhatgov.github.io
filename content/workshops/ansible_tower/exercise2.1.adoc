@@ -173,7 +173,7 @@ Select ADD     image:at_add.png[Add,35,25]
 
 === Step 3:
 
-Complete the form using the following entries
+Complete the form using the following entries:
 
 |===
 |NAME |Ansible Workshop Project

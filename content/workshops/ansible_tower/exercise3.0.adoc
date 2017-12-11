@@ -29,101 +29,61 @@ In your wetty window (if you closed it, see the link:/workshops/ansible_tower/se
 
 [source,bash]
 ----
-sudo ansible-galaxy install rhtps.800-53
+sudo ansible-galaxy install rhtps.800-53 -p /etc/ansible/roles
+----
+
+You will then see the following, showing that the role has been downloaded to your system-wide Ansible roles directory, `/etc/ansible/roles`:
+
+[source,bash]
+----
+- downloading role '800-53', owned by rhtps
+- downloading role from https://github.com/rhtps/ansible-role-800-53/archive/v1.1.1.tar.gz
+- extracting rhtps.800-53 to /etc/ansible/roles/rhtps.800-53
+- rhtps.800-53 (v1.1.1) was installed successfully
 ----
 
 === Step 2:
 
-Now that you have the role installed on your Tower node, we need to create a playbook that uses it.  First, let's create a storage directory for playbooks, so that we can reference them from a Tower project, and then we'll create the playbook:
-
-[source,bash]
-----
-sudo mkdir -p /var/lib/awx/projects/playbooks
-----
+First, in Ansible Tower, click on image:at_projects_icon.png[PROJECTS]
 
 === Step 3:
 
-Let's create the needed playbook.  You should have a pretty good understanding of playbooks by now, so we won't go over this, in detail.  Please do feel free to ask questions, though, if there is something that you don't understand.
-
-[source,bash]
-----
-sudo vim /var/lib/awx/projects/playbooks/800-53.yml
-----
-
-Note the use of the link:http://docs.ansible.com/ansible/latest/playbooks_conditionals.html#register-variables[register], link:http://docs.ansible.com/ansible/latest/playbooks_loops.html#standard-loops[with_items], and link:http://docs.ansible.com/ansible/latest/playbooks_conditionals.html#the-when-statement[when] directives.  These are how Ansible implements variable creation, recursion, and conditionals, respectively.
-
-[source,bash]
-----
----
-- hosts: web
-  become: yes
-  vars:
-    scap_reports_dir: /tmp
-    scap_profile: stig-rhel7-disa
-  roles:
-    - rhtps.800-53 
-
-  tasks:
-    - name: determine the most recent scap report
-      command: ls -tr /tmp/scap_reports/
-      register: results
-
-    - name: create the scap directory in the web server content
-      file:
-        name: /var/www/html/scap
-        state: directory
-        mode: 0755
-
-    - name: copy SCAP reports to the web server content directory
-      copy:
-        remote_src: True
-        src: "/tmp/scap_reports/{{ item }}"
-        dest: /var/www/html/scap
-        mode: 0644
-      with_items: "{{ results.stdout_lines }}"
-      when: item | match("scan-xccdf-report-*")
-----
+Next, Select ADD     image:at_add.png[Add,35,25]
 
 === Step 4:
 
-Save and quit from editing, and then we will move on to the in-Tower setup.
-
-== Configuring a security project and job template in Ansible Tower
-
-=== Step 1:
-
-In your Tower window, click on image:at_projects_icon.png[PROJECTS]
-
-=== Step 2:
-
-Select ADD     image:at_add.png[Add,35,25]
-
-=== Step 3:
-
-Enter the following values into your new project.  Note that the `PLAYBOOK DIRECTORY` item should show `playbooks`, as an option, when you click on it.
+Complete the form using the following entries
 
 |===
-|NAME |NIST 800-53 and DISA STIG
-|DESCRIPTION|Security Project
+|NAME |Ansible 800-53 Project
+|DESCRIPTION|800-53 Role Playbook
 |ORGANIZATION|Default
-|SCM TYPE|Manual
-|PROJECT BASE PATH|/var/lib/awx/projects
-|PLAYBOOK DIRECTORY|playbooks
+|SCM TYPE|Git
+|SCM URL| https://github.com/ajacocks/rhtps-800-53
+|SCM BRANCH|
+|SCM UPDATE OPTIONS
+a|
+
+- [*] Clean
+- [*] Delete on Update
+- [*] Update on Launch
 |===
 
-=== Step 4:
-
-Select SAVE     image:at_save.png[Save,35,25]
+image::section3.0-create-project.png[Cred_Detail, 900,caption="Figure 1: ",title="Defining a Project"]
 
 === Step 5:
 
-In your Tower window, click on `TEMPLATES`
+Select SAVE     image:at_save.png[Save,35,25]
 
 === Step 6:
 
-Click on ADD image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
+In your Tower window, click on `TEMPLATES`
 
 === Step 7:
+
+Click on ADD image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
+
+=== Step 8:
 
 Complete the form using the following values.  Note that the `PLAYBOOK` field should offer `800-53.yml` as an option, when clicked.
 
@@ -132,7 +92,7 @@ Complete the form using the following values.  Note that the `PLAYBOOK` field sh
 |DESCRIPTION|Template for security playbooks
 |JOB TYPE|Run
 |INVENTORY|Ansible Workshop Inventory
-|PROJECT|NIST 800-53 and DISA STIG
+|PROJECT|Ansible 800-53 Project
 |PLAYBOOK|800-53.yml
 |MACHINE CREDENTIAL|Ansible Workshop Credential
 |LIMIT|web
@@ -141,11 +101,13 @@ a|
 - [*] Enable Privilege Escalation
 |===
 
-=== Step 8:
+image::section3.0-create-job-template.png[Cred_Detail, 900,caption="Figure 2: ",title="Defining a Job"]
+
+=== Step 9:
 
 Click SAVE image:at_save.png[Save], to store your new template, and we are ready to run it.
 
-Click on the rocketship icon image:at_launch_icon.png[Add,35,25] next to the `NIST 800-53 Job Template` entry, to launch the job.
+Click on the rocketship icon image:at_launch_icon.png[Add,35,25] next to the `NIST 800-53 and DISA STIG Job Template` entry, to launch the job.
 
 You can see what the job looks like, as it is executing, and what the SCAP results look like, when uploaded to your second node, in the panel, below.
 
