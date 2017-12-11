@@ -66,7 +66,7 @@ Don't worry, it's supposed to look empty right now because you currently don't h
 > <i class="fa fa-terminal"></i> Open a terminal and login using the same URI with following command:
 
 ```
-$ oc login https://master.ocp.test-demo-dlt.com:8443
+$ oc login https://workshop-dlt.com:8443
 ```
 > You'll be prompted for a secure connection, respond 'y', then enter in your student credentials (Username: user{YOUR#}, Password: {get password from instructor}).
 

@@ -41,7 +41,7 @@ The output should show something *similar* to below:
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click "Add to Project"
+Click "Browse Catalog"
 </blockquote>
 
 <img src="../images/ocp-addToProjectButton.png" width="200"><br/>
@@ -68,8 +68,15 @@ Observe default values that are populated in the search results
 
 
 <blockquote>
-Scroll to the bottom and click "Create"
+Scroll through the additional settings and review the additional attributes you can set on your image. Leave 'guestbook' in the Name field and leave the Environment Variables and Labels as-is. When ready, click "Deploy"
 </blockquote>
+
+<img src="../images/ocp-guestbook-create-results.png" width="600"><br/>
+
+<blockquote>
+Click Close, the Deploy Image dialog box will close.  Now click your project description from the Projects section of the page. 
+</blockquote>
+
 
 {{% /panel %}}
 {{< /panel_group >}}

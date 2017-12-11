@@ -19,7 +19,7 @@ We can do this either via the command line or the web console.  You decide which
 </blockquote>
 
 ```
-$ oc new-app --name=dc-metro-map https://github.com/dudash/openshift-workshops.git --context-dir=dc-metro-map
+$ oc new-app --name=dc-metro-map https://github.com/DLT-Solutions-JBoss/openshift-workshops.git --context-dir=dc-metro-map
 $ oc expose service dc-metro-map
 ```
 
@@ -32,23 +32,41 @@ When using the CLI, OpenShift automatically detects the source code type and sel
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click "Add to Project"
+Click "Browse Catalog"
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="200"><br/>
 
 <blockquote>
-Click "Browse Catalog" and filter for nodejs. Select Node.js version 0.10 from the Version drop down menu and then click "Select"
+Under the "Browse Catalog" section, select Languages.
 </blockquote>
 <img src="../images/ocp-lab-s2i-filternode.png" width="900"><br/>
 
 <blockquote>
-Fill out the boxes to look as follows:
+Select the JavaScript menu option.
 </blockquote>
+
+<img src="../images/ocp-lab-s2i-javascript_filter.png" width="900"><br/>
+
+<blockquote>
+Select the Node.js option.
+</blockquote>
+
+<img src="../images/ocp-lab-s2i-nodejs_information.png" width="900"><br/>
+
+<blockquote>
+This dialog box informs you of the version and the OS being used for your Node.js application.  Click "Next".
+</blockquote>
+
+<img src="../images/ocp-lab-s2i-nodejs_configuration.png" width="900"><br/>
+
+<blockquote>
+Select Version "6 --latest" from the Version dropdown list.  Click the "advanced options" link and you will be taken to the Node.js configuration web page within the OCP web Console.
+</blockquote>
+
 <img src="../images/ocp-lab-s2i-nodejs.png" width="900"><br/>
 <p>
-Notes: You will need to click to expand the "advanced options"<br/>
-The github repository URL is: https://github.com/dudash/openshift-workshops.git<br/>
-The github context-dir is: dc-metro-map<br/>
+The github repository URL is: https://github.com/DLT-Solutions-JBoss/openshift-workshops.git<br/>
+The github context-dir is: /dc-metro-map<br/>
 </p>
 
 <blockquote>

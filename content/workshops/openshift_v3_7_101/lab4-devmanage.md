@@ -19,7 +19,7 @@ Only if you don't already have it running, add it with the following steps.
 > <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
 ```
-$ oc new-app --name=dc-metro-map https://github.com/dudash/openshift-workshops.git --context-dir=dc-metro-map
+$ oc new-app --name=dc-metro-map https://github.com/DLT-Solutions-JBoss/openshift-workshops.git --context-dir=dc-metro-map
 $ oc expose service dc-metro-map
 ```
 
@@ -77,7 +77,7 @@ Notice the information about the configuration of how this app gets built.  In p
 $ oc describe build/dc-metro-map-1
 ```
 
-This shows us even more about the deployed container's build and source code including exact commit GUID for this build.  We can also can see the commit's author, and the commit message.  You can inspect the code by opening a web browser and pointing it to: https://github.com/dudash/openshift-workshops/commit/[COMMIT_GUID]
+This shows us even more about the deployed container's build and source code including exact commit GUID for this build.  We can also can see the commit's author, and the commit message.  You can inspect the code by opening a web browser and pointing it to: https://github.com/DLT-Solutions-JBoss/openshift-workshops/commit/[COMMIT_GUID]
 
 {{% /panel %}}
 
@@ -101,8 +101,10 @@ Here are the details of the image stream for this deployment.<br/>
 <img src="../images/ocp-lab-devman-isDetails.png" width="900"><br/>
 
 <blockquote>
-<i class="fa fa-info-circle"></i> If you hover over the shortened image GUID or edit the image stream you can see the full GUID.
+<i class="fa fa-info-circle"></i> If select the "latest" button, you will see more detailed infomration about the image now as it resides with your project.  
 </blockquote>
+
+<img src="../images/ocp-lab-devman-isDetails_latest.png" width="900"><br/>
 
 <blockquote>
 Click "Builds" and then Builds to get back to the build summary
@@ -117,7 +119,7 @@ Because we built this app using S2I, we get to see the details about the build -
 <blockquote>
 Click "Overview" and then the deployment detail link to get back to the deployment summary again
 </blockquote>
-<img src="../images/ocp-lab-devman-deployment-shortcut.png" width="600">
+<img src="../images/ocp-lab-devman-deployment-shortcut_2.png" width="600">
 <br/>
 
 Notice in the Source line you can see the comment from the last commit when the build was started.  And you can see the that commit's author.  You can click that commit GUID to be taken to the exact version of the source code that is in this deployed application.
@@ -194,7 +196,7 @@ Let's have a little fun.  The app has some easter eggs that get triggered when c
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
 ```
-$ oc env dc/dc-metro-map -e BEERME=true
+$ oc env dc/dc-metro-map -e RAINBOW=true
 ```
 
 ```
@@ -232,19 +234,22 @@ Click the Environment tab next to the Details tab .
 This opens up a tab with the environment variables for this deployment config.
 
 <blockquote>
-Add an environment variable with the name BEERME and a value of 'true'
+Add an environment variable with the name RAINBOW and a value of 'true'
 </blockquote>
 <img src="../images/ocp-lab-devman-deployconfigdetails-populated.png" width="900"><br/>
 
 <blockquote>
 Click "Save".  And go back to the summary view by clicking "Overview" on the left menu bar
 </blockquote>
-If you are quick enough you will see a new pod spin up and an the old pod spin down.  This is due to the deployment config strategy being set to "Rolling" and having a "ConfigChange" trigger, OpenShift auto deployed a new pod as soon as you updated with the env variable.
+
+If you are quick enough you will see a new pod spin up and an the old pod spin down.  This is due to the deployment config strategy being set to "Rolling" and having a "ConfigChange" trigger, OpenShift auto deployed a new pod as soon as you updated with the env variable.  That page will look something like this - 
+
+<img src="../images/ocp-lab-devman-deployconfigdetails-updating.png" width="900"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
 
-With the new environment variables set the app should look like this in your web browser (with beers instead of busses):
+With the new environment variables set the app should look like this in your web browser (with colors of the bus stops all in rainbow color instead of black):
 
 <img src="../images/ocp-lab-devman-beerme.png" width="900"><br/>
 
@@ -275,10 +280,10 @@ $ oc exec -it [POD NAME] /bin/bash
 You are now interactively attached to the container in your pod.  Let's look for the environment variables we set:
 
 ```
-$ env | grep BEER
+$ env | grep RAINBOW
 ```
 
-That should return the **BEERME=true** matching the value that we set in the deployment config.
+That should return the **RAINBOW=true** matching the value that we set in the deployment config.
 
 ```
 $ exit
@@ -304,9 +309,9 @@ Click the "Terminal" button
 Let's look for the environment variables we set:
 
 <blockquote>
-Inside the web page's terminal type: 'env | grep BEER'
+Inside the web page's terminal type: 'env | grep RAINBOW'
 </blockquote>
-That should return the **BEERME=true** matching the value that we set in the deployment config.
+That should return the **RAINBOW=true** matching the value that we set in the deployment config.
 
 {{% /panel %}}
 {{< /panel_group >}}
