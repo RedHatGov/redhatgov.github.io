@@ -6,6 +6,20 @@ layout: lab
 toc: true
 ---
 
+# Verify Settings
+
+* You need to first verify that the Excel extensions were imported correctly into the designer
+
+* window <i class="fa fa-arrow-right"></i> show view <i class="fa fa-arrow-right"></i> other <i class="fa fa-arrow-right"></i>
+
+* Teiid Designer <i class="fa fa-arrow-right"></i> Model Extension Registry
+
+<img src="../images/7-show-view.png">
+
+* In the **Model Extension Registry** tab at the bottom, verify in the **Namespace Prefix** you see the value **excel** and a checkbox in the **imported** column.  If not, close the designer, re-open, click the start button to mark the server as started, and check again.
+
+<img src="../images/7-model-extension.png">
+
 # Import the Excel file
 
 * file <i class="fa fa-arrow-right"></i> import <i class="fa fa-arrow-right"></i> Teiid Connection >> Source Model
