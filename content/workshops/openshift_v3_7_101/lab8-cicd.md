@@ -25,12 +25,12 @@ $ oc new-project cicd-{YOUR#}
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Browse to original landing page, and click "New Project".
+Browse to original landing page, and click "+ Create Project".
 </blockquote>
 <img src="../images/ocp-lab-cicd-new-project.png" width="200"><br/>
 
 <blockquote>
-Fill in the Name and Display Name of the project as "cicd-{YOUR#}" and click "Create"
+Fill in the Name and Display Name of the project as "cicd-{YOUR#}" as shown below and click "Create"
 </blockquote>
 <img src="../images/ocp-lab-cicd-new-project-detail.png" width="600"><br/>
 {{% /panel %}}
@@ -57,19 +57,43 @@ $ oc new-app jenkins-ephemeral
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click "Add to Project", select "Browse Catalog" tab and filter on "jenkins". Then select "Jenkins (Ephemeral)".
+Click "CI/CD" under the "Browse Catalog" section of the page.
 </blockquote>
 
 <img src="../images/ocp-lab-cicd-jenkins-instantiate.png" width="900"><br/>
 
 <blockquote>
-Scroll to the bottom of this page and click "Create"
+Select "Jenkins (Ephemeral)".
+</blockquote>
+
+<img src="../images/ocp-lab-cicd-jenkins-instantiate2.png" width="900"><br/>
+
+<blockquote>
+This will start the provisioning of an instance of Jenkins for you to use with an ephemeral setup.  Click "Next >"
 </blockquote>
 
 <img src="../images/ocp-lab-cicd-jenkins-create-1.png" width="900"><br/>
 
 <blockquote>
-Select "Continue to overview" to display the following overview page.
+Next, configure your Jenkins service using the defaults but ensure to select your project "CI/CD", then click "Next >"
+</blockquote>
+
+<img src="../images/ocp-lab-cicd-jenkins-create-2.png" width="900"><br/>
+
+<blockquote>
+Bind your Jenkins service to an application but since we did not have the application yet, select "Create a secret in CI/CD to be used later" radio button.  Then Click "Create"
+</blockquote>
+
+<img src="../images/ocp-lab-cicd-jenkins-create-3.png" width="900"><br/>
+
+<blockquote>
+Your Jenkins service provisioning will begin.  Either pick "Close" or "Continue to the project overview" link.
+</blockquote>
+
+<img src="../images/ocp-lab-cicd-jenkins-create-4.png" width="900"><br/>
+
+<blockquote>
+The CI/CD project Overview page will show your jenkins service come up when the pod circle appears with a solid blue color. 
 </blockquote>
 
 <img src="../images/ocp-lab-cicd-jenkins-overview.png" width="900"><br/>
@@ -104,9 +128,10 @@ $ oc new-app -f https://raw.githubusercontent.com/openshift/origin/master/exampl
 
 ```
 $ oc get route
-NAME       HOST/PORT                            PATH      SERVICES   PORT      TERMINATION     WILDCARD
-frontend   frontend-cicd.192.168.42.27.xip.io             frontend   <all>     edge            None
-jenkins    jenkins-cicd.192.168.42.27.xip.io              jenkins    <all>     edge/Redirect   None
+NAME           HOST/PORT                                   PATH      SERVICES       PORT      TERMINATION     WILDCARD
+frontend       frontend-cicd-1.apps.workshop-dlt.com                 frontend       <all>     edge            None
+jenkins        jenkins-cicd-1.apps.workshop-dlt.com                  jenkins        <all>     edge/Redirect   None
+jenkins-jnlp   jenkins-jnlp-cicd-1.apps.workshop-dlt.com             jenkins-jnlp   agent                     None
 ```
 Use Jenkins HOST/PORT to access through web browser
 {{% /panel %}}
