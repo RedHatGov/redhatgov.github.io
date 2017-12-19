@@ -51,19 +51,19 @@ Select the JavaScript menu option.
 Select the Node.js option.
 </blockquote>
 
-<img src="../images/ocp-lab-s2i-nodejs_information.png" width="900"><br/>
+<img src="../images/ocp-lab-s2i-nodejs_information.png" width="600"><br/>
 
 <blockquote>
 This dialog box informs you of the version and the OS being used for your Node.js application.  Click "Next".
 </blockquote>
 
-<img src="../images/ocp-lab-s2i-nodejs_configuration.png" width="900"><br/>
+<img src="../images/ocp-lab-s2i-nodejs_configuration.png" width="600"><br/>
 
 <blockquote>
 Select Version "6 --latest" from the Version dropdown list.  Click the "advanced options" link and you will be taken to the Node.js configuration web page within the OCP web Console.
 </blockquote>
 
-<img src="../images/ocp-lab-s2i-nodejs.png" width="900"><br/>
+<img src="../images/ocp-lab-s2i-nodejs.png" width="600"><br/>
 <p>
 The github repository URL is: https://github.com/DLT-Solutions-JBoss/openshift-workshops.git<br/>
 The github context-dir is: /dc-metro-map<br/>

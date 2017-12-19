@@ -16,7 +16,7 @@ From the previous lab you should have the DC Metro Maps web app running in OpenS
 Only if you don't already have it running, add it with the following steps.
 {{% /alert %}}
 
-> <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
+<i class="fa fa-terminal"></i> Go to the terminal and type these commands:
 
 ```
 $ oc new-app --name=dc-metro-map https://github.com/DLT-Solutions-JBoss/openshift-workshops.git --context-dir=dc-metro-map
@@ -30,7 +30,7 @@ There is no more ambiguity or confusion about where the app came from.  OpenShif
 {{% panel "CLI Steps" %}}
 
 <blockquote>
-<i class="fa fa-terminal"></i> Goto the terminal and type the following:
+<i class="fa fa-terminal"></i> Go to the terminal and type the following:
 </blockquote>
 
 ```
@@ -64,6 +64,7 @@ Because we built this app using S2I, we get to see the details about the build -
 <blockquote>
 <i class="fa fa-terminal"></i> Type the following to find out more about our bc:
 </blockquote>
+
 ```
 $ oc describe bc/dc-metro-map
 ```
@@ -73,6 +74,7 @@ Notice the information about the configuration of how this app gets built.  In p
 <blockquote>
 <i class="fa fa-terminal"></i> Type the following:
 </blockquote>
+
 ```
 $ oc describe build/dc-metro-map-1
 ```
@@ -140,6 +142,7 @@ In the S2I lab we looked at a build log to inspect the process of turning source
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
+
 ```
 $ oc get pods
 ```
@@ -149,6 +152,7 @@ This is going to show basic details for all pods in this project (including the 
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following (replacing the POD ID with your pod's ID):
 </blockquote>
+
 ```
 $ oc logs [POD NAME]
 ```
@@ -195,6 +199,7 @@ Let's have a little fun.  The app has some easter eggs that get triggered when c
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
+
 ```
 $ oc env dc/dc-metro-map -e RAINBOW=true
 ```
@@ -265,8 +270,9 @@ There are situations when you might want to jump into a running pod, and OpenShi
 {{% panel "CLI Steps" %}}
 
 <blockquote>
-<i class="fa fa-terminal"></i> Goto the terminal and type the following:
+<i class="fa fa-terminal"></i> Go to the terminal and type the following:
 </blockquote>
+
 ```
 $ oc get pods
 ```
@@ -317,7 +323,7 @@ That should return the **RAINBOW=true** matching the value that we set in the de
 {{< /panel_group >}}
 
 ## Good work, let's clean this up
-> <i class="fa fa-terminal"></i> Let's clean up all this to get ready for the next lab:
+<i class="fa fa-terminal"></i> Let's clean up all this to get ready for the next lab:
 
 ```
 $ oc delete all -l app=dc-metro-map

@@ -12,8 +12,7 @@ When implementing continuous delivery for your software one very useful techniqu
 Before we get started with the Blue/Green deployment lab, lets clean up some of the projects from the previous lab. 
 
 ```
-$ oc delete all -l app=jenkins-ephemeral
-$ oc delete all -l app=nodejs-helloworld-sample
+$ oc delete all --all
 ```
 
 ## Lets deploy an application
@@ -21,7 +20,7 @@ To demonstrate Blue/Green deployments, we'll use a simple application that rende
 
 You should be comfortable deploying an app at this point, but here are the steps anyway:
 
-> <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
+<i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
 ```
 $ oc new-app --name=green [your-project-repo-url] --context-dir=dc-metro-map
@@ -39,7 +38,7 @@ We can change the text labels indicated by name of a color. If you want to chang
 
 Use the same commands to deploy this new version of the app, but this time name the service "blue". No need to expose a new route -- we'll instead switch the "green" route to point to the "blue" service once we've verified it.
 
-> <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
+<i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
 ```
 $ oc new-app --name=blue [your-project-repo-url] --context-dir=dc-metro-map
@@ -88,9 +87,13 @@ This will bring up the Route configuration yaml. Edit the element spec: to: name
 {{% /panel %}}
 {{< /panel_group >}}
 
-> This should be the result of your re-direction:
+>This should be the result of your re-direction:
 
 <img src="../images/ocp-lab-post-bluegreen-edit.png" width="900"><br/>
+
+>Clicking on the application url should expose the change in the Red Line label to Silver Line.
+
+<img src="../images/ocp-lab-post-bluegreen-edit_app.png" width="900"><br/>
 
 # Summary
 Pretty easy, right?
