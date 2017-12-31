@@ -157,7 +157,7 @@ Once your job is sucessful, navigate to your new website, where *workshopname* i
 
 [source,bash]
 ----
-http://workshopname.node.#.redhatgov.io
+{{< urifqdn "http://" "node" "" >}}
 ----
 
 

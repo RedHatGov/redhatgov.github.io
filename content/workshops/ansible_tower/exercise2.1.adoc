@@ -131,7 +131,7 @@ Click on ADD     image:at_add.png[Add,35,25]
 Complete the form using the following entries, by printing out your private SSH key to place into Tower.  When you paste the key in, in the `PRIVATE KEY` field, make sure to include the `-----BEGIN RSA PRIVATE KEY-----` and `-----BEGIN RSA PRIVATE KEY-----` lines.
 
 ----
-cat ~/.ssh/workshop-tower
+cat ~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
 ----
 
 |===
@@ -249,7 +249,7 @@ Using ssh, login to your control node, if by any chance you closed the wetty bro
 
 [source,bash]
 ----
-https://workshopname.tower.#.redhatgov.io:8888/wetty/ssh/ec2-user
+{{< urifqdn "https://" "tower" ":8888/wetty/ssh/ec2-user" >}}
 ----
 
 
@@ -283,3 +283,5 @@ image::at_inv_group.png[Cred_Detail,900,caption="Figure 9: ",title="Inventory wi
 === End Result
 
 At this point, we are doing with our basic configuration of Ansible Tower.  In exercise 2.2, we will be soley focused on creating and running a job template so you can see Tower in action.
+
+{{< importPartial "footer/footer.html" >}}

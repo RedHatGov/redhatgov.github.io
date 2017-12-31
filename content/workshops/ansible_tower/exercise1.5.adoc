@@ -226,7 +226,7 @@ Run the playbook.
 
 [source,bash]
 ----
-ansible-playbook --private-key=~/.ssh/workshopname-tower -i ../hosts site.yml
+ansible-playbook -i ../hosts site.yml --private-key=~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
 ----
 
 If successful, your standard output should look similar to the figure below.
@@ -236,3 +236,5 @@ image::stdout_3.png[ansible-basic-playbook role-based stdout]
 == Section 4: Review
 
 You should now have a completed playbook, `site.yml` with a single role called `apache-simple`.  The advantage of structuring your playbook into roles is that you can now add new roles to the playbook using Ansible Galaxy or simply writing your own.  In addition, roles simplify changes to variables, tasks, templates, etc.
+
+{{< importPartial "footer/footer.html" >}}
