@@ -40,5 +40,5 @@ Hopefully you have your laptop with you. If not, please find a shoulder-surfing 
 
 {{< labs ansible_tower >}}
 
-
+{{< importPartial "footer/footer.html" >}}
 

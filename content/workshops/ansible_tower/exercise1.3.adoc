@@ -253,3 +253,5 @@ looks the way you intended.  If not, now is the time for us to fix it up. The fi
         state: restarted
         enabled: yes
 ----
+
+{{< importPartial "footer/footer.html" >}}

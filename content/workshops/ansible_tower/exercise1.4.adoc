@@ -37,7 +37,7 @@ Run your playbook
 
 [source,bash]
 ----
-ansible-playbook --private-key=~/.ssh/workshopname-tower -i ../hosts site.yml
+ansible-playbook -i ../hosts site.yml --private-key=~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
 ----
 
 == Section 2: Review
@@ -46,3 +46,5 @@ If successful, you should see standard output that looks very similar to the fol
 know.  We'll help get things fixed up.
 
 image::stdout_2.png[caption="Figure 1: ", title="apache-basic-playbook stdout"]
+
+{{< importPartial "footer/footer.html" >}}
