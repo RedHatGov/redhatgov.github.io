@@ -175,3 +175,5 @@ image::at_web_tm.png[caption="Figure 17: ",title="New Website with Personalized 
 At this point in the workshop, you've experienced the core functionality of Ansible Tower.  But wait... there's more!
 You've just begun to explore the possibilities of Ansible Core and Tower.  Take a look at the resources page in this guide
 to explore some more features.
+
+{{< importPartial "footer/footer.html" >}}
