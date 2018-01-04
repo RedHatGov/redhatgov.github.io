@@ -6,7 +6,7 @@ layout: lab
 ---
 
 # That's it!
-Hopefully, these labs provided you some idea of how to perform common tasks within the OpenStack environment.  And hopefully, you have a deeper understanding of how Infrastructure-as-a-Service works.  Please feel free to continue to "kick the tires" in the demo environment we've setup and explore both the web console and the command line clients. These will remain running for a few days after the workshop.
+Hopefully, these labs provided you some idea of how to perform common tasks within the OpenStack environment.  And hopefully, you have a deeper understanding of how Infrastructure-as-a-Service works.
 
 # Get even deeper
 
@@ -19,4 +19,4 @@ Here are some good resources to continue learning OpenStack:
 There are two ways to get started with RDO: TripleO Quickstart and PackStack
 
 * [TripleO Quickstart](https://www.rdoproject.org/tripleo/)
-* [PackStack](https://www.rdoproject.org/install/quickstart/)
+* [PackStack](https://www.rdoproject.org/install/packstack/)

@@ -23,7 +23,7 @@ There are two ways to view the project network layout.
 2. Graph which is fun becuase you can drag it and things bounce around :)
 
 {{% alert info %}}
-You will notice that at this point, there is only 1 network named Public. This is an external network that the instructor added as an OpenStack administrator. The public network is shared among all projects and will be utilized in the next lab for managing floating IP addresses. As a project member only, you will not have the ability to modify the public network.
+You will notice that at this point, there is only 1 network named *public*. This is an external network that the instructor added as an OpenStack administrator. The public network is shared among all projects and will be utilized in the next lab for managing floating IP addresses. As a project member only, you will not have the ability to modify the public network.
 {{% /alert %}}
 
 ## Let's Create our First Project Network
@@ -39,7 +39,8 @@ You will notice that at this point, there is only 1 network named Public. This i
 > Enter **private-a-subnet** as the **Subnet Name**  
 > Enter **172.16.0.0/24** as **Network Address**  
 > Leave **IPV4** as the **IP Version**  
-> Leave **Gateway IP** blank and make sure **Disable Gateway** is not checked
+> Leave **Gateway IP** blank and make sure **Disable Gateway** is not checked  
+> Click **Next**
 
 {{< figure src="../images/lab2-neutron-create-network-2.png" title="Lab 2 Figure 3: Create Neutron Subnet" >}}
 
@@ -53,7 +54,7 @@ Be aware that because these project networks are VXLAN tunnels, they can be any 
 
 > Leave **Enable DHCP** checked  
 > Leave **Allocation Pools** empty (we'll use the entire range)  
-> Enter **192.168.0.1** in **DNS Name Servers**  
+> Enter **192.168.0.6** in **DNS Name Servers**  
 > Leave **Host Routes** empty and click **Create**
 
 {{< figure src="../images/lab2-neutron-create-network-3.png" title="Lab 2 Figure 4: Enter Neutron Subnet Details" >}}

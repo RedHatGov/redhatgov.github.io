@@ -15,7 +15,10 @@ A private IP address is assigned to an instance's network-interface by the DHCP 
 
 A floating IP address is a service provided by Neutron. It's not using any DHCP service or being set statically within the guest. As a matter of fact the guest's operating system has no idea that it was assigned a floating IP address. The delivery of packets to the interface with the assigned floating address is the responsibility of Neutron's L3 agent. Instances with an assigned floating IP address can be accessed from the public network by the floating IP.
 
-A floating IP address and a private IP address can be used at the same time on a single network-interface. The private IP address is likely to be used for accessing the instance by other instances in private networks while the floating IP address would be used for accessing the instance from public networks. How to configure floating IP range describes Floating IP range document.
+A floating IP address and a private IP address can be used at the same time on a single network-interface. The private IP address is likely to be used for accessing the instance by other instances in private networks while the floating IP address would be used for accessing the instance from public networks. 
+
+You can learn more about the difference between Floating IP and private IP from the RDO website.
+[https://www.rdoproject.org/networking/difference-between-floating-ip-and-private-ip/](https://www.rdoproject.org/networking/difference-between-floating-ip-and-private-ip/)
 
 {{% alert info %}}
 A floating IP range was already created on the public-sub subnet for the public network in our workshop environment.
