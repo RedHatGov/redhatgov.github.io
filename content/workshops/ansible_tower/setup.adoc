@@ -24,12 +24,13 @@ This lab provides a quick tour of the browser based SSH client Wetty. To help yo
 
 == Accessing Wetty
 
-Use this URL to access the Wetty node, just change the workshopname. Ask your instructor for the workshopname. 
+Use this URL to access the Wetty node, just change the workshopname (if applicable). Ask your instructor for the workshopname. 
 
 [source,bash]
 ----
-https://<workshopname>.master.<student number>.redhatgov.io:8888
+{{< urifqdn "https://" "master" ":8888" >}}
 ----
+
 
 After logging in, you should see a shell.
 
@@ -43,3 +44,5 @@ Be sure you can log in to your instances.  If you can't log in start shouting, l
 == End Result
 
 At this point, everyone should have logged into your node.  If you haven't, let us know so we can get you fixed up.
+
+{{< importPartial "footer/footer.html" >}}
