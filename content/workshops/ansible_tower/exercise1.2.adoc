@@ -27,7 +27,7 @@ From your playbook directory ( `~/apache_basic` ), run your playbook.
 
 [source,bash]
 ----
-ansible-playbook --private-key=~/.ssh/*-tower -i ../hosts install_apache.yml
+ansible-playbook -i ../hosts install_apache.yml --private-key=~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
 ----
 
 
