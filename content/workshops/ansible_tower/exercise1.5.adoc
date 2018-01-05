@@ -226,6 +226,7 @@ Run the playbook.
 
 [source,bash]
 ----
+cd ~/apache-basic-playbook
 ansible-playbook -i ../hosts site.yml --private-key=~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
 ----
 
