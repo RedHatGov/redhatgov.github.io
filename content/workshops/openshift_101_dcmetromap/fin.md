@@ -20,3 +20,5 @@ Here are some good resources to continue learning OpenShift:
 [2]: https://docs.openshift.com/container-platform/3.4/dev_guide/index.html
 [3]: http://developers.redhat.com/products/cdk/overview/
 [4]: http://developers.redhat.com/products/cdk/docs-and-apis/
+
+{{< importPartial "footer/footer.html" >}}

@@ -10,40 +10,49 @@ In modern software projects many teams utilize the concept of Continuous Integra
 
 In this lab we walk through creating a simple example of a CI/CD [pipeline][1] utlizing Jenkins, all running on top of OpenShift! The Jenkins job will trigger OpenShift to build and deploy a test version of the application, validate that the deployment works, and then tag the test version into production.
 
-In the steps below replace 'YOUR#' with your student number.
+In the steps below replace 'YOUR#' with your student number (if applicable).
 
 ## Create a new project
-Create a new project named “cicd-YOUR#”.
+Create a new project named “cicd-{{< span "userid" "YOUR#" >}}”.
 
 {{< panel_group >}}
 
 {{% panel "CLI Steps" %}}
 
-```bash
-$ oc new-project cicd-YOUR#
-```
+## Create the project cicd-{{< span "userid" "YOUR#" >}}
+
+<code>
+$ oc new-project cicd-{{< span "userid" "YOUR#" >}}
+</code>
 
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Browse to original landing page, and click "New Project".
+Browse to original landing page by clicking by "OpenShift Container Platform" in the top left hand corner
 </blockquote>
-<img src="../images/ocp-lab-cicd-new-project.png" width="200"><br/>
+
+<img src="../images/ocp-lab-cicd-new-project-landing.png" width="300"><br/>
 
 <blockquote>
-Fill in the Name and Display Name of the project as "cicd-YOUR#" and click "Create"
+click "Create Project".
 </blockquote>
-<img src="../images/ocp-lab-cicd-new-project-detail.png" width="600"><br/>
+
+<img src="../images/ocp-lab-cicd-new-project.png" width="400"><br/>
+
+<blockquote>
+Fill in the Name and Display Name of the project as "cicd-{{< span "userid" "YOUR#" >}}" and click "Create"
+</blockquote>
+<img src="../images/ocp-lab-cicd-new-project-detail.png" width="500"><br/>
 {{% /panel %}}
 
 {{< /panel_group >}}
 
-## Use the cicd-YOUR# project
+## Use the cicd-{{< span "userid" "YOUR#" >}} project
 
 ```bash
-$ oc project cicd-YOUR#
+$ oc project cicd-{{< span "userid" "YOUR#" >}}
 ```
 
 ## Instantiate a Jenkins server in your project
@@ -60,19 +69,33 @@ $ oc new-app jenkins-ephemeral
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click "Add to Project", select "Browse Catalog" tab and filter on "jenkins". Then select "Jenkins (Ephemeral)".
+Click "Add to Project", select "Browse Catalog" tab and search on "jenkins". Then select "Jenkins (Ephemeral)".
 </blockquote>
 
-<img src="../images/ocp-lab-cicd-jenkins-instantiate.png" width="900"><br/>
+<img src="../images/ocp-lab-cicd-jenkins-instantiate.png" width="600"><br/>
+
+<img src="../images/ocp-lab-cicd-jenkins-instantiate1.png" width="700"><br/>
 
 <blockquote>
-Scroll to the bottom of this page and click "Create"
+Select Next
 </blockquote>
 
-<img src="../images/ocp-lab-cicd-jenkins-create-1.png" width="900"><br/>
+<img src="../images/ocp-lab-cicd-jenkins-instantiate2.png" width="700"><br/>
 
 <blockquote>
-Select "Continue to overview" to display the following overview page.
+Select the Project cicd-{{< span "userid" "YOUR#" >}} from "Add to Project"
+</blockquote>
+
+<img src="../images/ocp-lab-cicd-jenkins-instantiate3.png" width="700"><br/>
+
+<blockquote>
+Select the Create
+</blockquote>
+
+<img src="../images/ocp-lab-cicd-jenkins-instantiate4.png" width="700"><br/>
+
+<blockquote>
+Click the "Continue to the project overview" link
 </blockquote>
 
 <img src="../images/ocp-lab-cicd-jenkins-overview.png" width="900"><br/>
@@ -138,7 +161,7 @@ The OpenShift login page is displayed in a new browser tab.
 <img src="../images/ocp-login.png" width="600">
 <br/>
 
-Once logged in you should see the Jenkins console 
+Once logged in, click the [Allow selected permissions] button and you should see the Jenkins console 
 
 > In the Jenkins console, open the "OpenShift Sample" menu and select "Configure"
 
@@ -176,11 +199,12 @@ If so, Jenkins "tags" the image for production. This tagging will trigger anothe
 <i class="fa fa-terminal"></i> Use the "oc get service" command to get the internal IP and port needed to access the frontend and frontend-prod services:
 </blockquote>
 
-```bash
-$ oc get services -n cicd-YOUR# | grep frontend
-frontend        172.30.151.206   <none>        8080/TCP    40m
-frontend-prod   172.30.230.228   <none>        8080/TCP    40m
-```
+<code>
+$ oc get services -n cicd-{{< span "userid" "YOUR#" >}} | grep frontend</br>
+frontend        172.30.151.206   <none>        8080/TCP    40m</br>
+frontend-prod   172.30.230.228   <none>        8080/TCP    40m</br>
+</code>
+
 Use IPs and ports to access services through web browser
 {{% /panel %}}
 
@@ -208,3 +232,4 @@ In this lab you have very quickly and easily constructed a basic Build/Test/Depl
 [3]: https://docs.openshift.com/enterprise/latest/using_images/other_images/jenkins.html
 [4]: https://jenkins.io/doc
 
+{{< importPartial "footer/footer.html" >}}

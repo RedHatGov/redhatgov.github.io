@@ -85,15 +85,15 @@ This shows us even more about the deployed container's build and source code inc
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click "Overview"
+Click "Overview", and expand dc-metra-map details (if applicable) by clicking >| 
 </blockquote>
 <blockquote>
 Check out the details within the deployment (above and to the right of the Pods circle). 
 </blockquote>
-<img src="../images/ocp-lab-devman-deployment-shortcut.png" width="600"><br/>
+<img src="../images/ocp-lab-devman-deployment-shortcut.png" width="700"><br/>
 
 Within the deployment for the dc-metro-map is a container summary that shows both the GUID for the image and the GUID for the git branch.
-<img src="../images/ocp-lab-devman-imageGuid.png" width="900"><br/>
+<img src="../images/ocp-lab-devman-imageGuid.png" width="600"><br/>
 
 <blockquote>
 Click on the link next to "Image:"
@@ -102,16 +102,14 @@ Here are the details of the image stream for this deployment.<br/>
 <img src="../images/ocp-lab-devman-isDetails.png" width="900"><br/>
 
 <blockquote>
-<i class="fa fa-info-circle"></i> If you hover over the shortened image GUID or edit the image stream you can see the full GUID.
-</blockquote>
-
-<blockquote>
 Click "Builds" and then Builds to get back to the build summary
 </blockquote>
 
 <blockquote>
 Click "#1" to see the build details
 </blockquote>
+<img src="../images/ocp-lab-buildsnoone.png" width="400"><br/>
+
 Because we built this app using S2I, we get to see the details about the build - including the container image that was used for building the source code.  Note that you can kick-off a rebuild here if something went wrong with the initial build and you'd like to attempt it again.<br/>
 <img src="../images/ocp-lab-devman-buildsummary.png" width="900"><br/>
 
@@ -167,6 +165,8 @@ You will see in the output details of your app starting up and any status messag
 <blockquote>
 Click on "Applications" and then click on "Pods"
 </blockquote>
+<img src="../images/ocp-lab-devman-apppods.png" width="600"><br/>
+
 This is going to show basic details for all pods in this project (including the builders).<br/>
 <img src="../images/ocp-lab-devman-pods.png" width="900"><br/>
 Next let's look at the log for the pod running our application.
@@ -330,4 +330,4 @@ To dig deeper in to details behind the steps you performed in this lab, check ou
 
 [1]: https://docs.openshift.com/container-platform/3.4/dev_guide/index.html
 
-
+{{< importPartial "footer/footer.html" >}}

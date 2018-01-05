@@ -35,17 +35,20 @@ Click the "Add to Project" button
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="200"><br/>
 <blockquote>
-Select the "Browse Catalog" tab and search for the nodejs:0.10 builder image.
+Select the "Browse Catalog" tab and search for the nodejs builder image. Click Next>
 </blockquote>
 <blockquote>
-Fill out the boxes to point to the fork and context dir
+Click 'advanced options' and fill out the boxes to point to the fork and context dir. 
 </blockquote>
 
 <p>
-Notes: You will need to click to expand the "advanced options"<br/>
 The github repository URL is: https://github.com/YOUR_ACCOUNT/openshift-workshops.git<br/>
 The github context-dir is: /dc-metro-map<br/>
 </p>
+
+<blockquote>
+When you are done, scroll to the bottom and click 'Create'
+</blockquote>
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -180,7 +183,6 @@ Click the "dc-metro-map" deployment config
 </blockquote>
 Toward the bottom of the screen you will see a table of deployments using this deployment config
 <img src="../images/ocp-lab-rollbacks-deploymentconfigsummary1.png" width="900"><br/>
-<img src="../images/ocp-lab-rollbacks-deploymentconfigsummary2.png" width="900"><br/>
 
 <blockquote>
 In the Deployments table click the #1
@@ -190,6 +192,8 @@ In the Deployments table click the #1
 <blockquote>
 Click the "Rollback button", accept defaults, and click "Rollback" again
 </blockquote>
+
+<img src="../images/ocp-lab-rollbacks-rollbackbutton.png" width="300"><br/>
 
 You can go back to the overview page to see your previous deployment spinning down and your new one spinning up.<br/>
 
@@ -220,3 +224,5 @@ In this lab we saw how you can configure a source code repository to trigger bui
 [3]: https://github.com/join?source=header-home
 [4]: https://github.com/RedHatGov/openshift-workshops.git
 [5]: https://docs.openshift.com/enterprise/latest/rest_api/openshift_v1.html#create-a-deploymentconfigrollback-2
+
+{{< importPartial "footer/footer.html" >}}
