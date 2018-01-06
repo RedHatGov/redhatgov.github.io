@@ -32,7 +32,7 @@ You can see the Labels automatically added contain the app, deployment, and depl
 </blockquote>
 
 ```bash
-$ oc label pod/<POD NAME> testdate=4.30.2016 testedby=mylastname
+$ oc label pod/<POD NAME> testdate=4.30.2018 testedby=mylastname
 ```
 
 <blockquote>
@@ -79,8 +79,24 @@ You will see all the labels under the metadata->labels section.
 
 <blockquote>
 Add a new label into the labels section
+
+testdate: 4.30.2018
+testedby: mylastname
 </blockquote>
-Your updated label will show up in the pod's list.
+
+<img src="../images/ocp-lab-labels-podedit2.png" width="300"><br/>
+
+Your updated label will show up in the running pod's.
+
+Select Application -> Pods -> dc-metro-map (Running POD)
+
+<blockquote>
+If you see "More labels..", then click that link
+<img src="../images/ocp-lab-labels-podedit3.png" width="500"><br/>
+</blockquote>
+
+Labels will appear in the list:</br>
+<img src="../images/ocp-lab-labels-podedit4.png" width="600"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -91,3 +107,5 @@ That's it for this lab. Now you know that all the objects in OpenShift can be la
 
 [1]: https://docs.openshift.com/enterprise/latest/architecture/core_concepts/pods_and_services.html#labels
 [2]: http://kubernetes.io/docs/user-guide/labels/
+
+{{< importPartial "footer/footer.html" >}}

@@ -43,12 +43,12 @@ The output should show something *similar* to below:
 <blockquote>
 Click "Add to Project"
 </blockquote>
-<img src="../images/ocp-addToProjectButton.png" width="200"><br/>
+<img src="../images/ocp-addToProjectButton.png" width="150"><br/>
 
 <blockquote>
-Select the tab for "Deploy Image" from the top options
+Select the "Deploy Image" option from the drop down
 </blockquote>
-<img src="../images/ocp-guestbook-deploy-image.png" width="400"><br/>
+<img src="../images/ocp-guestbook-deploy-image.png" width="200"><br/>
 
 <blockquote>
 Select the option for "Image Name" and enter "kubernetes/guestbook", then click the magnifying glass to the far right to search for the image.
@@ -59,10 +59,9 @@ Select the option for "Image Name" and enter "kubernetes/guestbook", then click 
 Observe default values that are populated in the search results
 </blockquote>
 <img src="../images/ocp-guestbook-create-1.png" width="600"><br/>
-<img src="../images/ocp-guestbook-create-2.png" width="600"><br/>
 
 <blockquote>
-Scroll to the bottom and click "Create"
+Click "Deploy" then click "Close"
 </blockquote>
 
 {{% /panel %}}
@@ -102,6 +101,8 @@ Let's look at the image stream.
 Click on "Builds -> Images"
 </blockquote>
 
+<img src="../images/ocp-guestbook-buildimages.png" width="200"><br/>
+
 This shows a list of all image streams within the project.  
 
 <blockquote>
@@ -132,8 +133,27 @@ $ oc expose service guestbook
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-To expose via the web console, click on "Overview" to get to this view
+To expose via the web console, click on <img src="../images/ocp-guestbook-slashes.png" width="50"><br>
 </blockquote>
+
+
+<blockquote>
+"Overview"
+</blockquote>
+
+<img src="../images/ocp-guestbook-overview.png" width="400"><br/>
+
+<blockquote>
+Select the arrow '>' next to 'guestbook, #' 
+</blockquote>
+
+<img src="../images/ocp-guestbook-arrow1.png" width="200"><br/>
+<img src="../images/ocp-guestbook-arrow2.png" width="200"><br/>
+
+<blockquote>
+To get to this view
+</blockquote>
+
 <img src="../images/ocp-guestbook-noroute.png" width="600"><br/>
 
 <p>Notice there is no exposed route </p>
@@ -175,3 +195,5 @@ $ oc delete all --all
 
 # Summary
 In this lab you've deployed an example docker image, pulled from docker hub, into a pod running in OpenShift.  You exposed a route for clients to access that service via thier web browsers.  And you learned how to get and describe resources using the command line and the web console.  Hopefully, this basic lab also helped to get you familiar with using the CLI and navigating within the web console.
+
+{{< importPartial "footer/footer.html" >}}

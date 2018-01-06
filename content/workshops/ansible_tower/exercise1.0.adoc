@@ -32,7 +32,7 @@ commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`
 The *workshopname*, in the example below, will be provided to you by your instructor.  The *#* should be replaced by your student number.
 
 For example, a recent workshop's first student used:
-*{{< urifqdn "" "master" "" >}}*
+*{{< urifqdn "" "tower" "" >}}*
 ====
 
 .hosts (example)

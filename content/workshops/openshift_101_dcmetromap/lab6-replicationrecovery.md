@@ -109,7 +109,7 @@ If you're fast enough you'll see the pod you deleted unfill a portion of the dep
 
 <img src="../images/ocp-lab-replicationrecovery-poddelete.png" width="900"><br/>
 
-You can browse the pods list again to see the old pod was deleted and a new pod with an age of "a few seconds" has been created to replace it.
+You can browse the pods list again to see the old pod was deleted and a new pod with a recent age.
 
 <img src="../images/ocp-lab-replicationrecovery-podrecovery.png" width="900"><br/>
 
@@ -202,6 +202,8 @@ The container died multiple times so quickly that OpenShift is going to put the 
 ## Clean up
 Let's scale back down to 1 replica.  If you are using the web console just click the down arrow from the Overview page.  If you are using the command line use the "oc scale" command.
 
+<img src="../images/ocp-lab-replicationrecovery-cleanup.png" width="900"><br/>
+
 # Summary
 In this lab we learned about replication controllers and how they can be used to scale your applications and services.  We also tried to break a few things and saw how OpenShift responded to heal the system and keep it running.  This topic can get deeper than we've experimented with here, but getting deeper into application health and recovery is an advanced topic.  If you're interested you can read more about it in the documentation [here][1], [here][2], and [here][3].
 
@@ -209,3 +211,5 @@ In this lab we learned about replication controllers and how they can be used to
 [1]: https://docs.openshift.com/enterprise/3.1/dev_guide/application_health.html
 [2]: https://docs.openshift.com/enterprise/latest/dev_guide/deployments.html#scaling
 [3]: http://kubernetes.io/docs/user-guide/walkthrough/k8s201/#health-checking
+
+{{< importPartial "footer/footer.html" >}}
