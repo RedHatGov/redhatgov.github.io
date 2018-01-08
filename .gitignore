@@ -2,7 +2,12 @@
 # Project
 ###############################################################################
 
+secrets.tar
 scripts/client_secret.json
+scripts/sheets.googleapis.com-redhatgov-events.json
+
+content/events/*.md
+!content/events/_index.md
 
 public/
 .idea/

@@ -150,10 +150,7 @@ def get_credentials():
     Returns:
         Credentials, the obtained credential.
     """
-    home_dir = os.path.expanduser('~')
-    credential_dir = os.path.join(home_dir, '.credentials')
-    if not os.path.exists(credential_dir):
-        os.makedirs(credential_dir)
+    credential_dir = os.path.dirname(os.path.realpath(CLIENT_SECRET_FILE))
     credential_path = os.path.join(
         credential_dir, 'sheets.googleapis.com-redhatgov-events.json')
 
@@ -210,8 +207,9 @@ def main():
 
     for event_hash, event in events.iteritems():
         if event_hash in event_files:
-            print('skipping', event)
+            print('SKIPPING', event)
             continue  # Skip event files that already exist
+        print('creating', event)
         full_filename = os.path.join(EVENTS_CONTENT_DIR, event.filename())
         with open(full_filename, 'w') as f:
             template = Template(
