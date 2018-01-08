@@ -3,8 +3,8 @@ branches:
     - docs
 
 before_install:
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash openssl aes-256-cbc -K $encrypted_3a2ffd558b46_key -iv $encrypted_3a2ffd558b46_iv -in secrets.tar.enc -out secrets.tar -d; fi'
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash tar xvf secrets.tar; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then openssl aes-256-cbc -K $encrypted_3a2ffd558b46_key -iv $encrypted_3a2ffd558b46_iv -in secrets.tar.enc -out secrets.tar -d; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then tar xvf secrets.tar; fi'
 
 install:
   - gem install asciidoctor
