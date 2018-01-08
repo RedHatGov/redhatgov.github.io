@@ -32,14 +32,14 @@ commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`
 The *workshopname*, in the example below, will be provided to you by your instructor.  The *#* should be replaced by your student number.
 
 For example, a recent workshop's first student used:
-*reston.node.1.redhatgov.io*
+*{{< urifqdn "" "master" "" >}}*
 ====
 
 .hosts (example)
 [source,bash]
 ----
 [web]
-<workshopname>.node.<student number>.redhatgov.io
+{{< urifqdn "" "node" "" >}}
 ----
 
 === Step 1:
@@ -121,3 +121,5 @@ ansible web -m ping
 ----
 We are going to be using the short-form options throughout this workshop
 ====
+
+{{< importPartial "footer/footer.html" >}}

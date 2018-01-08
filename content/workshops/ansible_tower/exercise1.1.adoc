@@ -163,3 +163,5 @@ like this.  Take note of the spacing and alignment.
         name: httpd
         state: started
 ----
+
+{{< importPartial "footer/footer.html" >}}

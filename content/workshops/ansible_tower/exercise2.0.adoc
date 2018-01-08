@@ -120,7 +120,7 @@ You can access your Tower (not forgetting that *workshopname* is the name of you
 
 [source,bash]
 ----
-https://workshopname.tower.#.redhatgov.io
+{{< urifqdn "" "tower" "" >}}
 ----
 
 === Ensuring Installation Success
@@ -128,3 +128,5 @@ https://workshopname.tower.#.redhatgov.io
 You know you were successful if you are able to browse to your Ansible Tower's url (_control node's IP address_) and get something like this
 
 image::ansible-lab-figure01-logon-screen.png[caption="Figure 2: ", title="Ansible Tower Login Screen"]
+
+{{< importPartial "footer/footer.html" >}}
