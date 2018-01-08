@@ -3,15 +3,15 @@ branches:
     - docs
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_3a2ffd558b46_key -iv $encrypted_3a2ffd558b46_iv -in secrets.tar.enc -out secrets.tar -d
-  - tar xvf secrets.tar
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash openssl aes-256-cbc -K $encrypted_3a2ffd558b46_key -iv $encrypted_3a2ffd558b46_iv -in secrets.tar.enc -out secrets.tar -d; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash tar xvf secrets.tar; fi'
 
 install:
   - gem install asciidoctor
   - sudo pip install Pygments
   - sudo pip install -r scripts/requirements.txt
   - cd scripts
-  - ./import_events.py
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./import_events.py; fi'
   - cd ..
   - rm -rf public || exit 0
 
