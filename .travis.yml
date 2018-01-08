@@ -2,9 +2,17 @@ branches:
   only:
     - docs
 
+before_install:
+  - openssl aes-256-cbc -K $encrypted_3a2ffd558b46_key -iv $encrypted_3a2ffd558b46_iv -in secrets.tar.enc -out secrets.tar -d
+  - tar xvf secrets.tar
+
 install:
   - gem install asciidoctor
   - sudo pip install Pygments
+  - sudo pip install -r scripts/requirements.txt
+  - cd scripts
+  - ./import_events.py
+  - cd ..
   - rm -rf public || exit 0
 
 script:
