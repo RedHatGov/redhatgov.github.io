@@ -16,7 +16,9 @@ Secure Computing Mode (seccomp) is a kernel feature that allows you to filter sy
 
 The default seccomp profile for docker is a JSON file and can be viewed here: https://github.com/docker/docker/blob/master/profiles/seccomp/default.json. It blocks 44 system calls out of more than 300 available.Making the list stricter would be a trade-off with application compatibility. A table with a significant part of the blocked calls and the reasoning for blocking can be found here: https://docs.docker.com/engine/security/seccomp/.
 
-Seccomp uses the Berkeley Packet Filter (BPF) system, which is programmable on the fly so you can make a custom filter. You can also limit a certain syscall by also customizing the conditions on how or when it should be limited. A seccomp filter replaces the syscall with a pointer to a BPF program, which will execute that program instead of the syscall. All children to a process with this filter will inherit the filter as well. The docker option which is used to operate with seccomp is `--security-opt`. To explicitly use the default policy for a container, the command will be:
+Seccomp uses the Berkeley Packet Filter (BPF) system, which is programmable on the fly so you can make a custom filter. You can also limit a certain syscall by also customizing the conditions on how or when it should be limited. A seccomp filter replaces the syscall with a pointer to a BPF program, which will execute that program instead of the syscall. All children to a process with this filter will inherit the filter as well. The docker option which is used to operate with seccomp is `--security-opt`.
+
+The following is an example of how to explicitly define the default seccomp policy for a container:
 
 [source,bash]
 ----
@@ -25,12 +27,32 @@ sudo docker run --security-opt seccomp=/path/to/default/profile.json <container>
 
 === Step 1:
 
-Lets take a look at the `1_chmod.json` file. This is a example seccomp file that will not allow the `chmod`, `chown`, or `chown32` systemcalls.
+Create the working directory:
 
 [source,bash]
 ----
-cat 1_chmod.json
+mkdir ~/seccomp
+----
 
+[source,bash]
+----
+cd ~/seccomp
+----
+
+[source,bash]
+----
+vim 1_chmod.json <1>
+----
+
+[NOTE]
+Copy the `1_chmod.json` below. Press `i` for Insert, then cut and paste
+`control + v`, then escape and write the file `esc`, `:wq`.
+
+
+This example seccomp file will be used to disallow the `chmod`, `chown`, or `chown32` systemcalls.
+
+[source,bash]
+----
 {
     "defaultAction": "SCMP_ACT_ALLOW",
     "architectures": [
@@ -73,9 +95,7 @@ Lets take a closer look at how this file restricts these system calls.
 <2> *SCMP_ACT_ERRNO*: Basically this blocks the chmod syscall. Man page: The thread will receive a return value of errno when it calls a syscall that matches the filter rule.
 
 
-
 === Step 2:
-
 
 Lets apply these restrictions to a container by using the `--security-opt` flag to point to our `1_chmod.json` file. We will start a container and try to run the chmod command on a file.
 
@@ -138,6 +158,49 @@ Lets run the same command again and add the https://linux.die.net/man/1/strace[`
 ----
 sudo docker run --rm -it --cap-add SYS_PTRACE --security-opt seccomp:1_chmod.json redhatgov/fedora strace chmod 400 /etc/hosts
 ----
+
+{{< panel_group >}}
+{{% panel "Result" %}}
+
+:icons: font
+
+[source,bash]
+----
+execve("/usr/bin/chmod", ["chmod", "400", "/etc/hosts"], 0x7ffd08fb72a0 /* 7 vars */) = 0
+brk(NULL)                               = 0x5620400b0000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f22590fe000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=13847, ...}) = 0
+mmap(NULL, 13847, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f22590fa000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib64/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\21\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=2254296, ...}) = 0
+mmap(NULL, 4082272, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f2258af4000
+mprotect(0x7f2258ccf000, 2097152, PROT_NONE) = 0
+mmap(0x7f2258ecf000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1db000) = 0x7f2258ecf000
+mmap(0x7f2258ed5000, 14944, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f2258ed5000
+close(3)                                = 0
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f22590f7000
+arch_prctl(ARCH_SET_FS, 0x7f22590f7740) = 0
+mprotect(0x7f2258ecf000, 16384, PROT_READ) = 0
+mprotect(0x56203ed78000, 4096, PROT_READ) = 0
+mprotect(0x7f2259100000, 4096, PROT_READ) = 0
+munmap(0x7f22590fa000, 13847)           = 0
+brk(NULL)                               = 0x5620400b0000
+brk(0x5620400d1000)                     = 0x5620400d1000
+brk(NULL)                               = 0x5620400d1000
+umask(000)                              = 022
+stat("/etc/hosts", {st_mode=S_IFREG|0644, st_size=174, ...}) = 0
+fchmodat(AT_FDCWD, "/etc/hosts", 0400)  = 0
+close(1)                                = 0
+close(2)                                = 0
+exit_group(0)                           = ?
++++ exited with 0 +++
+----
+{{% /panel %}}
+{{< /panel_group >}}
 
 Create a seccomp profile using the new mappings for system calls for `chmod` & `chown`. Check your answer below.
 
@@ -275,33 +338,18 @@ Then from inside the container run strace and the netcat command.
 
 [source,bash]
 ----
-execve("/usr/bin/nc", ["nc", "-l", "555"], 0x7ffd48b77df0 /* 10 vars */) = 0
-brk(NULL)                               = 0x555a8f451000
-mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f97676cc000
-access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
-
-..<SNIP>..
-
-socket(AF_INET6, SOCK_STREAM, IPPROTO_TCP) = -1 EPERM (Operation not permitted) <1>
-socket(AF_INET, SOCK_STREAM, IPPROTO_TCP) = -1 EPERM (Operation not permitted)  <2>
-write(2, "Ncat: ", 6Ncat: )                   = 6
-write(2, "Unable to open any listening soc"..., 37Unable to open any listening sockets.) = 37 <3>
-write(2, " QUITTING.\n", 11 QUITTING.
-)            = 11
-exit_group(2)                           = ?
-+++ exited with 2 +++
+strace: ptrace(PTRACE_TRACEME, ...): Operation not permitted
++++ exited with 1 +++
 ----
 
-<1> socket syscall
-<2> socket syscall
-<3> Failed to make socket connection message
-
-http://man7.org/linux/man-pages/man2/socket.2.html[`Socket Syscall Manpage`]
+http://man7.org/linux/man-pages/man2/socket.2.html[Socket Syscall Manpage]
 
 {{% /panel %}}
 {{< /panel_group >}}
 
-We have now found the correct syscall to add to our seccomp profile. Let's create a seccomp profile with our new syscall mapping.
+=== Step 3:
+
+We have now found the correct syscall to add to our seccomp profile. Create a seccomp profile called `3_network.json` using vim, or your favorite editor. Copy and paste the seccomp profile below into a text editor and save it as a file named `3_network.json` to create the profile.
 
 {{< panel_group >}}
 {{% panel "Seccomp Profile" %}}
@@ -324,14 +372,7 @@ We have now found the correct syscall to add to our seccomp profile. Let's creat
 {{% /panel %}}
 {{< /panel_group >}}
 
-Now we can create a seccomp profile called `3_network.json` using vim, or your favorite editor. You can copy and paster the seccomp profile above into this profile.
-
 Now that you have your new profile created, let's run the container again and see if our new seccomp profile blocks Netcat from working.
-
-{{< panel_group >}}
-{{% panel "Answer" %}}
-
-:icons: font
 
 [source,bash]
 ----
@@ -356,6 +397,3 @@ exit
 ----
 
 This `FAILED` because we explicitly denied this syscall to the container via the seccomp profile. This profile can help to stop would-be attackers from being able to further compromise a container or container host.
-
-{{% /panel %}}
-{{< /panel_group >}}

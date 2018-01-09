@@ -37,7 +37,7 @@ host.
 *Bottom line: As a best practice, run all applications in production with this
 mode.*
 
-== Readonly Containers
+== Read only Containers
 
 === Step 1:
 
@@ -46,8 +46,7 @@ Run a read­only container and specify a few writable file systems using the
 
 [source,bash]
 ----
-sudo docker run --rm -it --name readonly --read-only --tmpfs /run --tmpfs /tmp
-rhel7.3 bash
+sudo docker run --rm -it --name readonly --read-only --tmpfs=/run --tmpfs=/tmp rhel7.3 bash
 ----
 
 === Step 2:
@@ -58,15 +57,21 @@ Now, try to the following. What fails and what succeeds? Why?
 [source,bash]
 ----
 mkdir /newdir
+----
 
+[source,bash]
+----
 mkdir /run/newdir
+----
 
+[source,bash]
+----
 mkdir /tmp/newdir
 ----
 
 Now exit the container
 
-.exit the container
+.Exit the container
 [source,bash]
 ----
 exit

@@ -76,7 +76,7 @@ If I wanted to drop `setfcap`, `audit_write`, and `mknod`, I could use
 .Dropping setfcap, audit_write, mknod
 [source,bash]
 ----
-sudo docker run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod
+sudo docker run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod \
 fedora sleep 5 > /dev/null; pscap | grep sleep
 ----
 
@@ -88,8 +88,8 @@ drop all capabilities and just add setgid and setuid back in.
 .Whitelisting Capabilities
 [source,bash]
 ----
-sudo docker run -d --cap-drop=all --cap-add=setuid --cap-add=setgid fedora
-sleep 5 > /dev/null; pscap | grep sleep
+sudo docker run -d --cap-drop=all --cap-add=setuid --cap-add=setgid \
+fedora sleep 5 > /dev/null; pscap | grep sleep
 ----
 
 The following bellow is a comparison of the out put form blacklisting vs.
@@ -98,8 +98,8 @@ whitelisting.
 .Compare the output
 [source,bash]
 ----
-chown, dac_override, fowner, fsetid, kill, setgid, setuid, setpcap,
-net_bind_service, net_raw, sys_chroot <1>
+chown, dac_override, fowner, fsetid, kill, setgid, setuid,
+setpcap, net_bind_service, net_raw, sys_chroot <1>
 
 vs.
 

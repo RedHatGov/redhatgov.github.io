@@ -40,7 +40,7 @@ beginning of your Dockerfile then change back to the correct user with another
 .Example Dockerfile
 [source,bash]
 ----
-FROM fedora:25
+FROM fedora:27
 
 RUN groupadd -r swuser -g 433 && \
     useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
@@ -59,10 +59,34 @@ such as installing software via yum/dnf.
 
 Now we can test this out by building the following `Dockerfile`
 
+=== Step 1:
+
+Build the `Dockerfile`
+
+.Make new directory & Build Dockerfile
+[source,bash]
+----
+mkdir ~/user-test
+----
+
+[source,bash]
+----
+cd ~/user-test
+----
+
+[source,bash]
+----
+vim Dockerfile
+----
+
+[NOTE]
+Copy the `Dockerfile` above. Press `i` for Insert, then cut and paste
+`control + v`, then escape and write the file `esc`, `:wq`.
+
 .Dockerfile
 [source,bash]
 ----
-FROM fedora:25
+FROM fedora:27
 
 RUN groupadd -r swuser -g 433 && \
     useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
@@ -74,27 +98,9 @@ RUN dnf install -y vim
 USER swuser
 ----
 
-=== Step 2:
+Now build the image.  The build time is similar as before (approximately 3 minutes)
 
-Build the `Dockerfile`
-
-.Make new directory & Build Dockerfile
-[source,bash]
-----
-mkdir user-test
-
-cd user-test
-
-vim Dockerfile
-----
-
-[NOTE]
-Copy the `Dockerfile` above. Press `i` for Insert, then cut and paste
-`control + v`, then escape and write the file `esc`, `:wq`.
-
-Now build the image
-
-.build the image
+.Build the image
 [source,bash]
 ----
 sudo docker build -t user-test:1 .
@@ -102,7 +108,7 @@ sudo docker build -t user-test:1 .
 
 Now run and test the image to see who the container is running as. What do you see?
 
-.run the image
+.Run the image
 [source,bash]
 ----
 sudo docker run --rm -it user-test:1 whoami
