@@ -240,7 +240,7 @@ Should return nothing. Because the namespace is not shared.
 {{% /panel %}}
 {{< /panel_group >}}
 
-Now let's use the `--network=container:` flag to attach to the `http` containers network interface and try the curl command again.
+Now let's use the `--net=container:` flag to attach to the `http` containers network interface and try the curl command again.
 
 [source,bash]
 ----
