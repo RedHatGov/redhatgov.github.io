@@ -245,7 +245,7 @@ https://linux.die.net/man/2/fchownat[fchownat]
 {{< /panel_group >}}
 
 
-We have now found the correct syscall to add to our seccomp profile. Let's create a seccomp profile with our new syscall mapping. Now we can create a seccomp profile called `2_chmod_fedora.json` using vim, or your favorite editor. You can copy and paster the seccomp profile above into this profile.
+We have now found the correct syscall to add to our seccomp profile. Let's create a seccomp profile with our new syscall mapping. Now we can create a seccomp profile called `2_chmod_fedora.json` using vim, or your favorite editor. You can copy and paste the seccomp profile above into this profile.
 
 Now that you have your new profile created, let's run the container again and see if our new seccomp profile blocks `chmod` & `chown` from working.
 

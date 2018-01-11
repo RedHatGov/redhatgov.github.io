@@ -18,7 +18,7 @@ being executed to be executed with the privileges of the owner or the group.
 For example, if a file was owned by the root user and has the setuid bit set,
 no matter who executed the file it would always run with root user privileges.
 
-Chances are that your application doesn’t need any
+Chances are that your application does not need any elevated privileges.
 https://en.wikipedia.org/wiki/Setuid[setuid or setgid] binaries. If you can
 disable or remove such binaries, you stop any chance of them being used for
 https://en.wikipedia.org/wiki/Buffer_overflow[buffer overruns],

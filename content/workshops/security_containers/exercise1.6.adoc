@@ -12,7 +12,7 @@ layout: lab
 image::readonly.png[]
 
 Now that you've gotten a sense of Linux Kernel Capabilities, let's move on to
-Readonly Containers.
+Read only Containers.
 
 Imagine a scenario where an application gets compromised. The first thing the
 bad guy wants to do is to write an exploit into the application, so that the
