@@ -80,7 +80,7 @@ cd ~/defanged-debian
 
 [source,bash]
 ----
-vim Dockerfile <1>
+vim Dockerfile
 ----
 
 [NOTE]
