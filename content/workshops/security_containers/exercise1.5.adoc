@@ -159,11 +159,11 @@ sudo docker run -it redhatgov/alpine ip addr show
 {{% /panel %}}
 {{< /panel_group >}}
 
-By default a container's network is isolated with it's own IP and interface. By changing the namespace to host by using the `--network` flag, the process will have access to the host machines network interface.
+By default a container's network is isolated with it's own IP and interface. By changing the namespace to host by using the `--net` flag, the process will have access to the host machines network interface.
 
 [source,bash]
 ----
-sudo docker run -it --network=host redhatgov/alpine ip addr show
+sudo docker run -it --net=host redhatgov/alpine ip addr show
 ----
 
 {{< panel_group >}}
@@ -240,7 +240,7 @@ Should return nothing. Because the namespace is not shared.
 {{% /panel %}}
 {{< /panel_group >}}
 
-Now let's use the `--network=container:` flag to attach to the `http` containers network interface and try the curl command again.
+Now let's use the `--net=container:` flag to attach to the `http` containers network interface and try the curl command again.
 
 [source,bash]
 ----

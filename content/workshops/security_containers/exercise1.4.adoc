@@ -18,7 +18,7 @@ The https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/htm
 
 == Memory Limits
 
-Docker uses Cgroups to control and limit the amount of system resources a container can use. This will help to protect a system runing from potential application memory leaks or Denial of Service DoS attacks that can consume all available memory and take down a system. By running containers with special docker flags we can restrict the amount of memory a container is able to consume even when a applcation is trying to consume more memory.
+Docker uses Cgroups to control and limit the amount of system resources a container can use. This will help to protect a system runing from potential application memory leaks or Denial of Service DoS attacks that can consume all available memory and take down a system. By running containers with special docker flags we can restrict the amount of memory a container is able to consume even when a application is trying to consume more memory.
 
 
 [source, bash]
@@ -105,7 +105,7 @@ sudo docker ps -a
 == CPU Limits
 
 By default, each container’s access to the host machine’s CPU cycles is unlimited. Various constraints can be set to limit a given
-container’s access to the host machine’s CPU cycles. Docker provides several flags for setting limits on how many shares of a proccessor a container is able to use. Previously we looked at memory restrictions and setting a maximum ceiling for memory usage, CPU limits are set by shares. We can defin share weights for each container and slit the available shares between the containers for a single processor.
+container’s access to the host machine’s CPU cycles. Docker provides several flags for setting limits on how many shares of a processor a container is able to use. Previously we looked at memory restrictions and setting a maximum ceiling for memory usage, CPU limits are set by shares. We can define share weights for each container and slit the available shares between the containers for a single processor.
 
 Lets run a container with `512` limit of CPU shares.
 

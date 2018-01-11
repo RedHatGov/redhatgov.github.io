@@ -13,7 +13,7 @@ layout: lab
 image::file.png[]
 
 Now that you've gotten a sense of how Cockpit works, we are going to start
-digging in at the commandline on Container security. You can use either the
+digging in at the command line on Container security. You can use either the
 Terminal in Cockpit from your browser, a SSH terminal or Terminal client like
 PuTTy. The choice is yours.
 

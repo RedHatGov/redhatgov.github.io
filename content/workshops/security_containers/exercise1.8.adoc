@@ -31,18 +31,22 @@ Create the following directories.
 ----
 mkdir ~/selinux
 ----
+
 [source,bash]
 ----
 cd  ~/selinux
 ----
+
 [source,bash]
 ----
 mkdir data
 ----
+
 [source,bash]
 ----
 echo "SELINUX" > data/file1.txt
 ----
+
 [source,bash]
 ----
 cat data/file1.txt
