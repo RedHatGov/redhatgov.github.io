@@ -29,9 +29,7 @@ https://en.wikipedia.org/wiki/Privilege_escalation[privilege escalation attacks]
 
 === Step 1:
 
-To get a list of binaries with special permissions in a container image, the following syntax can be used (example shown below)
-
-`find / -perm +6000 -type f -exec ls -ld {} \;`
+To get a list of binaries with special permissions in a container image, the following syntax can be used `find / -perm +6000 -type f -exec ls -ld {} \;`. Note, no need to type this, see next command.
 
 .Test the latest Debian image
 [source,bash]
