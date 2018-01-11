@@ -89,7 +89,7 @@ Copy the `Dockerfile` below. Press `i` for Insert, then cut and paste
 [source,bash]
 ----
 FROM debian:jessie
-RUN find / -perm +6000 -type f -exec chmod a-s {} \; || true
+RUN find / -xdev -perm +6000 -type f -exec chmod a-s {} \; || true
 ----
 
 The `|| true` allows you to ignore any errors from find. The setuid and setgid
