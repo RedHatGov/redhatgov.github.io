@@ -29,9 +29,7 @@ https://en.wikipedia.org/wiki/Privilege_escalation[privilege escalation attacks]
 
 === Step 1:
 
-To get a list of binaries with special permissions in a container image, the following syntax can be used (example shown below)
-
-`find / -perm +6000 -type f -exec ls -ld {} \;`
+To get a list of binaries with special permissions in a container image, the following syntax can be used `find / -perm +6000 -type f -exec ls -ld {} \;`. Note, no need to type this, see next command.
 
 .Test the latest Debian image
 [source,bash]
@@ -80,7 +78,7 @@ cd ~/defanged-debian
 
 [source,bash]
 ----
-vim Dockerfile <1>
+vim Dockerfile
 ----
 
 [NOTE]
@@ -91,7 +89,7 @@ Copy the `Dockerfile` below. Press `i` for Insert, then cut and paste
 [source,bash]
 ----
 FROM debian:jessie
-RUN find / -perm +6000 -type f -exec chmod a-s {} \; || true
+RUN find / -xdev -perm +6000 -type f -exec chmod a-s {} \; || true
 ----
 
 The `|| true` allows you to ignore any errors from find. The setuid and setgid
@@ -119,6 +117,13 @@ sudo docker build -t defanged-debian .
 ----
 sudo docker run --rm defanged-debian \
   find / -perm +6000 -type f -exec ls -ld {} \; 2> /dev/null | wc
+----
+
+For comparison, now do the same command on your RHEL host, with a slight modification for the most recent version of findutils.
+
+[source,bash]
+----
+sudo find / -perm /6000 -type f -exec ls -ld {} \; 2> /dev/null | wc
 ----
 
 It's more likely that your Dockerfile will rely on a setuid/setgid binary than
