@@ -119,6 +119,13 @@ sudo docker run --rm defanged-debian \
   find / -perm +6000 -type f -exec ls -ld {} \; 2> /dev/null | wc
 ----
 
+For comparison, now do the same command on your RHEL host, with a slight modification for the most recent version of findutils.
+
+[source,bash]
+----
+sudo find / -perm /6000 -type f -exec ls -ld {} \; 2> /dev/null | wc
+----
+
 It's more likely that your Dockerfile will rely on a setuid/setgid binary than
 your application. Therefore, you can always perform this step near the end,
 after any such calls and before changing the user (removing setuid binaries is
