@@ -41,7 +41,7 @@ cd ~/seccomp
 
 [source,bash]
 ----
-vim 1_chmod.json <1>
+vim 1_chmod.json
 ----
 
 [NOTE]

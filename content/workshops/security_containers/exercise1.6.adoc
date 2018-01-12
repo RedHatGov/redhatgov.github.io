@@ -11,12 +11,11 @@ layout: lab
 
 image::readonly.png[]
 
-Now that you've gotten a sense of Linux Kernel Capabilities, let's move on to
-Read only Containers.
+Let's move on to Read only Containers.
 
 Imagine a scenario where an application gets compromised. The first thing the
-bad guy wants to do is to write an exploit into the application, so that the
-next time the application starts up, it starts up with the exploit in place. If
+bad guy wants to do is to patch a backdoor into the application, so that the
+next time the application starts up, it starts up with the backdoor in place. If
 the container was read­only it would prevent leaving a backdoor in place and be
 forced to start the cycle from the beginning.
 
