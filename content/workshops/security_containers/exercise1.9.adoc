@@ -76,7 +76,7 @@ If I wanted to drop `setfcap`, `audit_write`, and `mknod`, I could use
 .Dropping setfcap, audit_write, mknod
 [source,bash]
 ----
-sudo docker run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod
+sudo docker run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod \
 fedora sleep 5 > /dev/null; pscap | grep sleep
 ----
 
@@ -88,8 +88,8 @@ drop all capabilities and just add setgid and setuid back in.
 .Whitelisting Capabilities
 [source,bash]
 ----
-sudo docker run -d --cap-drop=all --cap-add=setuid --cap-add=setgid fedora
-sleep 5 > /dev/null; pscap | grep sleep
+sudo docker run -d --cap-drop=all --cap-add=setuid --cap-add=setgid \
+fedora sleep 5 > /dev/null; pscap | grep sleep
 ----
 
 The following bellow is a comparison of the out put form blacklisting vs.
@@ -98,8 +98,8 @@ whitelisting.
 .Compare the output
 [source,bash]
 ----
-chown, dac_override, fowner, fsetid, kill, setgid, setuid, setpcap,
-net_bind_service, net_raw, sys_chroot <1>
+chown, dac_override, fowner, fsetid, kill, setgid, setuid,
+setpcap, net_bind_service, net_raw, sys_chroot <1>
 
 vs.
 
@@ -108,7 +108,7 @@ setgid, setuid <2>
 
 <1> Blacklisting: Specifying each capability you want to drop.
 
-<2> Whitelisting: Droping all and adding back the ones you need.
+<2> Whitelisting: Dropping all and adding back the ones you need.
 
 == Deep Dive into Capabilities
 
@@ -149,7 +149,7 @@ horrible.”
 `*fowner*`
 
 According to the man page, fowner conveys the ability to bypass permission
-checks on operations that normally require the filesystem UID of the process to
+checks on operations that normally require the file system UID of the process to
 match the UID of the file. For example, chmod and utime, and excludes
 operations covered by cap_dac_override and cap_dac_read_search. Here’s more
 from the man page:
@@ -167,7 +167,7 @@ it should be blocked it when you run your container is production.
 
 The man page says “don’t clear set-user-ID and set-group-ID mode bits when a
 file is modified; set the set-group-ID bit for a file whose GID does not match
-the filesystem or any of the supplementary GIDs of the calling process.”
+the file system or any of the supplementary GIDs of the calling process.”
 
 My take: if you are not running an installation, you probably do not need this
 capability. I would disable this one by default.
@@ -238,7 +238,7 @@ If you want to bind to a port below 1024 you need this capability. If you are
 running a service that listens to a port above 1024 you should drop this
 capability.
 
-The risk of this capabilty is a rogue process interpreting a service like sshd,
+The risk of this capability is a rogue process interpreting a service like sshd,
 and collecting users passwords. Running a container in a different network
 namespace reduces the risk of this capability. It would be difficult for the
 container process to get to the public network interface

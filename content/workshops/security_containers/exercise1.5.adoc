@@ -57,107 +57,60 @@ sudo docker run -it --pid=host redhatgov/alpine ps aux
 .Host processes
 [source, bash]
 ----
-PID   USER     TIME   COMMAND
-    1 root       0:05 /usr/lib/systemd/systemd --switched-root --system --deser
-    2 root       0:00 [kthreadd]
-    4 root       0:00 [kworker/0:0H]
-    6 root       0:00 [mm_percpu_wq]
-    7 root       0:00 [ksoftirqd/0]
-    8 root       0:00 [rcu_sched]
-    9 root       0:00 [rcu_bh]
-   10 root       0:00 [rcuos/0]
-   11 root       0:00 [rcuob/0]
-   12 root       0:00 [migration/0]
-   13 root       0:00 [watchdog/0]
-   14 root       0:00 [cpuhp/0]
-   15 root       0:00 [kdevtmpfs]
-   16 root       0:00 [netns]
-   17 root       0:00 [oom_reaper]
-   18 root       0:00 [writeback]
-   19 root       0:00 [kcompactd0]
-   20 root       0:00 [ksmd]
-   21 root       0:00 [crypto]
-   22 root       0:00 [kintegrityd]
-   23 root       0:00 [bioset]
-   24 root       0:00 [kblockd]
-   25 root       0:00 [ata_sff]
-   26 root       0:00 [md]
-   27 root       0:00 [devfreq_wq]
-   28 root       0:00 [watchdogd]
-   31 root       0:00 [kauditd]
-   32 root       0:01 [kswapd0]
-   33 root       0:00 [bioset]
-   80 root       0:00 [kthrotld]
-   81 root       0:00 [acpi_thermal_pm]
-   82 root       0:00 [scsi_eh_0]
-   83 root       0:00 [scsi_tmf_0]
-   84 root       0:00 [scsi_eh_1]
-   85 root       0:00 [scsi_tmf_1]
-   87 root       0:00 [dm_bufio_cache]
-   88 root       0:00 [ipv6_addrconf]
-  139 root       0:00 [bioset]
-  308 root       0:00 [iscsi_eh]
-  311 root       0:00 [rpciod]
-  312 root       0:00 [xprtiod]
-  416 root       0:00 [kworker/0:1H]
-  483 root       0:00 [kdmflush]
-  484 root       0:00 [bioset]
-  506 root       0:00 [bioset]
-  514 root       0:00 [xfsalloc]
-  515 root       0:00 [xfs_mru_cache]
-  516 root       0:00 [xfs-buf/dm-0]
-  519 root       0:00 [xfs-data/dm-0]
-  520 root       0:00 [xfs-conv/dm-0]
-  521 root       0:00 [xfs-cil/dm-0]
-  522 root       0:00 [xfs-reclaim/dm-]
-  523 root       0:00 [xfs-log/dm-0]
-  524 root       0:00 [xfs-eofblocks/d]
-  525 root       0:00 [xfsaild/dm-0]
-  603 root       0:02 /usr/lib/systemd/systemd-journald
-  619 root       0:00 /usr/lib/systemd/systemd-udevd
-  660 root       0:00 [jbd2/sda1-8]
-  661 root       0:00 [ext4-rsv-conver]
-  670 root       0:00 /sbin/auditd
-  688 81         0:03 /usr/bin/dbus-daemon --system --address=systemd: --nofork
-  690 994        0:00 /usr/sbin/chronyd
-  693 root       0:00 /usr/lib/systemd/systemd-logind
-  699 root       0:00 /usr/sbin/gssproxy -D
-  709 root       0:00 /usr/sbin/sshd -D
-  712 root       0:25 /usr/libexec/docker/docker-containerd-current --listen un
-  717 root       0:00 /sbin/agetty --noclear tty1 linux
-  733 999        0:00 /usr/lib/polkit-1/polkitd --no-debug
-  843 root       0:00 [kdmflush]
-  844 root       0:00 [bioset]
-  850 root       0:00 [xfs-buf/dm-1]
-  851 root       0:00 [xfs-data/dm-1]
-  852 root       0:00 [xfs-conv/dm-1]
-  853 root       0:00 [xfs-cil/dm-1]
-  854 root       0:00 [xfs-reclaim/dm-]
-  855 root       0:00 [xfs-log/dm-1]
-  856 root       0:00 [xfs-eofblocks/d]
-  857 root       0:00 [xfsaild/dm-1]
-  935 root       0:45 /usr/bin/dockerd-current --add-runtime oci=/usr/libexec/d
- 1079 root       0:00 /usr/libexec/docker/rhel-push-plugin
- 1088 1000       0:00 /usr/lib/systemd/systemd --user
- 1090 1000       0:00 (sd-pam)
- 1989 root       0:03 /usr/sbin/NetworkManager --no-daemon
- 2033 root       0:00 /sbin/dhclient -d -q -sf /usr/libexec/nm-dhcp-helper -pf
- 2041 root       0:00 /sbin/dhclient -d -q -sf /usr/libexec/nm-dhcp-helper -pf
- 2974 root       0:00 sshd: vagrant [priv]
- 2977 1000       0:00 sshd: vagrant@pts/0
- 2978 1000       0:00 -bash
- 3101 root       0:00 /usr/lib/systemd/systemd-machined
-10917 root       0:00 [kworker/u2:1]
-13841 root       0:00 [kworker/0:0]
-13979 root       0:00 [kworker/u2:2]
-14088 root       0:00 [kworker/0:1]
-14210 root       0:00 [kworker/u2:0]
-14355 root       0:00 [kworker/0:2]
-14379 root       0:00 sudo docker run -it --pid=host bsollar/alpine ps aux
-14380 root       0:00 /usr/bin/docker-current run -it --pid=host bsollar/alpine
-14396 root       0:00 /usr/libexec/docker/docker-containerd-shim-current 7b5179
-14418 root       0:00 ps aux
-14427 root       0:00 /usr/libexec/nm-dispatcher
+1136 root       0:00 /sbin/agetty --keep-baud 115200 38400 9600 ttyS0 vt220
+1137 root       0:00 /sbin/agetty --noclear tty1 linux
+1320 root       0:00 rhnsd
+2993 root       0:00 [kworker/0:1]
+3067 root       0:00 [kworker/0:3]
+3211 root       0:00 [kworker/u30:0]
+3645 vpopmail   0:00 pickup -l -t unix -u
+3849 root       0:00 [kworker/0:2]
+4056 root       0:00 [kworker/u30:1]
+4529 root       0:00 /usr/lib/systemd/systemd-machined
+4559 root       0:00 sudo docker run -it --pid=host redhatgov/alpine ps aux
+4560 root       0:00 /usr/bin/docker-current run -it --pid=host redhatgov/alpi
+4564 root       0:00 /usr/lib/systemd/systemd-udevd
+4593 root       0:00 [kdmflush]
+4594 root       0:00 [bioset]
+4597 root       0:00 [xfs-buf/dm-1]
+4598 root       0:00 [xfs-data/dm-1]
+4599 root       0:00 [xfs-conv/dm-1]
+4600 root       0:00 [xfs-cil/dm-1]
+4601 root       0:00 [xfs-reclaim/dm-]
+4602 root       0:00 [xfs-log/dm-1]
+4603 root       0:00 [xfs-eofblocks/d]
+4604 root       0:00 [xfsaild/dm-1]
+4605 root       0:00 /usr/lib/systemd/systemd-udevd
+4608 root       0:00 /usr/lib/systemd/systemd-udevd
+4609 root       0:00 ps aux
+10538 root       0:00 /usr/sbin/lvmetad -f
+10711 root       0:00 [dm_bufio_cache]
+10874 root       1:04 /usr/bin/docker-current daemon --authorization-plugin=rhe
+10880 root       0:04 [loop0]
+10882 root       0:00 [loop1]
+10884 root       0:00 [kdmflush]
+10885 root       0:00 [bioset]
+10886 root       0:00 [kcopyd]
+10887 root       0:00 [bioset]
+10888 root       0:00 [dm-thin]
+10889 root       0:00 [bioset]
+11527 root       0:00 /usr/libexec/docker/rhel-push-plugin
+12622 root       0:00 /usr/sbin/crond -n
+13170 root       0:03 node /usr/lib/node_modules/wetty/bin/wetty.js --sslkey /h
+13193 root       0:00 /usr/sbin/sshd -D
+24142 root       0:00 login -- ec2-user
+24147 1000       0:00 -zsh
+24725 root       0:00 udevadm monitor -u -s block
+25323 root       0:00 udevadm monitor -u -s block
+25513 root       0:00 udevadm monitor -u -s block
+25948 root       0:00 udevadm monitor -u -s block
+26095 root       0:00 udevadm monitor -u -s block
+26250 root       0:00 udevadm monitor -u -s block
+26825 root       0:00 udevadm monitor -u -s block
+26915 root       0:00 udevadm monitor -u -s block
+27422 root       0:00 udevadm monitor -u -s block
+32327 root       0:00 [kworker/0:0]
+32644 root       0:00 [kworker/u30:2]
 ----
 
 As you can see we now have access to all of the processes running on host system by using the `--pid` flag.
@@ -186,13 +139,13 @@ sudo docker run -it redhatgov/alpine ip addr show
 .Container network
 [source, bash]
 ----
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1000             <1>
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1               <1>
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
     inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
-107: eth0@if108: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP <2>
+50: eth0@if51: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP  <2>
     link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff
     inet 172.17.0.2/16 scope global eth0
        valid_lft forever preferred_lft forever
@@ -206,11 +159,11 @@ sudo docker run -it redhatgov/alpine ip addr show
 {{% /panel %}}
 {{< /panel_group >}}
 
-By default a container's network is isolated with it's own IP and interface. By changing the namespace to host by using the `--network` flag, the process will have access to the host machines network interface.
+By default a container's network is isolated with it's own IP and interface. By changing the namespace to host by using the `--net` flag, the process will have access to the host machines network interface.
 
 [source,bash]
 ----
-sudo docker run -it --network=host redhatgov/alpine ip addr show
+sudo docker run -it --net=host redhatgov/alpine ip addr show
 ----
 
 {{< panel_group >}}
@@ -221,44 +174,37 @@ sudo docker run -it --network=host redhatgov/alpine ip addr show
 .Host network
 [source, bash]
 ----
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1000           <1>
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1                <1>
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
     inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
-2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP qlen 1000   <2>
-    link/ether 52:54:00:82:00:d4 brd ff:ff:ff:ff:ff:ff
-    inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic eth0
-       valid_lft 83285sec preferred_lft 83285sec
-    inet6 fe80::5054:ff:fe82:d4/64 scope link
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc pfifo_fast state UP qlen 1000   <2>
+    link/ether 0e:d1:08:25:e2:78 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.246/24 brd 10.0.2.255 scope global dynamic eth0
+       valid_lft 3076sec preferred_lft 3076sec
+    inet6 fe80::cd1:8ff:fe25:e278/64 scope link
        valid_lft forever preferred_lft forever
-3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP qlen 1000   <3>
-    link/ether 08:00:27:0b:1b:02 brd ff:ff:ff:ff:ff:ff
-    inet 172.28.128.3/24 brd 172.28.128.255 scope global dynamic eth1
-       valid_lft 1196sec preferred_lft 1196sec
-    inet6 fe80::a00:27ff:fe0b:1b02/64 scope link
-       valid_lft forever preferred_lft forever
-4: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN       <4>
-    link/ether 02:42:07:c4:e0:2d brd ff:ff:ff:ff:ff:ff
+3: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN         <3>
+    link/ether 02:42:c7:e8:36:fb brd ff:ff:ff:ff:ff:ff
     inet 172.17.0.1/16 scope global docker0
        valid_lft forever preferred_lft forever
-    inet6 fe80::42:7ff:fec4:e02d/64 scope link
+    inet6 fe80::42:c7ff:fee8:36fb/64 scope link
        valid_lft forever preferred_lft forever
 ----
 
 <1> Loopback
 <2> eth0
-<3> eth1
-<4> docker0
+<3> docker0
 
-*--network=container:NAME_or_ID*: Tells Docker to put this container’s processes inside of the network stack that has already been created inside of another container. The new container’s processes will be confined to their own filesystem and process list and resource limits, but will share the same IP address and port numbers as the first container, and processes on the two containers will be able to connect to each other over the loopback interface.
+*--net=container:NAME_or_ID*: Tells Docker to put this container’s processes inside of the network stack that has already been created inside of another container. The new container’s processes will be confined to their own filesystem and process list and resource limits, but will share the same IP address and port numbers as the first container, and processes on the two containers will be able to connect to each other over the loopback interface.
 
 {{% /panel %}}
 {{< /panel_group >}}
 
 {{< alert warning >}}
-Note: --network="host" gives the container full access to local system services such as D-bus and is therefore considered insecure.
+Note: --net="host" gives the container full access to local system services such as D-bus and is therefore considered insecure.
 {{< /alert >}}
 
 === Sharing Network Namespaces
@@ -294,11 +240,11 @@ Should return nothing. Because the namespace is not shared.
 {{% /panel %}}
 {{< /panel_group >}}
 
-Now let's use the `--network=container:` flag to attach to the `http` containers network interface and try the curl command again.
+Now let's use the `--net=container:` flag to attach to the `http` containers network interface and try the curl command again.
 
 [source,bash]
 ----
-sudo docker run --rm --network=container:http redhatgov/fedora curl -s localhost
+sudo docker run --rm --net=container:http redhatgov/fedora curl -s localhost
 ----
 
 {{< panel_group >}}

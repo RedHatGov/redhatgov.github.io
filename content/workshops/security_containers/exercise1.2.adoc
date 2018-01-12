@@ -40,29 +40,7 @@ beginning of your Dockerfile then change back to the correct user with another
 .Example Dockerfile
 [source,bash]
 ----
-FROM fedora:25
-
-RUN groupadd -r swuser -g 433 && \
-    useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
-
-USER root <1>
-
-RUN dnf install -y vim
-
-USER swuser <2>
-----
-
-<1> Switch to the root user to perform actions that need elevated permissions
-such as installing software via yum/dnf.
-
-<2> Then switch back to a lower permissions user to run the image.
-
-Now we can test this out by building the following `Dockerfile`
-
-.Dockerfile
-[source,bash]
-----
-FROM fedora:25
+FROM fedora:27
 
 RUN groupadd -r swuser -g 433 && \
     useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
@@ -74,17 +52,29 @@ RUN dnf install -y vim
 USER swuser
 ----
 
-=== Step 2:
+*USER root*: Switch to the root user to perform actions that need elevated permissions  such as installing software via yum/dnf.
+
+*USER swuser*: Then switch back to a lower permissions user to run the image.
+
+Now we can test this out by building the following `Dockerfile`
+
+=== Step 1:
 
 Build the `Dockerfile`
 
 .Make new directory & Build Dockerfile
 [source,bash]
 ----
-mkdir user-test
+mkdir ~/user-test
+----
 
-cd user-test
+[source,bash]
+----
+cd ~/user-test
+----
 
+[source,bash]
+----
 vim Dockerfile
 ----
 
@@ -92,9 +82,24 @@ vim Dockerfile
 Copy the `Dockerfile` above. Press `i` for Insert, then cut and paste
 `control + v`, then escape and write the file `esc`, `:wq`.
 
-Now build the image
+.Dockerfile
+[source,bash]
+----
+FROM fedora:27
 
-.build the image
+RUN groupadd -r swuser -g 433 && \
+    useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
+
+USER root
+
+RUN dnf install -y vim
+
+USER swuser
+----
+
+Now build the image.  The build time is similar as before (approximately 3 minutes)
+
+.Build the image
 [source,bash]
 ----
 sudo docker build -t user-test:1 .
@@ -102,7 +107,7 @@ sudo docker build -t user-test:1 .
 
 Now run and test the image to see who the container is running as. What do you see?
 
-.run the image
+.Run the image
 [source,bash]
 ----
 sudo docker run --rm -it user-test:1 whoami

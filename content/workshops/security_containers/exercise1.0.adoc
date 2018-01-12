@@ -48,15 +48,26 @@ on Cockpit-managed servers such as Project Atomic hosts.
 
 === Step 0:
 
+== Accessing the Cockpit web UI
+
+Use this URL to access the Cockpit console on your node, just change the <workshop name> and <student number>.  Ask your instructor for these values once the workshop lab begins.
+
+[source,bash]
+----
+https://<workshop name>.<student number>.redhatgov.io:9090
+----
+
 image::login.png[Login to Cockpit]
 
 .Login to Cockpit
 [source,bash]
 ----
-Username: cockpit
+Username: ec2-user
 
 Password: redhat!@#
 ----
+
+After logging in, you should see the Cockpit web UI.
 
 === Step 1:
 
