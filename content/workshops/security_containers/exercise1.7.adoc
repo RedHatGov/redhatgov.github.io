@@ -321,7 +321,7 @@ Let's run strace on the Netcat program to identify the syscalls we need for out 
 
 [source,bash]
 ----
-sudo docker run --rm -it --cap-add SYS_PTRACE redhatgov/fedora bash
+sudo docker run --rm -it --cap-drop SYS_PTRACE redhatgov/fedora bash
 ----
 
 Then from inside the container run strace and the netcat command.
