@@ -5,6 +5,9 @@ workshop_weight: 0
 layout: lab
 ---
 
+
+# Prerequisites
+
 # Your environments - OpenShift Container Platform & browser-based terminal
 
 {{% alert success %}}
@@ -13,42 +16,26 @@ We will use the student number you were given to ensure you don't clash with cla
 
 ## Your OCP environment resides here:
 
-https://master.ocp.test-demo-dlt.com:8443
+https://master.ocp.demo-dlt.com:8443
 
 Your user ID will be user{YOUR#} 
 
 Your password will be "example_password"
 
-## Your terminal environment resides here:
-
-https://A_CUSTOMER.{YOUR#}.demo-dlt.com/wetty/ssh/ec2-user
-
-When your browser session appears in your browser, it will prompt you for a login ID; use "ec2-user"
-
-You will then be prompted for a password for which you will not see when typed; use "redhat!@#"
-
-After successful login, you will have a command prompt!
-
-# Install the command line tools for your operating system
-
 {{% alert success %}}
-If we provided you a laptop or a browser-based command-line for this workshop.  We already set all this up for you - so you can skip below.
+This workshop is done entierly through the browser, but you do need a free personal GitHub account. 
 {{% /alert %}}
 
-The officially supported instructions for installing the oc client via Red Hat are [located here][1].  
+## Create a Github account
+If you don't have a person GitHub account please sign up [here][6] to create a free account.
 
-TL;DR:
-
-* Download a .tgz [from Red Hat][5] and add to your PATH
-
-
-# Create a Github account
-Create a FREE github account by going [to this link][6] and following their instructions.
+* [Create GitHub Account][6]
+* [Download Git Client (optional)][8]
 
 
 [1]: https://docs.openshift.com/enterprise/latest/cli_reference/get_started_cli.html
 [2]: https://github.com/openshift/origin/releases
 [3]: http://brew.sh/
 [4]: http://git-scm.com/downloads
-[5]: https://access.redhat.com/downloads/content/290
 [6]: https://github.com/join?source=header-home
+[8]: https://git-scm.com/downloads
