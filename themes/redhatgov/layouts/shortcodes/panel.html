@@ -1,12 +1,17 @@
+{{ $md5Inner := md5 .Inner }}
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4 class="panel-title">
-      <a data-toggle="collapse" href="#collapse{{ md5 .Inner }}" class="collapsed">
+      {{ with .Parent }}
+      <a data-toggle="collapse" href="#collapse{{ $md5Inner }}" {{ if ne (.Get "collapsed") "false" }}class="collapsed"{{ end }}>
+      {{ end }}
         {{ .Get 0 }}
       </a>
     </h4>
   </div>
-  <div id="collapse{{ md5 .Inner }}" class="panel-collapse collapse">
+  {{ with .Parent }}
+  <div id="collapse{{ $md5Inner }}" class="panel-collapse collapse {{ if eq (.Get "collapsed") "false" }}in{{ end }}">
+  {{ end }}
     <div class="panel-body">
        {{ .Inner }}
     </div>
