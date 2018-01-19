@@ -18,7 +18,7 @@ being executed to be executed with the privileges of the owner or the group.
 For example, if a file was owned by the root user and has the setuid bit set,
 no matter who executed the file it would always run with root user privileges.
 
-Chances are that your application doesn’t need any
+Chances are that your application does not need any elevated privileges.
 https://en.wikipedia.org/wiki/Setuid[setuid or setgid] binaries. If you can
 disable or remove such binaries, you stop any chance of them being used for
 https://en.wikipedia.org/wiki/Buffer_overflow[buffer overruns],
@@ -29,9 +29,7 @@ https://en.wikipedia.org/wiki/Privilege_escalation[privilege escalation attacks]
 
 === Step 1:
 
-To get a list of such binaries in an image, try running
-
-`find / -perm +6000 -type f -exec ls -ld {} \;`
+To get a list of binaries with special permissions in a container image, the following syntax can be used `find / -perm +6000 -type f -exec ls -ld {} \;`. Note, no need to type this, see next command.
 
 .Test the latest Debian image
 [source,bash]
@@ -39,14 +37,59 @@ To get a list of such binaries in an image, try running
 sudo docker run debian:jessie find / -perm +6000 -type f -exec ls -ld {} \; 2> /dev/null
 ----
 
+.Example output
+[source,bash]
+----
+-rwsr-xr-x. 1 root root 40000 Mar 29  2015 /bin/mount
+-rwsr-xr-x. 1 root root 70576 Oct 28  2014 /bin/ping
+-rwsr-xr-x. 1 root root 61392 Oct 28  2014 /bin/ping6
+-rwsr-xr-x. 1 root root 40168 May 17  2017 /bin/su
+-rwsr-xr-x. 1 root root 27416 Mar 29  2015 /bin/umount
+-rwxr-sr-x. 1 root shadow 35408 May 27  2017 /sbin/unix_chkpwd
+-rwxr-sr-x. 1 root shadow 62272 May 17  2017 /usr/bin/chage
+-rwsr-xr-x. 1 root root 53616 May 17  2017 /usr/bin/chfn
+-rwsr-xr-x. 1 root root 44464 May 17  2017 /usr/bin/chsh
+-rwxr-sr-x. 1 root shadow 22744 May 17  2017 /usr/bin/expiry
+-rwsr-xr-x. 1 root root 75376 May 17  2017 /usr/bin/gpasswd
+-rwsr-xr-x. 1 root root 39912 May 17  2017 /usr/bin/newgrp
+-rwsr-xr-x. 1 root root 54192 May 17  2017 /usr/bin/passwd
+-rwxr-sr-x. 1 root tty 27232 Mar 29  2015 /usr/bin/wall
+----
+
+=== Step 2:
+
 You can then “defang” the binaries with `chmod a-s` to remove the suid bit.
 For example, you can create a defanged Debian image with the following Dockerfile:
+
+[source,bash]
+----
+cd ~
+----
+
+[source,bash]
+----
+mkdir ~/defanged-debian
+----
+
+[source,bash]
+----
+cd ~/defanged-debian
+----
+
+[source,bash]
+----
+vim Dockerfile
+----
+
+[NOTE]
+Copy the `Dockerfile` below. Press `i` for Insert, then cut and paste
+`control + v`, then escape and write the file `esc`, `:wq`.
 
 .Dockerfile
 [source,bash]
 ----
 FROM debian:jessie
-RUN find / -perm +6000 -type f -exec chmod a-s {} \; || true
+RUN find / -xdev -perm +6000 -type f -exec chmod a-s {} \; || true
 ----
 
 The `|| true` allows you to ignore any errors from find. The setuid and setgid
@@ -58,22 +101,9 @@ required to execute a given task, such as setting a password.
 
 *Build it:*
 
-[source,bash]
-----
-mkdir defanged-debian
-
-cd defanged-debian
-
-vim Dockerfile <1>
-----
-
-[NOTE]
-Copy the `Dockerfile` above. Press `i` for Insert, then cut and paste
-`control + v`, then escape and write the file `esc`, `:wq`.
-
 Build the new image.
 
-.built the image
+.Build the image
 [source,bash]
 ----
 sudo docker build -t defanged-debian .
@@ -87,6 +117,13 @@ sudo docker build -t defanged-debian .
 ----
 sudo docker run --rm defanged-debian \
   find / -perm +6000 -type f -exec ls -ld {} \; 2> /dev/null | wc
+----
+
+For comparison, now do the same command on your RHEL host, with a slight modification for the most recent version of findutils.
+
+[source,bash]
+----
+sudo find / -perm /6000 -type f -exec ls -ld {} \; 2> /dev/null | wc
 ----
 
 It's more likely that your Dockerfile will rely on a setuid/setgid binary than

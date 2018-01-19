@@ -13,7 +13,7 @@ layout: lab
 image::file.png[]
 
 Now that you've gotten a sense of how Cockpit works, we are going to start
-digging in at the commandline on Container security. You can use either the
+digging in at the command line on Container security. You can use either the
 Terminal in Cockpit from your browser, a SSH terminal or Terminal client like
 PuTTy. The choice is yours.
 
@@ -94,13 +94,33 @@ sha1sum -b redis.tar.gz
 Here, we’re creating a 160-bit SHA-1 checksum. The -b flag tells the sha1sum
 utility that we are dealing with binary data, not text.
 
-Once you’ve tested and verified the software, you can add something like the
-following first RUN command to your Dockerfile: (about 2-3min build time)
+You can use your choice of [ Vi | Vim | Nano ] to copy and paste this into a
+new file called `Dockerfile`.
+
+.Build the Dockerfile
+[source,bash]
+----
+mkdir ~/redis
+----
+
+[source,bash]
+----
+cd ~/redis
+----
+
+[source,bash]
+----
+vim Dockerfile
+----
+
+[NOTE]
+Copy the text below. Type `vim Dockerfile`, Press `i` for Insert, then cut and
+paste `control + v`, then escape and write the file `esc`, `:wq`.
 
 .Dockerfile Redis with verified software download
 [source,bash]
 ----
-FROM fedora:25
+FROM fedora:27
 
 # Verified sha1sum
 RUN cd /tmp && \
@@ -136,31 +156,17 @@ CMD ["redis-server", "/etc/redis/redis.conf"]
 EXPOSE 6379
 ----
 
-You can use your choice of [ Vi | Vim | Nano ] to copy and paste this into a
-new file called `Dockerfile`. Notice the `.` it just means build in the
-current directory.
-
-.Build the Dockerfile
-[source,bash]
-----
-mkdir redis
-
-cd redis
-
-vim Dockerfile
-----
-
-[NOTE]
-Copy the text above. Type `vim Dockerfile`, Press `i` for Insert, then cut and
-paste `control + v`, then escape and write the file `esc`, `:wq`.
 
 Now build the image.
 
-.built the image
+.Build the image
 [source,bash]
 ----
 sudo docker build -t redis:3.2.8 .
 ----
+
+[NOTE]
+Notice the `.` at the end of the commands means build the container in the current directory.
 
 After about 2-3 minutes (Depending on how AWS is feeling today) you should see
 something similar to below;
@@ -246,5 +252,3 @@ control + c
 
 {{% /panel %}}
 {{< /panel_group >}}
-
-

@@ -29,14 +29,26 @@ Create the following directories.
 .Setup directory and file
 [source,bash]
 ----
-mkdir selinux
+mkdir ~/selinux
+----
 
-cd  selinux
+[source,bash]
+----
+cd  ~/selinux
+----
 
+[source,bash]
+----
 mkdir data
+----
 
-echo "SELINUX!" > data/file1.txt
+[source,bash]
+----
+echo "SELINUX" > data/file1.txt
+----
 
+[source,bash]
+----
 cat data/file1.txt
 ----
 
@@ -54,7 +66,7 @@ sestatus | grep mode
 sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
 ----
 
-You can see the reason by inspecting the folder’s security context:
+This action will result in a Permission denied error.  You can see the reason by inspecting the folder’s security context:
 
 [source,bash]
 ----
@@ -79,7 +91,7 @@ The containers should be running at `svirt_sandbox_file_t`
 
 Apply the container label to the data by using the `chcon` tool
 
-.relable the data dir
+.Re-label the data dir
 [source,bash]
 ----
 chcon -Rt svirt_sandbox_file_t data
@@ -87,7 +99,7 @@ chcon -Rt svirt_sandbox_file_t data
 
 Try to cat out the file again from the container.
 
-.run docker again
+.Run docker again
 [source,bash]
 ----
 sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
@@ -95,16 +107,15 @@ sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
 
 Append text from the container to the file
 
-.append text
+.Append text
 [source,bash]
 ----
-sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "Thank You For
-Attending!" >> /data/file1.txt'
+sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "Thank You For Attending" >> /data/file1.txt'
 ----
 
 [source,bash]
 ----
-cat data/file1.txt
+sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
 ----
 
 == DOCKER SELINUX SECURITY POLICY
@@ -202,4 +213,3 @@ image::selinux7.png[Stopped by Kernel]
 Linux for mere mortals - 2015 Red Hat Summit]
 - https://www.nsa.gov/what-we-do/research/selinux/mailing-list.shtml[SELinux NSA
 Mailing List]
-
