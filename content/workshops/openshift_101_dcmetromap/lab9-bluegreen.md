@@ -11,10 +11,11 @@ When implementing continuous delivery for your software one very useful techniqu
 ## Before starting
 Before we get started with the Blue/Green deployment lab, lets clean up some of the projects from the previous lab. 
 
-```bash
-$ oc delete all -l app=jenkins-ephemeral
-$ oc delete all -l app=nodejs-helloworld-sample
-```
+<code>
+$ oc delete all -l app=jenkins-ephemeral</br>
+$ oc delete all -l app=nodejs-helloworld-sample</br>
+$ oc delete project cicd-{{< span "userid" "YOUR#" >}}</br>
+</code>
 
 ## Lets deploy an application
 To demonstrate Blue/Green deployments, we'll use a simple application that renders a colored box as an example. Using your GitHub account, please fork the following https://github.com/RedHatGov/openshift-workshops [project][1].
@@ -23,10 +24,11 @@ You should be comfortable deploying an app at this point, but here are the steps
 
 > <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
-```bash
-$ oc new-app --name=green [your-project-repo-url] --context-dir=dc-metro-map
-$ oc expose service green
-```
+<code>
+$ oc new-project bluegreen-{{<span "userid" "YOUR#" >}}</br>
+$ oc new-app --name=green [your-project-repo-url] --context-dir=dc-metro-map</br>
+$ oc expose service green</br>
+</code>
 
 Note that we exposed this application using a route named "green". Wait for the application to become available, then navigate to your application and validate it deployed correctly.
 
@@ -70,7 +72,7 @@ This will bring up the Route configuration yaml. Edit the element spec: to: name
 
 >Navigate to the Routes view from the left-hand menu:
 
-<img src="../images/ocp-lab-bluegreen-navtoroutes.png" width="900"><br/>
+<img src="../images/ocp-lab-bluegreen-navtoroutes.png" width="500"><br/>
 
 >In your Routes overview, click on the "green" route:
 
@@ -83,7 +85,7 @@ This will bring up the Route configuration yaml. Edit the element spec: to: name
 
 >Edit the Route: select the name dropdown and change the value from "green" to "blue":
 
-<img src="../images/ocp-lab-bluegreen-edit.png" width="900"><br/>
+<img src="../images/ocp-lab-bluegreen-edit.png" width="700"><br/>
       
 {{% /panel %}}
 {{< /panel_group >}}
@@ -96,3 +98,5 @@ If you want to read more about Blue/Green check out [this post][2] with a longer
 
 [1]: https://github.com/RedHatGov/openshift-workshops
 [2]: http://martinfowler.com/bliki/BlueGreenDeployment.html
+
+{{< importPartial "footer/footer.html" >}}
