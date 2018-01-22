@@ -16,7 +16,7 @@ install:
   - rm -rf public || exit 0
 
 script:
-  - ./bin/hugo
+  - ./bin/hugo --buildFuture --verbose
   - cd public
   - touch .nojekyll
   - echo "redhatgov.io" > CNAME
