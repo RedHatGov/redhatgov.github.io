@@ -24,9 +24,9 @@ script:
 
 deploy:
   provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  target_branch: master
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  target-branch: master
   on:
     branch: docs
 
