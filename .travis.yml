@@ -1,6 +1,6 @@
-#branches:
-#  only:
-#    - docs
+branches:
+  only:
+    - DOESNOTEXIST
 
 before_install:
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then openssl aes-256-cbc -K $encrypted_3a2ffd558b46_key -iv $encrypted_3a2ffd558b46_iv -in secrets.tar.enc -out secrets.tar -d; fi'
@@ -28,7 +28,7 @@ deploy:
   github-token: $GITHUB_TOKEN
   target-branch: master
   on:
-    branch: docs
+    branch: DOESNOTEXIST
 
 notifications:
   slack: redhat:9meDz4fnYsXtr3krfjmSXADX
