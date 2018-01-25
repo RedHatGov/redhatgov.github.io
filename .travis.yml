@@ -1,6 +1,6 @@
 branches:
   only:
-    - DOESNOTEXIST
+    - docs
 
 before_install:
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then openssl aes-256-cbc -K $encrypted_3a2ffd558b46_key -iv $encrypted_3a2ffd558b46_iv -in secrets.tar.enc -out secrets.tar -d; fi'
@@ -24,11 +24,11 @@ script:
 
 deploy:
   provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  target-branch: master
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  target_branch: master
   on:
-    branch: DOESNOTEXIST
+    branch: docs
 
 notifications:
   slack: redhat:9meDz4fnYsXtr3krfjmSXADX
