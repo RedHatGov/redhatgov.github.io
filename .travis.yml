@@ -1,12 +1,13 @@
 branches:
   only:
-    - DOESNOTEXIST
+    - docs
 
 before_install:
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then openssl aes-256-cbc -K $encrypted_3a2ffd558b46_key -iv $encrypted_3a2ffd558b46_iv -in secrets.tar.enc -out secrets.tar -d; fi'
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then tar xvf secrets.tar; fi'
 
 install:
+  - sudo apt-get install tree
   - gem install asciidoctor
   - sudo pip install Pygments
   - sudo pip install -r scripts/requirements.txt
@@ -20,15 +21,20 @@ script:
   - cd public
   - touch .nojekyll
   - echo "redhatgov.io" > CNAME
-  - ls -lah
+  - tree workshops
+  - tree events
+  - cd ..
+  - pwd
 
 deploy:
   provider: pages
+  local-dir: public
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   target-branch: master
+  verbose: true
   on:
-    branch: DOESNOTEXIST
+    branch: docs
 
 notifications:
   slack: redhat:9meDz4fnYsXtr3krfjmSXADX
