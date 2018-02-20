@@ -42,6 +42,7 @@ Click 'advanced options' and fill out the boxes to point to the fork and context
 </blockquote>
 
 <p>
+Name: dc-metro-map
 The github repository URL is: https://github.com/YOUR_ACCOUNT/openshift-workshops.git<br/>
 The github context-dir is: /dc-metro-map<br/>
 </p>
