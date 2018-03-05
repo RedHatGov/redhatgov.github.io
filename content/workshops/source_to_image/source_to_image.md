@@ -176,7 +176,7 @@ Take a breath
 
 ## Step 12 - Deploy the App from the S2I Builder Image
 ```terminal
-oc new-app https://github.com/kevensen/openshift-gochat-client.git --image-stream=golang-s2i --env ARGS="-host :8080 -chatServer gochat-server-gochat-server.$APP_DOMAIN -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr -chatServerDomain $APP_DOMAIN"
+oc new-app https://github.com/kevensen/openshift-gochat-client.git --image-stream=golang-s2i --env ARGS="-host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr"
 ```
 
 ## Step 13 - Expose the App

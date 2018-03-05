@@ -20,23 +20,27 @@ oc new-project gochat-container-$OCP_USER
 Start a new build from the Dockerfile in the [gochat-container](https://github.com/kevensen/gochat-client-container) repository.
 
 ```terminal
-oc new-build https://github.com/kevensen/gochat-client-container -e CHAT_SERVER_DOMAIN=$APP_DOMAIN -e CHAT_SERVER=gochat-server-gochat-server.$APP_DOMAIN
+oc new-build https://github.com/kevensen/gochat-client-container -e CHAT_SERVER=gochat-server.gochat-server.svc.cluster.local:8080
 ```
 
 ## Step 3 - Let's Take a Pause
 Watch the deployment
+```terminal
+oc logs -f bc/gochat-client-container
+```
+Then **ctrl-c** once you've had enough.
 
-## Step 3 - Deploy from ImageStream
+## Step 4 - Deploy from ImageStream
 ```terminal
 oc new-app gochat-client-container
 ```
 
-## Step 4 - Expose the Containerized Gochat App
+## Step 5 - Expose the Containerized Gochat App
 ```terminal
 oc expose svc gochat-client-container
 ```
 
-## Step 5 - Access the App
+## Step 6 - Access the App
 Go back to the OpenShift WebUI and click on the "gochat" URL.
 
 {{< panel_group >}}
@@ -47,7 +51,7 @@ Go back to the OpenShift WebUI and click on the "gochat" URL.
 {{% /panel %}}
 {{< /panel_group >}}
 
-## Step 6 - Sign in to the App
+## Step 7 - Sign in to the App
 Log in to the app with your OpenShift token.
 
 {{< panel_group >}}
@@ -58,13 +62,13 @@ Log in to the app with your OpenShift token.
 {{% /panel %}}
 {{< /panel_group >}}
 
-## Step 7 - Test the App
+## Step 8 - Test the App
 Send a message.
 
-## Step 8 - Celebrate
+## Step 9 - Celebrate
 **Yay**
 
-## Step 9 - Logout
+## Step 10 - Logout
 {{< panel_group >}}
 {{% panel "Gochat Logout" %}}
 

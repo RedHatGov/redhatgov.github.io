@@ -120,13 +120,7 @@ Paste the command from **Step 8**.
 ```terminal
 export OCP_USER=$(oc whoami)
 ```
-## Step 13 - Export the Application Subdomain Variable
-The moderator will provide you the value that goes on the right side of the equal sign.
-```terminal
-export APP_DOMAIN=
-```
-
-## Step 14 - Create a Shared Screen
+## Step 13 - Create a Shared Screen
 Creating a shared screen will allow the moderators to assist you better by viewing your terminal session.  Be sure to replace {{USER_NAME}} with your assigned username.
 ```terminal
 screen -m -S shared-$OCP_USER

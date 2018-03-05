@@ -249,7 +249,7 @@ In the **Application Name** field, enter **gochat-client**
 
 In the **Application Command Line Arguments** field, enter the following:
 ```terminal
--host :8080 -chatServer gochat-server-gochat-server.$APP_DOMAIN -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr -chatServerDomain $APP_DOMAIN
+-host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr
 ```  
 Click **Create**
 ## Step 10 - Sign in to the App

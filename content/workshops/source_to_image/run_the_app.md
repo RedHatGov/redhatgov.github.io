@@ -18,11 +18,16 @@ oc expose svc gochat
 ```terminal
 go get github.com/kevensen/openshift-gochat-client
 ```
-## Step 3 - Run the App
+## Step 3 - Get Your OpenShift Token
+You'll need this in step 5.
 ```terminal
-openshift-gochat-client -host :8080 -chatServer gochat-server-gochat-server.$APP_DOMAIN -templatePath go/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr -chatServerDomain $APP_DOMAIN
+oc whoami -t
 ```
-## Step 4 - Access the App
+## Step 4 - Run the App
+```terminal
+openshift-gochat-client -host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath go/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr
+```
+## Step 5 - Access the App
 Go back to the OpenShift WebUI and click on the "gochat" URL.
 
 {{< panel_group >}}
@@ -33,7 +38,7 @@ Go back to the OpenShift WebUI and click on the "gochat" URL.
 {{% /panel %}}
 {{< /panel_group >}}
 
-## Step 5 - Sign in to the App
+## Step 6 - Sign in to the App
 Log in to the app with your OpenShift token.
 
 {{< panel_group >}}
