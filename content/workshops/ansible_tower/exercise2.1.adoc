@@ -57,50 +57,56 @@ image::at_lic_prompt.png[caption="Figure 4: ", title="Uploading a License"]
 
 === Step 2:
 
-At the commandline in your Tower instance download the encrypted license file via the curl command.
+In a separate browser tab, browse to https://www.ansible.com/workshop-license to request a workshop license.
 
-[source,bash]
-----
-curl -O https://s3.amazonaws.com/ansible-tower-workshop-license/license
-----
+=== Step 3:
 
-Then Decrypt the license file via Ansible Vault.
-**The instructor should provide the password**
+Back in the Tower UI, choose BROWSE image:at_browse.png[LicB,35,25] and upload your recently downloaded license file into Tower.
 
-[source,bash]
-----
-ansible-vault decrypt license --ask-vault-pass
+=== Step 4:
 
-...
+Select "_I agree to the End User License Agreement_".
 
-Vault password:
-----
+=== Step 5:
 
-Now use curl to POST the license to the Tower API endpoint.
-
-[source,bash]
-----
-curl -k https://localhost/api/v1/config/ \
-     -H 'Content-Type: application/json' \
-     -X POST \
-     --data @license \
-     --user admin:ansibleWS
-
-----
-
+Click on SUBMIT image:at_submit.png[Sub,35,25]
 
 // === Step 3:
 
-// Back in the Tower UI, choose BROWSE image:at_browse.png[LicB,35,25] and upload your
-// recently downloaded license file into Tower.
+// In a seperate browser tab, browse to https://www.ansible.com/workshop-license to request a workshop license.
 
-// === Step 4:
+// At the commandline in your Tower instance download the encrypted license file via the curl command.
 
-// Select "_I agree to the End User License Agreement_"
+// [source,bash]
+// ----
+// curl -O https://s3.amazonaws.com/ansible-tower-workshop-license/license
+// ----
 
-// === Step 5:
+// Then Decrypt the license file via Ansible Vault.
+// **The instructor should provide the password**
 
-// Click on SUBMIT image:at_submit.png[Sub,35,25]
+// [source,bash]
+// ----
+// ansible-vault decrypt license --ask-vault-pass
+// 
+// ...
+
+// Vault password:
+// ----
+
+// Now use curl to POST the license to the Tower API endpoint.
+
+// [source,bash]
+// ----
+// curl -k https://localhost/api/v1/config/ \
+//      -H 'Content-Type: application/json' \
+//      -X POST \
+//      --data @license \
+//      --user admin:ansibleWS
+// 
+// ----
+
+
 
 
 
