@@ -24,3 +24,5 @@ Click [here][3] for instructions on how to install Golang.
 [1]: https://docs.openshift.com/enterprise/latest/cli_reference/get_started_cli.html
 [2]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 [3]: https://golang.org/doc/install
+
+{{< importPartial "footer/footer.html" >}}

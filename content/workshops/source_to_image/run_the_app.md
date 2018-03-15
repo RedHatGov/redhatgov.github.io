@@ -18,16 +18,16 @@ oc expose svc gochat
 ```terminal
 go get github.com/kevensen/openshift-gochat-client
 ```
-## Step 3 - Get Your OpenShift Token
+## Step 3 - Run the App
+```terminal
+openshift-gochat-client -host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath go/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr
+```
+## Step 5 - Get Your OpenShift Token
 You'll need this in step 5.
 ```terminal
 oc whoami -t
 ```
-## Step 4 - Run the App
-```terminal
-openshift-gochat-client -host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath go/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr
-```
-## Step 5 - Access the App
+## Step 6 - Access the App
 Go back to the OpenShift WebUI and click on the "gochat" URL.
 
 {{< panel_group >}}
@@ -38,7 +38,7 @@ Go back to the OpenShift WebUI and click on the "gochat" URL.
 {{% /panel %}}
 {{< /panel_group >}}
 
-## Step 6 - Sign in to the App
+## Step 7 - Sign in to the App
 Log in to the app with your OpenShift token.
 
 {{< panel_group >}}
@@ -49,10 +49,10 @@ Log in to the app with your OpenShift token.
 {{% /panel %}}
 {{< /panel_group >}}
 
-## Step 7 - Test the App
+## Step 8 - Test the App
 Send a message!
 
-## Step 8 - Logout
+## Step 9 - Logout
 {{< panel_group >}}
 {{% panel "Gochat Logout" %}}
 
@@ -61,5 +61,7 @@ Send a message!
 {{% /panel %}}
 {{< /panel_group >}}
 
-## Step 9 - Quit the App
+## Step 10 - Quit the App
 In the Wetty terminal **ctrl+c** to stop the server.
+
+{{< importPartial "footer/footer.html" >}}

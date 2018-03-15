@@ -31,9 +31,9 @@ Create a new project by clicking the "New Project" button in the upper right of 
 
 ## Step 3 - Name Your Project
 
-Name your project as follows replacing {{USER_NAME}} with your username.
+Name your project as follows.
 
-* wetty-{{USER_NAME}}
+* wetty-user{{< span "userid" "YOUR#">}}
 
 {{< panel_group >}}
 {{% panel "Name the Project" %}}
@@ -116,12 +116,10 @@ Paste the command from **Step 8**.
 {{% /panel %}}
 {{< /panel_group >}}
 
-## Step 12 - Export the OpenShift User Variable
+## Step 12 - Create a Shared Screen
+Creating a shared screen will allow the moderators to assist you better by viewing your terminal session.
 ```terminal
-export OCP_USER=$(oc whoami)
+screen -m -S shared-user{{< span "userid" "YOUR#">}}
 ```
-## Step 13 - Create a Shared Screen
-Creating a shared screen will allow the moderators to assist you better by viewing your terminal session.  Be sure to replace {{USER_NAME}} with your assigned username.
-```terminal
-screen -m -S shared-$OCP_USER
-```
+
+{{< importPartial "footer/footer.html" >}}
