@@ -13,7 +13,7 @@ Fortunately we can build from a Dockerfile using the **oc** command line tool.  
 ## Step 1 - Create a New Project
 Create a new project for your containerized gochat application.
 ```terminal
-oc new-project gochat-container-$OCP_USER
+oc new-project gochat-container-user{{< span "userid" "YOUR#">}}
 ```
 
 ## Step 2 - Build from Dockerfile
@@ -40,7 +40,12 @@ oc new-app gochat-client-container
 oc expose svc gochat-client-container
 ```
 
-## Step 6 - Access the App
+## Step 6 - Obtain Your Token
+```terminal
+oc whoami -t
+```
+
+## Step 7 - Access the App
 Go back to the OpenShift WebUI and click on the "gochat" URL.
 
 {{< panel_group >}}
@@ -51,7 +56,8 @@ Go back to the OpenShift WebUI and click on the "gochat" URL.
 {{% /panel %}}
 {{< /panel_group >}}
 
-## Step 7 - Sign in to the App
+
+## Step 8 - Sign in to the App
 Log in to the app with your OpenShift token.
 
 {{< panel_group >}}
@@ -62,13 +68,13 @@ Log in to the app with your OpenShift token.
 {{% /panel %}}
 {{< /panel_group >}}
 
-## Step 8 - Test the App
+## Step 9 - Test the App
 Send a message.
 
-## Step 9 - Celebrate
+## Step 10 - Celebrate
 **Yay**
 
-## Step 10 - Logout
+## Step 11 - Logout
 {{< panel_group >}}
 {{% panel "Gochat Logout" %}}
 
@@ -76,3 +82,5 @@ Send a message.
 
 {{% /panel %}}
 {{< /panel_group >}}
+
+{{< importPartial "footer/footer.html" >}}

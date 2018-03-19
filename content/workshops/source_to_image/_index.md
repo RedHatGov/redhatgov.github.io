@@ -37,3 +37,5 @@ Containers have transformed the IT space by leaps and bounds.  Source-to-image a
 ## Labs
 
 {{< labs source_to_image >}}
+
+{{< importPartial "footer/footer.html" >}}

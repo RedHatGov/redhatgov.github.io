@@ -8,7 +8,7 @@ layout: lab
 ## Step 1 - Create a New Project Space
 In the Wetty terminal, create a new project.
 ```terminal
-oc new-project gochat-s2i-$OCP_USER
+oc new-project gochat-s2i-user{{< span "userid" "YOUR#">}}
 ```
 ## Step 2 - Create the Golang S2I Builder Image
 Create a new build for the Golang S2I builder image
@@ -35,7 +35,7 @@ In the OpenShift WebUI, on the catalog page, seclect Import YAML/JSON
 ## Step 4 - Configure the Import
 Select the project to which you want to import the template
 
-*gochat-s2i-{{USERNAME}}*
+*gochat-s2i-user{{< span "userid" "YOUR#">}}*
 
 Copy and paste the following YAML in to the text box.
 {{< panel_group >}}
@@ -241,7 +241,7 @@ Click **Next** to get to the *Information* screen.
 
 Click **Next** again to get to the *Configuration* screen.
 
-In the **Add to Project** field, select your **gochat-s2i-{{USERNAME}}** project.
+In the **Add to Project** field, select your **gochat-s2i-user{{< span "userid" "YOUR#">}}** project.
 
 In the **Application Source URL** field, enter https://github.com/kevensen/openshift-gochat-client.git
 
@@ -252,7 +252,11 @@ In the **Application Command Line Arguments** field, enter the following:
 -host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr
 ```  
 Click **Create**
-## Step 10 - Sign in to the App
+## Step 10 - Obtain Your Token
+```terminal
+oc whoami -t
+```
+## Step 11 - Sign in to the App
 Log in to the app with your OpenShift token.
 
 {{< panel_group >}}
@@ -263,10 +267,10 @@ Log in to the app with your OpenShift token.
 {{% /panel %}}
 {{< /panel_group >}}
 
-## Step 11 - Test the App
+## Step 12 - Test the App
 Send a message and chat with friends!
 
-## Step 12 - Logout
+## Step 13 - Logout
 {{< panel_group >}}
 {{% panel "Gochat Logout" %}}
 
@@ -274,3 +278,5 @@ Send a message and chat with friends!
 
 {{% /panel %}}
 {{< /panel_group >}}
+
+{{< importPartial "footer/footer.html" >}}

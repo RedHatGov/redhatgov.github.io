@@ -4,15 +4,19 @@ workshops: source_to_image
 workshop_weight: 15
 layout: lab
 ---
-
-## Step 1 - Go Get S2I Library
+## Step 1 - Create a new Project Space
+In the Wetty terminal, create a new project.
+```terminal
+oc new-project s2i-user{{< span "userid" "YOUR#">}}
+```
+## Step 2 - Go Get S2I Library
 ```bash
 cd ~
 ```
 ```terminal
 go get github.com/openshift/source-to-image
 ```
-## Step 2 - Build the S2I Tooling
+## Step 3 - Build the S2I Tooling
 ```terminal
 cd $GOPATH/src/github.com/openshift/source-to-image
 ```
@@ -22,7 +26,7 @@ hack/build-go.sh
 ```terminal
 export PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/local/bin/linux/amd64/
 ```
-## Step 3 - Create the S2I Project
+## Step 4 - Create the S2I Project
 ```terminal
 cd ~
 ```
@@ -33,7 +37,7 @@ Now let's inspect the project directory
 ```terminal
 tree -a golang-s2i
 ```
-## Step 4 - Edit the Dockerfile
+## Step 5 - Edit the Dockerfile
 ```terminal
 cd ~
 ```
@@ -61,9 +65,9 @@ LABEL io.k8s.description="Platform for building go based programs" \
       io.openshift.s2i.destination="/opt/app-root/destination"
 
 RUN yum clean all && \
-    yum install -y tar \
-                   git-remote-bzr \
-                   golang && \
+    yum install -y git-remote-bzr \
+                   golang \
+		           glide && \
     yum clean all && rm -rf /var/cache/yum/*
 
 COPY ./s2i/bin/ /usr/local/s2i
@@ -82,7 +86,7 @@ shift+z
 
 shift+z
 
-## Step 5 - Edit the Assemble Script
+## Step 6 - Edit the Assemble Script
 ```terminal
 cat /dev/null > ~/golang-s2i/s2i/bin/assemble
 ```
@@ -95,7 +99,11 @@ Copy the following into the editor.
 #
 # S2I assemble script for the 'golang-s2i' image.
 export GO_REPO=$(echo $OPENSHIFT_BUILD_SOURCE | sed --expression='s/\.git//g' | sed --expression='s/https:\/\///g')
-go get -d $GO_REPO
+mkdir -p $GOPATH/src/$GO_REPO
+cp -ar /opt/app-root/destination/src/* $GOPATH/src/$GO_REPO
+pushd $GOPATH/src/$GO_REPO
+glide install
+popd
 go build -o goexec $GO_REPO
 ```
 To exit vi:
@@ -103,7 +111,7 @@ To exit vi:
 shift+z
 
 shift+z
-## Step 6 - Edit the Run Script
+## Step 7 - Edit the Run Script
 ```terminal
 cat /dev/null > ~/golang-s2i/s2i/bin/run
 ```
@@ -120,7 +128,7 @@ To exit vi:
 shift+z
 
 shift+z
-## Step 7 - Edit the Save Artifacts Script
+## Step 8 - Edit the Save Artifacts Script
 ```terminal
 cat /dev/null > ~/golang-s2i/s2i/bin/save-artifacts
 ```
@@ -139,7 +147,7 @@ To exit vi:
 shift+z
 
 shift+z
-## Step 8 - Edit the Usage Script
+## Step 9 - Edit the Usage Script
 ```terminal
 cat /dev/null > ~/golang-s2i/s2i/bin/usage
 ```
@@ -157,11 +165,6 @@ To exit vi:
 shift+z
 
 shift+z
-## Step 9 - Create a new Project Space
-In the Wetty terminal, create a new project.
-```terminal
-oc new-project s2i-$OCP_USER
-```
 ## Step 10 - Create the Golang S2I Builder Image
 Create a new build for the Golang S2I builder image
 ```terminal
@@ -172,7 +175,10 @@ Start the new build for the Golang S2I builder image
 oc start-build golang-s2i --from-dir=golang-s2i/
 ```
 ## Step 11 - Wait for Build to Complete
-Take a breath
+Watch the deployment
+```terminal
+oc logs -f bc/golang-s2i
+```
 
 ## Step 12 - Deploy the App from the S2I Builder Image
 ```terminal
@@ -184,7 +190,12 @@ oc new-app https://github.com/kevensen/openshift-gochat-client.git --image-strea
 oc expose svc openshift-gochat-client
 ```
 
-## Step 14 - Sign in to the App
+## Step 14 - Obtain Your Token
+```terminal
+oc whoami -t
+```
+
+## Step 15 - Sign in to the App
 Log in to the app with your OpenShift token.
 
 {{< panel_group >}}
@@ -195,10 +206,10 @@ Log in to the app with your OpenShift token.
 {{% /panel %}}
 {{< /panel_group >}}
 
-## Step 15 - Test the App
+## Step 16 - Test the App
 Send a message!
 
-## Step 16 - Logout
+## Step 17- Logout
 {{< panel_group >}}
 {{% panel "Gochat Logout" %}}
 
@@ -206,3 +217,5 @@ Send a message!
 
 {{% /panel %}}
 {{< /panel_group >}}
+
+{{< importPartial "footer/footer.html" >}}
