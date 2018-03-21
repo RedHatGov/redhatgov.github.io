@@ -99,11 +99,28 @@ Copy the following into the editor.
 #
 # S2I assemble script for the 'golang-s2i' image.
 export GO_REPO=$(echo $OPENSHIFT_BUILD_SOURCE | sed --expression='s/\.git//g' | sed --expression='s/https:\/\///g')
+if [ -z "$GO_REPO" ]; then
+  export GO_REPO=$(grep ^package /opt/app-root/destination/src/glide.yaml | sed 's/package: //')
+fi
+
 mkdir -p $GOPATH/src/$GO_REPO
+
+# Copy the source
 cp -ar /opt/app-root/destination/src/* $GOPATH/src/$GO_REPO
-pushd $GOPATH/src/$GO_REPO
-glide install
-popd
+rm -rf /opt/app-root/destination/src/*
+
+# Restore build artifacts
+if [ "$(ls /opt/app-root/destination/artifacts/ 2>/dev/null)" ]; then
+    echo "Using artifacts from previous build."
+    mv /opt/app-root/destination/artifacts/vendor $GOPATH/src/$GO_REPO/vendor
+else
+    pushd $GOPATH/src/$GO_REPO
+    echo "Obtaining artifacts."
+    glide install -v
+    popd
+
+fi
+
 go build -o goexec $GO_REPO
 ```
 To exit vi:
@@ -139,8 +156,12 @@ Copy the following into the editor.
 ```terminal
 #!/bin/bash
 
-cd $GOPATH
-tar cf - pkg bin src
+export GO_REPO=$(echo $OPENSHIFT_BUILD_SOURCE | sed --expression='s/\.git//g' | sed --expression='s/https:\/\///g')
+if [ -z "$GO_REPO" ]; then
+  export GO_REPO=$(grep ^package /opt/app-root/destination/src/glide.yaml | sed 's/package: //')
+fi
+cd $GOPATH/src/$GO_REPO
+tar cf - vendor
 ```
 To exit vi:
 
@@ -168,6 +189,9 @@ shift+z
 ## Step 10 - Create the Golang S2I Builder Image
 Create a new build for the Golang S2I builder image
 ```terminal
+cd ~
+```
+```terminal
 oc new-build golang-s2i/ --to=golang-s2i
 ```
 Start the new build for the Golang S2I builder image
@@ -182,26 +206,37 @@ oc logs -f bc/golang-s2i
 
 ## Step 12 - Deploy the App from the S2I Builder Image
 ```terminal
-oc new-app https://github.com/kevensen/openshift-gochat-client.git --image-stream=golang-s2i --env ARGS="-host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr"
+oc new-app https://github.com/kevensen/openshift-gochat-client.git --image-stream=golang-s2i --env ARGS="-host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr -insecure"
 ```
 
 ## Step 13 - Expose the App
 ```terminal
 oc expose svc openshift-gochat-client
 ```
-
-## Step 14 - Obtain Your Token
+## Step 14 - Annotate the Service Account to Use OpenShift Authorization
+As in the previous lab, we must annotate the service account for the Gochat Client to communicate to the OpenShift API for user credential verification.
 ```terminal
-oc whoami -t
+oc annotate sa/default serviceaccounts.openshift.io/oauth-redirectreference.1='{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"openshift-gochat-client"}}' --overwrite
+```
+```terminal
+oc annotate sa/default serviceaccounts.openshift.io/oauth-redirecturi.1=auth/callback/openshift --overwrite
 ```
 
 ## Step 15 - Sign in to the App
-Log in to the app with your OpenShift token.
-
+Click the blue "Login" button.
 {{< panel_group >}}
 {{% panel "Gochat Signin" %}}
 
-<img src="../images/gochat_signin.png" width="600" align="middle"/>
+<img src="../images/gochat_signin.png" width="800" align="middle"/>
+
+{{% /panel %}}
+{{< /panel_group >}}
+Log in to the app with your OpenShift credentials.  The workshop moderator will provide you with the URL, your username, and password.
+
+{{< panel_group >}}
+{{% panel "OpenShift WebUI Login" %}}
+
+<img src="../images/webui.png" width="1000" />
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -209,7 +244,7 @@ Log in to the app with your OpenShift token.
 ## Step 16 - Test the App
 Send a message!
 
-## Step 17- Logout
+## Step 17 - Logout
 {{< panel_group >}}
 {{% panel "Gochat Logout" %}}
 

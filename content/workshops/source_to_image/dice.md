@@ -109,43 +109,9 @@ oc start-build fortran-s2i --from-dir=fortran-s2i/
 ```
 ## Step 7 - Create the Fortran-Dice Container from Source
 ```terminal
-oc new-build https://github.com/kevensen/fortran-dice.git --image-stream=fortran-s2i --name=dice-user{{< span "userid" "YOUR#">}}
+oc new-build https://github.com/kevensen/fortran-dice.git --image-stream=fortran-s2i --name=dice --allow-missing-imagestream-tags
 ```
 ## Step 8 - Roll Some Dice
-In the chat window, try:
-
-**//roll**
-
-or
-
-**//roll-dice2-sides6**
-
-## Step 9 - Note Some Trouble
-
-{{< panel_group >}}
-{{% panel "Trouble..." %}}
-
-<img src="../images/dice_trouble.png" width="600" align="middle"/>
-
-{{% /panel %}}
-{{< /panel_group >}}
-
-## Step 10 - Understand Why
-Each project in OpenShift gets a **default** service account which is a non-person entity.  This service account performs actions in OpenShift on behalf of the user.  In this case, we want the SA to roll the dice (start a job) on our behalf but it doesn't have permission to do so.  We can fix it!
-{{< panel_group >}}
-{{% panel "Why?" %}}
-
-<img src="../images/dice_permissions.png" width="1000" align="middle"/>
-
-{{% /panel %}}
-{{< /panel_group >}}
-
-## Step 11 - Grant the Service Account Permission
-In Wetty...
-```terminal
-oc adm policy add-role-to-user edit system:serviceaccount:gochat-s2i-user1:default -n gochat-s2i-user1
-```
-## Step 12 - Roll Again
 In the chat window, try:
 
 **//roll**

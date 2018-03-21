@@ -249,20 +249,33 @@ In the **Application Name** field, enter **gochat-client**
 
 In the **Application Command Line Arguments** field, enter the following:
 ```terminal
--host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr
+-host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr -insecure
 ```  
 Click **Create**
-## Step 10 - Obtain Your Token
+## Step 10 - Annotate the Service Account to Use OpenShift Authorization
+As in the previous lab, we must annotate the service account for the Gochat Client to communicate to the OpenShift API for user credential verification.
 ```terminal
-oc whoami -t
+oc annotate sa/default serviceaccounts.openshift.io/oauth-redirectreference.1='{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"gochat-client"}}' --overwrite
 ```
-## Step 11 - Sign in to the App
-Log in to the app with your OpenShift token.
+```terminal
+oc annotate sa/default serviceaccounts.openshift.io/oauth-redirecturi.1=auth/callback/openshift --overwrite
+```
 
+## Step 11 - Sign in to the App
+Click the blue "Login" button.
 {{< panel_group >}}
 {{% panel "Gochat Signin" %}}
 
-<img src="../images/gochat_signin.png" width="600" align="middle"/>
+<img src="../images/gochat_signin.png" width="800" align="middle"/>
+
+{{% /panel %}}
+{{< /panel_group >}}
+Log in to the app with your OpenShift credentials.  The workshop moderator will provide you with the URL, your username, and password.
+
+{{< panel_group >}}
+{{% panel "OpenShift WebUI Login" %}}
+
+<img src="../images/webui.png" width="1000" />
 
 {{% /panel %}}
 {{< /panel_group >}}
