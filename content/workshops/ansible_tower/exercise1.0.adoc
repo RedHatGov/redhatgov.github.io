@@ -111,7 +111,7 @@ ansible web -m git -a "repo=https://github.com/jboss-developer/jboss-eap-quickst
 and deploy the code via Maven provided by Red Hat Software Collections.
 [source,bash]
 ----
-ansible web -m shell -a "scl enable rh-maven35 'mvn clean install wildfly:deploy' chdir=/tmp/checkout/helloworld"
+ansible web -m shell -a "scl enable rh-maven35 'mvn clean install wildfly:deploy -Dmaven.test.skip=true' chdir=/tmp/checkout/helloworld" -b
 ----
 
 Demo site:
