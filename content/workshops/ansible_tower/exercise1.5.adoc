@@ -7,7 +7,7 @@ layout: lab
 
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
-:yum_url: http://docs.ansible.com/ansible/yum_module.html
+:package_url: http://docs.ansible.com/ansible/package_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html
 :dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
 :var_prec_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
@@ -173,7 +173,7 @@ Add tasks to your role in `roles/apache-simple/tasks/main.yml`.
 ---
 # tasks file for apache-simple
 - name: install httpd packages
-  yum:
+  package:
     name: "{{ item }}"
     state: present
   with_items: "{{ httpd_packages }}"

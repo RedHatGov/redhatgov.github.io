@@ -7,7 +7,7 @@ layout: lab
 
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
-:yum_url: http://docs.ansible.com/ansible/yum_module.html
+:package_url: http://docs.ansible.com/ansible/package_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html
 :gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
 
@@ -91,7 +91,7 @@ those tasks should be in now?
 
 Feel free to browse the help pages to see a list of all options.
 
-- link:{yum_url}[Ansible yum module]
+- link:{package_url}[Ansible package module]
 - link:{service_url}[Ansible service module]
 
 {{< importPartial "footer/footer.html" >}}

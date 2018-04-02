@@ -7,7 +7,7 @@ layout: lab
 
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
-:yum_url: http://docs.ansible.com/ansible/yum_module.html
+:package_url: http://docs.ansible.com/ansible/package_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html
 :var_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html
 :loop_url: http://docs.ansible.com/ansible/latest/playbooks_loops.html
@@ -88,7 +88,7 @@ Add a new task called *install httpd packages*.
 ----
   tasks:
     - name: install httpd packages
-      yum:
+      package:
         name: "{{ item }}"
         state: present
       with_items: "{{ httpd_packages }}"
@@ -218,7 +218,7 @@ looks the way you intended.  If not, now is the time for us to fix it up. The fi
 
   tasks:
     - name: httpd packages are present
-      yum:
+      package:
         name: "{{ item }}"
         state: present
       with_items: "{{ httpd_packages }}"

@@ -10,7 +10,7 @@ layout: lab
 :figure-caption!:
 :become_url: http://docs.ansible.com/ansible/become.html
 :dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
-:yum_url: http://docs.ansible.com/ansible/yum_module.html
+:package_url: http://docs.ansible.com/ansible/package_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html
 :yaml_url: http://docs.ansible.com/ansible/YAMLSyntax.html
 
@@ -83,7 +83,7 @@ If you want to see the entire playbook for reference, skip to the bottom of this
 ----
 tasks:
  - name: install apache
-   yum:
+   package:
      name: httpd
      state: present
 
@@ -104,14 +104,14 @@ Therefore, give your tasks a name that is short, sweet, and to the point
 
 [source,text]
 ----
-yum:
+package:
   name: httpd
   state: present
 ----
 
 
-- These three lines are calling the Ansible module *yum* to install httpd.
-link:{yum_url}[Click here] to see all options for the yum module.
+- These three lines are calling the Ansible module *package* to install httpd.
+link:{package_url}[Click here] to see all options for the package module.
 
 
 
@@ -154,7 +154,7 @@ like this.  Take note of the spacing and alignment.
 
   tasks:
     - name: install apache
-      yum:
+      package:
         name: httpd
         state: present
 
