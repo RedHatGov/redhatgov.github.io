@@ -114,6 +114,12 @@ and deploy the code via Maven provided by Red Hat Software Collections.
 ansible web -m shell -a "scl enable rh-maven35 'mvn clean install wildfly:deploy -Dmaven.test.skip=true' chdir=/tmp/checkout/helloworld" -b
 ----
 
+Demo site (unit test):
+[source,bash]
+----
+ansible web -m uri -a "url=http://localhost:8080/helloworld/ return_content=yes"
+----
+
 Demo site:
 [source,bash]
 ----
