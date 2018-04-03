@@ -120,7 +120,7 @@ Demo site (unit test):
 ansible web -m uri -a "url=http://localhost:8080/helloworld/ return_content=yes"
 ----
 
-Demo site:
+Demo site (open this in your web browser):
 [source,bash]
 ----
 http://{{< urifqdn "" "node" "" >}}:8080/helloworld/
