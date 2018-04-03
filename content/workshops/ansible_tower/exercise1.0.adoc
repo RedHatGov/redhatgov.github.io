@@ -81,7 +81,7 @@ ansible web -m package -a "name=git state=present" -b
 
 === Step 5:
 
-It is even possible to install groups of packages (aka yum groupinstall); such a Red Hat JBoss Enterprise Application Platform (EAP).
+It is even possible to install groups of packages (aka yum groupinstall); such as Red Hat JBoss Enterprise Application Platform (EAP).
 
 [source,bash]
 ----
