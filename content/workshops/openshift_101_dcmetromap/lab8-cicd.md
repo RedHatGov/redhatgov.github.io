@@ -219,7 +219,7 @@ buildconfig "pipeline" created
 
 {{% panel "Web Console Steps" %}}
 
-Choose *Add to project* -> *Import YAML* then copy and paste the following.
+Use the following OpenShift build configuration to create the pipeline.
 
 ```bash
 kind: "BuildConfig"
@@ -246,7 +246,13 @@ spec:
         }
 ```
 
+Choose *Add to project* -> *Import YAML* 
+
 <img src="../images/ocp-lab-cicd-import-yaml.png" width="900">
+
+Now copy and paste the above build configuration definition and choose "Create".
+
+<img src="../images/ocp-lab-cicd-import-yaml-dialog.png" width="900">
 
 {{% /panel %}}
 
