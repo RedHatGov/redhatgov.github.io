@@ -260,6 +260,8 @@ spec:
 
 ## Start the pipeline
 
+> Using the OpenShift Web Console, choose *Builds* -> *Pipelines*
+
 <img src="../images/ocp-lab-cicd-start-pipeline.png" width="900">
 
 When the pipeline starts, OpenShift uploads the pipeline the Jenkins server for execution. As it runs, the various stages trigger OpenShift to build and deploy the frontend microservice. After a Jenkins user approves the frontend deployment, Jenkins triggers OpenShift to tag the image stream with the ":prod" tag then scales the frontend-prod deployment for (2) replicas. 
