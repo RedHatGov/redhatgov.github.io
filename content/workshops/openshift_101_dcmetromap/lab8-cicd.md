@@ -6,11 +6,11 @@ layout: lab
 ---
 
 # CI/CD Defined
-In modern software projects many teams utilize the concept of Continuous Integration (CI) and Continuous Delivery (CD). By setting up a tool chain that continuously builds, tests, and stages software releases a team can ensure that their product can be reliably released at any time. OpenShift can be an enabler in the creation and management of this tool chain.
+In modern software projects many teams utilize the concept of Continuous Integration (CI) and Continuous Delivery (CD). By setting up a tool chain that continuously builds, tests, and stages software releases, a team can ensure that their product can be reliably released at any time. OpenShift can be an enabler in the creation and management of this tool chain.
 
 In this lab we walk through creating a simple example of a CI/CD [pipeline][1] utlizing Jenkins, all running on top of OpenShift! The Jenkins job will trigger OpenShift to build and deploy a test version of the application, validate that the deployment works, and then tag the test version into production.
 
-In the steps below replace 'YOUR#' with your student number (if applicable).
+> In the steps below replace 'YOUR#' with your student number (if applicable).
 
 ## Create a new project
 Create a new project named “cicd-{{< span "userid" "YOUR#" >}}”.
@@ -106,7 +106,7 @@ Click the "Continue to the project overview" link
 
 ## Create a sample application configuration
 
-Use the "oc new-app" command to create a simple nodejs application from a template file:
+> Use the "oc new-app" command to create a simple nodejs application from a template file:
 
 ```bash
 $ oc new-app -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json
@@ -165,15 +165,15 @@ Once logged in, click the [Allow selected permissions] button and you should see
 
 ## Create a Jenkins pipeline using OpenShift
 
-We will be creating the following very simple (4) stage Jenlins pipeline.
+We will be creating the following very simple (4) stage Jenkins pipeline.
 
 1. Build the application from source.
-2. Deploy the "dev" version of the application.
+2. Deploy the test version of the application.
 3. Submit for approval, then tag the image for production, otherwise abort.
 4. Scale the application.
 
-The first step is to create a build configuration that is based on a Jenkins pipeline strategy. The pipeline is written in the format of a Jenkinsfile 
-using the GROOVY language.
+The first step is to create a build configuration that is based on a Jenkins pipeline strategy. The pipeline is written 
+in the GROOVY language using a Jenkins file format.
 
 > Use the CLI or webconsole to create an OpenShift build configuration object.
 
@@ -246,11 +246,11 @@ spec:
         }
 ```
 
-Choose *Add to project* -> *Import YAML* 
+> Choose *Add to project* -> *Import YAML* 
 
 <img src="../images/ocp-lab-cicd-import-yaml.png" width="900">
 
-> Now copy and paste the above build configuration definition and choose "Create".
+> Then copy and paste the above build configuration definition and choose "Create".
 
 <img src="../images/ocp-lab-cicd-import-yaml-dialog.png" width="900">
 
@@ -268,7 +268,7 @@ Now watch the pipeline execute. Once the "deployFrontEnd" stage completes, you s
 
 <img src="../images/ocp-lab-cicd-pipeline-input.png" width="900">
 
-> Click on *Input Required" and you should get redirected to the Jenkins Web Console to 
+> Click on "Input Required" and you should get redirected to the Jenkins Web Console to 
 approve the promotion to production.
 
 <img src="../images/ocp-lab-cicd-jenkins-promote.png" width="900">
