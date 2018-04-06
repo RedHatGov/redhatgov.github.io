@@ -163,6 +163,120 @@ The OpenShift login page is displayed in a new browser tab.
 
 Once logged in, click the [Allow selected permissions] button and you should see the Jenkins console 
 
+## Begin pipeline section 
+## Create a pipeline
+
+The first step is to create a build configuration that is based on a Jenkins pipeline strategy. The pipeline is written in the format of a Jenkinsfile 
+using the GROOVY language.
+
+Using either the webconsole or CLI, copy and paste the following code to create an OpenShift build configuration object.
+
+```bash
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "pipeline"
+spec:
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfile: |-
+        node() {
+          stage 'buildFrontEnd'
+          openshiftBuild(buildConfig: 'frontend', showBuildLogs: 'true')
+  
+          stage 'deployFrontEnd'
+          openshiftDeploy(deploymentConfig: 'frontend')
+  
+          stage "promoteToProd"
+          input message: 'Promote to production ?', ok: '\'Yes\''
+          openshiftTag(sourceStream: 'origin-nodejs-sample', sourceTag: 'latest', destinationStream: 'origin-nodejs-sample', destinationTag: 'prod')
+  
+          stage 'scaleUp'
+          openshiftScale(deploymentConfig: 'frontend-prod',replicaCount: '2')
+        }
+```
+{{< panel_group >}}
+
+{{% panel "CLI Steps" %}}
+
+```bash
+oc create -f - <<EOF
+<Copy and paste the YAML code from above>
+EOF
+```
+
+Expected output:
+
+```bash
+buildconfig "pipeline" created
+```
+{{% /panel %}}
+
+{{% panel "Web Console Steps" %}}
+
+Choose *Add to project* -> *Import YAML*
+
+<img src="../images/ocp-lab-cicd-import-yaml.png" width="900">
+
+{{% /panel %}}
+
+{{< /panel_group >}}
+
+## Start the pipeline
+
+<img src="../images/ocp-lab-cicd-start-pipeline.png" width="900">
+
+Now watch the pipeline execute.
+
+<img src="../images/ocp-lab-cicd-pipeline-input.png" width="900">
+
+Click on *Input Required" and you should get redirected to the Jenkins Web Console to 
+approve the promotion to production.
+
+<img src="../images/ocp-lab-cicd-jenkins-promote.png" width="900">
+
+Now return to the OpenShift Web Console and watch the pipeline finish.
+
+<img src="../images/ocp-lab-cicd-pipeline-stages.png" width="900">
+
+Confirm the *frontend-prod* has deployed 2 pods. 
+
+<img src="../images/ocp-lab-cicd-create-route.png" width="900">
+
+Next, *create a secure route* with TLS edge termination so the application can be visited.
+
+<img src="../images/ocp-lab-cicd-route-tls.png" width="900">
+
+## Edit the pipeline.
+
+Now make a change to the pipeline. For example, in the *scaleUp* stage, change the number
+of replicas to 3. 
+
+{{< panel_group >}}
+
+{{% panel "CLI Steps" %}}
+
+If you are comfortable using the **vi** editor:
+
+~~~bash
+oc edit bc/pipeline
+~~~
+
+{{% /panel %}}
+
+{{% panel "Web Console Steps" %}}
+
+<img src="../images/ocp-lab-cicd-pipeline-edit.png" width="900">
+
+{{% /panel %}}
+
+{{< /panel_group >}}
+
+Save your changes and run the pipeline again to confirm the *frontend-prod* deployment has 
+deployed 3 pods.
+
+## End pipeline section
+
 > In the Jenkins console, open the "OpenShift Sample" menu and select "Configure"
 
 <img src="../images/ocp-lab-cicd-jenkins.png" width="900">
