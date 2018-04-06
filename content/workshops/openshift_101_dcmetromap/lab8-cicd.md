@@ -329,7 +329,7 @@ Service web page displayed:
 > Now make a change to the pipeline. For example, in the *scaleUp* stage, change the number
 of replicas to 3. 
 
-Technically speaking, a rebuild from source is not necessary to scale up a deployment. We use 
+Technically speaking, a rebuild from source is not needed to scale up a deployment. We use 
 this simple example to illustrate how a pipeline may be edited within OpenShift. 
 
 {{< panel_group >}}
@@ -354,6 +354,8 @@ oc edit bc/pipeline
 
 > Save your changes and run the pipeline again to confirm the *frontend-prod* deployment has 
 deployed 3 pods.
+
+<img src="../images/ocp-lab-cicd-app-3-pods.png" width="900">
 
 # Summary
 In this lab you have very quickly and easily constructed a basic Build/Test/Deploy pipeline. Although our example was very basic it introduces you to a powerful DevOps feature of OpenShift through the leveraging of Jenkins. This can be extended to support complex real-world continuous delivery requirements. Read more about the use of Jenkins on OpenShift [here][3] and more about Jenkins [here][4].
