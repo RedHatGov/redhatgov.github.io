@@ -297,15 +297,15 @@ approve the promotion to production.
 
 {{% panel "CLI Steps" %}}
 
-<blockquote>
-<i class="fa fa-terminal"></i> Use the ```oc get routes``` command to get the HOST/PORT (URLs) needed to access the frontend and frontend-prod services:
-</blockquote>
+Use the `oc get routes` command to get the HOST/PORT (URLs) needed to access the frontend and frontend-prod services:
 
-<code>
+```bash
+$ oc get routes
+
 NAME            HOST/PORT                            PATH      SERVICES        PORT      TERMINATION     WILDCARD
 frontend        frontend-cicd-XX.apps.eadgbe.net                  frontend        <all>     edge            None
 frontend-prod   frontend-prod-cicd-XX.apps.eadgbe.net             frontend-prod   web       edge            None
-</code>
+```
 
 Use a web browser to visit the HOST/PORT (URLs) for the frontend and frontend-prod services. Don't forget the ```https://``` prefix.
 
