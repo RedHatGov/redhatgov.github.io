@@ -122,7 +122,8 @@ $ oc new-app -f https://raw.githubusercontent.com/openshift/origin/master/exampl
 {{% panel "CLI Steps" %}}
 
 <blockquote>
-<i class="fa fa-terminal"></i> Get the route to the Jenkins server
+<i class="fa fa-terminal"></i> Get the route to the Jenkins server. Your HOST/PORT values will differ 
+from the example below.
 </blockquote>
 
 ```bash
@@ -297,7 +298,8 @@ approve the promotion to production.
 
 {{% panel "CLI Steps" %}}
 
-Use the `oc get routes` command to get the HOST/PORT (URLs) needed to access the frontend and frontend-prod services:
+Use the `oc get routes` command to get the HOST/PORT (URLs) needed to access the frontend and frontend-prod services. Your HOST/PORT values will differ 
+from the example below.
 
 ```bash
 $ oc get routes
