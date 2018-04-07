@@ -285,7 +285,7 @@ approve the promotion to production.
 
 <img src="../images/ocp-lab-cicd-create-route.png">
 
-> Next, *create a secure route* with TLS edge termination so the application can be visited.
+> Now *create a secure route* with TLS edge termination the *frontend-prod* service so the application can be visited.
 
 <img src="../images/ocp-lab-cicd-route-tls.png">
 
