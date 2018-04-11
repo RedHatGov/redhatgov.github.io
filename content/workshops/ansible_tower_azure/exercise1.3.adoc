@@ -254,4 +254,4 @@ looks the way you intended.  If not, now is the time for us to fix it up. The fi
         enabled: yes
 ----
 
-{{< importPartial "footer/footer.html" >}}
+{{< importPartial "footer/footer_azure.html" >}}

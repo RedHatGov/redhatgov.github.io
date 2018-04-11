@@ -120,7 +120,7 @@ You can access your Tower (not forgetting that *workshopname* is the name of you
 
 [source,bash]
 ----
-{{< urifqdn "" "tower" "" >}}
+{{< urifqdn_azure "" "tower" "" >}}
 ----
 
 === Ensuring Installation Success
@@ -129,4 +129,4 @@ You know you were successful if you are able to browse to your Ansible Tower's u
 
 image::ansible-lab-figure01-logon-screen.png[caption="Figure 2: ", title="Ansible Tower Login Screen"]
 
-{{< importPartial "footer/footer.html" >}}
+{{< importPartial "footer/footer_azure.html" >}}

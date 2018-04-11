@@ -32,14 +32,14 @@ commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`
 The *workshopname*, in the example below, will be provided to you by your instructor.  The *#* should be replaced by your student number.
 
 For example, a recent workshop's first student used:
-*{{< urifqdn "" "tower" "" >}}*
+*{{< urifqdn_azure "" "tower" "" >}}*
 ====
 
 .hosts (example)
 [source,bash]
 ----
 [web]
-{{< urifqdn "" "node" "" >}}
+{{< urifqdn_azure "" "node" "" >}}
 ----
 
 === Step 1:
@@ -123,7 +123,7 @@ ansible web -m uri -a "url=http://localhost:8080/helloworld/ return_content=yes"
 Demo site (open this in your web browser):
 [source,bash]
 ----
-http://{{< urifqdn "" "node" "" >}}:8080/helloworld/
+http://{{< urifqdn_azure "" "node" "" >}}:8080/helloworld/
 ----
 
 === Step 8:
@@ -162,4 +162,4 @@ ansible web -m ping
 We are going to be using the short-form options throughout this workshop
 ====
 
-{{< importPartial "footer/footer.html" >}}
+{{< importPartial "footer/footer_azure.html" >}}

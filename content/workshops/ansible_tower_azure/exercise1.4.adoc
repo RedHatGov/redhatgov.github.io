@@ -47,4 +47,4 @@ know.  We'll help get things fixed up.
 
 image::stdout_2.png[caption="Figure 1: ", title="apache-basic-playbook stdout"]
 
-{{< importPartial "footer/footer.html" >}}
+{{< importPartial "footer/footer_azure.html" >}}

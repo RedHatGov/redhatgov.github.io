@@ -164,4 +164,4 @@ like this.  Take note of the spacing and alignment.
         state: started
 ----
 
-{{< importPartial "footer/footer.html" >}}
+{{< importPartial "footer/footer_azure.html" >}}

@@ -157,7 +157,7 @@ Once your job is sucessful, navigate to your new website, where *workshopname* i
 
 [source,bash]
 ----
-{{< urifqdn "http://" "node" "" >}}
+{{< urifqdn_azure "http://" "node" "" >}}
 ----
 
 
@@ -176,4 +176,4 @@ At this point in the workshop, you've experienced the core functionality of Ansi
 You've just begun to explore the possibilities of Ansible Core and Tower.  Take a look at the resources page in this guide
 to explore some more features.
 
-{{< importPartial "footer/footer.html" >}}
+{{< importPartial "footer/footer_azure.html" >}}

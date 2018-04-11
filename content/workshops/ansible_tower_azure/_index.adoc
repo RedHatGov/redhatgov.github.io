@@ -6,14 +6,14 @@ menu:
     pre: fa fa-magic
 ---
 
-:domain_name: redhatgov.io
+:domain_name: cloudapp.azure.com
 :workshop_prefix: workshop
 :tower_url: https://{{ workshop_prefix }}-tower0.{{ region }}.cloudapp.azure.com
 :ssh_url: https://{{ workshop_prefix }}-tower0.{{ region }}.cloudapp.azure.com/wetty/ssh/azure-user
 
 :icons: font
 :iconsdir: http://people.redhat.com/~jduncan/images/icons
-:imagesdir: /workshops/ansible_tower/images
+:imagesdir: /workshops/ansible_tower_azu/images
 
 = Ansible Tower Workshop on Azure
 
@@ -40,4 +40,4 @@ Hopefully you have your laptop with you. If not, please find a shoulder-surfing 
 
 {{< labs ansible_tower_azure >}}
 
-{{< importPartial "footer/footer.html" >}}
+{{< importPartial "footer/footer_azure.html" >}}

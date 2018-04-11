@@ -94,4 +94,4 @@ Feel free to browse the help pages to see a list of all options.
 - link:{package_url}[Ansible package module]
 - link:{service_url}[Ansible service module]
 
-{{< importPartial "footer/footer.html" >}}
+{{< importPartial "footer/footer_azure.html" >}}
