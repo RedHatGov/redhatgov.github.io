@@ -28,7 +28,7 @@ Use this URL to access the Wetty node, just change the workshopname (if applicab
 
 [source,bash]
 ----
-{{< urifqdn "https://" "tower" ":8888" >}}
+https://{{ workshop_prefix }}-tower0.{{ region }}.cloudapp.azure.com:8888
 ----
 
 
@@ -44,5 +44,3 @@ Be sure you can log in to your instances.  If you can't log in start shouting, l
 == End Result
 
 At this point, everyone should have logged into your node.  If you haven't, let us know so we can get you fixed up.
-
-{{< importPartial "footer/footer.html" >}}

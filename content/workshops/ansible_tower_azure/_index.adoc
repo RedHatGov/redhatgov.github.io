@@ -8,8 +8,8 @@ menu:
 
 :domain_name: redhatgov.io
 :workshop_prefix: workshop
-:tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
-:ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
+:tower_url: https://{{ workshop_prefix }}-tower0.{{ region }}.cloudapp.azure.com
+:ssh_url: https://{{ workshop_prefix }}-tower0.{{ region }}.cloudapp.azure.com/wetty/ssh/azure-user
 
 :icons: font
 :iconsdir: http://people.redhat.com/~jduncan/images/icons
