@@ -26,18 +26,16 @@ This lab provides a quick tour of the browser based SSH client Wetty. To help yo
 
 Use this URL to access the Wetty node, just change the workshopname and region (if applicable). Ask your instructor for the workshopname and region.
 
----
-login: azure-user
-
----
-Password: redhat!@#
-
 [source,bash]
 ----
 {{< urifqdn_azure "https://" "tower" ":8888" >}}
 ----
 
-
+----
+login: azure-user
+Password: redhat!@#
+----
+  
 After logging in, you should see a shell.
 
 image::wetty.png[caption="Figure 1: ", title='wetty', 500]
