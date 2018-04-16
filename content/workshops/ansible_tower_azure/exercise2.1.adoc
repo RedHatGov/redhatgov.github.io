@@ -145,7 +145,7 @@ cat ~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
 |DESCRIPTION|Machine credential for run job templates during workshop
 |ORGANIZATION|Default
 |TYPE|Machine
-|USERNAME| ec2-user
+|USERNAME| azure-user
 |PRIVILEGE ESCALATION|Sudo
 |PRIVATE KEY|paste in secret key
 |===
@@ -255,7 +255,7 @@ Using ssh, login to your control node, if by any chance you closed the wetty bro
 
 [source,bash]
 ----
-{{< urifqdn_azure "https://" "tower" ":8888/wetty/ssh/ec2-user" >}}
+{{< urifqdn_azure "https://" "tower" ":8888/wetty/ssh/azure-user" >}}
 ----
 
 
@@ -265,7 +265,7 @@ Using ssh, login to your control node, if by any chance you closed the wetty bro
 
 Use the `tower-manage` command to import an existing inventory.  (_Be sure to replace <username> with your actual username_)
 ----
-sudo tower-manage inventory_import --source=/home/ec2-user/hosts --inventory-name="Ansible Workshop Inventory"
+sudo tower-manage inventory_import --source=/home/azure-user/hosts --inventory-name="Ansible Workshop Inventory"
 ----
 
 You should see output similar to the following:

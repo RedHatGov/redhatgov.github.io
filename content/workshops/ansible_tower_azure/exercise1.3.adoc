@@ -46,7 +46,7 @@ link:{handler_url}[Ansible Handlers]
 To begin, we are going to create a new playbook, but it should look very familiar to the one you created in exercise 1.2
 
 
-We are now going to run you're brand spankin' new playbook on your two web nodes.  To do this, you are going to use the `ansible-playbook` command.
+We are now going to run you're brand spankin' new playbook on your web node.  To do this, you are going to use the `ansible-playbook` command.
 
 === Step 1:
 
