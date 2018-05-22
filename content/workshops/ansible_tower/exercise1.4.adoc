@@ -7,7 +7,7 @@ layout: lab
 
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
-:yum_url: http://docs.ansible.com/ansible/yum_module.html
+:package_url: http://docs.ansible.com/ansible/package_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html
 
 
