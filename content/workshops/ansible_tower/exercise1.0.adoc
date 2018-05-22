@@ -32,7 +32,7 @@ commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`
 The *workshopname*, in the example below, will be provided to you by your instructor.  The *#* should be replaced by your student number.
 
 For example, a recent workshop's first student used:
-*{{< urifqdn "" "master" "" >}}*
+*{{< urifqdn "" "tower" "" >}}*
 ====
 
 .hosts (example)
@@ -71,41 +71,81 @@ ansible web -m setup
 
 === Step 4:
 
-Now, let's install Apache using the `yum` module.
+Now, let's install Maven & Git using the `package` module.
 
 [source,bash]
 ----
-ansible web -m yum -a "name=httpd state=present" -b
+ansible web -m package -a "name=rh-maven35 state=present" -b
+ansible web -m package -a "name=git state=present" -b
 ----
 
 === Step 5:
 
-OK, Apache is installed now so let's start it up using the `service` module.
+It is even possible to install groups of packages (aka yum groupinstall); such as Red Hat JBoss Enterprise Application Platform (EAP).
 
 [source,bash]
 ----
-ansible web -m service -a "name=httpd state=started" -b
+ansible web -m package -a "name=@jboss-eap7 state=present" -b
 ----
 
 === Step 6:
 
-Finally, let's clean up after ourselves.  First, stop the httpd service.
+OK, JBoss EAP is installed now so let's start it up using the `service` module.
 
 [source,bash]
 ----
-ansible web -m service -a "name=httpd state=stopped" -b
+ansible web -m service -a "name=eap7-standalone state=started" -b
 ----
 
 === Step 7:
 
-Next, remove the Apache package.
+Next, let's deploy an application.
+
+For simplicity sake, we will use an existing quickstart. To get started, we will checkout some code ...
 
 [source,bash]
 ----
-ansible web -m yum -a "name=httpd state=absent" -b
+ansible web -m git -a "repo=https://github.com/jboss-developer/jboss-eap-quickstarts.git dest=/tmp/checkout" 
 ----
 
+and deploy the code via Maven provided by Red Hat Software Collections.
+[source,bash]
+----
+ansible web -m shell -a "scl enable rh-maven35 'mvn clean install wildfly:deploy -Dmaven.test.skip=true' chdir=/tmp/checkout/helloworld" -b
+----
 
+Demo site (unit test):
+[source,bash]
+----
+ansible web -m uri -a "url=http://localhost:8080/helloworld/ return_content=yes"
+----
+
+Demo site (open this in your web browser):
+[source,bash]
+----
+http://{{< urifqdn "" "node" "" >}}:8080/helloworld/
+----
+
+=== Step 8:
+
+Finally, let's clean up after ourselves.  First, stop the Red Hat JBoss EAP service.
+
+[source,bash]
+----
+ansible web -m service -a "name=eap7-standalone state=stopped" -b
+----
+
+=== Step 9:
+
+Next, remove some packages.
+
+[source,bash]
+----
+ansible web -m package -a "name=@jboss-eap7 state=absent" -b
+ansible web -m package -a "name=eap7-* state=absent" -b
+ansible web -m package -a "name=rh-maven35 state=absent" -b
+ansible web -m package -a "name=git state=absent" -b
+----
 
 
 ====

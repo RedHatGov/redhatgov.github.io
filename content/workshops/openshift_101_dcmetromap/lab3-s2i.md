@@ -37,18 +37,26 @@ Click "Add to Project"
 <img src="../images/ocp-addToProjectButton.png" width="200"><br/>
 
 <blockquote>
-Click "Browse Catalog" and filter for nodejs. Select Node.js version 0.10 from the Version drop down menu and then click "Select"
+Click "Browse Catalog" and type filter 'nodejs' in the 'Search Catalog' field.
 </blockquote>
-<img src="../images/ocp-lab-s2i-filternode.png" width="900"><br/>
+
+<img src="../images/ocp-lab-s2i-filternode.png" width="700"><br/>
 
 <blockquote>
-Fill out the boxes to look as follows:
+Select Node.js 
 </blockquote>
-<img src="../images/ocp-lab-s2i-nodejs.png" width="900"><br/>
-<p>
-Notes: You will need to click to expand the "advanced options"<br/>
+
+<img src="../images/ocp-lab-s2i-filternode2.png" width="800"><br/>
+
+<blockquote>
+Select 'Next>'.  Then select 'advanced options'
+</blockquote>
+
+<img src="../images/ocp-lab-s2i-nodejs.png" width="700"><br/>
+
+The Name is: dc-metro-map<br/>
 The github repository URL is: https://github.com/RedHatGov/openshift-workshops.git<br/>
-The github context-dir is: dc-metro-map<br/>
+The github context-dir is: /dc-metro-map<br/>
 </p>
 
 <blockquote>
@@ -90,7 +98,7 @@ The console will print out the full log for your build.  Note, you could pipe th
 <blockquote>
 Click on "Builds" and then click on "Builds"
 </blockquote>
-<img src="../images/ocp-lab-s2i-builds.png" width="300"><br/>
+<img src="../images/ocp-lab-s2i-builds.png" width="800"><br/>
 
 <blockquote>
 Click on the "dc-metro-map" link
@@ -98,12 +106,12 @@ Click on the "dc-metro-map" link
 <img src="../images/ocp-lab-s2i-metromapbuild.png" width="900"><br/>
 
 <blockquote>
-Click on the "View Log" tab to see the details of your latest build
+Click on the "View Log" link to see the details of your latest build
 </blockquote>
-<img src="../images/ocp-lab-s2i-viewLog.png" width="900"><br/>
+<img src="../images/ocp-lab-s2i-viewLog.png" width="700"><br/>
 
 You should see a log output similar to the one below:<br>
-<img src="../images/ocp-lab-s2i-logs.png" width="900"><br/>
+<img src="../images/ocp-lab-s2i-logs.png" width="700"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -153,3 +161,5 @@ Clicking the checkboxes will toggle on/off the individual metro stations on each
 In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  In the next lab we will look at some details of this app's deployment and make some changes to see how OpenShift can help to automate our development processes. More information about creating new applications can be found [here][1].
 
 [1]: https://docs.openshift.com/container-platform/3.4/dev_guide/application_lifecycle/new_app.html
+
+{{< importPartial "footer/footer.html" >}}

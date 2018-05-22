@@ -132,22 +132,19 @@ at the very beginning of the file
 ## Install teiid Designer <a name="link7"></a>
 
 
-To add the latest teiid designer software to JBDS 11.0 you need to add the software site in JBDS
+* In the **Red Hat Central** window in the center, click the **Software/Update** tab at the bottom
 
-* **help <i class="fa fa-arrow-right"></i> install new software**
+* Check the box next to **JBoss Data Virtualization Development**
 
-* click the **add** button and put this in the url
+* Click the **Install/Update** button to install the teiid designer
 
-`http://download.jboss.org/jbosstools/oxygen/stable/updates/integration-stack/teiiddesigner`
+{{% alert %}}
+If you do not see **JBoss Data Virtualization Development** listed, check the **Enable Early Access** checkbox in the lower right.  Sometimes the teiid designer release does not sync with the JBDS release.
 
-* Select **Data Virtualization** and go through the prompts
+{{% /alert %}}
 
 <img src="../images/1-teiid-designer.png" width="640px">
 
-{{% alert %}}
-This step is usually unnecessary.  The Data Virtualization tools shipped as an installable out of the box but the latest tool release did not sync with the JBDS 11 release
-
-{{% /alert %}}
 
 * After installation, restart JBDS.  On reboot you will be asked for a **secure storage password**, you can choose something simple like `redhat`
 

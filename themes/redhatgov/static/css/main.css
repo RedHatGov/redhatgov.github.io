@@ -2,6 +2,10 @@ body {
   padding-top: 51px;
 }
 
+figure {
+  margin: 0 0 10px;
+}
+
 #footer {
   margin-top: 50px;
 }

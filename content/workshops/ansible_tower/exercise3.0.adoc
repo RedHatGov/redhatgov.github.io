@@ -93,7 +93,7 @@ Complete the form using the following values.  Note that the `PLAYBOOK` field sh
 |JOB TYPE|Run
 |INVENTORY|Ansible Workshop Inventory
 |PROJECT|Ansible 800-53 Project
-|PLAYBOOK|800-53.yml
+|PLAYBOOK|main.yml
 |MACHINE CREDENTIAL|Ansible Workshop Credential
 |LIMIT|web
 |OPTIONS
