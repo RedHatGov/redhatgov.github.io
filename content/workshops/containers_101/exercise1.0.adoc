@@ -11,41 +11,7 @@ layout: lab
 :source-highlighter: highlight.js
 :source-language: yaml
 
-= Exercise 1.0 - Install docker, buildah, skopeo, and podman
-
-== Install docker
-
-.Install docker
-[source, bash]
-----
-$ sudo -i
-# yum install -y docker
-----
-
-=== Start docker
-
-To start the docker binary and have it managed by link:https://fedoramagazine.org/what-is-an-init-system/[`systemd`]
-we first need to enable it and tell systemd that we want it to run a boot time.
-Then to start the docker daemon right away we use the start command.
-
-[source, bash]
-----
-systemctl enable docker
-----
-
-[source, bash]
-----
-systemctl start docker
-----
-
-[source, bash]
-----
-systemctl status docker
-----
-
-Once docker daemon starts successfully you should see a similar output as below.
-
-image::systemctl-status.png[caption="Figure 1: ", title="systemctl status docker", 330, 600]
+= Exercise 1.0 - Install buildah, skopeo, and podman
 
 == Install buildah, skopeo, and podman
 
