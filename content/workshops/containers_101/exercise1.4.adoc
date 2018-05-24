@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1.4 - Working with Docker Registry"
+title: "Exercise 1.4 - Working with a Container Registry"
 workshops: containers_101
 workshop_weight: 60
 layout: lab
@@ -12,51 +12,46 @@ layout: lab
 :source-language: yaml
 
 
-= Exercise 1.4 - Working with Docker Registry
+= Exercise 1.4 - Working with a Container Registry
 
 == What it is
-The Registry is a stateless, highly scalable server side application that stores and lets you distribute Docker images. The Registry is open-source, under the permissive Apache license.
+A basic container registry is a stateless, highly scalable server side application that stores and  distributes container images.  The docker registry is an open-source project offered under the permissive Apache license.
+
 
 === Why use it
-You should use the Registry if you want to:
+You should use a private container registry if you want to:
 
 - tightly control where your images are being stored
 - fully own your images distribution pipeline
 - integrate image storage and distribution tightly into your in-house development workflow
 
-Edit docker-storage-setup script. Add the following configuration lines of `DEVS=dev/xvdb` & `VG=docker-vg` to the `/etc/sysconfig/docker-storage-setup` file.
-
-.Docker storage setup
-[source, bash]
-----
-echo -e "DEVS=/dev/xvdb\nVG=docker-vg" >> /etc/sysconfig/docker-storage-setup
-----
 
 .Install Registry
 [source, bash]
 ----
-yum install –y docker-registry
+yum install -y docker-distribution
 ----
 
-.Enable & Start
+
+.Enable & Start the Docker Container Registry
 [source, bash]
 ----
-systemctl enable docker-registry
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
 ----
 
-[source, bash]
-----
-systemctl start docker-registry
-----
 
-.Edit Registry (Uncomment and add)
+The container registry configuration file will need to be modified to allow unsigned certificate communications.  Modify the OPTIONS line in the /etc/sysconfig/docker configuration file as shown in the example below.
+
+
+.Edit Registry Configuration File
 [source, bash]
 ----
 vim /etc/sysconfig/docker
 
-
---insecure-registry 0.0.0.0/0
+# Modify these options if you want to change the way the docker daemon runs
+OPTIONS='--selinux-enabled --log-driver=journald --signature-verification=false --insecure-registry 0.0.0.0/0'
 ----
+
 
 .Restart
 [source, bash]
@@ -64,10 +59,11 @@ vim /etc/sysconfig/docker
 systemctl restart docker
 ----
 
+
 .View Current Images
 [source, bash]
 ----
-docker images
+podman images
 
 REPOSITORY                        TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 fedora_postgresql                 latest              93e0fb06be2b        7 minutes ago       407.3 MB
@@ -75,23 +71,29 @@ docker.io/fedora                  latest              c7d2f0130dae        8 days
 registry.access.redhat.com/rhel   latest              c4f590bbcbe3        12 days ago         158.2 MB
 ----
 
+
 .Find AMI Public IP
 [source, bash]
 ----
 PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 ----
 
+
 .Tag fedora_postgresql
 [source, bash]
 ----
-docker tag 93e0fb06be2b ${PUBLIC_IP}:5000/fedora_postgresql
+podman tag [container ID] ${PUBLIC_IP}:5000/fedora_postgresql
 ----
 
-Where `93e0fb06be2b` is the IMAGE ID found when you used the `docker images` command.
+
+Where [container ID] is the IMAGE ID found when you used the podman images command.
+
 
 .Push fedora_postgresql
 [source, bash]
 ----
-docker push ${PUBLIC_IP}:5000/fedora_postgresql
-----
+podman push ${PUBLIC_IP}:5000/fedora_postgresql
 
+podman push 52a697ff56be docker-daemon:test3:latest
+skopeo copy docker-daemon:docker.io/test3:latest docker://localhost:5000/skopio/test3 --dest-tls-verify=false
+----

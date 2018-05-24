@@ -14,7 +14,7 @@ layout: lab
 
 = Exercise 1.3 - Working with the Dockerfile
 
-Once you understand how images and containers can be created from the command line, you can try building containers in a more permanent way. Building container images from Dockerfile files is by far the preferred way to create Docker formatted containers, as compared to modifying running containers and committing them to images.
+Once you understand how images and containers can be created from the command line, you can try building containers in a more permanent way. Building container images from Dockerfile files is by far the preferred way to create docker formatted containers, as compared to modifying running containers and committing them to images.
 
 The procedure here involves creating a Dockerfile file that includes many of the features illustrated earlier:
 
@@ -35,49 +35,57 @@ First get the Dockerfile from GitHub using curl.
 curl -s -o Dockerfile https://raw.githubusercontent.com/RedHatGov/Dockerfile_fedora-postgres/master/Dockerfile_fedora-postgres
 ----
 
+After downloading the Dockerfile using the curl command, edit the file to remove VOLUME line.  This would typically be used for container persistent storage of the database files.  In this scenario, the data does not need to be retained and the line should be removed.
 
 
-.Dockerfile
+.Remove the following Dockerfile line
+[source, bash]
+----
+VOLUME	["/var/lib/pgsql/data"]
+----
+
+
+.Edited Dockerfile contents
 [source, bash]
 ----
 cat Dockerfile
 
 FROM fedora
 MAINTAINER jcallawa@redhat.com
-RUN dnf install -y postgresql-server
+RUN yum install -y postgresql-server
 USER postgres
 RUN /bin/initdb -D /var/lib/pgsql/data
 RUN /usr/bin/pg_ctl start -D /var/lib/pgsql/data -s -o "-p 5432" -w -t 300 &&\
-    /bin/psql --command "CREATE USER docker WITH SUPERUSER PASSWORD 'docker';" &&\
-    /bin/createdb -O docker docker
+    /bin/psql --command "CREATE USER podman WITH SUPERUSER PASSWORD 'podman';" &&\
+    /bin/createdb -O podman podman
 RUN echo "host all  all    0.0.0.0/0  md5" >> /var/lib/pgsql/data/pg_hba.conf
 RUN echo "listen_addresses='*'" >> /var/lib/pgsql/data/postgresql.conf
 EXPOSE 5432
-VOLUME	["/var/lib/pgsql/data"]
 CMD ["/bin/postgres", "-D", "/var/lib/pgsql/data", "-c", "config_file=/var/lib/pgsql/data/postgresql.conf"]
 ----
-
 
 
 .Build
 [source, bash]
 ----
-mkdir build; mv Dockerfile build/Dockerfile
-cd build; docker build -t fedora_postgresql .
-----
+mkdir build; mv Dockerfile build/Dockerfile; cd build
 
+buildah bud -t fedora_postgresql .
+----
 
 
 .Run
 [source, bash]
 ----
-docker run -d --name fpg fedora_postgresql
+podman run -d --name fpg fedora_postgresql
 ----
+
 
 [source, bash]
 ----
-docker exec -it fpg psql
+podman exec -t fpg psql
 ----
+
 
 .Note: This is backslash followed by lower-case L
 [source, bash]
@@ -85,20 +93,20 @@ docker exec -it fpg psql
 \l
 
 List of databases
-Name      |  Owner   | Encoding  | Collate | Ctype |   Access privileges
-----------+----------+-----------+---------+-------+-----------------------
-docker    | docker   | SQL_ASCII | C       | C     |
+Name    |  Owner   | Encoding  | Collate | Ctype |   Access privileges
+-----------+----------+-----------+---------+-------+-----------------------
+podman    | podman   | SQL_ASCII | C       | C     |
 postgres  | postgres | SQL_ASCII | C       | C     |
 template0 | postgres | SQL_ASCII | C       | C     | =c/postgres          +
-          |          |           |         |       | postgres=CTc/postgres
+|          |           |         |       | postgres=CTc/postgres
 template1 | postgres | SQL_ASCII | C       | C     | =c/postgres          +
-          |          |           |         |       | postgres=CTc/postgres
+|          |           |         |       | postgres=CTc/postgres
 (4 rows)
 ----
+
 
 .To exit
 [source, bash]
 ----
 \q
 ----
-

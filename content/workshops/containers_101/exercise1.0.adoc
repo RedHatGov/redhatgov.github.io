@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1.0 - Install Docker"
+title: "Exercise 1.0 - Install docker, buildah, skopeo, and podman"
 workshops: containers_101
 workshop_weight: 20
 layout: lab
@@ -11,18 +11,18 @@ layout: lab
 :source-highlighter: highlight.js
 :source-language: yaml
 
-= Exercise 1.0 - Install Docker
+= Exercise 1.0 - Install docker, buildah, skopeo, and podman
 
-== Install Docker
+== Install docker
 
-.Install Docker
+.Install docker
 [source, bash]
 ----
 $ sudo -i
 # yum install -y docker
 ----
 
-=== Start Docker
+=== Start docker
 
 To start the docker binary and have it managed by link:https://fedoramagazine.org/what-is-an-init-system/[`systemd`]
 we first need to enable it and tell systemd that we want it to run a boot time.
@@ -43,6 +43,19 @@ systemctl start docker
 systemctl status docker
 ----
 
-Once docker starts successfully you should see a similar output as below.
+Once docker daemon starts successfully you should see a similar output as below.
 
 image::systemctl-status.png[caption="Figure 1: ", title="systemctl status docker", 330, 600]
+
+== Install buildah, skopeo, and podman
+
+The docker tooling requires a daemon (service) to operate.  There are alternative CLI tools which provide focused separation of the docker command's features and extend their capabilities.  The following three commands will be used throughout this workshop.
+
+- Buildah - used to build Open Container Initiative (OCI) format or docker format container images without the need for a daemon.
+- Podman - provides the ability to directly run container images without a daemon.  Podman can pull container images from a container registry if they are not available locally
+- Skopeo -  offers features for pulling and pushing containers to registries.  Moving containers between registries is supported.  Container image inspection is also offered and some introspective capabilities can be performed without first downloading the container itself.
+
+[source, bash]
+----
+yum -y install buildah skopeo podman
+----
