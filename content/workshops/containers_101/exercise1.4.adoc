@@ -25,6 +25,7 @@ You should use a private container registry if you want to:
 - fully own your images distribution pipeline
 - integrate image storage and distribution tightly into your in-house development workflow
 
+First, lets install the `docker-distribution` package, to provide the registry software:
 
 .Install Registry
 [source, bash]
@@ -32,6 +33,8 @@ You should use a private container registry if you want to:
 yum install -y docker-distribution
 ----
 
+
+Next, lets set the service to auto-start at system boot:
 
 .Enable the Docker Container Registry
 [source, bash]
@@ -49,6 +52,7 @@ mkdir /etc/docker-distribution/certs
 cd /etc/docker-distribution/certs
 openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -out domain.crt
 ----
+
 
 Answer the questions that OpenSSL asks, in any way that you see fit.  To finish this configuration, let's add the cert to the system's trusted database:
 
@@ -88,12 +92,16 @@ http:
 ----
 
 
+Next, we can start the registry:
+
 .Start the registry
 [source, bash]
 ----
 systemctl start docker-distribution
 ----
 
+
+Before we upload anything, let's take a look to see what images we have in the local image database:
 
 .View Current Images
 [source, bash]
