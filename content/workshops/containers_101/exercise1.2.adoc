@@ -65,6 +65,8 @@ To show that container storage volumes can be used to mount external file system
 
 === Volume Mounts
 
+Container images are very minimal installs of their referenced operating system, so commonly-used commands may not be present.
+
 .nonexistent command "ip"
 [source, bash]
 ----
@@ -75,7 +77,7 @@ container create failed: container_linux.go:348: starting container process caus
 : internal libpod error
 ----
 
-Running the same command with the -v switch will run the ip command successfully
+However, if we use `-v <source>:<destination>`, the `<source>` file or directory is mapped from the container host to the inside of the container.  Running the same command with the `-v` switch will run the ip command successfully
 
 
 .mounting the ip command via volumes
