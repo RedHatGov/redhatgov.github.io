@@ -27,17 +27,34 @@ The command you pass on the podman run command line sees the inside the containe
 
 If you want to make a directory from the host available to the container, map network ports from the container to the host, limit the amount of memory the container can use, or expand the CPU shares available to the container, you can do those things from the podman run command line.
 
-Launch a container and explore inside interactively.
+Launch a container and explore inside interactively:
 
-
-.podman run command
 [source, bash]
 ----
 podman run --rm -it registry.access.redhat.com/rhel7/rhel /bin/bash
 ----
+....
+Trying to pull registry.access.redhat.com/rhel7/rhel...Getting image source signatures
+Copying blob sha256:e0f71f706c2a1ff9efee4025e27d4dfd4f328190f31d16e11ef3283bc16d6842
+ 71.45 MB / ? [--------------------=---------------------------------------] 7s 
+Copying blob sha256:121ab4741000471a7e2ddc687dedb440060bf9845ca415a45e99e361706f1098
+ 1.22 KB / ? [----------------------------------------------------=--------] 0s 
+Copying config sha256:7a840db7f020be49bb60fb1cc4f1669e83221d61c1af23ff2cac2f870f9deee8
+ 6.21 KB / 6.21 KB [========================================================] 0s
+Writing manifest to image destination
+Storing signatures
+....
+
+[NOTE]
+====
+*NOTE:* When you see a prompt like the following, you are in the container:
+----
+[root@7e5a67870995 /]#
+----
+====
+
 
 Commands to try:
-
 
 [source, bash]
 ----
@@ -48,12 +65,10 @@ uname -a
 ----
 
 
-image::docker-shell.png[caption="Figure 2: ", title='In Linux container', 50]
-
+When you are finished looking around the internals of the container, type `exit` to exit.
 
 [source, bash]
 ----
-# to exit
 exit
 ----
 
@@ -71,20 +86,18 @@ Container images are very minimal installs of their referenced operating system,
 [source, bash]
 ----
 podman run --rm -it rhel7 /usr/sbin/ip a
-
+----
 ....
 container create failed: container_linux.go:348: starting container process caused "exec: \"/usr/sbin/ip\": stat /usr/sbin/ip: no such file or directory"
 : internal libpod error
-----
+....
 
-However, if we use `-v <source>:<destination>`, the `<source>` file or directory is mapped from the container host to the inside of the container.  Running the same command with the `-v` switch will run the ip command successfully
+However, if we use `-v <source>:<destination>`, the `<source>` file or directory is mapped from the container host to the inside of the container.  Running the same command with the `-v` switch will run the ip command successfully:
 
-
-.mounting the ip command via volumes
 [source, bash]
 ----
 podman run -v /usr/sbin:/usr/sbin --rm -it rhel7 /usr/sbin/ip a
-
+----
 ....
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -98,8 +111,7 @@ podman run -v /usr/sbin:/usr/sbin --rm -it rhel7 /usr/sbin/ip a
        valid_lft forever preferred_lft forever
     inet6 fe80::2006:a3ff:fef0:c6a0/64 scope link tentative
        valid_lft forever preferred_lft forever
-----
-
+....
 
 === Volume Mounts (continued)
 
@@ -130,7 +142,6 @@ The -w switch specifies the working directory where binaries are executed.  If u
 [source, bash]
 ----
 mkdir /opt/rhel_data
-
 podman run -d -p 8080:8000 --name="python_web" \
        -w /opt \
        -v /opt/rhel_data:/opt rhel7 \
@@ -143,31 +154,32 @@ Verify the container is running using the podman `ps` switch
 [source, bash]
 ----
 podman ps -a
-
+----
+....
 CONTAINER ID   IMAGE                                     COMMAND                  CREATED AT                      STATUS              PORTS                                            NAMES
 fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp...   2018-05-23 17:21:40 +0000 UTC   Up 45 seconds ago   0.0.0.0:8080->8000/udp, 0.0.0.0:8080->8000/tcp   python_web
-----
+....
 
 
-Run the following URL command to show there are no files present in the container’s
-/opt directory.
+Run the following URL command to show there are no files present in the container’s /opt directory.
 
 
 .Check to see no files in opt
 [source, bash]
 ----
 ll /opt/rhel_data/
-
-total 0
 ----
+....
+total 0
+....
 
 
 .Check to see no files via the web server
 [source, bash]
 ----
 curl localhost:8080
-
-
+----
+....
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html>
 <title>Directory listing for /</title>
 <body>
@@ -178,13 +190,11 @@ curl localhost:8080
 <hr>
 </body>
 </html>
-----
+....
 
 
 Now create several files with a script in the host `/opt/rhel_data` directory.
 
-
-.for loop script
 [source, bash]
 ----
 for i in {1..10}; do touch /opt/rhel_data/file${i}; done
@@ -196,7 +206,8 @@ View the newly created files in `/opt/rhel_data`
 [source, bash]
 ----
 ll /opt/rhel_data/
-
+----
+....
 total 0
 -rw-r--r--. 1 root root 0 Feb 14 22:38 file1
 -rw-r--r--. 1 root root 0 Feb 14 22:38 file10
@@ -208,16 +219,15 @@ total 0
 -rw-r--r--. 1 root root 0 Feb 14 22:38 file7
 -rw-r--r--. 1 root root 0 Feb 14 22:38 file8
 -rw-r--r--. 1 root root 0 Feb 14 22:38 file9
-----
+....
 
-Then use curl to view the files from the python webserver that is serving files from the mounted `/opt/rhel_data` volume.
+Then use curl to view the files from the python webserver that is serving files from the mounted `/opt/rhel_data` volume:
 
-
-.Check to see new files in the web server's `/opt`
 [source, bash]
 ----
 curl localhost:8080
-
+----
+....
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html>
 <title>Directory listing for /</title>
 <body>
@@ -238,18 +248,17 @@ curl localhost:8080
 <hr>
 </body>
 </html>
-----
+....
 
 == Container metadata
 
 Container images have metadata associated with them that can tell you a lot about processes and network settings.  The following command returns 304 lines of JSON data.  The output below is truncated for brevity.  Feel free to read over the metadata.
 
-
-.podman inspect
 [source, bash]
 ----
 podman inspect python_web
-
+----
+....
 [{
     "ID": "fcd06aee95338748ab86faddd696c2cda212e7797b1e44428434da4a0d0b2b45",
     "Created": "2018-05-23T17:21:40.315773016Z",
@@ -266,7 +275,7 @@ podman inspect python_web
     "MountLabel": "system_u:object_r:svirt_sandbox_file_t:s0:c744,c884",
     "ProcessLabel": "system_u:system_r:svirt_lxc_net_t:s0:c744,c884",
 ...
-----
+....
 
 === Scripting Pro Tips
 
@@ -276,9 +285,10 @@ You can use a dot notation to parse the metadata returned by podman inspect and 
 [source, bash]
 ----
 podman inspect -f {{.NetworkSettings.IPAddress}} python_web
-
-10.88.0.6
 ----
+....
+10.88.0.6
+....
 
 
 Note: output truncated slightly for readability
@@ -287,8 +297,9 @@ Note: output truncated slightly for readability
 [source, bash]
 ----
 podman run --rm -it rhel7 bash
-
-[root@592226ddcc06 /]# cat /proc/1/cgroup
+cat /proc/1/cgroup
+----
+....
 11:blkio:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
 10:hugetlb:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
 9:pids:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
@@ -300,4 +311,6 @@ podman run --rm -it rhel7 bash
 3:devices:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
 2:memory:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
 1:name=systemd:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-----
+....
+
+{{< importPartial "footer/footer.html" >}}

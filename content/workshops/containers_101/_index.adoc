@@ -48,3 +48,5 @@ Special Thanks to
 - Jason Callaway
 
 {{% /alert %}}
+
+{{< importPartial "footer/footer.html" >}}

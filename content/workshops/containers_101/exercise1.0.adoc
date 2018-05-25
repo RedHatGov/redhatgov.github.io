@@ -46,3 +46,5 @@ The docker tooling requires a daemon (service) to operate.  There are alternativ
 ----
 yum -y install buildah skopeo podman
 ----
+
+{{< importPartial "footer/footer.html" >}}
