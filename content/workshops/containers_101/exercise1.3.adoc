@@ -32,17 +32,10 @@ First get the Dockerfile from GitHub using curl.
 .Get file
 [source, bash]
 ----
-curl -s -o Dockerfile https://raw.githubusercontent.com/RedHatGov/Dockerfile_fedora-postgres/master/Dockerfile_fedora-postgres
+curl -s -o Dockerfile https://raw.githubusercontent.com/ajacocks/Dockerfile_fedora-postgres/master/Dockerfile_fedora-postgres
 ----
 
-After downloading the Dockerfile using the curl command, edit the file to remove VOLUME line.  This would typically be used for container persistent storage of the database files.  In this scenario, the data does not need to be retained and the line should be removed.
-
-
-.Remove the following Dockerfile line
-[source, bash]
-----
-VOLUME	["/var/lib/pgsql/data"]
-----
+After downloading the Dockerfile using the curl command, review the contents of the container description, to gain an understanding of how containers are built:
 
 
 .Edited Dockerfile contents
@@ -65,6 +58,8 @@ CMD ["/bin/postgres", "-D", "/var/lib/pgsql/data", "-c", "config_file=/var/lib/p
 ----
 
 
+Next, we will build the container, and store it in the local container images repository.  The command `buildah` will be used to create the container image, with the `bud` option specifying that we will build from a `dockerfile` format description, `-t fedora_postgresql` specifying the tag, and `.` telling buildah to use the current directory as the build source:
+
 .Build
 [source, bash]
 ----
@@ -74,6 +69,8 @@ buildah bud -t fedora_postgresql .
 ----
 
 
+Next, we will run the container.  However, we are introducing a new flag to our use of `podman`.  The `-d` flag tells podman to disconnect from the container, once it is executed, and to leave it running, while `-n fpg` gives it a name to reference:
+
 .Run
 [source, bash]
 ----
@@ -81,11 +78,15 @@ podman run -d --name fpg fedora_postgresql
 ----
 
 
+Now, we can open a shell inside of the running container, to poke around inside:
+
 [source, bash]
 ----
 podman exec -t fpg psql
 ----
 
+
+Let's do a quick check to see what databases are available:
 
 .Note: This is backslash followed by lower-case L
 [source, bash]
@@ -104,6 +105,8 @@ template1 | postgres | SQL_ASCII | C       | C     | =c/postgres          +
 (4 rows)
 ----
 
+
+And finally, we can close down our connection to the container:
 
 .To exit
 [source, bash]
