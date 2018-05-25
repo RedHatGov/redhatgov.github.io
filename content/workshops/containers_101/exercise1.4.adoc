@@ -54,7 +54,33 @@ openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -
 ----
 
 
-Answer the questions that OpenSSL asks, in any way that you see fit.  To finish this configuration, let's add the cert to the system's trusted database:
+Answer the questions that OpenSSL asks, in any way that you see fit, but make sure that you specify a `Common Name` of `localhost`.  Here is an example:
+
+.Enter certificate data
+[source, bash]
+----
+Generating a 4096 bit RSA private key
+............................................................++
+...............................................................++
+writing new private key to 'domain.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [XX]:US
+State or Province Name (full name) []:Maryland
+Locality Name (eg, city) [Default City]:Middletown
+Organization Name (eg, company) [Default Company Ltd]:Red Hat
+Organizational Unit Name (eg, section) []:BD SA Team
+Common Name (eg, your name or your server's hostname) []:localhost
+Email Address []:alexander@redhat.com
+----
+
+To finish this configuration, let's add the cert to the system's trusted database:
 
 .Trust a Self-Generated Certificate
 [source, bash]
@@ -87,7 +113,7 @@ http:
     tls:
       certificate: /etc/docker-distribution/certs/domain.crt
       key: /etc/docker-distribution/certs/domain.key
-    host: https://registry-internal:5000
+    host: https://localhost:5000
     relativeurls: false
 ----
 
@@ -126,7 +152,7 @@ buildah push fedora_postgresql:latest localhost:5000/fedora_postgresql:latest
 .Push fedora_postgresql via skopeo
 [source, bash]
 ----
-skopeo copy docker-daemon:docker.io/fedora_postgresql:latest docker://localhost:5000/fedora_postgresql:latest
+skopeo copy containers-storage:fedora_postgresql:latest docker://localhost:5000/fedora_postgresql:latest
 ----
 
 
