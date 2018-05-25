@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1.0 - Install docker, buildah, skopeo, and podman"
+title: "Exercise 1.0 - Install buildah, skopeo, and podman"
 workshops: containers_101
 workshop_weight: 20
 layout: lab
@@ -12,6 +12,27 @@ layout: lab
 :source-language: yaml
 
 = Exercise 1.0 - Install buildah, skopeo, and podman
+
+== Elevate privileges
+
+In order to do any of the steps of this workshop, you will need `root` privileges.  There are two ways of doing this, and which you choose is up to you.
+
+The first, and easier, way is to start a `root` session, with `sudo -i`:
+
+[source, bash]
+----
+sudo -i
+----
+
+Alternately, you can preface each command that we show you with `sudo`.  For example, to move a file:
+
+[source, bash]
+----
+sudo mv file /tmp/
+----
+
+Either method will work, but remember that, in a production environment, the second method is much more secure and auditable.
+
 
 == Install buildah, skopeo, and podman
 
