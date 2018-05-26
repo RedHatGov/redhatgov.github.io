@@ -38,14 +38,14 @@ After downloading the Dockerfile using the curl command, review the contents of 
 cat Dockerfile
 ----
 ....
-FROM fedora
-MAINTAINER jcallawa@redhat.com
+FROM docker.io/library/fedora:latest
+MAINTAINER alexander@redhat.com
 RUN yum install -y postgresql-server
 USER postgres
 RUN /bin/initdb -D /var/lib/pgsql/data
 RUN /usr/bin/pg_ctl start -D /var/lib/pgsql/data -s -o "-p 5432" -w -t 300 &&\
-    /bin/psql --command "CREATE USER podman WITH SUPERUSER PASSWORD 'podman';" &&\
-    /bin/createdb -O podman podman
+                /bin/psql --command "CREATE USER docker WITH SUPERUSER PASSWORD 'docker';" &&\
+                /bin/createdb -O docker docker
 RUN echo "host all  all    0.0.0.0/0  md5" >> /var/lib/pgsql/data/pg_hba.conf
 RUN echo "listen_addresses='*'" >> /var/lib/pgsql/data/postgresql.conf
 EXPOSE 5432
@@ -58,11 +58,15 @@ Next, we will build the container, and store it in the local container images re
 [source, bash]
 ----
 mkdir build; mv Dockerfile build/Dockerfile; cd build
+----
+
+[source, bash]
+----
 buildah bud -t fedora_postgresql .
 ----
 
 
-Next, we will run the container.  However, we are introducing a new flag to our use of `podman`.  The `-d` flag tells podman to disconnect from the container, once it is executed, and to leave it running, while `-n fpg` gives it a name to reference:
+Next, we will run the container.  However, we are introducing a new flag to our use of `podman`.  The `-d` flag tells podman to disconnect from the container, once it is executed, and to leave it running, while `--name fpg` gives it a name to reference:
 
 [source, bash]
 ----
@@ -88,13 +92,12 @@ Let's do a quick check to see what databases are available:
 List of databases
 Name    |  Owner   | Encoding  | Collate | Ctype |   Access privileges
 -----------+----------+-----------+---------+-------+-----------------------
-podman    | podman   | SQL_ASCII | C       | C     |
+docker    | docker   | SQL_ASCII | C       | C     |
 postgres  | postgres | SQL_ASCII | C       | C     |
 template0 | postgres | SQL_ASCII | C       | C     | =c/postgres          +
-|          |           |         |       | postgres=CTc/postgres
+          |          |           |         |       | postgres=CTc/postgres
 template1 | postgres | SQL_ASCII | C       | C     | =c/postgres          +
-|          |           |         |       | postgres=CTc/postgres
-(4 rows)
+          |          |           |         |       | postgres=CTc/postgres
 ....
 
 

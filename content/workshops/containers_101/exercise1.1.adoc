@@ -20,17 +20,17 @@ Use the following command to pull a RHEL image from the Red Hat repository:
 .podman pull command
 [source, bash]
 ----
-podman pull registry.access.redhat.com/rhel7/rhel
+podman pull registry.access.redhat.com/rhel7
 ----
 
 
-An image is identified by a repository name (registry.access.redhat.com), a namespace name (rhel7) and the image name (rhel).  You could also add a tag (which defaults to :latest if not entered). The repository name rhel.  If the container registry URL is not specified in the pull command, it could result in the retrieval of an image that originates from an untrusted registry.  If there are multiple versions of the same image, adding a tag, such as latest to form a name such as rhel:latest, lets you choose the image more explicitly.
+An image is identified by a repository name (registry.access.redhat.com), a namespace name (rhel7) and the image name (rhel).  You could also add a tag (which defaults to :latest if not entered).  The repository name rhel.  If the container registry URL is not specified in the pull command, it could result in the retrieval of an image that originates from an untrusted registry.  There can be multiple versions of the same image.  A specific version can be selected by adding a tag, such as :latest to form a name such as rhel:latest or rhel7:7.5-231.
 
-Skopeo allows the ability to inspect containers stored in a registry.  Using the inspect option shows details of the selected container.  An enhancement over the the docker tool is the inspect command's ability to list all tags of the specified container.
+Skopeo allows the ability to inspect containers stored in a registry.  Using the inspect option shows details of the selected container.  An enhancement over the the docker tool is the `skopeo inspect` command's ability to list all tags of the specified container.
 
 [source, bash]
 ----
-skopeo inspect docker://registry.access.redhat.com/rhel7/rhel
+skopeo inspect docker://registry.access.redhat.com/rhel7
 ----
 
 
@@ -41,13 +41,13 @@ Podman can be used to see what container images are in the local repository:
 podman images
 ----
 ....
-REPOSITORY                              TAG       IMAGE ID        CREATED       SIZE
-registry.access.redhat.com/rhel7/rhel   latest    98a88a8b722a    5 weeks ago   201.4 MB
+REPOSITORY                         TAG      IMAGE ID       CREATED      SIZE
+registry.access.redhat.com/rhel7   latest   7a840db7f020   2 days ago   211MB
 ....
 
 
 === Inspecting the container tools environment
-Now that you have the Linux container tools installed, with a few containers available, you can start investigating what makes up a container.  Run docker with the version and info options to get a feel for your Docker environment.
+Now that you have the Linux container tools installed, with a few containers available, you can start investigating what makes up a container.  Run `podman info` option to check the container environment details.
 
 
 .podman info command

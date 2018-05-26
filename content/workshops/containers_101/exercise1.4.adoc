@@ -46,7 +46,15 @@ The container registry configuration file will need to be modified to allow the 
 [source, bash]
 ----
 mkdir /etc/docker-distribution/certs
+----
+
+[source, bash]
+----
 cd /etc/docker-distribution/certs
+----
+
+[source, bash]
+----
 openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -out domain.crt
 ----
 
@@ -67,12 +75,12 @@ For some fields there will be a default value,
 If you enter '.', the field will be left blank.
 -----
 Country Name (2 letter code) [XX]:US
-State or Province Name (full name) []:Maryland
-Locality Name (eg, city) [Default City]:Middletown
-Organization Name (eg, company) [Default Company Ltd]:Red Hat
-Organizational Unit Name (eg, section) []:BD SA Team
+State or Province Name (full name) []:Ohio
+Locality Name (eg, city) [Default City]:Dublin
+Organization Name (eg, company) [Default Company Ltd]:workshop
+Organizational Unit Name (eg, section) []:workshop
 Common Name (eg, your name or your server's hostname) []:localhost
-Email Address []:alexander@redhat.com
+Email Address []:student@lab.local
 ....
 
 To finish this configuration, let's add the cert to the system's trusted database:
@@ -80,16 +88,23 @@ To finish this configuration, let's add the cert to the system's trusted databas
 [source, bash]
 ----
 cp domain.crt /etc/pki/tls/certs
+----
+
+[source, bash]
+----
 update-ca-trust extract
 ----
 
 
-Next, we will add secure mode to the container registry configuration.  Edit the file '/etc/docker-distribution/registry/config.yml' so that it looks like the following:
+Next, we will add secure mode to the container registry configuration.  Edit the file '/etc/docker-distribution/registry/config.yml' to match the example below.  Pay close attention to the last five lines, starting with tls, as these are required for configuration file.
 
 [source, bash]
 ----
-cat /etc/docker-distribution/registry/config.yml
+vi /etc/docker-distribution/registry/config.yml
+----
 
+[source, bash]
+----
 version: 0.1
 log:
   fields:
@@ -127,14 +142,14 @@ Before we upload anything, let's take a look to see what images we have in the l
 podman images
 ----
 ....
-REPOSITORY                        TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-fedora_postgresql                 latest              93e0fb06be2b        7 minutes ago       407.3 MB
-docker.io/fedora                  latest              c7d2f0130dae        8 days ago          204.3 MB
-registry.access.redhat.com/rhel   latest              c4f590bbcbe3        12 days ago         158.2 MB
+REPOSITORY                            TAG      IMAGE ID       CREATED          SIZE
+registry.access.redhat.com/rhel7      latest   7a840db7f020   2 days ago       211MB
+docker.io/library/fedora              latest   cc510acfcd70   2 weeks ago      263MB
+docker.io/library/fedora_postgresql   latest   b105a704d05d   10 minutes ago   495MB
 ....
 
 
-Now, we will push the container to the local registry.  Either of these two commands will work, showing that there is always more than one way to skin a cat.
+Now, we will push the container to the local registry.  Either of these two commands will work, showing that there is always more than one way to skin a cat.  NOTE: choose one of the following two commands
 
 [source, bash]
 ----
@@ -154,7 +169,7 @@ podman search --registry localhost:5000 postgresql
 ----
 ....
 INDEX            NAME                               DESCRIPTION   STARS   OFFICIAL   AUTOMATED
-localhost:5000   localhost:5000/fedora_postgresql
+localhost:5000   localhost:5000/fedora_postgresql                 0
 ....
 
 {{< importPartial "footer/footer.html" >}}

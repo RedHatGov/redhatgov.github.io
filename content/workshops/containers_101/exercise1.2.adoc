@@ -15,9 +15,9 @@ layout: lab
 
 == Run Container Images
 
-When you execute the podman run command, you essentially spin up and create a new container from a container image.  That container consists of the contents of the image, plus features based on any additional options you pass on the podman run command line.
+When you execute the `podman run` command, you essentially spin up and create a new container from a container image.  That container consists of the contents of the image, plus features based on any additional options you specify.
 
-The command you pass on the podman run command line sees the inside the container as its running environment so, by default, very little can be seen of the host system.  For example, by default, the running applications sees:
+The command you pass on the `podman run` command line sees the inside the container as its running environment so, by default, very little can be seen of the host system.  For example, by default, the running applications sees:
 
 - The file system provided by the container image.
 
@@ -25,20 +25,20 @@ The command you pass on the podman run command line sees the inside the containe
 
 - New network interfaces (by default, a separate container network interface provides a private IP address to each container via DHCP).
 
-If you want to make a directory from the host available to the container, map network ports from the container to the host, limit the amount of memory the container can use, or expand the CPU shares available to the container, you can do those things from the podman run command line.
+If you want to make a directory from the host available to the container, map network ports from the container to the host, limit the amount of memory the container can use, or expand the CPU shares available to the container, you can do those things from the `podman run` command line.
 
 Launch a container and explore inside interactively:
 
 [source, bash]
 ----
-podman run --rm -it registry.access.redhat.com/rhel7/rhel /bin/bash
+podman run --rm -it registry.access.redhat.com/rhel7 /bin/bash
 ----
 ....
-Trying to pull registry.access.redhat.com/rhel7/rhel...Getting image source signatures
+Trying to pull registry.access.redhat.com/rhel7...Getting image source signatures
 Copying blob sha256:e0f71f706c2a1ff9efee4025e27d4dfd4f328190f31d16e11ef3283bc16d6842
- 71.45 MB / ? [--------------------=---------------------------------------] 7s 
+ 71.45 MB / ? [--------------------=---------------------------------------] 7s
 Copying blob sha256:121ab4741000471a7e2ddc687dedb440060bf9845ca415a45e99e361706f1098
- 1.22 KB / ? [----------------------------------------------------=--------] 0s 
+ 1.22 KB / ? [----------------------------------------------------=--------] 0s
 Copying config sha256:7a840db7f020be49bb60fb1cc4f1669e83221d61c1af23ff2cac2f870f9deee8
  6.21 KB / 6.21 KB [========================================================] 0s
 Writing manifest to image destination
@@ -59,8 +59,15 @@ Commands to try:
 [source, bash]
 ----
 ls
+----
+
+[source, bash]
+----
 whoami
-pwd
+----
+
+[source, bash]
+----
 uname -a
 ----
 
@@ -92,7 +99,7 @@ container create failed: container_linux.go:348: starting container process caus
 : internal libpod error
 ....
 
-However, if we use `-v <source>:<destination>`, the `<source>` file or directory is mapped from the container host to the inside of the container.  Running the same command with the `-v` switch will run the ip command successfully:
+However, if we use `-v <source>:<destination>`, the `<source>` file or directory is mapped from the container host to the inside of the container.  Running the same command with the `-v` volume switch will run the ip command successfully:
 
 [source, bash]
 ----
@@ -133,6 +140,9 @@ Search for the container event on the container host log
 journalctl | grep "Testing logging"
 ----
 
+....
+May 26 03:28:42 ip-10-0-2-6.ec2.internal root[25499]: Testing logging to the host
+....
 
 === Persistent container data
 
@@ -142,6 +152,10 @@ The -w switch specifies the working directory where binaries are executed.  If u
 [source, bash]
 ----
 mkdir /opt/rhel_data
+----
+
+[source, bash]
+----
 podman run -d -p 8080:8000 --name="python_web" \
        -w /opt \
        -v /opt/rhel_data:/opt rhel7 \
@@ -153,8 +167,9 @@ Verify the container is running using the podman `ps` switch
 
 [source, bash]
 ----
-podman ps -a
+podman ps
 ----
+
 ....
 CONTAINER ID   IMAGE                                     COMMAND                  CREATED AT                      STATUS              PORTS                                            NAMES
 fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp...   2018-05-23 17:21:40 +0000 UTC   Up 45 seconds ago   0.0.0.0:8080->8000/udp, 0.0.0.0:8080->8000/tcp   python_web
@@ -252,12 +267,13 @@ curl localhost:8080
 
 == Container metadata
 
-Container images have metadata associated with them that can tell you a lot about processes and network settings.  The following command returns 304 lines of JSON data.  The output below is truncated for brevity.  Feel free to read over the metadata.
+Container images have metadata associated with them that can tell you a lot about processes and network settings.  The following command returns a little over 300 lines of JSON data.  The output below is truncated for brevity.  Feel free to read over the metadata.
 
 [source, bash]
 ----
 podman inspect python_web
 ----
+
 ....
 [{
     "ID": "fcd06aee95338748ab86faddd696c2cda212e7797b1e44428434da4a0d0b2b45",
@@ -286,6 +302,7 @@ You can use a dot notation to parse the metadata returned by podman inspect and 
 ----
 podman inspect -f {{.NetworkSettings.IPAddress}} python_web
 ----
+
 ....
 10.88.0.6
 ....
@@ -293,12 +310,18 @@ podman inspect -f {{.NetworkSettings.IPAddress}} python_web
 
 Note: output truncated slightly for readability
 
+You can see the use of cgroups when attached to the container tty.  Listing the contents of `/proc/1/cgroup` will show the cgroup labels.
 
 [source, bash]
 ----
 podman run --rm -it rhel7 bash
+----
+
+[source, bash]
+----
 cat /proc/1/cgroup
 ----
+
 ....
 11:blkio:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
 10:hugetlb:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
@@ -311,6 +334,27 @@ cat /proc/1/cgroup
 3:devices:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
 2:memory:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
 1:name=systemd:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+....
+
+Type `exit` to exit the container.  Running the same command from your student system, outside of the container context, will list the same top level groups without labels.
+
+[source, bash]
+----
+cat /proc/1/cgroup
+----
+
+....
+11:devices:/
+10:cpuset:/
+9:freezer:/
+8:hugetlb:/
+7:pids:/
+6:net_prio,net_cls:/
+5:perf_event:/
+4:blkio:/
+3:memory:/
+2:cpuacct,cpu:/
+1:name=systemd:/
 ....
 
 {{< importPartial "footer/footer.html" >}}
