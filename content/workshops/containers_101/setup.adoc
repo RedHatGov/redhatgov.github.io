@@ -13,6 +13,19 @@ layout: lab
 
 = Setup
 
+== Conventions Used in this Workshop
+
+When something written is a command that you should type, it is separated in a code block, like this:
+[source,bash]
+----
+echo "hello, world!"
+----
+And the output will be shown in a block, like this:
+....
+hello, world!
+....
+
+
 == Introduction to Wetty (Browser-based SSH)
 
 This lab provides a quick tour of the browser based SSH client Wetty. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
@@ -20,19 +33,16 @@ This lab provides a quick tour of the browser based SSH client Wetty. To help yo
 
 == Accessing Wetty
 
-Use this URL to access the Wetty node, just change the workshopname. Ask your instructor for rthe workshopname. 
+Use this URL to access the Wetty node, via your web browser.  Please use Chrome or Firefox, for best results.
 
 [source,bash]
 ----
-https://<workshopname>.master.<student number>.redhatgov.io:8888
+{{< uri2partfqdn "https://" ":8888" >}}
 ----
+
 
 After logging in, you should see a shell.
 
 image::wetty.png[caption="Figure 1: ", title='wetty', 500]
 
-
-
-
-
-
+{{< importPartial "footer/footer.html" >}}
