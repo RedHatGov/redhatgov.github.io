@@ -18,4 +18,7 @@ Add Code Analysis State into pipeline text file.
                 }
               }
 ```
+
+SonarQube is an open source static code analysis tool that we can automate running security scan against your source code to further improve the security of you application.  So every time you have a code check-in, SonarQube will scan the quality and threat analysis of that code.
+
 Once we build the full pipeline and run it, we will log into SonarQube and view the various metrics, stats, and code coverage.

@@ -18,7 +18,7 @@ metadata:
     labels:
       app: cicd-pipeline
       name: cicd-pipeline
-    name: tasks-pipeline2
+    name: tasks-pipeline
 spec:
     triggers:
       - type: GitHub

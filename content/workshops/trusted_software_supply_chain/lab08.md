@@ -10,6 +10,10 @@ Containers are an important foundation for your application in building a Truste
 
 Containers can be built using a layered approach. For example, to create a container of a Java web application, you could do so in multiple layers: the OS, the JVM, the web server, and the code itself.
 
+We can also incorporate vulnerability scanning against images in an automated fashion.  So any image change is scanned to improve the inherrited security of your application.
+
+We can also cryptographically sign your image so you know your container is running with a verified container image.
+
 <img src="../images/golden_images.png" width="900" />
 
 # Add Create Image Builder Stage
