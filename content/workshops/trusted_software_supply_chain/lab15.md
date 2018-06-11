@@ -1,22 +1,13 @@
 ---
-title: Lab 15 - Trigger the Trusted Software Supply Chain
+title: Lab 15 - Automation and the Trusted Software Supply Chain
 workshops: trusted_software_supply_chain
 workshop_weight: 25
 layout: lab
 ---
 
-- Clone and checkout the eap-7 branch of the openshift-tasks git repository and using an IDE (e.g. JBoss Developer Studio), remove the @Ignore annotation from src/test/java/org/jboss/as/quickstarts/tasksrs/service/UserResourceTest.java test methods to enable the unit tests. Commit and push to the git repo.
-- Check out Jenkins, a pipeline instance is created and is being executed. The pipeline will fail during unit tests due to the enabled unit test.
-- Check out the failed unit and test src/test/java/org/jboss/as/quickstarts/tasksrs/service/UserResourceTest.java and run it in the IDE.
-- Fix the test by modifying src/main/java/org/jboss/as/quickstarts/tasksrs/service/UserResource.java and uncommenting the sort function in getUsers method.
-- Run the unit test in the IDE. The unit test runs green.
-- Commit and push the fix to the git repository and verify a pipeline instance is created in Jenkins and executes successfully.
-
-You will fail a Unit Test and fix it Eclipse Che to trigger a Webhook Pipeline Run
-
 # Trigger the Trusted Software Supply Chain with Code Check-ins
 
-You will trigger the Trusted Software Supply Chain with code check-in.
+Through automation, you will trigger the Trusted Software Supply Chain with code check-ins.
 
 # Verify Webhook in Gogs
 
