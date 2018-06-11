@@ -20,9 +20,11 @@ Click the external route to go into your Jenkins Server
 
 Click Login with OpenShift.
 
-Login with your OpenShift Credentials.  You maybe asked to accept authorizations.  Go ahead and do so and re-login.
+Login with your OpenShift Credentials.  
 
 <img src="../images/jenkins_ocp_login.png" width="500" />
+
+You will be asked to authorize access to the jenkins service account.  Go ahead and Allow selected permissions.
 
 # Jenkins
 
@@ -60,7 +62,7 @@ metadata:
     labels:
       app: cicd-pipeline
       name: cicd-pipeline
-    name: tasks-pipeline2
+    name: tasks-pipeline
 spec:
     triggers:
       - type: GitHub
