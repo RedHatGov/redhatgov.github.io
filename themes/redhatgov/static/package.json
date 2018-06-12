@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "highlight.js": "^9.10.0",
+    "js-cookie": "^2.2.0",
     "patternfly": "^3.24.0"
   }
 }
