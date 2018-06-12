@@ -10,7 +10,7 @@ Containers are an important foundation for your application in building a Truste
 
 Containers can be built using a layered approach. For example, to create a container of a Java web application, you could do so in multiple layers: the OS, the JVM, the web server, and the code itself.
 
-We can also incorporate vulnerability scanning against images in an automated fashion.  So any image change is scanned to improve the inherrited security of your application.
+We can also incorporate CVE and vulnerability scanning against images in an automated fashion.  So any image change is scanned to improve the inherited security of your application.  We have partners such as Black Duck and Twistlock that do container image scanning.  Also from the acquisition of CoreOS, Quay is an enterprise registry that does vulnerability scanning.
 
 We can also cryptographically sign your image so you know your container is running with a verified container image.
 
