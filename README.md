@@ -17,11 +17,11 @@ If you want to build RedHatGov.io right away:
 - You have a working [Hugo environment][hugo].
 - You have Ruby and the asciidoctor gem installed (*gem install asciidoctor*)
 
-`$ git clone https://github.com/RedHatGov/redhatgov.github.io`
+    `$ git clone https://github.com/RedHatGov/redhatgov.github.io`
 
-`$ cd redhatgov.github.io`
+    `$ cd redhatgov.github.io`
 
-`$ hugo server`
+    `$ hugo server`
 
 ## Contributing
 
