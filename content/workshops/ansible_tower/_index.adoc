@@ -35,10 +35,9 @@ Your Responsibilities
 Have a discussion. This will be boring if it’s just us up here talking for over 4 hours.
 Participate. We are going to cut you loose with Ansible here in just a little while. Have questions. Have opinions.
 Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy. See? Not only can we dig into Ansible but you can make a new friend!
- 
+
 == Labs
 
 {{< labs ansible_tower >}}
 
 {{< importPartial "footer/footer.html" >}}
-
