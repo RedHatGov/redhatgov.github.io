@@ -1,6 +1,6 @@
 ---
 title: 'Lab 4: Bastion Host Preparation'
-workshops: openshift_for_ops
+workshops: openshift_install
 layout: lab
 workshop_weight: 40
 ---

@@ -1,6 +1,6 @@
 ---
 title: 'Lab 2: Environment'
-workshops: openshift_for_ops
+workshops: openshift_install
 layout: lab
 workshop_weight: 20
 ---
