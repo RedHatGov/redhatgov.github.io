@@ -1,6 +1,6 @@
 ---
 title: 'Lab 3: Node Registration'
-workshops: openshift_for_ops
+workshops: openshift_install
 layout: lab
 workshop_weight: 30
 ---

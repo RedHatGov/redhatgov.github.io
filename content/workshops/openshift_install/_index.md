@@ -1,5 +1,5 @@
 ---
-title: OpenShift for Ops
+title: OpenShift Install
 menu:
   main:
     parent: workshops
@@ -33,4 +33,4 @@ required for installing OpenShift Container Platform.
 
 # Labs
 
-{{< labs openshift_for_ops >}}
+{{< labs openshift_install >}}
