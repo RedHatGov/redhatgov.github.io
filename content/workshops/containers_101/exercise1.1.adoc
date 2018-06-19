@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1.1 - Pulling Docker Images"
+title: "Exercise 1.1 - Pulling and Running Container Images"
 workshops: containers_101
 workshop_weight: 30
 layout: lab
@@ -11,121 +11,81 @@ layout: lab
 :source-highlighter: highlight.js
 :source-language: yaml
 
-= Exercise 1.1 - Pulling Docker Images
+= Exercise 1.1 - Pulling Container Images
 
 == Pull Images
 
+Use the following command to pull a RHEL image from the Red Hat repository:
 
-.Docker pull command
+.podman pull command
 [source, bash]
 ----
-docker pull registry.access.redhat.com/rhel7/rhel
+podman pull registry.access.redhat.com/rhel7
 ----
 
 
-An image is identified by a repository name (registry.access.redhat.com), a namespace name (rhel7) and the image name (rhel). You could also add a tag (which defaults to :latest if not entered). The repository name rhel, when passed to the docker pull command without the name of a registry preceding it, is ambiguous and could result in the retrieval of an image that originates from an untrusted registry. If there are multiple versions of the same image, adding a tag, such as latest to form a name such as rhel:latest, lets you choose the image more explicitly.
+An image is identified by a repository name (registry.access.redhat.com), a namespace name (rhel7) and the image name (rhel).  You could also add a tag (which defaults to :latest if not entered).  The repository name rhel.  If the container registry URL is not specified in the pull command, it could result in the retrieval of an image that originates from an untrusted registry.  There can be multiple versions of the same image.  A specific version can be selected by adding a tag, such as :latest to form a name such as rhel:latest or rhel7:7.5-231.
 
+Skopeo allows the ability to inspect containers stored in a registry.  Using the inspect option shows details of the selected container.  An enhancement over the the docker tool is the `skopeo inspect` command's ability to list all tags of the specified container.
 
-.Docker images command
 [source, bash]
 ----
-docker images
-
-REPOSITORY                              TAG       IMAGE ID        CREATED       SIZE
-registry.access.redhat.com/rhel7/rhel   latest    98a88a8b722a    5 weeks ago   201.4 MB
+skopeo inspect docker://registry.access.redhat.com/rhel7
 ----
 
 
-=== Inspecting the Docker environment
-Now that you have the docker and docker-distribution services running, with a few containers available, you can start investigating the Docker environment and looking into what makes up a container. Run docker with the version and info options to get a feel for your Docker environment.
+Podman can be used to see what container images are in the local repository:
 
-
-.Docker version command
 [source, bash]
 ----
-docker version
-
-Client:
- Version:         1.12.5
- API version:     1.24
- Package version: docker-common-1.12.5-14.el7.x86_64
- Go version:      go1.7.4
- Git commit:      047e51b/1.12.5
- Built:           Wed Jan 11 17:53:20 2017
- OS/Arch:         linux/amd64
-
-Server:
- Version:         1.12.5
- API version:     1.24
- Package version: docker-common-1.12.5-14.el7.x86_64
- Go version:      go1.7.4
- Git commit:      047e51b/1.12.5
- Built:           Wed Jan 11 17:53:20 2017
- OS/Arch:         linux/amd64
+podman images
 ----
+....
+REPOSITORY                         TAG      IMAGE ID       CREATED      SIZE
+registry.access.redhat.com/rhel7   latest   7a840db7f020   2 days ago   211MB
+....
 
 
+=== Inspecting the container tools environment
+Now that you have the Linux container tools installed, with a few containers available, you can start investigating what makes up a container.  Run `podman info` option to check the container environment details.
 
-.Docker info command
+
+.podman info command
 [source, bash]
 ----
-docker info
-
-Containers: 0
- Running: 0
- Paused: 0
- Stopped: 0
-Images: 1
-Server Version: 1.12.5
-Storage Driver: devicemapper
- Pool Name: docker-202:2-8623952-pool
- Pool Blocksize: 65.54 kB
- Base Device Size: 10.74 GB
- Backing Filesystem: xfs
- Data file: /dev/loop0
- Metadata file: /dev/loop1
- Data Space Used: 249.3 MB
- Data Space Total: 107.4 GB
- Data Space Available: 51.05 GB
- Metadata Space Used: 712.7 kB
- Metadata Space Total: 2.147 GB
- Metadata Space Available: 2.147 GB
- Thin Pool Minimum Free Space: 10.74 GB
- Udev Sync Supported: true
- Deferred Removal Enabled: false
- Deferred Deletion Enabled: false
- Deferred Deleted Device Count: 0
- Data loop file: /var/lib/docker/devicemapper/devicemapper/data
- WARNING: Usage of loopback devices is strongly discouraged for production use. Use `--storage-opt dm.thinpooldev` to specify a custom block storage device.
- Metadata loop file: /var/lib/docker/devicemapper/devicemapper/metadata
- Library Version: 1.02.135-RHEL7 (2016-11-16)
-Logging Driver: journald
-Cgroup Driver: systemd
-Plugins:
- Volume: local
- Network: null host bridge overlay
- Authorization: rhel-push-plugin
-Swarm: inactive
-Runtimes: docker-runc runc
-Default Runtime: docker-runc
-Security Options: seccomp selinux
-Kernel Version: 3.10.0-514.el7.x86_64
-Operating System: Red Hat Enterprise Linux Server 7.3 (Maipo)
-OSType: linux
-Architecture: x86_64
-Number of Docker Hooks: 2
-CPUs: 2
-Total Memory: 3.451 GiB
-Name: ip-10-0-2-108.ec2.internal
-ID: BURQ:E6LS:DQ7D:HF7E:XZ7A:HHUA:RUK5:HPOK:OATV:TNC7:AKEJ:RCKX
-Docker Root Dir: /var/lib/docker
-Debug Mode (client): false
-Debug Mode (server): false
-Registry: https://registry.access.redhat.com/v1/
-WARNING: bridge-nf-call-iptables is disabled
-WARNING: bridge-nf-call-ip6tables is disabled
-Insecure Registries:
- 127.0.0.0/8
-Registries: registry.access.redhat.com (secure), docker.io (secure)
+podman info
 ----
+....
+host:
+  MemFree: 1050951680
+  MemTotal: 1926369280
+  SwapFree: 0
+  SwapTotal: 0
+  arch: amd64
+  cpus: 1
+  hostname: ip-10-0-2-211.ec2.internal
+  kernel: 3.10.0-862.3.2.el7.x86_64
+  os: linux
+  uptime: 19h 36m 30.42s (Approximately 0.79 days)
+insecure registries:
+  registries: []
+registries:
+  registries:
+  - registry.access.redhat.com
+store:
+  ContainerStore:
+    number: 0
+  GraphDriverName: overlay
+  GraphOptions:
+  - overlay.override_kernel_check=true
+  GraphRoot: /var/lib/containers/storage
+  GraphStatus:
+    Backing Filesystem: xfs
+    Native Overlay Diff: "true"
+    Supports d_type: "true"
+  ImageStore:
+    number: 0
+  RunRoot: /var/run/containers/storage
+....
 
+{{< importPartial "footer/footer.html" >}}

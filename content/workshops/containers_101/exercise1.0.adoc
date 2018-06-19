@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1.0 - Install Docker"
+title: "Exercise 1.0 - Install buildah, skopeo, and podman"
 workshops: containers_101
 workshop_weight: 20
 layout: lab
@@ -11,38 +11,40 @@ layout: lab
 :source-highlighter: highlight.js
 :source-language: yaml
 
-= Exercise 1.0 - Install Docker
+= Exercise 1.0 - Install buildah, skopeo, and podman
 
-== Install Docker
+== Elevate privileges
 
-.Install Docker
-[source, bash]
-----
-$ sudo -i
-# yum install -y docker
-----
+In order to do any of the steps of this workshop, you will need `root` privileges.  There are two ways of doing this, and which you choose is up to you.
 
-=== Start Docker
-
-To start the docker binary and have it managed by link:https://fedoramagazine.org/what-is-an-init-system/[`systemd`]
-we first need to enable it and tell systemd that we want it to run a boot time.
-Then to start the docker daemon right away we use the start command.
+The first, and easier, way is to start a `root` session, with `sudo -i`:
 
 [source, bash]
 ----
-systemctl enable docker
+sudo -i
 ----
+
+Alternately, you can preface each command that we show you with `sudo`.  For example, to move a file:
 
 [source, bash]
 ----
-systemctl start docker
+sudo mv file /tmp/
 ----
+
+Either method will work, but remember that, in a production environment, the second method is much more secure and auditable.
+
+
+== Install buildah, skopeo, and podman
+
+The docker tooling requires a daemon (service) to operate.  There are alternative CLI tools which provide focused separation of the docker command's features and extend their capabilities.  The following three commands will be used throughout this workshop.
+
+- Buildah - used to build Open Container Initiative (OCI) format or docker format container images without the need for a daemon.
+- Podman - provides the ability to directly run container images without a daemon.  Podman can pull container images from a container registry if they are not available locally
+- Skopeo -  offers features for pulling and pushing containers to registries.  Moving containers between registries is supported.  Container image inspection is also offered and some introspective capabilities can be performed without first downloading the container itself.
 
 [source, bash]
 ----
-systemctl status docker
+yum -y install buildah skopeo podman
 ----
 
-Once docker starts successfully you should see a similar output as below.
-
-image::systemctl-status.png[caption="Figure 1: ", title="systemctl status docker", 330, 600]
+{{< importPartial "footer/footer.html" >}}

@@ -16,8 +16,8 @@ layout: lab
 
 That wraps up what we have planned for today.
 
-What do you think? How can we help you understand Containers better?
+What do you think? How can we better help you understand Linux container concepts?
 
-For more indepth overview and examples for working with containers and RHEL check out link:https://access.redhat.com/documentation/en/red-hat-enterprise-linux-atomic-host/7/single/getting-started-with-containers/[this link]
+For more in depth overview and examples for working with containers and RHEL check out link:https://access.redhat.com/documentation/en/red-hat-enterprise-linux-atomic-host/7/single/getting-started-with-containers/[this link].
 
 Thank you for your time and participation!

@@ -1,0 +1,146 @@
+---
+title: "Exercise 3.0 - Using Ansible to Implement Security"
+workshops: ansible_tower_azure
+workshop_weight: 30
+layout: lab
+---
+
+:license_url: http://ansible-workshop-bos.redhatgov.io/ansible-license.json
+
+:icons: font
+:imagesdir: /workshops/ansible_tower_azure/images
+
+
+= Exercise 3.0 - Using Ansible to Implement Security
+
+In this exercise, we are going to use Ansible Tower to run DISA STIG and NIST 800-53 evaluations of our environment.  Note that the NIST 800-53 role also includes the execution of DISA STIG evaluation against targeted hosts.
+
+DISA STIG controls
+https://galaxy.ansible.com/MindPointGroup/RHEL7-STIG/
+
+NIST 800-53 controls
+https://galaxy.ansible.com/rhtps/800-53/
+
+== Adding the DISA STIG and NIST 800-53 role to your Tower node
+
+=== Step 1:
+
+In your wetty window (if you closed it, see the link:/workshops/ansible_tower/setup/[SETUP] step, in your workbook), type the following:
+
+[source,bash]
+----
+sudo ansible-galaxy install rhtps.800-53 -p /etc/ansible/roles
+----
+
+You will then see the following, showing that the role has been downloaded to your system-wide Ansible roles directory, `/etc/ansible/roles`:
+
+[source,bash]
+----
+- downloading role '800-53', owned by rhtps
+- downloading role from https://github.com/rhtps/ansible-role-800-53/archive/v1.1.1.tar.gz
+- extracting rhtps.800-53 to /etc/ansible/roles/rhtps.800-53
+- rhtps.800-53 (v1.1.1) was installed successfully
+----
+
+=== Step 2:
+
+First, in Ansible Tower, click on image:at_projects_icon.png[PROJECTS]
+
+=== Step 3:
+
+Next, Select ADD     image:at_add.png[Add,35,25]
+
+=== Step 4:
+
+Complete the form using the following entries
+
+|===
+|NAME |Ansible 800-53 Project
+|DESCRIPTION|800-53 Role Playbook
+|ORGANIZATION|Default
+|SCM TYPE|Git
+|SCM URL| https://github.com/ajacocks/rhtps-800-53
+|SCM BRANCH|
+|SCM UPDATE OPTIONS
+a|
+
+- [*] Clean
+- [*] Delete on Update
+- [*] Update on Launch
+|===
+
+image::section3.0-create-project.png[Cred_Detail, 900,caption="Figure 1: ",title="Defining a Project"]
+
+=== Step 5:
+
+Select SAVE     image:at_save.png[Save,35,25]
+
+=== Step 6:
+
+In your Tower window, click on `TEMPLATES`
+
+=== Step 7:
+
+Click on ADD image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
+
+=== Step 8:
+
+Complete the form using the following values.  Note that the `PLAYBOOK` field should offer `800-53.yml` as an option, when clicked.
+
+|===
+|NAME |NIST 800-53 and DISA STIG Job Template
+|DESCRIPTION|Template for security playbooks
+|JOB TYPE|Run
+|INVENTORY|Ansible Workshop Inventory
+|PROJECT|Ansible 800-53 Project
+|PLAYBOOK|main.yml
+|MACHINE CREDENTIAL|Ansible Workshop Credential
+|LIMIT|web
+|OPTIONS
+a|
+- [*] Enable Privilege Escalation
+|===
+
+image::section3.0-create-job-template.png[Cred_Detail, 900,caption="Figure 2: ",title="Defining a Job"]
+
+=== Step 9:
+
+Click SAVE image:at_save.png[Save], to store your new template, and we are ready to run it.
+
+Click on the rocketship icon image:at_launch_icon.png[Add,35,25] next to the `NIST 800-53 and DISA STIG Job Template` entry, to launch the job.
+
+You can see what the job looks like, as it is executing, and what the SCAP results look like, when uploaded to your second node, in the panel, below.
+
+{{< panel_group >}}
+{{% panel "Job Status" %}}
+
+:icons: font
+:imagesdir: /workshops/ansible_tower/images
+
+image:at_800-53_job_status.png[Job Status]
+
+{{% /panel %}}
+{{% panel "Results" %}}
+
+:icons: font
+:imagesdir: /workshops/ansible_tower/images
+
+image:at_scap_report.png[SCAP Report]
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+=== End Result
+
+You can watch the scan run against your managed node.  Note that each compliance check is named and detailed.
+
+Once the check is complete, you can open a new tab in your web browser, and navigate to the following URL, where `workshopname` is the workshop prefix, and `#` is the number that your instructor gave you:
+
+[source,bash]
+----
+{{< urifqdn_azure "http://" "node" "/scap" >}}
+----
+
+Click on the link called `scan-xccdf-report-...` to refiew the SCAP report that was generated.  Note the failures in the report; look at the machines, if you want, via your Wetty ssh session, to see what the problems might be.
+
+{{< importPartial "footer/footer_azure.html" >}}

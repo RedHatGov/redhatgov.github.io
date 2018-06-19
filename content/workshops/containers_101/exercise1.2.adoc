@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1.2 - Working with Docker Images"
+title: "Exercise 1.2 - Working with Container Images"
 workshops: containers_101
 workshop_weight: 40
 layout: lab
@@ -11,104 +11,138 @@ layout: lab
 :source-highlighter: highlight.js
 :source-language: yaml
 
-= Exercise 1.2 - Working with Docker Images
+= Exercise 1.2 - Working with Container Images
 
-== Run Docker
+== Run Container Images
 
-When you execute a docker run command, you essentially spin up and create a new container from a Docker image. That container consists of the contents of the image, plus features based on any additional options you pass on the docker run command line.
+When you execute the `podman run` command, you essentially spin up and create a new container from a container image.  That container consists of the contents of the image, plus features based on any additional options you specify.
 
-The command you pass on the docker run command line sees the inside the container as its running environment so, by default, very little can be seen of the host system. For example, by default, the running applications sees:
+The command you pass on the `podman run` command line sees the inside the container as its running environment so, by default, very little can be seen of the host system.  For example, by default, the running applications sees:
 
-- The file system provided by the Docker image.
+- The file system provided by the container image.
 
 - A new process table from inside the container (no processes from the host can be seen).
 
-- New network interfaces (by default, a separate docker network interface provides a private IP address to each container via DHCP).
+- New network interfaces (by default, a separate container network interface provides a private IP address to each container via DHCP).
 
-If you want to make a directory from the host available to the container, map network ports from the container to the host, limit the amount of memory the container can use, or expand the CPU shares available to the container, you can do those things from the docker run command line.
+If you want to make a directory from the host available to the container, map network ports from the container to the host, limit the amount of memory the container can use, or expand the CPU shares available to the container, you can do those things from the `podman run` command line.
 
-Launch a container and explore inside interactively.
+Launch a container and explore inside interactively:
 
-
-.Docker run command
 [source, bash]
 ----
-docker run --rm -it registry.access.redhat.com/rhel7/rhel /bin/bash
+podman run --rm -it registry.access.redhat.com/rhel7 /bin/bash
 ----
+....
+Trying to pull registry.access.redhat.com/rhel7...Getting image source signatures
+Copying blob sha256:e0f71f706c2a1ff9efee4025e27d4dfd4f328190f31d16e11ef3283bc16d6842
+ 71.45 MB / ? [--------------------=---------------------------------------] 7s
+Copying blob sha256:121ab4741000471a7e2ddc687dedb440060bf9845ca415a45e99e361706f1098
+ 1.22 KB / ? [----------------------------------------------------=--------] 0s
+Copying config sha256:7a840db7f020be49bb60fb1cc4f1669e83221d61c1af23ff2cac2f870f9deee8
+ 6.21 KB / 6.21 KB [========================================================] 0s
+Writing manifest to image destination
+Storing signatures
+....
+
+[NOTE]
+====
+*NOTE:* When you see a prompt like the following, you are in the container:
+----
+[root@7e5a67870995 /]#
+----
+====
+
 
 Commands to try:
 
 [source, bash]
 ----
 ls
-whoami
-pwd
-uname -a
 ----
-
-image::docker-shell.png[caption="Figure 2: ", title='In docker container', 50]
 
 [source, bash]
 ----
-# to exit
+whoami
+----
+
+[source, bash]
+----
+uname -a
+----
+
+
+When you are finished looking around the internals of the container, type `exit` to exit.
+
+[source, bash]
+----
 exit
 ----
 
-== Docker Volumes
 
-To show that docker volumes can be used to mount external file systems with useful functions and data we will mount a system volume to a container and use commands that are not present in the container. The following command will fail as the "ip" command is not present in the base rhel7 container image.
+== Container Storage Volumes
+
+To show that container storage volumes can be used to mount external file systems with useful functions and data, we will mount a system volume to a container and use commands that are not present in the container.  The following command will fail as the "ip" command is not present in the base rhel7 container image.
+
 
 === Volume Mounts
+
+Container images are very minimal installs of their referenced operating system, so commonly-used commands may not be present.
 
 .nonexistent command "ip"
 [source, bash]
 ----
-docker run --rm -it rhel7 /usr/sbin/ip a
-
-....
-/usr/bin/docker-current: Error response from daemon: invalid header field value "oci runtime error: container_linux.go:247: starting container process caused \"exec: \\\"/usr/sbin/ip\\\": stat /usr/sbin/ip: no such file or directory\"\n".
+podman run --rm -it rhel7 /usr/sbin/ip a
 ----
+....
+container create failed: container_linux.go:348: starting container process caused "exec: \"/usr/sbin/ip\": stat /usr/sbin/ip: no such file or directory"
+: internal libpod error
+....
 
-Running the same command with the -v switch will run the ip command successfully
+However, if we use `-v <source>:<destination>`, the `<source>` file or directory is mapped from the container host to the inside of the container.  Running the same command with the `-v` volume switch will run the ip command successfully:
 
-
-.mounting  ip command via volumes
 [source, bash]
 ----
-docker run -v /usr/sbin:/usr/sbin --rm -it rhel7 /usr/sbin/ip a
-
+podman run -v /usr/sbin:/usr/sbin --rm -it rhel7 /usr/sbin/ip a
+----
 ....
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
     inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
-10: eth0@if11: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP
-    link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
-    inet 172.17.0.2/16 scope global eth0
+3: eth0@if6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
+    link/ether 22:06:a3:f0:c6:a0 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 10.88.0.4/16 scope global eth0
        valid_lft forever preferred_lft forever
-    inet6 fe80::42:acff:fe11:2/64 scope link tentative
+    inet6 fe80::2006:a3ff:fef0:c6a0/64 scope link tentative
        valid_lft forever preferred_lft forever
-----
+....
 
 === Volume Mounts (continued)
 
 Volume mounts can be used for logging to the container host for event retention
 
+
 .mounting logs via volumes
 [source, bash]
 ----
-docker run -v /dev/log:/dev/log --rm rhel7 logger Testing logging to the host
+podman run -v /dev/log:/dev/log --rm rhel7 logger Testing logging to the host
 ----
 
 Search for the container event on the container host log
+
 
 .search the container host
 [source, bash]
 ----
 journalctl | grep "Testing logging"
 ----
+
+....
+May 26 03:28:42 ip-10-0-2-6.ec2.internal root[25499]: Testing logging to the host
+....
 
 === Persistent container data
 
@@ -117,40 +151,50 @@ The -w switch specifies the working directory where binaries are executed.  If u
 .Run Python simple server
 [source, bash]
 ----
-docker run -d -p 8080:8000 --name="python_web" \
+mkdir /opt/rhel_data
+----
+
+[source, bash]
+----
+podman run -d -p 8080:8000 --name="python_web" \
        -w /opt \
        -v /opt/rhel_data:/opt rhel7 \
        /bin/python -m SimpleHTTPServer 8000
 ----
 
-Verify the container is running using the docker `ps` switch
+Verify the container is running using the podman `ps` switch
+
 
 [source, bash]
 ----
-docker ps -a
-
-CONTAINER ID IMAGE COMMAND                CREATED        STATUS    PORTS                   NAMES
-6932ab070fa5 rhel  "/bin/python -m Simpl" 2 minutes ago  Up 2 min  0.0.0.0:8080->8000/tcp  python_web
+podman ps
 ----
 
-Run the following URL command to show there are no files present in the container’s
-/opt directory.
+....
+CONTAINER ID   IMAGE                                     COMMAND                  CREATED AT                      STATUS              PORTS                                            NAMES
+fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp...   2018-05-23 17:21:40 +0000 UTC   Up 45 seconds ago   0.0.0.0:8080->8000/udp, 0.0.0.0:8080->8000/tcp   python_web
+....
+
+
+Run the following URL command to show there are no files present in the container’s /opt directory.
 
 
 .Check to see no files in opt
 [source, bash]
 ----
 ll /opt/rhel_data/
-
-total 0
 ----
+....
+total 0
+....
+
 
 .Check to see no files via the web server
 [source, bash]
 ----
 curl localhost:8080
-
-
+----
+....
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html>
 <title>Directory listing for /</title>
 <body>
@@ -161,12 +205,11 @@ curl localhost:8080
 <hr>
 </body>
 </html>
-----
+....
+
 
 Now create several files with a script in the host `/opt/rhel_data` directory.
 
-
-.for loop script
 [source, bash]
 ----
 for i in {1..10}; do touch /opt/rhel_data/file${i}; done
@@ -174,10 +217,12 @@ for i in {1..10}; do touch /opt/rhel_data/file${i}; done
 
 View the newly created files in `/opt/rhel_data`
 
+
 [source, bash]
 ----
 ll /opt/rhel_data/
-
+----
+....
 total 0
 -rw-r--r--. 1 root root 0 Feb 14 22:38 file1
 -rw-r--r--. 1 root root 0 Feb 14 22:38 file10
@@ -189,15 +234,15 @@ total 0
 -rw-r--r--. 1 root root 0 Feb 14 22:38 file7
 -rw-r--r--. 1 root root 0 Feb 14 22:38 file8
 -rw-r--r--. 1 root root 0 Feb 14 22:38 file9
-----
+....
 
-Then use curl to view the files from the python webserver that is serving files from the mounted `/opt/rhel_data` volume.
+Then use curl to view the files from the python webserver that is serving files from the mounted `/opt/rhel_data` volume:
 
-.Check to see new files in the web server's `/opt`
 [source, bash]
 ----
 curl localhost:8080
-
+----
+....
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html>
 <title>Directory listing for /</title>
 <body>
@@ -218,55 +263,98 @@ curl localhost:8080
 <hr>
 </body>
 </html>
-----
+....
 
 == Container metadata
 
-Docker images have metadata associated with them that can tell you a lot about processes and network settings.
+Container images have metadata associated with them that can tell you a lot about processes and network settings.  The following command returns a little over 300 lines of JSON data.  The output below is truncated for brevity.  Feel free to read over the metadata.
 
-
-.Docker inspect
 [source, bash]
 ----
-docker inspect python_web
+podman inspect python_web
+----
 
+....
 [{
-    "AppArmorProfile": "",
+    "ID": "fcd06aee95338748ab86faddd696c2cda212e7797b1e44428434da4a0d0b2b45",
+    "Created": "2018-05-23T17:21:40.315773016Z",
+    "Path": "/bin/python",
     "Args": [
-        "-m",
-        "SimpleHTTPServer",
-        "8000"
+      "-m",
+      "SimpleHTTPServer",
+      "8000"
     ],
 ...
-    "ProcessLabel": "system_u:system_r:svirt_lxc_net_t:s0:c253,c723",
+    "Name": "python_web",
+    "RestartCount": 0,
+    "Driver": "overlay",
+    "MountLabel": "system_u:object_r:svirt_sandbox_file_t:s0:c744,c884",
+    "ProcessLabel": "system_u:system_r:svirt_lxc_net_t:s0:c744,c884",
 ...
-----
+....
 
 === Scripting Pro Tips
 
-You can use a dot notation to parse the metadata returned by docker inspect and use it in your scripting to quickly access properties you need.
+You can use a dot notation to parse the metadata returned by podman inspect and use it in your scripting to quickly access properties you need.
 
 
 [source, bash]
 ----
-docker inspect -f {{.NetworkSettings.IPAddress}} python_web
+podman inspect -f {{.NetworkSettings.IPAddress}} python_web
+----
 
-172.17.0.3
+....
+10.88.0.6
+....
+
+
+Note: output truncated slightly for readability
+
+You can see the use of cgroups when attached to the container tty.  Listing the contents of `/proc/1/cgroup` will show the cgroup labels.
+
+[source, bash]
+----
+podman run --rm -it rhel7 bash
 ----
 
 [source, bash]
 ----
-docker run --rm -it rhel7 bash
-
-[root@790377e6e083 ~]# cat /proc/1/cgroup
-10:hugetlb:/system.slice/docker-790377e6e083a5461b40406908d2cbb74389fadac0e2db611bf87674a1c4dc3d.scope
-9:perf_event:/
-8:blkio:/system.slice/docker-790377e6e083a5461b40406908d2cbb74389fadac0e2db611bf87674a1c4dc3d.scope
-7:net_cls:/system.slice/docker-790377e6e083a5461b40406908d2cbb74389fadac0e2db611bf87674a1c4dc3d.scope
-6:freezer:/system.slice/docker-790377e6e083a5461b40406908d2cbb74389fadac0e2db611bf87674a1c4dc3d.scope
-5:devices:/system.slice/docker-790377e6e083a5461b40406908d2cbb74389fadac0e2db611bf87674a1c4dc3d.scope
-4:memory:/system.slice/docker-790377e6e083a5461b40406908d2cbb74389fadac0e2db611bf87674a1c4dc3d.scope
-3:cpuacct,cpu:/system.slice/docker-790377e6e083a5461b40406908d2cbb74389fadac0e2db611bf87674a1c4dc3d.scope
-2:cpuset:/system.slice/docker-790377e6e083a5461b40406908d2cbb74389fadac0e2db611bf87674a1c4dc3d.scope
-1:name=systemd:/system.slice/docker-790377e6e083a5461b40406908d2cbb74389fadac0e2db611bf87674a1c4dc3d.scope
+cat /proc/1/cgroup
 ----
+
+....
+11:blkio:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+10:hugetlb:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+9:pids:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+8:cpuacct,cpu:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+7:freezer:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+6:cpuset:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+5:net_prio,net_cls:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+4:perf_event:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+3:devices:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+2:memory:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+1:name=systemd:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+....
+
+Type `exit` to exit the container.  Running the same command from your student system, outside of the container context, will list the same top level groups without labels.
+
+[source, bash]
+----
+cat /proc/1/cgroup
+----
+
+....
+11:devices:/
+10:cpuset:/
+9:freezer:/
+8:hugetlb:/
+7:pids:/
+6:net_prio,net_cls:/
+5:perf_event:/
+4:blkio:/
+3:memory:/
+2:cpuacct,cpu:/
+1:name=systemd:/
+....
+
+{{< importPartial "footer/footer.html" >}}

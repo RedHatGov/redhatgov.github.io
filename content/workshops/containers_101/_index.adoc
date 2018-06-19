@@ -14,21 +14,22 @@ menu:
 
 = Containers 101 Workshop
 
-== Description  
+== Description
 
-Come and build a container!  This workshop will show you how to build a container and work with the docker registry.
+Come and build a container!  This workshop will introduce you to Linux containers.  During the course of this workshop you will gain a foundational container hands-on training.
 
 == What you will learn
 
-- Install Docker
-- Docker Images.
-- Dockerfile
-- Docker Registry
+- Install docker, buildah, podman, and skopeo
+- Run an existing container image
+- Build a new container from a base container image
+- Push the new container image to a container registry
 
 == Overview
 
-Today is meant for anyone who has any exposure to Containers, whether you have used it or not. We are going to start with a short overview (yes, slideware) and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.
-Your Responsibilities
+Today is meant for anyone who has any exposure to Linux containers, whether you have used it or not. We are going to start with a short overview (yes, slideware) and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.
+
+== Your Responsibilities
 
 Have a discussion. This will be boring if it’s just us up here talking for over 2 hours.
 Participate. Have questions. Have opinions.
@@ -47,3 +48,5 @@ Special Thanks to
 - Jason Callaway
 
 {{% /alert %}}
+
+{{< importPartial "footer/footer.html" >}}

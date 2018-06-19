@@ -14,91 +14,98 @@ layout: lab
 
 = Exercise 1.3 - Working with the Dockerfile
 
-Once you understand how images and containers can be created from the command line, you can try building containers in a more permanent way. Building container images from Dockerfile files is by far the preferred way to create Docker formatted containers, as compared to modifying running containers and committing them to images.
+Once you understand how images and containers can be created from the command line, you can try building containers in a more permanent way. Building container images from Dockerfile files is by far the preferred way to create docker formatted containers, as compared to modifying running containers and committing them to images.
 
-The procedure here involves creating a Dockerfile file that includes many of the features illustrated earlier:
+The procedure here involves creating a dockerfile-format file that includes many of the features illustrated earlier:
 
 - Choosing a base image (i.e. Fedora)
-
 - Installing the packages needed (i.e. an Postgresql Server)
-
 - Mapping the server’s port (i.e. 5432)
-
 - Launching the Database server
 
-First get the Dockerfile from GitHub using curl.
+First get the Dockerfile from GitHub using curl:
 
-
-.Get file
 [source, bash]
 ----
-curl -s -o Dockerfile https://raw.githubusercontent.com/RedHatGov/Dockerfile_fedora-postgres/master/Dockerfile_fedora-postgres
+curl -s -o Dockerfile https://raw.githubusercontent.com/ajacocks/Dockerfile_fedora-postgres/master/Dockerfile_fedora-postgres
 ----
 
 
+After downloading the Dockerfile using the curl command, review the contents of the container description, to gain an understanding of how containers are built:
 
-.Dockerfile
 [source, bash]
 ----
 cat Dockerfile
-
-FROM fedora
-MAINTAINER jcallawa@redhat.com
-RUN dnf install -y postgresql-server
+----
+....
+FROM docker.io/library/fedora:latest
+MAINTAINER alexander@redhat.com
+RUN yum install -y postgresql-server
 USER postgres
 RUN /bin/initdb -D /var/lib/pgsql/data
 RUN /usr/bin/pg_ctl start -D /var/lib/pgsql/data -s -o "-p 5432" -w -t 300 &&\
-    /bin/psql --command "CREATE USER docker WITH SUPERUSER PASSWORD 'docker';" &&\
-    /bin/createdb -O docker docker
+                /bin/psql --command "CREATE USER docker WITH SUPERUSER PASSWORD 'docker';" &&\
+                /bin/createdb -O docker docker
 RUN echo "host all  all    0.0.0.0/0  md5" >> /var/lib/pgsql/data/pg_hba.conf
 RUN echo "listen_addresses='*'" >> /var/lib/pgsql/data/postgresql.conf
 EXPOSE 5432
-VOLUME	["/var/lib/pgsql/data"]
 CMD ["/bin/postgres", "-D", "/var/lib/pgsql/data", "-c", "config_file=/var/lib/pgsql/data/postgresql.conf"]
-----
+....
 
 
+Next, we will build the container, and store it in the local container images repository.  The command `buildah` will be used to create the container image, with the `bud` option specifying that we will build from a `dockerfile` format description, `-t fedora_postgresql` specifying the tag, and `.` telling buildah to use the current directory as the build source:
 
-.Build
 [source, bash]
 ----
-mkdir build; mv Dockerfile build/Dockerfile
-cd build; docker build -t fedora_postgresql .
-----
-
-
-
-.Run
-[source, bash]
-----
-docker run -d --name fpg fedora_postgresql
+mkdir build; mv Dockerfile build/Dockerfile; cd build
 ----
 
 [source, bash]
 ----
-docker exec -it fpg psql
+buildah bud -t fedora_postgresql .
 ----
 
-.Note: This is backslash followed by lower-case L
+
+Next, we will run the container.  However, we are introducing a new flag to our use of `podman`.  The `-d` flag tells podman to disconnect from the container, once it is executed, and to leave it running, while `--name fpg` gives it a name to reference:
+
+[source, bash]
+----
+podman run -d --name fpg fedora_postgresql
+----
+
+
+Now, we can open a shell inside of the running container, to poke around inside:
+
+[source, bash]
+----
+podman exec -t fpg psql
+----
+
+
+Let's do a quick check to see what databases are available:
+
 [source, bash]
 ----
 \l
-
+----
+....
 List of databases
-Name      |  Owner   | Encoding  | Collate | Ctype |   Access privileges
-----------+----------+-----------+---------+-------+-----------------------
+Name    |  Owner   | Encoding  | Collate | Ctype |   Access privileges
+-----------+----------+-----------+---------+-------+-----------------------
 docker    | docker   | SQL_ASCII | C       | C     |
 postgres  | postgres | SQL_ASCII | C       | C     |
 template0 | postgres | SQL_ASCII | C       | C     | =c/postgres          +
           |          |           |         |       | postgres=CTc/postgres
 template1 | postgres | SQL_ASCII | C       | C     | =c/postgres          +
           |          |           |         |       | postgres=CTc/postgres
-(4 rows)
-----
+....
 
-.To exit
+
+And finally, we can close down our connection to the container:
+
 [source, bash]
 ----
 \q
 ----
 
+{{< importPartial "footer/footer.html" >}}
