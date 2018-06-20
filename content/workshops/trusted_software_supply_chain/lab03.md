@@ -6,7 +6,7 @@ layout: lab
 ---
 # Jenkins and OpenShift
 
-Jenkins can be integrated with OpenShift in 3 ways.  Today, you'll be working with a containerized Jenkins Server that's fully integrated with OpenShift
+Jenkins can be integrated with OpenShift in 3 ways.  Today, you'll be working with a containerized Jenkins Server that's fully integrated with OpenShift.
 
 <img src="../images/jenkins_integrated.png" width="900" />
 
@@ -46,7 +46,7 @@ Please refer to these examples for more info.
 
 # Writing your Pipeline
 
-Get out your favorite text editor.  In the next few labs, we will be adding to your pipeline.  Make sure to Save your work as we go along.
+Get out your favorite text editor.  In the next few labs, we will be writing your pipeline in a text editor.  Once written, we will be importing your pipeline file into OpenShift.  Make sure to Save your work as we go along.
 
 # Create BuildConfig
 We will be create a BuildConfig that employs the Jenkins pipeline strategy for our Trusted Software Supply Chain.
@@ -110,7 +110,9 @@ https://github.com/epe105/openshift-tasks/blob/master/configuration/cicd-setting
             }
 ```
 
-# Your Pipeline Text File should look like this:
+# Verify Your Pipeline File
+
+Your Pipeline Text File should look like this:
 
 ```
 apiVersion: v1
@@ -121,7 +123,7 @@ metadata:
     labels:
       app: cicd-pipeline
       name: cicd-pipeline
-    name: tasks-pipeline2
+    name: tasks-pipeline
 spec:
     triggers:
       - type: GitHub

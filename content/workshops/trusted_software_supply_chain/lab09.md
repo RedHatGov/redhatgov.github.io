@@ -6,7 +6,12 @@ layout: lab
 ---
 # Add Build Image Stage
 
-Add Build Image Stage into your pipeline text file
+Add the Build Image Stage into your pipeline text file
+
+The "sh" are shell commands in your pipeline that are executed on the Jenkins Slave.  Maven built the openshift-tasks.war in it the target directory and it will be copied into the created oc-builds directory.
+
+The startBuild stage is kicked off from Openshift and pointing to the local directory "oc-build" on the Jenkins slave.
+
 
 ```
               stage('Build Image') {
@@ -24,7 +29,3 @@ Add Build Image Stage into your pipeline text file
                 }
               }
 ```
-
-The shell commands in your pipelien are executed on  commands are executed on Jenkins Slave
-
-The start build stage is kicked off from Openshift and pointing to the directory on the Jenkins slave.

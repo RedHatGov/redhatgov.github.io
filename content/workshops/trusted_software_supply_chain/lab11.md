@@ -5,11 +5,11 @@ workshop_weight: 21
 layout: lab
 ---
 
-# Enter Deploy Dev Stage
+# Deploy Dev Stage
 
-Enter Deploy Dev Stage to your pipeline Text File.  
+Enter the Deploy Dev Stage to your pipeline text file.  
 
-OpenShift deploys the application and it's deployment configuration to Dev.
+OpenShift deploys the application and it's deployment configuration to Dev as previously defined from the Create Dev Stage.
 
 ```
               stage('Deploy DEV') {

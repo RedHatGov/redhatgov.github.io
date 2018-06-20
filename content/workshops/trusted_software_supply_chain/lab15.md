@@ -1,5 +1,5 @@
 ---
-title: Lab 15 - Automation and the Trusted Software Supply Chain
+title: Lab 15 - Trigger the Software Supply Chain
 workshops: trusted_software_supply_chain
 workshop_weight: 25
 layout: lab

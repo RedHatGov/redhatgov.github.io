@@ -7,10 +7,11 @@ layout: lab
 
 # Add Archive Stage
 
-Add Archive Stage into Pipeline Text File
+Add Archive Stage Steps into your Pipeline Text File
 
-As previously mentioned, mvn deploy is the last step in the maven lifecycle.  The built application is archived into the nexus repository.  We can see it later once we run the pipeline.
+We leveraged the maven nexus plugin  mvn deploy is the last step in the maven lifecycle.  The built application is archived into the nexus repository.  We can see it later once we run the pipeline.
 
+The "-P nexus3" option activates the nexus3 profile defined in the configuration/cicd-settings-nexus3.xml
 ```
                 steps {
                   sh "${mvnCmd} deploy -DskipTests=true -P nexus3"

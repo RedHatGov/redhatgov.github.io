@@ -6,9 +6,14 @@ layout: lab
 toc: true
 ---
 
-# Add Build App Stage to Pipeline Text File
+# Add Build App Stage
 
-Add the text below to your pipeline.
+Add the Build App Stage to your pipeline text file.
+
+The git branch step will clone the openshift-tasks project with the git branch locally from your gogs server to your jenkins node.
+
+- https://jenkins.io/doc/pipeline/steps/git/
+
 
 ```
             stages {
@@ -25,9 +30,6 @@ Add the text below to your pipeline.
 ```
 
 
-The git branch step will clone the openshift-tasks project with the git branch locally from your gogs server to your jenkins node.
-
-- https://jenkins.io/doc/pipeline/steps/git/
 
 View your gogs pod and select the route to log into your gogs server. Use the user name and password given to you by your instructor.
 
@@ -48,8 +50,3 @@ Maven install will run through the maven lifecycle and skip the tests.  We will 
 - verify - run any checks on results of integration tests to ensure quality criteria are met
 - install - install the package into the local repository, for use as a dependency in other projects locally
 - deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
-
-
-
-- ‘Git Branch’ will clone  - https://jenkins.io/doc/pipeline/steps/git/ onto Gogs Server
-- Show Gogs Server and View Source

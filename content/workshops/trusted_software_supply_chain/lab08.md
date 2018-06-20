@@ -16,9 +16,19 @@ We can also cryptographically sign your image so you know your container is runn
 
 <img src="../images/golden_images.png" width="900" />
 
+# Start with Quality Parts
+
+Red Hat has a container registry that provides certified Red Hat and third party container images that will be the foundation of your container images.  Our Registry also has a health index of the image so you know the state of the image.
+
+<img src="../images/rh_container_catalog.png" width="900" />
+
 # Add Create Image Builder Stage
 
-Add Create Image Builder Stage into your pipeline text file
+Add Create Image Builder Stage into your pipeline text file.
+
+A new build will be created with this step.  We will be leveraging a trusted JBoss EAP 7 container.
+
+The golden image will will be using for our applications is jboss-eap70-openshift:1.5.  Again, you'll want a hardened, secured, patched and up to date container image as a foundation for your application.
 
 ```
             stage('Create Image Builder') {
@@ -42,7 +52,3 @@ Add Create Image Builder Stage into your pipeline text file
                 }
               }
 ```
-
-New build will be created with this step.  We will be levaring a JBoss EAP 7 container.
-
-The golden image will will be using for our applications is jboss-eap70-openshift:1.5.  Again, you'll want a hardened, secured, patched and up to date container image.

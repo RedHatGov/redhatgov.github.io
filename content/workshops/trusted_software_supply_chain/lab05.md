@@ -7,7 +7,9 @@ layout: lab
 
 # Add Test Stage into Pipeline Text File
 
-Add the configuration for the Test Stage below to your pipeline text file.
+Add the configuration for the Test Stage below to your pipeline text file.  Maven will run the test stage in the lifecycle that we skipped at the previous stages.
+
+Maven will place the test results in the surefire-reports folder.  The maven surefire-reports plugin allows for the generation of reports for your unit tests.
 
 ```
               stage('Test') {
@@ -17,5 +19,3 @@ Add the configuration for the Test Stage below to your pipeline text file.
                 }
               }
 ```
-
-Maven will run up to the test stage in the lifecycle.

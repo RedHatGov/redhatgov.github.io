@@ -5,7 +5,7 @@ workshop_weight: 11
 layout: lab
 ---
 # Welcome to OpenShift!
-This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.  If you are already familiar with the basics of OpenShift simply ensure you can login and create the project.
+This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content. 
 
 # Accrediting the OpenShift Container Platform
 
@@ -68,7 +68,7 @@ After logging in, you should see a shell.
 The Wetty instance will already have the 'oc' command installed on them. The 'oc' command is used to connect to the OpenShift Master.
 
 ## Let's try the 'oc' command line (CLI) tool
-On your Wetty Instance, enter the following:
+Next, you want to login into OpenShift from your Wetty Terminal.  Go to your Wetty Instance and enter the following:
 
 ```
 $ oc login https://master.ocp-naps.redhatgov.io:8443/ --insecure-skip-tls-verify=true

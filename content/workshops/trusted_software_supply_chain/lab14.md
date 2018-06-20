@@ -181,7 +181,8 @@ spec:
 ```
 # Verify your user Dev and Stage projects
 
-In your pipeline text file, make sure <user> reflects your user #
+In your pipeline text file, make sure \<user\> reflects your user # and project.
+
 ```
 - name: DEV_PROJECT
   value: dev-<user>
@@ -220,7 +221,7 @@ When it asks to promote to stage, go ahead and promote it.
 <img src="../images/pipeline_execution.png" width="900"><br/>
 
 # Explore Pipeline Run
-- Explore the snapshots repository in Nexus and verify openshift-tasks is pushed to the repository
+- Explore the snapshots repository in Nexus and verify tasks is pushed to the repository
 - Explore SonarQube and show the metrics, stats, code coverage, etc
 - Explore Tasks - Dev project in OpenShift console and verify the application is deployed in the DEV environment
 - Explore Tasks - Stage project in OpenShift console and verify the application is deployed in the STAGE environment
