@@ -11,7 +11,7 @@ Through automation, you will trigger the Trusted Software Supply Chain with code
 
 # Verify Webhook in Gogs
 
-The Webhook is what triggers your pipeline upon code check-ins.
+The Webhook is what triggers your pipeline upon code check-ins.  You want your SCM to trigger the pipeline as opposed to Jenkins constantly polling the source code for changes.
 
 Click on the Gogs route url in the CI/CD project which takes you to the home page.  Sign in using the credentials given to you by your Instructor.
 
@@ -24,6 +24,8 @@ Select Webhooks
 Verify the Webhook.  Make sure the url includes the name 'tasks-pipeline' of the your imported pipeline.
 
 <img src="../images/gogs-webhook.png" width="900"><br/>
+
+This should match the webhook of the pipeline you previously created.  The webhook url is located in builds > pipeline > tasks-pipeline > configuration > generic webhook url
 
 # Using Eclipse Che for Editing Code
 
