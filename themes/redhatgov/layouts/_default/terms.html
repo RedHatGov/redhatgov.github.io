@@ -1,18 +1,26 @@
 {{ partial "header" . }}
 
 <div class="jumbotron jumbotron-page text-center">
-  <h1>{{ .Title }}</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>{{ .Title }}</h1>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="container">
   <div class="row">
-    <ul>
-      {{ range .Data.Pages }}
-        <li>
-          {{ .Title }}
-        </li>
-      {{ end }}
-    </ul>
+    <div class="col-sm-12">
+      <ul>
+        {{ range .Data.Pages }}
+          <li>
+            {{ .Title }}
+          </li>
+        {{ end }}
+      </ul>
+    </div>
   </div>
 </div>
 

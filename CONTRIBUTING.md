@@ -23,7 +23,7 @@ repo.
 Right now, you have a fork of the RedHatGov.io repo, but you don't have the files in that repo on your computer. Let's create a [clone][git-clone] of your fork locally on your computer.
 
 ```sh
-git clone git@github.com:your-username/redhatgov.github.io.git
+git clone https://github.com/your-username/redhatgov.github.io.git
 cd redhatgov.github.io
 
 # Configure git to sync your fork with the original repo

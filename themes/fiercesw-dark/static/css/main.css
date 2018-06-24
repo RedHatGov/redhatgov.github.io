@@ -1,0 +1,181 @@
+body {
+  padding-top: 51px;
+}
+
+figure {
+  margin: 0 0 10px;
+}
+
+#footer {
+  margin-top: 50px;
+}
+
+.navbar-brand {
+  padding: 5px 0px;
+}
+.navbar-brand>img {
+  max-height:40px;
+}
+.navbar-inverse .navbar-brand>img {
+  max-height: 50px;
+  position: relative;
+  top: -5px;
+}
+.navbar-inverse .dropdown-menu>li>a {
+  color:#CCC;
+  line-height: 1.8;
+}
+.navbar-inverse .dropdown-menu>li>a:focus, .navbar-inverse .dropdown-menu>li>a:hover {
+  color: #FFF !important;
+  background-color: #111 !important;
+  border-color: #464646 !important;
+}
+.navbar-inverse .dropdown-menu>.active>a, .navbar-inverse .dropdown-menu>.active>a:focus, .navbar-inverse .dropdown-menu>.active>a:hover {
+    background-color: #000 !important;
+    border-color: #000 !important;
+    color: #7cd3ff!important;
+}
+.navbar-inverse .dropdown-menu>.active>a:after {
+    content: "↲";
+    margin-right: 0.5rem;
+    float: right;
+}
+.navbar-default {
+  background-color: rgba(231, 231, 231, 1);
+  border-color:#999;
+  box-shadow: 0px 0px 14px -1px rgba(0,0,0,0.5);
+}
+.navbar-inverse {
+  box-shadow: 0px 0px 14px -1px rgba(0,0,0,0.5);
+  background-color: #222;
+  border-color: #080808;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #FFF;
+    background-color: #999;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.85);
+    border-left: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    box-shadow: 0px 4px 11px 0px rgba(0,0,0,0.35) inset;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+  color:#000;
+}
+.navbar-no-margin {
+  margin-bottom: 0;
+}
+.navbar-inverse .dropdown-menu {
+    background-color: #333;
+    border: 1px solid #000;
+    border-radius: 1px;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175), 0px 4px 10px -3px rgba(0,0,0,0.75) inset;
+}
+
+.jumbotron-home {
+  color: #ffffff;
+  /*
+  background-color: #cc0000;
+  */
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00005a+0,cd0004+100 */
+  background: #00005a; /* Old browsers */
+  background: -moz-linear-gradient(left, #00005a 0%, #cd0004 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #00005a 0%,#cd0004 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #00005a 0%,#cd0004 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00005a', endColorstr='#cd0004',GradientType=1 ); /* IE6-9 */
+}
+.card-pf-view.card-pf-view-select span.fa {
+  transition: border 500ms ease;
+}
+.card-pf-view.card-pf-view-select:hover span.fa {
+  border-color:#cc0000;
+}
+
+.jumbotron-page {
+  background: url("/img/jumbotron-page-bg.png") center center repeat;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.jumbotron-page:before {
+  background:linear-gradient(to right, rgba(0, 0, 90, 0.75) 0%,rgba(205, 0, 4, 0.75) 100%);
+  position: absolute;
+  content: " ";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+}
+.jumbotron-page h1 {
+  color:#FFF;
+  z-index: 1;
+  position: relative;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+.jumbotron-page.green:before {
+    background: linear-gradient(to right, rgba(41, 137, 0, 0.15), rgba(41, 137, 0, 0.75));
+}
+.jumbotron-page.red:before {
+    background: linear-gradient(to right, rgba(205, 0, 4, 0.15), rgba(205, 0, 4, 0.75));
+}
+.jumbotron-page.blue:before {
+    background: linear-gradient(to right, rgba(0, 0, 90, 0.15), rgba(0, 0, 90, 0.75));
+}
+.jumbotron-page.blue-to-red:before {
+    background: linear-gradient(to right, rgba(0, 0, 90, 0.75) 0%,rgba(205, 0, 4, 0.75) 100%);
+}
+
+.btn {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  -webkit-transition-property: background;
+  transition-property: background;
+  background: #4c4c4c;
+  border-color: #4c4c4c;
+  color:#fff;
+}
+.btn:hover, .btn:focus {
+    color: #fff;
+    background: #3f3f3f;
+    border-color: #3f3f3f;
+}
+.btn-primary {
+  background: #c00;
+  border-color: #c00;
+}
+.btn-primary:hover, .btn-primary:focus {
+  color: #fff;
+  background: #b30000;
+  border-color: #b30000;
+}
+#page-footer.container p.text-center {
+  border-top: 1px solid #CCC;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: #999;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) {
+  #workshopFooterDetails {
+    margin-top:0;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+  #workshopFooterDetails {
+    margin-top:4rem;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {
+  #workshopFooterDetails {
+    margin-top:0;
+  }
+}

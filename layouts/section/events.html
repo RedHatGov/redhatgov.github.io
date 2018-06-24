@@ -1,38 +1,50 @@
 {{ .Scratch.Set "BodyClass" "cards-pf" }}{{ partial "header" . }}
 
 <div class="jumbotron jumbotron-page text-center">
-  <h1>{{ .Title }}</h1>
-</div>
-
-<div class="container">
-  <div class="row">
-    {{ .Content }}
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <ul id="event-tabs" class="nav nav-pills" role="tablist">
-      <li role="presentation" class="active"><a href="#events_all" aria-controls="events_all" role="tab" data-toggle="tab">All Events</a></li>
-      {{ range .Data.Pages.GroupByParam "event_technology" "asc" }}
-        <li role="presentation">
-          <a href="#events_{{ .Key | urlize }}" aria-controls="events_{{ .Key | urlize }}" role="tab" data-toggle="tab">
-            {{ .Key }}
-          </a>
-        </li>
-      {{ end }}
-    </ul>
-  </div>
-  <div class="row">
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="events_all">
-        {{ partial "events_table.html" .Data }}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>{{ .Title }}</h1>
       </div>
-      {{ range .Data.Pages.GroupByParam "event_technology" "asc" }}
-        <div role="tabpanel" class="tab-pane" id="events_{{ .Key | urlize }}">
-          {{ partial "events_table.html" . }}
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      {{ .Content }}
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <ul id="event-tabs" class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active"><a href="#events_all" aria-controls="events_all" role="tab" data-toggle="tab">All Events</a></li>
+        {{ range .Data.Pages.GroupByParam "event_technology" "asc" }}
+          <li role="presentation">
+            <a href="#events_{{ .Key | urlize }}" aria-controls="events_{{ .Key | urlize }}" role="tab" data-toggle="tab">
+              {{ .Key }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="events_all">
+          {{ partial "events_table.html" .Data }}
         </div>
-      {{ end }}
+        {{ range .Data.Pages.GroupByParam "event_technology" "asc" }}
+          <div role="tabpanel" class="tab-pane" id="events_{{ .Key | urlize }}">
+            {{ partial "events_table.html" . }}
+          </div>
+        {{ end }}
+      </div>
     </div>
   </div>
 </div>

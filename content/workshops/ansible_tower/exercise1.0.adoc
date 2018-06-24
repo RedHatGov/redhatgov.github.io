@@ -105,7 +105,7 @@ For simplicity sake, we will use an existing quickstart. To get started, we will
 
 [source,bash]
 ----
-ansible web -m git -a "repo=https://github.com/jboss-developer/jboss-eap-quickstarts.git dest=/tmp/checkout" 
+ansible web -m git -a "repo=https://github.com/jboss-developer/jboss-eap-quickstarts.git dest=/tmp/checkout"
 ----
 
 and deploy the code via Maven provided by Red Hat Software Collections.

@@ -171,6 +171,8 @@
       resetWorkshopFooter();
       return true;
     });
+    //Assign all images to be responsive...
+    jQuery('img').not('.img-responsive').addClass('img-responsive');
 
     return false;
   });

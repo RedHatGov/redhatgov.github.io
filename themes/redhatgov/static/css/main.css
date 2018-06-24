@@ -51,6 +51,13 @@ figure {
   background: #b30000;
   border-color: #b30000;
 }
+#page-footer.container p.text-center {
+  border-top: 1px solid #CCC;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: #999;
+}
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {

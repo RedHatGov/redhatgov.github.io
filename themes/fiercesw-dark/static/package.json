@@ -1,0 +1,16 @@
+{
+  "name": "redhatgov-hugo-theme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "highlight.js": "^9.10.0",
+    "js-cookie": "^2.2.0",
+    "patternfly": "^3.24.0"
+  }
+}
