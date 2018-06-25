@@ -41,11 +41,17 @@ It might take a little while before your workspace is set up and ready to be use
 
 <img src="../images/che-import-project.png" width="900"><br/>
 
-Enter the Gogs repository HTTPS url for openshift-tasks as the Git repository url with Git username and password in the url:
+Enter the Gogs repository HTTPS url for openshift-tasks as the Git repository url with Git username and password in the url.
+
+See the url below as an example.  Replace [gogs-hostname] with your gogs server.
 http://gogs:gogs@[gogs-hostname]/gogs/openshift-tasks.git
+
+So it should look something like this:
 http://gogs:gogs@gogs-cicd-user2.192.168.42.136.nip.io/gogs/openshift-tasks.git
 
-You can find the repository url in Gogs web console. Make sure the check the Branch field and enter eap-7 in order to clone the eap-7 branch which is used in this demo. Click on Import
+You can find the repository url in Gogs web console. Make sure the check the Branch field and enter eap-7 in order to clone the eap-7 branch which is used in this demo.
+
+Click on Import
 
 <img src="../images/che-import-git2.png" width="900"><br/>
 
