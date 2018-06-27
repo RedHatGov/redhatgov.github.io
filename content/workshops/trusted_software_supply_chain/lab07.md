@@ -1,20 +1,27 @@
 ---
-title: Lab 07 - Archive App
+title: Lab 07 - Test Stage
 workshops: trusted_software_supply_chain
 workshop_weight: 17
 layout: lab
 ---
 
-# Add Archive Stage
+# Add Test Stage
 
-Add Archive Stage Steps into your Pipeline Text File
+Add the configuration for the Test Stage below to your pipeline text file.
 
-We leveraged the maven nexus plugin for this deployment.  The mvn deploy step is the last step in the maven lifecycle.  The built application is archived into the nexus repository.  We can see it later once we run the pipeline.
+<img src="../images/pipeline_test.png" width="900" />
 
-The "-P nexus3" option activates the nexus3 profile defined in the configuration/cicd-settings-nexus3.xml
+Maven will run the test stage in the life cycle that we skipped at the previous stages.
+
+Maven will place the test results in the surefire-reports folder.  The maven surefire-reports plugin allows for the generation of reports for your unit tests.
+
+Append the text below to your text file or into the YAML/JSON field for tasks-pipeline in the OpenShift Console.
+
 ```
+              stage('Test') {
                 steps {
-                  sh "${mvnCmd} deploy -DskipTests=true -P nexus3"
+                  sh "${mvnCmd} test"
+                  step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
                 }
               }
 ```

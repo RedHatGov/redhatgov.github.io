@@ -1,37 +1,25 @@
 ---
-title:  Lab 02 - CICD Project and Pods
+title: Lab 02 - Trusted Software Supply Chain
 workshops: trusted_software_supply_chain
 workshop_weight: 12
 layout: lab
 ---
+# Trusted Software Supply Chain
+The notion of Trusted Software Supply Chain is that of applying an assembly line approach to software that includes building increasing levels of assurance before marking an artifact as ready to deploy to production.
 
-# Overview of the CICD Project and running PODS
-In this Workshop, you'll be building a Trusted Software Supply Chain leveraging several containerized tools such as Gogs, Nexus, Jenkins, Sonarqube, and Che.
+In this workshop, you will use build orchestration tools such as Jenkins, Kubernetes, and OpenShift to support implementing and integrating [continuous delivery (CD)][1] as the foundation of automating the various stages of the deployment lifecycle are represented – from development, multiple types of testing, user acceptance, staging, to production release.
 
-In the OpenShift Console go to the CICD Project to the right.
+<img src="../images/trusted_software_supply_chain.png" width="900" />
 
-Once inside the CICD Project, you will see the following PODS running.  This PODS are all leveraged in building our application.
+For many organizations, obtaining Authority to Operate (ATO) is an arduous process requiring hundreds of pages of documentation, and can prevent organizations from adopting continuous delivery practices for fear of falling out of compliance. Each phase in our Trusted Software Supply Chain will have a policy defining the stage gate for success and will generate a documentation artifact that will later be used as part of the [ATO process][2].
 
-- Che pod - Eclipse Che is an open source browser based IDE.
-- Gogs pod - Gogs is an open source git server written in Go.
-- Nexus pod - Nexus is an artiface repository
-- Jenkins pod - Jenkins is an open source CICD tool
-- Sonarqube pod - SonarQube is an open source static code analysis tool
+Having a secure foundation for your applications is a key component to a Trusted Software Supply Chain. In the following lab exercises, your applications will inherit these security controls from the accredited OpenShift platform.
 
-<img src="../images/cicd-pods.png" width="900"><br/>
+The approach towards the Authorization and Accreditation (A&A) process with OpenShift follows a Landlord/Tenant model. OpenShift is a container application platform that provides a standardized operating environment and when assessing system boundaries, a delineation should be made between the OpenShift system itself which operates as a Landlord and the tenant application, which consumes the OpenShift service.
 
+<img src="../images/security_inheritance_model.png" width="700" />
 
-# The Flow of the Trusted Software Supply Chain
+In Landlord/Tenant system security plans (SSP), many security controls are inherited from the Landlord’s SSP, but some controls remain the responsibility of the OpenShift consumers. Following this division of responsibilities illustrated in the diagram above, approximately 73 controls would be considered the responsibility of the tenant, whereas 621 controls that are already taken care of by the Landlord.
 
-- Jenkins is the CICD tool that will execute the project.
-- The Code is cloned from Gogs onto the Jenkins Executor Node.
-- The Code is built by Jenkins using Maven
-- JUnit Test are executed against the source code
-- In parallel, the source code is analyzed for vulnerabilities, bugs, and bad patterns by SonarQube
-- The WAR artifact is pushed to Nexus Repository manager
-- A container image (tasks:latest) is built based on the tasks application WAR artifact deployed on JBoss EAP
-- The tasks container image is deployed in a fresh new container in DEV project
-- The DEV image is tagged with the application version (tasks:7.x) in the STAGE project
-- The staged image is deployed in a fresh new container into the STAGE project
-
-<img src="../images/pipeline.png" width="900"><br/>
+[1]: https://en.wikipedia.org/wiki/Continuous_delivery
+[2]: https://cloud.gov/docs/compliance/ato-process/

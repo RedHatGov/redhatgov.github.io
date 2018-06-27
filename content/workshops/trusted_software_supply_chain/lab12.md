@@ -1,24 +1,44 @@
 ---
-title: Lab 12 - Promote to Stage
+title: Lab 12 - Create Dev
 workshops: trusted_software_supply_chain
 workshop_weight: 22
 layout: lab
 ---
-# Add Promote to Stage
-Enter the Promote to STAGE below into your pipeline text file
+# Add Create Dev Stage
 
-We set an approval to promote to the application to the Stage Project.  The approval process is a good feature for various gates of your deployments.  We also set a 15 minute timeout on the approval.  You also tag the tasks image with latest and the version from the pom file.
+Add Create Dev Stage into the pipeline.
+
+<img src="../images/pipeline_create_dev.png" width="900" />
+
+We first check if an deployment config for the Dev Project already exists.  If it does not exists, a new application is created and deployment config is defined for the Dev Project.
+
+Before a trigger is created, the pipeline sleeps for 10 seconds.  A deployment configuration can contain triggers, which drive the creation of new deployment processes in response to events inside the cluster.  In this case, the trigger is set to a manual deployment of the tasks deployment config.  The deployment will happen in Deploy Stage.
+
+Append the text below to your text file or into the YAML/JSON field for tasks-pipeline in the OpenShift Console.
 
 ```
-              stage('Promote to STAGE?') {
-                steps {
-                  timeout(time:15, unit:'MINUTES') {
-                      input message: "Promote to STAGE?", ok: "Promote"
+              stage('Create DEV') {
+                when {
+                  expression {
+                    openshift.withCluster() {
+                      openshift.withProject(env.DEV_PROJECT) {
+                        return !openshift.selector('dc', 'tasks').exists()
+                      }
+                    }
                   }
-
+                }
+                steps {
                   script {
                     openshift.withCluster() {
-                      openshift.tag("${env.DEV_PROJECT}/tasks:latest", "${env.STAGE_PROJECT}/tasks:${version}")
+                      openshift.withProject(env.DEV_PROJECT) {
+                        def app = openshift.newApp("tasks:latest")
+                        app.narrow("svc").expose();
+                        def dc = openshift.selector("dc", "tasks")
+                        while (dc.object().spec.replicas != dc.object().status.availableReplicas) {
+                            sleep 10
+                        }
+                        openshift.set("triggers", "dc/tasks", "--manual")
+                      }
                     }
                   }
                 }

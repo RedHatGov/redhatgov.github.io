@@ -1,52 +1,36 @@
 ---
-title:  Lab 04 - Build App Stage
+title: Lab 04 - Jenkins and OpenShift
 workshops: trusted_software_supply_chain
 workshop_weight: 14
 layout: lab
-toc: true
 ---
 
-# Add Build App Stage
 
-Add the Build App Stage to your pipeline text file.
+Jenkins can be integrated with OpenShift in 3 ways.  Today, you'll be working with a containerized Jenkins Server that's fully integrated with OpenShift.
 
-The git branch step will clone the openshift-tasks project with the git branch locally from your gogs server to your jenkins node.
+<img src="../images/jenkins_integrated.png" width="900" />
 
-- https://jenkins.io/doc/pipeline/steps/git/
+# Login through SSO with Jenkins
+
+Go into your CI/CD project and find the running Jenkins Pod.
+
+Click the external route (https://jenkins…) to go into your Jenkins Server
+
+<img src="../images/jenkins_pod.png" width="900" />
+
+Click Login with OpenShift.
+
+Login with your OpenShift Credentials. You maybe asked to accept authorizations. Go ahead and do so and re-login.
+
+<img src="../images/jenkins_ocp_login.png" width="500" />
+
+You will be asked to authorize access to the jenkins service account.  Go ahead and Allow selected permissions.
+
+<img src="../images/authorize_jenkins_service.png" width="700" />
 
 
-```
-            stages {
-              stage('Build App') {
-                steps {
-                  git branch: 'eap-7', url: 'http://gogs:3000/gogs/openshift-tasks.git'
-                  script {
-                      def pom = readMavenPom file: 'pom.xml'
-                      version = pom.version
-                  }
-                  sh "${mvnCmd} install -DskipTests=true"
-                }
-              }
-```
+You should now see the Jenkins Home Page
 
+<img src="../images/jenkins_home.png" width="900" />
 
-
-View your gogs pod and select the route to log into your gogs server. Use the user name and password given to you by your instructor.
-
-<img src="../images/gogs_route.png" width="900"><br/>
-
-View the source of the openshift-tasks project in your gogs server.  
-
-<br>
-
-<img src="../images/gogs_home.png" width="900"><br/>
-
-Maven install will run through the maven lifecycle and skip the tests.  We will execute tests later.
-
-- validate - validate the project is correct and all necessary information is available
-- compile - compile the source code of the project
-- test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
-- package - take the compiled code and package it in its distributable format, such as a JAR.
-- verify - run any checks on results of integration tests to ensure quality criteria are met
-- install - install the package into the local repository, for use as a dependency in other projects locally
-- deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+Jenkins follows a master/agent architecture.  Your pipeline will run a process called a Jenkins executor.  A Jenkins executor is one of the basic building blocks which allow a build to run on an agent (e.g. build server). Think of an executor as a single “process ID”, or as the basic unit of resource that Jenkins executes on your machine to run a build.

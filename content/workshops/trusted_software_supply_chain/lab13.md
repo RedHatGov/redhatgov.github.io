@@ -1,38 +1,30 @@
 ---
-title: Lab 13 - Deploy Stage
+title: Lab 13 - Deploy Dev
 workshops: trusted_software_supply_chain
 workshop_weight: 23
 layout: lab
 ---
-# Add Deploy Stage
 
-Add the Deploy Stage into your Pipeline Text File
+# Deploy Dev Stage
 
-If the deployment config for the application already exists in the Stage Project or Environment the deployment config , service, and route are deleted.  This allows for the pipeline to be rerun.
+Enter the Deploy Dev Stage to your pipeline text file.  
 
-The new-app is recreated in the Stage Environment from the image that you tagged in the previous stage.  The image also has a route created for with the svc.expose command.
+<img src="../images/pipeline_deploy_dev.png" width="900" />
 
-Congratulations, this should be the final step in your Trusted Software Supply Chain.  Go on to the next lab to verify and run the pipeline.
+OpenShift deploys the application and it's deployment configuration to Dev as previously defined from the Create Dev Stage.
+
+Append the text below to your text file or into the YAML/JSON field for tasks-pipeline in the OpenShift Console. 
 
 ```
-              stage('Deploy STAGE') {
+              stage('Deploy DEV') {
                 steps {
                   script {
                     openshift.withCluster() {
-                      openshift.withProject(env.STAGE_PROJECT) {
-                        if (openshift.selector('dc', 'tasks').exists()) {
-                          openshift.selector('dc', 'tasks').delete()
-                          openshift.selector('svc', 'tasks').delete()
-                          openshift.selector('route', 'tasks').delete()
-                        }
-
-                        openshift.newApp("tasks:${version}").narrow("svc").expose()
+                      openshift.withProject(env.DEV_PROJECT) {
+                        openshift.selector("dc", "tasks").rollout().latest();
                       }
                     }
                   }
                 }
               }
-            }
-          }
-      type: JenkinsPipeline
-```      
+```

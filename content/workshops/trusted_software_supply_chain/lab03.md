@@ -1,151 +1,48 @@
 ---
-title:  Lab 03 - Jenkins Pipeline
+title:  Lab 03 - CICD Project and Pods
 workshops: trusted_software_supply_chain
-workshop_weight: 13
+workshop_weight: 12
 layout: lab
 ---
-# Jenkins and OpenShift
+Before moving forward, it is important to understand the difference between [Continuous Integration (CI), Continuous Delivery (CD), and Continuous Deployment][1].
 
-Jenkins can be integrated with OpenShift in 3 ways.  Today, you'll be working with a containerized Jenkins Server that's fully integrated with OpenShift.
+Also, a part of this lab we’ll be using using [Pipelines in OpenShift][2] for CI/CD, which gives you control over building, deploying, and promoting your applications on OpenShift. Using a combination of the Jenkins Pipeline Build Strategy, Jenkinsfiles, and the OpenShift Domain Specific Language (DSL) (provided by the OpenShift Jenkins Client Plug-in), you can create advanced build, test, deploy, and promote pipelines for any scenario.
 
-<img src="../images/jenkins_integrated.png" width="900" />
+OK, let’s go ahead and start building an OpenShift CI/CD Pipeline using In the OpenShift Console.
 
-# Login through SSO with Jenkins
+First, go to the CI/CD Project to the right.
 
-Go into your CICD project and find the running Jenkins Pod.
+<img src="../images/ocp_cicd.png" width="900"><br/>
 
-Click the external route to go into your Jenkins Server
+If the project does not exists, then use the CLI and goto the terminal and type the following:
 
-<img src="../images/jenkins_pod.png" width="900" />
+<a href="https://asciinema.org/a/188738?autoplay=1"><img src="https://asciinema.org/a/188738.png" width="900"/></a>
 
-Click Login with OpenShift.
+Once inside the CI/CD Project, you will see the following PODS running.  This PODS are all leveraged in building our application.
 
-Login with your OpenShift Credentials.  
+- Che pod - Eclipse Che is an open source browser based IDE.
+- Gogs pod - Gogs is an open source git server written in Go.
+- Nexus pod - Nexus is an artifact repository
+- Jenkins pod - Jenkins is an open source CI/CD tool
+- Sonarqube pod - SonarQube is an open source static code analysis tool
 
-<img src="../images/jenkins_ocp_login.png" width="500" />
-
-You will be asked to authorize access to the jenkins service account.  Go ahead and Allow selected permissions.
-
-# Jenkins
-
-You should now see the Jenkins Home Page
-
-<img src="../images/jenkins_home.png" width="900" />
-
-Jenkins follows a master/slave architecture.  Your pipeline will run on node/slaves process called a Jenkins executor.  A Jenkins executor is one of the basic building blocks which allow a build to run on a node/slave (e.g. build server). Think of an executor as a single “process ID”, or as the basic unit of resource that Jenkins executes on your machine to run a build.
-
-# Building  your Trusted Software Supply Chain
-
-Today, you will be building  your Trusted Software Supply Chain using a Jenkins Pipeline that is integrated with OpenShift.
-
-In addition to standard Jenkins Pipeline Syntax, the OpenShift Jenkins image provides the OpenShift Domain Specific Language (DSL) (through the OpenShift Jenkins Client Plug-in), which aims to provide a readable, concise, comprehensive, and fluent syntax for rich interactions with an OpenShift API server, allowing for even more control over the build, deployment, and promotion of applications on your OpenShift cluster.
-
-Please refer to these examples for more info.
-
-- https://github.com/openshift/jenkins-client-plugin#examples
-
-# Writing your Pipeline
-
-Get out your favorite text editor.  In the next few labs, we will be writing your pipeline in a text editor.  Once written, we will be importing your pipeline file into OpenShift.  Make sure to Save your work as we go along.
-
-# Create BuildConfig
-We will be create a BuildConfig that employs the Jenkins pipeline strategy for our Trusted Software Supply Chain.
+<img src="../images/cicd-pods.png" width="900"><br/>
 
 
+# The Flow of the Trusted Software Supply Chain
 
-```
-apiVersion: v1
-kind: BuildConfig
-metadata:
-    annotations:
-      pipeline.alpha.openshift.io/uses: '[{"name": "jenkins", "namespace": "", "kind": "DeploymentConfig"}]'
-    labels:
-      app: cicd-pipeline
-      name: cicd-pipeline
-    name: tasks-pipeline
-spec:
-    triggers:
-      - type: GitHub
-        github:
-          secret: ${WEBHOOK_SECRET}
-      - type: Generic
-        generic:
-          secret: ${WEBHOOK_SECRET}
-    runPolicy: Serial
-    source:
-      type: None
+- Jenkins is the CI/CD tool that will execute the project.
+- The Code is cloned from Gogs onto the Jenkins Executor Node.
+- The Code is built by Jenkins using Maven
+- JUnit Test are executed against the source code
+- In parallel, the source code is analyzed for vulnerabilities, bugs, and bad patterns by SonarQube
+- The WAR artifact is pushed to Nexus Repository manager
+- A container image (tasks:latest) is built based on the tasks application WAR artifact deployed on JBoss EAP
+- The tasks container image is deployed in a fresh container in DEV project
+- The DEV image is tagged with the application version (tasks:7.x) in the STAGE project
+- The staged image is deployed in a fresh container into the STAGE project
 
-```
-# Update your user Dev and Stage projects
+<img src="../images/pipeline.png" width="900"><br/>
 
-Add the following Jenkins Pipeline Strategy.
-
-In your pipeline text file, make sure <user> reflects your user #
-
-```
-strategy:
-  jenkinsPipelineStrategy:
-    env:
-    - name: DEV_PROJECT
-      value: dev-<user>
-    - name: STAGE_PROJECT
-      value: stage-<user>
-```
-# Add your Jenkins File.  
-
-We will be launching a maven node/slave to execute our pipeline.
-
-You will also be declaring variables such as version and mvnCmd to be used later int he pipeline.
-
-The .xml file refers to maven configurations for your application.  The file can be seen here:
-
-https://github.com/epe105/openshift-tasks/blob/master/configuration/cicd-settings-nexus3.xml
-
-```
-        jenkinsfile: |-
-          def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
-          pipeline {
-            agent {
-              label 'maven'
-            }
-```
-
-# Verify Your Pipeline File
-
-Your Pipeline Text File should look like this:
-
-```
-apiVersion: v1
-kind: BuildConfig
-metadata:
-    annotations:
-      pipeline.alpha.openshift.io/uses: '[{"name": "jenkins", "namespace": "", "kind": "DeploymentConfig"}]'
-    labels:
-      app: cicd-pipeline
-      name: cicd-pipeline
-    name: tasks-pipeline
-spec:
-    triggers:
-      - type: GitHub
-        github:
-          secret: ${WEBHOOK_SECRET}
-      - type: Generic
-        generic:
-          secret: ${WEBHOOK_SECRET}
-    runPolicy: Serial
-    source:
-      type: None
-    strategy:
-      jenkinsPipelineStrategy:
-        env:
-        - name: DEV_PROJECT
-          value: dev-<user>
-        - name: STAGE_PROJECT
-          value: stage-<user>
-        jenkinsfile: |-
-          def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
-          pipeline {
-            agent {
-              label 'maven'
-            }
-```
+[1]: https://stackoverflow.com/questions/28608015/continuous-integration-vs-continuous-delivery-vs-continuous-deployment
+[2]: https://docs.openshift.com/container-platform/3.9/dev_guide/openshift_pipeline.html

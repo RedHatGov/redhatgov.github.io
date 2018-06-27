@@ -1,31 +1,25 @@
 ---
-title:  Lab 09 - Build Image
+title: Lab 09 - Archive App
 workshops: trusted_software_supply_chain
 workshop_weight: 19
 layout: lab
 ---
-# Add Build Image Stage
 
-Add the Build Image Stage into your pipeline text file
+# Add Archive Stage
 
-The "sh" are shell commands in your pipeline that are executed on the Jenkins Slave.  Maven built the openshift-tasks.war in it the target directory and it will be copied into the created oc-builds directory.
+Add Archive Stage Steps into your pipeline.
 
-The startBuild stage is kicked off from Openshift and pointing to the local directory "oc-build" on the Jenkins slave.
+<img src="../images/pipeline_nexus.png" width="900" />
 
+We leveraged the maven nexus plugin for this deployment.  The mvn deploy step is the last step in the maven lifecycle.  The built application is archived into the nexus repository.  We can see it later once we run the pipeline.
+
+The "-P nexus3" option activates the nexus3 profile defined in the configuration/cicd-settings-nexus3.xml
+
+Append the text below to your text file or into the YAML/JSON field for tasks-pipeline in the OpenShift Console. 
 
 ```
-              stage('Build Image') {
                 steps {
-                  sh "rm -rf oc-build && mkdir -p oc-build/deployments"
-                  sh "cp target/openshift-tasks.war oc-build/deployments/ROOT.war"
-
-                  script {
-                    openshift.withCluster() {
-                      openshift.withProject(env.DEV_PROJECT) {
-                        openshift.selector("bc", "tasks").startBuild("--from-dir=oc-build", "--wait=true")
-                      }
-                    }
-                  }
+                  sh "${mvnCmd} deploy -DskipTests=true -P nexus3"
                 }
               }
 ```

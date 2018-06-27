@@ -1,41 +1,60 @@
 ---
-title: Lab 06 - Code Analysis and Vulnerability Scanning
+title:  Lab 06 - Build App Stage
 workshops: trusted_software_supply_chain
 workshop_weight: 16
 layout: lab
+toc: true
 ---
 
-# Add Code Analysis Stage and Vulnerability Scanning.
+# Add Build App Stage to Pipeline Text File
 
-Add Code Analysis Stage into pipeline text file.  We leverage the maven sonar plugin to run SonarQube scanning against our source code.
+Next, you will add the Build App Stage to your pipeline.
 
-SonarQube is an open source static code analysis tool that we can automate running security scan against your source code to further improve the security of you application.  So every time you have a code check-in, SonarQube will scan the quality and threat analysis of that code.
+<img src="../images/pipeline_build.png" width="900" />
 
-We leverage the sonarqube maven plugin and specfify the maven goal "sonar:sonar" to run our project leveraging the sonarqube api.
+The git branch step will clone the openshift-tasks project with the git branch locally from your gogs server to your jenkins node.  The jenkins node is leveraging the [git jenkins plugin][1] to communicate to gogs.
 
-SonarQube's security rules orginate from these standards:
+Please note that we are leveraging the eap-7 branch in our git project and not the master branch.
 
-* [CWE Database][1] - Common Weakness Enumeration (CWE™) is a formal list or dictionary of common software weaknesses that can occur in software's architecture, design, code or implementation that can lead to exploitable security vulnerabilities.
-
-* [SANS Top 25][2] - The SANS Top 25 list is a collection of the 25-most dangerous errors listed in the CWE, as compiled by the SANS organization.
-
-* [OWASP Top 10][3] - The OWASP Top 10 is a list of broad categories of weaknesses, each of which can map to many individual rules.
+Append the text below to your text file or into the YAML/JSON field for tasks-pipeline in the OpenShift Console.
 
 ```
-              stage('Code Analysis') {
+            stages {
+              stage('Build App') {
                 steps {
+                  git branch: 'eap-7', url: 'http://gogs:3000/gogs/openshift-tasks.git'
                   script {
-                    sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true"
+                      def pom = readMavenPom file: 'pom.xml'
+                      version = pom.version
                   }
+                  sh "${mvnCmd} install -DskipTests=true"
                 }
               }
 ```
 
 
-Once we build the full pipeline and run it, we will log into SonarQube and view the various metrics, stats, and code coverage as seen from the screenshot below.
 
-<img src="../images/sonarqube-analysis.png" width="900"><br/>
+View your gogs pod and click select the route (https://gogs...) to log into your gogs server.
 
-[1]: http://cwe.mitre.org/about/index.html
-[2]: https://www.sans.org/top25-software-errors/
-[3]: https://www.owasp.org/index.php/Top_10-2017_Top_10
+Use the user name and password given to you by your instructor.
+
+<img src="../images/gogs_route.png" width="900"><br/>
+
+View the source of the openshift-tasks project in your gogs server.  
+
+<br>
+
+<img src="../images/gogs_home.png" width="900"><br/>
+
+Maven install will run through the [Maven lifecycle][2] and skip the tests.  We will execute tests later in the pipeline.
+
+- validate - validate the project is correct and all necessary information is available
+- compile - compile the source code of the project
+- test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+- package - take the compiled code and package it in its distributable format, such as a JAR.
+- verify - run any checks on results of integration tests to ensure quality criteria are met
+- install - install the package into the local repository, for use as a dependency in other projects locally
+- deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+
+[1]: https://jenkins.io/doc/pipeline/steps/git/
+[2]: https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
