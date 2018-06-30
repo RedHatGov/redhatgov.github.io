@@ -1,6 +1,6 @@
 ---
-title:  Lab 03 - CICD Project and Pods
-workshops: trusted_software_supply_chain
+title:  Lab 03 - CI/CD Project and Pods
+workshops: secure_software_factory
 workshop_weight: 12
 layout: lab
 ---
@@ -25,6 +25,8 @@ Once inside the CI/CD Project, you will see the following PODS running.  This PO
 - Nexus pod - Nexus is an artifact repository
 - Jenkins pod - Jenkins is an open source CI/CD tool
 - Sonarqube pod - SonarQube is an open source static code analysis tool
+
+It might take a few minutes for all PODS to be deployed.
 
 <img src="../images/cicd-pods.png" width="900"><br/>
 

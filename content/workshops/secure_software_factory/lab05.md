@@ -1,6 +1,6 @@
 ---
 title:  Lab 05 - Creating Your Pipeline
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 15
 layout: lab
 ---
@@ -31,10 +31,10 @@ spec:
     triggers:
       - type: GitHub
         github:
-          secret: ${WEBHOOK_SECRET}
+          secret: "secret101"
       - type: Generic
         generic:
-          secret: ${WEBHOOK_SECRET}
+          secret: "secret101"
     runPolicy: Serial
     source:
       type: None

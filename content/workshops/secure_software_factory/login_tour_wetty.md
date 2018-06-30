@@ -1,6 +1,6 @@
 ---
 title: Login Tour - Wetty
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 10
 layout: lab
 ---
@@ -29,5 +29,3 @@ After logging in, you should see a shell.
 <img src="../images/wetty.png" width="1000" />
 
 The wetty instance will already have the 'oc' command installed on them. The 'oc' command is used to connect to the OpenShift Master.
-
-{{< importPartial "footer/footer.html" >}}

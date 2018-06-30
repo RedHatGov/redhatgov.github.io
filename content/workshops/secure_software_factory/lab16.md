@@ -1,13 +1,18 @@
 ---
 title: Lab 16 - Run Pipeline
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 26
 layout: lab
 ---
 # Verify Completed Pipeline
 
-Before we kick off your pipeline, let's verify it.  Take a look and see if it matches the below text.
+Before we kick off your pipeline, let's verify it.  
 
+In Builds > Pipelines > tasks-pipeline > Actions > Edit YAML
+
+<img src="../images/pipeline_actions_edityaml.png" width="900" />
+
+Take a look and see if it matches the below text.  If not, please correct it.
 
 ```
 apiVersion: v1
@@ -23,10 +28,10 @@ spec:
     triggers:
       - type: GitHub
         github:
-          secret: ${WEBHOOK_SECRET}
+          secret: "secret101"
       - type: Generic
         generic:
-          secret: ${WEBHOOK_SECRET}
+          secret: "secret101"
     runPolicy: Serial
     source:
       type: None
@@ -179,6 +184,8 @@ spec:
           }
       type: JenkinsPipeline
 ```
+
+<br>
 # Verify your user Dev and Stage projects
 
 In your pipeline text file, make sure \<user\> reflects your user # and project.
@@ -190,6 +197,7 @@ In your pipeline text file, make sure \<user\> reflects your user # and project.
   value: stage-<user>
 ```
 
+<br>
 # Import pipeline into OpenShift (if not created already)
 
 If you created your pipeline in a text editor, you can import your text file in OpenShift.
@@ -205,12 +213,12 @@ Click Create and Close
 
 <img src="../images/import_pipeline.png" width="900"><br/>
 
-
+<br>
 # Run Pipeline
 
 Go to Builds > Pipeline
 
-Click Start Pipeline for the pipeline you just created called tasks-pipeline2.
+Click Start Pipeline for the pipeline you just created called tasks-pipeline.
 
 Your pipeline should now execute through all the stages you created.  
 
@@ -220,6 +228,7 @@ When it asks to promote to stage, go ahead and promote it.
 
 <img src="../images/pipeline_execution.png" width="900"><br/>
 
+<br>
 # Explore Pipeline Run
 - Explore the snapshots repository in Nexus and verify tasks is pushed to the repository
 - Explore SonarQube and show the metrics, stats, code coverage, etc

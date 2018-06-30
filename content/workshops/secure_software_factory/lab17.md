@@ -1,6 +1,6 @@
 ---
 title: Lab 17 - Trigger the Software Supply Chain
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 27
 layout: lab
 ---
@@ -9,6 +9,7 @@ layout: lab
 
 Through automation, you will trigger the Trusted Software Supply Chain with code check-ins.
 
+<br>
 # Verify Webhook in Gogs
 
 The Webhook is what triggers your pipeline upon code check-ins.  You want your SCM to trigger the pipeline as opposed to Jenkins constantly polling the source code for changes.
@@ -29,6 +30,7 @@ This should match the webhook of the pipeline you previously created except the 
 
 The webhook url is located in builds > pipeline > tasks-pipeline > configuration > generic webhook url
 
+<br>
 # Using Eclipse Che for Editing Code
 
 Click on Eclipse Che route url in the CI/CD project which takes you to the workspace administration page. Select the Java stack and click on the Create button to create a workspace for yourself.
@@ -43,7 +45,7 @@ It might take a little while before your workspace is set up and ready to be use
 
 <img src="../images/che-import-project.png" width="900"><br/>
 
-Enter the Gogs repository HTTPS url for openshift-tasks as the Git repository url with Git username and password in the url.
+Enter the Gogs repository http url for openshift-tasks as the Git repository url with Git username and password in the url.
 
 See the url below as an example.  Replace [gogs-hostname] with your gogs server.
 http://gogs:gogs@[gogs-hostname]/gogs/openshift-tasks.git
@@ -66,6 +68,7 @@ Configure you name and email to be stamped on your Git commity by going to Profi
 
 <img src="../images/che-configure-git-name2.png" width="900"><br/>
 
+<br>
 # Edit Code in your Workspace
 
 Remove the @Ignore annotation from src/test/java/org/jboss/as/quickstarts/tasksrs/service/UserResourceTest.java test methods to enable the unit tests.
@@ -73,6 +76,8 @@ Remove the @Ignore annotation from src/test/java/org/jboss/as/quickstarts/tasksr
 <img src="../images/remove_ignore.png" width="900"><br/>
 
 Commit and push to the git repo.
+
+<img src="../images/che_commit_push_git.png" width="900"><br/>
 
 <img src="../images/che-commit_push.png" width="900"><br/>
 

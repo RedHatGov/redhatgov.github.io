@@ -1,6 +1,6 @@
 ---
 title: Lab 02 - Trusted Software Supply Chain
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 12
 layout: lab
 ---

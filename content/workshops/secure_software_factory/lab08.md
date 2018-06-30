@@ -1,6 +1,6 @@
 ---
 title: Lab 08 - Code Analysis and Vulnerability Scanning
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 18
 layout: lab
 ---
@@ -25,18 +25,27 @@ SonarQube's security rules originate from these standards:
 
 * [OWASP Top 10][3] - The OWASP Top 10 is a list of broad categories of weaknesses, each of which can map to many individual rules.
 
-Append the text below to your text file or into the YAML/JSON field for tasks-pipeline in the OpenShift Console.
+<br>
+# Append to Jenkins Pipeline Configuration
+
+In Builds > Pipelines > tasks-pipeline > Actions > Edit
+
+<img src="../images/pipeline_actions_edit.png" width="900" />
+
+Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.  
+
 
 ```
-              stage('Code Analysis') {
-                steps {
-                  script {
-                    sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true"
-                  }
-                }
-              }
+    stage('Code Analysis') {
+      steps {
+        script {
+          sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true"
+        }
+      }
+    }
 ```
-
+<br>
+# SonarQube Dashboard
 
 Once we build the full pipeline and run it, we will log into SonarQube and view the various metrics, stats, and code coverage as seen from the screenshot below.
 

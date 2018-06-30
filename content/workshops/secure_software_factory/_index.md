@@ -1,5 +1,5 @@
 ---
-title: OpenShift 201 - Trusted Software Supply Chain
+title: DevSecOps Workshop - Secure Software Factory
 menu:
   main:
     parent: workshops
@@ -7,7 +7,7 @@ menu:
 ---
 
 # Description
-In this workshop, you'll be building a Trusted Software Supply Chain for a Java based website leveraging several containerized tools such as Gogs, Nexus, Jenkins, Sonarqube, and Che.
+In this workshop, you'll be building a Secure Software Factory for a Java based website leveraging several containerized tools such as Gogs, Nexus, Jenkins, Sonarqube, and Che hosted on the OpenShift Container Platform
 
 # Who Should Attend
 - Anyone who has had OpenShift 101
@@ -28,4 +28,4 @@ In this workshop, you'll be building a Trusted Software Supply Chain for a Java 
 
 # Labs
 
-{{< labs trusted_software_supply_chain >}}
+{{< labs secure_software_factory >}}

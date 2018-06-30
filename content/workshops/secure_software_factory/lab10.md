@@ -1,6 +1,6 @@
 ---
 title: Lab 10 - Create Image Builder
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 20
 layout: lab
 ---
@@ -16,12 +16,14 @@ We can incorporate CVE and vulnerability scanning against images in an automated
 
 We can also cryptographically sign your image so you know your container is running with a verified container image.
 
+<br>
 # Start with Quality Parts
 
 Red Hat has a container registry that provides certified Red Hat and third-party container images that will be the foundation of your container images.  Our Registry also has a health index of the image so you know the state of the image.
 
 <img src="../images/rh_container_catalog.png" width="900" />
 
+<br>
 # Add Create Image Builder Stage
 
 Next we will add the Create [Image Builder][1] Stage into your pipeline.
@@ -32,29 +34,36 @@ This step will create a new build.  We will be leveraging a trusted JBoss EAP 7 
 
 The golden image will will be using for our applications is jboss-eap70-openshift:1.5.  Again, you'll want a hardened, secured, patched and up to date container image as a foundation for your application.
 
-Append the text below to your text file or into the YAML/JSON field for tasks-pipeline in the OpenShift Console.
+<br>
+# Append to Jenkins Pipeline Configuration
+
+In Builds > Pipelines > tasks-pipeline > Actions > Edit
+
+<img src="../images/pipeline_actions_edit.png" width="900" />
+
+Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.  
 
 
 ```
-            stage('Create Image Builder') {
-                when {
-                  expression {
-                    openshift.withCluster() {
-                      openshift.withProject(env.DEV_PROJECT) {
-                        return !openshift.selector("bc", "tasks").exists();
-                      }
-                    }
-                  }
-                }
-                steps {
-                  script {
-                    openshift.withCluster() {
-                      openshift.withProject(env.DEV_PROJECT) {
-                        openshift.newBuild("--name=tasks", "--image-stream=jboss-eap70-openshift:1.5", "--binary=true")
-                      }
-                    }
-                  }
-                }
-              }
+    stage('Create Image Builder') {
+      when {
+        expression {
+          openshift.withCluster() {
+            openshift.withProject(env.DEV_PROJECT) {
+              return !openshift.selector("bc", "tasks").exists();
+            }
+          }
+        }
+      }
+      steps {
+        script {
+          openshift.withCluster() {
+            openshift.withProject(env.DEV_PROJECT) {
+              openshift.newBuild("--name=tasks", "--image-stream=jboss-eap70-openshift:1.5", "--binary=true")
+            }
+          }
+        }
+      }
+    }
 ```
 [1]: https://docs.openshift.com/container-platform/3.9/architecture/core_concepts/builds_and_image_streams.html

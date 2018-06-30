@@ -1,6 +1,6 @@
 ---
 title: Fin
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 30
 layout: lab
 ---

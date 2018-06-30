@@ -1,6 +1,6 @@
 ---
 title: Verify Prerequisites
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 0
 layout: lab
 ---

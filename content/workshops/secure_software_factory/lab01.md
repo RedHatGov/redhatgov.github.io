@@ -1,6 +1,6 @@
 ---
 title: Lab 01 - Welcome to OpenShift
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 11
 layout: lab
 ---

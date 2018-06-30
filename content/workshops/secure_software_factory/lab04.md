@@ -1,6 +1,6 @@
 ---
 title: Lab 04 - Jenkins and OpenShift
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 14
 layout: lab
 ---

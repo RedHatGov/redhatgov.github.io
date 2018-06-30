@@ -1,6 +1,6 @@
 ---
 title:  Lab 06 - Build App Stage
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 16
 layout: lab
 toc: true
@@ -16,23 +16,31 @@ The git branch step will clone the openshift-tasks project with the git branch l
 
 Please note that we are leveraging the eap-7 branch in our git project and not the master branch.
 
-Append the text below to your text file or into the YAML/JSON field for tasks-pipeline in the OpenShift Console.
+<br>
+# Append to Jenkins Pipeline Configuration
+
+In Builds > Pipelines > tasks-pipeline > Actions > Edit
+
+<img src="../images/pipeline_actions_edit.png" width="900" />
+
+Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.  
 
 ```
-            stages {
-              stage('Build App') {
-                steps {
-                  git branch: 'eap-7', url: 'http://gogs:3000/gogs/openshift-tasks.git'
-                  script {
-                      def pom = readMavenPom file: 'pom.xml'
-                      version = pom.version
-                  }
-                  sh "${mvnCmd} install -DskipTests=true"
-                }
-              }
+  stages {
+    stage('Build App') {
+      steps {
+        git branch: 'eap-7', url: 'http://gogs:3000/gogs/openshift-tasks.git'
+        script {
+            def pom = readMavenPom file: 'pom.xml'
+            version = pom.version
+          }
+          sh "${mvnCmd} install -DskipTests=true"
+        }
+      }
 ```
 
-
+<br>
+# View Source Code in Gogs
 
 View your gogs pod and click select the route (https://gogs...) to log into your gogs server.
 
@@ -45,6 +53,8 @@ View the source of the openshift-tasks project in your gogs server.
 <br>
 
 <img src="../images/gogs_home.png" width="900"><br/>
+
+# Maven
 
 Maven install will run through the [Maven lifecycle][2] and skip the tests.  We will execute tests later in the pipeline.
 

@@ -1,6 +1,6 @@
 ---
 title: Lab 09 - Archive App
-workshops: trusted_software_supply_chain
+workshops: secure_software_factory
 workshop_weight: 19
 layout: lab
 ---
@@ -15,11 +15,19 @@ We leveraged the maven nexus plugin for this deployment.  The mvn deploy step is
 
 The "-P nexus3" option activates the nexus3 profile defined in the configuration/cicd-settings-nexus3.xml
 
-Append the text below to your text file or into the YAML/JSON field for tasks-pipeline in the OpenShift Console. 
+<br>
+# Append to Jenkins Pipeline Configuration
+
+In Builds > Pipelines > tasks-pipeline > Actions > Edit
+
+<img src="../images/pipeline_actions_edit.png" width="900" />
+
+Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.  
 
 ```
-                steps {
-                  sh "${mvnCmd} deploy -DskipTests=true -P nexus3"
-                }
-              }
+    stage('Archive App') {
+      steps {
+        sh "${mvnCmd} deploy -DskipTests=true -P nexus3"
+      }
+    }
 ```
