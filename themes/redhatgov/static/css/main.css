@@ -28,3 +28,47 @@ figure {
   padding-bottom: 20px;
   padding-top: 10px;
 }
+.btn {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  -webkit-transition-property: background;
+  transition-property: background;
+  background: #4c4c4c;
+  border-color: #4c4c4c;
+  color:#fff;
+}
+.btn:hover, .btn:focus {
+    color: #fff;
+    background: #3f3f3f;
+    border-color: #3f3f3f;
+}
+.btn-primary {
+  background: #c00;
+  border-color: #c00;
+}
+.btn-primary:hover, .btn-primary:focus {
+  color: #fff;
+  background: #b30000;
+  border-color: #b30000;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) {
+  #workshopFooterDetails {
+    margin-top:0;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+  #workshopFooterDetails {
+    margin-top:4rem;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {
+  #workshopFooterDetails {
+    margin-top:0;
+  }
+}

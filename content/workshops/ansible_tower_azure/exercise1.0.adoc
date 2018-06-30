@@ -1,0 +1,165 @@
+---
+title: "Exercise 1.0 - Running Ad-hoc commands"
+workshops: ansible_tower_azure
+workshop_weight: 10
+layout: lab
+---
+
+:domain_name: redhatgov.io
+:icons: font
+:imagesdir: /workshops/ansible_tower_azure/images
+
+
+= Exercise 1.0 - Running Ad-hoc commands
+
+
+== Section 1: Ad-hoc commands
+
+For our first exercise, we are going to run some ad-hoc commands to help you get
+a feel for how Ansible works.  Ansible Ad-Hoc commands enable you to perform tasks
+on remote nodes without having to write a playbook.  They are very useful when you
+simply need to do one or two things quickly and often, to many remote nodes.
+
+
+
+=== Step 0:
+
+Define your inventory.  Inventories are crucial to Ansible as they define remote machines on which you wish to run
+commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`.  Then, add the appropriate definitions for the node that will function as a web node.
+
+====
+[NOTE]
+The *workshopname*, in the example below, will be provided to you by your instructor.  The *#* should be replaced by your student number.
+
+For example, a recent workshop's first student used:
+*{{< urifqdn_azure "" "tower" "" >}}*
+====
+
+.hosts (example)
+[source,bash]
+----
+[web]
+{{< urifqdn_azure "" "node" "" >}}
+----
+
+=== Step 1:
+
+Let's start with something really basic - pinging a host.  The `ping` module makes sure our web hosts are responsive.
+
+[source,bash]
+----
+ansible web -m ping
+----
+
+=== Step 2:
+
+Now let's see how we can run a good ol' fashioned Linux command and format the output using the `command` module.
+
+[source,bash]
+----
+ansible web -m command -a "uptime" -o
+----
+
+=== Step 3:
+
+Take a look at your web node's configuration.  The `setup` module displays ansible facts (and a lot of them) about an endpoint.
+
+[source,bash]
+----
+ansible web -m setup
+----
+
+=== Step 4:
+
+Now, let's install Maven & Git using the `package` module.
+
+[source,bash]
+----
+ansible web -m package -a "name=rh-maven35 state=present" -b
+ansible web -m package -a "name=git state=present" -b
+----
+
+=== Step 5:
+
+It is even possible to install groups of packages (aka yum groupinstall); such as Red Hat JBoss Enterprise Application Platform (EAP).
+
+[source,bash]
+----
+ansible web -m package -a "name=@jboss-eap7 state=present" -b
+----
+
+=== Step 6:
+
+OK, JBoss EAP is installed now so let's start it up using the `service` module.
+
+[source,bash]
+----
+ansible web -m service -a "name=eap7-standalone state=started" -b
+----
+
+=== Step 7:
+
+Next, let's deploy an application.
+
+For simplicity sake, we will use an existing quickstart. To get started, we will checkout some code ...
+
+[source,bash]
+----
+ansible web -m git -a "repo=https://github.com/jboss-developer/jboss-eap-quickstarts.git dest=/tmp/checkout"
+----
+
+and deploy the code via Maven provided by Red Hat Software Collections.
+[source,bash]
+----
+ansible web -m shell -a "scl enable rh-maven35 'mvn clean install wildfly:deploy -Dmaven.test.skip=true' chdir=/tmp/checkout/helloworld" -b
+----
+
+Demo site (unit test):
+[source,bash]
+----
+ansible web -m uri -a "url=http://localhost:8080/helloworld/ return_content=yes"
+----
+
+Demo site (open this in your web browser):
+[source,bash]
+----
+http://{{< urifqdn_azure "" "node" "" >}}:8080/helloworld/
+----
+
+=== Step 8:
+
+Finally, let's clean up after ourselves.  First, stop the Red Hat JBoss EAP service.
+
+[source,bash]
+----
+ansible web -m service -a "name=eap7-standalone state=stopped" -b
+----
+
+=== Step 9:
+
+Next, remove some packages.
+
+[source,bash]
+----
+ansible web -m package -a "name=@jboss-eap7 state=absent" -b
+ansible web -m package -a "name=eap7-* state=absent" -b
+ansible web -m package -a "name=rh-maven35 state=absent" -b
+ansible web -m package -a "name=git state=absent" -b
+----
+
+
+====
+[NOTE]
+Like many Linux commands, `ansible` allows for long-form options as well as short-form.  For example:
+
+----
+ansible web --module-name ping
+----
+is the same as running
+----
+ansible web -m ping
+----
+We are going to be using the short-form options throughout this workshop
+====
+
+{{< importPartial "footer/footer_azure.html" >}}

@@ -1,0 +1,208 @@
+<script type="text/javascript">
+
+function replaceclasstext(cname,cvalue) {
+    var x = document.getElementsByClassName(cname);
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].innerHTML= cvalue;
+    }
+}
+
+function setCookie(cname,cvalue) {
+    var date = new Date();
+    date.setTime(date.getTime() + 86400000);
+    var expires =  date.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";expires=" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function loadVariables() {
+
+    var userid=getCookie("userid");
+    var prefix=getCookie("prefix");
+    var domain=getCookie("domain");
+    var region=getCookie("region");
+
+    if (userid != "") {
+    	document.getElementById("userid").value = userid;
+    }
+    if (prefix != "") {
+    	document.getElementById("prefix").value = prefix;
+    } else {
+    	document.getElementById("prefix").value = "example";
+    }
+    if (region != "") {
+      document.getElementById("region").value = region;
+    } else {
+      document.getElementById("region").value = "example";
+    }
+    if (domain != "") {
+    	document.getElementById("domain").value = domain;
+        replaceclasstext("domain",domain)
+        replaceclasstext("prefix",prefix)
+        replaceclasstext("userid",userid)
+        replaceclasstext("region",region)
+    }
+}
+
+function defaultVariables() {
+
+    document.getElementById("userid").value = "0";
+    document.getElementById("prefix").value = "example";
+    document.getElementById("domain").value = "cloudapp.azure.com";
+    document.getElementById("region").value = "example";
+    setCookie("userid", document.getElementById("userid").value);
+    setCookie("prefix", document.getElementById("prefix").value);
+    setCookie("domain", document.getElementById("domain").value);
+    setCookie("region", document.getElementById("region").value);
+
+    var userid = document.getElementById("userid").value;
+    var prefix = document.getElementById("prefix").value;
+    var domain = document.getElementById("domain").value;
+    var region = document.getElementById("region").value;
+    var fqdn = userid + "." + prefix + "." + domain;
+
+    replaceclasstext("domain",domain)
+    replaceclasstext("prefix",prefix)
+    replaceclasstext("userid",userid)
+    replaceclasstext("region",region)
+
+}
+
+function setupWorkshop() {
+    var userid = document.getElementById("userid").value;
+    var prefix = document.getElementById("prefix").value;
+    var domain = document.getElementById("domain").value;
+    var region = document.getElementById("region").value;
+
+    setCookie("userid", userid);
+    setCookie("prefix", prefix);
+    setCookie("domain", domain);
+    setCookie("region", region);
+
+    replaceclasstext("domain",domain)
+    replaceclasstext("prefix",prefix)
+    replaceclasstext("userid",userid)
+    replaceclasstext("region",region)
+
+}
+</script>
+<hr>
+<h3>Workshop Details</h3>
+<table border=1>
+<tr>
+<td>
+  <table><tr><td>Student ID: </td><td>
+  <select id="userid">
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+    <option value="16">16</option>
+    <option value="17">17</option>
+    <option value="18">18</option>
+    <option value="19">19</option>
+    <option value="20">20</option>
+    <option value="21">21</option>
+    <option value="22">22</option>
+    <option value="23">23</option>
+    <option value="24">24</option>
+    <option value="25">25</option>
+    <option value="26">26</option>
+    <option value="27">27</option>
+    <option value="28">28</option>
+    <option value="29">29</option>
+    <option value="30">30</option>
+    <option value="31">31</option>
+    <option value="32">32</option>
+    <option value="33">33</option>
+    <option value="34">34</option>
+    <option value="35">35</option>
+    <option value="36">36</option>
+    <option value="37">37</option>
+    <option value="38">38</option>
+    <option value="39">39</option>
+    <option value="40">40</option>
+    <option value="41">41</option>
+    <option value="42">42</option>
+    <option value="43">43</option>
+    <option value="44">44</option>
+    <option value="45">45</option>
+    <option value="46">46</option>
+    <option value="47">47</option>
+    <option value="48">48</option>
+    <option value="49">49</option>
+    <option value="50">50</option>
+  </select>
+  </td></tr></table>
+</td>
+<td>
+  <table><tr><td>Workshop: </td><td>
+   <input id="prefix" type="text" size=8>
+  </td></tr></table>
+</td>
+<td>
+  <table><tr><td>Region: </td><td>
+   <input id="region" type="text" size=8>
+  </td></tr></table>
+</td>
+<td>
+  <select id="domain">
+    <option value="cloudapp.azure.com">cloudapp.azure.com</option>
+  </select>
+</td>
+<td>
+  <button onclick="setupWorkshop()">Enter</button><br>
+  <button onclick="defaultVariables()">Default</button>
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<td align=right><b>Domain: </b></td>
+<td><span class="domain"></span></td>
+<td rowspan=3>
+<img src="https://www.redhat.com/files/brand/email/sig-redhat.png" onload=loadVariables()>
+</td>
+</tr>
+<tr>
+<td align=right><b>Workshop Name: </b></td>
+<td><span class="prefix"></span></td>
+</tr>
+<tr>
+<td align=right><b>Region: </b></td>
+<td><span class="region"></span></td>
+</tr>
+<tr>
+<td align=right><b>User ID: </b></td>
+<td><span class="userid"></span></td>
+</tr>
+</table>
+<hr>
