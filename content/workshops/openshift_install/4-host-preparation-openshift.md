@@ -1,6 +1,6 @@
 ---
 title: 'Lab 5: OpenShift Host Preparation'
-workshops: openshift_for_ops
+workshops: openshift_install
 layout: lab
 workshop_weight: 50
 ---
