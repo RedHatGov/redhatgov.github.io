@@ -71,6 +71,65 @@ ansible web -m setup
 
 === Step 4:
 
+Now, let's install a deliberately out-of-date version of `subversion`, a revision control tool.  Let's first find the most recent out-of-date version of the package that is available:
+
+[source,bash] 
+----
+sudo yum list available subversion.x86_64 --showduplicates
+----
+
+You should get a number of lines of output, that look something like this (though the versions will vary):
+
+[source,bash] 
+----
+Loaded plugins: amazon-id, rhui-lb, search-disabled-repos
+Available Packages
+subversion.x86_64       1.7.14-6.el7            rhui-REGION-rhel-server-releases
+subversion.x86_64       1.7.14-7.el7_0          rhui-REGION-rhel-server-releases
+subversion.x86_64       1.7.14-7.el7_1.1        rhui-REGION-rhel-server-releases
+subversion.x86_64       1.7.14-10.el7           rhui-REGION-rhel-server-releases
+subversion.x86_64       1.7.14-11.el7_4         rhui-REGION-rhel-server-releases
+subversion.x86_64       1.7.14-14.el7           rhui-REGION-rhel-server-releases
+----
+
+Now, let's install the version mentioned in the second-to-last line:
+
+[source,bash] 
+----
+ansible web -m package -a "name=subversion-1.7.14-11.el7_4 state=present" -b
+----
+
+By the way, you can use that method, referring to a package with `<package name>-<version>` to install any version of any package.
+
+Since that's done, let's now update Subversion to the current version:
+
+[source,bash] 
+----
+ansible web -m package -a "name=subversion state=latest" -b
+----
+
+====
+[NOTE]
+Package Updating Methods
+
+There are various methods that you can use to update packages.  You saw a simple case, already, but you can also update *all* packages to current with:
+
+[source,bash] 
+----
+ansible web -m package -a "name=* state=latest" -b
+----
+
+Or, you can only install updates, to all packages, with security implications, with this:
+
+[source,bash] 
+----
+ansible web -m yum -a "name=* security=yes state=latest" -b
+----
+
+====
+
+=== Step 5:
+
 Now, let's install Maven & Git using the `package` module.
 
 [source,bash]
@@ -79,7 +138,7 @@ ansible web -m package -a "name=rh-maven35 state=present" -b
 ansible web -m package -a "name=git state=present" -b
 ----
 
-=== Step 5:
+=== Step 6:
 
 It is even possible to install groups of packages (aka yum groupinstall); such as Red Hat JBoss Enterprise Application Platform (EAP).
 
@@ -88,7 +147,7 @@ It is even possible to install groups of packages (aka yum groupinstall); such a
 ansible web -m package -a "name=@jboss-eap7 state=present" -b
 ----
 
-=== Step 6:
+=== Step 7:
 
 OK, JBoss EAP is installed now so let's start it up using the `service` module.
 
@@ -97,7 +156,7 @@ OK, JBoss EAP is installed now so let's start it up using the `service` module.
 ansible web -m service -a "name=eap7-standalone state=started" -b
 ----
 
-=== Step 7:
+=== Step 8:
 
 Next, let's deploy an application.
 
@@ -126,7 +185,7 @@ Demo site (open this in your web browser):
 http://{{< urifqdn "" "node" "" >}}:8080/helloworld/
 ----
 
-=== Step 8:
+=== Step 9:
 
 Finally, let's clean up after ourselves.  First, stop the Red Hat JBoss EAP service.
 
@@ -135,7 +194,7 @@ Finally, let's clean up after ourselves.  First, stop the Red Hat JBoss EAP serv
 ansible web -m service -a "name=eap7-standalone state=stopped" -b
 ----
 
-=== Step 9:
+=== Step 10:
 
 Next, remove some packages.
 
