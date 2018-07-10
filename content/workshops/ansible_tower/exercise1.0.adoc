@@ -119,7 +119,7 @@ There are various methods that you can use to update packages.  You saw a simple
 ansible web -m package -a "name=* state=latest" -b
 ----
 
-Or, you can only install updates, to all packages, with security implications, with this:
+Or, you can only install updates, to all packages, with security implications.  Red Hat marks an update security-relevant when the changes made to the package, with the update, affect system integrity.  To use this mode, do the following:
 
 [source,bash] 
 ----
