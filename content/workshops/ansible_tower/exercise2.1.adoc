@@ -137,7 +137,8 @@ Click on ADD     image:at_add.png[Add,35,25]
 Complete the form using the following entries, by printing out your private SSH key to place into Tower.  When you paste the key in, in the `PRIVATE KEY` field, make sure to include the `-----BEGIN RSA PRIVATE KEY-----` and `-----BEGIN RSA PRIVATE KEY-----` lines.
 
 ----
-cat ~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
+unsetopt prompt_cr prompt_sp
+cat ~/.ssh/{{< span2 "prefix" "example" "-tower" >}} && echo
 ----
 
 |===
