@@ -1,11 +1,11 @@
 ---
-title: Lab 08 - Code Analysis and Vulnerability Scanning
+title: Lab 08 - Static Application Security Testing
 workshops: secure_software_factory
 workshop_weight: 18
 layout: lab
 ---
 
-# Add Code Analysis Stage and Vulnerability Scanning
+# Static Application Security Testing
 
 Next we will add a Code Analysis Stage into the pipeline.  
 
@@ -50,6 +50,28 @@ Append the text below to the bottom of the Jenkins Pipeline Configuration.  Plea
 Once we build the full pipeline and run it, we will log into SonarQube and view the various metrics, stats, and code coverage as seen from the screenshot below.
 
 <img src="../images/sonarqube-analysis.png" width="900"><br/>
+
+# Test Your Pipeline
+If you'd like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.
+
+```
+  }
+}
+```
+
+Save your Jenkinsfile.
+
+Go back to Builds > Pipelines
+
+Click Start Pipeline
+
+# Delete Brackets
+Please delete the brackets you just added once testing is complete. We can add them later if you'd like to test your pipeline as you go along.
+
+```
+  }
+}
+```
 
 [1]: http://cwe.mitre.org/about/index.html
 [2]: https://www.sans.org/top25-software-errors/
