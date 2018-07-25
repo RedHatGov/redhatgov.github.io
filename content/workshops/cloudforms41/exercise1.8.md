@@ -7,9 +7,9 @@ layout: lab
 
 # Explore Access Control
 
-> Go to **Settings** → **Configuration** and select the **Access Control** accordion.
+> Go to **Administrator** (in the top right corner of the screen) → **Configuration** and select the **Access Control** accordion.
 
-<img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-dashboard-settings-configuration-1.png" width="1000"/><br/>
+<img title="CloudForms Top Window Navigation VM Providers" src="../images/access_control-1.png" width="1000"/><br/>
 *Configuration Dashboard*
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-dashboard-settings-configuration-2.png" width="1000"/><br/>
