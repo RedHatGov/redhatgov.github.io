@@ -53,9 +53,10 @@ If you'd like to do a test of first pipeline stage, add the following brackets a
 ```
 
 Your Jenkinsfile should look like this
-Click Save
 
 <img src="../images/jenkinsfile_buildapp_close.png" width="900" />
+
+Click Save
 
 Go back to Builds > Pipelines
 
@@ -72,6 +73,8 @@ Please delete the brackets you just added once testing is complete. We can add t
  }
 }
 ```
+
+Click Save
 
 
 <br>

@@ -15,7 +15,7 @@ First, we will need to create a [BuildConfig][2] that employs the [Pipeline Buil
 
 <img src="../images/import_yaml.png" width="900" />
 
-Then copy & paste the following into the YAML/JSON input text field and click Create:
+Then copy & paste the following into the YAML/JSON input text field and click Create,
 
 ```
 apiVersion: v1
@@ -53,6 +53,8 @@ spec:
             }
 ```
 
+Close the window once it's imported.
+
 Then go to “Builds” → “Pipelines” tab.
 
 <img src="../images/builds_pipelines.png" width="900" />
@@ -61,9 +63,12 @@ Verify that you see your "tasks pipeline" that you just imported.
 
 <img src="../images/tasks_pipeline.png" width="900" />
 
-OK, let’s modify this BuildConfig a little further in order to better fit our project.
 
-Click on the “tasks-pipline” under “Builds” → “Pipelines”, click Actions -> Edit YAML, and Update your user Dev and Stage projects to make sure reflects your user #.
+Click on the “tasks-pipeline”
+
+Click Actions -> Edit YAML
+
+Update your user Dev and Stage projects to make sure reflects your user #.
 
 ```
 strategy:
@@ -74,6 +79,7 @@ strategy:
     - name: STAGE_PROJECT
       value: stage-<user>
 ```
+
 Also, notice that We will be launching a Maven node/agent to execute our pipeline.
 
 You will also be declaring variables such as version and mvnCmd to be used later in the pipeline.
@@ -89,6 +95,7 @@ The .xml file refers to maven configurations for your application. The reference
             }
 ```
 
+Click Save
 
 [1]: https://github.com/openshift/jenkins-client-plugin#examples
 [2]: https://docs.openshift.com/container-platform/3.9/dev_guide/builds/index.html#defining-a-buildconfig

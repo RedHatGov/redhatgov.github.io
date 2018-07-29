@@ -72,6 +72,7 @@ Please delete the brackets you just added once testing is complete. We can add t
   }
 }
 ```
+Click Save
 
 [1]: http://cwe.mitre.org/about/index.html
 [2]: https://www.sans.org/top25-software-errors/

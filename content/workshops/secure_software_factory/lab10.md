@@ -88,5 +88,6 @@ Please delete the brackets you just added once testing is complete. We can add t
   }
 }
 ```
+Click Save
 
 [1]: https://docs.openshift.com/container-platform/3.9/architecture/core_concepts/builds_and_image_streams.html

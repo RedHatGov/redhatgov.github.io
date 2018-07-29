@@ -52,3 +52,5 @@ Please delete the brackets you just added once testing is complete. We can add t
   }
 }
 ```
+
+Click Save
