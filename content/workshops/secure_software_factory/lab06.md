@@ -39,6 +39,44 @@ Append the text below to the bottom of the Jenkins Pipeline Configuration.  Plea
       }
 ```
 
+Your Jenkinsfile should look like this.
+
+<img src="../images/jenkinsfile_buildapp.png" width="900" />
+<br>
+
+# Test Your Pipeline
+If you'd like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.
+
+```
+ }
+}
+```
+
+Your Jenkinsfile should look like this
+
+<img src="../images/jenkinsfile_buildapp_close.png" width="900" />
+
+Click Save
+
+Go back to Builds > Pipelines
+
+Click Start Pipeline
+
+You should see your first stage run successfully.
+
+<img src="../images/pipelinerun_buildapp.png" width="900" />
+
+# Delete Brackets
+Please delete the brackets you just added once testing is complete. We can add them later if you'd like to test your pipeline as you go along.
+
+```
+ }
+}
+```
+
+Click Save
+
+
 <br>
 # View Source Code in Gogs
 

@@ -66,4 +66,28 @@ Append the text below to the bottom of the Jenkins Pipeline Configuration.  Plea
       }
     }
 ```
+
+# Test Your Pipeline
+If you'd like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.
+
+```
+  }
+}
+```
+
+Save your Jenkinsfile.
+
+Go back to Builds > Pipelines
+
+Click Start Pipeline
+
+# Delete Brackets
+Please delete the brackets you just added once testing is complete. We can add them later if you'd like to test your pipeline as you go along.
+
+```
+  }
+}
+```
+Click Save
+
 [1]: https://docs.openshift.com/container-platform/3.9/architecture/core_concepts/builds_and_image_streams.html
