@@ -30,7 +30,7 @@ It might take a few minutes for all PODS to be deployed.
 
 <img src="../images/cicd-pods.png" width="900"><br/>
 
-
+<br>
 # The Flow of the Trusted Software Supply Chain
 
 - Jenkins is the CI/CD tool that will execute the project.
@@ -44,6 +44,7 @@ It might take a few minutes for all PODS to be deployed.
 - The DEV image is tagged with the application version (tasks:7.x) in the STAGE project
 - The staged image is deployed in a fresh container into the STAGE project
 
+<br>
 <img src="../images/pipeline.png" width="900"><br/>
 
 [1]: https://stackoverflow.com/questions/28608015/continuous-integration-vs-continuous-delivery-vs-continuous-deployment
