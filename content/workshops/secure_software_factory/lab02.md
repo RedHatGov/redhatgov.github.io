@@ -15,11 +15,11 @@ For many organizations, obtaining Authority to Operate (ATO) is an arduous proce
 
 Having a secure foundation for your applications is a key component to a Trusted Software Supply Chain. In the following lab exercises, your applications will inherit these security controls from the accredited OpenShift platform.
 
-The approach towards the Authorization and Accreditation (A&A) process with OpenShift follows a Landlord/Tenant model. OpenShift is a container application platform that provides a standardized operating environment and when assessing system boundaries, a delineation should be made between the OpenShift system itself which operates as a Landlord and the tenant application, which consumes the OpenShift service.
+The approach towards the Authorization and Accreditation (A&A) process with OpenShift follows a Landlord/Tenant model. OpenShift is a container application platform that provides a standardized operating environment and when assessing system boundaries, a delineation should be made between the OpenShift system itself, which operates as a Landlord, and the tenant application, which consumes the OpenShift service.
 
 <img src="../images/security_inheritance_model.png" width="700" />
 
-In Landlord/Tenant system security plans (SSP), many security controls are inherited from the Landlord’s SSP, but some controls remain the responsibility of the OpenShift consumers. Following this division of responsibilities illustrated in the diagram above, approximately 73 controls would be considered the responsibility of the tenant, whereas 621 controls that are already taken care of by the Landlord.
+In Landlord/Tenant system security plans (SSP), many security controls are inherited from the Landlord’s SSP, but some controls remain the responsibility of the OpenShift consumers. Following this division of responsibilities illustrated in the diagram above, some controls would be considered the responsibility of the tenant, whereas a good number of controls are already taken care of by the Landlord.
 
 [1]: https://en.wikipedia.org/wiki/Continuous_delivery
 [2]: https://cloud.gov/docs/compliance/ato-process/
