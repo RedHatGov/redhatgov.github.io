@@ -122,15 +122,11 @@ workshop, we are using a *machine* credential.
 
 === Step 1:
 
-Select the gear icon     image:at_gear.png[Gear,20,20]
-
-=== Step 2:
-
-Select CREDENTIALS
+Select CREDENTIALS image:at_credentials.png[credentials,150,50]
 
 === Step 3:
 
-Click on ADD     image:at_add.png[Add,35,25]
+Click on *+*     image:at_add.png[Add,35,25]
 
 === Step 4:
 
@@ -147,7 +143,7 @@ cat ~/.ssh/{{< span2 "prefix" "example" "-tower" >}} && echo
 |ORGANIZATION|Default
 |TYPE|Machine
 |USERNAME| ec2-user
-|PRIVILEGE ESCALATION|Sudo
+|PRIVILEGE ESCALATION|sudo
 |PRIVATE KEY|paste in secret key
 |===
 
@@ -172,11 +168,11 @@ a source code management (SCM) system supported by Tower, including Git, Subvers
 
 === Step 1:
 
-Click on PROJECTS
+Click on PROJECTS image:at_projects.png[projects,150,50]
 
 === Step 2:
 
-Select ADD     image:at_add.png[Add,35,25]
+Select *+*     image:at_add.png[Add,35,25]
 
 === Step 3:
 
@@ -194,7 +190,7 @@ a|
 
 - [*] Clean
 - [*] Delete on Update
-- [*] Update on Launch
+- [*] Update Revision on Launch
 |===
 
 
@@ -223,11 +219,15 @@ and this is how we are going to add an inventory for this workshop.
 
 === Step 1:
 
-Click on INVENTORIES
+Click on INVENTORIES image:at_inventories.png[inventories,150,50]
+
 
 === Step 2:
 
-Select ADD     image:at_add.png[Add,35,25]
+Select *+*     image:at_add.png[Add,35,25]
+
+From the drop down, select *Inventory*
+image:at_inventory.png[inventory,200]
 
 === Step 3:
 
@@ -278,8 +278,11 @@ image::at_tm_stdout.png[Cred_Detail,900,caption="Figure 8: ",title="Importing an
 
 
 
-Feel free to browse your inventory in Tower.  You should now notice that the inventory has been populated with Groups and that
-each of those groups contain hosts.
+Feel free to browse your inventory in Tower by selecting *HOSTS*.  
+image:at_inv_hosts.png[hosts,200,50]
+
+You should now notice that the inventory has been populated with each
+each of hosts and corresponding inventory
 
 
 image::at_inv_group.png[Cred_Detail,900,caption="Figure 9: ",title="Inventory with Groups"]
