@@ -13,14 +13,14 @@ layout: lab
 
 = Exercise 2.0 - Installing Ansible Tower
 
-
+== Exercise Description
 
 In this exercise, we are going to get Ansible Tower installed on your control node
 
 == Installing Ansible Tower
 
 
-=== Step 1:
+=== Step 1: Change directories
 
 Change directories to /tmp
 
@@ -29,7 +29,7 @@ Change directories to /tmp
 cd /tmp
 ----
 
-=== Step 2:
+=== Step 2: Download Red Hat Ansible Tower
 
 Download the latest Ansible Tower package
 
@@ -38,25 +38,23 @@ Download the latest Ansible Tower package
 curl -O http://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz
 ----
 
-=== Step 3:
-
-Untar and unzip the package file
+=== Step 3: Untar and unzip the package file
 
 [source,bash]
 ----
 tar xvfz /tmp/ansible-tower-setup-latest.tar.gz
 ----
 
-=== Step 4:
+=== Step 4: Change directories
 
-Change directories into the ansible tower package
+Change directories into the Ansible Tower package
 
 [source,bash]
 ----
 cd /tmp/ansible-tower-setup-*/
 ----
 
-=== Step 5:
+=== Step 5: Open inventory file
 
 Using an editor of your choice, open the inventory file
 
@@ -65,7 +63,7 @@ Using an editor of your choice, open the inventory file
 vim inventory
 ----
 
-=== Step 6:
+=== Step 6: Identify variables
 
 Fill a few variables out in an inventory file: `admin_password, pg_password, rabbitmq_password`
 
@@ -98,7 +96,7 @@ rabbitmq_use_long_name=false
 
 ----
 
-=== Step 7:
+=== Step 7: Run setup
 
 Run the Ansible Tower setup script
 
@@ -112,8 +110,7 @@ Step 7 will take approx. 10-15 minutes to complete.  This may be a good time to 
 
 
 
-=== End Result
-
+=== Step 8: Confirm results
 At this point, your Ansible Tower installation should be complete.
 You can access your Tower (not forgetting that *workshopname* is the name of your workshop, and *#* is your student number) at:
 

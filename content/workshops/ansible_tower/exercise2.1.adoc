@@ -11,19 +11,16 @@ layout: lab
 :image_links: https://s3.amazonaws.com/ansible-workshop-bos.redhatgov.io/_images
 :cred_url: http://docs.ansible.com/ansible-tower/latest/html/userguide/credentials.html#credential-types
 
-= Exercise 2.1 - Configuring Ansible Tower
+= Exercise 2.1 - Configuring Red Hat Ansible Tower
 
 
 
+== Exercise Description
 
-In this exercise, we are going to configure Tower so that we can run a playbook.
-[NOTE]
-
-
-== Configuring Ansible Tower
+In this exercise, we are going to configure Red Hat Ansible Tower, so that we can run a playbook.
 
 There are a number of contructs in the Ansible Tower UI that enable multi-tenancy, notifications, scheduling, etc.
-However, we are only going to focus on a few of the key contructs that are required for this workshop today.
+However, we are only going to focus on the key contructs that are required for this workshop today.
 
 
 * Credentials
@@ -32,12 +29,10 @@ However, we are only going to focus on a few of the key contructs that are requi
 * Job Template
 
 
+== Section 1: Logging into Ansible Tower and installing the license key
 
 
-== Logging into Tower and Installing the License Key
-
-
-=== Step 1:
+=== Step 1: Log in
 
 To log in, use the username `admin` and and the password `ansibleWS`.
 
@@ -46,7 +41,7 @@ To log in, use the username `admin` and and the password `ansibleWS`.
 image::ansible-lab-figure01-logon-screen.png[caption="Figure 3: ", title="Ansible Tower Login Screen"]
 
 
-As soon as you login, you will prompted to request a license or browse for an existing license file
+After you login, you will be prompted to request an Ansible Tower license, or browse for an existing license file
 
 
 
@@ -55,27 +50,27 @@ image::at_lic_prompt.png[caption="Figure 4: ", title="Uploading a License"]
 
 
 
-=== Step 2:
+=== Step 2: Request workshop license
 
 In a separate browser tab, browse to https://www.ansible.com/workshop-license to request a workshop license.
 
-=== Step 3:
+=== Step 3: Upload Ansible Tower workshop license
 
-Back in the Tower UI, choose BROWSE image:at_browse.png[LicB,35,25] and upload your recently downloaded license file into Tower.
+Back in the Ansible Tower UI, choose BROWSE image:at_browse.png[LicB,35,25] and upload your recently downloaded license file into Ansible Tower.
 
-=== Step 4:
+=== Step 4: Accept license agreement
 
 Select "_I agree to the End User License Agreement_".
 
-=== Step 5:
+=== Step 5: Submit
 
-Click on SUBMIT image:at_submit.png[Sub,35,25]
+Select SUBMIT image:at_submit.png[Sub,35,25]
 
-// === Step 3:
+// === Step 3: Request a workshop license
 
-// In a seperate browser tab, browse to https://www.ansible.com/workshop-license to request a workshop license.
+// In a separate browser tab, browse to https://www.ansible.com/workshop-license to request a workshop license.
 
-// At the commandline in your Tower instance download the encrypted license file via the curl command.
+// At the commandline in your Ansible Tower instance download the encrypted license file via the curl command.
 
 // [source,bash]
 // ----
@@ -88,7 +83,7 @@ Click on SUBMIT image:at_submit.png[Sub,35,25]
 // [source,bash]
 // ----
 // ansible-vault decrypt license --ask-vault-pass
-// 
+//
 // ...
 
 // Vault password:
@@ -103,7 +98,7 @@ Click on SUBMIT image:at_submit.png[Sub,35,25]
 //      -X POST \
 //      --data @license \
 //      --user admin:ansibleWS
-// 
+//
 // ----
 
 
@@ -111,30 +106,28 @@ Click on SUBMIT image:at_submit.png[Sub,35,25]
 
 
 
-== Creating a Credential
+== Section 2: Creating a credential
 
-Credentials are utilized by Tower for authentication when launching jobs against machines,
+Credentials are utilized by Ansible Tower for authentication when launching jobs against machines,
 synchronizing with inventory sources, and importing project content from a version control system.
 
-There are many link:{cred_url}[types of credentials] including machine, network, and various cloud providers.  In this
-workshop, we are using a *machine* credential.
+There are many link:{cred_url}[types of credentials] including machine, network, and various cloud providers.  In this workshop, we are using a *machine* credential.
 
 
-=== Step 1:
+=== Step 1: Select settings
 
-Select the gear icon     image:at_gear.png[Gear,20,20]
+Select Ansible Tower Settings (gear icon).     image:at_gear.png[Gear,20,20]
 
-=== Step 2:
+=== Step 2: Select Credentials
 
-Select CREDENTIALS
 
-=== Step 3:
 
-Click on ADD     image:at_add.png[Add,35,25]
+=== Step 3: Select Add
+    image:at_add.png[Add,35,25]
 
-=== Step 4:
+=== Step 4: Complete the Ansible Tower Credentials form
 
-Complete the form using the following entries, by printing out your private SSH key to place into Tower.  When you paste the key in, in the `PRIVATE KEY` field, make sure to include the `-----BEGIN RSA PRIVATE KEY-----` and `-----BEGIN RSA PRIVATE KEY-----` lines.
+Complete the form, using the following entries and your private Ansible Tower SSH key.  When you paste the key in the `PRIVATE KEY` field, make sure to include the `-----BEGIN RSA PRIVATE KEY-----` and `-----BEGIN RSA PRIVATE KEY-----` lines.
 
 ----
 unsetopt prompt_cr prompt_sp
@@ -157,28 +150,28 @@ image::at_cred_detail.png[Cred_Detail, 900,caption="Figure 5: ",title="Adding a 
 
 
 
-=== Step 5:
+=== Step 5: Save
 
 Select SAVE     image:at_save.png[Save,35,25] +
 
 
 
-== Creating a Project
+== Section 3: Creating a Project
 
-A Project is a logical collection of Ansible playbooks, represented in Tower.
-You can manage playbooks and playbook directories by either placing them manually
-under the Project Base Path on your Tower server, or by placing your playbooks into
-a source code management (SCM) system supported by Tower, including Git, Subversion, and Mercurial.
+A Project is a logical collection of Ansible playbooks, represented in Ansible Tower.
+You can manage playbooks and playbook directories, by either placing them manually
+under the Project Base Path on your Ansible Tower server, or by placing your playbooks into
+a source code management (SCM) system supported by Ansible Tower, including Git, Subversion, and Mercurial.
 
-=== Step 1:
+=== Step 1: Open a new project
 
-Click on PROJECTS
+Select PROJECTS.
 
-=== Step 2:
+=== Step 2: Add the project
 
-Select ADD     image:at_add.png[Add,35,25]
+Select ADD.     image:at_add.png[Add,35,25]
 
-=== Step 3:
+=== Step 3: Complete the Project form
 
 Complete the form using the following entries:
 
@@ -188,7 +181,7 @@ Complete the form using the following entries:
 |ORGANIZATION|Default
 |SCM TYPE|Git
 |SCM URL| https://github.com/ansible/lightbulb
-|SCM BRANCH| 
+|SCM BRANCH|
 |SCM UPDATE OPTIONS
 a|
 
@@ -203,35 +196,34 @@ image::at_project_detail.png[Cred_Detail, 900,caption="Figure 6: ",title="Defini
 
 
 
-=== Step 4:
+=== Step 4: Save
 
 Select SAVE     image:at_save.png[Save,35,25]
 
 
 
 
-== Creating a Inventory
+== Section 4: Creating an Inventory
 
-An inventory is a collection of hosts against which jobs may be launched.
+An inventory is a collection of hosts, against which jobs may be launched.
 Inventories are divided into groups and these groups contain the actual hosts.
-Groups may be sourced manually, by entering host names into Tower, or from one
-of Ansible Tower’s supported cloud providers.
 
-An Inventory can also be imported into Tower using the `tower-manage` command
-and this is how we are going to add an inventory for this workshop.
+Groups may be sourced *manually*, by entering host names into Ansible Tower, or from one of Ansible Tower’s supported cloud providers.
+
+An Inventory can also be *imported* into Ansible Tower using the `tower-manage` command. This is how we are going to add an inventory for this workshop.
 
 
-=== Step 1:
+=== Step 1: Navigate to Inventories main link
 
-Click on INVENTORIES
+Select INVENTORIES.
 
-=== Step 2:
+=== Step 2: Add a new inventory
 
-Select ADD     image:at_add.png[Add,35,25]
+Select ADD.     image:at_add.png[Add,35,25]
 
-=== Step 3:
+=== Step 3: Complete the Inventory form
 
-Complete the form using the following entries
+Complete the form, using the following entries:
 
 |===
 |NAME |Ansible Workshop Inventory
@@ -245,11 +237,11 @@ image::at_inv_create.png[Cred_Detail,900,caption="Figure 7: ",title="Create an I
 
 
 
-=== Step 4:
+=== Step 4: Save
 
-Select SAVE     image:at_save.png[Save,35,25]
+Select SAVE.     image:at_save.png[Save,35,25]
 
-=== Step 5:
+=== Step 5: Log in to the control node
 
 Using ssh, login to your control node, if by any chance you closed the wetty browser window.  Remember to replace *workshopname* with your workshop name, and *#* with your student number.
 
@@ -262,9 +254,9 @@ Using ssh, login to your control node, if by any chance you closed the wetty bro
 
 
 
-=== Step 6:
+=== Step 6: Import an existing inventory
 
-Use the `tower-manage` command to import an existing inventory.  (_Be sure to replace <username> with your actual username_)
+Use the `tower-manage` command to import an existing inventory.  (_Be sure to replace <username> with your actual username._)
 ----
 sudo tower-manage inventory_import --source=/home/ec2-user/hosts --inventory-name="Ansible Workshop Inventory"
 ----
@@ -278,7 +270,7 @@ image::at_tm_stdout.png[Cred_Detail,900,caption="Figure 8: ",title="Importing an
 
 
 
-Feel free to browse your inventory in Tower.  You should now notice that the inventory has been populated with Groups and that
+Feel free to browse your inventory in Ansible Tower.  You should now notice that the inventory has been populated with Groups and that
 each of those groups contain hosts.
 
 
@@ -289,6 +281,6 @@ image::at_inv_group.png[Cred_Detail,900,caption="Figure 9: ",title="Inventory wi
 
 === End Result
 
-At this point, we are doing with our basic configuration of Ansible Tower.  In exercise 2.2, we will be soley focused on creating and running a job template so you can see Tower in action.
+At this point, we are working with our basic configuration of Ansible Tower.  In Exercise 2.2, we will be solely focused on creating and running a job template so you can see Ansible Tower in action.
 
 {{< importPartial "footer/footer.html" >}}
