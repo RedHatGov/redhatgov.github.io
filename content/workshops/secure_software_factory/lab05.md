@@ -80,7 +80,7 @@ strategy:
       value: stage-<user>
 ```
 
-Also, notice that We will be launching a Maven node/agent to execute our pipeline.
+Also, notice that we will be launching a Maven node/agent to execute our pipeline.
 
 You will also be declaring variables such as version and mvnCmd to be used later in the pipeline.
 
