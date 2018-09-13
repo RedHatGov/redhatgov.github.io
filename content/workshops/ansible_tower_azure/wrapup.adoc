@@ -16,16 +16,14 @@ layout: lab
 
 = Wrap Up and Q&A
 
-That wraps up what we have planned for today.  We hope you've learned something valuable +
-about Ansible and Ansible Tower that you can apply in your daily role.
+That wraps up what we have planned for today.  We hope you've learned something valuable
+about Ansible and Red Hat Ansible Tower that you can apply in your daily role.
 
 What do you think? How can we help you understand Ansible Tower better?
 
-Before you leave, check out the *Resources* page that is part of this guide.  There you can +
-find a ton of links that will further your Ansible education.
+Before you leave, check out the *Resources* page that is part of this guide.  There, you can find a ton of links that will further your Ansible education.
 
-This *Participant Guide* will remain active for the next two weeks.  Please take advantage +
-of it by creating your own Ansible and Ansible Tower environment back at your organization.
+This *Participant Guide* will remain active for the next two weeks.  Please take advantage of it by creating your own Ansible and Ansible Tower environment back at your organization.
 
 Thank you for your time and participation!
 
