@@ -48,7 +48,7 @@ First, in Ansible Tower, click on image:at_projects_icon.png[PROJECTS]
 
 === Step 3:
 
-Next, Select ADD     image:at_add.png[Add,35,25]
+Next, Select *+*     image:at_add.png[Add,35,25]
 
 === Step 4:
 
@@ -66,7 +66,7 @@ a|
 
 - [*] Clean
 - [*] Delete on Update
-- [*] Update on Launch
+- [*] Update Revision on Launch
 |===
 
 image::section3.0-create-project.png[Cred_Detail, 900,caption="Figure 1: ",title="Defining a Project"]
@@ -81,7 +81,7 @@ In your Tower window, click on `TEMPLATES`
 
 === Step 7:
 
-Click on ADD image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
+Click on *+* image:at_add.png[Add,35,25], and select `Job Template`
 
 === Step 8:
 

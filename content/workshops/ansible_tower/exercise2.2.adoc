@@ -22,11 +22,11 @@ Job templates are useful to execute the same job many times.
 
 === Step 1:
 
-Select TEMPLATES
+Select TEMPLATES image:at_templates.png[templates,150,50]
 
 === Step 2:
 
-Click on ADD image:at_add.png[Add,35,25], and select JOB TEMPLATE
+Click on *+* image:at_add.png[Add,35,25], and select *Job Template* from the drop down image:at_jobtemplate.png[jobtemplate,200]
 
 === Step 3:
 
@@ -112,14 +112,17 @@ Click on the rocketship icon image:at_launch_icon.png[Add,35,25] for the *Apache
 When prompted, enter your desired test message
 
 
-
-image::at_survey_prompt.png[caption="Figure 13: ",title="Survey Prompt"]
+image::at_survey_prompt.png[caption="Figure 13: ",title="Survey Prompt",300]
 
 
 
 === Step 4:
 
-Select LAUNCH image:at_survey_launch.png[SurveyL,35,25]
+Select *NEXT*
+
+Select *LAUNCH*
+
+image:at_survey_launch.png[SurveyL,500]
 
 === Step 5:
 
