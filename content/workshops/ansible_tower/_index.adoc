@@ -21,7 +21,8 @@ menu:
 
 Ansible Tower will enable you to create playbooks, while building in security. Automation features will save time, empower junior staff, offload senior staff and automate your most tedious tasks!
 
-## Who should attend
+
+== Who should attend
 
 -   Architects
 -   Developers
@@ -37,17 +38,20 @@ Ansible Tower will enable you to create playbooks, while building in security. A
 - How to use templates to save time
 - How to enhance security, using Ansible Tower
 
+
 == Overview
 
 The Ansible Tower Workshop is meant for anyone who has any exposure to Ansible, whether you have used it or not. We are going to start with a short overview and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.
 
-==== Your Responsibilities
+
+== Your Responsibilities
 
 Have a Discussion. This will be boring if it’s just us, up here talking for over 4 hours.
 
 Participate. We are going to cut you loose with Ansible, in just a little while. Have questions. Have opinions.
 
 Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy. See? Not only can we dig into Ansible but you can make a new friend!
+
 
 == Exercises
 
