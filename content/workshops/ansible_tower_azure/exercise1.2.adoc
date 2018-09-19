@@ -18,10 +18,10 @@ layout: lab
 == Section 1: Running the Playbook
 
 
-We are now going to run you're brand spankin' new playbook on your two web nodes.  To do this,
+We are now going to run your brand spankin' new playbook on your two web nodes.  To do this,
  you are going to use the `ansible-playbook` command.
 
-=== Step 1:
+=== Step 1: Run your playbook
 
 From your playbook directory ( `~/apache_basic` ), run your playbook.
 
@@ -48,13 +48,13 @@ ansible-playbook -i ../hosts install_apache.yml --syntax-check --private-key=~/.
 
 
 ---
-OK, go ahead and run your playbook as specified in *Step 1*
+Now, run your playbook as specified in *Step 1*
 
 In standard output, you should see something that looks very similar to the following:
 
 image::stdout_1.png[caption="Figure 1: ", title="apache_basic playbook stdout",328]
 
-Notice that the play and each task is named so that you can see what is being done and to which node it is being done to.
+Notice that the play and each task is named, so that you can understand the action being performed and the node it is being performed upon.
 You also may notice a task in there that you didn't write;  <cough> `setup` <cough>.  This is because the `setup` module
 runs by default.  To turn if off, you can specify link:{gather_facts_url}[gather_facts: false] in your play definition like this:
 
@@ -70,13 +70,11 @@ runs by default.  To turn if off, you can specify link:{gather_facts_url}[gather
 
 
 
-=== Step 2:
+=== Step 2: Remove Apache
 
-Remove Apache
-
-OK, for the next several minutes or as much time as we can afford, we want to to experiment a little.
-We would like you to reverse what you've done, i.e. stop and uninstall apache on your web nodes.
-So, go ahead and edit your playbook and then when your finished, rerun it as specified in *Step 1*.
+Now, let's experiment a little.
+We would like you to reverse what you've done (i.e. stop and uninstall apache on your web nodes).
+So, edit your playbook and then when you're finished, rerun it - as described in *Step 1*.
 For this exercise we aren't going to show you line by line, but we will give you a few hints.
 
 [NOTE]

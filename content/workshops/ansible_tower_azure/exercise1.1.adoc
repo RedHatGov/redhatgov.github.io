@@ -15,7 +15,7 @@ layout: lab
 :yaml_url: http://docs.ansible.com/ansible/YAMLSyntax.html
 
 
-= Exercise 1.1 - Writing Your First playbook
+= Exercise 1.1 - Writing Your First Playbook
 
 
 Now that you've gotten a sense of how ansible works, we are going to write our first
