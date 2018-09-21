@@ -31,7 +31,7 @@ ansible-playbook -i ../hosts install_apache.yml --private-key=~/.ssh/{{< span2 "
 ----
 
 
-However, before you go ahead and run that command, lets take a few moments to understand the options.
+However, before you run that command, lets take a few moments to understand the options.
 
 - *--private-key* This option ask for the private ssh key to connect to the remote machine.
 - *-i* This option allows you to specify the inventory file you wish to use.

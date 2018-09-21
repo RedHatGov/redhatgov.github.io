@@ -119,11 +119,12 @@ There are many link:{cred_url}[types of credentials] including machine, network,
 Select Ansible Tower Settings (gear icon).     image:at_gear.png[Gear,20,20]
 
 === Step 2: Select Credentials
-
-
+Select CREDENTIALS   image:at_credentials.png[Cred,100,35]
 
 === Step 3: Select Add
-    image:at_add.png[Add,35,25]
+
+Select ADD   image:at_add.png[Add,35,25]
+
 
 === Step 4: Complete the Ansible Tower Credentials form
 
@@ -152,7 +153,7 @@ image::at_cred_detail.png[Cred_Detail, 900,caption="Figure 5: ",title="Adding a 
 
 === Step 5: Save
 
-Select    image:at_save.png[Save,35,25] +
+Select SAVE  image:at_save.png[Save,35,25] +
 
 
 
@@ -165,11 +166,11 @@ a source code management (SCM) system supported by Ansible Tower, including Git,
 
 === Step 1: Open a new project
 
-Select image:at_projects.png[projects,150,50].
+Select PROJECTS image:at_projects.png[projects,150,50].
 
 === Step 2: Add the project
 
-Select    image:at_add.png[Add,35,25]
+Select ADD   image:at_add.png[Add,35,25]
 
 === Step 3: Complete the Project form
 
@@ -198,7 +199,7 @@ image::at_project_detail.png[Cred_Detail, 900,caption="Figure 6: ",title="Defini
 
 === Step 4: Save
 
-Select image:at_save.png[Save,35,25]
+Select SAVE image:at_save.png[Save,35,25]
 
 
 
@@ -215,11 +216,11 @@ An Inventory can also be *imported* into Ansible Tower using the `tower-manage` 
 
 === Step 1: Navigate to Inventories main link
 
-Select INVENTORIES.
+Select INVENTORIES    image:at_inv_icon.png[Inv, 100,35]
 
 === Step 2: Add a new inventory
 
-Select   image:at_add.png[Add,35,25]
+Select ADD  image:at_add.png[Add,35,25]
 
 === Step 3: Complete the Inventory form
 
@@ -239,7 +240,7 @@ image::at_inv_create.png[Cred_Detail,900,caption="Figure 7: ",title="Create an I
 
 === Step 4: Save
 
-Select   image:at_save.png[Save,35,25]
+Select SAVE  image:at_save.png[Save,35,25]
 
 === Step 5: Log in to the control node
 

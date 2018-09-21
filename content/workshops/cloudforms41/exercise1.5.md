@@ -22,16 +22,16 @@ Execution consists of pre-processing and post-processing. Pre-processing acquire
 
 ## Infrastructure Provisioning
 
-Step 1: > Select **Compute** → **Infrastructure** → **Virtual Machines**.
+### Step 1: > Select **Compute** → **Infrastructure** → **Virtual Machines**.
 
 <img title="CloudForms Infrastructure VMs" src="../images/cfme-nav-compute-infra-vms.png" width="1000"/><br/>
 *Infrastructure VMs*
 
-Step 2: On the left, in the **VMs** accordion, select **All VMs & Templates**.
+### Step 2: On the left, in the **VMs** accordion, select **All VMs & Templates**.
 
-Step 3: On the right, click <img title="CloudForms Infrastructure VMs" src="../images/cfme-lifecycle-icon.png" /> (**Lifecycle**).
+### Step 3: On the right, click <img title="CloudForms Infrastructure VMs" src="../images/cfme-lifecycle-icon.png" /> (**Lifecycle**).
 
-Step 4: Select <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> (**Provision VMs**), and observe the following.
+### Step 4: Select <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> (**Provision VMs**), and observe the following.
 
 <img title="CloudForms Infrastructure VMs" src="../images/cfme-nav-compute-infra-vms-all-lifecycle.png" width="1000"/><br/>
 *Provision VMs*
@@ -43,12 +43,12 @@ A list of templates displays.
 
 The **Provider** column shows some templates are from Red Hat Enterprise Virtualization Manager and others are from VMware.
 
-Step 5: Select any template and click **Continue**.
+### Step 5: Select any template and click **Continue**.
 
 <img title="CloudForms Infrastructure VMs" src="../images/cfme-provision-vm-2.png" width="1000"/><br/>
 *Template Continue*
 
-Step 6: On the resulting page, perform the steps indicated below for each tab and review the data requested.
+### Step 6: On the resulting page, perform the steps indicated below for each tab and review the data requested.
 
 <img title="CloudForms Infrastructure VMs" src="../images/cfme-provision-vm-3.png" width="1000"/><br/>
 *Provision Virtual Machines*
@@ -61,7 +61,7 @@ Step 6: On the resulting page, perform the steps indicated below for each tab an
 
 <p>{{% alert warning %}} Because you are working in a lab environment, nothing happens after these steps. {{% /alert %}}</p>
 
-Step 7: On the resulting screen, observe that your provision request appears in a list. If you are in an environment with real infrastructure, you can monitor this area for the status of the VM build.
+### Step 7: On the resulting screen, observe that your provision request appears in a list. If you are in an environment with real infrastructure, you can monitor this area for the status of the VM build.
 
 <img title="CloudForms Infrastructure VMs" src="../images/cfme-provision-vm-4.png" width="1000"/><br/>
 *Provision Request*

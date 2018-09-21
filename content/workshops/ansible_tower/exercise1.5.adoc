@@ -24,7 +24,7 @@ For this exercise, you are going to take the playbook you just wrote and refacto
 
 Let's begin with understanding how your apache-basic-playbook will break down into a role.
 
-image::rol"?"
+image::roledir_1.png[apache-basic-playbook role directory structure]
 
 Fortunately, you don't have to create all of these directories and files by hand.  That's where Ansible Galaxy comes in.
 

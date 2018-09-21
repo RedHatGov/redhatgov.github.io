@@ -107,7 +107,7 @@ Click on SUBMIT image:at_submit.png[Sub,35,25]
 
 
 
-== Creating a Credential
+== Section 2: Creating a Credential
 
 Credentials are utilized by Tower for authentication when launching jobs against machines,
 synchronizing with inventory sources, and importing project content from a version control system.
@@ -121,8 +121,10 @@ Select Ansible Tower Settings (gear icon).     image:at_gear.png[Gear,20,20]
 
 === Step 2: Select Credentials
 
+Select CREDENTIALS image:at_credentials.png[Cred,100,35]
+
 === Step 3: Select Add
-image:at_add.png[Add,35,25]
+Select ADD image:at_add.png[Add,35,25]
 
 === Step 4: Complete the Ansible Tower Credentials form
 
@@ -150,7 +152,7 @@ image::at_cred_detail.png[Cred_Detail, 900,caption="Figure 5: ",title="Adding a 
 
 === Step 5: Save
 
-Select     image:at_save.png[Save,35,25] +
+Select   SAVE  image:at_save.png[Save,35,25] +
 
 
 
@@ -163,11 +165,11 @@ a source code management (SCM) system supported by Tower, including Git, Subvers
 
 === Step 1: Open a new project
 
-Click on PROJECTS
+Click on PROJECTS image:at_projects_icon.png[Proj,100,35]
 
 === Step 2: Add the project
 
-Select     image:at_add.png[Add,35,25]
+Select  ADD   image:at_add.png[Add,35,25]
 
 === Step 3: Complete the Project form
 
@@ -196,7 +198,7 @@ image::at_project_detail.png[Cred_Detail, 900,caption="Figure 6: ",title="Defini
 
 === Step 4: Save
 
-Select     image:at_save.png[Save,35,25]
+Select  SAVE   image:at_save.png[Save,35,25]
 
 
 
@@ -213,11 +215,11 @@ An Inventory can also be *imported* into Ansible Tower using the `tower-manage` 
 
 === Step 1: Navigate to Inventories main link
 
-Click on INVENTORIES
+Click on INVENTORIES image:at_inv_icon.png[Inv,100,35]
 
 === Step 2: Add a new inventory
 
-Select     image:at_add.png[Add,35,25]
+Select  ADD   image:at_add.png[Add,35,25]
 
 === Step 3: Complete the Inventory form
 
@@ -237,7 +239,7 @@ image::at_inv_create.png[Cred_Detail,900,caption="Figure 7: ",title="Create an I
 
 === Step 4: Save
 
-Select     image:at_save.png[Save,35,25]
+Select  SAVE   image:at_save.png[Save,35,25]
 
 === Step 5: Log in to the control node
 

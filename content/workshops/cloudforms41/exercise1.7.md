@@ -13,7 +13,7 @@ In Red Hat CloudForms, a cloud instance is a virtual machine running under cloud
 
 ## Section 1: Explore Cloud Instances
 
-> Select **Compute** → **Clouds** → **Instances**.
+### > Select **Compute** → **Clouds** → **Instances**.
 
 <img title="CloudForms Infrastructure VMs" src="../images/cfme-nav-compute-cloud-instances.png" width="1000"/><br/>
 *Cloud Instances*
@@ -34,12 +34,12 @@ The web interface uses virtual thumbnails to represent providers. Each thumbnail
 *   The bottom right quadrant shows the number of snapshots for this instance.
 *   A <i class="fa fa-shield fa-lg" aria-hidden="true"></i> (**Policy**) in the center indicates that this host has one or more policies applied.
 
-Step 1. > In the top right corner of the window, click <i class="fa fa-th fa-lg" aria-hidden="true"></i> <i class="fa fa-th-large fa-lg" aria-hidden="true"></i> <i class="fa fa-list fa-lg" aria-hidden="true"></i> to toggle between **Grid**, **Tile**, and **List** views.
+### Step 1. > In the top right corner of the window, click <i class="fa fa-th fa-lg" aria-hidden="true"></i> <i class="fa fa-th-large fa-lg" aria-hidden="true"></i> <i class="fa fa-list fa-lg" aria-hidden="true"></i> to toggle between **Grid**, **Tile**, and **List** views.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-grid-title-list-infra-instances.png" width="1000"/><br/>
 *Top Window Navigation*
 
-Step 2. > Click <i class="fa fa-download fa-lg" aria-hidden="true"></i> (**Download**) to download a list of Cloud Instances.
+### Step 2. > Click <i class="fa fa-download fa-lg" aria-hidden="true"></i> (**Download**) to download a list of Cloud Instances.
 
 <img title="CloudForms Download VM Providers" src="../images/cfme-nav-download-infra-instances.png" width="1000"/><br/>
 *Download Instances*
@@ -47,12 +47,12 @@ Step 2. > Click <i class="fa fa-download fa-lg" aria-hidden="true"></i> (**Downl
 
 ### Section 3. Explore Cloud Instance Details
 
-Step 1. Click the **Instances by Provider** accordion.
+### Step 1. Click the **Instances by Provider** accordion.
 
 <img title="CloudForms Dashboard CF41_OpenStack1 VM" src="../images/cfme-dashboard-infra-instances-provider.png" width="1000"/><br/>
 *Provider Accordion*
 
-Step 2. Select any instance and observe the following on the resulting screen.
+### Step 2. Select any instance and observe the following on the resulting screen.
 
 <img title="CloudForms Dashboard CF41_OpenStack1 VM" src="../images/cfme-dashboard-infra-instances.png" width="1000"/><br/>
 *Instance Provider*
@@ -61,7 +61,7 @@ Step 2. Select any instance and observe the following on the resulting screen.
 * The **Lifecycle** section displays when this instance was discovered, when it was most recently analyzed, and when it is scheduled for retirement.
 * The **Relationships** section displays the related cloud provider, availability zone, flavor, and drift and analysis histories for this instance.
 
- Step 3. Click these relationships to review how this instance relates to all of its resources.
+ ### Step 3. Click these relationships to review how this instance relates to all of its resources.
 * The **Compliance** section shows whether the instance is compliant with its applied policies.
 * The **Power Management** section shows the instance’s current power state, most recent boot time, and most recent date that the power state changed.
 * The **Security** section lists users, groups, and key pairs.

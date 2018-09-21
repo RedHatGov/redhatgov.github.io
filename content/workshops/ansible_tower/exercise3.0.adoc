@@ -73,7 +73,7 @@ image::section3.0-create-project.png[Cred_Detail, 900,caption="Figure 1: ",title
 
 === Step 5: Save
 
-Select      image:at_save.png[Save,35,25]
+Select   SAVE   image:at_save.png[Save,35,25]
 
 === Step 6: Select Template tab
 
@@ -81,7 +81,7 @@ In your Tower window, click `TEMPLATES`
 
 === Step 7: Add the job template
 
-Click image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
+Click ADD image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
 
 === Step 8: Complete the job Template form
 
@@ -105,7 +105,7 @@ image::section3.0-create-job-template.png[Cred_Detail, 900,caption="Figure 2: ",
 
 === Step 9: Save the template and run it
 
-Click image:at_save.png[Save], to store your new template, and we are ready to run it.
+Click SAVE image:at_save.png[Save], to store your new template, and we are ready to run it.
 
 Click  the rocketship icon image:at_launch_icon.png[Add,35,25] next to the `NIST 800-53 and DISA STIG Job Template` entry, to launch the job.
 

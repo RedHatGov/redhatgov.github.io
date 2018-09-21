@@ -63,7 +63,7 @@ vim site.yml
 ----
 
 
-=== Step 2: dd a play definition and variables
+=== Step 2: Add a play definition and variables
 
 Add a play definition and some variables to your playbook.  These include additional packages that your playbook will install on your web servers, plus some web server-specific configurations.
 

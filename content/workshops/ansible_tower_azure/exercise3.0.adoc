@@ -49,7 +49,7 @@ First, in Ansible Tower, click on image:at_projects_icon.png[PROJECTS]
 
 === Step 3: Click uploaded
 
-Next, Select     image:at_add.png[Add,35,25]
+Next, Select ADD    image:at_add.png[Add,35,25]
 
 === Step 4: Complete the Project form
 
@@ -74,15 +74,15 @@ image::section3.0-create-project.png[Cred_Detail, 900,caption="Figure 1: ",title
 
 === Step 5: Save
 
-Select     image:at_save.png[Save,35,25]
+Select  SAVE   image:at_save.png[Save,35,25]
 
 === Step 6: Select Template tab
 
-In your Tower window, click on `TEMPLATES`
+In your Tower window, click TEMPLATES `TEMPLATES`
 
 === Step 7: Add the job template
 
-Click on image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
+Click ADD image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
 
 === Step 8: Complete the job Template form
 

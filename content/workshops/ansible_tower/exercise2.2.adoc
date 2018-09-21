@@ -27,11 +27,11 @@ Templates also drive uniformity, by running templates exactly the same way every
 
 === Step 1: Navigate to the Templates tab
 
-Select TEMPLATES.
+Select TEMPLATES image:at_templates.png[temp,120,35]
 
 === Step 2: Create a new template
 
-Click image:at_add.png[Add,35,25] and select JOB TEMPLATE.
+Click image:at_add.png[Add,35,25] and select JOB TEMPLATE image:at_jobtemplate.png[jobT,150,100]
 
 === Step 3: Complete the job Template form
 
@@ -59,7 +59,7 @@ image::at_jt_detail.png[caption="Figure 11: ",900,title="Job Template Form"]
 
 === Step 4: Save
 
-Click image:at_save.png[Save] and then select image:at_addsurvey.png[Add Survey]
+Click SAVE image:at_save.png[Save] and then select ADD SURVEY image:at_addsurvey.png[Add Survey]
 
 === Step 5: Complete survey
 
@@ -84,15 +84,15 @@ image::at_survey_detail.png[caption="Figure 12: ",500,title="Survey Form"]
 
 === Step 6: Add the survey input
 
-Select  image:at_add.png[Add,35,25]
+Select ADD image:at_add.png[Add,35,25]
 
 === Step 7: Save
 
-Select image:at_save.png[Save,35,25]
+Select SAVE image:at_save.png[Save,35,25]
 
 === Step 8: Save at the main page
 
-Back on the main Job Template page, select image:at_save.png[Save,35,25] again.
+Back on the main Job Template page, select SAVE image:at_save.png[Save,35,25] again.
 
 
 

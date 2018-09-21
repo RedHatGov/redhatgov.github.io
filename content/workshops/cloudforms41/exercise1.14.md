@@ -16,99 +16,99 @@ In this exercise, you will learn how to work with policies, events, conditions, 
 
 ## Section 1: Examine Policies
 
-Step 1. Select **Control** → **Explorer**.
+### Step 1. Select **Control** → **Explorer**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-control-explorer.png" width="1000"/><br/>
 *Control Explorer*
 
-Step 2. Select the **Policy Profiles** accordion.
+### Step 2. Select the **Policy Profiles** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-policy-profile-accordion.png" /><br/>
 *Policy Profile Accordion*
 
-Step 3. Select **All Policy Profiles** → **Linux Compliance Check** → **VM and Instance Compliance: Shell-Shock Vulnerability** → **Vulnerable bash Package (ShellShock)**.
+### Step 3. Select **All Policy Profiles** → **Linux Compliance Check** → **VM and Instance Compliance: Shell-Shock Vulnerability** → **Vulnerable bash Package (ShellShock)**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-shell-shock.png" width="1000"/><br/>
 *Shell-Shock Vulnerability*
 
-Step 4. On the right, observe the Expression used for this policy.
+### Step 4. On the right, observe the Expression used for this policy.
 
 
 ## Section 2: Explore Events
 
-Step 1. Select the **Events** accordion.
+### Step 1. Select the **Events** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-events-accordion.png" /><br/>
 *Events Accordion*
 
-Step 2. Select **All Events** → **Container Image Discovered**.
+### Step 2. Select **All Events** → **Container Image Discovered**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-container-image-discovered.png" width="1000"/><br/>
 *Container Image Discovered*
 
-Step 3. Observe that the imported policy shows up as assigned.
+### Step 3. Observe that the imported policy shows up as assigned.
 
 
 ## Section 3. Explore Conditions
 
-Step 1. Select the **Conditions** accordion.
+### Step 1. Select the **Conditions** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-conditions-accordion.png" /><br/>
 *Conditions Accordion*
 
-Step 2. Select **All Conditions** → **All VM and Instance Conditions** → **Vulnerable bash Package (ShellShock)**
+### Step 2. Select **All Conditions** → **All VM and Instance Conditions** → **Vulnerable bash Package (ShellShock)**
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-conditions-shellshock.png" width="1000"/><br/>
 *Conditions ShellShock*
 
-Step 3. Examine the **Expression**.
+### Step 3. Examine the **Expression**.
 
 
 ## Section 4: Explore Actions
 
-Step 1. Select the **Actions** accordion.
+### Step 1. Select the **Actions** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-actions-accordion.png" /><br/>
 *Actions Accordion*
 
-Step 2. Select **All Actions** → **Send Email to Security Team**.
+### Step 2. Select **All Actions** → **Send Email to Security Team**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-actions-send-email.png" width="1000"/><br/>
 *Send Email*
 
-Step 3. Observe what this action does and the policies to which it is assigned.
+### Step 3. Observe what this action does and the policies to which it is assigned.
 
-Step 4. Examine other actions and results.
+### Step 4. Examine other actions and results.
 
 
 ## Section 5. Explore Alerts
 
-Step 1. Select the **Alerts** accordion.
+### Step 1. Select the **Alerts** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alerts-accordion.png" /><br/>
 *Alerts Accordion*
 
-Step 2. Select **All Alerts** → **VM Memory was decreased**.
+### Step 2. Select **All Alerts** → **VM Memory was decreased**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alerts-vm-decrease.png" width="1000"/><br/>
 *VM Memory Alerts*
 
-Step 3. Review the **Hardware Reconfigured Parameters** section to see what this alert monitors.
+### Step 3. Review the **Hardware Reconfigured Parameters** section to see what this alert monitors.
 
 
 ## Section 6. Explore Alert Profiles
 
-Step 1. Select the **Alert Profiles** accordion.
+### Step 1. Select the **Alert Profiles** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alert-profile.png" /><br/>
 *Alerts Profile Accordion*
 
-Step 2. Select **All Alert Profiles** → **VM and Instance Alert Profiles**.
+### Step 2. Select **All Alert Profiles** → **VM and Instance Alert Profiles**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alert-profile-vm-instance.png" width="1000"/><br/>
 *All VM and Instance Alert Profiles*
 
-Step 3. Add an alert profile:
+### Step 3. Add an alert profile:
 
 1.  Click <i class="fa fa-cog fa-lg" aria-hidden="true"></i> (**Configuration**) → **Add a New VM and Instance Alert Profile**.
 2.  Enter **VM Memory Decrease** for **Description**.
@@ -122,7 +122,7 @@ Step 3. Add an alert profile:
 
 <p>{{% alert info %}} An alert profile can contain many alerts or just one. {{% /alert %}}</p>
 
-Step 4. Assign your alert profile:
+### Step 4. Assign your alert profile:
 
 1.  Select the new alert profile you just created.
 2.  Click <i class="fa fa-cog fa-lg" aria-hidden="true"></i> (**Configuration**) → **Edit assignments for this Alert Profile**.

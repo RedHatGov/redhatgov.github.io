@@ -17,26 +17,26 @@ In other words, a infrastructure provider is a management platform for managing 
 
 ## Section 1: Explore Infrastructure Providers
 
-Step 1: Select **Compute** → **Infrastructure** → **Providers**.
+### Step 1: Select **Compute** → **Infrastructure** → **Providers**.
 
 <img title="Infrastructure Providers" src="../images/cfme-nav-compute-infra-providers.png" width="1000"/><br/>
 *Infrastructure Providers*
 
-Step 2: view the list of your data center infrastructure providers, such as VMware vCenter and Red Hat Enterprise Virtualization.
+### Step 2: view the list of your data center infrastructure providers, such as VMware vCenter and Red Hat Enterprise Virtualization.
 
 
 ## Section 2: Discover Infrastructure Providers
 
 In very large environments, you can discover new infrastructure providers.
 
-Step 1: Click <i class="fa fa-cog" aria-hidden="true"></i> (**Configuration**), then click <i class="fa fa-search" aria-hidden="true"></i> (**Discover**).
+### Step 1: Click <i class="fa fa-cog" aria-hidden="true"></i> (**Configuration**), then click <i class="fa fa-search" aria-hidden="true"></i> (**Discover**).
 
 <br><img title="Discover Infrastructure Providers" src="../images/cfme-nav-discover-infra-providers.png" width="1000"/><br/>
 *Discover Infrastructure Providers*
 
 <p>{{% alert warning %}} Review the data entry screen, but do not enter any information. {{% /alert %}}</p>
 
-Step 2: Click **Cancel** to return to the previous screen.
+### Step 2: Click **Cancel** to return to the previous screen.
 
 <br><img title="Cancel Discover Infrastructure Providers" src="../images/cfme-nav-discover-infra-providers-cancel.png" width="1000"/><br/>
 *Cancel Discover Infrastructure Providers*
@@ -46,12 +46,12 @@ Step 2: Click **Cancel** to return to the previous screen.
 
 You can also add infrastructure providers, if known.
 
-Step 1: Click <i class="fa fa-cog" aria-hidden="true"></i> (**Configuration**), then click <i class="fa fa-plus-circle" aria-hidden="true"></i> (**Add**).
+### Step 1: Click <i class="fa fa-cog" aria-hidden="true"></i> (**Configuration**), then click <i class="fa fa-plus-circle" aria-hidden="true"></i> (**Add**).
 
 <img title="Add Infrastructure Providers" src="../images/cfme-nav-add-infra-providers.png" width="1000"/><br/>
 *Add Infrastructure Providers*
 
-Step 2: Review the data entry screen, but do not enter any information.
+### Step 2: Review the data entry screen, but do not enter any information.
 
 Step 3: Click **Cancel** to return to the previous screen.
 

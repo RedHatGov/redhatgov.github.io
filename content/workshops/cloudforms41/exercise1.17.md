@@ -7,7 +7,7 @@ layout: lab
 
 # Exercise 1.17 - Introduction to the Automate Datastore
 ## Exercise Description
-In this exercise, you will learn about scripting actions, used to control automation datastore functions. 
+In this exercise, you will learn about scripting actions, used to control automation datastore functions.
 
 When we use the Automate capability of CloudForms, we write scripts in the Ruby language and use objects that the CloudForms Automation Engine makes available to us. The Automate model is arranged to provide an object oriented hierarchy to control automation functions. The model uses the following organizational units arranged in a hierarchy:
 
@@ -58,14 +58,14 @@ A *domain* is a collection of namespaces, classes, instances, and methods. The M
 
 User-added domains can be individually enabled or disabled and can be ordered by priority such that if code exists in the same path in multiple domain; for example, */Cloud/VM/Provisioning/StateMachines*.  The code in the highest-priority enabled domain will be executed.  
 
-Step 1. We can change the priority order of our user-added domains using the:
+### Step 1. We can change the priority order of our user-added domains using the:
 
 > **Configuration** → **Edit Priority Order of Domains** menu
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-datastore-conf-priority.png" width="1000"/><br/>
 *Edit priority*
 
-Step 2. Try using the up and down arrows to switch the priority of a domain, then save.
+### Step 2. Try using the up and down arrows to switch the priority of a domain, then save.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-datastore-conf-priority-save.png" width="1000"/><br/>
 *Save priority*

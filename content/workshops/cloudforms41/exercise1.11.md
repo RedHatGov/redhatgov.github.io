@@ -24,60 +24,60 @@ Select **Cloud Intel** → **Chargeback**.
 
 ## Section 2: Explore Reports
 
-Step 1. Select the **Reports** accordion.
+### Step 1. Select the **Reports** accordion.
 
 <img title="CloudForms Chargeback Reports" src="../images/cfme-nav-chargeback-reports.png" /><br/>
 *Chargeback Reports*
 
-Step 2. Select **Saved Chargeback Reports** → **Chargeback (Admin)**
+### Step 2. Select **Saved Chargeback Reports** → **Chargeback (Admin)**
 
 <img title="CloudForms Chargeback Reports Admin" src="../images/cfme-nav-chargeback-reports-admin.png" width="1000"/><br/>
 *Chargeback (Admin)*
 
-Step 3. Select any of the reports displayed and note how each instance is charged by resources consumed.
+### Step 3. Select any of the reports displayed and note how each instance is charged by resources consumed.
 
 
 ## Section 3: Explore Rates
 
-Step 1. Select the **Rates** accordion.
+### Step 1. Select the **Rates** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-chargeback-rates.png" /><br/>
 *Chargeback Rates*
 
-Step 2. Select **Rates** → **Compute** → **Default**.
+### Step 2. Select **Rates** → **Compute** → **Default**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-chargeback-rates-compute-default.png" width="1000"/><br/>
 *Chargeback Compute Default*
 
-Step 3. Observe how rates are assigned to each resource.
+### Step 3. Observe how rates are assigned to each resource.
 
-Step 4. Click <i class="fa fa-cog fa-lg" aria-hidden="true"></i> (**Configuration**) and select <i class="fa fa-files-o" aria-hidden="true"></i> (**Copy this Chargeback Rate**).
+### Step 4. Click <i class="fa fa-cog fa-lg" aria-hidden="true"></i> (**Configuration**) and select <i class="fa fa-files-o" aria-hidden="true"></i> (**Copy this Chargeback Rate**).
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-chargeback-rates-compute-default-copy.png" width="1000"/><br/>
 *Chargeback Compute Copy*
 
-Step 5. Edit this chargeback rate, note the possible settings, and then click **Cancel** to discard your changes.
+### Step 5. Edit this chargeback rate, note the possible settings, and then click **Cancel** to discard your changes.
 
-Step 6. Repeat steps for **Rates** → **Storage** → **Default**.
+### Step 6. Repeat steps for **Rates** → **Storage** → **Default**.
 
 
 ## Section 4: Explore Assignments
 
-Step 1. Select the **Assignments** accordion.
+### Step 1. Select the **Assignments** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-chargeback-assignments.png" /><br/>
 *Chargeback Assignments*
 
-Step 2. Select **Assignments** → **Compute**.
+### Step 2. Select **Assignments** → **Compute**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-chargeback-assignments-compute.png" width="1000"/><br/>
 *Chargeback Assignments Compute*
 
-Step 3. Observe that the computed rate assignments are configured for the entire enterprise using the default rates from the previous accordion.
+### Step 3. Observe that the computed rate assignments are configured for the entire enterprise using the default rates from the previous accordion.
 
-Step 4. Select **Assignments** → **Storage**.
+### Step 4. Select **Assignments** → **Storage**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-chargeback-assignments-storage.png" width="1000"/><br/>
 *Chargeback Assignments Storage*
 
-Step 5. Observe that the computed rate assignments are configured for the entire enterprise, using the default rates from the previous accordion.
+### Step 5. Observe that the computed rate assignments are configured for the entire enterprise, using the default rates from the previous accordion.
