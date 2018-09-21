@@ -1,7 +1,7 @@
 ---
 title: Fin
 workshops: secure_software_factory
-workshop_weight: 30
+workshop_weight: 99
 layout: lab
 ---
 
