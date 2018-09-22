@@ -53,12 +53,21 @@ $ openstack server list
 
 You should see the instances you created in the previous labs.
 
-{{< figure src="../images/lab8-heat-1.png" title="Lab 8 Figure 1: Logging into CLI system and Verifying Connectivity to OpenStack" >}}
+```
+[student1@workshop-bastion ~]$ openstack server list
++--------------------------------------+-----------------------+--------+-------------------------------------+--------------------+
+| ID                                   | Name                  | Status | Networks                            | Image Name         |
++--------------------------------------+-----------------------+--------+-------------------------------------+--------------------+
+| 73fadc50-2d9d-42ad-b304-f02a139eaf1f | student1-cirros-cli-1 | ACTIVE | private-b=172.16.1.5                | student1-cirros035 |
+| 33d9ddda-d2d6-4021-9cf6-381d46dd8d2d | student1-cirros-2     | ACTIVE | private-a=172.16.0.11               | student1-cirros    |
+| dc943883-f473-49ec-8e3f-7b057bf7474c | student1-cirros-1     | ACTIVE | private-a=172.16.0.12, 192.168.1.73 | student1-cirros    |
++--------------------------------------+-----------------------+--------+-------------------------------------+--------------------+
+```
 
 ## Now Let's Examine the Heat Template
 
 ```
-[student1@rhosp-101 ~]$ cat heat-example.yaml 
+[student1@workshop-bastion ~]$ cat heat-example.yaml 
 heat_template_version: 2014-10-16  
 description: A simple server.  
 parameters:
@@ -70,7 +79,7 @@ parameters:
     default: public
   image:
     type: string
-    default: rhel74
+    default: rhel75
   flavor:
     type: string
     default: m1.small
@@ -114,26 +123,24 @@ resources:
     properties:
       image: {get_param: image}
       size: 10
-
-
 ```
 
 > Let's Launch a Heat Stack with this Template
 
 ```
-$ openstack stack create --parameter keypair=studentX --parameter image=rhel74 -t heat-example.yaml studentX-stack
+$ openstack stack create --parameter keypair=studentX --parameter image=rhel75 -t heat-example.yaml studentX-stack
 ```
 
 Here is an example run.
 ```
-[student1@rhosp-101 ~]$ openstack stack create --parameter keypair=student1 --parameter image=rhel74 -t heat-example.yaml student1-stack
+[student1@workshop-bastion ~]$ openstack stack create --parameter keypair=student1 --parameter image=rhel75 -t heat-example.yaml student1-stack
 +---------------------+--------------------------------------+
 | Field               | Value                                |
 +---------------------+--------------------------------------+
-| id                  | 44dda3db-b91e-4d02-a56c-4cf1f34a790a |
+| id                  | 8ec5f05d-2b0f-4f5d-8532-e4ce43b6ad8d |
 | stack_name          | student1-stack                       |
 | description         | A simple server.                     |
-| creation_time       | 2017-06-20T12:48:13Z                 |
+| creation_time       | 2018-09-22T19:18:54Z                 |
 | updated_time        | None                                 |
 | stack_status        | CREATE_IN_PROGRESS                   |
 | stack_status_reason | Stack CREATE started                 |
@@ -147,12 +154,12 @@ $ watch openstack stack list
 ```
 
 ```
-Every 2.0s: openstack stack list                                                                                 Tue Jun 20 08:51:51 2017
+Every 2.0s: openstack stack list                                                                                                   Sat Sep 22 15:19:49 2018
 
 +--------------------------------------+----------------+-----------------+----------------------+--------------+
 | ID                                   | Stack Name     | Stack Status    | Creation Time        | Updated Time |
 +--------------------------------------+----------------+-----------------+----------------------+--------------+
-| 44dda3db-b91e-4d02-a56c-4cf1f34a790a | student1-stack | CREATE_COMPLETE | 2017-06-20T12:48:13Z | None         |
+| 8ec5f05d-2b0f-4f5d-8532-e4ce43b6ad8d | student1-stack | CREATE_COMPLETE | 2018-09-22T19:18:54Z | None         |
 +--------------------------------------+----------------+-----------------+----------------------+--------------+
 ```
 
