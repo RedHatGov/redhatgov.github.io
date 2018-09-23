@@ -22,7 +22,7 @@ Instances are virtual machines that run inside the OpenStack cloud. You can laun
 {{< figure src="../images/lab6-instances-1.png" title="Lab 6 Figure 1: Project Instance Listing" >}}
 
 > Click **Launch Instance** on the right hand side of the screen  
-> Enter **studentX-instance** for **Name**  
+> Enter **studentX-cirros** for **Name**  
 > Leave **Availability** set to **nova**  
 > Enter **2** for **Count**  
 > Click **Next**
@@ -31,17 +31,17 @@ Instances are virtual machines that run inside the OpenStack cloud. You can laun
 
 > Leave **Select Boot Source** set to **Image**  
 > Click **No** for **Create New Volume**    
-> Click the **Up** arrow to the right of **studentX-cirros** to move that image up to the **Allocated** section    
+> Click the **+** symbol to the right of **studentX-cirros** to move that image up to the **Allocated** section    
 > Click **Next**
 
 {{< figure src="../images/lab6-instances-3.png" title="Lab 6 Figure 3: Source for New Instance" >}}
 
-> Click the **Up** arrow to the right of **m1.tiny** to move that flavor up to the **Allocated** section    
+> Click the **+** symbol to the right of **m1.tiny** to move that flavor up to the **Allocated** section    
 > Click **Next**
 
 {{< figure src="../images/lab6-instances-4.png" title="Lab 6 Figure 4: Flavor for New Instance" >}}
 
-> Click the **Up** arrow to the right of **private-a** to move that network up to the **Allocated** section    
+> Click the **+** symbol to the right of **private-a** to move that network up to the **Allocated** section    
 > Click **Next** until you get to Security Groups
 
 {{< figure src="../images/lab6-instances-5.png" title="Lab 6 Figure 5: Networks for New Instance" >}}
@@ -91,7 +91,7 @@ If for some reason they do not, let the instructor know
 
 # Now Let's Associate a Floating IP Address with one of our instances
 
-> Look all the way to the right in the row for your **studentX-instance-1** instance, Click the down arrow  
+> Look all the way to the right in the row for your **studentX-cirros-1** instance, Click the down arrow  
 > Click **Associate Floating IP**  
 > Select any one of your available floating IP addresses for **IP Address**  
 > Leave **Port to be Associated** as is
@@ -100,7 +100,7 @@ If for some reason they do not, let the instructor know
 {{< figure src="../images/lab6-instances-fip-1.png" title="Lab 6 Figure 11: Selecting Floating IP to Associate with Our Instance" >}}
 
 {{% alert success %}}
-You should see a green box appear in the upper right corner of the screen that says something similar to "Success: IP address 192.168.1.76 associated."
+You should see a green box appear in the upper right corner of the screen that says something similar to "Success: IP address 192.168.1.73 associated."
 
 If you did not, let the intstructor know now
 {{% /alert %}}
