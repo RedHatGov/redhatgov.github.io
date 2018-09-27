@@ -11,12 +11,12 @@ In this exercise, you will learn about scripting actions, used to control automa
 
 When we use the Automate capability of CloudForms, we write scripts in the Ruby language and use objects that the CloudForms Automation Engine makes available to us. The Automate model is arranged to provide an object oriented hierarchy to control automation functions. The model uses the following organizational units arranged in a hierarchy:
 
-* Datastore - The main organization unit that stores the entire model.
-* Domains - Domains act as collection of automation functions. Functions are executed depending on the order of Domain priority, which means a function in a Domain with a higher priority overrides the same functions specified in a lower-priority Domain. This allows CloudForms Management Engine to specify a core Domain (ManageIQ) but allow users to override automate functions with custom Domains. Each Domain contains a set of Namespaces.
-* Namespaces - Containers that organize and categorize functions of the model. Namespaces can contain child Namespaces as well as Classes.
-* Classes - Templates for a specific function of the model. Each Class uses a Schema to apply to Instances to populate with default values. Each class also can contain a set of methods.
-* Instances - An instance is a version of a class populated with initial configuration data. An instance can include a collection of any number of attributes, calls to methods, and relationships.
-* Methods - Methods are functions within the model. Methods use Ruby code to execute various operations needed for a Class.
+*  **Datastore** - The main organization unit that stores the entire model.
+* **Domains** - Domains act as collection of automation functions. Functions are executed depending on the order of Domain priority, which means a function in a Domain with a higher priority overrides the same functions specified in a lower-priority Domain. This allows CloudForms Management Engine to specify a core Domain (ManageIQ) but allow users to override automate functions with custom Domains. Each Domain contains a set of Namespaces.
+*  **Namespaces** - Containers that organize and categorize functions of the model. Namespaces can contain child Namespaces as well as Classes.
+*  **Classes** - Templates for a specific function of the model. Each Class uses a Schema to apply to Instances to populate with default values. Each class also can contain a set of methods.
+*  **Instances** - An instance is a version of a class populated with initial configuration data. An instance can include a collection of any number of attributes, calls to methods, and relationships.
+*  **Methods** - Methods are functions within the model. Methods use Ruby code to execute various operations needed for a Class.
 
 
 
@@ -56,7 +56,7 @@ A *domain* is a collection of namespaces, classes, instances, and methods. The M
 
 {{% panel "Domain Priority" %}}
 
-User-added domains can be individually enabled or disabled and can be ordered by priority such that if code exists in the same path in multiple domain; for example, */Cloud/VM/Provisioning/StateMachines*.  The code in the highest-priority enabled domain will be executed.  
+User-added domains can be individually enabled or disabled and can be ordered by priority such that if code exists in the same path in multiple domain; for example, */Cloud/VM/Provisioning/StateMachines*.  The code in the highest-priority enabled domain will be executed.
 
 ### Step 1. We can change the priority order of our user-added domains using the:
 
@@ -92,7 +92,7 @@ Step 1.  **Configuration** → **Copy this Class**
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-copy-object.png" width="1000"/><br/>
 *Copying a class*
 
-Step 2. When we copy an object, such as a class, we are prompted for the From and To domains.  
+Step 2. When we copy an object, such as a class, we are prompted for the From and To domains.
 
 Step 3. We can optionally deselect “Copy to same path” d specify our own destination path for the object.
 
@@ -132,7 +132,7 @@ A *namespace* is a folder-like container for classes, instances, and methods, an
 
 A *class* is similar to a template: it contains a generic definition for a set of automation operations.  Each class has a *schema* that defines the variables, states, relationships, or methods that instances of the class will use.
 
-<p>{{% alert info %}} The Automate Datastore uses object-oriented terminology for these objects.  A *class* is a generic definition for a set of automation operations, and these classes are *instantiated* as specific instances.  
+<p>{{% alert info %}} The Automate Datastore uses object-oriented terminology for these objects.  A *class* is a generic definition for a set of automation operations, and these classes are *instantiated* as specific instances.
 
 The classes that we work with in the Automate Datastore are not the same as Ruby classes that we work with in our automation scripts.  {{% /alert %}}</p>
 
