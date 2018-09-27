@@ -97,7 +97,7 @@ Add a new task called *install httpd packages*.
 
 [NOTE]
 ====
-*_What the Helsinki is happening here!?_* +
+Explanation of the *install httpd packages* task actions. +
 
 - `vars:` You've told Ansible the next thing it sees will be a variable name +
 - `httpd_packages` You are defining a list-type variable called httpd_packages.  What follows
@@ -157,7 +157,7 @@ Add some file tasks and a service task to your playbook.
 
 [NOTE]
 ====
-_*So... what did I just write?*_
+What actions are performed by the playbook we just wrote?
 
 - `file:` This module is used to create, modify, delete files, directories, and symlinks.
 - `template:` This module specifies that a jinja2 template is being used and deployed. `template` is part of the `Files`
@@ -195,13 +195,15 @@ There are really two parts to this Section; adding a handler to the playbook and
 
 ====
 === Step 2: Calling the handlers
-[NOTE]
 
-*You can't have a former if you don't mention the latter*
-- `notify: restart apache service` ...and here is your latter. Finally!  The `nofify` statement is the invocation of a handler by
+[NOTE]
+====
+You can't have a former if you don't mention the latter.
+
+- `notify: restart apache service` ...and here is your latter. Finally!  The `notify` statement is the invocation of a handler by
 name.  Quite the reveal, we know.   You already noticed that you've added a `notify` statement to the `copy httpd.conf`
 task, now you know why.
-===
+====
 
 == Section 4: Review
 

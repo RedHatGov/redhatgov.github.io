@@ -135,9 +135,7 @@ httpd_packages:
 
 [NOTE]
 ====
-_*Hey, wait just a minute there buster... did you just have us put variables in two seperate places?*_ +
-
-Yes... yes we did.  Variables can live in quite a few places.  Just to name a few: +
+Hey, wait just a minute...did you just have us put variables in two separate places?  Yes...yes we did.  Variables can live in quite a few places.  Just to name a few: +
 
 - vars directory
 - defaults directory

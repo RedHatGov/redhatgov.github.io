@@ -19,8 +19,8 @@ layout: lab
 
 In this exercise, we are going to configure Red Hat Ansible Tower, so that we can run a playbook.
 
-There are a number of contructs in the Ansible Tower UI that enable multi-tenancy, notifications, scheduling, etc.
-However, we are only going to focus on the key contructs that are required for this workshop today.
+There are a number of constructs in the Ansible Tower UI that enable multi-tenancy, notifications, scheduling, etc.
+However, we are only going to focus on the key concepts required for this workshop today.
 
 
 * Credentials
@@ -56,7 +56,7 @@ In a separate browser tab, browse to https://www.ansible.com/workshop-license to
 
 === Step 3: Upload Ansible Tower workshop license
 
-Back in the Ansible Tower UI, choose BROWSE image:at_browse.png[LicB,35,25] and upload your recently downloaded license file into Ansible Tower.
+Back in the Ansible Tower UI, choose BROWSE image:at_browse.png[LicB,45,25] and upload your recently downloaded license file into Ansible Tower.
 
 === Step 4: Accept license agreement
 
@@ -125,7 +125,6 @@ Select CREDENTIALS   image:at_credentials.png[Cred,100,35]
 
 Select ADD   image:at_add.png[Add,35,25]
 
-
 === Step 4: Complete the Ansible Tower Credentials form
 
 Complete the form, using the following entries and your private Ansible Tower SSH key.  When you paste the key in the `PRIVATE KEY` field, make sure to include the `-----BEGIN RSA PRIVATE KEY-----` and `-----BEGIN RSA PRIVATE KEY-----` lines.
@@ -166,7 +165,7 @@ a source code management (SCM) system supported by Ansible Tower, including Git,
 
 === Step 1: Open a new project
 
-Select PROJECTS image:at_projects.png[projects,150,50].
+Select PROJECTS image:at_projects.png[projects,125,35].
 
 === Step 2: Add the project
 
@@ -216,7 +215,7 @@ An Inventory can also be *imported* into Ansible Tower using the `tower-manage` 
 
 === Step 1: Navigate to Inventories main link
 
-Select INVENTORIES    image:at_inv_icon.png[Inv, 100,35]
+Select INVENTORIES    image:at_inv_icon.png[Inv, 100,30]
 
 === Step 2: Add a new inventory
 
@@ -271,10 +270,9 @@ image::at_tm_stdout.png[Cred_Detail,900,caption="Figure 8: ",title="Importing an
 
 
 
-Feel free to browse your inventory in Ansible Tower, by selecting *Hosts*.
-image:at_inv_hosts.png[hosts,200,50]
-You should now notice that the inventory has been populated with each each of hosts and corresponding inventory.
+Feel free to browse your inventory in Ansible Tower, by selecting *Hosts*. image:at_inv_hosts.png[hosts,200,50]
 
+You should now notice that the inventory has been populated with each each of hosts and corresponding inventory.
 
 image::at_inv_group.png[Cred_Detail,900,caption="Figure 9: ",title="Inventory with Groups"]
 

@@ -63,7 +63,7 @@ vim inventory
 
 === Step 6: Identify variables
 
-Fill a few variables out in an inventory file: `admin_password, pg_password, rabbitmq_password`
+Fill a few variables out in an inventory file: `admin_password`, `pg_password`, `rabbitmq_password`
 
 [subs=+quotes]
 ----
@@ -118,7 +118,7 @@ You can access your Tower workshop (not forgetting that *workshopname* is the na
 {{< urifqdn "" "tower" "" >}}
 ----
 
- *Ensuring Installation Success*
+=== Ensuring Installation Success
 
 You know you were successful if you are able to browse to your Ansible Tower's url (_control node's IP address_) and get something like this
 

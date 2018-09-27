@@ -16,10 +16,10 @@ layout: lab
 == Exercise Description
 In this exercise, we are going to use Red Hat Ansible Tower to run *DISA STIG and NIST 800-53 evaluations* of our environment.  Note that the NIST 800-53 role also includes the execution of DISA STIG evaluation against targeted hosts.
 
-DISA STIG controls
+- DISA STIG controls
 https://galaxy.ansible.com/MindPointGroup/RHEL7-STIG/
 
-NIST 800-53 controls
+- NIST 800-53 controls
 https://galaxy.ansible.com/rhtps/800-53/
 
 
@@ -117,7 +117,7 @@ View what the job looks like as it is executing, as well as what the SCAP result
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
 
-image:at_800-53_job_status.png[Job Status]
+image:at_800-53_job_status.png[Job Status,width=1024]
 
 {{% /panel %}}
 {{% panel "Results" %}}
@@ -125,7 +125,7 @@ image:at_800-53_job_status.png[Job Status]
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
 
-image:at_scap_report.png[SCAP Report]
+image:at_scap_report.png[SCAP Report,width=1024]
 
 {{% /panel %}}
 {{< /panel_group >}}

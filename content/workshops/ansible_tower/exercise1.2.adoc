@@ -55,7 +55,7 @@ In standard output, you should see something that looks very similar to the foll
 image::stdout_1.png[caption="Figure 1: ", title="apache_basic playbook stdout",328]
 
 Notice that the play and each task is named, so that you can understand the action being performed and the node it is being performed upon.
-You also may notice a task in there that you didn't write;  <cough> `setup` <cough>.  This is because the `setup` module
+You also may notice a task in there that you didn't write;  <cough> `setup` </cough>.  This is because the `setup` module
 runs by default.  To turn if off, you can specify link:{gather_facts_url}[gather_facts: false] in your play definition like this:
 
 
