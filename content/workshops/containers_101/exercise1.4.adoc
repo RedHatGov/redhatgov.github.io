@@ -165,7 +165,7 @@ Next, let's search the registry to make sure that our image made it, and is avai
 
 [source, bash]
 ----
-podman search --registry localhost:5000 postgresql
+podman search localhost:5000/postgresql
 ----
 ....
 INDEX            NAME                               DESCRIPTION   STARS   OFFICIAL   AUTOMATED
