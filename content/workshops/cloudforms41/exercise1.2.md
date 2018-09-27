@@ -153,7 +153,7 @@ If the host changes between the various points in time, it appears here. Can you
 *   To zoom in on a chart, click <i class="fa fa-search-plus fa-lg" aria-hidden="true"></i> (Zoom In).
 *   To modify the timeframe displayed in the report, select the date range at the top of the screen.
 
-<p>{{% alert warning %}} The data in this demo is stagnant, so do not go beyond August 7, 2013. {{% /alert %}}</p>
+<p>{{% alert warning %}} The data in this demo is static, please do not go beyond August 7, 2013. {{% /alert %}}</p>
 
 
 ## Section 7: Explore Infrastructure Host Power State Control

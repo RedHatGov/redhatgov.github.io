@@ -65,7 +65,7 @@ vim inventory
 
 === Step 6: Identify variables
 
-Fill a few variables out in an inventory file: `admin_password, pg_password, rabbitmq_password`
+Fill a few variables out in an inventory file: `admin_password`, `pg_password`, `rabbitmq_password`
 
 [subs=+quotes]
 ----

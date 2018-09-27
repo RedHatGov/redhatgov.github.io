@@ -25,7 +25,7 @@ A list of your public and private cloud instances displays.
 
 The web interface uses virtual thumbnails to represent providers. Each thumbnail contains four quadrants by default, which display basic information about each provider.
 
-<img title="CloudForms Example Virtual Thumbnail" src="../images/cfme-virt-thumbnail-instances.png"/><br/>
+<img title="CloudForms Examplstagnante Virtual Thumbnail" src="../images/cfme-virt-thumbnail-instances.png"/><br/>
 *Example Virtual Thumbnail*
 
 *   The top left quadrant shows the operating system running on the instance.
@@ -57,11 +57,11 @@ The web interface uses virtual thumbnails to represent providers. Each thumbnail
 <img title="CloudForms Dashboard CF41_OpenStack1 VM" src="../images/cfme-dashboard-infra-instances.png" width="1000"/><br/>
 *Instance Provider*
 
-*  The **Properties** section displays detailed information about the instance.
+* The **Properties** section displays detailed information about the instance.
 * The **Lifecycle** section displays when this instance was discovered, when it was most recently analyzed, and when it is scheduled for retirement.
 * The **Relationships** section displays the related cloud provider, availability zone, flavor, and drift and analysis histories for this instance.
 
- ### Step 3. Click these relationships to review how this instance relates to all of its resources.
+### Step 3. Click these relationships to review how this instance relates to all of its resources.
 * The **Compliance** section shows whether the instance is compliant with its applied policies.
 * The **Power Management** section shows the instance’s current power state, most recent boot time, and most recent date that the power state changed.
 * The **Security** section lists users, groups, and key pairs.

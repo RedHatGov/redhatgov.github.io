@@ -25,7 +25,7 @@ A list of your private and public cloud providers, such as OpenStack and Amazon 
 ### Step 2: To add Amazon EC2 or Microsoft Azure as a provider, use either <i class="fa fa-cog fa-lg" aria-hidden="true"></i> (**Configuration**) and <i class="fa fa-search fa-lg" aria-hidden="true"></i>
  (**Discover**) or <i class="fa fa-cog fa-lg" aria-hidden="true"></i> (**Configuration**) and <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> (Add).
 
-Step 3: To add OpenStack or Google Compute Engine as a provider, you must use  (Configuration) and (Add).
+Step 3: To add OpenStack or Google Compute Engine as a provider, you must use (Configuration) and (Add).
 
 
 ## Section 2: Explore the Virtual Thumbnail for Cloud Providers
@@ -65,5 +65,5 @@ The web interface uses virtual thumbnails to represent providers. Each thumbnail
 
 <p>{{% alert info %}} The screen shows this provider’s relationships with its components, such as availability zones, flavors, security groups, instances, and images. {{% /alert %}}</p>
 
-### Step 6: Return to the list of **Cloud Providers…**  
+### Step 6: Return to the list of **Cloud Providers…**
 ### Step 7: Select the **OpenStack** cloud provider and click the relationships to review the gathered information.

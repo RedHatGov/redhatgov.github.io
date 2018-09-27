@@ -20,11 +20,11 @@ A topology view of the network displays.
 
 ### Step 2. Explore the filtering features by activating and deactivating each of the following items on the map:
 
-*   Cloud Subnets
-*   VMs
-*   Security Groups
-*   Floating IPs
 *   Cloud Networks
-*   Network Routers
+*   Cloud Subnets
 *   Cloud Tenants
+*   Floating IPs
+*   Network Routers
+*   Security Groups
 *   Tags
+*   VMs

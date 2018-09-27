@@ -35,7 +35,7 @@ the Server Role for Embedded Ansible to On to enable the role.
 
 ## Section 2: Configuration
 ### Step 1. Select Configuration
-<img src="../images/configure.png" width="500" />
+<img src="../images/configure.png" width="300" />
 
 ### Step 2. Click Embedded Ansible -> On
 
@@ -47,7 +47,7 @@ This should already be done for you.
 
 <img src="../images/configure2.png" width="1000" />
 
-<img src="../images/configure3.png" width="1000" />
+<img src="../images/configure3.png" width="650" />
 
 
 ### Step 3. Click Automate -> Ansible
@@ -66,7 +66,7 @@ You will now see Ansible Playbooks.  These playbooks are samples from [GitHub](h
 ManageIQ/create_user.yml
 ```
 
-From here we can see properties such as when it was uploaded and where the playbook came from.  
+From here we can see properties such as when it was uploaded and where the playbook came from.
 <img src="../images/ansible-playbooks2.png" width="1000" />
 
 If you click on "Repository" you can see even more detail about the Playbook.
@@ -95,7 +95,7 @@ Automate / Ansible / Credentials
 
 From here you would add a credential adding the Name and Type and actual credential.
 
-<img src="../images/ansible-creds2.png" width="1000" />
+<img src="../images/ansible-creds2.png" width="650" />
 
 ### Step 4. Explore your new Ansible Service
 

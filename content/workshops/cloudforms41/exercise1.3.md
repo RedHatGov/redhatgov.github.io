@@ -93,4 +93,4 @@ We will continue using the **CF41_OpenStack1** VM.  If needed, find it by return
 *   To zoom in on a chart, click <i class="fa fa-search-plus fa-lg" aria-hidden="true"></i> (Zoom In) in the lower left corner of the chart.
 *   To modify the timeframe displayed in the report, select the date range at the top of the screen.
 
-<p>{{% alert warning %}} The data in this demo is stagnant, so do not go beyond August 7, 2013. {{% /alert %}}</p>
+<p>{{% alert warning %}} The data in this demo is static, please do not go beyond August 7, 2013. {{% /alert %}}</p>

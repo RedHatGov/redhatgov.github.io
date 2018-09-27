@@ -38,7 +38,7 @@ Password: redhat!@#
 
 After logging in, you should see a shell.
 
-image::wetty.png[caption="Figure 1: ", title='wetty', 500]
+image::wetty.png[caption="Figure 1: ", title='wetty', width=1024]
 
 
 [IMPORTANT]

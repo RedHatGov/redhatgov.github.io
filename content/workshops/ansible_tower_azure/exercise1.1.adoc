@@ -37,7 +37,7 @@ our playbook today is very basic and creating a complex structure will just conf
 Instead, we are going to create a very simple directory structure for our playbook, and add just a couple of files to it.
 
 
-=== Step 1: Create a directory called *apache_basic* in your home directory and change directories into it
+=== Step 1: Create a directory called `apache_basic` in your home directory and change directories into it
 
 [source,bash]
 ----
@@ -69,7 +69,7 @@ Now that you are editing `install_apache.yml`, let's begin by defining the play 
 - `---` Defines the beginning of YAML
 - `hosts: web` Defines the host group in your inventory on which this play will run against
 - `name: Install the apache web service` This describes our play
-- `become: yes` Enables user privilege escalation.  The default is sudo, but su, pbrun, and link:{become_url}[several others] are also supported.
+- `become: yes` Enables user privilege escalation.  The default is *sudo*, however *su*, *pbrun*, and link:{become_url}[several others] methods are also supported.
 
 
 == Section 3: Adding Tasks to Your Play

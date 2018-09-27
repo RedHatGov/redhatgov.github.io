@@ -10,9 +10,10 @@ layout: lab
 Policy profiles are groups of policies that you can apply to entities within CloudForms.  Two common types of policies are Compliance policies, which check for a specific state in a host or VM, and Control policies, which control a host or VM, depending on certain criteria.
 
 In this exercise, you will learn how to work with policies, events, conditions, actions, alerts, and profiles.
-* An event is a trigger to check a condition.
-* A condition is a test triggered by an event.
-* An action is an execution that occurs if a condition is met.
+
+*  An **Event** is a trigger to check a condition.
+*  A **Condition** is a test triggered by an event.
+*  An **Action** is an execution that occurs if a condition is met.
 
 ## Section 1: Examine Policies
 

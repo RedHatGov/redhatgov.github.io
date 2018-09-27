@@ -42,11 +42,11 @@ This lab does not contain any Volumes or Builds, but you can see them in a live 
 
 ### Step 5. Explore the filtering features by activating and deactivating any of the following items on the map:
 
-*   Replicators
-*   Pods
 *   Containers
-*   Services
-*   Routes
-*   Nodes
-*   VMs
 *   Hosts
+*   Nodes
+*   Pods
+*   Services
+*   Replicators
+*   Routes
+*   VMs

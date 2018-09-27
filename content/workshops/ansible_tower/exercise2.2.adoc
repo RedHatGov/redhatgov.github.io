@@ -13,13 +13,9 @@ layout: lab
 
 
 == Exercise Description
-This exercise will walk you through the steps required to create a job template and run it.
+This exercise will walk you through the steps required to create a job template and run it.  A job template is a definition and set of parameters for running an Ansible job. In other words, a template combines an Ansible project playbook and the settings required to launch it, into one package.
 
-A job template is a definition and set of parameters for running an Ansible job. In other words, a template combines an Ansible project playbook and the settings required to launch it, into one package.
-
-Templates save setup time, for jobs that are launched repetitively. Once the template is set, it can be edited for future jobs, with different settings.
-
-Templates also drive uniformity, by running templates exactly the same way every time. And, because we're using templates, production responsibilities can be delegated to less experienced production personnel.
+Templates save setup time, for jobs that are launched repetitively. Once the template is set, it can be edited for future jobs, with different settings.  Templates also drive uniformity, by running templates exactly the same way every time. And, because we're using templates, production responsibilities can be delegated to less experienced production personnel.
 
 
 == Section1: Creating a job template
@@ -120,13 +116,13 @@ When prompted, enter your desired test message
 
 
 
-image::at_survey_prompt.png[caption="Figure 13: ",title="Survey Prompt"]
+image::at_survey_prompt.png[caption="Figure 13: ",title="Survey Prompt",width=800]
 
 
 
 === Step 4: Launch the job
 
-Select LAUNCH image:at_survey_launch.png[SurveyL,35,25]
+Select LAUNCH image:at_launch_icon.png[Add,35,25]
 
 === Step 5: View job summary
 
