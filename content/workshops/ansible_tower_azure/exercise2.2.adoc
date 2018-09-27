@@ -14,9 +14,7 @@ layout: lab
 == Exercise Description
 This exercise will walk you through the steps required to create a job template and run it.
 
-A job template is a definition and set of parameters for running an Ansible job. In other words, a template combines an Ansible project playbook and the settings required to launch it, into one package.
-
-Templates save setup time, for jobs that are launched repetitively. Once the template is set, it can be edited for future jobs, with different settings.
+A job template is a definition and set of parameters for running an Ansible job. In other words, a template combines an Ansible project playbook and the settings required to launch it, into one package.  Templates save setup time, for jobs that are launched repetitively. Once the template is set, it can be edited for future jobs, with different settings.
 
 Templates also drive uniformity, by running templates exactly the same way every time. And, because we're using templates, production responsibilities can be delegated to less experienced production personnel.
 
@@ -51,7 +49,7 @@ a|
 
 
 
-image::at_jt_detail.png[caption="Figure 11: ",900,title="Job Template Form"]
+image::at_jt_detail.png[caption="Figure 11: ", 1024,title="Job Template Form"]
 
 
 
@@ -97,8 +95,8 @@ Back on the main Job Template page, select SAVE image:at_save.png[Save,35,25] ag
 
 == Section 2: Running a job template
 
-Now that you've sucessfully creating your Job Template, you are ready to launch it.
-You will be redirected to a job screen, which refreshes in realtime
+Now that you've successfully creating your Job Template, you are ready to launch it.
+You will be redirected to a job screen, which refreshes in real-time
 and displays the status of the job.
 
 
@@ -143,7 +141,7 @@ Scroll down and view details on the play and each task in the playbook.
 
 
 
-image::at_job_tasklist.png[caption="Figure 15: ",title="Play and Task Details"]
+image::at_job_tasklist.png[caption="Figure 15: ",title="Play and Task Details", width=800]
 
 
 
@@ -151,13 +149,13 @@ To the right, you can view standard output; the same way you could if you were r
 
 
 
-image::at_job_stdout.png[caption="Figure 16: ",900,title="Job Standard Output"]
+image::at_job_stdout.png[caption="Figure 16: ",900,title="Job Standard Output", width=700]
 
 
 
 === Step 6: View the new website
 
-Once your job is sucessful, navigate to your new website, where *workshopname* is the name of your workshop, and *#* is your student number:
+Once your job is successful, navigate to your new website, where *workshopname* is the name of your workshop, and *#* is your student number:
 
 [source,bash]
 ----
@@ -176,8 +174,7 @@ image::at_web_tm.png[caption="Figure 17: ",title="New Website with Personalized 
 
 
 == End Result
-At this point in the workshop, you've experienced the core functionality of Ansible Tower.  But wait... there's more!
+At this point in the workshop, you've experienced the core functionality of Ansible Tower.  But wait...there's more!
 You've just begun to explore the possibilities of Ansible Core and Tower.  Take a look at the resources page in this guide, to explore some more features.
-to explore some more features.
 
 {{< importPartial "footer/footer_azure.html" >}}
