@@ -4,7 +4,8 @@ workshops: cloudforms41
 workshop_weight: 280
 layout: lab
 ---
-
+# Exercise 1.18 - “Hello, World!” Automation Script
+## Exercise Description
 Let’s jump right in and start writing our first automation script.  In time-honored fashion we’ll write “Hello, World!” to the Automate Engine logfile.
 
 Before we do anything, we need to ensure that the Automation Engine server role is selected on our CloudForms appliance.  We do this from the **Configure** → **Configuration** menu, selecting the CloudForms server in the Settings accordion.
@@ -15,69 +16,69 @@ Before we do anything, we need to ensure that the Automation Engine server role 
 *Setting the Automation Engine server role*
 
 
-# The Automation Engine Role
+## The Automation Engine Role
 
 Setting the Automation Engine role is necessary to be able to run *queued* Automate tasks.  Automate actions initiated directly from the WebUI—such as running instances from Simulation, or processing methods to populate dynamic dialogs—are run on the WebUI appliance itself, regardless of whether it has the Automation Engine role enabled.
 
 
-# Creating the Environment
+## Section 1: Creating the Environment
 
 Before we create our first automation script, we need to put some things in place.  We’ll begin by adding a new domain called *ACME*. We’ll add all of our automation code into this new domain.
 
-> Goto **Automate** → **Explorer**, then **<i class="fa fa-cog fa-lg" aria-hidden="true"></i> Configuration** → **<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> Add a New Domain**.
+### Step 1. Goto **Automate** → **Explorer**, then **<i class="fa fa-cog fa-lg" aria-hidden="true"></i> Configuration** → **<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> Add a New Domain**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-domain.png" width="1000"/><br/>
 *Adding a new domain*
 
-We’ll give the domain the name **ACME**, give it the description **ACME Corp.**, and ensure that the Enabled checkbox is selected.
+### Step 2. Name the domain **ACME**, type in the Description **ACME Corp.**, and ensure that the Enabled checkbox is selected.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-domain-acme.png" width="1000"/><br/>
 *ACME Domain*
 
 
-# Adding a Namespace
+## Section 2: Adding a Namespace
 
-Now we’ll add a namespace into this domain, called **General**.  Highlight the ACME domain icon in the sidebar, and click **Configuration** → **Add a New Namespace**.
+### Step 1. Add a namespace into this domain, called **General**.  Highlight the ACME domain icon in the sidebar, and click **Configuration** → **Add a New Namespace**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-domain-namespace.png" width="1000"/><br/>
 *Adding a new namespace*
 
-Give the namespace the name **General** and the description **General Content**.
+### Step 2. Give the namespace the name **General** and the description **General Content**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-domain-namespace-general.png" width="1000"/><br/>
 *General namespace*
 
 
-# Adding a Class
+## Section 3:  Adding a Class
 
-Now we’ll add a new class, called *Methods*.
+### Step 1. Now we’ll add a new class, called *Methods*.
 
 <p>{{% alert info %}} Naming a class Methods may seem somewhat confusing, but many of the generic classes in the ManageIQ and RedHat domains in the Automate Datastore are called Methods to signify their general-purpose nature. {{% /alert %}}</p>
 
-Highlight the General domain icon in the sidebar, and click **Configuration** → **Add a New Class**.
+### Step 2. Highlight the General domain icon in the sidebar, and click **Configuration** → **Add a New Class**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-namespace-class.png" width="1000"/><br/>
 *Adding a new class*
 
-Give the class the name **Methods** and the description **General Instances and Methods**. We’ll leave the display name empty for this example.
+### Step 3. Give the class the name **Methods** and the description **General Instances and Methods**. We’ll leave the display name empty for this example.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-namespace-class-methods.png" width="1000"/><br/>
 *Methods class*
 
 
-# Editing the Schema
+## Section 4: Editing the Schema
 
-Now we’ll create a simple schema. Click the Schema tab for the *Methods* class, and click **Configuration** → **Edit selected Schema**.
+### Step 1. Now we’ll create a simple schema. Click the Schema tab for the *Methods* class, and click **Configuration** → **Edit selected Schema**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-schema.png" width="1000"/><br/>
 *Editing the schema*
 
-Click New Field, and add a single field with name **execute**, type **Method**, and data type **String**.
+### Step 2. Click New Field, and add a single field with name **execute**, type **Method**, and data type **String**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-schema-field.png" /><br/>
 *Adding a new schema field*
 
-Click the checkmark in the lefthand column to save the field entry, and click the **Save** button to save the schema.  We now have our generic class definition called *Methods* set up, with a simple schema that executes a single method.
+### Step 3. Click the checkmark in the lefthand column to save the field entry, and click the **Save** button to save the schema.  We now have our generic class definition called *Methods* set up, with a simple schema that executes a single method.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-schema-field-save.png" width="1000"/><br/>
 *Save schema field*
@@ -85,7 +86,7 @@ Click the checkmark in the lefthand column to save the field entry, and click th
 
 # Hello, World!
 
-Our first Automate method is very simple; we’ll write an entry to the *automation.log* file using this two-line script:
+### Step 4. Our first Automate method is very simple; we’ll write an entry to the *automation.log* file using this two-line script:
 
 ```bash
 $evm.log(:info, "Hello, World!")
@@ -93,41 +94,41 @@ exit MIQ_OK
 ```
 
 
-# Adding a New Instance
+## Section 5. Adding a New Instance
 
-First we need to create an instance from our class.  In the Instances tab of the new *Methods* class, select **Configuration** → **Add a New Instance**.
+### Step 1. First we need to create an instance from our class.  In the Instances tab of the new *Methods* class, select **Configuration** → **Add a New Instance**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-instance.png" width="1000"/><br/>
 *Adding a new instance to our class*
 
-We’ll call the instance **HelloWorld**, and it’ll run (execute) a method called *hello_world*.
+### Step 2. We’ll call the instance **HelloWorld**, and it’ll run (execute) a method called *hello_world*.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-instance-helloworld.png" /><br/>
 *Entering the instance details*
 
-Click the **Add** button.
+### Step 3. Click the **Add** button.
 
 
-# Adding a New Method
+## Section 6. Adding a New Method
 
-In the Methods tab of the new *Methods* class, select **Configuration** → **Add a New Method**.
+### Step 1. In the Methods tab of the new *Methods* class, select **Configuration** → **Add a New Method**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-method.png" width="1000"/><br/>
 *Adding a new method to our class*
 
-Name the method **hello_world**, and paste our two lines of code into the Data window.
+### Step 2. Name the method **hello_world**, and paste our two lines of code into the Data window.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-method-helloworld.png" /><br/>
 *Entering the method details*
 
-Click **Validate** and then **Add**.
+### Step 3. Click **Validate** and then **Add**.
 
 <p>{{% alert info %}} Get into the habit of using the Validate button; it can save you a lot of time catching Ruby syntactical typos when you develop more complex scripts. {{% /alert %}}</p>
 
 
-# Running the Instance
+## Section 7:  Running the Instance
 
-We’ll run our new instance using the *Simulation* functionality of Automate. Before we do that, log in to CloudForms again from another browser or a private browsing tab and navigate to **Automate** → **Log**.
+### Step 1. We’ll run our new instance using the *Simulation* functionality of Automate. Before we do that, log in to CloudForms again from another browser or a private browsing tab and navigate to **Automate** → **Log**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-log.png" width="1000"/><br/>
 *Automate log file*
@@ -142,12 +143,12 @@ tail -f /var/www/miq/vmdb/log/automation.log
 
 In the simulation, we actually run an instance called Call_Instance in the */System/Request/* namespace of the *ManageIQ* domain, and this in turn calls our *HelloWorld* instance using the namespace, class, and instance attribute/value pairs that we pass to it.
 
-From the **Automate** → **Simulation** menu, complete the details.
+### Step 2. From the **Automate** → **Simulation** menu, complete the details.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-simulation-helloworld.png" /><br/>
 *Completing the Simulation details*
 
-Click **Submit**.
+### Step 3. Click **Submit**.
 
 If all went well, we should see our “Hello, World!” message appear in the *automation.log* file:
 
@@ -167,9 +168,9 @@ Or, like so from a private browser session:
 Success!
 
 
-# Exit Status Codes
+## Section 8: Exit Status Codes
 
-In our example we used an exit status code of MIQ_OK.  Although with simple methods such as this we don’t strictly need to specify an exit code, it’s good practice to do so.  When we build more advanced multimethod classes and state machines, an exit code can signal an error condition to the Automation Engine so that action can be taken.
+In our example we used an exit status code of MIQ_OK.  Although with simple methods such as this we don’t strictly need to specify an exit code, it’s good practice to do so.  When we build more advanced multi-method classes and state machines, an exit code can signal an error condition to the Automation Engine so that action can be taken.
 
 There are four exit codes that we can use:
 

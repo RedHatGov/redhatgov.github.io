@@ -17,14 +17,14 @@ layout: lab
 
 image::tower.002.png['Tower']
 
-== Introduction to Wetty (Browser-based SSH)
+== What you will learn: Wetty (Browser-based SSH)
 
-This lab provides a quick tour of the browser based SSH client Wetty. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
+This lab provides a quick tour of the browser based SSH client 'Wetty'. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
 
 
 == Accessing Wetty
 
-Use this URL to access the Wetty node, just change the workshopname (if applicable). Ask your instructor for the workshopname. 
+Use this URL to access the Wetty node, just change the workshop name (if applicable). Ask your instructor for the workshop name.
 
 [source,bash]
 ----
@@ -43,6 +43,6 @@ Be sure you can log in to your instances.  If you can't log in start shouting, l
 
 == End Result
 
-At this point, everyone should have logged into your node.  If you haven't, let us know so we can get you fixed up.
+At this point, you should have logged into your node.  If you haven't, let us know so we can get you fixed up.
 
 {{< importPartial "footer/footer.html" >}}

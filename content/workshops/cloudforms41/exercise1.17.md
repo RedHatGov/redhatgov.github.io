@@ -5,14 +5,24 @@ workshop_weight: 270
 layout: lab
 ---
 
-# What Is CloudForms Automate?
+# Exercise 1.17 - Introduction to the Automate Datastore
+## Exercise Description
+In this exercise, you will learn about scripting actions, used to control automation datastore functions.
 
-When we use the Automate capability of CloudForms, we write scripts in the Ruby language and use objects that the CloudForms Automation Engine makes available to us.
+When we use the Automate capability of CloudForms, we write scripts in the Ruby language and use objects that the CloudForms Automation Engine makes available to us. The Automate model is arranged to provide an object oriented hierarchy to control automation functions. The model uses the following organizational units arranged in a hierarchy:
+
+*  **Datastore** - The main organization unit that stores the entire model.
+* **Domains** - Domains act as collection of automation functions. Functions are executed depending on the order of Domain priority, which means a function in a Domain with a higher priority overrides the same functions specified in a lower-priority Domain. This allows CloudForms Management Engine to specify a core Domain (ManageIQ) but allow users to override automate functions with custom Domains. Each Domain contains a set of Namespaces.
+*  **Namespaces** - Containers that organize and categorize functions of the model. Namespaces can contain child Namespaces as well as Classes.
+*  **Classes** - Templates for a specific function of the model. Each Class uses a Schema to apply to Instances to populate with default values. Each class also can contain a set of methods.
+*  **Instances** - An instance is a version of a class populated with initial configuration data. An instance can include a collection of any number of attributes, calls to methods, and relationships.
+*  **Methods** - Methods are functions within the model. Methods use Ruby code to execute various operations needed for a Class.
 
 
-# Explore Automate
 
-> Go to **Automate** → **Explorer**.
+## Section 1: Exploring Automate
+
+Go to **Automate** → **Explorer**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate.png" width="1000"/><br/>
 *Automate Navigation*
@@ -25,7 +35,7 @@ The first menu item that we see takes us to the Explorer.  This is our visual in
 Before we start our journey into learning CloudForms Automate, we’ll take a tour of the Automate Datastore to familiarize ourselves with the objects that we’ll find there.
 
 
-# The Automate Datastore
+## Section 2: The Automate Datastore
 
 The Automate Datastore has a directory-like structure, consisting of several types of organizational units arranged in a hierarchy:
 
@@ -35,7 +45,7 @@ The Automate Datastore has a directory-like structure, consisting of several typ
 Next, we’ll look at each type of object in more detail.
 
 
-# Domains
+## Section 3: Domains
 
 A *domain* is a collection of namespaces, classes, instances, and methods. The ManageIQ project provides a single *ManageIQ* domain for all supplied automation code, while Red Hat adds the supplemental RedHat domain containing added-value code for the CloudForms product.  Both the *ManageIQ* and *RedHat* domains are locked, indicating their read-only nature, but we can create new domains for our own custom automation code.
 
@@ -46,14 +56,16 @@ A *domain* is a collection of namespaces, classes, instances, and methods. The M
 
 {{% panel "Domain Priority" %}}
 
-User-added domains can be individually enabled or disabled and can be ordered by priority such that if code exists in the same path in multiple domain; for example, */Cloud/VM/Provisioning/StateMachines*.  The code in the highest-priority enabled domain will be executed.  We can change the priority order of our user-added domains using the:
+User-added domains can be individually enabled or disabled and can be ordered by priority such that if code exists in the same path in multiple domain; for example, */Cloud/VM/Provisioning/StateMachines*.  The code in the highest-priority enabled domain will be executed.
+
+### Step 1. We can change the priority order of our user-added domains using the:
 
 > **Configuration** → **Edit Priority Order of Domains** menu
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-datastore-conf-priority.png" width="1000"/><br/>
 *Edit priority*
 
-> Try using the up and down arrows to switch the priority of a domain, then save.
+### Step 2. Try using the up and down arrows to switch the priority of a domain, then save.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-datastore-conf-priority-save.png" width="1000"/><br/>
 *Save priority*
@@ -72,14 +84,17 @@ bin/rake evm:automate:import YAML_FILE=bit63.yaml IMPORT_AS=Bit63 SYSTEM=false E
 
 {{% panel "Copying Objects Between Domains" %}}
 
+#### Customizing code in the domain
 We frequently need to customize code in the locked RedHat or ManageIQ domains — for example, when implementing our own custom VM acement method.  Fortunately, we can easily copy any object from the locked domains into our own, using the following steps.
 
-> **Configuration** → **Copy this Class**
+Step 1.  **Configuration** → **Copy this Class**
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-copy-object.png" width="1000"/><br/>
 *Copying a class*
 
-When we copy an object such as a class, we are prompted for the From and To domains.  We can optionally deselect “Copy to same path” d specify our own destination path for the object.
+Step 2. When we copy an object, such as a class, we are prompted for the From and To domains.
+
+Step 3. We can optionally deselect “Copy to same path” d specify our own destination path for the object.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-copy-object-class.png" /><br/>
 *Specifying the destination domain and path*
@@ -105,7 +120,7 @@ bin/rake evm:automate:convert FILE=database.xml DOMAIN=SAMPLE ZIP_FILE=/tmp/samp
 {{% /panel_group %}}
 
 
-# Namespaces
+## Section 4: Namespaces
 
 A *namespace* is a folder-like container for classes, instances, and methods, and is used purely for organizational purposes.  We create namespaces to arrange our code logically, and namespaces often contain other namespaces.
 
@@ -113,11 +128,13 @@ A *namespace* is a folder-like container for classes, instances, and methods, an
 *Namespaces*
 
 
-# Classes
+## Section 5: Classes
 
 A *class* is similar to a template: it contains a generic definition for a set of automation operations.  Each class has a *schema* that defines the variables, states, relationships, or methods that instances of the class will use.
 
-<p>{{% alert info %}} The Automate Datastore uses object-oriented terminology for these objects.  A *class* is a generic definition for a set of automation operations, and these classes are *instantiated* as specific instances.  The classes that we work with in the Automate Datastore are not the same as Ruby classes that we work with in our automation scripts.  {{% /alert %}}</p>
+<p>{{% alert info %}} The Automate Datastore uses object-oriented terminology for these objects.  A *class* is a generic definition for a set of automation operations, and these classes are *instantiated* as specific instances.
+
+The classes that we work with in the Automate Datastore are not the same as Ruby classes that we work with in our automation scripts.  {{% /alert %}}</p>
 
 
 {{% panel_group %}}
@@ -164,7 +181,7 @@ One of the schema field types is a *relationship*, which links to other instance
 {{% /panel_group %}}
 
 
-# Instances
+## Section 6. Instances
 
 An *instance* is a specific *instantiation* or “clone” of the generic class and is the entity run by the Automation Engine.  An instance contains a copy of the class schema but with actual values of the fields filled in.
 
@@ -172,7 +189,7 @@ An *instance* is a specific *instantiation* or “clone” of the generic class 
 *Single class definition with three instances*
 
 
-# Methods
+## Section 7. Methods
 
 A *method* is a self-contained block of Ruby code that gets executed when we run any automation operation.  A typical method looks like this:
 
@@ -208,7 +225,7 @@ end
 Methods can have one of three *location* values: *inline*, *built-in*, or *URI*.  In practice most of the methods that we create are inline methods, which means they run as a separate Ruby process outside of Rails.
 
 
-# Summary
+## Summary
 
 In this lab exercise we’ve learned about the fundamental objects or organizational units that we work with in the Automate Datastore: domains, namespaces, classes, instances, and methods.
 

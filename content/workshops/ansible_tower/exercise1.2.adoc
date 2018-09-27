@@ -15,13 +15,13 @@ layout: lab
 = Exercise 1.2 - Running Your Playbook
 
 
-== Section 1: Running the Playbook
+== Section 1: Running the playbook
 
 
-We are now going to run you're brand spankin' new playbook on your two web nodes.  To do this,
+We are now going to run your brand-new playbook, on your two web nodes.  To do this,
  you are going to use the `ansible-playbook` command.
 
-=== Step 1:
+=== Step 1: Run your playbook
 
 From your playbook directory ( `~/apache_basic` ), run your playbook.
 
@@ -31,15 +31,15 @@ ansible-playbook -i ../hosts install_apache.yml --private-key=~/.ssh/{{< span2 "
 ----
 
 
-However, before you go ahead and run that command, lets take a few moments to understand the options.
+However, before you run that command, lets take a few moments to understand the options.
 
-- *--private-key* This option ask for the private ssh key to connect to the remote machine.
+- *--private-key* This option asks for the private ssh key to connect to the remote machine.
 - *-i* This option allows you to specify the inventory file you wish to use.
-- *-v* Altough not used here, this increases verbosity.  Try running your playbook a second time using `-v` or `-vv` to increase the verbosity
+- *-v* Altough not used here, this increases verbosity.  Try running your playbook a second time using `-v` or `-vv` to increase the verbosity (debugging information).
 
 
 [NOTE]
-- *--syntax-check* If you run into any issues with your playbook running properly; you know, from that copy/pasting that you didn't do because we said "_don't do that_"; you could use this option to help find those issues like so...
+- *--syntax-check* If you run into any issues with your playbook running properly (from the copy/pasting that we told you not to do), you could use this option to help find those issues like so...
 
 [source,bash]
 ----
@@ -48,14 +48,14 @@ ansible-playbook -i ../hosts install_apache.yml --syntax-check --private-key=~/.
 
 
 ---
-OK, go ahead and run your playbook as specified in *Step 1*
+Now, run your playbook as specified in *Step 1*
 
 In standard output, you should see something that looks very similar to the following:
 
 image::stdout_1.png[caption="Figure 1: ", title="apache_basic playbook stdout",328]
 
-Notice that the play and each task is named so that you can see what is being done and to which node it is being done to.
-You also may notice a task in there that you didn't write;  <cough> `setup` <cough>.  This is because the `setup` module
+Notice that the play and each task is named, so that you can understand the action being performed and the node it is being performed upon.
+You also may notice a task in there that you didn't write;  <cough> `setup` </cough>.  This is because the `setup` module
 runs by default.  To turn if off, you can specify link:{gather_facts_url}[gather_facts: false] in your play definition like this:
 
 
@@ -70,13 +70,11 @@ runs by default.  To turn if off, you can specify link:{gather_facts_url}[gather
 
 
 
-=== Step 2:
+=== Step 2: Remove Apache
 
-Remove Apache
-
-OK, for the next several minutes or as much time as we can afford, we want to to experiment a little.
-We would like you to reverse what you've done, i.e. stop and uninstall apache on your web nodes.
-So, go ahead and edit your playbook and then when your finished, rerun it as specified in *Step 1*.
+Now, let's experiment a little.
+We would like you to reverse what you've done (i.e. stop and uninstall apache on your web nodes).
+So, edit your playbook and then when you're finished, rerun it - as described in *Step 1*.
 For this exercise we aren't going to show you line by line, but we will give you a few hints.
 
 [NOTE]
