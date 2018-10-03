@@ -149,15 +149,22 @@ docker.io/library/fedora_postgresql   latest   b105a704d05d   10 minutes ago   4
 ....
 
 
-Now, we will push the container to the local registry.  Either of these two commands will work, showing that there is always more than one way to skin a cat.  NOTE: choose one of the following two commands
+Now, we will push the container to the local registry.  Either of these two commands will work, showing that there is always more than one way to skin a cat.
+[IMPORTANT]
+Choose only one of the following two commands (`buildah push` or `skopeo copy`).  Both accomplish the same purpose.
 
 [source, bash]
 ----
 buildah push fedora_postgresql:latest localhost:5000/fedora_postgresql:latest
 ----
+
+With Skopeo, we need to be a bit more specific, and specify the image ID that we saw, above, from `podman images`.
+[NOTE]
+This image ID will vary, and you should use the value from the output produced on your workshop instance:
+
 [source, bash]
 ----
-skopeo copy containers-storage:fedora_postgresql:latest docker://localhost:5000/fedora_postgresql:latest
+skopeo copy containers-storage:7a840db7f020 docker://localhost:5000/fedora_postgresql:latest
 ----
 
 
