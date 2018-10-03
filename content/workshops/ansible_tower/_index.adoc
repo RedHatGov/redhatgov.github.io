@@ -15,28 +15,45 @@ menu:
 :iconsdir: http://people.redhat.com/~jduncan/images/icons
 :imagesdir: /workshops/ansible_tower/images
 
-= Ansible Tower Workshop
+= Red Hat Ansible Tower Workshop
 
-== Description
+== Workshop Description
 
-Build playbooks to build in security, empower junior staff and offload senior staff, and automate your most tedious tasks!
+Ansible Tower will enable you to create playbooks, while building in security. Automation features will save time, empower junior staff, offload senior staff and automate your most tedious tasks!
+
+
+== Who should attend
+
+-   Architects
+-   Developers
+-   Technical Leads
+-   Operations Engineers
+
 
 == What you will learn
 
-- Running ad-hoc commands
-- Writing a playbook
-- Install and configure Ansible Tower
-- Templates and Security.
+- How to run ad hoc commands
+- How to write a playbook
+- How to install and configure Red Hat Ansible Tower
+- How to use templates to save time
+- How to enhance security, using Ansible Tower
+
 
 == Overview
 
-Today is meant for anyone who has any exposure to Ansible, whether you have used it or not. We are going to start with a short overview (yes, slideware) and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.
-Your Responsibilities
-Have a discussion. This will be boring if it’s just us up here talking for over 4 hours.
-Participate. We are going to cut you loose with Ansible here in just a little while. Have questions. Have opinions.
+The Ansible Tower Workshop is meant for anyone who has any exposure to Ansible, whether you have used it or not. We are going to start with a short overview and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.
+
+
+== Your Responsibilities
+
+Have a Discussion. This will be boring if it’s just us, up here talking for over 4 hours.
+
+Participate. We are going to cut you loose with Ansible, in just a little while. Have questions. Have opinions.
+
 Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy. See? Not only can we dig into Ansible but you can make a new friend!
 
-== Labs
+
+== Exercises
 
 {{< labs ansible_tower >}}
 

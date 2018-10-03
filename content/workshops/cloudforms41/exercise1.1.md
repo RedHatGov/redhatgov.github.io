@@ -4,60 +4,63 @@ workshops: cloudforms41
 workshop_weight: 110
 layout: lab
 ---
+# Exercise 1.1: Working with Infrastructure Providers
 
-# What's An Infrastructure Provider?
 
-In Red Hat CloudForms, an infrastructure provider is a virtual infrastructure environment that you can add to a Red Hat CloudForms appliance to manage and interact with the resources in that environment.
+## Exercise Description
+Learn to view, search and manage infrastructure providers, in Red Hat CloudForms.
+
+In Red Hat CloudForms, an infrastructure provider is a virtual infrastructure environment that you can add to a Red Hat CloudForms appliance, to manage and interact with the resources, in that environment.
 
 In other words, a infrastructure provider is a management platform for managing virtual machines from a single type of hypervisor. Infrastructure providers supported by CloudForms are Red Hat Enterprise Virtualization Management (RHEV-M), VMware vCenter and Microsoft System Center Virtual Machine Manager (SCVMM).
 
 
-# Explore Infrastructure Providers
+## Section 1: Explore Infrastructure Providers
 
-> Select **Compute** → **Infrastructure** → **Providers**.
+### Step 1: Select **Compute** → **Infrastructure** → **Providers**.
 
 <img title="Infrastructure Providers" src="../images/cfme-nav-compute-infra-providers.png" width="1000"/><br/>
 *Infrastructure Providers*
 
-A list of your datacenter infrastructure providers appears, such as VMware vCenter and Red Hat Enterprise Virtualization.
+### Step 2: view the list of your data center infrastructure providers, such as VMware vCenter and Red Hat Enterprise Virtualization.
 
 
-# Discover Infrastructure Providers
+## Section 2: Discover Infrastructure Providers
 
 In very large environments, you can discover new infrastructure providers.
 
-> Click <i class="fa fa-cog" aria-hidden="true"></i> (**Configuration**), then click <i class="fa fa-search" aria-hidden="true"></i> (**Discover**).
+### Step 1: Click <i class="fa fa-cog" aria-hidden="true"></i> (**Configuration**), then click <i class="fa fa-search" aria-hidden="true"></i> (**Discover**).
 
 <br><img title="Discover Infrastructure Providers" src="../images/cfme-nav-discover-infra-providers.png" width="1000"/><br/>
 *Discover Infrastructure Providers*
 
 <p>{{% alert warning %}} Review the data entry screen, but do not enter any information. {{% /alert %}}</p>
 
-> Click **Cancel** to return to the previous screen.
+### Step 2: Click **Cancel** to return to the previous screen.
 
 <br><img title="Cancel Discover Infrastructure Providers" src="../images/cfme-nav-discover-infra-providers-cancel.png" width="1000"/><br/>
 *Cancel Discover Infrastructure Providers*
 
 
-# Add Infrastructure Providers
+## Section 3: Add Infrastructure Providers
 
 You can also add infrastructure providers, if known.
 
-> Click <i class="fa fa-cog" aria-hidden="true"></i> (**Configuration**), then click <i class="fa fa-plus-circle" aria-hidden="true"></i> (**Add**).
+### Step 1: Click <i class="fa fa-cog" aria-hidden="true"></i> (**Configuration**), then click <i class="fa fa-plus-circle" aria-hidden="true"></i> (**Add**).
 
 <img title="Add Infrastructure Providers" src="../images/cfme-nav-add-infra-providers.png" width="1000"/><br/>
 *Add Infrastructure Providers*
 
-Review the data entry screen, but do not enter any information.
+### Step 2: Review the data entry screen, but do not enter any information.
 
-> Click **Cancel** to return to the previous screen.
+Step 3: Click **Cancel** to return to the previous screen.
 
 <img title="Cancel Add Infrastructure Providers" src="../images/cfme-nav-add-infra-providers-cancel.png" width="1000"/><br/>
 *Cancel Add Infrastructure Providers*
 
-# Explore the Virtual Thumbnail for Infrastructure Providers
+## Section 4: Explore the Virtual Thumbnail for Infrastructure Providers
 
-The web interface uses virtual thumbnails to represent providers. Each thumbnail contains four quadrants by default, which display basic information about each provider.
+The web interface uses virtual thumbnails to represent providers. Each thumbnail contains four quadrants by default, which displays basic information about each provider.
 
 <img title="Example Virtual Thumbnail" src="../images/cfme-virt-thumbnail.png" /><br/>
 *Example Virtual Thumbnail*
@@ -76,16 +79,19 @@ When connected to providers, such as in a actual deployment, the <i class="fa fa
 
 A <i class="fa fa-shield fa-lg" aria-hidden="true"></i> (**Policy**) in the center of the virtual thumbnail indicates that this provider has one or more policies applied. There are no policies configured in this exercise, so the shield does not appear.
 
+### Step 1: Toggle views
 > In the top right corner of the window, click <i class="fa fa-th" aria-hidden="true"></i> <i class="fa fa-th-large" aria-hidden="true"></i> <i class="fa fa-list" aria-hidden="true"></i> to toggle between **Grid**, **Tile**, and **List** views.
 
 <img title="Top Window Navigation Infrastructure Providers" src="../images/cfme-nav-grid-title-list-infra-providers.png" width="1000"/><br/>
 *Top Window Navigation Infrastructure Providers*
 
+### Step 2: Access provider lists
 > Click <i class="fa fa-download fa-lg" aria-hidden="true"></i> (**Download**) for a list of providers in TXT, CSV, or PDF formats.
 
 <img title="Download Infrastructure Providers" src="../images/cfme-nav-download-infra-providers.png" width="1000"/><br/>
 *Download Infrastructure Providers*
 
+### Step 3: View provider details
 > Click any infrastructure provider and observe the following details on the resulting screen:
 
 <img title="Infrastructure Providers Dashboard" src="../images/cfme-dashboard-infra-providers.png" width="1000"/><br/>

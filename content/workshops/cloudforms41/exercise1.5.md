@@ -5,7 +5,12 @@ workshop_weight: 150
 layout: lab
 ---
 
-# What's Infrastructure Provisioning?
+#  Exercise 1.5: Examine Infrastructure Provisioning
+
+## Exercise Description
+Learn to provision infrastructures, using Red Hat CloudForms. CloudForms enables provisioning and management across physical, virtual, and private cloud platforms.
+
+### Red Hat CloudForms Infrastructure Provisioning process (Summary)
 
 In Red Hat CloudForms, when a virtual machine or cloud instance is provisioned, it goes through multiple phases. First, the request must be made. The request includes ownership information, tags, virtual hardware requirements, the operating system, and any customization of the request. Second, the request must go through an approval phase, either automatic or manual. Finally, the request is executed.
 
@@ -15,35 +20,35 @@ Execution consists of pre-processing and post-processing. Pre-processing acquire
 *Provision VM Workflow*
 
 
-# Examine Infrastructure Provisioning
+## Infrastructure Provisioning
 
-> Select **Compute** → **Infrastructure** → **Virtual Machines**.
+### Step 1: > Select **Compute** → **Infrastructure** → **Virtual Machines**.
 
 <img title="CloudForms Infrastructure VMs" src="../images/cfme-nav-compute-infra-vms.png" width="1000"/><br/>
 *Infrastructure VMs*
 
-On the left, in the **VMs** accordion, select **All VMs & Templates**.
+### Step 2: On the left, in the **VMs** accordion, select **All VMs & Templates**.
 
-On the right, click <img title="CloudForms Infrastructure VMs" src="../images/cfme-lifecycle-icon.png" /> (**Lifecycle**).
+### Step 3: On the right, click <img title="CloudForms Infrastructure VMs" src="../images/cfme-lifecycle-icon.png" /> (**Lifecycle**).
 
-> Select <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> (**Provision VMs**), and observe the following.
+### Step 4: Select <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> (**Provision VMs**), and observe the following.
 
 <img title="CloudForms Infrastructure VMs" src="../images/cfme-nav-compute-infra-vms-all-lifecycle.png" width="1000"/><br/>
 *Provision VMs*
 
-You are provided with a list of templates.
+A list of templates displays.
 
 <img title="CloudForms Infrastructure VMs" src="../images/cfme-provision-vm-1.png" width="1000"/><br/>
 *Template List*
 
 The **Provider** column shows some templates are from Red Hat Enterprise Virtualization Manager and others are from VMware.
 
-> Select any template and click **Continue**.
+### Step 5: Select any template and click **Continue**.
 
 <img title="CloudForms Infrastructure VMs" src="../images/cfme-provision-vm-2.png" width="1000"/><br/>
 *Template Continue*
 
-On the resulting page, perform the steps indicated below for each tab and look at the data requested.
+### Step 6: On the resulting page, perform the steps indicated below for each tab and review the data requested.
 
 <img title="CloudForms Infrastructure VMs" src="../images/cfme-provision-vm-3.png" width="1000"/><br/>
 *Provision Virtual Machines*
@@ -56,7 +61,7 @@ On the resulting page, perform the steps indicated below for each tab and look a
 
 <p>{{% alert warning %}} Because you are working in a lab environment, nothing happens after these steps. {{% /alert %}}</p>
 
-On the resulting screen, observe that your provision request appears in a list. If you are in an environment with real infrastructure, you can monitor this area for the status of the VM build.
+### Step 7: On the resulting screen, observe that your provision request appears in a list. If you are in an environment with real infrastructure, you can monitor this area for the status of the VM build.
 
 <img title="CloudForms Infrastructure VMs" src="../images/cfme-provision-vm-4.png" width="1000"/><br/>
 *Provision Request*

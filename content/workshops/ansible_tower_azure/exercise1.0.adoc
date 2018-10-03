@@ -10,22 +10,16 @@ layout: lab
 :imagesdir: /workshops/ansible_tower_azure/images
 
 
-= Exercise 1.0 - Running Ad-hoc commands
+= Exercise 1.0 - Running Ad Hoc Commands
 
 
-== Section 1: Ad-hoc commands
+== Section 1: Ad hoc commands
 
-For our first exercise, we are going to run some ad-hoc commands to help you get
-a feel for how Ansible works.  Ansible Ad-Hoc commands enable you to perform tasks
-on remote nodes without having to write a playbook.  They are very useful when you
-simply need to do one or two things quickly and often, to many remote nodes.
+For our first exercise, we are going to run some ad hoc commands to help you get a feel for how Red Hat Ansible Tower works.  Ansible ad hoc commands enable you to perform repeatable tasks on remote nodes, without having to write a playbook.  They are very useful when you simply need to do one or two tasks quickly and often, to many remote nodes.
 
+=== Set Up Dependencies:
 
-
-=== Step 0:
-
-Define your inventory.  Inventories are crucial to Ansible as they define remote machines on which you wish to run
-commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`.  Then, add the appropriate definitions for the node that will function as a web node.
+Define your inventory.  Inventories are crucial to Ansible, as they define remote machines on which you will run commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`.  Then, add the appropriate definitions for the node that will function as a web node.
 
 ====
 [NOTE]
@@ -42,34 +36,35 @@ For example, a recent workshop's first student used:
 {{< urifqdn_azure "" "node" "" >}}
 ----
 
-=== Step 1:
+=== Step 1: Test webhost response
 
-Let's start with something really basic - pinging a host.  The `ping` module makes sure our web hosts are responsive.
+Let's start with something basic - pinging a host.  The `ping` module tests the responsiveness of our web host.
 
 [source,bash]
 ----
 ansible web -m ping
 ----
 
-=== Step 2:
+=== Step 2: Run a Linux command
 
-Now let's see how we can run a good ol' fashioned Linux command and format the output using the `command` module.
+Now let's see how we can run a Linux command and format the output, using the `command` module.
+
 
 [source,bash]
 ----
 ansible web -m command -a "uptime" -o
 ----
 
-=== Step 3:
+=== Step 3: Review the setup module
 
-Take a look at your web node's configuration.  The `setup` module displays ansible facts (and a lot of them) about an endpoint.
+Take a look at your web node's configuration.  The `setup` module displays Ansible facts (and a lot of them) about an endpoint.
 
 [source,bash]
 ----
 ansible web -m setup
 ----
 
-=== Step 4:
+=== Step 4: Install Maven and Git
 
 Now, let's install Maven & Git using the `package` module.
 
@@ -79,25 +74,25 @@ ansible web -m package -a "name=rh-maven35 state=present" -b
 ansible web -m package -a "name=git state=present" -b
 ----
 
-=== Step 5:
+=== Step 5:Install a group of packages
 
 It is even possible to install groups of packages (aka yum groupinstall); such as Red Hat JBoss Enterprise Application Platform (EAP).
+
 
 [source,bash]
 ----
 ansible web -m package -a "name=@jboss-eap7 state=present" -b
 ----
 
-=== Step 6:
+=== Step 6: Start JBoss EAP
 
-OK, JBoss EAP is installed now so let's start it up using the `service` module.
-
+JBoss EAP is installed now, so let's start it up using the `service` module.
 [source,bash]
 ----
 ansible web -m service -a "name=eap7-standalone state=started" -b
 ----
 
-=== Step 7:
+=== Step 7: Deploy an application
 
 Next, let's deploy an application.
 
@@ -126,18 +121,18 @@ Demo site (open this in your web browser):
 http://{{< urifqdn_azure "" "node" "" >}}:8080/helloworld/
 ----
 
-=== Step 8:
+=== Step 8: Cleanup
 
-Finally, let's clean up after ourselves.  First, stop the Red Hat JBoss EAP service.
+Finally, let's clean up after ourselves.  First, stop the Red Hat JBoss EAP service, using the following command.
 
 [source,bash]
 ----
 ansible web -m service -a "name=eap7-standalone state=stopped" -b
 ----
 
-=== Step 9:
+=== Step 9: Remove packages
 
-Next, remove some packages.
+Next, remove some packages - as follows.
 
 [source,bash]
 ----

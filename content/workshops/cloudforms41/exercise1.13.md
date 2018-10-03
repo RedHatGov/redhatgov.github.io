@@ -4,34 +4,38 @@ workshops: cloudforms41
 workshop_weight: 230
 layout: lab
 ---
+ # Exercise 1.13 - Explore Planning
 
-# Explore Planning
+ ## Exercise Description
+ In this exercise you will learn how to plan and optimize a deployment.
 
-> Select **Optimize** → **Planning**.
+## Section 1: Explore Planning
+
+### Step 1. Select **Optimize** → **Planning**.
 
 <img title="CloudForms Optimize Planning" src="../images/cfme-nav-optimize-planning.png" width="1000"/><br/>
 *Optimize Planning*
 
-> Under **Reference VM Selection**, select **All VMs**.
+### Step 2. Under **Reference VM Selection**, select **All VMs**.
 
 <img title="CloudForms Optimize Planning" src="../images/cfme-nav-optimize-planning-ref-vm.png" width="1000"/><br/>
 *Reference VM Selection*
 
-Choose the **CFME027** VM.
+### Step 3. Choose the **CFME027** VM.
 
-Under **VM Options**, set the **Source to Usage**.
+### Step 4. Under **VM Options**, set the **Source to Usage**.
 
-Under **Target Options/Limits**, set **Show** to **Hosts**.
+### Step 5. Under **Target Options/Limits**, set **Show** to **Hosts**.
 
-> Click **Submit**.
+### Step 6. Click **Submit**.
 
 <img title="CloudForms Optimize Planning" src="../images/cfme-nav-optimize-planning-submit.png" width="1000"/><br/>
 *Reference VM Selection Submit*
 
-Examine the result on the right which shows all eligible hosts that could host this type of VM.
+### Step 7. Examine the result on the right, which describes all eligible hosts that could host this type of VM.
 
 
-# Review Information
+## Section 2:  Review Information
 
 > Select the **Report** tab and review the detailed information in the planning report.
 

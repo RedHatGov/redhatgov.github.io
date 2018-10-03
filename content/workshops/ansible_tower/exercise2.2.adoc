@@ -12,25 +12,26 @@ layout: lab
 = Exercise 2.2 - Creating and Running a Job Template
 
 
+== Exercise Description
+This exercise will walk you through the steps required to create a job template and run it.  A job template is a definition and set of parameters for running an Ansible job. In other words, a template combines an Ansible project playbook and the settings required to launch it, into one package.
 
-A job template is a definition and set of parameters for running an Ansible job.
-Job templates are useful to execute the same job many times.
-
-
-== Creating a Job Template
+Templates save setup time, for jobs that are launched repetitively. Once the template is set, it can be edited for future jobs, with different settings.  Templates also drive uniformity, by running templates exactly the same way every time. And, because we're using templates, production responsibilities can be delegated to less experienced production personnel.
 
 
-=== Step 1:
+== Section1: Creating a job template
 
-Select TEMPLATES
 
-=== Step 2:
+=== Step 1: Navigate to the Templates tab
 
-Click on ADD image:at_add.png[Add,35,25], and select JOB TEMPLATE
+Select TEMPLATES image:at_templates.png[temp,120,35]
 
-=== Step 3:
+=== Step 2: Create a new template
 
-Complete the form using the following values
+Click image:at_add.png[Add,35,25] and select JOB TEMPLATE image:at_jobtemplate.png[jobT,150,100]
+
+=== Step 3: Complete the job Template form
+
+Complete the template form, by entering the following values:
 
 |===
 |NAME |Apache Basic Job Template
@@ -52,13 +53,15 @@ image::at_jt_detail.png[caption="Figure 11: ",900,title="Job Template Form"]
 
 
 
-=== Step 4:
+=== Step 4: Save
 
-Click SAVE image:at_save.png[Save] and then select ADD SURVEY image:at_addsurvey.png[Add]
+Click SAVE image:at_save.png[Save] and then select ADD SURVEY image:at_addsurvey.png[Add Survey]
 
-=== Step 5:
+=== Step 5: Complete survey
 
-Complete the survey form with following values
+Job surveys provide extra playbook variables and present them in a user-friendly way. They also enable validation of the input you provide.
+
+Complete the survey form with following values.
 
 |===
 |PROMPT|Please enter a test message for your new website
@@ -75,58 +78,57 @@ image::at_survey_detail.png[caption="Figure 12: ",500,title="Survey Form"]
 
 
 
-=== Step 6:
+=== Step 6: Add the survey input
 
 Select ADD image:at_add.png[Add,35,25]
 
-=== Step 7:
+=== Step 7: Save
 
-Select SAVE image:at_save.png[Add,35,25]
+Select SAVE image:at_save.png[Save,35,25]
 
-=== Step 8:
+=== Step 8: Save at the main page
 
-Back on the main Job Template page, select SAVE image:at_save.png[Add,35,25] again.
-
-
+Back on the main Job Template page, select SAVE image:at_save.png[Save,35,25] again.
 
 
-== Running a Job Template
-
-Now that you've sucessfully creating your Job Template, you are ready to launch it.
-Once you do, you will be redirected to a job screen which is refreshing in realtime
-showing you the status of the job.
 
 
-=== Step 1:
+== Section 2: Running a job template
+
+Now that you've sucessfully created your Job Template, you are ready to launch it.
+You will be redirected to a job screen, which refreshes in realtime
+and displays the status of the job.
+
+
+=== Step 1: Select the Template tab
 
 Select TEMPLATES
 [NOTE]
 Alternatively, if you haven't navigated away from the job templates creation page, you can scroll down to see all existing job templates
 
-=== Step 2:
+=== Step 2: Access Apache Basic Job Template
 
-Click on the rocketship icon image:at_launch_icon.png[Add,35,25] for the *Apache Basic Job Template*
+Click the rocketship icon image:at_launch_icon.png[Add,35,25] for the *Apache Basic Job Template*
 
-=== Step 3:
+=== Step 3: Enter test message
 
 When prompted, enter your desired test message
 
 
 
-image::at_survey_prompt.png[caption="Figure 13: ",title="Survey Prompt"]
+image::at_survey_prompt.png[caption="Figure 13: ",title="Survey Prompt",width=800]
 
 
 
-=== Step 4:
+=== Step 4: Launch the job
 
-Select LAUNCH image:at_survey_launch.png[SurveyL,35,25]
+Select LAUNCH image:at_launch_icon.png[Add,35,25]
 
-=== Step 5:
+=== Step 5: View job summary
 
 Sit back, watch the magic happen
 
-One of the first things you will notice is the summary section.  This gives you details about
-your job such as who launched it, what playbook it's running, what the status is, i.e. pending, running, or complete.
+One of the first things you will notice is the RESULTS section.  This section provides job details, such as who launched it, what playbook it's running, what the status is, i.e. Pending, Running, or Complete.
 
 
 
@@ -134,7 +136,7 @@ image::at_job_status.png[caption="Figure 14: ",title="Job Summary"]
 
 
 
-Scrolling down, you will be able to see details on the play and each task in the playbook.
+Scroll down and view details on the play and each task in the playbook.
 
 
 
@@ -142,8 +144,7 @@ image::at_job_tasklist.png[caption="Figure 15: ",title="Play and Task Details"]
 
 
 
-To the right, you can view standard output; the same way you could if you were running Ansible Core
-from the command line.
+To the right, you can view standard output; the same way you could if you were running Ansible Core from the command line.
 
 
 
@@ -151,7 +152,7 @@ image::at_job_stdout.png[caption="Figure 16: ",900,title="Job Standard Output"]
 
 
 
-=== Step 6:
+=== Step 6: View the new website
 
 Once your job is sucessful, navigate to your new website, where *workshopname* is the name of your workshop, and *#* is your student number:
 
@@ -173,7 +174,6 @@ image::at_web_tm.png[caption="Figure 17: ",title="New Website with Personalized 
 
 == End Result
 At this point in the workshop, you've experienced the core functionality of Ansible Tower.  But wait... there's more!
-You've just begun to explore the possibilities of Ansible Core and Tower.  Take a look at the resources page in this guide
-to explore some more features.
+You've just begun to explore the possibilities of Ansible Core and Tower.  Take a look at the resources page in this guide, to explore some more features.
 
 {{< importPartial "footer/footer.html" >}}

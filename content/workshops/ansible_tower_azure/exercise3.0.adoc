@@ -12,18 +12,19 @@ layout: lab
 
 
 = Exercise 3.0 - Using Ansible to Implement Security
+== Exercise Description
 
 In this exercise, we are going to use Ansible Tower to run DISA STIG and NIST 800-53 evaluations of our environment.  Note that the NIST 800-53 role also includes the execution of DISA STIG evaluation against targeted hosts.
 
-DISA STIG controls
+- DISA STIG controls
 https://galaxy.ansible.com/MindPointGroup/RHEL7-STIG/
 
-NIST 800-53 controls
+- NIST 800-53 controls
 https://galaxy.ansible.com/rhtps/800-53/
 
 == Adding the DISA STIG and NIST 800-53 role to your Tower node
 
-=== Step 1:
+=== Step 1: Download role to Ansible roles directory
 
 In your wetty window (if you closed it, see the link:/workshops/ansible_tower/setup/[SETUP] step, in your workbook), type the following:
 
@@ -42,15 +43,15 @@ You will then see the following, showing that the role has been downloaded to yo
 - rhtps.800-53 (v1.1.1) was installed successfully
 ----
 
-=== Step 2:
+=== Step 2: Select Projects
 
 First, in Ansible Tower, click on image:at_projects_icon.png[PROJECTS]
 
-=== Step 3:
+=== Step 3: Click uploaded
 
-Next, Select ADD     image:at_add.png[Add,35,25]
+Next, Select ADD    image:at_add.png[Add,35,25]
 
-=== Step 4:
+=== Step 4: Complete the Project form
 
 Complete the form using the following entries
 
@@ -71,19 +72,19 @@ a|
 
 image::section3.0-create-project.png[Cred_Detail, 900,caption="Figure 1: ",title="Defining a Project"]
 
-=== Step 5:
+=== Step 5: Save
 
-Select SAVE     image:at_save.png[Save,35,25]
+Select  SAVE   image:at_save.png[Save,35,25]
 
-=== Step 6:
+=== Step 6: Select Template tab
 
-In your Tower window, click on `TEMPLATES`
+In your Tower window, click TEMPLATES `TEMPLATES`
 
-=== Step 7:
+=== Step 7: Add the job template
 
-Click on ADD image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
+Click ADD image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
 
-=== Step 8:
+=== Step 8: Complete the job Template form
 
 Complete the form using the following values.  Note that the `PLAYBOOK` field should offer `800-53.yml` as an option, when clicked.
 
@@ -103,11 +104,11 @@ a|
 
 image::section3.0-create-job-template.png[Cred_Detail, 900,caption="Figure 2: ",title="Defining a Job"]
 
-=== Step 9:
+=== Step 9: Save the template and run it
 
 Click SAVE image:at_save.png[Save], to store your new template, and we are ready to run it.
 
-Click on the rocketship icon image:at_launch_icon.png[Add,35,25] next to the `NIST 800-53 and DISA STIG Job Template` entry, to launch the job.
+Click on the rocket ship icon image:at_launch_icon.png[Add,35,25] next to the `NIST 800-53 and DISA STIG Job Template` entry, to launch the job.
 
 You can see what the job looks like, as it is executing, and what the SCAP results look like, when uploaded to your second node, in the panel, below.
 
@@ -117,7 +118,7 @@ You can see what the job looks like, as it is executing, and what the SCAP resul
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
 
-image:at_800-53_job_status.png[Job Status]
+image:at_800-53_job_status.png[Job Status, width=1024]
 
 {{% /panel %}}
 {{% panel "Results" %}}
@@ -125,12 +126,12 @@ image:at_800-53_job_status.png[Job Status]
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
 
-image:at_scap_report.png[SCAP Report]
+image:at_scap_report.png[SCAP Report, width=1024]
 
 {{% /panel %}}
 {{< /panel_group >}}
 
-=== End Result
+=== Step 10: Observe the scanning process and view reports
 
 You can watch the scan run against your managed node.  Note that each compliance check is named and detailed.
 

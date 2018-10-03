@@ -4,107 +4,112 @@ workshops: cloudforms41
 workshop_weight: 240
 layout: lab
 ---
+# Exercise 1.14 - Examine Policies
 
-# What Are Policies?
+## Exercise Description
+Policy profiles are groups of policies that you can apply to entities within CloudForms.  Two common types of policies are Compliance policies, which check for a specific state in a host or VM, and Control policies, which control a host or VM, depending on certain criteria.
 
-In Red Hat CloudForms, Policy profiles are groupings of policies that you can apply to entities within CloudForms.  Compliance policies check for a certain state in a host or VM. Control policies control a host or VM depending on certain criteria.
+In this exercise, you will learn how to work with policies, events, conditions, actions, alerts, and profiles.
 
+*  An **Event** is a trigger to check a condition.
+*  A **Condition** is a test triggered by an event.
+*  An **Action** is an execution that occurs if a condition is met.
 
-# Examine Policies
+## Section 1: Examine Policies
 
-> Select **Control** → **Explorer**.
+### Step 1. Select **Control** → **Explorer**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-control-explorer.png" width="1000"/><br/>
 *Control Explorer*
 
-> Select the **Policy Profiles** accordion.
+### Step 2. Select the **Policy Profiles** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-policy-profile-accordion.png" /><br/>
 *Policy Profile Accordion*
 
-> Select **All Policy Profiles** → **Linux Compliance Check** → **VM and Instance Compliance: Shell-Shock Vulnerability** → **Vulnerable bash Package (ShellShock)**.
+### Step 3. Select **All Policy Profiles** → **Linux Compliance Check** → **VM and Instance Compliance: Shell-Shock Vulnerability** → **Vulnerable bash Package (ShellShock)**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-shell-shock.png" width="1000"/><br/>
 *Shell-Shock Vulnerability*
 
-On the right, observe the Expression used for this policy.
+### Step 4. On the right, observe the Expression used for this policy.
 
 
-# Explore Events
+## Section 2: Explore Events
 
-> Select the **Events** accordion.
+### Step 1. Select the **Events** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-events-accordion.png" /><br/>
 *Events Accordion*
 
-> Select **All Events** → **Container Image Discovered**.
+### Step 2. Select **All Events** → **Container Image Discovered**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-container-image-discovered.png" width="1000"/><br/>
 *Container Image Discovered*
 
-Observe that the imported policy shows up as assigned.
+### Step 3. Observe that the imported policy shows up as assigned.
 
 
-# Explore Conditions
+## Section 3. Explore Conditions
 
-> Select the **Conditions** accordion.
+### Step 1. Select the **Conditions** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-conditions-accordion.png" /><br/>
 *Conditions Accordion*
 
-> Select **All Conditions** → **All VM and Instance Conditions** → **Vulnerable bash Package (ShellShock)**
+### Step 2. Select **All Conditions** → **All VM and Instance Conditions** → **Vulnerable bash Package (ShellShock)**
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-conditions-shellshock.png" width="1000"/><br/>
 *Conditions ShellShock*
 
-Examine the **Expression**.
+### Step 3. Examine the **Expression**.
 
 
-# Explore Actions
+## Section 4: Explore Actions
 
-> Select the **Actions** accordion.
+### Step 1. Select the **Actions** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-actions-accordion.png" /><br/>
 *Actions Accordion*
 
-> Select **All Actions** → **Send Email to Security Team**.
+### Step 2. Select **All Actions** → **Send Email to Security Team**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-actions-send-email.png" width="1000"/><br/>
 *Send Email*
 
-Observe what this action does and the policies to which it is assigned.
+### Step 3. Observe what this action does and the policies to which it is assigned.
 
-Examine other actions and results.
+### Step 4. Examine other actions and results.
 
 
-# Explore Alerts
+## Section 5. Explore Alerts
 
-> Select the **Alerts** accordion.
+### Step 1. Select the **Alerts** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alerts-accordion.png" /><br/>
 *Alerts Accordion*
 
-> Select **All Alerts** → **VM Memory was decreased**.
+### Step 2. Select **All Alerts** → **VM Memory was decreased**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alerts-vm-decrease.png" width="1000"/><br/>
 *VM Memory Alerts*
 
-Review the **Hardware Reconfigured Parameters** section to see what this alert monitors.
+### Step 3. Review the **Hardware Reconfigured Parameters** section to see what this alert monitors.
 
 
-# Explore Alert Profiles
+## Section 6. Explore Alert Profiles
 
-> Select the **Alert Profiles** accordion.
+### Step 1. Select the **Alert Profiles** accordion.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alert-profile.png" /><br/>
 *Alerts Profile Accordion*
 
-> Select **All Alert Profiles** → **VM and Instance Alert Profiles**.
+### Step 2. Select **All Alert Profiles** → **VM and Instance Alert Profiles**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alert-profile-vm-instance.png" width="1000"/><br/>
 *All VM and Instance Alert Profiles*
 
-Add an alert profile:
+### Step 3. Add an alert profile:
 
 1.  Click <i class="fa fa-cog fa-lg" aria-hidden="true"></i> (**Configuration**) → **Add a New VM and Instance Alert Profile**.
 2.  Enter **VM Memory Decrease** for **Description**.
@@ -118,7 +123,7 @@ Add an alert profile:
 
 <p>{{% alert info %}} An alert profile can contain many alerts or just one. {{% /alert %}}</p>
 
-Assign your alert profile:
+### Step 4. Assign your alert profile:
 
 1.  Select the new alert profile you just created.
 2.  Click <i class="fa fa-cog fa-lg" aria-hidden="true"></i> (**Configuration**) → **Edit assignments for this Alert Profile**.

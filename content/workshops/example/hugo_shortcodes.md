@@ -228,24 +228,6 @@ If the gist contains several files and you want to quote just one of them, you c
 
 {{< gist dischord01 f43dbb1b2cdfc4c3802f >}}
 
-### Speaker Deck
-
-To embed slides from [Speaker Deck](https://speakerdeck.com/), click on "&lt;&#8239;/&gt;&nbsp;Embed" (under Share right next to the template on Speaker Deck) and copy the URL, e.g.:
-
-```html
-<script async class="speakerdeck-embed" data-id="d1900e50eb564917a49200bf690d1644" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
-```
-
-
-Extract the value from the field `data-id` and pass it to the shortcode:
-
-```bash
-{{</* speakerdeck d1900e50eb564917a49200bf690d1644 */>}}
-```
-
-{{< speakerdeck d1900e50eb564917a49200bf690d1644 >}}
-
-
 ### Instagram
 
 If you'd like to embed photo from [Instagram](https://www.instagram.com/), all you need is photo ID from the URL, e. g.:

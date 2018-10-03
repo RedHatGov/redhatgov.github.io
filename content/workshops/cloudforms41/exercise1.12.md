@@ -5,31 +5,36 @@ workshop_weight: 220
 layout: lab
 ---
 
-# Explore Utilization
+# Exercise 1.12 - Explore Utilization
 
-> Select **Optimize** → **Utilization**.
+## Exercise Description
+CloudForms Management Engine server can collect and analyze capacity and utilization data from your virtual infrastructure. In this exercise, you will learn how to view utilization metrics.
+
+## Section 1: Explore Utilization
+
+### Step 1. Select **Optimize** → **Utilization**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-opt-util.png" width="1000"/><br/>
 *Utilization*
 
-> Select **Region 10** → **Cloud/Infrastructure Providers** → **RHV-M**.
+### Step 2. Select **Region 10** → **Cloud/Infrastructure Providers** → **RHV-M**.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-opt-util-reg10.png" width="1000"/><br/>
 *Region 10 RHV-M Utilization*
 
-On the Summary tab, review the daily utilization chart.
+### Step 3. On the **Summary** tab, review the daily utilization chart.
 
-Under the chart, review the CPU and Memory availability and utilization trends.
+### Step 4. Under the chart, review the CPU and Memory availability and utilization trends.
 
 
-# Finer Utilization Details
+## Section 2: Finer Utilization Details
 
-> Select the **Details** tab and review the CPU and Memory trend charts.
+### Step 1. Select the **Details** tab and review the CPU and Memory trend charts.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-opt-util-reg10-details.png" /><br/>
 *Region 10 RHV-M Utilization Details*
 
-> Select the Report tab and review the detailed report.
+### Step 2. Select the **Report** tab and review the detailed report.
 
 <img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-opt-util-reg10-report.png" width="1000"/><br/>
 *Region 10 RHV-M Utilization Report*

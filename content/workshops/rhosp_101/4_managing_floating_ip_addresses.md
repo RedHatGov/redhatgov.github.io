@@ -28,7 +28,7 @@ The range is 192.168.1.70 to 192.168.1.199. Each student project has a quota of 
 
 # Let's Go Allocate Some Floating IP Addresses
 
-> Navigate to Network -> Floating IPs using the second level navigation tabs  
+> Navigate to Compute -> Access & Security -> Floating IPs using the second level navigation tabs  
 
 {{< figure src="../images/lab3-floating-ips-1.png" title="Lab 3 Figure 1: Floating IP Listing" >}}
 

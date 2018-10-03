@@ -51,14 +51,14 @@ If you did not, let the intstructor know now
 
 > On the volume listing row for studentX-vol-1, Click the **down arrow** on the far right hand side of the row  
 > Click **Manage Attachments**  
-> Select **studentX-instance-1** from the **Attach to Instance** drop down  
+> Select **studentX-cirros-1** from the **Attach to Instance** drop down  
 > Leave **Device Name** as is  
 > Click **Attach Volume**
 
 {{< figure src="../images/lab9-storage-4.png" title="Lab 9 Figure 4: Attach Volume to Instance" >}}
 
 {{% alert info %}}
-You should see an info box appear in the upper right corner of the screen that says something similar to 'Info: Attaching volume student1-vol-1 to instance student1-instance-1 on /dev/vdb.'
+You should see an info box appear in the upper right corner of the screen that says something similar to 'Info: Attaching volume student1-vol-1 to instance student1-cirros-1 on /dev/vdb.'
 
 If you did not, let the intstructor know now
 {{% /alert %}}
@@ -66,7 +66,7 @@ If you did not, let the intstructor know now
 {{< figure src="../images/lab9-storage-5.png" title="Lab 9 Figure 5: New Volume Attached to Instance in Volume Listing" >}}
 
 {{% alert success %}}
-You should now have an active volume in your volume listing and it should be attached to your studentX-instance-1.
+You should now have an active volume in your volume listing and it should be attached to your studentX-cirros-1.
 
 If you do not, let the intstructor know now
 {{% /alert %}}
@@ -79,7 +79,7 @@ If you do not, let the intstructor know now
 
 > Click **+ Container** on the left hand side of the screen  
 > Enter **studentX-container** for **Container Name**  
-> Leave **Container Access** set to **Not public**  
+> Leave **Public** under Container Access unchecked  
 > Click **Submit**
 
 {{< figure src="../images/lab9-storage-7.png" title="Lab 9 Figure 7: Create Container" >}}

@@ -26,7 +26,7 @@ You cannot delete the default security group for a project. Also, you cannot del
 
 # Let's Look at the Default Security Group
 
-> Navigate to Network -> Security Groups using the second level navigation tabs  
+> Navigate to Compute -> Access & Security -> Security Groups using the second level navigation tabs  
 
 {{< figure src="../images/lab4-security-groups-1.png" title="Lab 4 Figure 1: Security Group Listing" >}}
 
@@ -71,7 +71,7 @@ If we now look at the Manage Rules screen for the default security group, we wil
 
 # Now We will Create a New Security Group for Web Servers
 
-> Navigate to Network -> Security Groups using the second level navigation tabs  
+> Navigate to Compute -> Access & Security -> Security Groups using the second level navigation tabs  
 
 {{< figure src="../images/lab4-security-groups-1.png" title="Lab 4 Figure 1: Security Group Listing" >}}
 

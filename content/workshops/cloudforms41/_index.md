@@ -9,15 +9,15 @@ menu:
 
 # CloudForms Workshop
 
-## Description 
+## Workshop Description
 
-Manage the hybrid environment, on prem and commercial cloud providers to include:  Quota management, auditing, Continuous discovery and tracking.
+Manage the hybrid environment, on-premise and commercial cloud providers to include:  Quota management, auditing, Continuous discovery and tracking.
 
 ## Who should attend
 
 -   Architects
 -   Developers
--   Technical leads
+-   Technical Leads
 -   Operations Engineers
 
 ## What you will learn
@@ -27,13 +27,13 @@ Manage the hybrid environment, on prem and commercial cloud providers to include
 -   Configuration auditing, change tracking, and drift analysis.
 -   Continuous discovery, monitoring, and tracking.
 
-## Lab Overview
+## Exercise Overview
 
 -   Learn the basics of a CloudForms environment.
 -   Understand resource quota enforcement, cost allocation, and chargeback.
 -   Explore Role-based access control (RBAC) users.
 -   Write and run your own automation script.
 
-## Lab Exercises
+## Exercises
 
 {{% labs cloudforms41 %}}

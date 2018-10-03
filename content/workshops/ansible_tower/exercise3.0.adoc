@@ -13,17 +13,17 @@ layout: lab
 
 = Exercise 3.0 - Using Ansible to Implement Security
 
-In this exercise, we are going to use Ansible Tower to run DISA STIG and NIST 800-53 evaluations of our environment.  Note that the NIST 800-53 role also includes the execution of DISA STIG evaluation against targeted hosts.
+== Exercise Description
+In this exercise, we are going to use Red Hat Ansible Tower to run *DISA STIG and NIST 800-53 evaluations* of our environment.  Note that the NIST 800-53 role also includes the execution of DISA STIG evaluation against targeted hosts.
 
-DISA STIG controls
+- DISA STIG controls
 https://galaxy.ansible.com/MindPointGroup/RHEL7-STIG/
 
-NIST 800-53 controls
+- NIST 800-53 controls
 https://galaxy.ansible.com/rhtps/800-53/
 
-== Adding the DISA STIG and NIST 800-53 role to your Tower node
 
-=== Step 1:
+=== Step 1: Download role to Ansible roles directory
 
 In your wetty window (if you closed it, see the link:/workshops/ansible_tower/setup/[SETUP] step, in your workbook), type the following:
 
@@ -32,7 +32,7 @@ In your wetty window (if you closed it, see the link:/workshops/ansible_tower/se
 sudo ansible-galaxy install rhtps.800-53 -p /etc/ansible/roles
 ----
 
-You will then see the following, showing that the role has been downloaded to your system-wide Ansible roles directory, `/etc/ansible/roles`:
+The image below illustrates that the role has been downloaded to your system-wide Ansible roles directory, `/etc/ansible/roles`:
 
 [source,bash]
 ----
@@ -42,17 +42,17 @@ You will then see the following, showing that the role has been downloaded to yo
 - rhtps.800-53 (v1.1.1) was installed successfully
 ----
 
-=== Step 2:
+=== Step 2: Select Projects
 
-First, in Ansible Tower, click on image:at_projects_icon.png[PROJECTS]
+Click the Projects tab, in the Ansible Tower UI. image:at_projects_icon.png[PROJECTS]
 
-=== Step 3:
+=== Step 3: Click Add
 
-Next, Select ADD     image:at_add.png[Add,35,25]
+Next, Select    image:at_add.png[Add,35,25]
 
-=== Step 4:
+=== Step 4: Complete the Project form
 
-Complete the form using the following entries
+Complete the project form, using the following entries:
 
 |===
 |NAME |Ansible 800-53 Project
@@ -71,19 +71,19 @@ a|
 
 image::section3.0-create-project.png[Cred_Detail, 900,caption="Figure 1: ",title="Defining a Project"]
 
-=== Step 5:
+=== Step 5: Save
 
-Select SAVE     image:at_save.png[Save,35,25]
+Select   SAVE   image:at_save.png[Save,35,25]
 
-=== Step 6:
+=== Step 6: Select Template tab
 
-In your Tower window, click on `TEMPLATES`
+In your Tower window, click `TEMPLATES`
 
-=== Step 7:
+=== Step 7: Add the job template
 
-Click on ADD image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
+Click ADD image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
 
-=== Step 8:
+=== Step 8: Complete the job Template form
 
 Complete the form using the following values.  Note that the `PLAYBOOK` field should offer `800-53.yml` as an option, when clicked.
 
@@ -103,13 +103,13 @@ a|
 
 image::section3.0-create-job-template.png[Cred_Detail, 900,caption="Figure 2: ",title="Defining a Job"]
 
-=== Step 9:
+=== Step 9: Save the template and run it
 
 Click SAVE image:at_save.png[Save], to store your new template, and we are ready to run it.
 
-Click on the rocketship icon image:at_launch_icon.png[Add,35,25] next to the `NIST 800-53 and DISA STIG Job Template` entry, to launch the job.
+Click  the rocketship icon image:at_launch_icon.png[Add,35,25] next to the `NIST 800-53 and DISA STIG Job Template` entry, to launch the job.
 
-You can see what the job looks like, as it is executing, and what the SCAP results look like, when uploaded to your second node, in the panel, below.
+View what the job looks like as it is executing, as well as what the SCAP results look like, when uploaded to your second node, in the panel, below.
 
 {{< panel_group >}}
 {{% panel "Job Status" %}}
@@ -117,7 +117,7 @@ You can see what the job looks like, as it is executing, and what the SCAP resul
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
 
-image:at_800-53_job_status.png[Job Status]
+image:at_800-53_job_status.png[Job Status,width=1024]
 
 {{% /panel %}}
 {{% panel "Results" %}}
@@ -125,12 +125,12 @@ image:at_800-53_job_status.png[Job Status]
 :icons: font
 :imagesdir: /workshops/ansible_tower/images
 
-image:at_scap_report.png[SCAP Report]
+image:at_scap_report.png[SCAP Report,width=1024]
 
 {{% /panel %}}
 {{< /panel_group >}}
 
-=== End Result
+=== Step 10: Observe the scanning process and view reports
 
 You can watch the scan run against your managed node.  Note that each compliance check is named and detailed.
 
@@ -141,6 +141,6 @@ Once the check is complete, you can open a new tab in your web browser, and navi
 {{< urifqdn "http://" "node" "/scap" >}}
 ----
 
-Click on the link called `scan-xccdf-report-...` to refiew the SCAP report that was generated.  Note the failures in the report; look at the machines, if you want, via your Wetty ssh session, to see what the problems might be.
+Click the link called `scan-xccdf-report-...` to review the SCAP report that was generated.  Note the failures in the report; look at the machines, if you want, via your Wetty ssh session, to analyze what the problems might be.
 
 {{< importPartial "footer/footer.html" >}}
