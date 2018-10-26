@@ -13,18 +13,21 @@ layout: lab
 
 image::selinux.png[]
 
-Now that you've gotten a sense of Read Only Containers, let's move on to
-SELinux.
+== Exercise 1.8 - SELinux
+
+== Exercise Description
+
+Let's move on to Security Enhanced Linux (SELinux). We will cover SELinux basics, Docker SELinux security policy and the "SELinux Coloring Book."
+
+== Section 1: Basics of SELINUX
 
 In this section, we’ll cover the basics of SELinux and containers. SELinux
-policy prevents a lot of break out situations where the other security
+policy prevents a lot of break out situations, where the other security
 mechanisms fail. With SELinux on Docker, we write policy that says that the
 container process running as `svirt_lxc_net_t` can only read/write files with
 the `svirt_sandbox_file_t` label.
 
-== Step 1:
-
-Create the following directories.
+=== Step 1. Create the following directories.
 
 .Setup directory and file
 [source,bash]
@@ -58,7 +61,7 @@ cat data/file1.txt
 sestatus | grep mode
 ----
 
-== Step 2:
+=== Step 2. Attempt to cat out the file
 
 .Try to cat out the file
 [source,bash]
@@ -77,7 +80,7 @@ The label for the data doesn’t match the label for containers. The fix is to
 apply the container label to the data by using the `chcon` tool, effectively
 notifying the system that you expect these files to be consumed by containers:
 
-Find the selinux file context associated with containers.
+=== Step 3. Find the selinux file context associated with containers.
 
 .Find the Containers Labels
 [source,bash]
@@ -87,9 +90,7 @@ sudo semanage fcontext --list | grep svirt
 
 The containers should be running at `svirt_sandbox_file_t`
 
-== Step 3:
-
-Apply the container label to the data by using the `chcon` tool
+=== Step 4. Apply the container label to the data, using the `chcon` tool
 
 .Re-label the data dir
 [source,bash]
@@ -97,7 +98,7 @@ Apply the container label to the data by using the `chcon` tool
 chcon -Rt svirt_sandbox_file_t data
 ----
 
-Try to cat out the file again from the container.
+=== Step 5. Try to cat out the file again from the container.
 
 .Run docker again
 [source,bash]
@@ -105,7 +106,7 @@ Try to cat out the file again from the container.
 sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
 ----
 
-Append text from the container to the file
+=== Step 6. Append text from the container to the file
 
 .Append text
 [source,bash]
@@ -118,15 +119,14 @@ sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "Thank You For Attending
 sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
 ----
 
-== DOCKER SELINUX SECURITY POLICY
+== Section 2: Docker SELinux Security Policy
 
-The Docker SELinux security policy is similar to the libvirt security policy
-and is based on the libvirt security policy.
+The Docker SELinux security policy is similar to, and is based on, the libvirt security policy.
+
+*libvirt Policy*
 
 The libvirt security policy is a series of SELinux policies that defines two
-ways of isolating virtual machines. Generally, virtual machines are prevented
-from accessing parts of the network. Specifically, individual virtual machines
-are denied access to one another’s resources.
+methods of isolating virtual machines. Generally, virtual machines are prevented from accessing specific parts of the network. Specifically, individual virtual machines are denied access to each other's resources.
 
 Red Hat extends the libvirt-SELinux model to Docker. The Docker SELinux role
 and Docker SELinux types are based on libvirt. For example, by default, Docker
@@ -148,16 +148,18 @@ system_u:system_r:svirt_lxc_net_t:s0:c186,c641
 |------ SELinux user
 ----
 
+
+*The category system isolates containers from one another.*
+
 If a file is labeled `svirt_sandbox_file_t`, then by default all containers can
-read it. But if the containers write into a directory that has
-`svirt_sandbox_file_t` ownership, they write using their own category (which in
+read it. But if the containers write to a directory that has `svirt_sandbox_file_t` ownership, they write using their own category (which in
 this case is `c186` , `c641`). If you start the same container twice, it will
-get a new category the second time ( a different category than it had the first
-time). The category system isolates containers from one another.
+get a new category the second time (a different category than it had the first
+time).
 
 Types can be applied to processes and to files.
 
-== SELinux Coloring Book
+== Section 3: SELinux Coloring Book
 
 {{< panel_group >}}
 {{% panel "SELinux Coloring Book" %}}

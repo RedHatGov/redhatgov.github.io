@@ -10,13 +10,19 @@ layout: lab
 
 = Exercise 1.7 - Seccomp
 
-== Seccomp
+== Exercise 1.7 - Seccomp
 
-Secure Computing Mode (seccomp) is a kernel feature that allows you to filter system calls to the kernel from a container. The combination of restricted and allowed calls are arranged in profiles, and you can pass different profiles to different containers. Seccomp provides more fine-grained control than capabilities, giving an attacker a limited number of syscalls from the container.
+== Exercise Description
 
-The default seccomp profile for docker is a JSON file and can be viewed here: https://github.com/docker/docker/blob/master/profiles/seccomp/default.json. It blocks 44 system calls out of more than 300 available.Making the list stricter would be a trade-off with application compatibility. A table with a significant part of the blocked calls and the reasoning for blocking can be found here: https://docs.docker.com/engine/security/seccomp/.
+Secure Computing Mode (seccomp) is a kernel feature that enables you to filter system calls to the kernel from a container. The combination of restricted and allowed calls are arranged in profiles, and you can pass different profiles to different containers. Seccomp provides more fine-grained control than capabilities, giving an attacker a limited number of syscalls from the container. This exercise examines how seccomp works and how it can be employed to provide container security.
 
-Seccomp uses the Berkeley Packet Filter (BPF) system, which is programmable on the fly so you can make a custom filter. You can also limit a certain syscall by also customizing the conditions on how or when it should be limited. A seccomp filter replaces the syscall with a pointer to a BPF program, which will execute that program instead of the syscall. All children to a process with this filter will inherit the filter as well. The docker option which is used to operate with seccomp is `--security-opt`.
+The default seccomp profile for Docker is a JSON file and can be viewed here: https://github.com/docker/docker/blob/master/profiles/seccomp/default.json. It blocks 44 system calls out of more than 300 available. Making the list stricter would be a trade-off with application compatibility. A table with a significant part of the blocked calls and the reasoning for blocking can be found here: https://docs.docker.com/engine/security/seccomp/.
+
+*Berkeley Packet Filter (BPF)*
+
+Seccomp uses the Berkeley Packet Filter (BPF) system, which is programmable on the fly so you can make a custom filter. You can also limit a certain syscall by also customizing the conditions on how or when it should be limited. A seccomp filter replaces the syscall with a pointer to a BPF program, which  executes that program instead of the syscall. All children to a process with this filter will inherit the filter as well. The Docker option used to operate with seccomp is `--security-opt`.
+
+== Section 1: Defining seccomp policy
 
 The following is an example of how to explicitly define the default seccomp policy for a container:
 
@@ -25,9 +31,7 @@ The following is an example of how to explicitly define the default seccomp poli
 sudo docker run --security-opt seccomp=/path/to/default/profile.json <container>
 ----
 
-=== Step 1:
-
-Create the working directory:
+=== Step 1. Create the working directory
 
 [source,bash]
 ----
@@ -44,9 +48,8 @@ cd ~/seccomp
 vim 1_chmod.json
 ----
 
-[NOTE]
-Copy the `1_chmod.json` below. Press `i` for Insert, then cut and paste
-`control + v`, then escape and write the file `esc`, `:wq`.
+=== Step 2. Copy the `1_chmod.json`  text below and paste it into the terminal window.
+Press `i` for Insert, then cut and paste `control + v`, then escape and write the file `esc`, `:wq`.
 
 
 This example seccomp file will be used to disallow the `chmod`, `chown`, or `chown32` systemcalls.
@@ -95,7 +98,7 @@ Lets take a closer look at how this file restricts these system calls.
 <2> *SCMP_ACT_ERRNO*: Basically this blocks the chmod syscall. Man page: The thread will receive a return value of errno when it calls a syscall that matches the filter rule.
 
 
-=== Step 2:
+=== Step 3. Apply the restrictions to a container
 
 Lets apply these restrictions to a container by using the `--security-opt` flag to point to our `1_chmod.json` file. We will start a container and try to run the chmod command on a file.
 
@@ -122,7 +125,7 @@ This `FAILED` because we explicitly denied this syscall to the container via the
 
 
 
-== Syscall Identification
+== Section 2: Syscall Identification
 
 Not all container operating systems use the same mappings for syscalls. While one OS may use a direct mapping of the binary `chown` to the syscall `chown` it is not always the case for other operating systems.
 
@@ -131,7 +134,7 @@ To find out what syscalls your application or command is using under the covers 
 Strace is used to identify the underlying syscall being made by the operating system. Lets walk through a example where the syscalls being made do not map directly to our syscalls in the `1_chmod.json` file.
 
 
-=== Step 1:
+=== Step 1. Run Fedora
 
 Let's run a instance of Fedora and use the same `1_chmod.json` profile to try and limit the `chmod` command inside the container.
 
@@ -149,7 +152,7 @@ sudo docker run --rm \
 The command should return a zero. This means that the container was able to `chmod` the `/etc/hosts` file. We want to limit this action and need to map the correct syscall to out seccomp profile. To identify the correct syscall we need to use `strace`.
 
 
-=== Step 2:
+=== Step 2. Add the strace program to trace chmod
 
 Lets run the same command again and add the https://linux.die.net/man/1/strace[`strace`] program to our command to trace the `chmod` command.
 
@@ -202,7 +205,9 @@ exit_group(0)                           = ?
 {{% /panel %}}
 {{< /panel_group >}}
 
-Create a seccomp profile using the new mappings for system calls for `chmod` & `chown`. Check your answer below.
+=== Step 3. Create a seccomp profile using new mappings
+
+Create a seccomp profile using the new mappings, for system calls, for `chmod` & `chown`. Check your answer below.
 
 
 {{< panel_group >}}
@@ -244,6 +249,7 @@ https://linux.die.net/man/2/fchownat[fchownat]
 {{% /panel %}}
 {{< /panel_group >}}
 
+=== Step 4. Create a seccomp profile with syscall mapping
 
 We have now found the correct syscall to add to our seccomp profile. Let's create a seccomp profile with our new syscall mapping. Now we can create a seccomp profile called `2_chmod_fedora.json` using vim, or your favorite editor. You can copy and paste the seccomp profile above into this profile.
 
@@ -283,12 +289,12 @@ chown: changing ownership of '/etc/hosts': Operation not permitted
 {{% /panel %}}
 {{< /panel_group >}}
 
-== Limit Network Syscalls
+== Section 3: Limiting Network Syscalls
 
-Docker presents the socket syscall to containers by default, this my not be a capability you want your containers to have in certain situations. Let's look at another example where we use the Swiss army knife of networking https://linux.die.net/man/1/nc[Netcat]. Netcat is used for just about anything under the sun involving TCP or UDP. It can open TCP connections, send UDP packets, listen on arbitrary TCP and UDP ports, do port scanning, and deal with both IPv4 and IPv6. These may not be features you want you containers to have.
+Docker presents the socket syscall to containers by default, this may not be a capability you want your containers to have in certain situations. Let's look at another example where we use the powerful networking tool, https://linux.die.net/man/1/nc[Netcat]. Netcat is used for just about anything under the sun involving TCP or UDP. It can open TCP connections, send UDP packets, listen on arbitrary TCP and UDP ports, do port scanning, and deal with both IPv4 and IPv6.
 
 
-=== Step 1:
+=== Step 1. Run a container with Netcat installed.
 
 Let's run a container with Netcat installed in it and listen for local traffic on port 999.
 
@@ -311,20 +317,22 @@ exit <2>
 <1> Netcat successfully connected. Use `Control + C` to exit Netcat.
 <2> `exit` to exit the container.
 
-We were able to bind to the localhost and listen for traffic on port 999. In step 2 lets work on disabling networking in this container.
+We were able to bind to the localhost and listen for traffic on port 999. In Step 2 we will disable networking in this container.
 
 
 
-=== Step 2:
+=== Step 2. Identify network-restricting syscalls.
 
-Let's run strace on the Netcat program to identify the syscalls we need for out seccomp profile that will restrict networking from our container.
+Run strace on the Netcat program, to identify the network-restricting syscalls we need for our seccomp profile, in our container.
 
 [source,bash]
 ----
 sudo docker run --rm -it --cap-drop SYS_PTRACE redhatgov/fedora bash
 ----
 
-Then from inside the container run strace and the netcat command.
+=== Step 3. Run strace and the Netcat command.
+
+Next, from inside the container, run strace and the Netcat command.
 
 [source,bash]
 ----
@@ -347,9 +355,11 @@ http://man7.org/linux/man-pages/man2/socket.2.html[Socket Syscall Manpage]
 {{% /panel %}}
 {{< /panel_group >}}
 
-=== Step 3:
+=== Step 4. Create a seccomp profile called `3_network.json`
 
-We have now found the correct syscall to add to our seccomp profile. Create a seccomp profile called `3_network.json` using vim, or your favorite editor. Copy and paste the seccomp profile below into a text editor and save it as a file named `3_network.json` to create the profile.
+We have now found the correct syscall to add to our seccomp profile. Create a seccomp profile called `3_network.json` -  using vim, or your favorite editor.
+
+Copy and paste the seccomp profile below into a text editor. Then, save it as a file named `3_network.json` to create the profile.
 
 {{< panel_group >}}
 {{% panel "Seccomp Profile" %}}
@@ -372,6 +382,8 @@ We have now found the correct syscall to add to our seccomp profile. Create a se
 {{% /panel %}}
 {{< /panel_group >}}
 
+=== Step 5. Test the new seccomp profile
+
 Now that you have your new profile created, let's run the container again and see if our new seccomp profile blocks Netcat from working.
 
 [source,bash]
@@ -386,8 +398,9 @@ sudo docker run --rm -it --security-opt seccomp:3_network.json redhatgov/fedora 
 Ncat: Unable to open any listening sockets. QUITTING. <1>
 ----
 
-<1> Netcat is blocked from connecting to a network socket via the seccomp profile.
+<1> Netcat is blocked from connecting to a network socket, via the seccomp profile.
 
+=== Step 6. Exit the container
 
 .Exit the container
 [source,bash]

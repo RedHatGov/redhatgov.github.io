@@ -12,25 +12,28 @@ layout: lab
 
 image::file.png[]
 
+== Exercise 1.1 - Reproducible and Trustworthy Dockerfiles
+
+== Exercise Description
+
 Now that you've gotten a sense of how Cockpit works, we are going to start
 digging in at the command line on Container security. You can use either the
 Terminal in Cockpit from your browser, a SSH terminal or Terminal client like
 PuTTy. The choice is yours.
 
-== Best Practices
+== Section 1: Best Practices
 
-=== Step 1:
+=== Step 1. Always specify a `tag` in `FROM` instructions.
 
-Always specify a `tag` in `FROM` instructions. `FROM redis` is bad, because it
-pulls the `latest` tag, which changes over time and can be expected to move
+`FROM redis` is bad, because it pulls the `latest` tag, which changes over time and can be expected to move
 with major version changes. `FROM redis:3.0` is better, but can still be
 expected to change with minor updates and bug fixes (which may be exactly what
 you want). If you want to be certain that the image you are pulling has not
-been tampered with, you can pull your images by hash rather than tag. This is
-can also be done from after you make changes to a image and want to
-specifically pull that image; for example:
+been tampered with, you can pull your images by hash rather than tag. This
+can also be done after you make changes to a image and want to
+ pull that specific image; for example:
 
-.Pull a image by sha256
+.Pull an image by sha256
 [source,bash]
 ----
 sudo docker images
@@ -38,7 +41,7 @@ sudo docker images
 sudo docker pull centos@sha256:be5b4a93f116a57ab3fd454ada72421eac892a3a4925627ac9a44f65fcd69cf8
 ----
 
-*Securely Downloading Software in Dockerfiles*
+=== Step 2. Securely Downloading Software in Dockerfiles
 
 In the majority of cases, vendors will make signed checksums available for
 verifying downloads. For example, the Dockerfile for the official Node.js image
@@ -74,6 +77,8 @@ the checksum matches the tarball by using the sha256sum tool.
 <4> Uses GPG to verify that the checksum was signed by whoever owns the keys we obtained.
 
 <5> Tests that the checksum matches the tarball by using the sha256sum tool.
+
+== Step 3. Creating an original checksum
 
 Assuming no signed package or checksum is available, creating your own is easy.
 For example, to create a checksum for a Redis release:
@@ -156,8 +161,8 @@ CMD ["redis-server", "/etc/redis/redis.conf"]
 EXPOSE 6379
 ----
 
+== Step 4. Build the image
 
-Now build the image.
 
 .Build the image
 [source,bash]
@@ -168,8 +173,7 @@ sudo docker build -t redis:3.2.8 .
 [NOTE]
 Notice the `.` at the end of the commands means build the container in the current directory.
 
-After about 2-3 minutes (Depending on how AWS is feeling today) you should see
-something similar to below;
+After about 2-3 minutes you should see something similar to below;
 
 .Successfully built `redis` container
 [source,bash]
@@ -196,8 +200,9 @@ Removing intermediate container f0178e2d39a8
 Successfully built 6b6864a5e3ba
 ----
 
-Then run the container to look around and when your done type `exit` to quit.
-Then we will move on to our next exercise.
+== Step 5. Run the container
+
+Run the container to look around.
 
 [source,bash]
 ----
@@ -211,7 +216,7 @@ sudo docker run --rm -it redis:3.2.8 bash
 
 :icons: font
 
-Now you are inside a container. In this example you can see out command shell changed to `[root@0636c3c4ee44 data]`. Try the following command `redis-server`.
+Now you are inside a container. In this example you can see our command shell changed to `[root@0636c3c4ee44 data]`. Try the following command `redis-server`.
 
 .In a Container
 [source,bash]
