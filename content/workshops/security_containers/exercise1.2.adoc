@@ -40,7 +40,7 @@ beginning of your Dockerfile then change back to the correct user with another
 .Example Dockerfile
 [source,bash]
 ----
-FROM fedora:27
+FROM fedora:29
 
 RUN groupadd -r swuser -g 433 && \
     useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
@@ -85,7 +85,7 @@ Copy the `Dockerfile` above. Press `i` for Insert, then cut and paste
 .Dockerfile
 [source,bash]
 ----
-FROM fedora:27
+FROM fedora:29
 
 RUN groupadd -r swuser -g 433 && \
     useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
@@ -117,3 +117,4 @@ For more information on Containers and correct users to use here are a few good 
 
 - http://www.projectatomic.io/blog/2015/08/why-we-dont-let-non-root-users-run-docker-in-centos-fedora-or-rhel/[Why we don't let non-root users run Docker in CentOS, Fedora, or RHEL]
 - http://www.projectatomic.io/docs/docker-image-author-guidance/[Guidance for Docker Image Authors]
+{{< importPartial "footer/footer.html" >}}

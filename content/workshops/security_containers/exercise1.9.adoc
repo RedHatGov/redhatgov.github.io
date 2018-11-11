@@ -289,3 +289,4 @@ should probably be dropped.
 
 {{% /panel %}}
 {{< /panel_group >}}
+{{< importPartial "footer/footer.html" >}}

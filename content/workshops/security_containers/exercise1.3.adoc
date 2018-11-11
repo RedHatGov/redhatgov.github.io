@@ -132,3 +132,4 @@ after any such calls and before changing the user (removing setuid binaries is
 pointless if the application runs with root privileges).
 
 https://access.redhat.com/solutions/33826[SUID+SGID+Sticky Bit]
+{{< importPartial "footer/footer.html" >}}
