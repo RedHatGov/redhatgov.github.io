@@ -213,3 +213,4 @@ image::selinux7.png[Stopped by Kernel]
 Linux for mere mortals - 2015 Red Hat Summit]
 - https://www.nsa.gov/what-we-do/research/selinux/mailing-list.shtml[SELinux NSA
 Mailing List]
+{{< importPartial "footer/footer.html" >}}

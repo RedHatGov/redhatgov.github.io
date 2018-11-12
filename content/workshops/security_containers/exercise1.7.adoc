@@ -156,7 +156,7 @@ Lets run the same command again and add the https://linux.die.net/man/1/strace[`
 
 [source,bash]
 ----
-sudo docker run --rm -it --cap-add SYS_PTRACE --security-opt seccomp:1_chmod.json redhatgov/fedora strace chmod 400 /etc/hosts
+sudo docker run --rm -it --cap-add SYS_PTRACE --security-opt seccomp:1_chmod.json redhatgov/fedora strace -P /etc/hosts chmod 400 /etc/hosts
 ----
 
 {{< panel_group >}}
@@ -166,37 +166,8 @@ sudo docker run --rm -it --cap-add SYS_PTRACE --security-opt seccomp:1_chmod.jso
 
 [source,bash]
 ----
-execve("/usr/bin/chmod", ["chmod", "400", "/etc/hosts"], 0x7ffd08fb72a0 /* 7 vars */) = 0
-brk(NULL)                               = 0x5620400b0000
-mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f22590fe000
-access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
-fstat(3, {st_mode=S_IFREG|0644, st_size=13847, ...}) = 0
-mmap(NULL, 13847, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f22590fa000
-close(3)                                = 0
-openat(AT_FDCWD, "/lib64/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
-read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\21\2\0\0\0\0\0"..., 832) = 832
-fstat(3, {st_mode=S_IFREG|0755, st_size=2254296, ...}) = 0
-mmap(NULL, 4082272, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f2258af4000
-mprotect(0x7f2258ccf000, 2097152, PROT_NONE) = 0
-mmap(0x7f2258ecf000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1db000) = 0x7f2258ecf000
-mmap(0x7f2258ed5000, 14944, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f2258ed5000
-close(3)                                = 0
-mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f22590f7000
-arch_prctl(ARCH_SET_FS, 0x7f22590f7740) = 0
-mprotect(0x7f2258ecf000, 16384, PROT_READ) = 0
-mprotect(0x56203ed78000, 4096, PROT_READ) = 0
-mprotect(0x7f2259100000, 4096, PROT_READ) = 0
-munmap(0x7f22590fa000, 13847)           = 0
-brk(NULL)                               = 0x5620400b0000
-brk(0x5620400d1000)                     = 0x5620400d1000
-brk(NULL)                               = 0x5620400d1000
-umask(000)                              = 022
 stat("/etc/hosts", {st_mode=S_IFREG|0644, st_size=174, ...}) = 0
 fchmodat(AT_FDCWD, "/etc/hosts", 0400)  = 0
-close(1)                                = 0
-close(2)                                = 0
-exit_group(0)                           = ?
 +++ exited with 0 +++
 ----
 {{% /panel %}}
@@ -344,8 +315,16 @@ strace: ptrace(PTRACE_TRACEME, ...): Operation not permitted
 
 http://man7.org/linux/man-pages/man2/socket.2.html[Socket Syscall Manpage]
 
+
 {{% /panel %}}
 {{< /panel_group >}}
+
+Exit the container
+
+[source,bash]
+----
+[root@9ad9f00480a0 /]# exit
+----
 
 === Step 3:
 
@@ -397,3 +376,4 @@ exit
 ----
 
 This `FAILED` because we explicitly denied this syscall to the container via the seccomp profile. This profile can help to stop would-be attackers from being able to further compromise a container or container host.
+{{< importPartial "footer/footer.html" >}}

@@ -45,7 +45,7 @@ Run a read­only container and specify a few writable file systems using the
 
 [source,bash]
 ----
-sudo docker run --rm -it --name readonly --read-only --tmpfs=/run --tmpfs=/tmp rhel7.3 bash
+sudo docker run --rm -it --name readonly --read-only --tmpfs=/run --tmpfs=/tmp rhel7.6 bash
 ----
 
 === Step 2:
@@ -75,3 +75,4 @@ Now exit the container
 ----
 exit
 ----
+{{< importPartial "footer/footer.html" >}}
