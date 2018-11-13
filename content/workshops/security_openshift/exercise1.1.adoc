@@ -1,236 +1,149 @@
 ---
-title: "Exercise 1.1 - SELinux"
+title: "Exercise 1.1 - OpenShift Templates"
 workshops: security_openshift
 workshop_weight: 20
 layout: lab
 ---
 
+:icons: font
 :source-highlighter: highlight.js
 :source-language: bash
 :imagesdir: /workshops/security_openshift/images
 
-= Exercise 1.1 - SELinux
+= Exercise 1.1 - OpenShift Templates
 
-image::selinux.png[]
+image::kernel.png[]
 
-SELinux is primarily a labeling system that assigns a label (name) to every
-process and system object. This allows every aspect of kernel operations to be
-first labeled, second classified, and then ultimately enforced by a set of
-rules that the provider maintains.
+== What are OpenShift Templates
 
-BENEFITS OF RUNNING SELINUX
 
-- All processes and files are labeled with a type. A type defines a domain for
-processes, and a type for files. Processes are separated from each other by
-running in their own domains, and SELinux policy rules define how processes
-interact with files, as well as how processes interact with each other. Access
-is only allowed if an SELinux policy rule exists that specifically allows it.
-- Fine-grained access control. Stepping beyond traditional UNIX permissions
-that are controlled at user discretion and based on Linux user and group IDs,
-SELinux access decisions are based on all available information, such as an
-SELinux user, role, type, and, optionally, a level.
-- SELinux policy is administratively-defined, enforced system-wide, and is not
-set at user discretion.
-- SELinux can be used to enforce data confidentiality and integrity, as well as
-protecting processes from untrusted inputs.
-- Reduced vulnerability to privilege escalation attacks. SELinux policy rules
-define how processes access files and other processes. If a process is
-compromised, the attacker only has access to the normal functions of that
-process, and to files the process has been configured to have access to.
+A template describes a set of objects that can be parameterized and processed to produce a list of objects for creation by OpenShift Container Platform. A template can be processed to create anything you have permission to create within a project, for example services, build configurations, and deployment configurations. A template may also define a set of labels to apply to every object defined in the template.
 
-_For example, if the Apache HTTP Server is compromised, an attacker cannot use
-that process to read files in user home directories, unless a specific SELinux
-policy rule was added or configured to allow such access._
+You can create a list of objects from a template using the CLI or, if a template has been uploaded to your project or the global template library, using the web console. For a curated set of templates, see the OpenShift Image Streams and Templates library https://github.com/openshift/library[OpenShift Image Streams and Templates library].
 
-== SELinux
+
+== Exploring OpenShift Templates
 
 === Step 1:
 
-In this section, we’ll cover the basics of SELinux and containers. SELinux
-policy prevents a lot of break out situations where the other security
-mechanisms fail. With SELinux on Docker, we write policy that says that the
-container process running as `svirt_lxc_net_t` can only read/write files with
-the `svirt_sandbox_file_t` label.
+First lets create a new name space to work in. Namespaces are a way to get your own space of computing on a OpenShift cluster where you can deploy applications.
 
-Create the following directories.
-
-.Setup directory and file
+.See Template Parameters 
 [source,bash]
 ----
-mkdir selinux
-
-cd  selinux
-
-mkdir data
-
-echo "SELINUX" > data/file1.txt
-
-cat data/file1.txt
+oc new-project template --description="Exploring Templates" --display-name="Templates"
 ----
 
-.Get Current SELinux policy
+Now lets look at a default template for the Nodejs & MongoDB template. 
+
+.See Template Parameters 
 [source,bash]
 ----
-sestatus | grep mode
+oc process --parameters -n openshift nodejs-mongo-persistent
 ----
 
-=== Step 2:
-
-.Try to cat out the file (it should fail)
-[source,bash]
-----
-sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
-----
-
-You can see the reason by inspecting the folder’s security context:
-
-[source,bash]
-----
-ls --scontext data
-----
-
-The label for the data doesn’t match the label for containers. The fix is to
-apply the container label to the data by using the `chcon` tool, effectively
-notifying the system that you expect these files to be consumed by containers:
-
-Find the selinux file context associated with containers.
-
-.Find the Containers Labels
-[source,bash]
-----
-sudo semanage fcontext --list | grep svirt
-----
-
-The containers should be running at `svirt_sandbox_file_t`
-
-=== Step 3:
-
-Apply the container label to the `data` directory by using the `chcon` tool
-
-.relable the data dir
-[source,bash]
-----
-chcon -Rt svirt_sandbox_file_t data
-----
-
-Try to cat out the file again from the container.
-
-.run docker again
-[source,bash]
-----
-sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
-----
-
-What did you see?
-
-Now try it in reverse. Append text from the container to the file
-
-.append text
-[source,bash]
-----
-sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "REDHAT" >> /data/file1.txt'
-----
-
-.see the text you appended from the container
-[source,bash]
-----
-cat data/file1.txt
-----
-
-== DOCKER SELINUX SECURITY POLICY
-
-The Docker SELinux security policy is similar to the libvirt security policy
-and is based on the libvirt security policy.
-
-The libvirt security policy is a series of SELinux policies that defines two
-ways of isolating virtual machines. Generally, virtual machines are prevented
-from accessing parts of the network. Specifically, individual virtual machines
-are denied access to one another’s resources.
-
-Red Hat extends the libvirt-SELinux model to Docker. The Docker SELinux role
-and Docker SELinux types are based on libvirt. For example, by default, Docker
-has access to /usr/var/ and some other locations, but it has complete access to
-things that are labeled with svirt_sandbox_file_t.
-
-https://www.mankier.com/8/docker_selinux - this explains the entire Docker
-SELinux policy. It is not in layman’s terms, but it is complete.
-
-`svirt_sandbox_file_t`
-
-[source,bash]
-----
-system_u:system_r:svirt_lxc_net_t:s0:c186,c641
-^      ^           ^          ^     ^--- unique category
-|      |           |          |----  secret-level 0
-|      |           |--- a shared type
-|      |---SELinux role
-|------ SELinux user
-----
-
-If a file is labeled `svirt_sandbox_file_t`, then by default all containers can
-read it. But if the containers write into a directory that has
-`svirt_sandbox_file_t` ownership, they write using their own category (which in
-this case is `c186` , `c641`). If you start the same container twice, it will
-get a new category the second time ( a different category than it had the first
-time). The category system isolates containers from one another.
-
-Types can be applied to processes and to files.
-
-== SELinux Coloring Book
 
 {{< panel_group >}}
-{{% panel "SELinux Coloring Book" %}}
+{{% panel "Results" %}}
 
-:icons: font
-:imagesdir: /workshops/security_openshift/images
-
-
-Imagine a system where we define types on objects like cats and dogs. A cat and
-dog are process types:
-
-- Cat
-- Dog
-
-image::selinux1.png[Processes]
-
-We have a class of objects that they want to interact with which we call food.
-And I want to add types to the food;
-
-- cat_food
-- dog_food
-
-image::selinux2.png[Objects]
-
-As a policy writer, we would define that a dog has permission to eat dog_chow
-food and a cat has permission to eat cat_chow food. In SELinux we would write
-this rule in policy.
-
-- allow cat cat_chow:food eat;
-- allow dog dog_chow:food eat;
-
-image::selinux3.png[Objects]
-
-With these rules the kernel would allow the cat process to eat food labeled
-cat_chow and the dog to eat food labeled dog_chow.
-
-And processes and objects are happy.
-
-image::selinux4.png[Objects]
-
-
-But in a SELinux system everything is denied by default. This means that if the
-dog process tried to eat the cat_chow, the kernel would prevent it.
-
-image::selinux7.png[Stopped by Kernel]
+.Windtrainer workouts
+[width="80%",cols="3,10,^2,^2",options="header"]
+|=========================================================
+|NAME             |         DESCRIPTION                                                                       |                        GENERATOR     |     VALUE
+|NAME             |         The name assigned to all of the frontend objects defined in this template.        |                                      |     
+|NAMESPACE        |         The OpenShift Namespace where the ImageStream resides.                            |                                      |     openshift
+|MEMORY_LIMIT     |         Maximum amount of memory the Node.js container can use.                           |                                      |     512Mi
+|MEMORY_MONGODB_LIMIT   |  Maximum amount of memory the MongoDB container can use.                            |                                      |     512Mi
+|VOLUME_CAPACITY        |   Volume space available for data, e.g. 512Mi, 2Gi                                  |                                      |     1Gi
+|SOURCE_REPOSITORY_URL  |   The URL of the repository with your application source code.                      |                                      |      
+|SOURCE_REPOSITORY_REF  |   Set this to a branch name, tag or other ref of your repository if you are not using the default branch.    |             |      
+|CONTEXT_DIR            |   Set this to the relative path to your project if it is not in the root of your repository.                 |             |      
+|APPLICATION_DOMAIN     |   The exposed hostname that will route to the Node.js service, if left blank a value will be defaulted.      |             |      
+|GITHUB_WEBHOOK_SECRET  |   Github trigger secret.  A difficult to guess string encoded as part of the webhook URL.  Not encrypted. |   expression   |    [a-zA-Z0-9]{40}
+|GENERIC_WEBHOOK_SECRET |   A secret string used to configure the Generic webhook.                                                  |   expression   |    [a-zA-Z0-9]{40}
+|DATABASE_SERVICE_NAME  |                                                                                                           |                |    mongodb
+|DATABASE_USER          |   Username for MongoDB user that will be used for accessing the database.                                 |  expression    |    user[A-Z0-9]{3}
+|DATABASE_PASSWORD      |   Password for the MongoDB user.                                                                          | expression     |    [a-zA-Z0-9]{16}
+|DATABASE_NAME          |                                                                                                           |                |    sampledb
+|DATABASE_ADMIN_PASSWORD |  Password for the database admin user.                                                                   |  expression    |    [a-zA-Z0-9]{16}
+|NPM_MIRROR              |  The custom NPM mirror URL                                       
+|=========================================================
 
 {{% /panel %}}
 {{< /panel_group >}}
 
-== SELinux Resources
+In this example we see that we can, from a security angle control exactly what we want to run in our container environment. The Template is how we can configure what source code repositories we want to allow a end user run or developer to develop against. Templates define what the application limits can be for further constraining an applications memory, or storage. This is alo a place where we can pass environmental variables to the application as well. 
 
-- https://stopdisablingselinux.com/[Seriously, stop disabling SELinux.]
--
-https://www.youtube.com/watch?v=cNoVgDqqJmM&feature=youtu.be[Security-enhanced
-Linux for mere mortals - 2015 Red Hat Summit]
-- https://www.nsa.gov/what-we-do/research/selinux/mailing-list.shtml[SELinux
-NSA Mailing List]
+=== Step 2:
+
+Lets take a deeper look at Templates by switching over to a higher privileged user to be able to edit the Template with your built in editor of choice, (it's VIM).
+
+.Login as the System user 
+[source,bash]
+----
+oc login -u system:admin
+----
+
+OpenShift provides the ability to quickly make changes to templates for users with correct permissions. 
+
+.View/Edit Template Parameters 
+[source,bash]
+----
+oc edit -n openshift template nodejs-mongo-persistent
+----
+
+.Exit by `esc + : + q`
+[source,bash]
+----
+esc + : + q
+----
+
+=== Step 3:
+
+Lets go ahead and launch a template from the commandline 
+
+.Launch the Template
+[source,bash]
+----
+oc process -n openshift nodejs-mongo-persistent | oc create -f -
+----
+
+.Multiple OpenShift objects created
+[source,bash]
+----
+secret "nodejs-mongo-persistent" created
+service "nodejs-mongo-persistent" created
+route "nodejs-mongo-persistent" created
+imagestream "nodejs-mongo-persistent" created
+buildconfig "nodejs-mongo-persistent" created
+deploymentconfig "nodejs-mongo-persistent" created
+persistentvolumeclaim "mongodb" created
+service "mongodb" created
+deploymentconfig "mongodb" created
+----
+
+
+You should be able to login to the web UI (*EXAMPLE:* `http://nodejs-mongo-persistent-myproject.apps.ocp.0.redhatgov.io/`) and in your Templates project and see the Nodejs application. 
+
+Click the Nodejs route; 
+
+image::node-route.png[]
+
+
+
+
+
+{{< panel_group >}}
+{{% panel "Results" %}}
+
+:icons: font
+:imagesdir: /workshops/security_openshift/images
+
+image::node-mongo.png[]
+
+
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+

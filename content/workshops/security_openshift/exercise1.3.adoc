@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1.3 - Image Streams & Secrets"
+title: "Exercise 1.3 - SELinux"
 workshops: security_openshift
 workshop_weight: 40
 layout: lab
@@ -9,210 +9,228 @@ layout: lab
 :source-language: bash
 :imagesdir: /workshops/security_openshift/images
 
-= Exercise 1.3 - Image Streams & Secrets
+= Exercise 1.3 - SELinux
 
-image::secrets.png[]
+image::selinux.png[]
 
-== Image Stream
+SELinux is primarily a labeling system that assigns a label (name) to every
+process and system object. This allows every aspect of kernel operations to be
+first labeled, second classified, and then ultimately enforced by a set of
+rules that the provider maintains.
 
-https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/builds_and_image_streams.html#image-streams[Image
-streams] can be used to automatically perform an action when new images are
-created. Builds and deployments can watch an image stream to receive
-notifications when new images are added and react by performing a build or
-deployment, respectively.
+BENEFITS OF RUNNING SELINUX
 
-For example, if a deployment is using a certain image and a new version of that
-image is created, a deployment could be automatically performed.
+- All processes and files are labeled with a type. A type defines a domain for
+processes, and a type for files. Processes are separated from each other by
+running in their own domains, and SELinux policy rules define how processes
+interact with files, as well as how processes interact with each other. Access
+is only allowed if an SELinux policy rule exists that specifically allows it.
+- Fine-grained access control. Stepping beyond traditional UNIX permissions
+that are controlled at user discretion and based on Linux user and group IDs,
+SELinux access decisions are based on all available information, such as an
+SELinux user, role, type, and, optionally, a level.
+- SELinux policy is administratively-defined, enforced system-wide, and is not
+set at user discretion.
+- SELinux can be used to enforce data confidentiality and integrity, as well as
+protecting processes from untrusted inputs.
+- Reduced vulnerability to privilege escalation attacks. SELinux policy rules
+define how processes access files and other processes. If a process is
+compromised, the attacker only has access to the normal functions of that
+process, and to files the process has been configured to have access to.
 
-== Secrets
+_For example, if the Apache HTTP Server is compromised, an attacker cannot use
+that process to read files in user home directories, unless a specific SELinux
+policy rule was added or configured to allow such access._
 
-A
-https://docs.openshift.com/container-platform/3.4/dev_guide/secrets.html#secrets-image-pull-secrets[Secret]
-is an object that contains a small amount of sensitive data such as a password,
-a token, or a key. Such information might otherwise be put in a Pod
-specification or in an image; putting it in a Secret object allows for more
-control over how it is used, and reduces the risk of accidental exposure. Users
-can create secrets, and the system also creates some secrets.
-
-Key properties include:
-
-- Secret data can be referenced independently from its definition.
-- Secret data volumes are backed by temporary file-storage facilities (`tmpfs`)
-and never come to rest on a node.
-- Secret data can be shared within a namespace.
-
-== Image Streams & Secrets
+== SELinux
 
 === Step 1:
 
-*Check your user*
+In this section, we’ll cover the basics of SELinux and containers. SELinux
+policy prevents a lot of break out situations where the other security
+mechanisms fail. With SELinux on Docker, we write policy that says that the
+container process running as `svirt_lxc_net_t` can only read/write files with
+the `svirt_sandbox_file_t` label.
 
-.see what user you are loged in as
-[source]
+Create the following directories.
+
+.Setup directory and file
+[source,bash]
 ----
-oc whoami
+mkdir selinux
+
+cd  selinux
+
+mkdir data
+
+echo "SELINUX" > data/file1.txt
+
+cat data/file1.txt
 ----
 
-.login as system:admin
-[source]
+.Get Current SELinux policy
+[source,bash]
 ----
-oc login -u system:admin
+sestatus | grep mode
 ----
 
 === Step 2:
 
-*Create the default image streams*
-
-Now we are going to create a JBoss
-https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/builds_and_image_streams.html[image
-stream]. Image streams present a single virtual view of related images.
-
-.create the image stream
-[source]
+.Try to cat out the file (it should fail)
+[source,bash]
 ----
-cd jboss-openshift-templates
-
-oc create -n openshift -f jboss-image-streams.json
+sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
 ----
 
-.switch to developer
-[source]
-----
-oc login -u developer
-----
+You can see the reason by inspecting the folder’s security context:
 
-Now create a new project called `SSO`.
-
-.SSO Project
-[source]
+[source,bash]
 ----
-oc new-project sso --description="Red Hat SSO" --display-name="SSO Keycloak"
+ls --scontext data
 ----
 
-Click on the `SSO Keycloak` project you just created.
+The label for the data doesn’t match the label for containers. The fix is to
+apply the container label to the data by using the `chcon` tool, effectively
+notifying the system that you expect these files to be consumed by containers:
 
-.Click SSO Keycloak Project
-image::sso-project.png[]
+Find the selinux file context associated with containers.
+
+.Find the Containers Labels
+[source,bash]
+----
+sudo semanage fcontext --list | grep svirt
+----
+
+The containers should be running at `svirt_sandbox_file_t`
 
 === Step 3:
 
-*Create Red Hat SSO application*
+Apply the container label to the `data` directory by using the `chcon` tool
 
-The Red Hat SSO container needs secrets from the Java Key Store (jks for
-short). Instead of hard coding these into the SSO image itself, OpenShift
-utilizes
-https://docs.openshift.com/container-platform/3.4/dev_guide/secrets.html#secrets-image-pull-secrets[`Secrets`]
-to hold the sensitive information.
-
-To get a feeling of what a secrets file looks like `cat` out the following file.
-
-[source]
+.relable the data dir
+[source,bash]
 ----
-cat secrets/sso-app-secret.json
+chcon -Rt svirt_sandbox_file_t data
 ----
 
-This is a excerpt of the `Secret` file.
+Try to cat out the file again from the container.
 
-.sso-app-secret.json
-[source]
+.run docker again
+[source,bash]
 ----
-"kind": "Secret", <1>
-"apiVersion": "v1",
-"metadata": {
-    "annotations": {
-        "description": "Default secret file with name 'jboss' and password 'mykeystorepass'"
-      },
-        "name": "sso-app-secret" <2>
-      },
-        "data": {
-                "keystore.jks": "/u3+7QAAAAIAAAABAAAAAQAF.....<snip> <3>
+sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
 ----
 
+What did you see?
 
-<1> Type of Object
+Now try it in reverse. Append text from the container to the file
 
-<2> Name of the `Secret`
-
-<3> The actual key & value of the secret, base64 encoded.
-
-The Secret object type provides a mechanism to hold sensitive information such
-as passwords. Secrets decouple sensitive content from the pods. You can mount
-secrets into containers using a volume plug-in or the system can use secrets to
-perform actions on behalf of a pod.
-
-.create `secrets` for `SSO`
-[source]
+.append text
+[source,bash]
 ----
-oc create -n sso -f secrets/sso-app-secret.json
+sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "REDHAT" >> /data/file1.txt'
 ----
 
-Now lets launch the app
-
-.launch `SSO`
-[source]
+.see the text you appended from the container
+[source,bash]
 ----
-oc process -f sso/sso71-https.json -p HTTPS_NAME=jboss HTTPS_PASSWORD=mykeystorepass | oc create -n sso -f -
+cat data/file1.txt
 ----
 
-You will see two pods with different
-https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/routes.html[routes]
-being built, the first is for a plain `http` route to the app, the second is
-via a `https` route. Click the top url (example for student 0:
-`https://secure-sso-sso.apps.ose.0.redhatgov.io`).
+== DOCKER SELINUX SECURITY POLICY
 
-.SSO Keycloak Project
-image::sso-overview.png[]
+The Docker SELinux security policy is similar to the libvirt security policy
+and is based on the libvirt security policy.
 
-*Add `auth` to the end of the url*
+The libvirt security policy is a series of SELinux policies that defines two
+ways of isolating virtual machines. Generally, virtual machines are prevented
+from accessing parts of the network. Specifically, individual virtual machines
+are denied access to one another’s resources.
 
-image::sso-auth.png[]
+Red Hat extends the libvirt-SELinux model to Docker. The Docker SELinux role
+and Docker SELinux types are based on libvirt. For example, by default, Docker
+has access to /usr/var/ and some other locations, but it has complete access to
+things that are labeled with svirt_sandbox_file_t.
 
-Now click Administration Console
+https://www.mankier.com/8/docker_selinux - this explains the entire Docker
+SELinux policy. It is not in layman’s terms, but it is complete.
 
-image::sso-admin-console.png[]
+`svirt_sandbox_file_t`
 
-The default password is admin / admin
-
-.login to SSO
-[source]
+[source,bash]
 ----
-username:  admin
-
-password:  admin
+system_u:system_r:svirt_lxc_net_t:s0:c186,c641
+^      ^           ^          ^     ^--- unique category
+|      |           |          |----  secret-level 0
+|      |           |--- a shared type
+|      |---SELinux role
+|------ SELinux user
 ----
 
-.Red Hat SSO Login
-image::sso-main-login.png[]
+If a file is labeled `svirt_sandbox_file_t`, then by default all containers can
+read it. But if the containers write into a directory that has
+`svirt_sandbox_file_t` ownership, they write using their own category (which in
+this case is `c186` , `c641`). If you start the same container twice, it will
+get a new category the second time ( a different category than it had the first
+time). The category system isolates containers from one another.
 
-This is Red Hat's SSO server. Red Hat Single Sign-On (RH-SSO) is based on the
-Keycloak project and enables you to secure your web applications by providing
-Web single sign-on (SSO) capabilities based on popular standards such as SAML
-2.0, OpenID Connect and OAuth 2.0.
+Types can be applied to processes and to files.
 
-The RH-SSO server can act as a SAML or OpenID Connect-based Identity Provider,
-mediating with your enterprise user directory or 3rd-party SSO provider for
-identity information and your applications via standards-based tokens. This is
-like having your own login with your Gmail or Facebook account you see all over
-the web. Now you can control your own identity provider instead of relying on
-third parties for that.
+== SELinux Coloring Book
 
-Features:
+{{< panel_group >}}
+{{% panel "SELinux Coloring Book" %}}
 
-- *Authentication Server:* Acts as a standalone SAML or OpenID Connect-based
-Identity Provider.
-- *User Federation:* Certified with LDAP servers and Microsoft Active Directory
-as sources for user information.
-- *Identity Brokering:* Integrates with 3rd-party Identity Providers including
-leading social networks as identity source.
-- *REST APIs and Administration GUI:* Specify user federation, role mapping,
-and client applications with easy-to-use Administration GUI and REST APIs.
+:icons: font
+:imagesdir: /workshops/security_openshift/images
 
-.Red Hat SSO Overview
-image::sso-main.png[]
 
-We went over a lot in this one, but if you made it this far you successfully
+Imagine a system where we define types on objects like cats and dogs. A cat and
+dog are process types:
 
-- Deployed a OpenShift `imagestream`
-- Learned about OpenShift `Secrets`
-- Deployed a `SSL` secured & containerized application
-- Got a overview of `Red Hat SSO`
+- Cat
+- Dog
+
+image::selinux1.png[Processes]
+
+We have a class of objects that they want to interact with which we call food.
+And I want to add types to the food;
+
+- cat_food
+- dog_food
+
+image::selinux2.png[Objects]
+
+As a policy writer, we would define that a dog has permission to eat dog_chow
+food and a cat has permission to eat cat_chow food. In SELinux we would write
+this rule in policy.
+
+- allow cat cat_chow:food eat;
+- allow dog dog_chow:food eat;
+
+image::selinux3.png[Objects]
+
+With these rules the kernel would allow the cat process to eat food labeled
+cat_chow and the dog to eat food labeled dog_chow.
+
+And processes and objects are happy.
+
+image::selinux4.png[Objects]
+
+
+But in a SELinux system everything is denied by default. This means that if the
+dog process tried to eat the cat_chow, the kernel would prevent it.
+
+image::selinux7.png[Stopped by Kernel]
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+== SELinux Resources
+
+- https://stopdisablingselinux.com/[Seriously, stop disabling SELinux.]
+-
+https://www.youtube.com/watch?v=cNoVgDqqJmM&feature=youtu.be[Security-enhanced
+Linux for mere mortals - 2015 Red Hat Summit]
+- https://www.nsa.gov/what-we-do/research/selinux/mailing-list.shtml[SELinux
+NSA Mailing List]
