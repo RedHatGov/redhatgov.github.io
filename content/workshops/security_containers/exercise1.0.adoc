@@ -55,7 +55,7 @@ Cockpit makes it easy to monitor and administer Docker containers running on Coc
 
 [source,bash]
 ----
-https://<workshop name>.<student number>.redhatgov.io:9090
+{{< uri2partfqdn "https://" ":9090" >}}
 ----
 
 === Step 2. Log in to Cockpit
@@ -65,7 +65,7 @@ https://<workshop name>.<student number>.redhatgov.io:9090
 ----
 Username: ec2-user
 
-Password: redhat!@#
+Password: <to be provided>
 ----
 
 After logging in, you should see the Cockpit web UI.
@@ -143,9 +143,18 @@ image::run-image.png[Run with options]
 
 === Step 6. View metadata
 
+
 Click on the newly created container to view all of the metadata about the
 container. Shows the state, the command executed, the container and image
 IDs, a timestamp, as well as the container's own terminal.
+=======
+
+Click on the newly created container [>]
+
+image::detail1.png[Image Detail]
+
+Expand the view and see all of the metadata about the container. Shows the state, the command executed, the container's and image's IDs, a timestamp, as well as the container's own terminal:
+
 
 image::detail.png[Image Detail]
 
@@ -178,7 +187,26 @@ When you've completed examining Cockpit, stop and delete the container using the
 
 [source,bash]
 ----
-Click:  Stop  ->  Delete
+Click:  Stop 
 ----
 
-image::delete.png[Stop & Delete]
+image::stop.png[Stop]
+
+[source,bash]
+----
+Drop Down: Select Everything to Refresh the page and display the exited container image
+----
+image::refresh.png[Refresh]
+
+[source,bash]
+----
+Select the [Trash] icon to remove the image
+----
+image::trash.png[Trash]
+
+[source,bash]
+----
+Confirm the delete
+----
+image::delete.png[Delete]
+{{< importPartial "footer/footer.html" >}}

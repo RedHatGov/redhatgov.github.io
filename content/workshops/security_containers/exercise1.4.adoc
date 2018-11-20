@@ -206,3 +206,4 @@ Make sure everything is cleared out.
 ----
 sudo docker ps -a
 ----
+{{< importPartial "footer/footer.html" >}}

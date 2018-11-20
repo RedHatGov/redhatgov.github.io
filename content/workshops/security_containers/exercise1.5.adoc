@@ -324,3 +324,4 @@ PID   USER     TIME   COMMAND
 {{< /panel_group >}}
 
 This is useful for debugging tools, such as strace. This allows you to give more permissions to certain containers without changing or restarting the application.
+{{< importPartial "footer/footer.html" >}}

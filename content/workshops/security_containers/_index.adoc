@@ -59,3 +59,7 @@ Special Thanks to:
 - Brent Baude
 - Adrian Mouat
 {{% /alert %}}
+
+=======
+
+{{< importPartial "footer/footer.html" >}}

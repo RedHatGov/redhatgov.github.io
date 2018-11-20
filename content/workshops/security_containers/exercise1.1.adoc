@@ -38,14 +38,13 @@ can also be done after you make changes to a image and want to
 ----
 sudo docker images
 
-sudo docker pull centos@sha256:be5b4a93f116a57ab3fd454ada72421eac892a3a4925627ac9a44f65fcd69cf8
+sudo docker pull centos@sha256:67dad89757a55bfdfabec8abd0e22f8c7c12a1856514726470228063ed86593b
 ----
 
 === Step 2. Securely Downloading Software in Dockerfiles
 
 In the majority of cases, vendors will make signed checksums available for
-verifying downloads. For example, the Dockerfile for the official Node.js image
-includes the following:
+verifying downloads. For example, this Dockerfile snippet fro the official Node.js image repository includes the following:
 
 .Example of signed checksums in a Dockerfile
 [source,bash]
@@ -85,15 +84,14 @@ For example, to create a checksum for a Redis release:
 
 [source,bash]
 ----
-curl http://download.redis.io/releases/redis-3.2.8.tar.gz --output redis.tar.gz --progress-bar
+curl http://download.redis.io/releases/redis-5.0.1.tar.gz --output redis.tar.gz --progress-bar
 ----
 
 [source,bash]
 ----
 sha1sum -b redis.tar.gz
 
-
-6780d1abb66f33a97aad0edbe020403d0a15b67f *redis.tar.gz
+32a3accc9ac63896eeb7a3bf27ab667b095ba30a *redis.tar.gz
 ----
 
 Here, we’re creating a 160-bit SHA-1 checksum. The -b flag tells the sha1sum
@@ -125,39 +123,39 @@ paste `control + v`, then escape and write the file `esc`, `:wq`.
 .Dockerfile Redis with verified software download
 [source,bash]
 ----
-FROM fedora:27
-
-# Verified sha1sum
-RUN cd /tmp && \
-    curl -sSL -o redis.tar.gz \
-    http://download.redis.io/releases/redis-3.2.8.tar.gz && \
-    echo "6780d1abb66f33a97aad0edbe020403d0a15b67f *redis.tar.gz" | sha1sum -c -
-
-RUN cd /tmp && \
-    tar xvzf redis.tar.gz && \
-    cd redis-3.2.8 && \
-    dnf install -y make gcc && \
-    make && \
-    make install && \
-    cp -f src/redis-sentinel /usr/local/bin && \
-    mkdir -p /etc/redis && \
-    cp -f *.conf /etc/redis && \
-    rm -rf /tmp/redis-3.2.8* && \
-    sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
-    sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
-    sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
-    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
-
-# Define mountable directories.
-VOLUME ["/data"]
-
-# Define working directory.
-WORKDIR /data
-
-# Define default command.
-CMD ["redis-server", "/etc/redis/redis.conf"]
-
-# Expose ports.
+FROM fedora:29                                                                                                                                             
+                                                                                                                                                           
+# Verified sha1sum                                                                                                                                         
+RUN cd /tmp && \                                                                                                                                           
+    curl -sSL -o redis.tar.gz \                                                                                                                            
+    http://download.redis.io/releases/redis-5.0.1.tar.gz && \                                                                                              
+    echo "32a3accc9ac63896eeb7a3bf27ab667b095ba30a *redis.tar.gz" | sha1sum -c -                                                                           
+                                                                                                                                                           
+RUN cd /tmp && \                                                                                                                                           
+    tar xvzf redis.tar.gz && \                                                                                                                             
+    cd redis-5.0.1 && \                                                                                                                                    
+    dnf install -y make gcc && \                                                                                                                           
+    make && \                                                                                                                                              
+    make install && \                                                                                                                                      
+    cp -f src/redis-sentinel /usr/local/bin && \                                                                                                           
+    mkdir -p /etc/redis && \                                                                                                                               
+    cp -f *.conf /etc/redis && \                                                                                                                           
+    rm -rf /tmp/redis-5.0.1* && \                                                                                                                          
+    sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \                                                                                              
+    sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \                                                                                         
+    sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \                                                                                   
+    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf                                                                                                
+                                                                                                                                                           
+# Define mountable directories.                                                                                                                            
+VOLUME ["/data"]                                                                                                                                           
+                                                                                                                                                           
+# Define working directory.                                                                                                                                
+WORKDIR /data                                                                                                                                              
+                                                                                                                                                           
+# Define default command.                                                                                                                                  
+CMD ["redis-server", "/etc/redis/redis.conf"]                                                                                                              
+                                                                                                                                                           
+# Expose ports.                                                                                                                                            
 EXPOSE 6379
 ----
 
@@ -167,7 +165,7 @@ EXPOSE 6379
 .Build the image
 [source,bash]
 ----
-sudo docker build -t redis:3.2.8 .
+sudo docker build -t redis:5.0.1 .
 ----
 
 [NOTE]
@@ -178,26 +176,7 @@ After about 2-3 minutes you should see something similar to below;
 .Successfully built `redis` container
 [source,bash]
 ----
-make[1]: Leaving directory '/tmp/redis-3.2.8/src'
----> 3f0fbb2cffc7
-Removing intermediate container 2723d408fca1
-Step 4 : VOLUME /data
----> Running in a0dba76fe7e3
----> df656c4567c6
-Removing intermediate container a0dba76fe7e3
-Step 5 : WORKDIR /data
----> Running in 8f17d79f5d29
----> 972733d86348
-Removing intermediate container 8f17d79f5d29
-Step 6 : CMD redis-server /etc/redis/redis.conf
----> Running in e54f055547de
----> 9a2d24686f5f
-Removing intermediate container e54f055547de
-Step 7 : EXPOSE 6379
----> Running in f0178e2d39a8
----> 6b6864a5e3ba
-Removing intermediate container f0178e2d39a8
-Successfully built 6b6864a5e3ba
+Successfully built
 ----
 
 == Step 5. Run the container
@@ -206,7 +185,7 @@ Run the container to look around.
 
 [source,bash]
 ----
-sudo docker run --rm -it redis:3.2.8 bash
+sudo docker run --rm -it redis:5.0.1 bash
 ----
 
 
@@ -216,31 +195,46 @@ sudo docker run --rm -it redis:3.2.8 bash
 
 :icons: font
 
+
 Now you are inside a container. In this example you can see our command shell changed to `[root@0636c3c4ee44 data]`. Try the following command `redis-server`.
+=======
+Now you are inside a container. In this example you can see out command shell changed to `[root@1afa082098ae data]`. Try the following command `redis-server`.
 
 .In a Container
 [source,bash]
 ----
-[root@0636c3c4ee44 data]# redis-server
-19:C 20 Jul 13:56:30.299 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
-                _._
-           _.-``__ ''-._
-      _.-``    `.  `_.  ''-._           Redis 3.2.8 (00000000/0) 64 bit
-  .-`` .-```.  ```\/    _.,_ ''-._
- (    '      ,       .-`  | `,    )     Running in standalone mode
- |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
- |    `-._   `._    /     _.-'    |     PID: 19
-  `-._    `-._  `-./  _.-'    _.-'
- |`-._`-._    `-.__.-'    _.-'_.-'|
- |    `-._`-._        _.-'_.-'    |           http://redis.io
-  `-._    `-._`-.__.-'_.-'    _.-'
- |`-._`-._    `-.__.-'    _.-'_.-'|
- |    `-._`-._        _.-'_.-'    |
-  `-._    `-._`-.__.-'_.-'    _.-'
-      `-._    `-.__.-'    _.-'
-          `-._        _.-'
-              `-.__.-'
-
+[root@1afa082098ae data]# redis-server                                                                                                                     
+11:C 10 Nov 2018 16:53:04.041 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo                                                                              
+11:C 10 Nov 2018 16:53:04.041 # Redis version=5.0.1, bits=64, commit=00000000, modified=0, pid=11, just started                                            
+11:C 10 Nov 2018 16:53:04.041 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/re
+dis.conf                                                                                                                                                   
+                _._                                                                                                                                        
+           _.-``__ ''-._                                                                                                                                   
+      _.-``    `.  `_.  ''-._           Redis 5.0.1 (00000000/0) 64 bit                                                                                    
+  .-`` .-```.  ```\/    _.,_ ''-._                                                                                                                         
+ (    '      ,       .-`  | `,    )     Running in standalone mode                                                                                         
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379                                                                                                         
+ |    `-._   `._    /     _.-'    |     PID: 11                                                                                                            
+  `-._    `-._  `-./  _.-'    _.-'                                                                                                                         
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                                                                                                        
+ |    `-._`-._        _.-'_.-'    |           http://redis.io                                                                                              
+  `-._    `-._`-.__.-'_.-'    _.-'                                                                                                                         
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                                                                                                        
+ |    `-._`-._        _.-'_.-'    |                                                                                                                        
+  `-._    `-._`-.__.-'_.-'    _.-'                                                                                                                         
+      `-._    `-.__.-'    _.-'                                                                                                                             
+          `-._        _.-'                                                                                                                                 
+              `-.__.-'                                                                                                                                     
+                                                                                                                                                           
+11:M 10 Nov 2018 16:53:04.043 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value o
+f 128.                                                                                                                                                     
+11:M 10 Nov 2018 16:53:04.043 # Server initialized                                                                                                         
+11:M 10 Nov 2018 16:53:04.043 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overc
+ommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.                          
+11:M 10 Nov 2018 16:53:04.043 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage iss
+ues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in o
+rder to retain the setting after a reboot. Redis must be restarted after THP is disabled.                                                                  
+11:M 10 Nov 2018 16:53:04.043 * Ready to accept connections 
 ----
 
 Type `control + c` to exit.
@@ -252,8 +246,9 @@ control + c
 .Type `exit` to quit
 [source,bash]
 ----
-[root@0636c3c4ee44 data]# exit
+[root@1afa082098ae data]# exit
 ----
 
 {{% /panel %}}
 {{< /panel_group >}}
+{{< importPartial "footer/footer.html" >}}
