@@ -12,13 +12,20 @@ layout: lab
 
 image::namespaces.png[]
 
-== Namespaces
+== Exercise 1.5 - Namespaces
 
-=== Pid Namespace
+== Exercise Description
+In this exercise, we will examine how to use namespaces to manage initialization processes, in multiple containers.
 
-PID namespaces allow processes in different containers to have the same PID, so each container can have its own init (PID1) process that manages various system initialization tasks as well as containers life cycle. Also, each container has its unique /proc directory. Note that from within the container you can monitor only processes running inside this container. In other words, the container is only aware of its native processes and can not "see" the processes running in different parts of the system. On the other hand, the host operating system is aware of processes running inside of the container, but assigns them different PID numbers.
 
-Let's launch a container in it's own namespace and see what process it can see from inside the container.
+
+PID namespaces enable processes in different containers to have the same PID (process identifier). This means each container can have its own init (PID1) process that manages various system initialization tasks, as well as the container life cycle.
+
+Also, each container has its unique /proc directory. Note that from within the container, you can only monitor those processes running inside this container. In other words, the container is only aware of its native processes and can not "see" the processes running in different parts of the system. It is the host operating system that is aware of processes running inside of the container, but assigns them different PID numbers.
+
+== Section 1: Launching a container
+
+Launch a container in it's own namespace and see what process it can see from inside the container.
 
 [source, bash]
 ----
@@ -41,6 +48,8 @@ PID   USER     TIME   COMMAND
 
 {{% /panel %}}
 {{< /panel_group >}}
+
+== Section 2: Enable namespace Sharing
 
 Containers can share namespaces with other containers. This has to be explicitly set to enable sharing. To enable namespace sharing we will use the `--pid` flag to assign the namespace you want to share.
 
@@ -119,7 +128,7 @@ As you can see we now have access to all of the processes running on host system
 {{< /panel_group >}}
 
 
-=== Network Namespace
+== Section 3: Network Namespace
 
 Network namespaces provide isolation of network controllers, system resources associated with networking, firewall and routing tables. This allows container to use separate virtual network stack, loopback device and process space. You can add virtual or real devices to the container, assign them their own IP Addresses and even full iptables rules.
 
@@ -207,7 +216,7 @@ sudo docker run -it --net=host redhatgov/alpine ip addr show
 Note: --net="host" gives the container full access to local system services such as D-bus and is therefore considered insecure.
 {{< /alert >}}
 
-=== Sharing Network Namespaces
+== Section 4: Sharing Network Namespaces
 
 Containers have a default security model that enforces isolation at the kernel level for process separation as well as network separation between containers. Sometimes you may need to debug a application or container and need to attach or share a containers namespace. Sharing namespaces should only be done in certain situations that require it, but for development it may be appropriate for debugging.
 

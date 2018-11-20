@@ -36,13 +36,13 @@ Learn how to scan, secure  and leverage properties in  the Linux kernel  like se
 
 == Overview
 
-Today is meant for anyone who has any exposure to Containers, whether you have used them or not. We are going to start with a short overview (yes, slideware) and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.
+Today is meant for anyone who has any exposure to containers, whether you have used them or not. We are going to start with a short overview (yes, slideware) and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.
 
-=== Your Responsibilities
+== Your Responsibilities
 
 Have a discussion. This will be boring if it’s just us up here talking for over 4 hours.
-Participate. We are going to cut you loose with Containers here in just a little while. Have questions. Have opinions.
-Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy. See? Not only can we dig into Containers but you can make a new friend!
+Participate. We are going to cut you loose with containers here in just a little while. Have questions. Have opinions.
+Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy. See? Not only can we dig into containers but you can make a new friend!
 Agenda
 
 == Labs
@@ -59,5 +59,7 @@ Special Thanks to:
 - Brent Baude
 - Adrian Mouat
 {{% /alert %}}
+
+=======
 
 {{< importPartial "footer/footer.html" >}}

@@ -12,6 +12,13 @@ layout: lab
 
 image::code.png[]
 
+== Exercise 1.3 - Remove setuid/setgid Binaries
+
+== Exercise Description
+This exercise covers permissions that can be set for setuid and setgid binaries and best practices for managing them.
+
+== SETUID/SETGID Overview
+
 There are two special permissions that can be set on executable files: Set
 User ID (setuid) and Set Group ID (sgid). These permissions allow the file
 being executed to be executed with the privileges of the owner or the group.
@@ -25,9 +32,7 @@ https://en.wikipedia.org/wiki/Buffer_overflow[buffer overruns],
 https://www.owasp.org/index.php/Path_Traversal[path traversal/injection] and
 https://en.wikipedia.org/wiki/Privilege_escalation[privilege escalation attacks].
 
-== SETUID/SETGID
-
-=== Step 1:
+=== Step 1. Find a list of binaries
 
 To get a list of binaries with special permissions in a container image, the following syntax can be used `find / -perm +6000 -type f -exec ls -ld {} \;`. Note, no need to type this, see next command.
 
@@ -56,7 +61,7 @@ sudo docker run debian:jessie find / -perm +6000 -type f -exec ls -ld {} \; 2> /
 -rwxr-sr-x. 1 root tty 27232 Mar 29  2015 /usr/bin/wall
 ----
 
-=== Step 2:
+=== Step 2. "Defang" the binaries
 
 You can then “defang” the binaries with `chmod a-s` to remove the suid bit.
 For example, you can create a defanged Debian image with the following Dockerfile:
@@ -81,9 +86,8 @@ cd ~/defanged-debian
 vim Dockerfile
 ----
 
-[NOTE]
-Copy the `Dockerfile` below. Press `i` for Insert, then cut and paste
-`control + v`, then escape and write the file `esc`, `:wq`.
+=== Step 3. Copy the Dockerfile text below and paste it into the terminal window.
+Press `i` for Insert, then cut and paste `control + v`, then escape and write the file `esc`, `:wq`.
 
 .Dockerfile
 [source,bash]
@@ -97,9 +101,7 @@ binaries run with the privileges of the owner rather than the user. These are
 normally used to allow users to temporarily run with escalated privileges
 required to execute a given task, such as setting a password.
 
-=== Step 3:
-
-*Build it:*
+=== Step 4. Build the Image
 
 Build the new image.
 
@@ -109,7 +111,7 @@ Build the new image.
 sudo docker build -t defanged-debian .
 ----
 
-=== Step 4:
+=== Step 5. Test the image
 
 *Now Test it to see that it has been changed.*
 
@@ -118,6 +120,8 @@ sudo docker build -t defanged-debian .
 sudo docker run --rm defanged-debian \
   find / -perm +6000 -type f -exec ls -ld {} \; 2> /dev/null | wc
 ----
+
+=== Step 6. Run the command on your RHEL host
 
 For comparison, now do the same command on your RHEL host, with a slight modification for the most recent version of findutils.
 

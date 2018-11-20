@@ -13,7 +13,12 @@ layout: lab
 
 image::cockpit.png[]
 
-== Cockpit
+== Exercise 1.0 - Intro to Cockpit
+
+== Exercise Description
+In this workshop, you will learn to navigate Cockpit and examine its features and capabilities.
+
+=== What is Cockpit?
 
 A remote manager for GNU/Linux servers
 
@@ -30,34 +35,30 @@ the terminal, it can be seen in the Cockpit journal interface.
 You can monitor and administer several servers at the same time. Just add them
 with a single click and your machines will look after its buddies.
 
-== Cockpit and Docker
+=== Cockpit and Docker are compatible
 
-Cockpit also makes it easy to monitor and administer Docker containers running
-on Cockpit-managed servers such as Project Atomic hosts.
+Cockpit makes it easy to monitor and administer Docker containers running on Cockpit-managed servers such as Project Atomic hosts. Some of the capabilities include:
 
-- Monitor resources consumed by containers
-- Adjust resources available to containers
-- Resource limits enforced by the CGroup subsystem in the Linux kernel
-- Adjust CPU shares
-- Assign memory limits
+
+- Monitoring resources consumed by containers
+- Adjusting resources available to containers (Resource limits are enforced by the CGroup subsystem in the Linux kernel.)
+- Adjusting CPU shares
+- Assigning memory limits
 - More CGroup policy controls to come
-- Stop, Start, Delete and Commit container instances
-- Run and Delete container images
+- Stopping, Starting, Deleting and Committing container instances
+- Running and Deleting container images
 
-== Cockpit
 
-=== Step 0:
+== Section 1: Accessing the Cockpit web UI
 
-== Accessing the Cockpit web UI
-
-Use this URL to access the Cockpit console on your node, just change the <workshop name> and <student number>.  Ask your instructor for these values once the workshop lab begins.
+=== Step 1. Use the following URL to access the Cockpit console on your node. Your instructor will provide a workshop name and student number. Enter this information in the appropriate space, within the URL.
 
 [source,bash]
 ----
 {{< uri2partfqdn "https://" ":9090" >}}
 ----
 
-image::login.png[Login to Cockpit]
+=== Step 2. Log in to Cockpit
 
 .Login to Cockpit
 [source,bash]
@@ -69,7 +70,9 @@ Password: <to be provided>
 
 After logging in, you should see the Cockpit web UI.
 
-=== Step 1:
+== Section 2: Navigate the Cockpit tool and examine its capabilities
+
+=== Step 1. Examine the System display. Navigate using the left-side menu.
 
 *System:* Shows information about the system that Cockpit is running on. This
 includes CPU usage, memory usage, disk I/O, and network traffic, as well as
@@ -82,9 +85,9 @@ Click:  Show Fingerprints | System Time | Power Options | Performance Profile
 
 image::overview.png[System]
 
-=== Step 2:
+=== Step 2. Examine  Services by clicking the System Services tab at the top of the display.
 
-*Services:* Shows the systemd services running on the Cockpit server. You can
+*System Services:* Shows the systemd services running on the Cockpit server. You can
 see which are active/enabled or inactive. You can also see other systemd
 features: Targets, sockets, timers, and paths.
 
@@ -95,13 +98,13 @@ Click:  Targets | System Services | Sockets | Timers | Paths
 
 image::services.png[Services]
 
-=== Step 3:
+=== Step 3. Examine the Containers and images. Navigate to "Containers" using the left-side menu.
 
 *Containers:* Lists all images available on the system, all running and
 non-running containers, combined CPU & memory usage graphs, and a storage
 usage bar.
 
-.Click to Launch a image
+.Click to Launch an image
 [source,bash]
 ----
 Click: Get new image
@@ -109,9 +112,9 @@ Click: Get new image
 
 image::containers1.png[Containers]
 
-=== Step 4:
+=== Step 4. Search For & Download Fedora
 
-Search & Download for Fedora
+Use the following commandline to search for and download Fedora.
 
 [source,bash]
 ----
@@ -120,9 +123,7 @@ Search: fedora -> download
 
 image::search.png[Search for Fedora]
 
-=== Step 5:
-
-Run the Fedora image
+=== Step 5. Run the Fedora image simply by clicking 'Run'.
 
 [source,bash]
 ----
@@ -131,7 +132,7 @@ Click: Run
 
 image::run.png[Run the Fedora image]
 
-Add a command to run the image. Sleep is generic enough command.
+Then, add a command to run the image. ("Sleep" is a generic enough command.)
 
 [source,bash]
 ----
@@ -140,8 +141,13 @@ Command: sleep 999
 
 image::run-image.png[Run with options]
 
-=== Step 6:
+=== Step 6. View metadata
 
+
+Click on the newly created container to view all of the metadata about the
+container. Shows the state, the command executed, the container and image
+IDs, a timestamp, as well as the container's own terminal.
+=======
 
 Click on the newly created container [>]
 
@@ -149,17 +155,19 @@ image::detail1.png[Image Detail]
 
 Expand the view and see all of the metadata about the container. Shows the state, the command executed, the container's and image's IDs, a timestamp, as well as the container's own terminal:
 
+
 image::detail.png[Image Detail]
 
 
-=== Step 7:
+=== Step 7. Navigate to 'Tools' via the left-side menu, to examine subscriptions, accounts, diagnostics, and terminal features.
 
+.Features and Capabilities
 *Tools:* (Terminal) +
 *Subscriptions:* Displays what Red Hat products are installed and subscribed. +
 *Accounts:* Shows which administrative (root) and other users have accounts on
 the system. +
 *Diagnostic report:* Collects system configuration and diagnostics information
-and prepares a report in an XZ format. +
+and prepares a report, in an XZ format. +
 *Terminal:* Opens a Terminal (command line) session to the Cockpit system.
 From there, you can run any commands available to the user you are logged in
 as. For example, as cockpit, you could run docker commands. +
@@ -173,9 +181,9 @@ image::terminal.png[Terminal]
 
 
 
-=== Step 8:
+=== Step 8. Delete the Container
 
-When your done taking a look around go ahead and stop & delete the container.
+When you've completed examining Cockpit, stop and delete the container using the following command.
 
 [source,bash]
 ----
