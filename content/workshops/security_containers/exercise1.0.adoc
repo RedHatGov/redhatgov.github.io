@@ -143,11 +143,9 @@ image::run-image.png[Run with options]
 
 === Step 6. View metadata
 
-
 Click on the newly created container to view all of the metadata about the
 container. Shows the state, the command executed, the container and image
 IDs, a timestamp, as well as the container's own terminal.
-=======
 
 Click on the newly created container [>]
 

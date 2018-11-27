@@ -60,6 +60,4 @@ Special Thanks to:
 - Adrian Mouat
 {{% /alert %}}
 
-=======
-
 {{< importPartial "footer/footer.html" >}}
