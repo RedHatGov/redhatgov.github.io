@@ -197,8 +197,6 @@ sudo docker run --rm -it redis:5.0.1 bash
 
 
 Now you are inside a container. In this example you can see our command shell changed to `[root@0636c3c4ee44 data]`. Try the following command `redis-server`.
-=======
-Now you are inside a container. In this example you can see out command shell changed to `[root@1afa082098ae data]`. Try the following command `redis-server`.
 
 .In a Container
 [source,bash]
