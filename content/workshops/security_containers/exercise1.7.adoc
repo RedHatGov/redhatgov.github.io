@@ -329,7 +329,7 @@ http://man7.org/linux/man-pages/man2/socket.2.html[Socket Syscall Manpage]
 
 
 === Step 4. Create a seccomp profile called `3_network.json`
-=======
+
 Exit the container
 
 [source,bash]
