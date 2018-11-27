@@ -24,7 +24,7 @@ Use this URL to access the Wetty node, just change the <workshop name> and <stud
 
 [source,bash]
 ----
-https://<workshop name>.<student number>.redhatgov.io:8888
+{{< uri2partfqdn "https://" ":8888" >}}
 ----
 
 After logging in, you should see a shell.
@@ -39,3 +39,4 @@ Be sure you can log in to your instances.  If you can't log in start shouting, l
 == End Result
 
 At this point, everyone should have logged into your node.  If you haven't, let us know so we can get you fixed up.
+{{< importPartial "footer/footer.html" >}}

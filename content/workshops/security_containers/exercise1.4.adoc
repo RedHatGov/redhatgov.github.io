@@ -12,19 +12,27 @@ layout: lab
 
 image::cgroups.png[]
 
-== CGroups
+== Exercise 1.4 - CGroups
 
-The https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Resource_Management_Guide/ch01.html[Device Cgroup] is primary in isolating and limiting containers to their own shares of CPU, memory, disk I/O, network, etc., other wise it will be denied.
+== Exercise Description
 
-== Memory Limits
+The https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Resource_Management_Guide/ch01.html[Device Cgroup] is primary in isolating and limiting containers to their own shares of CPU, memory, disk I/O, network, etc., otherwise the container will be denied. This exercise covers management of memory and CPU limitations.
 
-Docker uses Cgroups to control and limit the amount of system resources a container can use. This will help to protect a system runing from potential application memory leaks or Denial of Service DoS attacks that can consume all available memory and take down a system. By running containers with special docker flags we can restrict the amount of memory a container is able to consume even when a application is trying to consume more memory.
+== Section 1: Memory Limits
+
+Docker uses Cgroups to control and limit the amount of system resources a container can use, and provide administrators with fine-grained control over allocating, prioritizing, denying, managing and monitoring system resources. Cgroups help protect a system from potential application memory leaks or Denial of Service (DoS) attacks that can consume all available memory and take down a system.
+
+=== Step 1. Run containers with Docker flags
+
+By running containers with special Docker flags, we can restrict the amount of memory a container is able to consume, even when an application is trying to consume more memory.
 
 
 [source, bash]
 ----
 sudo docker run -d --name fedora1 fedora sleep 15m
 ----
+
+=== Step 2. Check for memory limits on a container
 
 We can check using the `https://docs.docker.com/engine/reference/commandline/stats/#description[docker stats]` command and see that this instance `fedora1` has no memory limits placed on it.
 
@@ -46,7 +54,7 @@ fedora1             0.00%               2.601 MB / 1.927 GB   0.13%             
 {{% /panel %}}
 {{< /panel_group >}}
 
-
+=== Step 3. Place a memory limit on a container
 
 Now we can place a memory limit on this second container `fedora2` with the docker flag `https://docs.docker.com/engine/admin/resource_constraints/[--memory]`.
 
@@ -55,7 +63,9 @@ Now we can place a memory limit on this second container `fedora2` with the dock
 sudo docker run -d --name fedora2 --memory 150m fedora sleep 15m
 ----
 
-Now lets check again using the `docker stats` command to see the memory restrictions it has placed on this new container.
+=== Step 4. Check for the new memory restrictions on the container
+
+Now, check again using the `docker stats` command, to see the memory restrictions placed on this new container.
 
 [source, bash]
 ----
@@ -79,7 +89,7 @@ fedora2             0.00%               2.597 MB / 157.3 MB   1.65%             
 
 Now you know how to restrict the amount of memory a container is able to use.
 
-=== Clean Up
+=== Step 5. Clean Up
 
 Lets clean up for the next exercise.
 
@@ -102,17 +112,21 @@ sudo docker ps -a
 ----
 
 
-== CPU Limits
+== Section 2: CPU Limits
 
 By default, each container’s access to the host machine’s CPU cycles is unlimited. Various constraints can be set to limit a given
-container’s access to the host machine’s CPU cycles. Docker provides several flags for setting limits on how many shares of a processor a container is able to use. Previously we looked at memory restrictions and setting a maximum ceiling for memory usage, CPU limits are set by shares. We can define share weights for each container and slit the available shares between the containers for a single processor.
+container’s access to the host machine’s CPU cycles. Docker provides several flags for setting limits on how many shares of a processor a container is able to use. Previously we looked at memory restrictions and setting a maximum ceiling for memory usage, CPU limits are set by shares.
 
-Lets run a container with `512` limit of CPU shares.
+In this exercise, we will define share weights for each container and split the available shares between the containers for a single processor.
+
+=== Step 1. Lets run a container with `512` limit of CPU shares.
 
 [source, bash]
 ----
 sudo docker run -d --name fedora1 --cpuset-cpus 0 --cpu-shares 512 dkuffner/docker-stress --cpu 10
 ----
+
+=== Step 2. Determine the container's share usage
 
 Now lets see how many shares this container is using.
 
@@ -143,6 +157,8 @@ CPU shares are defined as a value between 0-1024, however when idle the containe
 sudo docker run -d --name fedora2 --cpuset-cpus 0 --cpu-shares 512 dkuffner/docker-stress --cpu 10
 ----
 
+=== Step 3. View the processor shares
+
 Now lets see how the processor shares get divided between the two.
 
 [source, bash]
@@ -169,7 +185,7 @@ fedora2             49.91%              3.088 MB / 1.927 GB   0.16%             
 
 Now you know how to control the amount of CPU shares a container is able to use.
 
-=== Clean Up
+=== Step 4. Clean Up
 
 Lets clean up for the next exercise.
 
@@ -190,3 +206,4 @@ Make sure everything is cleared out.
 ----
 sudo docker ps -a
 ----
+{{< importPartial "footer/footer.html" >}}

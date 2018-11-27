@@ -10,7 +10,7 @@ layout: lab
 
 
 {{% alert success %}}
-This workshop is done entierly through the browser, but you do need a free personal GitHub account. 
+This workshop is done entirely through the browser, but you do need a free personal GitHub account. 
 {{% /alert %}}
 
 ## Create a Github account

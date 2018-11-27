@@ -13,21 +13,27 @@ layout: lab
 
 image::kernel.png[]
 
-== What are Linux Capabilities?
+== Exercise 1.9 - Linux Kernel Capabilities
+
+== Exercise Description
+
+In this exercise, we will examine Linux capabilities: how they are defined, their purpose,and how they affect security.
+
+*Linux Capabilities Defined*
 
 According to the capabilities man page;
 
 _Capabilities are distinct units of privilege that can be independently enabled
 or disabled._
 
-Capabilities were added to the kernel around 15 or so years ago to try to
+Capabilities were added to the kernel around 15 or so years ago, to try to
 divide up the power of root. Originally the kernel allocated a 32-bit bitmask
 to define these capabilities. A few years ago it was expanded to 64. There are
-currently around 38 capabilities defined.
+currently approximately 38 defined capabilities.
 
 Capabilities are things like the ability to send raw IP packets, change
 hostnames or bind to ports below 1024. When we run containers we can drop a
-whole bunch of capabilities before running our containers without causing the
+whole bunch of capabilities before running our containers, without causing the
 vast majority of containerized applications to fail.
 
 Most capabilities are required to manipulate the kernel/system, and these are
@@ -35,8 +41,7 @@ used by the container framework (docker), but seldom used by the processes
 running inside the container. However, some containers require a few
 capabilities, for example a container process needs capabilities like
 setuid/setgid to drop privileges. As with most things in the container world,
-we try to establish a compromise between security and the ability to get work
-done.
+we try to establish a compromise between security and the ability to be efficient.
 
 Luckily we also use additional tools like
 https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/SELinux_Users_and_Administrators_Guide/[SELinux],
@@ -44,12 +49,12 @@ https://en.wikipedia.org/wiki/Seccomp[seccomp], and
 http://rhelblog.redhat.com/2015/07/07/whats-next-for-containers-user-namespaces/[namespaces]
 to protect the host system from the containers.
 
-*Bottom line: dropping more of the capabilities from your container is a good
+*Bottom line: Dropping more of the capabilities from your container is a good
 idea from a security point of view.*
 
-== Linux Capabilities
+== Section 1: Linux Capabilities
 
-=== Step 1:
+=== Step 1. View process capabilities
 
 So, how can we drop these capabilities using docker? First, let’s see what
 capabilities a process has. There is a cool tool in Linux that can help you
@@ -68,7 +73,7 @@ pscap | head -10
 sudo docker run -d fedora sleep 5 >/dev/null; pscap | grep sleep
 ----
 
-=== Step 2:
+=== Step 2. Drop specific capabilities (Blacklisting)
 
 If I wanted to drop `setfcap`, `audit_write`, and `mknod`, I could use
 `--cap-drop=setfcap`  `--cap-drop=audit_write` `--cap-drop=mknod`:
@@ -80,7 +85,7 @@ sudo docker run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod \
 fedora sleep 5 > /dev/null; pscap | grep sleep
 ----
 
-=== Step 3:
+=== Step 3. Drop all capabilities and add specific ones back in. (Whitelisting)
 
 Better yet, if you know your container only needs setuid and setgid, you can
 drop all capabilities and just add setgid and setuid back in.
@@ -92,7 +97,7 @@ sudo docker run -d --cap-drop=all --cap-add=setuid --cap-add=setgid \
 fedora sleep 5 > /dev/null; pscap | grep sleep
 ----
 
-The following bellow is a comparison of the out put form blacklisting vs.
+The following bellow is a comparison of the output form blacklisting vs.
 whitelisting.
 
 .Compare the output
@@ -110,7 +115,8 @@ setgid, setuid <2>
 
 <2> Whitelisting: Dropping all and adding back the ones you need.
 
-== Deep Dive into Capabilities
+
+== Section 2: Deep Dive into Capabilities
 
 Lets look deeper into each of these Linux Capabilities.
 
@@ -160,8 +166,7 @@ ignore directory sticky bit on file deletion;
 specify O_NOATIME for arbitrary files in open(2) and fcntl(2).
 This is similar to DAC_OVERRIDE, almost no applications need this other than,
 potentially, software installation tools. Most likely your container would run
-fine without this capability. You might need to allow this for docker build but
-it should be blocked it when you run your container is production.
+fine without this capability. You might need to allow this for a Docker build but it should be blocked when you run your container in production.
 
 `*fsetid*`
 
@@ -169,17 +174,17 @@ The man page says “don’t clear set-user-ID and set-group-ID mode bits when a
 file is modified; set the set-group-ID bit for a file whose GID does not match
 the file system or any of the supplementary GIDs of the calling process.”
 
-My take: if you are not running an installation, you probably do not need this
-capability. I would disable this one by default.
+*My take: If you are not running an installation, you probably do not need this
+capability. I would disable this one by default.*
 
 `*kill*`
 
 If a process has this capability it can override the restriction that “the real
-or effective user ID of a process sending a signal must match the real or
+or effective user ID, of a process sending a signal, must match the real or
 effective user ID of the process receiving the signal.”
 
-This capability basically means that a root owned process can send kill signals
-to non root processes. If your container is running all processes as root or
+This capability basically means that a root-owned process can send kill signals
+to non-root processes. If your container is running all processes as root, or
 the root processes never kills processes running as non root, you do not need
 this capability. If you are running systemd as PID 1 inside of a container and
 you want to stop a container running with a different UID you might need this
@@ -209,9 +214,9 @@ mapping in a user namespace (see user_namespaces(7)).”
 A process with this capability can change its UID to any other UID. Basically,
 it allows full access to all files on the system. If your container processes
 do not change UIDs/GIDs always running as the same UID, preferably non root,
-they do not need this capability. Applications that that need setuid usually
-start as root in order to bind to ports below 1024 and then changes their UIDS
-and drop capabilities. Apache binding to port 80 requires net_bind_service,
+they do not need this capability. Applications that need setuid usually
+start as root, in order to bind to ports below 1024 and then change their UIDS
+and drop capabilities. Apache binding to Port 80 requires net_bind_service,
 usually starting as root. It then needs setuid/setgid to switch to the apache
 user and drop capabilities.
 
@@ -283,9 +288,10 @@ is not currently namespace aware, so this should be dropped by default.
 
 `*setfcap*`
 
-Finally, the setfcap capability allows you to set file capabilities on a file
+Finally, the setfcap capability enables you to set file capabilities on a file
 system. Might be needed for doing installs during builds, but in production it
 should probably be dropped.
 
 {{% /panel %}}
 {{< /panel_group >}}
+{{< importPartial "footer/footer.html" >}}

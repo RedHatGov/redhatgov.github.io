@@ -12,6 +12,9 @@ layout: lab
 
 image::term.png[]
 
+== Exercise 1.2 - Docker `USER`
+
+== Exercise Description
 Now that you've gotten a sense of software provenance in Dockerfiles lets take
 a look at the `USER` in `Dockerfiles`.
 
@@ -23,11 +26,7 @@ instruction to specify a *non-root* user for containers to run as. If your
 software does not create its own user, you can create a user and group in
 the Dockerfile.
 
-== User in Dockerfiles
-
-=== Step 1:
-
-*Reusing an Image with a Non-root User*
+=== Step 1. Reusing an Image with a Non-root User
 
 The default user in a Dockerfile is the user of the parent image. For example,
 if your image is derived from an image that uses a non-root user  example:
@@ -40,7 +39,7 @@ beginning of your Dockerfile then change back to the correct user with another
 .Example Dockerfile
 [source,bash]
 ----
-FROM fedora:27
+FROM fedora:29
 
 RUN groupadd -r swuser -g 433 && \
     useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
@@ -52,15 +51,13 @@ RUN dnf install -y vim
 USER swuser
 ----
 
-*USER root*: Switch to the root user to perform actions that need elevated permissions  such as installing software via yum/dnf.
+*USER root*: Switch to the root user to perform actions that need elevated permissions, such as installing software via yum/dnf.
 
-*USER swuser*: Then switch back to a lower permissions user to run the image.
+*USER swuser*: Then, switch back to a lower permissions user to run the image.
 
 Now we can test this out by building the following `Dockerfile`
 
-=== Step 1:
-
-Build the `Dockerfile`
+=== Step 2. Build the `Dockerfile`
 
 .Make new directory & Build Dockerfile
 [source,bash]
@@ -85,7 +82,7 @@ Copy the `Dockerfile` above. Press `i` for Insert, then cut and paste
 .Dockerfile
 [source,bash]
 ----
-FROM fedora:27
+FROM fedora:29
 
 RUN groupadd -r swuser -g 433 && \
     useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
@@ -97,7 +94,9 @@ RUN dnf install -y vim
 USER swuser
 ----
 
-Now build the image.  The build time is similar as before (approximately 3 minutes)
+=== Step 3. Build the image
+
+When building an image, the build time is similar as before (approximately 3 minutes)
 
 .Build the image
 [source,bash]
@@ -105,7 +104,9 @@ Now build the image.  The build time is similar as before (approximately 3 minut
 sudo docker build -t user-test:1 .
 ----
 
-Now run and test the image to see who the container is running as. What do you see?
+=== Step 4. Run and Test the image
+
+Run and test the image to see who the container is running as. What do you see?
 
 .Run the image
 [source,bash]
@@ -117,3 +118,4 @@ For more information on Containers and correct users to use here are a few good 
 
 - http://www.projectatomic.io/blog/2015/08/why-we-dont-let-non-root-users-run-docker-in-centos-fedora-or-rhel/[Why we don't let non-root users run Docker in CentOS, Fedora, or RHEL]
 - http://www.projectatomic.io/docs/docker-image-author-guidance/[Guidance for Docker Image Authors]
+{{< importPartial "footer/footer.html" >}}

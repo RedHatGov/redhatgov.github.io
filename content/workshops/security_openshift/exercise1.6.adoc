@@ -12,10 +12,9 @@ layout: lab
 
 = Exercise 1.6 - SCC & Seccomp
 
-In addition to authorization policies that control what a user can do,
-OpenShift Container Platform provides security context constraints (SCC) that
-control the actions that a pod can perform and what it has the ability to
-access. Administrators can manage SCCs using the CLI.
+image::scc-node.png[]
+
+In addition to authorization policies that control what a user can do, OpenShift Container Platform provides security context constraints (SCC) that control the actions that a pod can perform and what it has the ability to access. Administrators can manage SCCs using the CLI. This is a great way to lock down you individual application to make sure that they have hardened settings. This applies to applications running on OpenShift.
 
 == SCC
 
@@ -239,10 +238,11 @@ Settings:
 
 == Seccomp
 
-Seccomp (secure computing mode) is used to restrict the set of system calls
-applications can make, allowing cluster administrators greater control over the
-security of workloads running in OpenShift Container Platform. Seccomp support
-is achieved via two annotations in the pod configuration:
+Seccomp (secure computing mode) is used to restrict the set of system calls applications can make, allowing cluster administrators greater control over the security of workloads running in OpenShift Container Platform. Seccomp is applied at the individual host level. The ability to lock down certain hosts in a cluster can help to make you architecture more secure by running untrusted code or internet facing servers in a more restricted mannor than the rest of the nodes in the cluster.
+
+image::seccomp-int.png[]
+
+Seccomp support is achieved via two annotations in the pod configuration:
 
 - seccomp.security.alpha.kubernetes.io/pod: profile applies to all containers
 in the pod that do not override

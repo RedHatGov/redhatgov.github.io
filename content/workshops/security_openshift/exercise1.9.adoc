@@ -1,0 +1,218 @@
+---
+title: "Exercise 1.9 - Image Streams & Secrets"
+workshops: security_openshift
+workshop_weight: 91
+layout: lab
+---
+
+:source-highlighter: highlight.js
+:source-language: bash
+:imagesdir: /workshops/security_openshift/images
+
+= Exercise 1.9 - Image Streams & Secrets
+
+image::secrets.png[]
+
+== Image Stream
+
+https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/builds_and_image_streams.html#image-streams[Image
+streams] can be used to automatically perform an action when new images are
+created. Builds and deployments can watch an image stream to receive
+notifications when new images are added and react by performing a build or
+deployment, respectively.
+
+For example, if a deployment is using a certain image and a new version of that
+image is created, a deployment could be automatically performed.
+
+== Secrets
+
+A
+https://docs.openshift.com/container-platform/3.4/dev_guide/secrets.html#secrets-image-pull-secrets[Secret]
+is an object that contains a small amount of sensitive data such as a password,
+a token, or a key. Such information might otherwise be put in a Pod
+specification or in an image; putting it in a Secret object allows for more
+control over how it is used, and reduces the risk of accidental exposure. Users
+can create secrets, and the system also creates some secrets.
+
+Key properties include:
+
+- Secret data can be referenced independently from its definition.
+- Secret data volumes are backed by temporary file-storage facilities (`tmpfs`)
+and never come to rest on a node.
+- Secret data can be shared within a namespace.
+
+== Image Streams & Secrets
+
+=== Step 1:
+
+*Check your user*
+
+.see what user you are loged in as
+[source]
+----
+oc whoami
+----
+
+.login as system:admin
+[source]
+----
+oc login -u system:admin
+----
+
+=== Step 2:
+
+*Create the default image streams*
+
+Now we are going to create a JBoss
+https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/builds_and_image_streams.html[image
+stream]. Image streams present a single virtual view of related images.
+
+.create the image stream
+[source]
+----
+cd jboss-openshift-templates
+
+oc create -n openshift -f jboss-image-streams.json
+----
+
+.switch to developer
+[source]
+----
+oc login -u developer
+----
+
+Now create a new project called `SSO`.
+
+.SSO Project
+[source]
+----
+oc new-project sso --description="Red Hat SSO" --display-name="SSO Keycloak"
+----
+
+Click on the `SSO Keycloak` project you just created.
+
+.Click SSO Keycloak Project
+image::sso-project.png[]
+
+=== Step 3:
+
+*Create Red Hat SSO application*
+
+The Red Hat SSO container needs secrets from the Java Key Store (jks for
+short). Instead of hard coding these into the SSO image itself, OpenShift
+utilizes
+https://docs.openshift.com/container-platform/3.4/dev_guide/secrets.html#secrets-image-pull-secrets[`Secrets`]
+to hold the sensitive information.
+
+To get a feeling of what a secrets file looks like `cat` out the following file.
+
+[source]
+----
+cat secrets/sso-app-secret.json
+----
+
+This is a excerpt of the `Secret` file.
+
+.sso-app-secret.json
+[source]
+----
+"kind": "Secret", <1>
+"apiVersion": "v1",
+"metadata": {
+    "annotations": {
+        "description": "Default secret file with name 'jboss' and password 'mykeystorepass'"
+      },
+        "name": "sso-app-secret" <2>
+      },
+        "data": {
+                "keystore.jks": "/u3+7QAAAAIAAAABAAAAAQAF.....<snip> <3>
+----
+
+
+<1> Type of Object
+
+<2> Name of the `Secret`
+
+<3> The actual key & value of the secret, base64 encoded.
+
+The Secret object type provides a mechanism to hold sensitive information such
+as passwords. Secrets decouple sensitive content from the pods. You can mount
+secrets into containers using a volume plug-in or the system can use secrets to
+perform actions on behalf of a pod.
+
+.create `secrets` for `SSO`
+[source]
+----
+oc create -n sso -f secrets/sso-app-secret.json
+----
+
+Now lets launch the app
+
+.launch `SSO`
+[source]
+----
+oc process -f sso/sso71-https.json -p HTTPS_NAME=jboss HTTPS_PASSWORD=mykeystorepass | oc create -n sso -f -
+----
+
+You will see two pods with different
+https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/routes.html[routes]
+being built, the first is for a plain `http` route to the app, the second is
+via a `https` route. Click the top url (example for student 0:
+`https://secure-sso-sso.apps.ose.0.redhatgov.io`).
+
+.SSO Keycloak Project
+image::sso-overview.png[]
+
+*Add `auth` to the end of the url*
+
+image::sso-auth.png[]
+
+Now click Administration Console
+
+image::sso-admin-console.png[]
+
+The default password is admin / admin
+
+.login to SSO
+[source]
+----
+username:  admin
+
+password:  admin
+----
+
+.Red Hat SSO Login
+image::sso-main-login.png[]
+
+This is Red Hat's SSO server. Red Hat Single Sign-On (RH-SSO) is based on the
+Keycloak project and enables you to secure your web applications by providing
+Web single sign-on (SSO) capabilities based on popular standards such as SAML
+2.0, OpenID Connect and OAuth 2.0.
+
+The RH-SSO server can act as a SAML or OpenID Connect-based Identity Provider,
+mediating with your enterprise user directory or 3rd-party SSO provider for
+identity information and your applications via standards-based tokens. This is
+like having your own login with your Gmail or Facebook account you see all over
+the web. Now you can control your own identity provider instead of relying on
+third parties for that.
+
+Features:
+
+- *Authentication Server:* Acts as a standalone SAML or OpenID Connect-based
+Identity Provider.
+- *User Federation:* Certified with LDAP servers and Microsoft Active Directory
+as sources for user information.
+- *Identity Brokering:* Integrates with 3rd-party Identity Providers including
+leading social networks as identity source.
+- *REST APIs and Administration GUI:* Specify user federation, role mapping,
+and client applications with easy-to-use Administration GUI and REST APIs.
+
+.Red Hat SSO Overview
+image::sso-main.png[]
+
+We went over a lot in this one, but if you made it this far you successfully
+
+- Deployed a OpenShift `imagestream`
+- Learned about OpenShift `Secrets`
+- Deployed a `SSL` secured & containerized application
+- Got a overview of `Red Hat SSO`
