@@ -198,7 +198,7 @@ Let's have a little fun.  The app has some easter eggs that get triggered when c
 </blockquote>
 
 ```bash
-$ oc env dc/dc-metro-map -e BEERME=true
+$ oc set env dc/dc-metro-map -e BEERME=true
 ```
 
 ```bash
