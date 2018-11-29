@@ -38,13 +38,15 @@ Click the "Add to Project" button
 Select the "Browse Catalog" tab and search for the nodejs builder image. Click Next>
 </blockquote>
 <blockquote>
-Click 'advanced options' and fill out the boxes to point to the fork and context dir. 
+Click <b><u>advanced options</u></b> and fill out the boxes to point to the fork and context dir. Note that <b>YOUR_ACCOUNT</b> is the name of your GitHub account.
 </blockquote>
 
 <p>
-Name: dc-metro-map
-The github repository URL is: https://github.com/YOUR_ACCOUNT/openshift-workshops.git<br/>
-The github context-dir is: /dc-metro-map<br/>
+<table>
+<tr><td><b>Name</b></td><td>dc-metro-map</td></tr>
+<tr><td><b>Git Repository URL</b></td><td>https://github.com/YOUR_ACCOUNT/openshift-workshops.git</td></tr>
+<tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
+</table>
 </p>
 
 <blockquote>
