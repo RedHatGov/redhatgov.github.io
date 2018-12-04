@@ -14,16 +14,26 @@ layout: lab
 
 = Exercise 1.4 - Working with a Container Registry
 
-== What it is
+== Exercise 1.4 - Working with a Container Registry
+
+== Exercise Description
+
+In this exercise, you will learn container registry basics, what the registry offers and how to use it.
+
+_What is container registry?_
+
 A basic container registry is a stateless, highly scalable server side application that stores and  distributes container images.  The docker registry is an open-source project offered under the permissive Apache license.
 
 
-=== Why use it
+_Why use container registries?_
+
 You should use a private container registry if you want to:
 
 - tightly control where your images are being stored
-- fully own your images distribution pipeline
+- fully own your image's distribution pipeline
 - integrate image storage and distribution tightly into your in-house development workflow
+
+=== Step 1. Install docker-distribution package
 
 First, lets install the `docker-distribution` package, to provide the registry software:
 
@@ -32,6 +42,7 @@ First, lets install the `docker-distribution` package, to provide the registry s
 yum install -y docker-distribution
 ----
 
+=== Step 2. Set the service to auto-start
 
 Next, lets set the service to auto-start at system boot:
 
@@ -40,8 +51,9 @@ Next, lets set the service to auto-start at system boot:
 systemctl enable docker-distribution
 ----
 
+=== Step 3. Enable use of https
 
-The container registry configuration file will need to be modified to allow the use of https (secure) communications.  First, we will generate a certificate.
+A) The container registry configuration file will need to be modified to allow the use of https (secure) communications.  First, we will generate a certificate.
 
 [source, bash]
 ----
@@ -59,7 +71,7 @@ openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -
 ----
 
 
-Answer the questions that OpenSSL asks, in any way that you see fit, but make sure that you specify a `Common Name` of `localhost`.  Here is an example:
+B) Answer the questions that OpenSSL asks, in any way that you see fit, but make sure that you specify a `Common Name` of `localhost`.  Here is an example:
 
 ....
 Generating a 4096 bit RSA private key
@@ -83,7 +95,7 @@ Common Name (eg, your name or your server's hostname) []:localhost
 Email Address []:student@lab.local
 ....
 
-To finish this configuration, let's add the cert to the system's trusted database:
+=== Step 4. To finish this configuration,  add the cert to the system's trusted database:
 
 [source, bash]
 ----
@@ -95,8 +107,9 @@ cp domain.crt /etc/pki/tls/certs
 update-ca-trust extract
 ----
 
+=== Step 5. Add secure mode to the container registry configuration.
 
-Next, we will add secure mode to the container registry configuration.  Edit the file '/etc/docker-distribution/registry/config.yml' to match the example below.  Pay close attention to the last five lines, starting with tls, as these are required for configuration file.
+Edit the file '/etc/docker-distribution/registry/config.yml' to match the example below.  Pay close attention to the last five lines, starting with tls, as these are required for configuration file.
 
 [source, bash]
 ----
@@ -126,7 +139,7 @@ http:
 ----
 
 
-Next, we can start the registry:
+=== Step 6. Start the registry:
 
 .Start the registry
 [source, bash]
@@ -134,6 +147,7 @@ Next, we can start the registry:
 systemctl start docker-distribution
 ----
 
+=== Step 7. View images in the local image database.
 
 Before we upload anything, let's take a look to see what images we have in the local image database:
 
@@ -148,8 +162,10 @@ docker.io/library/fedora              latest   cc510acfcd70   2 weeks ago      2
 docker.io/library/fedora_postgresql   latest   b105a704d05d   10 minutes ago   495MB
 ....
 
+=== Step 8. Push the container to the local registry.
 
-Now, we will push the container to the local registry.  Either of these two commands will work, showing that there is always more than one way to skin a cat.
+To push the container, either of these two commands will work.
+
 [IMPORTANT]
 Choose only one of the following two commands (`buildah push` or `skopeo copy`).  Both accomplish the same purpose.
 
@@ -167,6 +183,7 @@ This image ID will vary, and you should use the value from the output produced o
 skopeo copy containers-storage:7a840db7f020 docker://localhost:5000/fedora_postgresql:latest
 ----
 
+=== Step 9. Verify the image location in the registry.
 
 Next, let's search the registry to make sure that our image made it, and is available:
 
