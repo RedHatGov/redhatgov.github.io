@@ -11,36 +11,37 @@ layout: lab
 :source-highlighter: highlight.js
 :source-language: yaml
 
-= Exercise 1.0 - Install buildah, skopeo, and podman
+= Exercise 1.0 - Installing Buildah, Skopeo, and Podman
 
-== Elevate privileges
+== Exercise 1.0: Installing Buildah, Skopeo and Podman
 
-In order to do any of the steps of this workshop, you will need `root` privileges.  There are two ways of doing this, and which you choose is up to you.
+=== Set up dependencies
 
-The first, and easier, way is to start a `root` session, with `sudo -i`:
+Elevate privileges
+
+In order to do any of the steps in the Containers 101 Workshop, you will need `root` privileges. There are two methods of doing this; the method you choose is up to you. Either method will work, but in a production environment, Method 2 is much more secure and auditable.
+
+Method 1: The first, and easiest, method is to start a `root` session, with `sudo -i`:
 
 [source, bash]
 ----
 sudo -i
 ----
 
-Alternately, you can preface each command that we show you with `sudo`.  For example, to move a file:
+Method 2: Alternatively, you can preface each command that we show you with `sudo`.  For example, to move a file:
 
 [source, bash]
 ----
 sudo mv file /tmp/
 ----
 
-Either method will work, but remember that, in a production environment, the second method is much more secure and auditable.
+== Install Buildah, Skopeo, and Podman
 
+The Docker tooling requires a daemon (service) to operate. There are alternative command-line interface (CLI) tools, which provide focused separation of the Docker command's features and extends their capabilities.  The following three commands will be used throughout this workshop.
 
-== Install buildah, skopeo, and podman
-
-The docker tooling requires a daemon (service) to operate.  There are alternative CLI tools which provide focused separation of the docker command's features and extend their capabilities.  The following three commands will be used throughout this workshop.
-
-- Buildah - used to build Open Container Initiative (OCI) format or docker format container images without the need for a daemon.
-- Podman - provides the ability to directly run container images without a daemon.  Podman can pull container images from a container registry if they are not available locally
-- Skopeo -  offers features for pulling and pushing containers to registries.  Moving containers between registries is supported.  Container image inspection is also offered and some introspective capabilities can be performed without first downloading the container itself.
+- Buildah - is used to build Open Container Initiative (OCI) format or Docker format container images without the need for a daemon.
+- Podman - provides the ability to directly run container images without a daemon.  Podman can pull container images from a container registry, if they are not available locally.
+- Skopeo -  offers features for pulling and pushing containers to registries. Moving containers between registries is supported. Container image inspection is also offered and some introspective capabilities can be performed, without first downloading the container itself.
 
 [source, bash]
 ----
