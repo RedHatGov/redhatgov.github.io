@@ -29,11 +29,8 @@ OpenShift provides a web console that allows you to perform various tasks via a 
 ## Let's Login to the Web Console
 Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.
 
-```bash
-https://ocp-naps.redhatgov.io/
-```
-
 <img src="../images/ocp-login.png" width="600"><br/>
+
 *Login Webpage*
 
 Once logged in you should see your available projects - or a button to create a project if none exist already.
@@ -42,7 +39,7 @@ Once logged in you should see your available projects - or a button to create a 
 Open a terminal and login using the same URI with following command:
 
 ```
-$ oc login https://ocp-naps.redhatgov.io/ --insecure-skip-tls-verify=true
+$ oc login https://ocp-ai.redhatgov.io/ --insecure-skip-tls-verify=true
 Authentication required for https://ocp-naps.redhatgov.io/ "master" ":8443" >}} (openshift)
  Username: user#
  Password:

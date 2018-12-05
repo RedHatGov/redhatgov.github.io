@@ -101,8 +101,9 @@ Redirect URLs are a critical part of the OAuth flow. After a user successfully a
 
 1. Open a browser tab and navigate to your SSO Location App.  It should be a similar link to:  
   - `http://www-userX.apps.ocp-ai.redhatgov.io/`.
+  - *Remember to replace the X your user number.*
 
-*Remember to replace the X your user number.*
+1. Navigate to the Locations Page
 
 1. Click the **Sign In** button.
 
