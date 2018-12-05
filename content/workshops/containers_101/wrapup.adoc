@@ -12,7 +12,7 @@ layout: lab
 :source-language: yaml
 
 
-== Wrap Up, Q&A, and Free Style
+== Wrap Up and Q&A
 
 That wraps up what we have planned for today.
 

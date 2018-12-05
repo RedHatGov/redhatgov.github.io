@@ -14,39 +14,34 @@ menu:
 
 = Containers 101 Workshop
 
-== Description
+== Workshop Description
 
-Come and build a container!  This workshop will introduce you to Linux containers.  During the course of this workshop you will gain a foundational container hands-on training.
+This workshop will introduce you to Linux containers and provide you with foundational container hands-on training.
+
+== Who should attend
+Today's container workshop is meant for anyone who has any exposure to Linux containers, whether you have used it or not.
 
 == What you will learn
 
-- Install docker, buildah, podman, and skopeo
-- Run an existing container image
-- Build a new container from a base container image
-- Push the new container image to a container registry
+- How to install docker, buildah, podman, and skopeo
+- How to run an existing container image
+- How to build a new container from a base container image
+- How to push the new container image to a container registry
 
 == Overview
 
-Today is meant for anyone who has any exposure to Linux containers, whether you have used it or not. We are going to start with a short overview (yes, slideware) and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.
+This workshop will start with a short overview about containers and instructions on setting up for the Container 101 Workshop. Next, we will transition into hands-on exercises. We will spend most of our time showing you how to work with container images, Dockerfiles, and container registries.
 
 == Your Responsibilities
 
-Have a discussion. This will be boring if it’s just us up here talking for over 2 hours.
-Participate. Have questions. Have opinions.
-Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy.
+Have a discussion. This will be boring if it’s just us talking for over two hours.
 
-== Labs
+Participate, by offering questions and sharing opinions.
+
+Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy to follow along.
+
+== Exercises
 
 {{< labs containers_101 >}}
-
-
-
-{{% alert success %}}
-Special Thanks to
-
-- Jamie Duncan
-- Jason Callaway
-
-{{% /alert %}}
 
 {{< importPartial "footer/footer.html" >}}
