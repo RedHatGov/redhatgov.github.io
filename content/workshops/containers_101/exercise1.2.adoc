@@ -20,7 +20,7 @@ In this exercise, you'll learn the fundamentals of container images, including h
 
 == Section 1: Container Images
 
-=== Step 1. Run container images, using 'podman run'
+What you can do with container images, using 'podman run'
 
 When you execute the `podman run` command, a new container is created, from a container image.  That container consists of the image contents, plus any features based on additional selected options.
 
@@ -32,9 +32,9 @@ The command you pass on the `podman run` command line considers the inside of th
 
 - New network interfaces (By default, a separate container network interface provides a private IP address to each container via DHCP.)
 
-=== Step 2. Make a host directory available to the container (Optional)
+Additionally you can also...
 
-To make a directory from the host available to the container, from the `podman run` command line:
+* Make a directory from the host available to the container, from the `podman run` command line:
 
   * Map network ports from the container to the host.
   * Limit the amount of memory the container can use, or expand the CPU shares available to the container.
