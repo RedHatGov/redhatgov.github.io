@@ -1,23 +1,25 @@
 ---
-title: Lab 19 - Create Quay Repository
+title: Lab 19 - View Container Scan Report
 workshops: secure_software_factory
-workshop_weight: 29
+workshop_weight: 31
 layout: lab
 ---
-# Create Container Repository in Quay
+# View Clair Container Scan Report in Quay
 
-Click Create New Repository
+Select your Repository from the previous lab
 
-<img src="../images/quay_create_repo.png" width="200"><br/>
+<img src="../images/quay_repo.png" width="900"><br/>
+
+<br>
+
+Select Repository Tags on the left hand menu
+
+Select the Security Scan for your Image
+
+<img src="../images/quay_repo_tags.png" width="900"><br/>
 
 <br>
 
-Enter Name of Repository, i.e. jboss-eap70-openshift
+View the Security Scan Report
 
-Select Public to make this a Public Repository
-
-Click Create Public Repository
-
-<img src="../images/quay_repo_config.png" width="500"><br/>
-
-<br>
+<img src="../images/quay_scan.png" width="900"><br/>

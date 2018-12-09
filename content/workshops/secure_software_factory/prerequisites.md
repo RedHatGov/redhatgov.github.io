@@ -10,14 +10,9 @@ layout: lab
 
 
 {{% alert success %}}
-This workshop is done entierly through the browser.
+This workshop is done entirely through the browser.
 {{% /alert %}}
 
-## Create a Github account (Optional)
-If you don't have a person GitHub account please sign up [here][1] to create a free account.
+- [Chrome][1] is the preferred browser for this workshop
 
-- [Create GitHub Account][1]
-- [Download Git Client][2]
-
-[1]: https://github.com/join?source=header-home
-[2]: https://git-scm.com/downloads
+[1]: https://www.google.com/chrome/
