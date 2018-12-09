@@ -7,27 +7,27 @@ menu:
 ---
 ## Description
 
-The Agile Integration workshop teaches developing, testing, and deploying cloud-native, connected solutions.  You'll be able to walk through an API development and integration process leveraging OpenShift, Ansible, Apicurio, Microcks, Fuse, and 3scale.
+The Agile Integration Workshop teaches the development, testing, and deployment of cloud-native and connected solutions.  You will walk through an API Development and Agile Integration process leveraging OpenShift, Apicurio, Microcks, Fuse, and 3scale for a sample application.
 
 ## Who should attend
 
-- Architects
 - Developers
-- Technical leads
 - API Owners
-
+- API Consumers
+- Architects
+- Technical leads
 
 ## What you will learn
 
 - Exploring OpenAPI contracts
-- Create a contract-first APIs
+- Create contract-first APIs
 - Convert existing SOAP APIs to REST
 - API Management
 - API Security
 
 # Introduction
 
-Red Hat integration solutions give you the power to connect everything in your enterprise—from apps and APIs to data and devices—to provide greater value to your customers.
+Red Hat's integration solutions give you the power to connect everything in your enterprise—from apps and APIs to data and devices—to provide greater value to your customers.
 
 Integration solutions should be incremental—letting you connect pieces step by step with open interfaces and no lock-in—so you can create, experiment, and deliver new services quickly. That’s why Red Hat's approach is distributed and independent of a centralized enterprise service bus (ESB).
 
