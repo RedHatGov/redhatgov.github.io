@@ -114,18 +114,14 @@ synchronizing with inventory sources, and importing project content from a versi
 There are many link:{cred_url}[types of credentials] including machine, network, and various cloud providers.  In this workshop, we are using a *machine* credential.
 
 
-=== Step 1: Select settings
+=== Step 1: Select Credentials
+Select CREDENTIALS, from the left-side menu bar.   image:at_credentials.png[Cred,100,35]
 
-Select Ansible Tower Settings (gear icon).     image:at_gear.png[Gear,20,20]
-
-=== Step 2: Select Credentials
-Select CREDENTIALS   image:at_credentials.png[Cred,100,35]
-
-=== Step 3: Select Add
+=== Step 2: Select Add
 
 Select ADD   image:at_add.png[Add,35,25]
 
-=== Step 4: Complete the Ansible Tower Credentials form
+=== Step 3: Complete the Ansible Tower Credentials form
 
 Complete the form, using the following entries and your private Ansible Tower SSH key.  When you paste the key in the `PRIVATE KEY` field, make sure to include the `-----BEGIN RSA PRIVATE KEY-----` and `-----BEGIN RSA PRIVATE KEY-----` lines.
 
@@ -150,7 +146,7 @@ image::at_cred_detail.png[Cred_Detail, 900,caption="Figure 5: ",title="Adding a 
 
 
 
-=== Step 5: Save
+=== Step 4: Save
 
 Select SAVE  image:at_save.png[Save,35,25] +
 
@@ -219,7 +215,7 @@ Select INVENTORIES    image:at_inv_icon.png[Inv, 100,30]
 
 === Step 2: Add a new inventory
 
-Select ADD  image:at_add.png[Add,35,25]
+Select ADD image:at_add.png[Add,35,25], and then select Inventory.
 
 === Step 3: Complete the Inventory form
 
@@ -241,10 +237,9 @@ image::at_inv_create.png[Cred_Detail,900,caption="Figure 7: ",title="Create an I
 
 Select SAVE  image:at_save.png[Save,35,25]
 
-=== Step 5: Log in to the control node
+=== Step 5: Switch back to your terminal session
 
-Using ssh, login to your control node, if by any chance you closed the wetty browser window.  Remember to replace *workshopname* with your workshop name, and *#* with your student number.
-
+Switch back to your terminal session.  If by any chance you closed the wetty browser window, open a new one with the URL shown, below:
 
 [source,bash]
 ----
