@@ -51,7 +51,7 @@ Enter the Gogs repository http url for openshift-tasks as the Git repository url
 See the url below as an example.  
 
   - Replace [gogs-hostname] with your gogs server.
-  - http://gogs:gogs@[gogs-hostname]/gogs/openshift-tasks.git
+    - http://gogs:gogs@[gogs-hostname]/gogs/openshift-tasks.git
   - So it should look something like this:
     - http://gogs:gogs@gogs-cicd-user2.192.168.42.136.nip.io/gogs/openshift-tasks.git
 
