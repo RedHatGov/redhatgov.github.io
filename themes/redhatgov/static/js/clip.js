@@ -1,13 +1,10 @@
-jQuery(document).ready(function() {
-
+jQuery( document ).ready(function( $ ) {
   // clipboard
   var clipInit = false;
   $('code').each(function() {
       var code = $(this),
           text = code.text();
       
-        //   console.log( code.text() );
-
       if (text.length > 5) {
           if (!clipInit) {
               var text, clip = new Clipboard('.copy-to-clipboard', {
@@ -41,6 +38,4 @@ jQuery(document).ready(function() {
           });
       }
   });
-
-  
 });
