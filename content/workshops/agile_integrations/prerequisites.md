@@ -10,7 +10,7 @@ layout: lab
 
 
 {{% alert success %}}
-This workshop is done entirely through the browser.
+This workshop is performed entirely through the browser.
 {{% /alert %}}
 
 - [Chrome][1] is the preferred browser for this workshop

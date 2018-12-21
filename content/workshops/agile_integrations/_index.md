@@ -33,6 +33,6 @@ Integration solutions should be incremental—letting you connect pieces step by
 
 Red Hat solutions are API-based, backed by an ecosystem of partners, customers, and developers to ensure the best use of services. And they’re container friendly, meaning you can develop, manage, and scale cloud-native apps that work together for the future of your business.
 
-# Labs
+# Exercises
 
 {{< labs agile_integrations >}}

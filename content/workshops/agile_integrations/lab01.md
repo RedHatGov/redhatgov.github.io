@@ -1,90 +1,90 @@
 ---
-title: Lab 01 - API Design
+title: Exercise 1.0 - API Design
 workshops: agile_integrations
 workshop_weight: 21
 layout: lab
 ---
-## Lab 1
+## Exercise 1.0 - API Design
 
-## API Design
-
-### Import an OpenAPI Specification using Apicurio Studio
+### Import an OpenAPI Specification using APIcurio Studio
 
 * Duration: 10 mins
 * Audience: Developers, Architects
 
-## Overview
+## Exercise Description
 
 As APIs become more widespread in the enterprise, consistent design and usage is critically important to improve reusability. The more reusable APIs are, the less friction there is for other internal or external teams to make progress. Having design standards and tools baked into the API development and maintenance process is a very powerful way to enable this consistency.
 
-As a developer, we need to be familiar with API Design even though it's not our core capability.  Therefore, in this lab we will review Red Hat's API Designer product, Apicurio, so that we're familiar with it's capabilities only.
+As a developer, we need to be familiar with API Design even though it's not our core capability.  Therefore, in this exercise we will review Red Hat's API Designer product, APIcurio, so that we're familiar with its capabilities only.
 
 ### Why Red Hat?
 
-Red Hat is one of the founding members of the Linux Foundation Open API Initiative (OAI) which produces the leading standard for REST API specifications. Red Hat consistently uses this standard throughout its tooling, starting with the Apicurio Studio API Design editor.
+Red Hat is one of the founding members of the Linux Foundation Open API Initiative (OAI), which produces the leading standard for REST API specifications. Red Hat consistently uses this standard throughout its tooling, starting with the Apicurio Studio API Design editor.
 
-## Lab Instructions
+## Section 1: Importing APIs with APIcurio Studio
 
-### Step 1: Importing APIs with Apicurio Studio
+### Step 1. Open a browser window and navigate to apicur.io
 
-1. Open a browser window and navigate to apicurio.
-
-1. Log in using your designated [user and password](#environment).
+### Step 2. Log in using your designated [user and password](#environment).
 
     <br><img src="../images/design-01.png "Login" width="900" /><br><br>
 
-1. Click on **APIs** in the left side navigation menu from the Dashboard page.
+### Step 3. From the Dashboard page, click **APIs** in the left-side navigation menu.
 
     <br><img src="../images/design-02.png "APIs" width="900" /><br><br>
 
-1. Click on **Import API**.
+### Step 4. Click **Import API**.
 
     <br><img src="../images/design-03.png "Import API" width="900" /><br><br>
 
-1. Import the API created by your friendly Citizen Integrator:
+### Step 5. Import the API created by your friendly Citizen Integrator:
 
     * Import Type: **Import From URL**
     * Url: `https://raw.githubusercontent.com/epe105/dayinthelife-integration/master/docs/labs/developer-track/resources/Locations.yaml`
 
     <br><img src="../images/design-04.png "Import API" width="900" /><br><br>
 
-1. Click on **Import API**.
+### Step 6. Click **Import API**.
 
-1. Finally, click on **Edit API** to walkthrough your newly imported API.
+### Step 7. Finally, click **Edit API** to walk through your newly imported API.
 
     <br><img src="../images/design-05.png "Edit API" width="900" /><br><br>
 
-### Step 2: Verifying APIs
+## Section 2: Verifying APIs
 
-You are now in the main screen to edit your APIs. Different from other API editor products, Apicurio's Editor is a graphical, form-based editor. With Apicurio you don't need master in and out all the details of the **OpenAPI Specification**. It allows you to design beautiful, functionals APIs with zero coding.
+You are now in the main screen to edit your APIs. APIcurio's Editor is a graphical, form-based editor, which makes it different from other API editors. With Apicurio, you don't need master in and out all the details of the **OpenAPI Specification**. It enables you to design beautiful, functional APIs with zero coding skills needed.
 
 Let's start verifying your API.
 
-1. Time to verify our data definitions for the API. Click on the `location/phone{id}` link under the *Paths*.
+### Step 1. First, verify data definitions for the API. Click the `location/phone{id}` link under the *Paths*.
 
     <br><img src="../images/design-15.png "Add Definition" width="900" /><br><br>
 
-1. Notice that this API path has a single path parameter (`id` defined as an `int32`) and a single GET operation defined.  Click on the GET operation, then click the location drop-down which is part of the 200 OK response.
+### Step 2. Notice that this API path has a single path parameter (`id` defined as an `int32`) and a single GET operation defined.  
+
+### Step 3. Click the GET operation, then click the location drop-down, which is part of the 200 OK response.
 
     <br><img src="../images/design-16.png "Definition Name" width="900" /><br><br>
 
-1. Notice that this API path has a single response defined (a `200 OK` response) and the type that is returned is a `location` object.
+### Step 4. Notice that this API path has a single response defined (a `200 OK` response) and the type that is returned is a `location` object.
 
     <br><img src="../images/design-17.png "Definition Data Types" width="900" /><br><br>
 
-### Step 3: Verify the location object
+## Section 3: Verify the location object
 
-1. Click on the `</> location` object link under the *Data Types* section.  Notice that the object has a bunch of properties defined which make up the object.
+### Step 1. From under the *Data Types* section, click the `</> location` object link.
+
+Note, the right side of the screen displays the properties that support the object.
 
     <br><img src="../images/design-06.png "Add Path" width="900" /><br><br>
 
-1. Click on the source link and notice that we have both YAML and JSON schemas generated by our object design:
+### Step 2. Click the source link and notice that we have both YAML and JSON schemas generated by our object design:
 
     <br><img src="../images/design-07.png "Path" width="900" /><br><br>
 
-### Step 4: Verify the /locations path
+## Section 4: Verify the /locations path
 
-1. Click the **/locations** path.  Then click on the source tab.  Notice that we have both a GET and POST request defined, together with a couple of example requests.  Using a POST method, we can insert a new record into our sample database with Fuse.
+Click the **/locations** path.  Then click the source tab.  Notice that we have both a GET and POST request defined, together with a couple of example requests.  Using a POST method, we can insert a new record into our sample database with Fuse.
 
     <br><img src="../images/design-23.png "Locations API" width="900" /><br><br>
 
@@ -92,11 +92,11 @@ Let's start verifying your API.
 
 ## Steps Beyond
 
-So, you want more? Did you notice the link **source** when editing the *Paths* or the *Definitions*? Get back to the API editor and follow the link. What do you see? Apicurio lets you follow the form-based editor or go one step beyond and also lets you direct edit the source of your API definition.
+So, you want more? Did you notice the link **source** when editing the *Paths* or the *Definitions*? Get back to the API editor and follow the link. What do you see? Apicurio lets you follow the form-based editor or go one step beyond and direct edit the source of your API definition.
 
 ## Summary
 
-In this lab you used Apicurio Studio to import a simple API definition using the OpenAPI Specification (Swagger 2.0). You learned how to author and download a standards compliant API Specification using Red Hat's APICurio.
+In this exercise you used APIcurio Studio to import a simple API definition using the OpenAPI Specification (Swagger 2.0). You also learned how to author and download a standards compliant API Specification, using Red Hat's Apicurio Studio.
 
 ## Notes and Further Reading
 
