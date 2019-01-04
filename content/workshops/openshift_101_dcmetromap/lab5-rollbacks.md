@@ -44,7 +44,7 @@ Click <b><u>advanced options</u></b> and fill out the boxes to point to the fork
 <p>
 <table>
 <tr><td><b>Name</b></td><td>dc-metro-map</td></tr>
-<tr><td><b>Git Repository URL</b></td><td>https://github.com/YOUR_ACCOUNT/openshift-workshops.git</td></tr>
+<tr><td><b>Git Repository URL</b></td><td>https://github.com/<b>YOUR_ACCOUNT</b>/openshift-workshops.git</td></tr>
 <tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
 </table>
 </p>
