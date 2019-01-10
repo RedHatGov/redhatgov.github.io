@@ -1,7 +1,7 @@
 /* Copy-To-Clipboard */
 pre {
     position: relative;
-    color: #ffffff;
+    /* color: #ffffff; */
 }
 /* code, kbd, pre, samp {
     font-family: "Consolas", menlo, monospace;
