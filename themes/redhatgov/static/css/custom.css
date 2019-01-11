@@ -1,20 +1,7 @@
 /* Copy-To-Clipboard */
 pre {
     position: relative;
-    /* color: #ffffff; */
 }
-/* code, kbd, pre, samp {
-    font-family: "Consolas", menlo, monospace;
-    font-size: 92%;
-} */
-/* code {
-    border-radius: 2px;
-    white-space: nowrap;
-    color: #5e5e5e;
-    background: #FFF7DD;
-    border: 1px solid #fbf0cb;
-    padding: 0px 2px;
-} */
 code + .copy-to-clipboard {
     margin-left: -1px;
     border-left: 0 !important;
@@ -23,26 +10,6 @@ code + .copy-to-clipboard {
     height: 21px;
     top: 0;
 }
-/* pre {
-    padding: 1rem;
-    margin: 2rem 0;
-    background: #1d1f21;
-    border: 0;
-    border-radius: 2px;
-    line-height: 1.15;
-} */
-/* pre code {
-    color: #dadada;
-    background: inherit;
-    white-space: inherit;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    font-size: 15px;
-} */
-/* hr {
-    border-bottom: 4px solid #F0F2F4;
-} */
 
 .tooltipped {
     position: relative;
