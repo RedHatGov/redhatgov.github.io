@@ -31,7 +31,9 @@ Eclipse Che, our online IDE, provides important functionality for implementing A
 
 1. Click on the link for Eclipse Che.
 
-1. Use your unique username as your workspace name e.g. userX.  Select "day in the life workshop" stack, increase the RAM to 4GB and then click **Create**.
+1. Use your unique username as your workspace name e.g. userX.  
+
+1. Select "day in the life workshop" stack, increase the RAM to 4GB and then click **Create**.
 
     <br><img src="../images/00-new-workspace.png "New Workspace" width="900" /><br><br>
 
@@ -71,7 +73,9 @@ Eclipse Che, our online IDE, provides important functionality for implementing A
 
     <br><img src="../images/00-import-project.png "Import Project" width="900" /><br><br>
 
-1. Enter your gogs repository.  It should be similar to `http://gogs.apps.ocp-ai.redhatgov.io/userX/dayintheliferepo`, making sure to update `userX` with your unique username.  Select **Import Recursively** and then click **Import**.
+1. Enter your gogs repository.  It should be similar to `http://gogs.apps.ocp-ai.redhatgov.io/userX/dayintheliferepo`, making sure to update `userX` with your unique username.  
+  - Select **Import Recursively** and then click **Import**. <br><br>
+
 
 1. When the "Save" pop-up appears, click the "X" to close the pop-up.
 
@@ -124,85 +128,96 @@ Once you've received the swagger specification (API contract) from your friendly
 
     <br><img src="../images/00-select-mvn.png "select" width="900" /><br><br>
 
-1. Double-click the **Generate REST DSL from..** script to open the command window.  Click **Run** to execute the script. If everything completes successfully, it should generate a new file under `src/main/java/com/redhat` called `CamelRoutes.java`.  If the Maven script fails, it's probably because you forgot to first highlight the `location-service` project in the previous step.  Be sure to do this and re-run the command to fix the error.
+1. Double-click the **Generate REST DSL from..** script to open the command window.  
+  - Click **Run** to execute the script.
+  - If everything completes successfully, it should generate a new file under `src/main/java/com/redhat` called `CamelRoutes.java`.  
+  - If the Maven script fails, it's probably because you forgot to first highlight the `location-service` project in the previous step.  Be sure to do this and re-run the command to fix the error.
 
     <br><img src="../images/00-run-mvn.png "run" width="900" /><br><br>
 
-1. Click on the workspace button (located next to the **Manage Commands** button).  Open the `CamelRoutes.java` file under `src/main/java/com/redhat`.  Notice that the `camel-restdsl-swagger-plugin` maven plugin has generated Camel RESTdsl code for the various HTTP GET and POST operations.  What is missing though are the underlying Camel routes, which will form our API service implementations. If the `CamelRoutes.java` hasn't appeared, please right-click on the `location-service` project and click **Refresh** to manually refresh the project tree.
+1. Click on the workspace button (located next to the **Manage Commands** button).  
+  - Open the `CamelRoutes.java` file under `src/main/java/com/redhat`.  
+  - Notice that the `camel-restdsl-swagger-plugin` maven plugin has generated Camel RESTdsl code for the various HTTP GET and POST operations.  
+  - What is missing though are the underlying Camel routes, which will form our API service implementations.
+  - If the `CamelRoutes.java` hasn't appeared, please right-click on the `location-service` project and click **Refresh** to manually refresh the project tree.
 
     <br><img src="../images/00-camel-routes.png "camel" width="900" /><br><br>
 
 
-  ```java
+    ```java
+        package com.redhat;
 
-    package com.redhat;
+        import javax.annotation.Generated;
+        import org.apache.camel.builder.RouteBuilder;
+        import org.apache.camel.model.rest.RestParamType;
 
-    import javax.annotation.Generated;
-    import org.apache.camel.builder.RouteBuilder;
-    import org.apache.camel.model.rest.RestParamType;
-
-    /**
-     * Generated from Swagger specification by Camel REST DSL generator.
-     */
-    @Generated("org.apache.camel.generator.swagger.PathGenerator")
-    public final class CamelRoutes extends RouteBuilder {
         /**
-         * Defines Apache Camel routes using REST DSL fluent API.
+         * Generated from Swagger specification by Camel REST DSL generator.
          */
-        public void configure() {
-            rest()
-                .get("/locations")
-                    .to("direct:rest1")
-                .post("/locations")
-                    .to("direct:rest2")
-                .get("/locations/{id}")
-                    .param()
-                        .name("id")
-                        .type(RestParamType.path)
-                        .dataType("integer")
-                        .required(true)
-                    .endParam()
-                    .to("direct:rest3")
-                .get("/location/phone/{id}")
-                    .param()
-                        .name("id")
-                        .type(RestParamType.path)
-                        .dataType("integer")
-                        .required(true)
-                    .endParam()
-                    .to("direct:rest4");
+        @Generated("org.apache.camel.generator.swagger.PathGenerator")
+        public final class CamelRoutes extends RouteBuilder {
+            /**
+             * Defines Apache Camel routes using REST DSL fluent API.
+             */
+            public void configure() {
+                rest()
+                    .get("/locations")
+                        .to("direct:rest1")
+                    .post("/locations")
+                        .to("direct:rest2")
+                    .get("/locations/{id}")
+                        .param()
+                            .name("id")
+                            .type(RestParamType.path)
+                            .dataType("integer")
+                            .required(true)
+                        .endParam()
+                        .to("direct:rest3")
+                    .get("/location/phone/{id}")
+                        .param()
+                            .name("id")
+                            .type(RestParamType.path)
+                            .dataType("integer")
+                            .required(true)
+                        .endParam()
+                        .to("direct:rest4");
+            }
         }
-    }
+    ```
 
-```
+
 
 
 1. Open the generated `CamelRoutes.java` file.  We need to first instantiate our newly created Result Processors' and include the necessary imports.  Insert the following import statements into the `CamelRoutes.java` file:
 
 
-```java
-	...
-	import com.redhat.processor.*;
-	import com.redhat.model.*;
-	import org.springframework.stereotype.Component;
-	import org.apache.camel.model.rest.RestBindingMode;
-	...
-```
+
+    ```java
+    ...
+    import com.redhat.processor.*;
+    import com.redhat.model.*;
+    import org.springframework.stereotype.Component;
+    import org.apache.camel.model.rest.RestBindingMode;
+    ...
+    ```
+
 
 1. As we're using SpringBoot, we should also include the `@Component` declaration to the class definition statement (under the `@Generated`).
 
-  ```java
-	...
-	/**
-	* Generated from Swagger specification by Camel REST DSL generator.
-	*/
-	@Generated("org.apache.camel.generator.swagger.PathGenerator")
-	@Component
-	public class CamelRoutes extends RouteBuilder {
-	...
-  ```
+    ```java
+      ...
+    	/**
+    	* Generated from Swagger specification by Camel REST DSL generator.
+    	*/
+    	@Generated("org.apache.camel.generator.swagger.PathGenerator")
+    	@Component
+    	public class CamelRoutes extends RouteBuilder {
+    	...
+    ```
 
-1. Next we need to include an `@Override` statement for our `configure()` method, and include references to our result processors.  Also add the `throws Exception`, `ciResultProcessor`, and `locationResultProcessor` as seem below
+
+
+1. Next we need to include an `@Override` statement for our `configure()` method, and include references to our result processors.  Also add the `throws Exception`, `ciResultProcessor`, and `locationResultProcessor` as seen below
 
 
     ```java
@@ -245,7 +260,7 @@ Once you've received the swagger specification (API contract) from your friendly
 			.to("sql:select * from locations?dataSource=dataSource")
 			.process(locationResultProcessor)
 			.log("${body}")
-	;
+	     ;
 
 	    from("direct:getlocation")
 			.to("sql:select * from locations where id=cast(:#id as int)?dataSource=dataSource")
@@ -256,17 +271,17 @@ Once you've received the swagger specification (API contract) from your friendly
 				.otherwise()
 					.setHeader("HTTP_RESPONSE_CODE",constant("404"))
 			.log("${body}")
-	;
+	     ;
 
         from("direct:addlocation")
             		.log("Creating new location")
 			.to("sql:INSERT INTO locations (id,name,lat,lng,location_type,status) VALUES (:#${body.id},:#${body.name},:#${body.location.lat},:#${body.location.lng},:#${body.type},:#${body.status});?dataSource=dataSource")
-		;
+	     ;
 
         from("direct:getlocationdetail")
 			.to("sql:select * from location_detail where id=cast(:#id as int)?dataSource=dataSource")
 			.process(ciResultProcessor)
-	;
+	     ;
 	...
     ```
 
@@ -301,102 +316,107 @@ Once you've received the swagger specification (API contract) from your friendly
     ```
 1.  Your CamelRoutes.java should look similar to the following:
 
-```java
-package com.redhat;
 
-import javax.annotation.Generated;
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.model.rest.RestParamType;
-import com.redhat.processor.*;
-import com.redhat.model.*;
-import org.springframework.stereotype.Component;
-import org.apache.camel.model.rest.RestBindingMode;
+    ```java
+    package com.redhat;
 
-/**
- * Generated from Swagger specification by Camel REST DSL generator.
- */
-@Generated("org.apache.camel.generator.swagger.PathGenerator")
-@Component
-public final class CamelRoutes extends RouteBuilder {
-    /**
-     * Defines Apache Camel routes using REST DSL fluent API.
-     */
-    @Override
-    public void configure() throws Exception {
+    import javax.annotation.Generated;
+    import org.apache.camel.builder.RouteBuilder;
+    import org.apache.camel.model.rest.RestParamType;
+    import com.redhat.processor.*;
+    import com.redhat.model.*;
+    import org.springframework.stereotype.Component;
+    import org.apache.camel.model.rest.RestBindingMode;
 
-        ContactInfoResultProcessor ciResultProcessor = new ContactInfoResultProcessor();
-        LocationResultProcessor locationResultProcessor = new LocationResultProcessor();
+        /**
+         * Generated from Swagger specification by Camel REST DSL generator.
+         */
+        @Generated("org.apache.camel.generator.swagger.PathGenerator")
+        @Component
+        public final class CamelRoutes extends RouteBuilder {
+            /**
+             * Defines Apache Camel routes using REST DSL fluent API.
+             */
+            @Override
+            public void configure() throws Exception {
 
-        restConfiguration()
-        .component("servlet")
-        .port(8080)
-        .bindingMode(RestBindingMode.json)
-        .contextPath("/")
-        .dataFormatProperty("prettyPrint", "true")
-        .enableCORS(true)
-        .apiContextPath("/api-doc")
-        .apiProperty("api.title", "Location and Contact Info API")
-        .apiProperty("api.version", "1.0.0")
-    ;
+                ContactInfoResultProcessor ciResultProcessor = new ContactInfoResultProcessor();
+                LocationResultProcessor locationResultProcessor = new LocationResultProcessor();
 
-        rest()
-        .get("/locations")
-            .to("direct:getalllocations")
-        .post("/locations")
-            .type(Location.class)
-            .to("direct:addlocation")
-        .get("/locations/{id}")
-            .param()
-                .name("id")
-                .type(RestParamType.path)
-                .dataType("integer")
-                .required(true)
-            .endParam()
-            .to("direct:getlocation")
-        .get("/location/phone/{id}")
-            .param()
-                .name("id")
-                .type(RestParamType.path)
-                .dataType("integer")
-                .required(true)
-            .endParam()
-            .outType(ContactInfo.class)
-            .to("direct:getlocationdetail")
-    ;
+                restConfiguration()
+                .component("servlet")
+                .port(8080)
+                .bindingMode(RestBindingMode.json)
+                .contextPath("/")
+                .dataFormatProperty("prettyPrint", "true")
+                .enableCORS(true)
+                .apiContextPath("/api-doc")
+                .apiProperty("api.title", "Location and Contact Info API")
+                .apiProperty("api.version", "1.0.0")
+            ;
 
-        from("direct:getalllocations")
-            .to("sql:select * from locations?dataSource=dataSource")
-            .process(locationResultProcessor)
-            .log("${body}")
-    ;
+                rest()
+                .get("/locations")
+                    .to("direct:getalllocations")
+                .post("/locations")
+                    .type(Location.class)
+                    .to("direct:addlocation")
+                .get("/locations/{id}")
+                    .param()
+                        .name("id")
+                        .type(RestParamType.path)
+                        .dataType("integer")
+                        .required(true)
+                    .endParam()
+                    .to("direct:getlocation")
+                .get("/location/phone/{id}")
+                    .param()
+                        .name("id")
+                        .type(RestParamType.path)
+                        .dataType("integer")
+                        .required(true)
+                    .endParam()
+                    .outType(ContactInfo.class)
+                    .to("direct:getlocationdetail")
+            ;
 
-        from("direct:getlocation")
-            .to("sql:select * from locations where id=cast(:#id as int)?dataSource=dataSource")
-            .process(locationResultProcessor)
-            .choice()
-                .when(simple("${body.size} > 0"))
-                    .setBody(simple("${body[0]}"))
-                .otherwise()
-                    .setHeader("HTTP_RESPONSE_CODE",constant("404"))
-            .log("${body}")
-    ;
+                from("direct:getalllocations")
+                    .to("sql:select * from locations?dataSource=dataSource")
+                    .process(locationResultProcessor)
+                    .log("${body}")
+            ;
 
-        from("direct:addlocation")
-                    .log("Creating new location")
-            .to("sql:INSERT INTO locations (id,name,lat,lng,location_type,status) VALUES (:#${body.id},:#${body.name},:#${body.location.lat},:#${body.location.lng},:#${body.type},:#${body.status});?dataSource=dataSource")
-        ;
+                from("direct:getlocation")
+                    .to("sql:select * from locations where id=cast(:#id as int)?dataSource=dataSource")
+                    .process(locationResultProcessor)
+                    .choice()
+                        .when(simple("${body.size} > 0"))
+                            .setBody(simple("${body[0]}"))
+                        .otherwise()
+                            .setHeader("HTTP_RESPONSE_CODE",constant("404"))
+                    .log("${body}")
+            ;
 
-        from("direct:getlocationdetail")
-            .to("sql:select * from location_detail where id=cast(:#id as int)?dataSource=dataSource")
-            .process(ciResultProcessor)
-    ;                
-  }
-}
+                from("direct:addlocation")
+                            .log("Creating new location")
+                    .to("sql:INSERT INTO locations (id,name,lat,lng,location_type,status) VALUES (:#${body.id},:#${body.name},:#${body.location.lat},:#${body.location.lng},:#${body.type},:#${body.status});?dataSource=dataSource")
+                ;
 
-```
+                from("direct:getlocationdetail")
+                    .to("sql:select * from location_detail where id=cast(:#id as int)?dataSource=dataSource")
+                    .process(ciResultProcessor)
+            ;                
+          }
+        }
+
+    ```
 
 
-1. Before we test our newly created Camel Routes, we need to update `src/main/resources/application.properties` to point to our Postgres database.  Set the `postgresql.service.name` property to `postgresql.OCPPROJECT.svc` so that it points to our OpenShift service. Replace `OCPPROJECT` with the OpenShift project name you used in Step 2 to host Postgres Database (this should be your unique username).
+## Test Route
+
+1. Before we test our newly created Camel Routes, we need to update `src/main/resources/application.properties` to point to our Postgres database.  
+  - Set the `postgresql.service.name` property to `postgresql.OCPPROJECT.svc` so that it points to our OpenShift service.
+  - Replace `OCPPROJECT` with the OpenShift project name you used in the previous step to host Postgres Database (this should be your unique username).
 
     <br><img src="../images/00-update-properties.png "Update Properties" width="900" /><br><br>
 

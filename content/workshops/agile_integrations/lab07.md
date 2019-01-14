@@ -27,14 +27,7 @@ You can customize the look and feel of the entire Developer Portal to match your
 
 ### Step 1: Customizing Developer Portal
 
-1. Open a browser window and navigate to the 3scale admin app.  Check with your instructor.  It should be similar to the following:
-
-    ```bash
-    https://user1-admin.apps.ocp-ai.redhatgov.io/
-    ```
-     *Remember to replace `X` with your user number.*
-
-1. Accept the self-signed certificate if you haven't.
+1. Open a browser window and navigate to the 3scale admin app.  Please check with your instructor.  
 
 1. Log into 3scale using your designated user and password. Click on **Sign In**.
 
@@ -58,7 +51,8 @@ You can customize the look and feel of the entire Developer Portal to match your
 
     <br><img src="../images/14-publish-devportal.png" width="900" /><br><br>
 
-1. Click on the **API** Tab, select the **Integration** link under **SSO Location API**, and click on the **Application Plans** on the left menu when it shows up. And publish your application plan by clicking in on the **Publish** option on the page.  
+1. Click on the **API** Tab, select the **Integration** link under **SSO Location API**, and click on the **Application Plans** on the left menu when it shows up.
+  - And publish your application plan by clicking in on the **Publish** option on the page.  
 
 	<br><img src="../images/17-publishplan.png" width="900" /><br><br>
 
@@ -75,6 +69,11 @@ You can customize the look and feel of the entire Developer Portal to match your
     <br><img src="../images/16a-signup-limited.png" width="900" /><br><br>
 
 1. Fill in your information and an email to register as a developer. Click on the **Sign up** button.
+  - ORGANIZATION/GROUP NAME: workshop
+  - USERNAME: developer
+  - EMAIL: developer@redhat.com
+  - PASSWORD: developer
+  - PASSWORD CONFIRMATION: developer
 
     <br><img src="../images/16b-signup-form.png" width="900" /><br><br>
 
@@ -102,8 +101,8 @@ You can customize the look and feel of the entire Developer Portal to match your
 
 	<br><img src="../images/21-select-application.png" width="900" /><br><br>
 
-1. Update redirect link to your locations application link.  Check with your instructor if need be.  Please update
- http://www-userX.apps.ocp-ai.redhatgov.io/*
+1. Update redirect link to your locations application link.  Please update userX and OCP_URL
+ http://www-[userX].apps.[OCP_URL]/*
 
 	<br><img src="../images/22-updare-redirect-link.png" width="900" /><br><br>
 
@@ -116,7 +115,7 @@ You can customize the look and feel of the entire Developer Portal to match your
 1. Open a new *Incognito/Private* browser window to test the Developer Portal login. Navigate to the following.  Make sure your user and Openshift environment is correct.
 
     ```bash
-     https://userX.apps.ocp-ai.redhatgov.io/
+     http://[userX].apps.[OCP_URL]
     ```
 
 1. Type your portal code to finish the login.

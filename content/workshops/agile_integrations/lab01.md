@@ -27,9 +27,9 @@ Red Hat is one of the founding members of the Linux Foundation Open API Initiati
 
 ### Step 1: Importing APIs with Apicurio Studio
 
-1. Open a browser window and navigate to apicurio.
+1. Open a browser window and navigate to Apicurio.  Please ask your Instructor if you do not have the link.
 
-1. Log in using your designated [user and password](#environment).
+1. Log in using your designated user and password.
 
     <br><img src="../images/design-01.png "Login" width="900" /><br><br>
 

@@ -51,7 +51,7 @@ Eclipse Che, our online IDE, provides important functionality for implementing A
     ```
 
 
-     *Remember to replace the **[OCPPROJECT]** with the OpenShift project(NameSpace) you created in last lab.  [OCPPROJECT] should be your username*
+     *Remember to replace the **[OCPPROJECT]** with the OpenShift project(NameSpace) you used in last lab.  [OCPPROJECT] should be your username*
 
 1. Once the build and deploy is complete, navigate back to your Openshift web console and verify the project is running.
 
@@ -64,7 +64,11 @@ Eclipse Che, our online IDE, provides important functionality for implementing A
 
     <br><img src="../images/00-verify-wsdl.png "Verify WSDL" width="900" /><br><br>
 
-1. Return to your Eclipse Che workspace and open the `dayintelife-import/location-soap2rest` project.  Open the `pom.xml` file and scroll to the bottom.  Uncomment out the `cxf-codegen-plugin` entry at the bottom.  Update the `<wsdl>` entry with your fully qualified WSDL URL e.g. `http://location-soap-userX.apps.ocp-devsecops2.redhatgov.io/ws/location?wsdl`. *Be sure to replace userX with your username.*
+1. Return to your Eclipse Che workspace and open the `dayintelife-import/location-soap2rest` project.  
+  - Open the `pom.xml` file and scroll to the bottom.  
+  - Uncomment out the `cxf-codegen-plugin` entry at the bottom.  
+  - Update the `<wsdl>` entry with your fully qualified WSDL URL e.g. `http://location-soap-userX.apps.ocp-ai.redhatgov.io/ws/location?wsdl`.
+  - *Be sure to replace userX with your username.*
 
     <br><img src="../images/00-uncomment-codegen.png "Uncomment codegen plugin" width="900" /><br><br>
 
@@ -76,7 +80,7 @@ Eclipse Che, our online IDE, provides important functionality for implementing A
 
     <br><img src="../images/00-verify-pojos.png "Verify Pojos" width="900" /><br><br>
 
-1. Open up the `CamelRoutes.java` file.  Notice that the existing implementation is barebones. First of all, we need to enter the SOAP service address and WSDL location for our CXF client to call after the camelContect and before the @Override.
+1. Open up the `CamelRoutes.java` file.  Notice that the existing implementation is barebones. First of all, we need to enter the SOAP service address and WSDL location for our CXF client to call after the camelContext and before the @Override.
 
     ```java
 	...
@@ -89,10 +93,12 @@ Eclipse Che, our online IDE, provides important functionality for implementing A
 
 	@Override
 	public void configure() throws Exception {
+  ...  
     ```
-1. Next after the restConfiguration() method, we need to create our Camel route implementation and create the RESTful endpoint.  To do this, include the following code (making sure to update the **{YOUR_NAME_SPACE}**,  **{OPENSHIFT_APP_URL}** and username values in the `to("cxf://` URL):
-
-       In this case **YOUR_NAME_SPACE** should be *userX* and **{OPENSHIFT_APP_URL}** would be *dil.opentry.me*. Check with your instructor if you are not sure.
+1. Next after the restConfiguration() method, we need to create our Camel route implementation and create the RESTful endpoint.  
+  - To do this, include the following code (making sure to update the **{YOUR_NAME_SPACE}**,  **{OPENSHIFT_APP_URL}** and username values in the `to("cxf://` URL):
+  - For example **YOUR_NAME_SPACE** should be *userX* and **{OPENSHIFT_APP_URL}** could be *apps.ocp-ai.redhatgov.io*.
+  - Check with your instructor if you are not sure.
 
     ```java
 	...
@@ -127,8 +133,6 @@ Eclipse Che, our online IDE, provides important functionality for implementing A
 
 		;
 
-	    }
-	}
     ```
 
 1. Now that we have our API service implementation, we can try to test this locally.  Navigate back to the **Manage commands** view and execute the `run spring-boot` script.  

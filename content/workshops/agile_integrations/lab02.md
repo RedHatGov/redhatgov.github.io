@@ -29,9 +29,9 @@ For the Developer track, we require a collaboration environment based on Git. Fo
 
 Follow this instructions to set up the repository.
 
-1. Open a browser window and navigate to gogs.
+1. Open a browser window and navigate to gogs.  Please ask your instructor if you need the link.
 
-1. Log into Gogs using your designated [user and password](#environment). Click on **Sign In**.
+1. Log into Gogs using your designated user and password. Click on **Sign In**.
 
     <br><img src="../images/mock-01.png "Sign In" width="900" /><br><br>
 
@@ -83,9 +83,9 @@ Follow this instructions to set up the repository.
 
 ### Step 1: Create a Microcks Job
 
-1. Open a browser window and navigate to microcks.
+1. Open a browser window and navigate to microcks.  Please ask your instructor if you need the link.
 
-1. Log in into Microcks using your designated [user and password](#environment).
+1. Log in into Microcks using your designated user and password.
 
     <br><img src="../images/mock-10.png "Openshift Login" width="900" /><br><br>
 
@@ -137,7 +137,7 @@ Follow this instructions to set up the repository.
 
     <br><img src="../images/mock-19.png "Mock Service" width="900" /><br><br>
 
-1. You can check that the example we added to the definition in [Lab 1](lab01.md) will be used to return the mock values. Scroll down, copy and save the **Mocks URL**, we will use that endpoint to test the REST mock service.
+1. You can check that the example we added to the definition in Lab 1 will be used to return the mock values. Scroll down, copy and save the **Mocks URL**, we will use that endpoint to test the REST mock service.
 
     <br><img src="../images/mock-20.png "Mock Operation" width="900" /><br><br>
 
@@ -154,9 +154,9 @@ We now have a working REST mock service listening for requests. We will use an o
 
 1. Copy and paste the Mock URL from earlier step. *Remember to replace X with your user number*. It should look similar to the link below.
 
-   ```bash
-   http://microcks.apps.ocp-ai.redhatgov.io/rest/Locations-UserX/1.0.0/locations
-   ```
+    ```bash
+    http://microcks.apps.ocp-ai.redhatgov.io/rest/Locations-UserX/1.0.0/locations
+    ```
 
 1. Click the **START YOUR CURL** button.
 
