@@ -27,13 +27,7 @@ Red Hat provides one the leading API Management tools which provide management s
 
 Your 3scale Admin Portal provides access to a number of configuration features. An administration token is needed when automating setups for your API. This step will let you create a new token for setup.
 
-1. Open a browser window and navigate to 3Scale.  Check with your instructor, but it should be similar to the link below.  Replax userX with your assigned user.
-
-    ```bash
-    https://userX-admin.apps.ocp-ai.redhatgov.io
-    ```
-
-1. Accept the self-signed certificate if you haven't.
+1. Open a browser window and navigate to 3Scale.  Please check with you instructor if you need the link.
 
 1. Log into 3scale using your designated user and password. Click on **Sign In**.
 
@@ -51,7 +45,8 @@ Your 3scale Admin Portal provides access to a number of configuration features. 
 	<br><img src="../images/06-menu.png" width="900" /><br><br>
 
 
-1. Create a new token that has the Read & Writeable rights to your management platform. Enter Name as **securetoken**, check the **Account management API** checkbox and **READ & WRITE** for Permission.
+1. Create a new token that has the Read & Writeable rights to your management platform.
+  - Enter Name as **securetoken**, check the **Account management API** checkbox and **READ & WRITE** for Permission.
 
 	<br><img src="../images/04-setuptoken.png" width="900" /><br><br>
 
@@ -63,12 +58,14 @@ Your 3scale Admin Portal provides access to a number of configuration features. 
 ### Step 2: Start managing your APIs
 
 By running the command lines, it will automatically setup the 3scale API configuration and start managing the API you have exposed!
+
 In you command line terminal or in your Che terminal enter the following CURL command:
 
-*Replace USERX as your user id, such as user1, user26, and OPENSHIFT_APP_URL, if you are not sure, check with your instructor*
+  - Replace USERX as your user id, such as user1, OPENSHIFT_APP_URL, YOUR_API_TOKEN you copied earlier.
+  - If you are not sure, check with your instructor
 
 ```bash
-curl -X POST http://threescale-automate-international.apps.ocp-devsecops2.redhatgov.io/threescale/automate/{YOUR_API_TOKEN}/{USERX}/{OPENSHIFT_APP_URL}
+curl -X POST http://threescale-automate-international.apps.{OPENSHIFT_APP_URL}/threescale/automate/{YOUR_API_TOKEN}/{USERX}/{OPENSHIFT_APP_URL}
 ```
 
 For example:
@@ -77,7 +74,7 @@ For example:
 curl -X POST http://threescale-automate-international.apps.ocp-ai.redhatgov.io/threescale/automate/5077c20822f2e284aaa48d9b2115551cc9605cb9617eb2479815a4209fea20d9/user1/apps.ocp-ai.redhatgov.io
 ```
 
-String **API automated, DONE!** should be returned as the result.
+**API automated, DONE!** should be returned as the result.
 
 **Save the Result as you will need it for the next lab**
 

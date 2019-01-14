@@ -23,7 +23,7 @@ Applications can be built from many technologies. In this case we use a simple w
 
 ## Lab Instructions
 
-### Step 1: Update OpenShift Deployment
+### Update OpenShift Deployment
 
 OpenShift let you automatically redeploy your changes when you setup a Continuous Integration / Continuous Deployment (CI/CD) pipeline through the use of webhook. For this lab we will trigger the new build and deployment manually through the OpenShift Console.
 
@@ -31,41 +31,41 @@ OpenShift let you automatically redeploy your changes when you setup a Continuou
 
 1. Scroll down and click in the www link in the BUILDS section.
 
-   <br><img src="../images/deploy-10.png" "Scroll Down" width="900" /><br><br>
+    <br><img src="../images/deploy-10.png" "Scroll Down" width="900" /><br><br>
 
-1. In the build environment variables page, replace the `CLIENT_ID` from `CHANGE_ME`to the one generated from the previous lab.
+1. In the build environment variables page, replace the `CLIENT_ID` from `CHANGE_ME` to the one generated from the previous lab.
 
-   <br><img src="../images/deploy-11.png" "Change Client ID" width="900" /><br><br>
+    <br><img src="../images/deploy-11.png" "Change Client ID" width="900" /><br><br>
 
 1. Click Save button to persist the changes. A green pop up will show you that the changes were saved.
 
 1. Click the Start Build button to trigger a new build using the new environment variables pointing to your service.
 
-   <br><img src="../images/deploy-12.png "Start Build" width="900" /><br><br>
+    <br><img src="../images/deploy-12.png "Start Build" width="900" /><br><br>
 
 1. In the Overview Page, a new build will be triggered. Expand the row by clicking the Builds Icon.
 
-   <br><img src="../images/deploy-13.png "View Build" width="900" /><br><br>
+    <br><img src="../images/deploy-13.png "View Build" width="900" /><br><br>
 
 *The build process checks out the code from the git repo, runs a source-to-image container image build, and redeploys the container with the new image using a rolling upgrade strategy.*
 
 1. Wait for until the new Build to complete and the rolling upgrade to finish to test your new deployment.
 
-   <br><img src="../images/consume-22.png "Updated App" width="900" /><br><br>
+    <br><img src="../images/consume-22.png "Updated App" width="900" /><br><br>
 
-### Step 2: Update Secured Service with Red Hat Single Sign On Application Callback
+### Update Secured Service with Red Hat Single Sign On Application Callback
 
 Redirect URLs are a critical part of the OAuth flow. After a user successfully authorizes an application, the authorization server will redirect the user back to the application with either an authorization code or access token in the URL. Because the redirect URL will contain sensitive information, it is critical that the service doesn’t redirect the user to arbitrary locations.
 
-1. Open a browser window and navigate to your SSO Console.  Please check with your instructor for the link.  It should be similar to the following.  Replace userX with your assigned user.
+1. Open a browser window and navigate to your SSO Console.  Please check with your instructor for the link.  It should be similar to the following.  Replace userX with your assigned user and OCP_URL.
 
     ```bash
-    http://sso-sso.apps.ocp-ai.redhatgov.io/auth/admin/userX/console/
+    http://sso-sso.apps.[OCP_URL]/auth/admin/[userX]/console/
     ```
 
     *Remember to replace the X with your user number.*
 
-1. Log into Red Hat Single Sign On using your designated [user and password](#environment). Click on **Sign In**.
+1. Log into Red Hat Single Sign On using your designated user and password. Click on **Sign In**.
 
     <br><img src="../images/00-login-sso.png "RH SSO Login" width="900" /><br><br>
 
@@ -88,7 +88,7 @@ Redirect URLs are a critical part of the OAuth flow. After a user successfully a
     | Access Type | Public |
     | Standard Flow Enabled | ON |
     | Implicit Flow Enabled | OFF |
-    | Valid Redirect URIs | http://www-userX.apps.ocp-ai.redhatgov.io/* |
+    | Valid Redirect URIs | http://www-userX.apps.[OCP_URL]/* |
     | Web Origins | \* |
 
     *Remember to replace the X with your user number.*
@@ -97,10 +97,10 @@ Redirect URLs are a critical part of the OAuth flow. After a user successfully a
 
 1. Finally, click **Save** button to persist the changes.
 
-### Step 5: Test the Single Sign On Integration
+### Test the Single Sign On Integration
 
-1. Open a browser tab and navigate to your SSO Location App.  It should be a similar link to:  
-  - `http://www-userX.apps.ocp-ai.redhatgov.io/`.
+1. Open a browser tab and navigate to your SSO Location App.  Update userX and OCP_URL :  
+  - `http://www-userX.apps.[OCP_URL]/`.
   - *Remember to replace the X your user number.*
 
 1. Navigate to the Locations Page
@@ -118,7 +118,7 @@ Redirect URLs are a critical part of the OAuth flow. After a user successfully a
 
     <br><img src="../images/consume-14.png "Locations Page" width="900" /><br><br>
 
- *Congratulations!* You have successfully used the Keycloak Javascript Adapter to protect International Inc's Locations Service with Single Sign On.
+ *Congratulations!* You have successfully used the Keycloak Javascript Adapter to protect International Inc's Locations Service with Single Sign On.  If you have any issues, please see the next session.
 
 ### Troubleshooting the Locations Page
 
@@ -133,6 +133,12 @@ Redirect URLs are a critical part of the OAuth flow. After a user successfully a
   - Make sure to turn this setting back on after the lab
 
  1. Refresh the page, and the locations should appear.
+
+ 1. If you get an "Authentication Parameter is Missing" Error.  It's most likely your backend api is not working
+    - Make you created the location-service API from Lab 3  
+    - Go into 3Scale and update the Private Base URL for the SSO Locations API to a working API such as the sample Locations API that your instructor can give you.   
+
+ 1. Also, make sure to use an Incognito Browser Window or Clear your Browser Cache when viewing the International Sample Application
 
 ## Steps Beyond
 
