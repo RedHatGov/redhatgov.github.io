@@ -54,9 +54,12 @@ Select 'Next>'.  Then select 'advanced options'
 
 <img src="../images/ocp-lab-s2i-nodejs.png" width="700"><br/>
 
-The Name is: dc-metro-map<br/>
-The github repository URL is: https://github.com/RedHatGov/openshift-workshops.git<br/>
-The github context-dir is: /dc-metro-map<br/>
+<p>
+<table>
+<tr><td><b>Name</b></td><td>dc-metro-map</td></tr>
+<tr><td><b>Git Repository URL</b></td><td><a href>https://github.com/RedHatGov/openshift-workshops.git</a></td></tr>
+<tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
+</table>
 </p>
 
 <blockquote>
