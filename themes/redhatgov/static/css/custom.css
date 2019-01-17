@@ -1,48 +1,16 @@
 /* Copy-To-Clipboard */
 pre {
     position: relative;
-    /* color: #ffffff; */
 }
-/* code, kbd, pre, samp {
-    font-family: "Consolas", menlo, monospace;
-    font-size: 92%;
-} */
-/* code {
-    border-radius: 2px;
-    white-space: nowrap;
-    color: #5e5e5e;
-    background: #FFF7DD;
-    border: 1px solid #fbf0cb;
-    padding: 0px 2px;
-} */
 code + .copy-to-clipboard {
     margin-left: -1px;
     border-left: 0 !important;
     font-size: inherit !important;
     vertical-align: middle;
-    height: 21px;
+    height: inherit;
     top: 0;
+    width: inherit;
 }
-/* pre {
-    padding: 1rem;
-    margin: 2rem 0;
-    background: #1d1f21;
-    border: 0;
-    border-radius: 2px;
-    line-height: 1.15;
-} */
-/* pre code {
-    color: #dadada;
-    background: inherit;
-    white-space: inherit;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    font-size: 15px;
-} */
-/* hr {
-    border-bottom: 4px solid #F0F2F4;
-} */
 
 .tooltipped {
     position: relative;
@@ -152,36 +120,63 @@ code + .copy-to-clipboard {
     border-right-color: rgba(0, 0, 0, 0.8);
 }
 
+
+*:not(pre) > code {
+    padding:0.5rem;
+}
+*:not(pre) > code + .copy-to-clipboard {
+    width:inherit;
+    display:inline;
+    padding:0.5rem 0.75rem;
+}
+*:not(pre) > code + .copy-to-clipboard:after {
+    font-size:inherit;
+}
 .copy-to-clipboard {
-    background-image: url(../img/clippy.svg);
-    background-position: 50% 50%;
-    background-size: 16px 16px;
-    background-repeat: no-repeat;
     width: 27px;
     height: 1.45rem;
     top: -1px;
     display: inline-block;
     vertical-align: middle;
     position: relative;
+    /* LIGHT THEME OoooooOOOOH */
     color: #5e5e5e;
-    background-color: #FFF7DD;
+    background-color: #CCC;
+    /* DARK THEME WOOOOAH */
+    /*
+    background-color: #4d5257;
+    color: #DDD;
+    */
     margin-left: -.2rem;
     cursor: pointer;
     border-radius: 0 2px 2px 0;
     margin-bottom: 1px;
+    text-align:center;
 }
-.copy-to-clipboard:hover {
-    background-color: #E8E2CD;
+.copy-to-clipboard:after {
+    content: "\f0ea";
+    font-size: 18px;
+    font-family: FontAwesome;
 }
 pre .copy-to-clipboard {
     position: absolute;
     right: 4px;
     top: 4px;
-    background-color: #4d5257;
-    color: #ccc;
     border-radius: 2px;
+    width:30px;
+    height:inherit;
+    padding:2px;
 }
+
 pre .copy-to-clipboard:hover {
     background-color: #656c72;
     color: #fff;
+}
+
+code + .copy-to-clipboard:after {
+    font-size:15px;
+}
+code + .copy-to-clipboard:hover {
+    background: #656c72;
+    color: #FFF;
 }
