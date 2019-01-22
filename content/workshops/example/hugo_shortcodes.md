@@ -159,6 +159,30 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
 {{< figure src="../images/lab1_oc_coolstore_dev1.png" title="OpenShift Coolstore" >}}
 
 
+### Font-Awesome Icons
+
+`fa` allows you to insert [Font Awesome](https://fontawesome.com/v4.7.0/icons/) icons into a Hugo Markdown page.
+
+#### Usage
+
+`fa` can be used the following ways:
+
+ * {{</* fa class="fa-dashboard" style="margin:1rem" */>}}
+ * {{</* fa "fa-dashboard" "margin:1rem" */>}}
+ * {{</* fa fa-dashboard  */>}}
+
+#### Example
+
+```bash
+ {{</* fa class="fa-dashboard" style="margin:1rem" */>}}
+ {{</* fa "fa-dashboard" "margin:1rem" */>}}
+ {{</* fa fa-dashboard  */>}}
+```
+
+#### Example output
+{{< fa fa-dashboard  >}}
+
+
 ### Twitter
 
 You want to include a single tweet into your blog post? Everything you need is the URL of the tweet, e.g.:
