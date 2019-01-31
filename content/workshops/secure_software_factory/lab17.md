@@ -1,103 +1,104 @@
 ---
-title: Lab 17 - Trigger the Software Supply Chain
+title: Lab 17 - Clair Container Scan
 workshops: secure_software_factory
-workshop_weight: 27
+workshop_weight: 30
 layout: lab
 ---
+# Add Clair Container Scan
 
-# Trigger the Trusted Software Supply Chain with Code Check-ins
+Add the configuration for the Container Scan below to your pipeline text file.
 
-Through automation, you will trigger the Trusted Software Supply Chain with code check-ins.
-
-<br>
-# Verify Webhook in Gogs
-
-The Webhook is what triggers your pipeline upon code check-ins.  You want your SCM to trigger the pipeline as opposed to Jenkins constantly polling the source code for changes.
-
-Click on the Gogs route url in the CI/CD project which takes you to the home page.  Sign in using the credentials given to you by your Instructor.
-
-Go to the openshift-tasks repository.
-
-Select Settings.
-
-Select Webhooks
-
-Verify the Webhook.  Make sure the url includes the name 'tasks-pipeline' of the your imported pipeline.
-
-<img src="../images/gogs-webhook.png" width="900"><br/>
-
-This should match the webhook of the pipeline you previously created except the domain will be openshift.default.svc.cluster.local because the gogs pod calls the internal dns to resolve the address.
-
-The webhook url is located in builds > pipeline > tasks-pipeline > configuration > generic webhook url
+<img src="../images/pipeline_container_scan.png" width="900"><br/>
 
 <br>
-# Using Eclipse Che for Editing Code
 
-Click on Eclipse Che route url in the CI/CD project which takes you to the workspace administration page. Select the Java stack and click on the Create button to create a workspace for yourself.
+# Append to Jenkins Pipeline Configuration
 
-<img src="../images/che-create-workspace.png" width="900"><br/>
+In Builds > Pipelines > tasks-pipeline > Actions > Edit
 
-You may need to start the workspace.  Click Start.
+<img src="../images/pipeline_actions_edit.png" width="900" />
 
-<img src="../images/eclipse_che_workspace_start.png" width="900"><br/>
+In your pipeline, replace the Jenkins agent 'maven' with 'jenkins-slave-image-mgmt'.
 
-It might take a little while before your workspace is set up and ready to be used in your browser. Once it's ready, click on Import Project... in order to import the openshift-tasks Gogs repository into your workspace.
+```
+pipeline {
+  agent {
+    label 'jenkins-slave-image-mgmt'
+  }
+```
 
-<img src="../images/che-import-project.png" width="900"><br/>
+In your pipeline, add the Container Scan Stage after the Build Container Stage and before the Create Dev Stage.
 
-Enter the Gogs repository http url for openshift-tasks as the Git repository url with Git username and password in the url.
+Please replace the following values:
 
-See the url below as an example.  Replace [gogs-hostname] with your gogs server.
-http://gogs:gogs@[gogs-hostname]/gogs/openshift-tasks.git
+- \<oc user\> : this was given to you by the instructor
+- \<oc password\> : this was given to you by the instructor
+- \<oc environment\> : this was given to you by the instructor
+- \<quay user\> : created from a previous lab
+- \<quay password\> : created from a previous lab
+- \<docker repository\> : In another tab with the OpenShift Console, go to Builds > Images.  Find the Docker Repo link for "jboss-eap70-openshift". It should be value similar to "172.30.186.87:5000/cicd-user1/jboss-eap70-openshift"
+- \<quay\> : this was given to you by the instructor
+- \<quay user again\> : same user as \<quay user\>
+- \<quay repository\>  : created from the previous lab, i.e. jboss-eap70-openshift
 
-So it should look something like this:
-http://gogs:gogs@gogs-cicd-user2.192.168.42.136.nip.io/gogs/openshift-tasks.git
+```
+    stage('Clair Container Scan') {
+      steps {
+            sh "oc login -u <oc user> -p '<oc password>'  --insecure-skip-tls-verify <oc environment> 2>&1"
+            sh 'echo "$(oc whoami):$(oc whoami -t)" > /tmp/srccreds'
+            sh 'skopeo --debug copy --src-creds="$(cat /tmp/srccreds)" --src-tls-verify=false --dest-tls-verify=false --dest-creds=<quay user>:<quay password> docker://<docker repo>:1.5 docker://<quay>/<quay user again>/<quay repository>:1.5'
+        }
+    }
+```
 
-You can find the repository url in Gogs web console. Make sure the check the Branch field and enter eap-7 in order to clone the eap-7 branch which is used in this demo.
+For an example, see the following:
 
-Click on Import
+```
+stage('Clair Container Scan') {
+  steps {
+        sh "oc login -u user1 -p 'redhat!@#' --insecure-skip-tls-verify https://master.ocp-naps.redhatgov.io:8443 2>&1"
+        sh 'echo "$(oc whoami):$(oc whoami -t)" > /tmp/srccreds'
+        sh 'skopeo --debug copy --src-creds="$(cat /tmp/srccreds)" --src-tls-verify=false --dest-tls-verify=false --dest-creds=user3:redhat123 docker://docker-registry.default.svc:5000/cicd-user1/jboss-eap70-openshift:1.5 docker://quay-enterprise-quay-enterprise.apps.ocp-naps.redhatgov.io/user1/jboss-eap70-openshift:1.5'
+    }
+}
+```
 
-<img src="../images/che-import-git2.png" width="900"><br/>
+Save your Jenkins file
 
-Change the project configuration to Maven and then click Save
+# Run Pipeline
 
+Go to Builds > Pipeline
 
-<img src="../images/che-import-maven.png" width="900"><br/>
+Click Start Pipeline for the pipeline you just created called tasks-pipeline.
 
-Configure you name and email to be stamped on your Git commity by going to Profile > Preferences > Git > Committer.  Click Save and Close the Window once Saved.
+Your pipeline should now execute through all the stages you created.  
 
-<img src="../images/che-configure-git-name2.png" width="900"><br/>
+Go ahead and click View Log.  This will take you to the Jenkins logs and you can follow the various stages in your pipeline.
 
-<br>
-# Edit Code in your Workspace
-
-Remove the @Ignore annotation from src/test/java/org/jboss/as/quickstarts/tasksrs/service/UserResourceTest.java test methods to enable the unit tests.
-
-<img src="../images/remove_ignore.png" width="900"><br/>
-
-Commit and push to the git repo.
-
-<img src="../images/che_commit_push_git.png" width="900"><br/>
-
-<img src="../images/che-commit_push.png" width="900"><br/>
-
-Check out Jenkins, a pipeline instance is created and is being executed. The pipeline will fail during unit tests due to the enabled unit test.
-
-<img src="../images/pipeline_failed_unittest.png" width="900"><br/>
-
-Fix the test by modifying src/main/java/org/jboss/as/quickstarts/tasksrs/service/UserResource.java and uncommenting the sort function in getUsers method.
-
-You can use CTRL+/ to uncomment multiple lines
-
-<img src="../images/che-user_resource_fix.png" width="900"><br/>
-
-
-Click on Git > Commit to commit the changes to the openshift-tasks git repository. Make sure Push commited changes to: origin/eap7 is checked. Click on Commit button.
-
-<img src="../images/che-commit.png" width="900"><br/>
-
-As soon the changes are committed to the git repository, a new instances of pipeline gets triggers to test and deploy the code changes.
-
-Go Back to OpenShift and Promote to Stage to finish your Pipeline Run
+When it asks to promote to stage, go ahead and promote it.
 
 <img src="../images/pipeline_execution.png" width="900"><br/>
+
+<br>
+
+# View Clair Container Scan Report in Quay
+
+Select your Repository you created from the previous lab
+
+<img src="../images/quay_repo.png" width="900"><br/>
+
+<br>
+
+Select Repository Tags on the left hand menu
+
+  - If your scan is queued, you will need to wait for the scan to finish to view the report
+
+Select the Security Scan for your Image
+
+<img src="../images/quay_repo_tags.png" width="900"><br/>
+
+<br>
+
+View the Security Scan Report
+
+<img src="../images/quay_scan.png" width="900"><br/>

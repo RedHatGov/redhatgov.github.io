@@ -7,6 +7,8 @@ layout: lab
 
 # Add Archive Stage
 
+Archiving the built and tested application into a trusted repository is important to making sure you are building with trusted parts.  You assume this application is built properly and all the previous stages have passed.  With that confidence, your built and tested application should be immutable in a trusted repository.  The repository will version or audit any changes to the application, configuration, and dependencies.
+
 Add Archive Stage Steps into your pipeline.
 
 <img src="../images/pipeline_nexus.png" width="900" />
