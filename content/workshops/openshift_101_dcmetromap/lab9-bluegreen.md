@@ -11,11 +11,11 @@ When implementing continuous delivery for your software one very useful techniqu
 ## Before starting
 Before we get started with the Blue/Green deployment lab, lets clean up some of the projects from the previous lab. 
 
-<code>
-$ oc delete all -l app=jenkins-ephemeral</br>
-$ oc delete all -l app=nodejs-helloworld-sample</br>
-$ oc delete project cicd-{{< span "userid" "YOUR#" >}}</br>
-</code>
+``` bash
+$ oc delete all -l app=jenkins-ephemeral
+$ oc delete all -l app=nodejs-helloworld-sample
+$ oc delete project cicd-{{< span "userid" "YOUR#" >}}
+```
 
 ## Lets deploy an application
 To demonstrate Blue/Green deployments, we'll use a simple application that renders a colored box as an example. Using your GitHub account, please fork the following https://github.com/RedHatGov/openshift-workshops [project][1].
@@ -24,11 +24,11 @@ You should be comfortable deploying an app at this point, but here are the steps
 
 > <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
-<code>
-$ oc new-project bluegreen-{{<span "userid" "YOUR#" >}}</br>
-$ oc new-app --name=green [your-project-repo-url] --context-dir=dc-metro-map</br>
-$ oc expose service green</br>
-</code>
+``` bash
+$ oc new-project bluegreen-{{<span "userid" "YOUR#" >}}
+$ oc new-app --name=green [your-project-repo-url] --context-dir=dc-metro-map
+$ oc expose service green
+```
 
 Note that we exposed this application using a route named "green". Wait for the application to become available, then navigate to your application and validate it deployed correctly.
 
@@ -43,7 +43,7 @@ Use the same commands to deploy this new version of the app, but this time name 
 
 > <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
-```bash
+``` bash
 $ oc new-app --name=blue [your-project-repo-url] --context-dir=dc-metro-map
 ```
 
@@ -60,7 +60,7 @@ Now that we are satisfied with our change we can do the Green/Blue switch.  With
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
 
-```bash
+``` bash
 $ oc edit route green
 ```
 
