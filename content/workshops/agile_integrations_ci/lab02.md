@@ -38,7 +38,7 @@ Red hat combines and number of commercial and Open Source tools to cover each pa
 
     <br><img src="../images/mock-11.png "Job" width="900" /><br><br>
 
-1. Click the **Upload** button to upload the **Locations-UserX.yaml** spec generated from [Lab 1](lab01.md).
+1. Click the **Upload** button to upload the **Locations-UserX.yaml** spec generated from Lab 1.
 
     <br><img src="../images/mock-12.png "Upload Spec" width="900" /><br><br>
 
