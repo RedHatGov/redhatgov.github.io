@@ -40,7 +40,6 @@ image::wetty.png[caption="Figure 1: ", title='wetty', 500]
 [IMPORTANT]
 Be sure you can log in to your instances.  If you can't log in start shouting, loudly, and waving your hands!
 
-
 == End Result
 
 At this point, you should have logged into your node.  If you haven't, let us know so we can get you fixed up.

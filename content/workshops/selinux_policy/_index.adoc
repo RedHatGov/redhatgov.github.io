@@ -52,6 +52,23 @@ Participate. We are going to cut you loose with SELinux, in just a little while.
 
 Bring a laptop.  It doesn't matter what OS it runs, but you will need either the Firefox or Chrome web browser installed. If, for some reason, you don't have a laptop, let your instructor know, or try to find someone to share with.
 
+[IMPORTANT]
+===============================
+When we want you to type something in, we'll use a frame like this:
+{{< highlight bash >}}
+cat /etc/hosts
+{{< /highlight >}}
+===============================
+
+[IMPORTANT]
+===============================
+When we want to show you the output from a command, we'll use a different frame, like this one:
+[source,bash]
+----
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+----
+===============================
 
 == Exercises
 
