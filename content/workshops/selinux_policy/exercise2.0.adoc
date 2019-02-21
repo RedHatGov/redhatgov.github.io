@@ -5,8 +5,6 @@ workshop_weight: 20
 layout: lab
 ---
 
-:license_url: http://ansible-workshop-bos.redhatgov.io/ansible-license.json
-
 :icons: font
 :imagesdir: /workshops/selinux_policy/images
 
@@ -15,7 +13,7 @@ layout: lab
 
 == Exercise Description
 
-In this exercise, we are going to write custom policy for an example application.
+In this exercise, we are going to download the code for the example application that we are going to write policy for, and build and install it onto our test system.
 
 
 === Step 1: Change directories
@@ -66,98 +64,39 @@ systemctl status testapp
    Active: inactive (dead)
 ----
 
-=== Step 5: Generate an initial generic SELinux policy
+=== Step 5: Start and enable the service
 
-Create a policy directory, and generate an initial policy.  Use `sepolicy generate` to generate a policy for the app that we want to enable.
+Now, let's file up the application
 
+{{< highlight bash >}}
+systemctl enable testapp
+systemctl start testapp
+{{< /highlight >}}
+
+We can see that the app has been launched by systemd:
+{{< highlight bash >}}
+systemctl status testapp
+{{< /highlight >}}
 [source,bash]
 ----
-cd ~/src
-mkdir policy
-cd policy
-sepolicy generate --init /usr/local/sbin/testapp
+● testapp.service - Testing SELinux app
+   Loaded: loaded (/usr/lib/systemd/system/testapp.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2019-02-20 20:18:51 UTC; 2min 4s ago
+  Process: 8496 ExecStart=/usr/local/sbin/testapp (code=exited, status=0/SUCCESS)
+ Main PID: 8497 (testapp)
+   CGroup: /system.slice/testapp.service
+           └─8497 /usr/local/sbin/testapp
+
+Feb 20 20:20:06 ip-10-0-2-80.ec2.internal testapp[8497]: daemon ttl 999924
 ----
 
-Note the last few lines in the output from `sepolicy generate`:
+And, we can also see that the app is running *unconfined*, which means that it is running without an SELinux policy, and can take any action that it wants to:
+{{< highlight bash >}}
+ps -efZ | grep testapp | grep -v grep
+{{< /highlight >}}
 [source,bash]
 ----
-Created the following files:
-/home/ec2-user/src/policy/testapp.te # Type Enforcement file
-/home/ec2-user/src/policy/testapp.if # Interface file
-/home/ec2-user/src/policy/testapp.fc # File Contexts file
-/home/ec2-user/src/policy/testapp_selinux.spec # Spec file
-/home/ec2-user/src/policy/testapp.sh # Setup Script
+system_u:system_r:unconfined_t:s0  root      8497     1  0 20:18 ?        00:00:00 /usr/local/sbin/testapp
 ----
-
-You will need all of these files to customize the policy, for the application.
-
-.SELinux Policy Source Compnents
-. `testapp.te` is the base policy for the application.  It sets the basic rules of the policy
-. `testapp.if` is the *interface* file.  Interfaces are like public functions, in that they provide ways for other SELinux modules to interact with the one that you are writing
-. `testapp.fc` is the *file contexts* file.  It contains the labeling information for all filesystem objects that the policy references
-. `testapp.sh` is a Red Hat provided script that compiles and loads the SELinux policy module
-
-=== Step 6: Identify variables
-
-Fill a few variables out in an inventory file: `admin_password`, `pg_password`, `rabbitmq_password`
-
-[subs=+quotes]
-----
-
-[tower]
-localhost ansible_connection=local
-
-[database]
-
-[all:vars]
-admin_password=*'ansibleWS'*
-
-pg_host=''
-pg_port=''
-
-pg_database='awx'
-pg_username='awx'
-pg_password=*'ansibleWS'*
-
-rabbitmq_port=5672
-rabbitmq_vhost=tower
-rabbitmq_username=tower
-rabbitmq_password=*'ansibleWS'*
-rabbitmq_cookie=cookiemonster
-
-# Needs to be true for fqdns and ip addresses
-rabbitmq_use_long_name=false
-
-----
-
-=== Step 7: Run setup
-
-Run the Ansible Tower setup script
-
-[source,bash]
-----
-sudo ./setup.sh
-----
-
-[NOTE]
-Step 7 will take approx. 10-15 minutes to complete.  This may be a good time to take a break.
-
-
-=== Step 8: Confirm results
-
-At this point, your Ansible Tower installation should be complete.
-You can access your Tower workshop (not forgetting that *workshopname* is the name of your workshop, and *#* is your student number) at:
-
-
-[source,bash]
-----
-{{< urifqdn "" "tower" "" >}}
-----
-
-=== Ensuring Installation Success
-
-You know you were successful if you are able to browse to your Ansible Tower's url (_control node's IP address_) and get something like this
-
-image::ansible-lab-figure01-logon-screen.png[caption="Figure 2: ", title="Ansible Tower Login Screen"]
 
 {{< importPartial "footer/footer.html" >}}
