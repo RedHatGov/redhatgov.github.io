@@ -1,12 +1,12 @@
 ---
-title: Lab 17 - Clair Container Scan
+title: Lab 17 - Clair Vulnerability Scan
 workshops: secure_software_factory
 workshop_weight: 30
 layout: lab
 ---
 # Add Clair Container Scan
 
-Add the configuration for the Container Scan below to your pipeline text file.
+Add the configuration for the Container Vulnerability Scan below to your pipeline text file.
 
 <img src="../images/pipeline_container_scan.png" width="900"><br/>
 
@@ -18,6 +18,38 @@ In Builds > Pipelines > tasks-pipeline > Actions > Edit
 
 <img src="../images/pipeline_actions_edit.png" width="900" />
 
+In your pipeline, add and update the following variables after the version and mvnCmd definitions.  Please fill in the values between the quotes.
+
+- ocuser : the openshift user given to you by your insturctor
+- ocpass : the openshift password given to you by your insturctor
+- ocp : the openshift host given to you by your instuctor
+- quayuser : the quay user you created previously
+- quaypass : the quay password you created previously
+- quayrepo : the quay repo you created previously i.e. jboss-eap70-openshift
+
+
+```
+def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
+def ocuser = " "
+def ocpass = " "
+def ocp = " "
+def quayuser = " "
+def quaypass = " "
+def quayrepo = " "
+```
+
+For Example:
+
+```
+def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
+def ocuser = "user1"
+def ocpass = "openshift"
+def ocp = "ocp-devsecops.redhatgov.io"
+def quayuser = "user1"
+def quaypass = "openshift"
+def quayrepo = "jboss-eap70-openshift"
+```
+
 In your pipeline, replace the Jenkins agent 'maven' with 'jenkins-slave-image-mgmt'.
 
 ```
@@ -27,40 +59,15 @@ pipeline {
   }
 ```
 
-In your pipeline, add the Container Scan Stage after the Build Container Stage and before the Create Dev Stage.
-
-Please replace the following values:
-
-- \<oc user\> : this was given to you by the instructor
-- \<oc password\> : this was given to you by the instructor
-- \<oc environment\> : this was given to you by the instructor
-- \<quay user\> : created from a previous lab
-- \<quay password\> : created from a previous lab
-- \<docker repository\> : In another tab with the OpenShift Console, go to Builds > Images.  Find the Docker Repo link for "jboss-eap70-openshift". It should be value similar to "172.30.186.87:5000/cicd-user1/jboss-eap70-openshift"
-- \<quay\> : this was given to you by the instructor
-- \<quay user again\> : same user as \<quay user\>
-- \<quay repository\>  : created from the previous lab, i.e. jboss-eap70-openshift
+In your pipeline, add the Vulnerability Scan Stage after the Build Container Stage.
 
 ```
-    stage('Clair Container Scan') {
+    stage('Clair Container Vulnerability Scan') {
       steps {
-            sh "oc login -u <oc user> -p '<oc password>'  --insecure-skip-tls-verify <oc environment> 2>&1"
-            sh 'echo "$(oc whoami):$(oc whoami -t)" > /tmp/srccreds'
-            sh 'skopeo --debug copy --src-creds="$(cat /tmp/srccreds)" --src-tls-verify=false --dest-tls-verify=false --dest-creds=<quay user>:<quay password> docker://<docker repo>:1.5 docker://<quay>/<quay user again>/<quay repository>:1.5'
+            sh "oc login -u $ocuser -p $ocpass --insecure-skip-tls-verify https://$ocp 2>&1"
+            sh 'skopeo --debug copy --src-creds="$(oc whoami)":"$(oc whoami -t)" --src-tls-verify=false --dest-tls-verify=false' + " --dest-creds=$quayuser:$quaypass docker://docker-registry.default.svc:5000/cicd-$ocuser/jboss-eap70-openshift:1.5 docker://quay-enterprise-quay-enterprise.apps.$ocp/$quayuser/$quayrepo:1.5"
         }
     }
-```
-
-For an example, see the following:
-
-```
-stage('Clair Container Scan') {
-  steps {
-        sh "oc login -u user1 -p 'redhat!@#' --insecure-skip-tls-verify https://master.ocp-naps.redhatgov.io:8443 2>&1"
-        sh 'echo "$(oc whoami):$(oc whoami -t)" > /tmp/srccreds'
-        sh 'skopeo --debug copy --src-creds="$(cat /tmp/srccreds)" --src-tls-verify=false --dest-tls-verify=false --dest-creds=user3:redhat123 docker://docker-registry.default.svc:5000/cicd-user1/jboss-eap70-openshift:1.5 docker://quay-enterprise-quay-enterprise.apps.ocp-naps.redhatgov.io/user1/jboss-eap70-openshift:1.5'
-    }
-}
 ```
 
 Save your Jenkins file

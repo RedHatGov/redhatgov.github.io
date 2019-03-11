@@ -189,7 +189,7 @@ The `/locations` path with an HTTP GET method will return a complete set of all 
 
 1. Click on the drop-down next to the `No description` message, and enter `Returns an array of location records` as the description.  Click the check-mark button to accept the description.
 
-    <br><img src="../images/design-54.png "Enter description")
+    <br><img src="../images/design-54.png "Enter description" width="900" /><br><br>
 
 1. Click on the green **GET** operation button to highlight the list of operations.
 

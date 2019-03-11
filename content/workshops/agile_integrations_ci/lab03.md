@@ -46,7 +46,7 @@ Red Hat Fuse integration solution empowers integration experts, application deve
 1. Enter below values for Database Configuration
 
     ```
-    Connection URL: jdbc:postgresql://postgresql.OCPPROJECT.svc:5432/sampledb
+    Connection URL: jdbc:postgresql://postgresql.international.svc:5432/sampledb
     Username      : dbuser
     Password      : password
     Schema        : <blank>
