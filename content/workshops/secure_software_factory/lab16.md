@@ -18,8 +18,8 @@ Fill in the account information for Quay.
 
 - Username: your assigned username i.e user1
 - E-mail address: your email address
-- Password: redhat123
-- Confirm Password: redhat123
+- Password: openshift
+- Confirm Password: openshift
 
 Click Create Account
 
