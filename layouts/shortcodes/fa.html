@@ -1,0 +1,5 @@
+{{ if .IsNamedParams }}
+  <i class="fa {{ if .Get "class" }}{{ .Get "class" }}{{ else }}fa-surprise{{ end }}"{{ if .Get "style" }} style="{{ .Get "class" }}"{{ end }}></i>
+{{ else }}
+  <i class="fa {{ .Get 0 }}"{{ if len .Params | eq 2 }} style="{{ .Get 1 }}"{{ end }}></i>
+{{ end }}
