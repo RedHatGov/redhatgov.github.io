@@ -72,7 +72,7 @@ Click "Deploy" then click "Close"
 > <i class="fa fa-terminal"></i> Try typing the following to see what is available to 'get':
 
 ```bash
-$ oc get
+$ oc get all
 ```
 
 > <i class="fa fa-terminal"></i> Now let's look at what our image stream has in it:
