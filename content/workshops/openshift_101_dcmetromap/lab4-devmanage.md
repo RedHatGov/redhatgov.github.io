@@ -102,7 +102,7 @@ Here are the details of the image stream for this deployment.<br/>
 <img src="../images/ocp-lab-devman-isDetails.png" width="900"><br/>
 
 <blockquote>
-Click "Builds" and then Builds to get back to the build summary
+Click "Builds" and then "Builds" to get back to the build summary
 </blockquote>
 
 <blockquote>
