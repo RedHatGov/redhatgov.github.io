@@ -133,11 +133,6 @@ $ oc expose service guestbook
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-To expose via the web console, click on <img src="../images/ocp-guestbook-slashes.png" width="50"><br>
-</blockquote>
-
-
-<blockquote>
 "Overview"
 </blockquote>
 
