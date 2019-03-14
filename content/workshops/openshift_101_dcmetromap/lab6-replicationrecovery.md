@@ -209,7 +209,7 @@ In this lab we learned about replication controllers and how they can be used to
 
 
 [1]: https://docs.openshift.com/enterprise/3.1/dev_guide/application_health.html
-[2]: https://docs.openshift.com/enterprise/latest/dev_guide/deployments.html#scaling
+[2]: https://docs.openshift.com/enterprise/3.1/dev_guide/deployments.html#scaling
 [3]: http://kubernetes.io/docs/user-guide/walkthrough/k8s201/#health-checking
 
 {{< importPartial "footer/footer.html" >}}

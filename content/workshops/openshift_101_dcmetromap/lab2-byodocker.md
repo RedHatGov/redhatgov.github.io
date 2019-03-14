@@ -72,7 +72,7 @@ Click "Deploy" then click "Close"
 > <i class="fa fa-terminal"></i> Try typing the following to see what is available to 'get':
 
 ```bash
-$ oc get
+$ oc get all
 ```
 
 > <i class="fa fa-terminal"></i> Now let's look at what our image stream has in it:
@@ -131,11 +131,6 @@ $ oc expose service guestbook
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
-
-<blockquote>
-To expose via the web console, click on <img src="../images/ocp-guestbook-slashes.png" width="50"><br>
-</blockquote>
-
 
 <blockquote>
 "Overview"
