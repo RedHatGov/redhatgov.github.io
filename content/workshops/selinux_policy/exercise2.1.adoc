@@ -137,7 +137,7 @@ system_u:system_r:testapp_t:s0  root      8737     1  0 20:51 ?        00:00:00 
 
 === Step 4: How does the application end up with the *testapp_t* context?
 
-This is because of SELinux process transition rules.  The `testapp` service is started by `systemd`, which runs with a context of `init_t`, as it is our init service.  Because of the transition rules, it changes contexts when the service is launched.
+This is because of SELinux domain transition rules.  The `testapp` service is started by `systemd`, which runs with a context of `init_t`, as it is our init service.  Because of the transition rules, it changes contexts when the service is launched. The rule says that any process labeled as `init_t` will execute any binary labeled as `testapp_exec_t`, the newly-created process will be labeled as `testapp_t`.
 
 To see those rules, type this:
 {{< highlight bash >}}
@@ -150,47 +150,74 @@ Found 1 semantic te rules:
    type_transition init_t testapp_exec_t : process testapp_t;
 ----
 
-=== Step 5: Submit
+The rule says that when any process labeled as `init_t` executes any binary labeled as `testapp_exec_t`, the newly-created process will be labeled as `testapp_t`.
 
-Select SUBMIT image:at_submit.png[Sub,35,25]
+=== Step 5: Check for AVC denials
 
-// === Step 3: Request a workshop license
+Now that our app is up and running, we can check the system logs for AVC (access vector cache, where SELinux caches decisions to grant or deny access) denial messages.
 
-// In a separate browser tab, browse to https://www.ansible.com/workshop-license to request a workshop license.
+{{< highlight bash >}}
+ausearch -m AVC -ts recent
+{{< /highlight >}}
 
-// At the commandline in your Ansible Tower instance download the encrypted license file via the curl command.
+There will (and should!) be quite a few denials returned from `ausearch`.  Here are some from the example machine:
 
-// [source,bash]
-// ----
-// curl -O https://s3.amazonaws.com/ansible-tower-workshop-license/license
-// ----
-
-// Then Decrypt the license file via Ansible Vault.
-// **The instructor should provide the password**
-
-// [source,bash]
-// ----
-// ansible-vault decrypt license --ask-vault-pass
-//
-// ...
-
-// Vault password:
-// ----
-
-// Now use curl to POST the license to the Tower API endpoint.
-
-// [source,bash]
-// ----
-// curl -k https://localhost/api/v1/config/ \
-//      -H 'Content-Type: application/json' \
-//      -X POST \
-//      --data @license \
-//      --user admin:ansibleWS
-//
-// ----
-
-
-
+[source,bash]
+-----
+----
+time->Thu Mar 14 14:36:20 2019
+type=PROCTITLE msg=audit(1552588580.764:25971): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.764:25971): arch=c000003e syscall=2 success=yes exit=4 a0=401a32 a1=0 a2=1b6 a3=24 items=0 ppid=1 pid=1022 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.764:25971): avc:  denied  { open } for  pid=1022 comm="testapp" path="/proc/meminfo" dev="proc" ino=4026532040 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:proc_t:s0 tclass=file permissive=1
+type=AVC msg=audit(1552588580.764:25971): avc:  denied  { read } for  pid=1022 comm="testapp" name="meminfo" dev="proc" ino=4026532040 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:proc_t:s0 tclass=file permissive=1
+----
+time->Thu Mar 14 14:36:20 2019
+type=PROCTITLE msg=audit(1552588580.764:25972): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.764:25972): arch=c000003e syscall=41 success=yes exit=3 a0=a a1=2 a2=0 a3=7ffc9a8c3360 items=0 ppid=1022 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.764:25972): avc:  denied  { create } for  pid=1023 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
+----
+time->Thu Mar 14 14:36:20 2019
+type=PROCTITLE msg=audit(1552588580.765:25973): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.765:25973): arch=c000003e syscall=4 success=yes exit=0 a0=7f22154460c1 a1=7f22110523f0 a2=7f22110523f0 a3=3 items=0 ppid=1022 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.765:25973): avc:  denied  { getattr } for  pid=1023 comm="testapp" path="/etc/resolv.conf" dev="dm-0" ino=67445450 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
+----
+time->Thu Mar 14 14:36:20 2019
+type=PROCTITLE msg=audit(1552588580.765:25974): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.765:25974): arch=c000003e syscall=2 success=yes exit=3 a0=7f22154460c1 a1=80000 a2=1b6 a3=24 items=0 ppid=1022 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.765:25974): avc:  denied  { open } for  pid=1023 comm="testapp" path="/etc/resolv.conf" dev="dm-0" ino=67445450 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
+type=AVC msg=audit(1552588580.765:25974): avc:  denied  { read } for  pid=1023 comm="testapp" name="resolv.conf" dev="dm-0" ino=67445450 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
+----
+time->Thu Mar 14 14:36:20 2019
+type=PROCTITLE msg=audit(1552588580.765:25975): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.765:25975): arch=c000003e syscall=42 success=yes exit=0 a0=3 a1=7f2211053dcc a2=10 a3=7f22110507a0 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.765:25975): avc:  denied  { connect } for  pid=1023 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
+----
+time->Thu Mar 14 14:36:20 2019
+type=PROCTITLE msg=audit(1552588580.766:25976): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.766:25976): arch=c000003e syscall=16 success=yes exit=0 a0=3 a1=541b a2=7f2211050ea0 a3=7f22110507a0 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.766:25976): avc:  denied  { getattr } for  pid=1023 comm="testapp" path="socket:[1181449]" dev="sockfs" ino=1181449 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
+----
+time->Thu Mar 14 14:36:20 2019
+type=PROCTITLE msg=audit(1552588580.769:25977): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.769:25977): arch=c000003e syscall=41 success=yes exit=3 a0=2 a1=1 a2=6 a3=7ffc9a8c35e0 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.769:25977): avc:  denied  { create } for  pid=1023 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
+----
+time->Thu Mar 14 14:36:20 2019
+type=PROCTITLE msg=audit(1552588580.769:25978): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.769:25978): arch=c000003e syscall=42 success=no exit=-115 a0=3 a1=7ffc9a8c38d0 a2=10 a3=7ffc9a8c31e0 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.769:25978): avc:  denied  { name_connect } for  pid=1023 comm="testapp" dest=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:http_port_t:s0 tclass=tcp_socket permissive=1
+type=AVC msg=audit(1552588580.769:25978): avc:  denied  { connect } for  pid=1023 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
+----
+time->Thu Mar 14 14:36:20 2019
+type=PROCTITLE msg=audit(1552588580.881:25982): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.881:25982): arch=c000003e syscall=55 success=yes exit=0 a0=3 a1=1 a2=4 a3=7ffc9a8c3b20 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.881:25982): avc:  denied  { getopt } for  pid=1023 comm="testapp" laddr=10.0.1.10 lport=57036 faddr=5.9.243.187 fport=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
+----
+time->Thu Mar 14 14:36:20 2019
+type=PROCTITLE msg=audit(1552588580.881:25983): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.881:25983): arch=c000003e syscall=52 success=yes exit=0 a0=3 a1=7ffc9a8c39f0 a2=7ffc9a8c39ec a3=7ffc9a8c3460 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.881:25983): avc:  denied  { getattr } for  pid=1023 comm="testapp" laddr=10.0.1.10 lport=57036 faddr=5.9.243.187 fport=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
+-----
 
 
 
