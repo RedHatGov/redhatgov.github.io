@@ -49,7 +49,13 @@ Select Node.js
 <img src="../images/ocp-lab-s2i-filternode2.png" width="800"><br/>
 
 <blockquote>
-Select 'Next>'.  Then select 'advanced options'
+Select 'Next>', then select version '6'
+</blockquote>
+
+<img src="../images/ocp-lab-s2i-nodejs-6.png" width="700"><br/>
+
+<blockquote>
+Select 'advanced options'
 </blockquote>
 
 <img src="../images/ocp-lab-s2i-nodejs.png" width="700"><br/>

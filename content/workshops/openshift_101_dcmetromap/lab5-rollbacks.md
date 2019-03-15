@@ -38,7 +38,7 @@ Click the "Add to Project" button
 Select the "Browse Catalog" tab and search for the nodejs builder image. Click Next>
 </blockquote>
 <blockquote>
-Click <b><u>advanced options</u></b> and fill out the boxes to point to the fork and context dir. Note that <b>YOUR_ACCOUNT</b> is the name of your GitHub account.
+Select version <b>[6]</b> then click <b><u>advanced options</u></b> and fill out the boxes to point to the fork and context dir. Note that <b>YOUR_ACCOUNT</b> is the name of your GitHub account.
 </blockquote>
 
 <p>
@@ -90,7 +90,7 @@ You will see the summary of builds using this build config
 <img src="../images/ocp-lab-rollbacks-buildconfigsummary.png" width="900"><br/>
 
 <blockquote>
-Click the "Configuration" tab (next to the active Summary tab)
+Click the "Configuration" tab 
 </blockquote>
 <img src="../images/ocp-lab-rollbacks-deployconfigconfig.png" width="900"><br/>
 Now you can see the various configuration details including the Github specific and Generic webhook URLs.
@@ -120,7 +120,7 @@ Click the "Settings" tab
 Now you will see a vertical list of settings groups.<br/><br/>
 
 <blockquote>
-Click the "Webhooks & services" item
+Click the "Webhooks" link
 </blockquote>
 <img src="../images/ocp-lab-rollbacks-githubwebhooks.png" width="900"><br/>
 
@@ -226,6 +226,6 @@ In this lab we saw how you can configure a source code repository to trigger bui
 [2]: https://docs.openshift.com/enterprise/3.1/dev_guide/deployments.html#triggers
 [3]: https://github.com/join?source=header-home
 [4]: https://github.com/RedHatGov/openshift-workshops.git
-[5]: https://docs.openshift.com/enterprise/latest/rest_api/openshift_v1.html#create-a-deploymentconfigrollback-2
+[5]: https://docs.openshift.com/enterprise/3.1/rest_api/openshift_v1.html#create-a-deploymentconfigrollback-2
 
 {{< importPartial "footer/footer.html" >}}
