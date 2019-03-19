@@ -16,8 +16,7 @@ Ask your instructor for the wetty URL.
 
 ### Login Info
 ```bash
-login:    user{{< span "userid" "YOUR#" >}}
-Password: <Instructor Provided>
+login:    user{{< span "userid" "YOUR#" >}}Password: <Instructor Provided>
 ```
 
 After logging in, you should see a shell.
@@ -25,3 +24,5 @@ After logging in, you should see a shell.
 <img src="../images/wetty.png" width="1000" />
 
 The wetty instance will already have the 'oc' command installed on them. The 'oc' command is used to connect to the OpenShift Master.
+
+{{< importPartial "footer/footer.html" >}}

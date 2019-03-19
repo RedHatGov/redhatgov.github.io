@@ -35,9 +35,9 @@ For Example:
 
 ```
 def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
-def ocuser = "user1"
+def ocuser = "user{{< span2 "userid" "YOUR#" >}}"
 def ocpass = "openshift"
-def ocp = "ocp-devsecops.redhatgov.io"
+def ocp = "{{< urishortfqdn "" "master" "" >}}"
 ```
 
 In your pipeline, make sure you replaced the Jenkins agent 'maven' with 'jenkins-slave-image-mgmt'.
@@ -93,3 +93,5 @@ Your report should look similar to the following: [OpenScap DISA STIG SCAN repor
 
 
 [1]: http://info.redhatgov.io/devsecops/report.html
+
+{{< importPartial "footer/footer.html" >}}

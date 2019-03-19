@@ -106,3 +106,4 @@ Maven install will run through the [Maven lifecycle][2] and skip the tests.  We 
 
 [1]: https://jenkins.io/doc/pipeline/steps/git/
 [2]: https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
+{{< importPartial "footer/footer.html" >}}

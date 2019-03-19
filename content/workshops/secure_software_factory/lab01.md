@@ -30,7 +30,7 @@ OpenShift provides a web console that allows you to perform various tasks via a 
 Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.
 
 ```bash
-https://master.ocp-naps.redhatgov.io:8443/
+{{< urishortfqdn "https://" "master" ":8443" >}}
 ```
 
 <img src="../images/ocp-login.png" width="600"><br/>
@@ -42,10 +42,9 @@ Once logged in you should see your available projects - or a button to create a 
 Open a terminal and login using the same URI with following command:
 
 ```
-$ oc login https://master.ocp-naps.redhatgov.io:8443/ --insecure-skip-tls-verify=true
-Authentication required for https://master.ocp-naps.redhatgov.io:8443/ "master" ":8443" >}} (openshift)
- Username: user#
- Password:
+$ oc login {{< urishortfqdn "https://" "master" ":8443" >}} --insecure-skip-tls-verify=true
+Authentication required for {{< urishortfqdn "https://" "master" ":8443" >}} (openshift)
+Username: user{{< span "userid" "YOUR#" >}}Password:
 Login successful.
 ```
 
@@ -63,3 +62,4 @@ $ oc status
 
 # Summary
 You should now be ready to get hands-on with our workshop labs.
+{{< importPartial "footer/footer.html" >}}

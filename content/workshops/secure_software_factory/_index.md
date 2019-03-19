@@ -29,3 +29,5 @@ In this workshop, you'll be building a Secure Software Factory for a Java based 
 # Labs
 
 {{< labs secure_software_factory >}}
+
+{{< importPartial "footer/footer.html" >}}

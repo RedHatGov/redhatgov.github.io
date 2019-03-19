@@ -42,9 +42,9 @@ spec:
       jenkinsPipelineStrategy:
         env:
         - name: DEV_PROJECT
-          value: dev-<user>
+          value: dev-{{< span "userid" "YOUR#" >}}
         - name: STAGE_PROJECT
-          value: stage-<user>
+          value: stage-{{< span "userid" "YOUR#" >}}
         jenkinsfile: |-
           def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
           pipeline {
@@ -75,9 +75,9 @@ strategy:
   jenkinsPipelineStrategy:
     env:
     - name: DEV_PROJECT
-      value: dev-<user>
+      value: dev-{{< span "userid" "YOUR#" >}}
     - name: STAGE_PROJECT
-      value: stage-<user>
+      value: stage-{{< span "userid" "YOUR#" >}}
 ```
 
 Also, notice that we will be launching a Maven node/agent to execute our pipeline.
@@ -100,3 +100,4 @@ Click Save
 [1]: https://github.com/openshift/jenkins-client-plugin#examples
 [2]: https://docs.openshift.com/container-platform/3.9/dev_guide/builds/index.html#defining-a-buildconfig
 [3]: https://docs.openshift.com/container-platform/3.9/architecture/core_concepts/builds_and_image_streams.html#pipeline-build
+{{< importPartial "footer/footer.html" >}}
