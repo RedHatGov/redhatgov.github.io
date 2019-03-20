@@ -96,7 +96,7 @@ ps -efZ | grep testapp | grep -v grep
 {{< /highlight >}}
 [source,bash]
 ----
-system_u:system_r:unconfined_t:s0  root      8497     1  0 20:18 ?        00:00:00 /usr/local/sbin/testapp
+system_u:system_r:unconfined_service_t:s0 root 9507 1  0 15:59 ?       00:00:00 /usr/local/sbin/testapp
 ----
 
 {{< importPartial "footer/footer.html" >}}
