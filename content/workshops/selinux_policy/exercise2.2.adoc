@@ -249,7 +249,7 @@ sudo ausearch -m AVC -ts recent | grep meminfo | wc -l
 Hooray!  One AVC down, quite a few to go.
 
 == End Result
-At this point in the workshop, you've experienced the core functionality of Ansible Tower.  But wait... there's more!
-You've just begun to explore the possibilities of Ansible Core and Tower.  Take a look at the resources page in this guide, to explore some more features.
+
+We've now made our first additions to the type enforcement file.  Hopefully, this is starting to make sense.  Don't hesitate to talk to your instructor about anyything that we have done that isn't clear.
 
 {{< importPartial "footer/footer.html" >}}
