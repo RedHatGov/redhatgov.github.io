@@ -39,9 +39,9 @@ spec:
       jenkinsPipelineStrategy:
         env:
         - name: DEV_PROJECT
-          value: dev-user{{< span "userid" "YOUR#" >}}
+          value: dev-user{{< span2 "userid" "YOUR#" >}}
         - name: STAGE_PROJECT
-          value: stage-user{{< span "userid" "YOUR#" >}}
+          value: stage-user{{< span2 "userid" "YOUR#" >}}
         jenkinsfile: |-
           def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
 
@@ -192,9 +192,9 @@ In your pipeline text file, make sure \<user\> reflects your user # and project.
 
 ```
 - name: DEV_PROJECT
-  value: dev-{{< span "userid" "YOUR#" >}}
+  value: dev-{{< span2 "userid" "YOUR#" >}}
 - name: STAGE_PROJECT
-  value: stage-{{< span "userid" "YOUR#" >}}
+  value: stage-{{< span2 "userid" "YOUR#" >}}
 ```
 
 <br>
