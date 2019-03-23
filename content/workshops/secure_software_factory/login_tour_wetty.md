@@ -16,7 +16,8 @@ Ask your instructor for the wetty URL.
 
 ### Login Info
 ```bash
-login:    user{{< span "userid" "YOUR#" >}}Password: <Instructor Provided>
+login:    user{{< span2 "userid" "YOUR#" >}}
+Password: <Instructor Provided>
 ```
 
 After logging in, you should see a shell.
