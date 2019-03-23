@@ -42,9 +42,9 @@ spec:
       jenkinsPipelineStrategy:
         env:
         - name: DEV_PROJECT
-          value: dev-user{{< span "userid" "YOUR#" >}}
+          value: dev-user{{< span2 "userid" "YOUR#" >}}
         - name: STAGE_PROJECT
-          value: stage-user{{< span "userid" "YOUR#" >}}
+          value: stage-user{{< span2 "userid" "YOUR#" >}}
         jenkinsfile: |-
           def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
           pipeline {
