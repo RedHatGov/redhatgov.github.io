@@ -75,9 +75,9 @@ strategy:
   jenkinsPipelineStrategy:
     env:
     - name: DEV_PROJECT
-      value: dev-{{< span "userid" "YOUR#" >}}
+      value: dev-{{< span2 "userid" "YOUR#" >}}
     - name: STAGE_PROJECT
-      value: stage-{{< span "userid" "YOUR#" >}}
+      value: stage-{{< span2 "userid" "YOUR#" >}}
 ```
 
 Also, notice that we will be launching a Maven node/agent to execute our pipeline.
