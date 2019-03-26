@@ -192,9 +192,9 @@ In your pipeline text file, make sure \<user\> reflects your user # and project.
 
 ```
 - name: DEV_PROJECT
-  value: dev-{{< span2 "userid" "YOUR#" >}}
+  value: dev-user{{< span2 "userid" "YOUR#" >}}
 - name: STAGE_PROJECT
-  value: stage-{{< span2 "userid" "YOUR#" >}}
+  value: stage-user{{< span2 "userid" "YOUR#" >}}
 ```
 
 <br>
