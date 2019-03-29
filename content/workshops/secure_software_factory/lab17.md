@@ -42,10 +42,10 @@ For Example:
 
 ```
 def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
-def ocuser = "user1"
+def ocuser = "user{{< span2 "userid" "YOUR#" >}}"
 def ocpass = "openshift"
-def ocp = "ocp-devsecops.redhatgov.io"
-def quayuser = "user1"
+def ocp = "{{< urishortfqdn "" "master" "" >}}"
+def quayuser = "user{{< span2 "userid" "YOUR#" >}}"
 def quaypass = "openshift"
 def quayrepo = "jboss-eap70-openshift"
 ```
@@ -109,3 +109,4 @@ Select the Security Scan for your Image
 View the Security Scan Report
 
 <img src="../images/quay_scan.png" width="900"><br/>
+{{< importPartial "footer/footer.html" >}}

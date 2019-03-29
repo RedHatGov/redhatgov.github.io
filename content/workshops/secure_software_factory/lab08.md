@@ -77,3 +77,4 @@ Click Save
 [1]: http://cwe.mitre.org/about/index.html
 [2]: https://www.sans.org/top25-software-errors/
 [3]: https://www.owasp.org/index.php/Top_10-2017_Top_10
+{{< importPartial "footer/footer.html" >}}

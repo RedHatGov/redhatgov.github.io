@@ -16,7 +16,7 @@ Click Create Account at the bottom of the page.
 
 Fill in the account information for Quay.
 
-- Username: your assigned username i.e user1
+- Username: your assigned username i.e user{{< span2 "userid" "YOUR#" >}}
 - E-mail address: your email address
 - Password: openshift
 - Confirm Password: openshift
@@ -44,3 +44,4 @@ Click Create Public Repository
 <img src="../images/quay_repo_config.png" width="500"><br/>
 
 <br>
+{{< importPartial "footer/footer.html" >}}

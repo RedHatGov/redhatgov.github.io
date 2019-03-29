@@ -34,3 +34,4 @@ You should now see the Jenkins Home Page
 <img src="../images/jenkins_home.png" width="900" />
 
 Jenkins follows a master/agent architecture.  Your pipeline will run a process called a Jenkins executor.  A Jenkins executor is one of the basic building blocks which allow a build to run on an agent (e.g. build server). Think of an executor as a single “process ID”, or as the basic unit of resource that Jenkins executes on your machine to run a build.
+{{< importPartial "footer/footer.html" >}}

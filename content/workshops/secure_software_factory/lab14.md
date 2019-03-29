@@ -39,9 +39,9 @@ spec:
       jenkinsPipelineStrategy:
         env:
         - name: DEV_PROJECT
-          value: dev-user1
+          value: dev-user{{< span2 "userid" "YOUR#" >}}
         - name: STAGE_PROJECT
-          value: stage-user1
+          value: stage-user{{< span2 "userid" "YOUR#" >}}
         jenkinsfile: |-
           def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
 
@@ -192,9 +192,9 @@ In your pipeline text file, make sure \<user\> reflects your user # and project.
 
 ```
 - name: DEV_PROJECT
-  value: dev-<user>
+  value: dev-user{{< span2 "userid" "YOUR#" >}}
 - name: STAGE_PROJECT
-  value: stage-<user>
+  value: stage-user{{< span2 "userid" "YOUR#" >}}
 ```
 
 <br>
@@ -238,3 +238,4 @@ When it asks to promote to stage, go ahead and promote it.
 Sonarqube metrics, stats, and code coverage can be seen such as this screenshot below.
 
 <img src="../images/sonarqube-analysis.png" width="900"><br/>
+{{< importPartial "footer/footer.html" >}}
