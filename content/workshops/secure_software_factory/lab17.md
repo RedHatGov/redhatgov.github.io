@@ -25,11 +25,10 @@ In your pipeline, add and update the following variables after the version and m
 - ocp : the openshift host given to you by your instuctor
 - quayuser : the quay user you created previously
 - quaypass : the quay password you created previously
-- quayrepo : the quay repo you created previously i.e. jboss-eap70-openshift
+- quayrepo : the quay repo you will push your app image to i.e. tasks
 
 
 ```
-def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
 def ocuser = " "
 def ocpass = " "
 def ocp = " "
@@ -41,13 +40,12 @@ def quayrepo = " "
 For Example:
 
 ```
-def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
 def ocuser = "user{{< span2 "userid" "YOUR#" >}}"
 def ocpass = "openshift"
 def ocp = "{{< urishortfqdn "" "master" "" >}}"
 def quayuser = "user{{< span2 "userid" "YOUR#" >}}"
 def quaypass = "openshift"
-def quayrepo = "jboss-eap70-openshift"
+def quayrepo = "tasks"
 ```
 
 In your pipeline, replace the Jenkins agent 'maven' with 'jenkins-slave-image-mgmt'.
@@ -59,13 +57,13 @@ pipeline {
   }
 ```
 
-In your pipeline, add the Vulnerability Scan Stage after the Build Container Stage.
+In your pipeline, add the Vulnerability Scan Stage after the Build Image Stage.
 
 ```
     stage('Clair Container Vulnerability Scan') {
       steps {
             sh "oc login -u $ocuser -p $ocpass --insecure-skip-tls-verify https://$ocp 2>&1"
-            sh 'skopeo --debug copy --src-creds="$(oc whoami)":"$(oc whoami -t)" --src-tls-verify=false --dest-tls-verify=false' + " --dest-creds=$quayuser:$quaypass docker://docker-registry.default.svc:5000/cicd-$ocuser/jboss-eap70-openshift:1.5 docker://quay-enterprise-quay-enterprise.apps.$ocp/$quayuser/$quayrepo:1.5"
+            sh 'skopeo --debug copy --src-creds="$(oc whoami)":"$(oc whoami -t)" --src-tls-verify=false --dest-tls-verify=false' + " --dest-creds=$quayuser:$quaypass docker://docker-registry.default.svc:5000/dev-$ocuser/tasks:latest docker://quay-enterprise-quay-enterprise.apps.$ocp/$quayuser/$quayrepo:latest"
         }
     }
 ```
@@ -90,7 +88,7 @@ When it asks to promote to stage, go ahead and promote it.
 
 # View Clair Container Scan Report in Quay
 
-Select your Repository you created from the previous lab
+Select the Repository that was created
 
 <img src="../images/quay_repo.png" width="900"><br/>
 
