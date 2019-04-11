@@ -45,7 +45,7 @@ def ocpass = "openshift"
 def ocp = "{{< urishortfqdn "" "master" "" >}}"
 def quayuser = "user{{< span2 "userid" "YOUR#" >}}"
 def quaypass = "openshift"
-def quayrepo = "tasks"
+def quayrepo = "jboss-eap70-openshift"
 ```
 
 In your pipeline, replace the Jenkins agent 'maven' with 'jenkins-slave-image-mgmt'.
@@ -63,7 +63,7 @@ In your pipeline, add the Vulnerability Scan Stage after the Build Image Stage.
     stage('Clair Container Vulnerability Scan') {
       steps {
             sh "oc login -u $ocuser -p $ocpass --insecure-skip-tls-verify https://$ocp 2>&1"
-            sh 'skopeo --debug copy --src-creds="$(oc whoami)":"$(oc whoami -t)" --src-tls-verify=false --dest-tls-verify=false' + " --dest-creds=$quayuser:$quaypass docker://docker-registry.default.svc:5000/dev-$ocuser/tasks:latest docker://quay-enterprise-quay-enterprise.apps.$ocp/$quayuser/$quayrepo:latest"
+            sh 'skopeo --debug copy --src-creds="$(oc whoami)":"$(oc whoami -t)" --src-tls-verify=false --dest-tls-verify=false' + " --dest-creds=$quayuser:$quaypass docker://docker-registry.default.svc:5000/cicd-$ocuser/jboss-eap70-openshift:1.5 docker://quay-enterprise-quay-enterprise.apps.$ocp/$quayuser/$quayrepo:1.5"
         }
     }
 ```
