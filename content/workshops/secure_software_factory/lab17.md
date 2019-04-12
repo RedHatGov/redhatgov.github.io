@@ -25,11 +25,10 @@ In your pipeline, add and update the following variables after the version and m
 - ocp : the openshift host given to you by your instuctor
 - quayuser : the quay user you created previously
 - quaypass : the quay password you created previously
-- quayrepo : the quay repo you created previously i.e. jboss-eap70-openshift
+- quayrepo : the quay repo you will push your app image to i.e. tasks
 
 
 ```
-def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
 def ocuser = " "
 def ocpass = " "
 def ocp = " "
@@ -41,7 +40,6 @@ def quayrepo = " "
 For Example:
 
 ```
-def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
 def ocuser = "user{{< span2 "userid" "YOUR#" >}}"
 def ocpass = "openshift"
 def ocp = "{{< urishortfqdn "" "master" "" >}}"
@@ -59,7 +57,7 @@ pipeline {
   }
 ```
 
-In your pipeline, add the Vulnerability Scan Stage after the Build Container Stage.
+In your pipeline, add the Vulnerability Scan Stage after the Build Image Stage.
 
 ```
     stage('Clair Container Vulnerability Scan') {
@@ -90,7 +88,7 @@ When it asks to promote to stage, go ahead and promote it.
 
 # View Clair Container Scan Report in Quay
 
-Select your Repository you created from the previous lab
+Select the Repository that was created
 
 <img src="../images/quay_repo.png" width="900"><br/>
 
