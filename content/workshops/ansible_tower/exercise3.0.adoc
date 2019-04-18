@@ -17,7 +17,7 @@ layout: lab
 In this exercise, we are going to use Red Hat Ansible Tower to run a *DISA STIG evaluation* of our environment.
 
 - DISA STIG controls
-https://galaxy.ansible.com/redhatofficial/rhel7_disa_stig
+https://galaxy.ansible.com/redhatofficial/rhel7_stig
 
 === Step 1: Download role to Ansible roles directory
 
@@ -25,18 +25,18 @@ In your wetty window (if you closed it, see the link:/workshops/ansible_tower/se
 
 [source,bash]
 ----
-sudo ansible-galaxy install redhatofficial.rhel7_disa_stig -p /etc/ansible/roles
+sudo ansible-galaxy install redhatofficial.rhel7_stig -p /etc/ansible/roles
 ----
 
 The image below illustrates that the role has been downloaded to your system-wide Ansible roles directory, `/etc/ansible/roles`:
 
 [source,bash]
 ----
-- downloading role 'rhel7_disa_stig', owned by redhatofficial
+- downloading role 'rhel7_stig', owned by redhatofficial
 - downloading role from https://github.com/RedHatOfficial/ansible-rhel7-disa-stig-role/archive/0.1.41.t
 ar.gz
-- extracting redhatofficial.rhel7_disa_stig to /etc/ansible/roles/redhatofficial.rhel7_disa_stig
-- redhatofficial.rhel7_disa_stig (0.1.41) was installed successfully
+- extracting redhatofficial.rhel7_stig to /etc/ansible/roles/redhatofficial.rhel7_stig
+- redhatofficial.rhel7_stig (0.1.43) was installed successfully
 ----
 
 === Step 2: Select Projects
