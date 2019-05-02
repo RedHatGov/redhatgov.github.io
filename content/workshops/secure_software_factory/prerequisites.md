@@ -16,3 +16,5 @@ This workshop is done entirely through the browser.
 - [Chrome][1] is the preferred browser for this workshop
 
 [1]: https://www.google.com/chrome/
+
+{{< importPartial "footer/footer.html" >}}

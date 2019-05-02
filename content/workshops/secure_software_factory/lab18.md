@@ -25,7 +25,6 @@ In your pipeline, verify the following variables are there after the version and
 - ocp : the openshift host given to you by your instuctor
 
 ```
-def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
 def ocuser = " "
 def ocpass = " "
 def ocp = " "
@@ -34,10 +33,9 @@ def ocp = " "
 For Example:
 
 ```
-def version, mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
-def ocuser = "user1"
+def ocuser = "user{{< span2 "userid" "YOUR#" >}}"
 def ocpass = "openshift"
-def ocp = "ocp-devsecops.redhatgov.io"
+def ocp = "{{< urishortfqdn "" "master" "" >}}"
 ```
 
 In your pipeline, make sure you replaced the Jenkins agent 'maven' with 'jenkins-slave-image-mgmt'.
@@ -56,8 +54,8 @@ In your pipeline, add the OpenSCAP DISA STIG Scan after the Container Vulnerabil
       steps {
           sh "oc login -u $ocuser -p $ocpass --insecure-skip-tls-verify https://$ocp 2>&1"
           sh "sshpass -p $ocpass ssh -oStrictHostKeyChecking=no -t $ocuser@$ocp docker login -u $ocuser -p " + '"$(oc whoami -t)"' + " docker-registry-default.apps.$ocp"
-          sh "sshpass -p $ocpass ssh -oStrictHostKeyChecking=no -t $ocuser@$ocp docker pull docker-registry-default.apps.$ocp/cicd-$ocuser/jboss-eap70-openshift:1.5"
-          sh "sshpass -p $ocpass ssh -oStrictHostKeyChecking=no -t $ocuser@$ocp sudo oscap-docker image docker-registry-default.apps.$ocp/cicd-$ocuser/jboss-eap70-openshift:1.5 xccdf eval --profile xccdf_org.ssgproject.content_profile_stig-rhel7-disa --report report.html /usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml"
+          sh "sshpass -p $ocpass ssh -oStrictHostKeyChecking=no -t $ocuser@$ocp docker pull docker-registry-default.apps.$ocp/dev-$ocuser/tasks:latest"
+          sh "sshpass -p $ocpass ssh -oStrictHostKeyChecking=no -t $ocuser@$ocp sudo oscap-docker image docker-registry-default.apps.$ocp/dev-$ocuser/tasks:latest xccdf eval --profile xccdf_org.ssgproject.content_profile_stig-rhel7-disa --report report.html /usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml"
         }
       } 
 ```
@@ -93,3 +91,5 @@ Your report should look similar to the following: [OpenScap DISA STIG SCAN repor
 
 
 [1]: http://info.redhatgov.io/devsecops/report.html
+
+{{< importPartial "footer/footer.html" >}}

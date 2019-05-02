@@ -53,7 +53,7 @@ See the url below as an example.
   - Replace [gogs-hostname] with your gogs server.
     - http://gogs:gogs@[gogs-hostname]/gogs/openshift-tasks.git
   - So it should look something like this:
-    - http://gogs:gogs@gogs-cicd-user2.192.168.42.136.nip.io/gogs/openshift-tasks.git
+    - {{< urishortfqdn "http://gogs:gogs@" "master" "" >}}/gogs/openshift-tasks.git
 
 You can find the repository url in Gogs web console.
 
@@ -109,3 +109,4 @@ As soon the changes are committed to the git repository, a new instances of pipe
 Go Back to OpenShift and Promote to Stage to finish your Pipeline Run
 
 <img src="../images/pipeline_execution.png" width="900"><br/><br>
+{{< importPartial "footer/footer.html" >}}
