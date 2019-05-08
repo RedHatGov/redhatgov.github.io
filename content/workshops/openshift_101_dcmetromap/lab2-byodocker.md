@@ -185,7 +185,7 @@ Notice that in the web console overview, you now have a URL in the service box. 
 <img src="../images/ocp-nexus-app.png" width="300"><br/>
 
 
-## Good work, this error is expect; since the nexus console is on /nexus
+## Good work - this error is expected; since the nexus console is on /nexus
 Go to URL: {{< rhocpuri4app " http://" "nexus-demo-" "/nexus/" >}} to get the Nexus console.  Of course, we have not provided persistent storage; so, any and all work will be lost.
 
 <img src="../images/ocp-nexus-app2.png" width="600"><br/>
