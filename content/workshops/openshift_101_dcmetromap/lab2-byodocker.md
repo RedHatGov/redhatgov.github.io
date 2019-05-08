@@ -111,7 +111,7 @@ Click on "Builds -> Images"
 This shows a list of all image streams within the project.  
 
 <blockquote>
-Now click on the ok image stream
+Now click on the "nexus" image stream
 </blockquote>
 
 You should see something similar to this:
