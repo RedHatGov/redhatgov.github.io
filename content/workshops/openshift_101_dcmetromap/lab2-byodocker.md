@@ -17,22 +17,27 @@ It's easy to get started with OpenShift whether you're using our app templates o
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
 ```bash
-$ oc new-app kubernetes/guestbook
+$ oc new-app sonatype/nexus:oss
 ```
 
 <blockquote>
 The output should show something *similar* to below:
 </blockquote>
 ```bash
---> Found docker image a49fe18 (17 months old) from docker Hub for "kubernetes/guestbook"
-    * An image stream will be created as "guestbook:latest" that will track this image
-    * This image will be deployed in deployment config "guestbook"
-    * Port 3000/tcp will be load balanced by service "guestbook"
---> Creating resources with label app=guestbook ...
-    ImageStream "guestbook" created
-    DeploymentConfig "guestbook" created
-    Service "guestbook" created
+--> Found Docker image adffc23 (13 days old) from Docker Hub for "sonatype/nexus:oss"
+    * An image stream tag will be created as "nexus:oss" that will track this image
+    * This image will be deployed in deployment config "nexus"
+    * Port 8081/tcp will be load balanced by service "nexus"
+      * Other containers can access this service through the hostname "nexus"
+    * This image declares volumes and will default to use non-persistent, host-local storage.
+      You can add persistent volumes later by running 'volume dc/nexus --add ...'
+--> Creating resources ...
+    imagestream.image.openshift.io "nexus" created
+    deploymentconfig.apps.openshift.io "nexus" created
+    service "nexus" created
 --> Success
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose svc/nexus' 
     Run 'oc status' to view your app.
 ```
 
@@ -48,17 +53,17 @@ Click "Add to Project"
 <blockquote>
 Select the "Deploy Image" option from the drop down
 </blockquote>
-<img src="../images/ocp-guestbook-deploy-image.png" width="200"><br/>
+<img src="../images/ocp-nexus-deploy-image.png" width="200"><br/>
 
 <blockquote>
-Select the option for "Image Name" and enter "kubernetes/guestbook", then click the magnifying glass to the far right to search for the image.
+Select the option for "Image Name" and enter "sonatype/nexus:oss", then click the magnifying glass to the far right to search for the image.
 </blockquote>
-<img src="../images/ocp-guestbook-imagename-expand.png" width="600"><br/>
+<img src="../images/ocp-nexus-imagename-expand.png" width="600"><br/>
 
 <blockquote>
 Observe default values that are populated in the search results
 </blockquote>
-<img src="../images/ocp-guestbook-create-1.png" width="600"><br/>
+<img src="../images/ocp-nexus-create-1.png" width="600"><br/>
 
 <blockquote>
 Click "Deploy" then click "Close"
@@ -81,11 +86,11 @@ $ oc get all
 $ oc get is
 ```
 ```bash
-$ oc describe is/guestbook
+$ oc describe is/nexus
 ```
 
 {{% alert info %}}
-An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, in our case a new version of the guestbook image, is created.
+An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, in our case a new version of the nexus image, is created.
 {{% /alert %}}
 
 > <i class="fa fa-terminal"></i> The app is running in a pod, let's look at that:
@@ -101,20 +106,20 @@ Let's look at the image stream.
 Click on "Builds -> Images"
 </blockquote>
 
-<img src="../images/ocp-guestbook-buildimages.png" width="200"><br/>
+<img src="../images/ocp-nexus-buildimages.png" width="200"><br/>
 
 This shows a list of all image streams within the project.  
 
 <blockquote>
-Now click on the guestbook image stream
+Now click on the "nexus" image stream
 </blockquote>
 
 You should see something similar to this:
 
-<img src="../images/ocp-guestbook-is.png" width="600"><br/>
+<img src="../images/ocp-nexus-is.png" width="600"><br/>
 
 
-## Does this guestbook do anything?
+## Does this nexus do anything?
 Good catch, your service is running but there is no way for users to access it yet.  We can fix that from the web console or the command line. You decide which you'd rather do from the steps below.
 
 {{< panel_group >}}
@@ -126,7 +131,7 @@ Good catch, your service is running but there is no way for users to access it y
 </blockquote>
 
 ```bash
-$ oc expose service guestbook
+$ oc expose service nexus
 ```
 {{% /panel %}}
 
@@ -136,20 +141,20 @@ $ oc expose service guestbook
 "Overview"
 </blockquote>
 
-<img src="../images/ocp-guestbook-overview.png" width="400"><br/>
+<img src="../images/ocp-nexus-overview.png" width="400"><br/>
 
 <blockquote>
-Select the arrow '>' next to 'guestbook, #' 
+Select the arrow '>' next to 'nexus, #' 
 </blockquote>
 
-<img src="../images/ocp-guestbook-arrow1.png" width="200"><br/>
-<img src="../images/ocp-guestbook-arrow2.png" width="200"><br/>
+<img src="../images/ocp-nexus-arrow1.png" width="200"><br/>
+<img src="../images/ocp-nexus-arrow2.png" width="200"><br/>
 
 <blockquote>
 To get to this view
 </blockquote>
 
-<img src="../images/ocp-guestbook-noroute.png" width="600"><br/>
+<img src="../images/ocp-nexus-noroute.png" width="600"><br/>
 
 <p>Notice there is no exposed route </p>
 
@@ -157,7 +162,7 @@ To get to this view
 Click on the "Create Route" link
 </blockquote>
 
-<img src="../images/ocp-guestbook-createRoute.png" width="600"><br/>
+<img src="../images/ocp-nexus-createRoute.png" width="600"><br/>
 
 <p>This is where you could specify route parameters, but we will just use the defaults.</p>
 
@@ -172,15 +177,21 @@ Click "Create"
 You can also create secured HTTPS routes, but that's a topic for a more advanced workshop
 {{% /alert %}}
 
-## Test out the guestbook webapp
+## Test out the nexus webapp
 Notice that in the web console overview, you now have a URL in the service box.  There is no database setup, but you can see the webapp running by clicking the route you just exposed.
 
 > Click the link in the service box. You should see:
 
-<img src="../images/ocp-guestbook-app.png" width="600"><br/>
+<img src="../images/ocp-nexus-app.png" width="300"><br/>
 
 
-## Good work, let's clean this up
+## Good work - this error is expected; since the nexus console is on /nexus
+Go to URL: {{< rhocpuri4app " http://" "nexus-demo-" "/nexus/" >}} to get the Nexus console.  Of course, we have not provided persistent storage; so, any and all work will be lost.
+
+<img src="../images/ocp-nexus-app2.png" width="600"><br/>
+
+## Let's clean this up
+
 > <i class="fa fa-terminal"></i> Let's clean up all this to get ready for the next lab:
 
 ```bash
