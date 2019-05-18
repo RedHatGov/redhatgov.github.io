@@ -1,95 +1,105 @@
 ---
-title: "Exercise 1.2 - Running Your Playbook"
+title: "Exercise 1.2 - SELinux Contexts"
 workshops: selinux_policy
-workshop_weight: 12
+workshop_weight: 11
 layout: lab
 ---
 
 :icons: font
 :imagesdir: /workshops/selinux_policy/images
-:package_url: http://docs.ansible.com/ansible/package_module.html
-:service_url: http://docs.ansible.com/ansible/service_module.html
-:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
 
+= Exercise 1.2 - SELinux Contexts
 
-= Exercise 1.2 - Running Your Playbook
+== Exercise Description
 
+All processes and files are labeled with an SELinux context.  The context contains information that SELinux needs to make control decisions.  Contexts contain user, role, type, and level information,
 
-== Section 1: Running the playbook
+=== Step 1: Examine a context
 
+To get started, let's check the context of a file in the `ec2-user` user's home directory:
 
-We are now going to run your brand-new playbook, on your two web nodes.  To do this,
- you are going to use the `ansible-playbook` command.
-
-=== Step 1: Run your playbook
-
-From your playbook directory ( `~/apache_basic` ), run your playbook.
+{{< highlight bash >}}
+ls -Z ~ec2-user/.vimrc
+{{< /highlight >}}
 
 [source,bash]
 ----
-ansible-playbook -i ../hosts install_apache.yml --private-key=~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
+-rw-r--r--. ec2-user ec2-user unconfined_u:object_r:user_home_t:s0 /home/ec2-user/.vimrc
 ----
 
+Following the standard UNIX permissions, user and group information, the SELinux context attached to the file is displayed.  The fields are SELinux user (`unconfined_u`), role (`object_r`), type (`user_home_t`), and level (`s0`).  
 
-However, before you run that command, lets take a few moments to understand the options.
+The SELinix user is not the same as the UNIX user, as it solely exists to associate a UNIX user to a set of roles.  This allows UNIX users to be constrained by SELinux policy.  In this case the `unconfined_u` user means that the user is mapped to the `__default__` SELinux login.  This means that the user is allowed to launch any application that standard filesystem permissions allow.  However, if that application has a defined domain transition, a confined domain will still apply to it.
 
-- *--private-key* This option asks for the private ssh key to connect to the remote machine.
-- *-i* This option allows you to specify the inventory file you wish to use.
-- *-v* Altough not used here, this increases verbosity.  Try running your playbook a second time using `-v` or `-vv` to increase the verbosity (debugging information).
+=== Step 2: Domain transitions
 
+To demonstrate the difference between confined and unconfined processes, let's launch an application which doesn't have a defined domain transition:
 
-[NOTE]
-- *--syntax-check* If you run into any issues with your playbook running properly (from the copy/pasting that we told you not to do), you could use this option to help find those issues like so...
+{{< highlight bash >}}
+yes >/dev/null &
+ps -Z | grep yes
+{{< /highlight >}}
 
 [source,bash]
 ----
-ansible-playbook -i ../hosts install_apache.yml --syntax-check --private-key=~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
+unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 29448 pts/0 00:00:07 yes
 ----
 
+Here, you can see that the `yes` process is labled with the `unconfined_t` domain, indicating that it still has full `root` privileges, and can do whatever it wishes.
 
----
-Now, run your playbook as specified in *Step 1*
+On the other hand, if we launch the `passwd` utility, we will see a different story:
 
-In standard output, you should see something that looks very similar to the following:
-
-image::stdout_1.png[caption="Figure 1: ", title="apache_basic playbook stdout",328]
-
-Notice that the play and each task is named, so that you can understand the action being performed and the node it is being performed upon.
-You also may notice a task in there that you didn't write;  <cough> `setup` </cough>.  This is because the `setup` module
-runs by default.  To turn if off, you can specify link:{gather_facts_url}[gather_facts: false] in your play definition like this:
-
+{{< highlight bash >}}
+kill %1
+passwd ec2-user >/dev/null &
+ps -Z | grep passwd
+{{< /highlight >}}
 
 [source,bash]
 ----
----
-- hosts: web
-  name: Install the apache web service
-  become: yes
-  gather_facts: false
+unconfined_u:unconfined_r:passwd_t:s0-s0:c0.c1023 29498 pts/0 00:00:00 passwd
+
+[1]+  Stopped                 passwd ec2-user > /dev/null
 ----
 
+See that the third field is `passwd_t`, indicating that the `passwd` process has been confined by the `passwd_t` domain.
 
+Let's kill that hanging `passwd` process, and move on:
 
-=== Step 2: Remove Apache
+{{< highlight bash >}}
+kill %1
+{{< /highlight >}}
 
-Now, let's experiment a little.
-We would like you to reverse what you've done (i.e. stop and uninstall apache on your web nodes).
-So, edit your playbook and then when you're finished, rerun it - as described in *Step 1*.
-For this exercise we aren't going to show you line by line, but we will give you a few hints.
+This changing of the context, when an application in SELinux's ruleset is launched, is called a `domain transition`.
 
-[NOTE]
+=== Step 3: Useful utility #1: restorecon
 
-- If your first task in the playbook was to install httpd and the second task was to start the service, which order do you think
-those tasks should be in now?
-- If `started` makes sure a service is started, then what option ensures it is stopped?
-- If `present` makes sure a package is installed, then what option ensures it is removed?  Er... starts with an *ab*, ends with a *sent*
+If I had to suggest to a new SELinux user the one thing that they should remember (no, it's not `setenforce 0`!), it'd be `restorecon`.  Restorecon will reset the SELinux context to what is defined in the system's context database.
 
+To try this out, let's purposefully set the context incorrectly on our example SELinux AVC log:
 
+{{< highlight bash >}}
+chcon -t httpd_sys_content_t ./testaudit
+ls -Z ./testaudit
+{{< /highlight >}}
 
+[source,bash]
+----
+-rw-------. root root system_u:object_r:httpd_sys_content_t:s0 ./testaudit
+----
 
-Feel free to browse the help pages to see a list of all options.
+And we can change it back, magically, with restorecon.  Note that this would have fixed the problem reported in our test AVC, by setting the context to `httpd_sys_content_t`:
 
-- link:{package_url}[Ansible package module]
-- link:{service_url}[Ansible service module]
+{{< highlight bash >}}
+restorecon ./testaudit 
+ls -Z ./testaudit
+{{< /highlight >}}
+
+[source,bash]
+----
+-rw-------. root root system_u:object_r:admin_home_t:s0 ./testaudit
+----
+
+I also slipped in `chcon`, which you can use to temporarily change the context on a file.
 
 {{< importPartial "footer/footer.html" >}}
