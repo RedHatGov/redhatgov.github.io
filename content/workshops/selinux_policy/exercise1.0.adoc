@@ -15,9 +15,9 @@ layout: lab
 
 In this exercise, we are going to introduce you to Security Enhanced Linux, commonly known as `SELinux`.
 
-SELinux is an implementation of the link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/SELinux_Guide/rhlcommon-appendix-0005.html#FTN.AEN5225[Flask] system security architecture.  The Flask architecture implements MAC, which focuses on providing an administratively-defined security policy that can control all subjects and objects, basing decisions on all security-relevant information. In addition, Flask focuses on the concept of least privilege, which gives a process exactly the rights it needs to perform it's given task.
+SELinux is an implementation of the link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/SELinux_Guide/rhlcommon-appendix-0005.html#FTN.AEN5225[Flask] system security architecture.  The Flask architecture implements MAC, which focuses on providing an administratively-defined security policy that can control all subjects and objects, basing decisions on all security-relevant information. In addition, Flask focuses on the concept of least privilege, which gives a process exactly the rights it needs to perform its given task.
 
-The Flask model allows you to express a security policy in a naturally flowing manner, so that parts of the security rules are like parts in a sentence. In Flask, changes are supported so you can tune your policy. Added to this architecture in the security server are TE and RBAC security models, providing fine-grained controls that can be transparent to users and applications.
+The Flask model allows you to express a security policy in a naturally flowing manner, so that parts of the security rules are like parts in a sentence. In Flask, changes are supported so you can tune your policy. Added to this architecture in the security server are type enforcement (TE) and robe-based access control (RBAC) security models, providing fine-grained controls that can be transparent to users and applications.
 
 As a next step in the evolution of SELinux, the NSA integrated SELinux into the Linux kernel using the Linux Security Modules (LSM) framework. SELinux motivated the creation of LSM, at the suggestion of Linus Torvalds, who wanted a modular approach to security instead of accepting just SELinux into the kernel.
 

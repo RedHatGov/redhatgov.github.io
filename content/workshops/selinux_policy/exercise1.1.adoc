@@ -65,7 +65,7 @@ getenforce
 Enforcing
 ----
 
-=== Step 3: Changing modes for specific domains
+=== Step 4: Changing modes for specific domains
 
 You can also set individual SELinux domains (like `httpd_t`, which controls web server access control) to permissve mode:
 
@@ -96,7 +96,7 @@ libsemanage.semanage_direct_remove_key: Removing last permissive_httpd_t module 
 
 The `permissive` mode means that either the entire system (the first example) or the specific application constrained by a type (the second example) are allowed to bypass SELinux access controls.  However, even though access controls are disabled, full AVC (access vector cache, where SELinux stores its decisions) logging still happens.
 
-=== Step 4: SELinux logging
+=== Step 5: SELinux logging
 
 SELinux messages are logged to the `/var/log/audit/audit.log` file.  We can read the messages with this command:
 
@@ -136,7 +136,7 @@ ausearch -m avc -ts recent
 
 You can try these, if you like, but they may or may not return any results.
 
-=== Step 4: Interpreting AVCs
+=== Step 6: Interpreting AVCs
 
 If you use `ausearch` to find AVC messages, you can see exactly what caused SELinux to deny access:
 
@@ -152,9 +152,9 @@ type=SYSCALL msg=audit(1226882736.442:86): arch=40000003 syscall=196 success=no 
 type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 comm="httpd" path="/var/www/html/file1" dev=dm-0 ino=284133 scontext=unconfined_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:samba_share_t:s0 tclass=file
 -----
 
-Here, we can see that the `httpd` process, ID `2427`, was disallowd from checking attributes of the file `/var/www/html/file1`.  Additionally, we can see that the domain of the process was `httpd_t`, and the file was labeled with the `samba_share_t` context.
+Here, we can see that the `httpd` process, ID `2427`, was disallowed from checking attributes of the file `/var/www/html/file1`.  Additionally, we can see that the domain of the process was `httpd_t`, and the file was labeled with the `samba_share_t` context.
 
-=== Step 5: Getting advice
+=== Step 7: Getting advice
 
 There is a neat utility called `audit2why`, which can make suggestions as to how you might solve SELinux AVC messages.  Let's try it on our test error:
 
