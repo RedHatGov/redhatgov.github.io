@@ -99,6 +99,7 @@ a|
 * CCE-27485-2
 * CCE-27311-0
 * CCE-80546-5
+* CCE-80998-8
 |OPTIONS
 a|
 - [*] Enable Privilege Escalation
