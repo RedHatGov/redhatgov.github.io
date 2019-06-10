@@ -16,8 +16,7 @@ layout: lab
 
 = Wrap Up and Q&A
 
-That wraps up what we have planned for today.  We hope you've learned something valuable
-about Ansible and Red Hat Ansible Tower that you can apply in your daily role.
+That wraps up what we have planned for today.  We hope you've learned something valuable about SELinux policies that you can apply in your daily role.
 
 What do you think? How can we help you understand Ansible Tower better?
 
