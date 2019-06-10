@@ -126,7 +126,6 @@ Select ADD   image:at_add.png[Add,35,25]
 Complete the form, using the following entries and your private Ansible Tower SSH key.  When you paste the key in the `PRIVATE KEY` field, make sure to include the `-----BEGIN RSA PRIVATE KEY-----` and `-----BEGIN RSA PRIVATE KEY-----` lines.
 
 ----
-unsetopt prompt_cr prompt_sp
 cat ~/.ssh/{{< span2 "prefix" "example" "-tower" >}} && echo
 ----
 

@@ -56,7 +56,7 @@ Complete the project form, using the following entries:
 |DESCRIPTION|STIG Role Playbook
 |ORGANIZATION|Default
 |SCM TYPE|Git
-|SCM URL| https://github.com/RedHatOfficial/ansible-role-rhel7-stig.git
+|SCM URL| https://github.com/ajacocks/rhel7_disa_stig
 |SCM BRANCH|
 |SCM UPDATE OPTIONS
 a|
@@ -99,6 +99,7 @@ a|
 * CCE-27485-2
 * CCE-27311-0
 * CCE-80546-5
+* CCE-80998-8
 |OPTIONS
 a|
 - [*] Enable Privilege Escalation
