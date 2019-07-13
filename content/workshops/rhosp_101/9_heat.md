@@ -39,7 +39,7 @@ Login with your **{{< student "" "" >}}** credentials.
 
 ## Let's Autenticate to the OpenStack Cloud
 
-> Source your studentXrc file
+> Source your {{< student "" "rc" >}} file
 
 ```
 $ source {{< student "" "rc" >}}

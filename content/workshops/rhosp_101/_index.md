@@ -36,14 +36,15 @@ Each student will be assigned a number at the beginning of the workshop. This nu
 
 At the bottom of each lab page is a form to set your student number. Please make sure you set this to the number you were assigned by the instructor.
 
-{{% alert info %}}
-In the labs, if you see studentX, substitute the number you were assigned at the start of the workshop for the X.
-{{% /alert %}}
 
 ## Horizon
 
-User Name: studentX (where X is the number you were assigned)  
-Password: Instructor will give out at beginning
+{{% alert info %}}
+Make sure the username below matches the number you were assigned. If not, scroll to the bottom of this page, set your student number and press Enter.
+{{% /alert %}}
+
+**Username: {{< student "" "" >}}**  
+**Password: Instructor will give out at beginning**
 
 # Environment Links
 
