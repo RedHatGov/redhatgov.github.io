@@ -26,7 +26,7 @@ for i in {1..30}; do
   sed -i "s/\(export OS_PASSWORD=\).*/\1${password}/" ${user}${i}rc
 
   #Copy each StudentRC file over to bastion host
-  scp ./student${i}rc student${i}@192.168.1.77:;
+  scp ./student${i}rc student${i}@192.168.1.90:;
   #Copy base heat example over to bastion host
-  scp ./heat-example.yaml student${i}@192.168.1.77:;
+  scp ./heat-example.yaml student${i}@192.168.1.90:;
 done
