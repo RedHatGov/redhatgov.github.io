@@ -26,7 +26,7 @@ You cannot delete the default security group for a project. Also, you cannot del
 
 # Let's Look at the Default Security Group
 
-> Navigate to Compute -> Access & Security -> Security Groups using the second level navigation tabs  
+> Navigate to Network -> Security Groups using the second level navigation tabs  
 
 {{< figure src="../images/lab4-security-groups-1.png" title="Lab 4 Figure 1: Security Group Listing" >}}
 
@@ -71,7 +71,7 @@ If we now look at the Manage Rules screen for the default security group, we wil
 
 # Now We will Create a New Security Group for Web Servers
 
-> Navigate to Compute -> Access & Security -> Security Groups using the second level navigation tabs  
+> Navigate to Network -> Security Groups using the second level navigation tabs 
 
 {{< figure src="../images/lab4-security-groups-1.png" title="Lab 4 Figure 1: Security Group Listing" >}}
 
@@ -132,3 +132,5 @@ We have now learned how to create and modify security groups in our project. We 
 Note that security groups can be combined together on instances to build up a set of rules depening on the instance role in your applications.
 
 In our next lab, we will start working with images.
+
+{{< importPartial "footer/footer-hattrick.html" >}}
