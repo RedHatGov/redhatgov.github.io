@@ -33,10 +33,9 @@ The image below illustrates that the role has been downloaded to your system-wid
 [source,bash]
 ----
 - downloading role 'rhel7_stig', owned by redhatofficial
-- downloading role from https://github.com/RedHatOfficial/ansible-role-rhel7-stig/archive/0.1.41.t
-ar.gz
+- downloading role from https://github.com/RedHatOfficial/ansible-role-rhel7-stig/archive/0.1.44.tar.gz
 - extracting redhatofficial.rhel7_stig to /etc/ansible/roles/redhatofficial.rhel7_stig
-- redhatofficial.rhel7_stig (0.1.41) was installed successfully
+- redhatofficial.rhel7_stig (0.1.44) was installed successfully
 ----
 
 === Step 2: Select Projects
@@ -63,7 +62,7 @@ a|
 
 - [*] Clean
 - [*] Delete on Update
-- [*] Update on Launch
+- [*] Update Revision on Launch
 |===
 
 image::section3.0-stig_project.png[Cred_Detail, 900,caption="Figure 1: ",title="Defining a Project"]
