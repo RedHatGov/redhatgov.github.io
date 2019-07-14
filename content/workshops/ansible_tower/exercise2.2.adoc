@@ -135,15 +135,6 @@ One of the first things you will notice is the RESULTS section.  This section pr
 image::at_job_status.png[caption="Figure 14: ",title="Job Summary"]
 
 
-
-Scroll down and view details on the play and each task in the playbook.
-
-
-
-image::at_job_tasklist.png[caption="Figure 15: ",title="Play and Task Details"]
-
-
-
 To the right, you can view standard output; the same way you could if you were running Ansible Core from the command line.
 
 
