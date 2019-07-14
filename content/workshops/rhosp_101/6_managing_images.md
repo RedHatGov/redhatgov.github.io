@@ -22,43 +22,42 @@ VM images made available through Glance can be stored in a variety of locations 
 {{< figure src="../images/lab5-images-1.png" title="Lab 5 Figure 1: Project Image Listing" >}}
 
 {{% alert info %}}
-To complete this lab, you need to download the latest Cirros Cloud test image from the link below. Save it to a good location locally to be used later in the lab.
+To complete this lab, you need to download a Cirros cloud test image from the link below. Save it to a good location locally to be used later in the lab.
 
-http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
+http://192.168.0.8/images/cirros.img
 {{% /alert %}}
 
 > Click **Create Image** on the right hand side of the screen  
-> Enter **studentX-cirros** for **Name**  
-> Enter **Cirros Cloud Image cirros/cubswin:)** for **Image Description**  
-> Click **Browse...** under **File** and select the Cirros 3.5 image you downloaded for this lab  
-> Select **QCOW2 - QEMU Emulator** for **Format**  
-> Leave Kernel and Ramdisk alone. No need to select them for this lab  
-> Scroll down to finish entering the Image Details
-
-{{< figure src="../images/lab5-images-2.png" title="Lab 5 Figure 2: Details for New cirros Image" >}}
-
+> Enter **{{< student "" "-cirros" >}}** for **Name**  
+> Enter **Cirros Cloud Image (cirros/gocubsgo)** for **Image Description**  
+> Click **Browse...** under **File** and select the Cirros image you downloaded for this lab  
+> Select **Raw** for **Format**  
+> Leave **Kernel** and **Ramdisk** alone. No need to select them for this lab  
 > Leave **Architecture** empty  
 > Enter **1** for Minimum Disk (GB)  
-> Enter **512** for Minimum RAM (MB)
-> Click **Private** under **Visibility** (this image will only be available to your project)
+> Enter **64** for Minimum RAM (MB)  
 > Leave **Protected** set to **No**  
 > Click **Create Image**
 
-{{% alert info %}}
-You will first see the image file get uploaded via a progress bar on the create image dialog
+{{< figure src="../images/lab5-images-2.png" title="Lab 5 Figure 2: Details for New cirros Image" >}}
 
-Then the image will begin processing to get uploaded to glance
+{{% alert info %}}
+Then the image will begin processing for uploading to glance.
+
+You will see the **Create Image** button get disabled, but there is no progress bar for the file upload. Please be patient and wait until you see the dialog disappear and a success message appear in the upper right.
 {{% /alert %}}
 
-{{< figure src="../images/lab5-images-3.png" title="Lab 5 Figure 3: Details Continued for New cirros Image" >}}
-
 {{% alert success %}}
-You should see a green box appear in the upper right corner of the screen that says something similar to "Success: Image student1-cirros was successfully created."
+After a little bit, You should see a green box appear in the upper right corner of the screen that says something similar to "Success: Image {{< student "" "-cirros" >}} was successfully created."
 
 If you did not, let the intstructor know now
 {{% /alert %}}
 
-{{< figure src="../images/lab5-images-4.png" title="Lab 5 Figure 4: New Image Uploaded to Glance and Available to Project" >}}
+{{< figure src="../images/lab5-images-3.png" title="Lab 5 Figure 4: New Image Uploaded to Glance and Available to Project" >}}
+
+{{% alert info %}}
+Note that the image list may be stuck with "saving" status. If you reload the page, you should see it with "Active" status.
+{{% /alert %}}
 
 # Summary
 
@@ -66,4 +65,8 @@ We have now learned how to upload images to our project. We can now use these im
 
 Building images is beyond the scope of this workshop. There are many resources on this topic both officially from Red Hat and from OpenStack.org
 
+OpenStack Foundation does maintain a list of ready cloud images at https://docs.openstack.org/image-guide/obtain-images.html
+
 In our next lab, we will start working with instances.
+
+{{< importPartial "footer/footer-hattrick.html" >}}

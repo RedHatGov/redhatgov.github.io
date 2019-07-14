@@ -31,7 +31,7 @@ Red Hat OpenStack Platform is Infrastructure-as-a-Service.
 
 ### Cloud controller
 
-The coordinating manager. All machines in the OpenStack cloud communicate with the cloud controller(s) using the Advanced Message Queuing Protocol (AMQP). In Red Hat OpenStack Platform, there are two options for AMQP: the Apache Qpid messaging daemon (qpidd), and RabbitMQ.
+The coordinating manager. All machines in the OpenStack cloud communicate with the cloud controller(s) using the Advanced Message Queuing Protocol (AMQP). In Red Hat OpenStack Platform, messaging is handled by RabbitMQ.
 
 ### Compute node
 
@@ -60,3 +60,5 @@ A block device that is created by Cinder and is attached to a instance as storag
 # This Sounds Great, Can We Get to Work Already!
 
 You got it!
+
+{{< importPartial "footer/footer-hattrick.html" >}}

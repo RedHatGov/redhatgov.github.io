@@ -13,10 +13,15 @@ Hopefully, these labs provided you some idea of how to perform common tasks with
 Here are some good resources to continue learning OpenStack:
 
 * [OpenStack Foundation](https://www.openstack.org/)
-* [TryStack.org - The easiest way to try OpenStack](http://trystack.org/)
-* [RDO Project - Our midstream open source OpenStack for RHEL variants](https://www.rdoproject.org/)
+* [RDO Project - Our midstream, open source OpenStack distrobution for RHEL variants](https://www.rdoproject.org/)
+* [Red Hat OpenStack Platform Official Docs](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/)
 
 There are two ways to get started with RDO: TripleO Quickstart and PackStack
 
 * [TripleO Quickstart](https://www.rdoproject.org/tripleo/)
 * [PackStack](https://www.rdoproject.org/install/packstack/)
+
+With Red Hat OpenStack Platform, you can use our Quick Start Guide or Packstack
+
+* [RHOSP Quick Start Guide](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/quick_start_guide/index)
+* [RHOSP PackStack](https://access.redhat.com/articles/1127153)
