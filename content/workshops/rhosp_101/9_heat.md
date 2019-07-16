@@ -68,7 +68,7 @@ You should see the instances you created in the previous labs.
 
 ```
 (overcloud) [student1@bastion ~]$ cat heat-example.yaml 
-heat_template_6version: 2014-10-16  
+heat_template_version: 2014-10-16  
 description: A simple server.  
 parameters:
   private_network:
