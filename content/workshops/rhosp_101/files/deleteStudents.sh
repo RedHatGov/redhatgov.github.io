@@ -8,10 +8,9 @@ tenant=student
 #Start as the admin user
 source ~/overcloudrc
 
-#for i in {16..20}; do
-for i in {1..20}; do
+for i in {1..30}; do
   echo "Deleting student$i and all related resources";
-  source ~/student${i}rc
+  source ~/workshop/student${i}rc
 
   #Delete Object Storage containers and objects
   swift delete --all
@@ -57,5 +56,5 @@ for i in {1..20}; do
   openstack project delete $tenant$i
   openstack user delete $user$i
   
-  rm -rf ~/student${i}rc
+  rm -rf ~/workshop/student${i}rc
 done
