@@ -1,10 +1,10 @@
-heat_template_6version: 2014-10-16  
+heat_template_version: 2014-10-16  
 description: A simple server.  
 parameters:
   private_network:
     type: string
     default: private-a
-  public_networ66k:
+  public_network:
     type: string
     default: public
   image:
