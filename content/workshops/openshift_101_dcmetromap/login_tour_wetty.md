@@ -26,7 +26,7 @@ Password: <Instructor Provided>
 
 After logging in, you should see a shell.
 
-<img src="../images/wetty.png" width="1000" />
+<img src="https://github.com/RedHatGov/redhatgov.github.io/raw/docs/content/workshops/openshift_101_dcmetromap/images/wetty.png" width="1000" />
 
 The wetty instance will already have the 'oc' command installed on them. The 'oc' command is used to connect to the OpenShift Master. 
 
