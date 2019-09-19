@@ -192,19 +192,57 @@ spec:
   strategy:
     jenkinsPipelineStrategy:
       jenkinsfile: |-
-        node() {
-          stage 'buildFrontEnd'
-          openshiftBuild(buildConfig: 'frontend', showBuildLogs: 'true')
-  
-          stage 'deployFrontEnd'
-          openshiftDeploy(deploymentConfig: 'frontend')
-  
-          stage "promoteToProd"
-          input message: 'Promote to production ?', ok: '\'Yes\''
-          openshiftTag(sourceStream: 'origin-nodejs-sample', sourceTag: 'latest', destinationStream: 'origin-nodejs-sample', destinationTag: 'prod')
-  
-          stage 'scaleUp'
-          openshiftScale(deploymentConfig: 'frontend-prod',replicaCount: '2')
+        pipeline {
+          agent any
+          stages {
+            stage('buildFrontEnd') {
+              steps {
+                script {
+                  openshift.withCluster() {
+                    openshift.withProject() {
+                      openshift.selector("bc", "frontend").startBuild("--wait=true", "--follow")
+                    }
+                  }
+                }
+              }
+            }
+            stage('deployFrontEnd') {
+              steps {
+                script {
+                  openshift.withCluster() {
+                    openshift.withProject() {
+                      openshift.selector("dc", "frontend").rollout().latest()
+                    }
+                  }
+                }
+              }
+            }
+            stage('promoteToProd') {
+              steps {
+                script {
+                  timeout(time: 15, unit: 'MINUTES') {
+                    input message: "Promote to PROD?", ok: "Promote"
+                  }
+                  openshift.withCluster() {
+                    openshift.withProject() {
+                      openshift.tag("origin-nodejs-sample:latest", "origin-nodejs-sample:prod")
+                    }
+                  }
+                }
+              }
+            }
+            stage('scaleUp') {
+              steps {
+                script {
+                  openshift.withCluster() {
+                    openshift.withProject() {
+                      openshift.selector("dc", "frontend-prod").scale("--replicas=2")
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
 EOF
 ```
@@ -229,19 +267,57 @@ spec:
   strategy:
     jenkinsPipelineStrategy:
       jenkinsfile: |-
-        node() {
-          stage 'buildFrontEnd'
-          openshiftBuild(buildConfig: 'frontend', showBuildLogs: 'true')
-  
-          stage 'deployFrontEnd'
-          openshiftDeploy(deploymentConfig: 'frontend')
-  
-          stage "promoteToProd"
-          input message: 'Promote to production ?', ok: '\'Yes\''
-          openshiftTag(sourceStream: 'origin-nodejs-sample', sourceTag: 'latest', destinationStream: 'origin-nodejs-sample', destinationTag: 'prod')
-  
-          stage 'scaleUp'
-          openshiftScale(deploymentConfig: 'frontend-prod',replicaCount: '2')
+        pipeline {
+          agent any
+          stages {
+            stage('buildFrontEnd') {
+              steps {
+                script {
+                  openshift.withCluster() {
+                    openshift.withProject() {
+                      openshift.selector("bc", "frontend").startBuild("--wait=true", "--follow")
+                    }
+                  }
+                }
+              }
+            }
+            stage('deployFrontEnd') {
+              steps {
+                script {
+                  openshift.withCluster() {
+                    openshift.withProject() {
+                      openshift.selector("dc", "frontend").rollout().latest()
+                    }
+                  }
+                }
+              }
+            }
+            stage('promoteToProd') {
+              steps {
+                script {
+                  timeout(time: 15, unit: 'MINUTES') {
+                    input message: "Promote to PROD?", ok: "Promote"
+                  }
+                  openshift.withCluster() {
+                    openshift.withProject() {
+                      openshift.tag("origin-nodejs-sample:latest", "origin-nodejs-sample:prod")
+                    }
+                  }
+                }
+              }
+            }
+            stage('scaleUp') {
+              steps {
+                script {
+                  openshift.withCluster() {
+                    openshift.withProject() {
+                      openshift.selector("dc", "frontend-prod").scale("--replicas=2")
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
 ```
 
