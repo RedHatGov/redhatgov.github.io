@@ -67,7 +67,6 @@ Fill a few variables out in an inventory file: `admin_password`, `pg_password`, 
 
 [subs=+quotes]
 ----
-
 [tower]
 localhost ansible_connection=local
 
@@ -83,14 +82,14 @@ pg_database='awx'
 pg_username='awx'
 pg_password=*'ansibleWS'*
 
-rabbitmq_port=5672
-rabbitmq_vhost=tower
 rabbitmq_username=tower
 rabbitmq_password=*'ansibleWS'*
 rabbitmq_cookie=cookiemonster
 
-# Needs to be true for fqdns and ip addresses
-rabbitmq_use_long_name=false
+# Isolated Tower nodes automatically generate an RSA key for authentication;
+# To disable this behavior, set this value to false
+# isolated_key_generation=true
+~                                 
 
 ----
 
