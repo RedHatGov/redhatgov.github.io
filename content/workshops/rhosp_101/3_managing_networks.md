@@ -30,7 +30,7 @@ You will notice that at this point, there is only 1 network named *public*. This
 
 > Click on the **Create Network** button in the upper right  
 > Enter **private-a** as the **Network Name**  
-> Leave **Create Subnet** checked and click **Next**
+> Leave **Enable Admin State** and **Create Subnet** checked and click **Next**
 
 {{< figure src="../images/lab2-neutron-create-network-1.png" title="Lab 2 Figure 2: Create Neutron Network" >}}
 
@@ -54,7 +54,7 @@ Be aware that because these project networks are VXLAN tunnels, they can be any 
 
 > Leave **Enable DHCP** checked  
 > Leave **Allocation Pools** empty (we'll use the entire range)  
-> Enter **192.168.0.6** in **DNS Name Servers**  
+> Enter **192.168.0.4** in **DNS Name Servers**  
 > Leave **Host Routes** empty and click **Create**
 
 {{< figure src="../images/lab2-neutron-create-network-3.png" title="Lab 2 Figure 4: Enter Neutron Subnet Details" >}}
@@ -133,3 +133,5 @@ We then created a Neutron router to tie both of these networks together so that 
 Also, we will now be able to associate floating IP addresses from the public network to instances on our private-a network.
 
 In our next lab, we will start working with floating IP addresses.
+
+{{< importPartial "footer/footer-hattrick.html" >}}

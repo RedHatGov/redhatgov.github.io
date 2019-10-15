@@ -28,7 +28,7 @@ Use this URL to access the Wetty node, just change the workshop name (if applica
 
 [source,bash]
 ----
-{{< urifqdn "https://" "tower" ":8888" >}}
+{{< urifqdn "https://" "tower" ":8888/wetty" >}}
 ----
 
 

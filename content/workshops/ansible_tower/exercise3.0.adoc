@@ -33,10 +33,9 @@ The image below illustrates that the role has been downloaded to your system-wid
 [source,bash]
 ----
 - downloading role 'rhel7_stig', owned by redhatofficial
-- downloading role from https://github.com/RedHatOfficial/ansible-role-rhel7-stig/archive/0.1.41.t
-ar.gz
+- downloading role from https://github.com/RedHatOfficial/ansible-role-rhel7-stig/archive/0.1.44.tar.gz
 - extracting redhatofficial.rhel7_stig to /etc/ansible/roles/redhatofficial.rhel7_stig
-- redhatofficial.rhel7_stig (0.1.41) was installed successfully
+- redhatofficial.rhel7_stig (0.1.44) was installed successfully
 ----
 
 === Step 2: Select Projects
@@ -63,7 +62,7 @@ a|
 
 - [*] Clean
 - [*] Delete on Update
-- [*] Update on Launch
+- [*] Update Revision on Launch
 |===
 
 image::section3.0-stig_project.png[Cred_Detail, 900,caption="Figure 1: ",title="Defining a Project"]
@@ -100,6 +99,20 @@ a|
 * CCE-27311-0
 * CCE-80546-5
 * CCE-80998-8
+* CCE-80224-9
+* CCE-80226-4
+* CCE-27413-4
+* CCE-27445-6
+* CCE-80221-5
+* CCE-27433-2
+* CCE-80222-3
+* CCE-80220-7
+* CCE-80223-1
+* CCE-27455-5
+* CCE-80436-9
+* CCE-80240-5
+* CCE-27458-9
+
 |OPTIONS
 a|
 - [*] Enable Privilege Escalation

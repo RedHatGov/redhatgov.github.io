@@ -182,7 +182,7 @@ a|
 
 - [*] Clean
 - [*] Delete on Update
-- [*] Update on Launch
+- [*] Update Revision on Launch
 |===
 
 
@@ -242,7 +242,7 @@ Switch back to your terminal session.  If by any chance you closed the wetty bro
 
 [source,bash]
 ----
-{{< urifqdn "https://" "tower" ":8888/wetty/ssh/ec2-user" >}}
+{{< urifqdn "https://" "tower" ":8888/wetty" >}}
 ----
 
 

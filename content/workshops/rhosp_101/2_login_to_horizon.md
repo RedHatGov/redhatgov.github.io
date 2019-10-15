@@ -17,7 +17,11 @@ In later labs we will explore accomplishing some of the same tasks using the Ope
 > Navigate to the URI provided by your instructor and login with the user/password provided. Ask if not sure
 
 {{% alert info %}}
-Remember that you were assigned a number at the beginning of the workshop. Your user name will be student + your number. In the screenshot below, see that this is student1 logging in.
+Remember that you were assigned a number at the beginning of the workshop. At the bottom of each lab page is a form to set your student number. Please do that now if you have not.
+
+Your username, based on the form, is: <b>{{< student "" "" >}}</b>
+
+In the screenshot below, see that this is student1 logging in.
 {{% /alert %}}
 
 {{< figure src="../images/lab1-horizon-login-screen.png" title="Lab 1 Figure 1: RHOSP Horizon Login Screen" >}}
@@ -42,3 +46,5 @@ The second level of navigation is for working within the current project. Using 
 
 # Summary
 You should now be ready to get hands-on with our workshop labs.
+
+{{< importPartial "footer/footer-hattrick.html" >}}

@@ -23,12 +23,12 @@ You can learn more about the difference between Floating IP and private IP from 
 {{% alert info %}}
 A floating IP range was already created on the public-sub subnet for the public network in our workshop environment.
 
-The range is 192.168.1.70 to 192.168.1.199. Each student project has a quota of 10 Floating IP Addresses
+The range is 192.168.1.70 to 192.168.1.199. Each student project has a quota of 50 Floating IP Addresses
 {{% /alert %}}
 
 # Let's Go Allocate Some Floating IP Addresses
 
-> Navigate to Compute -> Access & Security -> Floating IPs using the second level navigation tabs  
+> Navigate to Network -> Floating IPs using the second level navigation tabs  
 
 {{< figure src="../images/lab3-floating-ips-1.png" title="Lab 3 Figure 1: Floating IP Listing" >}}
 
@@ -39,7 +39,7 @@ The range is 192.168.1.70 to 192.168.1.199. Each student project has a quota of 
 {{< figure src="../images/lab3-floating-ips-2.png" title="Lab 3 Figure 2: Allocate Floating IP to Project" >}}
 
 {{% alert success %}}
-You should see a green box appear in the upper right corner of the screen that says something similar to "Success: Allocated Floating IP 192.168.1.76."
+You should see a green box appear in the upper right corner of the screen that says something similar to "Success: Allocated Floating IP 192.168.1.106."
 
 Note that you will get a different IP from the pool each time you go through this process.
 
@@ -65,3 +65,5 @@ In these labs, we are using Horizon to complete tasks. However, remember that th
 We could accomplish these same tasks via the other 2 methods as well. In fact in some cases, the CLI and APIs have more options available than Horizon.
 
 In our next lab, we will start working with security groups.
+
+{{< importPartial "footer/footer-hattrick.html" >}}
