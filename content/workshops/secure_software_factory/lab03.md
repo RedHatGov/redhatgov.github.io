@@ -48,5 +48,5 @@ It might take a few minutes for all PODS to be deployed.
 <img src="../images/pipeline.png" width="900"><br/>
 
 [1]: https://stackoverflow.com/questions/28608015/continuous-integration-vs-continuous-delivery-vs-continuous-deployment
-[2]: https://docs.openshift.com/container-platform/3.9/dev_guide/openshift_pipeline.html
+[2]: https://docs.openshift.com/container-platform/3.11/dev_guide/openshift_pipeline.html
 {{< importPartial "footer/footer.html" >}}
