@@ -15,7 +15,7 @@ This lab provides a quick tour of the browser based SSH client Wetty. To help yo
 Use this URL to access the Wetty node, just change the workshopname. Ask your instructor for the workshopname. 
 
 ```bash
-{{< urishortfqdn "https://" "master" ":8888" >}}
+{{< urishortfqdn "https://" "master" ":8888/wetty" >}}
 ```
 
 ### Login Info
