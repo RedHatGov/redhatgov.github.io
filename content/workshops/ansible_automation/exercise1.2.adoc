@@ -1,12 +1,12 @@
 ---
 title: "Exercise 1.2 - Running Your Playbook"
-workshops: ansible_tower
+workshops: ansible_automation
 workshop_weight: 12
 layout: lab
 ---
 
 :icons: font
-:imagesdir: /workshops/ansible_tower/images
+:imagesdir: /workshops/ansible_automation/images
 :package_url: http://docs.ansible.com/ansible/package_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html
 :gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts

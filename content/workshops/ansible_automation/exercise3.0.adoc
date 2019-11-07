@@ -1,0 +1,120 @@
+---
+title: "Exercise 3.0 - Using Ansible to Implement Security"
+workshops: ansible_automation
+workshop_weight: 30
+layout: lab
+---
+
+:license_url: http://ansible-workshop-bos.redhatgov.io/ansible-license.json
+
+:icons: font
+:imagesdir: /workshops/ansible_automation/images
+
+
+= Exercise 3.0 - Using Ansible to Implement Security
+
+== Exercise Description
+In this exercise, we are going to use Red Hat Ansible Tower to run a *Operating System Protection Profile (OSPP) for RHEL 8.x* for our environment
+
+=== Step 1: Generate a security profile using OpenSCAP.  
+
+In your Web Console Terminal window (if you closed it, see the link:/workshops/ansible_automation/setup/[SETUP] step, in your workbook), install OpenScap on the Tower node:
+
+[source,bash]
+----
+ansible localhost -m package -a "name=scap-security-guide state=present" -b
+----
+
+Next, setup a local projects directory to stage a remediation playbook
+[source,bash]
+----
+ansible localhost -m file -a "path=/var/lib/awx/projects/openscap-ospp state=directory mode=0755 owner=awx group=awx" -b
+----
+
+Use OpenSCAP to read a hardening profile via Extensible Configuration Checklist Description Format (XCCDF) and generate an Ansible remediation playbook.
+[source,bash]
+----
+sudo -u awx oscap xccdf generate fix --fix-type ansible --profile xccdf_org.ssgproject.content_profile_ospp \
+     --output /var/lib/awx/projects/openscap-ospp/ospp-rhel8.yml \
+     --fetch-remote-resources /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml 
+----
+
+=== Step 2: Select Projects
+
+Click the Projects tab, in the Ansible Tower UI. image:at_projects_icon.png[PROJECTS]
+
+=== Step 3: Click Add
+
+Next, Select    image:at_add.png[Add,35,25]
+
+=== Step 4: Complete the Project form
+
+Complete the project form, using the following entries:
+
+|===
+|NAME |Ansible RHEL8 OSPP Project
+|DESCRIPTION|RHEL8 OSPP Playbook
+|ORGANIZATION|Default
+|SCM TYPE|Manual
+|PROJECT BASE PATH|/var/lib/awx/projects
+|PLAYBOOK DIRECTORY|openscap-ospp 
+a|
+
+- [*] Clean
+- [*] Delete on Update
+- [*] Update Revision on Launch
+|===
+
+image::section3.0-ospp_project.png[Cred_Detail, 900,caption="Figure 1: ",title="Defining a Project"]
+
+=== Step 5: Save
+
+Select   SAVE   image:at_save.png[Save,35,25]
+
+=== Step 6: Select Template tab
+
+In your Tower window, click `TEMPLATES`
+
+=== Step 7: Add the job template
+
+Click ADD image:at_add.png[Add,35,25], and select `JOB TEMPLATE`
+
+=== Step 8: Complete the job Template form
+
+Complete the form using the following values.  Note that the `PLAYBOOK` field should offer `ospp-rhel8.yml` as an option, when clicked.
+
+|===
+|NAME |RHEL8 OSPP Job Template
+|JOB TYPE|Run
+|INVENTORY|Ansible Workshop Inventory
+|PROJECT|Ansible RHEL8 OSPP Project
+|PLAYBOOK|ospp-rhel8.yml
+|MACHINE CREDENTIAL|Ansible Workshop Credential
+|LIMIT|web
+|OPTIONS
+a|
+- [*] Enable Privilege Escalation
+|===
+
+image::section3.0-ospp_template.png[Cred_Detail, 900,caption="Figure 2: ",title="Defining a Job"]
+
+=== Step 9: Save the template and run it
+
+Click SAVE image:at_save.png[Save], to store your new template, and we are ready to run it.
+
+Click  the rocketship icon image:at_launch_icon.png[Add,35,25] next to the `RHEL8 OSPP Job Template` entry, to launch the job.
+
+View what the job looks like as it is executing, as well as what the SCAP results look like, when uploaded to your second node, in the panel, below.
+
+{{< panel_group >}}
+{{% panel "Job Status" %}}
+
+:icons: font
+:imagesdir: /workshops/ansible_automation/images
+
+image:section3.0-ospp_job_status.png[Job Status,width=1024]
+
+{{% /panel %}}
+{{< /panel_group >}}
+
+{{< importPartial "footer/footer.html" >}}
