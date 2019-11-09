@@ -1,12 +1,12 @@
 ---
 title: "Exercise 2.1 - Configuring Ansible Tower"
-workshops: ansible_tower
+workshops: ansible_automation
 workshop_weight: 21
 layout: lab
 ---
 
 :icons: font
-:imagesdir: /workshops/ansible_tower/images
+:imagesdir: /workshops/ansible_automation/images
 :license_url: https://s3.amazonaws.com/ansible-tower-workshop-license/license
 :image_links: https://s3.amazonaws.com/ansible-workshop-bos.redhatgov.io/_images
 :cred_url: http://docs.ansible.com/ansible-tower/latest/html/userguide/credentials.html#credential-types
@@ -135,7 +135,7 @@ cat ~/.ssh/{{< span2 "prefix" "example" "-tower" >}} && echo
 |ORGANIZATION|Default
 |TYPE|Machine
 |USERNAME| ec2-user
-|PRIVILEGE ESCALATION|Sudo
+|PRIVILEGE ESCALATION|sudo
 |PRIVATE KEY|paste in secret key
 |===
 
@@ -238,11 +238,11 @@ Select SAVE  image:at_save.png[Save,35,25]
 
 === Step 5: Switch back to your terminal session
 
-Switch back to your terminal session.  If by any chance you closed the wetty browser window, open a new one with the URL shown, below:
+Switch back to your terminal session.  If by any chance you closed the Red Hat Web Console browser window, open a new one with the URL shown, below:
 
 [source,bash]
 ----
-{{< urifqdn "https://" "tower" ":8888/wetty" >}}
+{{< urifqdn "https://" "tower" ":9090/system/terminal" >}}
 ----
 
 
