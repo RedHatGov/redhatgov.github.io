@@ -80,7 +80,7 @@ image::at_survey_detail.png[caption="Figure 12: ",500,title="Survey Form"]
 
 === Step 6: Add the survey input
 
-Select ADD image:at_add.png[Add,35,25]
+Select +ADD 
 
 === Step 7: Save
 

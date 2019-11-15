@@ -114,7 +114,7 @@ You can access your Tower workshop (not forgetting that *workshopname* is the na
 
 [source,bash]
 ----
-{{< urifqdn "" "tower" "" >}}
+{{< urifqdn "https://" "tower" "" >}}
 ----
 
 === Ensuring Installation Success
