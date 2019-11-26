@@ -1,12 +1,12 @@
 ---
 title: "Exercise 1.1 - Writing Your First Playbook"
-workshops: ansible_tower
+workshops: ansible_automation
 workshop_weight: 11
 layout: lab
 ---
 
 :icons: font
-:imagesdir: /workshops/ansible_tower/images
+:imagesdir: /workshops/ansible_automation/images
 :figure-caption!:
 :become_url: http://docs.ansible.com/ansible/become.html
 :dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
