@@ -1,12 +1,12 @@
 ---
 title: "Exercise 1.3 - Using Variables, Loops, and Handlers"
-workshops: ansible_tower
+workshops: ansible_automation
 workshop_weight: 13
 layout: lab
 ---
 
 :icons: font
-:imagesdir: /workshops/ansible_tower/images
+:imagesdir: /workshops/ansible_automation/images
 :package_url: http://docs.ansible.com/ansible/package_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html
 :var_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html
@@ -76,7 +76,7 @@ Add a play definition and some variables to your playbook.  These include additi
       - httpd
       - mod_wsgi
     apache_test_message: This is a test message
-    apache_max_keep_alive_requests: 115
+    apache_webserver_port: 80
 ----
 
 
@@ -123,8 +123,8 @@ Create a `templates` directory in your project directory and download two files.
 ----
 mkdir templates
 cd templates
-curl -O http://ansible-workshop.redhatgov.io/workshop-files/httpd.conf.j2
-curl -O http://ansible-workshop.redhatgov.io/workshop-files/index.html.j2
+curl -O https://raw.githubusercontent.com/ansible/lightbulb/master/examples/apache-basic-playbook/templates/httpd.conf.j2
+curl -O https://raw.githubusercontent.com/ansible/lightbulb/master/examples/apache-basic-playbook/templates/index.html.j2
 ----
 
 === Step 2: Add file and service tasks
@@ -222,7 +222,7 @@ looks the way you intended.  If not, now is the time to fix it up. The figure be
       - httpd
       - mod_wsgi
     apache_test_message: This is a test message
-    apache_max_keep_alive_requests: 115
+    apache_webserver_port: 80
 
   tasks:
     - name: httpd packages are present

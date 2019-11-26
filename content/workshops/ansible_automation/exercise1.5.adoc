@@ -1,12 +1,12 @@
 ---
 title: "Exercise 1.5 - Roles: Making your playbooks reusable"
-workshops: ansible_tower
+workshops: ansible_automation
 workshop_weight: 15
 layout: lab
 ---
 
 :icons: font
-:imagesdir: /workshops/ansible_tower/images
+:imagesdir: /workshops/ansible_automation/images
 :package_url: http://docs.ansible.com/ansible/package_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html
 :dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
@@ -117,7 +117,7 @@ Add some default variables to your role in `roles/apache-simple/defaults/main.ym
 ---
 # defaults file for apache-simple
 apache_test_message: This is a test message
-apache_max_keep_alive_requests: 115
+apache_webserver_port: 80
 ----
 
 === Step 4: Add variables
@@ -209,8 +209,8 @@ Download a couple of templates into `roles/apache-simple/templates/`.  And then,
 ----
 mkdir -p ~/apache-basic-playbook/roles/apache-simple/templates/
 cd ~/apache-basic-playbook/roles/apache-simple/templates/
-curl -O http://ansible-workshop.redhatgov.io/workshop-files/httpd.conf.j2
-curl -O http://ansible-workshop.redhatgov.io/workshop-files/index.html.j2
+curl -O https://raw.githubusercontent.com/ansible/lightbulb/master/examples/apache-basic-playbook/templates/httpd.conf.j2
+curl -O https://raw.githubusercontent.com/ansible/lightbulb/master/examples/apache-basic-playbook/templates/index.html.j2
 rm -rf ~/apache-basic-playbook/templates/
 ----
 

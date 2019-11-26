@@ -1,6 +1,6 @@
 ---
 title: "Exercise 2.0 - Installing Ansible Tower"
-workshops: ansible_tower
+workshops: ansible_automation
 workshop_weight: 20
 layout: lab
 ---
@@ -8,7 +8,7 @@ layout: lab
 :license_url: http://ansible-workshop-bos.redhatgov.io/ansible-license.json
 
 :icons: font
-:imagesdir: /workshops/ansible_tower/images
+:imagesdir: /workshops/ansible_automation/images
 
 
 = Exercise 2.0 - Installing Ansible Tower
@@ -114,7 +114,7 @@ You can access your Tower workshop (not forgetting that *workshopname* is the na
 
 [source,bash]
 ----
-{{< urifqdn "" "tower" "" >}}
+{{< urifqdn "https://" "tower" "" >}}
 ----
 
 === Ensuring Installation Success

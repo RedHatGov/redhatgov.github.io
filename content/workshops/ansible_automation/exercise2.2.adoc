@@ -1,13 +1,13 @@
 ---
 title: "Exercise 2.2 - Creating and Running a Job Template"
-workshops: ansible_tower
+workshops: ansible_automation
 workshop_weight: 22
 layout: lab
 ---
 
 :license_url: http://ansible-workshop-bos.redhatgov.io/wslic.txt
 :icons: font
-:imagesdir: /workshops/ansible_tower/images
+:imagesdir: /workshops/ansible_automation/images
 
 = Exercise 2.2 - Creating and Running a Job Template
 
@@ -80,7 +80,7 @@ image::at_survey_detail.png[caption="Figure 12: ",500,title="Survey Form"]
 
 === Step 6: Add the survey input
 
-Select ADD image:at_add.png[Add,35,25]
+Select +ADD 
 
 === Step 7: Save
 
