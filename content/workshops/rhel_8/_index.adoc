@@ -13,13 +13,25 @@ menu:
 
 :icons: font
 :iconsdir: http://people.redhat.com/~jduncan/images/icons
-:imagesdir: /workshops/ansible_automation/images
+:imagesdir: /workshops/rhel_8/images
 
 = Red Hat Enterprise Linux 8 Workshop
 
 == Workshop Description
 
-Ansible Tower will enable you to create playbooks, while building in security. Automation features will save time, empower junior staff, offload senior staff and automate your most tedious tasks!
+This workshop will cover the features, specifications and improvements that comprise the release of version 8 of Red Hat Enterprise Linux (RHEL).  RHEL 8 brings many improvements over previous releases, including:
+
+* Application streams, which allow for the use of bleeding edge interpreters, compilers and libraries, while maintaining full backwards compatibility and stability of the system
+* The web console has been completely overhauled, and significant new features have been added
+** Session recording capability has been added to the web console
+* Image builder provides for the easy creation of customized RHEL installation images
+* The system package management tool, YUM, has been enhanced with DNF technology, providing significant performance improvements
+* System purpose has been enhanced to automatically tune system performance for the usage of the system
+* There is a new `update-crypto-policies` tool, which applies cryptograhic polices system-wide
+** TLS, IPsec, DNSSEC, Kerberos, and SSH protocols are covered
+* The system Python interpreter is now version 3.6
+* System firmware updating is now built into the GNOME Software tool, using fwupd
+* The system firewall has been upgraded to 'nftables' from 'iptables', which provides significantly better performance.  The firewall manager, 'firewalld', remains the same 
 
 
 == Who should attend
@@ -41,20 +53,20 @@ Ansible Tower will enable you to create playbooks, while building in security. A
 
 == Overview
 
-The Ansible Automation Workshop is meant for anyone who has any exposure to Ansible, whether you have used it or not. We are going to start with a short overview and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.
+The RHEL 8 workshop is meant for anyone who has any exposure to Linux, whether you have used this distribution, or not. The event will begin with a short overview and then will move on to the lab.
 
 
 == Your Responsibilities
 
 Have a Discussion. This will be boring if it’s just us, up here talking for over 4 hours.
 
-Participate. We are going to cut you loose with Ansible, in just a little while. Have questions. Have opinions.
+Participate. We are going to cut you loose with RHEL, in just a little while. Have questions. Have opinions.
 
 Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy. See? Not only can we dig into Ansible but you can make a new friend!
 
 
 == Exercises
 
-{{< labs ansible_automation >}}
+{{< labs rhel_8 >}}
 
 {{< importPartial "footer/footer.html" >}}
