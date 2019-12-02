@@ -19,7 +19,7 @@ To get started, we will take a tour of the web console. The web console (called 
 
 === Step 1: Tour of the web console
 
-Please click through the console, as we explain the sections.
+Here is a quick overview of all the available modules:
 
 [.float-group]
 --
@@ -75,136 +75,32 @@ Manages subscriptions attached to the host
 Provides an interactive shell
 --
 
-=== Set Up Dependencies:
+Next, let's proceed to a more detailed examination of each module. Please click through the web console on your host, as you read the explanations, here.
 
-Define your inventory.  Inventories are crucial to Ansible, as they define remote machines on which you will run commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`.  Then, add the appropriate definitions for the node that will function as a web node.
+=== Step 2: System Module
 
-====
-[NOTE]
-The *workshopname*, in the example below, will be provided to you by your instructor.  The *#* should be replaced by your student number.
+image::cockpit_system.png[caption="Figure 2: ", title='Web Console System Module', 500]
 
-For example, a recent workshop student used:
-*{{< urifqdn "" "rhel" "" >}}*
-====
+The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
 
-.hosts (example)
-[source,bash]
-----
-[web]
-{{< urifqdn "" "node" "" >}}
-----
+* hardware type
+** detailed system hardware data is available, from the link on the main page
+* asset tag
+* machine ID
+* operating system
+** when updates to the system are available, an "updates available" link will be present
+* SSH keys
+** key fingerprints for all created 'root' keys
+* host name
+** the system's name may be changed, and an alias may be added
+* domain
+** the system may be added to an LDAP/AD domain
+* time and date
+** time zone and automatic or manual time and date setting can be done
+* performance profile
+** the system's performance profile may be changed
 
-=== Step 1: Test webhost response
+Additionally, there are graphs that show the system's CPU, memory, disk, and network utilization.  Each graph may be enlarged, by clicking its associated link.
 
-Let's start with something basic - pinging a host.  The `ping` module tests the responsiveness of our web host.
-
-[source,bash]
-----
-ansible web -m ping
-----
-
-=== Step 2: Run a Linux command
-
-Now let's see how we can run a Linux command and format the output, using the `command` module.
-
-[source,bash]
-----
-ansible web -m command -a "uptime" -o
-----
-
-=== Step 3: Review the setup module
-
-Take a look at your web node's configuration.  The `setup` module displays Ansible facts (and a lot of them) about an endpoint.
-
-[source,bash]
-----
-ansible web -m setup
-----
-
-
-====
-[NOTE]
-Like many Linux commands, `Ansible` allows for long-form options, as well as short-form.  For example:
-
-----
-ansible web --module-name ping
-----
-The command above is the same as running the command below.
-----
-ansible web -m ping
-----
-
-We are going to be using the short-form options throughout this workshop
-====
-
-=== Step 4: Install Maven, Git, and Red Hat JBoss Enterprise Application Platform
-
-Now, let's install Maven & Git, using the `dnf` module.
-
-[source,bash]
-----
-ansible web -m dnf -a 'name=git state=present' -b
-ansible web -m dnf -a "name='@maven:3.5/common' state=present" -b
-ansible web -m dnf -a "name=@jboss-eap7 state=present" -b
-----
-
-=== Step 5: Start JBoss EAP
-
-JBoss EAP is installed now, so let's start it up using the `service` module.
-
-[source,bash]
-----
-ansible web -m service -a "name=eap7-standalone state=started" -b
-----
-
-=== Step 6: Deploy an application
-
-Next, we will deploy an application.
-
-For simplicity sake, we will use an existing quickstart. To get started, we checkout some code ...
-
-[source,bash]
-----
-ansible web -m git -a "repo=https://github.com/jboss-developer/jboss-eap-quickstarts.git dest=/tmp/checkout"
-----
-
-..and deploy the code via Maven, provided by Red Hat Application Streams.
-[source,bash]
-----
-ansible web -m shell -a 'mvn clean install wildfly:deploy -Dmaven.test.skip=true chdir=/tmp/checkout/helloworld' -b
-----
-
-Demo site (unit test):
-[source,bash]
-----
-ansible web -m uri -a "url=http://localhost:8080/helloworld/ return_content=yes"
-----
-
-Demo site (open this in your web browser):
-[source,bash]
-----
-http://{{< urifqdn "" "node" "" >}}:8080/helloworld/
-----
-
-=== Step 7: Cleanup
-
-Finally, let's clean up after ourselves.  First, stop the Red Hat JBoss EAP service, using the following command.
-
-[source,bash]
-----
-ansible web -m service -a "name=eap7-standalone state=stopped" -b
-----
-
-=== Step 10: Remove packages
-
-Next, remove some packages - as follows.
-
-[source,bash]
-----
-ansible web -m dnf -a "name=@jboss-eap7 state=absent" -b
-ansible web -m dnf -a "name=eap7-* state=absent" -b
-ansible web -m dnf -a "name=maven state=absent" -b
-ansible web -m dnf -a "name=git state=absent" -b
-----
 
 {{< importPartial "footer/footer.html" >}}
