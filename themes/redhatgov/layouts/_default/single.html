@@ -8,4 +8,6 @@
   {{ .Content }}
 </div>
 
+{{ if .Params.redirectURL }}<meta http-equiv="refresh" content="1; url={{ .Params.redirectURL }}"/>{{ end }}
+
 {{ partial "footer" . }}
