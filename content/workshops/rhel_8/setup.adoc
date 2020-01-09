@@ -31,7 +31,13 @@ Use this URL to access the Web Console node, just change the workshop name (if a
 {{< urifqdn "https://" "tower" ":9090" >}}
 ----
 
-You will be presented with a login window.
+You will be presented with a login window.  Once there, please log in, using the credentials below:
+
+|===
+|User name|ec2-user
+|Password|*<provided by your instructor>*
+|Reuse my password for privileged tasks|*checked*
+|===
 
 image::cockpit_login.png[caption="Figure 1: ", title='Web Console Login', 500]
 
