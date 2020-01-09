@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1.1 - Writing Your First Playbook"
+title: "Exercise 1.1 - Managing Updates Using the Web Console"
 workshops: rhel_8
 workshop_weight: 11
 layout: lab
@@ -15,28 +15,17 @@ layout: lab
 :yaml_url: http://docs.ansible.com/ansible/YAMLSyntax.html
 
 
-= Exercise 1.1 - Writing Your First Playbook
+= Exercise 1.1 - Managing Updates Using the Web Console
 
 == Exercise Description
-Now that you've gotten a sense of how Red Hat Ansible Tower works, we are going to write our first
-Ansible playbook.  The playbook is where you can take some of those ad hoc commands you just ran
-and put them into a repeatable set of *plays* and *tasks*.
 
-A playbook can have multiple plays and a play can have one or multiple tasks.  The goal of a *play* is to map a group of hosts.  The goal of a *task* is to implement modules against those hosts.
+Now that you've toured the web console, lets work through updating the system. 
 
-For our first playbook, we are only going to write one play and two tasks.
+== Section 1: Basic Updating
 
+As you did in the previous section, navigate to the `Software Updates` section of the Web Console, by licking on the `Software Updates` link, in the left-hand menu. There will then be a brief interval where `Refreshing package information` will appear, along with a progress bar. Once that completes, you can proceed with the exercise.
 
-== Section 1: Creating a directory structure and files for your playbook
-
-There is a link:{dir_url}[best practice] regarding the preferred directory structures for playbooks.  We strongly encourage
-you to read and understand these practices as you develop your Ansible ninja skills.  That said,
-our playbook today is very basic, because creating a complex structure can create unnecessary challenges.
-
-Instead, we are going to create a very simple directory structure for our playbook, and add just a couple of files to it.
-
-
-=== Step 1: Create a directory
+=== Step 1: Update Some Packages
 Create a directory called *apache_basic* in your home directory and change directories to it.
 
 [source,bash]

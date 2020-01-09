@@ -23,7 +23,7 @@ Here is a quick overview of all the available modules:
 
 [.float-group]
 --
-image::cockpit_topics.png[caption="Figure 1: ", title="Web console functions", wideth=450, float=left]
+image::cockpit_topics.png[caption="Figure 1: ", title="Web console functions", width=450, float=left]
 The various functional sections can be seen in `Figure 1`, and are: +
 {empty} +
 *System* +
