@@ -22,9 +22,3 @@ metaDataFormat = "yaml"
     name = "Workshops"
     identifier = "workshops"
     weight = 100
-
-[[menu.main]]
-    name = "Junior SA Program"
-    identifier = "jr-sa"
-    url = "https://events.redhat.com/profile/form/index.cfm?PKformID=0x110847abcd"
-    weight = 90
