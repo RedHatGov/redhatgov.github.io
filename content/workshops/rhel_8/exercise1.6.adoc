@@ -62,23 +62,23 @@ When you have all the necessary packages installed, you can move on to configuri
 === Step 1.4: Configuring the recorded users or user groups with SSSD from web UI
 Specify recorded users or user groups using SSSD by listing them directly in the RHEL 8 web console.
 
-1.4.1: Connect to the RHEL 8 web console locally by entering `localhost:9090` or by entering your IP address `<IP_ADDRESS>:9090` to your browser.
+==== Step 1.4.1: Connect to the RHEL 8 web console locally by entering `localhost:9090` or by entering your IP address `<IP_ADDRESS>:9090` to your browser.
 
-1.4.2: Log in to the RHEL 8 web console.
+==== Step 1.4.2: Log in to the RHEL 8 web console.
 
 TIP: Your user has to have administrator privileges to be able to view the recorded sessions.
 
-1.4.3: Go to the Session Recording page in the menu on the left of the interface.
+==== Step 1.4.3: Go to the Session Recording page in the menu on the left of the interface.
 
 image::TerminalRecording-af59f.png[]
 
-1.4.4: Click on the gear button in the right top corner.
+==== Step 1.4.4: Click on the gear button in the right top corner.
 
 image::TerminalRecording-9ee56.png[]
 
-1.4.5: Set your parameters in the SSSD Configuration table. Names in the Users and Groups lists should be divided by commas.
+==== Step 1.4.5: Set your parameters in the SSSD Configuration table. Names in the Users and Groups lists should be divided by commas.
 
-= Alex:  As we spoke about, not sure what we want to have the user do.  Here are 2 screen shots that may or may not be useful.
+*Alex:  As we spoke about, not sure what we want to have the user do.  Here are 2 screen shots that may or may not be useful.*
 
 image::TerminalRecording-60f70.png[]
 
