@@ -50,6 +50,8 @@ This workshop will cover the features, specifications and improvements that comp
 - How to manage terminal session recording
 - How to manage containers with podman
 - How to manage system-wide cryptographic policies
+- How to manage application streams
+- How to use OpenSCAP
 
 
 == Overview
