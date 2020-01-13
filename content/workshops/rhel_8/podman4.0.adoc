@@ -1,0 +1,171 @@
+---
+title: "Exercise 4.0 - Deploying Containers with Podman"
+workshops: rhel_8
+workshop_weight: 30
+layout: lab
+---
+
+:domain_name: redhatgov.io
+:icons: font
+:imagesdir: /workshops/rhel_8/images
+
+= Exercise 4.0 - Deploying Containers with Podman"
+
+== Exercise Description
+
+Explore how Podman helps you run workloads in containers by taking an existing container image and deploying it into a runtime environment.
+
+After completing this scenario, users will be able to deploy and control an already defined container image.
+
+Concepts included in this scenario:
+
+1. List available container images
+1. Deploy a container image into an interactive container runtime
+1. Deploy a container image into a detached container runtime
+1. View deployed containers
+1. Stop a container instances
+1. Remove deployed container instances
+
+=== Step 1: 
+Using the top terminal session, view the container images available with the following command:
+```bash
+podman images
+```
+
+Expected Output:
+```bash
+REPOSITORY              TAG      IMAGE ID       CREATED        SIZE
+localhost/rhel8-httpd   latest   c12e3720df7b   43 hours ago   499 MB
+```
+
+There is one container available in the local (localhost) repository, rhel8-httpd. If there were multiple updated iterations of the conatiner available, you would use the IMAGE ID to work with those that are not tagged as latest. Also, from this list you are able to see the size, on disk, of the container image.
+
+=== Step 2:
+
+The rhel8-httpd container includes a bash shell. In this step, you will deploy the container in an interactive fashion, which will allow you to run commands within the deployed container.
+
+```bash
+podman run -it rhel8-httpd /bin/bash
+```
+
+You should now be looking at a bash shell prompt:
+
+```bash
+bash-4.4#
+```
+In the terminal, the displayed shell is running inside the container image, not the host operating system. To confirm this, take a look at the mounted filesystems:
+
+```bash
+df -hP
+```
+Expected output:
+
+```bash
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          35G  3.7G   31G  11% /
+tmpfs            64M     0   64M   0% /dev
+shm              63M     0   63M   0% /dev/shm
+tmpfs           915M   97M  818M  11% /etc/hosts
+tmpfs           915M     0  915M   0% /sys/fs/cgroup
+tmpfs           915M     0  915M   0% /proc/acpi
+tmpfs           915M     0  915M   0% /proc/scsi
+tmpfs           915M     0  915M   0% /sys/firmware
+bash-4.4#
+```
+
+You will notice that all of the filesystem contents are either memory-based (tmpfs, shm) or the overlay file associated with this runtime of the container image (overlay).
+
+Open another terminal on the same host system. Use this shell to verify that the container is running:
+
+```bash
+podman ps -a
+```
+
+Expected output:
+
+```bash
+CONTAINER ID  IMAGE                         COMMAND    CREATED        STATUS            PORTS  NAMES
+af2d3774f20b  localhost/rhel8-httpd:latest  /bin/bash  3 minutes ago  Up 3 minutes ago         keen_borg
+[root@915261e7b28a ~]#
+```
+
+Note: Your CONTAINER ID and NAMES will be different than the output displayed above as each container is assigned a unique ID and Name.
+
+=== Step 3:
+
+Switch back to Terminal 1. Exit the container's shell
+```bash
+exit
+```
+When the process on an interactive container is closed, the container stops running. You can verify this by looking at the list of container processes:
+```bash
+podman ps -a
+```
+```bash
+CONTAINER ID  IMAGE                         COMMAND    CREATED        STATUS                     PORTS  NAMES
+af2d3774f20b  localhost/rhel8-httpd:latest  /bin/bash  7 minutes ago  Exited (0) 41 seconds ago         keen_borg
+[root@915261e7b28a ~]#
+```
+Notice the STATUS field is now reported as Exited.
+
+A container in this state can be resumed, however, this one will no longer be used. You will remove it from the system. using podman rm . In the command below, we use a bit of bash scripting to determine the CONTAINER ID as it is unique to each container image.
+```bash
+podman rm $(podman ps -a | grep Exited | cut -d"" -f1)
+```
+```bash
+af2d3774f20b5afb4505a4eb3fea20df5861afd6ec06b9271b6419ff1515106d
+[root@915261e7b28a ~]#
+```
+The output of this removal is the full CONTAINER ID which was removed from the system.
+
+=== Step 4:
+
+Running an interactive container is all well and good, however, if the container is offering applications or services, you do not need to interact with it.
+
+The rhel8-httpd container, for example, is configured with an Apache web server running within it. You will create a new instance of this container in a detached mode. Further, the command provided will configure port forwarding for the Apache web server so that connections to the host's port 8081 will redirect to the running container's port 80 (Apache service).
+
+```bash
+podman run -dt -p 8081:80/tcp rhel8-httpd
+```
+You can verify the state of the container using podman ps
+
+```bash
+podman ps -a
+```
+```bash
+CONTAINER ID  IMAGE                         COMMAND               CREATED             STATUS                 PORTS                 NAMES
+8a961afbfa99  localhost/rhel8-httpd:latest  /usr/sbin/httpd -...  Abouta minute ago  Up About a minute ago  0.0.0.0:8081->80/tcp  loving_elion
+[root@915261e7b28a ~]#
+```
+
+Observe that the STATUS is Up and there is a new section in the output PORTS that indicates the port forwarding defined for the container.
+
+You can also now connect to the web server running on the container by using your browser and connecting to the following url and port: 
+
+```bash
+```
+Your browser should now display the Apache test page, being served by the httpd daemon running in the container.
+
+=== Step 5:
+Unlike interactive containers, detached containers are stopped using podman stop.
+
+```bash
+podman stop $(podman ps -a | grep Up | cut -d" "-f1)
+```
+```bash
+8a961afbfa9998bedfacb340de252c62d2750528734f1e2874140a7aa79c32ac
+[root@915261e7b28a ~]#
+```
+In the command above, we use a bit of bash scripting to determine the CONTAINER ID as it is going to be a value unique to each container image.
+
+You can verify that the container is now exited:
+
+```bash
+podman ps -a
+```
+```
+CONTAINER ID  IMAGE                         COMMAND               CREATED        STATUS                         PORTS                 NAMES
+8a961afbfa99  localhost/rhel8-httpd:latest  /usr/sbin/httpd -...  5 minutes ago  Exited (0) About a minute ago  0.0.0.0:8081->80/tcp  loving_elion
+```
+Also, if you access the Container Service URL, it will now report unable to connect; as the container offering the Apache web server is no longer available.
+
