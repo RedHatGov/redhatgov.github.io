@@ -24,7 +24,7 @@
     <form id="footerForm" onsubmit="return false;" class="row" style="padding: 1.75rem 0 0 0;">
       <div class="form-group col-sm-6 col-md-6 col-lg-2">
         <label for="userid">Student ID</label>
-        <select id="userid" name="userid" class="form-control">
+        <select id="userid" name="userid" class="form-control" onchange="setUserId(this.value)">
           <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -86,7 +86,7 @@
           <option value="redhat-fierce.io">redhat-fierce.io</option>
           <option value="fiercesw.network">fiercesw.network</option>
           <option value="rhtps.io">rhtps.io</option>
-          <option value="openshiftworkshop.com">openshiftworkshop.com</option>          
+          <option value="openshiftworkshop.com">openshiftworkshop.com</option>
           <option value="redhatpsmwsa.com">redhatpsmwsa.com</option>          
           <option value="open.redhat.com">open.redhat.com</option>          
         </select>
@@ -161,6 +161,11 @@
     //Set the defaults in the footer "output"
     //Hehe, we just do that by running the replaceClassText function
     replaceClassText();
+  }
+
+  function setUserId(val){
+    setWorkshopFooterData();
+    toastr["success"]("Used ID set to " + val);
   }
 
   jQuery(document).ready(function() {
