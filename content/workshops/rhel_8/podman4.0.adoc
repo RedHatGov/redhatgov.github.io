@@ -19,12 +19,12 @@ After completing this scenario, users will be able to deploy and control an alre
 
 Concepts included in this scenario:
 
-1. List available container images
-1. Deploy a container image into an interactive container runtime
-1. Deploy a container image into a detached container runtime
-1. View deployed containers
-1. Stop a container instances
-1. Remove deployed container instances
+. List available container images
+. Deploy a container image into an interactive container runtime
+. Deploy a container image into a detached container runtime
+. View deployed containers
+. Stop a container instances
+. Remove deployed container instances
 
 === Step 1: 
 Using the top terminal session, view the container images available with the following command:
