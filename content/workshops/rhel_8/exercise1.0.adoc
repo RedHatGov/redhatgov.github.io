@@ -15,6 +15,14 @@ layout: lab
 
 == Exercise Description
 
+Welcom to RHEL!
+
+Red Hat Enterprise Linux 8 is the intelligent enterprise Linux, providing a secure and consistent foundation across hybrid cloud deployments and the tools enterprises need to deliver services and workloads faster with less effort.  RHEL 8 enables delivery of any application, on any footprint, at any time.
+
+With predictable release cadence and 10-year enterprise support, RHEL 8 is the safe and stable choice for your enterprise.
+
+RHEL 8 also automates regulatory compliance and security configuration remediation ​across your system and within containers​​ with OpenSCAP, Red Hat’s National Institute of Standards and Technology (NIST)-certified scanner.  RHEL 8's security portfolio also includes a new, system-wide encryption policy and the latest nftables/firewalld firewall.
+
 To get started, we will take a tour of the web console. The web console (called `cockpit`) will be your primary interactive interface to RHEL. The console has a number of functions that allow you to manage most aspects of the installation.
 
 === Section 1: Overview of the web console
@@ -106,25 +114,25 @@ Additionally, there are graphs that show the system's CPU, memory, disk, and net
 
 image::cockpit_01_logs.png[caption="Figure 3: ", title='Web Console Logs Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+The logs module provides date-sorted view of recent system log entries.  You can change the date or apply basic filters using the pull-down menus at the top of the page. 
 
 === Section 4: Storage Module
 
 image::cockpit_02_storage.png[caption="Figure 4: ", title='Web Console Storage Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+The storage module provides graphs of current storage performance.  It also lists local and network-mounted filesystems, plus recent storage-related log entries.
 
 === Section 5: Networking Module
 
 image::cockpit_03_networking.png[caption="Figure 5: ", title='Web Console Networking Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+The network module contains performance graphs similar to the storage module.  Additionally, it shows the configuration of your network interfaces, identifies unused interfaces, and provides access to, and control of, the system firewall.
 
 === Section 5: Podman Containers Module
 
 image::cockpit_04_podman.png[caption="Figure 6: ", title='Web Console Podman Containers Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+This module provides control of local podman containers and their corresponding images.
 
 === Section 6: Virtual Machines Module
 
@@ -136,19 +144,19 @@ The main screen that you see, when you first login to the web console is the sys
 
 image::cockpit_06_accounts.png[caption="Figure 8: ", title='Web Console Accounts Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+The accounts module allows you to create and modify local user accounts.
 
-=== Section 8: Servicess Module
+=== Section 8: Services Module
 
 image::cockpit_07_services.png[caption="Figure 9: ", title='Web Console Services Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+The services module allows basic administration of systemd objects, including system services.
 
 === Section 9: Session Recording Module
 
 image::cockpit_08_sr.png[caption="Figure 10: ", title='Web Console Session Recording Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+This module provides management of recorded terminal sessions. 
 
 === Section 10: Applications Module
 
@@ -190,7 +198,36 @@ The main screen that you see, when you first login to the web console is the sys
 
 image::cockpit_15_terminal.png[caption="Figure 17: ", title='Web Console Terminal Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+The terminal module provides command-line access to the system, similar to an SSH session.  Section 16.1 has some example commands to try if you'd like to test it out.
+
+==== Section 16.1: Example terminal usage
+
+===== Example 1: Use the following command to pull a RHEL image from the Red Hat repository:
+
+[source, bash]
+----
+podman pull registry.access.redhat.com/ubi8/ubi-minimal
+----
+
+Now if you return to the Podman Containers tab (above, in Section 5), you should see this image listed.  You'll see more of podman later in Exercise 4.
+
+===== Example 2: Try the Skopeo command
+
+Skopeo provides the ability to inspect container images stored in a registry. The Inspect feature displays details of the selected image. The 'skopeo inspect' command's ability to list all the tags associated with a selected image is a benefit over the docker tool.
+
+[source, bash]
+----
+skopeo inspect docker://registry.access.redhat.com/ubi8/ubi-minimal
+----
+
+===== Example 3: List firewall rules
+
+nft is the nftables utility.  Similar to ''iptables -L'', the following lists the system's active firewall ruleset:
+
+[source, bash]
+----
+nft list ruleset
+----
 
 === Conclusion
 
