@@ -27,6 +27,7 @@ Concepts included in this scenario:
 1. Remove deployed container instances
 
 === Step 1: 
+
 Using the top terminal session, view the container images available with the following command:
 ```bash
 podman images
@@ -142,8 +143,11 @@ Observe that the STATUS is Up and there is a new section in the output PORTS tha
 
 You can also now connect to the web server running on the container by using your browser and connecting to the following url and port: 
 
-```bash
-```
+[source,bash]
+----
+{{< urifqdn "http://" "node" >}}
+----
+
 Your browser should now display the Apache test page, being served by the httpd daemon running in the container.
 
 === Step 5:
