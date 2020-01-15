@@ -44,11 +44,14 @@ This workshop will cover the features, specifications and improvements that comp
 
 == What you will learn
 
-- How to run ad hoc commands
-- How to write a playbook
-- How to install and configure Red Hat Ansible Tower
-- How to use templates to save time
-- How to enhance security, using Ansible Tower
+- What's new in RHEL 8
+- How to use the web console
+- How to update your system
+- How to manage terminal session recording
+- How to manage containers with podman
+- How to manage system-wide cryptographic policies
+- How to manage application streams
+- How to use OpenSCAP
 
 
 == Overview
