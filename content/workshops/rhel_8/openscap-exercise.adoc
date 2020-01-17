@@ -1,0 +1,105 @@
+---
+title: "Exercise X.1 - OpenSCAP Security Compliance Scanning"
+workshops: rhel_8
+workshop_weight: 15
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/rhel_8/images
+
+
+= Exercise X.1: OpenSCAP Security Compliance Scanning
+
+RHEL 8 makes it easy to maintain secure and compliant systems with OpenSCAP.  What is SCAP (pronounced "S-CAP")? +
+The essential components of SCAP are:
+
+* XCCDF: The Extensible Configuration Checklist Description Format
+* OVAL®: Open Vulnerability and Assessment Language
+* CCE™: Common Configuration Enumeration
+* CPE™: Common Platform Enumeration
+* CVE®: Common Vulnerabilities and Exposures
+* CVSS: Common Vulnerability Scoring System
+
+In brief, SCAP provides the language for describing assessment criteria and findings as well as the tools for performing scans and remediating findings. +
+You can read more about the project at `http://www.open-scap.org/` and the repository for their tools and profiles is on GitHub at `https://github.com/OpenSCAP/openscap/`.
+
+== Exercise Description
+
+In the following exercises we'll use the CLI to show how you can validate system compliance.  There are other tools as well, including a GUI utility and another for scanning container images.
+
+== Section 1: Ensure the OpenSCAP scanner is installed
+
+Ensure the OpenSCAP scanner and definitions are installed with the command below; it's safe to run even if the packages already exist:
+[source, bash]
+----
+dnf install openscap-scanner scap-security-guide
+----
+ 
+The `scap-security-guide` package contains prepared system profiles for several RHEL releases and system types; they are installed under `/usr/share/xml/scap/ssg/content`.  +
+You can get a summary of the profiles in a given definition file with the following command:
+[source, bash]
+----
+oscap xccdf info /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+----
+Output:
+....
+Document type: Source Data Stream
+Imported: 2019-03-11T12:36:47
+
+Stream: scap_org.open-scap_datastream_from_xccdf_ssg-rhel8-xccdf-1.2.xml
+Generated: (null)
+Version: 1.2
+Checklists:
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-xccdf-1.2.xml
+		Status: draft
+		Generated: 2019-03-11
+		Resolved: true
+		Profiles:
+			Title: PCI-DSS v3.2.1 Control Baseline for Red Hat Enterprise Linux 8
+				Id: xccdf_org.ssgproject.content_profile_pci-dss
+			Title: OSPP - Protection Profile for General Purpose Operating Systems
+				Id: xccdf_org.ssgproject.content_profile_ospp
+		Referenced check files:
+			ssg-rhel8-oval.xml
+				system: http://oval.mitre.org/XMLSchema/oval-definitions-5
+			ssg-rhel8-ocil.xml
+				system: http://scap.nist.gov/schema/ocil/2
+Checks:
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-oval.xml
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-ocil.xml
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-oval.xml
+Dictionaries:
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-dictionary.xml
+....
+
+Looking about half-way down, you can see that this file contains two profiles:  one for PCI-DSS and another for OSPP.
+
+== Section 2: Perform an initial compliance scan
+
+The OSPP profile is a general-purpose profile, so it's a good place to start. +
+To perform a basic compliance scan using the OSPP profile for RHEL 8, run the following command; the profile is specified by supplying the `Id` field from the output above:
+[source, bash]
+----
+oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /tmp/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+----
+
+The resulting report file, specified as `/tmp/report.html`, can be opened in a browser.  A snippet of what this looks like:
+
+image::openscap-report-snippet.png[caption="Figure 1: ", title="OpenSCAP report", width=450]
+
+== Section 3: Automatically remediate findings
+
+To correct compliance issues found in the scan, we can generate a Bash shell script or an Ansible playbook automatically from the scan's findings.  To generate a Bash script, run the following:
+
+[source, bash]
+----
+oscap xccdf generate fix --fix-type bash --result-id "" /tmp/arf.xml > /tmp/ospp-bash-fix.sh
+----
+
+Double-check the HTML report to ensure you're comfortable with fixing every "failed" item.  Once you're comfortable with it, run the script with:
+[source, bash]
+----
+chmod a+x /tmp/ospp-bash-fix.sh
+/tmp/ospp-bash-fix.sh
+----
