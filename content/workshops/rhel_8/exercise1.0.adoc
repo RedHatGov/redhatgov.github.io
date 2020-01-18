@@ -75,33 +75,7 @@ Manages subscriptions attached to the host
 Provides an interactive shell
 --
 
-=== Set Up Dependencies:
-
-Define your inventory.  Inventories are crucial to Ansible, as they define remote machines on which you will run commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`.  Then, add the appropriate definitions for the node that will function as a web node.
-
-====
-[NOTE]
-The *workshopname*, in the example below, will be provided to you by your instructor.  The *#* should be replaced by your student number.
-
-For example, a recent workshop student used:
-*{{< urifqdn "" "rhel" "" >}}*
-====
-
-.hosts (example)
-[source,bash]
-----
-[web]
-{{< urifqdn "" "node" "" >}}
-----
-
-=== Step 1: Test webhost response
-
-Let's start with something basic - pinging a host.  The `ping` module tests the responsiveness of our web host.
-
-[source,bash]
-----
-ansible web -m ping
-----
+As you can see, many of the day-to-day management of a RHEL system can be accomplished without touching the terminal. This makes RHEL 8 the easiest-to-live-with release, yet!
 
 === Step 2: Run a Linux command
 
