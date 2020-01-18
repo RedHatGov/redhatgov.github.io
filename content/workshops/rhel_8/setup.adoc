@@ -28,16 +28,22 @@ Use this URL to access the Web Console node, just change the workshop name (if a
 
 [source,bash]
 ----
-{{< urifqdn "https://" "tower" ":9090/system/terminal" >}}
+{{< urifqdn "https://" "node" ":9090" >}}
 ----
 
-You will be presented with a login window.
+You will be presented with a login window.  Once there, please log in, using the credentials below:
+
+|===
+|User name|ec2-user
+|Password|*<provided by your instructor>*
+|Reuse my password for privileged tasks|*checked*
+|===
 
 image::cockpit_login.png[caption="Figure 1: ", title='Web Console Login', 500]
 
-After logging in, you should see a shell.
+After logging in, you should see a screen similar to what is shown, below.
 
-image::cockpit_terminal.png[caption="Figure 1: ", title='Web Console Terminal Tab', 500]
+image::cockpit_system.png[caption="Figure 2: ", title='Web Console System Tab', 500]
 
 
 [IMPORTANT]

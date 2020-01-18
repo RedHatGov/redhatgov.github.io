@@ -5,7 +5,7 @@
 
 ----
 
-[RedHatGov.io][redhatgov] is an open source collection of workshop materials that
+[RedHatGov.io][redhatgov] is a great open source collection of workshop materials that
 cover various topics relating to Red Hat's product portfolio.
 
 ----
