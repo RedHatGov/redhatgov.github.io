@@ -15,7 +15,7 @@ layout: lab
 
 == Exercise Description
 
-Welcom to RHEL!
+Welcome to RHEL!
 
 Red Hat Enterprise Linux 8 is the intelligent enterprise Linux, providing a secure and consistent foundation across hybrid cloud deployments and the tools enterprises need to deliver services and workloads faster with less effort.  RHEL 8 enables delivery of any application, on any footprint, at any time.
 
@@ -82,6 +82,8 @@ Manages subscriptions attached to the host
 *Terminal* +
 Provides an interactive shell
 --
+
+As you can see, many of the day-to-day management of a RHEL system can be accomplished without touching the terminal. This makes RHEL 8 the easiest-to-live-with release, yet!
 
 Next, let's proceed to a more detailed examination of each module. Please click through the web console on your host, as you read the explanations, here.
 
