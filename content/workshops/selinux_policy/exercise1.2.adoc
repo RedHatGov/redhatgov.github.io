@@ -91,12 +91,14 @@ ls -Z ./testaudit
 And we can change it back, magically, with restorecon.  Note that this would have fixed the problem reported in our test AVC, by setting the context to `httpd_sys_content_t`:
 
 {{< highlight bash >}}
-restorecon ./testaudit 
+restorecon -v ./testaudit
 ls -Z ./testaudit
 {{< /highlight >}}
 
 [source,bash]
 ----
+Relabeled /root/testaudit from system_u:object_r:httpd_sys_content_t:s0 to system_u:object_r:admin_home_t:s0
+
 -rw-------. root root system_u:object_r:admin_home_t:s0 ./testaudit
 ----
 
