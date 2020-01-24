@@ -1,0 +1,57 @@
+---
+title: "Setup"
+workshops: rhel_8
+workshop_weight: 1
+layout: lab
+---
+
+:badges:
+:icons: font
+:iconsdir: http://people.redhat.com/~jduncan/images/icons
+:imagesdir: /workshops/rhel_8/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+
+= Workshop Lab Setup
+
+image::rhel8-isometric.svg['Red Hat Enterprise Linux 8']
+
+== What you will learn: Red Hat Web Console - Terminal
+
+This lab provides a quick tour of the browser based Terminal via the Red Hat Web Console. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
+
+
+== Accessing Red Hat Enterprise Linux Web Console (cockpit)
+
+Use this URL to access the Web Console node, just change the workshop name (if applicable). Ask your instructor for the workshop name.
+
+[source,bash]
+----
+{{< urifqdn "https://" "node" ":9090" >}}
+----
+
+You will be presented with a login window.  Once there, please log in, using the credentials below:
+
+|===
+|User name|ec2-user
+|Password|*<provided by your instructor>*
+|Reuse my password for privileged tasks|*checked*
+|===
+
+image::cockpit_login.png[caption="Figure 1: ", title='Web Console Login', 500]
+
+After logging in, you should see a screen similar to what is shown, below.
+
+image::cockpit_system.png[caption="Figure 2: ", title='Web Console System Tab', 500]
+
+
+[IMPORTANT]
+Be sure you can log in to your instances.  If you can't log in start shouting, loudly, and waving your hands!
+
+
+== End Result
+
+At this point, you should have logged into your node.  If you haven't, let us know so we can get you fixed up.
+
+{{< importPartial "footer/footer.html" >}}

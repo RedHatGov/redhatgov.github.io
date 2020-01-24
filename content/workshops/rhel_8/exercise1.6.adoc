@@ -1,0 +1,48 @@
+---
+title: "Exercise 1.6 - Managing Cryptographic Policies"
+workshops: rhel_8
+workshop_weight: 16
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/rhel_8/images
+:package_url: http://docs.ansible.com/ansible/package_module.html
+:service_url: http://docs.ansible.com/ansible/service_module.html
+:dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
+:var_prec_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
+
+
+= Exercise 1.6: Managing Cryptographic Policies
+
+== Exercise Description
+RHEL 8 makes it easy to enforce a strong and consistent cryptographic policy on your systems.
+
+In the following exercises we'll use the new commands for managing your crypto configurations and test them.
+
+== Section 1: Viewing and changing the crypto policy
+
+Show the current crypto policy.
+
+----
+# update-crypto-policies --show
+----
+
+You should see something like ...
+
+`DEFAULT`
+
+DEFAULT is one of the four crypto policies, along with LEGACY, FIPS 140, and FUTURE. You may view the details of these policies in the man page.
+
+`man crypto-policies`
+
+Now let's change the default crypto policy from DEFAULT to something less secure, just for testing purposes.  We'll set the crypto policy to LEGACY to temporarily allow insecure TLS 1.1 communication from our system.
+
+Change the crypto policy to LEGACY.
+----
+# update-crypto-policies --set LEGACY
+----
+And now let's test communication to an insecure TLS 1.1 site.
+----
+# wget https://tls-v1-1.badssl.com:1011/
+----

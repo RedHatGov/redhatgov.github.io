@@ -1,0 +1,75 @@
+---
+title: Red Hat Enterprise Linux 8
+menu:
+  main:
+    parent: workshops
+    pre: fa fa-magic
+---
+
+:domain_name: redhatgov.io
+:workshop_prefix: workshop
+:tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
+:ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}:9090
+
+:icons: font
+:iconsdir: http://people.redhat.com/~jduncan/images/icons
+:imagesdir: /workshops/rhel_8/images
+
+= Red Hat Enterprise Linux 8 Workshop
+
+== Workshop Description
+
+This workshop will cover the features, specifications and improvements that comprise the release of Red Hat Enterprise Linux Version 8 (RHEL 8).  RHEL 8 brings many improvements over previous releases, including:
+
+* Application streams, which enables the use of bleeding edge interpreters, compilers and libraries, while maintaining full backwards compatibility and stability of the system
+* The web console has been completely overhauled, and significant new features have been added
+** Session recording capability has been added to the web console
+* Image builder provides the easy creation of customized RHEL installation images
+* The system package management tool, YUM, has been enhanced with DNF technology, providing significant performance improvements
+* The `System Purpose` tool has been enhanced to automatically tune system performance for the usage of the system
+* There is a new `update-crypto-policies` tool, which applies cryptograhic polices system-wide
+** TLS, IPsec, DNSSEC, Kerberos, and SSH protocols are covered
+* The system Python interpreter has been updated to version 3.6
+* System firmware updating is now built into the GNOME Software tool, using fwupd
+* The system firewall has been upgraded to 'nftables' from 'iptables', which provides significantly better performance.  The firewall manager, 'firewalld', remains the same 
+
+
+== Who should attend
+
+-   Architects
+-   Developers
+-   Technical Leads
+-   Operations Engineers
+
+
+== What you will learn
+
+- What's new in RHEL 8
+- How to use the web console
+- How to update your system
+- How to manage terminal session recording
+- How to manage containers with podman
+- How to manage system-wide cryptographic policies
+- How to manage application streams
+- How to use OpenSCAP
+
+
+== Overview
+
+The RHEL 8 workshop is meant for anyone who has any exposure to Linux, whether you have used this distribution, or not. The event will begin with a short overview and then will move on to the lab.
+
+
+== Your Responsibilities
+
+Have a Discussion. This will be boring if it’s just us, up here talking for over 4 hours.
+
+Participate. We are going to cut you loose with RHEL, in just a little while. Have questions. Have opinions.
+
+Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy. See? Not only can we dig into Ansible but you can make a new friend!
+
+
+== Exercises
+
+{{< labs rhel_8 >}}
+
+{{< importPartial "footer/footer.html" >}}

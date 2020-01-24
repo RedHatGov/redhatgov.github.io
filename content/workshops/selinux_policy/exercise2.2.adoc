@@ -23,7 +23,7 @@ This exercise will walk you through the steps required to handle AVC messages th
 Now that our app is up and running, we can check the system logs for AVC (access vector cache, where SELinux caches decisions to grant or deny access) denial messages.
 
 {{< highlight bash >}}
-sudo ausearch -m AVC -ts recent
+sudo ausearch -m AVC -ts today
 {{< /highlight >}}
 
 There will (and should!) be quite a few denials returned from `ausearch`.  Here are some from the example machine:

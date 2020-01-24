@@ -23,7 +23,7 @@ To better understand SELinux basic concepts, see the following documentation:
 First, go ahead and switch users to root:
 
 {{< highlight bash >}}
-sudo su -
+sudo -i
 {{< /highlight >}}
 
 === Step 2: What mode are we in?

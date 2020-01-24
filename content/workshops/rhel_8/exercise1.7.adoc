@@ -1,0 +1,158 @@
+---
+title: "Exercise 1.7 - Managing Software in an Application Stream"
+workshops: rhel_8
+workshop_weight: 17
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/rhel_8/images
+:package_url: http://docs.ansible.com/ansible/package_module.html
+:service_url: http://docs.ansible.com/ansible/service_module.html
+:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
+
+
+= Exercise 1.7 - Managing Software in an Application Stream
+
+Application streams are a new RHEL 8 capability that provides access to the latest tools, languages and libraries, without affecting core system components. This is done by including all of those `streams` in containers. The containers are automatically instantiated, when needed, and go away, when they are not in use.
+
+== Section 1: Stream Availability
+
+=== Step 1: Check to see what PostgreSQL streams are available
+
+As root, use `yum` to see what streams are available, for PostgreSQL:
+
+[source,bash]
+----
+sudo yum module list postgresql
+----
+
+There are two versions of postgresql available as modules in the Application Stream, version 9.6 and version 10.
+
+PostgreSQL version 10 is set as the default, meaning if someone installed postgresql with no specific options or arguments, version 10 would be the one installed.
+
+== Section 2: Install software managed as an application stream
+
+=== Step 1: Install PostgreSQL 9.6
+
+To support the web application deployed on this machine, install postgresql version 9.6:
+
+[source,bash]
+----
+yum -y module install postgresql:9.6
+----
+
+=== Step 2: Verify installation
+
+After the installation is complete, verify that postgresql version 9.6 is installed on the system.
+
+[source,bash]
+----
+sudo yum module list postgresql
+----
+
+Notice that version 9.6 is now marked as [e]nabled under the Stream column and is flagged as [i]nstalled in the Profiles column of the listing for postgresql.
+
+=== Step 3: Run PostgreSQL
+
+Finally, run the postgres command to inspect the version it reports:
+
+[source,bash]
+----
+postgres --version
+----
+
+== Section 3: Change to a different version of a stream
+
+An update to the web application running on this system requires features available in postgresql version 10. To accomplish this you will ultimately remove postgresql 9.6 and install postgresql 10, however, there are some additional Application Stream settings to apply to the system configuration as well.
+
+=== Step 1: Remove PostgreSQL 9.6
+
+To start off with, remove PostgreSQL 9.6:
+
+[source,bash]
+----
+sudo yum -y module remove postgresql:9.6
+----
+
+=== Step 2: Verify removal
+
+Take a look at the Application Stream information for the machine to validate the removal:
+
+[source,bash]
+----
+sudo yum module list postgresql
+----
+
+Verify that postgresql version 9.6 is no longer flagged as [i]nstalled.
+
+== Section 3: Change to a different version of a stream
+
+=== Step 1: Disable a stream
+
+Prior to installing the newer version of postgresql that is available, first, the older (now removed) version of the software should be disabled:
+
+[source,bash]
+----
+sudo yum -y module disable postgresql:9.6
+----
+
+=== Step 2: Enable a stream
+
+Likewise, version 10, while it is the default, should be enabled:
+
+[source,bash]
+----
+sudo yum -y module enable postgresql:10
+----
+
+=== Step 3: Verify enablement
+
+Take a look at the Application Stream information to verify that postgresql version 10 is now the enabled version:
+
+[source,bash]
+----
+sudo yum module list postgresql
+----
+
+The [e]nabled flag is now present for postgresql version 10.
+
+== Section 5: Install PostgreSQL 10
+
+=== Step 1: Install the stream
+
+Now that the Postgres version 10 stream is enabled, install it on the system:
+
+[source,bash]
+----
+sudo yum -y module install postgresql:10
+----
+
+=== Step 2: Verify installation
+
+The Postgres 10 stream should now be listed as [i]nstalled:
+
+[source,bash]
+----
+sudo yum module list postgresql
+----
+
+=== Step 3: Check version
+
+Finally, check the version reported by the postgres command:
+
+[source,bash]
+----
+postgres --version
+----
+
+== Section 6: Show all streams
+
+Lastly, inspect all software managed as application streams:
+
+[source,bash]
+----
+sudo yum module list
+----
+
+{{< importPartial "footer/footer.html" >}}

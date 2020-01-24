@@ -1,0 +1,26 @@
+---
+title: "Exercise 1.1 - What's New in RHEL 8"
+workshops: rhel_8
+workshop_weight: 11
+layout: lab
+---
+
+:domain_name: redhatgov.io
+:icons: font
+:imagesdir: /workshops/rhel_8/images
+
+
+= Exercise 1.1 - What's New in RHEL 8
+
+
+== Exercise Description
+
+Welcome to RHEL!
+
+Red Hat Enterprise Linux 8 is the intelligent enterprise Linux, providing a secure and consistent foundation across hybrid cloud deployments and the tools enterprises need to deliver services and workloads faster with less effort.  RHEL 8 enables delivery of any application, on any footprint, at any time.
+
+With predictable release cadence and 10-year enterprise support, RHEL 8 is the safe and stable choice for your enterprise.
+
+RHEL 8 also automates regulatory compliance and security configuration remediation ​across your system and within containers​​ with OpenSCAP, Red Hat’s National Institute of Standards and Technology (NIST)-certified scanner.  RHEL 8's security portfolio also includes a new, system-wide encryption policy and the latest nftables/firewalld firewall.
+
+{{< importPartial "footer/footer.html" >}}
