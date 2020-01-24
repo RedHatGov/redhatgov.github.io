@@ -24,12 +24,12 @@ ls -Z ~ec2-user/.vimrc
 
 [source,bash]
 ----
--rw-r--r--. ec2-user ec2-user unconfined_u:object_r:user_home_t:s0 /home/ec2-user/.vimrc
+unconfined_u:object_r:user_home_t:s0 /home/ec2-user/.vimrc
 ----
 
 Following the standard UNIX permissions, user and group information, the SELinux context attached to the file is displayed.  The fields are SELinux user (`unconfined_u`), role (`object_r`), type (`user_home_t`), and level (`s0`).  
 
-The SELinix user is not the same as the UNIX user, as it solely exists to associate a UNIX user to a set of roles.  This allows UNIX users to be constrained by SELinux policy.  In this case the `unconfined_u` user means that the user is mapped to the `__default__` SELinux login.  This means that the user is allowed to launch any application that standard filesystem permissions allow.  However, if that application has a defined domain transition, a confined domain will still apply to it.
+The SELinux user is not the same as the UNIX user, as it solely exists to associate a UNIX user to a set of roles.  This allows UNIX users to be constrained by SELinux policy.  In this case the `unconfined_u` user means that the user is mapped to the `__default__` SELinux login.  This means that the user is allowed to launch any application that standard filesystem permissions allow.  However, if that application has a defined domain transition, a confined domain will still apply to it.
 
 === Step 2: Domain transitions
 
@@ -45,12 +45,13 @@ ps -Z | grep yes
 unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 29448 pts/0 00:00:07 yes
 ----
 
-Here, you can see that the `yes` process is labled with the `unconfined_t` domain, indicating that it still has full `root` privileges, and can do whatever it wishes.
+Here, you can see that the `yes` process is labeled with the `unconfined_t` domain, indicating that it still has full `root` privileges, and can do whatever it wishes.
 
 On the other hand, if we launch the `passwd` utility, we will see a different story:
 
 {{< highlight bash >}}
 kill %1
+ps -Z | grep yes
 passwd ec2-user >/dev/null &
 ps -Z | grep passwd
 {{< /highlight >}}
@@ -85,7 +86,7 @@ ls -Z ./testaudit
 
 [source,bash]
 ----
--rw-------. root root system_u:object_r:httpd_sys_content_t:s0 ./testaudit
+system_u:object_r:httpd_sys_content_t:s0 ./testaudit
 ----
 
 And we can change it back, magically, with restorecon.  Note that this would have fixed the problem reported in our test AVC, by setting the context to `httpd_sys_content_t`:
