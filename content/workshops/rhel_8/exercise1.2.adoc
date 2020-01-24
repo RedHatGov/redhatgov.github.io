@@ -15,7 +15,7 @@ layout: lab
 
 == Exercise Description
 
-To get started, we will take a tour of the web console. The web console (called `cockpit`) will be your primary interactive interface to RHEL. The console has a number of functions that allow you to manage most aspects of the installation.
+To get started, we will take a tour of the web console. The web console (called `cockpit`) will be your primary interactive interface to RHEL. The console has a number of functions that enable you to manage most aspects of the installation.
 
 === Section 1: Overview of the web console
 
@@ -33,13 +33,13 @@ Contains an overview of the system, including metadata and health graphs
 Displays current `journald` logs from all services
 {empty} +
 *Storage* +
-Displays storage activity graphs, and logs. Allows for the management of NFS mounts, RAID devices, volume groups, VDO (deduplication) devices, and iSCSI targets
+Displays storage activity graphs, and logs. Enables the management of NFS mounts, RAID devices, volume groups, VDO (deduplication) devices, and iSCSI targets
 {empty} +
 *Networking* +
 Displays network activity, logs, and allows firewall and network maintenance
 {empty} +
 *Podman Containers* +
-Allows for the management of container images and running containers
+Enables the management of container images and running containers
 {empty} +
 *Virtual Machines* +
 Virtual machines can be created, deleted and controlled

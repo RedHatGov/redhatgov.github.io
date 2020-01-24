@@ -128,10 +128,10 @@ a|
 
 Set the automatic update mechanism for Fridays, to apply security updates, at 03:00.
 
-There isn't much else to updating, via the web console, on RHEL 8.
+With this simple change, your system will always be up-to-date on critical security fixes, without you having to lift a further finger!
 
 == Summary
 
-We've tried out the manual and automatic updating functionality available, in the web console, for RHEL 8.  Please ask any questions that seem relevant, and then we can move on to the next section.
+We've tried out the RHEL 8 web console's manual and automatic updating functionality.  Please ask any questions that seem relevant, and then we can move on to the next section.
 
 {{< importPartial "footer/footer.html" >}}
