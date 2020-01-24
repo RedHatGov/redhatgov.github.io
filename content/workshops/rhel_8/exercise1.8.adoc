@@ -1,7 +1,7 @@
 ---
-title: "Exercise X.1 - OpenSCAP Security Compliance Scanning"
+title: "Exercise 1.8 - OpenSCAP Security Compliance Scanning"
 workshops: rhel_8
-workshop_weight: 15
+workshop_weight: 18
 layout: lab
 ---
 
@@ -9,7 +9,7 @@ layout: lab
 :imagesdir: /workshops/rhel_8/images
 
 
-= Exercise X.1: OpenSCAP Security Compliance Scanning
+= Exercise 1.8: OpenSCAP Security Compliance Scanning
 
 RHEL 8 makes it easy to maintain secure and compliant systems with OpenSCAP.  What is SCAP (pronounced "S-CAP")? +
 The essential components of SCAP are:

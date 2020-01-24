@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1.3 - Using Variables, Loops, and Handlers"
+title: "Exercise 1.3 - Managing Updates Using the Web Console"
 workshops: rhel_8
 workshop_weight: 13
 layout: lab
@@ -7,259 +7,131 @@ layout: lab
 
 :icons: font
 :imagesdir: /workshops/rhel_8/images
+:figure-caption!:
+:become_url: http://docs.ansible.com/ansible/become.html
+:dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
 :package_url: http://docs.ansible.com/ansible/package_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html
-:var_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html
-:loop_url: http://docs.ansible.com/ansible/latest/playbooks_loops.html
-:handler_url: http://docs.ansible.com/ansible/latest/playbooks_intro.html#handlers-running-operations-on-change
-:file_url: http://docs.ansible.com/ansible/latest/list_of_files_modules.html
-:jinja2_url: http://docs.ansible.com/ansible/latest/playbooks_templating.html
+:yaml_url: http://docs.ansible.com/ansible/YAMLSyntax.html
 
 
-= Exercise 1.3 - Using Variables, Loops, and Handlers
+= Exercise 1.3 - Managing Updates Using the Web Console
 
 == Exercise Description
-In previous exercises, we showed you the basics of the Ansible core.  In the next few exercises, we are going
-to teach some more advanced Ansible skills that will add flexibility and power to your playbooks.
 
-Ansible exists to make tasks *simple and repeatable*.  We also know that not all systems are exactly alike and often require
-some slight customization to the way an Ansible playbook is run.  Variables, loops and handlers make customization easier.
+Now that you've toured the web console, lets work through updating the system. 
 
-Variables are used to address differences between your systems, enabling you to account for a change in port, IP address
-or directory.
+== Section 1: Basic Updating
 
-Loops enable us to repeat the same task over and over again.  For example, lets say you want to install 10 packages.
-By using an Ansible loop, you can do that in a single task.
+As you did in the previous section, navigate to the `Software Updates` section of the Web Console, by clicking on the `Software Updates` link, in the left-hand menu. There will then be a brief interval where `Refreshing package information` will appear, along with a progress bar. Once that completes, you can proceed with the exercise.
 
-Handlers are the way in which we restart services.  Did you just deploy a new config file, install a new package?
-If so, you may need to restart a service, for those changes to take effect.  We do that with a handler.
+=== Step 1: Check for available updates
 
-For a full understanding of variables, loops, and handlers; check out our Ansible documentation on these subjects. +
-link:{var_url}[Ansible Variables] +
-link:{loop_url}[Ansible Loops] +
-link:{handler_url}[Ansible Handlers]
+Take a look at the `Available Updates` section of the browser window.  You should see several packages listed, in a single group, like this:
 
+image::su_updates.png[Software Updates, 900, caption="Figure 1: ", title="Packages Available for Updating"]
 
-== Section 1: Running the playbook
+You can expand the list, to see more details, by clicking on the drill-down `>` link:
 
+image::su_updates_expanded.png[Software Updates, 900, caption="Figure 2: ", title="Expanded Updates"]
 
-To begin, we are going to create a new playbook, but it should look very familiar to the one you created in Exercise 1.2
+In the expanded view, you can see details on what CVEs are relevant to the updates, and any associated bug IDs.  Additionally, a summary of the changes is displayed.
 
+=== Step 2: Install updates
 
-We are now going to run your brand-new playbook, on your two web nodes.  To do this, you are going to use the `ansible-playbook` command.
+Once you are finished reading, click the `Install Security Updates` button, to install the updated packages.
 
-=== Step 1: Create a new project and playbook
+The updates will install, and while doing so, there will be information on what actions are taking place, and below that, an expandable log drill-down. Once complete, you may receive a window like this:
 
-Navigate to your home directory create a new project and playbook.
+image::su_updates_restart.png[Software Updates, 900, caption="Figure 3: ", title="Updates Recommend a Restart"]
 
-[source,bash]
-----
-cd
-mkdir apache-basic-playbook
-cd apache-basic-playbook
-vim site.yml
-----
+=== Step 2: Restart the system
 
+Click the `Restart Now` button, to reboot your managed host, and cause the changes to take effect. You will see screens like these, while the system is rebooting:
 
-=== Step 2: Add a play definition and variables
+image::su_updates_restarting.png[Software Updates, 900, caption="Figure 4: ", title="System Restarting"]
 
-Add a play definition and some variables to your playbook.  These include additional packages that your playbook will install on your web servers, plus some web server-specific configurations.
+image::su_updates_disconnected.png[Software Updates, 900, caption="Figure 5: ", title="Disconnected"]
 
-[source,bash]
-----
----
-- hosts: web
-  name: This is a play within a playbook
-  become: yes
-  vars:
-    httpd_packages:
-      - httpd
-      - mod_wsgi
-    apache_test_message: This is a test message
-    apache_webserver_port: 80
-----
+=== Step 3: Reconnect
 
+Wait for a couple of minutes, for the system to come back up, and then click the `Reconnect` button, to be returned to the login screen, for the web console. Login, as before.
 
-=== Step 3: Add a task
+=== Step 4: Summary
 
-Add a new task called *install httpd packages*.
+Once you are logged back in, you will again see the updates screen, with a list of the updates that you just applied. You can expand the history list, to see the details.
 
-[source,bash]
-----
-  tasks:
-    - name: install httpd packages
-      package:
-        name: "{{ item }}"
-        state: present
-      with_items: "{{ httpd_packages }}"
-      notify: restart apache service
-----
+image::su_updates_summary.png[Software Updates, 900, caption="Figure 6: ", title="Update Summary"]
 
-[NOTE]
-====
-Explanation of the *install httpd packages* task actions. +
+== Section 2: Automatic Updating
 
-- `vars:` You've told Ansible the next thing it sees will be a variable name +
-- `httpd_packages` You are defining a list-type variable called httpd_packages.  What follows
-is a list of those packages +
-- `{{ item }}` You are telling Ansible that this will expand into a list item like `httpd` and `mod_wsgi`. +
-- `with_items: "{{ httpd_packages }}` This is your loop, which is instructing Ansible to perform this task on
-every `item` in `httpd_packages`
-- `notify: restart apache service` This statement is a `handler`, so we'll come back to it in Section 3.
-====
+Next, let's take a look at automatic updating.  There is an `Automatic Updates` switch, at the top of the updates window.
 
+=== Step 1: Enable Automatic Updates
 
-== Section 2: Deploying files and starting a service
+Click on the switch, next to the `Automatic Updates` label. You will then see a message, telling you that the package `dnf-automatic` is needed:
 
-When you need to do pretty much anything with files and directories, use one of the link:{file_url}[Ansible Files] modules.  In this case, we'll leverage the `file` and `template` modules.
+image::au_install_dnf.png[Software Updates, 900, caption="Figure 7: ", title="Install the dnf-automatic Package"]
 
-After that, you will define a task to start the apache service.
+Click the `Install` button, to proceed.
 
+=== Step 2: Configure Timing
 
-=== Step 1: Create a template directory
-Create a `templates` directory in your project directory and download two files.
+Once the `dnf-automatic` package is installed, you can choose which updates to install, which days, and what time:
 
-[source,bash]
-----
-mkdir templates
-cd templates
-curl -O https://raw.githubusercontent.com/ansible/lightbulb/master/examples/apache-basic-playbook/templates/httpd.conf.j2
-curl -O https://raw.githubusercontent.com/ansible/lightbulb/master/examples/apache-basic-playbook/templates/index.html.j2
-----
+image::au_configure.png[Software Updates, 900, caption="Figure 8: ", title="Configure Automatic Updates and Timing"]
 
-=== Step 2: Add file and service tasks
-Add some file tasks and a service task to your playbook.
+You can select from the available menus, and select any combination of the following options:
 
-[source,bash]
-----
-    - name: create site-enabled directory
-      file:
-        name: /etc/httpd/conf/sites-enabled
-        state: directory
+[%header,cols="1,1,1"]
+|===
+|Which updates?
+|What day?
+|What time?
 
-    - name: copy httpd.conf
-      template:
-        src: templates/httpd.conf.j2
-        dest: /etc/httpd/conf/httpd.conf
-      notify: restart apache service
+a|* Apply all updates
+* Apply security updates
+a|* every day
+* Mondays
+* Tuesdays
+* Wednesdays
+* Thursdays
+* Fridays
+* Saturdays
+* Sundays
+a|
+* 00:00
+* 01:00
+* 02:00
+* 03:00
+* 04:00
+* 05:00
+* 06:00
+* 07:00
+* 08:00
+* 09:00
+* 10:00
+* 11:00
+* 12:00
+* 13:00
+* 14:00
+* 15:00
+* 16:00
+* 17:00
+* 18:00
+* 19:00
+* 20:00
+* 21:00
+* 22:00
+* 23:00
+|===
 
-    - name: copy index.html
-      template:
-        src: templates/index.html.j2
-        dest: /var/www/html/index.html
+Set the automatic update mechanism for Fridays, to apply security updates, at 03:00.
 
-    - name: start httpd
-      service:
-        name: httpd
-        state: started
-        enabled: yes
-----
+There isn't much else to updating, via the web console, on RHEL 8.
 
-[NOTE]
-====
-What actions are performed by the playbook we just wrote?
+== Summary
 
-- `file:` This module is used to create, modify, delete files, directories, and symlinks.
-- `template:` This module specifies that a jinja2 template is being used and deployed. `template` is part of the `Files`
-  module family and we encourage you to check out all of the other link:{file_url}[file-management modules here].
-- *jinja-who?* - Not to be confused with 2013's blockbuster "Ninja II - Shadow of a Tear", link:{jinja2_url}[jinja2] is
-used in Ansible to transform data inside a template expression, i.e. filters.
-- *service* - The Service module starts/stops/restarts services.
-====
-
-
-== Section 3: Defining and using handlers
-
-Often, we may find ourselves needing to restart a service or process. Reasons may include the deployment of a configuration file, installation of a new package, etc. Here,  we are going to learn about using handlers in this situation.
-
-There are really two parts to this Section; adding a handler to the playbook and calling the handler after the a task.  We will start with the former.
-
-=== Step 1: Define a handler
-
-[source,bash]
-----
-  handlers:
-    - name: restart apache service
-      service:
-        name: httpd
-        state: restarted
-        enabled: yes
-----
-
-[NOTE]
-====
-
-- `handler:` This is telling the *play* that the `tasks:` are over, and now we are defining `handlers:`.
-  Everything below that looks the same as any other task, i.e. you give it a name, a module, and the options for that
-  module.  This is the definition of a handler.
-
-====
-=== Step 2: Calling the handlers
-
-[NOTE]
-====
-You can't have a former if you don't mention the latter.
-
-- `notify: restart apache service` ...and here is your latter. Finally!  The `notify` statement is the invocation of a handler by
-name.  Quite the reveal, we know.   You already noticed that you've added a `notify` statement to the `copy httpd.conf`
-task, now you know why.
-====
-
-== Section 4: Review
-
-Your new, improved playbook is done! But don't run it just yet, we'll do that in our next exercise.  For now, let's take a second look to make sure everything
-looks the way you intended.  If not, now is the time to fix it up. The figure below shows line counts and spacing.
-
-
-[source,bash]
-----
----
-- hosts: web
-  name: This is a play within a playbook
-  become: yes
-  vars:
-    httpd_packages:
-      - httpd
-      - mod_wsgi
-    apache_test_message: This is a test message
-    apache_webserver_port: 80
-
-  tasks:
-    - name: httpd packages are present
-      package:
-        name: "{{ item }}"
-        state: present
-      with_items: "{{ httpd_packages }}"
-      notify: restart apache service
-
-    - name: site-enabled directory is present
-      file:
-        name: /etc/httpd/conf/sites-enabled
-        state: directory
-
-    - name: latest httpd.conf is present
-      template:
-        src: templates/httpd.conf.j2
-        dest: /etc/httpd/conf/httpd.conf
-      notify: restart apache service
-
-    - name: latest index.html is present
-      template:
-        src: templates/index.html.j2
-        dest: /var/www/html/index.html
-
-    - name: httpd is started and enabled
-      service:
-        name: httpd
-        state: started
-        enabled: yes
-
-  handlers:
-    - name: restart apache service
-      service:
-        name: httpd
-        state: restarted
-        enabled: yes
-----
+We've tried out the manual and automatic updating functionality available, in the web console, for RHEL 8.  Please ask any questions that seem relevant, and then we can move on to the next section.
 
 {{< importPartial "footer/footer.html" >}}
