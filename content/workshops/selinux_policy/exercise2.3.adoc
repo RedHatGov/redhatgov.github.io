@@ -160,8 +160,8 @@ sudo ausearch -m AVC -ts recent | egrep 'tcp|udp' | audit2allow
 [source,bash] 
 ----
 #============= testapp_t ==============
-allow testapp_t self:tcp_socket { connect create getattr getopt };
-allow testapp_t self:udp_socket { connect create getattr };
+allow testapp_t self:tcp_socket { connect create getattr getopt setopt };
+allow testapp_t self:udp_socket { connect create getattr setopt };
 ----
 
 These rules look good, so go ahead and add them to your `testapp.te` file.

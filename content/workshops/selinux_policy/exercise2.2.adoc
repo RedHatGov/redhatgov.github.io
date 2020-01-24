@@ -104,7 +104,8 @@ If we look at them both closely, we can see that the `testapp` process is being 
 SELinux interface definitions are located in `/usr/share/selinux/devel/include`, if you install the `selinux-policy-devel` package.  If we search for `/proc`, in files named `*.if` (interface definitions):
 
 {{< highlight bash >}}
-find . -type f -name "*.if" -exec grep -H '/proc' {} \;
+cd /usr/share/selinux/devel/include
+find . -type f -name "*.if" -exec grep -H '/proc' {} \; | grep "system state information"
 {{< /highlight >}}
 
 We see that in the results, there is a line that says:
