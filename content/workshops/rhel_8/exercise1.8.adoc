@@ -11,7 +11,10 @@ layout: lab
 
 = Exercise 1.8: OpenSCAP Security Compliance Scanning
 
-RHEL 8 makes it easy to maintain secure and compliant systems with OpenSCAP.  What is SCAP (pronounced "S-CAP")? +
+RHEL 8 makes it easy to maintain secure and compliant systems with OpenSCAP.  +
+What is SCAP? +
+SCAP (Security Content Automation Protocol) is a NIST project that standardizes the language for describing assessment criteria and findings.  It also provides a vulnerability rating system.  The project's home page is `https://scap.nist.gov/` +
+
 The essential components of SCAP are:
 
 * XCCDF: The Extensible Configuration Checklist Description Format
@@ -21,7 +24,7 @@ The essential components of SCAP are:
 * CVE®: Common Vulnerabilities and Exposures
 * CVSS: Common Vulnerability Scoring System
 
-In brief, SCAP provides the language for describing assessment criteria and findings as well as the tools for performing scans and remediating findings. +
+OpenSCAP is a project that implements tools for performing SCAP scans and remediating findings. +
 You can read more about the project at `http://www.open-scap.org/` and the repository for their tools and profiles is on GitHub at `https://github.com/OpenSCAP/openscap/`.
 
 == Exercise Description
@@ -86,7 +89,7 @@ oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_ospp --results-a
 
 The resulting report file, specified as `/tmp/report.html`, can be opened in a browser.  A snippet of what this looks like:
 
-image::openscap-report-snippet.png[caption="Figure 1: ", title="OpenSCAP report", width=450]
+image::openscap-example-report.png[caption="Figure 1: ", title="OpenSCAP report", width=800]
 
 == Section 3: Automatically remediate findings
 
