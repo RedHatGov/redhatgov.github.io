@@ -58,13 +58,14 @@ sudo yum install rhel-system-roles ansible
 The `rhel-system-roles` package will install by default to the following locations where `SUBSYSTEM` is the name of the subsystem that contains the individual role manages. Examples may include network, timesync, or other subsystems as they become supported. Each subsystem role will include a README file which documents how to use the role and supported parameter values, as well as the matching README in the linux-system-roles Ansible Galaxy landing space (link: https://galaxy.ansible.com/linux-system-roles/network)
 
 === Documentation
-----
+....
 /usr/share/doc/rhel-system-roles/SUBSYSTEM/
-----
+....
+
 === Ansible Roles
-----
+....
 /usr/share/ansible/roles/rhel-system-roles.SUBSYSTEM/
-----
+....
 
 == Section 2: Example Usage of the rhel-system-roles.*network* role
 
@@ -77,11 +78,11 @@ This example assumes the following:
 
 === Step 1:
 
- Using a text editor (like `vim`), create a file with these contents.  Watch your spacing carefully, using 2 spaces only when you indent.
+Using a text editor (like `vim`), create a file with these contents.  Watch your spacing carefully, using 2 spaces only when you indent:
 
 [source, bash]
 ----
-# vim example-network-playbook.yml
+vim example-network-playbook.yml
 ----
 
 ....
@@ -181,7 +182,6 @@ NAME                UUID                                  TYPE      DEVICE
 System eth0         5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03  ethernet  eth0
 Wired connection 1  9738a5c6-39dd-3515-aa1c-895f763851a6  ethernet  eth1
 ens3                50e9a523-3280-4238-a07b-dbfd7d335273  ethernet  --
-#
 ....
 
 === Step 5:
@@ -189,7 +189,7 @@ ens3                50e9a523-3280-4238-a07b-dbfd7d335273  ethernet  --
 Now let's run our playbook to create a new connection profile called DBnic, turn off DHCP, and assign a static ip address:
 
 ----
-# ansible-playbook example-network-playbook.yml
+ansible-playbook example-network-playbook.yml
 ----
 
 ....
@@ -245,7 +245,7 @@ Now let's see how the Ansible playbook changed our network configuration:
 
 [source, bash]
 ----
-# ip a
+ip a
 ----
 
 ....
