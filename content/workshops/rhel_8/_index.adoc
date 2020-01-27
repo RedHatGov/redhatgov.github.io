@@ -52,7 +52,8 @@ This workshop will cover the features, specifications and improvements that comp
 - How to manage system-wide cryptographic policies
 - How to manage application streams
 - How to use OpenSCAP
-
+- How to create custom container images with buildah
+- How to use RHEL system roles with ansible
 
 == Overview
 
