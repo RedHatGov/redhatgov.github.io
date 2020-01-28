@@ -12,15 +12,36 @@ layout: lab
 
 = Exercise 1.1 - What's New in RHEL 8
 
+== Application streams
 
-== Exercise Description
+Application streams deliver user space packages on a cadence that makes sense for the package rather than as a monolithic distribution. Streams also allow the consolidation of previous distribution channels to a single place.
 
-Welcome to RHEL!
+== Red Hat Insights
 
-Red Hat Enterprise Linux 8 is the intelligent enterprise Linux, providing a secure and consistent foundation across hybrid cloud deployments and the tools enterprises need to deliver services and workloads faster with less effort.  RHEL 8 enables delivery of any application, on any footprint, at any time.
+Red Hat Insights is included with your Red Hat® Enterprise Linux® 8 subscription. It helps provide a security-focused, reliable, efficient, and scalable infrastructure environment.
 
-With predictable release cadence and 10-year enterprise support, RHEL 8 is the safe and stable choice for your enterprise.
+== Image builder
 
-RHEL 8 also automates regulatory compliance and security configuration remediation ​across your system and within containers​​ with OpenSCAP, Red Hat’s National Institute of Standards and Technology (NIST)-certified scanner.  RHEL 8's security portfolio also includes a new, system-wide encryption policy and the latest nftables/firewalld firewall.
+Image builder lets customers build images from source RPMs that are deployable to multiple targets quickly and simply, and provides fine-grained control and visibility in to what’s included in a particular image and its history. It allows customers to manage the life cycle of their image catalogs independently of the release of new packages.
+
+== New container tools
+
+New container tools—Podman, Buildah, and Skopeo—form a strong foundation to support your container image and container needs.
+
+== Web console
+
+The web console provides a single browser-based interface to all of the available tools and improves the user experience for new users and experienced administrators alike.
+
+== Virtual data optimizer
+
+This virtual data optimizer provides volume-level compression and data deduplication to eliminate data redundancy and increase effective storage capacity for new and existing devices.
+
+== System roles
+
+System roles allow customers to configure subsystems using Ansible.® They deliver a layer of abstraction at the automation level, providing a common syntax across multiple major versions of Red Hat Enterprise Linux.
+
+== Systemwide crypto policies
+
+Creating a systemwide crypto policy allows admins to set the acceptable algorithms in multiple sources with a single configuration.
 
 {{< importPartial "footer/footer.html" >}}

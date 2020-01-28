@@ -130,7 +130,7 @@ This module provides control of local podman containers and their corresponding 
 
 === Section 6: Virtual Machines Module
 
-image::cockpit_05_vm.png[caption="Figure 7: ", title='Web Console Virtual Machines Module', 500]
+image::cockpit_05_vms.png[caption="Figure 7: ", title='Web Console Virtual Machines Module', 500]
 
 The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
 
