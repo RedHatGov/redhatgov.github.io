@@ -220,7 +220,7 @@ nft is the nftables utility.  Similar to ''iptables -L'', the following lists th
 
 [source, bash]
 ----
-nft list ruleset
+sudo nft list ruleset
 ----
 
 === Conclusion
