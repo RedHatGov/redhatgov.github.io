@@ -14,7 +14,7 @@ layout: lab
 
 == Application streams
 
-Application streams deliver user space packages on a cadence that makes sense for the package rather than as a monolithic distribution. Streams also allow the consolidationof previous distribution channels to a single place.
+Application streams deliver user space packages on a cadence that makes sense for the package rather than as a monolithic distribution. Streams also allow the consolidation of previous distribution channels to a single place.
 
 == Red Hat Insights
 
@@ -22,7 +22,7 @@ Red Hat Insights is included with your Red Hat® Enterprise Linux® 8 subscripti
 
 == Image builder
 
-Image builder lets customers build images from source RPMs that are deployable to multiple targets quickly and simply, and provides fine-grained control and visibility intowhat’s included in a particular image and its history. It allows customers to manage the life cycle of their image catalogs independently of the release of new packages.
+Image builder lets customers build images from source RPMs that are deployable to multiple targets quickly and simply, and provides fine-grained control and visibility in to what’s included in a particular image and its history. It allows customers to manage the life cycle of their image catalogs independently of the release of new packages.
 
 == New container tools
 
@@ -30,7 +30,11 @@ New container tools—Podman, Buildah, and Skopeo—form a strong foundation to 
 
 == Web console
 
-The web console provides a single browser-based interface to all of the available tools and improves the user experience for new users and experienced administrators alike.Virtual data optimizerThis virtual data optimizer provides volume-level compression and data deduplication to eliminate data redundancy and increase effective storage capacity for new and existing devices.
+The web console provides a single browser-based interface to all of the available tools and improves the user experience for new users and experienced administrators alike.
+
+== Virtual data optimizer
+
+This virtual data optimizer provides volume-level compression and data deduplication to eliminate data redundancy and increase effective storage capacity for new and existing devices.
 
 == System roles
 
