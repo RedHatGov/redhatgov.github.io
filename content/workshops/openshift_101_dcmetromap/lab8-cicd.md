@@ -106,11 +106,72 @@ Click the "Continue to the project overview" link
 
 ## Create a sample application configuration
 
-> Use the "oc new-app" command to create a simple nodejs application from a template file:
+> Use the "oc create" command to create a template resource by filename for a simple nodejs application:
 
 ```bash
-$ oc new-app -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json
+$ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json
 ```
+
+## Modify the sample application configuration to use the Node.js [Red Hat Universal Base Image (UBI)](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image)
+
+> The template used above references a DEPRECATED: A Centos7 based NodeJS v0.10 image for use with OpenShift v3.
+
+{{< panel_group >}}
+
+{{% panel "CLI Steps" %}}
+
+<blockquote>
+Find and replace "nodejs-010-centos7" with "nodejs-10"
+</blockquote>
+
+```bash
+oc edit template nodejs-helloworld-sample
+```
+
+{{% /panel %}}
+
+{{% panel "Web Console Steps" %}}
+
+<blockquote>
+Click "Resources" and "Other Resources"
+</blockquote>
+
+<img src="../images/ocp-lab-cicd-app-resources.png" width="1000"><br/>
+
+<blockquote>
+From the "Choose a resource to list..." dropdown menu, select "Template"
+</blockquote>
+
+<img src="../images/ocp-lab-cicd-app-template.png" width="800"><br/>
+
+<blockquote>
+Click "Actions" and select "Edit YAML"
+</blockquote>
+
+<img src="../images/ocp-lab-cicd-app-resources-edit.png" width="800"><br/>
+
+<blockquote>
+Find and replace "nodejs-010-centos7" with "nodejs-10"
+</blockquote>
+
+<img src="../images/ocp-lab-cicd-app-edit-yaml-template.png" width="800"><br/>
+
+<blockquote>
+Click "Save"
+</blockquote>
+
+{{% /panel %}}
+
+{{< /panel_group >}}
+
+## Create a sample application from template
+
+> Use the "oc process" command to create a simple nodejs application from the template file:
+
+```bash
+oc process nodejs-helloworld-sample -p NAMESPACE=registry.access.redhat.com/ubi7 | oc create -f -
+```
+
 > Click on "Overview" within the OpenShift console to display the sample application configuration
 
 <img src="../images/ocp-lab-cicd-app-create.png" width="900"><br/>
@@ -122,7 +183,7 @@ $ oc new-app -f https://raw.githubusercontent.com/openshift/origin/master/exampl
 {{% panel "CLI Steps" %}}
 
 <blockquote>
-<i class="fa fa-terminal"></i> Get the route to the Jenkins server. Your HOST/PORT values will differ 
+<i class="fa fa-terminal"></i> Get the route to the Jenkins server. Your HOST/PORT values will differ
 from the example below.
 </blockquote>
 
@@ -171,7 +232,7 @@ We will be creating the following very simple (4) stage Jenkins pipeline.
 3. Submit for approval, then tag the image for production, otherwise abort.
 4. Scale the application.
 
-The first step is to create a build configuration that is based on a Jenkins pipeline strategy. The pipeline is written 
+The first step is to create a build configuration that is based on a Jenkins pipeline strategy. The pipeline is written
 in the GROOVY language using a Jenkins file format.
 
 > Use the OpenShift CLI or Web Console to create an OpenShift build configuration object.
@@ -321,7 +382,7 @@ spec:
         }
 ```
 
-> Choose *Add to project* -> *Import YAML* 
+> Choose *Add to project* -> *Import YAML*
 
 <img src="../images/ocp-lab-cicd-import-yaml.png" width="900">
 
@@ -339,7 +400,7 @@ spec:
 
 <img src="../images/ocp-lab-cicd-start-pipeline.png" width="900">
 
-When the pipeline starts, OpenShift uploads the pipeline to the Jenkins server for execution. As it runs, the various stages trigger OpenShift to build and deploy the frontend microservice. After a Jenkins user approves the frontend deployment, Jenkins triggers OpenShift to tag the image stream with the ":prod" tag then scales the frontend-prod deployment for (2) replicas. 
+When the pipeline starts, OpenShift uploads the pipeline to the Jenkins server for execution. As it runs, the various stages trigger OpenShift to build and deploy the frontend microservice. After a Jenkins user approves the frontend deployment, Jenkins triggers OpenShift to tag the image stream with the ":prod" tag then scales the frontend-prod deployment for (2) replicas.
 
 The Jenkins dashboard should indicate that a new build is executing.
 
@@ -349,7 +410,7 @@ Back in the OpenShift Web Console, watch the pipeline execute. Once the "deployF
 
 <img src="../images/ocp-lab-cicd-pipeline-input.png">
 
-> Click on "Input Required" and you should get redirected to the Jenkins Web Console to 
+> Click on "Input Required" and you should get redirected to the Jenkins Web Console to
 approve the promotion to production.
 
 <img src="../images/ocp-lab-cicd-jenkins-promote.png">
@@ -358,7 +419,7 @@ approve the promotion to production.
 
 <img src="../images/ocp-lab-cicd-pipeline-stages.png">
 
-> Confirm the *frontend-prod* has deployed 2 pods. 
+> Confirm the *frontend-prod* has deployed 2 pods.
 
 <img src="../images/ocp-lab-cicd-create-route.png">
 
@@ -374,7 +435,7 @@ approve the promotion to production.
 
 {{% panel "CLI Steps" %}}
 
-Use the `oc get routes` command to get the HOST/PORT (URLs) needed to access the frontend and frontend-prod services. Your HOST/PORT values will differ 
+Use the `oc get routes` command to get the HOST/PORT (URLs) needed to access the frontend and frontend-prod services. Your HOST/PORT values will differ
 from the example below.
 
 ```bash
@@ -408,10 +469,10 @@ Service web page displayed:
 ## Edit the pipeline.
 
 > Now make a change to the pipeline. For example, in the *scaleUp* stage, change the number
-of replicas to 3. 
+of replicas to 3.
 
-Technically speaking, a rebuild from source is not needed to scale up a deployment. We use 
-this simple example to illustrate how a pipeline may be edited within OpenShift. 
+Technically speaking, a rebuild from source is not needed to scale up a deployment. We use
+this simple example to illustrate how a pipeline may be edited within OpenShift.
 
 {{< panel_group >}}
 
@@ -433,7 +494,7 @@ oc edit bc/pipeline
 
 {{< /panel_group >}}
 
-> Save your changes and run the pipeline again to confirm the *frontend-prod* deployment has 
+> Save your changes and run the pipeline again to confirm the *frontend-prod* deployment has
 deployed 3 pods.
 
 <img src="../images/ocp-lab-cicd-app-3-pods.png">
