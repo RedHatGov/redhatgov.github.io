@@ -36,14 +36,14 @@ In the following exercises we'll use the CLI to show how you can validate system
 Ensure the OpenSCAP scanner and definitions are installed with the command below; it's safe to run even if the packages already exist:
 [source, bash]
 ----
-dnf install openscap-scanner scap-security-guide
+sudo dnf install openscap-scanner scap-security-guide
 ----
  
 The `scap-security-guide` package contains prepared system profiles for several RHEL releases and system types; they are installed under `/usr/share/xml/scap/ssg/content`.  +
 You can get a summary of the profiles in a given definition file with the following command:
 [source, bash]
 ----
-oscap xccdf info /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+sudo oscap xccdf info /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
 ----
 Output:
 ....
@@ -84,7 +84,7 @@ The OSPP profile is a general-purpose profile, so it's a good place to start. +
 To perform a basic compliance scan using the OSPP profile for RHEL 8, run the following command; the profile is specified by supplying the `Id` field from the output above:
 [source, bash]
 ----
-oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /tmp/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+sudo oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /tmp/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
 ----
 
 The resulting report file, specified as `/tmp/report.html`, can be opened in a browser.  A snippet of what this looks like:
@@ -97,12 +97,12 @@ To correct compliance issues found in the scan, we can generate a Bash shell scr
 
 [source, bash]
 ----
-oscap xccdf generate fix --fix-type bash --result-id "" /tmp/arf.xml > /tmp/ospp-bash-fix.sh
+sudo oscap xccdf generate fix --fix-type bash --result-id "" /tmp/arf.xml > /tmp/ospp-bash-fix.sh
 ----
 
 Double-check the HTML report to ensure you're comfortable with fixing every "failed" item.  Once you're comfortable with it, run the script with:
 [source, bash]
 ----
-chmod a+x /tmp/ospp-bash-fix.sh
-/tmp/ospp-bash-fix.sh
+sudo chmod a+x /tmp/ospp-bash-fix.sh
+sudo /tmp/ospp-bash-fix.sh
 ----
