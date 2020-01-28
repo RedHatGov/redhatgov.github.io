@@ -1,7 +1,7 @@
 ---
-title: "Exercise X - System Roles with Ansible"
+title: "Exercise 1.10 - System Roles with Ansible"
 workshops: rhel_8
-workshop_weight: 15
+workshop_weight: 20
 layout: lab
 ---
 
@@ -13,7 +13,7 @@ layout: lab
 :var_prec_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
 
 
-= Exercise X: System Roles with Ansible
+= Exercise 1.10: System Roles with Ansible
 
 == Exercise Description
 Red Hat Enterprise Linux (RHEL) 7.4 introduced RHEL System Roles as a collection of Ansible roles and modules that provide a stable and consistent configuration interface to remotely manage RHEL 6.10 and later versions of Red Hat Enterprise Linux. The effort is based on development of the Linux System Roles (link: https://linux-system-roles.github.io/upstream)  project. The following roles are provided and supported as follows:
@@ -27,40 +27,47 @@ There are five roles available on RHEL 8:
 * storage
 
 
-== Installing RHEL System Roles and Ansible
+== Section 1: Installing RHEL System Roles and Ansible
+
+=== Step 1: Install required packages
 
 We need to install two packages RPM packages to use system roles: `ansible` and `rhel-system-roles`.  Use subscription-manager to list the Ansible Engine repositories available. Note that the generic "2" repository will always provide the latest release of the 2.X stream as opposed to configuring a more specific version such as 2.8.
 
+[source, bash]
 ----
-# subscription-manager refresh
-# subscription-manager repos --list | grep ansible
+sudo subscription-manager refresh
+sudo subscription-manager repos --list | grep ansible
 ----
 
 Now persistently enable the Ansible Engine repository for RHEL 8 using Red Hat Subscription Manager:
 
+[source, bash]
 ----
-# subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
+sudo subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
 ----
 
 And install the required packages:
 
+[source, bash]
 ----
-# yum install rhel-system-roles ansible
+sudo yum install rhel-system-roles ansible
 ----
 
-== Documentation
+== Step 2: Documentation
+
 The `rhel-system-roles` package will install by default to the following locations where `SUBSYSTEM` is the name of the subsystem that contains the individual role manages. Examples may include network, timesync, or other subsystems as they become supported. Each subsystem role will include a README file which documents how to use the role and supported parameter values, as well as the matching README in the linux-system-roles Ansible Galaxy landing space (link: https://galaxy.ansible.com/linux-system-roles/network)
 
 === Documentation
-----
+....
 /usr/share/doc/rhel-system-roles/SUBSYSTEM/
-----
-=== Ansible Roles
-----
-/usr/share/ansible/roles/rhel-system-roles.SUBSYSTEM/
-----
+....
 
-== Example Usage of the rhel-system-roles.*network* role
+=== Ansible Roles
+....
+/usr/share/ansible/roles/rhel-system-roles.SUBSYSTEM/
+....
+
+== Section 2: Example Usage of the rhel-system-roles.*network* role
 
 This example assumes the following:
 
@@ -69,10 +76,16 @@ This example assumes the following:
 * We've added a 2nd network interface to our test system, `eth1`.
 * For further details, see the Ansible Getting Started (link?) or Quick Start Video at http://docs.ansible.com/ for further details on how to use Ansible.
 
-.1. Using a text editor (like `vim`), create a file with these contents.  Watch your spacing carefully, using 2 spaces only when you indent.
+=== Step 1:
+
+Using a text editor (like `vim`), create a file with these contents.  Watch your spacing carefully, using 2 spaces only when you indent:
+
+[source, bash]
+----
+vim example-network-playbook.yml
+----
 
 ....
-# vim example-network-playbook.yml
 ---
 - hosts: localhost
   vars:
@@ -91,20 +104,32 @@ This example assumes the following:
     - role: rhel-system-roles.network
 ....
 
-.2. Now let's test access to our `localhost` using the Ansible ad-hoc command:
+=== Step 2:
 
+Now let's test access to our `localhost` using the Ansible ad-hoc command:
+
+[source, bash]
 ----
-# ansible localhost -m ping
+ansible localhost -m ping
+----
+
+....
 localhost | SUCCESS => {
     "changed": false,
     "ping": "pong"
 }
+....
+
+=== Step 3:
+
+Query the Ansible Facts for this system to see the network configuration:
+
+[source, bash]
+----
+ansible localhost -m setup -a 'gather_subset=network filter=ansible_interfaces'
 ----
 
-.3. Query the Ansible Facts for this system to see the network configuration:
-
-----
-# ansible localhost -m setup -a 'gather_subset=network filter=ansible_interfaces'
+....
 localhost | SUCCESS => {
     "ansible_facts": {
         "ansible_interfaces": [
@@ -115,12 +140,18 @@ localhost | SUCCESS => {
     },
     "changed": false
 }
+....
+
+=== Step 4:
+
+Examine the current configuration of `eth1` using the `ip` and `nmcli` commands:
+
+[source, bash]
+----
+ip a
 ----
 
-.4. Examine the current configuration of `eth1` using the `ip` and `nmcli` commands:
-
-----
-# ip a
+....
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -139,22 +170,30 @@ localhost | SUCCESS => {
        valid_lft 3588sec preferred_lft 3588sec
     inet6 fe80::6cb5:e657:5c52:e6d1/64 scope link noprefixroute
        valid_lft forever preferred_lft forever
-#
-#
-# nmcli con
+....
+
+[source, bash]
+----
+nmcli con
+----
+
+....
 NAME                UUID                                  TYPE      DEVICE
 System eth0         5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03  ethernet  eth0
 Wired connection 1  9738a5c6-39dd-3515-aa1c-895f763851a6  ethernet  eth1
 ens3                50e9a523-3280-4238-a07b-dbfd7d335273  ethernet  --
-#
+....
+
+=== Step 5:
+
+Now let's run our playbook to create a new connection profile called DBnic, turn off DHCP, and assign a static ip address:
+
+----
+ansible-playbook example-network-playbook.yml
 ----
 
-.5. Now let's run our playbook to create a new connection profile called DBnic, turn off DHCP, and assign a static ip address:
-
-----
-# ansible-playbook example-network-playbook.yml
-[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match
-'all'
+....
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
 
 
 PLAY [localhost] ******************************************************************************************************
@@ -199,12 +238,17 @@ ok: [localhost]
 
 PLAY RECAP ************************************************************************************************************
 localhost                  : ok=7    changed=1    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0
+....
+
+=== Step 6:
+Now let's see how the Ansible playbook changed our network configuration:
+
+[source, bash]
+----
+ip a
 ----
 
-.6. Now let's see how the Ansible playbook changed our network configuration:
-
-----
-# ip a
+....
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -223,15 +267,21 @@ localhost                  : ok=7    changed=1    unreachable=0    failed=0    s
        valid_lft forever preferred_lft forever
     inet6 fe80::2bcc:cea2:c7fb:6bba/64 scope link noprefixroute
        valid_lft forever preferred_lft forever
-#
-# nmcli con
+....
+
+[source, bash]
+----
+nmcli con
+----
+
+....
 NAME                UUID                                  TYPE      DEVICE
 System eth0         5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03  ethernet  eth0
 DBnic               3b54603b-c603-46b9-9bd9-e6fc295e7a11  ethernet  eth1
 ens3                50e9a523-3280-4238-a07b-dbfd7d335273  ethernet  --
 Wired connection 1  9738a5c6-39dd-3515-aa1c-895f763851a6  ethernet  --
-#
-----
+....
 
 == Summary - What We've Learned
+
 Linux System Roles based on Ansible playbooks make it easy and consistent to enable specific services and configurations on your RHEL hosts, and across many versions.  We experimented with the *network* system role in this exercise, but *storage*, *kdump (kernel crash dump)*, *selinux*, and *timesync* are also available.
