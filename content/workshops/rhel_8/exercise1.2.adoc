@@ -132,7 +132,7 @@ This module provides control of local podman containers and their corresponding 
 
 image::cockpit_05_vms.png[caption="Figure 7: ", title='Web Console Virtual Machines Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+The Virtual Machines module allows for the creation, destruction, and management of virtual machines, their storage, and the networks that they are connected to.
 
 === Section 7: Accounts Module
 
@@ -156,37 +156,37 @@ This module provides management of recorded terminal sessions.
 
 image::cockpit_09_applications.png[caption="Figure 11: ", title='Web Console Applications Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+The applications module allows for the management of additional components for the web console. In this environment, we have already installed all of the modules, so the only option available is to remove them.
 
 === Section 11: Diagnostic Reports Module
 
 image::cockpit_10_dr.png[caption="Figure 12: ", title='Web Console Diagnostic Reports Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+This module is where SOSreports are placed, when they are generated. You can trigger an SOSreport, for submission to Red Hat support, from here.
 
 === Section 12: Kernel Dump Module
 
 image::cockpit_11_kd.png[caption="Figure 13: ", title='Web Console Kernel Dump Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+The kernel dump module allows for the configuration of where kernel diagnostic reports (or dumps) that are generated when the system crashes, are stored. Additionally, you can specify if you wish these dumps to be compressed. The buttons will turn the dump facility on and off, and can also be used to test the dump system by crashing the host.
 
 === Section 13: SELinux Module
 
 image::cockpit_12_selinux.png[caption="Figure 14: ", title='Web Console SELinux Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+This module allows the user to set SELinux to permissive or enforcing mode (off or on) and also shows any SELinux AVC (access vector cache) messages that may have been generated, on the system.
 
 === Section 14: Software Update Module
 
 image::cockpit_13_su.png[caption="Figure 15: ", title='Web Console Kernel Dump Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+The software update module is where updates may be applied to the system. Additionally, automatic updating of packages may be configured.
 
 === Section 15: Subscriptions Module
 
 image::cockpit_14_subscriptions.png[caption="Figure 16: ", title='Web Console Subscriptions Module', 500]
 
-The main screen that you see, when you first login to the web console is the system module.  It contains an overview of the system, including the below sections:
+This module allows the host to be registered or unregistered, and allows for the attachment or detachment of valid subscriptions.
 
 === Section 16: Terminal Module
 
