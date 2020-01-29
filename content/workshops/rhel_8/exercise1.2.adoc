@@ -200,7 +200,7 @@ The terminal module provides command-line access to the system, similar to an SS
 
 [source, bash]
 ----
-podman pull registry.access.redhat.com/ubi8/ubi-minimal
+podman pull docker://docker.io/library/busybox
 ----
 
 Now if you return to the Podman Containers tab (above, in Section 5), you should see this image listed.  You'll see more of podman later in Exercise 4.
@@ -211,7 +211,7 @@ Skopeo provides the ability to inspect container images stored in a registry. Th
 
 [source, bash]
 ----
-skopeo inspect docker://registry.access.redhat.com/ubi8/ubi-minimal
+skopeo inspect docker://docker.io/library/busybox
 ----
 
 ===== Example 3: List firewall rules
