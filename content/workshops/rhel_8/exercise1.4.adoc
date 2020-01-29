@@ -13,109 +13,61 @@ layout: lab
 
 == Section 1. Deploying Session Recording
 
-To be able to deploy the Session Recording solution you need to have the following packages installed: tlog, SSSD, cockpit-session-recording.
+To be able to deploy the Session Recording solution you need to have the following packages installed: tlog, SSSD, cockpit-session-recording. +
+Note that session recording doesn't work for graphical desktop sessions or Cockpit terminal sessions.
 
-=== Pre-Requisites
-In order to work with session recording you need to have the following installed:
+=== Step 1.1: Pre-Requisites
+In order to work with session recording, your system will need to have the following installed:
 
  - tlog
  - SSSD (System Security Services Deamon)
  - cockpit-session-recording
 
-For this workshop/lab the environment is already configured to have tlog and SSSD installed.
+For this workshop/lab the environment is already configured to have tlog and SSSD installed, but if you were to install these prerequisites yourself, you would run `sudo yum install -y tlog cockpit-session-recording systemd-journal-remote`
 
-=== Step 1.1: Installing tlog
-This step involves installing the tlog packages.  The tlog utility is a terminal input/output (I/O)
-recording and playback program. It inserts itself(specifically the tlog-rec-session tool)
-between the user terminal and the user shell, and logs everything that passes through as JSON messages.
-
-Run the following command in terminal to install tlog:
-
-[source,bash]
-----
-sudo yum install tlog
-----
-
-=== Step 1.2: Installing cockpit-session-recording
-The basic web console packages are a part of Red Hat Enterprise Linux 8 by default.
-To be able to use the Session Recording solution, you have to install the cockpit-session-recording
-packages and start or enable the web console on your system:
-
-Run the following command to install cockpit-session-recording:
-
-[source,bash]
-----
-sudo yum install cockpit-session-recording
-----
-
-=== Step 1.3: Start or enable web console
-
-Run the following command to start or enable the web console on your system:
-
-[source,bash]
-----
-systemctl start cockpit.socket
-----
-
-When you have all the necessary packages installed, you can move on to configuring your recording parameters.
-
-=== Step 1.4: Configuring the recorded users or user groups with SSSD from web UI
+=== Step 1.2: Configuring the recorded users or user groups with SSSD from web UI
 Specify recorded users or user groups using SSSD by listing them directly in the RHEL 8 web console.
 
-==== Step 1.4.1: Connect to the RHEL 8 web console locally by entering `localhost:9090` or by entering your IP address `<IP_ADDRESS>:9090` to your browser.
-
-==== Step 1.4.2: Log in to the RHEL 8 web console.
-
-TIP: Your user has to have administrator privileges to be able to view the recorded sessions.
-
-==== Step 1.4.3: Go to the Session Recording page in the menu on the left of the interface.
+==== Step 1.2.1: Go to the Session Recording page in the menu on the left of the interface.
 
 image::TerminalRecording-af59f.png[]
 
-==== Step 1.4.4: Click on the gear button in the right top corner.
+==== Step 1.2.2: Click on the gear button in the right top corner.
 
 image::TerminalRecording-9ee56.png[]
 
-==== Step 1.4.5: Set your parameters in the SSSD Configuration table. Names in the Users and Groups lists should be divided by commas.
+==== Step 1.2.3: Set your parameters in the SSSD Configuration table.
 
-*Alex:  As we spoke about, not sure what we want to have the user do.  Here are 2 screen shots that may or may not be useful.*
+There are 2 configuration panes, a General and another for SSSD; scroll down if you don't see the SSSD pane.
+To keep things simple, choose the `All` option in the `Scope` pull-down menu of the SSSD pane, as shown below.  Optionally choosing `Some` will allow you to provide comma-separated lists of users and groups whose terminal sessions should be recorded. +
+Be sure to click `Save` after making a selection.
 
 image::TerminalRecording-60f70.png[]
 
-image::TerminalRecording-bec58.png[]
-
-=== Step 1.5: Exporting recorded sessions to a file
+=== Step 1.3: Exporting recorded sessions to a file
 You can export your recorded sessions and their logs and copy them.
 
 The following procedure shows how to export recorded sessions on a local system.
 
-1.5.1: Install the `systemd-journal-remote` package.
+1.5.1: Run the journalctl -o export command:
 
 [source,bash]
 ----
-sudo yum install systemd-journal-remote
-----
-
-1.5.2: Run the journalctl -o export command:
-
-[source,bash]
-----
-journalctl -o export | systemd-journal-remote -o
+sudo journalctl -o export | /usr/lib/systemd/systemd-journal-remote -o /tmp/test.journal -
 ----
 
 This creates an export file from the system journal with all its entities.
 
-You can then copy the exported file to the `/var/log/journal/ directory` on any other host.
+You can then copy the exported file to the `/var/log/journal/` directory on another host.
 
-For your convenience, you can also create the `/var/log/journal/remote/` directory for export files from remote hosts.
+You can also create the `/var/log/journal/remote/` directory for exported files from remote hosts.
 
 
 == Section 2. PLAYING BACK RECORDED SESSIONS
 
-There are two possibilities for replaying already recorded sessions.
-The first one is to use the `tlog-play` tool.
-The second option is to manage your recorded sessions from the RHEL 8 web console, also referred to as Cockpit.  For this lab we
-will concentrate on the RHEL 8 web console.
+There are two possibilities for replaying recorded sessions.
+The first one is to use the `tlog-play` command-line utility.
+The second option is to manage your recorded sessions from the RHEL 8 web console, which we will use for this lab.
 
 === Step 2.1 Playback with the web console
 The RHEL 8 web console has a whole interface for managing recorded sessions.
