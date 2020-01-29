@@ -1,158 +1,230 @@
 ---
-title: "Exercise 1.2 - Managing Software in an Application Stream"
+title: "Exercise 1.2 - Tour of the Web Console"
 workshops: rhel_8
 workshop_weight: 12
 layout: lab
 ---
 
+:domain_name: redhatgov.io
 :icons: font
 :imagesdir: /workshops/rhel_8/images
-:package_url: http://docs.ansible.com/ansible/package_module.html
-:service_url: http://docs.ansible.com/ansible/service_module.html
-:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
 
 
-= Exercise 1.2 - Managing Software in an Application Stream
+= Exercise 1.2 - Tour of the Web Console
 
-Application streams are a new capability, in RHEL 8, providing access to the latest tools, languages and libraries, without affecting core system components. This is done by including all of those `streams` in containers. The containers are automatically instantiated, when needed, and go away, when they are not in use.
 
-== Section 1: Stream Availability
+== Exercise Description
 
-=== Step 1: Check to see what PostgreSQL streams are available
+To get started, we will take a tour of the web console. The web console (called `cockpit`) will be your primary interactive interface to RHEL. The console has a number of functions that enable you to manage most aspects of the installation.
 
-As root, use `yum` to see what streams are available, for PostgreSQL:
+=== Section 1: Overview of the web console
 
-[source,bash]
+Here is a quick overview of all the available modules:
+
+[.float-group]
+--
+image::cockpit_topics.png[caption="Figure 1: ", title="Web console functions", width=450, float=left]
+The various functional sections can be seen in `Figure 1`, and are: +
+{empty} +
+*System* +
+Contains an overview of the system, including metadata and health graphs
+{empty} +
+*Logs* +
+Displays current `journald` logs from all services
+{empty} +
+*Storage* +
+Displays storage activity graphs, and logs. Enables the management of NFS mounts, RAID devices, volume groups, VDO (deduplication) devices, and iSCSI targets
+{empty} +
+*Networking* +
+Displays network activity, logs, and allows firewall and network maintenance
+{empty} +
+*Podman Containers* +
+Enables the management of container images and running containers
+{empty} +
+*Virtual Machines* +
+Virtual machines can be created, deleted and controlled
+{empty} +
+*Accounts* +
+Allows for the creation, deletion and configuration of user accounts and ssh keys
+{empty} +
+*Services* +
+Displays all system targets, services, sockets, timers and paths, as managed by `systemd`, the root process
+{empty} +
+*Session Recording* +
+Manages recorded sessions, and allows for the configuration of session recorder defaults
+{empty} +
+*Applications* +
+Allows for the installation and removal of web console modules
+{empty} +
+*Diagnostic Reports* +
+Creates diagnostic reports used by Red Hat support, also known as SOSreports
+{empty} +
+*Kernel Dump* +
+Manages kernel debugging dumps, created when the system crashes
+{empty} +
+*SELinux* +
+Allows for the setting of SELinux to permissive mode, and shows recent SELinux alerts (`AVCs`)
+{empty} +
+*Software Updates* +
+Manages automatic package updating, and allows for the manual installation of updates
+{empty} +
+*Subscriptions* +
+Manages subscriptions attached to the host
+{empty} +
+*Terminal* +
+Provides an interactive shell
+--
+
+As you can see, many of the day-to-day management of a RHEL system can be accomplished without touching the terminal. This makes RHEL 8 the easiest-to-live-with release, yet!
+
+Next, let's proceed to a more detailed examination of each module. Please click through the web console on your host, as you read the explanations, here.
+
+=== Section 2: System Module
+
+image::cockpit_system.png[caption="Figure 2: ", title='Web Console System Module', 500]
+
+The system module is the main screen that you see, when you first login to the web console. It contains an overview of the system, including the below sections:
+
+* hardware type
+** detailed system hardware data is available, from the link on the main page
+* asset tag
+* machine ID
+* operating system
+** when updates to the system are available, an "updates available" link will be present
+* SSH keys
+** key fingerprints for all created 'root' keys
+* host name
+** the system's name may be changed, and an alias may be added
+* domain
+** the system may be added to an LDAP/AD domain
+* time and date
+** time zone and automatic or manual time and date setting can be done
+* performance profile
+** the system's performance profile may be changed
+
+Additionally, there are graphs that show the system's CPU, memory, disk, and network utilization.  Each graph may be enlarged, by clicking its associated link.
+
+=== Section 3: Logs Module
+
+image::cockpit_01_logs.png[caption="Figure 3: ", title='Web Console Logs Module', 500]
+
+The logs module provides date-sorted view of recent system log entries.  You can change the date or apply basic filters using the pull-down menus at the top of the page. 
+
+=== Section 4: Storage Module
+
+image::cockpit_02_storage.png[caption="Figure 4: ", title='Web Console Storage Module', 500]
+
+The storage module provides graphs of current storage performance.  It also lists local and network-mounted filesystems, plus recent storage-related log entries.
+
+=== Section 5: Networking Module
+
+image::cockpit_03_networking.png[caption="Figure 5: ", title='Web Console Networking Module', 500]
+
+The network module contains performance graphs similar to the storage module.  Additionally, it shows the configuration of your network interfaces, identifies unused interfaces, and provides access to, and control of, the system firewall.
+
+=== Section 5: Podman Containers Module
+
+image::cockpit_04_podman.png[caption="Figure 6: ", title='Web Console Podman Containers Module', 500]
+
+This module provides control of local podman containers and their corresponding images.
+
+=== Section 6: Virtual Machines Module
+
+image::cockpit_05_vms.png[caption="Figure 7: ", title='Web Console Virtual Machines Module', 500]
+
+The Virtual Machines module allows for the creation, destruction, and management of virtual machines, their storage, and the networks that they are connected to.
+
+=== Section 7: Accounts Module
+
+image::cockpit_06_accounts.png[caption="Figure 8: ", title='Web Console Accounts Module', 500]
+
+The accounts module allows you to create and modify local user accounts.
+
+=== Section 8: Services Module
+
+image::cockpit_07_services.png[caption="Figure 9: ", title='Web Console Services Module', 500]
+
+The services module allows basic administration of systemd objects, including system services.
+
+=== Section 9: Session Recording Module
+
+image::cockpit_08_sr.png[caption="Figure 10: ", title='Web Console Session Recording Module', 500]
+
+This module provides management of recorded terminal sessions. 
+
+=== Section 10: Applications Module
+
+image::cockpit_09_applications.png[caption="Figure 11: ", title='Web Console Applications Module', 500]
+
+The applications module allows for the management of additional components for the web console. In this environment, we have already installed all of the modules, so the only option available is to remove them.
+
+=== Section 11: Diagnostic Reports Module
+
+image::cockpit_10_dr.png[caption="Figure 12: ", title='Web Console Diagnostic Reports Module', 500]
+
+This module is where SOSreports are placed, when they are generated. You can trigger an SOSreport, for submission to Red Hat support, from here.
+
+=== Section 12: Kernel Dump Module
+
+image::cockpit_11_kd.png[caption="Figure 13: ", title='Web Console Kernel Dump Module', 500]
+
+The kernel dump module allows for the configuration of where kernel diagnostic reports (or dumps) that are generated when the system crashes, are stored. Additionally, you can specify if you wish these dumps to be compressed. The buttons will turn the dump facility on and off, and can also be used to test the dump system by crashing the host.
+
+=== Section 13: SELinux Module
+
+image::cockpit_12_selinux.png[caption="Figure 14: ", title='Web Console SELinux Module', 500]
+
+This module allows the user to set SELinux to permissive or enforcing mode (off or on) and also shows any SELinux AVC (access vector cache) messages that may have been generated, on the system.
+
+=== Section 14: Software Update Module
+
+image::cockpit_13_su.png[caption="Figure 15: ", title='Web Console Kernel Dump Module', 500]
+
+The software update module is where updates may be applied to the system. Additionally, automatic updating of packages may be configured.
+
+=== Section 15: Subscriptions Module
+
+image::cockpit_14_subscriptions.png[caption="Figure 16: ", title='Web Console Subscriptions Module', 500]
+
+This module allows the host to be registered or unregistered, and allows for the attachment or detachment of valid subscriptions.
+
+=== Section 16: Terminal Module
+
+image::cockpit_15_terminal.png[caption="Figure 17: ", title='Web Console Terminal Module', 500]
+
+The terminal module provides command-line access to the system, similar to an SSH session.  Section 16.1 has some example commands to try if you'd like to test it out.
+
+==== Section 16.1: Example terminal usage
+
+===== Example 1: Use the following command to pull a RHEL image from the Red Hat repository:
+
+[source, bash]
 ----
-sudo yum module list postgresql
+podman pull docker://docker.io/library/busybox
 ----
 
-There are two versions of postgresql available as modules in the Application Stream, version 9.6 and version 10.
+Now if you return to the Podman Containers tab (above, in Section 5), you should see this image listed.  You'll see more of podman later in Exercise 4.
 
-PostgreSQL version 10 is set as the default, meaning if someone installed postgresql with no specific options or arguments, version 10 would be the one installed.
+===== Example 2: Try the Skopeo command
 
-== Section 2: Install software managed as an application stream
+Skopeo provides the ability to inspect container images stored in a registry. The Inspect feature displays details of the selected image. The 'skopeo inspect' command's ability to list all the tags associated with a selected image is a benefit over the docker tool.
 
-=== Step 1: Install PostgreSQL 9.6
-
-To support the web application deployed on this machine, install postgresql version 9.6:
-
-[source,bash]
+[source, bash]
 ----
-yum -y module install postgresql:9.6
+skopeo inspect docker://docker.io/library/busybox
 ----
 
-=== Step 2: Verify installation
+===== Example 3: List firewall rules
 
-After the installation is complete, verify that postgresql version 9.6 is installed on the system.
+nft is the nftables utility.  Similar to ''iptables -L'', the following lists the system's active firewall ruleset:
 
-[source,bash]
+[source, bash]
 ----
-sudo yum module list postgresql
-----
-
-Notice that version 9.6 is now marked as [e]nabled under the Stream column and is flagged as [i]nstalled in the Profiles column of the listing for postgresql.
-
-=== Step 3: Run PostgreSQL
-
-Finally, run the postgres command to inspect the version it reports:
-
-[source,bash]
-----
-postgres --version
+sudo nft list ruleset
 ----
 
-== Section 3: Change to a different version of a stream
+=== Conclusion
 
-An update to the web application running on this system requires features available in postgresql version 10. To accomplish this you will ultimately remove postgresql 9.6 and install postgresql 10, however, there are some additional Application Stream settings to apply to the system configuration as well.
-
-=== Step 1: Remove PostgreSQL 9.6
-
-To start off with, remove PostgreSQL 9.6:
-
-[source,bash]
-----
-sudo yum -y module remove postgresql:9.6
-----
-
-=== Step 2: Verify removal
-
-Take a look at the Application Stream information for the machine to validate the removal:
-
-[source,bash]
-----
-sudo yum module list postgresql
-----
-
-Verify that postgresql version 9.6 is no longer flagged as [i]nstalled.
-
-== Section 3: Change to a different version of a stream
-
-=== Step 1: Disable a stream
-
-Prior to installing the newer version of postgresql that is available, first, the older (now removed) version of the software should be disabled:
-
-[source,bash]
-----
-sudo yum -y module disable postgresql:9.6
-----
-
-=== Step 2: Enable a stream
-
-Likewise, version 10, while it is the default, should be enabled:
-
-[source,bash]
-----
-sudo yum -y module enable postgresql:10
-----
-
-=== Step 3: Verify enablement
-
-Take a look at the Application Stream information to verify that postgresql version 10 is now the enabled version:
-
-[source,bash]
-----
-sudo yum module list postgresql
-----
-
-The [e]nabled flag is now present for postgresql version 10.
-
-== Section 5: Install PostgreSQL 10
-
-=== Step 1: Install the stream
-
-Now that the Postgres version 10 stream is enabled, install it on the system:
-
-[source,bash]
-----
-sudo yum -y module install postgresql:10
-----
-
-=== Step 2: Verify installation
-
-The Postgres 10 stream should now be listed as [i]nstalled:
-
-[source,bash]
-----
-sudo yum module list postgresql
-----
-
-=== Step 3: Check version
-
-Finally, check the version reported by the postgres command:
-
-[source,bash]
-----
-postgres --version
-----
-
-== Section 6: Show all streams
-
-Lastly, inspect all software managed as application streams:
-
-[source,bash]
-----
-sudo yum module list
-----
+The web console has a lot of new functionality, in version 8 of Red Hat Enterprise Linux. Hopefully, this brief (!) overview has demonstrated that, and given you a taste of how easily systems may be managed, with this new tool.
 
 {{< importPartial "footer/footer.html" >}}

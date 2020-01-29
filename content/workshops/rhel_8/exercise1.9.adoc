@@ -1,0 +1,220 @@
+---
+title: "Exercise 1.9 - Creating Custom Container Images with Buildah"
+workshops: rhel_8
+workshop_weight: 19
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/rhel_8/images
+
+= Exercise 1.9: Creating Custom Container Images with Buildah
+
+== Exercise Description
+
+In this exercise, you will build a custom application container utilizing the RHEL UBI container base image, modify that image with a deployment of Apache and test the image functionality.
+
+After completing this section, you will be able to build images from an existing base image using buildah and other host based tools.
+
+== Section 1: Install buildah and podman
+
+In this section, we will be installing buildah and podman, so we are able to create and run a container from the RHEL8 UBI. Before we install the packages, we should know what each program specializes in.
+
+##Buildah## specializes in building OCI images. Buildah's commands replicate all of the commands that are found in a Dockerfile. This allows building images with and without Dockerfiles while not requiring any root privileges. Buildah’s ultimate goal is to provide a lower-level coreutils interface to build images. The flexibility of building images without Dockerfiles allows for the integration of other scripting languages into the build process.
+
+##Podman## specializes in all of the commands and functions that help you to maintain and modify OCI images, such as pulling and tagging. It also allows you to create, run, and maintain those containers created from those images.
+
+=== Step 1: Install buildah and podman#
+
+Let's get started with a simple yum installation of both packages:
+
+[source, bash]
+----
+sudo yum install buildah podman -y
+----
+
+=== Step 2: Verify installation
+
+As root we will verify that both buildah and podman have been successfully installed. You should have both *buildah.x86_64* and *podman.x86_64* return from the below command:
+
+[source, bash]
+----
+sudo yum list installed | egrep “buildah|podman”
+----
+
+== Section 2: Create a container using buildah
+
+In this section, we will use buildah to pull down the RHEL 8 UBI image, to use as our base container image, and then install apache (httpd) on it.
+
+=== Step 1: Use buildah to pull the RHEL8 UBI base image
+
+The Red Hat Enterprise Linux 8 Universal Base Image is provided as the starting point for creating containers with Red Hat Enterprise Linux packages.
+
+To build an application container from the ##ubi-init## base image, we will create a working container with ##buildah##. A working container is a temporary container used as the target for buildah commands.
+
+[source, bash]
+----
+buildah from registry.access.redhat.com/ubi8/ubi-init
+----
+
+=== Step 2: Verify the container image pulled correctly
+
+Verify that your pull request for the UBI container image completed. Using the buildah command will display and allow you to verify what container images your user has access to. You should see an image with the container name ##ubi-init-working-container##.
+
+[NOTE]
+Buildah will append -working-container to the image name used. If that name already exists, a number will also be appended.
+
+[source, bash]
+----
+buildah containers
+----
+
+....
+CONTAINER ID  BUILDER  IMAGE ID            IMAGE NAME           CONTAINER NAME
+xxxxxxxxxxx   *        xxxxxxx             registry…/:latest    ubi-init-working-container
+....
+
+== Section 3: Creating an application image from an existing base
+
+=== Step 1: Install apache (httpd) on the UBI base container image
+
+The ##ubi-init## image is very complete, including tools like ##yum## and ##systemd##. You can install ##httpd## via ##yum## in the container using the ##buildah run## subcommand:
+
+[source, bash]
+----
+buildah run ubi-init-working-container -- yum -y install httpd
+----
+
+....
+Updating Subscription Management repositories.
+Unable to read consumer identity
+Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs) 2.4 MB/s | 7.0 MB     00:02
+Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)    1.3 MB/s | 3.7 MB     00:02
+Red Hat Enterprise Linux 8 for x86_64 - Supplementary (RPMs) 23 kB/s |  78 kB     00:03
+Dependencies resolved.
+============================
+Package   Arch   Version                     Repository           Size
+============================
+Installing:
+httpd x86_64 2.4.37-11.module+el8 rhel-8-for-x86_64-appstream-rpms 1.4 M
+<< OUTPUT ABRIDGED >>
+Complete!
+....
+
+This subcommand acts like the RUN directive in an OCIFile. Since the yum command includes a switch, we need to use the -- syntax to tell buildah run there are no buildah options to look for past this point.
+
+=== Step 2: Enable apache to start and use buildah to enable port 80
+
+Once the packages are installed in the working container, enable httpd to start when the container is run via systemd using the buildah run subcommand.
+
+[source, bash]
+----
+buildah run ubi-init-working-container -- systemctl enable httpd
+----
+
+....
+Created symlink /etc/systemd/system/multi-user.target.wants/httpd.service → /usr/lib/systemd/system/httpd.service.
+....
+
+To expose the web server port and set systemd to start when the container is run, modify the metadata with the ##buildah config## subcommand.
+
+[source, bash]
+----
+buildah config --port 80 --cmd “/usr/sbin/init” ubi-init-working-container
+----
+
+These options to ##buildah config## are equivalent to the EXPOSE and CMD directives.
+
+=== Step 3: Commit changes to the modified base container using buildah
+
+Once the contents of the working container are complete, and the metadata has been updated, save the working container as the target application image using ##buildah commit##. During the container customization process, you can choose how often you want to save your customizations in order to test each modification that has been completed. In this case we are saving both the installation of apache and the necessary modification to the container to start the service and open port 80 to the container:
+
+[source, bash]
+----
+buildah commit ubi-init-working-container el-httpd1
+----
+
+....
+Getting image source signatures
+Skipping fetch of repeat blob sha256:24d85c895b6b870f6b84327a5e31aa567a5d30588de0a0bdd9a669ec5012339c
+Skipping fetch of repeat blob sha256:c613b100be1645941fded703dd6037e5aba7c9388fd1fcb37c2f9f73bc438126
+Skipping fetch of repeat blob sha256:188ab351dfda8afc656a38073df0004cdc5196fd5572960ff5499c17e6442223
+Copying blob sha256:8df24355b15ad293a5dd60d0fe2c14dca68b0412b62f9e9c39c15bb8230d1936
+26.80 MiB / 26.80 MiB [====================================================] 0s
+Copying config sha256:b04fe2c73b034e657da2fee64c340c56086a38265777556fa8a02c5f12896e66
+2.42 KiB / 2.42 KiB [======================================================] 0s
+Writing manifest to image destination
+Storing signatures
+B04fe2c73b034e657da2fee64c340c56086a38265777556fa8a02c5f12896e66
+....
+
+In this example, each previous buildah subcommand results in a separate layer, much like building using an OCIFile. Note that we have named our save point at **el-httpd1**. You can change this to any label that will reflect what changes you have made at that given save point.
+
+== Section 4: Using podman launch and inspect the application container
+
+=== Step 1: Use podman to inspect available images
+
+In the previous steps we used buildah to pull down a new image and customize that image. The last step of section 3 had us commit the changes to the container and name it el-httpd1. Using the podman command, we can view what containers are available to start and run.
+
+[source, bash]
+----
+podman images
+----
+
+....
+REPOSITORY           TAG      IMAGE ID       CREATED          SIZE
+localhost/el-httpd1  latest   b04fe2c73b03   24 sec ago       279 MB
+regi.../ubi-init     latest   8c376a94293d   2 weeks ago      231 MB
+....
+
+[NOTE]
+The name matches what was set using buildah commit.
+
+=== Step 2: Use podman to start the customized container and bind port 80 
+
+Podman and buildah use the same storage locations on the host, this lets us immediately run the image without any other modification to the location of the container or system on which the container will run. Note we are using the name el-httpd1 that we created in our previous section. As mentioned previously, you can launch, test, and then stop the container as you make each individual change. This can be used for general application testing or debugging of a change made to the container during customization with buildah.
+
+[source, bash]
+----
+podman run -d -p 80:80 el-httpd1
+----
+
+f4d9db69e9b512517f9490d3bcc5096e69cca5e9b3a50b3890430da39ae46573
+
+Now, we can check the status of the application container using podman:
+
+[source, bash]
+----
+# podman ps
+----
+
+....
+CONTAINER ID  IMAGE                        COMMAND    CREATED   STATUS    PORTS     NAMES
+f4d9db69e9b5  localhost/el-httpd1:latest  /sbin/init  16 seconds ago  Up 16 seconds ago  0.0.0.0:80->80/tcp  relaxed_wilson
+....
+
+[NOTE]
+The ports and command match the metadata set using buildah config.
+
+=== Step 3: Test container application and stop container 
+
+Now, you can test all the work you have done to customize (buildah) and run (podman) your container. Open up your browser of choice and go to the following URL:
+
+http://localhost
+
+You should see a default Red Hat apache webpage. Since your test was successful, you can now stop the container, and continue with additional customization that you would like to try out. Remember to commit your changes as often as you would like, during the customization process, and use names that reflect the customization you have done to ease troubleshooting.
+
+[source, bash]
+----
+# podman stop -a
+----
+
+This will stop all containers that you have running via podman. 
+
+[NOTE]
+If you would prefer to stop only a single container, you can utilize podman ps to identify the Container ID. Then use the following command, with your unique Container ID number, to shutdown a single instance. Repeat step 2 of this section, before proceeding, if you have already run `podman stop -a`.
+
+[source, bash]
+----
+# podman stop f4d9db69e9b5 
+----

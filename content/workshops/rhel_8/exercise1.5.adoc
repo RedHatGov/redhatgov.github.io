@@ -1,239 +1,171 @@
 ---
-title: "Exercise 1.5 - Roles: Making your playbooks reusable"
+title: "Exercise 1.5 - Deploying Containers with Podman"
 workshops: rhel_8
 workshop_weight: 15
 layout: lab
 ---
 
+:domain_name: redhatgov.io
 :icons: font
 :imagesdir: /workshops/rhel_8/images
-:package_url: http://docs.ansible.com/ansible/package_module.html
-:service_url: http://docs.ansible.com/ansible/service_module.html
-:dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
-:var_prec_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
 
-
-= Exercise 1.5: Making Your Playbooks Reusable with "Roles"
+= Exercise 1.5 - Deploying Containers with Podman"
 
 == Exercise Description
-While it is possible to write a playbook in one file, as we've done throughout this workshop, eventually you’ll want to reuse files and start to organize things.
 
-The "role" feature in Ansible is the way we do this.  When you create a role, you deconstruct your playbook into parts and those parts sit in a directory structure.  _"Wha??  You mean that seemingly useless link:{dir_url}[best practice] you mentioned in exercise 1.2?"_   Yep, that one.
+Explore how Podman helps you run workloads in containers by taking an existing container image and deploying it into a runtime environment.
+
+After completing this scenario, users will be able to deploy and control an already defined container image.
+
+Concepts included in this scenario:
+
+. List available container images
+. Deploy a container image into an interactive container runtime
+. Deploy a container image into a detached container runtime
+. View deployed containers
+. Stop a container instances
+. Remove deployed container instances
+
+=== Step 1: 
+Using the top terminal session, view the container images available with the following command:
+```bash
+podman images
+```
+
+Expected Output:
+```bash
+REPOSITORY              TAG      IMAGE ID       CREATED        SIZE
+localhost/rhel8-httpd   latest   c12e3720df7b   43 hours ago   499 MB
+```
+
+There is one container available in the local (localhost) repository, rhel8-httpd. If there were multiple updated iterations of the conatiner available, you would use the IMAGE ID to work with those that are not tagged as latest. Also, from this list you are able to see the size, on disk, of the container image.
+
+=== Step 2:
+
+The rhel8-httpd container includes a bash shell. In this step, you will deploy the container in an interactive fashion, which will allow you to run commands within the deployed container.
+
+```bash
+podman run -it rhel8-httpd /bin/bash
+```
+
+You should now be looking at a bash shell prompt:
+
+```bash
+bash-4.4#
+```
+In the terminal, the displayed shell is running inside the container image, not the host operating system. To confirm this, take a look at the mounted filesystems:
+
+```bash
+df -hP
+```
+Expected output:
+
+```bash
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          35G  3.7G   31G  11% /
+tmpfs            64M     0   64M   0% /dev
+shm              63M     0   63M   0% /dev/shm
+tmpfs           915M   97M  818M  11% /etc/hosts
+tmpfs           915M     0  915M   0% /sys/fs/cgroup
+tmpfs           915M     0  915M   0% /proc/acpi
+tmpfs           915M     0  915M   0% /proc/scsi
+tmpfs           915M     0  915M   0% /sys/firmware
+bash-4.4#
+```
+
+You will notice that all of the filesystem contents are either memory-based (tmpfs, shm) or the overlay file associated with this runtime of the container image (overlay).
+
+Open another terminal on the same host system. Use this shell to verify that the container is running:
+
+```bash
+podman ps -a
+```
+
+Expected output:
+
+```bash
+CONTAINER ID  IMAGE                         COMMAND    CREATED        STATUS            PORTS  NAMES
+af2d3774f20b  localhost/rhel8-httpd:latest  /bin/bash  3 minutes ago  Up 3 minutes ago         keen_borg
+[root@915261e7b28a ~]#
+```
+
+Note: Your CONTAINER ID and NAMES will be different than the output displayed above as each container is assigned a unique ID and Name.
+
+=== Step 3:
+
+Switch back to Terminal 1. Exit the container's shell
+```bash
+exit
+```
+When the process on an interactive container is closed, the container stops running. You can verify this by looking at the list of container processes:
+```bash
+podman ps -a
+```
+```bash
+CONTAINER ID  IMAGE                         COMMAND    CREATED        STATUS                     PORTS  NAMES
+af2d3774f20b  localhost/rhel8-httpd:latest  /bin/bash  7 minutes ago  Exited (0) 41 seconds ago         keen_borg
+[root@915261e7b28a ~]#
+```
+Notice the STATUS field is now reported as Exited.
+
+A container in this state can be resumed, however, this one will no longer be used. You will remove it from the system. using podman rm . In the command below, we use a bit of bash scripting to determine the CONTAINER ID as it is unique to each container image.
+```bash
+podman rm $(podman ps -a | grep Exited | cut -d"" -f1)
+```
+```bash
+af2d3774f20b5afb4505a4eb3fea20df5861afd6ec06b9271b6419ff1515106d
+[root@915261e7b28a ~]#
+```
+The output of this removal is the full CONTAINER ID which was removed from the system.
+
+=== Step 4:
+
+Running an interactive container is all well and good, however, if the container is offering applications or services, you do not need to interact with it.
+
+The rhel8-httpd container, for example, is configured with an Apache web server running within it. You will create a new instance of this container in a detached mode. Further, the command provided will configure port forwarding for the Apache web server so that connections to the host's port 8081 will redirect to the running container's port 80 (Apache service).
+
+```bash
+podman run -dt -p 8081:80/tcp rhel8-httpd
+```
+You can verify the state of the container using podman ps
+
+```bash
+podman ps -a
+```
+```bash
+CONTAINER ID  IMAGE                         COMMAND               CREATED             STATUS                 PORTS                 NAMES
+8a961afbfa99  localhost/rhel8-httpd:latest  /usr/sbin/httpd -...  Abouta minute ago  Up About a minute ago  0.0.0.0:8081->80/tcp  loving_elion
+[root@915261e7b28a ~]#
+```
+
+Observe that the STATUS is Up and there is a new section in the output PORTS that indicates the port forwarding defined for the container.
+
+You can also now connect to the web server running on the container by using your browser and connecting to the following url and port: 
+
+```bash
+```
+Your browser should now display the Apache test page, being served by the httpd daemon running in the container.
+
+=== Step 5:
+Unlike interactive containers, detached containers are stopped using podman stop.
+
+```bash
+podman stop $(podman ps -a | grep Up | cut -d" "-f1)
+```
+```bash
+8a961afbfa9998bedfacb340de252c62d2750528734f1e2874140a7aa79c32ac
+[root@915261e7b28a ~]#
+```
+In the command above, we use a bit of bash scripting to determine the CONTAINER ID as it is going to be a value unique to each container image.
+
+You can verify that the container is now exited:
+
+```bash
+podman ps -a
+```
+```
+CONTAINER ID  IMAGE                         COMMAND               CREATED        STATUS                         PORTS                 NAMES
+8a961afbfa99  localhost/rhel8-httpd:latest  /usr/sbin/httpd -...  5 minutes ago  Exited (0) About a minute ago  0.0.0.0:8081->80/tcp  loving_elion
+```
+Also, if you access the Container Service URL, it will now report unable to connect; as the container offering the Apache web server is no longer available.
 
-For this exercise, you are going to take the playbook you just wrote and refactor it into a role.  In addition, you'll learn to use Ansible Galaxy.
-
-Let's begin with understanding how your apache-basic-playbook will break down into a role.
-
-image::roledir_1.png[apache-basic-playbook role directory structure]
-
-Fortunately, you don't have to create all of these directories and files by hand.  That's where Ansible Galaxy comes in.
-
-== Section 1: Using Ansible Galaxy to initialize a new role
-
-Ansible Galaxy is a free site for finding, downloading, and sharing roles.  It's also pretty handy for creating them, which is what we are about to do here.
-
-
-=== Step 1:Navigate to your project
-
-Navigate to your `apache-basic-playbook` project.
-
-[source,bash]
-----
-cd ~/apache-basic-playbook
-----
-
-
-=== Step 2: Create a directory
-
-Create a directory called `roles` and `cd` into it.
-
-[source,bash]
-----
-mkdir roles
-cd roles
-----
-
-
-=== Step 3: Initialize new role
-
-Use the `ansible-galaxy` command to initialize a new role called `apache-simple`.
-
-[source,bash]
-----
-ansible-galaxy init apache-simple
-----
-
-Take a look around the structure you just created.  It should look a lot like Figure 1 above.  However, we need to complete one more step before moving onto Section 2.  It is Ansible best practice to clean out role directories and files you won't be using.  For this role, we won't be using anything from `files`, `tests`.
-
-
-=== Step 4: Remove directories
-
-Remove the `files` and `tests` directories
-
-[source,bash]
-----
-cd ~/apache-basic-playbook/roles/apache-simple/
-rm -rf files tests
-----
-
-
-== Section 2: Breaking your `site.yml` playbook into the newly created `apache-simple` role
-
-
-In this section, we will separate the major parts of your playbook, including `vars:`, `tasks:`, `template:`, and `handlers:`.
-
-=== Step 1: Backup
-
-Make a backup copy of `site.yml`, then create a new `site.yml`.
-
-[source,bash]
-----
-cd ~/apache-basic-playbook
-mv site.yml site.yml.bkup
-vim site.yml
-----
-
-=== Step 2: Add play definition/Invoke role
-
-Add the play definition and the invocation of a single role.
-
-[source,bash]
-----
----
-- hosts: web
-  name: This is my role-based playbook
-  become: yes
-
-  roles:
-    - apache-simple
-----
-
-=== Step 3: Add default variables
-
-Add some default variables to your role in `roles/apache-simple/defaults/main.yml`.
-
-[source,bash]
-----
----
-# defaults file for apache-simple
-apache_test_message: This is a test message
-apache_webserver_port: 80
-----
-
-=== Step 4: Add variables
-
-Add some role-specific variables to your role in `roles/apache-simple/vars/main.yml`.
-
-[source,bash]
-----
----
-# vars file for apache-simple
-httpd_packages:
-  - httpd
-  - mod_wsgi
-----
-
-[NOTE]
-====
-Hey, wait just a minute...did you just have us put variables in two separate places?  Yes...yes we did.  Variables can live in quite a few places.  Just to name a few: +
-
-- vars directory
-- defaults directory
-- group_vars directory
-- In the playbook under the `vars:` section
-- In any file which can be specified on the command line using the `--extra_vars` option
-- On a boat, in a moat, with a goat  _(disclaimer:  this is a complete lie)_
-
-Bottom line, you need to read up on link:{var_prec_url}[variable precedence] to understand both where to define variables and which locations take precedence.  In this exercise, we are using role defaults to define a couple of variables and these are the most malleable.  After that, we defined some variables in `/vars`
-which have a higher precedence than defaults and can't be overridden as a default variable.
-====
-
-=== Step 5: Create role handler
-
-Create your role handler in `roles/apache-simple/handlers/main.yml`.
-
-[source,bash]
-----
----
-# handlers file for apache-simple
-- name: restart apache service
-  service:
-    name: httpd
-    state: restarted
-    enabled: yes
-----
-
-=== Step 6: Add role tasks
-
-Add tasks to your role in `roles/apache-simple/tasks/main.yml`.
-
-[source,bash]
-----
----
-# tasks file for apache-simple
-- name: install httpd packages
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ httpd_packages }}"
-  notify: restart apache service
-
-- name: create site-enabled directory
-  file:
-    name: /etc/httpd/conf/sites-enabled
-    state: directory
-
-- name: copy httpd.conf
-  template:
-    src: templates/httpd.conf.j2
-    dest: /etc/httpd/conf/httpd.conf
-  notify: restart apache service
-
-- name: copy index.html
-  template:
-    src: templates/index.html.j2
-    dest: /var/www/html/index.html
-
-- name: start httpd
-  service:
-    name: httpd
-    state: started
-    enabled: yes
-----
-
-=== Step 7: Download templates
-
-Download a couple of templates into `roles/apache-simple/templates/`.  And then, let's clean up the templates from exercise 2.1, by removing the old templates directory.
-
-[source,bash]
-----
-mkdir -p ~/apache-basic-playbook/roles/apache-simple/templates/
-cd ~/apache-basic-playbook/roles/apache-simple/templates/
-curl -O https://raw.githubusercontent.com/ansible/lightbulb/master/examples/apache-basic-playbook/templates/httpd.conf.j2
-curl -O https://raw.githubusercontent.com/ansible/lightbulb/master/examples/apache-basic-playbook/templates/index.html.j2
-rm -rf ~/apache-basic-playbook/templates/
-----
-
-== Section 3: Running your new role-based playbook
-
-Now that you've successfully separated your original playbook into a role,
-let's run it and see how it works.
-
-=== Step 1: Run the playbook
-
-
-[source,bash]
-----
-cd ~/apache-basic-playbook
-ansible-playbook -i ../hosts site.yml --private-key=~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
-----
-=== Step 2: Verify your output
-If successful, your standard output should look similar to the figure below.
-
-image::stdout_3.png[ansible-basic-playbook role-based stdout]
-
-== Section 4: Review
-
-You should now have a completed playbook, `site.yml` - with a single role called `apache-simple`.  The advantage of structuring your playbook into roles is that you can now add new roles to the playbook using Ansible Galaxy or simply writing your own.  In addition, roles simplify changes to variables, tasks, templates, etc.
-
-{{< importPartial "footer/footer.html" >}}

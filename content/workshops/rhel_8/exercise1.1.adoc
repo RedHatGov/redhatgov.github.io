@@ -1,137 +1,47 @@
 ---
-title: "Exercise 1.1 - Managing Updates Using the Web Console"
+title: "Exercise 1.1 - What's New in RHEL 8"
 workshops: rhel_8
 workshop_weight: 11
 layout: lab
 ---
 
+:domain_name: redhatgov.io
 :icons: font
 :imagesdir: /workshops/rhel_8/images
-:figure-caption!:
-:become_url: http://docs.ansible.com/ansible/become.html
-:dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
-:package_url: http://docs.ansible.com/ansible/package_module.html
-:service_url: http://docs.ansible.com/ansible/service_module.html
-:yaml_url: http://docs.ansible.com/ansible/YAMLSyntax.html
 
 
-= Exercise 1.1 - Managing Updates Using the Web Console
+= Exercise 1.1 - What's New in RHEL 8
 
-== Exercise Description
+== Application streams
 
-Now that you've toured the web console, lets work through updating the system. 
+Application streams deliver user space packages on a cadence that makes sense for the package rather than as a monolithic distribution. Streams also allow the consolidation of previous distribution channels to a single place.
 
-== Section 1: Basic Updating
+== Red Hat Insights
 
-As you did in the previous section, navigate to the `Software Updates` section of the Web Console, by clicking on the `Software Updates` link, in the left-hand menu. There will then be a brief interval where `Refreshing package information` will appear, along with a progress bar. Once that completes, you can proceed with the exercise.
+Red Hat Insights is included with your Red Hat® Enterprise Linux® 8 subscription. It helps provide a security-focused, reliable, efficient, and scalable infrastructure environment.
 
-=== Step 1: Check for available updates
+== Image builder
 
-Take a look at the `Available Updates` section of the browser window.  You should see several packages listed, in a single group, like this:
+Image builder lets customers build images from source RPMs that are deployable to multiple targets quickly and simply, and provides fine-grained control and visibility in to what’s included in a particular image and its history. It allows customers to manage the life cycle of their image catalogs independently of the release of new packages.
 
-image::su_updates.png[Software Updates, 900, caption="Figure 1: ", title="Packages Available for Updating"]
+== New container tools
 
-You can expand the list, to see more details, by clicking on the drill-down `>` link:
+New container tools—Podman, Buildah, and Skopeo—form a strong foundation to support your container image and container needs.
 
-image::su_updates_expanded.png[Software Updates, 900, caption="Figure 2: ", title="Expanded Updates"]
+== Web console
 
-In the expanded view, you can see details on what CVEs are relevant to the updates, and any associated bug IDs.  Additionally, a summary of the changes is displayed.
+The web console provides a single browser-based interface to all of the available tools and improves the user experience for new users and experienced administrators alike.
 
-=== Step 2: Install updates
+== Virtual data optimizer
 
-Once you are finished reading, click the `Install Security Updates` button, to install the updated packages.
+This virtual data optimizer provides volume-level compression and data deduplication to eliminate data redundancy and increase effective storage capacity for new and existing devices.
 
-The updates will install, and while doing so, there will be information on what actions are taking place, and below that, an expandable log drill-down. Once complete, you may receive a window like this:
+== System roles
 
-image::su_updates_restart.png[Software Updates, 900, caption="Figure 3: ", title="Updates Recommend a Restart"]
+System roles allow customers to configure subsystems using Ansible.® They deliver a layer of abstraction at the automation level, providing a common syntax across multiple major versions of Red Hat Enterprise Linux.
 
-=== Step 2: Restart the system
+== Systemwide crypto policies
 
-Click the `Restart Now` button, to reboot your managed host, and cause the changes to take effect. You will see screens like these, while the system is rebooting:
-
-image::su_updates_restarting.png[Software Updates, 900, caption="Figure 4: ", title="System Restarting"]
-
-image::su_updates_disconnected.png[Software Updates, 900, caption="Figure 5: ", title="Disconnected"]
-
-=== Step 3: Reconnect
-
-Wait for a couple of minutes, for the system to come back up, and then click the `Reconnect` button, to be returned to the login screen, for the web console. Login, as before.
-
-=== Step 4: Summary
-
-Once you are logged back in, you will again see the updates screen, with a list of the updates that you just applied. You can expand the history list, to see the details.
-
-image::su_updates_summary.png[Software Updates, 900, caption="Figure 6: ", title="Update Summary"]
-
-== Section 2: Automatic Updating
-
-Next, let's take a look at automatic updating.  There is an `Automatic Updates` switch, at the top of the updates window.
-
-=== Step 1: Enable Automatic Updates
-
-Click on the switch, next to the `Automatic Updates` label. You will then see a message, telling you that the package `dnf-automatic` is needed:
-
-image::au_install_dnf.png[Software Updates, 900, caption="Figure 7: ", title="Install the dnf-automatic Package"]
-
-Click the `Install` button, to proceed.
-
-=== Step 2: Configure Timing
-
-Once the `dnf-automatic` package is installed, you can choose which updates to install, which days, and what time:
-
-image::au_configure.png[Software Updates, 900, caption="Figure 8: ", title="Configure Automatic Updates and Timing"]
-
-You can select from the available menus, and select any combination of the following options:
-
-[%header,cols="1,1,1"]
-|===
-|Which updates?
-|What day?
-|What time?
-
-a|* Apply all updates
-* Apply security updates
-a|* every day
-* Mondays
-* Tuesdays
-* Wednesdays
-* Thursdays
-* Fridays
-* Saturdays
-* Sundays
-a|
-* 00:00
-* 01:00
-* 02:00
-* 03:00
-* 04:00
-* 05:00
-* 06:00
-* 07:00
-* 08:00
-* 09:00
-* 10:00
-* 11:00
-* 12:00
-* 13:00
-* 14:00
-* 15:00
-* 16:00
-* 17:00
-* 18:00
-* 19:00
-* 20:00
-* 21:00
-* 22:00
-* 23:00
-|===
-
-Set the automatic update mechanism for Fridays, to apply security updates, at 03:00.
-
-There isn't much else to updating, via the web console, on RHEL 8.
-
-== Summary
-
-We've tried out the manual and automatic updating functionality available, in the web console, for RHEL 8.  Please ask any questions that seem relevant, and then we can move on to the next section.
+Creating a systemwide crypto policy allows admins to set the acceptable algorithms in multiple sources with a single configuration.
 
 {{< importPartial "footer/footer.html" >}}

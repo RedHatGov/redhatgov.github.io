@@ -19,17 +19,17 @@ menu:
 
 == Workshop Description
 
-This workshop will cover the features, specifications and improvements that comprise the release of version 8 of Red Hat Enterprise Linux (RHEL).  RHEL 8 brings many improvements over previous releases, including:
+This workshop will cover the features, specifications and improvements that comprise the release of Red Hat Enterprise Linux Version 8 (RHEL 8).  RHEL 8 brings many improvements over previous releases, including:
 
-* Application streams, which allow for the use of bleeding edge interpreters, compilers and libraries, while maintaining full backwards compatibility and stability of the system
+* Application streams, which enables the use of bleeding edge interpreters, compilers and libraries, while maintaining full backwards compatibility and stability of the system
 * The web console has been completely overhauled, and significant new features have been added
 ** Session recording capability has been added to the web console
-* Image builder provides for the easy creation of customized RHEL installation images
+* Image builder provides the easy creation of customized RHEL installation images
 * The system package management tool, YUM, has been enhanced with DNF technology, providing significant performance improvements
-* System purpose has been enhanced to automatically tune system performance for the usage of the system
+* The `System Purpose` tool has been enhanced to automatically tune system performance for the usage of the system
 * There is a new `update-crypto-policies` tool, which applies cryptograhic polices system-wide
 ** TLS, IPsec, DNSSEC, Kerberos, and SSH protocols are covered
-* The system Python interpreter is now version 3.6
+* The system Python interpreter has been updated to version 3.6
 * System firmware updating is now built into the GNOME Software tool, using fwupd
 * The system firewall has been upgraded to 'nftables' from 'iptables', which provides significantly better performance.  The firewall manager, 'firewalld', remains the same 
 
@@ -52,7 +52,8 @@ This workshop will cover the features, specifications and improvements that comp
 - How to manage system-wide cryptographic policies
 - How to manage application streams
 - How to use OpenSCAP
-
+- How to create custom container images with buildah
+- How to use RHEL system roles with ansible
 
 == Overview
 

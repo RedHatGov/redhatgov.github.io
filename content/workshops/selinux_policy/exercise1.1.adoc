@@ -23,7 +23,7 @@ To better understand SELinux basic concepts, see the following documentation:
 First, go ahead and switch users to root:
 
 {{< highlight bash >}}
-sudo su -
+sudo -i
 {{< /highlight >}}
 
 === Step 2: What mode are we in?
@@ -76,11 +76,11 @@ semanage permissive -l
 
 [source,bash]
 ----
+Builtin Permissive Types
+
 Customized Permissive Types
 
 httpd_t
-
-Builtin Permissive Types
 ----
 
 And again, we can change it back:
@@ -111,7 +111,7 @@ We have asked the `ausearch` utility to look for SELinux policies being loaded (
 ----
 type=PROCTITLE msg=audit(05/17/2019 23:47:54.147:1896) : proctitle=/sbin/load_policy 
 type=SYSCALL msg=audit(05/17/2019 23:47:54.147:1896) : arch=x86_64 syscall=write success=yes exit=3857474 a0=0x4 a1=0x7fb57e597000 a2=0x3adc42 a3=0x7ffc8bb993a0 items=0 ppid=16567 pid=16572 auid=ec2-user uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts0 ses=1 comm=load_policy exe=/usr/sbin/load_policy subj=unconfined_u:unconfined_r:load_policy_t:s0-s0:c0.c1023 key=(null) 
-type=MAC_POLICY_LOAD msg=audit(05/17/2019 23:47:54.147:1896) : policy loaded auid=ec2-user ses=1
+type=MAC_POLICY_LOAD msg=audit(05/17/2019 23:47:54.147:1896) : auid=ec2-user ses=1 lsm=selinux res=yes
 -----
 
 Other useful searches include:

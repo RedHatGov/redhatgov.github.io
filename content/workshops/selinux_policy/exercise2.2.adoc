@@ -23,7 +23,7 @@ This exercise will walk you through the steps required to handle AVC messages th
 Now that our app is up and running, we can check the system logs for AVC (access vector cache, where SELinux caches decisions to grant or deny access) denial messages.
 
 {{< highlight bash >}}
-sudo ausearch -m AVC -ts recent
+sudo ausearch -m AVC -ts today
 {{< /highlight >}}
 
 There will (and should!) be quite a few denials returned from `ausearch`.  Here are some from the example machine:
@@ -104,7 +104,8 @@ If we look at them both closely, we can see that the `testapp` process is being 
 SELinux interface definitions are located in `/usr/share/selinux/devel/include`, if you install the `selinux-policy-devel` package.  If we search for `/proc`, in files named `*.if` (interface definitions):
 
 {{< highlight bash >}}
-find . -type f -name "*.if" -exec grep -H '/proc' {} \;
+cd /usr/share/selinux/devel/include
+find . -type f -name "*.if" -exec grep -H '/proc' {} \; | grep "system state information"
 {{< /highlight >}}
 
 We see that in the results, there is a line that says:

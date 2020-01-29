@@ -15,7 +15,7 @@ layout: lab
 
 = Workshop Lab Setup
 
-image::tower.002.png['Tower']
+image::rhel8-isometric.svg['Red Hat Enterprise Linux 8']
 
 == What you will learn: Red Hat Web Console - Terminal
 
