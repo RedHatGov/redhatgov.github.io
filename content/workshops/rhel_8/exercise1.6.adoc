@@ -24,8 +24,9 @@ In the following exercises we'll use the new commands for managing your crypto c
 
 Show the current crypto policy.
 
+[source, bash]
 ----
-# update-crypto-policies --show
+sudo update-crypto-policies --show
 ----
 
 You should see something like ...
@@ -39,10 +40,12 @@ DEFAULT is one of the four crypto policies, along with LEGACY, FIPS 140, and FUT
 Now let's change the default crypto policy from DEFAULT to something less secure, just for testing purposes.  We'll set the crypto policy to LEGACY to temporarily allow insecure TLS 1.1 communication from our system.
 
 Change the crypto policy to LEGACY.
+[source, bash]
 ----
-# update-crypto-policies --set LEGACY
+sudo update-crypto-policies --set LEGACY
 ----
 And now let's test communication to an insecure TLS 1.1 site.
+[source, bash]
 ----
-# wget https://tls-v1-1.badssl.com:1011/
+wget https://tls-v1-1.badssl.com:1011/
 ----
