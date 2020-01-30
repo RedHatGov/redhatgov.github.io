@@ -26,7 +26,7 @@ Show the current crypto policy.
 
 [source, bash]
 ----
-sudo update-crypto-policies --show
+update-crypto-policies --show
 ----
 
 You should see something like ...
