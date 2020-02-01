@@ -1,7 +1,7 @@
 ---
-title: "Exercise 1.8 - OpenSCAP Security Compliance Scanning"
+title: "Exercise 1.7 - OpenSCAP Security Compliance Scanning"
 workshops: rhel_8
-workshop_weight: 18
+workshop_weight: 17
 layout: lab
 ---
 

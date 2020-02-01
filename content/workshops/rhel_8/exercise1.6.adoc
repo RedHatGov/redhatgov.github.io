@@ -1,7 +1,7 @@
 ---
-title: "Exercise 1.7 - Managing Software in an Application Stream"
+title: "Exercise 1.6 - Managing Software in an Application Stream"
 workshops: rhel_8
-workshop_weight: 17
+workshop_weight: 16
 layout: lab
 ---
 

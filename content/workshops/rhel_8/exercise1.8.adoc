@@ -1,7 +1,7 @@
 ---
-title: "Exercise 1.9 - Creating Custom Container Images with Buildah"
+title: "Exercise 1.8 - Creating Custom Container Images with Buildah"
 workshops: rhel_8
-workshop_weight: 19
+workshop_weight: 18
 layout: lab
 ---
 
