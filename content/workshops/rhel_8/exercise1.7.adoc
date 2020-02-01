@@ -1,158 +1,114 @@
 ---
-title: "Exercise 1.7 - Managing Software in an Application Stream"
+title: "Exercise 1.8 - OpenSCAP Security Compliance Scanning"
 workshops: rhel_8
-workshop_weight: 17
+workshop_weight: 18
 layout: lab
 ---
 
 :icons: font
 :imagesdir: /workshops/rhel_8/images
-:package_url: http://docs.ansible.com/ansible/package_module.html
-:service_url: http://docs.ansible.com/ansible/service_module.html
-:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
 
 
-= Exercise 1.7 - Managing Software in an Application Stream
+= Exercise 1.8: OpenSCAP Security Compliance Scanning
 
-Application streams are a new RHEL 8 capability that provides access to the latest tools, languages and libraries, without affecting core system components. This is done by including all of those `streams` in containers. The containers are automatically instantiated, when needed, and go away, when they are not in use.
+RHEL 8 makes it easy to maintain secure and compliant systems with OpenSCAP.  +
+What is SCAP? +
+SCAP (Security Content Automation Protocol) is a NIST project that standardizes the language for describing assessment criteria and findings.  It also provides a vulnerability rating system.  The project's home page is `https://scap.nist.gov/` +
 
-== Section 1: Stream Availability
+The essential components of SCAP are:
 
-=== Step 1: Check to see what PostgreSQL streams are available
+* XCCDF: The Extensible Configuration Checklist Description Format
+* OVAL®: Open Vulnerability and Assessment Language
+* CCE™: Common Configuration Enumeration
+* CPE™: Common Platform Enumeration
+* CVE®: Common Vulnerabilities and Exposures
+* CVSS: Common Vulnerability Scoring System
 
-As root, use `yum` to see what streams are available, for PostgreSQL:
+OpenSCAP is a project that implements tools for performing SCAP scans and remediating findings. +
+You can read more about the project at `http://www.open-scap.org/` and the repository for their tools and profiles is on GitHub at `https://github.com/OpenSCAP/openscap/`.
 
-[source,bash]
+== Exercise Description
+
+In the following exercises we'll use the CLI to show how you can validate system compliance.  There are other tools as well, including a GUI utility and another for scanning container images.
+
+== Section 1: Ensure the OpenSCAP scanner is installed
+
+Ensure the OpenSCAP scanner and definitions are installed with the command below; it's safe to run even if the packages already exist:
+[source, bash]
 ----
-sudo yum module list postgresql
+sudo yum install openscap-scanner scap-security-guide
 ----
-
-There are two versions of postgresql available as modules in the Application Stream, version 9.6 and version 10.
-
-PostgreSQL version 10 is set as the default, meaning if someone installed postgresql with no specific options or arguments, version 10 would be the one installed.
-
-== Section 2: Install software managed as an application stream
-
-=== Step 1: Install PostgreSQL 9.6
-
-To support the web application deployed on this machine, install postgresql version 9.6:
-
-[source,bash]
+ 
+The `scap-security-guide` package contains prepared system profiles for several RHEL releases and system types; they are installed under `/usr/share/xml/scap/ssg/content`.  +
+You can get a summary of the profiles in a given definition file with the following command:
+[source, bash]
 ----
-yum -y module install postgresql:9.6
+oscap info --fetch-remote-resources /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
 ----
+Output:
+....
+Document type: Source Data Stream
+Imported: 2019-03-11T12:36:47
 
-=== Step 2: Verify installation
+Stream: scap_org.open-scap_datastream_from_xccdf_ssg-rhel8-xccdf-1.2.xml
+Generated: (null)
+Version: 1.2
+Checklists:
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-xccdf-1.2.xml
+		Status: draft
+		Generated: 2019-03-11
+		Resolved: true
+		Profiles:
+			Title: PCI-DSS v3.2.1 Control Baseline for Red Hat Enterprise Linux 8
+				Id: xccdf_org.ssgproject.content_profile_pci-dss
+			Title: OSPP - Protection Profile for General Purpose Operating Systems
+				Id: xccdf_org.ssgproject.content_profile_ospp
+		Referenced check files:
+			ssg-rhel8-oval.xml
+				system: http://oval.mitre.org/XMLSchema/oval-definitions-5
+			ssg-rhel8-ocil.xml
+				system: http://scap.nist.gov/schema/ocil/2
+Checks:
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-oval.xml
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-ocil.xml
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-oval.xml
+Dictionaries:
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-dictionary.xml
+....
 
-After the installation is complete, verify that postgresql version 9.6 is installed on the system.
+Looking about half-way down, you can see that this file contains two profiles:  one for PCI-DSS and another for OSPP.
 
-[source,bash]
+== Section 2: Perform an initial compliance scan
+
+The OSPP profile is a general-purpose profile, so it's a good place to start. +
+To perform a basic compliance scan using the OSPP profile for RHEL 8, run the following command; the profile is specified by supplying the `Id` field from the output above:
+[source, bash]
 ----
-sudo yum module list postgresql
-----
-
-Notice that version 9.6 is now marked as [e]nabled under the Stream column and is flagged as [i]nstalled in the Profiles column of the listing for postgresql.
-
-=== Step 3: Run PostgreSQL
-
-Finally, run the postgres command to inspect the version it reports:
-
-[source,bash]
-----
-postgres --version
-----
-
-== Section 3: Change to a different version of a stream
-
-An update to the web application running on this system requires features available in postgresql version 10. To accomplish this you will ultimately remove postgresql 9.6 and install postgresql 10, however, there are some additional Application Stream settings to apply to the system configuration as well.
-
-=== Step 1: Remove PostgreSQL 9.6
-
-To start off with, remove PostgreSQL 9.6:
-
-[source,bash]
-----
-sudo yum -y module remove postgresql:9.6
-----
-
-=== Step 2: Verify removal
-
-Take a look at the Application Stream information for the machine to validate the removal:
-
-[source,bash]
-----
-sudo yum module list postgresql
-----
-
-Verify that postgresql version 9.6 is no longer flagged as [i]nstalled.
-
-== Section 3: Change to a different version of a stream
-
-=== Step 1: Disable a stream
-
-Prior to installing the newer version of postgresql that is available, first, the older (now removed) version of the software should be disabled:
-
-[source,bash]
-----
-sudo yum -y module disable postgresql:9.6
+sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /tmp/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
 ----
 
-=== Step 2: Enable a stream
+The resulting report file, specified as `/tmp/report.html`, can be opened in a browser.  A snippet of what this looks like:
 
-Likewise, version 10, while it is the default, should be enabled:
+image::openscap-example-report.png[caption="Figure 1: ", title="OpenSCAP report", width=800]
 
-[source,bash]
+== Section 3: Automatically remediate findings
+
+To correct compliance issues found in the scan, we can generate a Bash shell script or an Ansible playbook automatically from the scan's findings.  To generate a Bash script, run the following:
+
+[source, bash]
 ----
-sudo yum -y module enable postgresql:10
-----
-
-=== Step 3: Verify enablement
-
-Take a look at the Application Stream information to verify that postgresql version 10 is now the enabled version:
-
-[source,bash]
-----
-sudo yum module list postgresql
+sudo oscap xccdf generate fix --fetch-remote-resources --fix-type bash --result-id "" /tmp/arf.xml > /tmp/ospp-bash-fix.sh
 ----
 
-The [e]nabled flag is now present for postgresql version 10.
-
-== Section 5: Install PostgreSQL 10
-
-=== Step 1: Install the stream
-
-Now that the Postgres version 10 stream is enabled, install it on the system:
-
-[source,bash]
+Double-check the HTML report to ensure you're comfortable with fixing every "failed" item.  Once you're comfortable with it, run the script with:
+[source, bash]
 ----
-sudo yum -y module install postgresql:10
+sudo chmod a+x /tmp/ospp-bash-fix.sh
+sudo /tmp/ospp-bash-fix.sh
 ----
 
-=== Step 2: Verify installation
-
-The Postgres 10 stream should now be listed as [i]nstalled:
-
-[source,bash]
+OPTIONAL:  reboot the system to enable the changes.
+[source, bash]
 ----
-sudo yum module list postgresql
+sudo init 6
 ----
-
-=== Step 3: Check version
-
-Finally, check the version reported by the postgres command:
-
-[source,bash]
-----
-postgres --version
-----
-
-== Section 6: Show all streams
-
-Lastly, inspect all software managed as application streams:
-
-[source,bash]
-----
-sudo yum module list
-----
-
-{{< importPartial "footer/footer.html" >}}
