@@ -66,7 +66,7 @@ Have a Discussion. This will be boring if it’s just us, up here talking for ov
 
 Participate. We are going to cut you loose with RHEL, in just a little while. Have questions. Have opinions.
 
-Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy. See? Not only can we dig into Ansible but you can make a new friend!
+Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy. See? Not only can we dig into RHEL, but you can make a new friend!
 
 
 == Exercises

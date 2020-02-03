@@ -1,7 +1,7 @@
 ---
-title: "Exercise 1.10 - System Roles with Ansible"
+title: "Exercise 1.9 - System Roles with Ansible"
 workshops: rhel_8
-workshop_weight: 20
+workshop_weight: 19
 layout: lab
 ---
 
