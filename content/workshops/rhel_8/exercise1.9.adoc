@@ -16,7 +16,7 @@ layout: lab
 = Exercise 1.10: System Roles with Ansible
 
 == Exercise Description
-Red Hat Enterprise Linux (RHEL) 7.4 introduced RHEL System Roles as a collection of Ansible roles and modules that provide a stable and consistent configuration interface to remotely manage RHEL 6.10 and later versions of Red Hat Enterprise Linux. The effort is based on development of the Linux System Roles (link: https://linux-system-roles.github.io/upstream)  project. The following roles are provided and supported as follows:
+RHEL 7.4 introduced RHEL System Roles, a collection of Ansible roles and modules that provide a stable and consistent configuration interface for remote management of Red Hat Enterprise Linux.  These System Roles are applicable to RHEL 6.10 and above, easing management of 3 generations of RHEL.  The effort is based on development of the Linux System Roles project (link: https://linux-system-roles.github.io/upstream). The following roles are provided and supported as follows:
 
 There are five roles available on RHEL 8:
 
@@ -26,6 +26,7 @@ There are five roles available on RHEL 8:
 * timesync
 * storage
 
+For further information, see the Ansible Quick-Start Guide for Sysadmins (https://www.redhat.com/en/blog/system-administrators-guide-getting-started-ansible-fast) or Quick Start Video (https://www.ansible.com/resources/videos/quick-start-video) for help learning how to use Ansible.
 
 == Section 1: Installing RHEL System Roles and Ansible
 
@@ -74,7 +75,6 @@ This example assumes the following:
 * Generally, Ansible is not installed on every system, but rather on a single system designated as the Ansible management or control node who's purpose is to manage other systems via Ansible.
 * Since we're running Ansible on the same instance we're changing, the target of the Ansible playbook is `localhost`.
 * We've added a 2nd network interface to our test system, `eth1`.
-* For further details, see the Ansible Getting Started (link?) or Quick Start Video at http://docs.ansible.com/ for further details on how to use Ansible.
 
 === Step 1:
 
