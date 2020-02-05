@@ -27,7 +27,7 @@ As root, use `yum` to see what streams are available, for PostgreSQL:
 sudo yum module list postgresql
 ----
 
-There are two versions of postgresql available as modules in the Application Stream, version 9.6 and version 10.
+There are three versions of postgresql available as modules in the Application Stream, versions 9.6, 10 and 12.
 
 PostgreSQL version 10 is set as the default, meaning if someone installed postgresql with no specific options or arguments, version 10 would be the one installed.
 

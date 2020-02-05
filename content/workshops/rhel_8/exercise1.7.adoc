@@ -39,7 +39,7 @@ Ensure the OpenSCAP scanner and definitions are installed with the command below
 sudo yum install openscap-scanner scap-security-guide
 ----
  
-The `scap-security-guide` package contains prepared system profiles for several RHEL releases and system types; they are installed under `/usr/share/xml/scap/ssg/content`.  +
+The ##scap-security-guide## package contains prepared system profiles for several RHEL releases and system types; they are installed under */usr/share/xml/scap/ssg/content*.  +
 You can get a summary of the profiles in a given definition file with the following command:
 [source, bash]
 ----
@@ -76,12 +76,11 @@ Dictionaries:
 	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-dictionary.xml
 ....
 
-Looking about half-way down, you can see that this file contains two profiles:  one for PCI-DSS and another for OSPP.
+Looking about half-way down, you can see that this file contains two profiles:  one for PCI-DSS and another for OSPP.  The OSPP profile is a general-purpose profile, so it's a good choice for testing.
 
 == Section 2: Perform an initial compliance scan
 
-The OSPP profile is a general-purpose profile, so it's a good place to start. +
-To perform a basic compliance scan using the OSPP profile for RHEL 8, run the following command; the profile is specified by supplying the `Id` field from the output above:
+To perform a basic compliance scan using the OSPP profile for RHEL 8, run the following command; the profile is specified by supplying the ##Id## field from the output above:
 [source, bash]
 ----
 sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /tmp/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
@@ -107,8 +106,8 @@ sudo chmod a+x /tmp/ospp-bash-fix.sh
 sudo /tmp/ospp-bash-fix.sh
 ----
 
-OPTIONAL:  reboot the system to enable the changes.
-[source, bash]
-----
-sudo init 6
-----
+// OPTIONAL:  reboot the system to enable the changes.
+// [source, bash]
+// ----
+// sudo init 6
+// ----
