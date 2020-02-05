@@ -1,5 +1,5 @@
 ---
-title: TBD
+title: Building a Microservice
 workshops: openshift_service_mesh
 workshop_weight: 21
 layout: lab

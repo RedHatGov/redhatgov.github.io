@@ -1,5 +1,5 @@
 ---
-title: TBD
+title: Kiali
 workshops: openshift_service_mesh
 workshop_weight: 23
 layout: lab

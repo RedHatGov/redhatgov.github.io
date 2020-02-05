@@ -1,5 +1,5 @@
 ---
-title: TBD
+title: mTLS
 workshops: openshift_service_mesh
 workshop_weight: 51
 layout: lab

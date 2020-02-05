@@ -1,5 +1,5 @@
 ---
-title: TBD
+title: Securing Ingress and Egress
 workshops: openshift_service_mesh
 workshop_weight: 54
 layout: lab

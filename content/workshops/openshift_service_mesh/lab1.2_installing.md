@@ -1,5 +1,5 @@
 ---
-title: TBD
+title: Installing Istio
 workshops: openshift_service_mesh
 workshop_weight: 12
 layout: lab

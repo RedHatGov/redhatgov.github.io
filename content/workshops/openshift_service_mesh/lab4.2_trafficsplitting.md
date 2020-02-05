@@ -1,5 +1,5 @@
 ---
-title: TBD
+title: Traffic Splitting
 workshops: openshift_service_mesh
 workshop_weight: 42
 layout: lab

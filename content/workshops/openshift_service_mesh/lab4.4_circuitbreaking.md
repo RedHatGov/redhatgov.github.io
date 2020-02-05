@@ -1,5 +1,5 @@
 ---
-title: TBD
+title: Circuit Breaking
 workshops: openshift_service_mesh
 workshop_weight: 44
 layout: lab

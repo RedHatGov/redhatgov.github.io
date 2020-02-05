@@ -1,5 +1,5 @@
 ---
-title: TBD
+title: Deploying an App
 workshops: openshift_service_mesh
 workshop_weight: 13
 layout: lab
