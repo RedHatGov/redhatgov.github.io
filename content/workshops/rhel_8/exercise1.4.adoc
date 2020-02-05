@@ -49,7 +49,7 @@ You can export your recorded sessions and their logs and copy them.
 
 The following procedure shows how to export recorded sessions on a local system.
 
-1.5.1: Run the journalctl -o export command:
+1.5.1: Run the `journalctl -o export` command in a terminal session:
 
 [source,bash]
 ----
@@ -63,7 +63,7 @@ You can then copy the exported file to the `/var/log/journal/` directory on anot
 You can also create the `/var/log/journal/remote/` directory for exported files from remote hosts.
 
 
-== Section 2. PLAYING BACK RECORDED SESSIONS
+== Section 2. Playing Back Recorded Sessions
 
 There are two possibilities for replaying recorded sessions.
 The first one is to use the `tlog-play` command-line utility.

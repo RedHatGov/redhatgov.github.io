@@ -200,10 +200,10 @@ The terminal module provides command-line access to the system, similar to an SS
 
 [source, bash]
 ----
-podman pull docker://docker.io/library/busybox
+sudo podman pull docker://docker.io/library/busybox
 ----
 
-Now if you return to the Podman Containers tab (above, in Section 5), you should see this image listed.  You'll see more of podman later in Exercise 4.
+Now if you return to the Podman Containers tab (above, in Section 5), you should see this image listed; you may be prompted to start the Podman service as well.  You'll see more of podman later in Exercise 8.
 
 ===== Example 2: Try the Skopeo command
 
@@ -211,7 +211,7 @@ Skopeo provides the ability to inspect container images stored in a registry. Th
 
 [source, bash]
 ----
-skopeo inspect docker://docker.io/library/busybox
+sudo skopeo inspect docker://docker.io/library/busybox
 ----
 
 ===== Example 3: List firewall rules
