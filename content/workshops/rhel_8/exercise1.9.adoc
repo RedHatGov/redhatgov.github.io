@@ -78,16 +78,17 @@ This example assumes the following:
 
 === Step 1:
 
-Using a text editor (like `vim`), create a file with these contents.  Watch your spacing carefully, using 2 spaces only when you indent:
+Take a look at the networking playbook that we have provided:
 
 [source, bash]
 ----
-vim example-network-playbook.yml
+cat example-network-playbook.yml
 ----
 
 ....
 ---
 - hosts: localhost
+  become: yes
   vars:
     network_connections:
       - name: DBnic
@@ -99,10 +100,12 @@ vim example-network-playbook.yml
           dhcp4: no
           auto6: no
           address:
-           - 10.10.10.10/24
+           - "10.10.10.{{ 254 | random( start=2) }}/24"
   roles:
     - role: rhel-system-roles.network
 ....
+
+As you can probably tell, this playbook creates a network interface called `DBnic`, with an IPv4 address of `10.10.10.<something>`, and brings it up. This is just a simple example of what can be done with the system network role.
 
 === Step 2:
 
