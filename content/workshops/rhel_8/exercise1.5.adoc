@@ -37,6 +37,15 @@ DEFAULT is one of the four crypto policies, along with LEGACY, FIPS 140, and FUT
 
 `man crypto-policies`
 
+To see the effect of the DEFAULT policy, try pasting in this command:
+
+[source, bash]
+----
+timeout 3 openssl s_client --connect tls-v1-1.badssl.com:1011
+----
+
+You can see from the 2nd line of output that it cannot make a TLS connection to that site, and reports "unsupported protocol".
+
 Now let's change the default crypto policy from DEFAULT to something less secure, just for testing purposes.  We'll set the crypto policy to LEGACY to temporarily allow insecure TLS 1.1 communication from our system.
 
 Change the crypto policy to LEGACY.
@@ -44,8 +53,8 @@ Change the crypto policy to LEGACY.
 ----
 sudo update-crypto-policies --set LEGACY
 ----
-And now let's test communication to an insecure TLS 1.1 site.
+And now let's test communication to the same site; now it connects, and reports TLS v1.1:
 [source, bash]
 ----
-wget https://tls-v1-1.badssl.com:1011/
+timeout 3 openssl s_client --connect tls-v1-1.badssl.com:1011 | grep Protocol
 ----
