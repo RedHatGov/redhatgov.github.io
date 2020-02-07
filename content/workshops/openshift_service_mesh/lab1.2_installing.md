@@ -103,7 +103,7 @@ List all the Istio components:
 oc get pods -n istio-system
 ```
 
-You should see the following:
+Output:
 
 ```
 NAME                                      READY   STATUS    RESTARTS   AGE
@@ -123,6 +123,13 @@ prometheus-xxxxxxxxx-xxxxx               2/2     Running   0          19m
 
 The primary control plane components are [Pilot][2], [Mixer][3], and [Citadel][4].  Pilot handles traffic management.  Mixer handles policy and telemetry.  Citadel handles security.
 
+Lastly, we need to add a project to our service mesh.  This is called a [Member Roll][5] resource.  Create the member roll resource for project `microservices-demo`:
+
+```
+oc apply -f ./servicemesh-memberroll.yaml
+```
+
+We will create the `microservices-demo` project in the next lab.
 
 Congratulations, you installed Istio!
 
@@ -130,6 +137,6 @@ Congratulations, you installed Istio!
 [2]: https://istio.io/docs/concepts/traffic-management/
 [3]: https://istio.io/docs/concepts/observability/
 [4]: https://istio.io/docs/concepts/security/
-
+[5]: https://docs.openshift.com/container-platform/4.1/service_mesh/service_mesh_install/installing-ossm.html#ossm-member-roll_installing-ossm
 
 {{< importPartial "footer/footer.html" >}}
