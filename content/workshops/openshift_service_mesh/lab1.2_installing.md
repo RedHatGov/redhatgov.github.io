@@ -57,7 +57,7 @@ Navigate to the directory for installing Istio:
 cd openshift-microservices/deployment/install/istio
 ```
 
-Start by installing the Istio Operator[1].  The operator is used to install and manage Istio in the cluster.
+Start by installing the Istio [Operator][1].  The operator is used to install and manage Istio in the cluster.
 
 ```
 oc apply -f ./istio-operator.yaml
@@ -121,7 +121,7 @@ kiali-xxxxxxxxx-xxxxx                    1/1     Running   0          16m
 prometheus-xxxxxxxxx-xxxxx               2/2     Running   0          19m
 ```
 
-The primary control plane components are Pilot[2], Mixer[3], and Citadel[4].  Pilot handles traffic management.  Mixer handles policy and telemetry.  Citadel handles security.
+The primary control plane components are [Pilot][2], [Mixer][3], and [Citadel][4].  Pilot handles traffic management.  Mixer handles policy and telemetry.  Citadel handles security.
 
 
 Congratulations, you installed Istio!
