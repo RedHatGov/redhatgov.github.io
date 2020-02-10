@@ -1,0 +1,153 @@
+---
+title: "Exercise 6 - Changing the Filesystem"
+workshops: containers_the_hard_way
+workshop_weight: 80
+layout: lab
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/containers_the_hard_way/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+
+= Exercise 6 - Changing the Filesystem
+
+== Exercise 6.1 - Some Background
+
+All of that is well and good. However, containers are great because they allow us to package and distribute software. All we've done is isolate some Linux processes. Where's the beef?
+
+Containers get their root filesystem from a container image file. This is typically pulled from a registry. This file is, essentially, a TAR archive with the root filesystem contents and some metadata. Those contents are then made available to the running container through use of an Overlay Filesystem. The Overlay Filesystem mechanism allows the container to use the files provided by the image and make ephemeral changes to those files.
+
+This is how Overlay Filesystems work. There are four directories: LOWER, UPPER, WORK, and MOUNT. The LOWER directory contains the filesystem's initial state. This is the contents of the container image and can be read only. The UPPER directory is where runtime changes will be stored and must be read/write. The WORK directory is where runtime changes are staged and must be read/write. Finally, the MOUNT directory is simply a directory where the OverlayFS is mounted and presented as a single filesystem. This is the directory we will chroot our container into.
+
+Strictly speaking, there are other backend storage methods that can be used with containers. However, OverlayFS has become quite popular lately and it is the one used by podman.
+
+== Exercise 6.2 - Fetch Dependencies
+
+For these exercises, we will need two things: Fuse and Skopeo. Run the following command as root.
+
+[source, bash]
+----
+yum install -y fuse3 skopeo
+----
+
+Fuse is a Linux utilty that allows Filesystems to be run in user space instead of Kernel space. This allows non-priviledged users to create and mount filesystems.
+Skopeo is a utility for interacting with remote container registries without the need to a container runtime engine.
+
+Now we want to download the contents of the Fedora image stored on Docker Hub.
+
+[source, bash]
+----
+su - rhel  # if necessary
+skopeo copy docker://docker.io/library/fedora:31 dir:fedora
+----
+....
+Getting image source signatures
+Copying blob d318c91bf2a8 done
+Copying config f0858ad3fe done
+Writing manifest to image destination
+Storing signatures
+....
+
+== Exercise 6.3 - What's in an Image
+
+If you have worked with containers before, you will have a general notion of image files. However, you have probably never seen one. They usually get stashed away in `/var/lib/containers` or `/var/lib/docker` and you interact with them only through the orchestration of your container engine. Today we will change all that.
+We have downloaded the fedora:31 image and saved it to a folder called `fedora`. Change into this directory and list the contents.
+
+[source, bash]
+----
+cd fedora
+ls -la
+----
+....
+total 65224
+drwxr-xr-x. 2 rhel rhel      186 Feb  6 04:29 .
+drwx------. 5 rhel rhel      155 Feb  6 04:29 ..
+-rw-r--r--. 1 rhel rhel 66774261 Feb  6 04:29 d318c91bf2a81634e0283fb7e7362efdd7c21164b60b74498360756dc82a95d9
+-rw-r--r--. 1 rhel rhel     2199 Feb  6 04:29 f0858ad3febdf45bb2e5501cb459affffacef081f79eaa436085c3b6d9bd46ca
+-rw-r--r--. 1 rhel rhel      529 Feb  6 04:29 manifest.json
+-rw-r--r--. 1 rhel rhel       33 Feb  6 04:29 version
+....
+
+Here we have a few files:
+- *version* contains the OCI file format spec information for this image
+- *manifest.json* contains information regarding the contents of the image
+- *f085...* contains the image metadata. We know that because it is small in file size.
+- *d318...* contains the image layer. This image contains only one layer, but some will contain more than one. These layers get stacked to create the base filesystem. We know this is a layer because its file size is quite large.
+
+Now let's extract the contents of the layer.
+
+[source, bash]
+----
+mkdir ../LOWER
+cd ../LOWER
+tar xf ../fedora/d318c91bf2a81634e0283fb7e7362efdd7c21164b60b74498360756dc82a95d9
+ls -la
+cd ..
+----
+....
+total 4
+lrwxrwxrwx.  1 rhel rhel    7 Jul 24  2019 bin -> usr/bin
+dr-xr-xr-x.  2 rhel rhel    6 Jul 24  2019 boot
+drwxr-xr-x.  2 rhel rhel    6 Oct 28 01:47 dev
+drwxr-xr-x. 47 rhel rhel 4096 Oct 28 01:48 etc
+drwxr-xr-x.  2 rhel rhel    6 Jul 24  2019 home
+lrwxrwxrwx.  1 rhel rhel    7 Jul 24  2019 lib -> usr/lib
+lrwxrwxrwx.  1 rhel rhel    9 Jul 24  2019 lib64 -> usr/lib64
+drwx------.  2 rhel rhel    6 Oct 28 01:47 lost+found
+drwxr-xr-x.  2 rhel rhel    6 Jul 24  2019 media
+drwxr-xr-x.  2 rhel rhel    6 Jul 24  2019 mnt
+drwxr-xr-x.  2 rhel rhel    6 Jul 24  2019 opt
+drwxr-xr-x.  2 rhel rhel    6 Oct 28 01:47 proc
+dr-xr-x---.  2 rhel rhel  196 Oct 28 01:48 root
+drwxr-xr-x. 13 rhel rhel  186 Oct 28 01:48 run
+lrwxrwxrwx.  1 rhel rhel    8 Jul 24  2019 sbin -> usr/sbin
+drwxr-xr-x.  2 rhel rhel    6 Jul 24  2019 srv
+drwxr-xr-x.  2 rhel rhel    6 Oct 28 01:47 sys
+drwxrwxr-x.  2 rhel rhel   32 Oct 28 01:48 tmp
+drwxr-xr-x. 12 rhel rhel  144 Oct 28 01:47 usr
+drwxr-xr-x. 18 rhel rhel  235 Oct 28 01:47 var
+....
+
+What we have just extracted is a Fedora 31 system's root filesystem!
+
+== Exercise 6.4 - Create an Overlay Filesystem
+
+Now let's use the LOWER directory we just populated to create an OverlayFS.
+
+[source, bash]
+----
+mkdir UPPER WORK ROOTFS
+fuse-overlayfs -olowerdir=LOWER,upperdir=UPPER,workdir=WORK ROOTFS
+----
+....
+uid=unchanged
+uid=unchanged
+upperdir=/home/rhel/UPPER
+workdir=WORK
+lowerdir=LOWER
+mountpoint=ROOTFS
+....
+
+Now you can explore the ROOTFS directory. You'll notice it is a replica of the LOWER dir. As you make changes to ROOTFS, those changes will appear in UPPER.
+
+== Exercise 6.4 - Create a Fedora Container
+
+Let's add a chroot to our namespace skills to create a container.
+
+[source, bash]
+----
+unshare -mipunUrf chroot ROOTFS /bin/bash
+mount -t proc none /proc
+mount -t sysfs none /sys
+cat /etc/redhat-release
+----
+....
+Fedora release 31 (Thirty One)
+....
+
+And there we have it. A bona fide Fedora container! Feel free to poke around the container a bit. Because the Fedora image is very barebones, you won't be able to do much. Type exit when you are done.
+
+{{< importPartial "footer/footer.html" >}}

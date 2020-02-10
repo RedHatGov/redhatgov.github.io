@@ -1,0 +1,25 @@
+---
+title: "Wrapup"
+workshops: containers_the_hard_way
+workshop_weight: 100
+layout: lab
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/containers_the_hard_way/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+
+== Wrap Up and Q&A
+
+That wraps up what we have planned for today.
+
+We explored Linux Namespaces and the unshare command in great depth. Obviously container enginers make heavy use of these namespaces. Their job is to orchestrate the namespaces, OverlayFS, image files, and active containers so you don't have to. Obviously, you wouldn't run containers this way in production, but there may be times that you'd like to make use of namespaces. For example, did you know that Ansible Tower uses namespaces to create isolated environments for running Ansible code? By segragating untrusted code with namespaces, you can maintain a higher degree of security. Chromium uses namespaces for isolating JavaScript code downloaded from the web. Pretty cool, huh?
+
+Then we explored Overlay Filesystems and Container Networking basics. These are the extra bits that make containers work.
+
+All container engines, be it podman, docker, rkt, etc... They all use the same Linux components. Now that the Registry API and Image File Format have been standardized, the underlying container engine can be changed with little affect to the runtime environment. Open source and open standards have provided a vast amount of flexibility.
+
+Thank you for your time and participation!
