@@ -1,0 +1,95 @@
+---
+title: "Exercise 1 - The Mount Namespace"
+workshops: containers_the_hard_way
+workshop_weight: 20
+layout: lab
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/containers_the_hard_way/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+= Exercise 1 - The Mount Namespace
+
+== Exercise 1.1: Unsharing is Caring
+
+New Linux Namespaces are typically spawned by using either the `clone` or `unshare` system calls. These exist as C functions but wrappers exist in many other languages. For our purposes today, we will be using the `unshare` command which is ostensibly a Bash wrapper to the `unshare` system call.
+
+[source, bash]
+----
+unshare --help
+----
+....
+Usage:
+ unshare [options] [<program> [<argument>...]]
+
+Run a program with some namespaces unshared from the parent.
+
+Options:
+ -m, --mount[=<file>]      unshare mounts namespace
+ -u, --uts[=<file>]        unshare UTS namespace (hostname etc)
+ -i, --ipc[=<file>]        unshare System V IPC namespace
+ -n, --net[=<file>]        unshare network namespace
+ -p, --pid[=<file>]        unshare pid namespace
+ -U, --user[=<file>]       unshare user namespace
+ -C, --cgroup[=<file>]     unshare cgroup namespace
+ -f, --fork                fork before launching <program>
+     --kill-child[=<signame>]  when dying, kill the forked child (implies --fork); defaults to SIGKILL
+     --mount-proc[=<dir>]  mount proc filesystem first (implies --mount)
+ -r, --map-root-user       map current user to root (implies --user)
+     --propagation slave|shared|private|unchanged
+                           modify mount propagation in mount namespace
+ -s, --setgroups allow|deny  control the setgroups syscall in user namespaces
+
+ -h, --help                display this help
+ -V, --version             display version
+
+For more details see unshare(1).
+....
+
+== Exercise 1.2: The Mount Namespace
+
+The Mount Namespace is the part of the Kernel that stores the mount table. When our sandboxed environment runs in a new Mount Namespace, it can mount filesystems not present on the host.
+
+Let's explore this. First, we are going to create a new mount namespace and start a Bash shell inside that namespace.
+
+[source, bash]
+----
+unshare -m /bin/bash
+----
+
+- The `unshare` command wraps the `unshare` Kernel call
+- The `-m` flag tells `unshare` that we would like a new Mount Namespace
+- `/bin/bash` tells `unshare` what program to run after creating the new namespace
+
+Now let's mount something in our workspace.
+
+[source, bash]
+----
+mount -t tmpfs tmpfs /mnt
+mount | grep mnt
+----
+....
+tmpfs on /mnt type tmpfs (rw,relatime,seclabel)
+....
+
+If you switch to another terminal, one that is in the native namespaces, running the `mount` command will show nothing mounted to `/mnt`.
+
+On the terminal that is in the new mount namespace, let's create a file.
+
+[source, bash]
+----
+date > /mnt/test
+cat /mnt/test
+----
+....
+Wed Feb  5 20:31:32 EST 2020
+....
+
+If you switch to the other terminal in the native namespaces, look for our new file at `/mnt/test` and you should see that it does not exist outside of our sandbox. You have mount namespaces to thank for that!
+
+On the terminal that is in the new mount namespace, type `exit` to return to the native namespaces.
+
+{{< importPartial "footer/footer.html" >}}

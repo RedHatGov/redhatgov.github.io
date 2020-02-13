@@ -91,6 +91,7 @@ Complete the form using the following values.  Note that the `PLAYBOOK` field sh
 |PLAYBOOK|ospp-rhel8.yml
 |MACHINE CREDENTIAL|Ansible Workshop Credential
 |LIMIT|web
+|VERBOSITY|0(Normal)
 |OPTIONS
 a|
 - [*] Enable Privilege Escalation
