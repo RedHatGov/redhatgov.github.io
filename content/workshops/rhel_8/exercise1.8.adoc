@@ -230,7 +230,39 @@ Alternatively, if you would prefer to stop only a single container, you can util
 podman stop 11fcab28fd31
 ----
 
-=== Step 4: Removing a container
+
+=== Step 4: Cool podman tricks
+
+You can't run these right now, but they're really worth knowing about!
+
+==== Exporting a container definition for use in OpenShift
+If you've built and tested a container with podman, and are happy with the results, you can very easily share that container with OpenShift.
+----
+podman generate kube my-container > export.yaml
+----
+
+Take a look at the file to see what's in it.  If you were in an OpenShift project, you could then import this file with:
+----
+oc create -f export.yaml
+----
+
+This is an example of a single container export, but you can export complete pods as well.
+
+
+==== Generating a SystemD service definition
+You can also turn a container directly into a system service.  The following command will generate a ##systemd## service definition file:
+----
+podman generate systemd my-container > my-container.service
+----
+
+Then, copy the service definition into place and activate it:
+----
+sudo cp my-container.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now my-container.service
+----
+
+=== Step 5: Removing a container
 
 If a container will no longer be used, you can remove it from the system using ##podman rm##. In the command below, we use a bit of bash scripting to determine the CONTAINER ID as it is unique to each container image.
 ```bash
