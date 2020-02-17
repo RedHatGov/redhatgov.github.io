@@ -31,12 +31,12 @@ You can read more about the project at `http://www.open-scap.org/` and the repos
 
 In the following exercises we'll use the CLI to show how you can validate system compliance.  There are other tools as well, including a GUI utility and another for scanning container images.
 
-== Section 1: Ensure the OpenSCAP scanner is installed
+== Section 1: Ensure httpd and the OpenSCAP scanner are installed
 
-Ensure the OpenSCAP scanner and definitions are installed with the command below; it's safe to run even if the packages already exist:
+Ensure Apache httpd plus the OpenSCAP scanner and definitions are installed with the command below; it's safe to run even if the packages already exist:
 [source, bash]
 ----
-sudo yum install openscap-scanner scap-security-guide
+sudo yum install -y httpd openscap-scanner scap-security-guide
 ----
  
 The ##scap-security-guide## package contains prepared system profiles for several RHEL releases and system types; they are installed under */usr/share/xml/scap/ssg/content*.  +
@@ -111,3 +111,7 @@ sudo /tmp/ospp-bash-fix.sh
 // ----
 // sudo init 6
 // ----
+
+//sed -i 's/^Listen.*$/Listen 0.0.0.0:80/' /etc/httpd/conf/httpd.conf
+//systemctl enable --now httpd
+//
