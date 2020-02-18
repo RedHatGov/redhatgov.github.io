@@ -42,9 +42,10 @@ You should see two services running `svc/openshift` and `svc/kubernetes`.
 ## Application Code
 Next we need a local copy of our application code.  The application code includes the resources to install Istio.
 
-Clone the repository:
+Clone the repository in your home directory:
 
 ```
+cd $HOME
 git clone https://github.com/dudash/openshift-microservices.git
 ```
 
@@ -54,7 +55,7 @@ Let's install Istio in our cluster.
 Navigate to the directory for installing Istio:
 
 ```
-cd openshift-microservices/deployment/install/istio
+cd $HOME/openshift-microservices/deployment/install/istio
 ```
 
 Start by installing the Istio [Operator][1].  The operator is used to install and manage Istio in the cluster.

@@ -11,7 +11,7 @@ It's time to deploy your microservices application.  The application you are wor
 
 *Show architecture*
 
-Some of the microservices include the UI, the boards application, and the context scraper.  In this scenario, we are going to deploy these services and then add a new user profile service.
+Some of the microservices include SSO, user interface, the boards application, and the context scraper.  In this scenario, we are going to deploy these services and then add a new user profile service.
 
 
 ## Deploy Microservices
@@ -19,7 +19,7 @@ Some of the microservices include the UI, the boards application, and the contex
 Navigate to the application resources.
 
 ``
-cd ../microservices/openshift-configuration
+cd $HOME/openshift-microservices/deployment/install/microservices/openshift-configuration
 ``
 
 We are going to build the application images from source code and then deploy the resources in the cluster.
@@ -65,7 +65,7 @@ oc new-app -f ./context-scraper-fromsource.yaml \
   -p GIT_URI=https://github.com/dudash/openshift-microservices.git
 ```
 
-Deploy the app UI:
+Deploy the app user interface:
 ```
 oc new-app -f ./app-ui-fromsource.yaml \
   -p APPLICATION_NAME=app-ui \
@@ -74,13 +74,19 @@ oc new-app -f ./app-ui-fromsource.yaml \
   -p GIT_URI=https://github.com/dudash/openshift-microservices.git
 ```
 
+Deploy SSO:
+```
+oc new-app -f ./sso73-x509-https.yaml \
+  -p APPLICATION_NAME=sso
+```
+
 Watch the microservices demo installation:
 
 ```
 oc get pods -n microservices-demo --watch
 ```
 
-Wait a couple minutes.  You should see the `app-ui`, `boards`, and `context-scraper` pods running.  For example:
+Wait a couple minutes.  You should see the `app-ui`, `boards`, `context-scraper`, and `sso` pods running.  For example:
 
 ```
 NAME                       READY   STATUS      RESTARTS   AGE
@@ -95,12 +101,16 @@ boards-mongodb-1-deploy    0/1     Completed   0          64m
 context-scraper-1-build    0/1     Completed   0          64m
 context-scraper-1-xxxxx    2/2     Running     0          62m
 context-scraper-1-deploy   0/1     Completed   0          62m
+sso73-x509-1-xxxxx         2/2     Running     0          62m
+sso73-x509-1-deploy        1/1     Completed   0          62m
 ```
+
+Each microservices pod runs two containers: the application itself and the Istio proxy.
 
 Print the containers in the `app-ui` pod:
 
 ```
-oc get pods -l app=app-ui -o jsonpath='{.items[*].spec.containers[*].name}{"\n"}'clear
+oc get pods -l app=app-ui -o jsonpath='{.items[*].spec.containers[*].name}{"\n"}'
 ```
 
 Output:
@@ -108,9 +118,44 @@ Output:
 app-ui istio-proxy
 ```
 
+## Access Application
 
+The application is deployed!  But we need a way to access the application via the user interface.
 
+Istio provides a [Gateway][1] resource, which is a load balancer at the edge of the service mesh that accepts incoming connections.  We need to deploy a Gateway resource and configure it to route to the application user interface.
 
+Navigate to the Istio resources.
+```
+cd $HOME/openshift-microservices/deployment/install/microservices/istio-configuration
+```
 
+Deploy the Gateway and routing rules:
+```
+oc apply -f ./ingress-gateway.yaml
+```
+
+For the last step, we need the endpoint of the load balancer that is accepting connections for our application.  This is the `istio-ingressgateway` in our service mesh.
+
+Export the URL of this gateway:
+```
+export GATEWAY_URL=$(oc -n istio-system get route istio-ingressgateway -o jsonpath='{.spec.host}')
+echo $GATEWAY_URL
+```
+
+Navigate to this URL in the browser.  For example:
+
+```
+https://istio-ingressgateway-istio-system.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443 
+```
+
+You should see the application user interface.  Try creating a new board and posting to the shared board.
+
+For example:
+
+*Application user interface*
+
+Congratulations, you installed the microservices application!
+
+[1]: https://istio.io/docs/reference/config/networking/gateway/
 
 {{< importPartial "footer/footer.html" >}}
