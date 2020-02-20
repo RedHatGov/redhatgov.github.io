@@ -59,7 +59,7 @@ oc get pods -l app=userprofile --watch
 Output:
 ```
 userprofile-1-xxxxx              2/2     Running		    0          2m55s
-userprofile-postgresql-1-xxxxx   1/1     Running            0          2m55s
+userprofile-postgresql-1-xxxxx   2/2     Running            0          2m55s
 ```
 
 Similar to the other microservices, the user profile services run the application and the Istio proxy.
