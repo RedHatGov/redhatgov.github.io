@@ -1,7 +1,7 @@
 ---
 title: "Wrapup"
 workshops: containers_the_hard_way
-workshop_weight: 100
+workshop_weight: 95
 layout: lab
 ---
 
