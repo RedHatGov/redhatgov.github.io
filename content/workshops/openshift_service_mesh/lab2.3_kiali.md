@@ -16,7 +16,7 @@ Istio provides [Kiali][1], an open source project that gives you a console view 
 Let's open the Kiali console.  Retrieve the endpoint for Kiali:
 
 ```
-export KIALI_CONSOLE=$(oc get routes kiali -n istio-system -o jsonpath='{.spec.host}{"\n"}')
+KIALI_CONSOLE=$(oc get routes kiali -n istio-system -o jsonpath='{.spec.host}{"\n"}')
 echo $KIALI_CONSOLE
 ```
 

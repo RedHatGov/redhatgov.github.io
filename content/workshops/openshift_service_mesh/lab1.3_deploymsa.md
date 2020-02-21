@@ -157,9 +157,9 @@ oc apply -f ./ingress-gateway.yaml
 
 For the last step, we need the endpoint of the load balancer that is accepting connections for our application.  This is the 'istio-ingressgateway' in our service mesh.
 
-Export the URL of this gateway:
+Retrieve the URL of this gateway:
 ```
-export GATEWAY_URL=$(oc -n istio-system get route istio-ingressgateway -o jsonpath='{.spec.host}')
+GATEWAY_URL=$(oc -n istio-system get route istio-ingressgateway -o jsonpath='{.spec.host}')
 echo $GATEWAY_URL
 ```
 

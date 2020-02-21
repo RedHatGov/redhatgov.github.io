@@ -33,7 +33,7 @@ Output:
 
 Before deploying the service, you need to a reference to the local image you built in the previous lab.
 ```
-export USER_PROFILE_IMAGE_URI=$(oc get is userprofile -o jsonpath='{.status.dockerImageRepository}{"\n"}')
+USER_PROFILE_IMAGE_URI=$(oc get is userprofile -o jsonpath='{.status.dockerImageRepository}{"\n"}')
 echo $USER_PROFILE_IMAGE_URI
 ```
 
