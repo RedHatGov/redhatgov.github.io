@@ -23,7 +23,7 @@ Once logged in, you should see the following:
 
 *Login image here*
 
-You will use the OpenShift `oc` CLI  to execute commands for the majority of this lab.  Login using API endpoint and remember to add the `--insecure-skip-tls-verify=true` flag.
+You will use the OpenShift 'oc' CLI  to execute commands for the majority of this lab.  Login using API endpoint and remember to add the '--insecure-skip-tls-verify=true' flag.
 
 For example:
 
@@ -37,7 +37,7 @@ Check the status of the cluster:
 oc status
 ```
 
-You should see two services running `svc/openshift` and `svc/kubernetes`.
+You should see two services running 'svc/openshift' and 'svc/kubernetes'.
 
 ## Application Code
 Next we need a local copy of our application code.  The application code includes the resources to install Istio.
@@ -74,7 +74,7 @@ The Istio operator should be in a running state.  For example:
 istio-operator-xxxxxxxxx-xxxxx   1/1   Running   0     17s
 ```
 
-Once the operator is running, install the Istio control plane in its own namespace `istio-system`:
+Once the operator is running, install the Istio control plane in its own namespace 'istio-system':
 
 ```
 oc new-project istio-system
@@ -124,13 +124,13 @@ prometheus-xxxxxxxxx-xxxxx               2/2     Running   0          19m
 
 The primary control plane components are [Pilot][2], [Mixer][3], and [Citadel][4].  Pilot handles traffic management.  Mixer handles policy and telemetry.  Citadel handles security.
 
-Lastly, we need to add a project to our service mesh.  This is called a [Member Roll][5] resource.  Create the member roll resource for project `microservices-demo`:
+Lastly, we need to add a project to our service mesh.  This is called a [Member Roll][5] resource.  Create the member roll resource for project 'microservices-demo':
 
 ```
 oc apply -f ./servicemesh-memberroll.yaml
 ```
 
-We will create the `microservices-demo` project in the next lab.
+We will create the 'microservices-demo' project in the next lab.
 
 Congratulations, you installed Istio!
 

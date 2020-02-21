@@ -18,21 +18,21 @@ Some of the microservices include SSO, user interface, the boards application, a
 
 Navigate to the application resources.
 
-``
+```
 cd $HOME/openshift-microservices/deployment/install/microservices/openshift-configuration
-``
+```
 
 We are going to build the application images from source code and then deploy the resources in the cluster.
 
-Create a new project for the microservices.  The project `microservices-demo` was already added to the service mesh in the previous lab.
+Create a new project for the microservices.  The project 'microservices-demo' was already added to the service mesh in the previous lab.
 
 ```
 oc new-project microservices-demo --display-name="OpenShift Microservices Demo"
 ```
 
-The source files are labeled `{microservice}-fromsource.yaml`.  In each file, an annotation `sidecar.istio.io/inject` was added to tell Istio to inject a sidecar proxy.
+The source files are labeled '{microservice}-fromsource.yaml'.  In each file, an annotation 'sidecar.istio.io/inject' was added to tell Istio to inject a sidecar proxy.
 
-Verify the annotation in the `app-ui` file:
+Verify the annotation in the 'app-ui' file:
 ```
 cat app-ui-fromsource.yaml | grep -B 1 sidecar.istio.io/inject
 ```
@@ -86,7 +86,7 @@ Watch the microservices demo installation:
 oc get pods -n microservices-demo --watch
 ```
 
-Wait a couple minutes.  You should see the `app-ui`, `boards`, `context-scraper`, and `sso` pods running.  For example:
+Wait a couple minutes.  You should see the 'app-ui', 'boards', 'context-scraper', and 'sso' pods running.  For example:
 
 ```
 NAME                       READY   STATUS      RESTARTS   AGE
@@ -107,7 +107,7 @@ sso73-x509-1-deploy        1/1     Completed   0          62m
 
 Each microservices pod runs two containers: the application itself and the Istio proxy.
 
-Print the containers in the `app-ui` pod:
+Print the containers in the 'app-ui' pod:
 
 ```
 oc get pods -l app=app-ui -o jsonpath='{.items[*].spec.containers[*].name}{"\n"}'
@@ -134,7 +134,7 @@ Deploy the Gateway and routing rules:
 oc apply -f ./ingress-gateway.yaml
 ```
 
-For the last step, we need the endpoint of the load balancer that is accepting connections for our application.  This is the `istio-ingressgateway` in our service mesh.
+For the last step, we need the endpoint of the load balancer that is accepting connections for our application.  This is the 'istio-ingressgateway' in our service mesh.
 
 Export the URL of this gateway:
 ```

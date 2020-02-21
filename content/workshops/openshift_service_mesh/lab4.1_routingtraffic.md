@@ -11,7 +11,7 @@ One of Istio's core capabilities is the ability to dynamically control how servi
 
 The two core API objects for traffic management are the [Virtual Service][2] and the [Destination Rule][3].  The destination rule is for the owner of a microservice - what versions do I expose and what happens to traffic before it reaches my service?  The virtual service is for the client of a microservice - how do I want to route traffic to the microservice?
 
-For example, a destination rule can expose two versions of a service (e.g. `v1`, `v2`) and prescribe different load balancing policies for each version.  Then, a virtual service can split traffic to each of those versions when the microservice is called by a client.
+For example, a destination rule can expose two versions of a service (e.g. 'v1', 'v2') and prescribe different load balancing policies for each version.  Then, a virtual service can split traffic to each of those versions when the microservice is called by a client.
 
 ## Traffic Routing
 
@@ -50,7 +50,7 @@ spec:
 ...
 ```
 
-Most of the destination rules do not have specific configurations.  However, the `userprofile` destination rule exposes `subsets` - version of the service that can be called on.  You can see different load balancer policies for versions `1.0` and `2.0`.  By default, Istio uses `ROUND_ROBIN`.
+Most of the destination rules do not have specific configurations.  However, the 'userprofile' destination rule exposes 'subsets' - version of the service that can be called on.  You can see different load balancer policies for versions '1.0' and '2.0'.  By default, Istio uses 'ROUND_ROBIN' load balancing.
 
 View the virtual services in your favorite editor or via bash:
 ```
@@ -77,7 +77,7 @@ spec:
 ...
 ```
 
-Most of the virtual services do not have specific configurations.  However, the `userprofile` virtual service routes specifically to version `v2` of the `userprofile` microservice.
+Most of the virtual services do not have specific configurations.  However, the 'userprofile' virtual service routes specifically to version 'v2' of the 'userprofile' microservice.
 
 Let's deploy these routing rules:
 ```
@@ -118,7 +118,7 @@ userprofile-postgresql                                  [userprofile-postgresql]
 
 Let's test the application UI in the browser.
 
-Navigate to the `Profile` section in the header.  If you lost the URL, you can retrieve it via:
+Navigate to the 'Profile' section in the header.  If you lost the URL, you can retrieve it via:
 ```
 echo $GATEWAY_URL
 ```
@@ -131,12 +131,12 @@ There should be no change at this point.  We are routing to version 2 of the use
 
 Let's see what this looks like in Kiali.
 
-Navigate to `Graph` in the left navigation bar. If you lost the URL, you can retrieve it via:
+Navigate to 'Graph' in the left navigation bar. If you lost the URL, you can retrieve it via:
 ```
 echo $KIALI_CONSOLE
 ```
 
-Switch to the `Versioned app graph` view.  You should see the version of the user profile service being called, `2.0`.
+Switch to the 'Versioned app graph' view.  You should see the version of the user profile service being called, '2.0'.
 
 *Show versioned app graph with version 2*
 
@@ -165,7 +165,7 @@ spec:
         subset: v1
 ```
 
-In this configuration, you will route to `v1` of the virtual service.
+In this configuration, you will route to 'v1' of the virtual service.
 
 Deploy the change:
 ```
@@ -191,7 +191,7 @@ Spec:
 Events:          <none>
 ```
 
-In the application UI, navigate to the `Profile` section in the header.
+In the application UI, navigate to the 'Profile' section in the header.
 
 You should see the following:
 
@@ -199,9 +199,9 @@ You should see the following:
 
 We are now seeing version 1 of the user profile service!
 
-In Kiali, navigate to `Graph` in the left navigation bar.
+In Kiali, navigate to 'Graph' in the left navigation bar.
 
-Switch to the `Versioned app graph` view.  You should see the version of the user profile service being called, `1.0`.
+Switch to the 'Versioned app graph' view.  You should see the version of the user profile service being called, '1.0'.
 
 *Show versioned app graph with version 1*
 

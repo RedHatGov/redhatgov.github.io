@@ -13,14 +13,14 @@ You built the user profile service and now you need to deploy it into the servic
 
 Navigate to the application resources.
 
-``
+```
 cd $HOME/openshift-microservices/deployment/install/microservices/openshift-configuration
-``
+```
 
 
-The deployment file `userprofile.yaml` was created for you to deploy the application.  The file creates the user profile service and an accompanying PostgreSQL database.  Similar to the other source files, an annotation `sidecar.istio.io/inject` was added to tell Istio to inject a sidecar proxy and add this to the mesh.
+The deployment file 'userprofile.yaml' was created for you to deploy the application.  The file creates the user profile service and an accompanying PostgreSQL database.  Similar to the other source files, an annotation 'sidecar.istio.io/inject' was added to tell Istio to inject a sidecar proxy and add this to the mesh.
 
-Verify the annotation in the `userprofile` file:
+Verify the annotation in the 'userprofile' file:
 ```
 cat userprofile.yaml | grep -B 1 sidecar.istio.io/inject
 ```
@@ -64,7 +64,7 @@ userprofile-postgresql-1-xxxxx   2/2     Running            0          2m55s
 
 Similar to the other microservices, the user profile services run the application and the Istio proxy.
 
-Print the containers in the `userprofile` pod:
+Print the containers in the 'userprofile' pod:
 
 ```
 oc get pods -l deploymentconfig=userprofile -o jsonpath='{.items[*].spec.containers[*].name}{"\n"}'
@@ -79,7 +79,7 @@ userprofile istio-proxy
 
 The user profile service is deployed!  Let's test this in the browser.
 
-Navigate to the `Profile` section in the header.  If you lost the URL, you can retrieve it via:
+Navigate to the 'Profile' section in the header.  If you lost the URL, you can retrieve it via:
 ```
 echo $GATEWAY_URL
 ```

@@ -30,26 +30,27 @@ Navigate to this URL in the browser.  Login with the same credentials you were p
 <img src="../images/kiali-welcome.png" width="600"><br/>
  *Kiali Welcome*
 
-Let's take a look at the service mesh topology.  Navigate to `Graph` in the left navigation bar.  Change the window of the view on the right side from `Last 1m` to `Last 1h`.
+Let's take a look at the service mesh topology.  Navigate to 'Graph' in the left navigation bar.  Change the window of the view on the right side from 'Last 1m' to 'Last 1h'.
 
 *Show app graph*
 
-The graph shows the microservices in your service mesh and how they are connected.  
+The graph shows the microservices in your service mesh and how they are connected.
+
 > If you don't see connected microservices, navigate to the application UI in another tab via $GATEWAY_URL, add comments to the shared board, and view the profile page.  Refresh Kiali afterwards.  
 
-You can inspect information about the traffic being sent between the services via the edge labels.  Click `No edge labels` and switch to `Requests per second`.  You can now see HTTP traffic information between the microservices.
+You can inspect information about the traffic being sent between the services via the edge labels.  Click 'No edge labels' and switch to 'Requests per second'.  You can now see HTTP traffic information between the microservices.
 
 *Show app graph with edge labels*
 
-Let's take a look at the microservices running in your service mesh.  Navigate to  `Applications` in the left navigation bar.
+Let's take a look at the microservices running in your service mesh.  Navigate to  'Applications' in the left navigation bar.
 
 *Show app page*
 
-You can drill down into each microservice from this view.  Select `app-ui`.
+You can drill down into each microservice from this view.  Select 'app-ui'.
 
 *Show app-ui app page*
 
-You should see the `Health` of that microservice.  Navigate to the `Traffic` tab and you should see the inbound and outbound calls made from that microservice.
+You should see the 'Health' of that microservice.  Navigate to the 'Traffic' tab and you should see the inbound and outbound calls made from that microservice.
 
 *Show app-ui inbound/outbound page*
 

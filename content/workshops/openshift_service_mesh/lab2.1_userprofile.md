@@ -7,7 +7,7 @@ layout: lab
 
 # Building a Microservice
 
-In the browser, navigate to the `Profile` section in the header.  If you lost the URL, you can retrieve it via:
+In the browser, navigate to the 'Profile' section in the header.  If you lost the URL, you can retrieve it via:
 ```
 echo $GATEWAY_URL
 ```
@@ -25,9 +25,9 @@ Let's take a look at the code.  Navigate to the code directory:
 cd $HOME/git/openshift-microservices/code/userprofile/
 ```
 
-Your new application is written in Java, whereas the other backend components such as `app-ui` and `boards` are written in NodeJS.  One of the advantages of Istio is that it is agnostic to the programming languages of the running microservices.
+Your new application is written in Java, whereas the other backend components such as 'app-ui' and 'boards' are written in NodeJS.  One of the advantages of Istio is that it is agnostic to the programming languages of the running microservices.
 
-View the `UserProfile` class in your favorite editor or via bash:
+View the 'UserProfile' class in your favorite editor or via bash:
 ```
 cat src/main/java/org/microservices/demo/json/UserProfile.java
 ```
@@ -76,9 +76,9 @@ This class file includes REST methods for getting and setting user profile infor
 ## Build Application
 
 You are ready to build the application.  Navigate to the application resources:
-``
+```
 cd $HOME/openshift-microservices/deployment/install/microservices/openshift-configuration
-``
+```
 
 You need a base Java image to run your application code.  Import the OpenJDK 8 Image for Java Applications:
 ```
@@ -96,7 +96,7 @@ NAME                  IMAGE REPOSITORY                                          
 openjdk18-openshift   image-registry.openshift-image-registry.svc:5000/microservices-demo/openjdk18-openshift   1.8    8 minutes ago
 ```
 
-Use a [BuildConfig][1] to build the application image.  A `BuildConfig` file was already created for you.  View the file using your favorite editor or via bash:
+Use a [BuildConfig][1] to build the application image.  A 'BuildConfig' file was already created for you.  View the file using your favorite editor or via bash:
 ```
 cat userprofile-build.yaml 
 ```
