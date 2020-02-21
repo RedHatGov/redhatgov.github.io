@@ -80,22 +80,6 @@ You are ready to build the application.  Navigate to the workshop directory:
 cd $HOME/openshift-microservices/deployment/workshop
 ```
 
-You need a base Java image to run your application code.  Import the OpenJDK 8 Image for Java Applications:
-```
-oc import-image redhat-openjdk-18/openjdk18-openshift:1.8 --from=registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:1.8 --confirm
-```
-
-Verify the import:
-```
-oc get is openjdk18-openshift
-```
-
-Output:
-```
-NAME                  IMAGE REPOSITORY                                                                          TAGS   UPDATED
-openjdk18-openshift   image-registry.openshift-image-registry.svc:5000/microservices-demo/openjdk18-openshift   1.8    8 minutes ago
-```
-
 Use a [BuildConfig][1] to build the application image.  A 'BuildConfig' file was already created for you.  View the file using your favorite editor or via bash:
 ```
 cat openshift-configuration/userprofile-build.yaml 
@@ -108,12 +92,12 @@ Output (snippet):
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: openjdk18-openshift:1.8
+        name: java:11
     type: Source
 ...
 ```
 
-Notice the build uses the base Java builder image you imported.
+Notice the build uses a base Java image to build the application.
 
 Create the build:
 ```
@@ -129,13 +113,14 @@ The builder will compile the source code and use the base image to create your d
 
 Output (snippet):
 ```
+...
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time:  01:35 min
 [INFO] Finished at: 2020-02-19T21:00:22Z
 [INFO] ------------------------------------------------------------------------
-
+...
 ```
 
 Once the build is complete, the image is stored in the OpenShift local repository.
