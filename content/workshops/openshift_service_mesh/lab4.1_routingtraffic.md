@@ -15,14 +15,14 @@ For example, a destination rule can expose two versions of a service (e.g. 'v1',
 
 ## Traffic Routing
 
-Traffic routing rules have been constructed for you already.  Navigate to the Istio resources.
+Traffic routing rules have been constructed for you already.  Navigate to the workshop directory:
 ```
-cd $HOME/openshift-microservices/deployment/install/microservices/istio-configuration
+cd $HOME/openshift-microservices/deployment/workshop
 ```
 
 View the destination rules in your favorite editor or via bash:
 ```
-cat destinationrules-all.yaml
+cat ./istio-configuration/destinationrules-all.yaml
 ```
 
 Output (snippet):
@@ -54,7 +54,7 @@ Most of the destination rules do not have specific configurations.  However, the
 
 View the virtual services in your favorite editor or via bash:
 ```
-cat virtual-services-all-v2.yaml
+cat ./istio-configuration/virtual-services-all-v2.yaml
 ```
 
 Output (snippet):
@@ -81,8 +81,8 @@ Most of the virtual services do not have specific configurations.  However, the 
 
 Let's deploy these routing rules:
 ```
-oc apply -f destinationrules-all.yaml 
-oc apply -f virtual-services-all-v2.yaml
+oc apply -f ./istio-configuration/destinationrules-all.yaml 
+oc apply -f ./istio-configuration/virtual-services-all-v2.yaml
 ```
 
 Verify the destination rules:
@@ -109,9 +109,9 @@ Output:
 ```
 NAME                     GATEWAYS                       HOSTS                      AGE
 app-ui                                                  [app-ui]                   25m
+app-ui-gateway           [microservices-demo-ingressgateway]   [*]                        31m
 boards                                                  [boards]                   25m
 boards-mongodb                                          [boards-mongodb]           25m
-microservices-demo       [microservices-demo-gateway]   [*]                        46h
 userprofile                                             [userprofile]              25m
 userprofile-postgresql                                  [userprofile-postgresql]   25m
 ```
@@ -146,7 +146,7 @@ One of the advantages of Istio is that you can change traffic routing without mo
 
 View the modified virtual service in your favorite editor or via bash:
 ```
-cat virtual-service-userprofile-v1.yaml
+cat ./istio-configuration/virtual-service-userprofile-v1.yaml
 ```
 
 Output:
@@ -169,7 +169,7 @@ In this configuration, you will route to 'v1' of the virtual service.
 
 Deploy the change:
 ```
-oc apply -f virtual-service-userprofile-v1.yaml
+oc apply -f ./istio-configuration/virtual-service-userprofile-v1.yaml
 ```
 
 Verify the change:
