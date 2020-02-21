@@ -32,7 +32,7 @@ You need to add this project to the service mesh.  This is called a [Member Roll
 
 Create the member roll resource for your project:
 ```
-cat > istio-configuration/smmr.yaml <<EOF
+oc apply -f - <<EOF
 apiVersion: maistra.io/v1
 kind: ServiceMeshMemberRoll
 metadata:
@@ -44,18 +44,13 @@ spec:
 EOF
 ```
 
-Deploy the member roll resource:
-```
-oc apply -f ./istio-configuration/smmr.yaml
-```
-
-We are going to build the application images from source code and then deploy the resources in the cluster.
+You are going to build the application images from source code and then deploy the resources in the cluster.
 
 The source files are labeled '{microservice}-fromsource.yaml'.  In each file, an annotation 'sidecar.istio.io/inject' was added to tell Istio to inject a sidecar proxy.
 
 Verify the annotation in the 'app-ui' file:
 ```
-cat app-ui-fromsource.yaml | grep -B 1 sidecar.istio.io/inject
+cat openshift-configuration/app-ui-fromsource.yaml | grep -B 1 sidecar.istio.io/inject
 ```
 
 Output:
@@ -68,7 +63,7 @@ Now let's deploy the microservices.
 
 Deploy the boards service:
 ```
-oc new-app -f ./boards-fromsource.yaml \
+oc new-app -f ./openshift-configuration/boards-fromsource.yaml \
   -p APPLICATION_NAME=boards \
   -p NODEJS_VERSION_TAG=8-RHOAR \
   -p GIT_URI=https://github.com/dudash/openshift-microservices.git \
@@ -79,32 +74,32 @@ oc new-app -f ./boards-fromsource.yaml \
 
 Deploy the context scraper service:
 ```
-oc new-app -f ./context-scraper-fromsource.yaml \
+oc new-app -f ./openshift-configuration/context-scraper-fromsource.yaml \
   -p APPLICATION_NAME=context-scraper \
   -p NODEJS_VERSION_TAG=8-RHOAR \
   -p GIT_BRANCH=develop \
   -p GIT_URI=https://github.com/dudash/openshift-microservices.git
 ```
 
-Deploy the app user interface:
+Deploy the user interface:
 ```
-oc new-app -f ./app-ui-fromsource.yaml \
+oc new-app -f ./openshift-configuration/app-ui-fromsource.yaml \
   -p APPLICATION_NAME=app-ui \
   -p NODEJS_VERSION_TAG=8-RHOAR \
   -p GIT_BRANCH=develop \
   -p GIT_URI=https://github.com/dudash/openshift-microservices.git
 ```
 
-Deploy SSO:
+Deploy single sign-on:
 ```
-oc new-app -f ./sso73-x509-https.yaml \
+oc new-app -f ./openshift-configuration/sso73-x509-https.yaml \
   -p APPLICATION_NAME=sso
 ```
 
 Watch the microservices demo installation:
 
 ```
-oc get pods -n microservices-demo --watch
+oc get pods -n $PROJECT_NAME --watch
 ```
 
 Wait a couple minutes.  You should see the 'app-ui', 'boards', 'context-scraper', and 'sso' pods running.  For example:
@@ -141,32 +136,34 @@ app-ui istio-proxy
 
 ## Access Application
 
-The application is deployed!  But we need a way to access the application via the user interface.
+The application is deployed!  But you need a way to access the application via the user interface.
 
-Istio provides a [Gateway][2] resource, which is a load balancer at the edge of the service mesh that accepts incoming connections.  We need to deploy a Gateway resource and configure it to route to the application user interface.
+Istio provides a [Gateway][2] resource, which is a load balancer at the edge of the service mesh that accepts incoming connections.  You need to deploy a Gateway resource and configure it to route to the application user interface.
 
-Navigate to the Istio resources.
+Deploy the load balancer for the gateway:
 ```
-cd $HOME/openshift-microservices/deployment/install/microservices/istio-configuration
-```
-
-Deploy the Gateway and routing rules:
-```
-oc apply -f ./ingress-gateway.yaml
+oc process -f ./ingress-loadbalancer.yaml \
+  -p INGRESS_GATEWAY_NAME=$PROJECT_NAME-ingressgateway | oc create -n istio-system -f -
 ```
 
-For the last step, we need the endpoint of the load balancer that is accepting connections for our application.  This is the 'istio-ingressgateway' in our service mesh.
-
-Retrieve the URL of this gateway:
+Deploy the gateway and routing rules:
 ```
-GATEWAY_URL=$(oc -n istio-system get route istio-ingressgateway -o jsonpath='{.spec.host}')
+oc process -f ./istio-configuration/ingress-gateway.yaml \
+  -p INGRESS_GATEWAY_NAME=$PROJECT_NAME-ingressgateway | oc create -f -
+```
+
+To access the application, you need the endpoint of the load balancer you created.
+
+Retrieve the URL of the load balancer:
+```
+GATEWAY_URL=$(oc -n istio-system get route istio-$PROJECT_NAME-ingressgateway -o jsonpath='{.spec.host}')
 echo $GATEWAY_URL
 ```
 
 Navigate to this URL in the browser.  For example:
 
 ```
-https://istio-ingressgateway-istio-system.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443 
+https://istio-microservices-demo-ingressgateway.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443 
 ```
 
 You should see the application user interface.  Try creating a new board and posting to the shared board.
