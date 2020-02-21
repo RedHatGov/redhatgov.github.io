@@ -11,24 +11,45 @@ It's time to deploy your microservices application.  The application you are wor
 
 *Show architecture*
 
-Some of the microservices include SSO, user interface, the boards application, and the context scraper.  In this scenario, we are going to deploy these services and then add a new user profile service.
+The microservices include single sign-on (SSO), user interface (UI), the boards application, and the context scraper.  In this scenario, you are going to deploy these services and then add a new user profile service.
 
 
 ## Deploy Microservices
 
-Navigate to the application resources.
+Navigate to the workshop directory:
 
 ```
-cd $HOME/openshift-microservices/deployment/install/microservices/openshift-configuration
+cd $HOME/openshift-microservices/deployment/workshop
+```
+
+Create a new project for your application.  Use your unique username for the project name:
+```
+PROJECT_NAME=<enter username>
+oc new-project $PROJECT_NAME --display-name="OpenShift Microservices Demo"
+```
+
+You need to add this project to the service mesh.  This is called a [Member Roll][1] resource.  If you do not add the project to the mesh, the microservices will not be added to the service mesh.
+
+Create the member roll resource for your project:
+```
+cat > istio-configuration/smmr.yaml <<EOF
+apiVersion: maistra.io/v1
+kind: ServiceMeshMemberRoll
+metadata:
+  name: default
+  namespace: istio-system
+spec:
+  members:
+    - $PROJECT_NAME
+EOF
+```
+
+Deploy the member roll resource:
+```
+oc apply -f ./istio-configuration/smmr.yaml
 ```
 
 We are going to build the application images from source code and then deploy the resources in the cluster.
-
-Create a new project for the microservices.  The project 'microservices-demo' was already added to the service mesh in the previous lab.
-
-```
-oc new-project microservices-demo --display-name="OpenShift Microservices Demo"
-```
 
 The source files are labeled '{microservice}-fromsource.yaml'.  In each file, an annotation 'sidecar.istio.io/inject' was added to tell Istio to inject a sidecar proxy.
 
@@ -122,7 +143,7 @@ app-ui istio-proxy
 
 The application is deployed!  But we need a way to access the application via the user interface.
 
-Istio provides a [Gateway][1] resource, which is a load balancer at the edge of the service mesh that accepts incoming connections.  We need to deploy a Gateway resource and configure it to route to the application user interface.
+Istio provides a [Gateway][2] resource, which is a load balancer at the edge of the service mesh that accepts incoming connections.  We need to deploy a Gateway resource and configure it to route to the application user interface.
 
 Navigate to the Istio resources.
 ```
@@ -156,6 +177,7 @@ For example:
 
 Congratulations, you installed the microservices application!
 
-[1]: https://istio.io/docs/reference/config/networking/gateway/
+[1]: https://docs.openshift.com/container-platform/4.1/service_mesh/service_mesh_install/installing-ossm.html#ossm-member-roll_installing-ossm
+[2]: https://istio.io/docs/reference/config/networking/gateway/
 
 {{< importPartial "footer/footer.html" >}}
