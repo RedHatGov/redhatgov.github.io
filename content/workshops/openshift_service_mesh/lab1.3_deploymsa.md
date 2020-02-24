@@ -142,7 +142,7 @@ Istio provides a [Gateway][2] resource, which is a load balancer at the edge of 
 
 Deploy the load balancer for the gateway:
 ```
-oc process -f ./ingress-loadbalancer.yaml \
+oc process -f ./istio-configuration/ingress-loadbalancer.yaml \
   -p INGRESS_GATEWAY_NAME=$PROJECT_NAME-ingressgateway | oc create -n istio-system -f -
 ```
 

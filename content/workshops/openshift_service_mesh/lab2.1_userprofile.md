@@ -50,28 +50,24 @@ This class file encapsulates information about the user such as the first and la
 
 Your application also exposes a REST API to interact with the service.
 
-View the API class in your favorite editor or via bash:
+View the interface in your favorite editor or via bash:
 ```
-cat src/main/java/org/microservices/demo/rest/UserProfileResource.java
+cat src/main/java/org/microservices/demo/service/UserProfileService.java
 ```
 
 Output (snippet):
 ```
 ...
-    @GET
-   /* @APIResponse(responseCode = "200", description = "User Profile Retrieved",
-    content = @Content( 
-                        mediaType = "application/json",
-                        schema = @ArraySchema(implementation  = UserProfile.class))) */
-    public Set<UserProfile> getProfiles() {
-        return userProfileService.getProfiles();
-        // if had return Response.ok(profiles).build(), would require
-        // @RegisterForReflection on the bean
-    }
+    /**
+     * return a specific profile
+     * @param id
+     * @return the specified profile
+     */
+    UserProfile getProfile(@NotBlank String id);
 ...
 ```
 
-This class file includes REST methods for getting and setting user profile information.
+This class file includes the REST interface for getting and setting user profile information.
 
 ## Build Application
 

@@ -13,16 +13,28 @@ Istio provides [Kiali][1], an open source project that gives you a console view 
 
 ## Explore Kiali
 
-Let's open the Kiali console.  Retrieve the endpoint for Kiali:
+First, let's send some load to the application.
+
+Send load to the application user interface:
+```
+for ((i=1;i<=100;i++)); do curl -s -o /dev/null $GATEWAY_URL; done
+```
+
+Send load to the user profile service:
+```
+for ((i=1;i<=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+```
+
+Now let's open the Kiali console.  Retrieve the endpoint for Kiali:
 
 ```
-KIALI_CONSOLE=$(oc get routes kiali -n istio-system -o jsonpath='{.spec.host}{"\n"}')
+KIALI_CONSOLE=https://$(oc get routes kiali -n istio-system -o jsonpath='{.spec.host}{"\n"}')
 echo $KIALI_CONSOLE
 ```
 
 Output (sample):
 ```
-https://kiali-istio-system.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443 
+https://kiali-istio-system.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com
 ```
 
 Navigate to this URL in the browser.  Login with the same credentials you were provided to access OpenShift.  Once logged in, you should be presented with the Kiali console:
@@ -35,8 +47,6 @@ Let's take a look at the service mesh topology.  Navigate to 'Graph' in the left
 *Show app graph*
 
 The graph shows the microservices in your service mesh and how they are connected.
-
-> If you don't see connected microservices, navigate to the application UI in another tab via $GATEWAY_URL, add comments to the shared board, and view the profile page.  Refresh Kiali afterwards.  
 
 You can inspect information about the traffic being sent between the services via the edge labels.  Click 'No edge labels' and switch to 'Requests per second'.  You can now see HTTP traffic information between the microservices.
 
