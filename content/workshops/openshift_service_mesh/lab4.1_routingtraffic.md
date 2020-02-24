@@ -34,6 +34,9 @@ metadata:
   name: userprofile
 spec:
   host: userprofile
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
   subsets:
   	- name: v1
   	  labels:
@@ -50,7 +53,7 @@ spec:
 ...
 ```
 
-Most of the destination rules do not have specific configurations.  However, the 'userprofile' destination rule exposes 'subsets' - version of the service that can be called on.  You can see different load balancer policies for versions '1.0' and '2.0'.  By default, Istio uses 'ROUND_ROBIN' load balancing.
+Most of the destination rules do not have specific configurations except for the tls configuration, which we will discuss in a later lab.  However, the 'userprofile' destination rule exposes 'subsets' - version of the service that can be called on.  You can see different load balancer policies for versions '1.0' and '2.0'.  By default, Istio uses 'ROUND_ROBIN' load balancing.
 
 View the virtual services in your favorite editor or via bash:
 ```
