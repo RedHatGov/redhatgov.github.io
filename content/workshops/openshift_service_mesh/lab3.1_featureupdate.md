@@ -109,3 +109,5 @@ You should see the following:
 
 The profile page loads after several seconds, but it's really slow.  Let's use Istio to debug the problem.
 
+
+{{< importPartial "footer/footer.html" >}}
