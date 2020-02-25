@@ -9,7 +9,7 @@ layout: lab
 
 [Chaos Engineering][1] is the discipline of testing a software's tolerance to failure in production.  For microservices, this means injecting failure into the production environment to test how resilient your services are to errors.
 
-Istio provides ways to inject failure at the application layer with [Delay Faults][2] and [Abort Faults][3].
+Istio provides ways to inject failure at the application layer with [Delay Faults][2] and [Abort Faults][3] using virtual services.
 
 ## Inject Failure
 
