@@ -47,7 +47,7 @@ Output (snippet):
 ...
 ```
 
-The connection pool settings restrict the maximum number of requests to each instance to 1 (this makes it easier for you to trip the circuit for demo purposes).  The outlier detection settings define the thresholds - an instance that fails once with a 502/503/504 error is ejected from the mesh for 3 minutes.  You can read about the various settings in the Istio [docs][1].
+The circuit breaking rule is only applied to v3 of the user profile service.  The connection pool settings restrict the maximum number of requests to each instance to 1 (this makes it easier for you to trip the circuit for demo purposes).  The outlier detection settings define the thresholds - an instance that fails once with a 502/503/504 error is ejected from the mesh for 3 minutes.  You can read about the various settings in the Istio [docs][1].
 
 Deploy this circuit breaking rule:
 ```
@@ -56,25 +56,36 @@ oc apply -f ./istio-configuration/destinationrule-circuitbreaking.yaml
 
 ## Trip the Circuit Breaker
 
-First, scale the user profile service to two instances:
+First, route traffic evenly between v1 and v3 of the user profile service.
 ```
-oc scale --replicas=2 dc userprofile
+oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
 ```
 
-Apply CPU stress to one instance to force it to return a 503 error.
+Apply CPU stress to v3 to force it to return a 503 error.
 ```
-USERPROFILE_POD=$(oc get pod -l app=userprofile -o jsonpath='{.items[0].metadata.name}{"\n"}')
+USERPROFILE_POD=$(oc get pod -l app=userprofile,version=3.0)
 oc exec $USERPROFILE_POD -- apt-get update
 oc exec $USERPROFILE_POD -- apt-get install stress
 oc exec $USERPROFILE_POD -- stress --cpu 2 --timeout 300s
 ```
 
-Load test with 20 clients sending 2 concurrent requests to the user profile service:
+Send load to the user profile service:
 ```
-siege -r 20 -c 2 -v $GATEWAY_URL/profile
+for ((i=1;i<=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 
+Inspect the change in Kiali.  Navigate to 'Graph' in the left navigation bar. If you lost the URL, you can retrieve it via:
+```
+echo $KIALI_CONSOLE
+```
 
+Switch to the 'Versioned app graph' view.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
+
+*Show circuit breaking in Kiali*
+
+You should see a small percentage of traffic directed to v3.  The lightning icon indicates a circuit breaking rule, and the circuit breaker was tripped so most traffic was routed to v1.
+
+Congratulations, you configured circuit breaking in Istio!
 
 [1]: https://istio.io/docs/reference/config/networking/destination-rule/#OutlierDetection
 
