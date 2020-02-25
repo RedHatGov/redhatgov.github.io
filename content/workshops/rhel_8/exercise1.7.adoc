@@ -92,18 +92,17 @@ image::openscap-example-report.png[caption="Figure 1: ", title="OpenSCAP report"
 
 == Section 3: Automatically remediate findings
 
-To correct compliance issues found in the scan, we can generate a Bash shell script or an Ansible playbook automatically from the scan's findings.  To generate a Bash script, run the following:
+To correct compliance issues found in the scan, we can generate a Bash shell script or an Ansible playbook automatically from the scan's findings.  To generate an Ansible playbook, run the following:
 
 [source, bash]
 ----
-sudo oscap xccdf generate fix --fetch-remote-resources --fix-type bash --result-id "" /tmp/arf.xml > /tmp/ospp-bash-fix.sh
+sudo oscap xccdf generate fix --fetch-remote-resources --fix-type ansible --result-id "" /tmp/arf.xml > /tmp/ospp-playbook-fix.yml
 ----
 
-Double-check the HTML report to ensure you're comfortable with fixing every "failed" item.  Once you're comfortable with it, run the script with:
+Review the generated YAML file, ##/tmp/ospp-playbook-fix.yml##.  Note that the individual tasks are clearly named and delineated.  Once you're comfortable with it, run the playbook with:
 [source, bash]
 ----
-sudo chmod a+x /tmp/ospp-bash-fix.sh
-sudo /tmp/ospp-bash-fix.sh
+ansible-playbook -i localhost, -u ec2-user -b /tmp/ospp-playbook-fix.yml
 ----
 
 // OPTIONAL:  reboot the system to enable the changes.
@@ -113,5 +112,13 @@ sudo /tmp/ospp-bash-fix.sh
 // ----
 
 //sed -i 's/^Listen.*$/Listen 0.0.0.0:80/' /etc/httpd/conf/httpd.conf
+//semanage port -a -t http_port_t -p tcp 8888
 //systemctl enable --now httpd
-//
+
+// Bash remediation:
+//sudo oscap xccdf generate fix --fetch-remote-resources --fix-type bash --result-id "" /tmp/arf.xml > /tmp/ospp-bash-fix.sh
+//sudo chmod a+x /tmp/ospp-bash-fix.sh
+//sudo /tmp/ospp-bash-fix.sh
+
+//sudo oscap xccdf generate fix --fetch-remote-resources --fix-type ansible --result-id "" /tmp/arf.xml > /tmp/ospp-playbook.yml
+//ansible-playbook -i localhost, -u ec2-user -b /tmp/ospp-playbook.yml
