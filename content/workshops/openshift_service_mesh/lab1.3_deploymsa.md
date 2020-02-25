@@ -86,7 +86,7 @@ Deploy the user interface:
 oc new-app -f ./openshift-configuration/app-ui-fromsource.yaml \
   -p APPLICATION_NAME=app-ui \
   -p NODEJS_VERSION_TAG=8-RHOAR \
-  -p GIT_BRANCH=develop \
+  -p GIT_BRANCH=moving-to-four \
   -p GIT_URI=https://github.com/dudash/openshift-microservices.git
 ```
 

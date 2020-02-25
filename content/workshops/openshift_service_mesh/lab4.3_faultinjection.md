@@ -7,11 +7,9 @@ layout: lab
 
 # Testing Resiliency with Fault Injection
 
-One of the core principles behind microservices development is to not assume that the network is reliable.  More generally, these concepts are codified in [Distributed Computing][1].
+[Chaos Engineering][1] is the discipline of testing a software's tolerance to failure in production.  For microservices, this means injecting failure into the production environment to test how resilient your services are to errors.
 
-But how do you do this in practice?  [Chaos Engineering][2] is the discipline of testing a software's tolerance to failure in production.  In the context of microservices, we do this by injecting failure into a production environment to test service resiliency - how does my service behave when things break down?
-
-Istio provides ways to inject failure into the network to test the resiliency of the service.
+Istio provides ways to inject failure at the application layer with [Delay Faults][2] and [Abort Faults][3].
 
 ## Inject Failure
 
@@ -70,7 +68,8 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
 Congratulations, you configured fault injection with Istio!
 
 
-[1]: https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing
-[2]: https://en.wikipedia.org/wiki/Chaos_engineering
+[1]: https://en.wikipedia.org/wiki/Chaos_engineering
+[2]: https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-delay-fault
+[3]: https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-abort-fault
 
 {{< importPartial "footer/footer.html" >}}
