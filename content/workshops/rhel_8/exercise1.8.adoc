@@ -8,8 +8,6 @@ layout: lab
 :icons: font
 :imagesdir: /workshops/rhel_8/images
 
-= Exercise 1.9: Creating Custom Container Images with Buildah
-
 == Exercise Description
 
 In this exercise, you will build a custom application container utilizing a Fedora Apache container base image, customize that image and test the image functionality.
@@ -278,3 +276,5 @@ podman rm $(podman ps -l | awk '$0 ~ /Exited/ {print $1; exit}')
 af2d3774f20b5afb4505a4eb3fea20df5861afd6ec06b9271b6419ff1515106d
 ```
 The output of this removal is the full CONTAINER ID which was removed from the system.
+
+{{< importPartial "footer/footer.html" >}}

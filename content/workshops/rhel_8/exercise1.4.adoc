@@ -9,8 +9,6 @@ layout: lab
 :icons: font
 :imagesdir: /workshops/rhel_8/images
 
-
-
 == Section 1. Deploying Session Recording
 
 To be able to deploy the Session Recording solution you need to have the following packages installed: tlog, SSSD, cockpit-session-recording. +
@@ -80,3 +78,5 @@ image::TerminalRecording-09d8f.png[]
 By clicking on one of the sessions you are presented with a player to view the recording in as shown:
 
 image::TerminalRecording-178f1.png[]
+
+{{< importPartial "footer/footer.html" >}}

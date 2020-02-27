@@ -12,9 +12,6 @@ layout: lab
 :dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
 :var_prec_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
 
-
-= Exercise 1.10: System Roles with Ansible
-
 == Exercise Description
 RHEL 7.4 introduced RHEL System Roles, a collection of Ansible roles and modules that provide a stable and consistent configuration interface for remote management of Red Hat Enterprise Linux.  These System Roles are applicable to RHEL 6.10 and above, easing management of 3 generations of RHEL.  The effort is based on development of the Linux System Roles project (link: https://linux-system-roles.github.io/upstream). The following roles are provided and supported as follows:
 
@@ -288,3 +285,5 @@ Wired connection 1  9738a5c6-39dd-3515-aa1c-895f763851a6  ethernet  --
 == Summary - What We've Learned
 
 Linux System Roles based on Ansible playbooks make it easy and consistent to enable specific services and configurations on your RHEL hosts, and across many versions.  We experimented with the *network* system role in this exercise, but *storage*, *kdump (kernel crash dump)*, *selinux*, and *timesync* are also available.
+
+{{< importPartial "footer/footer.html" >}}
