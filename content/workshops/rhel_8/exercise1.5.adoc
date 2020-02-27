@@ -12,9 +12,6 @@ layout: lab
 :dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
 :var_prec_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
 
-
-= Exercise 1.6: Managing Cryptographic Policies
-
 == Exercise Description
 RHEL 8 makes it easy to enforce a strong and consistent cryptographic policy on your systems.
 
@@ -58,3 +55,5 @@ And now let's test communication to the same site; now it connects, and reports 
 ----
 timeout 3 openssl s_client --connect tls-v1-1.badssl.com:1011 | grep Protocol
 ----
+
+{{< importPartial "footer/footer.html" >}}

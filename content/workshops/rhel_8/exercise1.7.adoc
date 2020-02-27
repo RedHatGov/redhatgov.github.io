@@ -9,10 +9,12 @@ layout: lab
 :imagesdir: /workshops/rhel_8/images
 
 
-= Exercise 1.8: OpenSCAP Security Compliance Scanning
+== Overview
 
 RHEL 8 makes it easy to maintain secure and compliant systems with OpenSCAP.  +
-What is SCAP? +
+
+=== What is SCAP?
+
 SCAP (Security Content Automation Protocol) is a NIST project that standardizes the language for describing assessment criteria and findings.  It also provides a vulnerability rating system.  The project's home page is `https://scap.nist.gov/` +
 
 The essential components of SCAP are:
@@ -142,3 +144,5 @@ The playbook will take several minutes to run.
 //sudo oscap xccdf generate fix --fetch-remote-resources --fix-type bash --result-id "" /tmp/arf.xml > /tmp/ospp-bash-fix.sh
 //sudo chmod a+x /tmp/ospp-bash-fix.sh
 //sudo /tmp/ospp-bash-fix.sh
+
+{{< importPartial "footer/footer.html" >}}

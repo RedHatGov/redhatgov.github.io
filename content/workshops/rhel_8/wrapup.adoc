@@ -27,3 +27,5 @@ This *Participant Guide* will remain active for the next two weeks.  Please take
 Thank you for your time and participation!
 
 image::redhat.svg[]
+
+{{< importPartial "footer/footer.html" >}}
