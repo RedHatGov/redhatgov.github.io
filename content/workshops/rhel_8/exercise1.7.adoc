@@ -131,14 +131,14 @@ The playbook will take several minutes to run.
 // sudo init 6
 // ----
 
-//sed -i 's/^Listen.*$/Listen 0.0.0.0:80/' /etc/httpd/conf/httpd.conf
-//semanage port -a -t http_port_t -p tcp 8888
+//change httpd listen port to 8888:
+//sudo sed -i 's/^Listen.*$/Listen 0.0.0.0:8888/' /etc/httpd/conf/httpd.conf
+//sudo semanage port -a -t http_port_t -p tcp 8888
+//sudo firewall-cmd --permanent --zone=public --add-port=8888
+//sudo systemctl reload firewalld
 //systemctl enable --now httpd
 
-// Bash remediation:
+// oscap Bash remediation:
 //sudo oscap xccdf generate fix --fetch-remote-resources --fix-type bash --result-id "" /tmp/arf.xml > /tmp/ospp-bash-fix.sh
 //sudo chmod a+x /tmp/ospp-bash-fix.sh
 //sudo /tmp/ospp-bash-fix.sh
-
-//sudo oscap xccdf generate fix --fetch-remote-resources --fix-type ansible --result-id "" /tmp/arf.xml > /tmp/ospp-playbook.yml
-//ansible-playbook -i localhost, -u ec2-user -b /tmp/ospp-playbook.yml
