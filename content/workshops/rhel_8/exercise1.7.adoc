@@ -78,19 +78,37 @@ Dictionaries:
 
 Looking about half-way down, you can see that this file contains two profiles:  one for PCI-DSS and another for OSPP.  The OSPP profile is a general-purpose profile, so it's a good choice for testing.
 
-== Section 2: Perform an initial compliance scan
+
+== Section 2: Enable httpd for viewing compliance report
+
+Run the following to enable the Apache web server and allow client access to it.
+
+[source, bash]
+----
+sudo firewall-cmd --permanent --zone=public --add-service=http
+sudo systemctl reload firewalld
+sudo systemctl enable --now httpd
+----
+
+== Section 3: Perform an initial compliance scan
 
 To perform a basic compliance scan using the OSPP profile for RHEL 8, run the following command; the profile is specified by supplying the ##Id## field from the output above:
 [source, bash]
 ----
-sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /tmp/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /var/www/html/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
 ----
 
-The resulting report file, specified as `/tmp/report.html`, can be opened in a browser.  A snippet of what this looks like:
+Open this link in another tab to view the resulting report:
+[source, bash]
+----
+{{< urifqdn "http://" "tower" "/report.html" >}}
+----
+
+Here's a snippet of what this report looks like:
 
 image::openscap-example-report.png[caption="Figure 1: ", title="OpenSCAP report", width=800]
 
-== Section 3: Automatically remediate findings
+== Section 4: Automatically remediate findings
 
 To correct compliance issues found in the scan, we can generate a Bash shell script or an Ansible playbook automatically from the scan's findings.  To generate an Ansible playbook, run the following:
 
@@ -104,6 +122,8 @@ Review the generated YAML file, ##/tmp/ospp-playbook-fix.yml##.  Note that the i
 ----
 ansible-playbook -i localhost, -u ec2-user -b /tmp/ospp-playbook-fix.yml
 ----
+
+The playbook will take several minutes to run.
 
 // OPTIONAL:  reboot the system to enable the changes.
 // [source, bash]
