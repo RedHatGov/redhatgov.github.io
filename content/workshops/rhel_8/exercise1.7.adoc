@@ -98,13 +98,13 @@ To perform a basic compliance scan using the OSPP profile for RHEL 8, run the fo
 sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /var/www/html/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
 ----
 
-Open this link in another tab to view the resulting report:
+Once the command completes, open this link in another tab to view the resulting report:
 [source, bash]
 ----
-{{< urifqdn "http://" "tower" "/report.html" >}}
+{{< urifqdn "http://" "node" "/report.html" >}}
 ----
 
-Here's a snippet of what this report looks like:
+Here's a snippet of what the report looks like:
 
 image::openscap-example-report.png[caption="Figure 1: ", title="OpenSCAP report", width=800]
 
