@@ -1,0 +1,49 @@
+---
+title: Linux Containers the Hard Way
+menu:
+  main:
+    parent: workshops
+    pre: fa fa-linux
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/containers_the_hard_way/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+= Containers the Hard Way
+
+== Workshop Description
+
+This workshop will deep dive into the Linux internals that enable containers to work. Containers will be demystified so developers and admins will have a better grasp at what their favorite container engine is doing at runtime.
+
+== Who should attend
+
+Today's container workshop is meant for anyone who has any exposure to Linux containers, and assumes that you have run a container or two. If you have had no exposure to containers, that's fine too, just don't be shy about asking questions.
+
+== What you will learn
+
+- How a container is made
+- Linux namespaces and how they impact running processes
+- What is stored in an OCI image file
+- How the container filesystem is constructed
+- How the container networking stack is constructed
+
+== Overview
+
+We will begin with a fast overview of how different Linux utilities work together to create a sandboxed environment and run a container. We will then step through each piece one-at-a-time and explore how they work. Finally, we will put all of our acquired knowledge together to run a Fedora container as a standard user without a container runtime. No Podman or Docker!
+
+== Your Responsibilities
+
+Have a discussion. This will be boring if it’s just us talking for over two hours.
+
+Participate, by offering questions and sharing opinions.
+
+Hopefully you have your laptop with you. If not, please find a shoulder-surfing buddy to follow along.
+
+== Exercises
+
+{{< labs containers_the_hard_way >}}
+
+{{< importPartial "footer/footer.html" >}}

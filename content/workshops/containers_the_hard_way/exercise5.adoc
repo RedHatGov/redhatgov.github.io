@@ -1,0 +1,38 @@
+---
+title: "Exercise 5 - All Together Now"
+workshops: containers_the_hard_way
+workshop_weight: 70
+layout: lab
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/containers_the_hard_way/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+= Exercise 5 - All Together Now
+
+Let's put all of our new namespace skills to use! Again, we will be working as the rhel user.
+
+[source, bash]
+----
+su - rhel  # if neccessary
+unshare -mipfnuUr /bin/bash
+mount -t proc none /proc
+mount -t tmpfs none /tmp
+mount -t sysfs none /sys
+----
+
+With the call to unshare, we used all of the flags that we have used in the previous exercises. We also mounted three new filesystems after creating our sandbox.
+The new proc filesystem allow us to lookup processes in our current PID namespace.
+The new tmp filesystem prevents us from sharing a /tmp directory with the host. If you are not switching out the filesystem, this is generally a good idea.
+The new sysfs filesystem gives the Kernel a clean space to report its state with all of our new namespaces.
+
+We have now created a fully isolated environment on our system by only using namespaces!
+
+Feel free to play around in your sandbox and type exit when you are done.
+
+image::cgroups_namespaces.jpeg[caption="Figure 1: Today's Sponsors" 500]
+
+{{< importPartial "footer/footer.html" >}}

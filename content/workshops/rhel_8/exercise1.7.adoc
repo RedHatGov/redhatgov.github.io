@@ -31,15 +31,15 @@ You can read more about the project at `http://www.open-scap.org/` and the repos
 
 In the following exercises we'll use the CLI to show how you can validate system compliance.  There are other tools as well, including a GUI utility and another for scanning container images.
 
-== Section 1: Ensure the OpenSCAP scanner is installed
+== Section 1: Ensure httpd and the OpenSCAP scanner are installed
 
-Ensure the OpenSCAP scanner and definitions are installed with the command below; it's safe to run even if the packages already exist:
+Ensure Apache httpd plus the OpenSCAP scanner and definitions are installed with the command below; it's safe to run even if the packages already exist:
 [source, bash]
 ----
-sudo yum install openscap-scanner scap-security-guide
+sudo yum install -y httpd openscap-scanner scap-security-guide
 ----
  
-The `scap-security-guide` package contains prepared system profiles for several RHEL releases and system types; they are installed under `/usr/share/xml/scap/ssg/content`.  +
+The ##scap-security-guide## package contains prepared system profiles for several RHEL releases and system types; they are installed under */usr/share/xml/scap/ssg/content*.  +
 You can get a summary of the profiles in a given definition file with the following command:
 [source, bash]
 ----
@@ -76,39 +76,69 @@ Dictionaries:
 	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-dictionary.xml
 ....
 
-Looking about half-way down, you can see that this file contains two profiles:  one for PCI-DSS and another for OSPP.
+Looking about half-way down, you can see that this file contains two profiles:  one for PCI-DSS and another for OSPP.  The OSPP profile is a general-purpose profile, so it's a good choice for testing.
 
-== Section 2: Perform an initial compliance scan
 
-The OSPP profile is a general-purpose profile, so it's a good place to start. +
-To perform a basic compliance scan using the OSPP profile for RHEL 8, run the following command; the profile is specified by supplying the `Id` field from the output above:
+== Section 2: Enable httpd for viewing compliance report
+
+Run the following to enable the Apache web server and allow client access to it.
+
 [source, bash]
 ----
-sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /tmp/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+sudo firewall-cmd --permanent --zone=public --add-service=http
+sudo systemctl reload firewalld
+sudo systemctl enable --now httpd
 ----
 
-The resulting report file, specified as `/tmp/report.html`, can be opened in a browser.  A snippet of what this looks like:
+== Section 3: Perform an initial compliance scan
+
+To perform a basic compliance scan using the OSPP profile for RHEL 8, run the following command; the profile is specified by supplying the ##Id## field from the output above:
+[source, bash]
+----
+sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /var/www/html/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+----
+
+Once the command completes, open this link in another tab to view the resulting report:
+[source, bash]
+----
+{{< urifqdn "http://" "node" "/report.html" >}}
+----
+
+Here's a snippet of what the report looks like:
 
 image::openscap-example-report.png[caption="Figure 1: ", title="OpenSCAP report", width=800]
 
-== Section 3: Automatically remediate findings
+== Section 4: Automatically remediate findings
 
-To correct compliance issues found in the scan, we can generate a Bash shell script or an Ansible playbook automatically from the scan's findings.  To generate a Bash script, run the following:
+To correct compliance issues found in the scan, we can generate a Bash shell script or an Ansible playbook automatically from the scan's findings.  To generate an Ansible playbook, run the following:
 
 [source, bash]
 ----
-sudo oscap xccdf generate fix --fetch-remote-resources --fix-type bash --result-id "" /tmp/arf.xml > /tmp/ospp-bash-fix.sh
+sudo oscap xccdf generate fix --fetch-remote-resources --fix-type ansible --result-id "" /tmp/arf.xml > /tmp/ospp-playbook-fix.yml
 ----
 
-Double-check the HTML report to ensure you're comfortable with fixing every "failed" item.  Once you're comfortable with it, run the script with:
+Review the generated YAML file, ##/tmp/ospp-playbook-fix.yml##.  Note that the individual tasks are clearly named and delineated.  Once you're comfortable with it, run the playbook with:
 [source, bash]
 ----
-sudo chmod a+x /tmp/ospp-bash-fix.sh
-sudo /tmp/ospp-bash-fix.sh
+ansible-playbook -i localhost, -u ec2-user -b /tmp/ospp-playbook-fix.yml
 ----
 
-OPTIONAL:  reboot the system to enable the changes.
-[source, bash]
-----
-sudo init 6
-----
+The playbook will take several minutes to run.
+
+// OPTIONAL:  reboot the system to enable the changes.
+// [source, bash]
+// ----
+// sudo init 6
+// ----
+
+//change httpd listen port to 8888:
+//sudo sed -i 's/^Listen.*$/Listen 0.0.0.0:8888/' /etc/httpd/conf/httpd.conf
+//sudo semanage port -a -t http_port_t -p tcp 8888
+//sudo firewall-cmd --permanent --zone=public --add-port=8888
+//sudo systemctl reload firewalld
+//systemctl enable --now httpd
+
+// oscap Bash remediation:
+//sudo oscap xccdf generate fix --fetch-remote-resources --fix-type bash --result-id "" /tmp/arf.xml > /tmp/ospp-bash-fix.sh
+//sudo chmod a+x /tmp/ospp-bash-fix.sh
+//sudo /tmp/ospp-bash-fix.sh

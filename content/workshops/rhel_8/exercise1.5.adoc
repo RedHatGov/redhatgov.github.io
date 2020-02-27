@@ -41,7 +41,7 @@ To see the effect of the DEFAULT policy, try pasting in this command:
 
 [source, bash]
 ----
-timeout 3 openssl s_client --connect tls-v1-1.badssl.com:1011
+openssl s_client --connect tls-v1-1.badssl.com:1011
 ----
 
 You can see from the 2nd line of output that it cannot make a TLS connection to that site, and reports "unsupported protocol".

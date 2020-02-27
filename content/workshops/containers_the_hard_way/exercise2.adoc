@@ -1,0 +1,141 @@
+---
+title: "Exercise 2 - PID and IPC Namespaces"
+workshops: containers_the_hard_way
+workshop_weight: 40
+layout: lab
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/containers_the_hard_way/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+= Exercise 2 - PID and IPC Namespaces
+
+== Exercise 2.1 - The PID Basics
+
+Before we start playing with PID namespaces, it is good to have some background on how PIDs in Linux work.
+
+Every process that runs on a Linux system gets a Process ID (PID). This exists as a 32-bit integer. Numbering starts at 1 and increments until there are none left. PIDs can be reused once the process terminates. If you run out of PIDs, you'll have a bad time.
+
+Processes are structured in a Tree Structure. Every process has a parent except the first process. Typically the init system (SystemD) will be PID 1 and has no parent.
+When you have an active bash shell and you run a program, it starts as a child of the bash shell. The act of spawning a child process is called forking because the process splits, like a fork in the road.
+
+You can visualize the process tree with the `pstree` command.
+
+[source, bash]
+----
+pstree -S
+----
+....
+systemd─┬─NetworkManager(mnt)───2*[{NetworkManager}]
+        ├─agetty
+        ├─auditd(mnt)─┬─sedispatch
+        │             └─2*[{auditd}]
+        ├─chronyd(mnt)
+        ├─crond
+        ├─dbus-daemon───{dbus-daemon}
+        ├─firewalld───{firewalld}
+        ├─irqbalance───{irqbalance}
+        ├─polkitd───9*[{polkitd}]
+        ├─rhsmcertd
+        ├─rngd───2*[{rngd}]
+        ├─rsyslogd───2*[{rsyslogd}]
+        ├─sshd─┬─sshd───sshd───bash───pstree
+        │      └─2*[sshd───sshd───bash]
+        ├─sssd─┬─sssd_be
+        │      └─sssd_nss
+        ├─systemd───(sd-pam)
+        ├─systemd-journal
+        ├─systemd-logind
+        ├─systemd-udevd(mnt)
+        └─tuned───3*[{tuned}]
+....
+
+Here we can see that systemd is the root process in the tree. Some applications, like auditd or sshd have split into multiple processes.
+The `-S` flag informs `pstree` to show us where new namespaces have been created. For example, we can see that `auditd` is running in a new mount namespace indicated by `(mnt)`.
+
+If you have any questions here, ask your instructor as being able to understand the process tree is fairly important.
+
+Now... Let's play with some PIDs.
+
+== Exercise 2.2 - PID and IPC Namespaces
+
+The PID namespace allows a process and its children to run in a new process tree that maps back to the host process tree. The new PID namespace starts with PID 1 which will map to a much higher PID in the host's native PID namespace. The Inter-Process Communication (IPC) Namespace limits the processes ability to share memory.
+
+First, let's take note of our current PID.
+
+[source, bash]
+----
+echo $$
+----
+....
+7128
+....
+
+Ok, so our current Bash shell has a PID of 7128. Let's make a new PID namespace.
+
+[source, bash]
+----
+unshare -mipf
+----
+
+That's a lof more flags this time.
+- `m` creates a new mount namespace (you'll see why)
+- `i` creates a new IPC namespace
+- `p` creates a new PID namespace
+- `f` tells unshare to fork after creating the new namespaces and before starting Bash
+
+It is very important that we fork anytime we create a new PID namespace. The reason is because a new PID table is created, but the current process is still in the old namespace. If we run a Bash shell, it will not be able to look up its own PID. If that sounds bad, its because it is! Don't believe me? Try running that unshare command without the f option. Use the exit command to leave the broken Bash shell when you are done.
+
+Now let's inspect the current PID.
+
+[source, bash]
+----
+echo $$
+----
+....
+1
+....
+
+Look at that! Ever run a Bash shell as PID 1? Probably not. Since we are running in an isolated PID namespace, lets list all the processes.
+
+[source, bash]
+----
+ps aux | head -n5
+----
+....
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.7 178584 13512 ?        Ss   Feb05   0:21 /usr/lib/systemd/systemd --switched-root --system --deserialize 18
+root         2  0.0  0.0      0     0 ?        S    Feb05   0:00 [kthreadd]
+root         3  0.0  0.0      0     0 ?        I<   Feb05   0:00 [rcu_gp]
+root         4  0.0  0.0      0     0 ?        I<   Feb05   0:00 [rcu_par_gp]
+....
+
+Wait a minute... Why is ps reporting that systemd is PID 1? It looks like ps is referencing the native PID namespace. Indeed it is!
+The Linux Kernel uses the /proc pseudo filesystem to report raw data on processes. Since we created a new PID namespace, we need to mount a new /proc that matches this new namespace.
+
+[source, bash]
+----
+mount -t proc none /proc
+----
+
+So that is why we needed the switch the mount namespace! Ok, now lets list our processes again.
+
+[source, bash]
+----
+ps aux | head -n5
+----
+....
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.2  25352  3872 pts/0    S    03:11   0:00 /bin/bash
+root        25  0.0  0.2  57172  3872 pts/0    R+   03:21   0:00 ps aux
+root        26  0.0  0.0   7296   736 pts/0    S+   03:21   0:00 head -n5
+....
+
+Now that's more like it!
+
+On the terminal that is in the new namespaces, type `exit` to return to the native namespaces.
+
+{{< importPartial "footer/footer.html" >}}
