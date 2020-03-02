@@ -21,7 +21,8 @@ http://console-openshift-console.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.
 
 Once logged in, you should see the following:
 
-*Login image here*
+<img src="../images/openshift-welcome.png" width="600"><br/>
+ *OpenShift Welcome*
 
 You will use the OpenShift 'oc' CLI  to execute commands for the majority of this lab.  Login using API endpoint and remember to add the '--insecure-skip-tls-verify=true' flag.
 

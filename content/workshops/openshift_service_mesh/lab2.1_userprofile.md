@@ -14,7 +14,7 @@ echo $GATEWAY_URL
 
 You should see the following:
 
-*Show empty profile page*
+> TODO: Empty profile page
 
 Notice how it's empty?  There's no profile service for our application.  You are going to build a new microservice for user profiles and add this to your service mesh.
 
@@ -76,33 +76,41 @@ You are ready to build the application.  Navigate to the workshop directory:
 cd $HOME/openshift-microservices/deployment/workshop
 ```
 
-Use a [BuildConfig][1] to build the application image.  A 'BuildConfig' file was already created for you.  View the file using your favorite editor or via bash:
+Use a [BuildConfig][1] to build the application image.  A 'BuildConfig' template was already created for you.
+
+Verify the base image used to build the application:
 ```
-cat openshift-configuration/userprofile-build.yaml 
+cat ./openshift-configuration/userprofile-build.yaml | grep -A 4 sourceStrategy
 ```
 
 Output (snippet):
 ```
-...
-  strategy:
-    sourceStrategy:
-      from:
-        kind: ImageStreamTag
-        name: java:11
-    type: Source
-...
+      sourceStrategy:
+        from:
+          kind: ImageStreamTag
+          name: java:11
+          namespace: openshift
 ```
 
 Notice the build uses a base Java image to build the application.
 
 Create the build:
 ```
-oc create -f ./openshift-configuration/userprofile-build.yaml
+oc new-app -f ./openshift-configuration/userprofile-build.yaml \
+  -p APPLICATION_NAME=userprofile \
+  -p APPLICATION_CODE_URI=https://github.com/dudash/openshift-microservices.git \
+  -p APPLICATION_CODE_BRANCH=moving-to-four \
+  -p APP_VERSION_TAG=1.0
+```
+
+Start the build:
+```
+oc start-build userprofile-1.0
 ```
 
 Follow the build:
 ```
-oc logs -f bc/userprofile
+oc logs -f bc/userprofile-1.0
 ```
 
 The builder will compile the source code and use the base image to create your deployable image artifact.  You should eventually see a successful build.
@@ -129,7 +137,7 @@ oc get is userprofile
 Output:
 ```
 NAME          IMAGE REPOSITORY                                                                  TAGS     UPDATED
-userprofile   image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile   latest   3 minutes ago
+userprofile   image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile   1.0   3 minutes ago
 ```
 
 Congratulations, you built the new user profile service!

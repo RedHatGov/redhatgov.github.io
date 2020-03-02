@@ -9,7 +9,11 @@ layout: lab
 
 It's time to deploy your microservices application.  The application you are working on is a paste board application in which users can post comments in shared boards.  Here is a diagram of the architecture:
 
-*Show architecture*
+
+<img src="https://github.com/dudash/openshift-microservices/blob/master/design/highlevel-arch.png
+" width="600"><br/>
+
+*App Architecture*
 
 The microservices include single sign-on (SSO), user interface (UI), the boards application, and the context scraper.  In this scenario, you are going to deploy these services and then add a new user profile service.
 
@@ -170,7 +174,8 @@ You should see the application user interface.  Try creating a new board and pos
 
 For example:
 
-*Application user interface*
+<img src="../images/app-pasteboard.png" width="600"><br/>
+ *Create a new board*
 
 Congratulations, you installed the microservices application!
 
