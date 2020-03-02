@@ -46,14 +46,28 @@ The interface also includes a method for getting the user profile's photo, which
 
 ## Build and Deploy
 
-Trigger a new build on the application:
+Navigate to the workshop directory:
 ```
-oc start-build userprofile --from-file=.
+cd $HOME/openshift-microservices/deployment/workshop
+```
+
+Create a new build on this feature branch:
+```
+oc new-app -f ./openshift-configuration/userprofile-build.yaml \
+  -p APPLICATION_NAME=userprofile \
+  -p APPLICATION_CODE_URI=https://github.com/dudash/openshift-microservices.git \
+  -p APPLICATION_CODE_BRANCH=feature_update \
+  -p APP_VERSION_TAG=2.0
+```
+
+Start the build:
+```
+oc start-build userprofile-2.0
 ```
 
 Follow the build:
 ```
-oc logs -f bc/userprofile
+oc logs -f bc/userprofile-2.0
 ```
 
 The builder will compile the source code and use the base image to create your deployable image artifact.  You should eventually see a successful build.
@@ -81,18 +95,49 @@ oc describe is userprofile
 Output (snippet):
 ```
 ...
-latest
+2.0
   no spec tag
 
-  * image-registry.openshift-image-registry.svc:5000/openshift-console/userprofile@sha256:81d9863567f23557358ef31737d22f47bc05b320e6b8504d59eccb3047c4a55b
-      4 minutes ago
-    image-registry.openshift-image-registry.svc:5000/openshift-console/userprofile@sha256:d84b0fd5e9f3f416ae6f7e92aff5b5c8c073678d2a8916392935d5ee39206c0b
-      About an hour ago
+  * image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile@sha256:147d836e9f7331a27b26723cbb99f2b667e176b4d5dd356fea947c7ca4fc24a6
+      2 minutes ago
+
+1.0
+  no spec tag
+
+  * image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile@sha256:f01d00409f44962ab321517e18fb06483fadfc07b2f70c088f567acf20dc65eb
+      23 hours ago
 ```
 
-The latest tag is applied to the most recently created image.
+The latest image should have the '2.0' tag.
 
-> TODO: Check deployment config picked up latest tag
+Grab a reference to the local image:
+```
+USER_PROFILE_IMAGE_URI=$(oc get is userprofile -o jsonpath='{.status.dockerImageRepository}{"\n"}')
+echo $USER_PROFILE_IMAGE_URI
+```
+
+Output (sample):
+```
+image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile
+```
+
+The deployment file 'userprofile-deploy-v2.yaml' was created for you to deploy the application.
+
+Deploy the service using the image URI:
+```
+sed "s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|" ./openshift-configuration/userprofile-deploy-v2.yaml | oc create -f -
+```
+
+Watch the deployment of the user profile:
+```
+oc get pods -l deploymentconfig=userprofile --watch
+```
+
+Output:
+```
+userprofile-2-xxxxx              2/2     Running        0          22s
+userprofile-1-xxxxx              2/2     Running        0          2m55s
+```
 
 ## Access Application
 
@@ -103,7 +148,7 @@ Navigate to the 'Profile' section in the header.  If you lost the URL, you can r
 echo $GATEWAY_URL
 ```
 
-You should see the following:
+The user interface will round robin between versions '1.0' and '2.0' of the user profile service.  Refresh the browser until you see the following:
 
 *Show profile page loading*
 

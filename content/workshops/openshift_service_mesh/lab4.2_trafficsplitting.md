@@ -11,9 +11,9 @@ It's time to fix the performance issue of the application.  Previously, you depl
 
 ## Feature Fix
 
-The code to fix the performance issue of the user profile service has already been written for you.  Navigate to the repo directory:
+The code to fix the performance issue of the user profile service has already been written for you.  Navigate to the workshop directory:
 ```
-cd $HOME/openshift-microservices
+cd $HOME/openshift-microservices/deployment/workshop
 ```
 
 Check out the 'feature_fix' branch:
@@ -21,14 +21,23 @@ Check out the 'feature_fix' branch:
 git checkout -b feature_fix
 ```
 
-Trigger a new build on the application:
+Create a new build on this feature branch:
 ```
-oc start-build userprofile --from-file=.
+oc new-app -f ./openshift-configuration/userprofile-build.yaml \
+  -p APPLICATION_NAME=userprofile \
+  -p APPLICATION_CODE_URI=https://github.com/dudash/openshift-microservices.git \
+  -p APPLICATION_CODE_BRANCH=moving-to-four \
+  -p APP_VERSION_TAG=3.0
+```
+
+Start the build:
+```
+oc start-build userprofile-3.0
 ```
 
 Follow the build:
 ```
-oc logs -f bc/userprofile
+oc logs -f bc/userprofile-3.0
 ```
 
 The builder will compile the source code and use the base image to create your deployable image artifact.  You should eventually see a successful build.
@@ -56,19 +65,52 @@ oc describe is userprofile
 Output (snippet):
 ```
 ...
-latest
+
+3.0
   no spec tag
 
-  * image-registry.openshift-image-registry.svc:5000/openshift-console/userprofile@sha256:81d9863567f23557358ef31737d22f47bc05b320e6b8504d59eccb3047c4a55b
-      4 minutes ago
-    image-registry.openshift-image-registry.svc:5000/openshift-console/userprofile@sha256:d84b0fd5e9f3f416ae6f7e92aff5b5c8c073678d2a8916392935d5ee39206c0b
-      About an hour ago
+  * image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile@sha256:da74d277cc91c18226fb5cf8ca25d6bdbbf3f77a7480d0583f23023fb0d0d7df
+      12 seconds ago
+
+2.0
+  no spec tag
+
+  * image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile@sha256:147d836e9f7331a27b26723cbb99f2b667e176b4d5dd356fea947c7ca4fc24a6
+      16 minutes ago
+...
 ```
 
-The latest tag is applied to the most recently created image.
+The latest image should have the '3.0' tag.
 
-> TODO: Check deployment config picked up latest tag
+Grab a reference to the local image:
+```
+USER_PROFILE_IMAGE_URI=$(oc get is userprofile -o jsonpath='{.status.dockerImageRepository}{"\n"}')
+echo $USER_PROFILE_IMAGE_URI
+```
 
+Output (sample):
+```
+image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile
+```
+
+The deployment file 'userprofile-deploy-v3.yaml' was created for you to deploy the application.
+
+Deploy the service using the image URI:
+```
+sed "s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|" ./openshift-configuration/userprofile-deploy-v3.yaml | oc create -f -
+```
+
+Watch the deployment of the user profile:
+```
+oc get pods -l deploymentconfig=userprofile --watch
+```
+
+Output:
+```
+userprofile-3-xxxxx              2/2     Running        0          53s
+userprofile-2-xxxxx              2/2     Running        0          13m
+userprofile-1-xxxxx              2/2     Running        0          22h
+```
 
 ## Traffic Routing
 

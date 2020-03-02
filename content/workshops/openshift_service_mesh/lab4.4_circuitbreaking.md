@@ -63,10 +63,8 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
 
 Apply CPU stress to v3 to force it to return a 503 error.
 ```
-USERPROFILE_POD=$(oc get pod -l app=userprofile,version=3.0)
-oc exec $USERPROFILE_POD -- apt-get update
-oc exec $USERPROFILE_POD -- apt-get install stress
-oc exec $USERPROFILE_POD -- stress --cpu 2 --timeout 300s
+USERPROFILE_POD=$(oc get pod -l deploymentconfig=userprofile,version=3.0 -o jsonpath='{.items[0].metadata.name}{"\n"}')
+oc exec $USERPROFILE_POD -- yes > /dev/null &
 ```
 
 Send load to the user profile service:

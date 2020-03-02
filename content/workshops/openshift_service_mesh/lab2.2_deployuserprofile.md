@@ -47,7 +47,7 @@ image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile
 
 Deploy the service using this image URI:
 ```
-sed "s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|" ./openshift-configuration/userprofile-deploy-all.yaml | oc apply -f -
+sed "s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|" ./openshift-configuration/userprofile-deploy-all.yaml | oc create -f -
 ```
 
 Watch the deployment of the user profile:
