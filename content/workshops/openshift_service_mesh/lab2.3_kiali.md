@@ -42,27 +42,32 @@ Navigate to this URL in the browser.  Login with the same credentials you were p
 <img src="../images/kiali-welcome.png" width="600"><br/>
  *Kiali Welcome*
 
-Let's take a look at the service mesh topology.  Navigate to 'Graph' in the left navigation bar.  Change the window of the view on the right side from 'Last 1m' to 'Last 1h'.
+Let's take a look at the service mesh topology.  Navigate to 'Graph' in the left navigation bar.  Change the window of the view on the right side from 'Last 1m' to 'Last 10m'.
 
-*Show app graph*
+<img src="../images/kiali-graph.png" width="600"><br/>
+*Kiali Graph*
 
 The graph shows the microservices in your service mesh and how they are connected.
 
 You can inspect information about the traffic being sent between the services via the edge labels.  Click 'No edge labels' and switch to 'Requests per second'.  You can now see HTTP traffic information between the microservices.
 
-*Show app graph with edge labels*
+<img src="../images/kiali-rpsgraph.png" width="600"><br/>
+*Kiali Graph with Requests Per Second*
 
 Let's take a look at the microservices running in your service mesh.  Navigate to  'Applications' in the left navigation bar.
 
-*Show app page*
+<img src="../images/kiali-apps.png" width="600"><br/>
+*Kiali View of Applications*
 
 You can drill down into each microservice from this view.  Select 'app-ui'.
 
-*Show app-ui app page*
+<img src="../images/kiali-appui.png" width="600"><br/>
+*Kiali View of App UI*
 
 You should see the 'Health' of that microservice.  Navigate to the 'Traffic' tab and you should see the inbound and outbound calls made from that microservice.
 
-*Show app-ui inbound/outbound page*
+<img src="../images/kiali-appuitraffic.png" width="600"><br/>
+*Kiali View of Inbound and Outbound Traffic to App UI*
 
 Keep the Kiali console opened in a tab in your browser.  You will use Kiali throughout the remainder of the labs.
 

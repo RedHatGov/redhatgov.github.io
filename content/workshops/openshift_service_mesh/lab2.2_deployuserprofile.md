@@ -55,9 +55,11 @@ Watch the deployment of the user profile:
 oc get pods -l deploymentconfig=userprofile --watch
 ```
 
+> The userprofile service may error and restart if the PostgreSQL pod is not running yet.
+
 Output:
 ```
-userprofile-1-xxxxx              2/2     Running		    0          2m55s
+userprofile-xxxxxxxxxx-xxxxx              2/2     Running		    0          2m55s
 ```
 
 Similar to the other microservices, the user profile services run the application and the Istio proxy.
@@ -83,8 +85,6 @@ echo $GATEWAY_URL
 ```
 
 You should see the following:
-
-*Show profile page*
 
 <img src="../images/app-profilepage.png" width="600"><br/>
  *Profile Page*

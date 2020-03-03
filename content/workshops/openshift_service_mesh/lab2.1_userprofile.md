@@ -14,9 +14,10 @@ echo $GATEWAY_URL
 
 You should see the following:
 
-> TODO: Empty profile page
+<img src="../images/app-unknownuser.png" width="600"><br/>
+ *Unknown Profile Page*
 
-Notice how it's empty?  There's no profile service for our application.  You are going to build a new microservice for user profiles and add this to your service mesh.
+The UI shows an unknown user and that's because there's no profile service for your application.  You are going to build a new microservice for user profiles and add this to your service mesh.
 
 ## Application Code
 
@@ -99,7 +100,7 @@ Create the build:
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
   -p APPLICATION_CODE_URI=https://github.com/dudash/openshift-microservices.git \
-  -p APPLICATION_CODE_BRANCH=moving-to-four \
+  -p APPLICATION_CODE_BRANCH=workshop-stable \
   -p APP_VERSION_TAG=1.0
 ```
 
