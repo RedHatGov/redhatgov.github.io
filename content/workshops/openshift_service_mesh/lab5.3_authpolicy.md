@@ -9,7 +9,9 @@ layout: lab
 Stuff goes here
 
 
-* XXX[1]
+## Auth Policy Summary
+* Secures end-user-to-service communication
+* Provides end-user authentication via JSON Web Tokens (JWT)
 
 [1]: https://xxxx
 

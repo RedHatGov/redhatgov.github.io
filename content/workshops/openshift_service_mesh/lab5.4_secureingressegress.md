@@ -11,6 +11,8 @@ Stuff goes here
 
 * XXX[1]
 
-[1]: https://xxxx
+[1]: https://istio.io/docs/tasks/traffic-management/ingress/
+[2]: https://istio.io/docs/tasks/traffic-management/egress/
+[3]: https://istio.io/docs/ops/best-practices/security/
 
 {{< importPartial "footer/footer.html" >}}
