@@ -11,14 +11,9 @@ It's time to fix the performance issue of the application.  Previously, you depl
 
 ## Feature Fix
 
-The code to fix the performance issue of the user profile service has already been written for you.  Navigate to the workshop directory:
+The code to fix the performance issue of the user profile service has already been written for you on the 'feature_fix' branch.  Navigate to the workshop directory:
 ```
 cd $HOME/openshift-microservices/deployment/workshop
-```
-
-Check out the 'feature_fix' branch:
-```
-git checkout -b feature_fix
 ```
 
 Create a new build on this feature branch:
@@ -26,9 +21,11 @@ Create a new build on this feature branch:
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
   -p APPLICATION_CODE_URI=https://github.com/dudash/openshift-microservices.git \
-  -p APPLICATION_CODE_BRANCH=moving-to-four \
+  -p APPLICATION_CODE_BRANCH=feature_fix \
   -p APP_VERSION_TAG=3.0
 ```
+
+> Ignore the failure since the imagestream already exists.
 
 Start the build:
 ```
@@ -107,9 +104,9 @@ oc get pods -l deploymentconfig=userprofile --watch
 
 Output:
 ```
-userprofile-3-xxxxx              2/2     Running        0          53s
-userprofile-2-xxxxx              2/2     Running        0          13m
-userprofile-1-xxxxx              2/2     Running        0          22h
+userprofile-3-xxxxxxxxxx-xxxxx              2/2     Running        0          53s
+userprofile-2-xxxxxxxxxx-xxxxx              2/2     Running        0          13m
+userprofile-xxxxxxxxxx-xxxxx                2/2     Running        0          22h
 ```
 
 ## Traffic Routing
@@ -136,8 +133,6 @@ Output (snippet):
         host: userprofile
         subset: v1
       weight: 90
-  http:
-  - route:
     - destination:
         host: userprofile
         subset: v3
@@ -153,9 +148,9 @@ Deploy the routing rule:
 oc apply -f ./istio-configuration/virtual-service-userprofile-90-10.yaml
 ```
 
-Send load to the user profile service:
+Send load continuously to the user profile service:
 ```
-for ((i=1;i<=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 
 Inspect the change in Kiali.  Navigate to 'Graph' in the left navigation bar. If you lost the URL, you can retrieve it via:
@@ -163,11 +158,12 @@ Inspect the change in Kiali.  Navigate to 'Graph' in the left navigation bar. If
 echo $KIALI_CONSOLE
 ```
 
-Switch to the 'Versioned app graph' view.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
+Switch to the 'Versioned app graph' view and change to 'Last 1m'.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
 
-You should see a 90/10 percentage split between versions 1 and 3 of the user profile service.
+The traffic splits between versions 1 and 3 of the user profile service at roughly 90% and 10% split.
 
-*Show versioned app graph with 90-10 split*
+<img src="../images/kiali-userprofile-90-10.png" width="600"><br/>
+*Kiali Graph with 90-10 Traffic Split*
 
 By doing this, you can isolate the new user profile experience for a small subset of your users without impacting everyone at once.  
 
@@ -188,8 +184,6 @@ Output (snippet):
         host: userprofile
         subset: v1
       weight: 50
-  http:
-  - route:
     - destination:
         host: userprofile
         subset: v3
@@ -207,14 +201,15 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
 
 Send load to the user profile service:
 ```
-for ((i=1;i<=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 
 Inspect the change again in Kiali.  Navigate to 'Graph' in the left navigation bar.  Switch to the 'Versioned app graph' view.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
 
-You should see a 50/50 percentage split between versions 1 and 3 of the user profile service.
+You should see a roughly 50/50 percentage split between versions 1 and 3 of the user profile service.
 
-*Show versioned app graph with 50-50 split*
+<img src="../images/kiali-userprofile-50-50.png" width="600"><br/>
+*Kiali Graph with 50-50 Traffic Split*
 
 Finally, you are ready to roll this new version to everyone.
 
@@ -241,16 +236,18 @@ Deploy the routing rule:
 oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
 ```
 
-Test the new version of your profile service in the browser.
-
-Navigate to the 'Profile' section in the header.  If you lost the URL, you can retrieve it via:
+Send load to the user profile service:
 ```
-echo $GATEWAY_URL
+while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 
-You should see the following:
+Inspect the change again in Kiali.  Navigate to 'Graph' in the left navigation bar.  Switch to the 'Versioned app graph' view.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
 
-*Show profile page version 3*
+You should see traffic routed to v3 of the user profile service.
+
+<img src="../images/kiali-userprofile-v3.png" width="600"><br/>
+*Kiali Graph with v3 Routing*
+
 
 Congratulations, you configured traffic splitting in Istio!
 

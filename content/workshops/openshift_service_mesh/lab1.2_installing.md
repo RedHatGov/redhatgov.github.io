@@ -44,10 +44,14 @@ You should see two services running 'svc/openshift' and 'svc/kubernetes'.
 Next we need a local copy of our application code.  The application code includes the resources to install Istio.
 
 Clone the repository in your home directory:
-
 ```
 cd $HOME
 git clone https://github.com/dudash/openshift-microservices.git
+```
+
+Checkout the workshop-stable branch:
+```
+git checkout workshop-stable
 ```
 
 ## Istio

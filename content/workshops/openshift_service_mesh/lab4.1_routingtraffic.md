@@ -126,26 +126,30 @@ Navigate to the 'Profile' section in the header.  If you lost the URL, you can r
 echo $GATEWAY_URL
 ```
 
-You should see the following:
-
-*Show profile page v2*
-
-There should be no change at this point.  We are routing to version 2 of the user profile service we deployed in an earlier lab.
+There should be no change at this point.  You are routing to version 2 of the user profile service you deployed in an earlier lab, and it is really slow.
 
 Let's see what this looks like in Kiali.
+
+Send load to the user profile service:
+```
+for ((i=1;i<=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+```
 
 Navigate to 'Graph' in the left navigation bar. If you lost the URL, you can retrieve it via:
 ```
 echo $KIALI_CONSOLE
 ```
 
-Switch to the 'Versioned app graph' view.  You should see the version of the user profile service being called, '2.0'.
+Switch to the 'Versioned app graph' view and change to 'Last 1m'.  You should see traffic flowing to user profile version '2.0'.
 
-*Show versioned app graph with version 2*
+> The flow of traffic is indicated by a green highlight in the graph.
+
+<img src="../images/kiali-userprofile-v2.png" width="600"><br/>
+*Kiali Graph with v2 Routing*
 
 ## Change Traffic Routing
 
-One of the advantages of Istio is that you can change traffic routing without modifying application code.  Let's pretend there is an issue with version 2 of our profile service and you need to roll back.  All you need to do is change your virtual service configuration.
+One of the advantages of Istio is that you can change traffic routing without modifying application code.  There is a performance issue with version 2 of our profile service so let's roll back to version 1.  All you need to do is change your virtual service configuration.
 
 View the modified virtual service in your favorite editor or via bash:
 ```
@@ -194,19 +198,21 @@ Spec:
 Events:          <none>
 ```
 
-In the application UI, navigate to the 'Profile' section in the header.
+In the application UI, navigate to the 'Profile' section in the header.  The page should load quickly and you are back to routing to version 1 of the user profile service.
 
-You should see the following:
-
-*Show profile page v1*
-
-We are now seeing version 1 of the user profile service!
+```
+for ((i=1;i<=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+```
 
 In Kiali, navigate to 'Graph' in the left navigation bar.
 
-Switch to the 'Versioned app graph' view.  You should see the version of the user profile service being called, '1.0'.
+Switch to the 'Versioned app graph' view and change to 'Last 1m'.  You should see traffic flowing to user profile version '1.0'.
 
-*Show versioned app graph with version 1*
+> The flow of traffic is indicated by a green highlight in the graph.
+
+<img src="../images/kiali-userprofile-v1.png" width="600"><br/>
+*Kiali Graph with v1 Routing*
+
 
 Congratulations, you configured traffic routing with Istio!
 

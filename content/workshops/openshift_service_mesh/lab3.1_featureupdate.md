@@ -13,21 +13,11 @@ Istio provides additional capabilities to analyze the service mesh and its perfo
 
 The profile page returns basic information about the user.  Let's add a feature update to show a profile photo on the profile page.
 
-The code has already been written for you.  Navigate to the repo directory:
-```
-cd $HOME/openshift-microservices
-```
+The code has already been written for you on the 'feature_update' branch of the repo.
 
-Check out the 'feature_update' branch:
+Navigate to the URL via your browser:
 ```
-git checkout -b feature_update
-```
-
-Your application also exposes a REST API to interact with the service.
-
-View the interface in your favorite editor or via bash:
-```
-cat code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
+https://github.com/dudash/openshift-microservices/blob/master/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
 ```
 
 Output (snippet):
@@ -55,10 +45,12 @@ Create a new build on this feature branch:
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
-  -p APPLICATION_CODE_URI=https://github.com/theckang/openshift-microservices.git \
+  -p APPLICATION_CODE_URI=https://github.com/dudash/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=feature_update \
   -p APP_VERSION_TAG=2.0
 ```
+
+> Ignore the failure since the imagestream already exists.
 
 Start the build:
 ```
