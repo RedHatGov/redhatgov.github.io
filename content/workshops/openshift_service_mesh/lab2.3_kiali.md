@@ -40,7 +40,7 @@ https://kiali-istio-system.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com
 Navigate to this URL in the browser.  Login with the same credentials you were provided to access OpenShift.  Once logged in, you should be presented with the Kiali console:
 
 <img src="../images/kiali-welcome.png" width="600"><br/>
- *Kiali Welcome*
+*Kiali Welcome*
 
 Let's take a look at the service mesh topology.  Navigate to 'Graph' in the left navigation bar.  Change the window of the view on the right side from 'Last 1m' to 'Last 10m'.
 

@@ -55,7 +55,7 @@ Create a new build on this feature branch:
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
-  -p APPLICATION_CODE_URI=https://github.com/dudash/openshift-microservices.git \
+  -p APPLICATION_CODE_URI=https://github.com/theckang/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=feature_update \
   -p APP_VERSION_TAG=2.0
 ```
@@ -135,8 +135,8 @@ oc get pods -l deploymentconfig=userprofile --watch
 
 Output:
 ```
-userprofile-2-xxxxx              2/2     Running        0          22s
-userprofile-1-xxxxx              2/2     Running        0          2m55s
+userprofile-2-xxxxxxxxxx-xxxxx            2/2     Running        0          22s
+userprofile-xxxxxxxxxx-xxxxx              2/2     Running        0          2m55s
 ```
 
 ## Access Application
@@ -148,11 +148,7 @@ Navigate to the 'Profile' section in the header.  If you lost the URL, you can r
 echo $GATEWAY_URL
 ```
 
-The user interface will round robin between versions '1.0' and '2.0' of the user profile service.  Refresh the browser until you see the following:
-
-*Show profile page loading*
-
-The profile page loads after several seconds, but it's really slow.  Let's use Istio to debug the problem.
+The profile page will round robin between versions 1 and 2.  Refresh a couple of times, and you'll notice that sometimes the page loads really slowly.  Let's use Istio to debug the problem.
 
 
 {{< importPartial "footer/footer.html" >}}
