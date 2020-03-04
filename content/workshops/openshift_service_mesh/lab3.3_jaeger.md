@@ -14,7 +14,6 @@ Jaeger[1] is a distributed tracing tool that lets you trace requests as they flo
 First, let's explore the Jaeger user interface.
 
 Open the Jaeger console.  Retrieve the endpoint for Jaeger:
-
 ```
 JAEGER_CONSOLE=https://$(oc get routes jaeger -n istio-system -o jsonpath='{.spec.host}{"\n"}')
 echo $JAEGER_CONSOLE
