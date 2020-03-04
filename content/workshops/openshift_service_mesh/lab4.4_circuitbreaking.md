@@ -42,12 +42,12 @@ Output (snippet):
     outlierDetection:
       consecutiveErrors: 1
       interval: 1s
-      baseEjectionTime: 3m
+      baseEjectionTime: 10m
       maxEjectionPercent: 100
 ...
 ```
 
-The circuit breaking rule is only applied to v3 of the user profile service.  The connection pool settings restrict the maximum number of requests to each instance to 1 (this makes it easier for you to trip the circuit for demo purposes).  The outlier detection settings define the thresholds - an instance that fails once with a 502/503/504 error is ejected from the mesh for 3 minutes.  You can read about the various settings in the Istio [docs][1].
+The circuit breaking rule is only applied to v3 of the user profile service.  The connection pool settings restrict the maximum number of requests to each instance to 1 (this makes it easier for you to trip the circuit for demo purposes).  The outlier detection settings define the thresholds - an instance that fails once with a 50x error is ejected from the mesh for 10 minutes.  You can read about the various settings in the Istio [docs][1].
 
 Deploy this circuit breaking rule:
 ```
@@ -61,15 +61,15 @@ First, route traffic evenly between v1 and v3 of the user profile service.
 oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
 ```
 
-Apply CPU stress to v3 to force it to return a 503 error.
-```
-USERPROFILE_POD=$(oc get pod -l deploymentconfig=userprofile,version=3.0 -o jsonpath='{.items[0].metadata.name}{"\n"}')
-oc exec $USERPROFILE_POD -- yes > /dev/null &
-```
-
 Send load to the user profile service:
 ```
-for ((i=1;i<=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+```
+
+In another tab in terminal, kill the server running version 3 of the user profile service:
+```
+USERPROFILE_POD=$(oc get pod -l deploymentconfig=userprofile,version=3.0 -o jsonpath='{.items[0].metadata.name}{"\n"}')
+oc exec $USERPROFILE_POD -- kill 1
 ```
 
 Inspect the change in Kiali.  Navigate to 'Graph' in the left navigation bar. If you lost the URL, you can retrieve it via:
@@ -77,11 +77,14 @@ Inspect the change in Kiali.  Navigate to 'Graph' in the left navigation bar. If
 echo $KIALI_CONSOLE
 ```
 
-Switch to the 'Versioned app graph' view.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
+Switch to the 'Versioned app graph' view and change to 'Last 1m'.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
 
-*Show circuit breaking in Kiali*
+<img src="../images/kiali-circuitbreaking.png" width="600"><br/>
+*Traces to User Profile Service with Fault Delays*
 
-You should see a small percentage of traffic directed to v3.  The lightning icon indicates a circuit breaking rule, and the circuit breaker was tripped so most traffic was routed to v1.
+You should gradually see the percentage of traffic directed away from v3 to v1.  The lightning icon indicates a circuit breaking rule, and the circuit breaker was tripped so traffic was routed to v1.
+
+> OpenShift's will attempt to revive the server once the health check fails.  If you see traffic rebalancing itself, run the command to kill the server again.
 
 Congratulations, you configured circuit breaking in Istio!
 
