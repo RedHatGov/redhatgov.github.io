@@ -20,7 +20,7 @@ Create a new build on this feature branch:
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
-  -p APPLICATION_CODE_URI=https://github.com/dudash/openshift-microservices.git \
+  -p APPLICATION_CODE_URI=https://github.com/theckang/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=feature_fix \
   -p APP_VERSION_TAG=3.0
 ```

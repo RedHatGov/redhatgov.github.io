@@ -17,7 +17,7 @@ The code has already been written for you on the 'feature_update' branch of the 
 
 Navigate to the URL via your browser:
 ```
-https://github.com/dudash/openshift-microservices/blob/master/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
+https://github.com/theckang/openshift-microservices/blob/feature_update/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
 ```
 
 Output (snippet):
@@ -45,7 +45,7 @@ Create a new build on this feature branch:
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
-  -p APPLICATION_CODE_URI=https://github.com/dudash/openshift-microservices.git \
+  -p APPLICATION_CODE_URI=https://github.com/theckang/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=feature_update \
   -p APP_VERSION_TAG=2.0
 ```
