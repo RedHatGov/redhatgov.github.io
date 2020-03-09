@@ -144,30 +144,30 @@ The application is deployed!  But you need a way to access the application via t
 
 Istio provides a [Gateway][2] resource, which is a load balancer at the edge of the service mesh that accepts incoming connections.  You need to deploy a Gateway resource and configure it to route to the application user interface.
 
-Deploy the load balancer for the gateway:
+Create the gateway load balancer:
 ```
 oc process -f ./istio-configuration/ingress-loadbalancer.yaml \
-  -p INGRESS_GATEWAY_NAME=$PROJECT_NAME-ingressgateway | oc create -n istio-system -f -
+  -p INGRESS_GATEWAY_NAME=demogateway | oc create -f -
 ```
 
-Deploy the gateway and routing rules:
+Create the gateway configuration and routing rules:
 ```
 oc process -f ./istio-configuration/ingress-gateway.yaml \
-  -p INGRESS_GATEWAY_NAME=$PROJECT_NAME-ingressgateway | oc create -f -
+  -p INGRESS_GATEWAY_NAME=demogateway | oc create -f -
 ```
 
 To access the application, you need the endpoint of the load balancer you created.
 
 Retrieve the URL of the load balancer:
 ```
-GATEWAY_URL=$(oc -n istio-system get route istio-$PROJECT_NAME-ingressgateway -o jsonpath='{.spec.host}')
+GATEWAY_URL=$(oc get route istio-demogateway -o jsonpath='{.spec.host}')
 echo $GATEWAY_URL
 ```
 
 Navigate to this URL in the browser.  For example:
 
 ```
-https://istio-microservices-demo-ingressgateway.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443 
+https://istio-demogateway-microservices-demo.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443
 ```
 
 You should see the application user interface.  Try creating a new board and posting to the shared board.
