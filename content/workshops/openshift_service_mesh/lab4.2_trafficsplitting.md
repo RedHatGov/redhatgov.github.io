@@ -11,7 +11,7 @@ It's time to fix the performance issue of the application.  Previously, you depl
 
 ## Feature Fix
 
-The code to fix the performance issue of the user profile service has already been written for you on the 'feature_fix' branch.  Navigate to the workshop directory:
+The code to fix the performance issue of the user profile service has already been written for you on the 'workshop_feature_fix' branch.  Navigate to the workshop directory:
 ```
 cd $HOME/openshift-microservices/deployment/workshop
 ```
@@ -21,7 +21,7 @@ Create a new build on this feature branch:
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
   -p APPLICATION_CODE_URI=https://github.com/theckang/openshift-microservices.git \
-  -p APPLICATION_CODE_BRANCH=feature_fix \
+  -p APPLICATION_CODE_BRANCH=workshop_feature_fix \
   -p APP_VERSION_TAG=3.0
 ```
 
