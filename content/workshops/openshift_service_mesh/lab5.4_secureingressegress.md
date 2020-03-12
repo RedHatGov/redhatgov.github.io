@@ -129,7 +129,9 @@ custom_search?term==skynet
 
 <br>
 
-Let's look at Kiali to see how things are visualized.
+If we wanted to we could now configure virtual services and destination rules to control traffic to the service entry in a more granular way. The same way we configured traffic for the other services in our mesh. 
+
+And Kiali tracks this ServiceEntry too, let's look at the graph to see how things are visualized.
 
 <br>
 

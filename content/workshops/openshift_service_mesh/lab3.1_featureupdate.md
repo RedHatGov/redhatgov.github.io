@@ -15,7 +15,11 @@ The profile page returns basic information about the user.  Let's add a feature 
 
 The code has already been written for you on the 'workshop_feature_update' branch of the repo.
 
+<blockquote>
+<i class="fa fa-desktop"></i>
 Navigate to the URL via your browser:
+</blockquote>
+
 ```
 https://github.com/theckang/openshift-microservices/blob/workshop_feature_update/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
 ```
@@ -36,12 +40,20 @@ The interface also includes a method for getting the user profile's photo, which
 
 ## Build and Deploy
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Navigate to the workshop directory:
+</blockquote>
+
 ```
 cd $HOME/openshift-microservices/deployment/workshop
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Create a new build on this feature branch:
+</blockquote>
+
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
@@ -50,14 +62,23 @@ oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APP_VERSION_TAG=2.0
 ```
 
-> Ignore the failure since the imagestream already exists.
+<p><i class="fa fa-info-circle"></i> Ignore the failure since the imagestream already exists.</p>
 
+
+<blockquote>
+<i class="fa fa-terminal"></i>
 Start the build:
+</blockquote>
+
 ```
 oc start-build userprofile-2.0
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Follow the build:
+</blockquote>
+
 ```
 oc logs -f bc/userprofile-2.0
 ```
@@ -77,9 +98,15 @@ Output (snippet):
 [INFO] ------------------------------------------------------------------------...
 ```
 
+<br>
+
 Once the build is complete, the image is stored in the OpenShift local repository.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Verify the image was created:
+</blockquote>
+
 ```
 oc describe is userprofile
 ```
@@ -100,9 +127,15 @@ Output (snippet):
       23 hours ago
 ```
 
-The latest image should have the '2.0' tag.
+<p><i class="fa fa-info-circle"></i> The latest image should have the '2.0' tag.</p>
 
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i>
 Grab a reference to the local image:
+</blockquote>
+
 ```
 USER_PROFILE_IMAGE_URI=$(oc get is userprofile -o jsonpath='{.status.dockerImageRepository}{"\n"}')
 echo $USER_PROFILE_IMAGE_URI
@@ -113,14 +146,24 @@ Output (sample):
 image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile
 ```
 
+<br>
+
 The deployment file 'userprofile-deploy-v2.yaml' was created for you to deploy the application.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Deploy the service using the image URI:
+</blockquote>
+
 ```
 sed "s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|" ./openshift-configuration/userprofile-deploy-v2.yaml | oc create -f -
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Watch the deployment of the user profile:
+</blockquote>
+
 ```
 oc get pods -l deploymentconfig=userprofile --watch
 ```
@@ -131,16 +174,24 @@ userprofile-2-xxxxxxxxxx-xxxxx            2/2     Running        0          22s
 userprofile-xxxxxxxxxx-xxxxx              2/2     Running        0          2m55s
 ```
 
+<br>
+
 ## Access Application
 
 Let's test the new version of our profile service in the browser.
 
-Navigate to the 'Profile' section in the header.  If you lost the URL, you can retrieve it via:
-```
-echo $GATEWAY_URL
-```
+<blockquote>
+<i class="fa fa-desktop"></i>
+Navigate to the 'Profile' section in the header.  
+</blockquote>
+
+<p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
+`echo $GATEWAY_URL`
+
+<br>
 
 The profile page will round robin between versions 1 and 2.  Refresh a couple of times, and you'll notice that sometimes the page loads really slowly.  Let's use Istio to debug the problem.
 
+<br>
 
 {{< importPartial "footer/footer.html" >}}

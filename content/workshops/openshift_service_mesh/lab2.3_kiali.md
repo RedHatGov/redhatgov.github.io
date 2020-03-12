@@ -15,17 +15,31 @@ Istio provides [Kiali][1], an open source project that gives you a console view 
 
 First, let's send some load to the application.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Send load to the application user interface:
+</blockquote>
+
 ```
 for ((i=1;i<=100;i++)); do curl -s -o /dev/null $GATEWAY_URL; done
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Send load to the user profile service:
+</blockquote>
+
 ```
 for ((i=1;i<=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i>
 Now let's open the Kiali console.  Retrieve the endpoint for Kiali:
+</blockquote>
+
 
 ```
 KIALI_CONSOLE=https://$(oc get routes kiali -n istio-system -o jsonpath='{.spec.host}{"\n"}')
@@ -37,37 +51,83 @@ Output (sample):
 https://kiali-istio-system.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com
 ```
 
-Navigate to this URL in the browser.  Login with the same credentials you were provided to access OpenShift.  Once logged in, you should be presented with the Kiali console:
+<br>
 
-<img src="../images/kiali-welcome.png" width="600"><br/>
+<blockquote>
+<i class="fa fa-desktop"></i>
+Navigate to this URL in the browser.  Login with the same credentials you were provided to access OpenShift.  
+</blockquote>
+
+Once logged in, you should be presented with the Kiali console:
+
+<img src="../images/kiali-welcome.png" width="1024"><br/>
 *Kiali Welcome*
 
-Let's take a look at the service mesh topology.  Navigate to 'Graph' in the left navigation bar.  Change the window of the view on the right side from 'Last 1m' to 'Last 10m'.
+Let's take a look at the service mesh topology.  
 
-<img src="../images/kiali-graph.png" width="600"><br/>
+<br>
+
+<blockquote>
+<i class="fa fa-desktop"></i>
+Navigate to 'Graph' in the left navigation bar.  Change the window of the view on the right side from 'Last 1m' to 'Last 10m'.
+</blockquote>
+
+
+<img src="../images/kiali-graph.png" width="1024"><br/>
 *Kiali Graph*
 
 The graph shows the microservices in your service mesh and how they are connected.
 
-You can inspect information about the traffic being sent between the services via the edge labels.  Click 'No edge labels' and switch to 'Requests per second'.  You can now see HTTP traffic information between the microservices.
+You can inspect information about the traffic being sent between the services via the edge labels.  
 
-<img src="../images/kiali-rpsgraph.png" width="600"><br/>
+<br>
+
+<blockquote>
+<i class="fa fa-desktop"></i>
+Click 'No edge labels' and switch to 'Requests per second'.
+</blockquote>
+
+You can now see HTTP traffic information between the microservices.
+
+<img src="../images/kiali-rpsgraph.png" width="1024"><br/>
 *Kiali Graph with Requests Per Second*
 
-Let's take a look at the microservices running in your service mesh.  Navigate to  'Applications' in the left navigation bar.
+Let's take a look at the microservices running in your service mesh.  
 
-<img src="../images/kiali-apps.png" width="600"><br/>
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Navigate to  'Applications' in the left navigation bar.
+</blockquote>
+
+<img src="../images/kiali-apps.png" width="1024"><br/>
 *Kiali View of Applications*
 
-You can drill down into each microservice from this view.  Select 'app-ui'.
+<br>
 
-<img src="../images/kiali-appui.png" width="600"><br/>
+<blockquote>
+<i class="fa fa-terminal"></i>
+You can drill down into each microservice from this view.  Select 'app-ui'.
+</blockquote>
+
+
+<img src="../images/kiali-appui.png" width="1024"><br/>
 *Kiali View of App UI*
 
-You should see the 'Health' of that microservice.  Navigate to the 'Traffic' tab and you should see the inbound and outbound calls made from that microservice.
+You should see the 'Health' of that microservice.  
 
-<img src="../images/kiali-appuitraffic.png" width="600"><br/>
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Navigate to the 'Traffic' tab and you should see the inbound and outbound calls made from that microservice.
+</blockquote>
+
+<img src="../images/kiali-appuitraffic.png" width="1024"><br/>
 *Kiali View of Inbound and Outbound Traffic to App UI*
+
+<br>
 
 Keep the Kiali console opened in a tab in your browser.  You will use Kiali throughout the remainder of the labs.
 

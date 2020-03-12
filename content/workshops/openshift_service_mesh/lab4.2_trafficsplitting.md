@@ -11,12 +11,22 @@ It's time to fix the performance issue of the application.  Previously, you depl
 
 ## Feature Fix
 
-The code to fix the performance issue of the user profile service has already been written for you on the 'workshop_feature_fix' branch.  Navigate to the workshop directory:
+The code to fix the performance issue of the user profile service has already been written for you on the 'workshop_feature_fix' branch.  
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Navigate to the workshop directory:
+</blockquote>
+
 ```
 cd $HOME/openshift-microservices/deployment/workshop
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Create a new build on this feature branch:
+</blockquote>
+
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
@@ -25,14 +35,22 @@ oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APP_VERSION_TAG=3.0
 ```
 
-> Ignore the failure since the imagestream already exists.
+<p><i class="fa fa-info-circle"></i> Ignore the failure since the imagestream already exists.</p>
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Start the build:
+</blockquote>
+
 ```
 oc start-build userprofile-3.0
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Follow the build:
+</blockquote>
+
 ```
 oc logs -f bc/userprofile-3.0
 ```
@@ -54,7 +72,11 @@ Output (snippet):
 
 Once the build is complete, the image is stored in the OpenShift local repository.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Verify the image was created:
+</blockquote>
+
 ```
 oc describe is userprofile
 ```
@@ -79,7 +101,11 @@ Output (snippet):
 
 The latest image should have the '3.0' tag.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Grab a reference to the local image:
+</blockquote>
+
 ```
 USER_PROFILE_IMAGE_URI=$(oc get is userprofile -o jsonpath='{.status.dockerImageRepository}{"\n"}')
 echo $USER_PROFILE_IMAGE_URI
@@ -92,12 +118,20 @@ image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile
 
 The deployment file 'userprofile-deploy-v3.yaml' was created for you to deploy the application.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Deploy the service using the image URI:
+</blockquote>
+
 ```
 sed "s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|" ./openshift-configuration/userprofile-deploy-v3.yaml | oc create -f -
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Watch the deployment of the user profile:
+</blockquote>
+
 ```
 oc get pods -l deploymentconfig=userprofile --watch
 ```
@@ -109,16 +143,26 @@ userprofile-2-xxxxxxxxxx-xxxxx              2/2     Running        0          13
 userprofile-xxxxxxxxxx-xxxxx                2/2     Running        0          22h
 ```
 
+<br>
+
 ## Traffic Routing
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Navigate to the workshop directory:
+</blockquote>
+
 ```
 cd $HOME/openshift-microservices/deployment/workshop
 ```
 
 Let's start with a [Canary Release][1] of the new version of the user profile service.  You'll route 90% of user traffic to version 1 and route 10% of traffic to the latest version.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
+</blockquote>
+
 ```
 cat ./istio-configuration/virtual-service-userprofile-90-10.yaml
 ```
@@ -143,33 +187,59 @@ Output (snippet):
 
 The weights determine the amount of traffic sent to the service subset.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Deploy the routing rule:
+</blockquote>
+
 ```
 oc apply -f ./istio-configuration/virtual-service-userprofile-90-10.yaml
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Send load continuously to the user profile service:
+</blockquote>
+
 ```
 while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 
-Inspect the change in Kiali.  Navigate to 'Graph' in the left navigation bar. If you lost the URL, you can retrieve it via:
-```
-echo $KIALI_CONSOLE
-```
+<br>
 
-Switch to the 'Versioned app graph' view and change to 'Last 1m'.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
+Inspect the change in Kiali.
+<blockquote>
+<i class="fa fa-desktop"></i>
+Navigate to 'Graph' in the left navigation bar. 
+</blockquote>
+
+<p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
+
+`echo $KIALI_CONSOLE`
+
+<blockquote>
+<i class="fa fa-desktop"></i>
+Switch to the 'Versioned app graph' view and change to 'Last 1m'.  
+</blockquote>
+<blockquote>
+<i class="fa fa-desktop"></i>
+Change the 'No edge labels' dropdown to 'Requests percentage'.  
+</blockquote>
 
 The traffic splits between versions 1 and 3 of the user profile service at roughly 90% and 10% split.
 
-<img src="../images/kiali-userprofile-90-10.png" width="600"><br/>
+<img src="../images/kiali-userprofile-90-10.png" width="1024"><br/>
 *Kiali Graph with 90-10 Traffic Split*
 
 By doing this, you can isolate the new user profile experience for a small subset of your users without impacting everyone at once.  
 
 Once you are comfortable with the change, you can increase the traffic load to the latest version.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
+</blockquote>
+
 ```
 cat ./istio-configuration/virtual-service-userprofile-50-50.yaml
 ```
@@ -194,26 +264,51 @@ Output (snippet):
 
 In this example, you will route traffic evenly between the two versions.  This is commonly known as a [Blue-Green Deployment][2].
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Deploy the routing rule:
+</blockquote>
+
 ```
 oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Send load to the user profile service:
+</blockquote>
+
 ```
 while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 
-Inspect the change again in Kiali.  Navigate to 'Graph' in the left navigation bar.  Switch to the 'Versioned app graph' view.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
+<br>
+
+Inspect the change again in Kiali.
+
+<blockquote>
+<i class="fa fa-desktop"></i>
+Navigate to 'Graph' in the left navigation bar.
+</blockquote>
+<blockquote>
+<i class="fa fa-desktop"></i>
+Switch to the 'Versioned app graph' view.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
+</blockquote>
 
 You should see a roughly 50/50 percentage split between versions 1 and 3 of the user profile service.
 
-<img src="../images/kiali-userprofile-50-50.png" width="600"><br/>
+<img src="../images/kiali-userprofile-50-50.png" width="1024"><br/>
 *Kiali Graph with 50-50 Traffic Split*
 
 Finally, you are ready to roll this new version to everyone.
 
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
+</blockquote>
+
 ```
 cat ./istio-configuration/virtual-service-userprofile-v3.yaml
 ```
@@ -231,25 +326,47 @@ Output (snippet):
 ...
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Deploy the routing rule:
+</blockquote>
+
 ```
 oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Send load to the user profile service:
+</blockquote>
+
 ```
 while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 
-Inspect the change again in Kiali.  Navigate to 'Graph' in the left navigation bar.  Switch to the 'Versioned app graph' view.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
+<br>
+
+Inspect the change again in Kiali.
+<blockquote>
+<i class="fa fa-desktop"></i>
+Navigate to 'Graph' in the left navigation bar. 
+</blockquote>
+<blockquote>
+<i class="fa fa-desktop"></i>
+Switch to the 'Versioned app graph' view.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
+</blockquote>
+
 
 You should see traffic routed to v3 of the user profile service.
 
-<img src="../images/kiali-userprofile-v3.png" width="600"><br/>
+<img src="../images/kiali-userprofile-v3.png" width="1024"><br/>
 *Kiali Graph with v3 Routing*
 
+<br>
 
 Congratulations, you configured traffic splitting in Istio!
+
+<br>
 
 [1]: https://martinfowler.com/bliki/CanaryRelease.html
 [2]: https://martinfowler.com/bliki/BlueGreenDeployment.html

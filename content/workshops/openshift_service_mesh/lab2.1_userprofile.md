@@ -7,28 +7,43 @@ layout: lab
 
 # Building a Microservice
 
-In the browser, navigate to the 'Profile' section in the header.  If you lost the URL, you can retrieve it via:
-```
-echo $GATEWAY_URL
-```
+<blockquote>
+<i class="fa fa-desktop"></i>
+In the browser, navigate to the 'Profile' section in the header.
+</blockquote>
+
+<p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
+`echo $GATEWAY_URL`
+
+<br>
 
 You should see the following:
 
-<img src="../images/app-unknownuser.png" width="600"><br/>
+<img src="../images/app-unknownuser.png" width="1024"><br/>
  *Unknown Profile Page*
 
 The UI shows an unknown user and that's because there's no profile service for your application.  You are going to build a new microservice for user profiles and add this to your service mesh.
 
 ## Application Code
 
-Let's take a look at the code.  Navigate to the code directory:
+Let's take a look at the code.  
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Navigate to the code directory:
+</blockquote>
+
 ```
 cd $HOME/openshift-microservices/code/userprofile/
 ```
 
 Your new application is written in Java, whereas the other backend components such as 'app-ui' and 'boards' are written in NodeJS.  One of the advantages of Istio is that it is agnostic to the programming languages of the running microservices.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 View the 'UserProfile' class in your favorite editor or via bash:
+</blockquote>
+
 ```
 cat src/main/java/org/microservices/demo/json/UserProfile.java
 ```
@@ -51,7 +66,11 @@ This class file encapsulates information about the user such as the first and la
 
 Your application also exposes a REST API to interact with the service.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 View the interface in your favorite editor or via bash:
+</blockquote>
+
 ```
 cat src/main/java/org/microservices/demo/service/UserProfileService.java
 ```
@@ -70,16 +89,28 @@ Output (snippet):
 
 This class file includes the REST interface for getting and setting user profile information.
 
+<br>
+
 ## Build Application
 
-You are ready to build the application.  Navigate to the workshop directory:
+You are ready to build the application.  
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Navigate to the workshop directory:
+</blockquote>
+
 ```
 cd $HOME/openshift-microservices/deployment/workshop
 ```
 
 Use a [BuildConfig][1] to build the application image.  A 'BuildConfig' template was already created for you.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Verify the base image used to build the application:
+</blockquote>
+
 ```
 cat ./openshift-configuration/userprofile-build.yaml | grep -A 4 sourceStrategy
 ```
@@ -95,7 +126,11 @@ Output (snippet):
 
 Notice the build uses a base Java image to build the application.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Create the build:
+</blockquote>
+
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
@@ -104,12 +139,20 @@ oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APP_VERSION_TAG=1.0
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Start the build:
+</blockquote>
+
 ```
 oc start-build userprofile-1.0
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Follow the build:
+</blockquote>
+
 ```
 oc logs -f bc/userprofile-1.0
 ```
@@ -130,7 +173,11 @@ Output (snippet):
 
 Once the build is complete, the image is stored in the OpenShift local repository.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Verify the image was created:
+</blockquote>
+
 ```
 oc get is userprofile
 ```

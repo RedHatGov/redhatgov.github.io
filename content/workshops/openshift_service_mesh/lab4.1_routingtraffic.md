@@ -15,12 +15,22 @@ For example, a destination rule can expose two versions of a service (e.g. 'v1',
 
 ## Traffic Routing
 
-Traffic routing rules have been constructed for you already.  Navigate to the workshop directory:
+Traffic routing rules have been constructed for you already.  
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Navigate to the workshop directory:
+</blockquote>
+
 ```
 cd $HOME/openshift-microservices/deployment/workshop
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 View the destination rules in your favorite editor or via bash:
+</blockquote>
+
 ```
 cat ./istio-configuration/destinationrules-all.yaml
 ```
@@ -55,7 +65,11 @@ spec:
 
 Most of the destination rules do not have specific configurations except for the tls configuration, which we will discuss in a later lab.  However, the 'userprofile' destination rule exposes 'subsets' - version of the service that can be called on.  You can see different load balancer policies for versions '1.0' and '2.0'.  By default, Istio uses 'ROUND_ROBIN' load balancing.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 View the virtual services in your favorite editor or via bash:
+</blockquote>
+
 ```
 cat ./istio-configuration/virtual-services-all-v2.yaml
 ```
@@ -82,13 +96,21 @@ spec:
 
 Most of the virtual services do not have specific configurations.  However, the 'userprofile' virtual service routes specifically to version 'v2' of the 'userprofile' microservice.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Let's deploy these routing rules:
+</blockquote>
+
 ```
 oc apply -f ./istio-configuration/destinationrules-all.yaml 
 oc apply -f ./istio-configuration/virtual-services-all-v2.yaml
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Verify the destination rules:
+</blockquote>
+
 ```
 oc get dr
 ```
@@ -103,7 +125,11 @@ userprofile              userprofile              20m
 userprofile-postgresql   userprofile-postgresql   16m
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Verify the virtual services:
+</blockquote>
+
 ```
 oc get vs
 ```
@@ -121,37 +147,66 @@ userprofile-postgresql                                  [userprofile-postgresql]
 
 Let's test the application UI in the browser.
 
-Navigate to the 'Profile' section in the header.  If you lost the URL, you can retrieve it via:
-```
-echo $GATEWAY_URL
-```
+<blockquote>
+<i class="fa fa-desktop"></i>
+Navigate to the 'Profile' section in the header.  
+</blockquote>
+
+<p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
+
+`echo $GATEWAY_URL`
 
 There should be no change at this point.  You are routing to version 2 of the user profile service you deployed in an earlier lab, and it is really slow.
 
+<br>
+
 Let's see what this looks like in Kiali.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Send load to the user profile service:
+</blockquote>
+
 ```
 for ((i=1;i<=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 
-Navigate to 'Graph' in the left navigation bar. If you lost the URL, you can retrieve it via:
-```
-echo $KIALI_CONSOLE
-```
+<br>
 
-Switch to the 'Versioned app graph' view and change to 'Last 1m'.  You should see traffic flowing to user profile version '2.0'.
+<blockquote>
+<i class="fa fa-desktop"></i>
+Navigate to 'Graph' in the left navigation bar.
+</blockquote>
 
-> The flow of traffic is indicated by a green highlight in the graph.
+<p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
 
-<img src="../images/kiali-userprofile-v2.png" width="600"><br/>
+`echo $KIALI_CONSOLE`
+
+<br>
+
+<blockquote>
+<i class="fa fa-desktop"></i>
+Switch to the 'Versioned app graph' view and change to 'Last 1m'.  
+</blockquote>
+
+You should see traffic flowing to user profile version '2.0'. 
+
+The flow of traffic is indicated by a green highlight in the graph.
+
+<img src="../images/kiali-userprofile-v2.png" width="1024"><br/>
 *Kiali Graph with v2 Routing*
+
+<br>
 
 ## Change Traffic Routing
 
 One of the advantages of Istio is that you can change traffic routing without modifying application code.  There is a performance issue with version 2 of our profile service so let's roll back to version 1.  All you need to do is change your virtual service configuration.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 View the modified virtual service in your favorite editor or via bash:
+</blockquote>
+
 ```
 cat ./istio-configuration/virtual-service-userprofile-v1.yaml
 ```
@@ -174,12 +229,20 @@ spec:
 
 In this configuration, you will route to 'v1' of the virtual service.
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Deploy the change:
+</blockquote>
+
 ```
 oc apply -f ./istio-configuration/virtual-service-userprofile-v1.yaml
 ```
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Verify the change:
+</blockquote>
+
 ```
 oc describe vs userprofile
 ```
@@ -198,23 +261,48 @@ Spec:
 Events:          <none>
 ```
 
-In the application UI, navigate to the 'Profile' section in the header.  The page should load quickly and you are back to routing to version 1 of the user profile service.
+<br>
+
+<blockquote>
+<i class="fa fa-desktop"></i>
+In the application UI, navigate to the 'Profile' section in the header.  
+</blockquote>
+
+The page should load quickly and you are back to routing to version 1 of the user profile service.
+
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Let's send 100 user profile requests to generate traffic
+</blockquote>
 
 ```
 for ((i=1;i<=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 
-In Kiali, navigate to 'Graph' in the left navigation bar.
+<blockquote>
+<i class="fa fa-desktop"></i>
+Now in Kiali, navigate to 'Graph' in the left navigation bar.
+</blockquote>
 
-Switch to the 'Versioned app graph' view and change to 'Last 1m'.  You should see traffic flowing to user profile version '1.0'.
+<blockquote>
+<i class="fa fa-desktop"></i>
+Switch to the 'Versioned app graph' view and change to 'Last 1m'.  
+</blockquote>
 
-> The flow of traffic is indicated by a green highlight in the graph.
+You should see traffic flowing to user profile version '1.0'.
 
-<img src="../images/kiali-userprofile-v1.png" width="600"><br/>
+The flow of traffic is indicated by a green highlight in the graph.
+
+<img src="../images/kiali-userprofile-v1.png" width="1024"><br/>
 *Kiali Graph with v1 Routing*
 
+<br>
 
 Congratulations, you configured traffic routing with Istio!
+
+<br>
 
 [1]: https://istio.io/docs/concepts/traffic-management
 [2]: https://istio.io/docs/concepts/traffic-management/#virtual-services

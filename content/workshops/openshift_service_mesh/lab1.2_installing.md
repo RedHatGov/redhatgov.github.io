@@ -11,7 +11,9 @@ You will conduct these labs in an OpenShift cluster.  First, test you have acces
 
 ## OpenShift
 
-Navigate to the console URI provided by your instructor and login with the username/password provided.
+<blockquote>
+<i class="fa fa-desktop"></i> Navigate to the console URI provided by your instructor and login with the username/password provided.
+</blockquote>
 
 For example:
 
@@ -21,10 +23,17 @@ http://console-openshift-console.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.
 
 Once logged in, you should see the following:
 
-<img src="../images/openshift-welcome.png" width="600"><br/>
+<img src="../images/openshift-welcome.png" width="1024"><br/>
  *OpenShift Welcome*
 
-You will use the OpenShift 'oc' CLI  to execute commands for the majority of this lab.  Login using API endpoint and remember to add the '--insecure-skip-tls-verify=true' flag.
+<br>
+
+You will use the OpenShift 'oc' CLI  to execute commands for the majority of this lab.  
+
+
+<blockquote>
+<i class="fa fa-terminal"></i> Login using API endpoint and remember to add the '--insecure-skip-tls-verify=true' flag
+</blockquote>
 
 For example:
 
@@ -32,7 +41,9 @@ For example:
 oc login https://api.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443 --insecure-skip-tls-verify=true
 ```
 
-Check the status of the cluster:
+<blockquote>
+<i class="fa fa-terminal"></i> Check the status of the cluster:
+</blockquote>
 
 ```
 oc status
@@ -40,24 +51,37 @@ oc status
 
 You should see two services running 'svc/openshift' and 'svc/kubernetes'.
 
+<br>
+
 ## Application Code
 Next we need a local copy of our application code.  The application code includes the resources to install Istio.
 
-Clone the repository in your home directory:
+<blockquote>
+<i class="fa fa-terminal"></i> Clone the repository in your home directory:
+</blockquote>
+
 ```
 cd $HOME
 git clone https://github.com/dudash/openshift-microservices.git
 ```
 
-Checkout the workshop-stable branch:
+<blockquote>
+<i class="fa fa-terminal"></i> Checkout the workshop-stable branch:
+</blockquote>
+
 ```
 git checkout workshop-stable
 ```
 
+<br>
+
 ## Istio
 Let's install Istio in our cluster. 
 
+<blockquote>
+<i class="fa fa-terminal"></i>
 Navigate to the directory for installing Istio:
+</blockquote>
 
 ```
 cd $HOME/openshift-microservices/deployment/install/istio
@@ -65,11 +89,22 @@ cd $HOME/openshift-microservices/deployment/install/istio
 
 Start by installing the Istio [Operator][1].  The operator is used to install and manage Istio in the cluster.
 
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i>Run the following command:
+</blockquote>
+
 ```
 oc apply -f ./istio-operator.yaml
 ```
 
-Watch the operator installation:
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i> Use oc to watch the operator installation:
+</blockquote>
+
 ```
 oc get pods -n openshift-operators -l name=istio-operator --watch
 ```
@@ -81,12 +116,24 @@ istio-operator-xxxxxxxxx-xxxxx   1/1   Running   0     17s
 
 Once the operator is running, install the Istio control plane in its own namespace 'istio-system':
 
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i>Run the following 2 commands:
+</blockquote>
+
 ```
 oc new-project istio-system
+```
+```
 oc create -n istio-system -f ./istio-resources.yaml
 ```
 
-Watch the control plane installation:
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i>Watch the control plane installation:
+</blockquote>
 
 ```
 oc get servicemeshcontrolplane/istio-demo -n istio-system --template='{{range .status.conditions}}{{printf "%s=%s, reason=%s, message=%s\n\n" .type .status .reason .message}}{{end}}' --watch
@@ -103,7 +150,12 @@ Ready=True, reason=ComponentsReady, message=All component deployments are Availa
 
 ```
 
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i>
 List all the Istio components:
+</blockquote>
 
 ```
 oc get pods -n istio-system
