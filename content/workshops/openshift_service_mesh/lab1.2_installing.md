@@ -135,5 +135,6 @@ Congratulations, you installed Istio!
 [2]: https://istio.io/docs/concepts/traffic-management/
 [3]: https://istio.io/docs/concepts/observability/
 [4]: https://istio.io/docs/concepts/security/
+[5]: https://maistra.io/docs/installation/installation-options/
 
 {{< importPartial "footer/footer.html" >}}
