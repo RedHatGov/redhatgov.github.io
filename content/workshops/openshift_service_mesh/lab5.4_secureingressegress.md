@@ -6,10 +6,16 @@ layout: lab
 ---
 
 # Securing Ingress and Egress
-In cases where security is a priority we need to configure specifics around securing ingress and egress traffic. TODO more text here with a use case about rogue developers.
+In cases where strict security is required we need to configure specifics around securing ingress and egress traffic. Security around egress is often used to lock down and deny access to potentially harmful resources outside the network. Additionally, it is a good practice to prevent malicious activities from originating from the cluster.
+
+You are probably already familiar with basic ingress security concepts. Essentially, only exposing particular services to be accessible from outside the cluster and using basic TLS/SSL. The service mesh has an ingress router (a standalone Envoy) running by default and we already configured it during the "Deploy MSA" lab.
+
+An even better way to lockdown inbound traffic for our demo application is to leverage API management in front of all the API services. We can do this with a service mesh plugin for 3scale. We aren't going to walk through it today with hands-on steps. But if that's something that interest you, we can discuss and you can [read more about that here][7] [and here][8].
+
+For now let's lockdown egress.
 
 ## Lock Down Egress
-In this example we are going to restrict access to external endpoints to only approved host. This is a service mesh 
+In this example we are going to restrict access to external endpoints to only approved hosts. The service mesh has an egress router (a standalone Envoy) running by default and we just need to configure it.
 
 istio-system has a config map called `istio` which controls the default for egress security. It looks like this:
 
@@ -23,7 +29,7 @@ outboundTrafficPolicy:
   mode: ALLOW_ANY
 ```
 
-The cluster your using in this workshop has flipped the mode to `REGISTRY_ONLY`. Let's verify that:
+The mesh your using in this workshop should already have the mode set to `REGISTRY_ONLY`. Let's verify that:
 
 <br>
 
@@ -154,7 +160,7 @@ A few key highlights are:
 * We can lock down egress traffic to only approved external endpoints or services
 * We can lock down ingress traffic to only approved external endpoints or services
 * We can secure ingress traffic via standard TLS or mutual TLS
-* We can setup secure a [ingress mount][4] to utilize custom certificates
+* We can leverage 3scale API management to limit who can access exposed APIs and how
 
 
 [1]: https://istio.io/docs/tasks/traffic-management/ingress/
@@ -163,5 +169,7 @@ A few key highlights are:
 [4]: https://istio.io/docs/tasks/traffic-management/ingress/secure-ingress-mount/
 [5]: https://istio.io/docs/concepts/traffic-management/#service-entries
 [6]: https://archive.istio.io/v1.4/docs/tasks/traffic-management/egress/egress-control/
+[7]: https://docs.openshift.com/container-platform/4.3/service_mesh/threescale_adapter/threescale-adapter.html
+[8]: https://www.redhat.com/en/technologies/jboss-middleware/3scale
 
 {{< importPartial "footer/footer.html" >}}
