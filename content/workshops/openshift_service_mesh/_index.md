@@ -40,8 +40,8 @@ If you are on-site with us, the instructor will walk you through and kick off ea
 
 <br>
 
-{{% alert info %}}
+
 These labs have been tailored for OpenShift 4.x
-{{% /alert %}}
+
 
 {{< importPartial "footer/footer.html" >}}
