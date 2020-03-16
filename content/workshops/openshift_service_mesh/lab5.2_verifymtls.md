@@ -50,7 +50,7 @@ curl: (56) Recv failure: Connection reset by peer
 pod microservices-demo/curl-boards terminated (Error)
 ```
 
-## Turn of Strict Mode
+## Turn off Strict Mode
 Let's turn strict mode back off, we will be doing some intentionally insecure things in the next couple labs.
 
 <blockquote>

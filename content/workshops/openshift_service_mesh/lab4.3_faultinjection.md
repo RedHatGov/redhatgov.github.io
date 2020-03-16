@@ -7,9 +7,11 @@ layout: lab
 
 # Testing Resiliency with Fault Injection
 
+Your application is working great now with the new version of the user profile service.  But the previous version caused performance issues, and future updates may cause issues in other areas of the application.  How can you test how your application behaves when a failure occurs?
+
 [Chaos Engineering][1] is the discipline of testing a software's tolerance to failure in production.  For microservices, this means injecting failure into the production environment to test how resilient your services are to errors.
 
-Istio provides ways to inject failure at the application layer with [Delay Faults][2] and [Abort Faults][3] using virtual services.
+Istio provides ways to inject failure at the application layer with [Delay Faults][2] and [Abort Faults][3] using virtual services.  Let's try this with the paste board application.
 
 ## Abort Faults
 
@@ -115,7 +117,7 @@ Refresh the brower a couple of times.
 
 Sometimes you will see the profile page show up; other times, you will see 'Unknown User'.
 
-Injecting an abort fault is a great mechanism to test how your application handles failure.  In more complex service meshes, you can use this to prevent cascading failures in which an erroring service causes a chain of other services to fail.
+Injecting an abort fault is a great mechanism to test how your application handles failure.  In more complex service meshes, you can use this to identify and prevent cascading failures in which an erroring service causes a chain of other services to fail.
 
 <br>
 

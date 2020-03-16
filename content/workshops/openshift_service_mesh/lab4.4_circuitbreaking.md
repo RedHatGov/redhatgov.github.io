@@ -120,7 +120,7 @@ Switch to the 'Versioned app graph' view and change to 'Last 1m'.  Change the 'N
 
 You should gradually see the percentage of traffic directed away from v3 to v1.  The lightning icon indicates a circuit breaking rule, and the circuit breaker was tripped so traffic was routed to v1.
 
-OpenShift's will attempt to revive the server once the health check fails.  If you see traffic rebalancing itself, run the command to kill the server again.
+OpenShift will attempt to revive the server once the health check fails.  If you see traffic rebalancing itself, run the command to kill the server again.
 
 <br>
 
