@@ -9,7 +9,7 @@ layout: lab
 
 Your application is working great now with the new version of the user profile service.  But the previous version caused performance issues, and future updates may cause issues in other areas of the application.  How can you test how your application behaves when a failure occurs?
 
-[Chaos Engineering][1] is the discipline of testing a software's tolerance to failure in production.  For microservices, this means injecting failure into the production environment to test how resilient your services are to errors.
+You need a way to simulate failure in the service mesh.  By doing so, you can test if your application functions correctly in a degraded state.  This concept is more generally known as [Chaos Engineering][1].  In Chaos Engineering, you test your software by causing breakdowns in the production environment.
 
 Istio provides ways to inject failure at the application layer with [Delay Faults][2] and [Abort Faults][3] using virtual services.  Let's try this with the paste board application.
 
