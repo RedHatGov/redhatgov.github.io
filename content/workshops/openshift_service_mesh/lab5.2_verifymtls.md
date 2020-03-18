@@ -57,6 +57,7 @@ Let's turn strict mode back off, we will be doing some intentionally insecure th
 <i class="fa fa-terminal"></i>
 Type the following in the CLI
 </blockquote>
+
 ```
 oc delete policy/default
 ```
