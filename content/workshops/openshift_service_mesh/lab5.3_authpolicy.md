@@ -128,6 +128,14 @@ Our app-ui microservice requests the JWT from the Keycloak SSO when a user logs 
 
 In our example case here, all traffic for these flows is internal to our cluster. Client-side java script doesn't ever get to see or access the JWT because the app-ui does that in node.js server-side only javascript. If you have the time and want to dig deeper, you should read more about [configuring Keycloak][4] and about [JWTs][3].
 
+Check out highlevel diagrams of the flows we executed below:
+
+<br>
+*Fail Case*
+<img src="../images/architecture-jwtfail.png" width="600" class="architecture"><br/>
+<br>
+*Success Case*
+<img src="../images/architecture-jwtsuccess.png" width="800" class="architecture"><br/>
 
 ## Authorization Policy Summary
 * Authorization via dynamically configurable policy
