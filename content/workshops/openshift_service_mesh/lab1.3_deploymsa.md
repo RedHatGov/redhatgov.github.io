@@ -127,7 +127,8 @@ Deploy single sign-on:
 
 ```
 oc new-app -f ./openshift-configuration/sso73-x509-https.yaml \
-  -p APPLICATION_NAME=sso
+  -p APPLICATION_NAME=sso \
+  -p MEMORY_LIMIT=512Mi
 ```
 
 <blockquote>
