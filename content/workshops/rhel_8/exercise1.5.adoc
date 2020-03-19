@@ -1,178 +1,59 @@
 ---
-title: "Exercise 1.5 - Deploying Containers with Podman"
+title: "Exercise 1.5 - Managing Cryptographic Policies"
 workshops: rhel_8
 workshop_weight: 15
 layout: lab
 ---
 
-:domain_name: redhatgov.io
 :icons: font
 :imagesdir: /workshops/rhel_8/images
-
-= Exercise 1.5 - Deploying Containers with Podman"
+:package_url: http://docs.ansible.com/ansible/package_module.html
+:service_url: http://docs.ansible.com/ansible/service_module.html
+:dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
+:var_prec_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
 
 == Exercise Description
+RHEL 8 makes it easy to enforce a strong and consistent cryptographic policy on your systems.
 
-Explore how Podman helps you run workloads in containers by taking an existing container image and deploying it into a runtime environment.
+In the following exercises we'll use the new commands for managing your crypto configurations and test them.
 
-After completing this scenario, users will be able to deploy and control an already defined container image.
+== Section 1: Viewing and changing the crypto policy
 
-Concepts included in this scenario:
+Show the current crypto policy.
 
-. List available container images
-. Deploy a container image into an interactive container runtime
-. Deploy a container image into a detached container runtime
-. View deployed containers
-. Stop a container instances
-. Remove deployed container instances
+[source, bash]
+----
+update-crypto-policies --show
+----
 
-=== Step 1: 
-Using the top terminal session, view the container images available with the following command:
-```bash
-podman images
-```
+You should see something like ...
 
-Expected Output:
-```bash
-REPOSITORY                          TAG      IMAGE ID       CREATED        SIZE
-registry.redhat.io/rhel8-httpd-24   latest   c12e3720df7b   43 hours ago   499 MB
-```
+`DEFAULT`
 
-There is one container available in the repository, rhel8-httpd-24. If there were multiple updated iterations of the conatiner available, you would use the IMAGE ID to work with those that are not tagged as latest. Also, from this list you are able to see the size, on disk, of the container image.
+DEFAULT is one of the four crypto policies, along with LEGACY, FIPS 140, and FUTURE. You may view the details of these policies in the man page.
 
-=== Step 2:
+`man crypto-policies`
 
-The rhel8-httpd container includes a bash shell. In this step, you will deploy the container in an interactive fashion, which will allow you to run commands within the deployed container.
+To see the effect of the DEFAULT policy, try pasting in this command:
 
-```bash
-podman run -it rhel8/httpd-24 /bin/bash
-```
+[source, bash]
+----
+openssl s_client --connect tls-v1-1.badssl.com:1011
+----
 
-You should now be looking at a bash shell prompt:
+You can see from the 2nd line of output that it cannot make a TLS connection to that site, and reports "unsupported protocol".
 
-```bash
-bash-4.4$
-```
-In the terminal, the displayed shell is running inside the container image, not the host operating system. To confirm this, take a look at the mounted filesystems:
+Now let's change the default crypto policy from DEFAULT to something less secure, just for testing purposes.  We'll set the crypto policy to LEGACY to temporarily allow insecure TLS 1.1 communication from our system.
 
-```bash
-df -hP
-```
-Expected output:
+Change the crypto policy to LEGACY.
+[source, bash]
+----
+sudo update-crypto-policies --set LEGACY
+----
+And now let's test communication to the same site; now it connects, and reports TLS v1.1:
+[source, bash]
+----
+timeout 3 openssl s_client --connect tls-v1-1.badssl.com:1011 | grep Protocol
+----
 
-```bash
-Filesystem      Size  Used Avail Use% Mounted on
-overlay          35G  3.7G   31G  11% /
-tmpfs            64M     0   64M   0% /dev
-shm              63M     0   63M   0% /dev/shm
-tmpfs           915M   97M  818M  11% /etc/hosts
-tmpfs           915M     0  915M   0% /sys/fs/cgroup
-tmpfs           915M     0  915M   0% /proc/acpi
-tmpfs           915M     0  915M   0% /proc/scsi
-tmpfs           915M     0  915M   0% /sys/firmware
-bash-4.4$
-```
-
-You will notice that all of the filesystem contents are either memory-based (tmpfs, shm) or the overlay file associated with this runtime of the container image (overlay).
-
-Open another terminal on the same host system. Use this shell to verify that the container is running:
-
-```bash
-podman ps -a
-```
-
-Expected output:
-
-```bash
-CONTAINER ID  IMAGE                                     COMMAND    CREATED        STATUS            PORTS  NAMES
-af2d3774f20b  registry.redhat.io/rhel8/httpd-24:latest  /bin/bash  3 minutes ago  Up 3 minutes ago         keen_borg
-```
-
-Note: Your CONTAINER ID and NAMES will be different than the output displayed above as each container is assigned a unique ID and Name.
-
-=== Step 3:
-
-Switch back to Terminal 1. Exit the container's shell
-```bash
-exit
-```
-When the process on an interactive container is closed, the container stops running. You can verify this by looking at the list of container processes:
-```bash
-podman ps -a
-```
-```bash
-CONTAINER ID  IMAGE                                     COMMAND    CREATED        STATUS                     PORTS  NAMES
-af2d3774f20b  registry.redhat.io/rhel8/httpd-24:latest  /bin/bash  7 minutes ago  Exited (0) 41 seconds ago         keen_borg
-```
-Notice the STATUS field is now reported as Exited.
-
-A container in this state can be resumed, however, this one will no longer be used. You will remove it from the system. using podman rm . In the command below, we use a bit of bash scripting to determine the CONTAINER ID as it is unique to each container image.
-```bash
-podman rm $(podman ps -a | grep Exited | cut -d" " -f1)
-```
-```bash
-af2d3774f20b5afb4505a4eb3fea20df5861afd6ec06b9271b6419ff1515106d
-```
-The output of this removal is the full CONTAINER ID which was removed from the system.
-
-=== Step 4:
-
-Running an interactive container is all well and good, however, if the container is offering applications or services, you do not need to interact with it.
-
-The rhel8/httpd-24 container, for example, is configured with an Apache web server running within it. You will create a new instance of this container in a detached mode. Further, the command provided (-P) will configure port forwarding for the Apache web server so that connections to the local host's port will redirect to the running container's port of 8080/tcp or 8443/tcp (Apache service).
-
-```bash
-podman run -dt -P rhel8/httpd-24
-```
-You can verify the state of the container using podman ps
-
-```bash
-podman ps -a
-```
-```bash
-CONTAINER ID  IMAGE                                     COMMAND               CREATED            STATUS                 PORTS                                             NAMES
-8a961afbfa99  registry.redhat.io/rhel8/httpd-24:latest  /usr/sbin/httpd -...  Abouta minute ago  Up About a minute ago  0.0.0.0:43589->8080/tcp, 0.0.0.0:41553->8443/tcp  loving_elion
-```
-
-Observe that the STATUS is Up and there is a new section in the output PORTS that indicates the port forwarding defined for the container.
-
-Additionally, you can see the forwarded ports by running
-```bash
-podman port -l
-```
-```bash
-8080/tcp -> 0.0.0.0:43589
-8443/tcp -> 0.0.0.0:41553
-```
-You can now test the connection to the web server running on the container using the curl command using the localhost and one of the assigned ports. For example: 
-
-```bash
-curl -s http://localhost:43589 | grep title
-```
-Your browser should now display the Apache test page title, being served by the httpd daemon running in the container.
-```bash
-		<title>Test Page for the Apache HTTP Server on Red Hat Enterprise Linux</title>
-```
-
-=== Step 5:
-Unlike interactive containers, detached containers are stopped using podman stop.
-
-```bash
-podman stop $(podman ps -a | grep Up | cut -d" " -f1)
-```
-```bash
-8a961afbfa9998bedfacb340de252c62d2750528734f1e2874140a7aa79c32ac
-```
-In the command above, we use a bit of bash scripting to determine the CONTAINER ID as it is going to be a value unique to each container image.
-
-You can verify that the container is now exited:
-
-```bash
-podman ps -a
-```
-```
-CONTAINER ID  IMAGE                                     COMMAND               CREATED         STATUS                     PORTS                                            NAMES
-8a961afbfa99  registry.redhat.io/rhel8/httpd-24:latest  container-entrypo...  37 minutes ago  Exited (0) 6 seconds ago   0.0.0.0:43589->8080/tcp, 0.0.0.0:41553->8443/tcp loving_elion
-```
-Also, if you access the Container Service URL, it will now report unable to connect; as the container offering the Apache web server is no longer available.
-
+{{< importPartial "footer/footer.html" >}}
