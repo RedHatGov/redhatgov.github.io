@@ -127,6 +127,21 @@ ansible-playbook -i localhost, -u ec2-user -b /tmp/ospp-playbook-fix.yml
 
 The playbook will take several minutes to run.
 
+== Section 5: Review changes
+
+To see what differences the application of the hardening profile has made, re-run OpenSCAP, in eval mode, as you did, before:
+
+[source, bash]
+----
+sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /var/www/html/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+----
+
+Once the command completes, open this link in another tab to view the resulting report:
+[source, bash]
+----
+{{< urifqdn "http://" "node" "/report.html" >}}
+----
+
 // OPTIONAL:  reboot the system to enable the changes.
 // [source, bash]
 // ----
