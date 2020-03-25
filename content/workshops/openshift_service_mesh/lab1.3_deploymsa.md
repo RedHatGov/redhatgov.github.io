@@ -18,12 +18,11 @@ The microservices include single sign-on (SSO), user interface (UI), the boards 
 
 <br>
 
-## Solo Setup
+## Setup
 
-# <i class="fa fa-exclamation-triangle"></i> Only run this section if you are running these labs on your own.
-# Skip this if you are running this in an instructor-led workshop.
+{{< panel_group >}}
+{{% panel "Run these steps if you are running the lab without an instructor" %}}
 
-<br>
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -37,7 +36,7 @@ oc new-project $PROJECT_NAME --display-name="OpenShift Microservices Demo"
 
 <br>
 
-You need to add this project to the service mesh.  This is called a [Member Roll][1] resource.  If you do not add the project to the mesh, the microservices will not be added to the service mesh.
+You need to add this project to the service mesh.  This is called a Member Roll resource.  If you do not add the project to the mesh, the microservices will not be added to the service mesh.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -59,14 +58,39 @@ EOF
 
 <br>
 
-## Workshop Setup
+You should already have a local copy of the application code.  If you do not, make sure to complete the previous lab.
 
-# <i class="fa fa-exclamation-triangle"></i> Only run this section if you are running this in an instructor-led workshop.
-# Skip this if you are running these labs on your own.
+<blockquote>
+<i class="fa fa-terminal"></i> Navigate to the local repo folder:
+</blockquote>
+
+```
+cd $HOME/openshift-microservices
+```
+
+<blockquote>
+<i class="fa fa-terminal"></i> Show working tree status:
+</blockquote>
+
+```
+git status
+```
+
+Output:
+
+```
+On branch workshop-stable
+```
+
+{{% /panel %}}
+{{< /panel_group >}}
 
 <br>
 
-Set the project name variable.  If you are running this in an instructor-led workshop, the project name should match your username such as 'userX'.
+{{< panel_group >}}
+{{% panel "Run these steps if you are running the lab with an instructor" %}}
+
+Set the project name variable.  The project name should have been provided to you by the instructor.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -97,8 +121,12 @@ git clone https://github.com/dudash/openshift-microservices.git
 </blockquote>
 
 ```
+cd $HOME/openshift-microservices
 git checkout workshop-stable
 ```
+
+{{% /panel %}}
+{{< /panel_group >}}
 
 <br>
 
@@ -297,7 +325,6 @@ A few key highlights are:
 * A Gateway resource configures an edge load balancer to allow inbound connections into the service mesh
 
 
-[1]: https://docs.openshift.com/container-platform/4.1/service_mesh/service_mesh_install/installing-ossm.html#ossm-member-roll_installing-ossm
-[2]: https://istio.io/docs/reference/config/networking/gateway/
+[1]: https://istio.io/docs/reference/config/networking/gateway/
 
 {{< importPartial "footer/footer.html" >}}

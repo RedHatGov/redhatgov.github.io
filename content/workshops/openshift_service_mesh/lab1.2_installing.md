@@ -70,6 +70,7 @@ git clone https://github.com/dudash/openshift-microservices.git
 </blockquote>
 
 ```
+cd $HOME/openshift-microservices
 git checkout workshop-stable
 ```
 
@@ -181,12 +182,12 @@ prometheus-xxxxxxxxx-xxxxx               2/2     Running   0          19m
 
 The primary control plane components are [Pilot][2], [Mixer][3], and [Citadel][4].  Pilot handles traffic management.  Mixer handles policy and telemetry.  Citadel handles security.
 
+<br>
+
 ## Setup Projects
 
-# <i class="fa fa-exclamation-triangle"></i> Only run this section if you are an instructor setting up a workshop class.
-# Skip this if you are running these labs on your own.
-
-<br>
+{{< panel_group >}}
+{{% panel "Run these steps if you are an instructor setting up a workshop class" %}}
 
 As the instructor, you will create projects for users (identified as users1...x).  You also need to grant each user view access to the Istio namespace 'istio-system'. 
 
@@ -210,7 +211,7 @@ done
 
 <br>
 
-Next, add projects to the service mesh using a [Member Roll][6] resource.  If you do not add the projects to the mesh, the users' microservices will not be added to the service mesh.
+Next, add projects to the service mesh using a Member Roll resource.  If you do not add the projects to the mesh, the users' microservices will not be added to the service mesh.
 
 
 <blockquote>
@@ -249,6 +250,8 @@ spec:
     - user20
 EOF
 ```
+{{% /panel %}}
+{{< /panel_group >}}
 
 <br>
 
@@ -260,7 +263,7 @@ A few key highlights are:
 
 * The Istio control plane can be installed in OpenShift using the Service Mesh Operator
 * The primary control plane components are Pilot, Mixer, and Citadel
-* Projects must be added to the service mesh via the Member Roll resource
+* Projects must be added to the service mesh via the [Member Roll][6] resource
 
 If you want to learn more about Istio's architecture, the best place to start is the [Istio documentation][7].
 
