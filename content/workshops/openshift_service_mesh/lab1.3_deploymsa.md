@@ -16,27 +16,26 @@ It's time to deploy your microservices application.  The application you are wor
 
 The microservices include single sign-on (SSO), user interface (UI), the boards application, and the context scraper.  In this scenario, you are going to deploy these services and then add a new user profile service.
 
+<br>
 
-## Deploy Microservices
+## Solo Setup
 
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
+# <i class="fa fa-exclamation-triangle"></i> Only run this section if you are running these labs on your own.
+# Skip this if you are running this in an instructor-led workshop.
 
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
+<br>
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Create a new project for your application.  Use your unique username for the project name:
+Create a new project for your application:
 </blockquote>
 
 ```
-PROJECT_NAME=<enter username>
+PROJECT_NAME=<enter project name>
 oc new-project $PROJECT_NAME --display-name="OpenShift Microservices Demo"
 ```
+
+<br>
 
 You need to add this project to the service mesh.  This is called a [Member Roll][1] resource.  If you do not add the project to the mesh, the microservices will not be added to the service mesh.
 
@@ -58,9 +57,65 @@ spec:
 EOF
 ```
 
+<br>
+
+## Workshop Setup
+
+# <i class="fa fa-exclamation-triangle"></i> Only run this section if you are running this in an instructor-led workshop.
+# Skip this if you are running these labs on your own.
+
+<br>
+
+Set the project name variable.  If you are running this in an instructor-led workshop, the project name should match your username such as 'userX'.
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Set the project name variable.  For example:
+</blockquote>
+
+```
+PROJECT_NAME=userX
+```
+
+<br>
+
+Next we need a local copy of our application code.
+
+<blockquote>
+<i class="fa fa-terminal"></i> Clone the repository in your home directory:
+</blockquote>
+
+```
+cd $HOME
+git clone https://github.com/dudash/openshift-microservices.git
+```
+
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i> Checkout the workshop-stable branch:
+</blockquote>
+
+```
+git checkout workshop-stable
+```
+
+<br>
+
+## Deploy Microservices
+
 You are going to build the application images from source code and then deploy the resources in the cluster.
 
 The source files are labeled '{microservice}-fromsource.yaml'.  In each file, an annotation 'sidecar.istio.io/inject' was added to tell Istio to inject a sidecar proxy.
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Navigate to the workshop directory:
+</blockquote>
+
+```
+cd $HOME/openshift-microservices/deployment/workshop
+```
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -76,6 +131,8 @@ Output:
 	annotations:
 	  sidecar.istio.io/inject: "true"
 ```
+
+<br>
 
 Now let's deploy the microservices.
 
@@ -229,7 +286,16 @@ For example:
 <img src="../images/app-pasteboard.png" width="1024"><br/>
  *Create a new board*
 
-Congratulations, you installed the microservices application!
+## Summary
+
+Congratulations, you installed the microservices application!  
+
+A few key highlights are:
+
+* The demo microservices application is a paste board application
+* The annotation 'sidecar.istio.io/inject' tells Istio to inject a sidecar proxy into the microservice pod
+* A Gateway resource configures an edge load balancer to allow inbound connections into the service mesh
+
 
 [1]: https://docs.openshift.com/container-platform/4.1/service_mesh/service_mesh_install/installing-ossm.html#ossm-member-roll_installing-ossm
 [2]: https://istio.io/docs/reference/config/networking/gateway/

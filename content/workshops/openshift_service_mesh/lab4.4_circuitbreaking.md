@@ -124,9 +124,15 @@ OpenShift will attempt to revive the server once the health check fails.  If you
 
 <br>
 
+
+## Summary
+
 Congratulations, you configured circuit breaking in Istio!
 
-<br>
+A few key highlights are:
+
+* Circuit breaking can build resiliency in the service mesh by tripping connections to an unhealthy service instance
+* The threshold limits for tripping a circuit can be set in the Destination Rule
 
 [1]: https://istio.io/docs/reference/config/networking/destination-rule/#OutlierDetection
 
