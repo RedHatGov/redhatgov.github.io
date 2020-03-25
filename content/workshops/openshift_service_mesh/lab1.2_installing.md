@@ -70,6 +70,7 @@ git clone https://github.com/dudash/openshift-microservices.git
 </blockquote>
 
 ```
+cd $HOME/openshift-microservices
 git checkout workshop-stable
 ```
 
@@ -181,12 +182,98 @@ prometheus-xxxxxxxxx-xxxxx               2/2     Running   0          19m
 
 The primary control plane components are [Pilot][2], [Mixer][3], and [Citadel][4].  Pilot handles traffic management.  Mixer handles policy and telemetry.  Citadel handles security.
 
-Congratulations, you installed Istio!
+<br>
+
+## Setup Projects
+
+{{< panel_group >}}
+{{% panel "Run these steps if you are an instructor setting up a workshop class" %}}
+
+As the instructor, you will create projects for users (identified as users1...x).  You also need to grant each user view access to the Istio namespace 'istio-system'. 
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Run the following:
+</blockquote>
+
+```
+NUM_USERS=<enter number of users>
+```
+
+```
+for (( i=1 ; i<=$NUM_USERS ; i++ ))
+do 
+  oc new-project user$i --as=user$i \
+    --as-group=system:authenticated --as-group=system:authenticated:oauth
+  oc adm policy add-role-to-user view user$i -n istio-system
+done
+```
+
+<br>
+
+Next, add projects to the service mesh using a Member Roll resource.  If you do not add the projects to the mesh, the users' microservices will not be added to the service mesh.
+
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Add projects to the mesh.  Adjust the number of user projects if needed:
+</blockquote>
+
+```
+oc apply -f - <<EOF
+apiVersion: maistra.io/v1
+kind: ServiceMeshMemberRoll
+metadata:
+  name: default
+  namespace: istio-system
+spec:
+  members:
+    - user1
+    - user2
+    - user3
+    - user4
+    - user5
+    - user6
+    - user7
+    - user8
+    - user9
+    - user10
+    - user11
+    - user12
+    - user13
+    - user14
+    - user15
+    - user16
+    - user17
+    - user18
+    - user19
+    - user20
+EOF
+```
+{{% /panel %}}
+{{< /panel_group >}}
+
+<br>
+
+## Summary
+
+Congratulations, you installed Istio!  
+
+A few key highlights are:
+
+* The Istio control plane can be installed in OpenShift using the Service Mesh Operator
+* The primary control plane components are Pilot, Mixer, and Citadel
+* Projects must be added to the service mesh via the [Member Roll][6] resource
+
+If you want to learn more about Istio's architecture, the best place to start is the [Istio documentation][7].
 
 [1]: https://www.openshift.com/learn/topics/operators
 [2]: https://istio.io/docs/concepts/traffic-management/
 [3]: https://istio.io/docs/concepts/observability/
 [4]: https://istio.io/docs/concepts/security/
 [5]: https://maistra.io/docs/installation/installation-options/
+[6]: https://docs.openshift.com/container-platform/4.1/service_mesh/service_mesh_install/installing-ossm.html#ossm-member-roll_installing-ossm
+[7]: https://istio.io/docs/ops/deployment/architecture/
+
 
 {{< importPartial "footer/footer.html" >}}

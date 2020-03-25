@@ -211,9 +211,16 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
 
 <br>
 
+## Summary
+
 Congratulations, you configured fault injection with Istio!
 
-<br>
+A few key highlights are:
+
+* We can test the resiliency of our service mesh using Delay Faults and Abort Faults
+* Abort Faults synthentically inject 50x errors in responses to a service call
+* Delay Faults synthentically add latency in responses to a service call
+* Jaeger can capture performance delays with distributed tracing
 
 [1]: https://en.wikipedia.org/wiki/Chaos_engineering
 [2]: https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-delay-fault

@@ -300,9 +300,15 @@ The flow of traffic is indicated by a green highlight in the graph.
 
 <br>
 
+## Summary
+
 Congratulations, you configured traffic routing with Istio!
 
-<br>
+A few key highlights are:
+
+* The two core API objects for traffic management are the Virtual Service and Destination Rule
+* We can change which version of a service we call by modifying the Virtual Service
+* Kiali provides a service graph view while traffic is flowing in the mesh
 
 [1]: https://istio.io/docs/concepts/traffic-management
 [2]: https://istio.io/docs/concepts/traffic-management/#virtual-services

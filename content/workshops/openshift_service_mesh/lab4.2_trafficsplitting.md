@@ -364,9 +364,14 @@ You should see traffic routed to v3 of the user profile service.
 
 <br>
 
+## Summary
+
 Congratulations, you configured traffic splitting in Istio!
 
-<br>
+A few key highlights are:
+
+* We can change the percentage of traffic sent to different versions of services by modifying the 'weight' parameter in a Virtual Service
+* The Kiali service graph captures traffic splitting dynamically as traffic flows in the mesh
 
 [1]: https://martinfowler.com/bliki/CanaryRelease.html
 [2]: https://martinfowler.com/bliki/BlueGreenDeployment.html
