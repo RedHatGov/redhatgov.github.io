@@ -273,7 +273,7 @@ Create the gateway load balancer:
 
 ```
 oc process -f ./istio-configuration/ingress-loadbalancer.yaml \
-  -p INGRESS_GATEWAY_NAME=demogateway | oc create -f -
+  -p INGRESS_GATEWAY_NAME=demogateway-$PROJECT_NAME | oc create -f -
 ```
 
 <blockquote>
@@ -283,7 +283,7 @@ Create the gateway configuration and routing rules:
 
 ```
 oc process -f ./istio-configuration/ingress-gateway.yaml \
-  -p INGRESS_GATEWAY_NAME=demogateway | oc create -f -
+  -p INGRESS_GATEWAY_NAME=demogateway-$PROJECT_NAME | oc create -f -
 ```
 
 To access the application, you need the endpoint of the load balancer you created.
@@ -294,7 +294,7 @@ Retrieve the URL of the load balancer:
 </blockquote>
 
 ```
-GATEWAY_URL=$(oc get route istio-demogateway -o jsonpath='{.spec.host}')
+GATEWAY_URL=$(oc get route istio-demogateway-$PROJECT_NAME -o jsonpath='{.spec.host}')
 echo $GATEWAY_URL
 ```
 
