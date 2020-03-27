@@ -264,7 +264,7 @@ app-ui istio-proxy
 
 The application is deployed!  But you need a way to access the application via the user interface.
 
-Istio provides a [Gateway][2] resource, which is a load balancer at the edge of the service mesh that accepts incoming connections.  You need to deploy a Gateway resource and configure it to route to the application user interface.
+Istio provides a [Gateway][1] resource, which is a load balancer at the edge of the service mesh that accepts incoming connections.  You need to deploy a Gateway resource and configure it to route to the application user interface.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
