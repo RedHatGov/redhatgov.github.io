@@ -85,7 +85,7 @@ bin/rake evm:automate:import YAML_FILE=bit63.yaml IMPORT_AS=Bit63 SYSTEM=false E
 {{% panel "Copying Objects Between Domains" %}}
 
 #### Customizing code in the domain
-We frequently need to customize code in the locked RedHat or ManageIQ domains — for example, when implementing our own custom VM acement method.  Fortunately, we can easily copy any object from the locked domains into our own, using the following steps.
+We frequently need to customize code in the locked RedHat or ManageIQ domains — for example, when implementing our own custom VM placement method.  Fortunately, we can easily copy any object from the locked domains into our own, using the following steps.
 
 Step 1.  **Configuration** → **Copy this Class**
 
