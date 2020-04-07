@@ -1,5 +1,5 @@
 ---
-title: Deploying an App
+title: Intro to Service Mesh - Deploying an App
 workshops: openshift_service_mesh
 workshop_weight: 13
 layout: lab

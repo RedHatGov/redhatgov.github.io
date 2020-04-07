@@ -1,5 +1,5 @@
 ---
-title: Fault Injection
+title: Traffic Control - Fault Injection
 workshops: openshift_service_mesh
 workshop_weight: 43
 layout: lab

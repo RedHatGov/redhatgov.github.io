@@ -1,5 +1,5 @@
 ---
-title: Jaeger
+title: Observability - Jaeger
 workshops: openshift_service_mesh
 workshop_weight: 33
 layout: lab

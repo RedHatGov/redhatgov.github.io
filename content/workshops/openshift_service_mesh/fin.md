@@ -1,7 +1,7 @@
 ---
 title: Fin.
 workshops: openshift_service_mesh
-workshop_weight: 100
+workshop_weight: 99
 layout: lab
 ---
 

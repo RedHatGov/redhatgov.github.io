@@ -1,5 +1,5 @@
 ---
-title: Securing Ingress and Egress
+title: Security - Securing Ingress and Egress
 workshops: openshift_service_mesh
 workshop_weight: 54
 layout: lab
@@ -29,7 +29,7 @@ outboundTrafficPolicy:
   mode: ALLOW_ANY
 ```
 
-The mesh your using in this workshop should already have the mode set to `REGISTRY_ONLY`. Let's verify that:
+The mesh you're using in this workshop should already have the mode set to `REGISTRY_ONLY`. Let's verify that:
 
 <br>
 

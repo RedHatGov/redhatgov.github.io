@@ -1,5 +1,5 @@
 ---
-title: Verifying mTLS
+title: Security - Verifying mTLS
 workshops: openshift_service_mesh
 workshop_weight: 52
 layout: lab
