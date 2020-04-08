@@ -50,7 +50,7 @@ The dc provides us details we care about to see where our application image come
 </blockquote>
 
 ```bash
-$ oc describe dc/dc-metro-map
+$ oc describe deployment/dc-metro-map
 ```
 
 Notice under the template section it lists the containers it wants to deploy along with the path to the container image.
@@ -85,44 +85,50 @@ This shows us even more about the deployed container's build and source code inc
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click "Overview", and expand dc-metra-map details (if applicable) by clicking >| 
+Change modes to "Administrator", and then click on "Workloads", and "Deployment Configs".
 </blockquote>
+<img src="../images/ocp-lab-devman-dc.png" width="500"><br/>
+
 <blockquote>
-Check out the details within the deployment (above and to the right of the Pods circle). 
+Click on "dc-metro-map", under "Name", and check out the details within the deployment (above and to the right of the Pods circle). 
 </blockquote>
 <img src="../images/ocp-lab-devman-deployment-shortcut.png" width="700"><br/>
 
+<blockquote>
 Within the deployment for the dc-metro-map is a container summary that shows both the GUID for the image and the GUID for the git branch.
+</blockquote>
 <img src="../images/ocp-lab-devman-imageGuid.png" width="600"><br/>
 
 <blockquote>
-Click on the link next to "Image:"
+Click on "Builds", and then "Image Streams", in the left-side menu.
 </blockquote>
-Here are the details of the image stream for this deployment.<br/>
-<img src="../images/ocp-lab-devman-isDetails.png" width="900"><br/>
+<img src="../images/ocp-BuildsImageStreamsButton.png" width="300"><br/>
 
 <blockquote>
-Click "Builds" and then "Builds" to get back to the build summary
+Click on the "dc-metro-map" image stream, to see its details.
+</blockquote>
+<img src="../images/ocp-lab-devman-DCMetroMapIS.png" width="600"><br/>
+
+<blockquote>
+You should see something like what is shown, below.
+</blockquote>
+<img src="../images/ocp-lab-devman-DCMetroMapIS-Details.png" width="600"><br/>
+
+<blockquote>
+Click "Builds" and then "Builds", in the left-side menu, to get back to the build summary
 </blockquote>
 
 <blockquote>
-Click "#1" to see the build details
+Click "dc-metro-map-1" to see the build details
 </blockquote>
-<img src="../images/ocp-lab-buildsnoone.png" width="400"><br/>
+<img src="../images/ocp-lab-buildsnoone.png" width="600"><br/>
 
+<blockquote>
 Because we built this app using S2I, we get to see the details about the build - including the container image that was used for building the source code.  Note that you can kick-off a rebuild here if something went wrong with the initial build and you'd like to attempt it again.<br/>
-<img src="../images/ocp-lab-devman-buildsummary.png" width="900"><br/>
-
-<blockquote>
-Click "Overview" and then the deployment detail link to get back to the deployment summary again
+<br/>
+Notice that, in the "Git Commit" section, you can see the comment from the last commit when the build was started.  And you can see the that commit's author.  You can click that commit GUID to be taken to the exact version of the source code that is in this deployed application.
 </blockquote>
-<img src="../images/ocp-lab-devman-deployment-shortcut.png" width="600">
-<br/>
-
-Notice in the Source line you can see the comment from the last commit when the build was started.  And you can see the that commit's author.  You can click that commit GUID to be taken to the exact version of the source code that is in this deployed application.
-<br/>
-
-<img src="../images/ocp-lab-devman-commitmsg.png" width="600"><br/>
+<img src="../images/ocp-lab-devman-commitmsg.png" width="400"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -163,25 +169,29 @@ You will see in the output details of your app starting up and any status messag
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click on "Applications" and then click on "Pods"
+Click on "Workloads" and then click on "Pods"
 </blockquote>
-<img src="../images/ocp-lab-devman-apppods.png" width="600"><br/>
-
-This is going to show basic details for all pods in this project (including the builders).<br/>
-<img src="../images/ocp-lab-devman-pods.png" width="900"><br/>
-Next let's look at the log for the pod running our application.
+<img src="../images/ocp-lab-devman-apppods.png" width="300"><br/>
 
 <blockquote>
-Click the pod that starts with "dc-metro-map-" and has a status of Running
+This is going to show basic details for all pods in this project (including the builders).
 </blockquote>
-<img src="../images/ocp-lab-devman-poddetails.png" width="900"><br/>
+<img src="../images/ocp-lab-devman-pods.png" width="600"><br/>
+
+<blockquote>
+Next let's look at the log for the pod running our application.
+<br/>
+Click the pod that starts with "dc-metro-map-"
+<br/>
 Here you see the status details of your pod as well as its configuration.  Take a minute here and look at what details are available.
+</blockquote>
+<img src="../images/ocp-lab-devman-poddetails.png" width="600"><br/>
 
 <blockquote>
 Click the "Logs" button
 </blockquote>
-<img src="../images/ocp-lab-devman-podslogs.png" width="900"><br/>
-Now you can see in the output window the details of your app starting up and any status messages it has reported since it started.
+<img src="../images/ocp-lab-devman-podslogs.png" width="600"><br/>
+Now you can see, in the output window, the details of your app starting up, and any status messages that it has reported since it started.
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -198,7 +208,7 @@ Let's have a little fun.  The app has some easter eggs that get triggered when c
 </blockquote>
 
 ```bash
-$ oc set env dc/dc-metro-map -e BEERME=true
+$ oc set env deployment/dc-metro-map -e BEERME=true
 ```
 
 ```bash
@@ -220,30 +230,39 @@ Due to the deployment config strategy being set to "Rolling" and the "ConfigChan
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click on "Applications" and then click on "Deployments"
+Click on "Workloads" and then "Builds", and last, click on "Build Configs", in the left-side menu.
 </blockquote>
-This is going to show basic details for all deployment configurations in this project
+This is going to show basic details for all build configurations in this project
 
 <blockquote>
-Click the "dc-metro-map" deployment config
+Click the "dc-metro-map" build config.
 </blockquote>
 There are a lot of details here, feel free to check them out and ask questions, but we are here to set some new environment variables.  
 
 <blockquote>
-Click the Environment tab next to the Details tab .
+Click the "Environment" tab next to the "Builds" tab .
 </blockquote>
-<img src="../images/ocp-lab-devman-deployconfigdetails-config.png" width="900"><br/>
+<img src="../images/ocp-lab-devman-buildconfigdetails-config.png" width="600"><br/>
 This opens up a tab with the environment variables for this deployment config.
 
 <blockquote>
 Add an environment variable with the name BEERME and a value of 'true'
 </blockquote>
-<img src="../images/ocp-lab-devman-deployconfigdetails-populated.png" width="900"><br/>
+<img src="../images/ocp-lab-devman-deployconfigdetails-populated.png" width="600">
+<br/>
 
 <blockquote>
-Click "Save".  And go back to the summary view by clicking "Overview" on the left menu bar
+Click "Save".  Next, kick off a new build, by selecting "Start Build", from the "Actions" menu, to the right.
 </blockquote>
-If you are quick enough you will see a new pod spin up and an the old pod spin down.  This is due to the deployment config strategy being set to "Rolling" and having a "ConfigChange" trigger, OpenShift auto deployed a new pod as soon as you updated with the env variable.
+<img src="../images/ocp-lab-devman-startBuild.png" width="200">
+<br/>
+
+<blockquote>
+Click "Workloads", and then "Pods", from the left-side menu.
+<br/>
+If you are quick enough, you will see a new pod spin up and an the old pod spin down.  This is due to the deployment config strategy being set to "Rolling" and having a "ConfigChange" trigger, OpenShift auto deployed a new pod as soon as you updated with the env variable.
+</blockquote>
+<img src="../images/ocp-lab-devman-BuildRunning.png" width="600">
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -294,7 +313,7 @@ $ exit
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click on "Applications" and then click on "Pods"
+Click on "Workloads" and then click on "Pods"
 </blockquote>
 
 <blockquote>
@@ -304,8 +323,7 @@ Click the pod that starts with "dc-metro-map-" and has a status of Running
 <blockquote>
 Click the "Terminal" button
 </blockquote>
-
-<img src="../images/ocp-lab-devman-terminal.png" width="900"><br/>
+<img src="../images/ocp-lab-devman-terminal.png" width="600"><br/>
 Let's look for the environment variables we set:
 
 <blockquote>
