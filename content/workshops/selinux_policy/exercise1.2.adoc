@@ -27,6 +27,8 @@ ls -Z ~ec2-user/.vimrc
 unconfined_u:object_r:user_home_t:s0 /home/ec2-user/.vimrc
 ----
 
+As a side note, the `-Z` flag is present, in a wide variety of common CLI tools, including *ls* and *ps*. That flag indicates that SELinux context information should be displayed. 
+
 Following the standard UNIX permissions, user and group information, the SELinux context attached to the file is displayed.  The fields are SELinux user (`unconfined_u`), role (`object_r`), type (`user_home_t`), and level (`s0`).  
 
 The SELinux user is not the same as the UNIX user, as it solely exists to associate a UNIX user to a set of roles.  This allows UNIX users to be constrained by SELinux policy.  In this case the `unconfined_u` user means that the user is mapped to the `__default__` SELinux login.  This means that the user is allowed to launch any application that standard filesystem permissions allow.  However, if that application has a defined domain transition, a confined domain will still apply to it.
