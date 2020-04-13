@@ -35,17 +35,19 @@ Click the "Add to Project" button
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="200"><br/>
 <blockquote>
-Select the "Browse Catalog" tab and search for the nodejs builder image. Click Next>
+Select the "From Git" tab and search for the nodejs builder image.
 </blockquote>
 <blockquote>
-Select version <b>[6]</b> then click <b><u>advanced options</u></b> and fill out the boxes to point to the fork and context dir. Note that <b>YOUR_ACCOUNT</b> is the name of your GitHub account.
+Select version <b>[10-SCL]</b> then click <b><u>Show Advanced Git Options</u></b>, and fill out the boxes to point to the fork and context dir. Note that <b>YOUR_ACCOUNT</b> is the name of your GitHub account.
 </blockquote>
 
 <p>
 <table>
-<tr><td><b>Name</b></td><td>dc-metro-map</td></tr>
 <tr><td><b>Git Repository URL</b></td><td>https://github.com/<b>YOUR_ACCOUNT</b>/openshift-workshops.git</td></tr>
 <tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
+<tr><td><b>Application</b></td><td>Create Application</td></tr>
+<tr><td><b>Application Name</b></td><td>dc-metro-map</td></tr>
+<tr><td><b>Name</b></td><td>dc-metro-map</td></tr>
 </table>
 </p>
 
@@ -66,11 +68,33 @@ The node.js builder template creates a number of resources for you, but what we 
 </blockquote>
 
 ```bash
-$ oc describe bc/dc-metro-map | grep -i webhook
+$ oc get bc/dc-metro-map -o yaml | grep generic-webhook
+        name: dc-metro-map-generic-webhook-secret
 ```
 
 <blockquote>
-Copy the Generic webhook to the clipboard
+<i class="fa fa-terminal"></i> Now that you have the name of the secret, you can get its value:
+</blockquote>
+
+```bash
+$ oc get secrets dc-metro-map-generic-webhook-secret -o yaml | grep -i key                    
+  WebHookSecretKey: MGE4NWYyZGZjMzFjZjJhMg==
+```
+
+<blockquote>
+<i class="fa fa-terminal"></i> Last, we can get the URL for the webhook
+</blockquote>
+
+```bash
+$ oc describe bc/dc-metro-map | grep -i webhook                                               
+Webhook Generic:                                                                                  
+        URL:            https://api.alexocp43.redhatgov.io:6443/apis/build.openshift.io/v1/namespaces/demo-1/buildconfigs/dc-metro-map/webhooks/<secret>/generic                                    
+Webhook GitHub:                                                                                   
+        URL:    https://api.alexocp43.redhatgov.io:6443/apis/build.openshift.io/v1/namespaces/demo-1/buildconfigs/dc-metro-map/webhooks/<secret>/github
+```
+
+<blockquote>
+Copy the Generic webhook to the clipboard, replacing <b>&ltsecret&gt</b> with the value of the secret that you looked up, earlier.
 </blockquote>
 
 {{% /panel %}}
@@ -78,25 +102,25 @@ Copy the Generic webhook to the clipboard
 {{% panel "Web Console Steps" %}}
         
 <blockquote>
-Click on "Builds" and then click on "Builds"
+Click on "Builds" and then click on "Build Configs"
 </blockquote>
 This is going to show basic details for all build configurations in this project
-<img src="../images/ocp-lab-rollbacks-buildsList.png" width="900"><br/>
+<img src="../images/ocp-lab-rollbacks-buildsList.png" width="600"><br/>
 
 <blockquote>
 Click the "dc-metro-map" build config
 </blockquote>
 You will see the summary of builds using this build config
-<img src="../images/ocp-lab-rollbacks-buildconfigsummary.png" width="900"><br/>
+<img src="../images/ocp-lab-rollbacks-buildconfigsummary.png" width="600"><br/>
 
 <blockquote>
-Click the "Configuration" tab 
+Scroll to the bottom of the window.
 </blockquote>
-<img src="../images/ocp-lab-rollbacks-deployconfigconfig.png" width="900"><br/>
-Now you can see the various configuration details including the Github specific and Generic webhook URLs.
+<img src="../images/ocp-lab-rollbacks-deployconfigconfig.png" width="600"><br/>
+Now you can see the links to get the various secrets.
 
 <blockquote>
-Copy the Generic webhook to the clipboard
+Copy the Generic webhook to the clipboard, by clicking on "Copy URL with Secret"
 </blockquote>
 
 {{% /panel %}}
@@ -168,7 +192,7 @@ Well, what if something isn't quite right with the latest version of our app?  L
 </blockquote>
 
 ```bash
-$ oc rollback dc-metro-map-1
+$ oc rollout undo deployment/dc-metro-map
 $ oc get pods -w
 ```
 

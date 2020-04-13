@@ -339,6 +339,7 @@ That should return the **BEERME=true** matching the value that we set in the dep
 
 ```bash
 $ oc delete all -l app=dc-metro-map
+$ oc delete secrets dc-metro-map-generic-webhook-secret dc-metro-map-github-webhook-secret    
 ```
   
 # Summary
