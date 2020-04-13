@@ -262,7 +262,7 @@ Output (snippet):
 ...
 ```
 
-In this example, you will route traffic evenly between the two versions.  This is commonly known as a [Blue-Green Deployment][2].
+In this example, you will route traffic evenly between the two versions. This is a technique that could be used for advanced deployments, for example A/B testing.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
