@@ -19,7 +19,7 @@ Let's walk through a simple example of how the replication controller can keep y
 </blockquote>
 
 ```bash
-$ oc scale --replicas=4 dc/dc-metro-map
+$ oc scale --replicas=4 deployment/dc-metro-map
 ```
 
 <blockquote>
@@ -30,17 +30,17 @@ $ oc scale --replicas=4 dc/dc-metro-map
 $ oc get pods
 ```
 
-Notice that you now have 4 unique pods availble to inspect.  If you want go ahead and inspect them, using 'oc describe pod/<POD NAME>', you can see that each have their own IP address and logs.
+Notice that you now have 4 unique pods availble to inspect.  If you want go ahead and inspect them, using 'oc describe pod/<b>POD NAME</b>', you can see that each have their own IP address and logs.
 
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click "Overview"
+Click "Workloads", then "Deploymnents", and then "dc-metro-map"
 </blockquote>
 <blockquote>
-In the deployment, click the up arrow 3 times.
+In the deployment overview, click the up arrow 3 times.
 </blockquote>
 The deployment should indicate that it is scaling to 4 pods, and eventually you will have 4 running pods.  Keep in mind that each pod has it's own container which is an identical deployment of the webapp.  OpenShift is now (by default) round robin load-balancing traffic to each pod.
 <img src="../images/ocp-lab-replicationrecovery-4pods.png" width="900"><br/>
@@ -75,11 +75,11 @@ $ oc get pods -w
 If you're fast enough you'll see the pod you deleted go "Terminating" and you'll also see a new pod immediately get created and transition from "Pending" to "Running".  If you weren't fast enough you can see that your old pod is gone and a new pod is in the list with an age of only a few seconds.
 
 <blockquote>
-<i class="fa fa-info-circle"></i>  You can see the more details about your replication controller with:
+<i class="fa fa-info-circle"></i>  You can see the more details about your deployment configuration with:
 </blockquote>
 
 ```bash
-$ oc describe rc
+$ oc describe deployment/dc-metro-map
 ```
 
 {{% /panel %}}
@@ -92,7 +92,7 @@ From the browse pods list:
 Click one of the running pods (not a build pod)
 </blockquote>
 <blockquote>
-Click the "Actions" button in the top right and then select "Delete"
+Click the "Actions" button in the top right and then select "Delete Pod"
 </blockquote>
 <img src="../images/ocp-lab-replicationrecovery-podaction.png" width="900"><br/>
 
@@ -102,12 +102,12 @@ Now click the "Delete" button in the popup to confirm the pod deletion
 <img src="../images/ocp-lab-replicationrecovery-deletepod.png" width="900"><br/>
 
 <blockquote>
-Quickly switch back to the Overview
+Quickly switch back to the deployment overview
 </blockquote>
 
 If you're fast enough you'll see the pod you deleted unfill a portion of the deployment circle, and then a new pod fill it back up.
 
-<img src="../images/ocp-lab-replicationrecovery-poddelete.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-poddelete.png" width="300"><br/>
 
 You can browse the pods list again to see the old pod was deleted and a new pod with a recent age.
 
@@ -179,7 +179,7 @@ Click inside the terminal view and type $ pkill -9 node
 
 </br>This is going to kill the node.js web server and kick you off the container.</br></br>
 
-<img src="../images/ocp-lab-replicationrecovery-terminalkick.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-terminalkick.png" width="400"><br/>
 
 </br>
 
@@ -188,7 +188,7 @@ Click the refresh button (on the terminal) and do that a couple more times
 </blockquote>
 
 <blockquote>
-Go back to the pods list
+Go back to the pod overview
 </blockquote>
 
 <img src="../images/ocp-lab-replicationrecovery-backoff.png" width="900"><br/>
@@ -200,7 +200,7 @@ The container died multiple times so quickly that OpenShift is going to put the 
 
 
 ## Clean up
-Let's scale back down to 1 replica.  If you are using the web console just click the down arrow from the Overview page.  If you are using the command line use the "oc scale" command.
+Let's scale back down to 1 replica.  If you are using the web console just click the down arrow from the Deployments Overview page.  If you are using the command line use the "oc scale" command.
 
 <img src="../images/ocp-lab-replicationrecovery-cleanup.png" width="900"><br/>
 
