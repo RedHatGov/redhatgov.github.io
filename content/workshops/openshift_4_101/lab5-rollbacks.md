@@ -201,30 +201,21 @@ $ oc get pods -w
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click on "Applications" and then click on "Deployments"
+Click on "Builds" and then click on "Builds"
+<br/>
+This is going to show basic details for all builds, for the dc-metro-map application.
 </blockquote>
-This is going to show basic details for all deployment configurations in this project
+<img src="../images/ocp-lab-rollbacks-builds-builds.png" width="900"><br/>
 
 <blockquote>
-Click the "dc-metro-map" deployment config
+Click the "dc-metro-map" build that you want to roll back to. For the purposes of this lab, click dc-metro-map-1.
+<br/>
+Click on 'Actions', and then 'Rebuild', from the menu, in the upper right corner of the window.
 </blockquote>
-Toward the bottom of the screen you will see a table of deployments using this deployment config
-<img src="../images/ocp-lab-rollbacks-deploymentconfigsummary1.png" width="900"><br/>
+<img src="../images/ocp-lab-rollbacks-actions-rebuild.png" width="900"><br/>
 
-<blockquote>
-In the Deployments table click the #1
-</blockquote>
-<img src="../images/ocp-lab-rollbacks-deploymentconfig.png" width="600"><br/>
-
-<blockquote>
-Click the "Rollback button", accept defaults, and click "Rollback" again
-</blockquote>
-
-<img src="../images/ocp-lab-rollbacks-rollbackbutton.png" width="300"><br/>
-
-You can go back to the overview page to see your previous deployment spinning down and your new one spinning up.<br/>
-
-<img src="../images/ocp-lab-rollbacks-rollback.png" width="900"><br/>
+You can go back to the 'Workloads', 'Deployments', 'dc-metro-map' page, and click on the 'Events' tab, to see your previous deployment spinning down and your new one spinning up.<br/>
+<img src="../images/ocp-lab-rollbacks-workloads-deployments-dcmm-events.png" width="900"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
