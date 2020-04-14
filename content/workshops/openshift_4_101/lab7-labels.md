@@ -22,7 +22,16 @@ In a previous lab we added our web app using a S2I template.  When we did that, 
 
 ```bash
 $ oc get pods
-$ oc describe pod/<POD NAME> | more
+$ oc describe pod/<POD NAME> | grep Labels: --context=4
+Namespace:    demo-1
+Priority:     0
+Node:         ip-10-0-132-38.us-east-2.compute.internal/10.0.132.38
+Start Time:   Tue, 14 Apr 2020 17:41:58 +0000
+Labels:       app=dc-metro-map
+              deploymentconfig=dc-metro-map
+              pod-template-hash=7bc46bf89d
+Annotations:  k8s.v1.cni.cncf.io/networks-status:
+                [{
 ```
 
 You can see the Labels automatically added contain the app, deployment, and deploymentconfig.  Let's add a new label to this pod.
@@ -32,7 +41,7 @@ You can see the Labels automatically added contain the app, deployment, and depl
 </blockquote>
 
 ```bash
-$ oc label pod/<POD NAME> testdate=4.30.2018 testedby=mylastname
+$ oc label pod/<POD NAME> testdate=4.14.2020 testedby=mylastname
 ```
 
 <blockquote>
@@ -40,7 +49,16 @@ $ oc label pod/<POD NAME> testdate=4.30.2018 testedby=mylastname
 </blockquote>
 
 ```bash
-$ oc describe pod/<POD NAME> | more
+$ oc describe pod/<POD NAME> | grep Labels: --context=4
+Namespace:    demo-1
+Priority:     0
+Node:         ip-10-0-132-38.us-east-2.compute.internal/10.0.132.38
+Start Time:   Tue, 14 Apr 2020 17:41:58 +0000
+Labels:       app=dc-metro-map
+              deploymentconfig=dc-metro-map
+              pod-template-hash=7bc46bf89d
+              testdate=4.14.2020
+              testedby=mylastname
 ```
 
 <blockquote>
@@ -68,35 +86,20 @@ Next let's look at the log for the pod running our application.
 <blockquote>
 Click the pod for the dc metro map webapp (it shoud have a status of Running)
 </blockquote>
-<img src="../images/ocp-lab-labels-poddetails.png" width="900"></br>
+<img src="../images/ocp-lab-labels-poddetails.png" width="500"></br>
 Here, at the top, you can see the labels on this pod
 
 <blockquote>
-Click the "Actions" button, then click "Edit YAML" for the pod
+Click the "Actions" button, then click "Edit Labels" for the pod
 </blockquote>
-<img src="../images/ocp-lab-labels-podedit.png" width="900"><br/>
-You will see all the labels under the metadata->labels section.
+<img src="../images/ocp-lab-labels-podedit.png" width="500"><br/>
+
+Your updated label will show up in the running pods.
 
 <blockquote>
-Add a new label into the labels section
-
-testdate: 4.30.2018
-testedby: mylastname
+Select Workloads -> Pods -> dc-metro-map (Running POD), then scroll down to "Labels"
 </blockquote>
-
-<img src="../images/ocp-lab-labels-podedit2.png" width="300"><br/>
-
-Your updated label will show up in the running pod's.
-
-Select Application -> Pods -> dc-metro-map (Running POD)
-
-<blockquote>
-If you see "More labels..", then click that link
-<img src="../images/ocp-lab-labels-podedit3.png" width="500"><br/>
-</blockquote>
-
-Labels will appear in the list:</br>
-<img src="../images/ocp-lab-labels-podedit4.png" width="600"><br/>
+<img src="../images/ocp-lab-labels-podedit3.png" width="900"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
