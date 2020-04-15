@@ -13,12 +13,11 @@ Before we get started with the Blue/Green deployment lab, lets clean up some of 
 
 ``` bash
 $ oc delete all -l app=jenkins-ephemeral
-$ oc delete all -l app=nodejs-helloworld-sample
 $ oc delete project cicd-{{< span "userid" "YOUR#" >}}
 ```
 
 ## Lets deploy an application
-To demonstrate Blue/Green deployments, we'll use a simple application that renders a colored box as an example. Using your GitHub account, please fork the following https://github.com/RedHatGov/openshift-workshops [project][1].
+To demonstrate Blue/Green deployments, we'll use a simple application that renders a colored box as an example. Using your GitHub account, please fork the following https://github.com/RedHatGov/openshift-workshops project.
 
 You should be comfortable deploying an app at this point, but here are the steps anyway:
 
@@ -26,7 +25,7 @@ You should be comfortable deploying an app at this point, but here are the steps
 
 ``` bash
 $ oc new-project bluegreen-{{<span "userid" "YOUR#" >}}
-$ oc new-app --name=green [your-project-repo-url] --context-dir=dc-metro-map
+$ oc new-app --name=green https://github.com/your-github-uid-goes-here/openshift-workshops --context-dir=dc-metro-map
 $ oc expose service green
 ```
 
@@ -44,7 +43,7 @@ Use the same commands to deploy this new version of the app, but this time name 
 > <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
 ``` bash
-$ oc new-app --name=blue [your-project-repo-url] --context-dir=dc-metro-map
+$ oc new-app --name=blue https://github.com/your-github-uid-goes-here/openshift-workshops --context-dir=dc-metro-map
 ```
 
 Wait for the "blue" application to become avialable before proceeding.
@@ -64,7 +63,19 @@ Now that we are satisfied with our change we can do the Green/Blue switch.  With
 $ oc edit route green
 ```
 
-This will bring up the Route configuration yaml. Edit the element spec: to: name and change it's value from "green" to "blue".
+This will bring up the Route configuration yaml. Edit the element "spec:". On the "to:" "name:" line, change its value from "green" to "blue":
+
+```bash
+spec:
+  host: green-bluegreen-1.apps.alexocp43.redhatgov.io
+  port:
+    targetPort: 8080-tcp
+  to:
+    kind: Service
+    name: blue
+    weight: 100
+  wildcardPolicy: None
+```
 
 {{% /panel %}}
 
@@ -72,7 +83,7 @@ This will bring up the Route configuration yaml. Edit the element spec: to: name
 
 >Navigate to the Routes view from the left-hand menu:
 
-<img src="../images/ocp-lab-bluegreen-navtoroutes.png" width="500"><br/>
+<img src="../images/ocp-lab-bluegreen-navtoroutes.png" width="400"><br/>
 
 >In your Routes overview, click on the "green" route:
 
@@ -81,9 +92,9 @@ This will bring up the Route configuration yaml. Edit the element spec: to: name
 
 >In the Route detail page, click on Actions > Edit:
 
-<img src="../images/ocp-lab-bluegreen-routedetail.png" width="900"><br/>
+<img src="../images/ocp-lab-bluegreen-routedetail.png" width="200"><br/>
 
->Edit the Route: select the name dropdown and change the value from "green" to "blue":
+>Edit the Route: change the "spec:" -> "to:" section "name:" from "green" to "blue", and click "Save"
 
 <img src="../images/ocp-lab-bluegreen-edit.png" width="700"><br/>
       
