@@ -1,5 +1,5 @@
 ---
-title: Login Tour - Butterfly
+title: Lab 0 - Deploy Your Own Terminal
 workshops: openshift_4_101
 workshop_weight: 10
 layout: lab
@@ -36,7 +36,7 @@ This is going to take you to the next logical step of adding something to the pr
 
 > Click the "demo-{{< span userid "YOUR#" >}}" link on the top left to goto your project
 
-Don't worry, it's supposed to look empty right now because you currently don't have anything in your project (we'll fix that in the next lab).
+Don't worry, it's supposed to look empty right now because you currently don't have anything in your project.
 
 ## Let's deploy Butterfly (Browser-based SSH)
 
@@ -69,9 +69,6 @@ Click "Create"
 You will now see a screen that shows a thumbnail view of your deployed application. Click on it, to expand the screen, and see details of the running pod:
 
 <img src="../images/ocp-workshop-terminal-thumb.png" width="150"><br/>
-
-## Does this Butterfly do anything?
-Good catch, your service is running but there is no way for users to access it yet.  We can fix that from the web console.
 
 <blockquote>
 "Topology"
