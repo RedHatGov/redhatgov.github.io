@@ -80,15 +80,22 @@ Select the option for "Image name from external registry" and enter "sonatype/ne
 <blockquote>
 Click on the pop-up menu underneath "Application", and select "Unassigned", to have the application not be in the group with the Butterfly Terminal.
 <br/>
-If this menu is not present, skip this instruction.
+If this menu is not present, it's not a problem.
 </blockquote>
 <img src="../images/ocp-nexus-application.png" width="600"><br/>
 
 
 <blockquote>
-Observe default values that are populated in the search results
+Enter the values shown, in the image above.
 </blockquote>
-<img src="../images/ocp-nexus-create-1.png" width="600"><br/>
+<p>
+<table>
+<tr><td><b>Application</b></td><td>Unassigned</td></tr>
+<tr><td><b>Name</b></td><td>nexus</td></tr>
+<tr><td><b>Resources</b></td><td>Deployment Config</td></tr>
+<tr><td><b>Create a route to the application</b></td><td>Checked</td></tr>
+</table>
+</p>
 
 <blockquote>
 Click "Create"
