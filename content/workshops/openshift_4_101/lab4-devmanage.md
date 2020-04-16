@@ -24,7 +24,7 @@ $ oc expose service dc-metro-map
 ```
 
 ## See the app in action and inspect some details
-There is no more ambiguity or confusion about where the app came from.  OpenShift provides traceability for your running deployment back to the docker image and the registry it came from, as well as (for images built by OpenShift) back to the exact source code branch and commit.  Let's take a look at that.
+Unlike in previous versions of OpenShift, there is no more ambiguity or confusion about where the app came from.  OpenShift provides traceability for your running deployment, back to the container image, and the registry that it came from. Additionally, images built by OpenShift are traceable back to the exact [branch](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-branches) and [commit](https://help.github.com/en/github/getting-started-with-github/github-glossary#commit). Let's take a look at that!
 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
@@ -37,7 +37,7 @@ There is no more ambiguity or confusion about where the app came from.  OpenShif
 $ oc status
 ```
 
-This is going to show the status of your current project.  In this case it will show the dc-metro-map service (svc) with a nested deployment config (dc) along with some more info that you can ignore for now.  
+This is going to show the status of your current project.  In this case it will show the dc-metro-map service (svc) with a nested deployment config(also called a "DC") along with some more info that you can ignore for now.  
 
 <blockquote>
 <i class="fa fa-info-circle"></i>  A deployment in OpenShift is a replication controller based on a user defined template called a deployment configuration <br/>
@@ -50,14 +50,21 @@ The dc provides us details we care about to see where our application image come
 </blockquote>
 
 ```bash
-$ oc describe deployment/dc-metro-map
+$ oc describe deploymentconfig/dc-metro-map
 ```
 
 Notice under the template section it lists the containers it wants to deploy along with the path to the container image.
 
 <blockquote>
-<i class="fa fa-info-circle"></i> There are a few other ways you could get to this information.  If you are feeling adventurous, you might want to describe the replication controller (oc describe rc -l app=dc-metro-map), the image stream (oc describe is -l app=dc-metro-map) or the running pod itself (oc describe pod -l app=dc-metro-map).
+<i class="fa fa-info-circle"></i> There are a few other ways you could get to this information.  If you are feeling adventurous, you might also want to try to:
 </blockquote>
+
+- describe the replication controller
+    - ```oc describe rc -l app=dc-metro-map```
+- describe the image stream
+    - ```oc describe is -l app=dc-metro-map```
+- describe the running pods
+    - ```oc describe pod```
 
 Because we built this app using S2I, we get to see the details about the build - including the container image that was used for building the source code.  So let's find out where the image came from.  Here are the steps to get more information about the build configuration (bc) and the builds themselves.
 
@@ -78,7 +85,9 @@ Notice the information about the configuration of how this app gets built.  In p
 $ oc describe build/dc-metro-map-1
 ```
 
-This shows us even more about the deployed container's build and source code including exact commit GUID for this build.  We can also can see the commit's author, and the commit message.  You can inspect the code by opening a web browser and pointing it to: https://github.com/RedHatGov/openshift-workshops/commit/[COMMIT_GUID]
+This shows us even more about the deployed container's build and source code, including exact commit information, for this build.  We can also see the commit's author, and the commit message.  You can inspect the code by opening a web browser and pointing it to a specific commit, like this:
+
+https://github.com/RedHatGov/redhatgov.github.io/commit/2d5078cc5bbdf3cf63c5ab15e1628f30b3c89954
 
 {{% /panel %}}
 
@@ -90,12 +99,12 @@ Change modes to "Administrator", and then click on "Workloads", and "Deployment 
 <img src="../images/ocp-lab-devman-dc.png" width="500"><br/>
 
 <blockquote>
-Click on "dc-metro-map", under "Name", and check out the details within the deployment (above and to the right of the Pods circle). 
+Click on "dc-metro-map", under "Name", and check out the details of the deployment
 </blockquote>
 <img src="../images/ocp-lab-devman-deployment-shortcut.png" width="700"><br/>
 
 <blockquote>
-Within the deployment for the dc-metro-map is a container summary that shows both the GUID for the image and the GUID for the git branch.
+Within the deployment for the dc-metro-map is a container summary that shows the detailed registry, container reference, and hash information, for the container that was deployed.
 </blockquote>
 <img src="../images/ocp-lab-devman-imageGuid.png" width="600"><br/>
 
@@ -117,6 +126,7 @@ You should see something like what is shown, below.
 <blockquote>
 Click "Builds" and then "Builds", in the left-side menu, to get back to the build summary
 </blockquote>
+<img src="../images/ocp-builds-builds.png" width="300"><br/>
 
 <blockquote>
 Click "dc-metro-map-1" to see the build details
@@ -126,7 +136,7 @@ Click "dc-metro-map-1" to see the build details
 <blockquote>
 Because we built this app using S2I, we get to see the details about the build - including the container image that was used for building the source code.  Note that you can kick-off a rebuild here if something went wrong with the initial build and you'd like to attempt it again.<br/>
 <br/>
-Notice that, in the "Git Commit" section, you can see the comment from the last commit when the build was started.  And you can see the that commit's author.  You can click that commit GUID to be taken to the exact version of the source code that is in this deployed application.
+Notice that, in the "Git Commit" section, you can see the comment from the last commit when the build was started, and you can see the that commit's author.
 </blockquote>
 <img src="../images/ocp-lab-devman-commitmsg.png" width="400"><br/>
 
@@ -202,27 +212,27 @@ Whether it's a database name or a configuration variable, most applications make
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
 
-Let's have a little fun.  The app has some easter eggs that get triggered when certain env vars are set to 'true'.
+Let's have a little fun.  The app has some easter eggs that get triggered when certain environment variables are set to 'true'.
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
 
 ```bash
-$ oc set env deployment/dc-metro-map -e BEERME=true
+$ oc set env deploymentconfig/dc-metro-map -e BEERME=true
 ```
 
 ```bash
 $ oc get pods -w
 ```
 
-Due to the deployment config strategy being set to "Rolling" and the "ConfigChange" trigger being set, OpenShift auto deployed a new pod as soon as you updated with the env variable.  If you were quick enough you saw this happening with the get pods command
+Due to the deployment config strategy being set to "Rolling" and the "ConfigChange" trigger being set, OpenShift auto deployed a new pod as soon as you updated the environment variable.  If you were quick enough, you might have seen this happening, with the "oc get pods -w" command
 
 <blockquote>
 <i class="fa fa-terminal"></i> Type Ctrl+C to stop watching the pods
 </blockquote>
 
 <blockquote>
-<i class="fa fa-info-circle"></i> You can set env variables across all deployment configs with 'dc --all' instead of specifying a specifc config
+<i class="fa fa-info-circle"></i> You can set environment variables, across all deployment configurations, with 'dc --all', instead of specifying a specific DC.
 </blockquote>
 
 {{% /panel %}}
@@ -237,7 +247,6 @@ This is going to show basic details for all build configurations in this project
 <blockquote>
 Click the "dc-metro-map" build config.
 </blockquote>
-There are a lot of details here, feel free to check them out and ask questions, but we are here to set some new environment variables.  
 
 <blockquote>
 Click the "Environment" tab next to the "Builds" tab .
@@ -260,7 +269,7 @@ Click "Save".  Next, kick off a new build, by selecting "Start Build", from the 
 <blockquote>
 Click "Workloads", and then "Pods", from the left-side menu.
 <br/>
-If you are quick enough, you will see a new pod spin up and an the old pod spin down.  This is due to the deployment config strategy being set to "Rolling" and having a "ConfigChange" trigger, OpenShift auto deployed a new pod as soon as you updated with the env variable.
+If you are quick enough, you will see a new pod spin up, and the old pod spin down.  This is due to the deployment config strategy being set to "Rolling", and having a "ConfigChange" trigger. Thus, OpenShift auto deployed a new pod as soon as you updated with the environment variable.
 </blockquote>
 <img src="../images/ocp-lab-devman-BuildRunning.png" width="600">
 
@@ -277,7 +286,7 @@ Environment variables are great, but sometimes we don't want sensitive data expo
 
 
 ## Getting into a pod
-There are situations when you might want to jump into a running pod, and OpenShift lets you do that pretty easily.  We set some environment variables and secrets in this lab, let's jump onto our pod to inspect them.  
+There are situations when you might want to jump into a running pod, and OpenShift lets you do that pretty easily.  We set some environment variables, in this lab, so let's jump onto our pod to inspect them.  
 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
@@ -324,12 +333,17 @@ Click the pod that starts with "dc-metro-map-" and has a status of Running
 Click the "Terminal" button
 </blockquote>
 <img src="../images/ocp-lab-devman-terminal.png" width="600"><br/>
-Let's look for the environment variables we set:
+
+## Let's look for the environment variables we set
 
 <blockquote>
-Inside the web page's terminal type: 'env | grep BEER'
+Inside the web page's terminal type this:
 </blockquote>
-That should return the **BEERME=true** matching the value that we set in the deployment config.
+```bash
+$ env | grep BEER
+```
+
+That should return **BEERME=true**, matching the value that we set in the deployment config.
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -345,7 +359,7 @@ $ oc delete secrets dc-metro-map-generic-webhook-secret dc-metro-map-github-webh
 # Summary
 In this lab you've seen how to trace running software back to its roots, how to see details on the pods running your software, how to update deployment configurations, how to inspect logs files, how to set environment variables consistently across your environment, and how to interactively attach to running containers.  All these things should come in handy for any developer working in an OpenShift platform.
 
-To dig deeper in to details behind the steps you performed in this lab, check out the OpenShift [developer's guide][1].
+To dig deeper into the details behind the steps you performed in this lab, check out the OpenShift [developer's guide][1].
 
 [1]: https://docs.openshift.com/container-platform/3.4/dev_guide/index.html
 

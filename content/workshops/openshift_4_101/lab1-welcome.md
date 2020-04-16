@@ -13,6 +13,7 @@ We will be using the following terms throughout the workshop labs so here are so
 
 * Container - Your software wrapped in a complete filesystem containing everything it needs to run
 * Image - We are talking about docker images; read-only and used to create containers
+* Image Stream - An image stream comprises one or more Docker images identified by tags. 
 * Pod - One or more docker containers that run together
 * Service - Provides a common DNS name to access a pod (or replicated set of pods)
 * Project - A project is a group of services that are related logically
@@ -24,7 +25,7 @@ We will be using the following terms throughout the workshop labs so here are so
 * Node - Where the compute happens, your software is run on nodes
 
 # Accessing OpenShift
-Additionally, you can utilize a command line tool to perfrom tasks.
+Additionally, you can utilize a command line tool to perforrm tasks.
 
 ## Let's try the command line (CLI)
 > <i class="fa fa-terminal"></i> Use your existing Butterfly terminal, and login, using the same URI with following command:

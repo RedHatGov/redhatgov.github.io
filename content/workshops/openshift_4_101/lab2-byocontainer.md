@@ -156,7 +156,7 @@ You should see something similar to this:
 
 ## Test out the nexus webapp
 
-Change the context menu (the menu, in the top left, that contains "Administrator" and "Developer" back to "Developer", and click on the arrow, at the top right of the "nexus" tumbnail, to open the webapp's route.
+Change the context menu (the menu, in the top left, that contains "Administrator" and "Developer" back to "Developer", and click on the arrow, at the top right of the "nexus" thumbnail, to open the webapp's route.
 
 <img src="../images/ocp-nexus-thumbnail.png" width="125"><br/>
 

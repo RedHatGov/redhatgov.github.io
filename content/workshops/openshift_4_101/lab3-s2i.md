@@ -32,6 +32,11 @@ When using the CLI, OpenShift automatically detects the source code type and sel
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
+Switch to developer mode, if you're not already there
+</blockquote>
+<img src="../images/ocp-switch-developer.png" width="500"><br/>
+
+<blockquote>
 Click "+Add"
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="80"><br/>
