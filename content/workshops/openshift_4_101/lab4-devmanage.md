@@ -230,7 +230,7 @@ Due to the deployment config strategy being set to "Rolling" and the "ConfigChan
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click on "Workloads" and then "Builds", and last, click on "Build Configs", in the left-side menu.
+Click on "Builds", and last, click on "Build Configs", in the left-side menu.
 </blockquote>
 This is going to show basic details for all build configurations in this project
 
