@@ -60,11 +60,11 @@ Click on the "Show Advanced Git Options" expender
 <img src="../images/ocp-lab-s2i-ago.png" width="200"><br/>
 
 <blockquote>
-Fill out the "Git Reference" field as follows:
+Fill out the "Context Dir" field as follows:
 </blockquote>
 <p>
 <table>
-<tr><td><b>Git Reference</b></td><td>/dc-metro-map</td></tr>
+<tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
 </table>
 
 <blockquote>
