@@ -58,6 +58,11 @@ ore of the commands below:
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
+Switch to "Developer" mode, by clicking on the menu, in the top left corner, where it says "Administrator", and pick "Developer"
+</blockquote>
+<img src="../images/ocp-switch-developer.png" width="500"><br/>
+
+<blockquote>
 Click "+Add"
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="75"><br/>
