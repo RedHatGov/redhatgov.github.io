@@ -79,6 +79,8 @@ Select the option for "Image name from external registry" and enter "sonatype/ne
 
 <blockquote>
 Click on the pop-up menu underneath "Application", and select "Unassigned", to have the application not be in the group with the Butterfly Terminal.
+<br/>
+If this menu is not present, skip this instruction.
 </blockquote>
 <img src="../images/ocp-nexus-application.png" width="600"><br/>
 
