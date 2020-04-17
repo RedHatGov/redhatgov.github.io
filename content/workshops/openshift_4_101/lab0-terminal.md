@@ -28,13 +28,13 @@ Once logged in you should see your available projects - or a button to create a 
 ## So this is what an empty project looks like
 First let's create a new project to do our workshop work in.  We will use the student number you were given to ensure you don't clash with classmates:
 
-> Click on the "Create Project" button and give it a name of demo-{{< span userid "YOUR#" >}}
+> Click on the "Create Project" button and give it a name of terminal-{{< span userid "YOUR#" >}}
 
-> Populate "Name" with "demo-{{< span userid "YOUR#" >}}" and populate "Description" boxes with whatever you like.  And click "Create"
+> Populate "Name" with "terminal-{{< span userid "YOUR#" >}}" and populate "Description" boxes with whatever you like.  And click "Create"
 
 This is going to take you to the next logical step of adding something to the project, but we don't want to do that just yet.
 
-> Click the "demo-{{< span userid "YOUR#" >}}" link on the top left to goto your project
+> Click the "terminal-{{< span userid "YOUR#" >}}" link on the top left to goto your project
 
 Don't worry, it's supposed to look empty right now because you currently don't have anything in your project.
 
