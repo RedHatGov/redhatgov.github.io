@@ -1,5 +1,5 @@
 ---
-title: Traffic Splitting
+title: Traffic Control - Traffic Splitting
 workshops: openshift_service_mesh
 workshop_weight: 42
 layout: lab
@@ -33,6 +33,7 @@ oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_CODE_URI=https://github.com/theckang/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=workshop_feature_fix \
   -p APP_VERSION_TAG=3.0
+  -e USER_PROFILE_STYLE_ID=3
 ```
 
 <p><i class="fa fa-info-circle"></i> Ignore the failure since the imagestream already exists.</p>
@@ -262,7 +263,7 @@ Output (snippet):
 ...
 ```
 
-In this example, you will route traffic evenly between the two versions.  This is commonly known as a [Blue-Green Deployment][2].
+In this example, you will route traffic evenly between the two versions. This is a technique that could be used for advanced deployments, for example A/B testing.
 
 <blockquote>
 <i class="fa fa-terminal"></i>

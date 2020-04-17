@@ -1,5 +1,5 @@
 ---
-title: Feature Update
+title: Observability - Feature Update
 workshops: openshift_service_mesh
 workshop_weight: 31
 layout: lab
@@ -60,6 +60,7 @@ oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_CODE_URI=https://github.com/theckang/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=workshop_feature_update \
   -p APP_VERSION_TAG=2.0
+  -e USER_PROFILE_STYLE_ID=2
 ```
 
 <p><i class="fa fa-info-circle"></i> Ignore the failure since the imagestream already exists.</p>

@@ -1,5 +1,5 @@
 ---
-title: Building a Microservice
+title: Intro to Service Mesh - Building a Microservice
 workshops: openshift_service_mesh
 workshop_weight: 21
 layout: lab

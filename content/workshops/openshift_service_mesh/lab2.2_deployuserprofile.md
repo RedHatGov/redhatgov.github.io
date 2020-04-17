@@ -1,5 +1,5 @@
 ---
-title: Adding a New Service
+title: Intro to Service Mesh - Adding a New Service
 workshops: openshift_service_mesh
 workshop_weight: 22
 layout: lab

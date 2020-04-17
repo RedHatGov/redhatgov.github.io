@@ -1,5 +1,5 @@
 ---
-title: mTLS
+title: Security - mTLS
 workshops: openshift_service_mesh
 workshop_weight: 51
 layout: lab
@@ -109,5 +109,8 @@ So now that the policy is applied, all our service-to-service (aka peer) communi
 Everything should look just the same as before - the extra security is happening behind the scenes.
 
 <img src="../images/app-boardslist.png" width="1024" class="screenshot"><br/>
+
+<br>
+Next we will verify the mTLS that we just enabled.
 
 {{< importPartial "footer/footer.html" >}}

@@ -1,5 +1,5 @@
 ---
-title: Fault Injection
+title: Traffic Control - Fault Injection
 workshops: openshift_service_mesh
 workshop_weight: 43
 layout: lab
@@ -184,7 +184,7 @@ Inspect the traces.
 
 <blockquote>
 <i class="fa fa-desktop"></i>
-On the left bar under 'Search', select 'app-ui.microservies-demo' for 'Service' and 'userprofile-microservices-demo.svc.cluster.local'for 'Operation'.
+On the left bar under 'Search', select 'app-ui.microservices-demo' for 'Service' and 'userprofile-microservices-demo.svc.cluster.local'for 'Operation'.
 </blockquote>
 <blockquote>
 <i class="fa fa-desktop"></i>

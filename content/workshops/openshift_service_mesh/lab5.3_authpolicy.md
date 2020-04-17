@@ -1,5 +1,5 @@
 ---
-title: Auth Policy
+title: Security - Auth Policy
 workshops: openshift_service_mesh
 workshop_weight: 53
 layout: lab

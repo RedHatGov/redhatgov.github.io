@@ -1,5 +1,5 @@
 ---
-title: Deploying an App
+title: Intro to Service Mesh - Deploying an App
 workshops: openshift_service_mesh
 workshop_weight: 13
 layout: lab
@@ -60,7 +60,7 @@ Deploy the boards service:
 ```
 oc new-app -f ./openshift-configuration/boards-fromsource.yaml \
   -p APPLICATION_NAME=boards \
-  -p NODEJS_VERSION_TAG=8-RHOAR \
+  -p NODEJS_VERSION_TAG=node-12 \
   -p GIT_URI=https://github.com/dudash/openshift-microservices.git \
   -p GIT_BRANCH=workshop-stable \
   -p DATABASE_SERVICE_NAME=boards-mongodb \
@@ -75,7 +75,7 @@ Deploy the context scraper service:
 ```
 oc new-app -f ./openshift-configuration/context-scraper-fromsource.yaml \
   -p APPLICATION_NAME=context-scraper \
-  -p NODEJS_VERSION_TAG=8-RHOAR \
+  -p NODEJS_VERSION_TAG=node-12 \
   -p GIT_BRANCH=workshop-stable \
   -p GIT_URI=https://github.com/dudash/openshift-microservices.git
 ```
@@ -88,7 +88,7 @@ Deploy the user interface:
 ```
 oc new-app -f ./openshift-configuration/app-ui-fromsource.yaml \
   -p APPLICATION_NAME=app-ui \
-  -p NODEJS_VERSION_TAG=8-RHOAR \
+  -p NODEJS_VERSION_TAG=node-12 \
   -p GIT_BRANCH=workshop-stable \
   -p GIT_URI=https://github.com/dudash/openshift-microservices.git
 ```
