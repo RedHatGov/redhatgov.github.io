@@ -101,28 +101,26 @@ Scroll down to the bottom, and click
 
 ## Create a sample application configuration
 
-> Use the "oc create" command to create a template resource by filename for a simple nodejs application:
-
-```bash
-$ oc project cicd-{{< span "userid" "YOUR#" >}}
-$ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json
-template.template.openshift.io/nodejs-helloworld-sample created
-```
-
-## Modify the sample application configuration to use the Node.js [Red Hat Universal Base Image (UBI)](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image)
-
-> The template used above references a DEPRECATED: A Centos7 based NodeJS v0.10 image for use with OpenShift v3.
-
 {{< panel_group >}}
 
 {{% panel "CLI Steps" %}}
 
-<blockquote>
-Find and replace "nodejs-010-centos7" with "nodejs-10"
-</blockquote>
+> Let's download a tempate for a sample application, so that we can integrate it into our pipeline
 
 ```bash
-$ oc edit template nodejs-helloworld-sample
+$ wget https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json 
+```
+
+> Next, let's update the template to not use an deprecated container, as it's base. We'll use Red Hat's Universal Base Image as the platform, instead:
+
+```bash
+$ sed 's/nodejs-010-centos7/nodejs-10/g' application-template.json > NEW-Template.json
+```
+
+> And last, lets instantiate the template.
+
+```bash
+$ oc create -f NEW-Template.json
 ```
 
 {{% /panel %}}
