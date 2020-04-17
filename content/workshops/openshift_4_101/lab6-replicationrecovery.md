@@ -57,7 +57,7 @@ Notice that you now have 4 unique webapp pods available to inspect.  If you want
 So you've told OpenShift that you'd like to maintain 4 running, load-balanced, instances of our web app.
 
 ## Recovery
-Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy.  Let's forceably inflict an issue and see how OpenShift responds.
+Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy.  Let's forcibly inflict an issue and see how OpenShift responds.
 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
@@ -118,7 +118,7 @@ You can browse the pods list again to see the old pod was deleted and a new pod 
 
 
 ## Application Health
-In addition to the health of your application's pods, OpenShift will watch the containers inside those pods.  Let's forceaboy inflict some issues and see how OpenShift responds.  
+In addition to the health of your application's pods, OpenShift will watch the containers inside those pods.  Let's forcibly inflict some issues and see how OpenShift responds.  
 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}

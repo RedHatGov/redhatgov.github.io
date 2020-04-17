@@ -38,7 +38,7 @@ Click the "Add to Project" button
 Select the "From Git" icon, and click on the "Node.js" builder image.
 </blockquote>
 
-Make sure that you replace <b>YOUR_ACCOUNT</b> with your GitHub user ID. You will need to click on the "Show Advanced Git Options" expander to fill in the "Context Dir" field:
+Make sure that you replace <b>YOUR_ACCOUNT</b> with your GitHub user ID. Click on the "Show Advanced Git Options" expander to fill in the "Context Dir" field:
 
 <p>
 <table>
