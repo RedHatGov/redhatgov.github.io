@@ -74,9 +74,9 @@ $ oc describe all | grep -i "labels:"
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click "Applications" and then click on "Pods"
+Click "Workloads" and then click on "Pods"
 </blockquote>
-This is going to show basic details for all pods in this project (including the builders).
+
 <img src="../images/ocp-lab-labels-pods.png" width="900"></br>
 </br>
 
@@ -84,7 +84,7 @@ Next let's look at the log for the pod running our application.
 </br>
 
 <blockquote>
-Click the pod for the dc metro map webapp (it shoud have a status of Running)
+Click the pod for the dc-metro-map webapp (it should have a status of Running)
 </blockquote>
 <img src="../images/ocp-lab-labels-poddetails.png" width="500"></br>
 Here, at the top, you can see the labels on this pod
