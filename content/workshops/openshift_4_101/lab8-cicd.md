@@ -8,7 +8,7 @@ layout: lab
 # CI/CD Defined
 In modern software projects many teams utilize the concept of Continuous Integration (CI) and Continuous Delivery (CD). By setting up a tool chain that continuously builds, tests, and stages software releases, a team can ensure that their product can be reliably released at any time. OpenShift can be an enabler in the creation and management of this tool chain.
 
-In this lab we walk through creating a simple example of a CI/CD [pipeline][1] utlizing Jenkins, all running on top of OpenShift! The Jenkins job will trigger OpenShift to build and deploy a test version of the application, validate that the deployment works, and then tag the test version into production.
+In this lab we walk through creating a simple example of a CI/CD [pipeline][1] utilizing Jenkins, all running on top of OpenShift! The Jenkins job will trigger OpenShift to build and deploy a test version of the application, validate that the deployment works, and then tag the test version into production.
 
 ## Create a new project
 Create a new project named “cicd-{{< span "userid" "YOUR#" >}}”.
@@ -515,6 +515,11 @@ Click "Save"
 
 ```bash
 $ oc process nodejs-helloworld-sample -p NAMESPACE=registry.access.redhat.com/ubi7 | oc create -f -
+```
+
+> You will see the followig:
+
+```bash
 service/frontend-prod created
 route.route.openshift.io/frontend created
 deploymentconfig.apps.openshift.io/frontend-prod created
@@ -671,6 +676,8 @@ buildconfig.build.openshift.io/pipeline created
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
+
+> Click on "Build" and then "Create Build Config"
 
 > Use the following OpenShift build configuration to create the pipeline.
 
