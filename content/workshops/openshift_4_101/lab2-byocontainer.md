@@ -16,6 +16,7 @@ It's easy to get started with OpenShift whether you're using our app templates o
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
+
 ```bash
 $ oc new-app sonatype/nexus:oss
 ```
@@ -23,6 +24,7 @@ $ oc new-app sonatype/nexus:oss
 <blockquote>
 The output should show something *similar* to below:
 </blockquote>
+
 ```bash
 --> Found container image 8027e6d (2 months old) from Docker Hub for "sonatype/nexus:oss"         
                                                                                                   
@@ -51,6 +53,14 @@ d Hat only supports Red Hat technologies through subscriptions for Red Hat produ
 ore of the commands below:                                                                        
      'oc expose svc/nexus'                                                                        
     Run 'oc status' to view your app.  
+```
+
+<blockquote>
+Now, let's create a route, so that you can get to the app:
+</blockquote>
+
+```bash
+$ oc expose svc/nexus
 ```
 
 {{% /panel %}}
