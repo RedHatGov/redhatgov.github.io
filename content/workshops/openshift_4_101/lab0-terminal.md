@@ -46,6 +46,11 @@ Click "Administrator", and change it to "Developer"
 <img src="../images/ocp-menu-administrator.png" width="450"><br/>
 
 <blockquote>
+Click "+Add", to add a new item to the project
+</blockquote>
+<img src="../images/ocp-addToProjectButton.png" width="75"><br/>
+
+<blockquote>
 Click "Container Image", to add an existing image from the container registry
 </blockquote>
 <img src="../images/ocp-ContainerImageButton.png" width="300"><br/>
