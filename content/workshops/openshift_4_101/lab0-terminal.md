@@ -11,8 +11,6 @@ OpenShift provides a web console that allows you to perform various tasks via a 
 ## Let's Login to the Web Console
 > Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.
 
-https://console-openshift-console.apps.alexocp43.redhatgov.io
-
 ```bash
 {{< urishortfqdn "https://" "console-openshift-console.apps" >}}
 ```
