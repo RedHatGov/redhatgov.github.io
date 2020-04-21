@@ -11,8 +11,6 @@ OpenShift provides a web console that allows you to perform various tasks via a 
 ## Let's Login to the Web Console
 > Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.
 
-https://console-openshift-console.apps.alexocp43.redhatgov.io
-
 ```bash
 {{< urishortfqdn "https://" "console-openshift-console.apps" >}}
 ```
@@ -46,6 +44,11 @@ First, we need to change views from the "Administrator" view to the "Developer" 
 Click "Administrator", and change it to "Developer"
 </blockquote>
 <img src="../images/ocp-menu-administrator.png" width="450"><br/>
+
+<blockquote>
+Click "+Add", to add a new item to the project
+</blockquote>
+<img src="../images/ocp-addToProjectButton.png" width="75"><br/>
 
 <blockquote>
 Click "Container Image", to add an existing image from the container registry

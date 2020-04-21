@@ -33,18 +33,26 @@ Jump back to your OpenShift web console and let's add the webapp to our project.
 <blockquote>
 Click the "Add to Project" button
 </blockquote>
-<img src="../images/ocp-addToProjectButton.png" width="200"><br/>
+<img src="../images/ocp-addToProjectButton.png" width="70"><br/>
 <blockquote>
-Select the "From Git" tab and search for the nodejs builder image.
+Select the "From Git" icon, and click on the "Node.js" builder image.
 </blockquote>
+
+Make sure that you replace <b>YOUR_ACCOUNT</b> with your GitHub user ID. Click on the "Show Advanced Git Options" expander to fill in the "Context Dir" field:
+
+<p>
+<table>
+<tr><td><b>Git Repo URL</b></td><td>https://github.com/<b>YOUR_ACCOUNT</b>/openshift-workshops.git</td></tr>
+<tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
+</table>
+</p>
+
 <blockquote>
-Select version <b>[10-SCL]</b> then click <b><u>Show Advanced Git Options</u></b>, and fill out the boxes to point to the fork and context dir. Note that <b>YOUR_ACCOUNT</b> is the name of your GitHub account.
+Select version <b>[10-SCL]</b> and then fill out the rest of the fields, as shown:
 </blockquote>
 
 <p>
 <table>
-<tr><td><b>Git Repository URL</b></td><td>https://github.com/<b>YOUR_ACCOUNT</b>/openshift-workshops.git</td></tr>
-<tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
 <tr><td><b>Application</b></td><td>Create Application</td></tr>
 <tr><td><b>Application Name</b></td><td>dc-metro-map</td></tr>
 <tr><td><b>Name</b></td><td>dc-metro-map</td></tr>
@@ -69,7 +77,14 @@ The node.js builder template creates a number of resources for you, but what we 
 
 ```bash
 $ oc get bc/dc-metro-map -o yaml | grep generic-webhook
-        name: dc-metro-map-generic-webhook-secret
+```
+
+<blockquote>
+<i class="fa fa-terminal"></i> ...which returns the name of the secret that we need to find:
+</blockquote>
+
+```bash
+name: dc-metro-map-generic-webhook-secret
 ```
 
 <blockquote>
@@ -77,24 +92,28 @@ $ oc get bc/dc-metro-map -o yaml | grep generic-webhook
 </blockquote>
 
 ```bash
-$ oc get secrets dc-metro-map-generic-webhook-secret -o yaml | grep -i key                    
-  WebHookSecretKey: MGE4NWYyZGZjMzFjZjJhMg==
+$ SECRET=`oc get secrets dc-metro-map-generic-webhook-secret -o yaml | grep -i key | sed 's/^.*: //' | base64 -d ; echo`
 ```
 
 <blockquote>
-<i class="fa fa-terminal"></i> Last, we can get the URL for the webhook
+<i class="fa fa-terminal"></i> Last, we can get the URL for the webhook, this way:
 </blockquote>
 
 ```bash
-$ oc describe bc/dc-metro-map | grep -i webhook                                               
-Webhook Generic:                                                                                  
-        URL:            https://api.alexocp43.redhatgov.io:6443/apis/build.openshift.io/v1/namespaces/demo-1/buildconfigs/dc-metro-map/webhooks/<secret>/generic                                    
-Webhook GitHub:                                                                                   
-        URL:    https://api.alexocp43.redhatgov.io:6443/apis/build.openshift.io/v1/namespaces/demo-1/buildconfigs/dc-metro-map/webhooks/<secret>/github
+$ oc describe bc/dc-metro-map | grep "Webhook Generic" -A 1 | sed "s/<secret>/${SECRET}/"
 ```
 
 <blockquote>
-Copy the Generic webhook to the clipboard, replacing <b>&ltsecret&gt</b> with the value of the secret that you looked up, earlier.
+... which results in the information that we need:
+</blockquote>
+
+```bash
+Webhook Generic:
+        URL:            https://api.alexocp43.redhatgov.io:6443/apis/build.openshift.io/v1/namespaces/cicd-1/buildconfigs/dc-metro-map/webhooks/1234abcd5678efgh/generic
+```
+
+<blockquote>
+Copy the "Webhook Generic" URL to the clipboard, so that we can use it in GitHub.
 </blockquote>
 
 {{% /panel %}}
@@ -102,7 +121,7 @@ Copy the Generic webhook to the clipboard, replacing <b>&ltsecret&gt</b> with th
 {{% panel "Web Console Steps" %}}
         
 <blockquote>
-Click on "Builds" and then click on "Build Configs"
+in "Administrator" mode, click on "Builds" and then click on "Build Configs"
 </blockquote>
 This is going to show basic details for all build configurations in this project
 <img src="../images/ocp-lab-rollbacks-buildsList.png" width="600"><br/>

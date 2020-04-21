@@ -30,14 +30,14 @@ $ oc scale --replicas=4 deployment/dc-metro-map
 $ oc get pods
 ```
 
-Notice that you now have 4 unique pods availble to inspect.  If you want go ahead and inspect them, using 'oc describe pod/<b>POD NAME</b>', you can see that each have their own IP address and logs.
+Notice that you now have 4 unique pods available to inspect.  If you want go ahead and inspect them, using 'oc describe pod/<b>POD NAME</b>'. You can see that each has its own IP address and logs.
 
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click "Workloads", then "Deploymnents", and then "dc-metro-map"
+Click "Workloads", then "Deployments", and then "dc-metro-map"
 </blockquote>
 <blockquote>
 In the deployment overview, click the up arrow 3 times.
@@ -48,7 +48,7 @@ The deployment should indicate that it is scaling to 4 pods, and eventually you 
 <blockquote>
 Hover over the pod counter (the circle) and click
 </blockquote>
-Notice that you now have 4 unique webapp pods available to inspect.  If you want go ahead and inspect them you can see that each have their own IP address and logs.
+Notice that you now have 4 unique webapp pods available to inspect.  If you want go ahead and inspect them you can see that each has its own IP address and logs.
 <img src="../images/ocp-lab-replicationrecovery-4podslist.png" width="900"><br/>
 
 {{% /panel %}}
@@ -57,7 +57,7 @@ Notice that you now have 4 unique webapp pods available to inspect.  If you want
 So you've told OpenShift that you'd like to maintain 4 running, load-balanced, instances of our web app.
 
 ## Recovery
-Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy.  Let's force inflict an issue and see how OpenShift reponds.
+Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy.  Let's forcibly inflict an issue and see how OpenShift responds.
 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
@@ -118,7 +118,7 @@ You can browse the pods list again to see the old pod was deleted and a new pod 
 
 
 ## Application Health
-In addition to the health of your application's pods, OpenShift will watch the containers inside those pods.  Let's force inflict some issues and see how OpenShift reponds.  
+In addition to the health of your application's pods, OpenShift will watch the containers inside those pods.  Let's forcibly inflict some issues and see how OpenShift responds.  
 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
@@ -177,14 +177,14 @@ Click inside the terminal view and type $ pkill -9 node
 </blockquote>
 <img src="../images/ocp-lab-replicationrecovery-terminal.png" width="900"><br/>
 
-</br>This is going to kill the node.js web server and kick you off the container.</br></br>
+</br>This is going to kill the node.js web server, and kick you off of the container's terminal.</br></br>
 
 <img src="../images/ocp-lab-replicationrecovery-terminalkick.png" width="400"><br/>
 
 </br>
 
 <blockquote>
-Click the refresh button (on the terminal) and do that a couple more times
+Click the refresh button (on your web browser), and do that a couple more times
 </blockquote>
 
 <blockquote>
