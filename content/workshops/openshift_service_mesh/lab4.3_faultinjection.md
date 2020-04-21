@@ -17,15 +17,6 @@ Istio provides ways to inject failure at the application layer with [Delay Fault
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
-
-<blockquote>
-<i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
 </blockquote>
 

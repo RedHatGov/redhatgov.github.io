@@ -11,43 +11,7 @@ Istio provides additional capabilities to analyze the service mesh and its perfo
 
 ## Feature Update
 
-The profile page returns basic information about the user.  Let's add a feature update to show a profile photo on the profile page.
-
-The code has already been written for you on the 'workshop_feature_update' branch of the repo.
-
-<blockquote>
-<i class="fa fa-desktop"></i>
-Navigate to the URL via your browser:
-</blockquote>
-
-```
-https://github.com/theckang/openshift-microservices/blob/workshop_feature_update/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
-```
-
-Output (snippet):
-```
-...
-    /**
-     * return the photo information for a specific profile
-     * @param id
-     * @return
-     */
-    UserProfilePhoto getUserProfilePhoto(@NotBlank String id);
-...
-```
-
-The interface also includes a method for getting the user profile's photo, which has been implemented for you.
-
-## Build and Deploy
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
+The code has already been written for you on the 'workshop-feature-update' branch of the repo.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -57,14 +21,15 @@ Create a new build on this feature branch:
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
-  -p APPLICATION_CODE_URI=https://github.com/theckang/openshift-microservices.git \
-  -p APPLICATION_CODE_BRANCH=workshop_feature_update \
-  -p APP_VERSION_TAG=2.0
+  -p APPLICATION_CODE_URI=https://github.com/RedHatGov/openshift-microservices.git \
+  -p APPLICATION_CODE_BRANCH=workshop-feature-update \
+  -p APP_VERSION_TAG=2.0 \
   -e USER_PROFILE_STYLE_ID=2
 ```
 
 <p><i class="fa fa-info-circle"></i> Ignore the failure since the imagestream already exists.</p>
 
+<br>
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -138,7 +103,7 @@ Grab a reference to the local image:
 </blockquote>
 
 ```
-USER_PROFILE_IMAGE_URI=$(oc get is userprofile -o jsonpath='{.status.dockerImageRepository}{"\n"}')
+USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template='{{.status.dockerImageRepository}}')
 echo $USER_PROFILE_IMAGE_URI
 ```
 

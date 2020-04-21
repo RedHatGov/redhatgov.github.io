@@ -7,18 +7,9 @@ layout: lab
 
 # Adding a New Service to the Mesh
 
-You built the user profile service and now you need to deploy it into the service mesh.
+You need to deploy the new user profile application into the service mesh.
 
 ## Deploy Application
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
 
 The deployment file 'userprofile-deploy-all.yaml' was created for you to deploy the application.  The file creates the user profile service and an accompanying PostgreSQL database.  Similar to the other source files, an annotation 'sidecar.istio.io/inject' was added to tell Istio to inject a sidecar proxy and add this to the mesh.
 
@@ -33,14 +24,16 @@ cat ./openshift-configuration/userprofile-deploy-all.yaml | grep -B 1 sidecar.is
 
 Output:
 ```
-	annotations:
-	  sidecar.istio.io/inject: "true"
+    annotations:
+      sidecar.istio.io/inject: "true"
   --
     annotations:
       sidecar.istio.io/inject: "true"
 ```
 
 The annotation appears twice for the userprofile and PostgreSQL services.
+
+<br>
 
 Before deploying the service, you need a reference to the local image you built in the previous lab.
 
@@ -50,7 +43,7 @@ Run the following commands:
 </blockquote>
 
 ```
-USER_PROFILE_IMAGE_URI=$(oc get is userprofile -o jsonpath='{.status.dockerImageRepository}{"\n"}')
+USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template='{{.status.dockerImageRepository}}')
 echo $USER_PROFILE_IMAGE_URI
 ```
 
@@ -77,14 +70,16 @@ Watch the deployment of the user profile:
 oc get pods -l deploymentconfig=userprofile --watch
 ```
 
-> The userprofile service may error and restart if the PostgreSQL pod is not running yet.
+<p><i class="fa fa-info-circle"></i> The userprofile service may error and restart if the PostgreSQL pod is not running yet.</p>
 
 Output:
 ```
 userprofile-xxxxxxxxxx-xxxxx              2/2     Running		    0          2m55s
 ```
 
-Similar to the other microservices, the user profile services run the application and the Istio proxy.
+<br>
+
+Similar to the other microservices, the user profile service runs the application and the Istio proxy.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -100,6 +95,8 @@ Output:
 ```
 userprofile istio-proxy
 ```
+
+<br>
 
 ## Access Application
 
@@ -119,8 +116,5 @@ You should see the following:
 
 <img src="../images/app-profilepage.png" width="1024"><br/>
  *Profile Page*
-
-
-Congratulations, you deployed the user profile service and added it to the service mesh!
 
 {{< importPartial "footer/footer.html" >}}

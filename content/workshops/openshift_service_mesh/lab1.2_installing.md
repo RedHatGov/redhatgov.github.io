@@ -105,12 +105,11 @@ PROJECT_NAME=$(oc project -q)
 Next we need a local copy of our application code.
 
 <blockquote>
-<i class="fa fa-terminal"></i> Clone the repository in your home directory:
+<i class="fa fa-terminal"></i> Clone the repository:
 </blockquote>
 
 ```
-cd $HOME
-git clone https://github.com/dudash/openshift-microservices.git
+git clone https://github.com/RedHatGov/openshift-microservices.git
 ```
 
 <blockquote>
@@ -118,8 +117,16 @@ git clone https://github.com/dudash/openshift-microservices.git
 </blockquote>
 
 ```
-cd $HOME/openshift-microservices
-git checkout workshop-stable
+cd openshift-microservices && git checkout workshop-stable
+```
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Navigate to the workshop directory:
+</blockquote>
+
+```
+cd deployment/workshop
 ```
 
 <br>

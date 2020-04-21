@@ -26,26 +26,16 @@ The UI shows an unknown user and that's because there's no profile service for y
 
 ## Application Code
 
-Let's take a look at the code.  
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the code directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/code/userprofile/
-```
-
 Your new application is written in Java, whereas the other backend components such as 'app-ui' and 'boards' are written in NodeJS.  One of the advantages of Istio is that it is agnostic to the programming languages of the running microservices.
 
+
 <blockquote>
-<i class="fa fa-terminal"></i>
-View the 'UserProfile' class in your favorite editor or via bash:
+<i class="fa fa-desktop"></i>
+Navigate to the 'UserProfile' class in your browser:
 </blockquote>
 
 ```
-cat src/main/java/org/microservices/demo/json/UserProfile.java
+https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/json/UserProfile.java
 ```
 
 Output (snippet):
@@ -62,17 +52,19 @@ Output (snippet):
 ...
 ```
 
-This class file encapsulates information about the user such as the first and last name.
+This class encapsulates information about the user such as the first and last name.
+
+<br>
 
 Your application also exposes a REST API to interact with the service.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-View the interface in your favorite editor or via bash:
+Navigate to the 'UserProfileService' interface in your browser:
 </blockquote>
 
 ```
-cat src/main/java/org/microservices/demo/service/UserProfileService.java
+https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
 ```
 
 Output (snippet):
@@ -87,22 +79,13 @@ Output (snippet):
 ...
 ```
 
-This class file includes the REST interface for getting and setting user profile information.
+This interface includes the REST methods for getting and setting user profile information.
 
 <br>
 
 ## Build Application
 
 You are ready to build the application.  
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
 
 Use a [BuildConfig][1] to build the application image.  A 'BuildConfig' template was already created for you.
 
@@ -126,6 +109,8 @@ Output (snippet):
 
 Notice the build uses a base Java image to build the application.
 
+<br>
+
 <blockquote>
 <i class="fa fa-terminal"></i>
 Create the build:
@@ -134,9 +119,10 @@ Create the build:
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
-  -p APPLICATION_CODE_URI=https://github.com/dudash/openshift-microservices.git \
+  -p APPLICATION_CODE_URI=https://github.com/RedHatGov/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=workshop-stable \
-  -p APP_VERSION_TAG=1.0
+  -p APP_VERSION_TAG=1.0 \
+  -e USER_PROFILE_STYLE_ID=1
 ```
 
 <blockquote>
@@ -171,6 +157,8 @@ Output (snippet):
 ...
 ```
 
+<br>
+
 Once the build is complete, the image is stored in the OpenShift local repository.
 
 <blockquote>
@@ -187,8 +175,6 @@ Output:
 NAME          IMAGE REPOSITORY                                                                  TAGS     UPDATED
 userprofile   image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile   1.0   3 minutes ago
 ```
-
-Congratulations, you built the new user profile service!
 
 [1]: https://docs.openshift.com/container-platform/4.2/builds/understanding-buildconfigs.html
 

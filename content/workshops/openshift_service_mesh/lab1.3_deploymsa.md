@@ -26,15 +26,6 @@ The source files are labeled '{microservice}-fromsource.yaml'.  In each file, an
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
-
-<blockquote>
-<i class="fa fa-terminal"></i>
 Verify the annotation in the 'app-ui' file:
 </blockquote>
 
@@ -61,7 +52,7 @@ Deploy the boards service:
 oc new-app -f ./openshift-configuration/boards-fromsource.yaml \
   -p APPLICATION_NAME=boards \
   -p NODEJS_VERSION_TAG=node-12 \
-  -p GIT_URI=https://github.com/dudash/openshift-microservices.git \
+  -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git \
   -p GIT_BRANCH=workshop-stable \
   -p DATABASE_SERVICE_NAME=boards-mongodb \
   -p MONGODB_DATABASE=boardsDevelopment
@@ -77,7 +68,7 @@ oc new-app -f ./openshift-configuration/context-scraper-fromsource.yaml \
   -p APPLICATION_NAME=context-scraper \
   -p NODEJS_VERSION_TAG=node-12 \
   -p GIT_BRANCH=workshop-stable \
-  -p GIT_URI=https://github.com/dudash/openshift-microservices.git
+  -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git
 ```
 
 <blockquote>
@@ -90,7 +81,7 @@ oc new-app -f ./openshift-configuration/app-ui-fromsource.yaml \
   -p APPLICATION_NAME=app-ui \
   -p NODEJS_VERSION_TAG=node-12 \
   -p GIT_BRANCH=workshop-stable \
-  -p GIT_URI=https://github.com/dudash/openshift-microservices.git
+  -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git
 ```
 
 <blockquote>

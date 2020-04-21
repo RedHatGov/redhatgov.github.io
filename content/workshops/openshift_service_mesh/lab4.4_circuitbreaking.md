@@ -17,15 +17,6 @@ In Istio, you can define circuit breaking limits using destination rules.
 
 ## Define Threshold Limits
 
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
-
 A circuit breaking rule has already been written for you for the user profile service.
 
 <blockquote>
@@ -94,7 +85,7 @@ In another tab in terminal, kill the server running version 3 of the user profil
 </blockquote>
 
 ```
-USERPROFILE_POD=$(oc get pod -l deploymentconfig=userprofile,version=3.0 -o jsonpath='{.items[0].metadata.name}{"\n"}')
+USERPROFILE_POD=$(oc get pod -l deploymentconfig=userprofile,version=3.0 -o jsonpath='{.items[0].metadata.name}')
 oc exec $USERPROFILE_POD -- kill 1
 ```
 

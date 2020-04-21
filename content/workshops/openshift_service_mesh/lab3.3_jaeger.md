@@ -19,9 +19,10 @@ Open the Jaeger console.  Retrieve the endpoint for Jaeger:
 </blockquote>
 
 ```
-JAEGER_CONSOLE=https://$(oc get routes jaeger -n istio-system -o jsonpath='{.spec.host}{"\n"}')
+JAEGER_CONSOLE=$(oc get route jaeger -n istio-system --template='https://{{.spec.host}}')
 echo $JAEGER_CONSOLE
 ```
+<p><i class="fa fa-info-circle"></i> Click 'Allow selected permissions' if prompted to authorized access.</p>
 
 <blockquote>
 <i class="fa fa-desktop"></i>
