@@ -8,7 +8,7 @@ layout: lab
 # CI/CD Defined
 In modern software projects many teams utilize the concept of Continuous Integration (CI) and Continuous Delivery (CD). By setting up a tool chain that continuously builds, tests, and stages software releases, a team can ensure that their product can be reliably released at any time. OpenShift can be an enabler in the creation and management of this tool chain.
 
-In this lab we walk through creating a simple example of a CI/CD [pipeline][1] utlizing Jenkins, all running on top of OpenShift! The Jenkins job will trigger OpenShift to build and deploy a test version of the application, validate that the deployment works, and then tag the test version into production.
+In this lab we walk through creating a simple example of a CI/CD [pipeline][1] utilizing Jenkins, all running on top of OpenShift! The Jenkins job will trigger OpenShift to build and deploy a test version of the application, validate that the deployment works, and then tag the test version into production.
 
 ## Create a new project
 Create a new project named “cicd-{{< span "userid" "YOUR#" >}}”.
@@ -101,28 +101,26 @@ Scroll down to the bottom, and click
 
 ## Create a sample application configuration
 
-> Use the "oc create" command to create a template resource by filename for a simple nodejs application:
-
-```bash
-$ oc project cicd-{{< span "userid" "YOUR#" >}}
-$ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json
-template.template.openshift.io/nodejs-helloworld-sample created
-```
-
-## Modify the sample application configuration to use the Node.js [Red Hat Universal Base Image (UBI)](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image)
-
-> The template used above references a DEPRECATED: A Centos7 based NodeJS v0.10 image for use with OpenShift v3.
-
 {{< panel_group >}}
 
 {{% panel "CLI Steps" %}}
 
-<blockquote>
-Find and replace "nodejs-010-centos7" with "nodejs-10"
-</blockquote>
+> Let's download a tempate for a sample application, so that we can integrate it into our pipeline
 
 ```bash
-$ oc edit template nodejs-helloworld-sample
+$ wget https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json 
+```
+
+> Next, let's update the template to not use an deprecated container, as it's base. We'll use Red Hat's Universal Base Image as the platform, instead:
+
+```bash
+$ sed 's/nodejs-010-centos7/nodejs-10/g' application-template.json > NEW-Template.json
+```
+
+> And last, we'll instantiate the template.
+
+```bash
+$ oc create -f NEW-Template.json
 ```
 
 {{% /panel %}}
@@ -161,229 +159,355 @@ Click "Save"
 
 {{< /panel_group >}}
 
-## With either editing method, please make sure that your template looks like this, when it is complete
+## With either editing method, please make sure that your template looks like this, when it is complete:
+
+{{< panel_group >}}
+
+{{% panel "Edited Template" %}}
 
 > Your timestamp and uid will vary
 
 ```bash
-kind: Template
-apiVersion: template.openshift.io/v1
-metadata:
-  name: nodejs-helloworld-sample
-  namespace: cicd-1
-  selfLink: >-
-    /apis/template.openshift.io/v1/namespaces/cicd-1/templates/nodejs-helloworld-sample
-  uid: 5fc348f0-3d51-4111-a8ad-cd4d13c290f6
-  resourceVersion: '3499205'
-  creationTimestamp: '2020-04-15T15:32:30Z'
-  annotations:
-    description: >-
-      This example shows how to create a simple nodejs application in openshift
-      origin v3
-    iconClass: icon-nodejs
-    tags: 'instant-app,nodejs'
-objects:
-  - apiVersion: v1
-    kind: Service
-    metadata:
-      name: frontend-prod
-    spec:
-      ports:
-        - name: web
-          nodePort: 0
-          port: 8080
-          protocol: TCP
-          targetPort: 8080
-      selector:
-        name: frontend-prod
-      sessionAffinity: None
-      type: ClusterIP
-    status:
-      loadBalancer: {}
-  - apiVersion: v1
-    kind: Route
-    metadata:
-      name: frontend
-    spec:
-      tls:
-        termination: edge
-      to:
-        kind: Service
-        name: frontend
-  - apiVersion: v1
-    kind: DeploymentConfig
-    metadata:
-      name: frontend-prod
-    spec:
-      replicas: 1
-      selector:
-        name: frontend-prod
-      strategy:
-        rollingParams:
-          intervalSeconds: 1
-          timeoutSeconds: 120
-          updatePeriodSeconds: 1
-        type: Rolling
-      template:
-        metadata:
-          labels:
-            name: frontend-prod
-        spec:
-          containers:
-            - image: ' '
-              imagePullPolicy: IfNotPresent
-              name: nodejs-helloworld
-              ports:
-                - containerPort: 8080
-                  protocol: TCP
-              resources:
-                limits:
-                  memory: '${MEMORY_LIMIT}'
-              securityContext:
-                capabilities: {}
-                privileged: false
-              terminationMessagePath: /dev/termination-log
-          dnsPolicy: ClusterFirst
-          restartPolicy: Always
-      triggers:
-        - imageChangeParams:
-            automatic: true
-            containerNames:
-              - nodejs-helloworld
-            from:
-              kind: ImageStreamTag
-              name: 'origin-nodejs-sample:prod'
-          type: ImageChange
-        - type: ConfigChange
-  - apiVersion: v1
-    kind: Service
-    metadata:
-      name: frontend
-    spec:
-      ports:
-        - name: web
-          nodePort: 0
-          port: 8080
-          protocol: TCP
-          targetPort: 8080
-      selector:
-        name: frontend
-      sessionAffinity: None
-      type: ClusterIP
-  - apiVersion: v1
-    kind: ImageStream
-    metadata:
-      name: origin-nodejs-sample
-  - apiVersion: v1
-    kind: ImageStream
-    metadata:
-      name: origin-nodejs-sample2
-  - apiVersion: v1
-    kind: ImageStream
-    metadata:
-      name: origin-nodejs-sample3
-  - apiVersion: v1
-    kind: ImageStream
-    metadata:
-      name: nodejs-10
-    spec:
-      dockerImageRepository: '${NAMESPACE}/nodejs-10'
-  - apiVersion: v1
-    kind: BuildConfig
-    metadata:
-      labels:
-        name: nodejs-sample-build
-      name: frontend
-    spec:
-      output:
-        to:
-          kind: ImageStreamTag
-          name: 'origin-nodejs-sample:latest'
-      resources: {}
-      source:
-        git:
-          uri: 'https://github.com/openshift/nodejs-ex.git'
-        type: Git
-      strategy:
-        sourceStrategy:
-          from:
-            kind: ImageStreamTag
-            name: 'nodejs-10:latest'
-        type: Source
-      triggers:
-        - github:
-            secret: secret101
-          type: GitHub
-        - generic:
-            secret: secret101
-          type: Generic
-  - apiVersion: v1
-    kind: DeploymentConfig
-    metadata:
-      name: frontend
-    spec:
-      replicas: 1
-      selector:
-        name: frontend
-      strategy:
-        rollingParams:
-          intervalSeconds: 1
-          timeoutSeconds: 120
-          updatePeriodSeconds: 1
-        type: Rolling
-      template:
-        metadata:
-          labels:
-            name: frontend
-        spec:
-          containers:
-            - image: ' '
-              imagePullPolicy: IfNotPresent
-              name: nodejs-helloworld
-              ports:
-                - containerPort: 8080
-                  protocol: TCP
-              resources:
-                limits:
-                  memory: '${MEMORY_LIMIT}'
-              securityContext:
-                capabilities: {}
-                privileged: false
-              terminationMessagePath: /dev/termination-log
-          dnsPolicy: ClusterFirst
-          restartPolicy: Always
-      triggers:
-        - imageChangeParams:
-            automatic: false
-            containerNames:
-              - nodejs-helloworld
-            from:
-              kind: ImageStreamTag
-              name: 'origin-nodejs-sample:latest'
-          type: ImageChange
-        - type: ConfigChange
-parameters:
-  - name: MEMORY_LIMIT
-    displayName: Memory Limit
-    description: Maximum amount of memory the container can use.
-    value: 512Mi
-  - name: NAMESPACE
-    displayName: Namespace
-    description: The OpenShift Namespace where the ImageStream resides.
-    value: openshift
-  - name: ADMIN_USERNAME
-    displayName: Administrator Username
-    description: Username for the administrator of this application.
-    generate: expression
-    from: 'admin[A-Z0-9]{3}'
-  - name: ADMIN_PASSWORD
-    displayName: Administrator Password
-    description: Password for the administrator of this application.
-    generate: expression
-    from: '[a-zA-Z0-9]{8}'
-labels:
-  template: application-template-stibuild
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "nodejs-helloworld-sample",
+    "annotations": {
+      "description": "This example shows how to create a simple nodejs application in openshift origin v3",
+      "iconClass": "icon-nodejs",
+      "tags": "instant-app,nodejs"
+    }
+  },
+  "objects": [
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "frontend-prod"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "web",
+            "protocol": "TCP",
+            "port": 8080,
+            "targetPort": 8080,
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "name": "frontend-prod"
+        },
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "kind": "Route",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "frontend"
+      },
+      "spec": {
+        "to": {
+          "kind": "Service",
+          "name": "frontend"
+        },
+        "tls": {
+          "termination": "edge"
+        }
+      }
+    },
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "frontend-prod"
+      },
+      "spec": {
+        "strategy": {
+          "type": "Rolling",
+          "rollingParams": {
+            "updatePeriodSeconds": 1,
+            "intervalSeconds": 1,
+            "timeoutSeconds": 120
+          }
+        },
+        "triggers": [
+          {
+            "type": "ImageChange",
+            "imageChangeParams": {
+              "automatic": true,
+              "containerNames": [
+                "nodejs-helloworld"
+              ],
+              "from": {
+                "kind": "ImageStreamTag",
+                "name": "origin-nodejs-sample:prod"
+              }
+            }
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "replicas": 1,
+        "selector": {
+          "name":"frontend-prod"
+        },
+        "template": {
+          "metadata": {
+            "labels": {
+              "name": "frontend-prod"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "nodejs-helloworld",
+                "image": " ",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "memory": "${MEMORY_LIMIT}"
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent",
+                "securityContext": {
+                  "capabilities": {},
+                  "privileged": false
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst"
+          }
+        }
+      }
+    },
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "frontend"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "web",
+            "protocol": "TCP",
+            "port": 8080,
+            "targetPort": 8080,
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "name": "frontend"
+        },
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "origin-nodejs-sample"
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "origin-nodejs-sample2"
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "origin-nodejs-sample3"
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "nodejs-10"
+      },
+      "spec": {
+        "dockerImageRepository": "${NAMESPACE}/nodejs-10"
+      }
+    },
+    {
+      "kind": "BuildConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "frontend",
+        "labels": {
+          "name": "nodejs-sample-build"
+        }
+      },
+      "spec": {
+        "triggers": [
+          {
+            "type": "GitHub",
+            "github": {
+              "secret": "secret101"
+            }
+          },
+          {
+            "type": "Generic",
+            "generic": {
+              "secret": "secret101"
+            }
+          }
+        ],
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "https://github.com/openshift/nodejs-ex.git"
+          }
+        },
+        "strategy": {
+          "type": "Source",
+          "sourceStrategy": {
+            "from": {
+              "kind": "ImageStreamTag",
+              "name": "nodejs-10:latest"
+            }
+          }
+        },
+        "output": {
+          "to": {
+            "kind": "ImageStreamTag",
+            "name": "origin-nodejs-sample:latest"
+          }
+        },
+        "resources": {}
+      }
+    },
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "frontend"
+      },
+      "spec": {
+        "strategy": {
+          "type": "Rolling",
+          "rollingParams": {
+            "updatePeriodSeconds": 1,
+            "intervalSeconds": 1,
+            "timeoutSeconds": 120
+          }
+        },
+        "triggers": [
+          {
+            "type": "ImageChange",
+            "imageChangeParams": {
+              "automatic": false,
+              "containerNames": [
+                "nodejs-helloworld"
+              ],
+              "from": {
+                "kind": "ImageStreamTag",
+                "name": "origin-nodejs-sample:latest"
+              }
+            }
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "replicas": 1,
+        "selector": {
+          "name":"frontend"
+          },
+        "template": {
+          "metadata": {
+            "labels": {
+              "name": "frontend"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "nodejs-helloworld",
+                "image": " ",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "memory": "${MEMORY_LIMIT}"
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent",
+                "securityContext": {
+                  "capabilities": {},
+                  "privileged": false
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst"
+          }
+        }
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "MEMORY_LIMIT",
+      "displayName": "Memory Limit",
+      "description": "Maximum amount of memory the container can use.",
+      "value": "512Mi"
+    },
+    {
+      "name": "NAMESPACE",
+      "displayName": "Namespace",
+      "description": "The OpenShift Namespace where the ImageStream resides.",
+      "value": "openshift"
+    },
+   {
+      "name": "ADMIN_USERNAME",
+      "displayName": "Administrator Username",
+      "description": "Username for the administrator of this application.",
+      "generate": "expression",
+      "from": "admin[A-Z0-9]{3}"
+    },
+    {
+      "name": "ADMIN_PASSWORD",
+      "displayName": "Administrator Password",
+      "description": "Password for the administrator of this application.",
+      "generate": "expression",
+      "from": "[a-zA-Z0-9]{8}"
+    }
+  ],
+  "labels": {
+    "template": "application-template-stibuild"
+  }
+}
 ```
+
+{{% /panel %}}
+
+{{< /panel_group >}}
 
 ## Create a sample application from template
 
@@ -391,6 +515,11 @@ labels:
 
 ```bash
 $ oc process nodejs-helloworld-sample -p NAMESPACE=registry.access.redhat.com/ubi7 | oc create -f -
+```
+
+> You will see the followig:
+
+```bash
 service/frontend-prod created
 route.route.openshift.io/frontend created
 deploymentconfig.apps.openshift.io/frontend-prod created
@@ -547,6 +676,8 @@ buildconfig.build.openshift.io/pipeline created
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
+
+> Click on "Build" and then "Create Build Config"
 
 > Use the following OpenShift build configuration to create the pipeline.
 
