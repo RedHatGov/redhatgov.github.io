@@ -111,8 +111,6 @@ boards-mongodb-1-deploy    0/1     Completed   0          64m
 context-scraper-1-build    0/1     Completed   0          64m
 context-scraper-1-xxxxx    2/2     Running     0          62m
 context-scraper-1-deploy   0/1     Completed   0          62m
-sso73-x509-1-xxxxx         2/2     Running     0          62m
-sso73-x509-1-deploy        1/1     Completed   0          62m
 ```
 
 <br>
