@@ -1,7 +1,7 @@
 ---
 title: Security - Securing Ingress and Egress
 workshops: openshift_service_mesh
-workshop_weight: 54
+workshop_weight: 55
 layout: lab
 ---
 

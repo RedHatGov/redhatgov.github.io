@@ -70,7 +70,10 @@ Watch the deployment of the user profile:
 oc get pods -l deploymentconfig=userprofile --watch
 ```
 
-<p><i class="fa fa-info-circle"></i> The userprofile service may error and restart if the PostgreSQL pod is not running yet.</p>
+<p>
+<i class="fa fa-info-circle"></i>
+The userprofile service may error and restart if the PostgreSQL pod is not running yet.
+</p>
 
 Output:
 ```

@@ -81,18 +81,8 @@ oc new-app -f ./openshift-configuration/app-ui-fromsource.yaml \
   -p APPLICATION_NAME=app-ui \
   -p NODEJS_VERSION_TAG=node-12 \
   -p GIT_BRANCH=workshop-stable \
-  -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git
-```
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Deploy single sign-on:
-</blockquote>
-
-```
-oc new-app -f ./openshift-configuration/sso73-x509-https.yaml \
-  -p APPLICATION_NAME=sso \
-  -p MEMORY_LIMIT=512Mi
+  -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git \
+  -e FAKE_USER=true
 ```
 
 <blockquote>
