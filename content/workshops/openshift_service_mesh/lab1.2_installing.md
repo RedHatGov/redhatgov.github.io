@@ -110,7 +110,7 @@ Next we need a local copy of our application code.
 
 ```
 cd $HOME
-git clone https://github.com/dudash/openshift-microservices.git
+git clone https://github.com/redhatgov/openshift-microservices.git
 ```
 
 <blockquote>

@@ -21,7 +21,7 @@ Navigate to the URL via your browser:
 </blockquote>
 
 ```
-https://github.com/theckang/openshift-microservices/blob/workshop_feature_update/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
+https://github.com/redhatgov/openshift-microservices/blob/workshop_feature_update/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
 ```
 
 Output (snippet):
@@ -57,7 +57,7 @@ Create a new build on this feature branch:
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
-  -p APPLICATION_CODE_URI=https://github.com/theckang/openshift-microservices.git \
+  -p APPLICATION_CODE_URI=https://github.com/redhatgov/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=workshop_feature_update \
   -p APP_VERSION_TAG=2.0
   -e USER_PROFILE_STYLE_ID=2
