@@ -35,11 +35,11 @@ oc apply -f ./sso-realm.yaml
 ```
 
 ```
-oc apply -f ./sso-user-1.yaml
+oc apply -f ./sso-user1.yaml
 ```
 
 ```
-oc apply -f ./sso-user-2.yaml
+oc apply -f ./sso-user2.yaml
 ```
 
 ### Login to the SSO Admin Console
