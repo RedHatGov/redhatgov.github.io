@@ -1,5 +1,5 @@
 ---
-title: Kiali
+title: Observability - Kiali
 workshops: openshift_service_mesh
 workshop_weight: 23
 layout: lab
@@ -42,7 +42,7 @@ Now let's open the Kiali console.  Retrieve the endpoint for Kiali:
 
 
 ```
-KIALI_CONSOLE=https://$(oc get routes kiali -n istio-system -o jsonpath='{.spec.host}{"\n"}')
+KIALI_CONSOLE=$(oc get route kiali -n istio-system --template='https://{{.spec.host}}')
 echo $KIALI_CONSOLE
 ```
 

@@ -1,5 +1,5 @@
 ---
-title: Fault Injection
+title: Traffic Control - Fault Injection
 workshops: openshift_service_mesh
 workshop_weight: 43
 layout: lab
@@ -14,15 +14,6 @@ You need a way to simulate failure in the service mesh.  By doing so, you can te
 Istio provides ways to inject failure at the application layer with [Delay Faults][2] and [Abort Faults][3] using virtual services.  Let's try this with the paste board application.
 
 ## Abort Faults
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -184,7 +175,7 @@ Inspect the traces.
 
 <blockquote>
 <i class="fa fa-desktop"></i>
-On the left bar under 'Search', select 'app-ui.microservies-demo' for 'Service' and 'userprofile-microservices-demo.svc.cluster.local'for 'Operation'.
+On the left bar under 'Search', select 'app-ui.user#' for 'Service' and 'userprofile-user#.svc.cluster.local' for 'Operation'.
 </blockquote>
 <blockquote>
 <i class="fa fa-desktop"></i>
@@ -218,8 +209,8 @@ Congratulations, you configured fault injection with Istio!
 A few key highlights are:
 
 * We can test the resiliency of our service mesh using Delay Faults and Abort Faults
-* Abort Faults synthentically inject 50x errors in responses to a service call
-* Delay Faults synthentically add latency in responses to a service call
+* Abort Faults synthetically inject 50x errors in responses to a service call
+* Delay Faults synthetically add latency in responses to a service call
 * Jaeger can capture performance delays with distributed tracing
 
 [1]: https://en.wikipedia.org/wiki/Chaos_engineering

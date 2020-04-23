@@ -1,5 +1,5 @@
 ---
-title: Grafana
+title: Observability - Grafana
 workshops: openshift_service_mesh
 workshop_weight: 32
 layout: lab
@@ -19,9 +19,10 @@ Open the Grafana console.  Retrieve the endpoint for Grafana:
 </blockquote>
 
 ```
-GRAFANA_CONSOLE=https://$(oc get routes grafana -n istio-system -o jsonpath='{.spec.host}{"\n"}')
+GRAFANA_CONSOLE=$(oc get route grafana -n istio-system --template='https://{{.spec.host}}')
 echo $GRAFANA_CONSOLE
 ```
+<p><i class="fa fa-info-circle"></i> Click 'Allow selected permissions' if prompted to authorized access.</p>
 
 <blockquote>
 <i class="fa fa-desktop"></i>
@@ -82,7 +83,7 @@ Open another tab in the terminal. Send load to the user profile service:
 </blockquote>
 
 ```
-GATEWAY_URL=$(oc get route istio-demogateway -o jsonpath='{.spec.host}')
+GATEWAY_URL=$(oc get route istio-demogateway-$PROJECT_NAME --template='http://{{.spec.host}}')
 while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 

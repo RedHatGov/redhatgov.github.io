@@ -1,5 +1,5 @@
 ---
-title: Traffic Splitting
+title: Traffic Control - Traffic Splitting
 workshops: openshift_service_mesh
 workshop_weight: 42
 layout: lab
@@ -11,16 +11,7 @@ It's time to fix the performance issue of the application.  Previously, you depl
 
 ## Feature Fix
 
-The code to fix the performance issue of the user profile service has already been written for you on the 'workshop_feature_fix' branch.  
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
+The code to fix the performance issue of the user profile service has already been written for you on the 'workshop-feature-fix' branch.  
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -30,9 +21,10 @@ Create a new build on this feature branch:
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
-  -p APPLICATION_CODE_URI=https://github.com/theckang/openshift-microservices.git \
-  -p APPLICATION_CODE_BRANCH=workshop_feature_fix \
-  -p APP_VERSION_TAG=3.0
+  -p APPLICATION_CODE_URI=https://github.com/RedHatGov/openshift-microservices.git \
+  -p APPLICATION_CODE_BRANCH=workshop-feature-fix \
+  -p APP_VERSION_TAG=3.0 \
+  -e USER_PROFILE_STYLE_ID=3
 ```
 
 <p><i class="fa fa-info-circle"></i> Ignore the failure since the imagestream already exists.</p>
@@ -107,7 +99,7 @@ Grab a reference to the local image:
 </blockquote>
 
 ```
-USER_PROFILE_IMAGE_URI=$(oc get is userprofile -o jsonpath='{.status.dockerImageRepository}{"\n"}')
+USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template='{{.status.dockerImageRepository}}')
 echo $USER_PROFILE_IMAGE_URI
 ```
 
@@ -146,15 +138,6 @@ userprofile-xxxxxxxxxx-xxxxx                2/2     Running        0          22
 <br>
 
 ## Traffic Routing
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
 
 Let's start with a [Canary Release][1] of the new version of the user profile service.  You'll route 90% of user traffic to version 1 and route 10% of traffic to the latest version.
 
@@ -262,7 +245,7 @@ Output (snippet):
 ...
 ```
 
-In this example, you will route traffic evenly between the two versions.  This is commonly known as a [Blue-Green Deployment][2].
+In this example, you will route traffic evenly between the two versions. This is a technique that could be used for advanced deployments, for example A/B testing.
 
 <blockquote>
 <i class="fa fa-terminal"></i>

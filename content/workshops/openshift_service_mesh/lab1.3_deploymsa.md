@@ -1,5 +1,5 @@
 ---
-title: Deploying an App
+title: Intro to Service Mesh - Deploying an App
 workshops: openshift_service_mesh
 workshop_weight: 13
 layout: lab
@@ -18,132 +18,11 @@ The microservices include single sign-on (SSO), user interface (UI), the boards 
 
 <br>
 
-## Setup
-
-{{< panel_group >}}
-{{% panel "Run these steps if you are running the lab without an instructor" %}}
-
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Create a new project for your application:
-</blockquote>
-
-```
-PROJECT_NAME=<enter project name>
-oc new-project $PROJECT_NAME --display-name="OpenShift Microservices Demo"
-```
-
-<br>
-
-You need to add this project to the service mesh.  This is called a Member Roll resource.  If you do not add the project to the mesh, the microservices will not be added to the service mesh.
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Create the member roll resource for your project:
-</blockquote>
-
-```
-oc apply -f - <<EOF
-apiVersion: maistra.io/v1
-kind: ServiceMeshMemberRoll
-metadata:
-  name: default
-  namespace: istio-system
-spec:
-  members:
-    - $PROJECT_NAME
-EOF
-```
-
-<br>
-
-You should already have a local copy of the application code.  If you do not, make sure to complete the previous lab.
-
-<blockquote>
-<i class="fa fa-terminal"></i> Navigate to the local repo folder:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices
-```
-
-<blockquote>
-<i class="fa fa-terminal"></i> Show working tree status:
-</blockquote>
-
-```
-git status
-```
-
-Output:
-
-```
-On branch workshop-stable
-```
-
-{{% /panel %}}
-{{< /panel_group >}}
-
-<br>
-
-{{< panel_group >}}
-{{% panel "Run these steps if you are running the lab with an instructor" %}}
-
-Set the project name variable.  The project name should have been provided to you by the instructor.
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Set the project name variable.  For example:
-</blockquote>
-
-```
-PROJECT_NAME=userX
-```
-
-<br>
-
-Next we need a local copy of our application code.
-
-<blockquote>
-<i class="fa fa-terminal"></i> Clone the repository in your home directory:
-</blockquote>
-
-```
-cd $HOME
-git clone https://github.com/dudash/openshift-microservices.git
-```
-
-<br>
-
-<blockquote>
-<i class="fa fa-terminal"></i> Checkout the workshop-stable branch:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices
-git checkout workshop-stable
-```
-
-{{% /panel %}}
-{{< /panel_group >}}
-
-<br>
-
 ## Deploy Microservices
 
 You are going to build the application images from source code and then deploy the resources in the cluster.
 
 The source files are labeled '{microservice}-fromsource.yaml'.  In each file, an annotation 'sidecar.istio.io/inject' was added to tell Istio to inject a sidecar proxy.
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -172,8 +51,8 @@ Deploy the boards service:
 ```
 oc new-app -f ./openshift-configuration/boards-fromsource.yaml \
   -p APPLICATION_NAME=boards \
-  -p NODEJS_VERSION_TAG=8-RHOAR \
-  -p GIT_URI=https://github.com/dudash/openshift-microservices.git \
+  -p NODEJS_VERSION_TAG=10 \
+  -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git \
   -p GIT_BRANCH=workshop-stable \
   -p DATABASE_SERVICE_NAME=boards-mongodb \
   -p MONGODB_DATABASE=boardsDevelopment
@@ -187,9 +66,9 @@ Deploy the context scraper service:
 ```
 oc new-app -f ./openshift-configuration/context-scraper-fromsource.yaml \
   -p APPLICATION_NAME=context-scraper \
-  -p NODEJS_VERSION_TAG=8-RHOAR \
+  -p NODEJS_VERSION_TAG=10 \
   -p GIT_BRANCH=workshop-stable \
-  -p GIT_URI=https://github.com/dudash/openshift-microservices.git
+  -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git
 ```
 
 <blockquote>
@@ -200,20 +79,10 @@ Deploy the user interface:
 ```
 oc new-app -f ./openshift-configuration/app-ui-fromsource.yaml \
   -p APPLICATION_NAME=app-ui \
-  -p NODEJS_VERSION_TAG=8-RHOAR \
+  -p NODEJS_VERSION_TAG=10 \
   -p GIT_BRANCH=workshop-stable \
-  -p GIT_URI=https://github.com/dudash/openshift-microservices.git
-```
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Deploy single sign-on:
-</blockquote>
-
-```
-oc new-app -f ./openshift-configuration/sso73-x509-https.yaml \
-  -p APPLICATION_NAME=sso \
-  -p MEMORY_LIMIT=512Mi
+  -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git \
+  -e FAKE_USER=true
 ```
 
 <blockquote>
@@ -222,8 +91,10 @@ Watch the microservices demo installation:
 </blockquote>
 
 ```
-oc get pods -n $PROJECT_NAME --watch
+oc get pods --watch
 ```
+
+<br>
 
 Wait a couple minutes.  You should see the 'app-ui', 'boards', 'context-scraper', and 'sso' pods running.  For example:
 
@@ -240,9 +111,9 @@ boards-mongodb-1-deploy    0/1     Completed   0          64m
 context-scraper-1-build    0/1     Completed   0          64m
 context-scraper-1-xxxxx    2/2     Running     0          62m
 context-scraper-1-deploy   0/1     Completed   0          62m
-sso73-x509-1-xxxxx         2/2     Running     0          62m
-sso73-x509-1-deploy        1/1     Completed   0          62m
 ```
+
+<br>
 
 Each microservices pod runs two containers: the application itself and the Istio proxy.
 
@@ -260,21 +131,13 @@ Output:
 app-ui istio-proxy
 ```
 
+<br>
+
 ## Access Application
 
 The application is deployed!  But you need a way to access the application via the user interface.
 
-Istio provides a [Gateway][2] resource, which is a load balancer at the edge of the service mesh that accepts incoming connections.  You need to deploy a Gateway resource and configure it to route to the application user interface.
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Create the gateway load balancer:
-</blockquote>
-
-```
-oc process -f ./istio-configuration/ingress-loadbalancer.yaml \
-  -p INGRESS_GATEWAY_NAME=demogateway | oc create -f -
-```
+Istio provides a [Gateway][1] resource, which can configure a load balancer at the edge of the service mesh.  In the previous lab, you verified that a load balancer was already created for you in your project.  The next step is to deploy a Gateway resource and configure the load balancer to route to the application user interface.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -283,10 +146,10 @@ Create the gateway configuration and routing rules:
 
 ```
 oc process -f ./istio-configuration/ingress-gateway.yaml \
-  -p INGRESS_GATEWAY_NAME=demogateway | oc create -f -
+  -p INGRESS_GATEWAY_NAME=demogateway-$PROJECT_NAME | oc create -f -
 ```
 
-To access the application, you need the endpoint of the load balancer you created.
+To access the application, you need the endpoint of your load balancer.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -294,7 +157,7 @@ Retrieve the URL of the load balancer:
 </blockquote>
 
 ```
-GATEWAY_URL=$(oc get route istio-demogateway -o jsonpath='{.spec.host}')
+GATEWAY_URL=$(oc get route istio-demogateway-$PROJECT_NAME --template='http://{{.spec.host}}')
 echo $GATEWAY_URL
 ```
 
@@ -304,8 +167,10 @@ Navigate to this URL in the browser.  For example:
 </blockquote>
 
 ```
-https://istio-demogateway-microservices-demo.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443
+http://istio-demogateway-userX-userX.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443
 ```
+
+<br>
 
 You should see the application user interface.  Try creating a new board and posting to the shared board.
 

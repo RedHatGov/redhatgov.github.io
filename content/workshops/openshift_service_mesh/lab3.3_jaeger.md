@@ -1,5 +1,5 @@
 ---
-title: Jaeger
+title: Observability - Jaeger
 workshops: openshift_service_mesh
 workshop_weight: 33
 layout: lab
@@ -19,9 +19,10 @@ Open the Jaeger console.  Retrieve the endpoint for Jaeger:
 </blockquote>
 
 ```
-JAEGER_CONSOLE=https://$(oc get routes jaeger -n istio-system -o jsonpath='{.spec.host}{"\n"}')
+JAEGER_CONSOLE=$(oc get route jaeger -n istio-system --template='https://{{.spec.host}}')
 echo $JAEGER_CONSOLE
 ```
+<p><i class="fa fa-info-circle"></i> Click 'Allow selected permissions' if prompted to authorized access.</p>
 
 <blockquote>
 <i class="fa fa-desktop"></i>
@@ -51,7 +52,7 @@ Let's inspect the traces.
 
 <blockquote>
 <i class="fa fa-desktop"></i>
-On the left bar under 'Search', select 'app-ui.microservies-demo' for 'Service' and 'boards-microservices-demo.svc.cluster.local'for 'Operation'.  
+On the left bar under 'Search', select 'app-ui.user#' for 'Service' and 'boards-user#.svc.cluster.local' for 'Operation'.  
 </blockquote>
 
 It should look like this:
@@ -138,7 +139,7 @@ for ((i=1;i<=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 Inspect the traces.  
 <blockquote>
 <i class="fa fa-desktop"></i>
-On the left bar under 'Search', select 'app-ui.microservies-demo' for 'Service' and 'userprofile-microservices-demo.svc.cluster.local'for 'Operation'.  
+On the left bar under 'Search', select 'app-ui.user#' for 'Service' and 'userprofile-user#.svc.cluster.local' for 'Operation'.  
 </blockquote>
 
 <blockquote>

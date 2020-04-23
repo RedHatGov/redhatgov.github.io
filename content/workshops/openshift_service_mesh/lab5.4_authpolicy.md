@@ -1,7 +1,7 @@
 ---
-title: Auth Policy
+title: Security - Auth Policy
 workshops: openshift_service_mesh
-workshop_weight: 53
+workshop_weight: 54
 layout: lab
 ---
 
@@ -81,12 +81,6 @@ You should now see a list of shared items
 You might need to refresh the page a few times before it takes effect
 </p>
 
-<br>
-<br>
-
-# <i class="fa fa-exclamation-triangle"></i> At the time on this writing Service Mesh 1.0 is using Istio 1.1. 
-# This section of the lab requires Istio 1.4 or later - which is expected to GA soon.
-# Please read but do not execute the steps
 
 <br>
 <br>
@@ -186,7 +180,7 @@ Our app-ui microservice requests the JWT from the Keycloak SSO when a user logs 
 
 If you have the time and want to dig deeper, you should read more about [configuring Keycloak][4] and about [JWTs][3].
 
-Check out highlevel diagrams of the flows we executed below:
+Check out high-level diagrams of the flows we executed below:
 
 <br>
 *Fail Case*
