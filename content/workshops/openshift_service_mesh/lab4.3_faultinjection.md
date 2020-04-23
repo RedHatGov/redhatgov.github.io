@@ -175,7 +175,7 @@ Inspect the traces.
 
 <blockquote>
 <i class="fa fa-desktop"></i>
-On the left bar under 'Search', select 'app-ui.microservices-demo' for 'Service' and 'userprofile-microservices-demo.svc.cluster.local'for 'Operation'.
+On the left bar under 'Search', select 'app-ui.user#' for 'Service' and 'userprofile-user#.svc.cluster.local' for 'Operation'.
 </blockquote>
 <blockquote>
 <i class="fa fa-desktop"></i>
@@ -209,8 +209,8 @@ Congratulations, you configured fault injection with Istio!
 A few key highlights are:
 
 * We can test the resiliency of our service mesh using Delay Faults and Abort Faults
-* Abort Faults synthentically inject 50x errors in responses to a service call
-* Delay Faults synthentically add latency in responses to a service call
+* Abort Faults synthetically inject 50x errors in responses to a service call
+* Delay Faults synthetically add latency in responses to a service call
 * Jaeger can capture performance delays with distributed tracing
 
 [1]: https://en.wikipedia.org/wiki/Chaos_engineering
