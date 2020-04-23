@@ -17,7 +17,7 @@ For now let's lockdown egress.
 ## Lock Down Egress
 In this example we are going to restrict access to external endpoints to only approved hosts. The service mesh has an egress router (a standalone Envoy) running by default and we just need to configure it.
 
-istio-system has a config map called `istio` which controls the default for egress security. It looks like this:
+The `ServiceMeshControlPlane` custom resource we used to install Istio has a `global` config which allows control of the defaults for egress security. That looks like this:
 
 ```
 # Set the default behavior of the sidecar for handling outbound traffic from the application:
@@ -29,13 +29,22 @@ outboundTrafficPolicy:
   mode: REGISTRY_ONLY
 ```
 
-The mesh you're using in this workshop should already have the mode set to `REGISTRY_ONLY`. Let's verify that:
+The mesh you're using in this workshop should already have the mode set to `REGISTRY_ONLY`. Let's verify that in the auto-generated config map:
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Run this command and look for outboundTrafficPolicy
+</blockquote>
+
+```
+oc describe cm/istio -n istio-system
+```
 
 <br>
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Run this command to scrape some data:
+Now let's verify it's working - Run this command to scrape some data:
 </blockquote>
 
 ```
