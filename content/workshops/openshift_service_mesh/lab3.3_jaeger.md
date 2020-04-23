@@ -52,7 +52,7 @@ Let's inspect the traces.
 
 <blockquote>
 <i class="fa fa-desktop"></i>
-On the left bar under 'Search', select 'app-ui.microservices-demo' for 'Service' and 'boards-microservices-demo.svc.cluster.local' for 'Operation'.  
+On the left bar under 'Search', select 'app-ui.user#' for 'Service' and 'boards-user#.svc.cluster.local' for 'Operation'.  
 </blockquote>
 
 It should look like this:
@@ -139,7 +139,7 @@ for ((i=1;i<=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 Inspect the traces.  
 <blockquote>
 <i class="fa fa-desktop"></i>
-On the left bar under 'Search', select 'app-ui.microservices-demo' for 'Service' and 'userprofile-microservices-demo.svc.cluster.local' for 'Operation'.  
+On the left bar under 'Search', select 'app-ui.user#' for 'Service' and 'userprofile-user#.svc.cluster.local' for 'Operation'.  
 </blockquote>
 
 <blockquote>

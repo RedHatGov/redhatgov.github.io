@@ -51,7 +51,7 @@ Deploy the boards service:
 ```
 oc new-app -f ./openshift-configuration/boards-fromsource.yaml \
   -p APPLICATION_NAME=boards \
-  -p NODEJS_VERSION_TAG=node-12 \
+  -p NODEJS_VERSION_TAG=10 \
   -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git \
   -p GIT_BRANCH=workshop-stable \
   -p DATABASE_SERVICE_NAME=boards-mongodb \
@@ -66,7 +66,7 @@ Deploy the context scraper service:
 ```
 oc new-app -f ./openshift-configuration/context-scraper-fromsource.yaml \
   -p APPLICATION_NAME=context-scraper \
-  -p NODEJS_VERSION_TAG=node-12 \
+  -p NODEJS_VERSION_TAG=10 \
   -p GIT_BRANCH=workshop-stable \
   -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git
 ```
@@ -79,7 +79,7 @@ Deploy the user interface:
 ```
 oc new-app -f ./openshift-configuration/app-ui-fromsource.yaml \
   -p APPLICATION_NAME=app-ui \
-  -p NODEJS_VERSION_TAG=node-12 \
+  -p NODEJS_VERSION_TAG=10 \
   -p GIT_BRANCH=workshop-stable \
   -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git \
   -e FAKE_USER=true
