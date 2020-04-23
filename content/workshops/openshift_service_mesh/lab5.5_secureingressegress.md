@@ -26,7 +26,7 @@ istio-system has a config map called `istio` which controls the default for egre
 # REGISTRY_ONLY - restrict outbound traffic to services defined in the service registry as well
 #   as those defined through ServiceEntries  
 outboundTrafficPolicy:
-  mode: ALLOW_ANY
+  mode: REGISTRY_ONLY
 ```
 
 The mesh you're using in this workshop should already have the mode set to `REGISTRY_ONLY`. Let's verify that:
