@@ -35,9 +35,6 @@ metadata:
   name: userprofile
 spec:
   host: userprofile
-  trafficPolicy:
-    tls:
-      mode: ISTIO_MUTUAL
   subsets:
   	- name: v1
   	  labels:
