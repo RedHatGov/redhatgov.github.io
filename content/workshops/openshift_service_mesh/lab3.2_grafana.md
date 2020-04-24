@@ -83,7 +83,7 @@ Open another tab in the terminal. Send load to the user profile service:
 </blockquote>
 
 ```
-GATEWAY_URL=$(oc get route istio-demogateway-$PROJECT_NAME --template='http://{{.spec.host}}')
+GATEWAY_URL=$(oc get route istio-demogateway-$(oc project -q) --template='http://{{.spec.host}}')
 while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 

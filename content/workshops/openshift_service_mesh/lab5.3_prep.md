@@ -23,7 +23,7 @@ You can do this CLI or web console. If using web console just use the + button a
 </blockquote>
 
 ```
-oc apply -f ./sso-keycloak.yaml
+oc apply -f ./istio-configuration/sso-keycloak.yaml
 ```
 
 <blockquote>
@@ -31,15 +31,15 @@ oc apply -f ./sso-keycloak.yaml
 </blockquote>
 
 ```
-oc apply -f ./sso-realm.yaml
+oc apply -f ./istio-configuration/sso-realm.yaml
 ```
 
 ```
-oc apply -f ./sso-user1.yaml
+oc apply -f ./istio-configuration/sso-user1.yaml
 ```
 
 ```
-oc apply -f ./sso-user2.yaml
+oc apply -f ./istio-configuration/sso-user2.yaml
 ```
 
 ### Login to the SSO Admin Console
