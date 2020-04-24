@@ -96,6 +96,14 @@ spec:
 ```
 
 <blockquote>
+<i class="fa fa-terminal"></i> Remove existing destination rules:
+</blockquote>
+```
+oc delete dr --all
+```
+<br>
+
+<blockquote>
 <i class="fa fa-terminal"></i> Apply it with the following command:
 </blockquote>
 ```
