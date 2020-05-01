@@ -121,8 +121,7 @@ oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
   -p APPLICATION_CODE_URI=https://github.com/RedHatGov/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=workshop-stable \
-  -p APP_VERSION_TAG=1.0 \
-  -e USER_PROFILE_STYLE_ID=1
+  -p APP_VERSION_TAG=1.0
 ```
 
 <blockquote>

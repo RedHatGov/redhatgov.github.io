@@ -23,8 +23,7 @@ oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
   -p APPLICATION_CODE_URI=https://github.com/RedHatGov/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=workshop-feature-fix \
-  -p APP_VERSION_TAG=3.0 \
-  -e USER_PROFILE_STYLE_ID=3
+  -p APP_VERSION_TAG=3.0
 ```
 
 <p><i class="fa fa-info-circle"></i> Ignore the failure since the imagestream already exists.</p>
@@ -181,7 +180,7 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-90-10.yaml
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Send load continuously to the user profile service:
+If you aren't already (from the Grafana lab) - send load continuously to the user profile service:
 </blockquote>
 
 ```
@@ -217,6 +216,7 @@ The traffic splits between versions 1 and 3 of the user profile service at rough
 By doing this, you can isolate the new user profile experience for a small subset of your users without impacting everyone at once.  
 
 Once you are comfortable with the change, you can increase the traffic load to the latest version.
+
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -258,7 +258,7 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Send load to the user profile service:
+If you aren't already - send load to the user profile service:
 </blockquote>
 
 ```
@@ -320,7 +320,7 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Send load to the user profile service:
+If you aren't already - Send load to the user profile service:
 </blockquote>
 
 ```
@@ -344,6 +344,25 @@ You should see traffic routed to v3 of the user profile service.
 
 <img src="../images/kiali-userprofile-v3.png" width="1024"><br/>
 *Kiali Graph with v3 Routing*
+
+<br>
+
+Let's test this version of the profile service in the browser.
+
+<blockquote>
+<i class="fa fa-desktop"></i>
+Navigate to the 'Profile' section in the header.  
+</blockquote>
+
+<p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
+`echo $GATEWAY_URL`
+
+<br>
+
+You should see the following:
+
+<img src="../images/app-profilepage-v3.png" width="1024"><br/>
+ *Profile Page*
 
 <br>
 

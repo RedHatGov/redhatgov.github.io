@@ -23,23 +23,47 @@ You can do this CLI or web console. If using web console just use the + button a
 </blockquote>
 
 ```
-oc apply -f ./sso-keycloak.yaml
+oc apply -f ./istio-configuration/sso-keycloak.yaml
 ```
+
+```
+oc patch cm/keycloak-probes -p '{"data":{"liveness_probe.sh":"#!/bin/bash\necho pass\n","readiness_probe.sh":"#!/bin/bash\necho pass\n"}}'
+```
+
+<blockquote>
+<i class="fa fa-terminal"></i> Watch the pods for keycloak-0 to become READY 1/1:
+</blockquote>
+
+```
+oc get pods -w
+```
+
+```
+NAME                                       READY   STATUS      RESTARTS   AGE
+keycloak-0                                 0/1     Pending       0          0s
+keycloak-0                                 0/1     Init:0/1      0          0s
+keycloak-0                                 0/1     Init:0/1      0          3s
+keycloak-0                                 0/1     Init:0/1      0          4s
+keycloak-0                                 0/1     PodInitializing   0          9s
+keycloak-0                                 1/1     Running           0          10s
+```
+
+<br>
 
 <blockquote>
 <i class="fa fa-terminal"></i> We configure via Kubernetes resources to create the realm + roles + clients & users as follows:
 </blockquote>
 
 ```
-oc apply -f ./sso-realm.yaml
+oc apply -f ./istio-configuration/sso-realm.yaml
 ```
 
 ```
-oc apply -f ./sso-user1.yaml
+oc apply -f ./istio-configuration/sso-user1.yaml
 ```
 
 ```
-oc apply -f ./sso-user2.yaml
+oc apply -f ./istio-configuration/sso-user2.yaml
 ```
 
 ### Login to the SSO Admin Console
@@ -127,7 +151,7 @@ Copy the password decoded
 
 ### Editing Config with the SSO Web Console
 <blockquote>
-<i class="fa fa-desktop"></i> Now that you're logged in, click on "Users"
+<i class="fa fa-desktop"></i> Now that you're logged in, click on "Users" and "View all users"
 </blockquote>
 
 <blockquote>
@@ -155,6 +179,28 @@ Copy the password decoded
 <i class="fa fa-desktop"></i> Click on the "cool-kids" role to highlight it. And click the "Add selected" button to give the role.
 </blockquote>
 
+{{< panel_group >}}
+{{% panel "If you don't see cool-kids in the list (click to expand)" %}}
+
+<blockquote>
+<i class="fa fa-desktop"></i> On the left side bar click on "Roles" and "View all roles"
+</blockquote>
+
+<blockquote>
+<i class="fa fa-desktop"></i> On the right side of the screen click on "Add Role"
+</blockquote>
+
+<blockquote>
+<i class="fa fa-desktop"></i> Type in "cool-kids" and a description, then click "Save"
+</blockquote>
+
+<blockquote>
+<i class="fa fa-desktop"></i> Now go back to "Users" choose "theterminator" and you should be able to do the realm role mapping
+</blockquote>
+
+{{% /panel %}}
+{{< /panel_group >}}
+
 <br>
 
 ## Tell the APP UI to use this SSO service
@@ -172,8 +218,8 @@ oc set env dc/app-ui FAKE_USER=false
 <br/>
 
 ## Access Info / API documentation
-- Admin can login at: https://auth-microservices-demo.apps.YOURCLUSTER.COM/
-- Users will login at: https://auth-microservices-demo.apps.YOURCLUSTER.COM/auth/realms/microservices/account
+- Admin can login at: https://keycloak-userX.apps.YOURCLUSTER.COM/
+- Users will login at: https://keycloak-userX.apps.YOURCLUSTER.COM/auth/realms/microservices/account
 - To understand more about keycloak check out the resources below:
   - [Official Docs][1]
   - [Upstream Docs][2]

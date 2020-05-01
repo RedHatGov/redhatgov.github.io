@@ -115,6 +115,18 @@ OpenShift will attempt to revive the server once the health check fails.  If you
 
 <br>
 
+## Clean up
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Revert the changes you made before ending this lab.
+</blockquote>
+
+```
+oc apply -f ./istio-configuration/destinationrules-all.yaml
+```
+
+<br>
 
 ## Summary
 

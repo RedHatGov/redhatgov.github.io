@@ -157,7 +157,7 @@ Retrieve the URL of the load balancer:
 </blockquote>
 
 ```
-GATEWAY_URL=$(oc get route istio-demogateway-$PROJECT_NAME --template='http://{{.spec.host}}')
+GATEWAY_URL=$(oc get route istio-demogateway-$(oc project -q) --template='http://{{.spec.host}}')
 echo $GATEWAY_URL
 ```
 

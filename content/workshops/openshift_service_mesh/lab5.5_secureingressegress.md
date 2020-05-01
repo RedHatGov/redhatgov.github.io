@@ -48,7 +48,7 @@ Now let's verify it's working - Run this command to scrape some data:
 </blockquote>
 
 ```
-oc run curl-scraper-1 --attach --restart=Never --image=appropriate/curl --timeout=30s -- -v context-scraper:8080/scrape/custom_search?term==skynet
+oc run curl-scraper-1 -i --restart=Never --image=appropriate/curl --timeout=30s -- -v context-scraper:8080/scrape/custom_search?term==skynet
 ```
 
 We should get an output similar to the one below:
@@ -91,7 +91,7 @@ If you have admin access you can also run `oc describe cm/istio -n istio-system`
 <br>
 
 ## Allow Egress to Approved Hosts
-Now we will be using a core API object of type [ServiceEntry] to do allow controlled egress. After you add the ServiceEntry, the Envoy proxies can send traffic to the external service as if it was a service in your mesh.
+Now we will be using a core API object of type [ServiceEntry][5] to do allow controlled egress. After you add the ServiceEntry, the Envoy proxies can send traffic to the external service as if it was a service in your mesh.
 
 Our ServiceEntry looks like this:
 ```
@@ -118,7 +118,7 @@ Apply it with the following command:
 </blockquote>
 
 ```
-oc apply -f ./oc apply -f ./istio-configuration/serviceentry-googleapis.yaml
+oc apply -f ./istio-configuration/serviceentry-googleapis.yaml
 ```
 
 <br>
@@ -129,7 +129,7 @@ Run a new curl job to try scrape some data again:
 </blockquote>
 
 ```
-oc run curl-scraper-2 --attach --restart=Never --image=appropriate/curl --timeout=30s -- context-scraper:8080/scrape/custom_search?term==skynet
+oc run curl-scraper-2 -i --restart=Never --image=appropriate/curl --timeout=30s -- context-scraper:8080/scrape/custom_search?term==skynet
 ```
 
 

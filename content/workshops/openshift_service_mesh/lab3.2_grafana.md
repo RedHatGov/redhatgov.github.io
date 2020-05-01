@@ -83,7 +83,7 @@ Open another tab in the terminal. Send load to the user profile service:
 </blockquote>
 
 ```
-GATEWAY_URL=$(oc get route istio-demogateway-$PROJECT_NAME --template='http://{{.spec.host}}')
+GATEWAY_URL=$(oc get route istio-demogateway-$(oc project -q) --template='http://{{.spec.host}}')
 while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 
@@ -125,6 +125,7 @@ It should look like this:
 This provides a visual representation of the latencies we saw on the Mesh Dashboard, and it is clear that the version 2 latencies are much higher.
 
 <br>
+
 
 [1]: https://grafana.com
 

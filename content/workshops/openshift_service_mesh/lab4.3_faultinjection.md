@@ -52,7 +52,7 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-503.yaml
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Send load to the user profile service:
+If you aren't already (from previous labs) - Send load to the user profile service:
 </blockquote>
 
 ```
@@ -153,7 +153,7 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-delay.yaml
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Send load to the user profile service:
+If you aren't already - Send load to the user profile service:
 </blockquote>
 
 ```
@@ -164,30 +164,25 @@ while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 
 <blockquote>
 <i class="fa fa-desktop"></i>
-Inspect the change in Jaeger.
+Let's inspect the change in Kiali's embedded Jaeger view.
 </blockquote>
-
-<p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
-
-`echo $JAEGER_CONSOLE`
-
-Inspect the traces.  
 
 <blockquote>
 <i class="fa fa-desktop"></i>
-On the left bar under 'Search', select 'app-ui.user#' for 'Service' and 'userprofile-user#.svc.cluster.local' for 'Operation'.
-</blockquote>
-<blockquote>
-<i class="fa fa-desktop"></i>
-Select 'Find Traces' and Jaeger should reload with traces to the user profile service.
+From the Graph view right click on the userprofile service (the triangle shape). Then click "show traces"
 </blockquote>
 
-<img src="../images/jaeger-userprofile-traces-delay.png" width="1024"><br/>
-*Traces to User Profile Service with Fault Delays*
+
+<img src="../images/kiali-userprofile-showtraces.png" width="1024"><br/>
+*Graphed Service - Right Click Menu*
 
 Notice some the traces are about 5s in duration while others are in the millisecond range.
 
 Injecting a delay fault is a great mechanism to test how your application handles slow outbound service calls.
+
+
+<img src="../images/kiali-userprofile-faultdelaytraces.png" width="1024"><br/>
+*Traces to User Profile Service with Fault Delays*
 
 ## Clean up
 
