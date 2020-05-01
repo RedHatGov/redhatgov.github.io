@@ -64,7 +64,7 @@ It should look like this:
 
 <blockquote>
 <i class="fa fa-desktop"></i>
-Select 'Find Traces' and Jaeger should reload with traces to the Boards service.
+Click the 'Find Traces' button and Jaeger should reload with traces to the Boards service.
 </blockquote>
 
 <img src="../images/jaeger-boards-traces.png" width="600"><br/>

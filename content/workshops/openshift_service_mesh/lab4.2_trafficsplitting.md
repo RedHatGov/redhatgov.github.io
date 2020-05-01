@@ -180,7 +180,7 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-90-10.yaml
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Send load continuously to the user profile service:
+If you aren't already (from the Grafana lab) - send load continuously to the user profile service:
 </blockquote>
 
 ```
@@ -216,6 +216,7 @@ The traffic splits between versions 1 and 3 of the user profile service at rough
 By doing this, you can isolate the new user profile experience for a small subset of your users without impacting everyone at once.  
 
 Once you are comfortable with the change, you can increase the traffic load to the latest version.
+
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -257,7 +258,7 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Send load to the user profile service:
+If you aren't already - send load to the user profile service:
 </blockquote>
 
 ```
@@ -319,7 +320,7 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Send load to the user profile service:
+If you aren't already - Send load to the user profile service:
 </blockquote>
 
 ```
