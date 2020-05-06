@@ -19,7 +19,9 @@ We can lock down the service entirely and only let authenticated users access it
 
 ```
  sed "s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|" ./istio-configuration/policy-boards-jwt.yaml | oc apply -f -
+ sed "s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|" ./istio-configuration/serviceentry-keycloak.yaml | oc apply -f -
 ```
+
 
 The policy specifies the requirements for traffic to the boards service to have a JWT with specific properties. It looks like this:
 ```
