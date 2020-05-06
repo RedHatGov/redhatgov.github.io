@@ -14,14 +14,14 @@ Let's walk through a basic example of restricting service access via Authenticat
 We can lock down the service entirely and only let authenticated users access it.
 
 <blockquote>
-<i class="fa fa-terminal"></i> Apply a new authentication policy with the following command:
+<i class="fa fa-terminal"></i> Apply a new authentication policy and service entry with the following commands:
 </blockquote>
 
 ```
  sed "s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|" ./istio-configuration/policy-boards-jwt.yaml | oc apply -f -
 ```
 
-This specifies the requirements for traffic to the boards service to have a JWT with specific properties. It looks like this:
+The policy specifies the requirements for traffic to the boards service to have a JWT with specific properties. It looks like this:
 ```
 apiVersion: authentication.istio.io/v1alpha1
 kind: Policy
@@ -46,6 +46,11 @@ spec:
 <p>
 <i class="fa fa-info-circle"></i>
 We mentioned earlier that JWT shares identity info, the JWKS endpoint gives us keys to verify the data of the JWT is from our trusted source.
+</p>
+
+<p>
+<i class="fa fa-info-circle"></i>
+Don't worry about the service entry for now - we'll explain that in another lab.
 </p>
 
 <br>
