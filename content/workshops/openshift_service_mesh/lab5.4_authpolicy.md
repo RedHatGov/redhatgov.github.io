@@ -18,7 +18,7 @@ We can lock down the service entirely and only let authenticated users access it
 </blockquote>
 
 ```
-sed "s|microservices-demo|$PROJECT_NAME|" ./istio-configuration/policy-boards-jwt.yaml | oc apply -f -
+ sed "s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|" ./istio-configuration/policy-boards-jwt.yaml | oc apply -f -
 ```
 
 This specifies the requirements for traffic to the boards service to have a JWT with specific properties. It looks like this:
@@ -27,7 +27,6 @@ apiVersion: authentication.istio.io/v1alpha1
 kind: Policy
 metadata:
   name: boards-jwt
-  namespace: microservices-demo
 spec:
   targets:
   - name: boards
