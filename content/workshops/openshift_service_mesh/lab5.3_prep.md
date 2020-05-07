@@ -55,7 +55,7 @@ keycloak-0                                 1/1     Running           0          
 </blockquote>
 
 ```
-sed "s|http://istio-ingressgateway-istio-system.apps.cluster.domain.com|$GATEWAY_URL|" ./istio-configuration/sso-realm.yaml | oc create -f -
+sed "s|istio-ingressgateway-istio-system.apps.cluster.domain.com|$GATEWAY_URL|" ./istio-configuration/sso-realm.yaml | oc create -f -
 ```
 
 ```
