@@ -74,6 +74,11 @@ It will fail with the following error (once it takes effect).
 <i class="fa fa-desktop"></i> Login as user "demo" with password "demo"
 </blockquote>
 
+<p>
+<i class="fa fa-info-circle"></i>
+Refresh the browser if you see an 'upstream connect error' failure after logging in.
+</p>
+
 <blockquote>
 <i class="fa fa-desktop"></i> Try to access the page again
 </blockquote>
