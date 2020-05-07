@@ -60,6 +60,7 @@ Type the following in the CLI
 
 ```
 oc delete policy/default
+oc delete dr --all
 ```
 
 
