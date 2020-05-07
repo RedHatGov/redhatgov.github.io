@@ -32,9 +32,6 @@ metadata:
 spec:
   targets:
   - name: boards
-  peers:
-  - mtls:
-      mode: STRICT
   origins:
   - jwt:
       issuer: "https://keycloak-sso-shared.apps.leonardo.nub3s.io/auth/realms/microservices-demo"

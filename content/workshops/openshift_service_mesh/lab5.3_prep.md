@@ -55,7 +55,7 @@ keycloak-0                                 1/1     Running           0          
 </blockquote>
 
 ```
-sed "s|http://istio-ingressgateway-istio-system.apps.cluster.domain.com|$GATEWAY_URL|" ./istio-configuration/sso-realm.yaml | oc create -f -
+sed "s|istio-ingressgateway-istio-system.apps.cluster.domain.com|$GATEWAY_URL|" ./istio-configuration/sso-realm.yaml | oc create -f -
 ```
 
 ```
@@ -225,7 +225,10 @@ Type the following in the CLI:
 </blockquote>
 
 ```
-SSO_SVC=${SSO_CONSOLE#*//}
+oc create route reencrypt keycloak-alt --service=keycloak 
+```
+```
+SSO_SVC=$(oc get route keycloak-alt --template='{{.spec.host}}')
 oc set env dc/app-ui FAKE_USER=false SSO_SVC_HOST=$SSO_SVC
 ```
 
