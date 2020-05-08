@@ -110,27 +110,28 @@ spec:
   selector:
     matchLabels:
       app: boards
+      deploymentconfig: boards
   rules:
   - from:
     - source:
-      principals: ["*"]
+        requestPrincipals: ["*"]
     to:
     - operation:
-      methods: ["POST"]
-      paths: ["/shareditems/*"]
-      when:
-      - key: request.auth.claims[realm_access.roles]
-        values: ["cool-kids"]
+        methods: ["POST"]
+        paths: ["*/shareditems"]
+    when:
+    - key: request.auth.claims[realm_access_roles]
+      values: ["cool-kids"]
   - from:
     - source:
-      principals: ["*"]
+        requestPrincipals: ["*"]
     to:
     - operation:
-      methods: ["GET"]
-      when:
-      - key: request.auth.claims[scope]
+        methods: ["GET"]
+    when:
+    - key: request.auth.claims[scope]
       values: ["openid"]
- ```
+```
 
 An authorization policy includes a selector and a list of rules. The selector specifies the **target** that the policy applies to - in this case our boards microservice. While the rules specify **who** (from) is allowed to do **what** (to) under **which** (when) conditions - in this case any source can POST as long as they have the "cool-kids" role listed in their JWT payload. 
 
@@ -175,6 +176,10 @@ oc delete authorizationpolicy/boards-shared-lockdown
 
 ```
 oc delete policy/boards-jwt
+```
+
+```
+oc delete serviceentry/keycloak-egress
 ```
 
 
