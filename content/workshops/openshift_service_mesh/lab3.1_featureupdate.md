@@ -155,7 +155,11 @@ Navigate to the 'Profile' section in the header.
 
 <br>
 
-The profile page will round robin between versions 1 and 2. Refresh a couple of times, and you'll notice that sometimes the page loads really slowly.  
+The profile page will round robin between versions 1 and 2.  Version 2 loads really slowly and looks like this:
+
+<img src="../images/app-profilepage-v2.png" width="1024"><br/>
+ *Profile Page*
+
 
 ## Next, we will use the Service Mesh to debug the problem.
 

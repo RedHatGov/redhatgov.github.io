@@ -82,9 +82,10 @@ Output (sample):
 ```
 NAME                                       READY   STATUS    RESTARTS   AGE
 istio-demogateway-user1-xxxxxxxxxx-xxxxx   1/1     Running   0          2m41s
+keycloak-operator-xxxxxxxxx-xxxxx          1/1     Running   0          15h
 ```
 
-This is a load balancer dedicated to your project.  You will configure this load balancer in the next lab.
+The gateway is a load balancer dedicated to your project.  You will configure this load balancer in the next lab.  The keycloak operator will be used in the security labs.
 
 <br>
 

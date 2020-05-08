@@ -57,7 +57,7 @@ On the left bar under 'Search', select 'app-ui.user#' for 'Service' and 'boards-
 
 It should look like this:
 
-<img src="../images/jaeger-search-boards.png" width="1024"><br/>
+<img src="../images/jaeger-search-boards.png" width="400"><br/>
 *Search for Traces to Boards Service*
 
 <br>
@@ -67,7 +67,7 @@ It should look like this:
 Click the 'Find Traces' button and Jaeger should reload with traces to the Boards service.
 </blockquote>
 
-<img src="../images/jaeger-boards-traces.png" width="600"><br/>
+<img src="../images/jaeger-boards-traces.png" width="1024"><br/>
 *Traces to Boards Service*
 
 <br>

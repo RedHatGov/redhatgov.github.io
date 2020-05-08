@@ -97,11 +97,11 @@ The mesh dashboard should dynamically update.  It should look like this now:
 Notice the userprofile service has two different workloads: userprofile (version 1) and userprofile-2.  Calls to userprofile-2 are vastly slower.  You can further inspect the metrics associated with the service by selecting the service dashboard.
 
 <blockquote>
-<i class="fa fa-terminal"></i>
-Hover over the userprofile service FQDN and select it.
+<i class="fa fa-desktop"></i>
+In the Service column, hover over the userprofile FQDN and select it.
 </blockquote>
 
-It should look like this:
+That will take you to the service view, it looks like this:
 
 <img src="../images/grafana-istio-service.png" width="1024"><br/>
 *Grafana Istio Service Dashboard*
@@ -111,7 +111,7 @@ It should look like this:
 These are metrics specific to the user profile service.  Scroll down under 'Service Workloads' and you can see a breakdown of how the different workload versions differ for that service.
 
 <blockquote>
-<i class="fa fa-terminal"></i>
+<i class="fa fa-desktop"></i>
 Hover over the Incoming Request Duration by Source under 'Service Workloads'.
 </blockquote>
 

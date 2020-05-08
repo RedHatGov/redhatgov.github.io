@@ -14,26 +14,24 @@ Let's walk through a basic example of restricting service access via Authenticat
 We can lock down the service entirely and only let authenticated users access it.
 
 <blockquote>
-<i class="fa fa-terminal"></i> Apply a new authentication policy with the following command:
+<i class="fa fa-terminal"></i> Apply a new authentication policy and service entry with the following commands:
 </blockquote>
 
 ```
-sed "s|microservices-demo|$PROJECT_NAME|" ./istio-configuration/policy-boards-jwt.yaml | oc apply -f -
+ sed "s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|" ./istio-configuration/policy-boards-jwt.yaml | oc apply -f -
+ sed "s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|" ./istio-configuration/serviceentry-keycloak.yaml | oc apply -f -
 ```
 
-This specifies the requirements for traffic to the boards service to have a JWT with specific properties. It looks like this:
+
+The policy specifies the requirements for traffic to the boards service to have a JWT with specific properties. It looks like this:
 ```
 apiVersion: authentication.istio.io/v1alpha1
 kind: Policy
 metadata:
   name: boards-jwt
-  namespace: microservices-demo
 spec:
   targets:
   - name: boards
-  peers:
-  - mtls:
-      mode: STRICT
   origins:
   - jwt:
       issuer: "https://keycloak-sso-shared.apps.leonardo.nub3s.io/auth/realms/microservices-demo"
@@ -47,6 +45,11 @@ spec:
 <p>
 <i class="fa fa-info-circle"></i>
 We mentioned earlier that JWT shares identity info, the JWKS endpoint gives us keys to verify the data of the JWT is from our trusted source.
+</p>
+
+<p>
+<i class="fa fa-info-circle"></i>
+Don't worry about the service entry for now - we'll explain that in another lab.
 </p>
 
 <br>
@@ -107,27 +110,28 @@ spec:
   selector:
     matchLabels:
       app: boards
+      deploymentconfig: boards
   rules:
   - from:
     - source:
-      principals: ["*"]
+        requestPrincipals: ["*"]
     to:
     - operation:
-      methods: ["POST"]
-      paths: ["/shareditems/*"]
-      when:
-      - key: request.auth.claims[realm_access.roles]
-        values: ["cool-kids"]
+        methods: ["POST"]
+        paths: ["*/shareditems"]
+    when:
+    - key: request.auth.claims[realm_access_roles]
+      values: ["cool-kids"]
   - from:
     - source:
-      principals: ["*"]
+        requestPrincipals: ["*"]
     to:
     - operation:
-      methods: ["GET"]
-      when:
-      - key: request.auth.claims[scope]
+        methods: ["GET"]
+    when:
+    - key: request.auth.claims[scope]
       values: ["openid"]
- ```
+```
 
 An authorization policy includes a selector and a list of rules. The selector specifies the **target** that the policy applies to - in this case our boards microservice. While the rules specify **who** (from) is allowed to do **what** (to) under **which** (when) conditions - in this case any source can POST as long as they have the "cool-kids" role listed in their JWT payload. 
 
@@ -171,12 +175,16 @@ oc delete authorizationpolicy/boards-shared-lockdown
 ```
 
 ```
-oc delete policy/policy/boards-jwt
+oc delete policy/boards-jwt
+```
+
+```
+oc delete serviceentry/keycloak-egress
 ```
 
 
 ## How it Works
-Our app-ui microservice requests the JWT from the Keycloak SSO when a user logs in. If logged in, the JWT is always passed (in the request header) from the app-ui to any services it calls. All our services have Envoy sidecar proxies running and are seeing the traffic, including the JWT in app-ui request headers. So the configuration we applied is used to inform sidecar proxies to follow the policies we set. When we weren't logged in there was no JWT to pass along so our call requests failed. Only after we were logged with as a valid user did we pass along a valid JWT. And each user's JWT was different, so the *when* conditions only matched for theterminator, allowing him able to POST to the shared board.
+Our app-ui microservice gets the JWT from the Keycloak SSO whenever a user logs in. If logged in, the JWT is always passed (in the request header) from the app-ui to any services it calls. All our services have Envoy sidecar proxies running and are seeing the traffic, including the JWT in app-ui request headers. So the configuration we applied is used to inform sidecar proxies to follow the policies we set. When we weren't logged in there was no JWT to pass along so our call requests failed. Only after we were logged in with as a valid user did we pass along a valid JWT. And each user's JWT was different, so the *when* conditions only matched for theterminator, allowing him able to POST to the shared board.
 
 If you have the time and want to dig deeper, you should read more about [configuring Keycloak][4] and about [JWTs][3].
 
@@ -188,6 +196,10 @@ Check out high-level diagrams of the flows we executed below:
 <br>
 *Success Case*
 <img src="../images/architecture-jwtsuccess.png" width="800" class="architecture"><br/>
+<p><i class="fa fa-info-circle"></i>
+Note: these diagrams have been simplified for discussion purposes
+</p>
+
 
 ## Authorization Policy Summary
 * Authorization via dynamically configurable policy
