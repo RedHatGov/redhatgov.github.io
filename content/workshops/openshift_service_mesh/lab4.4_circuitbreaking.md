@@ -1,5 +1,5 @@
 ---
-title: Circuit Breaking
+title: Traffic Control - Circuit Breaking
 workshops: openshift_service_mesh
 workshop_weight: 44
 layout: lab
@@ -16,15 +16,6 @@ This concept is called Circuit Breaking - you set threshold limits for instances
 In Istio, you can define circuit breaking limits using destination rules.
 
 ## Define Threshold Limits
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
 
 A circuit breaking rule has already been written for you for the user profile service.
 
@@ -94,7 +85,7 @@ In another tab in terminal, kill the server running version 3 of the user profil
 </blockquote>
 
 ```
-USERPROFILE_POD=$(oc get pod -l deploymentconfig=userprofile,version=3.0 -o jsonpath='{.items[0].metadata.name}{"\n"}')
+USERPROFILE_POD=$(oc get pod -l deploymentconfig=userprofile,version=3.0 -o jsonpath='{.items[0].metadata.name}')
 oc exec $USERPROFILE_POD -- kill 1
 ```
 
@@ -124,6 +115,18 @@ OpenShift will attempt to revive the server once the health check fails.  If you
 
 <br>
 
+## Clean up
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Revert the changes you made before ending this lab.
+</blockquote>
+
+```
+oc apply -f ./istio-configuration/destinationrules-all.yaml
+```
+
+<br>
 
 ## Summary
 

@@ -1,5 +1,5 @@
 ---
-title: mTLS
+title: Security - mTLS
 workshops: openshift_service_mesh
 workshop_weight: 51
 layout: lab
@@ -13,12 +13,14 @@ Imagine a scenario where you are deploying a microservices application and are e
 ## Current State of No Encryption
 Currently, the services you deployed in earlier labs are secured from access by the outside world by standard OpenShift networking/routing. Essentially, there is no ingress route to most services (as it's controlled via the ingress gateway). However, a rogue pod running in the project could snoop on our data and it could even make direct HTTP requests to other services. 
 
+<p><i class="fa fa-info-circle"></i> Make sure to add some items to the shared board if you haven't already done so. </p>
+
 <blockquote>
 <i class="fa fa-terminal"></i> let's launch a job using the CLI with to show that:
 </blockquote>
 
 ```
-oc run curl-boards-1 --attach --restart=Never --image=appropriate/curl --timeout=10s -- boards:8080/shareditems
+oc run curl-boards-1 -i --restart=Never --image=appropriate/curl --timeout=10s -- boards:8080/shareditems
 ```
 
 This job executes a direct HTTP curl request for the current shared boards list. It'll print out something similar to this:
@@ -48,6 +50,7 @@ This job executes a direct HTTP curl request for the current shared boards list.
 100   423  100   423    0     0  23500      0 --:--:-- --:--:-- --:--:-- 23500
 ]
 ```
+
 <br>
 
 ## Adding mTLS to Our Existing Services
@@ -93,6 +96,14 @@ spec:
 ```
 
 <blockquote>
+<i class="fa fa-terminal"></i> Remove existing destination rules:
+</blockquote>
+```
+oc delete dr --all
+```
+<br>
+
+<blockquote>
 <i class="fa fa-terminal"></i> Apply it with the following command:
 </blockquote>
 ```
@@ -109,5 +120,8 @@ So now that the policy is applied, all our service-to-service (aka peer) communi
 Everything should look just the same as before - the extra security is happening behind the scenes.
 
 <img src="../images/app-boardslist.png" width="1024" class="screenshot"><br/>
+
+<br>
+Next we will verify the mTLS that we just enabled.
 
 {{< importPartial "footer/footer.html" >}}

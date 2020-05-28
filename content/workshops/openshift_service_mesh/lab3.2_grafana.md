@@ -1,5 +1,5 @@
 ---
-title: Grafana
+title: Observability - Grafana
 workshops: openshift_service_mesh
 workshop_weight: 32
 layout: lab
@@ -19,9 +19,10 @@ Open the Grafana console.  Retrieve the endpoint for Grafana:
 </blockquote>
 
 ```
-GRAFANA_CONSOLE=https://$(oc get routes grafana -n istio-system -o jsonpath='{.spec.host}{"\n"}')
+GRAFANA_CONSOLE=$(oc get route grafana -n istio-system --template='https://{{.spec.host}}')
 echo $GRAFANA_CONSOLE
 ```
+<p><i class="fa fa-info-circle"></i> Click 'Allow selected permissions' if prompted to authorized access.</p>
 
 <blockquote>
 <i class="fa fa-desktop"></i>
@@ -82,7 +83,7 @@ Open another tab in the terminal. Send load to the user profile service:
 </blockquote>
 
 ```
-GATEWAY_URL=$(oc get route istio-demogateway -o jsonpath='{.spec.host}')
+GATEWAY_URL=$(oc get route istio-demogateway-$(oc project -q) --template='http://{{.spec.host}}')
 while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 ```
 
@@ -96,11 +97,11 @@ The mesh dashboard should dynamically update.  It should look like this now:
 Notice the userprofile service has two different workloads: userprofile (version 1) and userprofile-2.  Calls to userprofile-2 are vastly slower.  You can further inspect the metrics associated with the service by selecting the service dashboard.
 
 <blockquote>
-<i class="fa fa-terminal"></i>
-Hover over the userprofile service FQDN and select it.
+<i class="fa fa-desktop"></i>
+In the Service column, hover over the userprofile FQDN and select it.
 </blockquote>
 
-It should look like this:
+That will take you to the service view, it looks like this:
 
 <img src="../images/grafana-istio-service.png" width="1024"><br/>
 *Grafana Istio Service Dashboard*
@@ -110,7 +111,7 @@ It should look like this:
 These are metrics specific to the user profile service.  Scroll down under 'Service Workloads' and you can see a breakdown of how the different workload versions differ for that service.
 
 <blockquote>
-<i class="fa fa-terminal"></i>
+<i class="fa fa-desktop"></i>
 Hover over the Incoming Request Duration by Source under 'Service Workloads'.
 </blockquote>
 
@@ -124,6 +125,7 @@ It should look like this:
 This provides a visual representation of the latencies we saw on the Mesh Dashboard, and it is clear that the version 2 latencies are much higher.
 
 <br>
+
 
 [1]: https://grafana.com
 

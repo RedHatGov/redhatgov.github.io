@@ -1,5 +1,5 @@
 ---
-title: Routing Traffic
+title: Traffic Control - Routing Traffic
 workshops: openshift_service_mesh
 workshop_weight: 41
 layout: lab
@@ -19,15 +19,6 @@ Traffic routing rules have been constructed for you already.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
-
-<blockquote>
-<i class="fa fa-terminal"></i>
 View the destination rules in your favorite editor or via bash:
 </blockquote>
 
@@ -44,9 +35,6 @@ metadata:
   name: userprofile
 spec:
   host: userprofile
-  trafficPolicy:
-    tls:
-      mode: ISTIO_MUTUAL
   subsets:
   	- name: v1
   	  labels:
@@ -134,13 +122,14 @@ Verify the virtual services:
 oc get vs
 ```
 
-Output:
+Output (sample):
 ```
 NAME                     GATEWAYS                       HOSTS                      AGE
 app-ui                                                  [app-ui]                   25m
-app-ui-gateway           [microservices-demo-ingressgateway]   [*]                        31m
 boards                                                  [boards]                   25m
 boards-mongodb                                          [boards-mongodb]           25m
+context-scraper                                         [context-scraper]          25m
+demogateway-userX        [demogateway-userX]            [*]                        44m
 userprofile                                             [userprofile]              25m
 userprofile-postgresql                                  [userprofile-postgresql]   25m
 ```

@@ -1,5 +1,5 @@
 ---
-title: Kiali
+title: Observability - Kiali
 workshops: openshift_service_mesh
 workshop_weight: 23
 layout: lab
@@ -42,7 +42,7 @@ Now let's open the Kiali console.  Retrieve the endpoint for Kiali:
 
 
 ```
-KIALI_CONSOLE=https://$(oc get routes kiali -n istio-system -o jsonpath='{.spec.host}{"\n"}')
+KIALI_CONSOLE=$(oc get route kiali -n istio-system --template='https://{{.spec.host}}')
 echo $KIALI_CONSOLE
 ```
 
@@ -69,9 +69,13 @@ Let's take a look at the service mesh topology.
 
 <blockquote>
 <i class="fa fa-desktop"></i>
-Navigate to 'Graph' in the left navigation bar.  Change the window of the view on the right side from 'Last 1m' to 'Last 10m'.
+Navigate to 'Graph' in the left navigation bar and select your namespace (e.g. user1).
 </blockquote>
 
+<blockquote>
+<i class="fa fa-desktop"></i>
+Now change the window of the view on the right side from 'Last 1m' to 'Last 10m'.
+</blockquote>
 
 <img src="../images/kiali-graph.png" width="1024"><br/>
 *Kiali Graph*

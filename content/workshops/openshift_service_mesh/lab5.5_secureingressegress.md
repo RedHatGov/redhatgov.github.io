@@ -1,23 +1,23 @@
 ---
-title: Securing Ingress and Egress
+title: Security - Securing Ingress and Egress
 workshops: openshift_service_mesh
-workshop_weight: 54
+workshop_weight: 55
 layout: lab
 ---
 
 # Securing Ingress and Egress
 In cases where strict security is required we need to configure specifics around securing ingress and egress traffic. Security around egress is often used to lock down and deny access to potentially harmful resources outside the network. Additionally, it is a good practice to prevent malicious activities from originating from the cluster.
 
-You are probably already familiar with basic ingress security concepts. Essentially, only exposing particular services to be accessible from outside the cluster and using basic TLS/SSL. The service mesh has an ingress router (a standalone Envoy) running by default and we already configured it during the "Deploy MSA" lab.
+You are probably already familiar with basic ingress security concepts. Essentially, only exposing particular services to be accessible from outside the cluster and using basic TLS/SSL. The service mesh has an ingress router (a standalone Envoy) running by default and we already configured it during the "Deploying an App into the Service Mesh" lab.
 
-An even better way to lockdown inbound traffic for our demo application is to leverage API management in front of all the API services. We can do this with a service mesh plugin for 3scale. We aren't going to walk through it today with hands-on steps. But if that's something that interest you, we can discuss and you can [read more about that here][7] [and here][8].
+An even better way to track/lockdown inbound traffic for our microservices is to leverage API management in front of all the API services. We could do this with a service mesh plugin for 3scale. We aren't going to walk through it today - if that's something that interest you, [read more about that here][7] [and here][8].
 
 For now let's lockdown egress.
 
 ## Lock Down Egress
 In this example we are going to restrict access to external endpoints to only approved hosts. The service mesh has an egress router (a standalone Envoy) running by default and we just need to configure it.
 
-istio-system has a config map called `istio` which controls the default for egress security. It looks like this:
+The `ServiceMeshControlPlane` custom resource we used to install Istio has a `global` config which allows control of the defaults for egress security. That looks like this:
 
 ```
 # Set the default behavior of the sidecar for handling outbound traffic from the application:
@@ -26,63 +26,76 @@ istio-system has a config map called `istio` which controls the default for egre
 # REGISTRY_ONLY - restrict outbound traffic to services defined in the service registry as well
 #   as those defined through ServiceEntries  
 outboundTrafficPolicy:
-  mode: ALLOW_ANY
+  mode: REGISTRY_ONLY
 ```
 
-The mesh your using in this workshop should already have the mode set to `REGISTRY_ONLY`. Let's verify that:
+The mesh you're using in this workshop should already have the mode set to `REGISTRY_ONLY`. Let's verify that in the auto-generated config map:
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Run this command and look for outboundTrafficPolicy
+</blockquote>
+
+```
+oc describe cm/istio -n istio-system
+```
 
 <br>
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Run this command to scrape some data:
+Now let's verify it's working - Run this command to scrape some data:
 </blockquote>
 
 ```
-oc run curl-scraper-1 --attach --restart=Never --image=appropriate/curl --timeout=30s -- -v context-scraper:8080/scrape/custom_search?term==skynet
+oc run curl-scraper-1 -i --restart=Never --image=appropriate/curl --timeout=30s -- -v context-scraper:8080/scrape/custom_search?term==skynet
 ```
 
-We should get an output similar to the one below:
+We should get an output similar to the one below, with error of ECONNRESET:
 
 ```
-custom_search?term==skynet
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 172.30.103.7...
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 172.30.83.172...
 * TCP_NODELAY set
-* Connected to context-scraper (172.30.103.7) port 8080 (#0)
+* Connected to context-scraper (172.30.83.172) port 8080 (#0)
 > GET /scrape/custom_search?term==skynet HTTP/1.1
 > Host: context-scraper:8080
 > User-Agent: curl/7.59.0
 > Accept: */*
 >
-{"oops":{"name":"RequestError","message":"Error: socket hang up","cause":{"code":"ECONNRESET","path":null,"host":"www.googleapis.com","port":443},"error":{"code":"ECONNRESET","path":null,"host":"www.googleapis.com","port":443},"options":{"method":"GET","uri":"https://www.googleapis.com/customsearch/v1/siterestrict","qs":{"key":"AIzaSyDRdgirA2Pakl4PMi7t-8LFfnnjEFHnbY4","cx":"005627457786250373845:lwanzyzfwji","q":"=skynet"},"headers":{"user-agent":"curl/7.59.0","x-request-id":"64097d86-aaa3-967a-8e9e-e1dca378b874","x-b3-traceid":"d438e87ee482372d4a798909639c2f09","x-b3-spanid":"4a798909639c2f09","x-b3-sampled":"1"},"json":true,"simple":true,"resolveWithFullResponse":false,"transform2xxOnly":false}}}< HTTP/1.1 500 Internal Server Error
+< HTTP/1.1 500 Internal Server Error
 < x-powered-by: Express
 < access-control-allow-origin: *
 < content-type: application/json; charset=utf-8
-< content-length: 707
-< etag: W/"2c3-ewRbpkhv52n41xqIO9XxOuoG+9c"
-< date: Thu, 12 Mar 2020 17:14:35 GMT
-< x-envoy-upstream-service-time: 23
+< content-length: 682
+< etag: W/"2aa-5GVBTSjlqUqotSZU1yZmOHgTWC0"
+< date: Thu, 07 May 2020 23:02:45 GMT
+< x-envoy-upstream-service-time: 36
 < server: istio-envoy
-< x-envoy-decorator-operation: context-scraper.workshop-t2.svc.cluster.local:8080/*
+< x-envoy-decorator-operation: context-scraper.user3.svc.cluster.local:8080/*
 <
-{ [707 bytes data]
-100   707  100   707    0     0  21424      0 --:--:-- --:--:-- --:--:-- 21424
+{ [682 bytes data]
+100   682  100   682    0     0  16634      0 --:--:-- --:--:-- --:--:-- 16634
 * Connection #0 to host context-scraper left intact
+{"oops":{"name":"RequestError","message":"Error: read ECONNRESET","cause":{"errno":"ECONNRESET","code":"ECONNRESET","syscall":"read"},"error":{"errno":"ECONNRESET","code":"ECONNRESET","syscall":"read"},"options":{"method":"GET","uri":"https://www.googleapis.com/customsearch/v1/siterestrict","qs":{"key":"AIzaSyDRdgirA2Pakl4PMi7t-8LFfnnjEFHnbY4","cx":"005627457786250373845:lwanzyzfwji","q":"=skynet"},"headers":{"user-agent":"curl/7.59.0","x-request-id":"d78cf7b9-0010-9ecf-b520-f3d6a83376a0","x-b3-traceid":"21b58b1725b20a81f914496d9a55455d","x-b3-spanid":"f914496d9a55455d","x-b3-sampled":"1"},"json":true,"simple":true,"resolveWithFullResponse":false,"transform2xxOnly":false}}}
 ```
 
-Which is curl timing out and failing.
+Which is curl (running in a pod in our project) trying to talk to the context-scraper microservice (in the mesh). You can see from the error details that the service is trying to get out to googleapis.com but fails.
 
-<p>
-<i class="fa fa-info-circle"></i>
-If you have admin access you can also run `oc describe cm/istio -n istio-system` to see your policy on egress
-</p>
+<br>
+
+<blockquote>
+<i class="fa fa-desktop"></i>
+(Optional) If you were to look at Kiali now you'd see the request going to a blackhole:
+</blockquote>
+
+<img src="../images/kiali-egress-blackhole.png" width="1024" class="screenshot"><br/>
 
 <br>
 
 ## Allow Egress to Approved Hosts
-Now we will be using a core API object of type [ServiceEntry] to do allow controlled egress. After you add the ServiceEntry, the Envoy proxies can send traffic to the external service as if it was a service in your mesh.
+Now we will be using an Istio API object of type [ServiceEntry][5] to allow controlled egress. After you add this ServiceEntry, our microservices (via their Envoy sidecars) can send traffic to the specified external service as if it was a service in your mesh.
 
 Our ServiceEntry looks like this:
 ```
@@ -109,7 +122,7 @@ Apply it with the following command:
 </blockquote>
 
 ```
-oc apply -f ./oc apply -f ./istio-configuration/serviceentry-googleapis.yaml
+oc apply -f ./istio-configuration/serviceentry-googleapis.yaml
 ```
 
 <br>
@@ -120,7 +133,7 @@ Run a new curl job to try scrape some data again:
 </blockquote>
 
 ```
-oc run curl-scraper-2 --attach --restart=Never --image=appropriate/curl --timeout=30s -- context-scraper:8080/scrape/custom_search?term==skynet
+oc run curl-scraper-2 -i --restart=Never --image=appropriate/curl --timeout=30s -- context-scraper:8080/scrape/custom_search?term==skynet
 ```
 
 
@@ -143,9 +156,8 @@ And Kiali tracks this ServiceEntry too, let's look at the graph to see how thing
 
 <blockquote>
 <i class="fa fa-desktop"></i>
-Open up the dashboard to Kiali (if you don't already have it open) and navigate to the Graph view.
+(Optional) And now, if your were to open the graph view of Kiali you'd see the external service represented
 <br>
-In the first drop down select the "App graph" and in the graph view double click on the context-scraper app.
 </blockquote>
 
 <img src="../images/kiali-egress.png" width="1024" class="screenshot"><br/>

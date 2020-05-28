@@ -1,11 +1,11 @@
 ---
-title: Installing Istio
+title: Setup
 workshops: openshift_service_mesh
 workshop_weight: 12
 layout: lab
 ---
 
-# Installing Istio - the Easy Button
+# Setup
 
 You will conduct these labs in an OpenShift cluster.  First, test you have access to your cluster via console and CLI.
 
@@ -41,28 +41,76 @@ For example:
 oc login https://api.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443 --insecure-skip-tls-verify=true
 ```
 
+<br>
+
+The instructor will have preconfigured your projects for you.
+
 <blockquote>
-<i class="fa fa-terminal"></i> Check the status of the cluster:
+<i class="fa fa-terminal"></i> List your projects:
 </blockquote>
 
 ```
-oc status
+oc projects
 ```
 
-You should see two services running 'svc/openshift' and 'svc/kubernetes'.
+You should see two projects: your user project (e.g. 'userX') and 'istio-system'.  
+
+<br>
+
+<blockquote>
+<i class="fa fa-terminal"></i> Switch to your user project.  For example:
+</blockquote>
+
+```
+oc project userX
+```
+
+<br>
+
+Let's take a look at the project.
+
+<blockquote>
+<i class="fa fa-terminal"></i> List the pods in the project:
+</blockquote>
+
+```
+oc get pods
+```
+
+Output (sample):
+
+```
+NAME                                       READY   STATUS    RESTARTS   AGE
+istio-demogateway-user1-xxxxxxxxxx-xxxxx   1/1     Running   0          2m41s
+keycloak-operator-xxxxxxxxx-xxxxx          1/1     Running   0          15h
+```
+
+The gateway is a load balancer dedicated to your project.  You will configure this load balancer in the next lab.  The keycloak operator will be used in the security labs.
+
+<br>
+
+Finally, set the project name variable.
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Run this command:
+</blockquote>
+
+```
+PROJECT_NAME=$(oc project -q)
+```
 
 <br>
 
 ## Application Code
-Next we need a local copy of our application code.  The application code includes the resources to install Istio.
+Next we need a local copy of our application code.
 
 <blockquote>
-<i class="fa fa-terminal"></i> Clone the repository in your home directory:
+<i class="fa fa-terminal"></i> Clone the repository:
 </blockquote>
 
 ```
-cd $HOME
-git clone https://github.com/dudash/openshift-microservices.git
+git clone https://github.com/RedHatGov/openshift-microservices.git
 ```
 
 <blockquote>
@@ -70,88 +118,22 @@ git clone https://github.com/dudash/openshift-microservices.git
 </blockquote>
 
 ```
-cd $HOME/openshift-microservices
-git checkout workshop-stable
+cd openshift-microservices && git checkout workshop-stable
+```
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Navigate to the workshop directory:
+</blockquote>
+
+```
+cd deployment/workshop
 ```
 
 <br>
 
 ## Istio
-Let's install Istio in our cluster. 
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the directory for installing Istio:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/install/istio
-```
-
-Start by installing the Istio [Operator][1].  The operator is used to install and manage Istio in the cluster.
-
-<br>
-
-<blockquote>
-<i class="fa fa-terminal"></i>Run the following command:
-</blockquote>
-
-```
-oc apply -f ./istio-operator.yaml
-```
-
-<br>
-
-<blockquote>
-<i class="fa fa-terminal"></i> Use oc to watch the operator installation:
-</blockquote>
-
-```
-oc get pods -n openshift-operators -l name=istio-operator --watch
-```
-
-The Istio operator should be in a running state.  For example:
-```
-istio-operator-xxxxxxxxx-xxxxx   1/1   Running   0     17s
-```
-
-Once the operator is running, install the Istio control plane in its own namespace 'istio-system':
-
-<br>
-
-<blockquote>
-<i class="fa fa-terminal"></i>Run the following 2 commands:
-</blockquote>
-
-```
-oc new-project istio-system
-```
-```
-oc create -n istio-system -f ./istio-resources.yaml
-```
-
-<br>
-
-<blockquote>
-<i class="fa fa-terminal"></i>Watch the control plane installation:
-</blockquote>
-
-```
-oc get servicemeshcontrolplane/istio-demo -n istio-system --template='{{range .status.conditions}}{{printf "%s=%s, reason=%s, message=%s\n\n" .type .status .reason .message}}{{end}}' --watch
-```
-
-Wait a couple of minutes.  The installation should complete.  For example:
-
-```
-Installed=True, reason=InstallSuccessful, message=Successfully installed all mesh components
-
-Reconciled=True, reason=InstallSuccessful, message=Successfully installed version 1.0.6-1.el8-1
-
-Ready=True, reason=ComponentsReady, message=All component deployments are Available
-
-```
-
-<br>
+Istio should have been installed in the cluster by the instructor.  Let's make sure Istio is running in the cluster.  You will only have view access to the Istio project.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -180,100 +162,11 @@ kiali-xxxxxxxxx-xxxxx                    1/1     Running   0          16m
 prometheus-xxxxxxxxx-xxxxx               2/2     Running   0          19m
 ```
 
-The primary control plane components are [Pilot][2], [Mixer][3], and [Citadel][4].  Pilot handles traffic management.  Mixer handles policy and telemetry.  Citadel handles security.
+The primary control plane components are [Pilot][1], [Mixer][2], and [Citadel][3].  Pilot handles traffic management.  Mixer handles policy and telemetry.  Citadel handles security.
 
-<br>
-
-## Setup Projects
-
-{{< panel_group >}}
-{{% panel "Run these steps if you are an instructor setting up a workshop class" %}}
-
-As the instructor, you will create projects for users (identified as users1...x).  You also need to grant each user view access to the Istio namespace 'istio-system'. 
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Run the following:
-</blockquote>
-
-```
-NUM_USERS=<enter number of users>
-```
-
-```
-for (( i=1 ; i<=$NUM_USERS ; i++ ))
-do 
-  oc new-project user$i --as=user$i \
-    --as-group=system:authenticated --as-group=system:authenticated:oauth
-  oc adm policy add-role-to-user view user$i -n istio-system
-done
-```
-
-<br>
-
-Next, add projects to the service mesh using a Member Roll resource.  If you do not add the projects to the mesh, the users' microservices will not be added to the service mesh.
-
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Add projects to the mesh.  Adjust the number of user projects if needed:
-</blockquote>
-
-```
-oc apply -f - <<EOF
-apiVersion: maistra.io/v1
-kind: ServiceMeshMemberRoll
-metadata:
-  name: default
-  namespace: istio-system
-spec:
-  members:
-    - user1
-    - user2
-    - user3
-    - user4
-    - user5
-    - user6
-    - user7
-    - user8
-    - user9
-    - user10
-    - user11
-    - user12
-    - user13
-    - user14
-    - user15
-    - user16
-    - user17
-    - user18
-    - user19
-    - user20
-EOF
-```
-{{% /panel %}}
-{{< /panel_group >}}
-
-<br>
-
-## Summary
-
-Congratulations, you installed Istio!  
-
-A few key highlights are:
-
-* The Istio control plane can be installed in OpenShift using the Service Mesh Operator
-* The primary control plane components are Pilot, Mixer, and Citadel
-* Projects must be added to the service mesh via the [Member Roll][6] resource
-
-If you want to learn more about Istio's architecture, the best place to start is the [Istio documentation][7].
-
-[1]: https://www.openshift.com/learn/topics/operators
-[2]: https://istio.io/docs/concepts/traffic-management/
-[3]: https://istio.io/docs/concepts/observability/
-[4]: https://istio.io/docs/concepts/security/
-[5]: https://maistra.io/docs/installation/installation-options/
-[6]: https://docs.openshift.com/container-platform/4.1/service_mesh/service_mesh_install/installing-ossm.html#ossm-member-roll_installing-ossm
-[7]: https://istio.io/docs/ops/deployment/architecture/
+[1]: https://istio.io/docs/concepts/traffic-management/
+[2]: https://istio.io/docs/concepts/observability/
+[3]: https://istio.io/docs/concepts/security/
 
 
 {{< importPartial "footer/footer.html" >}}

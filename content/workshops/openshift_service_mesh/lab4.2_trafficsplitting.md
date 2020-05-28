@@ -1,5 +1,5 @@
 ---
-title: Traffic Splitting
+title: Traffic Control - Traffic Splitting
 workshops: openshift_service_mesh
 workshop_weight: 42
 layout: lab
@@ -11,16 +11,7 @@ It's time to fix the performance issue of the application.  Previously, you depl
 
 ## Feature Fix
 
-The code to fix the performance issue of the user profile service has already been written for you on the 'workshop_feature_fix' branch.  
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
+The code to fix the performance issue of the user profile service has already been written for you on the 'workshop-feature-fix' branch.  
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -30,8 +21,8 @@ Create a new build on this feature branch:
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
-  -p APPLICATION_CODE_URI=https://github.com/theckang/openshift-microservices.git \
-  -p APPLICATION_CODE_BRANCH=workshop_feature_fix \
+  -p APPLICATION_CODE_URI=https://github.com/RedHatGov/openshift-microservices.git \
+  -p APPLICATION_CODE_BRANCH=workshop-feature-fix \
   -p APP_VERSION_TAG=3.0
 ```
 
@@ -107,7 +98,7 @@ Grab a reference to the local image:
 </blockquote>
 
 ```
-USER_PROFILE_IMAGE_URI=$(oc get is userprofile -o jsonpath='{.status.dockerImageRepository}{"\n"}')
+USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template='{{.status.dockerImageRepository}}')
 echo $USER_PROFILE_IMAGE_URI
 ```
 
@@ -146,15 +137,6 @@ userprofile-xxxxxxxxxx-xxxxx                2/2     Running        0          22
 <br>
 
 ## Traffic Routing
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
 
 Let's start with a [Canary Release][1] of the new version of the user profile service.  You'll route 90% of user traffic to version 1 and route 10% of traffic to the latest version.
 
@@ -198,7 +180,7 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-90-10.yaml
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Send load continuously to the user profile service:
+If you aren't already (from the Grafana lab) - send load continuously to the user profile service:
 </blockquote>
 
 ```
@@ -235,6 +217,7 @@ By doing this, you can isolate the new user profile experience for a small subse
 
 Once you are comfortable with the change, you can increase the traffic load to the latest version.
 
+
 <blockquote>
 <i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
@@ -262,7 +245,7 @@ Output (snippet):
 ...
 ```
 
-In this example, you will route traffic evenly between the two versions.  This is commonly known as a [Blue-Green Deployment][2].
+In this example, you will route traffic evenly between the two versions. This is a technique that could be used for advanced deployments, for example A/B testing.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -275,7 +258,7 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Send load to the user profile service:
+If you aren't already - send load to the user profile service:
 </blockquote>
 
 ```
@@ -337,7 +320,7 @@ oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Send load to the user profile service:
+If you aren't already - Send load to the user profile service:
 </blockquote>
 
 ```
@@ -361,6 +344,25 @@ You should see traffic routed to v3 of the user profile service.
 
 <img src="../images/kiali-userprofile-v3.png" width="1024"><br/>
 *Kiali Graph with v3 Routing*
+
+<br>
+
+Let's test this version of the profile service in the browser.
+
+<blockquote>
+<i class="fa fa-desktop"></i>
+Navigate to the 'Profile' section in the header.  
+</blockquote>
+
+<p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
+`echo $GATEWAY_URL`
+
+<br>
+
+You should see the following:
+
+<img src="../images/app-profilepage-v3.png" width="1024"><br/>
+ *Profile Page*
 
 <br>
 

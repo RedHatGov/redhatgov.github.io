@@ -1,5 +1,5 @@
 ---
-title: Feature Update
+title: Observability - Feature Update
 workshops: openshift_service_mesh
 workshop_weight: 31
 layout: lab
@@ -11,43 +11,7 @@ Istio provides additional capabilities to analyze the service mesh and its perfo
 
 ## Feature Update
 
-The profile page returns basic information about the user.  Let's add a feature update to show a profile photo on the profile page.
-
-The code has already been written for you on the 'workshop_feature_update' branch of the repo.
-
-<blockquote>
-<i class="fa fa-desktop"></i>
-Navigate to the URL via your browser:
-</blockquote>
-
-```
-https://github.com/theckang/openshift-microservices/blob/workshop_feature_update/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
-```
-
-Output (snippet):
-```
-...
-    /**
-     * return the photo information for a specific profile
-     * @param id
-     * @return
-     */
-    UserProfilePhoto getUserProfilePhoto(@NotBlank String id);
-...
-```
-
-The interface also includes a method for getting the user profile's photo, which has been implemented for you.
-
-## Build and Deploy
-
-<blockquote>
-<i class="fa fa-terminal"></i>
-Navigate to the workshop directory:
-</blockquote>
-
-```
-cd $HOME/openshift-microservices/deployment/workshop
-```
+The code has already been written for you on the 'workshop-feature-update' branch of the repo.
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -57,13 +21,14 @@ Create a new build on this feature branch:
 ```
 oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
-  -p APPLICATION_CODE_URI=https://github.com/theckang/openshift-microservices.git \
-  -p APPLICATION_CODE_BRANCH=workshop_feature_update \
+  -p APPLICATION_CODE_URI=https://github.com/RedHatGov/openshift-microservices.git \
+  -p APPLICATION_CODE_BRANCH=workshop-feature-update \
   -p APP_VERSION_TAG=2.0
 ```
 
 <p><i class="fa fa-info-circle"></i> Ignore the failure since the imagestream already exists.</p>
 
+<br>
 
 <blockquote>
 <i class="fa fa-terminal"></i>
@@ -137,7 +102,7 @@ Grab a reference to the local image:
 </blockquote>
 
 ```
-USER_PROFILE_IMAGE_URI=$(oc get is userprofile -o jsonpath='{.status.dockerImageRepository}{"\n"}')
+USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template='{{.status.dockerImageRepository}}')
 echo $USER_PROFILE_IMAGE_URI
 ```
 
@@ -178,7 +143,7 @@ userprofile-xxxxxxxxxx-xxxxx              2/2     Running        0          2m55
 
 ## Access Application
 
-Let's test the new version of our profile service in the browser.
+Let's test the new version of our profile service in the browser (spoiler: you added a bug).
 
 <blockquote>
 <i class="fa fa-desktop"></i>
@@ -190,7 +155,13 @@ Navigate to the 'Profile' section in the header.
 
 <br>
 
-The profile page will round robin between versions 1 and 2.  Refresh a couple of times, and you'll notice that sometimes the page loads really slowly.  Let's use Istio to debug the problem.
+The profile page will round robin between versions 1 and 2.  Version 2 loads really slowly and looks like this:
+
+<img src="../images/app-profilepage-v2.png" width="1024"><br/>
+ *Profile Page*
+
+
+## Next, we will use the Service Mesh to debug the problem.
 
 <br>
 

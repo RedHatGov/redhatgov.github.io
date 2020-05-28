@@ -1,5 +1,5 @@
 ---
-title: Verifying mTLS
+title: Security - Verifying mTLS
 workshops: openshift_service_mesh
 workshop_weight: 52
 layout: lab
@@ -38,7 +38,7 @@ OK, let's try to run that same command again to snoop on traffic. Run the follow
 </blockquote>
 
 ```
-oc run curl-boards-2 --attach --restart=Never --image=appropriate/curl --timeout=10s -- boards:8080/shareditems
+oc run curl-boards-2 -i --restart=Never --image=appropriate/curl --timeout=10s -- boards:8080/shareditems
 ```
 
 You should get an output indicating that the job failed to pull data. This is because the traffic didn't come from a verifiable service known to the mesh and wasn't able to do a secure mTLS token handshake. Your output should look like this:
@@ -60,6 +60,7 @@ Type the following in the CLI
 
 ```
 oc delete policy/default
+oc delete dr --all
 ```
 
 
