@@ -84,6 +84,9 @@ View your gogs pod and click select the route (https://gogs...) to log into your
 
 Use the user name and password given to you by your instructor.
 
+Default Username: gogs
+Default Password: gogs
+
 <img src="../images/gogs_route.png" width="900"><br/>
 
 View the source of the openshift-tasks project in your gogs server.  
