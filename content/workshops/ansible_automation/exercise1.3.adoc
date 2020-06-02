@@ -102,7 +102,7 @@ Explanation of the *install httpd packages* task actions. +
 - `vars:` You've told Ansible the next thing it sees will be a variable name +
 - `httpd_packages` You are defining a list-type variable called httpd_packages.  What follows
 is a list of those packages +
-- `{{ item }}` You are telling Ansible that this will expand into a list item like `httpd` and `mod_wsgi`. +
+- `{{ item }}` You are telling Ansible that this will expand into a list item like `httpd` and `python3-mod_wsgi`. +
 - `with_items: "{{ httpd_packages }}` This is your loop, which is instructing Ansible to perform this task on
 every `item` in `httpd_packages`
 - `notify: restart apache service` This statement is a `handler`, so we'll come back to it in Section 3.
@@ -220,7 +220,7 @@ looks the way you intended.  If not, now is the time to fix it up. The figure be
   vars:
     httpd_packages:
       - httpd
-      - mod_wsgi
+      - python3-mod_wsgi
     apache_test_message: This is a test message
     apache_webserver_port: 80
 
