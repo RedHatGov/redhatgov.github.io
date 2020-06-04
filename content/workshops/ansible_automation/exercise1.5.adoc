@@ -126,7 +126,7 @@ Add some role-specific variables to your role in `roles/apache-simple/vars/main.
 ----
 httpd_packages:
   - httpd
-  - mod_wsgi
+  - python3-mod_wsgi
 ----
 
 [NOTE]
