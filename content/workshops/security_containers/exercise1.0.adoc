@@ -115,6 +115,7 @@ image::containers1.png[Containers]
 === Step 4. Search For & Download Fedora
 
 Use the following commandline to search for and download Fedora.
+Type in "docker.io/fedora" in order to search the online Docker registry.
 
 [source,bash]
 ----
@@ -167,17 +168,12 @@ the system. +
 *Diagnostic report:* Collects system configuration and diagnostics information
 and prepares a report, in an XZ format. +
 *Terminal:* Opens a Terminal (command line) session to the Cockpit system.
-From there, you can run any commands available to the user you are logged in
-as. For example, as cockpit, you could run docker commands. +
+From there, you can run any commands available to the user you are logged in as. +
 
 [source,bash]
 ----
-Command:  sudo docker ps -a
+Command:  sudo ps -a
 ----
-
-image::terminal.png[Terminal]
-
-
 
 === Step 8. Delete the Container
 
