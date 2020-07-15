@@ -18,8 +18,8 @@ image::term.png[]
 Now that you've gotten a sense of software provenance in Dockerfiles lets take
 a look at the `USER` in `Dockerfiles`.
 
-By default docker containers run as root. A docker container running as root
-has full control of the host system. As docker matures, more secure default
+By default, containers run as root. A container running as root
+has full control of the host system. As container technology matures, more secure default
 options may become available. For now, requiring root is dangerous for others
 and may not be available in all environments. Your image should use the `USER`
 instruction to specify a *non-root* user for containers to run as. If your
@@ -101,7 +101,7 @@ When building an image, the build time is similar as before (approximately 3 min
 .Build the image
 [source,bash]
 ----
-sudo docker build -t user-test:1 .
+sudo buildah bud -t user-test:1
 ----
 
 === Step 4. Run and Test the image
@@ -111,7 +111,7 @@ Run and test the image to see who the container is running as. What do you see?
 .Run the image
 [source,bash]
 ----
-sudo docker run --rm -it user-test:1 whoami
+sudo podman run --rm -it user-test:1 whoami
 ----
 
 For more information on Containers and correct users to use here are a few good articles.

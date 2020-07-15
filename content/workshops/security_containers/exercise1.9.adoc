@@ -37,7 +37,7 @@ whole bunch of capabilities before running our containers, without causing the
 vast majority of containerized applications to fail.
 
 Most capabilities are required to manipulate the kernel/system, and these are
-used by the container framework (docker), but seldom used by the processes
+used by the container framework, but seldom used by the processes
 running inside the container. However, some containers require a few
 capabilities, for example a container process needs capabilities like
 setuid/setgid to drop privileges. As with most things in the container world,
@@ -56,7 +56,7 @@ idea from a security point of view.*
 
 === Step 1. View process capabilities
 
-So, how can we drop these capabilities using docker? First, let’s see what
+So, how can we drop these capabilities for containers? First, let’s see what
 capabilities a process has. There is a cool tool in Linux that can help you
 view what capabilities a process has called `pscap`, available in the
 `libcap-ng-utils` package on Fedora.
@@ -70,7 +70,7 @@ pscap | head -10
 .See processes of a normal container
 [source,bash]
 ----
-sudo docker run -d fedora sleep 5 >/dev/null; pscap | grep sleep
+sudo podman run -d fedora sleep 5 >/dev/null; pscap | grep sleep
 ----
 
 === Step 2. Drop specific capabilities (Blacklisting)
@@ -81,7 +81,7 @@ If I wanted to drop `setfcap`, `audit_write`, and `mknod`, I could use
 .Dropping setfcap, audit_write, mknod
 [source,bash]
 ----
-sudo docker run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod \
+sudo podman run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod \
 fedora sleep 5 > /dev/null; pscap | grep sleep
 ----
 
@@ -93,7 +93,7 @@ drop all capabilities and just add setgid and setuid back in.
 .Whitelisting Capabilities
 [source,bash]
 ----
-sudo docker run -d --cap-drop=all --cap-add=setuid --cap-add=setgid \
+sudo podman run -d --cap-drop=all --cap-add=setuid --cap-add=setgid \
 fedora sleep 5 > /dev/null; pscap | grep sleep
 ----
 
@@ -166,7 +166,7 @@ ignore directory sticky bit on file deletion;
 specify O_NOATIME for arbitrary files in open(2) and fcntl(2).
 This is similar to DAC_OVERRIDE, almost no applications need this other than,
 potentially, software installation tools. Most likely your container would run
-fine without this capability. You might need to allow this for a Docker build but it should be blocked when you run your container in production.
+fine without this capability. You might need to allow this for a container build but it should be blocked when you run your container in production.
 
 `*fsetid*`
 

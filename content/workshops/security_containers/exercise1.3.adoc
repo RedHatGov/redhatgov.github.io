@@ -39,7 +39,7 @@ To get a list of binaries with special permissions in a container image, the fol
 .Test the latest Debian image
 [source,bash]
 ----
-sudo docker run debian:jessie find / -perm +6000 -type f -exec ls -ld {} \; 2> /dev/null
+sudo podman run debian:jessie find / -perm +6000 -type f -exec ls -ld {} \; 2> /dev/null
 ----
 
 .Example output
@@ -108,7 +108,7 @@ Build the new image.
 .Build the image
 [source,bash]
 ----
-sudo docker build -t defanged-debian .
+sudo buildah bud -t defanged-debian
 ----
 
 === Step 5. Test the image
@@ -117,7 +117,7 @@ sudo docker build -t defanged-debian .
 
 [source,bash]
 ----
-sudo docker run --rm defanged-debian \
+sudo podman run --rm defanged-debian \
   find / -perm +6000 -type f -exec ls -ld {} \; 2> /dev/null | wc
 ----
 

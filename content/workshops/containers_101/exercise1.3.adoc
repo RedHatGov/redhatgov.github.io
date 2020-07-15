@@ -94,7 +94,7 @@ Now, we can open a shell inside of the running container, to poke around inside:
 
 [source, bash]
 ----
-podman exec -t fpg psql
+podman exec -it fpg psql
 ----
 
 
