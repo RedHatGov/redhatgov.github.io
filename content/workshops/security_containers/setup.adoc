@@ -1,35 +1,40 @@
 ---
-title: Setup
+title: "Setup"
 workshops: security_containers
 workshop_weight: 10
 layout: lab
 ---
 
+:badges:
 :icons: font
-:source-highlighter: highlight.js
 :imagesdir: /workshops/security_containers/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
 
 = Workshop Lab Setup
 
-image::container-lab.001.png['Red Hat', 1000]
+== What you will learn: Red Hat Web Console - Terminal
 
-== Introduction to Wetty (Browser-based SSH)
-
-This lab provides a quick tour of the browser based SSH client Wetty. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
+This lab provides a quick tour of the browser based Terminal via the Red Hat Web Console. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
 
 
-== Accessing Wetty
+== Accessing Red Hat Enterprise Linux Web Console (cockpit)
 
-Use this URL to access the Wetty node, just change the <workshop name> and <student number>.  Ask your instructor for these values once the workshop lab begins.
+Use this URL to access the Web Console node, just change the workshop name (if applicable). Ask your instructor for the workshop name.
 
 [source,bash]
 ----
-{{< uri2partfqdn "https://" ":8888" >}}
+{{< uri2partfqdn "https://" ":9090/system/terminal" >}}
 ----
+
+You will be presented with a login window.
+
+image::cockpit_login.png[caption="Figure 1: ", title='Web Console Login', 500]
 
 After logging in, you should see a shell.
 
-image::wetty.png[caption="Figure 1: ", title='wetty', 500]
+image::cockpit_terminal.png[caption="Figure 1: ", title='Web Console Terminal Tab', 500]
 
 
 [IMPORTANT]
@@ -38,5 +43,6 @@ Be sure you can log in to your instances.  If you can't log in start shouting, l
 
 == End Result
 
-At this point, everyone should have logged into your node.  If you haven't, let us know so we can get you fixed up.
+At this point, you should have logged into your node.  If you haven't, let us know so we can get you fixed up.
+
 {{< importPartial "footer/footer.html" >}}

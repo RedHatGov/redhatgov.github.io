@@ -16,11 +16,11 @@ layout: lab
 
 Secure Computing Mode (seccomp) is a kernel feature that enables you to filter system calls to the kernel from a container. The combination of restricted and allowed calls are arranged in profiles, and you can pass different profiles to different containers. Seccomp provides more fine-grained control than capabilities, giving an attacker a limited number of syscalls from the container. This exercise examines how seccomp works and how it can be employed to provide container security.
 
-The default seccomp profile for Docker is a JSON file and can be viewed here: https://github.com/docker/docker/blob/master/profiles/seccomp/default.json. It blocks 44 system calls out of more than 300 available. Making the list stricter would be a trade-off with application compatibility. A table with a significant part of the blocked calls and the reasoning for blocking can be found here: https://docs.docker.com/engine/security/seccomp/.
+The default seccomp profile for containers is a JSON file and can be viewed here: https://github.com/docker/docker/blob/master/profiles/seccomp/default.json. It blocks 44 system calls out of more than 300 available. Making the list stricter would be a trade-off with application compatibility. A table with a significant part of the blocked calls and the reasoning for blocking can be found here: https://docs.docker.com/engine/security/seccomp/.
 
 *Berkeley Packet Filter (BPF)*
 
-Seccomp uses the Berkeley Packet Filter (BPF) system, which is programmable on the fly so you can make a custom filter. You can also limit a certain syscall by also customizing the conditions on how or when it should be limited. A seccomp filter replaces the syscall with a pointer to a BPF program, which  executes that program instead of the syscall. All children to a process with this filter will inherit the filter as well. The Docker option used to operate with seccomp is `--security-opt`.
+Seccomp uses the Berkeley Packet Filter (BPF) system, which is programmable on the fly so you can make a custom filter. You can also limit a certain syscall by also customizing the conditions on how or when it should be limited. A seccomp filter replaces the syscall with a pointer to a BPF program, which  executes that program instead of the syscall. All children to a process with this filter will inherit the filter as well. The command line flag used to operate with seccomp is `--security-opt`.
 
 == Section 1: Defining seccomp policy
 
@@ -28,7 +28,7 @@ The following is an example of how to explicitly define the default seccomp poli
 
 [source,bash]
 ----
-sudo docker run --security-opt seccomp=/path/to/default/profile.json <container>
+sudo podman run --security-opt seccomp=/path/to/default/profile.json <container>
 ----
 
 === Step 1. Create the working directory
@@ -104,7 +104,7 @@ Lets apply these restrictions to a container by using the `--security-opt` flag 
 
 [source,bash]
 ----
-sudo docker run --rm -it --security-opt seccomp:1_chmod.json redhatgov/alpine chmod 400 /etc/hosts
+sudo podman run --rm -it --security-opt seccomp=1_chmod.json redhatgov/alpine chmod 400 /etc/hosts
 ----
 {{< panel_group >}}
 {{% panel "Result" %}}
@@ -141,10 +141,10 @@ Let's run a instance of Fedora and use the same `1_chmod.json` profile to try an
 
 [source,bash]
 ----
-sudo docker run --rm \
+sudo podman run --rm \
                 -it  \
                 --cap-add SYS_PTRACE \
-                --security-opt seccomp:1_chmod.json \
+                --security-opt seccomp=1_chmod.json \
                 redhatgov/fedora \
                 chmod 400 /etc/hosts && echo $?
 ----
@@ -159,7 +159,7 @@ Lets run the same command again and add the https://linux.die.net/man/1/strace[`
 
 [source,bash]
 ----
-sudo docker run --rm -it --cap-add SYS_PTRACE --security-opt seccomp:1_chmod.json redhatgov/fedora strace -P /etc/hosts chmod 400 /etc/hosts
+sudo podman run --rm -it --cap-add SYS_PTRACE --security-opt seccomp=1_chmod.json redhatgov/fedora strace -P /etc/hosts chmod 400 /etc/hosts
 ----
 
 {{< panel_group >}}
@@ -229,7 +229,7 @@ Now that you have your new profile created, let's run the container again and se
 .chmod
 [source,bash]
 ----
-sudo docker run --rm -it --security-opt seccomp:2_chmod_fedora.json redhatgov/fedora chmod 400 /etc/hosts
+sudo podman run --rm -it --security-opt seccomp=2_chmod_fedora.json redhatgov/fedora chmod 400 /etc/hosts
 ----
 
 {{< panel_group >}}
@@ -246,7 +246,7 @@ chmod: changing permissions of '/etc/hosts': Operation not permitted
 .chown
 [source,bash]
 ----
-sudo docker run --rm -it --security-opt seccomp:2_chmod_fedora.json redhatgov/fedora chown root:root /etc/hosts
+sudo podman run --rm -it --security-opt seccomp=2_chmod_fedora.json redhatgov/fedora chown root:root /etc/hosts
 ----
 
 {{< panel_group >}}
@@ -272,7 +272,7 @@ Let's run a container with Netcat installed in it and listen for local traffic o
 
 [source,bash]
 ----
-sudo docker run --rm -it redhatgov/fedora bash
+sudo podman run --rm -it redhatgov/fedora bash
 ----
 
 .In a Container
@@ -298,7 +298,7 @@ Run strace on the Netcat program, to identify the network-restricting syscalls w
 
 [source,bash]
 ----
-sudo docker run --rm -it --cap-drop SYS_PTRACE redhatgov/fedora bash
+sudo podman run --rm -it --cap-drop SYS_PTRACE redhatgov/fedora bash
 ----
 
 === Step 3. Run strace and the Netcat command.
@@ -370,7 +370,7 @@ Now that you have your new profile created, let's run the container again and se
 
 [source,bash]
 ----
-sudo docker run --rm -it --security-opt seccomp:3_network.json redhatgov/fedora bash
+sudo podman run --rm -it --security-opt seccomp=3_network.json redhatgov/fedora bash
 ----
 
 .In a Container

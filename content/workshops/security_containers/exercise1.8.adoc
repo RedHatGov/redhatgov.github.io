@@ -66,7 +66,7 @@ sestatus | grep mode
 .Try to cat out the file
 [source,bash]
 ----
-sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
+sudo podman run -v $(pwd)/data:/data fedora cat /data/file1.txt
 ----
 
 This action will result in a Permission denied error.  You can see the reason by inspecting the folder’s security context:
@@ -85,25 +85,25 @@ notifying the system that you expect these files to be consumed by containers:
 .Find the Containers Labels
 [source,bash]
 ----
-sudo semanage fcontext --list | grep svirt
+sudo semanage fcontext --list | grep kubernetes
 ----
 
-The containers should be running at `svirt_sandbox_file_t`
+The containers should be running at `container_file_t`
 
 === Step 4. Apply the container label to the data, using the `chcon` tool
 
 .Re-label the data dir
 [source,bash]
 ----
-chcon -Rt svirt_sandbox_file_t data
+chcon -Rt container_file_t data
 ----
 
 === Step 5. Try to cat out the file again from the container.
 
-.Run docker again
+.Run the container again
 [source,bash]
 ----
-sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
+sudo podman run -v $(pwd)/data:/data fedora cat /data/file1.txt
 ----
 
 === Step 6. Append text from the container to the file
@@ -111,38 +111,36 @@ sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
 .Append text
 [source,bash]
 ----
-sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "Thank You For Attending" >> /data/file1.txt'
+sudo podman run -v $(pwd)/data:/data fedora sh -c 'echo "Thank You For Attending" >> /data/file1.txt'
 ----
 
 [source,bash]
 ----
-sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt
+sudo podman run -v $(pwd)/data:/data fedora cat /data/file1.txt
 ----
 
-== Section 2: Docker SELinux Security Policy
+== Section 2: Container SELinux Security Policy
 
-The Docker SELinux security policy is similar to, and is based on, the libvirt security policy.
+The Container SELinux security policy is similar to, and is based on, the libvirt security policy.
 
 *libvirt Policy*
 
 The libvirt security policy is a series of SELinux policies that defines two
 methods of isolating virtual machines. Generally, virtual machines are prevented from accessing specific parts of the network. Specifically, individual virtual machines are denied access to each other's resources.
 
-Red Hat extends the libvirt-SELinux model to Docker. The Docker SELinux role
-and Docker SELinux types are based on libvirt. For example, by default, Docker
-has access to /usr/var/ and some other locations, but it has complete access to
-things that are labeled with svirt_sandbox_file_t.
+Red Hat extends the libvirt-SELinux model to containers. The Container SELinux role
+and Container SELinux types are based on libvirt.
 
-https://www.mankier.com/8/docker_selinux - this explains the entire Docker
+https://github.com/containers/container-selinux - this explains the Container
 SELinux policy. It is not in layman’s terms, but it is complete.
 
-`svirt_sandbox_file_t`
+`container_file_t`
 
 [source,bash]
 ----
-system_u:system_r:svirt_lxc_net_t:s0:c186,c641
-^      ^           ^          ^     ^--- unique category
-|      |           |          |----  secret-level 0
+system_u:system_r:container_file_t:s0:c186,c641
+^      ^           ^               ^     ^--- unique category
+|      |           |               |----  secret-level 0
 |      |           |--- a shared type
 |      |---SELinux role
 |------ SELinux user
@@ -151,8 +149,8 @@ system_u:system_r:svirt_lxc_net_t:s0:c186,c641
 
 *The category system isolates containers from one another.*
 
-If a file is labeled `svirt_sandbox_file_t`, then by default all containers can
-read it. But if the containers write to a directory that has `svirt_sandbox_file_t` ownership, they write using their own category (which in
+If a file is labeled `container_file_t`, then by default all containers can
+read it. But if the containers write to a directory that has `container_file_t` ownership, they write using their own category (which in
 this case is `c186` , `c641`). If you start the same container twice, it will
 get a new category the second time (a different category than it had the first
 time).

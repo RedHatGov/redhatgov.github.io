@@ -4,6 +4,9 @@ theme = "redhatgov"
 languageCode = "en-us"
 metaDataFormat = "yaml"
 
+[markup]
+    defaultMarkdownHandler = "blackfriday"
+
 [params]
     description = "Tried. Tested. Trusted."
 

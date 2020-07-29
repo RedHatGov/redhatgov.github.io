@@ -10,12 +10,12 @@
       {{ $mainLabPage := delimit (slice "/workshops" .Params.workshops) "/" }}
       <a href="{{ $mainLabPage | absURL }}">Return to Workshop</a>
     </p>
-    
-    {{ partial "prev_next_links" .Page }}
+
+    {{ partial "new_pagination" .Page }}
 
     {{ .Content }}
 
-    {{ partial "prev_next_links" .Page }}
+    {{ partial "new_pagination" .Page }}
 
     <p class="text-center">
       {{ $mainLabPage := delimit (slice "/workshops" .Params.workshops) "/" }}
