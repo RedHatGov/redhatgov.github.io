@@ -28,6 +28,7 @@ The essential components of SCAP are:
 
 OpenSCAP is a project that implements tools for performing SCAP scans and remediating findings. +
 You can read more about the project at `http://www.open-scap.org/` and the repository for their tools and profiles is on GitHub at `https://github.com/OpenSCAP/openscap/`.
+Red Hat ships SCAP content in the SCAP security guide, but the content the OpenSCAP uses is under active development and latest versions of it can be found at: `http://www.github.com/ComplianceAsCode`. 
 
 == Exercise Description
 
