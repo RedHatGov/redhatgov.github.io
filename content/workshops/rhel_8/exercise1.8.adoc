@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1.8 - Creating Custom Container Images with Buildah"
+title: "Exercise 1.8 - Introduction to using buildah, podman and skopeo to work on containers"
 workshops: rhel_8
 workshop_weight: 18
 layout: lab
@@ -10,25 +10,27 @@ layout: lab
 
 == Exercise Description
 
-In this exercise, you will build a custom application container utilizing the Red Hat Universal Base Image, customize that image and test the image functionality.
+In this exercise, you will build a custom application container utilizing the Red Hat Universal Base Image, customize that image and test the image functionality. After that you will use skopeo to transfer that image from your user local repository to the system repository and configure it to start at boot.
 
-After completing this section, you will be able to build images from an existing base image using buildah and other host based tools.
+After completing this section, you will be able to build images from an existing base image using buildah and other host based tools. This is just scratching the surface of what  can be done with containers and the container tooling on RHEL 8, there are other workshops that focus exclusively on containers.
 
-== Section 1: Overview of buildah and podman
+== Section 1: Overview of buildah, podman and skopeo
 
 ##Buildah## specializes in building OCI images. Buildah's commands replicate all of the commands that are found in a Dockerfile. This allows building images with and without Dockerfiles while not requiring any root privileges. The flexibility of building images without Dockerfiles also allows for the integration of other scripting languages into the build process.
 
 ##Podman## specializes in all of the commands and functions that help you to maintain and modify OCI images, such as pulling and tagging. It also allows you to create, run, and maintain those containers created from those images.
 
+##Skopeo## specializes in inspecting images and copying images from one location to another, converting formats if necessary.
+
 These utilities are pre-installed on the workshop systems, but if you needed to install them on your own hosts, you would enter:
 [source, bash]
 ----
-sudo yum install -y buildah podman
+sudo yum install -y buildah podman skopeo
 ----
 
-== Section 2: Create a container using buildah
+== Section 2: Create a container for development using buildah
 
-In this section, we will use buildah to pull down a Fedora Apache image to use as our base container image.
+In this section, we will use buildah to pull down the Red Hat ubi image to use as our base container image, which we will build on to create our application image.
 
 [NOTE]
 Before getting started, two directories need to be deleted as root:
@@ -102,7 +104,7 @@ Complete!
 
 This subcommand acts like the RUN directive in an OCIFile. Since the yum command includes a switch, we need to use the ##--## syntax to tell ##buildah run## there are no buildah options to look for past this point.
 
-=== Step 1: Install a simple home page
+=== Step 2: Install a simple home page
 
 Once the packages are installed in the working container, place a one-line home page we can use to check that our container works properly.
 
@@ -112,7 +114,7 @@ echo 'Welcome to the RHEL8 workshop!' > index.html
 buildah copy ubi-working-container index.html /var/www/html/index.html
 ----
 
-=== Step 2: Set httpd to start at launch
+=== Step 3: Set httpd to start at launch
 
 Instead of using init scripts, the webserver will be started directly when the container is started. In order to keep the container running while the webserver is up, the foreground flag is added or the container would end as soon as it goes into the background.  To set httpd to start when the container is run, modify the metadata with the ##buildah config## subcommand.
 
@@ -123,16 +125,16 @@ buildah config --cmd "/usr/sbin/httpd -D FOREGROUND" ubi-working-container
 
 The above option to ##buildah config## is equivalent to the CMD directive in an OCIFile.
 
-=== Step 3: Expose web port on the container
+=== Step 4: Expose the http port on the container
 
-To get access to the web server, the http port needs to be opened
+To get access to the web server, http port 80 needs to be opened
 
 [source, bash]
 ----
 buildah config --port 80 ubi-working-container
 ----
 
-=== Step 4: Commit changes to the modified base container using buildah
+=== Step 5: Commit changes to the modified base container using buildah
 
 Once the contents of the working container are complete, and the metadata has been updated, save the working container as the target application image using ##buildah commit##. During the container customization process, you can choose how often you want to save your customizations in order to test each modification that has been completed. In this case we are saving both the installation of apache, a simple home page and the directive to start the httpd service:
 
@@ -155,7 +157,7 @@ Storing signatures
 B04fe2c73b034e657da2fee64c340c56086a38265777556fa8a02c5f12896e66
 ....
 
-In this example, each previous buildah subcommand results in a separate layer, much like building using an OCIFile. Note that we have named our save point at **httpd**. You can change this to any label that will reflect what changes you have made at that given save point.
+In this example, each previous buildah subcommand results in a separate layer, much like building using an OCIFile. Note that we have named our save point as **httpd**. You can change this to any label that will reflect what changes you have made at that given save point.
 
 == Section 4: Using podman to launch and inspect the application container
 
@@ -192,6 +194,8 @@ podman run -d -p 8080:80 httpd
 f4d9db69e9b512517f9490d3bcc5096e69cca5e9b3a50b3890430da39ae46573
 ....
 
+=== Step 3: Inspect container and verify the application in the container is running and accessible
+
 Now, we can check the status of the application container using podman.  Note you can also see the forwarded ports:
 
 [source, bash]
@@ -219,8 +223,6 @@ default   9     1      0.000   6m24.455458435s   ?     0s     /usr/sbin/httpd -D
 default   14    1      0.000   6m24.455616596s   ?     0s     /usr/sbin/httpd -DFOREGROUND 
 ....
 
-=== Step 3: Test container application and stop container 
-
 Now, we can test retrieval of our example home page:
 
 [source, bash]
@@ -234,6 +236,8 @@ Welcome to the RHEL8 workshop!
 
 [NOTE]
 Note the URL specified matches the port mapping specified on the ##podman run## command.
+
+==== Step 4: Stop the container
 
 Since your test was successful, you can now stop the container, and continue with additional customization that you would like to try out. Remember to commit your changes as often as you would like, during the customization process, and use names that reflect the customization you have done to ease troubleshooting.
 
@@ -256,6 +260,7 @@ The first line of the output should show a container that was recently stopped, 
 CONTAINER ID  IMAGE                       COMMAND               CREATED        STATUS                     PORTS                 NAMES
 11fcab28fd31  localhost/httpd:latest  /bin/sh -c /usr/s...  4 minutes ago  Exited (0) 10 seconds ago  0.0.0.0:8080->80/tcp  amazing_tharp
 ....
+
 Notice the STATUS field is now reported as Exited.
 
 Alternatively, if you would prefer to stop only a single container, you can utilize ##podman ps## to identify the Container ID you wish to stop.  (If you've already performed the ##stop -a##, you can re-start the container with the ##podman run## command shown in Step 2, above.)  Then use the following command, with your unique Container ID number, to shutdown a single instance. For example:
@@ -265,12 +270,156 @@ Alternatively, if you would prefer to stop only a single container, you can util
 podman stop 11fcab28fd31
 ----
 
+== Section 5: Use skopeo and podman to integrate the container into systemd
 
-=== Step 4: Cool podman tricks
+Running as ec2-user, the container work that you have done is stored in your home directory. We will move it to the system image store in /var/lib/, enable it and start the application.
+
+=== Step 1: Inspecting the httpd image ====
+
+First let's use skopeo to inspect the image.
+[source, bash]
+----
+skopeo inspect containers-storage:localhost/httpd
+----
+....
+{
+    "Name": "localhost/httpd",
+    "Digest": "sha256:0dbc14b4aa06a3232087d5fa329b158dfe580686fa00e9383f78ee64e3d3ae0f",
+    "RepoTags": [],
+    "Created": "2020-07-29T03:26:45.369889926Z",
+    "DockerVersion": "",
+    "Labels": {
+
+<<output truncate>>
+
+}
+....
+
+=== Step 2: Transfer the image into the operating system image store ====
+
+First export the image from ec2-user's image store into an archive file. Skopeo can export containers into either docker archive or OCI archive if we want to put the container into a file. Using the OCI archive format:
+
+----
+skopeo copy containers-storage:localhost/httpd oci-archive:httpd.tar
+----
+....
+Getting image source signatures
+Copying blob 226bfaae015f done  
+Copying blob 70056249a0e2 done  
+Copying blob 1ff90c7e6397 done  
+Copying config 80dd2eb93b done  
+Writing manifest to image destination
+Storing signatures
+....
+
+Import the archive into the system image store
+
+----
+sudo skopeo copy oci-archive:httpd.tar containers-storage:localhost/httpd
+----
+....
+WARN[0000] Not using native diff for overlay, this may cause degraded performance for building images: kernel has CONFIG_OVERLAY_FS_REDIRECT_DIR enabled 
+Getting image source signatures
+Copying blob b80ee16c8662 done  
+Copying blob 6eeb9b4a640f done  
+Copying blob ae48556e82ac done  
+Copying config 80dd2eb93b done  
+Writing manifest to image destination
+Storing signatures
+....
+
+The container should now be visible in the system image store
+
+----
+sudo podman images
+----
+....
+REPOSITORY        TAG      IMAGE ID       CREATED          SIZE
+localhost/httpd   latest   80dd2eb93b53   37 minutes ago   242 MB
+....
+
+=== Step 3: Integrate container into systemd
+
+To finish this section, let's integrate our new container into systemd so you can have it start at boot time and otherwise manage it using systemd. Before getting started, ensure that the webserver started in the openSCAP section is not running:
+
+----
+sudo systemctl stop httpd 
+----
+
+First prepare the container by creating it using our new image and configuring it to expose port 80. This container will be named "web".   
+
+----
+sudo podman create -p 80:80 --name web httpd
+----
+
+Next generate the systemd configuration file. The default filename is container-<name>.service 
+
+----
+sudo podman generate systemd --name web --file 
+----
+
+This will create a systemd configuration file in the current working directory. Inspect the configuration file:
+
+----
+cat container-web.service
+----
+....
+# container-web.service
+# autogenerated by Podman 1.9.3
+# Wed Jul 29 04:45:39 UTC 2020
+
+[Unit]
+Description=Podman container-web.service
+Documentation=man:podman-generate-systemd(1)
+Wants=network.target
+After=network-online.target
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+Restart=on-failure
+ExecStart=/usr/bin/podman start web
+ExecStop=/usr/bin/podman stop -t 10 web
+PIDFile=/var/run/containers/storage/overlay-containers/8ad6217bd93b39920b11161e1cd958e80cce42c1310ee716421fd4672f7f3953/userdata/conmon.pid
+KillMode=none
+Type=forking
+
+[Install]
+WantedBy=multi-user.target default.target
+....
+
+Finally move this service file into systemd configation and start the service:
+
+----
+sudo cp container-web.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now container-web.service
+----
+
+Confirm that the container is started and it's port 80 is connected to the host's port 80.
+
+----
+sudo podman ps
+----
+....
+CONTAINER ID  IMAGE                   COMMAND               CREATED        STATUS            PORTS               NAMES
+8ad6217bd93b  localhost/httpd:latest  /usr/sbin/httpd -...  9 minutes ago  Up 5 seconds ago  0.0.0.0:80->80/tcp  web
+....
+
+Verify that the webserver is running
+
+----
+curl -s http://localhost
+----
+....
+Welcome to the RHEL8 workshop!
+....
+
+
+== Section 6: Some other interesting podman commands
 
 Here are some lesser-known ##podman## features that're really worth knowing about.
 
-==== Exporting a container definition for use in OpenShift
+=== Exporting a container definition for use in OpenShift
 If you've built and tested a container with podman, and are happy with the results, you can very easily share that container with OpenShift.
 ----
 podman generate kube $(podman ps --quiet -l) > export.yaml
@@ -285,23 +434,7 @@ oc create -f export.yaml
 This is an example of a single container export, but you can export complete pods as well.
 
 
-==== Generating a SystemD service definition
-You can also turn a container directly into a system service.  The following command will generate a ##systemd## service definition file:
-
-[source, bash]
-----
-podman generate systemd $(podman ps --quiet -l) > my-container.service
-----
-
-Then, copy the service definition into place and activate it:
-
-----
-sudo cp my-container.service /etc/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable --now my-container.service
-----
-
-=== Step 5: Removing a container
+=== Removing a container
 
 If a container will no longer be used, you can remove it from the system using ##podman rm##. In the command below, we use a bit of bash scripting to return the CONTAINER ID of the last container that was running as it is unique to each container image.
 
