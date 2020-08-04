@@ -33,13 +33,15 @@ sudo yum install -y buildah podman skopeo
 In this section, we will use buildah to pull down the Red Hat ubi image to use as our base container image, which we will build on to create our application image.
 
 [NOTE]
-Before getting started, two directories need to be deleted as root:
+Before getting started, two directories need to be deleted as root, if they exist:
 
 [source, bash]
 ----
+if [ -d /etc/docker/certs.d ]; then
 cd /etc/docker/certs.d
 sudo rm -rf registry.access.redhat.com registry.redhat.io
 cd 
+fi
 ----
 
 These directories are no longer needed and to download images as a non-root user, they have to be deleted. 
@@ -274,7 +276,7 @@ podman stop 11fcab28fd31
 
 Running as ec2-user, the container work that you have done is stored in your home directory. We will move it to the system image store in /var/lib/, enable it and start the application.
 
-=== Step 1: Inspecting the httpd image ====
+=== Step 1: Inspecting the httpd image 
 
 First let's use skopeo to inspect the image.
 [source, bash]
@@ -299,6 +301,7 @@ skopeo inspect containers-storage:localhost/httpd
 
 First export the image from ec2-user's image store into an archive file. Skopeo can export containers into either docker archive or OCI archive if we want to put the container into a file. Using the OCI archive format:
 
+[source, bash]
 ----
 skopeo copy containers-storage:localhost/httpd oci-archive:httpd.tar
 ----
@@ -314,6 +317,7 @@ Storing signatures
 
 Import the archive into the system image store
 
+[source, bash]
 ----
 sudo skopeo copy oci-archive:httpd.tar containers-storage:localhost/httpd
 ----
@@ -330,6 +334,7 @@ Storing signatures
 
 The container should now be visible in the system image store
 
+[source, bash]
 ----
 sudo podman images
 ----
@@ -342,24 +347,28 @@ localhost/httpd   latest   80dd2eb93b53   37 minutes ago   242 MB
 
 To finish this section, let's integrate our new container into systemd so you can have it start at boot time and otherwise manage it using systemd. Before getting started, ensure that the webserver started in the openSCAP section is not running:
 
+[source, bash]
 ----
 sudo systemctl stop httpd 
 ----
 
 First prepare the container by creating it using our new image and configuring it to expose port 80. This container will be named "web".   
 
+[source, bash]
 ----
 sudo podman create -p 80:80 --name web httpd
 ----
 
 Next generate the systemd configuration file. The default filename is container-<name>.service 
 
+[source, bash]
 ----
-sudo podman generate systemd --name web --file 
+sudo podman generate systemd --name web -f 
 ----
 
 This will create a systemd configuration file in the current working directory. Inspect the configuration file:
 
+[source, bash]
 ----
 cat container-web.service
 ----
@@ -389,6 +398,7 @@ WantedBy=multi-user.target default.target
 
 Finally move this service file into systemd configation and start the service:
 
+[source, bash]
 ----
 sudo cp container-web.service /etc/systemd/system/
 sudo systemctl daemon-reload
@@ -397,6 +407,7 @@ sudo systemctl enable --now container-web.service
 
 Confirm that the container is started and it's port 80 is connected to the host's port 80.
 
+[source, bash]
 ----
 sudo podman ps
 ----
@@ -407,6 +418,7 @@ CONTAINER ID  IMAGE                   COMMAND               CREATED        STATU
 
 Verify that the webserver is running
 
+[source, bash]
 ----
 curl -s http://localhost
 ----
@@ -421,12 +433,15 @@ Here are some lesser-known ##podman## features that're really worth knowing abou
 
 === Exporting a container definition for use in OpenShift
 If you've built and tested a container with podman, and are happy with the results, you can very easily share that container with OpenShift.
+
+[source, bash]
 ----
 podman generate kube $(podman ps --quiet -l) > export.yaml
 ----
 
 Take a look at the file to see what's in it.  If you were in an OpenShift project, you could then import this file with:
 
+[source, bash]
 ----
 oc create -f export.yaml
 ----
@@ -438,6 +453,7 @@ This is an example of a single container export, but you can export complete pod
 
 If a container will no longer be used, you can remove it from the system using ##podman rm##. In the command below, we use a bit of bash scripting to return the CONTAINER ID of the last container that was running as it is unique to each container image.
 
+[source, bash]
 ----
 podman rm $(podman ps --quiet -l)
 ----
