@@ -17,9 +17,15 @@ layout: lab
 
 To get started, we will take a tour of the web console. The web console (called *cockpit*) will be your primary interactive interface to RHEL. The console has a number of functions that enable you to manage most aspects of the installation.
 
+Connect to your personal lab environment. Ensure that the information in the footer of the page is correctly filled out and the URL for your environment should show up below
+
+----
+{{< urifqdn "http://" "node" ":9090" >}}
+----
+
 === Section 1: Overview of the web console
 
-Here is a quick overview of all the available modules:
+Here is a quick overview of all the available modules. Click through each of these menu options to see the information discussed:
 
 [.float-group]
 --
