@@ -41,9 +41,12 @@ Login successful.
 
 ```bash
 $ oc get projects
+oc get projects
+NAME          DISPLAY NAME   STATUS
+terminal-{{< span2 "userid" "YOUR#" >}}                  Active
 ```
 
-## It looks empty via the command line too
+### You will only see the "terminal" project.
 
 > Create a project
 

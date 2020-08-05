@@ -75,7 +75,7 @@ Switch to "Developer" mode, by clicking on the menu, in the top left corner, whe
 <blockquote>
 Click "+Add"
 </blockquote>
-<img src="../images/ocp-addToProjectButton.png" width="75"><br/>
+<img src="../images/ocp-addToProjectButton.png" width="450"><br/>
 
 <blockquote>
 Click "Container Image", to add an existing image from the container registry
@@ -83,24 +83,16 @@ Click "Container Image", to add an existing image from the container registry
 <img src="../images/ocp-ContainerImageButton.png" width="300"><br/>
 
 <blockquote>
-Select the option for "Image name from external registry" and enter "sonatype/nexus:oss", then click the magnifying glass to the far right to search for the image.
+Select the option for "Image name from external registry" and enter "sonatype/nexus:oss", then ensure that the image is validated.
 </blockquote>
-<img src="../images/ocp-nexus-imagename-expand.png" width="600"><br/>
-
-<blockquote>
-Click on the pop-up menu underneath "Application", and select "Unassigned", to have the application not be in the group with the Butterfly Terminal.
-<br/>
-If this menu is not present, it's not a problem.
-</blockquote>
-<img src="../images/ocp-nexus-application.png" width="600"><br/>
-
+<img src="../images/ocp-nexus-imagename-expand.png" width="800"><br/>
 
 <blockquote>
 Enter the values shown, in the image above.
 </blockquote>
 <p>
 <table>
-<tr><td><b>Application</b></td><td>Unassigned</td></tr>
+<tr><td><b>Application Name</b></td><td>nexus-app</td></tr>
 <tr><td><b>Name</b></td><td>nexus</td></tr>
 <tr><td><b>Resources</b></td><td>Deployment Config</td></tr>
 <tr><td><b>Create a route to the application</b></td><td>Checked</td></tr>
@@ -119,6 +111,7 @@ Click "Create"
 > <i class="fa fa-terminal"></i> Try typing the following to see what is available to 'get':
 
 ```bash
+$ oc project demo-{{< span userid "YOUR#" >}}
 $ oc get all
 ```
 
@@ -147,7 +140,7 @@ Let's look at the image stream.
 <blockquote>
 Click on "Developer", in the top left corner, and change it to "Administrator"
 </blockquote>
-<img src="../images/ocp-menu-developer.png" width="300"><br/>
+<img src="../images/ocp-menu-administrator.png" width="300"><br/>
 
 <blockquote>
 Click on "Builds", in the left-side menu, and then "Image Streams"
