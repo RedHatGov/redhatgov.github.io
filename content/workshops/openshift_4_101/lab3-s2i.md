@@ -39,17 +39,12 @@ Switch to developer mode, if you're not already there
 <blockquote>
 Click "+Add"
 </blockquote>
-<img src="../images/ocp-addToProjectButton.png" width="80"><br/>
+<img src="../images/ocp-addToProjectButton.png" width="450"><br/>
 
 <blockquote>
 Click "From Git"
 </blockquote>
 <img src="../images/ocp-FromGitButton.png" width="200"><br/>
-
-<blockquote>
-Under "Builder", click click on the "node.js" icon
-</blockquote>
-<img src="../images/ocp-lab-s2i-builder.png" width="600"><br/>
 
 <blockquote>
 Fill out the "Git Repo URL" field as follows:
@@ -59,10 +54,14 @@ Fill out the "Git Repo URL" field as follows:
 <tr><td><b>Git Repo URL</b></td><td><a href>https://github.com/RedHatGov/openshift-workshops.git</a></td></tr>
 </table>
 
+<img src="../images/ocp-git-dc-metro-map.png" width="700"><br/>
+
+<br>Ensure that the repository is validated (as shown above)</br><br>
+
 <blockquote>
 Click on the "Show Advanced Git Options" expender
 </blockquote>
-<img src="../images/ocp-lab-s2i-ago.png" width="200"><br/>
+<img src="../images/ocp-lab-s2i-ago.png" width="200"><br/><br>
 
 <blockquote>
 Fill out the "Context Dir" field as follows:
@@ -72,10 +71,16 @@ Fill out the "Context Dir" field as follows:
 <tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
 </table>
 
+
+<blockquote>
+Under "Builder", click click on the "Node.js" icon
+</blockquote>
+<img src="../images/ocp-lab-s2i-builder.png" width="600"><br/>
+
 <blockquote>
 Select Node.js 
 </blockquote>
-<img src="../images/ocp-lab-s2i-nodejs.png" width="200"><br/>
+<img src="../images/ocp-lab-s2i-nodejs.png" width="400"><br/>
 
 <blockquote>
 Fill out the fields, under "General" as follows:
@@ -87,6 +92,11 @@ Fill out the fields, under "General" as follows:
 <tr><td><b>Name</b></td><td>dc-metro-map</td></tr>
 </table>
 </p>
+
+<blockquote>
+Choose "Deployment Configuration" 
+</blockquote>
+<img src="../images/ocp-lab-s2i-nodejs-dc.png" width="400"><br/>
 
 <blockquote>
 Scroll to the bottom and click "Create"

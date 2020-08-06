@@ -30,11 +30,9 @@ First let's create a new project to do our workshop work in.  We will use the st
 
 > Populate "Name" with "terminal-{{< span userid "YOUR#" >}}" and populate "Description" boxes with whatever you like.  And click "Create"
 
+<img src="../images/ocp-admin-create-project.png" width="600"><br/><br>
+
 This is going to take you to the next logical step of adding something to the project, but we don't want to do that just yet.
-
-> Click the "terminal-{{< span userid "YOUR#" >}}" link on the top left to goto your project
-
-Don't worry, it's supposed to look empty right now because you currently don't have anything in your project.
 
 ## Let's deploy Butterfly (Browser-based SSH)
 
@@ -43,12 +41,14 @@ First, we need to change views from the "Administrator" view to the "Developer" 
 <blockquote>
 Click "Administrator", and change it to "Developer"
 </blockquote>
-<img src="../images/ocp-menu-administrator.png" width="450"><br/>
+<img src="../images/ocp-menu-administrator.png" width="450"><br/><br>
+
 
 <blockquote>
 Click "+Add", to add a new item to the project
 </blockquote>
-<img src="../images/ocp-addToProjectButton.png" width="75"><br/>
+<img src="../images/ocp-addToProjectButton.png" width="450"><br/><br>
+
 
 <blockquote>
 Click "Container Image", to add an existing image from the container registry
@@ -56,7 +56,7 @@ Click "Container Image", to add an existing image from the container registry
 <img src="../images/ocp-ContainerImageButton.png" width="300"><br/>
 
 <blockquote>
-In the dialog box under the default radio button, "Image name from external registry", enter "quay.io/openshifthomeroom/workshop-terminal", then click the magnifying glass to the far right to search for the image.
+In the dialog box under the default radio button, "Image name from external registry", enter "quay.io/openshifthomeroom/workshop-terminal", the image should be "Validated" when found.
 </blockquote>
 <img src="../images/ocp-deploy-image.png" width="600"><br/>
 

@@ -19,7 +19,7 @@ Let's walk through a simple example of how the replication controller can keep y
 </blockquote>
 
 ```bash
-$ oc scale --replicas=4 deployment/dc-metro-map
+$ oc scale --replicas=4 dc/dc-metro-map
 ```
 
 <blockquote>
@@ -37,16 +37,16 @@ Notice that you now have 4 unique pods available to inspect.  If you want go ahe
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click "Workloads", then "Deployments", and then "dc-metro-map"
+Click "Workloads", then "Deployment Configuration", and then "dc-metro-map"
 </blockquote>
 <blockquote>
-In the deployment overview, click the up arrow 3 times.
+In the Deployment Config Details, click the up arrow 3 times.
 </blockquote>
 The deployment should indicate that it is scaling to 4 pods, and eventually you will have 4 running pods.  Keep in mind that each pod has it's own container which is an identical deployment of the webapp.  OpenShift is now (by default) round robin load-balancing traffic to each pod.
 <img src="../images/ocp-lab-replicationrecovery-4pods.png" width="900"><br/>
 
 <blockquote>
-Hover over the pod counter (the circle) and click
+Click the Pods tab, and select one of the pods (ex: dc-metro-map-X-XXXX)
 </blockquote>
 Notice that you now have 4 unique webapp pods available to inspect.  If you want go ahead and inspect them you can see that each has its own IP address and logs.
 <img src="../images/ocp-lab-replicationrecovery-4podslist.png" width="900"><br/>
@@ -79,7 +79,7 @@ If you're fast enough you'll see the pod you deleted go "Terminating" and you'll
 </blockquote>
 
 ```bash
-$ oc describe deployment/dc-metro-map
+$ oc describe dc/dc-metro-map
 ```
 
 {{% /panel %}}
@@ -102,7 +102,7 @@ Now click the "Delete" button in the popup to confirm the pod deletion
 <img src="../images/ocp-lab-replicationrecovery-deletepod.png" width="900"><br/>
 
 <blockquote>
-Quickly switch back to the deployment overview
+Quickly switch back to the deployment configuration overview
 </blockquote>
 
 If you're fast enough you'll see the pod you deleted unfill a portion of the deployment circle, and then a new pod fill it back up.
@@ -200,16 +200,11 @@ The container died multiple times so quickly that OpenShift is going to put the 
 
 
 ## Clean up
-Let's scale back down to 1 replica.  If you are using the web console just click the down arrow from the Deployments Overview page.  If you are using the command line use the "oc scale" command.
+Let's scale back down to 1 replica.  If you are using the web console just click the down arrow from the Deployments Configs Overview page.  If you are using the command line use the "oc scale" command.
 
 <img src="../images/ocp-lab-replicationrecovery-cleanup.png" width="900"><br/>
 
 # Summary
-In this lab we learned about replication controllers and how they can be used to scale your applications and services.  We also tried to break a few things and saw how OpenShift responded to heal the system and keep it running.  This topic can get deeper than we've experimented with here, but getting deeper into application health and recovery is an advanced topic.  If you're interested you can read more about it in the documentation [here][1], [here][2], and [here][3].
-
-
-[1]: https://docs.openshift.com/enterprise/3.1/dev_guide/application_health.html
-[2]: https://docs.openshift.com/enterprise/3.1/dev_guide/deployments.html#scaling
-[3]: http://kubernetes.io/docs/user-guide/walkthrough/k8s201/#health-checking
+In this lab we learned about replication controllers and how they can be used to scale your applications and services.  We also tried to break a few things and saw how OpenShift responded to heal the system and keep it running.  
 
 {{< importPartial "footer/footer.html" >}}

@@ -240,7 +240,7 @@ Due to the deployment config strategy being set to "Rolling" and the "ConfigChan
 {{% panel "Web Console Steps" %}}
 
 <blockquote>
-Click on "Builds", and last, click on "Build Configs", in the left-side menu.
+Click on "Workloads", and last, click on "Deployment Configs", in the left-side menu.
 </blockquote>
 This is going to show basic details for all build configurations in this project
 
@@ -249,21 +249,15 @@ Click the "dc-metro-map" build config.
 </blockquote>
 
 <blockquote>
-Click the "Environment" tab next to the "Builds" tab .
+Click the "Environment" tab next to the "Pods" tab .
 </blockquote>
-<img src="../images/ocp-lab-devman-buildconfigdetails-config.png" width="600"><br/>
+<img src="../images/ocp-lab-devman-deploymentconfigdetails-config.png" width="600"><br/>
 This opens up a tab with the environment variables for this deployment config.
 
 <blockquote>
 Add an environment variable with the name BEERME and a value of 'true'
 </blockquote>
 <img src="../images/ocp-lab-devman-deployconfigdetails-populated.png" width="600">
-<br/>
-
-<blockquote>
-Click "Save".  Next, kick off a new build, by selecting "Start Build", from the "Actions" menu, to the right.
-</blockquote>
-<img src="../images/ocp-lab-devman-startBuild.png" width="200">
 <br/>
 
 <blockquote>
