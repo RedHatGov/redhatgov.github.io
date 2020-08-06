@@ -67,7 +67,7 @@ This will bring up the Route configuration yaml. Edit the element "spec:". On th
 
 ```bash
 spec:
-  host: green-bluegreen-1.apps.alexocp43.redhatgov.io
+  host: green-bluegreen-{{< span "userid" "YOUR#" >}}.apps.alexocp43.redhatgov.io
   port:
     targetPort: 8080-tcp
   to:
@@ -81,7 +81,7 @@ spec:
 
 {{% panel "Web Console Steps" %}}
 
-> As "Administrator", in the "bluegree-#" project, navigate to "Routes", and select "green"
+> As "Administrator", in the "bluegreen-{{< span "userid" "YOUR#" >}}" project, navigate to "Routes", and select "green"
 
 <img src="../images/ocp-lab-bluegreen-routesoverview.png" width="900">
 <br/>
