@@ -1,0 +1,47 @@
+---
+title: "Exercise 1.1 - What's New in RHEL 8"
+workshops: rhel_8
+workshop_weight: 11
+layout: lab
+---
+
+:domain_name: redhatgov.io
+:icons: font
+:imagesdir: /workshops/rhel_8/images
+
+
+= Exercise 1.1 - What's New in RHEL 8
+
+== Application streams
+
+Application streams deliver user space packages on a cadence that makes sense for the package rather than as a monolithic distribution. Streams also allow the consolidation of previous distribution channels to a single place.
+
+== Red Hat Insights
+
+Red Hat Insights is included with your Red Hat® Enterprise Linux® 8 subscription. It helps provide a security-focused, reliable, efficient, and scalable infrastructure environment.
+
+== Image builder
+
+Image builder lets customers build images from source RPMs that are deployable to multiple targets quickly and simply, and provides fine-grained control and visibility in to what’s included in a particular image and its history. It allows customers to manage the life cycle of their image catalogs independently of the release of new packages.
+
+== New container tools
+
+New container tools—Podman, Buildah, and Skopeo—form a strong foundation to support your container image and container needs.
+
+== Web console
+
+The web console provides a single browser-based interface to all of the available tools and improves the user experience for new users and experienced administrators alike.
+
+== Virtual data optimizer
+
+This virtual data optimizer provides volume-level compression and data deduplication to eliminate data redundancy and increase effective storage capacity for new and existing devices.
+
+== System roles
+
+System roles allow customers to configure subsystems using Ansible.® They deliver a layer of abstraction at the automation level, providing a common syntax across multiple major versions of Red Hat Enterprise Linux.
+
+== Systemwide crypto policies
+
+Creating a systemwide crypto policy allows admins to set the acceptable algorithms in multiple sources with a single configuration.
+
+{{< importPartial "footer/footer.html" >}}

@@ -50,14 +50,11 @@ Agenda
 {{< labs security_containers >}}
 
 
-
-{{% alert success %}}
-Special Thanks to:
+=== Special Thanks to:
 
 - Dan Walsh
 - Bob Kozdemba
 - Brent Baude
 - Adrian Mouat
-{{% /alert %}}
 
 {{< importPartial "footer/footer.html" >}}

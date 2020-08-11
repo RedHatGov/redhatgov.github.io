@@ -4,6 +4,9 @@ theme = "redhatgov"
 languageCode = "en-us"
 metaDataFormat = "yaml"
 
+[markup]
+    defaultMarkdownHandler = "blackfriday"
+
 [params]
     description = "Tried. Tested. Trusted."
 
@@ -22,3 +25,9 @@ metaDataFormat = "yaml"
     name = "Workshops"
     identifier = "workshops"
     weight = 100
+
+[[menu.main]]
+    name = "Events"
+    identifier = "events"
+    weight = 30
+    url = "https://www.redhat.com/en/events"

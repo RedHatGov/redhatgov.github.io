@@ -10,6 +10,12 @@ figure {
   margin-top: 50px;
 }
 
+.screenshot {
+  padding:1px;
+  border:1px solid #021a40;
+  background-color:#ca0000b7;
+}
+
 .navbar-brand {
   padding: 5px 20px;
 }

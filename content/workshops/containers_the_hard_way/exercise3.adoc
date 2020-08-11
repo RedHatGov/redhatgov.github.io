@@ -1,0 +1,75 @@
+---
+title: "Exercise 3 - Network and UTS Namespaces"
+workshops: containers_the_hard_way
+workshop_weight: 50
+layout: lab
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/containers_the_hard_way/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+
+= Exercise 3 - Network and UTS Namespaces
+
+== Exercise 3.1 - Network Stack Background
+
+The networking namespace in the Kernel is actually responsible for a surprisingly large number of things. It keeps tabs on all the network interfaces and their state, routing tables (Did you know there is more than one? By default, there are 4.), firewall rules, etc. All of these things are explored using the `ip` command. This command allows root to view and modify the networking stack.
+
+The hostname of the machine is stored in a few places. First, the Kernel tracks the machine's hostname. Next, the `/etc/hostname` file stores the statically defined hostname. Finally, a hostname can be derived from DHCP and DNS. What is important to note is that the `hostnamectl` command will change the hostname value in the Kernel and the value in `/etc/hostname`. Because our sandbox is using the same filesystem as our host, this is not desireable. Instead of using `hostnamectl` to manipulate the hostname, we will only use the `hostname` command as it only changes the Kernel's value.
+
+== Exercise 3.2 - Network and UTS Namespaces
+
+The Network Namespace allows a new network stack to exist in the sandbox. This means our sandboxed environment can have its own network interfaces, routing tables, DNS lookup servers, IP addresses, subnets... you name it! The Unix Time Sharing (UTS) Namespace exists solely for storing the system's hostname. Seriously. A whole namespace to store one string. This namespace has a long history and has changed quite a bit along the way. It exists the way it is for historical reasons.
+
+Let's create a sandbox with a new Network and UTS Namespace.
+
+[source, bash]
+----
+unshare -nu /bin/bash
+----
+
+- `n` creates a new Networking Namespace
+- `u` creates a new UTS Namespace
+
+What network interfaces are available to our sandbox?
+
+[source, bash]
+----
+ip a
+----
+....
+1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+....
+
+Just the loopback. Good news, our network namespace worked! Bad news, we can't reach the internet. Keep this issue in mind, we will revisit it later.
+
+Now let's change our hostname.
+
+[source, bash]
+----
+hostname sandbox
+hostname
+----
+....
+sandbox
+....
+
+Cool! That worked exactly as expected. But what is the hostname on our host? Switch terminals to one that is in the native namespaces and check.
+
+[source, bash]
+----
+hostname
+----
+....
+ede4c33aee15
+....
+
+It is unchanged! Now our sandbox environment can operate a full networking stack independent of the host it lives one.
+
+On the terminal that is in the new namespaces, type `exit` to return to the native namespaces.
+
+{{< importPartial "footer/footer.html" >}}

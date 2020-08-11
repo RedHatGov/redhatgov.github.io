@@ -5,7 +5,7 @@
 
 ----
 
-[RedHatGov.io][redhatgov] is an open source collection of workshop materials that
+[RedHatGov.io][redhatgov] is a great open source collection of workshop materials that
 cover various topics relating to Red Hat's product portfolio.
 
 ----
@@ -14,7 +14,8 @@ cover various topics relating to Red Hat's product portfolio.
 
 If you want to build RedHatGov.io right away:
 
-- You have a working [Hugo environment][hugo].
+- You have a working [Hugo environment][hugo] - and *probably* at the correct version.
+  - we keep a current working version in the `./bin/` folder
 - You have Ruby and the asciidoctor gem installed (*gem install asciidoctor*)
 
     `$ git clone https://github.com/RedHatGov/redhatgov.github.io`

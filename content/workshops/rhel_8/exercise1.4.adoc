@@ -1,0 +1,90 @@
+---
+title: "Exercise 1.4 - Configuring Terminal Session Recording"
+workshops: rhel_8
+workshop_weight: 14
+layout: lab
+---
+
+:domain_name: redhatgov.io
+:icons: font
+:imagesdir: /workshops/rhel_8/images
+
+== Section 1. Deploying Session Recording
+
+To be able to deploy the Session Recording solution you need to have the following packages installed: tlog, SSSD, cockpit-session-recording. +
+Note that session recording doesn't work for graphical desktop sessions or Cockpit terminal sessions.
+
+=== Step 1.1: Pre-Requisites
+In order to work with session recording, your system will need to have the following installed:
+
+ - tlog
+ - SSSD (System Security Services Deamon)
+ - cockpit-session-recording
+
+For this workshop/lab the environment is already configured to have tlog and SSSD installed, but if you were to install these prerequisites yourself, you would run `sudo yum install -y tlog cockpit-session-recording systemd-journal-remote`
+
+=== Step 1.2: Configuring the recorded users or user groups with SSSD from web UI
+Specify recorded users or user groups using SSSD by listing them directly in the RHEL 8 web console.
+
+==== Step 1.2.1: Go to the Session Recording page in the menu on the left of the interface.
+
+image::TerminalRecording-af59f.png[]
+
+==== Step 1.2.2: Click on the gear button in the right top corner.
+
+image::TerminalRecording-9ee56.png[]
+
+==== Step 1.2.3: Set your parameters in the SSSD Configuration table.
+
+There are 2 configuration panes, a General and another for SSSD; scroll down if you don't see the SSSD pane.
+To keep things simple, choose the `All` option in the `Scope` pull-down menu of the SSSD pane, as shown below.  Optionally choosing `Some` will allow you to provide comma-separated lists of users and groups whose terminal sessions should be recorded. +
+Be sure to click `Save` after making a selection.
+
+image::TerminalRecording-60f70.png[]
+
+=== Step 1.3: Test Session Recording
+Let's create a sample log. SSH back into your server:
+
+[source,bash]
+----
+ssh localhost
+----
+
+You should see a banner that says "ATTENTION! Your session is being recorded!" 
+
+* Enter a few commands. For this demo, we'll do `uptime`, `ls -l`,`df -k` and `hostname`
+
+[source,bash]
+----
+uptime
+ls -l
+df -k
+hostname
+----
+
+* Exit the shell 
+
+[source,bash]
+----
+exit
+----
+
+== Section 2. Playing Back Recorded Sessions
+
+There are two possibilities for replaying recorded sessions.
+The first option is to manage your recorded sessions from the RHEL 8 web console, which we will use for this lab.
+You can also use the `tlog-play` utility to play back recorded sessions on the command line.
+
+=== Step 2.1 Playback with the web console
+The RHEL 8 web console has an interface that could be used to manage recorded sessions.
+You can choose the session you want to review directly from the Session Recording page, where the list of your recorded sessions are. You might have to reload that page.
+
+Example 2.1: Example list of recorded sessions
+
+image::TerminalRecording-09d8f.png[]
+
+Click on one of the sessions and you are presented with a player to view the recording in as shown:
+
+image::TerminalRecording-178f1.png[]
+
+{{< importPartial "footer/footer.html" >}}

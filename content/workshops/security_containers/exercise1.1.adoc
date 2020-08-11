@@ -36,9 +36,9 @@ can also be done after you make changes to a image and want to
 .Pull an image by sha256
 [source,bash]
 ----
-sudo docker images
+sudo podman images
 
-sudo docker pull centos@sha256:67dad89757a55bfdfabec8abd0e22f8c7c12a1856514726470228063ed86593b
+sudo podman pull docker.io/centos@sha256:67dad89757a55bfdfabec8abd0e22f8c7c12a1856514726470228063ed86593b
 ----
 
 === Step 2. Securely Downloading Software in Dockerfiles
@@ -165,18 +165,24 @@ EXPOSE 6379
 .Build the image
 [source,bash]
 ----
-sudo docker build -t redis:5.0.1 .
+sudo buildah bud -t redis:5.0.1
 ----
-
-[NOTE]
-Notice the `.` at the end of the commands means build the container in the current directory.
 
 After about 2-3 minutes you should see something similar to below;
 
 .Successfully built `redis` container
 [source,bash]
 ----
-Successfully built
+...
+STEP 8: COMMIT redis:5.0.1
+Getting image source signatures
+Copying blob b7ba3be6a0d6 skipped: already exists
+Copying blob 0a2bd68c4a15 done
+Copying config 980e01820e done
+Writing manifest to image destination
+Storing signatures
+980e01820e16f269b906975a35a9157ac861a607429df1ed19b9aaf4954e94af
+980e01820e16f269b906975a35a9157ac861a607429df1ed19b9aaf4954e94af
 ----
 
 == Step 5. Run the container
@@ -185,7 +191,7 @@ Run the container to look around.
 
 [source,bash]
 ----
-sudo docker run --rm -it redis:5.0.1 bash
+sudo podman run --rm -it redis:5.0.1 bash
 ----
 
 

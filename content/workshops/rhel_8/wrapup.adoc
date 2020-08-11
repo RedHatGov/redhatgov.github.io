@@ -1,0 +1,31 @@
+---
+title: "Wrapup"
+workshops: rhel_8
+workshop_weight: 70
+layout: lab
+---
+
+:badges:
+:icons: font
+//:iconsdir: http://people.redhat.com/~jduncan/images/icons
+:imagesdir: /workshops/rhel_8/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+:figure-caption!:
+
+= Wrap Up and Q&A
+
+That wraps up what we have planned for today.  We hope you've enjoyed learning about all the goodness that is RHEL 8!
+
+What do you think? How can we help you understand new RHEL features better?
+
+//Before you leave, check out the *Resources* page that is part of this guide.  There, you can find a ton of links that will further your RHEL education.
+
+This *Participant Guide* will remain active for the next two weeks.  Please take advantage of it by downloading RHEL8 and installing a test host or VM back at your organization.
+
+Thank you for your time and participation!
+
+image::redhat.svg[]
+
+{{< importPartial "footer/footer.html" >}}

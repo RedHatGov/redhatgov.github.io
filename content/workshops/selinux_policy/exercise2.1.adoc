@@ -70,7 +70,7 @@ rm tmp/testapp.mod tmp/testapp.mod.fc
 ./testapp_selinux.8
 ----
 
-In addition to compiling and loading the policy, the `testapp.sh` script also generates an RPM spec file, and builds a package, containing the policy for the app.  This makes it easy to redistribute the policy, when you have finishe dcreating it.  You can see this in the second part of the script output:
+In addition to compiling and loading the policy, the `testapp.sh` script also generates an RPM spec file, and builds a package, containing the policy for the app.  This makes it easy to redistribute the policy, when you have finished creating it.  You can see this in the second part of the script output:
 
 [source,bash]
 ----
@@ -143,8 +143,7 @@ sesearch -T -s init_t -t testapp_exec_t
 
 [source,bash]
 ----
-Found 1 semantic te rules:
-   type_transition init_t testapp_exec_t : process testapp_t;
+type_transition init_t testapp_exec_t : process testapp_t;
 ----
 
 The rule says that when any process labeled as `init_t` executes any binary labeled as `testapp_exec_t`, the newly-created process will be labeled as `testapp_t`.

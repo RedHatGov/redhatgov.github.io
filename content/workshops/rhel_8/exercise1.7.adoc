@@ -1,0 +1,172 @@
+---
+title: "Exercise 1.7 - OpenSCAP Security Compliance Scanning"
+workshops: rhel_8
+workshop_weight: 17
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/rhel_8/images
+
+
+== Overview
+
+RHEL 8 makes it easy to maintain secure and compliant systems with OpenSCAP.  +
+
+=== What is SCAP?
+
+SCAP (Security Content Automation Protocol) is a NIST project that standardizes the language for describing assessment criteria and findings.  It also provides a vulnerability rating system.  The project's home page is `https://scap.nist.gov/` +
+
+The essential components of SCAP are:
+
+* XCCDF: The Extensible Configuration Checklist Description Format
+* OVAL®: Open Vulnerability and Assessment Language
+* CCE™: Common Configuration Enumeration
+* CPE™: Common Platform Enumeration
+* CVE®: Common Vulnerabilities and Exposures
+* CVSS: Common Vulnerability Scoring System
+
+OpenSCAP is a project that implements tools for performing SCAP scans and remediating findings. +
+You can read more about the project at `http://www.open-scap.org/` and the repository for their tools and profiles is on GitHub at `https://github.com/OpenSCAP/openscap/`.
+Red Hat ships SCAP content in the SCAP security guide, but the content the OpenSCAP uses is under active development and latest versions of it can be found at: `http://www.github.com/ComplianceAsCode`. 
+
+== Exercise Description
+
+In the following exercises we'll use the CLI to show how you can validate system compliance.  There are other tools as well, including a GUI utility and another for scanning container images.
+
+== Section 1: Ensure httpd and the OpenSCAP scanner are installed
+
+Ensure Apache httpd plus the OpenSCAP scanner and definitions are installed with the command below; it's safe to run even if the packages already exist:
+[source, bash]
+----
+sudo yum install -y httpd openscap-scanner scap-security-guide
+----
+ 
+The ##scap-security-guide## package contains prepared system profiles for several RHEL releases and system types; they are installed under */usr/share/xml/scap/ssg/content*.  +
+You can get a summary of the profiles in a given definition file with the following command:
+[source, bash]
+----
+oscap info --fetch-remote-resources /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+----
+Output:
+....
+Document type: Source Data Stream
+Imported: 2020-02-11T13:41:17
+
+Stream: scap_org.open-scap_datastream_from_xccdf_ssg-rhel8-xccdf-1.2.xml
+Generated: (null)
+Version: 1.3
+Checklists:
+        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-xccdf-1.2.xml
+Downloading: https://www.redhat.com/security/data/oval/com.redhat.rhsa-RHEL8.xml ... ok
+                Status: draft
+                Generated: 2020-02-11
+                Resolved: true
+                Profiles:
+                        Title: Protection Profile for General Purpose Operating Systems
+                                Id: xccdf_org.ssgproject.content_profile_ospp
+                        Title: PCI-DSS v3.2.1 Control Baseline for Red Hat Enterprise Linux 8
+                                Id: xccdf_org.ssgproject.content_profile_pci-dss
+                        Title: [DRAFT] DISA STIG for Red Hat Enterprise Linux 8
+                                Id: xccdf_org.ssgproject.content_profile_stig
+                        Title: Australian Cyber Security Centre (ACSC) Essential Eight
+                                Id: xccdf_org.ssgproject.content_profile_e8
+                Referenced check files:
+                        ssg-rhel8-oval.xml
+                                system: http://oval.mitre.org/XMLSchema/oval-definitions-5
+                        ssg-rhel8-ocil.xml
+                                system: http://scap.nist.gov/schema/ocil/2
+                        security-data-oval-com.redhat.rhsa-RHEL8.xml
+                                system: http://oval.mitre.org/XMLSchema/oval-definitions-5
+Checks:
+        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-oval.xml
+        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-ocil.xml
+        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-oval.xml
+        Ref-Id: scap_org.open-scap_cref_security-data-oval-com.redhat.rhsa-RHEL8.xml
+Dictionaries:
+        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-dictionary.xml
+....
+
+Looking about half-way down, you can see that this file contains two profiles:  one for PCI-DSS and another for OSPP.  The OSPP profile is a general-purpose profile, so it's a good choice for testing.
+
+
+== Section 2: Enable httpd for viewing compliance report
+
+Run the following to enable the Apache web server and allow client access to it.
+
+[source, bash]
+----
+sudo firewall-cmd --permanent --zone=public --add-service=http
+sudo systemctl reload firewalld
+sudo systemctl enable --now httpd
+----
+
+== Section 3: Perform an initial compliance scan
+
+To perform a basic compliance scan using the OSPP profile for RHEL 8, run the following command; the profile is specified by supplying the ##Id## field from the output above:
+[source, bash]
+----
+sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /var/www/html/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+----
+
+Once the command completes, open this link in another tab to view the resulting report:
+[source, bash]
+----
+{{< urifqdn "http://" "node" "/report.html" >}}
+----
+
+Here's a snippet of what the report looks like:
+
+image::openscap-example-report.png[caption="Figure 1: ", title="OpenSCAP report", width=800]
+
+== Section 4: Automatically remediate findings
+
+To correct compliance issues found in the scan, we can generate a Bash shell script or an Ansible playbook automatically from the scan's findings.  To generate an Ansible playbook, run the following:
+
+[source, bash]
+----
+sudo oscap xccdf generate fix --fetch-remote-resources --fix-type ansible --result-id "" /tmp/arf.xml > /tmp/ospp-playbook-fix.yml
+----
+
+Review the generated YAML file, ##/tmp/ospp-playbook-fix.yml##.  Note that the individual tasks are clearly named and delineated.  Once you're comfortable with it, run the playbook with:
+[source, bash]
+----
+sudo ansible-playbook -i localhost, -c local /tmp/ospp-playbook-fix.yml
+----
+
+The playbook will take several minutes to run.
+
+== Section 5: Review changes
+
+To see what differences the application of the hardening profile has made, re-run OpenSCAP, in eval mode, as you did, before:
+
+[source, bash]
+----
+sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /var/www/html/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+----
+
+Once the command completes, open this link in another tab to view the resulting report:
+[source, bash]
+----
+{{< urifqdn "http://" "node" "/report.html" >}}
+----
+
+// OPTIONAL:  reboot the system to enable the changes.
+// [source, bash]
+// ----
+// sudo init 6
+// ----
+
+//change httpd listen port to 8888:
+//sudo sed -i 's/^Listen.*$/Listen 0.0.0.0:8888/' /etc/httpd/conf/httpd.conf
+//sudo semanage port -a -t http_port_t -p tcp 8888
+//sudo firewall-cmd --permanent --zone=public --add-port=8888
+//sudo systemctl reload firewalld
+//systemctl enable --now httpd
+
+// oscap Bash remediation:
+//sudo oscap xccdf generate fix --fetch-remote-resources --fix-type bash --result-id "" /tmp/arf.xml > /tmp/ospp-bash-fix.sh
+//sudo chmod a+x /tmp/ospp-bash-fix.sh
+//sudo /tmp/ospp-bash-fix.sh
+
+{{< importPartial "footer/footer.html" >}}
