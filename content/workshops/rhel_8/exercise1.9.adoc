@@ -129,7 +129,7 @@ Query the Ansible Facts for this system to see the network configuration:
 ansible localhost -m setup -a 'gather_subset=network filter=ansible_interfaces'
 ----
 
-....
+.....
 localhost | SUCCESS => {
     "ansible_facts": {
         "ansible_interfaces": [
@@ -140,16 +140,16 @@ localhost | SUCCESS => {
     },
     "changed": false
 }
-....
+.....
 
 === Step 4:
 
 Examine the current configuration of `eth1` using the `ip` and `nmcli` commands:
 
 [source, bash]
-----
-ip a
-----
+-----
+ip addr
+-----
 
 ....
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
@@ -188,6 +188,7 @@ ens3                50e9a523-3280-4238-a07b-dbfd7d335273  ethernet  --
 
 Now let's run our playbook to create a new connection profile called DBnic, turn off DHCP, and assign a static ip address:
 
+[source, bash]
 ----
 ansible-playbook example-network-playbook.yml
 ----
@@ -245,7 +246,7 @@ Now let's see how the Ansible playbook changed our network configuration:
 
 [source, bash]
 ----
-ip a
+ip addr
 ----
 
 ....
