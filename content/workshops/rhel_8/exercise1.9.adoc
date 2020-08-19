@@ -22,6 +22,7 @@ There are five roles available on RHEL 8:
 * network
 * timesync
 * storage
+* postfix
 
 For further information, see the Ansible Quick-Start Guide for Sysadmins (https://www.redhat.com/en/blog/system-administrators-guide-getting-started-ansible-fast) or Quick Start Video (https://www.ansible.com/resources/videos/quick-start-video) for help learning how to use Ansible.
 

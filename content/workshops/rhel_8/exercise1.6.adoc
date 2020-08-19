@@ -61,7 +61,7 @@ Finally, run the postgres command to inspect the version it reports:
 postgres --version
 ----
 
-== Section 3: Change to a different version of a stream
+== Section 3: Remove a stream
 
 Now imagine an update to a web application running on this system requires features available in postgresql version 10. To accomplish this you will ultimately remove postgresql 9.6 and install postgresql 10, however, there are some additional Application Stream settings to apply to the system configuration as well.
 
@@ -85,7 +85,7 @@ sudo yum module list postgresql
 
 Verify that postgresql version 9.6 is no longer flagged as [i]nstalled.
 
-== Section 3: Change to a different version of a stream
+== Section 4: Change to a different version of a stream
 
 === Step 1: Disable a stream
 
