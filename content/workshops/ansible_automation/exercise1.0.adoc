@@ -162,6 +162,8 @@ Next, we will deploy an application.
 [source,bash]
 ----
 ansible web -m service -a "name=hello state=started enabled=yes" -b
+ansible web -m firewalld -a "port=8080/tcp permanent=yes state=enabled" -b
+ansible web -m systemd -a "name=firewalld state=reloaded" -b
 ----
 
 
