@@ -32,20 +32,6 @@ sudo yum install -y buildah podman skopeo
 
 In this section, we will use buildah to pull down the Red Hat ubi image to use as our base container image, which we will build on to create our application image.
 
-[NOTE]
-Before getting started, two directories need to be deleted as root, if they exist:
-
-[source, bash]
-----
-if [ -d /etc/docker/certs.d ]; then
-cd /etc/docker/certs.d
-sudo rm -rf registry.access.redhat.com registry.redhat.io
-cd 
-fi
-----
-
-These directories are no longer needed and to download images as a non-root user, they have to be deleted. 
-
 === Step 1: Use buildah to pull the base image
 
 The Red Hat Universal base image (UBI) is a convenient starting point for creating containers. It offers official RHEL bits for building container images, but offers more freedom in how they are used and distributed. There are three versions of it, standard, minimal and runtimes. For this workshop we will use the standard image.

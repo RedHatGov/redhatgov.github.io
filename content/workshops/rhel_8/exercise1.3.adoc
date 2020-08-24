@@ -39,7 +39,7 @@ In the expanded view, you can see details on what CVEs are relevant to the updat
 
 === Step 2: Install updates
 
-Once you are finished reading, click the `Install Security Updates` button, to install the updated packages.
+Once you are finished reading, click the `Install All Updates` button, to install the updated packages.
 
 The updates will install, and while doing so, there will be information on what actions are taking place, and below that, an expandable log drill-down. Once complete, you may receive a window like this:
 

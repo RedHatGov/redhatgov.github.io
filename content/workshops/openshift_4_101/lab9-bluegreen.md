@@ -24,7 +24,7 @@ You should be comfortable deploying an app at this point, but here are the steps
 > <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
 ``` bash
-$ oc new-project bluegreen-{{<span "userid" "YOUR#" >}}
+$ oc new-project bluegreen-{{<span2 "userid" "YOUR#" >}}
 $ oc new-app --name=green https://github.com/your-github-uid-goes-here/openshift-workshops --context-dir=dc-metro-map
 $ oc expose service green
 ```
@@ -67,7 +67,7 @@ This will bring up the Route configuration yaml. Edit the element "spec:". On th
 
 ```bash
 spec:
-  host: green-bluegreen-1.apps.alexocp43.redhatgov.io
+  host: green-bluegreen-{{< span "userid" "YOUR#" >}}.apps.alexocp43.redhatgov.io
   port:
     targetPort: 8080-tcp
   to:
@@ -81,11 +81,7 @@ spec:
 
 {{% panel "Web Console Steps" %}}
 
->Navigate to the Routes view from the left-hand menu:
-
-<img src="../images/ocp-lab-bluegreen-navtoroutes.png" width="400"><br/>
-
->In your Routes overview, click on the "green" route:
+> As "Administrator", in the "bluegreen-{{< span "userid" "YOUR#" >}}" project, navigate to "Routes", and select "green"
 
 <img src="../images/ocp-lab-bluegreen-routesoverview.png" width="900">
 <br/>
