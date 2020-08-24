@@ -7,8 +7,8 @@ layout: lab
 
 :icons: font
 :imagesdir: /workshops/ansible_automation/images
-:package_url: http://docs.ansible.com/ansible/package_module.html
-:service_url: http://docs.ansible.com/ansible/service_module.html
+:package_url: https://docs.ansible.com/ansible/latest/modules/package_module.html
+:service_url: https://docs.ansible.com/ansible/latest/modules/service_module.html
 :gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
 
 
