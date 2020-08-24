@@ -39,7 +39,7 @@ We have configured 'sudo' for you; however, Ansible can use lots of other method
 ansible localhost -m uri -a "url=https://raw.githubusercontent.com/RedHatGov/redhatgov.workshops/master/ansible_tower_aws/files/code-server.service return_content=yes dest=/etc/systemd/system" -b
 ----
 
-Now in the */etc/systemd/system* directory lives the *code-server.service* file you downloaded from the SCM system. In order to apply it, we would typically utilize the "systemctl" command; however, this is an ansible workshop.  With that being said, we will apply the configuration file with a module. 
+Now in the */etc/systemd/system* directory lives the *code-server.service* file you downloaded from the SCM system. In order to apply it, we would typically utilize the "systemctl" command; however, this is an Ansible workshop.  With that being said, we will apply the configuration file with a module. 
 
 [source,bash]
 ----
