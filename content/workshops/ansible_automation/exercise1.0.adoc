@@ -189,7 +189,7 @@ Finally, let's clean up after ourselves.  First, stop the node service, using th
 ansible web -m service -a "name=hello state=stopped enabled=no" -b
 ----
 
-=== Step 10: Remove package
+=== Step 8: Remove package
 
 Next, remove nodejs package - as follows.
 
@@ -198,7 +198,7 @@ Next, remove nodejs package - as follows.
 ansible web -m dnf -a "name=nodejs state=absent" -b
 ----
 
-=== Step 11: Clean files
+=== Step 9: Clean files
 
 [source,bash]
 ----
