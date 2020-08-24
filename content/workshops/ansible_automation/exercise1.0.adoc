@@ -53,7 +53,7 @@ It is possible now to see your service running by doing the following commands:
 systemctl status code-server.service
 ----
 
-Additionally, you can more details about pod deployment:
+Additionally, you can see more details about the pod deployment:
 
 [source,bash]
 ----
