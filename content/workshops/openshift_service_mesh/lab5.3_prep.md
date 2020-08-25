@@ -144,7 +144,7 @@ Decode the characters by running (replace your copy):
 </blockquote>
 
 ```
-echo <PASTE_YOUR_DATA_HERE> | base64 -D
+echo <PASTE_YOUR_DATA_HERE> | base64 -d
 ```
 
 <blockquote>
