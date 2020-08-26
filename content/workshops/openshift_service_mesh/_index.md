@@ -36,12 +36,4 @@ If you are on-site with us, the instructor will walk you through and kick off ea
 
 ## Labs
 
-{{< labs openshift_service_mesh >}}
-
-<br>
-
-
-These labs have been tailored for OpenShift 4.x
-
-
-{{< importPartial "footer/footer.html" >}}
+These labs are built for use with [OpenShift Homeroom](https://github.com/openshift-homeroom). On the day of the workshop, you'll receive access to a dashboard which contains the labguides, a web terminal, and an embedded web console; so all you need to participate is your browser. If you'd like to review the labs in advance, you can check out the source markdown [here](https://github.com/redhatgov/service-mesh-workshop/tree/main/workshop/content).
