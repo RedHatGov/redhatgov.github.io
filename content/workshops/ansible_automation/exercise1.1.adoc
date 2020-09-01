@@ -29,6 +29,7 @@ A playbook can have multiple plays and a play can have one or multiple tasks.  T
 
 Let's clone a source code repository locally to get the sample playbook.
 
+
 [source,bash]
 ----
 cd ~
@@ -39,7 +40,7 @@ Now, let's run a playbook.  This playbook will open firewall ports on the remote
 
 [source,bash]
 ----
-ansible-playbook -i hosts artifacts/playbooks/firewall-open-http.yml --private-key=~/.ssh/gdit-tower
+ansible-playbook -i hosts artifacts/playbooks/firewall-open-http.yml --private-key=~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
 ----
 
 == Section 2: Creating a directory structure and files for your own playbook
