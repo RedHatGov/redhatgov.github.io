@@ -60,7 +60,7 @@ Additionally, you can see more details about the pod deployment:
 podman pod list
 ----
 
-Connect to the web based editor in a browser window ...
+Connect to the web based editor in a browser window, using the following URL:
 
 ----
 {{< urifqdn "https://" "tower" ":8443" >}}
@@ -83,9 +83,15 @@ For example, a recent workshop student used:
 .hosts (example)
 [source,bash]
 ----
+vim hosts
+----
+
+Put the following content into the file:
+
+....
 [web]
 {{< urifqdn "" "node" "" >}}
-----
+....
 
 === Step 1: Test webhost response
 

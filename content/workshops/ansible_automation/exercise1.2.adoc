@@ -18,23 +18,15 @@ layout: lab
 == Section 1: Running the playbook
 
 
-We are now going to run your brand-new playbook, on your two web nodes.  To do this,
- you are going to use the `ansible-playbook` command.
+We are now going to run your brand-new playbook, on your two web nodes.  To do this, you are going to use the `ansible-playbook` command.
 
-=== Step 1: Run your playbook
-
-From your playbook directory ( `~/apache_basic` ), run your playbook.
-
-[source,bash]
-----
-ansible-playbook -i ../hosts install_apache.yml --private-key=~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
-----
+=== Step 1: Check your playbook
 
 
-However, before you run that command, lets take a few moments to understand the options.
 
-- *--private-key* This option asks for the private ssh key to connect to the remote machine.
-- *-i* This option allows you to specify the inventory file you wish to use.
+However, before you run the playbook, lets take a few moments to understand the options.
+
+- *install_apache.yml* This is the name of the playbook that we are running.
 - *-v* Altough not used here, this increases verbosity.  Try running your playbook a second time using `-v` or `-vv` to increase the verbosity (debugging information).
 
 
@@ -43,12 +35,18 @@ However, before you run that command, lets take a few moments to understand the 
 
 [source,bash]
 ----
-ansible-playbook -i ../hosts install_apache.yml --syntax-check --private-key=~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
+ansible-playbook install_apache.yml --syntax-check
 ----
 
-
 ---
-Now, run your playbook as specified in *Step 1*
+Now, run your playbook:
+
+From your playbook directory ( `~/apache_basic` ), run your playbook.
+
+[source,bash]
+----
+ansible-playbook install_apache.yml
+----
 
 In standard output, you should see something that looks very similar to the following:
 

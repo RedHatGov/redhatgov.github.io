@@ -114,6 +114,12 @@ Add some default variables to your role in `roles/apache-simple/defaults/main.ym
 
 [source,bash]
 ----
+vim roles/apache-simple/defaults/main.yml
+----
+
+Add the following contents to the file:
+
+----
 apache_test_message: This is a test message
 apache_webserver_port: 80
 ----
@@ -123,6 +129,12 @@ apache_webserver_port: 80
 Add some role-specific variables to your role in `roles/apache-simple/vars/main.yml`.
 
 [source,bash]
+----
+vim roles/apache-simple/vars/main.yml
+----
+
+Add the following contents to the file:
+
 ----
 httpd_packages:
   - httpd
@@ -150,6 +162,12 @@ Create your role handler in `roles/apache-simple/handlers/main.yml`.
 
 [source,bash]
 ----
+vim roles/apache-simple/handlers/main.yml
+----
+
+Add the following contents to the file:
+
+----
 - name: restart apache service
   service:
     name: httpd
@@ -162,6 +180,12 @@ Create your role handler in `roles/apache-simple/handlers/main.yml`.
 Add tasks to your role in `roles/apache-simple/tasks/main.yml`.
 
 [source,bash]
+----
+vim roles/apache-simple/tasks/main.yml
+----
+
+Add the following contents to the file:
+
 ----
 - name: install httpd packages
   package:
@@ -213,11 +237,10 @@ let's run it and see how it works.
 
 === Step 1: Run the playbook
 
-
 [source,bash]
 ----
 cd ~/apache-basic-playbook
-ansible-playbook -i ../hosts site.yml --private-key=~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
+ansible-playbook site.yml
 ----
 === Step 2: Verify your output
 If successful, your standard output should look similar to the figure below.
