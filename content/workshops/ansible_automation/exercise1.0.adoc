@@ -9,17 +9,66 @@ layout: lab
 :icons: font
 :imagesdir: /workshops/ansible_automation/images
 
-
 = Exercise 1.0 - Running Ad Hoc Commands
 
 
 == Exercise Description
 
-For our first exercise, we are going to run some ad hoc commands to help you get a feel for how Red Hat Ansible Tower works.  Ansible ad hoc commands enable you to perform repeatable tasks on remote nodes, without having to write a playbook.  They are very useful when you simply need to do one or two tasks quickly and often, to many remote nodes.
+For our first exercise, we are going to run some ad hoc commands to help you get a feel for how Red Hat Ansible Automation works.  Ansible ad hoc commands enable you to perform repeatable tasks on local or remote nodes, without having to write a playbook.  They are very useful when you simply need to do one or two tasks quickly and often, to many remote nodes.
 
+== Quick example:
 
+Let's deploy an application on your local node that can assist you with the workshop.  Using ad hoc commands, we will download a configuration file from a remote git server (gitOps), set up a system service, and start the service.
 
-=== Set Up Dependencies:
+====
+[NOTE]
+The service will be a Visual Studio Code container, defined in a Kubernetes POD YAML, launched via podman by systemd.
+====
+
+The systemd configuration file exists in SCM; so, we need to pull it to the local host.  Since the file is available via a URL, we will use the Ansible 'uri' module to retrieve the file.
+
+The ansible ad hoc command will start with "ansible", then the target, declaring the "uri" module via the -m switch, the arguments to the module, followed by the "-b" switch telling Ansible to become a superuser.  
+
+====
+[NOTE]
+We have configured 'sudo' for you; however, Ansible can use lots of other methods to become (-b) the superuser. 
+====
+
+[source,bash]
+----
+ansible localhost -m uri -a "url=https://raw.githubusercontent.com/RedHatGov/redhatgov.workshops/master/ansible_tower_aws/files/code-server.service return_content=yes dest=/etc/systemd/system" -b
+----
+
+Now in the */etc/systemd/system* directory lives the *code-server.service* file you downloaded from the SCM system. In order to apply it, we would typically utilize the "systemctl" command; however, this is an Ansible workshop.  With that being said, we will apply the configuration file with a module. 
+
+[source,bash]
+----
+ansible localhost -m service -a "name=code-server state=started enabled=yes" -b
+----
+
+It is possible now to see your service running by doing the following commands:
+
+[source,bash]
+----
+systemctl status code-server.service
+----
+
+Additionally, you can see more details about the pod deployment:
+
+[source,bash]
+----
+podman pod list
+----
+
+Connect to the web based editor in a browser window ...
+
+----
+{{< urifqdn "https://" "tower" ":8443" >}}
+----
+
+=== Managing remote hosts
+
+First, in order to manage remote systems - we need to set up our dependencies:
 
 Define your inventory.  Inventories are crucial to Ansible, as they define remote machines on which you will run commands or your playbook(s).  Use `vi` or `vim` to create a file called `hosts`.  Then, add the appropriate definitions for the node that will function as a web node.
 
@@ -81,74 +130,81 @@ ansible web -m ping
 We are going to be using the short-form options throughout this workshop
 ====
 
-=== Step 4: Install Maven, Git, and Red Hat JBoss Enterprise Application Platform
+=== Step 4: Install Node.js
 
-Now, let's install Maven & Git, using the `dnf` module.
-
-[source,bash]
-----
-ansible web -m dnf -a 'name=git state=present' -b
-ansible web -m dnf -a "name='@maven:3.5/common' state=present" -b
-ansible web -m dnf -a "name=@jboss-eap7 state=present" -b
-----
-
-=== Step 5: Start JBoss EAP
-
-JBoss EAP is installed now, so let's start it up using the `service` module.
+Now, let's install Node.js, using the `dnf` module.
 
 [source,bash]
 ----
-ansible web -m service -a "name=eap7-standalone state=started" -b
+ansible web -m dnf -a "name=nodejs state=present" -b
+----
+
+=== Step 5: Let's copy a file to the managed node.
+
+[source,bash]
+----
+cd ~
+ansible web -m copy -a "src=hello.js dest=hello.js"
+----
+
+=== Step 6: Copy configuration file to priviledged location
+
+[source,bash]
+----
+cd ~
+ansible web -m copy -a "src=hello.service dest=/etc/systemd/system/hello.service" -b
 ----
 
 === Step 6: Deploy an application
 
 Next, we will deploy an application.
 
-For simplicity sake, we will use an existing quickstart. To get started, we checkout some code ...
-
 [source,bash]
 ----
-ansible web -m git -a "repo=https://github.com/jboss-developer/jboss-eap-quickstarts.git dest=/tmp/checkout"
+ansible web -m service -a "name=hello state=started enabled=yes" -b
+ansible web -m firewalld -a "port=8080/tcp permanent=yes state=enabled" -b
+ansible web -m systemd -a "name=firewalld state=reloaded" -b
 ----
 
-..and deploy the code via Maven, provided by Red Hat Application Streams.
-[source,bash]
-----
-ansible web -m shell -a 'mvn clean install wildfly:deploy -Dmaven.test.skip=true chdir=/tmp/checkout/helloworld' -b
-----
 
 Demo site (unit test):
 [source,bash]
 ----
-ansible web -m uri -a "url=http://localhost:8080/helloworld/ return_content=yes"
+ansible web -m uri -a "url=http://localhost:8080 return_content=yes"
+ansible localhost -m uri -a "url=http://{{< urifqdn "" "node" "" >}}:8080 return_content=yes"
 ----
 
 Demo site (open this in your web browser):
 [source,bash]
 ----
-http://{{< urifqdn "" "node" "" >}}:8080/helloworld/
+http://{{< urifqdn "" "node" "" >}}:8080
 ----
 
 === Step 7: Cleanup
 
-Finally, let's clean up after ourselves.  First, stop the Red Hat JBoss EAP service, using the following command.
+Finally, let's clean up after ourselves.  First, stop the node service, using the following command.
 
 [source,bash]
 ----
-ansible web -m service -a "name=eap7-standalone state=stopped" -b
+ansible web -m service -a "name=hello state=stopped enabled=no" -b
 ----
 
-=== Step 10: Remove packages
+=== Step 8: Remove package
 
-Next, remove some packages - as follows.
+Next, remove nodejs package - as follows.
 
 [source,bash]
 ----
-ansible web -m dnf -a "name=@jboss-eap7 state=absent" -b
-ansible web -m dnf -a "name=eap7-* state=absent" -b
-ansible web -m dnf -a "name=maven state=absent" -b
-ansible web -m dnf -a "name=git state=absent" -b
+ansible web -m dnf -a "name=nodejs state=absent" -b
 ----
+
+=== Step 9: Clean files
+
+[source,bash]
+----
+ansible web -m file -a "path=/home/ec2-user/hello.js state=absent"
+ansible web -m file -a "path=/etc/systemd/system/hello.service state=absent" -b
+----
+
 
 {{< importPartial "footer/footer.html" >}}

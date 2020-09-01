@@ -24,10 +24,27 @@ and put them into a repeatable set of *plays* and *tasks*.
 
 A playbook can have multiple plays and a play can have one or multiple tasks.  The goal of a *play* is to map a group of hosts.  The goal of a *task* is to implement modules against those hosts.
 
+
+== Section 1: Running a pre-existing playbook from SCM
+
+Let's clone a source code repository locally to get the sample playbook.
+
+[source,bash]
+----
+cd ~
+ansible localhost -m git -a "repo=https://github.com/RedHatGov/workshop.artifacts.git dest=artifacts"
+----
+
+Now, let's run a playbook.  This playbook will open firewall ports on the remote node.
+
+[source,bash]
+----
+ansible-playbook -i hosts artifacts/playbooks/firewall-open-http.yml --private-key=~/.ssh/gdit-tower
+----
+
+== Section 2: Creating a directory structure and files for your own playbook
+
 For our first playbook, we are only going to write one play and two tasks.
-
-
-== Section 1: Creating a directory structure and files for your playbook
 
 There is a link:{dir_url}[best practice] regarding the preferred directory structures for playbooks.  We strongly encourage
 you to read and understand these practices as you develop your Ansible ninja skills.  That said,
