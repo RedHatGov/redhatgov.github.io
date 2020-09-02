@@ -32,7 +32,6 @@ Let's clone a source code repository locally to get the sample playbook.
 
 [source,bash]
 ----
-cd ~/src
 ansible localhost -m git -a "repo=https://github.com/RedHatGov/workshop.artifacts.git dest=artifacts"
 ----
 
