@@ -25,9 +25,9 @@ Let's deploy an application on your local node that can assist you with the work
 The service will be a Visual Studio Code container, defined in a Kubernetes POD YAML, launched via podman by systemd.
 ====
 
-The systemd configuration file exists in SCM; so, we need to pull it to the local host.  Since the file is available via a URL, we will use the Ansible 'uri' module to retrieve the file.
+The systemd configuration file exists in SCM; so, we need to pull it to the local host.  Since the file is available via a URL, we will use the Ansible *uri* module to retrieve the file.
 
-The ansible ad hoc command will start with "ansible", then the target, declaring the "uri" module via the -m switch, the arguments to the module, followed by the "-b" switch telling Ansible to become a superuser.  
+The ansible ad hoc command will start with *ansible*, then the target, declaring the *uri* module via the *--module* switch, the arguments *--args* to the module, followed by the *--become* switch telling Ansible to become a superuser.  
 
 ====
 [NOTE]
@@ -36,14 +36,14 @@ We have configured 'sudo' for you; however, Ansible can use lots of other method
 
 [source,bash]
 ----
-ansible localhost -m uri -a "url=https://raw.githubusercontent.com/RedHatGov/redhatgov.workshops/master/ansible_tower_aws/files/code-server.service return_content=yes dest=/etc/systemd/system" -b
+ansible localhost --module-name uri --args "url=https://raw.githubusercontent.com/RedHatGov/redhatgov.workshops/master/ansible_tower_aws/files/code-server.service return_content=yes dest=/etc/systemd/system" --become
 ----
 
-Now in the */etc/systemd/system* directory lives the *code-server.service* file you downloaded from the SCM system. In order to apply it, we would typically utilize the "systemctl" command; however, this is an Ansible workshop.  With that being said, we will apply the configuration file with a module. 
+Now in the */etc/systemd/system* directory lives the *code-server.service* file you downloaded from the SCM system. In order to apply it, we would typically utilize the *systemctl* command; however, this is an Ansible workshop.  With that being said, we will apply the configuration file with a module. 
 
 [source,bash]
 ----
-ansible localhost -m service -a "name=code-server state=started enabled=yes" -b
+ansible localhost --module-name service --args "name=code-server state=started enabled=yes" --become
 ----
 
 It is possible now to see your service running by doing the following commands:
@@ -60,7 +60,7 @@ Additionally, you can see more details about the pod deployment:
 podman pod list
 ----
 
-Connect to the web based editor in a browser window ...
+Connect to the web based editor in a browser window, using the following URL:
 
 ----
 {{< urifqdn "https://" "tower" ":8443" >}}
@@ -83,9 +83,15 @@ For example, a recent workshop student used:
 .hosts (example)
 [source,bash]
 ----
+vim hosts
+----
+
+Put the following content into the file:
+
+....
 [web]
 {{< urifqdn "" "node" "" >}}
-----
+....
 
 === Step 1: Test webhost response
 
@@ -93,7 +99,7 @@ Let's start with something basic - pinging a host.  The `ping` module tests the 
 
 [source,bash]
 ----
-ansible web -m ping
+ansible web --module-name ping
 ----
 
 === Step 2: Run a Linux command
@@ -102,7 +108,7 @@ Now let's see how we can run a Linux command and format the output, using the `c
 
 [source,bash]
 ----
-ansible web -m command -a "uptime" -o
+ansible web --module-name command --args "uptime" --one-line
 ----
 
 === Step 3: Review the setup module
@@ -111,23 +117,26 @@ Take a look at your web node's configuration.  The `setup` module displays Ansib
 
 [source,bash]
 ----
-ansible web -m setup
+ansible web --module-name setup
 ----
 
 
 ====
 [NOTE]
-Like many Linux commands, `Ansible` allows for long-form options, as well as short-form.  For example:
+Like many Linux commands, *ansible* allows for long-form and short-form command-line arguments.  For example:
 
+[source,bash]
 ----
-ansible web --module-name ping
+ansible web --module-name command --args "uptime" --one-line --become
 ----
-The command above is the same as running the command below.
+The command above is the same as running the command below:
+[source,bash]
 ----
-ansible web -m ping
+ansible web -m command -a "uptime" -o -b
 ----
 
-We are going to be using the short-form options throughout this workshop
+We are going to be using the short-form options, going forward. Please ask your instructor if any of them are unclear!
+
 ====
 
 === Step 4: Install Node.js
@@ -143,7 +152,6 @@ ansible web -m dnf -a "name=nodejs state=present" -b
 
 [source,bash]
 ----
-cd ~
 ansible web -m copy -a "src=hello.js dest=hello.js"
 ----
 
@@ -151,13 +159,12 @@ ansible web -m copy -a "src=hello.js dest=hello.js"
 
 [source,bash]
 ----
-cd ~
 ansible web -m copy -a "src=hello.service dest=/etc/systemd/system/hello.service" -b
 ----
 
 === Step 6: Deploy an application
 
-Next, we will deploy an application.
+Next, we will deploy an application. We first enable the application service, then open the port in the firewall, and last activate the change to the firewall: 
 
 [source,bash]
 ----
@@ -165,7 +172,6 @@ ansible web -m service -a "name=hello state=started enabled=yes" -b
 ansible web -m firewalld -a "port=8080/tcp permanent=yes state=enabled" -b
 ansible web -m systemd -a "name=firewalld state=reloaded" -b
 ----
-
 
 Demo site (unit test):
 [source,bash]
@@ -191,7 +197,7 @@ ansible web -m service -a "name=hello state=stopped enabled=no" -b
 
 === Step 8: Remove package
 
-Next, remove nodejs package - as follows.
+Next, remove the nodejs package, as shown, below:
 
 [source,bash]
 ----
@@ -199,6 +205,8 @@ ansible web -m dnf -a "name=nodejs state=absent" -b
 ----
 
 === Step 9: Clean files
+
+Last, let's remove the web content and service definition:
 
 [source,bash]
 ----

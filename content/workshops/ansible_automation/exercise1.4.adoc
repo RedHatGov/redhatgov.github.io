@@ -17,22 +17,12 @@ most, if not all, of your future playbooks.  Before you get too excited though, 
 
 == Section 1: Running your new apache playbook
 
-=== Step 1: Create a host file
-Make sure you are in the correct directory and create a host file.
-
-[source,bash]
-----
-cd ~/apache-basic-playbook
-----
-
-[NOTE]
-Since you already did the work of creating a host file in Lession 1.0, feel free to re-use it.
-
-=== Step 2: Run your playbook
+=== Step 1: Run your playbook
 Run your playbook, using the following command.
 [source,bash]
 ----
-ansible-playbook -i ../hosts site.yml --private-key=~/.ssh/{{< span2 "prefix" "example" "-tower" >}}
+cd ~/apache-basic-playbook
+ansible-playbook site.yml
 ----
 
 == Section 2: Review
