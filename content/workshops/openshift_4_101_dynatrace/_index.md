@@ -44,7 +44,7 @@ If you are on-site with us, the instructor will walk you through and kick off ea
 <br>
 
 
-Labs 3, 4, and 6 are based on a series of labs hosted at <a href>https://github.com/marcredhat/upi/blob/master/nfs/nfs.adoc</a>.<br/>
+Labs 3, 4, and 6 are based on a series of labs hosted at <a href>https://github.com/marcredhat/dynatrace</a>.<br/>
 
 {{% alert info %}}
 These labs have been tailored for OpenShift v4.3
