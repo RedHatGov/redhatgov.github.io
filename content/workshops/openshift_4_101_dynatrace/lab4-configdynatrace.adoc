@@ -21,7 +21,6 @@ clusterrole.rbac.authorization.k8s.io/dynatrace-monitoring-cluster created
 clusterrolebinding.rbac.authorization.k8s.io/dynatrace-monitoring-cluster created
 ```
 
-
 ```bash
 oc config view --minify -o jsonpath='{.clusters[0].cluster.server}'
 
@@ -80,4 +79,3 @@ Click on "Install a new Environment ActiveGate"
 </blockquote>
 
 {{< importPartial "footer/footer.html" >}}
-

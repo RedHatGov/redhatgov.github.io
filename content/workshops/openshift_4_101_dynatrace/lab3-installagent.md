@@ -74,7 +74,7 @@ tokens: "oneagent"
 as shown below.
 </blockquote>
 
-```yaml
+```
 apiVersion: dynatrace.com/v1alpha1
 kind: OneAgent
 metadata:
@@ -145,11 +145,7 @@ oc logs oneagent-jhk2f
 ```
 
 <blockquote>
-If you are using NFS, please see
-<p>
-<a href>https://github.com/marcredhat/upi/blob/master/nfs/nfs.adoc</a><br/>
-</p>
+If you are using NFS, please see <a href>https://github.com/marcredhat/upi/blob/master/nfs/nfs.adoc</a><br/>
 </blockquote>
 
 {{< importPartial "footer/footer.html" >}}
-

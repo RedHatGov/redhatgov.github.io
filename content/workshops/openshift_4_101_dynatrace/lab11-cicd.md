@@ -5,7 +5,6 @@ workshop_weight: 21
 layout: lab
 ---
 
-
 # Build Triggers, Webhooks and Rollbacks - Oh My!
 Once you have an app deployed in OpenShift you can take advantage of some continuous capabilities that help to enable DevOps and automate your management process.  We will cover some of those in this lab: Build triggers, webhooks, and rollbacks.
 
