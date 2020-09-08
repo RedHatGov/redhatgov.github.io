@@ -1,5 +1,5 @@
 ---
-title: Lab 12 - Blue | Green Deployment
+title: Lab 12 - Blue | Green Deployment (Optional)
 workshops: openshift_4_101_dynatrace
 workshop_weight: 22
 layout: lab

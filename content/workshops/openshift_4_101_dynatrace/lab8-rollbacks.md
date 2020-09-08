@@ -1,5 +1,5 @@
 ---
-title: Lab 8 - Webhooks and Rollbacks
+title: Lab 8 - Webhooks and Rollbacks (Optional)
 workshops: openshift_4_101_dynatrace
 workshop_weight: 18
 layout: lab

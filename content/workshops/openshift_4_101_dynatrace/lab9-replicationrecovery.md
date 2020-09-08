@@ -1,5 +1,5 @@
 ---
-title: Lab 9 - Replication and Recovery
+title: Lab 9 - Replication and Recovery (Optional)
 workshops: openshift_4_101_dynatrace
 workshop_weight: 19
 layout: lab
