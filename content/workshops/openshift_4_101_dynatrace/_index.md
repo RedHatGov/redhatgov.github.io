@@ -23,7 +23,7 @@ This workshop will have you deploying and creating native docker images for a No
 
 ## What you will learn
 
-- Enabling Dynatrace OneAgent
+- Enabling Dynatrace OneAgent and optional ActiveGuard
 - S2I
 - Rollback Replication and Recovery
 - Using Labels
