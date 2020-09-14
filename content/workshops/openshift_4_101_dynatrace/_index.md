@@ -10,7 +10,7 @@ menu:
 
 ## Description 
 
-This workshop will have you deploying and creating native docker images for a Node.js based website and learning to leverage the power of OpenShift 4 to build, deploy, scale, and automate.
+This workshop will have you deploying and creating native docker images for a Node.js based website and learning to leverage the power of OpenShift 4 to build, deploy, scale, and automate. Additionaly, you will learn how to monitor the applications through the deployment of a Dynatrace OneAgent Operator.
 
 ## Who should attend
 
@@ -23,7 +23,7 @@ This workshop will have you deploying and creating native docker images for a No
 
 ## What you will learn
 
-- Enabling Dynatrace OneAgent and optional ActiveGuard
+- Enabling Dynatrace OneAgent Operator and integration with Dynatrace ActiveGate (optional)
 - S2I
 - Rollback Replication and Recovery
 - Using Labels
@@ -32,7 +32,7 @@ This workshop will have you deploying and creating native docker images for a No
 
 
 ## Introduction
-Welcome to the workshop! This particular workshop will have you deploying with native docker images as well as using OpenShift to create docker images for a Node.js based website. You will also be leveraging the power of OpenShift to build, deploy, scale, and automate. In addition Dynatrace OneAgent will be installed and configured to show off the power of using Application Performance Mangement.
+Welcome to the workshop! This particular workshop will have you deploying with native docker images as well as using OpenShift to create docker images for a Node.js based website. You will also be leveraging the power of OpenShift to build, deploy, scale, and automate. In addition a Dynatrace OneAgent Operator will be installed and configured to show off the power of using Application Performance Mangement.
 
 If you are on-site with us, the instructor will walk you through and kick off each lab.  Otherwise, if you're running this on your own, just go through the list of labs below in order (as some build off of each other).
 
