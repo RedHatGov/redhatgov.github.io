@@ -1,11 +1,11 @@
 ---
-title: Lab 4 - Configuring Dynatrace ActiveGuard (Optional)
+title: Lab 4 - Configuring Dynatrace ActiveGate (Optional)
 workshops: openshift_4_101_dynatrace
 workshop_weight: 14
 layout: lab
 ---
 
-# Connect your OpenShift clusters to Dynatrace with ActiveGuard to take advantage of the dedicated OpenShift overview page 
+# Connect your OpenShift clusters to Dynatrace with an ActiveGate to take advantage of the dedicated OpenShift overview page 
   
 Connecting your OpenShift clusters to Dynatrace to take advantage of the dedicated OpenShift overview page 
 requires that you run an ActiveGate in your environment (version 1.163+).
