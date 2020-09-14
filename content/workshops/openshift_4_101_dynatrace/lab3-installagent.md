@@ -8,18 +8,24 @@ layout: lab
 # Deploy the Dynatrace OneAgent Operator on OpenShift 4.4+ 
 
 <blockquote>
-Prerequisites
-1) If no existing account Sign-up for a trial with Dynatrace at https://www.dynatrace.com/trial/
+Prerequisites:
+1) If no existing account, sign-up for a trial with Dynatrace at https://www.dynatrace.com/trial/
 
-2) Dynatrace API token 
-   from Settings > Integration > Dynatrace API
+2) Dynatrace API Token
+   from Settings > Integration > Dynatrace API > Generate Token
+   Activate the following settings:
+      * Access problem and event feed, metrics, and topology
+      * Read log content
+      * Write configuration
    
 3) Dynatrace PaaS token PaaS (used to download OneAgent and ActiveGate installers)
-   from Settings >  Integration > Platform as a Service
+   from Settings >  Integration > Platform as a Service > Generate Token
    
 4) apiUrl -  URL to the API of your Dynatrace environment. 
-   In Dynatrace SaaS it will look like https://<ENVIRONMENTID>.live.dynatrace.com/api
-   Mine is https://eye15053.live.dynatrace.com/api
+   In Dynatrace SaaS it will look like https://<ENVIRONMENT_ID>.live.dynatrace.com/api
+      e.g. https://eye15053.live.dynatrace.com/api
+   In Dynatrace Managed it will look like https://<DOMAIN>/e/<ENVIRONMENT_ID>/api
+      e.g. https://mtx879.dynatrace-managed.com/e/65c5d8d9-9cb4-42bb-b24d-4f7817eaf3a6/api
 </blockquote>
 
 
@@ -39,7 +45,7 @@ https://github.com/Dynatrace/dynatrace-oneagent-operator/branches/active
 
 ```bash
 oc apply -f \
-https://github.com/Dynatrace/dynatrace-oneagent-operator/releases/download/v0.8.0/openshift.yaml
+https://github.com/Dynatrace/dynatrace-oneagent-operator/releases/latest/download/openshift.yaml
 
 customresourcedefinition.apiextensions.k8s.io/oneagentapms.dynatrace.com configured
 customresourcedefinition.apiextensions.k8s.io/oneagents.dynatrace.com configured
@@ -66,9 +72,9 @@ curl -o cr.yaml https://raw.githubusercontent.com/Dynatrace/dynatrace-oneagent-o
 ```
 
 <blockquote>
-Update cr.yaml with apiUrl and the name of secret we create above ("oneagent").
+Update the custom resource (cr.yaml) with apiUrl and the name of secret we create above ("oneagent").
 
-In my case,
+e.g.
 apiUrl: https://eye15053.live.dynatrace.com/api
 tokens: "oneagent"
 as shown below.
@@ -95,7 +101,14 @@ spec:
 
 <blockquote>
 If you want Dynatrace to monitor OpenShift Service Mesh deployments, set
+</blockquote>
+
+```
 enableIstio: true
+```
+
+<blockquote>
+Apply the modified custom resource (cr.yaml)
 </blockquote>
 
 ```bash
