@@ -1,5 +1,95 @@
-<hr>
-<h3>Workshop Details</h3>
+<style>
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #000000;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #000000;
+  color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+</style>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h3>Workshop Details</h3>
+    </div>
+    <div class="modal-body">
 <div class="row">
   <div class="col-lg-4 col-md-5 col-sm-12" id="workshopFooterDetails">
     <table>
@@ -24,7 +114,7 @@
     <form id="footerForm" onsubmit="return false;" class="row" style="padding: 1.75rem 0 0 0;">
       <div class="form-group col-sm-6 col-md-6 col-lg-2">
         <label for="userid">Student ID</label>
-        <select id="userid" name="userid" class="form-control" onchange="updateFooter(this)">
+        <select id="userid" name="userid">
           <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -230,7 +320,7 @@
       </div>
       <div class="form-group col-sm-6 col-md-6 col-lg-4">
         <label for="domain">Domain</label>
-        <select id="domain" name="domain" class="form-control" onchange="updateFooter(this)">
+        <select id="domain" name="domain">
           <option value="redhatgov.io">redhatgov.io</option>
           <option value="rhnaps.io">rhnaps.io</option>          
           <option value="az.redhatgov.io">az.redhatgov.io</option>
@@ -256,7 +346,13 @@
   </div>
 </div>
 
-<hr>
+    </div>
+    <div class="modal-footer">
+      <h3></h3>
+    </div>
+  </div>
+
+</div>
 
 <script type="text/javascript" src="{{ "/node_modules/js-cookie/src/js.cookie.js" }}"></script>
 <script type="text/javascript">
@@ -297,6 +393,7 @@
     Cookies2.set("prefix", jQuery("input#prefix").val(), { path: cookiePath, expires: 7 } );
     Cookies2.set("userid", jQuery("select#userid").val(), { path: cookiePath, expires: 7 } );
     replaceClassText();
+    modal.style.display = "none";
   }
   function setWorkshopFooterInputValues() {
     jQuery("select#domain").val(Cookies2.get("domain"));
@@ -373,3 +470,54 @@
   });
 -->
 </script>
+
+<hr>
+<h3>Workshop Details</h3>
+    <table>
+      <tr>
+        <td class="text-right"><b>Domain</b></td>
+        <td><span class="domain"></span></td>
+        <td rowspan="3">
+          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Workshop</b></td>
+        <td><span class="prefix"></span></td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Student ID</b></td>
+        <td><span class="userid"></span></td>
+      </tr>
+    </table>
+<button id="myBtn">Configure Workshop</button>
+<hr>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
