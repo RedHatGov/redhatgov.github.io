@@ -336,7 +336,7 @@
       </div>
       <div class="form-group col-sm-6 col-md-6 col-lg-3">
         <label for="prefix">Workshop</label>
-        <input id="prefix" name="prefix" type="text" size="16" class="form-control" placeholder="example"/>
+        <input id="prefix" name="prefix" type="text" size="16" class="form-control" placeholder="example" onkeyup="this.value = this.value.toLowerCase();this.value = this.value.replace(/ /g, '');"/>
       </div>
       <div class="form-group col-sm-6 col-md-6 col-lg-3">
         <button type="submit" class="btn btn-primary form-control" style="margin-bottom:1rem;">Enter</button>
