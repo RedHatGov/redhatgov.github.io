@@ -18,15 +18,15 @@ OpenShift provides a web console that allows you to perform various tasks via a 
 <img src="../images/ocp-login.png" width="600"><br/>
 *Login Webpage*
 
-Once logged in you should see your available projects - or a button to create a project if none exist already:
+Once logged in you should see the overview page for your cluster:
 
 <img src="../images/ocp-admin-default.png" width="600"><br/>
-*Administrator Default View, with No Projects*
+*Administrator Default View*
 
 ## So this is what an empty project looks like
 First let's create a new project to do our workshop work in.  We will use the student number you were given to ensure you don't clash with classmates:
 
-> Click on the "Create Project" button and give it a name of terminal-{{< span userid "YOUR#" >}}
+> Click on "Projects" then the "Create Project" button and give it a name of terminal-{{< span userid "YOUR#" >}}
 
 > Populate "Name" with "terminal-{{< span userid "YOUR#" >}}" and populate "Description" boxes with whatever you like.  And click "Create"
 
