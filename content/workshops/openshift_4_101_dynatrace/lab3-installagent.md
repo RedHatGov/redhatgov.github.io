@@ -22,9 +22,9 @@ Prerequisites:
    from Settings >  Integration > Platform as a Service > Generate Token
    
 4) apiUrl -  URL to the API of your Dynatrace environment. 
-   In Dynatrace SaaS it will look like https://<ENVIRONMENT_ID>.live.dynatrace.com/api
+   In Dynatrace SaaS it will look like https://ENVIRONMENT_ID.live.dynatrace.com/api
       e.g. https://eye15053.live.dynatrace.com/api
-   In Dynatrace Managed it will look like https://<DOMAIN>/e/<ENVIRONMENT_ID>/api
+   In Dynatrace Managed it will look like https://DOMAIN/e/ENVIRONMENT_ID/api
       e.g. https://mtx879.dynatrace-managed.com/e/65c5d8d9-9cb4-42bb-b24d-4f7817eaf3a6/api
 </blockquote>
 
@@ -43,13 +43,21 @@ Check the latest release at
 https://github.com/Dynatrace/dynatrace-oneagent-operator/branches/active
 </blockquote>
 
+<blockquote>
+Apply the latest configuration from Dynatrace:
+</blockquote>
+
 ```bash
 oc apply -f \
 https://github.com/Dynatrace/dynatrace-oneagent-operator/releases/latest/download/openshift.yaml
+```
+<blockquote>
+You should see an output *similar* to the following:
+</blockquote>
 
-customresourcedefinition.apiextensions.k8s.io/oneagentapms.dynatrace.com configured
-customresourcedefinition.apiextensions.k8s.io/oneagents.dynatrace.com configured
-mutatingwebhookconfiguration.admissionregistration.k8s.io/dynatrace-oneagent-webhook created
+```bash
+customresourcedefinition.apiextensions.k8s.io/oneagentapms.dynatrace.com created
+customresourcedefinition.apiextensions.k8s.io/oneagents.dynatrace.com created
 serviceaccount/dynatrace-oneagent created
 serviceaccount/dynatrace-oneagent-operator created
 serviceaccount/dynatrace-oneagent-webhook created
@@ -65,7 +73,12 @@ service/dynatrace-oneagent-webhook created
 deployment.apps/dynatrace-oneagent-operator created
 deployment.apps/dynatrace-oneagent-webhook created
 securitycontextconstraints.security.openshift.io/dynatrace-oneagent-privileged created
+mutatingwebhookconfiguration.admissionregistration.k8s.io/dynatrace-oneagent-webhook created
 ```
+
+<blockquote>
+Create the default custom resource for the Dynatrace OneAgent:
+</blockquote>
 
 ```bash
 curl -o cr.yaml https://raw.githubusercontent.com/Dynatrace/dynatrace-oneagent-operator/master/deploy/cr.yaml
@@ -78,6 +91,10 @@ e.g.
 apiUrl: https://eye15053.live.dynatrace.com/api
 tokens: "oneagent"
 as shown below.
+</blockquote>
+
+<blockquote>
+vi cr.yaml
 </blockquote>
 
 ```
