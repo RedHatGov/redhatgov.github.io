@@ -92,6 +92,11 @@ Switch to "Developer" mode, by clicking on the menu, in the top left corner, whe
 <img src="../images/ocp-switch-developer.png" width="500"><br/>
 
 <blockquote>
+Switch to "Project: demo-0", by clicking on the menu, in the top left, where it says "Project" and pick "demo-0"
+</blockquote>
+<img src="../images/ocp-switch-project-demo-0.png" width="500"><br/>
+
+<blockquote>
 Click "+Add"
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="450"><br/>
