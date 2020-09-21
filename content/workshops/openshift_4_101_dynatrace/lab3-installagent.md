@@ -92,16 +92,19 @@ curl -o cr.yaml https://raw.githubusercontent.com/Dynatrace/dynatrace-oneagent-o
 ```
 
 <blockquote>
-Update the custom resource (cr.yaml) with apiUrl and the name of secret we create above ("oneagent").
+Update the custom resource (cr.yaml) with apiUrl and the name of secret we create above ("oneagent") as shown below
 
 e.g.
 apiUrl: https://eye15053.live.dynatrace.com/api
 tokens: "oneagent"
-as shown below.
 </blockquote>
 
-<blockquote>
+```bash
 vi cr.yaml
+```
+
+<blockquote>
+
 </blockquote>
 
 ```
