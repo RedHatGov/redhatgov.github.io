@@ -276,7 +276,7 @@ With the new environment variables set the app should look like this in your web
 
 
 ## What about passwords and private keys?
-Environment variables are great, but sometimes we don't want sensitive data exposed in the environment.  We will get into using **secrets** later when you do the lab: Keep it Secret, Keep it Safe
+Environment variables are great, but sometimes we don't want sensitive data exposed in the environment.  This is covered in depth in the OpenShift Security Workshop. Need to know more right now? Ask your facilitator to get you more info!
 
 
 ## Getting into a pod
