@@ -57,7 +57,7 @@ Let's tell the terminal command line tool to create and use a new project:
 > <i class="fa fa-terminal"></i> Type the following command to create and use the demo project:
 
 ```bash
-$ oc new-project demo-{{< span userid "YOUR#" >}}
+$ oc new-project demo-0
 ```
 
 > <i class="fa fa-terminal"></i> Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):
