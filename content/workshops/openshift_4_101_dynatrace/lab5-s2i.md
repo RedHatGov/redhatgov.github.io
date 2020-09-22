@@ -200,7 +200,7 @@ Although the processes and services are automatically discovered once the OneAge
 
 <img src="../images/ocp-lab-s2i-dynatrace-application-detection.png" width="900"><br/>
 
-Enter "DC Metro Map" for the new application.  Select "If the URL" and "begins with..." as the definition.  Enter "dc-metro-map" in the example text box.  Finish defining the application by clicking on "Save."
+Enter "DC Metro Map" for the new application.  Select "If the URL" and "begins with..." as the definition.  Enter "http://dc-metro-map" in the example text box.  Finish defining the application by clicking on "Save."
 
 <img src="../images/ocp-lab-s2i-dynatrace-application-detection-rule.png" width="900"><br/>
 
