@@ -205,4 +205,18 @@ The output should look *similar* to the following:
 23:21:35 dynatrace_oneagent module was successfully installed
 ```
 
+## Verify that the Dynatrace OneAgent Operator is deployed in both the OpenShift Management Console and the Dynatrace tenant
+First verify the deployment via the OpenShift Management Conole
+
+<blockquote>
+In the "Developer" interface, ensure that you are in the project "dynatrace" and choose topology to verify that you have three deployments: dynatrace-oneagent-operator, dynatrace-oneagent-webhook, and oneagent
+</blockquote>
+<img src="../images/ocp-dynatrace-oneagent-operator-1.png" width="500"><br/>
+
+<blockquote>
+In the Dynatrace tenant, select "Deployment status" and ensure that you have 6 Dynatrace OneAgents deployed across the 6 hosts in the cluster
+</blockquote>
+<img src="../images/ocp-dynatrace-oneagent-operator-2.png" width="500"><br/>
+
+
 {{< importPartial "footer/footer.html" >}}
