@@ -196,6 +196,22 @@ The vertical mapping on the left shows the underlying process groups, host(s), a
 
 <img src="../images/ocp-lab-s2i-dynatrace-dc-metro-map-service.png" width="900"><br/>
 
+Although the processes and services are automatically discovered once the OneAgent is deployed, we still need to define the web entry point as an application.  By default, all user traffic is placed under "My web application."  To isolate the real user performance start by defining the dc-metro-map application.  Click on "Settings" -> "Web and mobile monitoring" -> "Application detection and RUM" -> "Create application detection rule"
+
+<img src="../images/ocp-lab-s2i-dynatrace-application-detection.png" width="900"><br/>
+
+Enter "DC Metro Map" for the new application.  Select "If the URL" and "begins with..." as the definition.  Enter "dc-metro-map" in the example text box.  Finish defining the application by clicking on "Save."
+
+<img src="../images/ocp-lab-s2i-dynatrace-application-detection-rule.png" width="900"><br/>
+
+To verify you created the new application in Dynatrace, select "Applications" in the upper left corner and click on "DC Metro Map" in the center section.
+
+<img src="../images/ocp-lab-s2i-dynatrace-dc-metro-map-application.png" width="900"><br/>
+
+No user interaction with the DC Metro Map application will be detected until you go back to the application interface and navigate the elements again.  It will still take a couple of minutes for the data to be processed and data to start populating this view.
+
+<img src="../images/ocp-lab-s2i-dynatrace-dc-metro-map-application-finish" width="900"><br/>
+
 # Summary
 In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  We then examined the discovered architecture of the application in Dynatrace.  In the next lab we will deploy a multi-tier that includes a frontend, backend, and database tier.
 
