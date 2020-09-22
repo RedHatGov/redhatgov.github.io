@@ -213,6 +213,8 @@ In the "Developer" interface, ensure that you are in the project "dynatrace" and
 </blockquote>
 <img src="../images/ocp-dynatrace-oneagent-operator-1.png" width="500"><br/>
 
+Then verify the deployment via the Dynatrace Tenant interface
+
 <blockquote>
 In the Dynatrace tenant, select "Deployment status" and ensure that you have 6 Dynatrace OneAgents deployed across the 6 hosts in the cluster
 </blockquote>
