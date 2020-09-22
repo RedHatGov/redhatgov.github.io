@@ -187,7 +187,16 @@ The app should look like this in your web browser:
 
 Clicking the checkboxes will toggle on/off the individual metro stations on each colored line.  A numbered icon indicates there is more than one metro station in that area and they have been consolidated - click the number or zoom in to see more.
 
+# Now let's examine the application in Dynatrace
+Switch back to the Dynatrace interface and select "Smartscape topology" -> "Services" -> "dc-metro-map" and observice the dependency mapping of this single-tier application.
+
+<img src="../images/ocp-lab-s2i-dynatrace-smartscape.png" width="900"><br/>
+
+The vertical mapping on the left shows the underlying process groups, host(s), and Data center(s) for the dc-metro-map service.  On the right hand side of the Smartscape topology view shows the peer services that the dc-metro-map service is communicating with. Continue to navigate the Dynatrace interface to examine the details of the dc-metro-map service and node.js process group it is running in.
+
+<img src="../images/ocp-lab-s2i-dynatrace-dc-metro-map-service.png" width="900"><br/>
+
 # Summary
-In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  In the next lab we will deploy a multi-tier that includes a frontend, backend, and database tier.
+In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  We then examined the discovered architecture of the application in Dynatrace.  In the next lab we will deploy a multi-tier that includes a frontend, backend, and database tier.
 
 {{< importPartial "footer/footer.html" >}}
