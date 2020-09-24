@@ -23,7 +23,7 @@ We will be using the following terms throughout the workshop labs so here are so
 * Route - a labeled and DNS mapped network path to a service from outside OpenShift
 * Master - The foreman of the OpenShift architecture, the master schedules operations, watches for problems, and orchestrates everything
 * Node - Where the compute happens, your software is run on nodes
-* Operator - A method of packaging, deploying and managing a Kubernetes-native application.
+* Operator - A method of packaging, deploying, and managing a Kubernetes-native application.
 
 # Accessing OpenShift
 Additionally, you can utilize a command line tool to perforrm tasks.
@@ -32,9 +32,10 @@ Additionally, you can utilize a command line tool to perforrm tasks.
 > <i class="fa fa-terminal"></i> Use your existing Butterfly terminal, and login, using the same URI with following command:
 
 ```bash
-$ oc login {{< urishortfqdn "https://" "api" ":6443" >}} --insecure-skip-tls-verify=true
+$ oc login
 Authentication required for {{< urishortfqdn "https://" "api" ":6443" >}} (openshift)
- Username: user{{< span "userid" "YOUR#" >}} Password:
+ Username: kubeadmin
+ Password:
 Login successful.
 ```
 
@@ -47,7 +48,7 @@ NAME          DISPLAY NAME   STATUS
 terminal-{{< span2 "userid" "YOUR#" >}}                  Active
 ```
 
-### You will only see the "terminal" project.
+### You will only see the ~58 projects including the "terminal" project.
 
 > Create a project
 
@@ -56,7 +57,7 @@ Let's tell the terminal command line tool to create and use a new project:
 > <i class="fa fa-terminal"></i> Type the following command to create and use the demo project:
 
 ```bash
-$ oc new-project demo-{{< span userid "YOUR#" >}}
+$ oc new-project demo-0
 ```
 
 > <i class="fa fa-terminal"></i> Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):
