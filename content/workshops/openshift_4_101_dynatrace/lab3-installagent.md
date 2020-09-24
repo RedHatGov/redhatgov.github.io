@@ -22,34 +22,49 @@ Prerequisites:
    from Settings >  Integration > Platform as a Service > Generate Token
    
 4) apiUrl -  URL to the API of your Dynatrace environment. 
-   In Dynatrace SaaS it will look like https://<ENVIRONMENT_ID>.live.dynatrace.com/api
+   In Dynatrace SaaS it will look like https://ENVIRONMENT_ID.live.dynatrace.com/api
       e.g. https://eye15053.live.dynatrace.com/api
-   In Dynatrace Managed it will look like https://<DOMAIN>/e/<ENVIRONMENT_ID>/api
+   In Dynatrace Managed it will look like https://DOMAIN/e/ENVIRONMENT_ID/api
       e.g. https://mtx879.dynatrace-managed.com/e/65c5d8d9-9cb4-42bb-b24d-4f7817eaf3a6/api
 </blockquote>
 
+<blockquote>
+The first step is to define the new project where we'll deploy the Dynatrace OneAgent pods
+</blockquote>
 
 ```bash
 oc new-project dynatrace
+```
 
+<blockquote>
+Using the information you gathered in the pre-requisites referenced above, define the secret that will be used to provision the operator.  You may update this secret at any time to rotate the tokens.
+</blockquote>
+
+```bash
 oc -n dynatrace create secret generic oneagent \
 --from-literal="apiToken=<API token>" --from-literal="paasToken=<PaaS token>"
 ```
 
 <blockquote>
-You may update this Secret at any time to rotate the tokens.
-
-Check the latest release at 
+Optional: Check the latest release at 
 https://github.com/Dynatrace/dynatrace-oneagent-operator/branches/active
+</blockquote>
+
+<blockquote>
+Apply the latest configuration from Dynatrace:
 </blockquote>
 
 ```bash
 oc apply -f \
 https://github.com/Dynatrace/dynatrace-oneagent-operator/releases/latest/download/openshift.yaml
+```
+<blockquote>
+You should see an output *similar* to the following:
+</blockquote>
 
-customresourcedefinition.apiextensions.k8s.io/oneagentapms.dynatrace.com configured
-customresourcedefinition.apiextensions.k8s.io/oneagents.dynatrace.com configured
-mutatingwebhookconfiguration.admissionregistration.k8s.io/dynatrace-oneagent-webhook created
+```bash
+customresourcedefinition.apiextensions.k8s.io/oneagentapms.dynatrace.com created
+customresourcedefinition.apiextensions.k8s.io/oneagents.dynatrace.com created
 serviceaccount/dynatrace-oneagent created
 serviceaccount/dynatrace-oneagent-operator created
 serviceaccount/dynatrace-oneagent-webhook created
@@ -65,19 +80,31 @@ service/dynatrace-oneagent-webhook created
 deployment.apps/dynatrace-oneagent-operator created
 deployment.apps/dynatrace-oneagent-webhook created
 securitycontextconstraints.security.openshift.io/dynatrace-oneagent-privileged created
+mutatingwebhookconfiguration.admissionregistration.k8s.io/dynatrace-oneagent-webhook created
 ```
+
+<blockquote>
+Create the default custom resource for the Dynatrace OneAgent:
+</blockquote>
 
 ```bash
 curl -o cr.yaml https://raw.githubusercontent.com/Dynatrace/dynatrace-oneagent-operator/master/deploy/cr.yaml
 ```
 
 <blockquote>
-Update the custom resource (cr.yaml) with apiUrl and the name of secret we create above ("oneagent").
+Update the custom resource (cr.yaml) with apiUrl and the name of secret we create above ("oneagent") as shown below
 
 e.g.
 apiUrl: https://eye15053.live.dynatrace.com/api
 tokens: "oneagent"
-as shown below.
+</blockquote>
+
+```bash
+vi cr.yaml
+```
+
+<blockquote>
+
 </blockquote>
 
 ```
@@ -116,8 +143,19 @@ oc apply -f cr.yaml
 oneagent.dynatrace.com/oneagent configured
 ```
 
+<blockquote>
+Verify that the operator, webhook, and OneAgent pods have been created and are deploying
+</blockquote>
+
 ```bash
 oc get pods
+```
+
+<blockquote>
+The outpout should look *similar* to the following:
+</blockquote>
+
+```bash
 NAME                                           READY   STATUS    RESTARTS   AGE
 dynatrace-oneagent-operator-788fd7f5b4-6lt67   1/1     Running   0          4m21s
 dynatrace-oneagent-webhook-84747567df-lmltw    2/2     Running   0          4m21s
@@ -127,9 +165,19 @@ oneagent-b7qlb                                 0/1     Running   0          108s
 oneagent-jhk2f                                 0/1     Running   0          107s
 ```
 
+<blockquote>
+Check the deployment status of one of the pods:
+</blockquote>
 
 ```bash
 oc logs oneagent-jhk2f
+```
+
+<blockquote>
+The output should look *similar* to the following:
+</blockquote>
+
+```bash
 23:19:49 Started agent deployment as a container, PID 1352627.
 23:19:49 Downloading agent to /tmp/Dynatrace-OneAgent-Linux.sh via https://eye15053.live.dynatrace.com/api/v1/deployment/installer/agent/unix/default/latest?Api-Token=***&arch=x86&flavor=default
 23:20:18 Download complete
@@ -157,8 +205,20 @@ oc logs oneagent-jhk2f
 23:21:35 dynatrace_oneagent module was successfully installed
 ```
 
+## Verify that the Dynatrace OneAgent Operator is deployed in both the OpenShift Management Console and the Dynatrace tenant
+First verify the deployment via the OpenShift Management Conole
+
 <blockquote>
-If you are using NFS, please see <a href>https://github.com/marcredhat/upi/blob/master/nfs/nfs.adoc</a><br/>
+In the "Developer" interface, ensure that you are in the project "dynatrace" and choose topology to verify that you have three deployments: dynatrace-oneagent-operator, dynatrace-oneagent-webhook, and oneagent
 </blockquote>
+<img src="../images/ocp-dynatrace-oneagent-operator-1.png" width="500"><br/>
+
+Then verify the deployment via the Dynatrace Tenant interface
+
+<blockquote>
+In the Dynatrace tenant, select "Deployment status" and ensure that you have 6 Dynatrace OneAgents deployed across the 6 hosts in the cluster
+</blockquote>
+<img src="../images/ocp-dynatrace-oneagent-operator-2.png" width="500"><br/>
+
 
 {{< importPartial "footer/footer.html" >}}
