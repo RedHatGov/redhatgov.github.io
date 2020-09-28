@@ -25,7 +25,7 @@ During this workshop, you get your first taste of using and operating a Red Hat 
 - Managing Security Groups, Images and Instances
 - Using Heat for Orchestration
 - Using Software defined block and object Storage
- 
+
 ## Introduction
 This workshop on Red Hat OpenStack Platform is designed as an introduction for those who are intending to implement a cloud computing environment using OpenStack. Students will learn a small taste of how to operate Red Hat OpenStack Platform. In this course you will use both the OpenStack Dashboard (Horizon) and OpenStack command-line interface.
 Labs
@@ -59,7 +59,7 @@ Your instructor will provide the following:
 {{< labs rhosp_101 >}}
 
 {{% alert info %}}
-These labs have been tailored for Red Hat OpenStack Platform 13
+These labs have been tailored for Red Hat OpenStack Platform 16.1
 {{% /alert %}}
 
 {{< importPartial "footer/footer-hattrick.html" >}}

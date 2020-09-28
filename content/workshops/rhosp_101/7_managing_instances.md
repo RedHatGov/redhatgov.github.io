@@ -22,6 +22,7 @@ Instances are virtual machines that run inside the OpenStack cloud. You can laun
 We need a key pair created to use when we provision instances. The public key is passed to the instance and put in the authorized_keys file on the login user account.
 
 > Click **Create Key Pair**  
+> Select **SSH Key** under **type*
 
 {{< figure src="../images/lab6-keypair-1.png" title="Lab 6 Figure 1: Key Pair list" >}}
 
