@@ -46,9 +46,9 @@ Once you are logged in you should see the overview page for your cluster:
 ## This is what an empty project looks like
 First, let's create a new project to run a terminal application that we'll use for the rest of the workshop.
 
-> Click on "Projects" then the "Create Project" button and give it a name of terminal-0
+> Click on "Projects" then the "Create Project" button and give it a name of terminal
 
-> Populate "Name" with "terminal-0" and populate the "Display Name" and "Description" boxes with whatever you like.  Click on "Create" to create the project.
+> Populate "Name" with "terminal" and populate the "Display Name" and "Description" boxes with whatever you like.  Click on "Create" to create the project.
 
 <img src="../images/ocp-admin-create-project.png" width="600"><br/><br>
 
