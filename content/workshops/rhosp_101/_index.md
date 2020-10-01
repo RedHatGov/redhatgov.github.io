@@ -59,7 +59,7 @@ Your instructor will provide the following:
 {{< labs rhosp_101 >}}
 
 {{% alert info %}}
-These labs have been tailored for Red Hat OpenStack Platform 13
+These labs have been tailored for Red Hat OpenStack Platform 16
 {{% /alert %}}
 
 {{< importPartial "footer/footer-hattrick.html" >}}
