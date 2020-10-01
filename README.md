@@ -10,7 +10,7 @@ cover various topics relating to Red Hat's product portfolio.
 
 ----
 
-## To start developing
+## Initial start towards developing
 
 If you want to build RedHatGov.io right away:
 
