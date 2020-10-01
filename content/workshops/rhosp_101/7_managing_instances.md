@@ -104,6 +104,7 @@ If for some reason they do not, let the instructor know
 
 {{< figure src="../images/lab6-instances-fip-1.png" title="Lab 6 Figure 12: Selecting Floating IP to Associate with Our Instance" >}}
 
+
 {{% alert success %}}
 You should see a green box appear in the upper right corner of the screen that says something similar to "Success: IP address 192.168.1.106 associated."
 
