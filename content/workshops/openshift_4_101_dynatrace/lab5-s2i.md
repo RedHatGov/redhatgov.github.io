@@ -19,6 +19,7 @@ We can do this either via the command line or the web console.  You decide which
 </blockquote>
 
 ```bash
+$ oc new-project metro-map
 $ oc new-app --name=dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir=dc-metro-map
 $ oc expose service dc-metro-map
 ```
@@ -186,9 +187,32 @@ The app should look like this in your web browser:
 
 Clicking the checkboxes will toggle on/off the individual metro stations on each colored line.  A numbered icon indicates there is more than one metro station in that area and they have been consolidated - click the number or zoom in to see more.
 
-# Summary
-In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  In the next lab we will look at some details of this app's deployment and make some changes to see how OpenShift can help to automate our development processes. More information about creating new applications can be found [here][1].
+# Now let's examine the application in Dynatrace
+Switch back to the Dynatrace interface and select "Smartscape topology" -> "Services" -> "dc-metro-map" and observice the dependency mapping of this single-tier application.
 
-[1]: https://docs.openshift.com/container-platform/3.4/dev_guide/application_lifecycle/new_app.html
+<img src="../images/ocp-lab-s2i-dynatrace-smartscape.png" width="900"><br/>
+
+The vertical mapping on the left shows the underlying process groups, host(s), and Data center(s) for the dc-metro-map service.  On the right hand side of the Smartscape topology view shows the peer services that the dc-metro-map service is communicating with. Continue to navigate the Dynatrace interface to examine the details of the dc-metro-map service and the node.js process group it is running in.
+
+<img src="../images/ocp-lab-s2i-dynatrace-dc-metro-map-service.png" width="900"><br/>
+
+Although the processes and services are automatically discovered once the OneAgent is deployed, we still need to define the web entry point as an application using an application detection rule.  By default, all user traffic is placed under "My web application."  To create the "DC Metro Map" application and track the real user performance data for this application, start by defining the dc-metro-map entry point.  Click on "Settings" -> "Web and mobile monitoring" -> "Application detection and RUM" -> "Create application detection rule"
+
+<img src="../images/ocp-lab-s2i-dynatrace-application-detection.png" width="900"><br/>
+
+Enter "DC Metro Map" for the new application.  Select "If the URL" and "begins with..." as the definition.  Enter "http://dc-metro-map" in the example text box.  Finish defining the application by clicking on "Save."
+
+<img src="../images/ocp-lab-s2i-dynatrace-application-detection-rule.png" width="600"><br/>
+
+To verify you created the new application in Dynatrace, select "Applications" in the upper left corner and click on "DC Metro Map" in the center section.
+
+<img src="../images/ocp-lab-s2i-dynatrace-dc-metro-map-application.png" width="900"><br/>
+
+No user interaction with the DC Metro Map application will be detected until you go back to the application interface and navigate the elements again.  It will still take a couple of minutes for the data to be processed and data to start populating this view.
+
+<img src="../images/ocp-lab-s2i-dynatrace-dc-metro-map-application-finish.png" width="900"><br/>
+
+# Summary
+In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  We then examined the discovered architecture of the application in Dynatrace.  In the next lab we will deploy a multi-tier that includes a frontend, backend, and database tier.
 
 {{< importPartial "footer/footer.html" >}}

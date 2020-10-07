@@ -1,7 +1,7 @@
 ---
 title: Lab 1 - Welcome
 workshops: openshift_4_101_dynatrace
-workshop_weight: 11
+workshop_weight: 10
 layout: lab
 ---
 
@@ -23,43 +23,144 @@ We will be using the following terms throughout the workshop labs so here are so
 * Route - a labeled and DNS mapped network path to a service from outside OpenShift
 * Master - The foreman of the OpenShift architecture, the master schedules operations, watches for problems, and orchestrates everything
 * Node - Where the compute happens, your software is run on nodes
-* Operator - A method of packaging, deploying and managing a Kubernetes-native application.
+* Operator - A method of packaging, deploying, and managing a Kubernetes-native application.
 
-# Accessing OpenShift
-Additionally, you can utilize a command line tool to perforrm tasks.
+# Accessing OpenShift through the Web Console
+OpenShift provides a web console that allows you to perform various tasks via a web browser.
 
-## Let's try the command line (CLI)
-> <i class="fa fa-terminal"></i> Use your existing Butterfly terminal, and login, using the same URI with following command:
+## Let's Login to the Web Console
+> Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.
 
 ```bash
-$ oc login {{< urishortfqdn "https://" "api" ":6443" >}} --insecure-skip-tls-verify=true
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+```
+
+<img src="../images/ocp-login.png" width="600"><br/>
+*Login Webpage*
+
+Once you are logged in you should see the overview page for your cluster:
+
+<img src="../images/ocp-admin-default.png" width="600"><br/>
+*Administrator Default View*
+
+## This is what an empty project looks like
+First, let's create a new project to run a terminal application that we'll use for the rest of the workshop.
+
+> Click on "Projects" then the "Create Project" button and give it a name of terminal
+
+> Populate "Name" with "terminal" and populate the "Display Name" and "Description" boxes with whatever you like.  Click on "Create" to create the project.
+
+<img src="../images/ocp-admin-create-project.png" width="600"><br/><br>
+
+This is going to take you to the next logical step of adding something to the project but we don't want to do that just yet.
+
+## Let's deploy Butterfly (Browser-based SSH)
+
+First, we need to change views from the "Administrator" view to the "Developer" view. There is a pop-up menu in the top left corner of the screen just below the menu (three horizontal lines) button.
+
+<blockquote>
+Click "Administrator" and change it to "Developer"
+</blockquote>
+<img src="../images/ocp-menu-administrator.png" width="450"><br/><br>
+
+
+<blockquote>
+Click "+Add" to add a new item to the project
+</blockquote>
+<img src="../images/ocp-addToProjectButton.png" width="450"><br/><br>
+
+
+<blockquote>
+Click "Container Image" to add an existing image from the container registry
+</blockquote>
+<img src="../images/ocp-ContainerImageButton.png" width="300"><br/>
+
+
+<blockquote>
+In the dialog box under the default radio button "Image name from external registry", enter "quay.io/openshifthomeroom/workshop-terminal".  The image should be "Validated" when found.
+</blockquote>
+<img src="../images/ocp-deploy-image.png" width="600"><br/>
+
+
+<blockquote>
+Observe the default values that are populated in the search results.
+</blockquote>
+<img src="../images/ocp-butterfly-create-1.png" width="600"><br/>
+
+
+<blockquote>
+Click "Create"
+</blockquote>
+
+You will now see a screen that shows a thumbnail view of your deployed application. Click on "D workshop-termin..." to expand the screen and see the details of the running pod:
+
+<img src="../images/ocp-workshop-terminal-thumb.png" width="150"><br/>
+
+
+<blockquote>
+"Topology"
+</blockquote>
+
+<img src="../images/ocp-butterfly-topology.png" width="600"><br/>
+
+## Test out the Butterfly webapp
+Notice that in the web console overview, you now have a URL in the service box.  You can see the webapp running by clicking the exposed route.
+
+<img src="../images/ocp-butterfly-route.png" width="600"><br/>
+
+
+After clicking on the URLa new browser window should open placing you into a terminal session.
+
+<img src="../images/butterfly-session.png" width="600"><br/>
+
+Now, type the command `oc`.
+
+# Accessing OpenShift through the CLI
+In addition to the web console we previously used, you can utilize a command line tool to perform tasks.
+
+## Using the command line (CLI)
+<blockquote>
+ Use your existing Butterfly terminal login following command:
+</blockquote>
+
+```bash
+$ oc login
+```
+
+<blockquote>
+ Using the same username/password combination as before, finish authenticating to the CLI
+</blockquote>
+
+```bash
 Authentication required for {{< urishortfqdn "https://" "api" ":6443" >}} (openshift)
- Username: user{{< span "userid" "YOUR#" >}} Password:
+ Username: kubeadmin
+ Password:
 Login successful.
 ```
 
-> <i class="fa fa-terminal"></i> Check to see what projects you have access to:
+<blockquote>
+ Check to see what projects you have access to:
+</blockquote>
 
 ```bash
 $ oc get projects
-oc get projects
-NAME          DISPLAY NAME   STATUS
-terminal-{{< span2 "userid" "YOUR#" >}}                  Active
 ```
 
-### You will only see the "terminal" project.
+### You will see ~58 projects including the "terminal-0" project.
 
-> Create a project
+## Use the CLI to create a new project
 
-Let's tell the terminal command line tool to create and use a new project:
-
-> <i class="fa fa-terminal"></i> Type the following command to create and use the demo project:
+<blockquote>
+ Use the CLI to create and use a new project by typing the following command to create and use the project "demo-0"
+</blockquote>
 
 ```bash
-$ oc new-project demo-{{< span userid "YOUR#" >}}
+$ oc new-project demo-0
 ```
 
-> <i class="fa fa-terminal"></i> Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):
+<blockquote>
+ Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):
+</blockquote>
 
 ```bash
 $ oc status

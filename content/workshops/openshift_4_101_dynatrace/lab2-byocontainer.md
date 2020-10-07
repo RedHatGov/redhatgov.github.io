@@ -14,7 +14,31 @@ It's easy to get started with OpenShift whether you're using our app templates o
 {{% panel "CLI Steps" %}}
 
 <blockquote>
-<i class="fa fa-terminal"></i> Goto the terminal and type the following:
+<i class="fa fa-terminal"></i> Verify you're still in the project we created at the end of the last lab by going to the terminal and typing the following:  
+</blockquote>
+
+```bash
+$ oc projects
+```
+
+<blockquote>
+You should see something *similar* in the last line of the output:
+</blockquote>
+
+```bash
+$ Using project "demo-0" on server "https://172.30.0.1:443".
+```
+
+<blockquote>
+<i class="fa fa-terminal"></i> If you don't, use the following command to use the correct project:
+</blockquote>
+
+```bash
+$ oc project demo-0
+```
+
+<blockquote>
+<i class="fa fa-terminal"></i> In the terminal and type the following:
 </blockquote>
 
 ```bash
@@ -26,32 +50,27 @@ The output should show something *similar* to below:
 </blockquote>
 
 ```bash
---> Found container image 8027e6d (2 months old) from Docker Hub for "sonatype/nexus:oss"         
-                                                                                                  
-    Red Hat Universal Base Image 7                                                                
-    ------------------------------                                                                
-    The Universal Base Image is designed and engineered to be the base layer for all of your conta
-inerized applications, middleware and utilities. This base image is freely redistributable, but Re
-d Hat only supports Red Hat technologies through subscriptions for Red Hat products. This image is
- maintained by Red Hat and updated regularly.                                                     
-                                                                                                  
-    Tags: base rhel7                                                                              
-                                                                                                  
-    * An image stream tag will be created as "nexus:oss" that will track this image               
-    * This image will be deployed in deployment config "nexus"                                    
-    * Port 8081/tcp will be load balanced by service "nexus"                                      
-      * Other containers can access this service through the hostname "nexus"                     
-    * This image declares volumes and will default to use non-persistent, host-local storage.     
-      You can add persistent volumes later by running 'oc set volume dc/nexus --add ...'          
-                                                                                                  
---> Creating resources ...                                                                        
-    imagestream.image.openshift.io "nexus" created                                                
-    deploymentconfig.apps.openshift.io "nexus" created                                            
-    service "nexus" created                                                                       
---> Success                                                                                       
-    Application is not exposed. You can expose services to the outside world by executing one or m
-ore of the commands below:                                                                        
-     'oc expose svc/nexus'                                                                        
+--> Found container image ae52f07 (4 months old) from Docker Hub for "sonatype/nexus:oss"
+
+    Red Hat Universal Base Image 7
+    ------------------------------
+    The Universal Base Image is designed and engineered to be the base layer for all of your 
+containerized applications, middleware and utilities. This base image is freely redistributable, 
+but Red Hat only supports Red Hat technologies through subscriptions for Red Hat products. 
+This image is maintained by Red Hat and updated regularly.
+
+    Tags: base rhel7
+
+    * An image stream tag will be created as "nexus:oss" that will track this image
+
+--> Creating resources ...
+    imagestream.image.openshift.io "nexus" created
+    deployment.apps "nexus" created
+    service "nexus" created
+--> Success
+    Application is not exposed. You can expose services to the outside world by executing one or 
+more of the commands below:
+     'oc expose svc/nexus'
     Run 'oc status' to view your app.  
 ```
 
@@ -71,6 +90,11 @@ $ oc expose svc/nexus
 Switch to "Developer" mode, by clicking on the menu, in the top left corner, where it says "Administrator", and pick "Developer"
 </blockquote>
 <img src="../images/ocp-switch-developer.png" width="500"><br/>
+
+<blockquote>
+Switch to "Project: demo-0", by clicking on the menu, in the top left, where it says "Project" and pick "demo-0"
+</blockquote>
+<img src="../images/ocp-switch-project-demo-0.png" width="500"><br/>
 
 <blockquote>
 Click "+Add"
