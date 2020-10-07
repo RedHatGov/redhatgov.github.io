@@ -1,32 +1,15 @@
 ---
 title: Setup
 workshops: openshift_service_mesh_v1.0
-workshop_weight: 12
+workshop_weight: 13
 layout: lab
 ---
 
 # Setup
 
-You will conduct these labs in an OpenShift cluster.  First, test you have access to your cluster via console and CLI.
+You will conduct these labs in an OpenShift cluster.  As in the previous terminal deployment exercise, you can access your cluster via console and CLI.
 
 ## OpenShift
-
-<blockquote>
-<i class="fa fa-desktop"></i> Navigate to the console URI provided by your instructor and login with the username/password provided.
-</blockquote>
-
-For example:
-
-```
-http://console-openshift-console.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com
-```
-
-Once logged in, you should see the following:
-
-<img src="../images/openshift-welcome.png" width="1024"><br/>
- *OpenShift Welcome*
-
-<br>
 
 You will use the OpenShift 'oc' CLI  to execute commands for the majority of this lab.  
 
@@ -35,10 +18,11 @@ You will use the OpenShift 'oc' CLI  to execute commands for the majority of thi
 <i class="fa fa-terminal"></i> Login using API endpoint and remember to add the '--insecure-skip-tls-verify=true' flag
 </blockquote>
 
-For example:
-
 ```
-oc login https://api.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443 --insecure-skip-tls-verify=true
+$ oc login {{< urishortfqdn "https://" "api" ":6443" >}} --insecure-skip-tls-verify=true
+Authentication required for {{< urishortfqdn "https://" "api" ":6443" >}} (openshift)
+ Username: user{{< span "userid" "YOUR#" >}} Password:
+Login successful.
 ```
 
 <br>
@@ -62,7 +46,7 @@ You should see two projects: your user project (e.g. 'userX') and 'istio-system'
 </blockquote>
 
 ```
-oc project userX
+oc project user{{< span "userid" "YOUR#" >}}
 ```
 
 <br>

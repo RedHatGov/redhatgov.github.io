@@ -1,7 +1,7 @@
 ---
 title: Intro to Service Mesh - Deploying an App
-workshops: openshift_service_mesh_v1.0_v1.0
-workshop_weight: 13
+workshops: openshift_service_mesh_v1.0
+workshop_weight: 14
 layout: lab
 ---
 
