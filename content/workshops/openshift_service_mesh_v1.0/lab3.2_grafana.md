@@ -79,7 +79,19 @@ This gives you a holistic view of your services and metrics associated with thos
 
 <blockquote>
 <i class="fa fa-terminal"></i>
-Open another tab in the terminal. Send load to the user profile service:
+Send that terminal job to the background:
+</blockquote>
+
+```
+^Z
+[1]+  Stopped                 curl -s -o /dev/null $GATEWAY_URL
+bg                                                     
+[1]+ curl -s -o /dev/null $GATEWAY_URL &
+```
+
+<blockquote>
+<i class="fa fa-terminal"></i>
+Now, send load to the user profile service:
 </blockquote>
 
 ```
