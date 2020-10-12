@@ -1,5 +1,5 @@
 title = "Red Hat | Public Sector"
-baseURL = "http://redhatgov.io/"
+baseURL = "/"
 theme = "redhatgov"
 languageCode = "en-us"
 metaDataFormat = "yaml"
