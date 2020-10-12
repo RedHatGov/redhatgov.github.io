@@ -1,6 +1,6 @@
 ---
 title: Observability - Feature Update
-workshops: openshift_service_mesh_v1.0_v1.0
+workshops: openshift_service_mesh_v1.0
 workshop_weight: 31
 layout: lab
 ---
