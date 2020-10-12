@@ -163,11 +163,11 @@ echo $GATEWAY_URL
 
 <blockquote>
 <i class="fa fa-desktop"></i>
-Navigate to this URL in the browser.  For example:
+Navigate to this URL in the browser:
 </blockquote>
 
 ```
-http://istio-demogateway-userX-userX.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443
+{{< uriistio "http://" "istio-demogateway" "user" "apps" ":6443">}}
 ```
 
 <br>
