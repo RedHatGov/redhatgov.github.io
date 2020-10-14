@@ -1,6 +1,6 @@
 ---
 title: Lab 1 - Welcome
-workshops: openshift_4_101_dynatrace
+workshops: dynatrace_openshift
 workshop_weight: 10
 layout: lab
 ---

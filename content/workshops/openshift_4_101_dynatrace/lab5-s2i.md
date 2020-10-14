@@ -1,6 +1,6 @@
 ---
 title: Lab 5 - Deploying an App with S2I
-workshops: openshift_4_101_dynatrace
+workshops: dynatrace_openshift
 workshop_weight: 15
 layout: lab
 ---

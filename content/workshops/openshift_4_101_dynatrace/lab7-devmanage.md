@@ -1,6 +1,6 @@
 ---
 title: Lab 7 - Developing and Managing Your Application
-workshops: openshift_4_101_dynatrace
+workshops: dynatrace_openshift
 workshop_weight: 17
 layout: lab
 ---

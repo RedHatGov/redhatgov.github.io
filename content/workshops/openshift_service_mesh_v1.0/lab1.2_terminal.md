@@ -9,7 +9,7 @@ layout: lab
 OpenShift provides a web console that allows you to perform various tasks via a web browser.
 
 ## Let's Login to the Web Console
-> Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.
+> Use your browser to navigate to the below URI, and login with the username `user{{< span userid "YOUR#" >}}` and the password provided by your instructor:
 
 ```bash
 {{< urishortfqdn "https://" "console-openshift-console.apps" >}}

@@ -1,6 +1,6 @@
 ---
 title: Lab 4 - Configuring Dynatrace ActiveGate (Optional)
-workshops: openshift_4_101_dynatrace
+workshops: dynatrace_openshift
 workshop_weight: 14
 layout: lab
 ---

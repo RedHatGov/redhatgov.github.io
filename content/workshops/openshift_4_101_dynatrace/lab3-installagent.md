@@ -1,6 +1,6 @@
 ---
 title: Lab 3 - Install Dynatrace Agent
-workshops: openshift_4_101_dynatrace
+workshops: dynatrace_openshift
 workshop_weight: 13
 layout: lab
 ---

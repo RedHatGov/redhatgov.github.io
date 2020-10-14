@@ -1,6 +1,6 @@
 ---
 title: Lab 2 - BYO Container
-workshops: openshift_4_101_dynatrace
+workshops: dynatrace_openshift
 workshop_weight: 12
 layout: lab
 ---

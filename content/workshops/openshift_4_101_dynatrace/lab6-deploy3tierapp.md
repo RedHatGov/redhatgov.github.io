@@ -1,6 +1,6 @@
 ---
 title: Lab 6 - Deploying a 3 Tier App
-workshops: openshift_4_101_dynatrace
+workshops: dynatrace_openshift
 workshop_weight: 16
 layout: lab
 ---

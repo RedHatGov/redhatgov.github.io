@@ -1,6 +1,6 @@
 ---
 title: Lab 11 - Webhooks and Rollbacks (Optional)
-workshops: openshift_4_101_dynatrace
+workshops: dynatrace_openshift
 workshop_weight: 21
 layout: lab
 ---
