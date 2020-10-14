@@ -1,6 +1,6 @@
 ---
 title: Lab 10 - Labels (Optional)
-workshops: openshift_4_101_dynatrace
+workshops: dynatrace_openshift
 workshop_weight: 20
 layout: lab
 ---

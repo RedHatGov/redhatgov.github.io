@@ -1,6 +1,6 @@
 ---
 title: Verify Prerequisites
-workshops: openshift_4_101
+workshops: dynatrace_openshift
 workshop_weight: 0
 layout: lab
 ---

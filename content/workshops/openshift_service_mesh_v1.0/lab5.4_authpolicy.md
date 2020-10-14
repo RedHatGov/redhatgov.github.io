@@ -167,7 +167,7 @@ Your new item should show in the shared list
 <br>
 
 <blockquote>
-<i class="fa fa-terminal"></i> Now let's put things back to normal
+<i class="fa fa-terminal"></i> Now let's put things back to normal:
 </blockquote>
 
 ```
@@ -182,6 +182,10 @@ oc delete policy/boards-jwt
 oc delete serviceentry/keycloak-egress
 ```
 
+```
+SSO_SVC=$(oc get route keycloak-alt --template='{{.spec.host}}')
+oc set env dc/app-ui FAKE_USER=true SSO_SVC_HOST=$SSO_SVC
+```
 
 ## How it Works
 Our app-ui microservice gets the JWT from the Keycloak SSO whenever a user logs in. If logged in, the JWT is always passed (in the request header) from the app-ui to any services it calls. All our services have Envoy sidecar proxies running and are seeing the traffic, including the JWT in app-ui request headers. So the configuration we applied is used to inform sidecar proxies to follow the policies we set. When we weren't logged in there was no JWT to pass along so our call requests failed. Only after we were logged in with as a valid user did we pass along a valid JWT. And each user's JWT was different, so the *when* conditions only matched for theterminator, allowing him able to POST to the shared board.

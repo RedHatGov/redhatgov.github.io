@@ -1,7 +1,7 @@
 ---
 title: Intro to Service Mesh - Deploying an App
-workshops: openshift_service_mesh_v1.0_v1.0
-workshop_weight: 13
+workshops: openshift_service_mesh_v1.0
+workshop_weight: 14
 layout: lab
 ---
 
@@ -163,11 +163,11 @@ echo $GATEWAY_URL
 
 <blockquote>
 <i class="fa fa-desktop"></i>
-Navigate to this URL in the browser.  For example:
+Navigate to this URL in the browser:
 </blockquote>
 
 ```
-http://istio-demogateway-userX-userX.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com:6443
+{{< uriistio "http://" "istio-demogateway" "user" "apps" ":6443">}}
 ```
 
 <br>

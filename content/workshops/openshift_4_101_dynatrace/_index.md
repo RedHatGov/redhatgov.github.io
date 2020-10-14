@@ -39,7 +39,7 @@ If you are on-site with us, the instructor will walk you through and kick off ea
 
 ## Labs
 
-{{< labs openshift_4_101_dynatrace >}}
+{{< labs dynatrace_openshift >}}
 
 <br>
 
