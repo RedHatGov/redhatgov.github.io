@@ -1,6 +1,6 @@
 ---
 title: Fin.
-workshops: openshift_service_mesh_v1.0_v1.0
+workshops: openshift_service_mesh_v1.0
 workshop_weight: 99
 layout: lab
 ---
