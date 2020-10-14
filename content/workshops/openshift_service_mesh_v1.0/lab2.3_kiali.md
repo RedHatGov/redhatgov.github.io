@@ -46,9 +46,9 @@ KIALI_CONSOLE=$(oc get route kiali -n istio-system --template='https://{{.spec.h
 echo $KIALI_CONSOLE
 ```
 
-Output (sample):
+Output:
 ```
-https://kiali-istio-system.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com
+{{< urishortfqdn "https://" "kiali-istio-system.apps" >}}/
 ```
 
 <br>
