@@ -235,8 +235,7 @@ oc set env dc/app-ui FAKE_USER=false SSO_SVC_HOST=$SSO_SVC
 <br/>
 
 ## Access Info / API documentation
-- Admin can login at: https://keycloak-userX.apps.YOURCLUSTER.COM/
-- Users will login at: https://keycloak-userX.apps.YOURCLUSTER.COM/auth/realms/microservices/account
+- Admin can login at: `{{< urikeycloak "https://" "keycloak" "user" "apps">}}`
 - To understand more about keycloak check out the resources below:
   - [Official Docs][1]
   - [Upstream Docs][2]
@@ -247,3 +246,5 @@ oc set env dc/app-ui FAKE_USER=false SSO_SVC_HOST=$SSO_SVC
 [1]: https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.3/html-single/red_hat_single_sign-on_for_openshift/
 [2]: https://www.keycloak.org/documentation.html
 [3]: https://developers.redhat.com/blog/2020/01/29/api-login-and-jwt-token-generation-using-keycloak/
+
+{{< importPartial "footer/footer.html" >}}
