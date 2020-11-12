@@ -82,7 +82,7 @@ The node.js builder template creates a number of resources for you, but what we 
 </blockquote>
 
 ```bash
-$ oc get bc/dc-metro-map -o yaml | grep generic-webhook
+$ oc get bc/dc-metro-map -o yaml | grep github-webhook
 ```
 
 <blockquote>
@@ -90,7 +90,7 @@ $ oc get bc/dc-metro-map -o yaml | grep generic-webhook
 </blockquote>
 
 ```bash
-name: dc-metro-map-generic-webhook-secret
+name: dc-metro-map-github-webhook-secret
 ```
 
 <blockquote>
@@ -98,7 +98,7 @@ name: dc-metro-map-generic-webhook-secret
 </blockquote>
 
 ```bash
-$ SECRET=`oc get secrets dc-metro-map-generic-webhook-secret -o yaml | grep -i key | sed 's/^.*: //' | base64 -d ; echo`
+$ SECRET=`oc get secrets dc-metro-map-github-webhook-secret -o json | jq ".data.WebHookSecretKey" | base64 -di`
 ```
 
 <blockquote>
@@ -106,7 +106,7 @@ $ SECRET=`oc get secrets dc-metro-map-generic-webhook-secret -o yaml | grep -i k
 </blockquote>
 
 ```bash
-$ oc describe bc/dc-metro-map | grep "Webhook Generic" -A 1 | sed "s/<secret>/${SECRET}/"
+$ oc describe bc/dc-metro-map | awk '/github$/{print $2}' | sed "s/<secret>/${SECRET}/"
 ```
 
 <blockquote>
@@ -114,8 +114,7 @@ $ oc describe bc/dc-metro-map | grep "Webhook Generic" -A 1 | sed "s/<secret>/${
 </blockquote>
 
 ```bash
-Webhook Generic:
-        URL:            https://api.alexocp43.redhatgov.io:6443/apis/build.openshift.io/v1/namespaces/cicd-1/buildconfigs/dc-metro-map/webhooks/1234abcd5678efgh/generic
+https://api.alexocp43.redhatgov.io:6443/apis/build.openshift.io/v1/namespaces/cicd-1/buildconfigs/dc-metro-map/webhooks/1234abcd5678efgh/github
 ```
 
 <blockquote>
@@ -178,6 +177,9 @@ Click the "Add webhook" button
 </blockquote>
 <blockquote>
 Paste in the URL you copied
+</blockquote>
+<blockquote>
+Change content type to "application/json"
 </blockquote>
 <blockquote>
 Disable SSL verification by clicking the button

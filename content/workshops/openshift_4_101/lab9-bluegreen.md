@@ -25,7 +25,7 @@ You should be comfortable deploying an app at this point, but here are the steps
 
 ``` bash
 $ oc new-project bluegreen-{{<span2 "userid" "YOUR#" >}}
-$ oc new-app --name=green https://github.com/your-github-uid-goes-here/openshift-workshops --context-dir=dc-metro-map
+$ oc new-app --name=green https://github.com/your-github-uid-goes-here/openshift-workshops --context-dir=dc-metro-map --as-deployment-config=true
 $ oc expose service green
 ```
 
@@ -43,7 +43,7 @@ Use the same commands to deploy this new version of the app, but this time name 
 > <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
 ``` bash
-$ oc new-app --name=blue https://github.com/your-github-uid-goes-here/openshift-workshops --context-dir=dc-metro-map
+$ oc new-app --name=blue https://github.com/your-github-uid-goes-here/openshift-workshops --context-dir=dc-metro-map --as-deployment-config=true
 ```
 
 Wait for the "blue" application to become avialable before proceeding.
@@ -66,8 +66,6 @@ $ oc edit route green
 This will bring up the Route configuration yaml. Edit the element "spec:". On the "to:" "name:" line, change its value from "green" to "blue":
 
 ```bash
-spec:
-  host: green-bluegreen-{{< span "userid" "YOUR#" >}}.apps.alexocp43.redhatgov.io
   port:
     targetPort: 8080-tcp
   to:
