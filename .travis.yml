@@ -39,3 +39,5 @@ deploy:
 
 notifications:
   slack: redhat:9meDz4fnYsXtr3krfjmSXADX
+  email:
+    - ajacocks@redhat.com
