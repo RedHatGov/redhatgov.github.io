@@ -55,7 +55,7 @@ Fill in the Name and Display Name of the project as "cicd-{{< span "userid" "YOU
 {{% panel "CLI Steps" %}}
 
 ```bash
-$ oc new-app jenkins-ephemeral
+$ oc new-app jenkins-ephemeral --as-deployment-config=true
 $ oc logs -f dc/jenkins
 --> Scaling jenkins-1 to 1
 --> Success
