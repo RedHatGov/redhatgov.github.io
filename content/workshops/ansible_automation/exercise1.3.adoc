@@ -50,11 +50,11 @@ We are now going to run your brand-new playbook, on your two web nodes.  To do t
 
 === Step 1: Create a new project and playbook
 
-Navigate to your home directory create a new project and playbook.
+Navigate to the '~/src/' directory create a new project and playbook.
 
 [source,bash]
 ----
-cd
+cd ~/src/
 mkdir apache-basic-playbook
 cd apache-basic-playbook
 vim site.yml
