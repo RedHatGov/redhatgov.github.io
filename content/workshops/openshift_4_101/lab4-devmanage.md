@@ -19,7 +19,7 @@ Only if you don't already have it running, add it with the following steps.
 > <i class="fa fa-terminal"></i> Goto the terminal and type these commands:
 
 ```bash
-$ oc new-app --name=dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir=dc-metro-map
+$ oc new-app --name=dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir=dc-metro-map --as-deployment-config=true
 $ oc expose service dc-metro-map
 ```
 
@@ -347,7 +347,7 @@ That should return **BEERME=true**, matching the value that we set in the deploy
 
 ```bash
 $ oc delete all -l app=dc-metro-map
-$ oc delete secrets dc-metro-map-generic-webhook-secret dc-metro-map-github-webhook-secret    
+$ oc delete secrets dc-metro-map-generic-webhook-secret dc-metro-map-github-webhook-secret 2>/dev/null
 ```
   
 # Summary

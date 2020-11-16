@@ -19,7 +19,7 @@ We can do this either via the command line or the web console.  You decide which
 </blockquote>
 
 ```bash
-$ oc new-app --name=dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir=dc-metro-map
+$ oc new-app --name=dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir=dc-metro-map --as-deployment-config=true
 $ oc expose service dc-metro-map
 ```
 
