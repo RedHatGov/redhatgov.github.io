@@ -33,7 +33,7 @@ Download the latest Ansible Tower package
 
 [source,bash]
 ----
-curl -O https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz
+curl -O https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-3.7.3-1.tar.gz
 ----
 
 === Step 3: Untar and unzip the package file
