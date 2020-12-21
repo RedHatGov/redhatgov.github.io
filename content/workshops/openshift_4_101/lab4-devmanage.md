@@ -296,7 +296,7 @@ $ oc get pods
 Find the pod name for your Running pod
 
 ```bash
-$ oc exec -it [POD NAME] /bin/bash
+$ oc exec -it [POD NAME] -- /bin/bash
 ```
  
 You are now interactively attached to the container in your pod.  Let's look for the environment variables we set:
@@ -353,8 +353,8 @@ $ oc delete secrets dc-metro-map-generic-webhook-secret dc-metro-map-github-webh
 # Summary
 In this lab you've seen how to trace running software back to its roots, how to see details on the pods running your software, how to update deployment configurations, how to inspect logs files, how to set environment variables consistently across your environment, and how to interactively attach to running containers.  All these things should come in handy for any developer working in an OpenShift platform.
 
-To dig deeper into the details behind the steps you performed in this lab, check out the OpenShift [developer's guide][1].
+To dig deeper into the details behind the steps you performed in this lab, check out the OpenShift documentation[1].
 
-[1]: https://docs.openshift.com/container-platform/3.4/dev_guide/index.html
+[1]: https://docs.openshift.com/container-platform/latest/welcome/index.html 
 
 {{< importPartial "footer/footer.html" >}}
