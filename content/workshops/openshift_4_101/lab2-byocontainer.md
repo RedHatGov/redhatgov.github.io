@@ -111,7 +111,6 @@ Click "Create"
 > <i class="fa fa-terminal"></i> Try typing the following to see what is available to 'get':
 
 ```bash
-$ oc project demo-{{< span userid "YOUR#" >}}
 $ oc get all
 ```
 
