@@ -1,0 +1,31 @@
+---
+title: Container Security - A Practical Introduction
+menu:
+  main:
+    parent: workshops
+    pre: fa fa-lock
+---
+
+
+:badges:
+:icons: font
+:imagesdir: /workshops/security_container_intro/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+== A PRACTICAL INTRODUCTION TO CONTAINER SECURITY
+=== Red Hat Summit 2020
+
+Bob Kozdemba (bkozdemb@redhat.com)
+Dan Walsh (dwalsh@redhat.com)
+
+image::container-tools.png[Container Tools Image]
+
+=== Abstract
+Linux containers provide convenient application packaging and run-time isolation in multi-tenant environments. However, the security implications of running containerized applications is often taken for granted. For example, today it is very easy to pull container images from the internet and run them in the enterprise without examining their content and authenticity. In this lab, you'll complete a series of hands on exercises aimed at understanding the concepts, challenges and best practices associated with deploying containers in a secure fashion.
+
+== Labs
+
+{{< labs security_container_intro >}}
+
+{{< importPartial "footer/footer.html" >}}
