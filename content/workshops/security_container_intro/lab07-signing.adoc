@@ -32,75 +32,80 @@ image::decrypt.png[Image Decryption]
 
 On the bastion server, create a configuration for the `node1` registry. 
 
-.Become root to do this.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo -i*
-```
+Become root to do this.
+[source,bash]
+----
+sudo -i
+----
 
-.Create the configuration for node1.
-[source,subs="{markup-in-source}"]
-```
-# *cat <<EOF > /etc/containers/registries.d/node1.{GUID}.internal.yaml
-
+Create the configuration for node1.
+[source,bash]
+----
+cat <<EOF > /etc/containers/registries.d/node1.{GUID}.internal.yaml
+----
+[source,bash]
+----
 docker:
   node1.{GUID}.internal:5000:
     sigstore: file:///var/tmp/sigstore/node1.{GUID}.internal
     sigstore-staging: file:///var/tmp/sigstore/node1.{GUID}.internal
-EOF*
-```
+EOF
+----
 
-.Exit from the root shell.
-[source,subs="{markup-in-source}"]
-```
-# *exit*
-```
+Exit from the root shell.
+[source,bash]
+----
+exit
+----
 
 Notice we are using the `/var/tmp/sigstore` directory to store signature claims. This allows the system administrator to configure the signature store for a given registry and allows rootless users to push and pull signed container images.
 
-.Create a directory for the signature claims for the node1 registry.
-[source,subs="{markup-in-source}"]
-```
-$ *mkdir -p /usr/tmp/sigstore/node1.{GUID}.internal*
-```
+Create a directory for the signature claims for the node1 registry.
+[source,bash]
+----
+mkdir -p /usr/tmp/sigstore/node1.{GUID}.internal
+----
 
 === Generating key pairs
 
-.Generate the gpg key pair. You'll be prompted to set a pass phrase. Set it to `redhat` so you don't forget. :)
-[source,subs="{markup-in-source}"]
-```
-$ *gpg2 --quick-gen-key --yes %USERNAME%*
-```
+Generate the gpg key pair. You'll be prompted to set a pass phrase. Set it to `redhat` so you don't forget. :)
+[source,bash]
+----
+gpg2 --quick-gen-key --yes %USERNAME%
+----
 
-.Now export the public key. You'll need it later.
-[source,subs="{markup-in-source}"]
-```
-$ *mkdir /usr/tmp/keys*
-$ *gpg2 --export %USERNAME% > /usr/tmp/keys/gpg-pubkey.gpg*
-```
+Now export the public key. You'll need it later.
+[source,bash]
+----
+mkdir /usr/tmp/keys
+gpg2 --export %USERNAME% > /usr/tmp/keys/gpg-pubkey.gpg
+----
 
-.Confirm you have a container image with the **correct REPOSITORY and TAG** as shown.
-[source,subs="{markup-in-source}"]
-```
-$ *podman tag %RHEL_CONTAINER% node1.{GUID}.internal:5000/ubi8/ubi*
-
-
-$ *podman images*
+Confirm you have a container image with the **correct REPOSITORY and TAG** as shown.
+[source,bash]
+----
+podman tag %RHEL_CONTAINER% node1.{GUID}.internal:5000/ubi8/ubi
+----
+....
+podman images
 
 REPOSITORY                                  TAG      IMAGE ID       CREATED       SIZE
 node1.{GUID}.internal:5000/ubi8/ubi          latest   a4a954bf99ed   2 weeks ago   831 MB
 %RHEL_CONTAINER%         latest   a4a954bf99ed   2 weeks ago   831 MB
-```
+....
 
-.Login to the registry, then sign and push the image. When `podman` signs the image it will prompt for the gpg key pass phrase you used to create the key pair. It then creates a signature claim.
-[source,subs="{markup-in-source}"]
-```
-$ *podman login --username=redhat --password=redhat node1.{GUID}.internal:5000*
-
+Login to the registry, then sign and push the image. When `podman` signs the image it will prompt for the gpg key pass phrase you used to create the key pair. It then creates a signature claim.
+[source,bash]
+----
+podman login --username=redhat --password=redhat node1.{GUID}.internal:5000
+----
+....
 Login Succeeded!
-
-$ *podman push --sign-by %USERNAME% node1.{GUID}.internal:5000/ubi8/ubi*
-
+....
+----
+podman push --sign-by %USERNAME% node1.{GUID}.internal:5000/ubi8/ubi
+----
+....
 Getting image source signatures
 Copying blob acc367faa01d done
 Copying blob 2e7173fdd054 done
@@ -111,95 +116,104 @@ Copying config a4a954bf99 done
 Writing manifest to image destination
 Signing manifest
 Storing signatures
-```
+....
 
-.Confirm the signature claim was created. 
-[source,subs="{markup-in-source}"]
-```
-$ *tree /var/tmp/sigstore*
-
+Confirm the signature claim was created.
+[source,bash]
+----
+tree /var/tmp/sigstore
+----
+....
 /var/tmp/sigstore
 └── node1.{GUID}.internal
     └── ubi8/ubi@sha256=348abe443209236c7359717d582b3a63160628d2e452a5eead05dcb3a453beb6
         └── signature-1
 
 2 directories, 1 file
-```
+....
 
-.Confirm the push succeeded.
-[source,subs="{markup-in-source}"]
-```
-$ *curl  --user redhat:redhat https://node1.{GUID}.internal:5000/v2/_catalog*
-
+Confirm the push succeeded.
+[source,bash]
+----
+curl  --user redhat:redhat https://node1.{GUID}.internal:5000/v2/_catalog
+----
+....
 {"repositories":["ubi8/ubi"]}
-```
+....
 
 === Working with trust policies
 
 In this exercise you will configure the image trust policy so that it allows only signed images to be pulled from a trusted registry on node1. 
 
-.Start by examining the current trust policy (which accepts anything)then create a default policy that rejects all image pulls.
-[source,subs="{markup-in-source}"]
-```
-$ *podman image trust show*
-
+Start by examining the current trust policy (which accepts anything) then create a default policy that rejects all image pulls.
+[source,bash]
+----
+podman image trust show
+----
+....
 default             insecureAcceptAnything                         
-```
+....
 
-.Change the policy to reject by default.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo podman image trust set -t reject default*
-$ *podman image trust show*
+Change the policy to reject by default.
+[source,bash]
+----
+sudo podman image trust set -t reject default
+podman image trust show
+----
+....
 
           insecureAcceptAnything      
 default   reject
-```
+....
 
 === Pulling signed images
 
-.Now we are ready to try an image pull. To make certain you are authenticated to the registry, login again.
-[source,subs="{markup-in-source}"]
-```
-$ *podman login --username=redhat --password=redhat node1.{GUID}.internal:5000*
-
+Now we are ready to try an image pull. To make certain you are authenticated to the registry, login again.
+[source,bash]
+----
+podman login --username=redhat --password=redhat node1.{GUID}.internal:5000
+----
+....
 Login Succeeded!
-```
+....
 
-.Now test that image pulls are rejected by default.
-[source,subs="{markup-in-source}"]
-```
-$ *podman pull node1.{GUID}.internal:5000/ubi8/ubi*
-
+Now test that image pulls are rejected by default.
+[source,bash]
+----
+podman pull node1.{GUID}.internal:5000/ubi8/ubi
+----
+....
 Trying to pull node1.{GUID}.internal:5000/ubi8/ubi...
   Running image docker://node1.{GUID}.internal:5000/ubi8/ubi:latest is rejected by p
 olicy.
 Error: error pulling image "node1.{GUID}.internal:5000/ubi8/ubi": unable to pull nod
 e1.summit.internal:5000/ubi8/ubi: unable to pull image: Source image rejected: Runni
 ng image docker://node1.{GUID}.internal:5000/ubi8/ubi:latest is rejected by policy.
-```
+....
 
-.Set a trust policy for node1.{GUID}.internal using your exported public gpg key.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo podman image trust set --type signedBy --pubkeysfile /usr/tmp/keys/gpg-pubkey.gpg node1.{GUID}.internal:5000*
-```
+Set a trust policy for node1.{GUID}.internal using your exported public gpg key.
+[source,bash]
+----
+sudo podman image trust set --type signedBy --pubkeysfile /usr/tmp/keys/gpg-pubkey.gpg node1.{GUID}.internal:5000
+----
 
-.Now examine the image trust again. It should show that any image pulls from node1.{GUID}.internal must be signed. 
-[source,subs="{markup-in-source}"]
-```
-$ *podman image trust show*
-
+Now examine the image trust again. It should show that any image pulls from *node1.{GUID}.internal* must be signed.
+[source,bash]
+----
+podman image trust show
+----
+....
 default                      reject                              
 node1.summit.internal:5000   signedBy                 ec2-user   file:///var/tmp/s
 igstore/node1.summit.internal
-```
+....
 
-.Finally, try to pull the image from the trusted registry on node1.{GUID}.internal and it should succeed.
-[source,subs="{markup-in-source}"]
-```
-$ *podman pull node1.{GUID}.internal:5000/ubi8/ubi:latest*
-
+Finally, try to pull the image from the trusted registry on node1.{GUID}.internal and it should succeed.
+[source,bash]
+----
+podman pull node1.{GUID}.internal:5000/ubi8/ubi:latest
+----
+....
 Trying to pull node1.summit.internal:5000/ubi8/ubi...
 Getting image source signatures
 Checking if image destination supports signatures
@@ -211,67 +225,74 @@ Copying blob 103696e3c551 skipped: already exists
 Copying config a4a954bf99 done
 Writing manifest to image destination
 Storing signatures
-```
+....
 
 === Create a trust policy for Red Hat images. 
 
 In this exercise, you will create a trust policy that allows only signed images to be pulled from Red Hat's Container Catalog.  
 
-.First, try a pull and it should fail because of the default policy.
-[source,subs="{markup-in-source}"]
-```
-$ *podman pull %RHEL_CONTAINER%*
-
+First, try a pull and it should fail because of the default policy.
+[source,bash]
+----
+podman pull %RHEL_CONTAINER%
+----
+....
 Trying to pull %RHEL_CONTAINER%...
   Running image docker://%RHEL_CONTAINER%:latest is rejected by policy.
 Error: error pulling image "%RHEL_CONTAINER%": unable to pull %RHEL_CONTAINER%: unable to pull image: Source image rejected: Running image docker://%RHEL_CONTAINER%:latest is rejected by policy.
-```
+....
 
 Configure the sigstore for the RedHat registry.
 
-.Become root to do this.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo -i*
-```
+Become root to do this.
+[source,bash]
+----
+sudo -i
+----
 
-.Create the configuration for node1.
-[source,subs="{markup-in-source}"]
-```
-# *cat <<EOF > /etc/containers/registries.d/registry.access.redhat.com.yaml
+Create the configuration for node1.
+[source,bash]
+----
+cat <<EOF > /etc/containers/registries.d/registry.access.redhat.com.yaml
+----
+[source,bash]
+----
 docker:
      registry.access.redhat.com:
          sigstore: https://access.redhat.com/webassets/docker/content/sigstore
-EOF*
-```
+EOF
+----
 
-.Exit from the root shell.
-[source,subs="{markup-in-source}"]
-```
-# *exit*
-```
+Exit from the root shell.
+[source,bash]
+----
+exit
+----
 
-.Configure the trust policy for the RedHat registry.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo podman image trust set -f /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release registry.access.redhat.com*
-```
+Configure the trust policy for the RedHat registry.
+[source,bash]
+----
+sudo podman image trust set -f /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release registry.access.redhat.com
+----
 
-.Examine the trust policy again.
-[source,subs="{markup-in-source}"]
-```
-$ *podman image trust show*
+Examine the trust policy again.
+[source,bash]
+----
+podman image trust show
+----
+....
                              insecureAcceptAnything
 default                      reject
 node1.{GUID}.internal:5000   signedBy                 ec2-user                                   file:///var/tmp/sigstore
 registry.access.redhat.com   signedBy                 security@redhat.com, security@redhat.com   https://access.redhat.com/webassets/docker/content/sigstore
-```
+....
 
-.Try the image pull again.
-[source,subs="{markup-in-source}"]
-```
-$ *podman pull %RHEL_CONTAINER%*
-
+Try the image pull again.
+[source,bash]
+----
+podman pull %RHEL_CONTAINER%
+----
+....
 Trying to pull %RHEL_CONTAINER%...
 Getting image source signatures
 Checking if image destination supports signatures
@@ -281,7 +302,7 @@ Copying config 0c46e5c7a8 done
 Writing manifest to image destination
 Storing signatures
 0c46e5c7a82a97d21447ee6a1ef0d407317642c9361b562456395e087be08774
-```
+....
 
 This https://access.redhat.com/articles/3116561[kbase article] has more detail.
 
@@ -289,21 +310,22 @@ This https://access.redhat.com/articles/3116561[kbase article] has more detail.
 
 It is recommended that a registry trust policy be used to control which registries you want to allow users to pull and push from. This gives greater flexibility, and supports all container runtimes and tools including the docker daemon, podman, buildah and cri-o.
 
-.There are a few ways to approach this.
+There are a few ways to approach this.
 * Create a default reject policy and trust only node1
 * Create a default accept policy and reject node2
 
-Take what you've learn and give each a try.
+Take what you've learned and give each a try.
 
-.Now try to pull the image from node2.{GUID}.internal, it should fail.
-[source,subs="{markup-in-source}"]
-```
-$ *podman pull node2.{GUID}.internal:5000/ubi8/ubi*
-
+Now try to pull the image from *node2.{GUID}.internal*, it should fail.
+[source,bash]
+----
+podman pull node2.{GUID}.internal:5000/ubi8/ubi
+----
+....
 Trying to pull node2.{GUID}.internal:5000/ubi8/ubi...
   Running image docker://node2.{GUID}.internal:5000/ubi8/ubi:latest is rejected by policy.
 Error: error pulling image "node2.{GUID}.internal:5000/ubi8/ubi": unable to pull node2.{GUID}.internal:5000/ubi8/ubi: unabl
 e to pull image: Source image rejected: Running image docker://node2.{GUID}.internal:5000/ubi8/ubi:latest is rejected by policy.
-```
+....
 
 {{< importPartial "footer/footer.html" >}}
