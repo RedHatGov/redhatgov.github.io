@@ -225,6 +225,7 @@ Keeping things in alphabetic order doesn't make any difference to SELinux, but m
 Now, let's recompile the policy, and reload it into memory.
 
 {{< highlight bash >}}
+cd ~/src/policy
 sudo ./testapp.sh
 {{< /highlight >}}
 
