@@ -24,32 +24,48 @@ configured and running, the `curl` command can be used to test basic connectivit
 [[anchor-1]]
 == Configuring the registries
 
-.Login to `node1.{GUID}.internal` and configure the registry. Do this as a regular (non-root) user.
-[source,subs="{markup-in-source}"]
-```
-$ *cd $HOME/files/nodes/registry-files/gen-certs*
-```
+Login to `{{< urifqdn "" "node1" "" >}}` (from the bastion) and configure the registry. Do this as a regular (non-root) user.
+[source,bash]
+----
+{{< urifqdn "ssh " "node1" "" >}}
+----
+You'll be asked to confirm the key fingerprint, the first time that you login. Please answer `yes`.
+....
+The authenticity of host 'jajcs.node1.0.rhnaps.io (10.0.2.88)' can't be established.
+ECDSA key fingerprint is SHA256:t019FDEhEgp1uhivEZy1gwqaNaXM75tOem4MHpmLRaw.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'jajcs.node1.0.rhnaps.io,10.0.2.88' (ECDSA) to the list of known hosts.
+Last login: Tue Jan 12 02:10:26 2021 from 10.0.2.245
+[ec2-user@ip-10-0-2-88 ~]$
+....
 
-.Confirm that the `FQDN` variable is set to `node1.{GUID}.internal` in the `myserver.cnf` file.
-[source,subs="{markup-in-source}"]
-```
-$ *grep FQDN myserver.cnf*
+Confirm that the `FQDN` variable is set to `{{< urifqdn "" "node1" "" >}}` in the `myserver.cnf` file.
 
-FQDN=node1.{GUID}.internal
-```
+[source,bash]
+----
+cd $HOME/files/nodes/registry-files/gen-certs
+grep ^FQDN myserver.cnf
+----
+
+....
+FQDN={{< urifqdn "" "node1" "" >}}
+....
 
 .Run the `gen-cert.sh` script to generate an SSL certificate.
-[source,subs="{markup-in-source}"]
-```
-$ *sh ./gen-cert.sh*
 
+[source,bash]
+----
+sh ./gen-cert.sh
+----
+
+....
 Generating a RSA private key
 ........................................................++++
 .......................................++++
 writing new private key to 'myserver.key'
 -----
 Signature ok
-subject=C = CH, O = Summit, CN = node1.{GUID}.internal
+subject=C = CH, O = Summit, CN = {{< urifqdn "" "node1" "" >}}
 Getting Private key
 Certificate:
     Data:
@@ -57,57 +73,83 @@ Certificate:
         Serial Number:
             66:eb:dd:c8:21:f5:38:ef:22:16:79:d0:ba:34:2c:f9:4b:1b:7d:6f
         Signature Algorithm: sha256WithRSAEncryption
-        Issuer: C = CH, O = Summit, CN = node1.897qp.internal
+        Issuer: C = CH, O = Summit, CN = {{< urifqdn "" "node1" "" >}}
         Validity
             Not Before: Apr  7 19:12:30 2020 GMT
             Not After : Sep 28 19:12:30 2025 GMT
-```
+....
 
-.Now move up one directory and run the `run-registry.sh` script to start the registry container.
-[source,subs="{markup-in-source}"]
-```
-$ *cd ..*
-$ *sh ./run-registry.sh*
+Now move up one directory and run the `run-registry.sh` script to start the registry container.
+[source,bash]
+----
+cd ..
+sh ./run-registry.sh
+----
 
+....
 Adding password for user redhat
 750ef695e4b66b00919e725bc2559db6ec2f9407e1f31358686b4339017c2ed5
-```
+
+
+Give the registry a minute or so to start then ...
+curl  --user user:password -k https://localhost:5000/v2/_catalog
+....
 
 === Testing the registries
 
-.Use `curl` to test that the registry service is running.
-[source,subs="{markup-in-source}"]
-```
-$ *curl  --user redhat:redhat https://node1.{GUID}.internal:5000/v2/_catalog*
+Use `curl` to test that the registry service is running:
+[source,bash]
+----
+curl --user redhat:redhat {{< urifqdn "https://" "node1" ":5000/v2/_catalog" >}}
+----
 
+....
 {"repositories":[]}
-```
+....
 
-<<anchor-1,Repeat>> the same for node2
+Logout from node1:
+[source,bash]
+----
+exit
+----
+<<anchor-1,Repeat>> the same for `node2`.
+
+[source,bash]
+----
+{{< urifqdn "ssh " "node2" "" >}}
+cd $HOME/files/nodes/registry-files/gen-certs
+sh ./gen-cert.sh
+cd ..
+sh ./run-registry.sh
+exit
+----
 
 === Configuring and testing the bastion
 
-.Copy the SSL certificates from the registry servers and update the trust store.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo scp node1.{GUID}.internal:/etc/pki/ca-trust/source/anchors/myserver.cert /etc/pki/ca-trust/source/anchors/node1.cert*
+Copy the SSL certificates from the registry servers and update the trust store.
+[source,bash]
+----
+sudo scp ec2-user@{{< urifqdn "" "node1" "" >}}:/etc/pki/ca-trust/source/anchors/myserver.cert /etc/pki/ca-trust/source/anchors/node1.cert
+sudo scp ec2-user@{{< urifqdn "" "node2" "" >}}:/etc/pki/ca-trust/source/anchors/myserver.cert /etc/pki/ca-trust/source/anchors/node2.cert
+sudo update-ca-trust
+----
 
-$ *sudo scp node2.{GUID}.internal:/etc/pki/ca-trust/source/anchors/myserver.cert /etc/pki/ca-trust/source/anchors/node2.cert*
-
-$ *sudo update-ca-trust*
-```
-
-.Now try to curl the registries from the bastion using the `FQDN`.
-[source,subs="{markup-in-source}"]
-```
-$ *curl  --user redhat:redhat https://node1.{GUID}.internal:5000/v2/_catalog*
-
+Now try to curl the registries from the bastion using the `FQDN`:
+[source,bash]
+----
+curl --user redhat:redhat {{< urifqdn "https://" "node1" ":5000/v2/_catalog" >}}
+----
+....
 {"repositories":[]}
+....
 
-$ *curl  --user redhat:redhat https://node2.{GUID}.internal:5000/v2/_catalog*
-
+[source,bash]
+----
+curl --user redhat:redhat {{< urifqdn "https://" "node2" ":5000/v2/_catalog" >}}
+----
+....
 {"repositories":[]}
-```
+....
 
 Now that the registries have been configured, the remainder of the commands will be run on the bastion.
 
