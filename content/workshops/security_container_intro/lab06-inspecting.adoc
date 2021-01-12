@@ -19,62 +19,71 @@ Container images can easily be pulled from any public registry and run on a cont
 
 == Podman inspect
 
-.Use `podman` to inspect the %RHEL_CONTAINER% image. Remember, this image must be present in local storage. Examine the output to determine who is the maintainer and what is the version of that image?
-[source,subs="{markup-in-source}"]
-```
-$ *podman inspect %RHEL_CONTAINER%*
-```
+Use `podman` to inspect the *%RHEL_CONTAINER%* image. Remember, this image must be present in local storage. Examine the output to determine who is the maintainer and what is the version of that image?
+
+[source,bash]
+----
+podman inspect %RHEL_CONTAINER%
+----
 
 === Podman diff
 
-.The `podman diff` command can help understand the difference between a container image and it's parent. 
-[source,subs="{markup-in-source}"]
-```
-$ *podman diff --format=json %RHEL_CONTAINER%*
-```
+The `podman diff` command can help understand the difference between a container image and its parent. 
+[source,bash]
+----
+podman diff --format=json %RHEL_CONTAINER%
+----
 
 === Podman live mounts
 
 Next we’ll use the podman command to inspect a container’s filesystem by mounting it to the host.
 
-.First, launch a long running container in the background.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo podman run -d --name sleepy %RHEL_CONTAINER% sleep 9999*
-
+First, launch a long running container in the background.
+[source,bash]
+----
+sudo podman run -d --name sleepy %RHEL_CONTAINER% sleep 9999
+----
+....
 7ce0fdb9d8a9345e760fbcbf460d795a0a50cba1ac6e0ffe0e894c7a927cdcda
-```
+....
 
-.Next, enter the container's namespace, create some data then `exit` back to the host.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo podman exec -it sleepy bash*
+Next, enter the container's namespace, create some data then `exit` back to the host.
+[source,bash]
+----
+sudo podman exec -it sleepy bash
+----
+The previous `podman` command will give you a shell within the container shell.  Now, create some data:
+[source,bash]
+----
+date >> /tmp/date.txt
+exit
+----
 
-%CONTAINER_PROMPT% date >> /tmp/date.txt
-%CONTAINER_PROMPT% exit
-```
+Next, mount the container. The host mount point should get displayed.
+[source,bash]
+----
+sudo podman mount sleepy
+----
 
-.Next, mount the container. The host mount point should get displayed. 
-[source,subs="{markup-in-source}"]
-```
-$ *sudo podman mount sleepy*
-
+....
 /var/lib/containers/storage/overlay/<container-id>/merged
-```
+....
 
-.Using the directory returned from the above `mount` command, confirm the date.txt file exists in the mounted file system.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo cat /var/lib/containers/storage/overlay/`<container-id>`/merged/tmp/date.txt*
-
+Using the directory returned from the above `mount` command, confirm the date.txt file exists in the mounted file system.
+[source,bash]
+----
+sudo cat /var/lib/containers/storage/overlay/`<container-id>`/merged/tmp/date.txt
+----
+....
 Tue Apr 16 19:45:11 UTC 2019
-```
+....
 
-.How might you search this container's file system for all programs that are owned by root and have the SETUID bit set? 
-[source,subs="{markup-in-source}"]
-```
-$ *sudo find /var/lib/containers/storage/overlay/<container-id>/merged -user root -perm -4000 -exec ls -ldb {} \;*
-
+How might you search this container's file system for all programs that are owned by root and have the SETUID bit set?
+[source,bash]
+----
+sudo find /var/lib/containers/storage/overlay/<container-id>/merged -user root -perm -4000 -exec ls -ldb {} \;
+----
+....
 -rws--x--x. 1 root root 47424 Nov 20  2018 /var/lib/containers/storage/overlay/c1add9d7
 571f099af67704bea5774efaa3df3351d8ccafc60dc0678e91e5ff5c/merged/usr/sbin/userhelper
 -rwsr-xr-x. 1 root root 13376 Dec  7  2018 /var/lib/containers/storage/overlay/c1add9d7
@@ -84,22 +93,23 @@ check
 ...
 ...
 ...
-```
+....
 
-.Un-mount the container when you're finished.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo podman umount sleepy*
-
+Un-mount the container when you're finished.
+[source,bash]
+----
+sudo podman umount sleepy
+----
+....
 <container-id>
-```
+....
 
-.Stop and remove the running container.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo podman stop sleepy*
-$ *sudo podman rm sleepy*
-```
+Stop and remove the running container.
+[source,bash]
+----
+sudo podman stop sleepy
+sudo podman rm sleepy
+----
 
 === Working with Skopeo
 
@@ -110,11 +120,12 @@ Skopeo is an additional low level tool that can perform image operations on loca
 Try the following `skopeo` commands to inspect images from a remote registry. How
 many layers does the `ubi` image contain? 
 
-.Try to inspect an image in local container storage. What command did you use?
-[source,subs="{markup-in-source}"]
-```
-$ *skopeo inspect docker://%RHEL_CONTAINER%*
-
+Try to inspect an image in local container storage. What command did you use?
+[source,bash]
+----
+skopeo inspect docker://%RHEL_CONTAINER%
+----
+....
 {
     "Name": "%RHEL_CONTAINER%",
     "Digest": "sha256:1f0e6e1f451ff020b3b44c1c4c34d85db5ffa0fc1bb0490d6a32957a7a06b67f"
@@ -126,19 +137,20 @@ $ *skopeo inspect docker://%RHEL_CONTAINER%*
         ...
 
 }
-```
+....
 
-.Skopeo can also copy images between two registries. See the `skopeo(1)` man page for details and give it a try. An example is shown below. To make this work, the proper image tags must exist and authentication to registries must be in place.
-[source,subs="{markup-in-source}"]
-```
-$ *skopeo copy docker://node1.{GUID}.internal:5000/ubi8/ubi docker://node2.{GUID}.internal:5000/ubi8/ubi*
-
+Skopeo can also copy images between two registries. See the `skopeo(1)` man page for details and give it a try. An example is shown below. To make this work, the proper image tags must exist and authentication to registries must be in place.
+[source,bash]
+----
+skopeo copy docker://node1.{GUID}.internal:5000/ubi8/ubi docker://node2.{GUID}.internal:5000/ubi8/ubi
+----
+....
 Getting image source signatures
 Copying blob ba795627ed38 done
 Copying blob 5d5058e0252a done
 Copying config 8121a9f530 done
 Writing manifest to image destination
 Storing signatures
-```
+....
 
 {{< importPartial "footer/footer.html" >}}
