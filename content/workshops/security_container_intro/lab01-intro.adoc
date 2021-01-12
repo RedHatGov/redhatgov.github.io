@@ -1,0 +1,153 @@
+---
+title: "Lab 1.0 - Workshop introduction"
+workshops: security_container_intro
+workshop_weight: 10
+layout: lab
+---
+
+:imagesdir: images
+:GUID: %guid%
+:STUDENT_SSH_COMMAND: %student_ssh_command%
+:STUDENT_SSH_PASSWORD: %student_ssh_password%
+:STUDENT_BASTION_HOSTNAME: %student_bastion_hostname%
+:USERNAME: %username%
+:markup-in-source: verbatim,attributes,quotes
+:toc:
+
+:badges:
+:icons: font
+:imagesdir: /workshops/security_container_intro/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+This lab session is a low-level, hands-on introduction to container security using the container tools included with Red Hat Enterprise Linux 8. It is intended to be consumed as a series of self paced exercises.
+
+.Prerequisites
+* An introductory knowledge of Linux and containers is helpful.
+* Basic text editing skills using `vim` or `nano`.
+
+Lab Environment 
+
+.Lab Environment
+image::lab-diagram.png[Lab diagram]
+
+.Lab Resources
+[options="header,footer"]
+|=======================
+|Server   |Function
+|BookBag  |Client as a Service 
+|bastion  |External ssh and container host     
+|node1    |Image registry and  container host
+|node2    |Image registry and  container host
+|=======================
+
+== Important 
+
+TIP: These servers can not be rebuilt in a timely fashion.
+
+.TIPS
+* Do not `rm` any files or directories you did not create.
+* Make a backup copy before modifying any file.  
+
+=== Conventions used in this lab 
+
+Shells and Prompts
+
+
+.Bastion
+[source,bash]
+----
+%BASTION_PROMPT%
+----
+
+.Example `*command*` with `sample output`.
+[source,subs="{markup-in-source}"]
+----
+*cat /etc/redhat-release*
+----
+----
+Red Hat Enterprise Linux release 8.1 (Ootpa)
+----
+
+=== The BookBag Environment 
+
+BookBag provides a integrated student client environment in a web browser. It includes the lab guide, terminals and a collection of client programs (i.e. `ssh`) to access the servers used in the lab. In case you are interested, BookBag runs as a container and can be hosted by `podman` or https://www.openshift.com[OpenShift].
+
+.BookBag Tips
+- Increase the width of the web browser to view the table of contents.
+- Move the horizontal and vertical dividers as needed.
+- Use the menu in the upper right to open additional terminals.
+- Commands may be copy and pasted from the lab guide to the terminals.
+
+=== Getting access to the servers
+
+.Bastion
+  * `{STUDENT_SSH_COMMAND}`
+  * Password: `{STUDENT_SSH_PASSWORD}`
+
+.Nodes
+  * To login to the either node from the bastion, `ssh` must be run using `sudo`.
+
+[source,bash]
+----
+$ *sudo ssh node1.{GUID}.internal*
+----
+
+[source,bash]
+----
+[ec2-user@node1 ~]$ 
+----
+
+=== Optional BookBag Configuration 
+
+This configuration is optional but helpful. Be certain this is
+performed in the BookBag shell only.
+
+.Create a an ssh key pair using the default key file with no pass phrase.
+[source,bash]
+----
+*ssh-keygen -P "" -f $HOME/.ssh/id_rsa*
+----
+.Create an ssh configuration to prevent the ssh session from timing out.
+
+[source,bash]
+----
+*echo -e "Host * \nServerAliveInterval 120" >> $HOME/.ssh/config*
+----
+
+.Copy the ssh identity to the bastion.
+[source,subs="{markup-in-source}",role=execute]
+```
+*ssh-copy-id -o "StrictHostKeyChecking=no" lab-user@{STUDENT_BASTION_HOSTNAME}*
+```
+
+.Use this ssh password that was provided in your email.
+[source,subs="{markup-in-source}",role=execute]
+```
+*{STUDENT_SSH_PASSWORD}*
+```
+
+.Example output.
+[source,subs="{markup-in-source}"]
+```
+lab-user@{STUDENT_BASTION_HOSTNAME}'s password: *`{STUDENT_SSH_PASSWORD}`*
+
+Number of key(s) added:        1
+```
+
+.Now try logging into the bastion without providing a password.
+[source,subs="{markup-in-source}"]
+```
+*{STUDENT_SSH_COMMAND}*
+```
+
+.Example output.
+[source,subs="{markup-in-source}"]
+```
+This system is not registered to Red Hat Insights. See https://cloud.redhat.com/
+To register this system, run: insights-client --register
+
+Last login: Wed May 27 22:00:03 2020 from 3.218.14.240
+[lab-user@bastion 0 ~]$
+```
+{{< importPartial "footer/footer.html" >}}

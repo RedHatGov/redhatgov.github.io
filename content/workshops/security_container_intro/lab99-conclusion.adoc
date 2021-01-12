@@ -1,0 +1,20 @@
+---
+title: "Conclusion - Closing thoughts & homework"
+workshops: security_container_intro
+workshop_weight: 99
+layout: lab
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/security_container_intro/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+As a final homework assignment, we encourage you to watch a video entitled the https://www.youtube.com/watch?v=bMo06sIHltY[State of Container Security] that Sally and Urvashi presented at an OpenShift Commons briefing on March 27, 2020. Their talk goes into additional detail on many of the concepts covered in this lab along with a sneak peak at future work by the upstream community. They also show some great demos that you will want to see. 
+
+So this concludes the lab on a practical introduction to container security. We hope you had fun and learned something in the process. Thanks for attending and *please complete the survey* so we can improve this course for next year.
+
+Bob and Dan
+
+{{< importPartial "footer/footer.html" >}}

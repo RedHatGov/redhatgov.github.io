@@ -1,0 +1,114 @@
+---
+title: "Lab 2.0 - Container registries"
+workshops: security_container_intro
+workshop_weight: 20
+layout: lab
+---
+
+:GUID: %guid%
+:markup-in-source: verbatim,attributes,quotes
+:toc:
+
+:badges:
+:icons: font
+:imagesdir: /workshops/security_container_intro/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+During this module you will configure both nodes to host secure container registries.
+The registry software runs in a container and listens on port 5000. Configuring the 
+registry consists of generating a self-signed SSL certificate and running the 
+container. Two simple bash scripts are provided to do this. Once the registries are
+configured and running, the `curl` command can be used to test basic connectivity.
+
+[[anchor-1]]
+== Configuring the registries
+
+.Login to `node1.{GUID}.internal` and configure the registry. Do this as a regular (non-root) user.
+[source,subs="{markup-in-source}"]
+```
+$ *cd $HOME/files/nodes/registry-files/gen-certs*
+```
+
+.Confirm that the `FQDN` variable is set to `node1.{GUID}.internal` in the `myserver.cnf` file.
+[source,subs="{markup-in-source}"]
+```
+$ *grep FQDN myserver.cnf*
+
+FQDN=node1.{GUID}.internal
+```
+
+.Run the `gen-cert.sh` script to generate an SSL certificate.
+[source,subs="{markup-in-source}"]
+```
+$ *sh ./gen-cert.sh*
+
+Generating a RSA private key
+........................................................++++
+.......................................++++
+writing new private key to 'myserver.key'
+-----
+Signature ok
+subject=C = CH, O = Summit, CN = node1.{GUID}.internal
+Getting Private key
+Certificate:
+    Data:
+        Version: 1 (0x0)
+        Serial Number:
+            66:eb:dd:c8:21:f5:38:ef:22:16:79:d0:ba:34:2c:f9:4b:1b:7d:6f
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C = CH, O = Summit, CN = node1.897qp.internal
+        Validity
+            Not Before: Apr  7 19:12:30 2020 GMT
+            Not After : Sep 28 19:12:30 2025 GMT
+```
+
+.Now move up one directory and run the `run-registry.sh` script to start the registry container.
+[source,subs="{markup-in-source}"]
+```
+$ *cd ..*
+$ *sh ./run-registry.sh*
+
+Adding password for user redhat
+750ef695e4b66b00919e725bc2559db6ec2f9407e1f31358686b4339017c2ed5
+```
+
+=== Testing the registries
+
+.Use `curl` to test that the registry service is running.
+[source,subs="{markup-in-source}"]
+```
+$ *curl  --user redhat:redhat https://node1.{GUID}.internal:5000/v2/_catalog*
+
+{"repositories":[]}
+```
+
+<<anchor-1,Repeat>> the same for node2
+
+=== Configuring and testing the bastion
+
+.Copy the SSL certificates from the registry servers and update the trust store.
+[source,subs="{markup-in-source}"]
+```
+$ *sudo scp node1.{GUID}.internal:/etc/pki/ca-trust/source/anchors/myserver.cert /etc/pki/ca-trust/source/anchors/node1.cert*
+
+$ *sudo scp node2.{GUID}.internal:/etc/pki/ca-trust/source/anchors/myserver.cert /etc/pki/ca-trust/source/anchors/node2.cert*
+
+$ *sudo update-ca-trust*
+```
+
+.Now try to curl the registries from the bastion using the `FQDN`.
+[source,subs="{markup-in-source}"]
+```
+$ *curl  --user redhat:redhat https://node1.{GUID}.internal:5000/v2/_catalog*
+
+{"repositories":[]}
+
+$ *curl  --user redhat:redhat https://node2.{GUID}.internal:5000/v2/_catalog*
+
+{"repositories":[]}
+```
+
+Now that the registries have been configured, the remainder of the commands will be run on the bastion.
+
+{{< importPartial "footer/footer.html" >}}
