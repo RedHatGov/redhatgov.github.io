@@ -40,7 +40,7 @@ curl -O https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-3.7
 
 [source,bash]
 ----
-tar xvfz /tmp/ansible-tower-setup-latest.tar.gz
+tar xvfz /tmp/ansible-tower-setup-3.7.3-1.tar.gz
 ----
 
 === Step 4: Change directories

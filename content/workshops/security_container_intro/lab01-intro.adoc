@@ -35,10 +35,9 @@ image::lab-diagram.png[Lab diagram]
 [options="header,footer"]
 |=======================
 |Server   |Function
-|BookBag  |Client as a Service 
 |bastion  |External ssh and container host     
-|node1    |Image registry and  container host
-|node2    |Image registry and  container host
+|node1    |Image registry and container host
+|node2    |Image registry and container host
 |=======================
 
 == Important 
@@ -53,101 +52,36 @@ TIP: These servers can not be rebuilt in a timely fashion.
 
 Shells and Prompts
 
-
 .Bastion
 [source,bash]
 ----
-%BASTION_PROMPT%
+ec2-user  ~ 
 ----
 
 .Example `*command*` with `sample output`.
-[source,subs="{markup-in-source}"]
+[source,bash]
 ----
-*cat /etc/redhat-release*
+cat /etc/redhat-release
 ----
-----
+....
 Red Hat Enterprise Linux release 8.1 (Ootpa)
-----
-
-=== The BookBag Environment 
-
-BookBag provides a integrated student client environment in a web browser. It includes the lab guide, terminals and a collection of client programs (i.e. `ssh`) to access the servers used in the lab. In case you are interested, BookBag runs as a container and can be hosted by `podman` or https://www.openshift.com[OpenShift].
-
-.BookBag Tips
-- Increase the width of the web browser to view the table of contents.
-- Move the horizontal and vertical dividers as needed.
-- Use the menu in the upper right to open additional terminals.
-- Commands may be copy and pasted from the lab guide to the terminals.
+....
 
 === Getting access to the servers
 
-.Bastion
-  * `{STUDENT_SSH_COMMAND}`
-  * Password: `{STUDENT_SSH_PASSWORD}`
-
-.Nodes
-  * To login to the either node from the bastion, `ssh` must be run using `sudo`.
+Use the web console to login to the bastion:
 
 [source,bash]
 ----
-$ *sudo ssh node1.{GUID}.internal*
+{{< urifqdn "https://" "bastion" ":9090/system/terminal" >}}
 ----
+
+==== Use `ssh` to login to the nodes, from the bastion:
 
 [source,bash]
 ----
-[ec2-user@node1 ~]$ 
+{{< urifqdn "ssh " "node1" "" >}}
+{{< urifqdn "ssh " "node2" "" >}}
 ----
 
-=== Optional BookBag Configuration 
-
-This configuration is optional but helpful. Be certain this is
-performed in the BookBag shell only.
-
-.Create a an ssh key pair using the default key file with no pass phrase.
-[source,bash]
-----
-*ssh-keygen -P "" -f $HOME/.ssh/id_rsa*
-----
-.Create an ssh configuration to prevent the ssh session from timing out.
-
-[source,bash]
-----
-*echo -e "Host * \nServerAliveInterval 120" >> $HOME/.ssh/config*
-----
-
-.Copy the ssh identity to the bastion.
-[source,subs="{markup-in-source}",role=execute]
-```
-*ssh-copy-id -o "StrictHostKeyChecking=no" lab-user@{STUDENT_BASTION_HOSTNAME}*
-```
-
-.Use this ssh password that was provided in your email.
-[source,subs="{markup-in-source}",role=execute]
-```
-*{STUDENT_SSH_PASSWORD}*
-```
-
-.Example output.
-[source,subs="{markup-in-source}"]
-```
-lab-user@{STUDENT_BASTION_HOSTNAME}'s password: *`{STUDENT_SSH_PASSWORD}`*
-
-Number of key(s) added:        1
-```
-
-.Now try logging into the bastion without providing a password.
-[source,subs="{markup-in-source}"]
-```
-*{STUDENT_SSH_COMMAND}*
-```
-
-.Example output.
-[source,subs="{markup-in-source}"]
-```
-This system is not registered to Red Hat Insights. See https://cloud.redhat.com/
-To register this system, run: insights-client --register
-
-Last login: Wed May 27 22:00:03 2020 from 3.218.14.240
-[lab-user@bastion 0 ~]$
-```
 {{< importPartial "footer/footer.html" >}}

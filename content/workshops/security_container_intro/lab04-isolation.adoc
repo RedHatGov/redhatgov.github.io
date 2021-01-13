@@ -23,23 +23,22 @@ It would be worth taking a few minutes to read this http://rhelblog.redhat.com/2
 
 Capabilities are distinct units of privilege that can be independently enabled or disabled.
 
-.Start by examining the Linux process capabilities header file. 
-[source,subs="{markup-in-source}"]
-```
-$ *vim -R /usr/include/linux/capability.h*
-```
+Start by examining the Linux process capabilities header file. 
+[source,bash]
+----
+vim -R /usr/include/linux/capability.h
+----
 
-.Turn on **line numbering** in vim.
-[source,subs="{markup-in-source}"]
-```
-*:set number*
-```
+Turn on **line numbering** in vim.
+[source,bash]
+----
+:set number
+----
 
-.The capability bit mask definitions begin around line 103. Each capability is defined by a bit position followed by a short description. For example, the first capability is `CAP_CHOWN` (bit 0). This capability grants permission to change the ownership of files. 
+The capability bit mask definitions begin around line 103. Each capability is defined by a bit position followed by a short description. For example, the first capability is `CAP_CHOWN` (bit 0). This capability grants permission to change the ownership of files. 
 
-[source,subs="{markup-in-source}"]
-```
-103 /**
+....
+103 /*
 104  ** POSIX-draft defined capabilities.
 105  **/
 106 
@@ -48,251 +47,289 @@ $ *vim -R /usr/include/linux/capability.h*
 109    ownership. */
 110 
 111 #define CAP_CHOWN            0
-```
+....
 
-.Exit vim 
-[source,subs="{markup-in-source}"]
-```
-*:q*
-```
+Exit vim:
+[source,bash]
+----
+:q
+----
 
-.Now examine the capabilities bit mask of a *rootless* process running on the host. 
-[source,subs="{markup-in-source}"]
-```
-$ *grep CapEff /proc/self/status*
-
+Now examine the capabilities bit mask of a *rootless* process running on the host. 
+[source,bash]
+----
+grep CapEff /proc/self/status
+----
+....
 CapEff:	0000000000000000
-```
+....
 The bitmask returned is `0x0` meaning this process does not have any capabilities. For example, since bit 0 is not set (`CAP_CHOWN`) a process with this `CapEff` bitmask can not execute `chown` or `chgrp` on a file that it does not own.
 
-.Now examine the capabilities bit mask of a *root* process on the host.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo grep CapEff /proc/self/status*
-
+Now examine the capabilities bit mask of a *root* process on the host.
+[source,bash]
+----
+sudo grep CapEff /proc/self/status
+----
+....
 CapEff:	0000003fffffffff
-```
+....
 
 Notice that all 38 capability bits are set indicating this process has a full set of capabilities. In a later exercise, you'll discover that a container
 running as **root** has a filtered set of capabilities by default but this can be changed at run time.
 
-.The `capsh` command can decode a capabilities bitmask into a human readable output. Try it out!
-[source,subs="{markup-in-source}"]
-```
-$ *capsh --decode=3fffffffff*
-
+The `capsh` command can decode a capabilities bitmask into a human readable output. Try it out!
+[source,bash]
+----
+capsh --decode=3fffffffff
+----
+....
 0x0000003fffffffff=cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,ca
 p_setpcap,cap_linux_immutable,cap_net_bind_service,cap_net_broadcast,cap_net_admin,cap_net_raw,cap_ipc_lock,cap_ipc_owner
 ,cap_sys_module,cap_sys_rawio,cap_sys_chroot,cap_sys_ptrace,cap_sys_pacct,cap_sys_admin,cap_sys_boot,cap_sys_nice,cap_sys
 _resource,cap_sys_time,cap_sys_tty_config,cap_mknod,cap_lease,cap_audit_write,cap_audit_control,cap_setfcap,cap_mac_overr
 ide,cap_mac_admin,cap_syslog,cap_wake_alarm,cap_block_suspend,cap_audit_read
-
-$ *capsh --decode=200*
-
+....
+[source,bash]
+----
+capsh --decode=200
+----
+....
 0x0000000000000200=cap_linux_immutable
-```
+....
 
 === Exploring the capabilities of containers.
 
 A non-null CapEff value indicates the process has some capabilities. You will discover that the capabilities of a container are often less than what a root process has running on the host.
 
-.Start by running a rootless container as `--user=32767` and look at it’s capabilities.
-[source,subs="{markup-in-source}"]
-```
-$ *podman run --rm -it --user=32767 %RHEL_CONTAINER% grep CapEff /proc/self/status*
-
+Start by running a rootless container as `--user=32767` and look at it’s capabilities.
+[source,bash]
+----
+podman run --rm -it --user=32767 registry.access.redhat.com/ubi8/ubi grep CapEff /proc/self/status
+----
+....
 CapEff:	0000000000000000
-```
+....
 
-.Next run a rootless container as `--user=0` and look at it’s capabilities. Note that it's capabilities are filtered from that of a root process on the host.
-[source,subs="{markup-in-source}"]
-```
-$ *podman run --user=0 --rm -it %RHEL_CONTAINER% grep CapEff /proc/self/status*
-
+Next run a rootless container as `--user=0` and look at it’s capabilities. Note that it's capabilities are filtered from that of a root process on the host.
+[source,bash]
+----
+podman run --user=0 --rm -it registry.access.redhat.com/ubi8/ubi grep CapEff /proc/self/status
+----
+....
 CapEff:	00000000a80425fb
-```
+....
 
-.Now run a container as privileged and compare the results to the previous exercises. What conclusions can you draw?
-[source,subs="{markup-in-source}"]
-```
-$ *sudo podman run --user=0 --rm -it --privileged %RHEL_CONTAINER% grep CapEff /proc/self/status*
-
+Now run a container as privileged and compare the results to the previous exercises. What conclusions can you draw?
+[source,bash]
+----
+sudo podman run --user=0 --rm -it --privileged registry.access.redhat.com/ubi8/ubi grep CapEff /proc/self/status
+----
+....
 CapEff: 0000003fffffffff
-```
+....
 
 === Examining container processes
 
-.Run a container in the background that runs for a few minutes.
-[source,subs="{markup-in-source}"]
-```
-$ *podman run --user=0 --name=sleepy -it -d %RHEL_CONTAINER% sleep 999*
-```
+Run a container in the background that runs for a few minutes.
+[source,bash]
+----
+podman run --user=0 --name=sleepy -it -d registry.access.redhat.com/ubi8/ubi sleep 999
+----
 
-.Use `podman top` to examine the container's capabilities.
-[source,subs="{markup-in-source}"]
-```
-$ *podman top sleepy capeff*
-
+Use `podman top` to examine the container's capabilities.
+[source,bash]
+----
+podman top sleepy capeff
+----
+....
 EFFECTIVE CAPS
 AUDIT_WRITE,CHOWN,DAC_OVERRIDE,FOWNER,FSETID,KILL,MKNOD,NET_BIND_SERVICE,NET_RAW,SETFCAP,SETGID,SETPCAP,SETUID,SYS_CHROOT
-```
+....
 
-.Try out the following very useful shortcut (`-l`).It tells `podman` to act on the latest container it is aware of.
-[source,subs="{markup-in-source}"]
-```
-$ *podman top -l capeff*
-```
+Try out the following very useful shortcut (`-l`). It tells `podman` to act on the latest container it is aware of:
+[source,bash]
+----
+podman top -l capeff
+----
 
-.Podman `top` has many additional format descriptors you can check out.
-[source,subs="{markup-in-source}"]
-```
-$ *podman top -h*
-```
+Podman `top` has many additional format descriptors you can check out.
+[source,bash]
+----
+podman top -h
+----
 
 === Capabilities Challenge #1
 
 How could you determine which capabilities podman _filters_ from a _root_ process running in a container? 
 
-.From a previous exercise we know that a root process on the host has a capabilities mask of CapEff = `0000003fffffffff`
+From a previous exercise we know that a root process on the host has a capabilities mask of CapEff = `0000003fffffffff`
 
-.From a previous exercise we know that a root process in a container has a capabilities mask of CapEff = `00000000a80427fb`
+From a previous exercise we know that a root process in a container has a capabilities mask of CapEff = `00000000a80427fb`
 
-.Hint: Below is an example that uses the Linux binary calculator `bc` to add hexadecimal numbers `(0x9 + 0x1) = A`.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo yum install bc -y*
-
-$ *echo 'obase=16;ibase=16;9+1' | bc*
-
+Hint: Below is an example that uses the Linux binary calculator `bc` to add hexadecimal numbers `(0x9 + 0x1) = A`.
+[source,bash]
+----
+sudo yum install bc -y
+echo 'obase=16;ibase=16;9+1' | bc
+----
+....
 A
-```
+....
 === Capabilities Challenge #2
 
 Suppose an application had a legitimate reason to change the date (ntpd, license testing, etc) How would you allow a container to change the date on the host? What capabilities are needed to allow this? 
 
-.Run a container, save the date then try to change the date.
-[source,subs="{markup-in-source}"]
-```
-$ *podman run --rm -ti --user 0 --name temp %RHEL_CONTAINER% bash*
-
-%CONTAINER_PROMPT% *savethedate=$(date)*
-%CONTAINER_PROMPT% *date -s "$savethedate"*
-
+Run a container, save the date then try to change the date.
+[source,bash]
+----
+podman run --rm -ti --user 0 --name temp registry.access.redhat.com/ubi8/ubi bash
+savethedate=$(date)
+date -s "$savethedate"
+----
+....
 date: cannot set date: Operation not permitted
 Mon Apr  8 21:45:24 UTC 2019
+....
 
-%CONTAINER_PROMPT% *exit*
-```
+[source,bash]
+----
+exit
+----
 
 === Capabilities Challenge #3
 
 You have been given a container image to deploy (`quay.io/bkozdemb/hello`). The application needs to use the `chattr` utility but must not be allowed to `ping` any hosts. Use what you've learned about capabilities to properly deploy this application using `podman`.
 
-.For example, `ping` succeeds but `chattr` fails. We want the opposite.  
-[source,subs="{markup-in-source}"]
-```
-$ *podman run -it --name=chattr_no_ping --rm quay.io/bkozdemb/utils bash*
-
-# *ping -c1 127.0.0.1*
+For example, `ping` succeeds but `chattr` fails. We want the opposite.  
+[source,bash]
+----
+podman run -it --name=chattr_no_ping --rm quay.io/bkozdemb/utils bash
+ping -c1 127.0.0.1
+----
+....
 PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
 64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.035 ms
 
 --- 127.0.0.1 ping statistics ---
 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 rtt min/avg/max/mdev = 0.035/0.035/0.035/0.000 ms
-# *touch file*
-# *chattr +i file*
-
+....
+[source,bash]
+----
+touch file
+chattr +i file
+----
+....
 chattr: Operation not permitted while setting flags on file
-```
+....
+
+Exit from the container:
+
+[source,bash]
+----
+exit
+----
 
 === Example Solutions to Challenges
 
-.Challenge #1: One approach would be to use your favorite binary calculator (`bc`) to calculate the difference in `CapEff` between a host root process `(0x3fffffffff)` and a containerized root process `(0xa80427fb)`.
-[source,subs="{markup-in-source}"]
-```
+Challenge #1: One approach would be to use your favorite binary calculator (`bc`) to calculate the difference in `CapEff` between a host root process `(0x3fffffffff)` and a containerized root process `(0xa80427fb)`.
+....
   0x3FFFFFFFFF
 - 0x00A80427FB
   ------------
   0x3F57FBD804
-
-$ *echo 'obase=16;ibase=16;3FFFFFFFFF-A80427FB' | bc*
-
+....
+[source,bash]
+----
+echo 'obase=16;ibase=16;3FFFFFFFFF-A80427FB' | bc
+----
+....
 3F57FBD804
-```
+....
 
-.To produce a human readable list, use `capsh` to decode the vector.
-[source,subs="{markup-in-source}"]
-```
-$ *capsh --decode=3F57FBD804*
-
+To produce a human readable list, use `capsh` to decode the vector.
+[source,bash]
+----
+capsh --decode=3F57FBD804
+----
+....
 0x0000003f57fbd804=cap_dac_read_search,cap_net_broadcast,cap_net_admin,cap_ipc_lock,cap_ipc_owner,cap_sys_module,cap_sys_rawio,cap_sys_ptrace,cap_sys_pacct,cap_sys_admin,cap_sys_boot,cap_sys
 _nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_lease,cap_audit_control,cap_mac_override,cap_mac_admin,cap_syslog,cap_wake_alarm,cap_block_suspend,cap_audit_read
-```
+....
 
-.Challenge #2: To allow a container to set the system clock, the `sys_time` capability must be added. Add this capability then try setting the date again.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo podman run --rm -ti --user 0 --name temp --cap-add=sys_time %RHEL_CONTAINER% bash*
-
-*%CONTAINER_PROMPT% savethedate=$(date)*
-*%CONTAINER_PROMPT% date -s "$savethedate"*
-
+Challenge #2: To allow a container to set the system clock, the `sys_time` capability must be added. Add this capability then try setting the date again.
+[source,bash]
+----
+sudo podman run --rm -ti --user 0 --name temp --cap-add=sys_time registry.access.redhat.com/ubi8/ubi bash
+savethedate=$(date)
+date -s "$savethedate"
+----
+....
 Mon Apr  8 21:46:18 UTC 2019
+....
+And exit from the container:
+[source,bash]
+----
+exit
+----
 
-*%CONTAINER_PROMPT% exit*
-```
+Challenge #3: Drop all capabilities then add `linux_immutable`. The trick with this is the container must run as root because `linux_immutable` is a filtered capability.
+[source,bash]
+----
+sudo podman run -it --name=chattr_no_ping --rm --cap-drop=all --cap-add=linux_immutable quay.io/bkozdemb/utils bash
+----
 
-.Challenge #3: Drop all capabilities then add `linux_immutable`. The trick with this is the container must run as root because `linux_immutable` is a filtered capability.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo podman run -it --name=chattr_no_ping --rm --cap-drop=all --cap-add=linux_immutable quay.io/bkozdemb/utils bash*
-```
-
-.The `ping` command should fail.
-[source,subs="{markup-in-source}"]
-```
-# *ping -c1 127.0.0.1*
+The `ping` command should fail.
+[source,bash]
+----
+ping -c1 127.0.0.1
+----
+....
 ping: socket: Operation not permitted
-```
+....
 
-.The `chattr` command should succeed in making a file read only
-[source,subs="{markup-in-source}"]
-```
-# *touch file*
-# *chattr +i file*
-# *rm -rf file*
-
+The `chattr` command should succeed in making a file read only:
+[source,bash]
+----
+touch file
+chattr +i file
+rm -rf file
+----
+....
 rm: cannot remove 'file': Operation not permitted
-
-# *lsattr file*
-
+....
+[source,bash]
+----
+lsattr file
+----
+....
 ----i--------------- file
-```
+....
 
-.Remember to reset the file attributes so the container can shutdown cleanly.
-[source,subs="{markup-in-source}"]
-```
-# *chattr -i file*
-# *lsattr file*
-
+Remember to reset the file attributes so the container can shutdown cleanly:
+[source,bash]
+----
+chattr -i file
+lsattr file
+----
+....
 -------------------- file
-```
+....
 
-.On the host, check the capabilities of the container.
-[source,subs="{markup-in-source}"]
-```
-$ *sudo podman top chattr_no_ping capeff*
-
+On the host, check the capabilities of the container. This will require you to open another terminal:
+[source,bash]
+----
+sudo podman top chattr_no_ping capeff
+----
+....
 EFFECTIVE CAPS
 LINUX_IMMUTABLE
-```
+....
 
-.Exit the container. 
-[source,subs="{markup-in-source}"]
-```
-# *exit*
-$
-```
+Exit the container (in the original container):
+[source,bash]
+----
+exit
+----
 
 {{< importPartial "footer/footer.html" >}}
