@@ -61,14 +61,14 @@ Create the following *Dockerfile*
 [source,bash]
 ----
 cat > Dockerfile <<EOF
-*FROM registry.access.redhat.com/ubi8/ubi
-*LABEL description="Minimal python web server" maintainer="yourname@mail.net"
-*RUN dnf -y update; dnf -y clean all
-*RUN dnf -y install python3 --setopt install_weak_deps=false; dnf -y clean all
-*RUN echo "The python http.server module is running." > /index.html
-*EXPOSE 8000
-*CMD [ "/usr/bin/python3",  "-m", "http.server" ]
-*EOF
+FROM registry.access.redhat.com/ubi8/ubi
+LABEL description="Minimal python web server" maintainer="yourname@mail.net"
+RUN dnf -y update; dnf -y clean all
+RUN dnf -y install python3 --setopt install_weak_deps=false; dnf -y clean all
+RUN echo "The python http.server module is running." > /index.html
+EXPOSE 8000
+CMD [ "/usr/bin/python3",  "-m", "http.server" ]
+EOF
 ----
 
 Create a new container image from Dockerfile.
