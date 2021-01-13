@@ -85,10 +85,9 @@ Confirm you have a container image with the **correct REPOSITORY and TAG** as sh
 [source,bash]
 ----
 podman tag registry.access.redhat.com/ubi8/ubi {{< urifqdn "" "node1" ":5000/ubi8/ubi" >}}
+podman images
 ----
 ....
-podman images
-
 REPOSITORY                                  TAG      IMAGE ID       CREATED       SIZE
 {{< urifqdn "" "node1" ":5000/ubi8/ubi" >}}          latest   a4a954bf99ed   2 weeks ago   831 MB
 registry.access.redhat.com/ubi8/ubi         latest   a4a954bf99ed   2 weeks ago   831 MB
