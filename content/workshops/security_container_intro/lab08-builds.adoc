@@ -63,7 +63,7 @@ lab-user 17279 17273  1 13:26 pts/1    00:00:00 buildah-in-a-user-namespace unsh
 lab-user 17420 16988  0 13:26 pts/0    00:00:00 grep --color=auto buildah
 ....
 
-The process information above indicates `root (uid=0)` in the modified user namespace but a rootless user (%USERNAME%) on the host. Can't believe your eyes?
+The process information above indicates `root (uid=0)` in the modified user namespace but a rootless user (ec2-user) on the host. Can't believe your eyes?
 
 Try a command like `cat /etc/shadow` that requires root privileges. Remember, bash is owned by root in the modified user namespace but not in the host's namespace.
 [source,bash]
@@ -125,7 +125,7 @@ yum install -y --releasever=8 --installroot=$scratchmnt redhat-release
 A few `Permission denied` errors will be reported that can be safely ignored and eventually the `redhat-release` package will get installed.
 ....
 Installed:
-  redhat-release-8.1-3.3.el8.x86_64                                           redhat-release-eula-8.1-3.3.el8.x86_64
+  redhat-release-8.1-3.3.el8.x86_64 redhat-release-eula-8.1-3.3.el8.x86_64
 
 Complete!
 ....
@@ -268,8 +268,8 @@ Your simple container is still working!
 Tag and push the image to the registry.
 [source,bash]
 ----
-podman tag localhost/scratch node1.w222v.internal:5000/lab-user/my-scratch-build
-podman push node1.w222v.internal:5000/lab-user/my-scratch-build
+podman tag localhost/scratch {{< urifqdn "" "node1" ":5000" >}}/lab-user/my-scratch-build
+podman push {{< urifqdn "" "node1" ":5000" >}}/lab-user/my-scratch-build
 ----
 ....
 Getting image source signatures
@@ -302,7 +302,7 @@ Below are the basic steps for building a container image from a UBI. No `Dockerf
 
 [source,bash]
 ----
-buildah from --name=myapp %RHEL_CONTAINER%
+buildah from --name=myapp registry.access.redhat.com/ubi8/ubi
 buildah run myapp -- dnf -y install python3
 echo "The container is working." > index.html
 buildah copy myapp index.html /
@@ -336,7 +336,7 @@ Create the following *Dockerfile*
 [source,bash]
 ----
 cat > Dockerfile <<EOF
-*FROM %RHEL_CONTAINER%
+*FROM registry.access.redhat.com/ubi8/ubi
 *LABEL description="Minimal python web server" maintainer="yourname@mail.net"
 *RUN dnf -y update; dnf -y clean all
 *RUN dnf -y install python3 --setopt install_weak_deps=false; dnf -y clean all
@@ -352,7 +352,7 @@ Create a new container image from Dockerfile.
 buildah bud -t buildahbuddemo Dockerfile
 ----
 ....
-STEP 1: FROM %RHEL_CONTAINER%
+STEP 1: FROM registry.access.redhat.com/ubi8/ubi
 STEP 2: LABEL description="Minimal python web server" maintainer="yourname@mail.net"
 ...
 ...
