@@ -15,294 +15,19 @@ layout: lab
 :source-highlighter: highlight.js
 :source-language: yaml
 
+
+= Building Container Images
+
 This module will introduce _Buildah_, a command line tool for building https://https://www.opencontainers.org/[Open Container Initiative]
 compatible container images. _Buildah_ is easy to incorporate into scripts and build pipelines, and best of all, it doesn't require a running container daemon to build its image. You can read more about _Buildah_ at the https://buildah.io[buildah.io] web site. Also, have a look at the https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/building_running_and_managing_containers/index#building-container-images-with-buildah_building-running-and-managing-containers[buildah] chapter in the RHEL 8 documentation. 
 
-== Scratch builds
-
-Scratch builds allows container images to be built without
-using a Dockerfile or a traditional container base image. It allows for an image to contain the bare minimum to run an application.
-
-Start by creating a modified user namespace.
-[source,bash]
-----
-buildah unshare
-----
-....
-[root@bastion 0 ~]#
-....
-
-Verify this by comparing the user and process IDs in the modified user namespace and the host. Notice the `buildah` processes on the host are owned by a non-root user.
-
-View the modified user namespace processes.
-[source,bash]
-----
-id
-----
-....
-uid=0(root) gid=0(root) groups=0(root),65534(nobody) context=unconfined_u:system_r:container_runtime_t:s0-s0:c0.c1023
-....
-[source,bash]
-----
-ps -ef | grep buildah
-----
-....
-root     16589 16448  0 13:22 pts/0    00:00:00 buildah unshare
-root     16595 16589  0 13:22 pts/0    00:00:00 buildah-in-a-user-namespace unshare
-root     16756 16605  0 13:23 pts/0    00:00:00 grep --color=auto buildah
-....
-
-View the Bastion host processes.
-[source,bash]
-----
-ps -ef | grep buildah
-----
-....
-lab-user 17273 17133  0 13:26 pts/1    00:00:00 buildah unshare
-lab-user 17279 17273  1 13:26 pts/1    00:00:00 buildah-in-a-user-namespace unshare
-lab-user 17420 16988  0 13:26 pts/0    00:00:00 grep --color=auto buildah
-....
-
-The process information above indicates `root (uid=0)` in the modified user namespace but a rootless user (%USERNAME%) on the host. Can't believe your eyes?
-
-Try a command like `cat /etc/shadow` that requires root privileges. Remember, bash is owned by root in the modified user namespace but not in the host's namespace.
-[source,bash]
-----
-id
-----
-....
-uid=0(root) gid=0(root) groups=0(root),65534(nobody) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
-....
-[source,bash]
-----
-cat /etc/shadow
-----
-....
-cat: /etc/shadow: Permission denied
-....
-
-So that was an overview of user namespaces. The reason for needing this modified namespace is so `buildah` can mount the container's file system. Now let's get back to building a container from scratch.
-
-Start with a scratch container. By default it will be called `working-container`.
-[source,bash]
-----
-buildah from scratch
-----
-....
-working-container
-....
-
-Mount the container's file system so buildah can begin to layer software.
-[source,bash]
-----
-scratchmnt=$(buildah mount working-container)
-----
-
-Mount the container's file system so buildah can begin to layer software.
-[source,bash]
-----
-echo $scratchmnt
-----
-....
-/home/ec2-user/.local/share/containers/storage/overlay/0ef0ddd05c334704ed91b8a5664bb5c7b1d7cc02b15a27eb7f39201b580f43cd/merged
-....
-
-Note that the root of the scratch container is empty.
-[source,bash]
-----
-ls -R $scratchmnt
-----
-....
-/home/ec2-user/.local/share/containers/storage/overlay/0ef0ddd05c334704ed91b8a5664bb5c7b1d7cc02b15a27eb7f39201b580f43cd/merged:
-....
-
-Begin by installing the `redhat-release` package.
-[source,bash]
-----
-yum install -y --releasever=8 --installroot=$scratchmnt redhat-release
-----
-
-A few `Permission denied` errors will be reported that can be safely ignored and eventually the `redhat-release` package will get installed.
-....
-Installed:
-  redhat-release-8.1-3.3.el8.x86_64                                           redhat-release-eula-8.1-3.3.el8.x86_64
-
-Complete!
-....
-
-Next, install the minimum packages to run shell programs. This will take a few minutes. 
-[source,bash]
-----
-yum install -y --setopt=reposdir=/etc/yum.repos.d --installroot=$scratchmnt --setopt=cachedir=var/cache/dnf bash coreutils --setopt install_weak_deps=false
-----
-....
-Installed:
- ...
- ...
- ...
-  openssl-libs-1:1.1.1c-2.el8.x86_64                        glibc-common-2.28-72.el8_1.1.x86_64          glibc-all-langpacks-2.28-72.el8_1.1.x86_64
-  glibc-2.28-72.el8_1.1.x86_64
-
-Complete!
-....
-
-Clean up the layers
-[source,bash]
-----
-dnf clean --installroot $scratchmnt all
-----
-....
-56 files removed
-....
-
-Create a simple shell script that will get copied into the container.
-[source,bash]
-----
-cat > runecho.sh <<EOF
-#!/usr/bin/env bash
-echo "Your simple container is working!"
-EOF
-----
-
-Make the script executable and copy it to the `/usr/bin` directory in the container's file system.
-[source,bash]
-----
-chmod u+x runecho.sh
-buildah copy working-container ./runecho.sh /usr/bin
-----
-....
-02a4078d6a03298c44d0962dea86e9b1a8f86e190af4270ea93caf75df36056f
-....
-
-Examine the container directory and you should see your shell script.
-[source,bash]
-----
-ls -al $scratchmnt/bin/runecho.sh
-----
-....
--rwxr--r--. 1 root root 61 Apr 22 16:13 /home/lab-user/.local/share/containers/storage/overlay/2bcf874df5f9e1b556e7d8842a41019236c18ca3e2212ed2dbcfb81eb5837e5b/merged/bin/runecho.sh
-....
-
-Define an entry point. This command will run when the container runs.
-[source,bash]
-----
-buildah config --entrypoint /usr/bin/runecho.sh working-container
-----
-
-Set some configuration labels.
-[source,bash]
-----
-buildah config --author='YourName' --created-by=buildah --label=name=myshdemo working-container
-----
-
-This can be verified.
-[source,bash]
-----
-buildah inspect working-container
-----
-
-Make a test run. Your echo script should run.
-[source,bash]
-----
-buildah run --tty working-container /usr/bin/runecho.sh
-----
-....
-Your simple container is working!
-....
-
-Make a change to `runecho.sh` and copy the file again.
-[source,bash]
-----
-buildah copy working-container ./runecho.sh /usr/bin
-----
-
-Confirm the changes by running the container again.
-[source,bash]
-----
-buildah run --tty working-container /usr/bin/runecho.sh
-----
-....
-Your simple container is still working!
-....
-
-Commit the final version to storage.
-[source,bash]
-----
-buildah unmount working-container
-buildah commit working-container localhost/scratch
-----
-....
-Getting image source signatures
-Copying blob 3e01796ace31 done
-Copying config 56fa90dd8f done
-Writing manifest to image destination
-Storing signatures
-56fa90dd8fd9bf037d19b96f6990e698c99429518d1a747b25d8e98766f57c29
-....
-
-Exit the user modified namespace.
-[source,bash]
-----
-exit
-----
-
-Use `podman` to confirm the image was saved.
-[source,bash]
-----
-podman images
-----
-....
-REPOSITORY                                  TAG      IMAGE ID       CREATED              SIZE
-localhost/scratch                           latest   687160d0cd4b   About a minute ago   303 MB
-....
-
-Test and run with `podman`.
-[source,bash]
-----
-podman run -it --rm localhost/scratch
-----
-....
-Your simple container is still working!
-....
-
-Tag and push the image to the registry.
-[source,bash]
-----
-podman tag localhost/scratch node1.w222v.internal:5000/lab-user/my-scratch-build
-podman push node1.w222v.internal:5000/lab-user/my-scratch-build
-----
-....
-Getting image source signatures
-Copying blob d751a5947269 done
-Copying config 5ee85fa930 done
-Writing manifest to image destination
-Storing signatures
-....
-
-Clean things up.
-[source,bash]
-----
-buildah ls
-buildah rm working-container
-----
-....
-61ac84aa81daa4610d4523e1583ec88c8f2393e950f9dabf247d4371edd95ccc
-....
-[source,bash]
-----
-podman rmi localhost/scratch
-----
-....
-Untagged: localhost/scratch:latest
-....
-
-=== Building from Universal Base Images
+== Building from Universal Base Images
 
 Below are the basic steps for building a container image from a UBI. No `Dockerfile` needed. Give it a try! Get creative, the lab is almost finished!
 
 [source,bash]
 ----
-buildah from --name=myapp %RHEL_CONTAINER%
+buildah from --name=myapp registry.access.redhat.com/ubi8/ubi
 buildah run myapp -- dnf -y install python3
 echo "The container is working." > index.html
 buildah copy myapp index.html /
@@ -330,13 +55,13 @@ podman rm -f test
 284681fbc26f52dfdfa4c5a3b1680635984f9f1d2c1a97967ebe637297a646e5
 ....
 
-=== Build using Docker (BuD)
+== Build using Docker (BuD)
 
 Create the following *Dockerfile*
 [source,bash]
 ----
 cat > Dockerfile <<EOF
-*FROM %RHEL_CONTAINER%
+*FROM registry.access.redhat.com/ubi8/ubi
 *LABEL description="Minimal python web server" maintainer="yourname@mail.net"
 *RUN dnf -y update; dnf -y clean all
 *RUN dnf -y install python3 --setopt install_weak_deps=false; dnf -y clean all
@@ -352,7 +77,7 @@ Create a new container image from Dockerfile.
 buildah bud -t buildahbuddemo Dockerfile
 ----
 ....
-STEP 1: FROM %RHEL_CONTAINER%
+STEP 1: FROM registry.access.redhat.com/ubi8/ubi
 STEP 2: LABEL description="Minimal python web server" maintainer="yourname@mail.net"
 ...
 ...
