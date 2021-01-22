@@ -24,6 +24,8 @@ configured and running, the `curl` command can be used to test basic connectivit
 [[anchor-1]]
 == Configuring the registries
 
+=== Node 1
+
 Login to `{{< urifqdn "" "node1" "" >}}` (from the bastion) and configure the registry. Do this as a regular (non-root) user.
 [source,bash]
 ----
@@ -112,15 +114,95 @@ Logout from node1:
 ----
 exit
 ----
-<<anchor-1,Repeat>> the same for `node2`.
 
+=== Node 2
+
+Login to `{{< urifqdn "" "node2" "" >}}` (from the bastion) and configure the registry. Do this as a regular (non-root) user.
 [source,bash]
 ----
 {{< urifqdn "ssh " "node2" "" >}}
+----
+You'll be asked to confirm the key fingerprint, the first time that you login. Please answer `yes`.
+....
+The authenticity of host 'jajcs.node2.0.rhnaps.io (10.0.2.88)' can't be established.
+ECDSA key fingerprint is SHA256:t019FDEhEgp1uhivEZy1gwqaNaXM75tOem4MHpmLRaw.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'jajcs.node2.0.rhnaps.io,10.0.2.88' (ECDSA) to the list of known hosts.
+Last login: Tue Jan 12 02:10:26 2021 from 10.0.2.245
+[ec2-user@ip-10-0-2-88 ~]$
+....
+
+Confirm that the `FQDN` variable is set to `{{< urifqdn "" "node2" "" >}}` in the `myserver.cnf` file.
+
+[source,bash]
+----
 cd $HOME/files/nodes/registry-files/gen-certs
+grep ^FQDN myserver.cnf
+----
+
+....
+FQDN={{< urifqdn "" "node2" "" >}}
+....
+
+.Run the `gen-cert.sh` script to generate an SSL certificate.
+
+[source,bash]
+----
 sh ./gen-cert.sh
+----
+
+....
+Generating a RSA private key
+........................................................++++
+.......................................++++
+writing new private key to 'myserver.key'
+-----
+Signature ok
+subject=C = CH, O = Summit, CN = {{< urifqdn "" "node2" "" >}}
+Getting Private key
+Certificate:
+    Data:
+        Version: 1 (0x0)
+        Serial Number:
+            66:eb:dd:c8:21:f5:38:ef:22:16:79:d0:ba:34:2c:f9:4b:1b:7d:6f
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C = CH, O = Summit, CN = {{< urifqdn "" "node2" "" >}}
+        Validity
+            Not Before: Apr  7 19:12:30 2020 GMT
+            Not After : Sep 28 19:12:30 2025 GMT
+....
+
+Now move up one directory and run the `run-registry.sh` script to start the registry container.
+[source,bash]
+----
 cd ..
 sh ./run-registry.sh
+----
+
+....
+Adding password for user redhat
+750ef695e4b66b00919e725bc2559db6ec2f9407e1f31358686b4339017c2ed5
+
+
+Give the registry a minute or so to start then ...
+curl  --user user:password -k https://localhost:5000/v2/_catalog
+....
+
+=== Testing the registries
+
+Use `curl` to test that the registry service is running:
+[source,bash]
+----
+curl --user redhat:redhat {{< urifqdn "https://" "node2" ":5000/v2/_catalog" >}}
+----
+
+....
+{"repositories":[]}
+....
+
+Logout from node2:
+[source,bash]
+----
 exit
 ----
 
