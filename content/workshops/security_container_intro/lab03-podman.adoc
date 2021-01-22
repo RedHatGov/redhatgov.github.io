@@ -91,7 +91,8 @@ ubi8/ubi   latest   8121a9f5303b   8 days ago   240 MB
 node1.8l829.internal:5000/ubi8/ubi    latest   8121a9f5303b   8 days ago   240 MB
 ....
 
-Login to the `{{< urifqdn "" "node1" "" >}}` registry. Do the same for `{{< urifqdn "" "node2" "" >}}`. 
+Login to the `{{< urifqdn "" "node1" "" >}}` registry. Do the same for `{{< urifqdn "" "node2" "" >}}`. Both of these actions should be taken from `{{< urifqdn "" "bastion" "" >}}`:
+
 [source,bash]
 ----
 podman login -u redhat -p redhat {{< urifqdn "" "node1" ":5000" >}}
@@ -134,7 +135,7 @@ curl --user redhat:redhat {{< urifqdn "https://" "node1" ":5000/v2/_catalog" >}}
 
 Podman supports storing and running root and rootless containers. Effectively, each user manages it's own containers.
 
-The UBI container images should be loaded into the podman's local image storage for both root and rootless (lab-user) usage. 
+The UBI container images should be loaded into the podman's local image storage for both root and rootless (ec2-user) usage. 
 
 Confirm these images exist using `podman`. Note the `podman` command may be run as **root** (privileged) or as a **root-less** (non-privileged) user.
 
@@ -243,7 +244,7 @@ Start by running a rootless container in the background:
 podman run --name sleepy -d registry.access.redhat.com/ubi8/ubi sleep 999
 ----
 
-Next, run `podman top` to list the processes running in the container. Take note of the USER and the PID. The container process is running as the `lab-user` user even though the container thinks it is `root`. This is user namespaces in action. 
+Next, run `podman top` to list the processes running in the container. Take note of the USER and the PID. The container process is running as the `ec2-user` user even though the container thinks it is `root`. This is user namespaces in action. 
 
 What does the `-l` option do?
 [source,bash]
@@ -258,14 +259,14 @@ ps -ef| grep sleep
 ----
 ....
 UID        PID  PPID  C STIME TTY          TIME CMD
-lab-user  1701  1690  0 07:30 ?        00:00:00 /usr/bin/coreutils --coreutils-prog-shebang=sleep /usr/bin/sleep 999
+ec2-user  1701  1690  0 07:30 ?        00:00:00 /usr/bin/coreutils --coreutils-prog-shebang=sleep /usr/bin/sleep 999
 ....
 
 Compare those ID's to the same process running in the hosts' namespace:
 
 TIP: Take note of 2 important concepts from this example.
 
-The `sleep` process in the container is owned by `root` but the process on the host is owned by `lab-user`. This is user namespaces in action. The **fork/exec** model used by podman improves the security auditing of containers. It allows an administrator to identify users that run containers as root. Container engines that use a ***client/server*** model can't provide this.
+The `sleep` process in the container is owned by `root` but the process on the host is owned by `ec2-user`. This is user namespaces in action. The **fork/exec** model used by podman improves the security auditing of containers. It allows an administrator to identify users that run containers as root. Container engines that use a ***client/server*** model can't provide this.
 
 The `sleep` process in the container has a PID of 1 but on the host the PID is **rootless** (a PID >1). This is kernel namespaces in action.
 
@@ -304,19 +305,18 @@ Examine the kernel audit system log to determine which user ran the malicious pr
 sudo ausearch -m path -ts recent -i | grep touch | grep --color=auto 'auid=[^ ]*'
 ----
 ....
-type=SYSCALL msg=audit(04/30/2019 11:03:03.384:425) : arch=x86_64 syscall=openat success=yes exit=3 a0=0xffffff9c a1=0x7ffeee3ecf5c a2=O_WRONLY|O_CREAT|O_NOCTTY|O_NONBLOCK a3=0x1b6 items=2 ppid=6168 pid=6180 auid=lab-user uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=(none) ses=11 comm=touch exe=/usr/bin/coreutils subj=unconfined_u:system_r:spc_t:s0 key=(null) 
+type=SYSCALL msg=audit(04/30/2019 11:03:03.384:425) : arch=x86_64 syscall=openat success=yes exit=3 a0=0xffffff9c a1=0x7ffeee3ecf5c a2=O_WRONLY|O_CREAT|O_NOCTTY|O_NONBLOCK a3=0x1b6 items=2 ppid=6168 pid=6180 auid=ec2-user uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=(none) ses=11 comm=touch exe=/usr/bin/coreutils subj=unconfined_u:system_r:spc_t:s0 key=(null) 
 ....
 
 TIP: Try this at home using another container engine based on a client/server model and you 
-will notice that the offending audit ID is reported as `4294967295` (i.e. an `unsignedint(-1)`).
+will notice that the offending audit ID is reported as *4294967295* (i.e. an *unsignedint(-1)*).
 In other words, the malicious user is unknown.  
 
 === UID Mapping
 
-A container administrator can make use *podman's* `--uidmap` option to force a range of UID's to be used. See
-`podman-run(1)` for details.
+A container administrator can make use podman's *--uidmap* option to force a range of UID's to be used. See *podman-run(1)* for details.
 
-Run a container that maps `5000` UIDs starting at `100,000`. This example maps uids `0-5000` in the container to the uids `100,000 - 104,999` on the host:
+Run a container that maps *5000* UIDs starting at *100,000*. This example maps uids *0-5000* in the container to the uids *100,000 - 104,999* on the host:
 [source,bash]
 ----
 sudo podman run --uidmap 0:100000:5000 -d registry.access.redhat.com/ubi8/ubi sleep 1000

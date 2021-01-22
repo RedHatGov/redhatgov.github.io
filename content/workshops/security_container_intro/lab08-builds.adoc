@@ -29,6 +29,12 @@ Below are the basic steps for building a container image from a UBI. No `Dockerf
 ----
 buildah from --name=myapp registry.access.redhat.com/ubi8/ubi
 buildah run myapp -- dnf -y install python3
+----
+
+Now, add the rest of the container configuration:
+
+[source,bash]
+----
 echo "The container is working." > index.html
 buildah copy myapp index.html /
 buildah config --cmd 'python3 -m http.server' myapp
