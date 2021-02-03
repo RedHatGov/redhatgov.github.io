@@ -9,7 +9,7 @@ layout: lab
 :imagesdir: /workshops/ansible_automation/images
 :figure-caption!:
 :become_url: http://docs.ansible.com/ansible/become.html
-:dir_url: http://docs.ansible.com/ansible/playbooks_best_practices.html
+:dir_url: https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html
 :package_url: http://docs.ansible.com/ansible/package_module.html
 :service_url: http://docs.ansible.com/ansible/service_module.html
 :yaml_url: http://docs.ansible.com/ansible/YAMLSyntax.html
@@ -18,9 +18,7 @@ layout: lab
 = Exercise 1.1 - Writing Your First Playbook
 
 == Exercise Description
-Now that you've gotten a sense of how Red Hat Ansible Tower works, we are going to write our first
-Ansible playbook.  The playbook is where you can take some of those ad hoc commands you just ran
-and put them into a repeatable set of *plays* and *tasks*.
+Now that you've gotten a sense of how Red Hat Ansible Tower works, we are going to write our first Ansible playbook.  The playbook is where you can take some of those ad hoc commands you just ran and put them into a repeatable set of *plays* and *tasks*.
 
 A playbook can have multiple plays and a play can have one or multiple tasks.  The goal of a *play* is to map a group of hosts.  The goal of a *task* is to implement modules against those hosts.
 
@@ -46,9 +44,7 @@ ansible-playbook -i hosts artifacts/playbooks/firewall-open-http.yml
 
 For our first playbook, we are only going to write one play and two tasks.
 
-There is a link:{dir_url}[best practice] regarding the preferred directory structures for playbooks.  We strongly encourage
-you to read and understand these practices as you develop your Ansible ninja skills.  That said,
-our playbook today is very basic, because creating a complex structure can create unnecessary challenges.
+There is a link:{dir_url}[best practice] regarding the preferred directory structures for playbooks.  We strongly encourage you to read and understand these practices as you develop your Ansible ninja skills.  That said, our playbook today is very basic, because creating a complex structure can create unnecessary challenges.
 
 Instead, we are going to create a very simple directory structure for our playbook, and add just a couple of files to it.
 
