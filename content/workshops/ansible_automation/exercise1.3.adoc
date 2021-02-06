@@ -132,7 +132,7 @@ Add some file tasks and a service task to your playbook.
 
 [source,bash]
 ----
-    - name: create site-enabled directory
+    - name: site-enabled directory is present
       file:
         name: /etc/httpd/conf/sites-enabled
         state: directory
@@ -148,7 +148,7 @@ Add some file tasks and a service task to your playbook.
         src: templates/index.html.j2
         dest: /var/www/html/index.html
 
-    - name: start httpd
+    - name: httpd is started and enabled
       service:
         name: httpd
         state: started
@@ -237,13 +237,13 @@ looks the way you intended.  If not, now is the time to fix it up. The figure be
         name: /etc/httpd/conf/sites-enabled
         state: directory
 
-    - name: latest httpd.conf is present
+    - name: copy httpd.conf
       template:
         src: templates/httpd.conf.j2
         dest: /etc/httpd/conf/httpd.conf
       notify: restart apache service
 
-    - name: latest index.html is present
+    - name: copy index.html
       template:
         src: templates/index.html.j2
         dest: /var/www/html/index.html
