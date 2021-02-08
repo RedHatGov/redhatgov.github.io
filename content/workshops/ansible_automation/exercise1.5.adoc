@@ -39,7 +39,7 @@ Navigate to your `apache-basic-playbook` project.
 
 [source,bash]
 ----
-cd ~/src/apache-basic-playbook
+cd ~/apache-basic-playbook
 ----
 
 
@@ -72,7 +72,7 @@ Remove the `files` and `tests` directories
 
 [source,bash]
 ----
-cd ~/src/apache-basic-playbook/roles/apache-simple/
+cd ~/apache-basic-playbook/roles/apache-simple/
 rm -rf files tests
 ----
 
@@ -88,7 +88,7 @@ Make a backup copy of `site.yml`, then create a new `site.yml`.
 
 [source,bash]
 ----
-cd ~/src/apache-basic-playbook
+cd ~/apache-basic-playbook
 mv site.yml site.yml.bkup
 vim site.yml
 ----
@@ -224,7 +224,7 @@ Download a couple of templates into `roles/apache-simple/templates/`.  And then,
 [source,bash]
 ----
 mkdir -p ~/apache-basic-playbook/roles/apache-simple/templates/
-cd ~/src/apache-basic-playbook/roles/apache-simple/templates/
+cd ~/apache-basic-playbook/roles/apache-simple/templates/
 curl -O https://raw.githubusercontent.com/ansible/lightbulb/master/examples/apache-basic-playbook/templates/httpd.conf.j2
 curl -O https://raw.githubusercontent.com/ansible/lightbulb/master/examples/apache-basic-playbook/templates/index.html.j2
 rm -rf ~/apache-basic-playbook/templates/
@@ -239,7 +239,7 @@ let's run it and see how it works.
 
 [source,bash]
 ----
-cd ~/src/apache-basic-playbook
+cd ~/apache-basic-playbook
 ansible-playbook site.yml
 ----
 === Step 2: Verify your output
