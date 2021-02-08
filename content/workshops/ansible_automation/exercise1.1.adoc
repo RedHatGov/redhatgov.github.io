@@ -54,8 +54,8 @@ Create a directory called *apache_basic* in your home directory and change direc
 
 [source,bash]
 ----
-mkdir ~/src/apache_basic
-cd ~/src/apache_basic
+mkdir ~/apache_basic
+cd ~/apache_basic
 ----
 
 === Step 2: Open the apache install

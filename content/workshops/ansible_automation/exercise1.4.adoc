@@ -21,7 +21,7 @@ most, if not all, of your future playbooks.  Before you get too excited though, 
 Run your playbook, using the following command.
 [source,bash]
 ----
-cd ~/src/apache-basic-playbook
+cd ~/apache-basic-playbook
 ansible-playbook site.yml
 ----
 

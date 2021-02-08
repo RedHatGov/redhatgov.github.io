@@ -34,14 +34,8 @@ The ansible ad hoc command will start with *ansible*, then the target, declaring
 We have configured 'sudo' for you; however, Ansible can use lots of other methods to become (-b) the superuser. 
 ====
 
-====
-[NOTE]
-Make sure that you change directories to the '~/src' directory. That is where our playbooks are located, along with the Ansible configurations that we have provided.
-====
-
 [source,bash]
 ----
-cd ~/src
 ansible localhost --module-name uri --args "url=https://raw.githubusercontent.com/RedHatGov/redhatgov.workshops/master/ansible_tower_aws/files/code-server.service return_content=yes dest=/etc/systemd/system" --become
 ----
 
