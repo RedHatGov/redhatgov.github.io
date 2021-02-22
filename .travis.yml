@@ -15,9 +15,9 @@ install:
   - sudo apt-get install tree
   - gem install asciidoctor
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-  - python get-pip.py --user
-  - pip3 install Pygments --user
-  - pip3 install -r scripts/requirements.txt --user
+  - python get-pip.py
+  - pip3 install Pygments
+  - pip3 install -r scripts/requirements.txt
   - export PATH=~/.local/bin:$PATH
   - cd scripts
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then ./import_events.py; fi'
