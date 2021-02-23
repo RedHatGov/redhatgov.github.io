@@ -291,6 +291,7 @@ ping: socket: Operation not permitted
 The `chattr` command should succeed in making a file read only:
 [source,bash]
 ----
+cd /tmp
 touch file
 chattr +i file
 rm -rf file
