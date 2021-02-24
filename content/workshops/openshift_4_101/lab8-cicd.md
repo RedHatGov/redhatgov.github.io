@@ -59,7 +59,12 @@ $ oc new-app jenkins-ephemeral --as-deployment-config=true
 $ oc logs -f dc/jenkins
 ```
 
-Wait for logs to return "Success". **Note: This may take a while.**
+Wait for logs to return "Success".
+
+{{% alert info %}}
+NOTE: this may take some time
+{{% /alert %}}
+
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
