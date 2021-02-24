@@ -98,7 +98,9 @@ name: dc-metro-map-github-webhook-secret
 </blockquote>
 
 ```bash
-$ SECRET=`oc get secrets dc-metro-map-github-webhook-secret -o json | jq ".data.WebHookSecretKey" | base64 -di`
+$ curl -o jq -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+$ chmod 0755 jq
+$ SECRET=`oc get secrets dc-metro-map-github-webhook-secret -o json | ./jq ".data.WebHookSecretKey" | base64 -di`
 ```
 
 <blockquote>
@@ -176,7 +178,7 @@ Click the "Webhooks" link
 Click the "Add webhook" button
 </blockquote>
 <blockquote>
-Paste in the URL you copied
+In the Payload URL field, paste the URL that you copied.
 </blockquote>
 <blockquote>
 Change content type to "application/json"
@@ -209,7 +211,12 @@ In addition to setting up triggers for rebuilding code, we can setup a different
 
 
 ## Rollbacks
-Well, what if something isn't quite right with the latest version of our app?  Let's say some feature we thought was ready for the world really isn't - and we didn't figure that out until after we deployed it.  No problem, we can roll it back with the click of a button.  Let's check that out:
+Well, what if something isn't quite right with the latest version of our app?  Let's say some feature we thought was ready for the world really isn't - and we didn't figure that out until after we deployed it.  No problem, we can roll it back with the click of a button.
+
+{{% alert info %}}
+This will not work in today's workshop, as we have not yet made a second deployment.
+{{% /alert %}}
+
 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
@@ -222,6 +229,8 @@ Well, what if something isn't quite right with the latest version of our app?  L
 $ oc rollout undo dc/dc-metro-map
 $ oc get pods -w
 ```
+
+
 
 {{% /panel %}}
 

@@ -17,7 +17,7 @@ Create a new project named “cicd-{{< span "userid" "YOUR#" >}}”.
 
 {{% panel "CLI Steps" %}}
 
-## Create the project cicd-{{< span "userid" "YOUR#" >}}
+<i class="fa fa-terminal"></i> Create the project cicd-{{< span "userid" "YOUR#" >}}
 
 <code>
 $ oc new-project cicd-{{< span2 "userid" "YOUR#" >}}
@@ -54,12 +54,12 @@ Fill in the Name and Display Name of the project as "cicd-{{< span "userid" "YOU
 
 {{% panel "CLI Steps" %}}
 
-```bash
+<code>
 $ oc new-app jenkins-ephemeral --as-deployment-config=true
 $ oc logs -f dc/jenkins
 --> Scaling jenkins-1 to 1
 --> Success
-```
+</code>
 Wait for logs to return "Success".  Note: This may take awhile.
 {{% /panel %}}
 
@@ -115,11 +115,9 @@ Go to "Topology", select the deployment configuration for jenkins, under details
 ## Create a sample application configuration
 
 
-```bash
+<code>
 $ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/nodejs-sample-pipeline.yaml
-buildconfig.build.openshift.io/nodejs-sample-pipeline created
-$
-```
+</code>
 
 ## Confirm you can access Jenkins
 
@@ -128,16 +126,12 @@ $
 {{% panel "CLI Steps" %}}
 
 <blockquote>
-<i class="fa fa-terminal"></i> Get the route to the Jenkins server. Your HOST/PORT values will differ
-from the example below.
+<i class="fa fa-terminal"></i> Get the route to the Jenkins server:
 </blockquote>
 
-```bash
-$ oc get route
-NAME       HOST/PORT                            PATH      SERVICES   PORT      TERMINATION     WILDCARD
-frontend   frontend-cicd.192.168.42.27.xip.io             frontend   <all>     edge            None
-jenkins    jenkins-cicd.192.168.42.27.xip.io              jenkins    <all>     edge/Redirect   None
-```
+<code>
+$ oc get route | grep jenkins | awk '{ print $2 }'
+</code>
 
 Use Jenkins HOST/PORT to access through web browser
 {{% /panel %}}
@@ -170,6 +164,21 @@ Once logged in, click the [Allow selected permissions] button and you should see
 
 ## Start the pipeline
 
+{{< panel_group >}}
+
+{{% panel "CLI Steps" %}}
+
+<i class="fa fa-terminal"></i> Launch the pipeline:
+
+<code>
+$ oc start-build nodejs-sample-pipeline
+</code>
+
+{{% /panel %}}
+
+{{% panel "Web Console Steps" %}}
+
+
 > Using the OpenShift Web Console, in "Administrator" mode, choose *Builds* -> *Build Configs*, and then click on "nodejs-sample-pipeline"
 
 <img src="../images/ocp-lab-cicd-start-pipeline.png" width="900">
@@ -177,6 +186,12 @@ Once logged in, click the [Allow selected permissions] button and you should see
 > From the "Actions" menu, choose "Start Build"
 
 <img src="../images/ocp-lab-cicd-pipeline-actions-start_build.png" width="200">
+
+{{% /panel %}}
+
+{{< /panel_group >}}
+
+## Monitor the pipeline's progress
 
 When the pipeline starts, OpenShift uploads the pipeline to the Jenkins server for execution. 
 
@@ -186,7 +201,7 @@ The Jenkins dashboard should indicate that a new build is executing.
 
 Back in the OpenShift Web Console, watch the pipeline execute. 
 
-## Confirm application is available
+## Confirm that the application is available
 
 <blockquote>
 In "Developer" mode, select the "cicd-{{< span2 "userid" "YOUR#" >}}" project, and click on "Topology"

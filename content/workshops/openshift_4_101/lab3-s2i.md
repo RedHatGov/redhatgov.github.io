@@ -20,6 +20,8 @@ We can do this either via the command line or the web console.  You decide which
 
 ```bash
 $ oc new-app --name=dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir=dc-metro-map --as-deployment-config=true
+```
+```bash
 $ oc expose service dc-metro-map
 ```
 
@@ -182,7 +184,7 @@ Click the arrow, at the top right corner of the "dc-metro-map" icon, to launch a
 
 The app should look like this in your web browser:
 
-<img src="../images/ocp-lab-s2i-apprunning.png" width="900"><br/>
+<img src="../images/dc-metro-map-app.png" width="900"><br/>
 
 Clicking the checkboxes will toggle on/off the individual metro stations on each colored line.  A numbered icon indicates there is more than one metro station in that area and they have been consolidated - click the number or zoom in to see more.
 
