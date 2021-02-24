@@ -6,7 +6,7 @@ layout: lab
 ---
 
 # Things will go wrong, and that's why we have replication and recovery
-Things will go wrong with your software, or your hardware, or from something out of your control.  But we can plan for that failure, and planning for it let's us minimize the impact.  OpenShift supports this via what we call replication and recovery.
+Things will go wrong with your software, or your hardware, or from something completely out of your control.  But, we can plan for such failures, thus minimizing their impact.  OpenShift supports this via the replication and recovery functionality.
 
 ## Replication
 Let's walk through a simple example of how the replication controller can keep your deployment at a desired state.  Assuming you still have the dc-metro-map project running we can manually scale up our replicas to handle increased user load.

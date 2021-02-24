@@ -41,8 +41,8 @@ OpenShift provides a web console that allows you to perform various tasks via a 
 
 Once logged in you should see your available projects - or a button to create a project if none exist already:
 
-<img src="../images/ocp-admin-default.png" width="600"><br/>
-*Administrator Default View, with No Projects*
+<img src="../images/ocp-dev-view.png" width="600"><br/>
+*Developer Default View*
 
 ## So this is what an empty project looks like
 First let's create a new project to do our workshop work in.  We will use the student number you were given to ensure you don't clash with classmates:
@@ -79,7 +79,7 @@ The terminal will launch as a container in the project.  Once the container come
 $ oc get projects
 oc get projects
 NAME          DISPLAY NAME   STATUS
-terminal-{{< span2 "userid" "YOUR#" >}}                  Active
+demo-{{< span2 "userid" "YOUR#" >}}                  Active
 ```
 > <i class="fa fa-terminal"></i> Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):
 
