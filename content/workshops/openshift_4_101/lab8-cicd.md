@@ -17,7 +17,7 @@ Create a new project named “cicd-{{< span "userid" "YOUR#" >}}”.
 
 {{% panel "CLI Steps" %}}
 
-## Create the project cicd-{{< span "userid" "YOUR#" >}}
+<i class="fa fa-terminal"></i> Create the project cicd-{{< span "userid" "YOUR#" >}}
 
 <code>
 $ oc new-project cicd-{{< span2 "userid" "YOUR#" >}}
@@ -168,7 +168,7 @@ Once logged in, click the [Allow selected permissions] button and you should see
 
 {{% panel "CLI Steps" %}}
 
-Launch the pipeline:
+<i class="fa fa-terminal"></i> Launch the pipeline:
 
 <code>
 $ oc start-build nodejs-sample-pipeline
