@@ -54,10 +54,10 @@ Fill in the Name and Display Name of the project as "cicd-{{< span "userid" "YOU
 
 {{% panel "CLI Steps" %}}
 
-<code>
+```bash
 $ oc new-app jenkins-ephemeral --as-deployment-config=true
 $ oc logs -f dc/jenkins
-</code>
+```
 
 Wait for logs to return "Success".
 
@@ -119,13 +119,9 @@ Go to "Topology", select the deployment configuration for jenkins, under details
 ## Create a sample application configuration
 
 
-<code>
+```bash
 $ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/nodejs-sample-pipeline.yaml
-<<<<<<< HEAD
-</code>
-=======
 ```
->>>>>>> ac308dd39655495ec62ff72616be2abfb93c7fa7
 
 ## Confirm you can access Jenkins
 
@@ -137,15 +133,9 @@ $ oc create -f https://raw.githubusercontent.com/openshift/origin/master/example
 <i class="fa fa-terminal"></i> Get the route to the Jenkins server:
 </blockquote>
 
-<<<<<<< HEAD
-<code>
-$ oc get route | grep jenkins | awk '{ print $2 }'
-</code>
-=======
 ```bash
 $ oc get route | grep jenkins | awk '{ print $2 }'
 ```
->>>>>>> ac308dd39655495ec62ff72616be2abfb93c7fa7
 
 Copy the above URL, and paste it in your web browser, to access Jenkins.
 {{% /panel %}}
@@ -184,15 +174,9 @@ Once logged in, click the [Allow selected permissions] button and you should see
 
 <i class="fa fa-terminal"></i> Launch the pipeline:
 
-<<<<<<< HEAD
-<code>
-$ oc start-build nodejs-sample-pipeline
-</code>
-=======
 ```bash
 $ oc start-build nodejs-sample-pipeline
 ```
->>>>>>> ac308dd39655495ec62ff72616be2abfb93c7fa7
 
 {{% /panel %}}
 
