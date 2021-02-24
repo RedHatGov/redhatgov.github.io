@@ -164,6 +164,21 @@ Once logged in, click the [Allow selected permissions] button and you should see
 
 ## Start the pipeline
 
+{{< panel_group >}}
+
+{{% panel "CLI Steps" %}}
+
+Launch the pipeline:
+
+<code>
+$ oc start-build nodejs-sample-pipeline
+</code>
+
+{{% /panel %}}
+
+{{% panel "Web Console Steps" %}}
+
+
 > Using the OpenShift Web Console, in "Administrator" mode, choose *Builds* -> *Build Configs*, and then click on "nodejs-sample-pipeline"
 
 <img src="../images/ocp-lab-cicd-start-pipeline.png" width="900">
@@ -171,6 +186,12 @@ Once logged in, click the [Allow selected permissions] button and you should see
 > From the "Actions" menu, choose "Start Build"
 
 <img src="../images/ocp-lab-cicd-pipeline-actions-start_build.png" width="200">
+
+{{% /panel %}}
+
+{{< /panel_group >}}
+
+## Monitor the pipeline's progress
 
 When the pipeline starts, OpenShift uploads the pipeline to the Jenkins server for execution. 
 
@@ -180,7 +201,7 @@ The Jenkins dashboard should indicate that a new build is executing.
 
 Back in the OpenShift Web Console, watch the pipeline execute. 
 
-## Confirm application is available
+## Confirm that the application is available
 
 <blockquote>
 In "Developer" mode, select the "cicd-{{< span2 "userid" "YOUR#" >}}" project, and click on "Topology"
