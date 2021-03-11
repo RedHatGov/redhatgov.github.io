@@ -122,7 +122,7 @@ class Event(object):
 
     @property
     def hash(self):
-        m = hashlib.md5()
+        m = hashlib.encode('utf-8').md5()
         m.update(str(self.start_date))
         m.update(str(self.end_date))
         m.update(self.title)
