@@ -20,7 +20,7 @@ install:
   - pip3 install -r scripts/requirements.txt
   - export PATH=~/.local/bin:$PATH
   - cd scripts
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then ./import_events.py; fi'
+#  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then ./import_events.py; fi'
   - cd ..
   - rm -rf public || exit 0
 
