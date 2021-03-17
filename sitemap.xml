@@ -1,0 +1,1141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/events/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/readme/</loc>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_ci/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_dev/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_ansible/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/prerequisites/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/source_to_image/conclusion/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_container_intro/lab99-conclusion/</loc>
+  </url>
+  
+  <url>
+    <loc>/contact/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_container_intro/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_101/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab1.2_terminal/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/dynatrace_openshift/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/exercise1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_the_hard_way/exercise1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/exercise1.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_101/exercise1.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/exercise1.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/selinux_policy/exercise1.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/exercise1.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/exercise1.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/exercise1.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/selinux_policy/exercise1.1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/exercise1.1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_101/exercise1.1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/exercise1.1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/exercise1.1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/exercise1.1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/exercise1.1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.10/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.11/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.12/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.13/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.14/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.15/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.16/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.17/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.18/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.19/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/exercise1.2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/exercise1.2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/exercise1.2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/exercise1.2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/selinux_policy/exercise1.2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/exercise1.2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_101/exercise1.2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.20/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.3/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/exercise1.3/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/exercise1.3/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/exercise1.3/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/exercise1.3/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/exercise1.3/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_101/exercise1.3/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/exercise1.4/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/exercise1.4/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.4/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/exercise1.4/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/exercise1.4/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/exercise1.4/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_101/exercise1.4/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/exercise1.5/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.5/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/exercise1.5/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/exercise1.5/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/exercise1.5/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/exercise1.5/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.6/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/exercise1.6/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/exercise1.6/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/exercise1.6/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.7/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/exercise1.7/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/exercise1.7/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/exercise1.7/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.8/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/exercise1.8/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/exercise1.8/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/exercise1.8/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/exercise1.9/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/exercise1.9/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/exercise1.9/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/exercise1.9/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/exercise10/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_the_hard_way/exercise2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/exercise2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/selinux_policy/exercise2.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/exercise2.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/exercise2.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/exercise2.1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/exercise2.1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/selinux_policy/exercise2.1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/selinux_policy/exercise2.2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/exercise2.2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/exercise2.2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/selinux_policy/exercise2.3/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/selinux_policy/exercise2.4/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_the_hard_way/exercise3/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/exercise3/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/exercise3.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/exercise3.0/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/exercise4/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_the_hard_way/exercise4/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_the_hard_way/exercise5/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/exercise5/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_the_hard_way/exercise6/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/exercise6/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_the_hard_way/exercise7/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/exercise7/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/exercise8/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/exercise9/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/fin/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/fin/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101/fin/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/fin/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/fin/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhosp_101/fin/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab2.2_deployuserprofile/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab2.1_userprofile/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab1.4_deploymsa/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_the_hard_way/intro/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhosp_101/1_introduction/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/</loc>
+  </url>
+  
+  <url>
+    <loc>/jr-sa/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/strangling_the_monolith/lab1/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/source_to_image/containerize_app/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/source_to_image/gochat_s2i/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/strangling_the_monolith/login_tour_oc/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/strangling_the_monolith/login_tour_wetty/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/strangling_the_monolith/lab3/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/source_to_image/dice/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/source_to_image/run_the_app/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/source_to_image/source_to_image/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/strangling_the_monolith/lab2/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_ci/lab01/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_dev/lab01/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab01/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_ci/lab02/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_dev/lab02/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab02/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab03/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_ci/lab03/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_dev/lab03/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab04/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_ci/lab04/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_dev/lab04/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_ci/lab05/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab05/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_dev/lab05/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_ci/lab06/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab06/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_dev/lab06/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_dev/lab07/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab07/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_ci/lab07/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_dev/lab08/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab08/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab09/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhosp_101/2_login_to_horizon/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/lab1-welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101/lab1-welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/lab1-welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_container_intro/lab01-intro/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab10/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/lab10-labels/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab11/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/lab11-cicd/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/lab12-bluegreen/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab12/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab13/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab14/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab15/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab16/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab17/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/lab18/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101/lab2-byocontainer/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/lab2-byocontainer/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/lab2-byodocker/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhosp_101/3_managing_networks/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_container_intro/lab02-registry/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/lab3-s2i/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101/lab3-s2i/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/lab3-installagent/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhosp_101/4_managing_floating_ip_addresses/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_container_intro/lab03-podman/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/lab4-configdynatraceactivegate/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/lab4-devmanage/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101/lab4-devmanage/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhosp_101/5_managing_security_groups/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_container_intro/lab04-isolation/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/lab5-s2i/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhosp_101/6_managing_images/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/lab5-rollbacks/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101/lab5-rollbacks/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_container_intro/lab05-selinux/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/lab6-deploy3tierapp/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhosp_101/7_managing_instances/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/lab6-replicationrecovery/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101/lab6-replicationrecovery/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_container_intro/lab06-inspecting/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/lab7-devmanage/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/lab7-labels/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101/lab7-labels/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhosp_101/8_using_the_cli/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_container_intro/lab07-signing/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/lab8-cicd/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101/lab8-cicd/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhosp_101/9_heat/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/lab8-rollbacks/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_container_intro/lab08-builds/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/lab9-bluegreen/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101/lab9-bluegreen/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhosp_101/10_storage/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/lab9-replicationrecovery/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_the_hard_way/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/login_tour_wetty/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/login_tour_wetty/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab1.1_welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/strangling_the_monolith/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab3.1_featureupdate/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab3.2_grafana/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab3.3_jaeger/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab2.3_kiali/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/source_to_image/prerequisites/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/strangling_the_monolith/prerequisites/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/prerequisites/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhosp_101/</loc>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab5.4_authpolicy/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab5.3_prep/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab5.1_intromtls/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab5.5_secureingressegress/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab5.2_verifymtls/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/selinux_policy/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/setup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/setup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_101/setup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab1.3_installing/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/setup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/setup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/setup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/selinux_policy/setup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/source_to_image/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/source_to_image/setup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab4.4_circuitbreaking/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab4.3_faultinjection/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab4.1_routingtraffic/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/lab4.2_trafficsplitting/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_ci/prerequisites/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_dev/prerequisites/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_101_dcmetromap/prerequisites/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101/prerequisites/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_4_101_dynatrace/prerequisites/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/secure_software_factory/prerequisites/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_ci/openshift/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/agile_integrations_dev/openshift/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/cloudforms41/wrapup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/jdv_dev/wrapup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_containers/wrapup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/security_openshift/wrapup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_automation/wrapup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/ansible_tower_azure/wrapup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_101/wrapup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/containers_the_hard_way/wrapup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/rhel_8/wrapup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/selinux_policy/wrapup/</loc>
+  </url>
+  
+  <url>
+    <loc>/workshops/openshift_service_mesh_v1.0/</loc>
+  </url>
+  
+</urlset>

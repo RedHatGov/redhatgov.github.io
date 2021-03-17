@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Red Hat Enterprise Linux 8 on Red Hat | Public Sector</title>
+    <link>/workshops/rhel_8/</link>
+    <description>Recent content in Red Hat Enterprise Linux 8 on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/rhel_8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Exercise 1.0 - Welcome to RHEL!</title>
+      <link>/workshops/rhel_8/exercise1.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/exercise1.0/</guid>
+      <description>Exercise Description Welcome to RHEL!
+ Red Hat Enterprise Linux 8 is the intelligent enterprise Linux, providing a secure and consistent foundation across hybrid cloud deployments and the tools enterprises need to deliver services and workloads faster with less effort. RHEL 8 enables delivery of any application, on any architecture, on any cloud, physical, or virtual environment, at any time.
+ With predictable release cadence and 10-year enterprise support, RHEL 8 is the safe and stable choice for your enterprise.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.1 - What&#39;s New in RHEL 8</title>
+      <link>/workshops/rhel_8/exercise1.1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/exercise1.1/</guid>
+      <description>Application streams Application streams deliver user space packages on a cadence that makes sense for the package rather than as a monolithic distribution. Streams also allow the consolidation of previous distribution channels to a single place.
+   Red Hat Insights Red Hat Insights is included with your Red Hat® Enterprise Linux® 8 subscription. It helps provide a security-focused, reliable, efficient, and scalable infrastructure environment.
+   Image builder Image builder lets customers build images from source RPMs that are deployable to multiple targets quickly and simply, and provides fine-grained control and visibility in to what’s included in a particular image and its history.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.2 - Tour of the Web Console</title>
+      <link>/workshops/rhel_8/exercise1.2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/exercise1.2/</guid>
+      <description>Exercise Description To get started, we will take a tour of the web console. The web console (called cockpit) will be your primary interactive interface to RHEL. The console has a number of functions that enable you to manage most aspects of the installation.
+ Connect to your personal lab environment. Ensure that the information in the footer of the page is correctly filled out and the URL for your environment should show up below</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.3 - Managing Updates Using the Web Console</title>
+      <link>/workshops/rhel_8/exercise1.3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/exercise1.3/</guid>
+      <description>Exercise Description Now that you&amp;#8217;ve toured the web console, lets work through updating the system.
+   Section 1: Basic Updating As you did in the previous section, navigate to the Software Updates section of the Web Console, by clicking on the Software Updates link, in the left-hand menu. There will then be a brief interval where Refreshing package information will appear, along with a progress bar. Once that completes, you can proceed with the exercise.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.4 - Configuring Terminal Session Recording</title>
+      <link>/workshops/rhel_8/exercise1.4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/exercise1.4/</guid>
+      <description>Section 1. Deploying Session Recording To be able to deploy the Session Recording solution you need to have the following packages installed: tlog, SSSD, cockpit-session-recording.
+Note that session recording doesn&amp;#8217;t work for graphical desktop sessions or Cockpit terminal sessions.
+ Step 1.1: Pre-Requisites In order to work with session recording, your system will need to have the following installed:
+   tlog
+  SSSD (System Security Services Deamon)</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.5 - Managing Cryptographic Policies</title>
+      <link>/workshops/rhel_8/exercise1.5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/exercise1.5/</guid>
+      <description>Exercise Description RHEL 8 makes it easy to enforce a strong and consistent cryptographic policy on your systems.
+ In the following exercises we&amp;#8217;ll use the new commands for managing your crypto configurations and test them.
+   Section 1: Viewing and changing the crypto policy Show the current crypto policy.
+ update-crypto-policies --show   You should see something like &amp;#8230;&amp;#8203;
+ DEFAULT
+ DEFAULT is one of the four crypto policies, along with LEGACY, FIPS 140, and FUTURE.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.6 - Managing Software in an Application Stream</title>
+      <link>/workshops/rhel_8/exercise1.6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/exercise1.6/</guid>
+      <description>Overview Application streams are a new RHEL 8 capability that provides access to the latest tools, languages and libraries, without affecting core system components. This is done by including all of those streams in containers. The containers are automatically instantiated, when needed, and go away, when they are not in use.
+   Section 1: Stream Availability Step 1: Check to see what PostgreSQL streams are available As root, use yum to see what streams are available, for PostgreSQL:</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.7 - OpenSCAP Security Compliance Scanning</title>
+      <link>/workshops/rhel_8/exercise1.7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/exercise1.7/</guid>
+      <description>Overview RHEL 8 makes it easy to maintain secure and compliant systems with OpenSCAP.  What is SCAP? SCAP (Security Content Automation Protocol) is a NIST project that standardizes the language for describing assessment criteria and findings. It also provides a vulnerability rating system. The project&amp;#8217;s home page is https://scap.nist.gov/
+ The essential components of SCAP are:
+   XCCDF: The Extensible Configuration Checklist Description Format
+  OVAL®: Open Vulnerability and Assessment Language</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.8 - Introduction to using buildah, podman and skopeo to work on containers</title>
+      <link>/workshops/rhel_8/exercise1.8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/exercise1.8/</guid>
+      <description>Exercise Description In this exercise, you will build a custom application container utilizing the Red Hat Universal Base Image, customize that image and test the image functionality. After that you will use skopeo to transfer that image from your user local repository to the system repository and configure it to start at boot.
+ After completing this section, you will be able to build images from an existing base image using buildah and other host based tools.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.9 - System Roles with Ansible</title>
+      <link>/workshops/rhel_8/exercise1.9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/exercise1.9/</guid>
+      <description>Exercise Description RHEL 7.4 introduced RHEL System Roles, a collection of Ansible roles and modules that provide a stable and consistent configuration interface for remote management of Red Hat Enterprise Linux. These System Roles are applicable to RHEL 6.10 and above, easing management of 3 generations of RHEL. The effort is based on development of the Linux System Roles project (link: https://linux-system-roles.github.io/upstream). The following roles are provided and supported as follows:</description>
+    </item>
+    
+    <item>
+      <title>Setup</title>
+      <link>/workshops/rhel_8/setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/setup/</guid>
+      <description>What you will learn: Red Hat Web Console - Terminal This lab provides a quick tour of the browser based Terminal via the Red Hat Web Console. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
+   Accessing Red Hat Enterprise Linux Web Console (cockpit) Use this URL to access the Web Console node, just change the workshop name (if applicable).</description>
+    </item>
+    
+    <item>
+      <title>Wrapup</title>
+      <link>/workshops/rhel_8/wrapup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/wrapup/</guid>
+      <description>That wraps up what we have planned for today. We hope you&amp;#8217;ve enjoyed learning about all the goodness that is RHEL 8!
+ What do you think? How can we help you understand new RHEL features better?
+ This Participant Guide will remain active for the next two weeks. Please take advantage of it by downloading RHEL8 and installing a test host or VM back at your organization.
+ Thank you for your time and participation!</description>
+    </item>
+    
+  </channel>
+</rss>

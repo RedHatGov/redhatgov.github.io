@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Exercise 1.7 - Seccomp | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Exercise 1.7 - Seccomp</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/security_containers">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/security_containers/exercise1.6/">&larr; Previous: Exercise 1.6 - Read Only Containers</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/security_containers/exercise1.8/">Next: Exercise 1.8 - SELinux &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div class="sect1">
+<h2 id="_exercise_1_7_seccomp">Exercise 1.7 - Seccomp</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_description">Exercise Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Secure Computing Mode (seccomp) is a kernel feature that enables you to filter system calls to the kernel from a container. The combination of restricted and allowed calls are arranged in profiles, and you can pass different profiles to different containers. Seccomp provides more fine-grained control than capabilities, giving an attacker a limited number of syscalls from the container. This exercise examines how seccomp works and how it can be employed to provide container security.</p>
+</div>
+<div class="paragraph">
+<p>The default seccomp profile for containers is a JSON file and can be viewed here: <a href="https://github.com/docker/docker/blob/master/profiles/seccomp/default.json" class="bare">https://github.com/docker/docker/blob/master/profiles/seccomp/default.json</a>. It blocks 44 system calls out of more than 300 available. Making the list stricter would be a trade-off with application compatibility. A table with a significant part of the blocked calls and the reasoning for blocking can be found here: <a href="https://docs.docker.com/engine/security/seccomp/" class="bare">https://docs.docker.com/engine/security/seccomp/</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Berkeley Packet Filter (BPF)</strong></p>
+</div>
+<div class="paragraph">
+<p>Seccomp uses the Berkeley Packet Filter (BPF) system, which is programmable on the fly so you can make a custom filter. You can also limit a certain syscall by also customizing the conditions on how or when it should be limited. A seccomp filter replaces the syscall with a pointer to a BPF program, which  executes that program instead of the syscall. All children to a process with this filter will inherit the filter as well. The command line flag used to operate with seccomp is <code>--security-opt</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_section_1_defining_seccomp_policy">Section 1: Defining seccomp policy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following is an example of how to explicitly define the default seccomp policy for a container:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo podman run --security-opt seccomp=/path/to/default/profile.json &lt;container&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_1_create_the_working_directory">Step 1. Create the working directory</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">mkdir ~/seccomp</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cd ~/seccomp</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">vim 1_chmod.json</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_copy_the_1_chmod_json_text_below_and_paste_it_into_the_terminal_window">Step 2. Copy the <code>1_chmod.json</code>  text below and paste it into the terminal window.</h3>
+<div class="paragraph">
+<p>Press <code>i</code> for Insert, then cut and paste <code>control + v</code>, then escape and write the file <code>esc</code>, <code>:wq</code>.</p>
+</div>
+<div class="paragraph">
+<p>This example seccomp file will be used to disallow the <code>chmod</code>, <code>chown</code>, or <code>chown32</code> systemcalls.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">{
+    "defaultAction": "SCMP_ACT_ALLOW",
+    "architectures": [
+        "SCMP_ARCH_X86_64",
+        "SCMP_ARCH_X86",
+        "SCMP_ARCH_X32"
+    ],
+    "syscalls": [
+        {
+            "name": "chmod",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        },
+        {
+            "name": "chown",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        },
+        {
+            "name": "chown32",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lets take a closer look at how this file restricts these system calls.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">"syscalls": [
+        {
+            "name": "chmod",                <i class="conum" data-value="1"></i><b>(1)</b>
+            "action": "SCMP_ACT_ERRNO",     <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>chmod</strong>:  is the command and system call which may change the access permissions to file system objects (files and directories). It may also alter special mode flags. The request is filtered by the umask. The name is an abbreviation of change mode.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>SCMP_ACT_ERRNO</strong>: Basically this blocks the chmod syscall. Man page: The thread will receive a return value of errno when it calls a syscall that matches the filter rule.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3_apply_the_restrictions_to_a_container">Step 3. Apply the restrictions to a container</h3>
+<div class="paragraph">
+<p>Lets apply these restrictions to a container by using the <code>--security-opt</code> flag to point to our <code>1_chmod.json</code> file. We will start a container and try to run the chmod command on a file.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo podman run --rm -it --security-opt seccomp=1_chmod.json redhatgov/alpine chmod 400 /etc/hosts</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse2810c9e161e85564a0d195acb7fc9468" class="collapsed">
+      
+        Result
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse2810c9e161e85564a0d195acb7fc9468" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">chmod: /etc/hosts: Operation not permitted</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This <code>FAILED</code> because we explicitly denied this syscall to the container via the seccomp profile. This profile can be updated to enable or disable syscalls for your application.</p>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_section_2_syscall_identification">Section 2: Syscall Identification</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Not all container operating systems use the same mappings for syscalls. While one OS may use a direct mapping of the binary <code>chown</code> to the syscall <code>chown</code> it is not always the case for other operating systems.</p>
+</div>
+<div class="paragraph">
+<p>To find out what syscalls your application or command is using under the covers we need to profile or trace the application and the syscalls it is making. To do this we use a tool called <a href="https://linux.die.net/man/1/strace"><code>strace</code></a>.</p>
+</div>
+<div class="paragraph">
+<p>Strace is used to identify the underlying syscall being made by the operating system. Lets walk through a example where the syscalls being made do not map directly to our syscalls in the <code>1_chmod.json</code> file.</p>
+</div>
+<div class="sect2">
+<h3 id="_step_1_run_fedora">Step 1. Run Fedora</h3>
+<div class="paragraph">
+<p>Let&#8217;s run a instance of Fedora and use the same <code>1_chmod.json</code> profile to try and limit the <code>chmod</code> command inside the container.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo podman run --rm \
+                -it  \
+                --cap-add SYS_PTRACE \
+                --security-opt seccomp=1_chmod.json \
+                redhatgov/fedora \
+                chmod 400 /etc/hosts &amp;&amp; echo $?</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The command should return a zero. This means that the container was able to <code>chmod</code> the <code>/etc/hosts</code> file. We want to limit this action and need to map the correct syscall to out seccomp profile. To identify the correct syscall we need to use <code>strace</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_add_the_strace_program_to_trace_chmod">Step 2. Add the strace program to trace chmod</h3>
+<div class="paragraph">
+<p>Lets run the same command again and add the <a href="https://linux.die.net/man/1/strace"><code>strace</code></a> program to our command to trace the <code>chmod</code> command.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo podman run --rm -it --cap-add SYS_PTRACE --security-opt seccomp=1_chmod.json redhatgov/fedora strace -P /etc/hosts chmod 400 /etc/hosts</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapseeb2619956e9acdb78a222bead5c9100f" class="collapsed">
+      
+        Result
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapseeb2619956e9acdb78a222bead5c9100f" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">stat("/etc/hosts", {st_mode=S_IFREG|0644, st_size=174, ...}) = 0
+fchmodat(AT_FDCWD, "/etc/hosts", 0400)  = 0
++++ exited with 0 +++</code></pre>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3_create_a_seccomp_profile_using_new_mappings">Step 3. Create a seccomp profile using new mappings</h3>
+<div class="paragraph">
+<p>Create a seccomp profile using the new mappings, for system calls, for <code>chmod</code> &amp; <code>chown</code>. Check your answer below.</p>
+</div>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse8287504d40b392995412a9340f50f868" class="collapsed">
+      
+        Seccomp Profile
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse8287504d40b392995412a9340f50f868" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="paragraph">
+<p>Create the following profile using vim, or your favorite editor.</p>
+</div>
+<div class="listingblock">
+<div class="title">2_chmod_fedora.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">{
+    "defaultAction": "SCMP_ACT_ALLOW",
+    "architectures": [
+        "SCMP_ARCH_X86_64",
+        "SCMP_ARCH_X86",
+        "SCMP_ARCH_X32"
+    ],
+    "syscalls": [
+        {
+            "name": "fchmodat",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        },
+        {
+            "name": "fchownat",
+            "action": "SCMP_ACT_ERRNO",
+            "args": []
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://linux.die.net/man/2/fchmodat">fchmodat</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://linux.die.net/man/2/fchownat">fchownat</a></p>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_4_create_a_seccomp_profile_with_syscall_mapping">Step 4. Create a seccomp profile with syscall mapping</h3>
+<div class="paragraph">
+<p>We have now found the correct syscall to add to our seccomp profile. Let&#8217;s create a seccomp profile with our new syscall mapping. Now we can create a seccomp profile called <code>2_chmod_fedora.json</code> using vim, or your favorite editor. You can copy and paste the seccomp profile above into this profile.</p>
+</div>
+<div class="paragraph">
+<p>Now that you have your new profile created, let&#8217;s run the container again and see if our new seccomp profile blocks <code>chmod</code> &amp; <code>chown</code> from working.</p>
+</div>
+<div class="listingblock">
+<div class="title">chmod</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo podman run --rm -it --security-opt seccomp=2_chmod_fedora.json redhatgov/fedora chmod 400 /etc/hosts</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapsea1b10be9667b6029af5bef985a9839f8" class="collapsed">
+      
+        Chmod Result
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapsea1b10be9667b6029af5bef985a9839f8" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">chmod: changing permissions of '/etc/hosts': Operation not permitted</code></pre>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+<div class="listingblock">
+<div class="title">chown</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo podman run --rm -it --security-opt seccomp=2_chmod_fedora.json redhatgov/fedora chown root:root /etc/hosts</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapseb929fe3dcdb0bdd986a77cc33d4f9610" class="collapsed">
+      
+        Chown Result
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapseb929fe3dcdb0bdd986a77cc33d4f9610" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">chown: changing ownership of '/etc/hosts': Operation not permitted</code></pre>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_section_3_limiting_network_syscalls">Section 3: Limiting Network Syscalls</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Docker presents the socket syscall to containers by default, this may not be a capability you want your containers to have in certain situations. Let&#8217;s look at another example where we use the powerful networking tool, <a href="https://linux.die.net/man/1/nc">Netcat</a>. Netcat is used for just about anything under the sun involving TCP or UDP. It can open TCP connections, send UDP packets, listen on arbitrary TCP and UDP ports, do port scanning, and deal with both IPv4 and IPv6.</p>
+</div>
+<div class="sect2">
+<h3 id="_step_1_run_a_container_with_netcat_installed">Step 1. Run a container with Netcat installed.</h3>
+<div class="paragraph">
+<p>Let&#8217;s run a container with Netcat installed in it and listen for local traffic on port 999.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo podman run --rm -it redhatgov/fedora bash</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">In a Container</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">[root@2b1369bfa927 /]# nc -l 999
+^C <i class="conum" data-value="1"></i><b>(1)</b>
+
+[root@2b1369bfa927 /]# exit
+exit <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Netcat successfully connected. Use <code>Control + C</code> to exit Netcat.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>exit</code> to exit the container.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We were able to bind to the localhost and listen for traffic on port 999. In Step 2 we will disable networking in this container.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_identify_network_restricting_syscalls">Step 2. Identify network-restricting syscalls.</h3>
+<div class="paragraph">
+<p>Run strace on the Netcat program, to identify the network-restricting syscalls we need for our seccomp profile, in our container.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo podman run --rm -it --cap-drop SYS_PTRACE redhatgov/fedora bash</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3_run_strace_and_the_netcat_command">Step 3. Run strace and the Netcat command.</h3>
+<div class="paragraph">
+<p>Next, from inside the container, run strace and the Netcat command.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">[root@9ad9f00480a0 /]# strace nc -l 999</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse3b6568546d850c2f3d9cb6e0db942386" class="collapsed">
+      
+        Strace results
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse3b6568546d850c2f3d9cb6e0db942386" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">strace: ptrace(PTRACE_TRACEME, ...): Operation not permitted
++++ exited with 1 +++</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="http://man7.org/linux/man-pages/man2/socket.2.html">Socket Syscall Manpage</a></p>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_4_create_a_seccomp_profile_called_3_network_json">Step 4. Create a seccomp profile called <code>3_network.json</code></h3>
+<div class="paragraph">
+<p>Exit the container</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">[root@9ad9f00480a0 /]# exit</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3">Step 3:</h3>
+<div class="paragraph">
+<p>We have now found the correct syscall to add to our seccomp profile. Create a seccomp profile called <code>3_network.json</code> -  using vim, or your favorite editor.</p>
+</div>
+<div class="paragraph">
+<p>Copy and paste the seccomp profile below into a text editor. Then, save it as a file named <code>3_network.json</code> to create the profile.</p>
+</div>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapsedfb4fb6830e841c41e5880c33fd5cdec" class="collapsed">
+      
+        Seccomp Profile
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapsedfb4fb6830e841c41e5880c33fd5cdec" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">{
+   "defaultAction":"SCMP_ACT_ALLOW",
+   "syscalls":[
+      {
+         "name":"socket",
+         "action":"SCMP_ACT_ERRNO"
+      }
+   ]
+}</code></pre>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_5_test_the_new_seccomp_profile">Step 5. Test the new seccomp profile</h3>
+<div class="paragraph">
+<p>Now that you have your new profile created, let&#8217;s run the container again and see if our new seccomp profile blocks Netcat from working.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo podman run --rm -it --security-opt seccomp=3_network.json redhatgov/fedora bash</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">In a Container</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">[root@de51762b4213 /]# nc -l 555
+Ncat: Unable to open any listening sockets. QUITTING. <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Netcat is blocked from connecting to a network socket, via the seccomp profile.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_6_exit_the_container">Step 6. Exit the container</h3>
+<div class="listingblock">
+<div class="title">Exit the container</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">[root@de51762b4213 /]# exit
+exit</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This <code>FAILED</code> because we explicitly denied this syscall to the container via the seccomp profile. This profile can help to stop would-be attackers from being able to further compromise a container or container host.
+<style>
+
+ 
+.modal {
+  display: none;  
+  position: fixed;  
+  z-index: 1;  
+  left: 0;
+  top: 0;
+  width: 100%;  
+  height: 100%;  
+  overflow: auto;  
+  background-color: rgb(0,0,0);  
+  background-color: rgba(0,0,0,0.4);  
+  -webkit-animation-name: fadeIn;  
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+ 
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+ 
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #000000;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #000000;
+  color: white;
+}
+
+ 
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+</style>
+
+<div id="myModal" class="modal">
+
+  
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h3>Workshop Details</h3>
+    </div>
+    <div class="modal-body">
+<div class="row">
+  <div class="col-lg-4 col-md-5 col-sm-12" id="workshopFooterDetails">
+    <table>
+      <tr>
+        <td class="text-right"><b>Domain</b></td>
+        <td><span class="domain"></span></td>
+        <td rowspan="3">
+          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Workshop</b></td>
+        <td><span class="prefix"></span></td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Student ID</b></td>
+        <td><span class="userid"></span></td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-lg-8 col-md-7 col-sm-12">
+    <form id="footerForm" onsubmit="return false;" class="row" style="padding: 1.75rem 0 0 0;">
+      <div class="form-group col-sm-6 col-md-6 col-lg-2">
+        <label for="userid">Student ID</label>
+        <select id="userid" name="userid">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>
+          <option value="32">32</option>
+          <option value="33">33</option>
+          <option value="34">34</option>
+          <option value="35">35</option>
+          <option value="36">36</option>
+          <option value="37">37</option>
+          <option value="38">38</option>
+          <option value="39">39</option>
+          <option value="40">40</option>
+          <option value="41">41</option>
+          <option value="42">42</option>
+          <option value="43">43</option>
+          <option value="44">44</option>
+          <option value="45">45</option>
+          <option value="46">46</option>
+          <option value="47">47</option>
+          <option value="48">48</option>
+          <option value="49">49</option>
+          <option value="50">50</option>
+          <option value="51">51</option>
+          <option value="52">52</option>
+          <option value="53">53</option>
+          <option value="54">54</option>
+          <option value="55">55</option>
+          <option value="56">56</option>
+          <option value="57">57</option>
+          <option value="58">58</option>
+          <option value="59">59</option>
+          <option value="60">60</option>
+          <option value="61">61</option>
+          <option value="62">62</option>
+          <option value="63">63</option>
+          <option value="64">64</option>
+          <option value="65">65</option>
+          <option value="66">66</option>
+          <option value="67">67</option>
+          <option value="68">68</option>
+          <option value="69">69</option>
+          <option value="70">70</option>
+          <option value="71">71</option>
+          <option value="72">72</option>
+          <option value="73">73</option>
+          <option value="74">74</option>
+          <option value="75">75</option>
+          <option value="76">76</option>
+          <option value="77">77</option>
+          <option value="78">78</option>
+          <option value="79">79</option>
+          <option value="80">80</option>
+          <option value="81">81</option>
+          <option value="82">82</option>
+          <option value="83">83</option>
+          <option value="84">84</option>
+          <option value="85">85</option>
+          <option value="86">86</option>
+          <option value="87">87</option>
+          <option value="88">88</option>
+          <option value="89">89</option>
+          <option value="90">90</option>
+          <option value="91">91</option>
+          <option value="92">92</option>
+          <option value="93">93</option>
+          <option value="94">94</option>
+          <option value="95">95</option>
+          <option value="96">96</option>
+          <option value="97">97</option>
+          <option value="98">98</option>
+          <option value="99">99</option>
+          <option value="100">100</option>
+          <option value="101">101</option>
+          <option value="102">102</option>
+          <option value="103">103</option>
+          <option value="104">104</option>
+          <option value="105">105</option>
+          <option value="106">106</option>
+          <option value="107">107</option>
+          <option value="108">108</option>
+          <option value="109">109</option>
+          <option value="110">110</option>
+          <option value="111">111</option>
+          <option value="112">112</option>
+          <option value="113">113</option>
+          <option value="114">114</option>
+          <option value="115">115</option>
+          <option value="116">116</option>
+          <option value="117">117</option>
+          <option value="118">118</option>
+          <option value="119">119</option>
+          <option value="120">120</option>
+          <option value="121">121</option>
+          <option value="122">122</option>
+          <option value="123">123</option>
+          <option value="124">124</option>
+          <option value="125">125</option>
+          <option value="126">126</option>
+          <option value="127">127</option>
+          <option value="128">128</option>
+          <option value="129">129</option>
+          <option value="130">130</option>
+          <option value="131">131</option>
+          <option value="132">132</option>
+          <option value="133">133</option>
+          <option value="134">134</option>
+          <option value="135">135</option>
+          <option value="136">136</option>
+          <option value="137">137</option>
+          <option value="138">138</option>
+          <option value="139">139</option>
+          <option value="140">140</option>
+          <option value="141">141</option>
+          <option value="142">142</option>
+          <option value="143">143</option>
+          <option value="144">144</option>
+          <option value="145">145</option>
+          <option value="146">146</option>
+          <option value="147">147</option>
+          <option value="148">148</option>
+          <option value="149">149</option>
+          <option value="150">150</option>
+          <option value="151">151</option>
+          <option value="152">152</option>
+          <option value="153">153</option>
+          <option value="154">154</option>
+          <option value="155">155</option>
+          <option value="156">156</option>
+          <option value="157">157</option>
+          <option value="158">158</option>
+          <option value="159">159</option>
+          <option value="160">160</option>
+          <option value="161">161</option>
+          <option value="162">162</option>
+          <option value="163">163</option>
+          <option value="164">164</option>
+          <option value="165">165</option>
+          <option value="166">166</option>
+          <option value="167">167</option>
+          <option value="168">168</option>
+          <option value="169">169</option>
+          <option value="170">170</option>
+          <option value="171">171</option>
+          <option value="172">172</option>
+          <option value="173">173</option>
+          <option value="174">174</option>
+          <option value="175">175</option>
+          <option value="176">176</option>
+          <option value="177">177</option>
+          <option value="178">178</option>
+          <option value="179">179</option>
+          <option value="180">180</option>
+          <option value="181">181</option>
+          <option value="182">182</option>
+          <option value="183">183</option>
+          <option value="184">184</option>
+          <option value="185">185</option>
+          <option value="186">186</option>
+          <option value="187">187</option>
+          <option value="188">188</option>
+          <option value="189">189</option>
+          <option value="190">190</option>
+          <option value="191">191</option>
+          <option value="192">192</option>
+          <option value="193">193</option>
+          <option value="194">194</option>
+          <option value="195">195</option>
+          <option value="196">196</option>
+          <option value="197">197</option>
+          <option value="198">198</option>
+          <option value="199">199</option>
+          <option value="200">200</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-4">
+        <label for="domain">Domain</label>
+        <select id="domain" name="domain">
+          <option value="rhnaps.io">rhnaps.io</option>          
+          <option value="redhatgov.io">redhatgov.io</option>
+          <option value="az.redhatgov.io">az.redhatgov.io</option>
+          <option value="redhat-fierce.io">redhat-fierce.io</option>
+          <option value="fiercesw.network">fiercesw.network</option>
+          <option value="rhtps.io">rhtps.io</option>
+          <option value="openshiftworkshop.com">openshiftworkshop.com</option>
+          <option value="redhatpsmwsa.com">redhatpsmwsa.com</option>          
+          <option value="open.redhat.com">open.redhat.com</option>
+          <option value="opentlc.com">opentlc.com</option>
+          <option value="aroapp.io">aroapp.io</option>
+          <option value="danclark.io">danclark.io</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-3">
+        <label for="prefix">Workshop</label>
+        <input id="prefix" name="prefix" type="text" size="16" class="form-control" placeholder="example" onkeyup="this.value = this.value.toLowerCase();this.value = this.value.replace(/ /g, '');"/>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-3">
+        <button type="submit" class="btn btn-primary form-control" style="margin-bottom:1rem;">Enter</button>
+        <button type="reset" class="btn btn-default form-control">Default</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+    </div>
+    <div class="modal-footer">
+      <h3></h3>
+    </div>
+  </div>
+
+</div>
+
+<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
+<script type="text/javascript">
+<!--
+  
+  var Cookies2 = Cookies.noConflict();
+
+  var cookiePathArr = cleanArray(window.location.pathname.split('/'));
+  var cookiePath = '/' + cookiePathArr[0] + '/' + cookiePathArr[1] + '/';
+
+  function cleanArray(actual) {
+    var newArray = new Array();
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i]) {
+        newArray.push(actual[i]);
+      }
+    }
+    return newArray;
+  }
+  function replaceClassText() {
+    jQuery("span.domain").html(Cookies2.get("domain"));
+    jQuery("span.userid").html(Cookies2.get("userid"));
+    jQuery("span.prefix").html(Cookies2.get("prefix"));
+  }
+  function pageLoadWorkshopFooterTest() {
+    
+    if (Cookies2.get("domain") === undefined) {
+      resetWorkshopFooter();
+    }
+    else {
+      replaceClassText();
+      setWorkshopFooterInputValues()
+    }
+  }
+  function setWorkshopFooterData() {
+    
+    Cookies2.set("domain", jQuery("select#domain").val(), { path: cookiePath, expires: 7 } );
+    Cookies2.set("prefix", jQuery("input#prefix").val(), { path: cookiePath, expires: 7 } );
+    Cookies2.set("userid", jQuery("select#userid").val(), { path: cookiePath, expires: 7 } );
+    replaceClassText();
+    modal.style.display = "none";
+  }
+  function setWorkshopFooterInputValues() {
+    jQuery("select#domain").val(Cookies2.get("domain"));
+    jQuery("input#prefix").val(Cookies2.get("prefix"));
+    jQuery("select#userid").val(Cookies2.get("userid"));
+  }
+  function resetWorkshopFooter() {
+    
+    jQuery("select#domain, select#userid").prop("selectedIndex", 0);
+    jQuery("input#prefix").val(jQuery("input#prefix").attr('placeholder'));
+    
+    Cookies2.set("domain", jQuery("select#domain option").first().val(), { path: cookiePath, expires: 7 } ); 
+    Cookies2.set("userid", jQuery("select#userid option").first().val(), { path: cookiePath, expires: 7 } ); 
+    Cookies2.set("prefix", jQuery("input#prefix").val(), { path: cookiePath, expires: 7 } );
+    
+    
+    replaceClassText();
+  }
+
+
+
+
+  function updateFooter(e){
+    fieldName = '';
+
+    switch(e.id) {
+      case 'userid':
+        fieldName = 'User Id';
+        break;
+      case 'domain':
+        fieldName = 'Domain';
+        break;
+      case 'prefix':
+        fieldName = 'Workshop';
+        break;
+      default:
+        fieldName = 'unknown';
+    }
+    setWorkshopFooterData();
+    toastr["success"](fieldName + " set to " + e.value);
+  }
+
+  jQuery(document).ready(function() {
+    pageLoadWorkshopFooterTest();
+
+
+    
+    var input = document.getElementById("prefix");
+
+    
+    input.addEventListener("keyup", function(event) {
+      
+      if (event.keyCode === 13) {
+        
+        event.preventDefault();
+        
+        
+        updateFooter(input);
+      }
+    });
+
+
+    jQuery("form#footerForm").submit(function() {
+      setWorkshopFooterData();
+      return false; 
+    });
+
+    jQuery("form#footerForm").bind("reset", function() {
+      resetWorkshopFooter();
+      return true;
+    });
+
+    return false;
+  });
+-->
+</script>
+
+<hr>
+<h3>Workshop Details</h3>
+    <table>
+      <tr>
+        <td class="text-right"><b>Domain</b></td>
+        <td><span class="domain"></span></td>
+        <td rowspan="3">
+          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Workshop</b></td>
+        <td><span class="prefix"></span></td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Student ID</b></td>
+        <td><span class="userid"></span></td>
+      </tr>
+    </table>
+<button id="myBtn">Configure Workshop</button>
+<hr>
+
+<script>
+
+var modal = document.getElementById("myModal");
+
+
+var btn = document.getElementById("myBtn");
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/security_containers/exercise1.6/">&larr; Previous: Exercise 1.6 - Read Only Containers</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/security_containers/exercise1.8/">Next: Exercise 1.8 - SELinux &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/security_containers">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

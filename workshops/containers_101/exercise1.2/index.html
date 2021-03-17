@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Exercise 1.2 - Working with Container Images | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Exercise 1.2 - Working with Container Images</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/containers_101">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/containers_101/exercise1.1/">&larr; Previous: Exercise 1.1 - Pulling and Running Container Images</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/containers_101/exercise1.3/">Next: Exercise 1.3 - Working with the Dockerfile &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div class="sect1">
+<h2 id="_exercise_1_2_working_with_container_images">Exercise 1.2 - Working with Container Images</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_description">Exercise Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this exercise, you&#8217;ll learn the fundamentals of container images, including how to run them and how to see what is  inside of a container. Container storage volumes will be discussed, showing how to mount external file systems, with useful functions and data. We will also discuss container metadata and explain what types of information you can get from them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_section_1_container_images">Section 1: Container Images</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What you can do with container images, using 'podman run'</p>
+</div>
+<div class="paragraph">
+<p>When you execute the <code>podman run</code> command, a new container is created, from a container image.  That container consists of the image contents, plus any features based on additional selected options.</p>
+</div>
+<div class="paragraph">
+<p>The command you pass on the <code>podman run</code> command line considers the inside of the container its running environment. So, by default, very little of the host system is visible.  For example, by default, the running application sees:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The file system provided by the container image.</p>
+</li>
+<li>
+<p>A new process table from inside the container (no processes from the host are visible).</p>
+</li>
+<li>
+<p>New network interfaces (By default, a separate container network interface provides a private IP address to each container via DHCP.)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additionally you can also&#8230;&#8203;</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Make a directory from the host available to the container, from the <code>podman run</code> command line:</p>
+</li>
+<li>
+<p>Map network ports from the container to the host.</p>
+</li>
+<li>
+<p>Limit the amount of memory the container can use, or expand the CPU shares available to the container.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_step_1_launch_a_container_and_explore_inside_interactively">Step 1. Launch a container and explore inside interactively:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it registry.access.redhat.com/rhel7 /bin/bash</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Trying to pull registry.access.redhat.com/rhel7...Getting image source signatures
+Copying blob sha256:e0f71f706c2a1ff9efee4025e27d4dfd4f328190f31d16e11ef3283bc16d6842
+ 71.45 MB / ? [--------------------=---------------------------------------] 7s
+Copying blob sha256:121ab4741000471a7e2ddc687dedb440060bf9845ca415a45e99e361706f1098
+ 1.22 KB / ? [----------------------------------------------------=--------] 0s
+Copying config sha256:7a840db7f020be49bb60fb1cc4f1669e83221d61c1af23ff2cac2f870f9deee8
+ 6.21 KB / 6.21 KB [========================================================] 0s
+Writing manifest to image destination
+Storing signatures</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>NOTE:</strong> When you see a prompt like the following, you are in the container:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">[root@7e5a67870995 /]#</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_try_these_commands">Step 2. Try these commands</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">whoami</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">uname -a</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3_when_you_are_finished_looking_around_the_internals_of_the_container_type_exit_to_exit">Step 3. When you are finished looking around the internals of the container, type <code>exit</code> to exit.</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_section_2_container_storage_volumes">Section 2: Container Storage Volumes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section, we will mount a system volume to a container and use commands that are not present in the container.</p>
+</div>
+<div class="paragraph">
+<p>Note: The following command will fail as the "ip" command is not present in the base rhel7 container image.</p>
+</div>
+<div class="sect2">
+<h3 id="_volume_mounts">Volume Mounts</h3>
+<div class="paragraph">
+<p>Container images are very minimal installs of their referenced operating system, so commonly-used commands may not be present.</p>
+</div>
+<div class="listingblock">
+<div class="title">nonexistent command "ip"</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it rhel7 /usr/sbin/ip a</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>container create failed: container_linux.go:348: starting container process caused "exec: \"/usr/sbin/ip\": stat /usr/sbin/ip: no such file or directory"
+: internal libpod error</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, if we use <code>-v &lt;source&gt;:&lt;destination&gt;</code>, the <code>&lt;source&gt;</code> file or directory is mapped from the container host to the inside of the container.  Running the same command with the <code>-v</code> volume switch will run the ip command successfully:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -v /usr/sbin:/usr/sbin --rm -it rhel7 /usr/sbin/ip a</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+3: eth0@if6: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default
+    link/ether 22:06:a3:f0:c6:a0 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 10.88.0.4/16 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::2006:a3ff:fef0:c6a0/64 scope link tentative
+       valid_lft forever preferred_lft forever</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_volume_mounts_continued">Volume Mounts (continued)</h3>
+<div class="paragraph">
+<p>Volume mounts can be used for logging to the container host for event retention.</p>
+</div>
+<div class="listingblock">
+<div class="title">mounting logs via volumes</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -v /dev/log:/dev/log --rm rhel7 logger Testing logging to the host</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Search for the container event on the container host log, using the following command.</p>
+</div>
+<div class="listingblock">
+<div class="title">search the container host</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">journalctl | grep "Testing logging"</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>May 26 03:28:42 ip-10-0-2-6.ec2.internal root[25499]: Testing logging to the host</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_persistent_container_data">Persistent Container Data</h3>
+<div class="paragraph">
+<p>The -w switch specifies the working directory where binaries are executed.  If unspecified, the root directory (/) is used.</p>
+</div>
+<div class="listingblock">
+<div class="title">Run Python simple server</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /opt/rhel_data</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -d -p 8080:8000 --name="python_web" \
+       -w /opt \
+       -v /opt/rhel_data:/opt rhel7 \
+       /bin/python -m SimpleHTTPServer 8000</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_1_verify_the_container_is_running_using_the_podman_ps_switch">Step 1. Verify the container is running using the podman <code>ps</code> switch</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman ps</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>CONTAINER ID   IMAGE                                     COMMAND                  CREATED AT                      STATUS              PORTS                                            NAMES
+fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp...   2018-05-23 17:21:40 +0000 UTC   Up 45 seconds ago   0.0.0.0:8080-&gt;8000/udp, 0.0.0.0:8080-&gt;8000/tcp   python_web</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_run_the_following_url_command_to_show_there_are_no_files_present_in_the_containers_opt_directory">Step 2. Run the following URL command to show there are no files present in the container’s /opt directory.</h3>
+<div class="listingblock">
+<div class="title">Check to see no files in opt</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ll /opt/rhel_data/</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>total 0</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3_run_the_following_url_command_to_show_there_are_no_files_via_the_webserver">Step 3. Run the following URL command to show there are no files via the webserver.</h3>
+<div class="listingblock">
+<div class="title">Check to see no files via the web server</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl localhost:8080</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"&gt;&lt;html&gt;
+&lt;title&gt;Directory listing for /&lt;/title&gt;
+&lt;body&gt;
+&lt;h2&gt;Directory listing for /&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_4_now_create_several_files_with_a_script_in_the_host_optrhel_data_directory">Step 4. Now create several files with a script in the host <code>/opt/rhel_data</code> directory.</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">for i in {1..10}; do touch /opt/rhel_data/file${i}; done</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_5_view_the_newly_created_files_in_optrhel_data">Step 5. View the newly created files in <code>/opt/rhel_data</code></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ll /opt/rhel_data/</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>total 0
+-rw-r--r--. 1 root root 0 Feb 14 22:38 file1
+-rw-r--r--. 1 root root 0 Feb 14 22:38 file10
+-rw-r--r--. 1 root root 0 Feb 14 22:38 file2
+-rw-r--r--. 1 root root 0 Feb 14 22:38 file3
+-rw-r--r--. 1 root root 0 Feb 14 22:38 file4
+-rw-r--r--. 1 root root 0 Feb 14 22:38 file5
+-rw-r--r--. 1 root root 0 Feb 14 22:38 file6
+-rw-r--r--. 1 root root 0 Feb 14 22:38 file7
+-rw-r--r--. 1 root root 0 Feb 14 22:38 file8
+-rw-r--r--. 1 root root 0 Feb 14 22:38 file9</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_6_then_use_curl_to_view_the_files_from_the_python_webserver_that_is_serving_files_from_the_mounted_optrhel_data_volume">Step 6. Then use curl to view the files from the python webserver that is serving files from the mounted <code>/opt/rhel_data</code> volume:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl localhost:8080</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"&gt;&lt;html&gt;
+&lt;title&gt;Directory listing for /&lt;/title&gt;
+&lt;body&gt;
+&lt;h2&gt;Directory listing for /&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="file1"&gt;file1&lt;/a&gt;
+&lt;li&gt;&lt;a href="file10"&gt;file10&lt;/a&gt;
+&lt;li&gt;&lt;a href="file2"&gt;file2&lt;/a&gt;
+&lt;li&gt;&lt;a href="file3"&gt;file3&lt;/a&gt;
+&lt;li&gt;&lt;a href="file4"&gt;file4&lt;/a&gt;
+&lt;li&gt;&lt;a href="file5"&gt;file5&lt;/a&gt;
+&lt;li&gt;&lt;a href="file6"&gt;file6&lt;/a&gt;
+&lt;li&gt;&lt;a href="file7"&gt;file7&lt;/a&gt;
+&lt;li&gt;&lt;a href="file8"&gt;file8&lt;/a&gt;
+&lt;li&gt;&lt;a href="file9"&gt;file9&lt;/a&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_section_3_container_metadata">Section 3: Container metadata</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Container images have metadata associated with them that can describe processes and network settings.  The following command returns a little over 300 lines of JSON data.  The output below is truncated for brevity.  Feel free to read over the metadata.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman inspect python_web</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[{
+    "ID": "fcd06aee95338748ab86faddd696c2cda212e7797b1e44428434da4a0d0b2b45",
+    "Created": "2018-05-23T17:21:40.315773016Z",
+    "Path": "/bin/python",
+    "Args": [
+      "-m",
+      "SimpleHTTPServer",
+      "8000"
+    ],
+...
+    "Name": "python_web",
+    "RestartCount": 0,
+    "Driver": "overlay",
+    "MountLabel": "system_u:object_r:svirt_sandbox_file_t:s0:c744,c884",
+    "ProcessLabel": "system_u:system_r:svirt_lxc_net_t:s0:c744,c884",
+...</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_scripting_pro_tips">Scripting Pro Tips</h3>
+<div class="paragraph">
+<p>You can use a dot notation to parse the metadata returned by 'podman inspect' and use it in your scripting, to quickly access properties you need, as shown in the following example.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman inspect -f {{.NetworkSettings.IPAddress}} python_web</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>10.88.0.6</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note: Output has been truncated slightly for readability</p>
+</div>
+<div class="paragraph">
+<p>You can see the use of cgroups when attached to the container tty.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it rhel7 bash</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Listing the contents of <code>/proc/1/cgroup</code> will show the cgroup labels.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat /proc/1/cgroup</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>11:blkio:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+10:hugetlb:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+9:pids:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+8:cpuacct,cpu:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+7:freezer:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+6:cpuset:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+5:net_prio,net_cls:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+4:perf_event:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+3:devices:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+2:memory:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+1:name=systemd:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Type <code>exit</code> to exit the container.  Running the same command from your student system, outside of the container context, will list the same top level groups without labels.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat /proc/1/cgroup</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>11:devices:/
+10:cpuset:/
+9:freezer:/
+8:hugetlb:/
+7:pids:/
+6:net_prio,net_cls:/
+5:perf_event:/
+4:blkio:/
+3:memory:/
+2:cpuacct,cpu:/
+1:name=systemd:/</pre>
+</div>
+</div>
+<div class="paragraph">
+<style>
+
+ 
+.modal {
+  display: none;  
+  position: fixed;  
+  z-index: 1;  
+  left: 0;
+  top: 0;
+  width: 100%;  
+  height: 100%;  
+  overflow: auto;  
+  background-color: rgb(0,0,0);  
+  background-color: rgba(0,0,0,0.4);  
+  -webkit-animation-name: fadeIn;  
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+ 
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+ 
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #000000;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #000000;
+  color: white;
+}
+
+ 
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+</style>
+
+<div id="myModal" class="modal">
+
+  
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h3>Workshop Details</h3>
+    </div>
+    <div class="modal-body">
+<div class="row">
+  <div class="col-lg-4 col-md-5 col-sm-12" id="workshopFooterDetails">
+    <table>
+      <tr>
+        <td class="text-right"><b>Domain</b></td>
+        <td><span class="domain"></span></td>
+        <td rowspan="3">
+          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Workshop</b></td>
+        <td><span class="prefix"></span></td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Student ID</b></td>
+        <td><span class="userid"></span></td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-lg-8 col-md-7 col-sm-12">
+    <form id="footerForm" onsubmit="return false;" class="row" style="padding: 1.75rem 0 0 0;">
+      <div class="form-group col-sm-6 col-md-6 col-lg-2">
+        <label for="userid">Student ID</label>
+        <select id="userid" name="userid">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>
+          <option value="32">32</option>
+          <option value="33">33</option>
+          <option value="34">34</option>
+          <option value="35">35</option>
+          <option value="36">36</option>
+          <option value="37">37</option>
+          <option value="38">38</option>
+          <option value="39">39</option>
+          <option value="40">40</option>
+          <option value="41">41</option>
+          <option value="42">42</option>
+          <option value="43">43</option>
+          <option value="44">44</option>
+          <option value="45">45</option>
+          <option value="46">46</option>
+          <option value="47">47</option>
+          <option value="48">48</option>
+          <option value="49">49</option>
+          <option value="50">50</option>
+          <option value="51">51</option>
+          <option value="52">52</option>
+          <option value="53">53</option>
+          <option value="54">54</option>
+          <option value="55">55</option>
+          <option value="56">56</option>
+          <option value="57">57</option>
+          <option value="58">58</option>
+          <option value="59">59</option>
+          <option value="60">60</option>
+          <option value="61">61</option>
+          <option value="62">62</option>
+          <option value="63">63</option>
+          <option value="64">64</option>
+          <option value="65">65</option>
+          <option value="66">66</option>
+          <option value="67">67</option>
+          <option value="68">68</option>
+          <option value="69">69</option>
+          <option value="70">70</option>
+          <option value="71">71</option>
+          <option value="72">72</option>
+          <option value="73">73</option>
+          <option value="74">74</option>
+          <option value="75">75</option>
+          <option value="76">76</option>
+          <option value="77">77</option>
+          <option value="78">78</option>
+          <option value="79">79</option>
+          <option value="80">80</option>
+          <option value="81">81</option>
+          <option value="82">82</option>
+          <option value="83">83</option>
+          <option value="84">84</option>
+          <option value="85">85</option>
+          <option value="86">86</option>
+          <option value="87">87</option>
+          <option value="88">88</option>
+          <option value="89">89</option>
+          <option value="90">90</option>
+          <option value="91">91</option>
+          <option value="92">92</option>
+          <option value="93">93</option>
+          <option value="94">94</option>
+          <option value="95">95</option>
+          <option value="96">96</option>
+          <option value="97">97</option>
+          <option value="98">98</option>
+          <option value="99">99</option>
+          <option value="100">100</option>
+          <option value="101">101</option>
+          <option value="102">102</option>
+          <option value="103">103</option>
+          <option value="104">104</option>
+          <option value="105">105</option>
+          <option value="106">106</option>
+          <option value="107">107</option>
+          <option value="108">108</option>
+          <option value="109">109</option>
+          <option value="110">110</option>
+          <option value="111">111</option>
+          <option value="112">112</option>
+          <option value="113">113</option>
+          <option value="114">114</option>
+          <option value="115">115</option>
+          <option value="116">116</option>
+          <option value="117">117</option>
+          <option value="118">118</option>
+          <option value="119">119</option>
+          <option value="120">120</option>
+          <option value="121">121</option>
+          <option value="122">122</option>
+          <option value="123">123</option>
+          <option value="124">124</option>
+          <option value="125">125</option>
+          <option value="126">126</option>
+          <option value="127">127</option>
+          <option value="128">128</option>
+          <option value="129">129</option>
+          <option value="130">130</option>
+          <option value="131">131</option>
+          <option value="132">132</option>
+          <option value="133">133</option>
+          <option value="134">134</option>
+          <option value="135">135</option>
+          <option value="136">136</option>
+          <option value="137">137</option>
+          <option value="138">138</option>
+          <option value="139">139</option>
+          <option value="140">140</option>
+          <option value="141">141</option>
+          <option value="142">142</option>
+          <option value="143">143</option>
+          <option value="144">144</option>
+          <option value="145">145</option>
+          <option value="146">146</option>
+          <option value="147">147</option>
+          <option value="148">148</option>
+          <option value="149">149</option>
+          <option value="150">150</option>
+          <option value="151">151</option>
+          <option value="152">152</option>
+          <option value="153">153</option>
+          <option value="154">154</option>
+          <option value="155">155</option>
+          <option value="156">156</option>
+          <option value="157">157</option>
+          <option value="158">158</option>
+          <option value="159">159</option>
+          <option value="160">160</option>
+          <option value="161">161</option>
+          <option value="162">162</option>
+          <option value="163">163</option>
+          <option value="164">164</option>
+          <option value="165">165</option>
+          <option value="166">166</option>
+          <option value="167">167</option>
+          <option value="168">168</option>
+          <option value="169">169</option>
+          <option value="170">170</option>
+          <option value="171">171</option>
+          <option value="172">172</option>
+          <option value="173">173</option>
+          <option value="174">174</option>
+          <option value="175">175</option>
+          <option value="176">176</option>
+          <option value="177">177</option>
+          <option value="178">178</option>
+          <option value="179">179</option>
+          <option value="180">180</option>
+          <option value="181">181</option>
+          <option value="182">182</option>
+          <option value="183">183</option>
+          <option value="184">184</option>
+          <option value="185">185</option>
+          <option value="186">186</option>
+          <option value="187">187</option>
+          <option value="188">188</option>
+          <option value="189">189</option>
+          <option value="190">190</option>
+          <option value="191">191</option>
+          <option value="192">192</option>
+          <option value="193">193</option>
+          <option value="194">194</option>
+          <option value="195">195</option>
+          <option value="196">196</option>
+          <option value="197">197</option>
+          <option value="198">198</option>
+          <option value="199">199</option>
+          <option value="200">200</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-4">
+        <label for="domain">Domain</label>
+        <select id="domain" name="domain">
+          <option value="rhnaps.io">rhnaps.io</option>          
+          <option value="redhatgov.io">redhatgov.io</option>
+          <option value="az.redhatgov.io">az.redhatgov.io</option>
+          <option value="redhat-fierce.io">redhat-fierce.io</option>
+          <option value="fiercesw.network">fiercesw.network</option>
+          <option value="rhtps.io">rhtps.io</option>
+          <option value="openshiftworkshop.com">openshiftworkshop.com</option>
+          <option value="redhatpsmwsa.com">redhatpsmwsa.com</option>          
+          <option value="open.redhat.com">open.redhat.com</option>
+          <option value="opentlc.com">opentlc.com</option>
+          <option value="aroapp.io">aroapp.io</option>
+          <option value="danclark.io">danclark.io</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-3">
+        <label for="prefix">Workshop</label>
+        <input id="prefix" name="prefix" type="text" size="16" class="form-control" placeholder="example" onkeyup="this.value = this.value.toLowerCase();this.value = this.value.replace(/ /g, '');"/>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-3">
+        <button type="submit" class="btn btn-primary form-control" style="margin-bottom:1rem;">Enter</button>
+        <button type="reset" class="btn btn-default form-control">Default</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+    </div>
+    <div class="modal-footer">
+      <h3></h3>
+    </div>
+  </div>
+
+</div>
+
+<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
+<script type="text/javascript">
+<!--
+  
+  var Cookies2 = Cookies.noConflict();
+
+  var cookiePathArr = cleanArray(window.location.pathname.split('/'));
+  var cookiePath = '/' + cookiePathArr[0] + '/' + cookiePathArr[1] + '/';
+
+  function cleanArray(actual) {
+    var newArray = new Array();
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i]) {
+        newArray.push(actual[i]);
+      }
+    }
+    return newArray;
+  }
+  function replaceClassText() {
+    jQuery("span.domain").html(Cookies2.get("domain"));
+    jQuery("span.userid").html(Cookies2.get("userid"));
+    jQuery("span.prefix").html(Cookies2.get("prefix"));
+  }
+  function pageLoadWorkshopFooterTest() {
+    
+    if (Cookies2.get("domain") === undefined) {
+      resetWorkshopFooter();
+    }
+    else {
+      replaceClassText();
+      setWorkshopFooterInputValues()
+    }
+  }
+  function setWorkshopFooterData() {
+    
+    Cookies2.set("domain", jQuery("select#domain").val(), { path: cookiePath, expires: 7 } );
+    Cookies2.set("prefix", jQuery("input#prefix").val(), { path: cookiePath, expires: 7 } );
+    Cookies2.set("userid", jQuery("select#userid").val(), { path: cookiePath, expires: 7 } );
+    replaceClassText();
+    modal.style.display = "none";
+  }
+  function setWorkshopFooterInputValues() {
+    jQuery("select#domain").val(Cookies2.get("domain"));
+    jQuery("input#prefix").val(Cookies2.get("prefix"));
+    jQuery("select#userid").val(Cookies2.get("userid"));
+  }
+  function resetWorkshopFooter() {
+    
+    jQuery("select#domain, select#userid").prop("selectedIndex", 0);
+    jQuery("input#prefix").val(jQuery("input#prefix").attr('placeholder'));
+    
+    Cookies2.set("domain", jQuery("select#domain option").first().val(), { path: cookiePath, expires: 7 } ); 
+    Cookies2.set("userid", jQuery("select#userid option").first().val(), { path: cookiePath, expires: 7 } ); 
+    Cookies2.set("prefix", jQuery("input#prefix").val(), { path: cookiePath, expires: 7 } );
+    
+    
+    replaceClassText();
+  }
+
+
+
+
+  function updateFooter(e){
+    fieldName = '';
+
+    switch(e.id) {
+      case 'userid':
+        fieldName = 'User Id';
+        break;
+      case 'domain':
+        fieldName = 'Domain';
+        break;
+      case 'prefix':
+        fieldName = 'Workshop';
+        break;
+      default:
+        fieldName = 'unknown';
+    }
+    setWorkshopFooterData();
+    toastr["success"](fieldName + " set to " + e.value);
+  }
+
+  jQuery(document).ready(function() {
+    pageLoadWorkshopFooterTest();
+
+
+    
+    var input = document.getElementById("prefix");
+
+    
+    input.addEventListener("keyup", function(event) {
+      
+      if (event.keyCode === 13) {
+        
+        event.preventDefault();
+        
+        
+        updateFooter(input);
+      }
+    });
+
+
+    jQuery("form#footerForm").submit(function() {
+      setWorkshopFooterData();
+      return false; 
+    });
+
+    jQuery("form#footerForm").bind("reset", function() {
+      resetWorkshopFooter();
+      return true;
+    });
+
+    return false;
+  });
+-->
+</script>
+
+<hr>
+<h3>Workshop Details</h3>
+    <table>
+      <tr>
+        <td class="text-right"><b>Domain</b></td>
+        <td><span class="domain"></span></td>
+        <td rowspan="3">
+          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Workshop</b></td>
+        <td><span class="prefix"></span></td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Student ID</b></td>
+        <td><span class="userid"></span></td>
+      </tr>
+    </table>
+<button id="myBtn">Configure Workshop</button>
+<hr>
+
+<script>
+
+var modal = document.getElementById("myModal");
+
+
+var btn = document.getElementById("myBtn");
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/containers_101/exercise1.1/">&larr; Previous: Exercise 1.1 - Pulling and Running Container Images</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/containers_101/exercise1.3/">Next: Exercise 1.3 - Working with the Dockerfile &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/containers_101">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

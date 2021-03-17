@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Lab - Building and Deploying a Fast-Moving Monolith | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Lab - Building and Deploying a Fast-Moving Monolith</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/strangling_the_monolith">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/strangling_the_monolith/login_tour_oc/">&larr; Previous: Lab - Login &amp; Tour of OpenShift</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/strangling_the_monolith/lab2/">Next: Lab - Strangle Your Monolith &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    
+
+<h1 id="fast-moving-monolith">FAST-MOVING MONOLITH</h1>
+
+<ul>
+<li>Large organizations have a tremendous amount of resources invested in existing monolith applications</li>
+<li>Looking for a sane way to capture the benefits of containers and orchestration without having to complete rewrite</li>
+<li>OpenShift provides the platform for their existing investment with the benefit of a path forward for microservice based apps in the future</li>
+</ul>
+
+<h1 id="fast-moving-monolith-advantages">FAST-MOVING MONOLITH ADVANTAGES</h1>
+
+<ul>
+<li>Easier to develop since all dependencies are included</li>
+<li>Single code base for teams to work on</li>
+<li>No API backwards compatibility issues since all logic is packaged with the application</li>
+<li>Single deployable unit</li>
+</ul>
+
+<h1 id="step-1">Step 1</h1>
+
+<ul>
+<li>In this lab, the coolstore monolith will be built and deployed to OpenShift from your local workstation demonstrating a typical Java application developer workflow</li>
+<li>A sample pipeline is included which will be used to deploy across dev and prod environment</li>
+</ul>
+
+<blockquote>
+<p>First, deploy the coolstore monolith dev project (don’t forget to include -b app-partner when you run git clone - this is the branch in use for this lab!):</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir ~/coolstore</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone -b app-partner https://github.com/epe105/monolith</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd monolith</code></pre></div>
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+  
+
+Please update ``<USERNAME>`` below with your assigned username
+
+
+</div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-project coolstore-&lt;USERNAME&gt;</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc process -f src/main/openshift/template.json | oc create -f -</code></pre></div>
+<h1 id="step-2">Step 2</h1>
+
+<blockquote>
+<p>Notice there is no deployment yet as there is no build yet:</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapseb56a8a76c5b3eeab3986e156c71c086d" class="collapsed">
+      
+        OpenShift Dev Deployment
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapseb56a8a76c5b3eeab3986e156c71c086d" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab1_oc_coolstore_dev1.png" width="1000" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<h1 id="step-3">Step 3</h1>
+
+<ul>
+<li>A number of OpenShift objects were created:</li>
+<li>A Postgres database deployment, service, and route</li>
+<li>A coolstore binary BuildConfig
+
+<ul>
+<li>Binary builds accept source code through stdin in later commands (vs. kicking off a build within an OpenShift pod)</li>
+</ul></li>
+<li>Services, Routes and DeploymentConfig for coolstore-dev</li>
+<li>Service Accounts and Secrets (for cluster permissions)<br /></li>
+</ul>
+
+<blockquote>
+<p>Build the coolstore monolith (.war file) locally and deploy into the OpenShift via the binary build:</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore/monolith</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean package -Popenshift</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc start-build coolstore --from-file deployments/ROOT.war --follow</code></pre></div>
+<h1 id="step-4">Step 4</h1>
+
+<ul>
+<li>Binary builds still produce Linux container images and are stored into the container registry.</li>
+</ul>
+
+<blockquote>
+<p>In the web console, navigate to Builds → Images to see the new image created as a result of combining the monolith .war file with the JBoss EAP builder image</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse6a47a3538a8acfd929a02d45f05f6ab3" class="collapsed">
+      
+        OpenShift Cool Store Build
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse6a47a3538a8acfd929a02d45f05f6ab3" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab1_oc_build_coolstore1.png" width="1000" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<h1 id="step-5">Step 5</h1>
+
+<blockquote>
+<p>Once the deployment is complete, navigate to the application by clicking on its route in the OpenShift web console Overview and exercise the app by adding/removing products to your shopping cart:</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse015d3b7ce5dcbf5cd877eb010785e0d0" class="collapsed">
+      
+        Cool Store UI
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse015d3b7ce5dcbf5cd877eb010785e0d0" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab1_oc_coolstore_gui1.png" width="1000" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<h1 id="step-6">Step 6</h1>
+
+<ul>
+<li>The app contains an AngularJS web frontend which makes REST calls to its backend (e.g. /services/products)</li>
+<li>The app’s backend contains services implement as Stateless and Stateful EJBs backed by JPA entities</li>
+<li>The product catalog and inventory are stored together in the database.</li>
+</ul>
+
+<blockquote>
+<p>Log into the database pod (with postgresql in the pod name) and inspect the values stored (you will need to copy/paste the password from the POSTGRESQL_PASSWORD environment variable when running the psql command):</p>
+
+<p>Make note of POSTGRESQL_PASSWORD</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc env dc/coolstore-dev-postgresql --list       <span style="color:#75715e"># copy value of POSTGRESQL_PASSWORD to clipboard</span></code></pre></div>
+<blockquote>
+<p>Make note of postgresql pod</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods</code></pre></div>
+<blockquote>
+<p>oc rsh into postresql pod</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc rsh coolstore-dev-postgresql-1-3rfuw
+sh-4.2$ psql -h $HOSTNAME -d $POSTGRESQL_DATABASE -U $POSTGRESQL_USER
+Password <span style="color:#66d9ef">for</span> user userV31:XXXXXXXX
+psql <span style="color:#f92672">(</span>9.5.4<span style="color:#f92672">)</span>
+Type <span style="color:#e6db74">&#34;help&#34;</span> <span style="color:#66d9ef">for</span> help.
+
+monolith<span style="color:#f92672">=</span>&gt; <span style="color:#66d9ef">select</span> * from INVENTORY;
+monolith<span style="color:#f92672">=</span>&gt; <span style="color:#66d9ef">select</span> * from PRODUCT_CATALOG;</code></pre></div>
+<blockquote>
+<p>Exit out of psql and then the postgresql pod</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">monolith<span style="color:#f92672">=</span>&gt; <span style="color:#ae81ff">\q</span>
+sh-4.2$ exit
+exit</code></pre></div>
+<h1 id="step-7">Step 7</h1>
+
+<ul>
+<li>The coolstore-dev build and deployment is responsible for building new versions of the app after code changes and deploying them to the development environment.</li>
+<li>Production environments will ideally use different projects, and even different nodes in an OpenShift cluster. For simplicity we have dev and prod in the same project.</li>
+</ul>
+
+<blockquote>
+<p>Create the production deployment objects that will be used to promote builds from dev to prod using the supplied CI/CD pipeline:</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc process -f ~/coolstore/monolith/src/main/openshift/template-prod.json | oc create -f -</code></pre></div>
+<h1 id="step-8">Step 8</h1>
+
+<ul>
+<li>Several types of OpenShift objects are created:
+
+<ul>
+<li>A production Postgres database deployment, service, and route</li>
+<li>Services, Routes and DeploymentConfig for coolstore-prod (production env)</li>
+<li>Service Accounts and Secrets (for cluster permissions)</li>
+<li>A CI/CD server (Jenkins)</li>
+<li>A CI/CD pipeline</li>
+</ul></li>
+<li>Notice that no deployment occurs for the production version of the app.</li>
+<li>Deployment of the production app occurs as a result of images from the dev environment being appropriately tagged.</li>
+</ul>
+
+<blockquote>
+<p>Inspect the pipeline and observe the steps it executes during the pipeline run. Notice at the end of the script, the latest coolstore image is tagged with :prod, triggering a production deployment:</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get bc/monolith-pipeline -o yaml
+...
+          openshiftTag<span style="color:#f92672">(</span>sourceStream: <span style="color:#e6db74">&#39;coolstore&#39;</span>, sourceTag: <span style="color:#e6db74">&#39;latest&#39;</span>, namespace: <span style="color:#e6db74">&#39;&#39;</span>, destinationStream: <span style="color:#e6db74">&#39;coolstore&#39;</span>, destinationTag: <span style="color:#e6db74">&#39;prod&#39;</span>, destinationNamespace: <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">)</span>
+...</code></pre></div>
+<h1 id="step-9">Step 9</h1>
+
+<blockquote>
+<p>Wait for the jenkins service to be completely available, then execute the pipeline by navigating to Builds→ Pipelines and click on Start Pipeline next to the Monolith Pipeline:</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse560d2c7b3dbb21dfe18953457733577b" class="collapsed">
+      
+        Monolith Pipeline
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse560d2c7b3dbb21dfe18953457733577b" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab1_oc_pipeline_coolstore1.png" width="1000" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<h1 id="step-10">Step 10</h1>
+
+<ul>
+<li>Observe the pipeline as it executes its stages</li>
+<li>Once the pipeline is complete, the production app is deployed.</li>
+<li>Typically there would be a human approval step before going live</li>
+<li>Pipelines are also good at executing advanced deployment strategies (blue/green, canary)</li>
+</ul>
+
+<blockquote>
+<p>Return to the Overview page, wait for the deployment to complete, then click on the route for the coolstore-prod deployment to test the production app (identical to coolstore-dev).</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse4ebf36ae42a4f8fea67f59df34213a40" class="collapsed">
+      
+        Pipelines
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse4ebf36ae42a4f8fea67f59df34213a40" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab1_oc_pipeline_coolstore2.png" width="1000" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<h1 id="step-11">Step 11</h1>
+
+<blockquote>
+<p>You should now have two identical copies of the app deployed, along with two databases:</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapseffd164e44f4bd80ada120afbd3f9021a" class="collapsed">
+      
+        OpenShift Dev and Prod Container Deployment
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapseffd164e44f4bd80ada120afbd3f9021a" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab1_oc__coolstore_prod1.png" width="1000" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<h1 id="step-12">Step 12</h1>
+
+<blockquote>
+<p>Scale down the coolstore-dev environment by clicking the down arrow next to the coolstore-dev and coolstore-dev-postgresql pods:</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapsed65181f1de18895b52c0743d35db69cc" class="collapsed">
+      
+        Scale Down Dev Containers
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapsed65181f1de18895b52c0743d35db69cc" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab1_oc_dev_containers1.png" width="1000" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+  
+
+If your build pipeline fails to start, you can manually tag the images:
+
+```bash
+$ oc tag coolstore:latest coolstore:prod
+```
+
+
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/strangling_the_monolith/login_tour_oc/">&larr; Previous: Lab - Login &amp; Tour of OpenShift</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/strangling_the_monolith/lab2/">Next: Lab - Strangle Your Monolith &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/strangling_the_monolith">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Containers 101 Workshop on Red Hat | Public Sector</title>
+    <link>/workshops/containers_101/</link>
+    <description>Recent content in Containers 101 Workshop on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/containers_101/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Exercise 1.0 - Install buildah, skopeo, and podman</title>
+      <link>/workshops/containers_101/exercise1.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/containers_101/exercise1.0/</guid>
+      <description>Exercise 1.0: Installing Buildah, Skopeo and Podman Set up dependencies Elevate privileges
+ In order to do any of the steps in the Containers 101 Workshop, you will need root privileges. There are two methods of doing this; the method you choose is up to you. Either method will work, but in a production environment, Method 2 is much more secure and auditable.
+ Method 1: The first, and easiest, method is to start a root session, with sudo -i:</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.1 - Pulling and Running Container Images</title>
+      <link>/workshops/containers_101/exercise1.1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/containers_101/exercise1.1/</guid>
+      <description>Exercise 1.1 - Pulling Container Images   Section 1: Pull RHEL Images Step 1. Use the following command to pull a RHEL image from the Red Hat repository: podman pull command podman pull registry.access.redhat.com/rhel7   Images are accessed using the container registry URL (registry.access.redhat.com). If the container registry URL is not specified in the pull command, it could result in the retrieval of an image that originates from an untrusted registry.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.2 - Working with Container Images</title>
+      <link>/workshops/containers_101/exercise1.2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/containers_101/exercise1.2/</guid>
+      <description>Exercise 1.2 - Working with Container Images   Exercise Description In this exercise, you&amp;#8217;ll learn the fundamentals of container images, including how to run them and how to see what is inside of a container. Container storage volumes will be discussed, showing how to mount external file systems, with useful functions and data. We will also discuss container metadata and explain what types of information you can get from them.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.3 - Working with the Dockerfile</title>
+      <link>/workshops/containers_101/exercise1.3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/containers_101/exercise1.3/</guid>
+      <description>Exercise 1.3 - Working with the Dockerfile   Exercise Description This exercise will enable you to use a Dockerfile to build a container. Once you understand how images and containers can be created from the command line, you can try building containers in a more permanent way.
+ Building container images from Dockerfile files is, by far, the preferred way to create docker-formatted containers, as compared to modifying running containers and committing them to images.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.4 - Working with a Container Registry</title>
+      <link>/workshops/containers_101/exercise1.4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/containers_101/exercise1.4/</guid>
+      <description>Exercise 1.4 - Working with a Container Registry   Exercise Description In this exercise, you will learn container registry basics, what the registry offers and how to use it.
+ What is container registry?
+ A basic container registry is a stateless, highly scalable server side application that stores and distributes container images. The docker registry is an open-source project offered under the permissive Apache license.
+ Why use container registries?</description>
+    </item>
+    
+    <item>
+      <title>Setup</title>
+      <link>/workshops/containers_101/setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/containers_101/setup/</guid>
+      <description>What you will learn: Red Hat Web Console - Terminal This lab provides a quick tour of the browser based Terminal via the Red Hat Web Console. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
+   Accessing Red Hat Enterprise Linux Web Console (cockpit) Use this URL to access the Web Console node, just change the workshop name (if applicable).</description>
+    </item>
+    
+    <item>
+      <title>Wrapup</title>
+      <link>/workshops/containers_101/wrapup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/containers_101/wrapup/</guid>
+      <description>Wrap Up and Q&amp;amp;A That wraps up what we have planned for today.
+ What do you think? How can we better help you understand Linux container concepts?
+ For more in depth overview and examples for working with containers and RHEL check out this link.
+ Thank you for your time and participation!
+   </description>
+    </item>
+    
+  </channel>
+</rss>

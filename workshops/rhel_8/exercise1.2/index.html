@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Exercise 1.2 - Tour of the Web Console | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Exercise 1.2 - Tour of the Web Console</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/rhel_8">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/rhel_8/exercise1.1/">&larr; Previous: Exercise 1.1 - What&#39;s New in RHEL 8</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/rhel_8/exercise1.3/">Next: Exercise 1.3 - Managing Updates Using the Web Console &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div class="sect1">
+<h2 id="_exercise_description">Exercise Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To get started, we will take a tour of the web console. The web console (called <strong>cockpit</strong>) will be your primary interactive interface to RHEL. The console has a number of functions that enable you to manage most aspects of the installation.</p>
+</div>
+<div class="paragraph">
+<p>Connect to your personal lab environment. Ensure that the information in the footer of the page is correctly filled out and the URL for your environment should show up below</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>http://<span class="prefix">example</span>.node.<span class="userid">0</span>.<span class="domain">redhatgov.io</span>:9090</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_1_overview_of_the_web_console">Section 1: Overview of the web console</h3>
+<div class="paragraph">
+<p>Here is a quick overview of all the available modules. Click through each of these menu options to see the information discussed:</p>
+</div>
+<div class="openblock float-group">
+<div class="content">
+<div class="imageblock left">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_topics.png" alt="cockpit topics" width="450">
+</div>
+<div class="title">Figure 1: Web console functions</div>
+</div>
+<div class="paragraph">
+<p>The various functional sections can be seen in <strong>Figure 1</strong>, and are:<br>
+<br></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Overview</dt>
+<dd>
+<p>Contains an overview of the system, including metadata and health graphs</p>
+</dd>
+<dt class="hdlist1">Logs</dt>
+<dd>
+<p>Displays current <strong>journald</strong> logs from all services
+<br></p>
+</dd>
+<dt class="hdlist1">Storage</dt>
+<dd>
+<p>Displays storage activity graphs, and logs. Enables the management of NFS mounts, RAID devices, volume groups, VDO (deduplication) devices, and iSCSI targets
+<br></p>
+</dd>
+<dt class="hdlist1">Networking</dt>
+<dd>
+<p>Displays network activity, logs, and allows firewall and network maintenance
+<br></p>
+</dd>
+<dt class="hdlist1">Podman Containers</dt>
+<dd>
+<p>Enables the management of container images and running containers
+<br></p>
+</dd>
+<dt class="hdlist1">Virtual Machines</dt>
+<dd>
+<p>Virtual machines can be created, deleted and controlled
+<br></p>
+</dd>
+<dt class="hdlist1">Accounts</dt>
+<dd>
+<p>Allows for the creation, deletion and configuration of user accounts and ssh keys
+<br></p>
+</dd>
+<dt class="hdlist1">Services</dt>
+<dd>
+<p>Displays all system targets, services, sockets, timers and paths, as managed by <strong>systemd</strong>, the root process
+<br></p>
+</dd>
+<dt class="hdlist1">Session Recording</dt>
+<dd>
+<p>Manages recorded sessions, and allows for the configuration of session recorder defaults
+<br></p>
+</dd>
+<dt class="hdlist1">Applications</dt>
+<dd>
+<p>Allows for the installation and removal of web console modules
+<br></p>
+</dd>
+<dt class="hdlist1">Diagnostic Reports</dt>
+<dd>
+<p>Creates diagnostic reports used by Red Hat support, also known as SOSreports
+<br></p>
+</dd>
+<dt class="hdlist1">Kernel Dump</dt>
+<dd>
+<p>Manages kernel debugging dumps, created when the system crashes
+<br></p>
+</dd>
+<dt class="hdlist1">SELinux</dt>
+<dd>
+<p>Allows for the setting of SELinux to permissive mode, and shows recent SELinux alerts (<strong>AVCs</strong>)
+<br></p>
+</dd>
+<dt class="hdlist1">Software Updates</dt>
+<dd>
+<p>Manages automatic package updating, and allows for the manual installation of updates
+<br></p>
+</dd>
+<dt class="hdlist1">Subscriptions</dt>
+<dd>
+<p>Manages subscriptions attached to the host
+<br></p>
+</dd>
+<dt class="hdlist1">Terminal</dt>
+<dd>
+<p>Provides an interactive shell</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see, many of the day-to-day management of a RHEL system can be accomplished without touching the terminal. This makes RHEL 8 the easiest-to-live-with release, yet!</p>
+</div>
+<div class="paragraph">
+<p>Next, let&#8217;s proceed to a more detailed examination of each module. Please click through the web console on your host, as you read the explanations, here.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_2_system_module">Section 2: System Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_system.png" alt="cockpit system" height="650">
+</div>
+<div class="title">Figure 2: Web Console System Module</div>
+</div>
+<div class="paragraph">
+<p>The overview module is the main screen that you see, when you first login to the web console. It has four panes:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Health</dt>
+<dd>
+<p>System health including</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Bug fixes available</p>
+</li>
+<li>
+<p>Insights information</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Usage</dt>
+<dd>
+<p>Snapshot of system performance</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CPU utilization</p>
+</li>
+<li>
+<p>Memory Utilization</p>
+</li>
+<li>
+<p>Link to additional graphs. Time series of CPU, memory, network and disk I/O</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">System information</dt>
+<dd>
+<p>information about the hardware of the system (if available)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Model of system</p>
+</li>
+<li>
+<p>Asset tag</p>
+</li>
+<li>
+<p>Machine ID</p>
+</li>
+<li>
+<p>Link to more detailed hardware information</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Configuration</dt>
+<dd>
+<p>Operating system configuration information, including:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>hostname</p>
+</li>
+<li>
+<p>system time</p>
+</li>
+<li>
+<p>Domain</p>
+</li>
+<li>
+<p>Performance Profile</p>
+</li>
+<li>
+<p>ssh key fingerprints for all created 'root' keys</p>
+</li>
+<li>
+<p>Toggle to enable or disable storing of metrics.</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Additionally, there are graphs that show the system&#8217;s CPU, memory, disk, and network utilization.  Each graph may be enlarged, by clicking its associated link.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_3_logs_module">Section 3: Logs Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_01_logs.png" alt="cockpit 01 logs" height="650">
+</div>
+<div class="title">Figure 3: Web Console Logs Module</div>
+</div>
+<div class="paragraph">
+<p>The logs module provides date-sorted view of recent system log entries.  You can change the date or apply basic filters using the pull-down menus at the top of the page.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_4_storage_module">Section 4: Storage Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_02_storage.png" alt="cockpit 02 storage" height="650">
+</div>
+<div class="title">Figure 4: Web Console Storage Module</div>
+</div>
+<div class="paragraph">
+<p>The storage module provides graphs of current storage performance.  It also lists local and network-mounted filesystems, plus recent storage-related log entries.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_5_networking_module">Section 5: Networking Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_03_networking.png" alt="cockpit 03 networking" height="650">
+</div>
+<div class="title">Figure 5: Web Console Networking Module</div>
+</div>
+<div class="paragraph">
+<p>The network module contains performance graphs similar to the storage module.  Additionally, it shows the configuration of your network interfaces, identifies unused interfaces, and provides access to, and control of, the system firewall.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_5_podman_containers_module">Section 5: Podman Containers Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_04_podman.png" alt="cockpit 04 podman" height="650">
+</div>
+<div class="title">Figure 6: Web Console Podman Containers Module</div>
+</div>
+<div class="paragraph">
+<p>This module provides control of local podman containers and their corresponding images.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_6_virtual_machines_module">Section 6: Virtual Machines Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_05_vms.png" alt="cockpit 05 vms" height="650">
+</div>
+<div class="title">Figure 7: Web Console Virtual Machines Module</div>
+</div>
+<div class="paragraph">
+<p>The Virtual Machines module allows for the creation, destruction, and management of virtual machines, their storage, and the networks that they are connected to.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_7_accounts_module">Section 7: Accounts Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_06_accounts.png" alt="cockpit 06 accounts" height="650">
+</div>
+<div class="title">Figure 8: Web Console Accounts Module</div>
+</div>
+<div class="paragraph">
+<p>The accounts module allows you to create and modify local user accounts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_8_services_module">Section 8: Services Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_07_services.png" alt="cockpit 07 services" height="650">
+</div>
+<div class="title">Figure 9: Web Console Services Module</div>
+</div>
+<div class="paragraph">
+<p>The services module allows basic administration of systemd objects, including system services.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_9_session_recording_module">Section 9: Session Recording Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_08_sr.png" alt="cockpit 08 sr" height="650">
+</div>
+<div class="title">Figure 10: Web Console Session Recording Module</div>
+</div>
+<div class="paragraph">
+<p>This module provides management of recorded terminal sessions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_10_applications_module">Section 10: Applications Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_09_applications.png" alt="cockpit 09 applications" height="650">
+</div>
+<div class="title">Figure 11: Web Console Applications Module</div>
+</div>
+<div class="paragraph">
+<p>The applications module allows for the management of additional components for the web console. In this environment, we have already installed all of the modules, so the only option available is to remove them.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_11_diagnostic_reports_module">Section 11: Diagnostic Reports Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_10_dr.png" alt="cockpit 10 dr" height="650">
+</div>
+<div class="title">Figure 12: Web Console Diagnostic Reports Module</div>
+</div>
+<div class="paragraph">
+<p>This module is where SOSreports are placed, when they are generated. You can trigger an SOSreport, for submission to Red Hat support, from here.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_12_kernel_dump_module">Section 12: Kernel Dump Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_11_kd.png" alt="cockpit 11 kd" height="650">
+</div>
+<div class="title">Figure 13: Web Console Kernel Dump Module</div>
+</div>
+<div class="paragraph">
+<p>The kernel dump module allows for the configuration of where kernel diagnostic reports (or dumps) that are generated when the system crashes, are stored. Additionally, you can specify if you wish these dumps to be compressed. The buttons will turn the dump facility on and off, and can also be used to test the dump system by crashing the host.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_13_selinux_module">Section 13: SELinux Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_12_selinux.png" alt="cockpit 12 selinux" height="650">
+</div>
+<div class="title">Figure 14: Web Console SELinux Module</div>
+</div>
+<div class="paragraph">
+<p>This module allows the user to set SELinux to permissive or enforcing mode (off or on) and also shows any SELinux AVC (access vector cache) messages that may have been generated and any SELinux booleans changed on the standard SELinux profile on the system.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_14_software_update_module">Section 14: Software Update Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_13_su.png" alt="cockpit 13 su" height="650">
+</div>
+<div class="title">Figure 15: Web Console Kernel Dump Module</div>
+</div>
+<div class="paragraph">
+<p>The software update module is where updates may be applied to the system. Additionally, automatic updating of packages may be configured.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_15_subscriptions_module">Section 15: Subscriptions Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_14_subscriptions.png" alt="cockpit 14 subscriptions" height="650">
+</div>
+<div class="title">Figure 16: Web Console Subscriptions Module</div>
+</div>
+<div class="paragraph">
+<p>This module allows the host to be registered or unregistered, and allows for the attachment or detachment of valid subscriptions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_16_terminal_module">Section 16: Terminal Module</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/rhel_8/images/cockpit_15_terminal.png" alt="cockpit 15 terminal" height="650">
+</div>
+<div class="title">Figure 17: Web Console Terminal Module</div>
+</div>
+<div class="paragraph">
+<p>The terminal module provides command-line access to the system, similar to an SSH session.  Section 16.1 has some example commands to try if you&#8217;d like to test it out.</p>
+</div>
+<div class="sect3">
+<h4 id="_section_16_1_example_terminal_usage">Section 16.1: Example terminal usage</h4>
+<div class="sect4">
+<h5 id="_example_1_use_the_following_command_to_pull_a_rhel_image_from_the_red_hat_repository">Example 1: Use the following command to pull a RHEL image from the Red Hat repository:</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo podman pull docker://docker.io/library/busybox</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now if you return to the Podman Containers tab (above, in Section 5), you should see this image listed; you may be prompted to start the Podman service as well.  You&#8217;ll see more of podman later in Exercise 8.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_example_2_try_the_skopeo_command">Example 2: Try the Skopeo command</h5>
+<div class="paragraph">
+<p>Skopeo provides the ability to inspect container images stored in a registry. The Inspect feature displays details of the selected image. The 'skopeo inspect' command&#8217;s ability to list all the tags associated with a selected image is a benefit over the docker tool.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo skopeo inspect docker://docker.io/library/busybox</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_example_3_list_firewall_rules">Example 3: List firewall rules</h5>
+<div class="paragraph">
+<p>nft is the nftables utility.  Similar to ''iptables -L'', the following lists the system&#8217;s active firewall ruleset:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo nft list ruleset</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_conclusion">Conclusion</h3>
+<div class="paragraph">
+<p>The web console has a lot of new functionality, in version 8 of Red Hat Enterprise Linux. Hopefully, this brief (!) overview has demonstrated that, and given you a taste of how easily systems may be managed, with this new tool.</p>
+</div>
+<div class="paragraph">
+<style>
+
+ 
+.modal {
+  display: none;  
+  position: fixed;  
+  z-index: 1;  
+  left: 0;
+  top: 0;
+  width: 100%;  
+  height: 100%;  
+  overflow: auto;  
+  background-color: rgb(0,0,0);  
+  background-color: rgba(0,0,0,0.4);  
+  -webkit-animation-name: fadeIn;  
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+ 
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+ 
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #000000;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #000000;
+  color: white;
+}
+
+ 
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+</style>
+
+<div id="myModal" class="modal">
+
+  
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h3>Workshop Details</h3>
+    </div>
+    <div class="modal-body">
+<div class="row">
+  <div class="col-lg-4 col-md-5 col-sm-12" id="workshopFooterDetails">
+    <table>
+      <tr>
+        <td class="text-right"><b>Domain</b></td>
+        <td><span class="domain"></span></td>
+        <td rowspan="3">
+          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Workshop</b></td>
+        <td><span class="prefix"></span></td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Student ID</b></td>
+        <td><span class="userid"></span></td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-lg-8 col-md-7 col-sm-12">
+    <form id="footerForm" onsubmit="return false;" class="row" style="padding: 1.75rem 0 0 0;">
+      <div class="form-group col-sm-6 col-md-6 col-lg-2">
+        <label for="userid">Student ID</label>
+        <select id="userid" name="userid">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>
+          <option value="32">32</option>
+          <option value="33">33</option>
+          <option value="34">34</option>
+          <option value="35">35</option>
+          <option value="36">36</option>
+          <option value="37">37</option>
+          <option value="38">38</option>
+          <option value="39">39</option>
+          <option value="40">40</option>
+          <option value="41">41</option>
+          <option value="42">42</option>
+          <option value="43">43</option>
+          <option value="44">44</option>
+          <option value="45">45</option>
+          <option value="46">46</option>
+          <option value="47">47</option>
+          <option value="48">48</option>
+          <option value="49">49</option>
+          <option value="50">50</option>
+          <option value="51">51</option>
+          <option value="52">52</option>
+          <option value="53">53</option>
+          <option value="54">54</option>
+          <option value="55">55</option>
+          <option value="56">56</option>
+          <option value="57">57</option>
+          <option value="58">58</option>
+          <option value="59">59</option>
+          <option value="60">60</option>
+          <option value="61">61</option>
+          <option value="62">62</option>
+          <option value="63">63</option>
+          <option value="64">64</option>
+          <option value="65">65</option>
+          <option value="66">66</option>
+          <option value="67">67</option>
+          <option value="68">68</option>
+          <option value="69">69</option>
+          <option value="70">70</option>
+          <option value="71">71</option>
+          <option value="72">72</option>
+          <option value="73">73</option>
+          <option value="74">74</option>
+          <option value="75">75</option>
+          <option value="76">76</option>
+          <option value="77">77</option>
+          <option value="78">78</option>
+          <option value="79">79</option>
+          <option value="80">80</option>
+          <option value="81">81</option>
+          <option value="82">82</option>
+          <option value="83">83</option>
+          <option value="84">84</option>
+          <option value="85">85</option>
+          <option value="86">86</option>
+          <option value="87">87</option>
+          <option value="88">88</option>
+          <option value="89">89</option>
+          <option value="90">90</option>
+          <option value="91">91</option>
+          <option value="92">92</option>
+          <option value="93">93</option>
+          <option value="94">94</option>
+          <option value="95">95</option>
+          <option value="96">96</option>
+          <option value="97">97</option>
+          <option value="98">98</option>
+          <option value="99">99</option>
+          <option value="100">100</option>
+          <option value="101">101</option>
+          <option value="102">102</option>
+          <option value="103">103</option>
+          <option value="104">104</option>
+          <option value="105">105</option>
+          <option value="106">106</option>
+          <option value="107">107</option>
+          <option value="108">108</option>
+          <option value="109">109</option>
+          <option value="110">110</option>
+          <option value="111">111</option>
+          <option value="112">112</option>
+          <option value="113">113</option>
+          <option value="114">114</option>
+          <option value="115">115</option>
+          <option value="116">116</option>
+          <option value="117">117</option>
+          <option value="118">118</option>
+          <option value="119">119</option>
+          <option value="120">120</option>
+          <option value="121">121</option>
+          <option value="122">122</option>
+          <option value="123">123</option>
+          <option value="124">124</option>
+          <option value="125">125</option>
+          <option value="126">126</option>
+          <option value="127">127</option>
+          <option value="128">128</option>
+          <option value="129">129</option>
+          <option value="130">130</option>
+          <option value="131">131</option>
+          <option value="132">132</option>
+          <option value="133">133</option>
+          <option value="134">134</option>
+          <option value="135">135</option>
+          <option value="136">136</option>
+          <option value="137">137</option>
+          <option value="138">138</option>
+          <option value="139">139</option>
+          <option value="140">140</option>
+          <option value="141">141</option>
+          <option value="142">142</option>
+          <option value="143">143</option>
+          <option value="144">144</option>
+          <option value="145">145</option>
+          <option value="146">146</option>
+          <option value="147">147</option>
+          <option value="148">148</option>
+          <option value="149">149</option>
+          <option value="150">150</option>
+          <option value="151">151</option>
+          <option value="152">152</option>
+          <option value="153">153</option>
+          <option value="154">154</option>
+          <option value="155">155</option>
+          <option value="156">156</option>
+          <option value="157">157</option>
+          <option value="158">158</option>
+          <option value="159">159</option>
+          <option value="160">160</option>
+          <option value="161">161</option>
+          <option value="162">162</option>
+          <option value="163">163</option>
+          <option value="164">164</option>
+          <option value="165">165</option>
+          <option value="166">166</option>
+          <option value="167">167</option>
+          <option value="168">168</option>
+          <option value="169">169</option>
+          <option value="170">170</option>
+          <option value="171">171</option>
+          <option value="172">172</option>
+          <option value="173">173</option>
+          <option value="174">174</option>
+          <option value="175">175</option>
+          <option value="176">176</option>
+          <option value="177">177</option>
+          <option value="178">178</option>
+          <option value="179">179</option>
+          <option value="180">180</option>
+          <option value="181">181</option>
+          <option value="182">182</option>
+          <option value="183">183</option>
+          <option value="184">184</option>
+          <option value="185">185</option>
+          <option value="186">186</option>
+          <option value="187">187</option>
+          <option value="188">188</option>
+          <option value="189">189</option>
+          <option value="190">190</option>
+          <option value="191">191</option>
+          <option value="192">192</option>
+          <option value="193">193</option>
+          <option value="194">194</option>
+          <option value="195">195</option>
+          <option value="196">196</option>
+          <option value="197">197</option>
+          <option value="198">198</option>
+          <option value="199">199</option>
+          <option value="200">200</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-4">
+        <label for="domain">Domain</label>
+        <select id="domain" name="domain">
+          <option value="rhnaps.io">rhnaps.io</option>          
+          <option value="redhatgov.io">redhatgov.io</option>
+          <option value="az.redhatgov.io">az.redhatgov.io</option>
+          <option value="redhat-fierce.io">redhat-fierce.io</option>
+          <option value="fiercesw.network">fiercesw.network</option>
+          <option value="rhtps.io">rhtps.io</option>
+          <option value="openshiftworkshop.com">openshiftworkshop.com</option>
+          <option value="redhatpsmwsa.com">redhatpsmwsa.com</option>          
+          <option value="open.redhat.com">open.redhat.com</option>
+          <option value="opentlc.com">opentlc.com</option>
+          <option value="aroapp.io">aroapp.io</option>
+          <option value="danclark.io">danclark.io</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-3">
+        <label for="prefix">Workshop</label>
+        <input id="prefix" name="prefix" type="text" size="16" class="form-control" placeholder="example" onkeyup="this.value = this.value.toLowerCase();this.value = this.value.replace(/ /g, '');"/>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-3">
+        <button type="submit" class="btn btn-primary form-control" style="margin-bottom:1rem;">Enter</button>
+        <button type="reset" class="btn btn-default form-control">Default</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+    </div>
+    <div class="modal-footer">
+      <h3></h3>
+    </div>
+  </div>
+
+</div>
+
+<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
+<script type="text/javascript">
+<!--
+  
+  var Cookies2 = Cookies.noConflict();
+
+  var cookiePathArr = cleanArray(window.location.pathname.split('/'));
+  var cookiePath = '/' + cookiePathArr[0] + '/' + cookiePathArr[1] + '/';
+
+  function cleanArray(actual) {
+    var newArray = new Array();
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i]) {
+        newArray.push(actual[i]);
+      }
+    }
+    return newArray;
+  }
+  function replaceClassText() {
+    jQuery("span.domain").html(Cookies2.get("domain"));
+    jQuery("span.userid").html(Cookies2.get("userid"));
+    jQuery("span.prefix").html(Cookies2.get("prefix"));
+  }
+  function pageLoadWorkshopFooterTest() {
+    
+    if (Cookies2.get("domain") === undefined) {
+      resetWorkshopFooter();
+    }
+    else {
+      replaceClassText();
+      setWorkshopFooterInputValues()
+    }
+  }
+  function setWorkshopFooterData() {
+    
+    Cookies2.set("domain", jQuery("select#domain").val(), { path: cookiePath, expires: 7 } );
+    Cookies2.set("prefix", jQuery("input#prefix").val(), { path: cookiePath, expires: 7 } );
+    Cookies2.set("userid", jQuery("select#userid").val(), { path: cookiePath, expires: 7 } );
+    replaceClassText();
+    modal.style.display = "none";
+  }
+  function setWorkshopFooterInputValues() {
+    jQuery("select#domain").val(Cookies2.get("domain"));
+    jQuery("input#prefix").val(Cookies2.get("prefix"));
+    jQuery("select#userid").val(Cookies2.get("userid"));
+  }
+  function resetWorkshopFooter() {
+    
+    jQuery("select#domain, select#userid").prop("selectedIndex", 0);
+    jQuery("input#prefix").val(jQuery("input#prefix").attr('placeholder'));
+    
+    Cookies2.set("domain", jQuery("select#domain option").first().val(), { path: cookiePath, expires: 7 } ); 
+    Cookies2.set("userid", jQuery("select#userid option").first().val(), { path: cookiePath, expires: 7 } ); 
+    Cookies2.set("prefix", jQuery("input#prefix").val(), { path: cookiePath, expires: 7 } );
+    
+    
+    replaceClassText();
+  }
+
+
+
+
+  function updateFooter(e){
+    fieldName = '';
+
+    switch(e.id) {
+      case 'userid':
+        fieldName = 'User Id';
+        break;
+      case 'domain':
+        fieldName = 'Domain';
+        break;
+      case 'prefix':
+        fieldName = 'Workshop';
+        break;
+      default:
+        fieldName = 'unknown';
+    }
+    setWorkshopFooterData();
+    toastr["success"](fieldName + " set to " + e.value);
+  }
+
+  jQuery(document).ready(function() {
+    pageLoadWorkshopFooterTest();
+
+
+    
+    var input = document.getElementById("prefix");
+
+    
+    input.addEventListener("keyup", function(event) {
+      
+      if (event.keyCode === 13) {
+        
+        event.preventDefault();
+        
+        
+        updateFooter(input);
+      }
+    });
+
+
+    jQuery("form#footerForm").submit(function() {
+      setWorkshopFooterData();
+      return false; 
+    });
+
+    jQuery("form#footerForm").bind("reset", function() {
+      resetWorkshopFooter();
+      return true;
+    });
+
+    return false;
+  });
+-->
+</script>
+
+<hr>
+<h3>Workshop Details</h3>
+    <table>
+      <tr>
+        <td class="text-right"><b>Domain</b></td>
+        <td><span class="domain"></span></td>
+        <td rowspan="3">
+          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Workshop</b></td>
+        <td><span class="prefix"></span></td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Student ID</b></td>
+        <td><span class="userid"></span></td>
+      </tr>
+    </table>
+<button id="myBtn">Configure Workshop</button>
+<hr>
+
+<script>
+
+var modal = document.getElementById("myModal");
+
+
+var btn = document.getElementById("myBtn");
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/rhel_8/exercise1.1/">&larr; Previous: Exercise 1.1 - What&#39;s New in RHEL 8</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/rhel_8/exercise1.3/">Next: Exercise 1.3 - Managing Updates Using the Web Console &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/rhel_8">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

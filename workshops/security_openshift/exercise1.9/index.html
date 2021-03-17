@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Exercise 1.9 - Image Streams &amp; Secrets | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Exercise 1.9 - Image Streams &amp; Secrets</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/security_openshift">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/security_openshift/exercise1.8/">&larr; Previous: Exercise 1.8 - Red Hat Security API</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/security_openshift/wrapup/">Next: Wrap Up &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div id="preamble">
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/secrets.png" alt="secrets">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_image_stream">Image Stream</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/builds_and_image_streams.html#image-streams">Image
+streams</a> can be used to automatically perform an action when new images are
+created. Builds and deployments can watch an image stream to receive
+notifications when new images are added and react by performing a build or
+deployment, respectively.</p>
+</div>
+<div class="paragraph">
+<p>For example, if a deployment is using a certain image and a new version of that
+image is created, a deployment could be automatically performed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_secrets">Secrets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A
+<a href="https://docs.openshift.com/container-platform/3.4/dev_guide/secrets.html#secrets-image-pull-secrets">Secret</a>
+is an object that contains a small amount of sensitive data such as a password,
+a token, or a key. Such information might otherwise be put in a Pod
+specification or in an image; putting it in a Secret object allows for more
+control over how it is used, and reduces the risk of accidental exposure. Users
+can create secrets, and the system also creates some secrets.</p>
+</div>
+<div class="paragraph">
+<p>Key properties include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Secret data can be referenced independently from its definition.</p>
+</li>
+<li>
+<p>Secret data volumes are backed by temporary file-storage facilities (<code>tmpfs</code>)
+and never come to rest on a node.</p>
+</li>
+<li>
+<p>Secret data can be shared within a namespace.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_image_streams_secrets">Image Streams &amp; Secrets</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_step_1">Step 1:</h3>
+<div class="paragraph">
+<p><strong>Check your user</strong></p>
+</div>
+<div class="listingblock">
+<div class="title">see what user you are loged in as</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc whoami</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">login as system:admin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u system:admin</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2">Step 2:</h3>
+<div class="paragraph">
+<p><strong>Create the default image streams</strong></p>
+</div>
+<div class="paragraph">
+<p>Now we are going to create a JBoss
+<a href="https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/builds_and_image_streams.html">image
+stream</a>. Image streams present a single virtual view of related images.</p>
+</div>
+<div class="listingblock">
+<div class="title">create the image stream</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd jboss-openshift-templates
+
+oc create -n openshift -f jboss-image-streams.json</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">switch to developer</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u developer</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now create a new project called <code>SSO</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">SSO Project</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project sso --description="Red Hat SSO" --display-name="SSO Keycloak"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Click on the <code>SSO Keycloak</code> project you just created.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/sso-project.png" alt="sso project">
+</div>
+<div class="title">Figure 1. Click SSO Keycloak Project</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3">Step 3:</h3>
+<div class="paragraph">
+<p><strong>Create Red Hat SSO application</strong></p>
+</div>
+<div class="paragraph">
+<p>The Red Hat SSO container needs secrets from the Java Key Store (jks for
+short). Instead of hard coding these into the SSO image itself, OpenShift
+utilizes
+<a href="https://docs.openshift.com/container-platform/3.4/dev_guide/secrets.html#secrets-image-pull-secrets"><code>Secrets</code></a>
+to hold the sensitive information.</p>
+</div>
+<div class="paragraph">
+<p>To get a feeling of what a secrets file looks like <code>cat</code> out the following file.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat secrets/sso-app-secret.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is a excerpt of the <code>Secret</code> file.</p>
+</div>
+<div class="listingblock">
+<div class="title">sso-app-secret.json</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">"kind": "Secret", <b class="conum">(1)</b>
+"apiVersion": "v1",
+"metadata": {
+    "annotations": {
+        "description": "Default secret file with name 'jboss' and password 'mykeystorepass'"
+      },
+        "name": "sso-app-secret" <b class="conum">(2)</b>
+      },
+        "data": {
+                "keystore.jks": "/u3+7QAAAAIAAAABAAAAAQAF.....&lt;snip&gt; <b class="conum">(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Type of Object</p>
+</li>
+<li>
+<p>Name of the <code>Secret</code></p>
+</li>
+<li>
+<p>The actual key &amp; value of the secret, base64 encoded.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The Secret object type provides a mechanism to hold sensitive information such
+as passwords. Secrets decouple sensitive content from the pods. You can mount
+secrets into containers using a volume plug-in or the system can use secrets to
+perform actions on behalf of a pod.</p>
+</div>
+<div class="listingblock">
+<div class="title">create <code>secrets</code> for <code>SSO</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -n sso -f secrets/sso-app-secret.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now lets launch the app</p>
+</div>
+<div class="listingblock">
+<div class="title">launch <code>SSO</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc process -f sso/sso71-https.json -p HTTPS_NAME=jboss HTTPS_PASSWORD=mykeystorepass | oc create -n sso -f -</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see two pods with different
+<a href="https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/routes.html">routes</a>
+being built, the first is for a plain <code>http</code> route to the app, the second is
+via a <code>https</code> route. Click the top url (example for student 0:
+<code><a href="https://secure-sso-sso.apps.ose.0.redhatgov.io" class="bare">https://secure-sso-sso.apps.ose.0.redhatgov.io</a></code>).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/sso-overview.png" alt="sso overview">
+</div>
+<div class="title">Figure 2. SSO Keycloak Project</div>
+</div>
+<div class="paragraph">
+<p><strong>Add <code>auth</code> to the end of the url</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/sso-auth.png" alt="sso auth">
+</div>
+</div>
+<div class="paragraph">
+<p>Now click Administration Console</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/sso-admin-console.png" alt="sso admin console">
+</div>
+</div>
+<div class="paragraph">
+<p>The default password is admin / admin</p>
+</div>
+<div class="listingblock">
+<div class="title">login to SSO</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username:  admin
+
+password:  admin</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/sso-main-login.png" alt="sso main login">
+</div>
+<div class="title">Figure 3. Red Hat SSO Login</div>
+</div>
+<div class="paragraph">
+<p>This is Red Hat&#8217;s SSO server. Red Hat Single Sign-On (RH-SSO) is based on the
+Keycloak project and enables you to secure your web applications by providing
+Web single sign-on (SSO) capabilities based on popular standards such as SAML
+2.0, OpenID Connect and OAuth 2.0.</p>
+</div>
+<div class="paragraph">
+<p>The RH-SSO server can act as a SAML or OpenID Connect-based Identity Provider,
+mediating with your enterprise user directory or 3rd-party SSO provider for
+identity information and your applications via standards-based tokens. This is
+like having your own login with your Gmail or Facebook account you see all over
+the web. Now you can control your own identity provider instead of relying on
+third parties for that.</p>
+</div>
+<div class="paragraph">
+<p>Features:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Authentication Server:</strong> Acts as a standalone SAML or OpenID Connect-based
+Identity Provider.</p>
+</li>
+<li>
+<p><strong>User Federation:</strong> Certified with LDAP servers and Microsoft Active Directory
+as sources for user information.</p>
+</li>
+<li>
+<p><strong>Identity Brokering:</strong> Integrates with 3rd-party Identity Providers including
+leading social networks as identity source.</p>
+</li>
+<li>
+<p><strong>REST APIs and Administration GUI:</strong> Specify user federation, role mapping,
+and client applications with easy-to-use Administration GUI and REST APIs.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/sso-main.png" alt="sso main">
+</div>
+<div class="title">Figure 4. Red Hat SSO Overview</div>
+</div>
+<div class="paragraph">
+<p>We went over a lot in this one, but if you made it this far you successfully</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Deployed a OpenShift <code>imagestream</code></p>
+</li>
+<li>
+<p>Learned about OpenShift <code>Secrets</code></p>
+</li>
+<li>
+<p>Deployed a <code>SSL</code> secured &amp; containerized application</p>
+</li>
+<li>
+<p>Got a overview of <code>Red Hat SSO</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/security_openshift/exercise1.8/">&larr; Previous: Exercise 1.8 - Red Hat Security API</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/security_openshift/wrapup/">Next: Wrap Up &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/security_openshift">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

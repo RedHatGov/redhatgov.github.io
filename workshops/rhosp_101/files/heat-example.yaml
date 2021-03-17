@@ -1,0 +1,55 @@
+heat_template_version: 2014-10-16  
+description: A simple server.  
+parameters:
+  private_network:
+    type: string
+    default: private-a
+  public_network:
+    type: string
+    default: public
+  image:
+    type: string
+    default: rhel76
+  flavor:
+    type: string
+    default: m1.small
+  keypair:
+    type: string
+
+resources:  
+  server:
+    type: OS::Nova::Server
+    properties:
+      block_device_mapping_v2:
+        - device_name: vda
+          delete_on_termination: true
+          volume_id: { get_resource: volume }
+      flavor: {get_param: flavor}
+      metadata: {"metering.stack": {get_param: "OS::stack_id"}}
+      key_name: {get_param: keypair}
+      networks:
+        - port: { get_resource: port }
+
+  port:
+    type: OS::Neutron::Port
+    properties:
+      network: {get_param: private_network}
+      security_groups:
+        - default
+
+  floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: {get_param: public_network}
+
+  floating_ip_assoc:
+    type: OS::Neutron::FloatingIPAssociation
+    properties:
+      floatingip_id: { get_resource: floating_ip }
+      port_id: { get_resource: port }
+
+  volume:
+    type: OS::Cinder::Volume
+    properties:
+      image: {get_param: image}
+      size: 10

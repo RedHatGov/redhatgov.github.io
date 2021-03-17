@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Exercise 1.0 - Deploy OpenShift | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Exercise 1.0 - Deploy OpenShift</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/security_openshift">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/security_openshift/setup/">&larr; Previous: Setup</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/security_openshift/exercise1.1/">Next: Exercise 1.1 - OpenShift Templates &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div id="preamble">
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/openshift-ocp.svg" alt="openshift ocp">
+</div>
+</div>
+<div class="paragraph">
+<p>OpenShift v3 is a layered system designed to expose underlying Docker-formatted
+container image and Kubernetes concepts as accurately as possible, with a focus
+on easy composition of applications by a developer. For example, install Ruby,
+push code, and add MySQL.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openshift">OpenShift</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_step_1">Step 1:</h3>
+<div class="paragraph">
+<p><strong>Use the <code>oc</code> command</strong></p>
+</div>
+<div class="paragraph">
+<p>These instances have been preconfigured with <code>docker</code> and the <code>oc</code> command. The
+<code>oc</code> command makes deploying OpenShift for development purposes incredibly
+easy. The <code>oc cluster up</code> command starts a OpenShift all-in-one cluster with a
+configured registry, router, image streams, and default templates.</p>
+</div>
+<div class="listingblock">
+<div class="title">switch to root</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">make a /data dir</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /data</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next use the following command to bring up the cluster on your local machine.</p>
+</div>
+<div class="paragraph">
+<p>&lt;div class="alert alert-warning"&gt;</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>&lt;span class="pficon pficon-warning-triangle-o"&gt;&lt;/span&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But first! export your student number to sync up with the wildcard DNS mapped
+to your instance. For example below, if you are student <code>0</code> then <code>export
+STUDENT=0</code>.</p>
+</div>
+<div class="paragraph">
+<p>&lt;/div&gt;</p>
+</div>
+<div class="listingblock">
+<div class="title">Change the number to your student number</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export STUDENT=0</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Run the oc command (you can cut &amp; paste this)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc cluster up --public-hostname=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) --routing-suffix=apps.ocp.$STUDENT.redhatgov.io --host-pv-dir=/data --host-data-dir=/data</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Successful Build (example)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Using nsenter mounter for OpenShift volumes
+Using public hostname IP 107.21.72.239 as the host IP
+Using 107.21.72.239 as the server IP
+Starting OpenShift using openshift/origin:v3.9.0 ...
+OpenShift server started.
+The server is accessible via web console at:
+    https://107.21.72.239:8443 <i class="conum" data-value="1"></i><b>(1)</b>
+You are logged in as:
+    User:     developer
+    Password: &lt;any value&gt;
+To login as administrator:
+    oc login -u system:admin</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>OpenShift Web Console, EXAMPLE: <code><a href="https://107.21.72.239:8443" class="bare">https://107.21.72.239:8443</a></code>  or use the DNS name with your student number, Example: <code><a href="https://openshiftsecurity.0.redhatgov.io:8443" class="bare">https://openshiftsecurity.0.redhatgov.io:8443</a></code></td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2">Step 2:</h3>
+<div class="paragraph">
+<p><strong>Launch your first application.</strong></p>
+</div>
+<div class="listingblock">
+<div class="title">see what user you are loged in as</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc whoami</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should be logged in as <code>developer</code></p>
+</div>
+<div class="paragraph">
+<p>Create a new
+<a href="https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/projects_and_users.html">Project</a>
+for your first app.</p>
+</div>
+<div class="listingblock">
+<div class="title">create new project</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project flask --description="Python Flask App" --display-name="Flask App"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now use the <code>new-app</code> command to create the new app from a simple Python flask
+repository on GitHub. By using the <code>--strategy=source</code> we can pass it the type
+of container to build and launch the app. In this case we are using
+<code>python:3.5</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">create the app</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-app --strategy=source python:3.5~https://github.com/RedHatGov/OCP-App.git --name=flask-app</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now follow the logs as its being built.</p>
+</div>
+<div class="listingblock">
+<div class="title">follow the logs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc logs -f bc/flask-app</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Open a browser next to the terminal so you can see the app get created</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3">Step 3:</h3>
+<div class="paragraph">
+<p><strong>Login to OpenShift</strong></p>
+</div>
+<div class="listingblock">
+<div class="title">Login as developer</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Username:  developer
+
+Password:  developer</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/login-ocp.png" alt="login ocp">
+</div>
+<div class="title">Figure 1. OpenShift Main Login</div>
+</div>
+<div class="paragraph">
+<p>Click on the new project you created <code>Flask App</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/flask-app.png" alt="flask app">
+</div>
+<div class="title">Figure 2. Flask App</div>
+</div>
+<div class="paragraph">
+<p>Now we need to create a
+<a href="https://docs.openshift.com/container-platform/3.4/architecture/core_concepts/routes.html"><code>route</code></a>
+to see the app.</p>
+</div>
+<div class="paragraph">
+<p>Click <code>Create Route</code> in the top right corner. Accept the defaults and click
+<code>create</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/create-route.png" alt="create route">
+</div>
+<div class="title">Figure 3. create route</div>
+</div>
+<div class="paragraph">
+<p>Now lets see your first app. Click the new route. It should look similar to
+this <code><a href="http://http://flask-app-flask.apps.ose.0.redhatgov.io" class="bare">http://http://flask-app-flask.apps.ose.0.redhatgov.io</a></code>.</p>
+</div>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapsec32e30114960effaeaad995e56ca8757" class="collapsed">
+      
+        Result!
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapsec32e30114960effaeaad995e56ca8757" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/ocp-result.png" alt="ocp result">
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+<div class="paragraph">
+<p>Congratulations! You have launched your first app in OpenShift!</p>
+</div>
+<div class="paragraph">
+<p>To recap:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You just launched OpenShift on AWS</p>
+</li>
+<li>
+<p>You launched a containerized python app</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/openshift/origin/blob/master/docs/cluster_up_down.md#specifying-images-to-use">oc guide</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_extra_credit">Extra credit</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Details on the oc command (Informational Only)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc cluster up \
+   --public-hostname=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) \ <i class="conum" data-value="1"></i><b>(1)</b>
+   --routing-suffix=apps.ocp.$STUDENT.redhatgov.io \ <i class="conum" data-value="2"></i><b>(2)</b>
+   --host-pv-dir=/data \ <i class="conum" data-value="3"></i><b>(3)</b>
+   --host-data-dir=/data  <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This sets OpenShift&#8217;s public name to the public ip of the AMI, via the AWS
+metadata service (169.254.169.254).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>This sets the wildcard domain for all of the applications you provision in
+OpenShift.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Cluster up creates a set of persistent volumes by default. It exposes a new
+flag that allows setting the directory on the host for these volumes.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>To persist data across restarts, specify a valid host directory when
+starting your cluster with <code>oc</code> cluster up.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/security_openshift/setup/">&larr; Previous: Setup</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/security_openshift/exercise1.1/">Next: Exercise 1.1 - OpenShift Templates &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/security_openshift">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

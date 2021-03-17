@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Exercise 1.6 - SCC &amp; Seccomp | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Exercise 1.6 - SCC &amp; Seccomp</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/security_openshift">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/security_openshift/exercise1.5/">&larr; Previous: Exercise 1.5 - Atomic Scanner</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/security_openshift/exercise1.7/">Next: Exercise 1.7 - Red Hat Container Catalog &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div id="preamble">
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/scc-node.png" alt="scc node">
+</div>
+</div>
+<div class="paragraph">
+<p>In addition to authorization policies that control what a user can do, OpenShift Container Platform provides security context constraints (SCC) that control the actions that a pod can perform and what it has the ability to access. Administrators can manage SCCs using the CLI. This is a great way to lock down you individual application to make sure that they have hardened settings. This applies to applications running on OpenShift.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_scc">SCC</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SCCs are objects that define a set of conditions that a pod must run with in
+order to be accepted into the system. They allow an administrator to control
+the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Running of privileged containers.</p>
+</li>
+<li>
+<p>Capabilities a container can request to be added.</p>
+</li>
+<li>
+<p>Use of host directories as volumes.</p>
+</li>
+<li>
+<p>The SELinux context of the container.</p>
+</li>
+<li>
+<p>The user ID.</p>
+</li>
+<li>
+<p>The use of host namespaces and networking.</p>
+</li>
+<li>
+<p>Allocating an FSGroup that owns the pod’s volumes</p>
+</li>
+<li>
+<p>Configuring allowable supplemental groups</p>
+</li>
+<li>
+<p>Requiring the use of a read only root file system</p>
+</li>
+<li>
+<p>Controlling the usage of volume types</p>
+</li>
+<li>
+<p>Configuring allowable seccomp profiles</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_step_1">Step 1:</h3>
+<div class="paragraph">
+<p>Change to <code>system</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u system:admin</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2">Step 2:</h3>
+<div class="paragraph">
+<p>Get a current list of SCCs.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get scc</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Get a closer look at the <code>restricted</code> SCC.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe scc restricted</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse5c9b5a05b64d0beff65802e6eb44dd28" class="collapsed">
+      
+        Restricted SCC
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse5c9b5a05b64d0beff65802e6eb44dd28" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">Name:                                      restricted
+Priority:                                  &lt;none&gt;
+Access:
+  Users:                                   &lt;none&gt;
+  Groups:                                  system:authenticated
+Settings:
+  Allow Privileged:                        false
+  Default Add Capabilities:                &lt;none&gt;
+  Required Drop Capabilities:              KILL,MKNOD,SYS_CHROOT,SETUID,SETGID           <i class="conum" data-value="1"></i><b>(1)</b>
+  Allowed Capabilities:                    &lt;none&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+  Allowed Volume Types:                    configMap,downwardAPI,emptyDir,persistentVolumeClaim,secret
+  Allow Host Network:                      false
+  Allow Host Ports:                        false
+  Allow Host PID:                          false
+  Allow Host IPC:                          false
+  Read Only Root Filesystem:               false
+  Run As User Strategy:  MustRunAsRange
+    UID:                                   &lt;none&gt;
+    UID Range Min:                         &lt;none&gt;
+    UID Range Max:                         &lt;none&gt;
+  SELinux Context Strategy: MustRunAs             <i class="conum" data-value="3"></i><b>(3)</b>
+    User:                                  &lt;none&gt;
+    Role:                                  &lt;none&gt;
+    Type:                                  &lt;none&gt;
+    Level:                                 &lt;none&gt;
+  FSGroup Strategy: MustRunAs
+    Ranges:                                &lt;none&gt;
+  Supplemental Groups Strategy: RunAsAny
+    Ranges:                                &lt;none&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Linux Capabilities to be dropped.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Linux Capabilities that could be added.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>SELinux options</td>
+</tr>
+</table>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3">Step 3:</h3>
+<div class="paragraph">
+<p>Create a SCC</p>
+</div>
+<div class="paragraph">
+<p>As most people at this workshop are security minded people we will skip over
+<strong>adding</strong> permissions and capabilities to containers, let&#8217;s look at how tighten
+things up. We will look at <strong>dropping</strong> certain Linux Capabilities in this SCC
+file.</p>
+</div>
+<div class="listingblock">
+<div class="title">drop-capabilities.yml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">---
+kind: SecurityContextConstraints
+apiVersion: v1
+metadata:
+  name: drop-capabilities
+allowPrivilegedContainer: false
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+users:
+- drop-user
+groups:
+- drop-group
+requiredDropCapabilities:
+- KILL
+- MKNOD
+- SYS_CHROOT
+- SETPCAP
+- NET_BIND_SERVICE
+- NET_RAW
+- SYS_CHROOT
+- MKNOD
+- AUDIT_WRITE
+- SETFCAP</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Copy the text above. Type <code>vim drop-capabilities.yml</code>, Press <code>i</code> for
+Insert, then cut and paste <code>control + v</code>, then escape and write the file <code>esc</code>,
+<code>:wq</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f drop-capabilities.yml</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_4_add_scc_to_a_service_account">Step 4: Add SCC to a service account</h3>
+<div class="paragraph">
+<p>Create <code>Service Account</code></p>
+</div>
+<div class="paragraph">
+<div class="title">create service account</div>
+<p><a href="https://en.wikipedia.org/wiki/Public_Security_Section_9">Section9</a></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create serviceaccount section9</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Describe service account</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe serviceaccount section9</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add to service account</p>
+</div>
+<div class="listingblock">
+<div class="title">add the policy <code>drop-capabilities.yml</code> to the service account</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc adm policy add-scc-to-user drop-capabilities system:serviceaccount:sso:section9</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now lets view the policy again and see that our service account was added.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe scc drop-capabilities</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse992b7ae0f9cb3883ac79778e69b8679e" class="collapsed">
+      
+        drop-capabilities result
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse992b7ae0f9cb3883ac79778e69b8679e" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">Name:                                     drop-capabilities
+Priority:                                 &lt;none&gt;
+Access:
+  Users:                                  dc17-user,system:serviceaccount:sso:section9
+  Groups:                                 dc17-group
+Settings:
+  Allow Privileged:                       false
+  Default Add Capabilities:               &lt;none&gt;
+  Required Drop Capabilities:             KILL,MKNOD,SYS_CHROOT,SETPCAP,NET_BIND_SERVICE,NET_RAW,SYS_CHROOT,MKNOD,AUDIT_WRITE,SETFCAP  <i class="conum" data-value="1"></i><b>(1)</b>
+  Allowed Capabilities:                   &lt;none&gt;                                                 <i class="conum" data-value="2"></i><b>(2)</b>
+  Allowed Volume Types:                   awsElasticBlockStore,azureDisk,azureFile,cephFS,cinder,configMap,downwardAPI,emptyDir,fc,flexVolume,flocker,gcePersistentDisk,gitRepo,glusterfs,iscsi,nfs,persistentVolumeClaim,photonPersistentDisk,quobyte,rbd,secret,vsphere
+  Allow Host Network:                     false
+  Allow Host Ports:                       false
+  Allow Host PID:                         false
+  Allow Host IPC:                         false
+  Read Only Root Filesystem:              false
+  Run As User Strategy: RunAsAny
+    UID:                                  &lt;none&gt;
+    UID Range Min:                        &lt;none&gt;
+    UID Range Max:                        &lt;none&gt;
+  SELinux Context Strategy: RunAsAny
+    User:                                 &lt;none&gt;
+    Role:                                 &lt;none&gt;
+    Type:                                 &lt;none&gt;
+    Level:                                &lt;none&gt;
+  FSGroup Strategy: RunAsAny
+    Ranges:                               &lt;none&gt;
+  Supplemental Groups Strategy: RunAsAny
+    Ranges:                               &lt;none&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Linux Capabilities to be dropped.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Linux Capabilities are allowed, currently none.</td>
+</tr>
+</table>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seccomp">Seccomp</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Seccomp (secure computing mode) is used to restrict the set of system calls applications can make, allowing cluster administrators greater control over the security of workloads running in OpenShift Container Platform. Seccomp is applied at the individual host level. The ability to lock down certain hosts in a cluster can help to make you architecture more secure by running untrusted code or internet facing servers in a more restricted mannor than the rest of the nodes in the cluster.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/seccomp-int.png" alt="seccomp int">
+</div>
+</div>
+<div class="paragraph">
+<p>Seccomp support is achieved via two annotations in the pod configuration:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>seccomp.security.alpha.kubernetes.io/pod: profile applies to all containers
+in the pod that do not override</p>
+</li>
+<li>
+<p>container.seccomp.security.alpha.kubernetes.io/&lt;container_name&gt;:
+container-specific profile override</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Applications use <code>seccomp</code> to restrict the set of system calls they can make.
+Recently, container runtimes have begun adding features to allow the runtime to
+interact with <code>seccomp</code> on behalf of the application, which eliminates the need
+for applications to link against <code>libseccomp</code> directly. Adding support in the
+Kubernetes API for describing <code>seccomp</code> <code>profiles</code> will allow administrators
+greater control over the security of workloads running in Kubernetes.</p>
+</div>
+<div class="paragraph">
+<p>The systemd seccomp facility is based on a whitelist of system calls that can
+be made, rather than a full filter specification.</p>
+</div>
+<div class="paragraph">
+<p>&lt;div class="alert alert-warning"&gt;</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>&lt;span class="pficon pficon-warning-triangle-o"&gt;&lt;/span&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Containers are run with unconfined seccomp settings by default.</p>
+</div>
+<div class="paragraph">
+<p>&lt;/div&gt;</p>
+</div>
+<div class="listingblock">
+<div class="title">check to see if seccomp is enabled</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat /boot/config-`uname -r` | grep CONFIG_SECCOMP=</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pod_container_configurations">Pod &amp; Container Configurations</h3>
+<div class="paragraph">
+<p>Seccomp support is achieved via two metadata annotations in the pod configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">annotations:
+  seccomp.security.alpha.kubernetes.io/pod                          <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">annotations:
+  container.seccomp.security.alpha.kubernetes.io/&lt;container_name&gt;   <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>profile applies to all containers in the pod that do not override</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>container-specific profile override</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_policy_examples">Policy Examples:</h3>
+<div class="sect3">
+<h4 id="_unconfined_profile">Unconfined profile</h4>
+<div class="paragraph">
+<p>Here&#8217;s an example of a pod that uses the unconfined profile:</p>
+</div>
+<div class="listingblock">
+<div class="title">unconfined</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apiVersion: v1
+kind: Pod
+metadata:
+  name: trustworthy-pod
+  annotations:
+    seccomp.security.alpha.kubernetes.io/pod: unconfined <i class="conum" data-value="1"></i><b>(1)</b>
+spec:
+  containers:
+    - name: trustworthy-container
+      image: sotrustworthy:latest</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Use Kubernetes Pods metadata lables to define the Seccomp profile. This one is using a unconfined profile.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_custom_restrictive_profile">Custom restrictive profile</h4>
+<div class="paragraph">
+<p>Here&#8217;s an example of a Pod that uses a profile called <code>example-explorer-profile</code>. This is a sample program that only can set permissions on files and move them to diffrent locations.</p>
+</div>
+<div class="listingblock">
+<div class="title">custom restricted</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apiVersion: v1
+kind: Pod
+metadata:
+  name: explorer
+  annotations:
+    container.seccomp.security.alpha.kubernetes.io/explorer: localhost/example-explorer-profile  <i class="conum" data-value="1"></i><b>(1)</b>
+spec:
+  containers:
+    - name: explorer
+      image: gcr.io/google_containers/explorer:1.0
+      args: ["-port=8080"]
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+      volumeMounts:
+        - mountPath: "/mount/test-volume"
+          name: test-volume
+  volumes:
+    - name: test-volume
+      emptyDir: {}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This refers to a custom file policy that resides on the localhost and will apply <code>syscall</code> restrictions to the Pod/containers via <code>Secccomp</code>.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_default_docker_seccomp_profile">Default Docker Seccomp Profile</h3>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse8898bfed4baa34391b3b70407ba09050" class="collapsed">
+      
+        Default Docker Seccomp Profile
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse8898bfed4baa34391b3b70407ba09050" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">{
+  "defaultAction": "SCMP_ACT_ERRNO",
+  "archMap": [
+    {
+      "architecture": "SCMP_ARCH_X86_64",
+      "subArchitectures": [
+        "SCMP_ARCH_X86",
+        "SCMP_ARCH_X32"
+      ]
+    },
+    {
+      "architecture": "SCMP_ARCH_AARCH64",
+      "subArchitectures": [
+        "SCMP_ARCH_ARM"
+      ]
+    },
+    {
+      "architecture": "SCMP_ARCH_MIPS64",
+      "subArchitectures": [
+        "SCMP_ARCH_MIPS",
+        "SCMP_ARCH_MIPS64N32"
+      ]
+    },
+    {
+      "architecture": "SCMP_ARCH_MIPS64N32",
+      "subArchitectures": [
+        "SCMP_ARCH_MIPS",
+        "SCMP_ARCH_MIPS64"
+      ]
+    },
+    {
+      "architecture": "SCMP_ARCH_MIPSEL64",
+      "subArchitectures": [
+        "SCMP_ARCH_MIPSEL",
+        "SCMP_ARCH_MIPSEL64N32"
+      ]
+    },
+    {
+      "architecture": "SCMP_ARCH_MIPSEL64N32",
+      "subArchitectures": [
+        "SCMP_ARCH_MIPSEL",
+        "SCMP_ARCH_MIPSEL64"
+      ]
+    },
+    {
+      "architecture": "SCMP_ARCH_S390X",
+      "subArchitectures": [
+        "SCMP_ARCH_S390"
+      ]
+    }
+  ],
+  "syscalls": [
+    {
+      "names": [
+        "accept",
+        "accept4",
+        "access",
+        "adjtimex",
+        "alarm",
+        "alarm",
+        "bind",
+        "brk",
+        "capget",
+        "capset",
+        "chdir",
+        "chmod",
+        "chown",
+        "chown32",
+        "clock_getres",
+        "clock_gettime",
+        "clock_nanosleep",
+        "close",
+        "connect",
+        "copy_file_range",
+        "creat",
+        "dup",
+        "dup2",
+        "dup3",
+        "epoll_create",
+        "epoll_create1",
+        "epoll_ctl",
+        "epoll_ctl_old",
+        "epoll_pwait",
+        "epoll_wait",
+        "epoll_wait_old",
+        "eventfd",
+        "eventfd2",
+        "execve",
+        "execveat",
+        "exit",
+        "exit_group",
+        "faccessat",
+        "fadvise64",
+        "fadvise64_64",
+        "fallocate",
+        "fanotify_mark",
+        "fchdir",
+        "fchmod",
+        "fchmodat",
+        "fchown",
+        "fchown32",
+        "fchownat",
+        "fcntl",
+        "fcntl64",
+        "fdatasync",
+        "fgetxattr",
+        "flistxattr",
+        "flock",
+        "fork",
+        "fremovexattr",
+        "fsetxattr",
+        "fstat",
+        "fstat64",
+        "fstatat64",
+        "fstatfs",
+        "fstatfs64",
+        "fsync",
+        "ftruncate",
+        "ftruncate64",
+        "futex",
+        "futimesat",
+        "getcpu",
+        "getcwd",
+        "getdents",
+        "getdents64",
+        "getegid",
+        "getegid32",
+        "geteuid",
+        "geteuid32",
+        "getgid",
+        "getgid32",
+        "getgroups",
+        "getgroups32",
+        "getitimer",
+        "getpeername",
+        "getpgid",
+        "getpgrp",
+        "getpid",
+        "getppid",
+        "getpriority",
+        "getrandom",
+        "getresgid",
+        "getresgid32",
+        "getresuid",
+        "getresuid32",
+        "getrlimit",
+        "get_robust_list",
+        "getrusage",
+        "getsid",
+        "getsockname",
+        "getsockopt",
+        "get_thread_area",
+        "gettid",
+        "gettimeofday",
+        "getuid",
+        "getuid32",
+        "getxattr",
+        "inotify_add_watch",
+        "inotify_init",
+        "inotify_init1",
+        "inotify_rm_watch",
+        "io_cancel",
+        "ioctl",
+        "io_destroy",
+        "io_getevents",
+        "ioprio_get",
+        "ioprio_set",
+        "io_setup",
+        "io_submit",
+        "ipc",
+        "kill",
+        "lchown",
+        "lchown32",
+        "lgetxattr",
+        "link",
+        "linkat",
+        "listen",
+        "listxattr",
+        "llistxattr",
+        "_llseek",
+        "lremovexattr",
+        "lseek",
+        "lsetxattr",
+        "lstat",
+        "lstat64",
+        "madvise",
+        "memfd_create",
+        "mincore",
+        "mkdir",
+        "mkdirat",
+        "mknod",
+        "mknodat",
+        "mlock",
+        "mlock2",
+        "mlockall",
+        "mmap",
+        "mmap2",
+        "mprotect",
+        "mq_getsetattr",
+        "mq_notify",
+        "mq_open",
+        "mq_timedreceive",
+        "mq_timedsend",
+        "mq_unlink",
+        "mremap",
+        "msgctl",
+        "msgget",
+        "msgrcv",
+        "msgsnd",
+        "msync",
+        "munlock",
+        "munlockall",
+        "munmap",
+        "nanosleep",
+        "newfstatat",
+        "_newselect",
+        "open",
+        "openat",
+        "pause",
+        "pipe",
+        "pipe2",
+        "poll",
+        "ppoll",
+        "prctl",
+        "pread64",
+        "preadv",
+        "preadv2",
+        "prlimit64",
+        "pselect6",
+        "pwrite64",
+        "pwritev",
+        "pwritev2",
+        "read",
+        "readahead",
+        "readlink",
+        "readlinkat",
+        "readv",
+        "recv",
+        "recvfrom",
+        "recvmmsg",
+        "recvmsg",
+        "remap_file_pages",
+        "removexattr",
+        "rename",
+        "renameat",
+        "renameat2",
+        "restart_syscall",
+        "rmdir",
+        "rt_sigaction",
+        "rt_sigpending",
+        "rt_sigprocmask",
+        "rt_sigqueueinfo",
+        "rt_sigreturn",
+        "rt_sigsuspend",
+        "rt_sigtimedwait",
+        "rt_tgsigqueueinfo",
+        "sched_getaffinity",
+        "sched_getattr",
+        "sched_getparam",
+        "sched_get_priority_max",
+        "sched_get_priority_min",
+        "sched_getscheduler",
+        "sched_rr_get_interval",
+        "sched_setaffinity",
+        "sched_setattr",
+        "sched_setparam",
+        "sched_setscheduler",
+        "sched_yield",
+        "seccomp",
+        "select",
+        "semctl",
+        "semget",
+        "semop",
+        "semtimedop",
+        "send",
+        "sendfile",
+        "sendfile64",
+        "sendmmsg",
+        "sendmsg",
+        "sendto",
+        "setfsgid",
+        "setfsgid32",
+        "setfsuid",
+        "setfsuid32",
+        "setgid",
+        "setgid32",
+        "setgroups",
+        "setgroups32",
+        "setitimer",
+        "setpgid",
+        "setpriority",
+        "setregid",
+        "setregid32",
+        "setresgid",
+        "setresgid32",
+        "setresuid",
+        "setresuid32",
+        "setreuid",
+        "setreuid32",
+        "setrlimit",
+        "set_robust_list",
+        "setsid",
+        "setsockopt",
+        "set_thread_area",
+        "set_tid_address",
+        "setuid",
+        "setuid32",
+        "setxattr",
+        "shmat",
+        "shmctl",
+        "shmdt",
+        "shmget",
+        "shutdown",
+        "sigaltstack",
+        "signalfd",
+        "signalfd4",
+        "sigreturn",
+        "socket",
+        "socketcall",
+        "socketpair",
+        "splice",
+        "stat",
+        "stat64",
+        "statfs",
+        "statfs64",
+        "symlink",
+        "symlinkat",
+        "sync",
+        "sync_file_range",
+        "syncfs",
+        "sysinfo",
+        "syslog",
+        "tee",
+        "tgkill",
+        "time",
+        "timer_create",
+        "timer_delete",
+        "timerfd_create",
+        "timerfd_gettime",
+        "timerfd_settime",
+        "timer_getoverrun",
+        "timer_gettime",
+        "timer_settime",
+        "times",
+        "tkill",
+        "truncate",
+        "truncate64",
+        "ugetrlimit",
+        "umask",
+        "uname",
+        "unlink",
+        "unlinkat",
+        "utime",
+        "utimensat",
+        "utimes",
+        "vfork",
+        "vmsplice",
+        "wait4",
+        "waitid",
+        "waitpid",
+        "write",
+        "writev"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": [
+        "personality"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [
+        {
+          "index": 0,
+          "value": 0,
+          "valueTwo": 0,
+          "op": "SCMP_CMP_EQ"
+        }
+      ],
+      "comment": "",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": [
+        "personality"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [
+        {
+          "index": 0,
+          "value": 8,
+          "valueTwo": 0,
+          "op": "SCMP_CMP_EQ"
+        }
+      ],
+      "comment": "",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": [
+        "personality"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [
+        {
+          "index": 0,
+          "value": 131072,
+          "valueTwo": 0,
+          "op": "SCMP_CMP_EQ"
+        }
+      ],
+      "comment": "",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": [
+        "personality"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [
+        {
+          "index": 0,
+          "value": 131080,
+          "valueTwo": 0,
+          "op": "SCMP_CMP_EQ"
+        }
+      ],
+      "comment": "",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": [
+        "personality"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [
+        {
+          "index": 0,
+          "value": 4294967295,
+          "valueTwo": 0,
+          "op": "SCMP_CMP_EQ"
+        }
+      ],
+      "comment": "",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": [
+        "sync_file_range2"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "arches": [
+          "ppc64le"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "arm_fadvise64_64",
+        "arm_sync_file_range",
+        "sync_file_range2",
+        "breakpoint",
+        "cacheflush",
+        "set_tls"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "arches": [
+          "arm",
+          "arm64"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "arch_prctl"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "arches": [
+          "amd64",
+          "x32"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "modify_ldt"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "arches": [
+          "amd64",
+          "x32",
+          "x86"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "s390_pci_mmio_read",
+        "s390_pci_mmio_write",
+        "s390_runtime_instr"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "arches": [
+          "s390",
+          "s390x"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "open_by_handle_at"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "caps": [
+          "CAP_DAC_READ_SEARCH"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "bpf",
+        "clone",
+        "fanotify_init",
+        "lookup_dcookie",
+        "mount",
+        "name_to_handle_at",
+        "perf_event_open",
+        "setdomainname",
+        "sethostname",
+        "setns",
+        "umount",
+        "umount2",
+        "unshare"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "caps": [
+          "CAP_SYS_ADMIN"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "clone"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [
+        {
+          "index": 0,
+          "value": 2080505856,
+          "valueTwo": 0,
+          "op": "SCMP_CMP_MASKED_EQ"
+        }
+      ],
+      "comment": "",
+      "includes": {},
+      "excludes": {
+        "caps": [
+          "CAP_SYS_ADMIN"
+        ],
+        "arches": [
+          "s390",
+          "s390x"
+        ]
+      }
+    },
+    {
+      "names": [
+        "clone"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [
+        {
+          "index": 1,
+          "value": 2080505856,
+          "valueTwo": 0,
+          "op": "SCMP_CMP_MASKED_EQ"
+        }
+      ],
+      "comment": "s390 parameter ordering for clone is different",
+      "includes": {
+        "arches": [
+          "s390",
+          "s390x"
+        ]
+      },
+      "excludes": {
+        "caps": [
+          "CAP_SYS_ADMIN"
+        ]
+      }
+    },
+    {
+      "names": [
+        "reboot"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "caps": [
+          "CAP_SYS_BOOT"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "chroot"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "caps": [
+          "CAP_SYS_CHROOT"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "delete_module",
+        "init_module",
+        "finit_module",
+        "query_module"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "caps": [
+          "CAP_SYS_MODULE"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "acct"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "caps": [
+          "CAP_SYS_PACCT"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "kcmp",
+        "process_vm_readv",
+        "process_vm_writev",
+        "ptrace"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "caps": [
+          "CAP_SYS_PTRACE"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "iopl",
+        "ioperm"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "caps": [
+          "CAP_SYS_RAWIO"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "settimeofday",
+        "stime",
+        "clock_settime"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "caps": [
+          "CAP_SYS_TIME"
+        ]
+      },
+      "excludes": {}
+    },
+    {
+      "names": [
+        "vhangup"
+      ],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "",
+      "includes": {
+        "caps": [
+          "CAP_SYS_TTY_CONFIG"
+        ]
+      },
+      "excludes": {}
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_seccomp_refrence">Seccomp Refrence</h3>
+<div class="paragraph">
+<p><a href="https://github.com/docker/docker/blob/master/profiles/seccomp/default.json">Docker
+Default Seccomp</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/kubernetes/kubernetes/blob/release-1.4/docs/design/seccomp.md">Seccomp
+Design</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/seccomp/libseccomp">libseccomp</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://dzone.com/articles/understanding-openshift-security-context-constrain" class="bare">https://dzone.com/articles/understanding-openshift-security-context-constrain</a></p>
+</div>
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/security_openshift/exercise1.5/">&larr; Previous: Exercise 1.5 - Atomic Scanner</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/security_openshift/exercise1.7/">Next: Exercise 1.7 - Red Hat Container Catalog &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/security_openshift">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

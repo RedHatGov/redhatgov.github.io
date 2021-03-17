@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Exercise 1.2 - Discovering Virtualization Host Systems | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Exercise 1.2 - Discovering Virtualization Host Systems</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/cloudforms41">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/cloudforms41/exercise1.1/">&larr; Previous: Exercise 1.1 - Explore Your First Infrastructure Provider</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/cloudforms41/exercise1.3/">Next: Exercise 1.3 - Discovering VM Systems &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    
+
+<h1 id="exercise-1-2-discovering-virtualization-host-systems">Exercise 1.2 - Discovering Virtualization Host Systems</h1>
+
+<h2 id="exercise-description">Exercise Description</h2>
+
+<p>In this exercise, you will learn how to view, search and manage host systems.</p>
+
+<p>In Red Hat CloudForms, hosts are hypervisors running on physical hardware providing virtual machines and infrastructure.</p>
+
+<p>The CloudForms Management Engine automatically adds hosts from discovered providers. However, you can also discover hosts directly if not using a provider. Discovering hosts is only supported for standalone VMware vSphere servers.</p>
+
+<h2 id="section-1-explore-infrastructure-hosts">Section 1:  Explore Infrastructure Hosts</h2>
+
+<h3 id="step-1-select-compute-infrastructure-hosts">Step 1: Select <strong>Compute</strong> → <strong>Infrastructure</strong> → <strong>Hosts</strong>.</h3>
+
+<p><img title="List Infrastructure Hosts" src="../images/cfme-nav-compute-infra-hosts.png"  width="1000"/><br/>
+<em>List Infrastructure Hosts</em></p>
+
+<h3 id="step-2-view-the-list-of-your-private-datacenter-infrastructure-hosts-such-as-vmware-vsphere-and-red-hat-enterprise-virtualization-managed-hosts-red-hat-enterprise-linux-or-red-hat-enterprise-virtualization-hypervisor">Step 2: View the list of your private datacenter infrastructure hosts, such as VMware vSphere and Red Hat Enterprise Virtualization managed hosts (Red Hat Enterprise Linux or Red Hat Enterprise Virtualization Hypervisor).</h3>
+
+<p>
+
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+   You can discover hosts independently, from an infrastructure provider, but this is not recommended because you do not see the relationship between hosts and providers. 
+</div>
+</p>
+
+<h2 id="section-2-discover-infrastructure-hosts">Section 2: Discover Infrastructure Hosts</h2>
+
+<p>In very large environments, you can discover new hosts directly.</p>
+
+<h3 id="step-1-click-i-class-fa-fa-cog-aria-hidden-true-i-configuration-then-click-i-class-fa-fa-search-aria-hidden-true-i-discover-items">Step 1: Click <i class="fa fa-cog" aria-hidden="true"></i> (<strong>Configuration</strong>), then click <i class="fa fa-search" aria-hidden="true"></i> (<strong>Discover items</strong>).</h3>
+
+<p><img title="Discover Infrastructure Hosts" src="../images/cfme-nav-discover-infra-hosts.png" width="1000"/><br/>
+<em>Discover Infrastructure Hosts</em></p>
+
+<h3 id="step-2-review-the-data-entry-screen-but-do-not-enter-any-information">Step 2: Review the data entry screen, but do not enter any information.</h3>
+
+<h3 id="step-3-click-cancel-to-return-to-the-previous-screen">Step 3: Click <strong>Cancel</strong> to return to the previous screen.</h3>
+
+<p><img title="Cancel Infrastructure Host Discovery" src="../images/cfme-nav-discover-infra-hosts-cancel.png" width="1000"/><br/>
+<em>Cancel Infrastructure Host Discovery</em></p>
+
+<h2 id="section-3-add-infrastructure-hosts">Section 3: Add Infrastructure Hosts</h2>
+
+<p>You can also manually add infrastructure hosts, if they are known.</p>
+
+<h3 id="step-1-click-i-class-fa-fa-cog-aria-hidden-true-i-configuration-then-click-i-class-fa-fa-plus-circle-fa-lg-aria-hidden-true-i-add">Step 1: Click <i class="fa fa-cog" aria-hidden="true"></i> (<strong>Configuration</strong>), then click <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> (<strong>Add</strong>).</h3>
+
+<p><img title="Add Infrastructure Hosts" src="../images/cfme-nav-add-infra-hosts.png" width="1000"/><br/>
+<em>Add Infrastructure Hosts</em></p>
+
+<h3 id="step-2-review-the-data-entry-screen-but-do-not-enter-any-information-1">Step 2: Review the data entry screen, but do not enter any information.</h3>
+
+<h3 id="step-3-click-cancel-to-return-to-the-previous-screen-1">Step 3: Click <strong>Cancel</strong> to return to the previous screen.</h3>
+
+<p><img title="Cancel Add Infrastructure Hosts" src="../images/cfme-nav-add-infra-hosts-cancel.png" width="1000"/><br/>
+<em>Cancel Add Infrastructure Hosts</em></p>
+
+<h2 id="section-4-explore-the-virtual-thumbnail-for-infrastructure-hosts">Section 4: Explore the Virtual Thumbnail for Infrastructure Hosts</h2>
+
+<p>The web interface uses virtual thumbnails to represent providers. Each thumbnail contains four quadrants by default, which display basic information about each provider.</p>
+
+<p><img title="CloudForms Example Virtual Thumbnail" src="../images/cfme-virt-thumbnail-hosts.png"/><br/>
+<em>Example Virtual Thumbnail</em></p>
+
+<ul>
+<li>The top left quadrant shows the number of VMs running on the host.</li>
+<li>The top right quadrant shows the power state of the host.</li>
+<li>The image in the bottom left quadrant represents the type of host, such as VMware vSphere and Red Hat Enterprise Virtualization.</li>
+<li>The bottom right quadrant shows the status of the host.</li>
+<li>A <i class="fa fa-shield fa-lg" aria-hidden="true"></i> (<strong>Policy</strong>) in the center indicates that this host has one or more policies applied.</li>
+</ul>
+
+<h3 id="step-1-to-download-the-list-of-hosts-click-i-class-fa-fa-download-fa-lg-aria-hidden-true-i-download-next-to-i-class-fa-fa-power-off-aria-hidden-true-i-power">Step 1: To download the list of hosts, click <i class="fa fa-download fa-lg" aria-hidden="true"></i> (<strong>Download</strong>) next to <i class="fa fa-power-off" aria-hidden="true"></i> (<strong>Power</strong>).</h3>
+
+<p><img title="CloudForms Download Host Providers" src="../images/cfme-nav-download-infra-hosts.png" width="1000"/><br/>
+<em>Download Host Providers</em></p>
+
+<h3 id="step-2-in-the-top-right-corner-of-the-window-click-i-class-fa-fa-th-fa-lg-aria-hidden-true-i-i-class-fa-fa-th-large-fa-lg-aria-hidden-true-i-i-class-fa-fa-list-fa-lg-aria-hidden-true-i-to-toggle-between-grid-tile-and-list-views">Step 2: In the top right corner of the window, click <i class="fa fa-th fa-lg" aria-hidden="true"></i> <i class="fa fa-th-large fa-lg" aria-hidden="true"></i> <i class="fa fa-list fa-lg" aria-hidden="true"></i> to toggle between <strong>Grid</strong>, <strong>Tile</strong>, and <strong>List</strong> views.</h3>
+
+<p><img title="Top Window Host Providers Navigation" src="../images/cfme-nav-grid-title-list-infra-hosts.png" width=1000/><br/>
+<em>Top Window Host Providers Navigation</em></p>
+
+<h3 id="step-3-select-the-infrastructure-host-named-esxi3-with-vmware-and-20-vms-and-observe-the-following-details-on-the-resulting-screen">Step 3: Select the infrastructure host named <strong>esxi3</strong> with VMware and 20 VMs, and observe the following details on the resulting screen:</h3>
+
+<p><img title="vSphere Hosts Dashboard" src="../images/cfme-dashboard-infra-hosts.png" width="1000"/><br/>
+<em>vSphere Hosts Dashboard</em></p>
+
+<ol>
+<li>The <strong>Properties</strong> section displays detailed information about the host.
+
+<ul>
+<li>Observe these parts of the <strong>Properties</strong> details to see how this host relates to its resources in the provider.</li>
+</ul></li>
+<li>The <strong>Compliance</strong> section shows whether the host is compliant with its applied policies.</li>
+<li>The <strong>Smart Management</strong> section shows that this provider is tagged as existing at a specific location, as well as its provisioning scope.</li>
+<li>The <strong>Authentication</strong> status section shows whether or not CloudForms can log in to the host.</li>
+<li>The <strong>Security</strong> section lists users, groups, patches, firewall rules, and other operating system security-related information.</li>
+<li>The <strong>Configuration</strong> section lists packages, services, and other operating system configuration-related information.</li>
+</ol>
+
+<h2 id="section-5-explore-host-drift-history">Section 5: Explore Host Drift History</h2>
+
+<h3 id="step-1-in-the-relationships-section-click-drift-history">Step 1: In the Relationships section, click Drift History.</h3>
+
+<p><img title="vSphere Host Drift Tab Dashboard" src="../images/cfme-nav-infra-hosts-drift-1.png" width="1000"/><br/>
+<em>vSphere Host Drift Tab Dashboard</em></p>
+
+<p>
+
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+   The **Relationships** section is an accordion tab nested within the host named **esxi3**. 
+</div>
+</p>
+
+<h3 id="step-2-on-the-resulting-screen-check-at-least-two-of-the-available-dates">Step 2: On the resulting screen, check at least two of the available dates.</h3>
+
+<h3 id="step-3-click-img-title-cloudforms-drift-icon-src-images-cfme-nav-drift-icon-png-drift-above-the-list-of-timestamps">Step 3:  Click <img title="CloudForms Drift Icon" src="../images/cfme-nav-drift-icon.png"/> (<strong>Drift</strong>) above the list of timestamps.</h3>
+
+<p><img title="vSphere Host Drift Dashboard Detail" src="../images/cfme-nav-infra-hosts-drift-2.png" width="1000"/><br/>
+<em>vSphere Host Drift Dashboard Detail</em></p>
+
+<h3 id="step-4-on-the-next-screen-do-not-uncheck-properties-but-check-security-and-configuration">Step 4: On the next screen, do not uncheck Properties, but check Security and Configuration.</h3>
+
+<h3 id="step-5-click-apply">Step 5: Click Apply.</h3>
+
+<p><img title="vSphere Host Drift Dashboard Section Detail" src="../images/cfme-nav-infra-hosts-drift-3.png" width="1000"/><br/>
+<em>vSphere Host Drift Dashboard Section Detail</em></p>
+
+<p>If the host changes between the various points in time, it appears here. Can you see what’s changed over time?</p>
+
+<h3 id="step-6-try-using-the-img-title-cloudforms-drift-icon-src-images-cfme-nav-drift-filter-icon-png-filters-buttons-to-see-which-changes-have-occurred">Step 6: Try using the <img title="CloudForms Drift Icon" src="../images/cfme-nav-drift-filter-icon.png"/> (<strong>Filters Buttons</strong>) to see which changes have occurred.</h3>
+
+<p><img title="vSphere Host Drift Dashboard Filter Detail" src="../images/cfme-nav-infra-hosts-drift-4.png" width="1000"/><br/>
+<em>vSphere Host Drift Dashboard Filter Detail</em></p>
+
+<p>
+
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+   You will likely need to click the little <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i> mark next to the `Host Properties` section to expand and see the details of what’s changed. 
+</div>
+</p>
+
+<h2 id="section-6-explore-infrastructure-host-utilization">Section 6: Explore Infrastructure Host Utilization</h2>
+
+<h3 id="step-1-click-esxi3-summary-to-select-the-host-named-esxi3-from-the-drift-analysis-page">Step 1: Click <strong>esxi3 (Summary)</strong> to select the host named <strong>esxi3</strong> from the <strong>Drift Analysis</strong> page.</h3>
+
+<p><img title="CloudForms vSphere Dashboard" src="../images/cfme-nav-esxi3-from-drift.png" width="1000"/><br/>
+<em>CloudForms vSphere Dashboard</em></p>
+
+<h3 id="step-2-click-img-title-cloudforms-monitor-icon-src-images-cfme-nav-monitor-icon-png-monitoring-and-then-select-img-title-cloudforms-utilization-icon-src-images-cfme-nav-utilization-icon-png-utilization">Step 2: Click <img title="CloudForms Monitor Icon" src="../images/cfme-nav-monitor-icon.png"/> (<strong>Monitoring</strong>) and then select <img title="CloudForms Utilization Icon" src="../images/cfme-nav-utilization-icon.png"/> (<strong>Utilization</strong>).</h3>
+
+<p><img title="Hosts Monitor Utilization" src="../images/cfme-nav-monitor-infra-hosts.png" width="1000"/><br/>
+<em>Hosts Monitor Utilization</em></p>
+
+<h3 id="step-3-try-changing-the-interval-to-hourly">Step 3: Try changing the <strong>Interval</strong> to <strong>Hourly</strong>.</h3>
+
+<p><img title="CloudForms Dashboard Monitor Utilization Interval" src="../images/cfme-nav-infra-hosts-util-interval.png" width="1000"/><br/>
+<em>Hosts Monitor Utilization Interval</em></p>
+
+<h3 id="step-4-examine-the-screen-that-appears-showing-a-detailed-report-of-cpu-memory-disk-i-o-network-and-running-vms">Step 4: Examine the screen that appears, showing a detailed report of CPU, memory, disk I/O, network, and running VMs.</h3>
+
+<ul>
+<li>To see a specific data point, hover over any chart.</li>
+<li>To zoom in on a chart, click <i class="fa fa-search-plus fa-lg" aria-hidden="true"></i> (Zoom In).</li>
+<li>To modify the timeframe displayed in the report, select the date range at the top of the screen.</li>
+</ul>
+
+<p>
+
+
+<div class="alert alert-warning">
+  
+  <span class="pficon pficon-warning-triangle-o"></span>
+   The data in this demo is static, please do not go beyond August 7, 2013. 
+</div>
+</p>
+
+<h2 id="section-7-explore-infrastructure-host-power-state-control">Section 7: Explore Infrastructure Host Power State Control</h2>
+
+<h3 id="step-1-return-to-the-list-of-compute-hosts-eg-click-the-hosts-link-in-the-navigation-breadcrumbs-at-the-top-of-the-page">Step 1: Return to the list of Compute Hosts (eg, click the <strong>Hosts</strong> link in the navigation breadcrumbs at the top of the page).</h3>
+
+<p><img title="Infrastructure Hosts Breadcrumb" src="../images/cfme-nav-compute-infra-hosts-breadcrumb.png" width="1000"/><br/>
+<em>Infrastructure Hosts Breadcrumb</em></p>
+
+<h3 id="step-2-check-the-box-next-to-any-host-but-do-not-select-the-host">Step 2: Check the box next to any host, but do not select the host.</h3>
+
+<p>Note that the <img title="CloudForms Power Icon" src="../images/cfme-nav-power-icon.png"/> (<strong>Power</strong>), located above the list of hosts, is now active due to host  selection.</p>
+
+<p>Also, observe the available power states that you can set for this host.</p>
+
+<p><img title="Infrastructure Hosts Power States" src="../images/cfme-nav-compute-infra-hosts-power-states.png" width="1000"/><br/>
+<em>Infrastructure Hosts Power States</em></p>
+
+<p>
+
+
+<div class="alert alert-warning">
+  
+  <span class="pficon pficon-warning-triangle-o"></span>
+   This demo environment is not connected to any real hosts, so changing the power state here does not affect any hosts. 
+</div>
+</p>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/cloudforms41/exercise1.1/">&larr; Previous: Exercise 1.1 - Explore Your First Infrastructure Provider</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/cloudforms41/exercise1.3/">Next: Exercise 1.3 - Discovering VM Systems &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/cloudforms41">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

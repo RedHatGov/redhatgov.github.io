@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Lab - Strangle Your Monolith | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Lab - Strangle Your Monolith</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/strangling_the_monolith">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/strangling_the_monolith/lab1/">&larr; Previous: Lab - Building and Deploying a Fast-Moving Monolith</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/strangling_the_monolith/lab3/">Next: Lab - Microservice Integration Patterns &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    
+
+<h1 id="strangling-the-monolith-design-pattern">Strangling the Monolith Design Pattern</h1>
+
+<ul>
+<li>Strangling - incrementally replacing functionality in app with something better (cheaper, faster, easier to maintain).</li>
+<li>As functionality is replaced, “dead” parts of monolith can be removed/retired.</li>
+<li>You can also wait for all functionality to be replaced before retiring anything!</li>
+<li>You can optionally include new functionality during strangulation to make it more attractive to business stakeholders.</li>
+</ul>
+
+<p><img src="../img/lab2_stm_over_time.png" width="700" /></p>
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+  
+[https://paulhammant.com/2013/07/14/legacy-application-strangulation-case-studies/](https://paulhammant.com/2013/07/14/legacy-application-strangulation-case-studies/)
+
+
+</div>
+
+<h1 id="steps-for-strangling-the-monolith">Steps for Strangling the Monolith</h1>
+
+<blockquote>
+<p>1) Strangle Monolith</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse6cf39d9b768548781241936321fa54db" class="collapsed">
+      
+        Strangle Monolith
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse6cf39d9b768548781241936321fa54db" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab2_str_mon_arch1.png" width="400" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<blockquote>
+<p>2) Add a Microservice</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse73984d32fd71ab16a26b26c7c5b2bee0" class="collapsed">
+      
+        Add a Microservice
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse73984d32fd71ab16a26b26c7c5b2bee0" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab2_str_mon_arch2.png" width="400" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<blockquote>
+<p>3) And Another</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse97b384fb54726c14ad91471e3caa24d4" class="collapsed">
+      
+        And Another
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse97b384fb54726c14ad91471e3caa24d4" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab2_str_mon_arch3.png" width="400" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<blockquote>
+<p>4) Squeeze Monolith</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse8c8adeab91e9d3a048a7db06ed1f0477" class="collapsed">
+      
+        Squeeze Monolith
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse8c8adeab91e9d3a048a7db06ed1f0477" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab2_str_mon_arch4.png" width="400" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<blockquote>
+<p>5) And Remove Dead</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapsefa84431f0802f2e4468bde4909c49720" class="collapsed">
+      
+        And Remove Dead
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapsefa84431f0802f2e4468bde4909c49720" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab2_str_mon_arch5.png" width="400" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<h1 id="step-1">Step 1</h1>
+
+<ul>
+<li>In this lab, you will begin to ‘strangle’ the coolstore monolith by implementing two of its services as external microservices, split along business boundaries</li>
+<li>Once implemented, traffic destined to the original monolith’s services will be redirected (via OpenShift software-defined routing) to the new services</li>
+<li>We will be using the Fabric8 Maven Plugin to automatically deploy to openshift</li>
+</ul>
+
+<blockquote>
+<ul>
+<li>First, build and deploy the catalog microservice (Based on Spring Boot)</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone -b app-partner https://github.com/epe105/catalog</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd catalog</code></pre></div>
+<div class="alert alert-warning">
+  
+  <span class="pficon pficon-warning-triangle-o"></span>
+  
+
+Please update ``<USERNAME>`` below with your assigned username
+
+
+</div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project coolstore-&lt;USERNAME&gt;</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean fabric8:deploy -Popenshift -DskipTests</code></pre></div>
+<h1 id="step-2">Step 2</h1>
+
+<blockquote>
+<p>Once the new catalog service is deployed, test it with curl:</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get route/catalog
+NAME      HOST/PORT                                              PATH      SERVICES   PORT      TERMINATION
+catalog   catalog-coolstore-&lt;USERNAME&gt;.apps.ocp.naps-redhat.com            catalog    <span style="color:#ae81ff">8080</span></code></pre></div>
+<p>Curl using the HOST/PORT from the previous step</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl http://catalog-coolstore--USERNAME&gt;.apps.ocp.naps-redhat.com/api/catalog
+
+<span style="color:#f92672">[{</span><span style="color:#e6db74">&#34;itemId&#34;</span>:<span style="color:#e6db74">&#34;329299&#34;</span>,<span style="color:#e6db74">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;Red Fedora&#34;</span>,<span style="color:#e6db74">&#34;desc&#34;</span>:<span style="color:#e6db74">&#34;Official Red Hat Fedora&#34;</span>,<span style="color:#e6db74">&#34;price&#34;</span>:34.99<span style="color:#f92672">}</span>,<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;itemId&#34;</span>:<span style="color:#e6db74">&#34;329199&#34;</span>,<span style="color:#e6db74">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;Forge Laptop Sticker&#34;</span>,<span style="color:#e6db74">&#34;desc&#34;</span>:<span style="color:#e6db74">&#34;JBoss Community Forge Project Sticker&#34;</span>,<span style="color:#e6db74">&#34;price&#34;</span>:8.5<span style="color:#f92672">}</span>
+...</code></pre></div>
+<blockquote>
+<p>You can also test it by clicking on the route to the catalog service and adding /api/catalog to the URL:</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapsef889dd0be6a15f8c0b24e83308d6b450" class="collapsed">
+      
+        Catalog API Service
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapsef889dd0be6a15f8c0b24e83308d6b450" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab2_curl_catalog_srvc_browser.png" width="1000" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<h1 id="step-3">Step 3</h1>
+
+<blockquote>
+<p>Now we will do the same for the Inventory service, based on WildFly Swarm:</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone -b app-partner https://github.com/epe105/inventory</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd inventory</code></pre></div>
+<div class="alert alert-warning">
+  
+  <span class="pficon pficon-warning-triangle-o"></span>
+  
+
+Please update ``<USERNAME>`` below with your assigned username
+
+
+</div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project coolstore-&lt;USERNAME&gt;</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean fabric8:deploy -Popenshift  -DskipTests</code></pre></div>
+<ul>
+<li>The catalog microservice is responsible for retrieving and returning a list of products and their descriptions (price, images, etc).</li>
+<li>The inventory service is responsible for retrieving and returning inventory for a given product.</li>
+<li>The catalog service does not specifically know about or care about inventory. In the next lab we will combine the two!</li>
+</ul>
+
+<h1 id="step-4">Step 4</h1>
+
+<ul>
+<li>The inventory microservice has a separate database from the current monolith.</li>
+<li>This allows teams split along business concerns to independently develop, test, deploy and scale the service and its database
+&gt;Once the new inventory service is deployed, dump its database:</li>
+</ul>
+
+<blockquote>
+<p>Get the POSTGRESQL_PASSWORD</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc env dc/inventory-database --list <span style="color:#75715e"># get the POSTGRESQL_PASSWORD</span></code></pre></div>
+<p>Get the postgresql pod</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods</code></pre></div>
+<blockquote>
+<p>oc rsh into the postgresql pod from the previous step</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc rsh inventory-database-1-kkxs2
+sh-4.2$ psql -h $HOSTNAME -d $POSTGRESQL_DATABASE -U $POSTGRESQL_USER
+Password <span style="color:#66d9ef">for</span> user userV31:XXXXXXXX
+psql <span style="color:#f92672">(</span>9.5.4<span style="color:#f92672">)</span>
+Type <span style="color:#e6db74">&#34;help&#34;</span> <span style="color:#66d9ef">for</span> help.
+
+monolith<span style="color:#f92672">=</span>&gt; <span style="color:#66d9ef">select</span> * from inventory;
+ itemid |               link                | location | quantity
+--------+-----------------------------------+----------+----------
+ <span style="color:#ae81ff">329299</span> | http://maps.google.com/?q<span style="color:#f92672">=</span>Raleigh | Raleigh  |      <span style="color:#ae81ff">736</span>
+...</code></pre></div>
+<blockquote>
+<p>Exit out of psql and then the postgresql pod</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">monolith<span style="color:#f92672">=</span>&gt; <span style="color:#ae81ff">\q</span>
+sh-4.2$ exit
+exit</code></pre></div>
+<h1 id="step-5">Step 5</h1>
+
+<blockquote>
+<p>Once the new service is deployed, test it with curl<br />
+You should get a JSON object representing the inventory availability of product 329299</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get route/inventory
+NAME        HOST/PORT                                                  PATH      SERVICES    PORT      TERMINATION
+inventory   inventory-coolstore-&lt;USERNAME&gt;.apps.ocp.naps-redhat.com              inventory   <span style="color:#ae81ff">8080</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl http://inventory-coolstore-&lt;USERNAME&gt;.apps.ocp.naps-redhat.com/api/inventory/329299
+<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;itemId&#34;</span>:<span style="color:#e6db74">&#34;329299&#34;</span>,<span style="color:#e6db74">&#34;location&#34;</span>:<span style="color:#e6db74">&#34;Raleigh&#34;</span>,<span style="color:#e6db74">&#34;quantity&#34;</span>:736,<span style="color:#e6db74">&#34;link&#34;</span>:<span style="color:#e6db74">&#34;http://maps.google.com/?q=Raleigh&#34;</span><span style="color:#f92672">}</span></code></pre></div>
+<blockquote>
+<p>You can also test it by clicking on the route to the inventory service and adding /api/inventory/329299 to the URL</p>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse1d1e8d8f0c44d77188f19f877e4fc9ad" class="collapsed">
+      
+        Inventory API Service
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse1d1e8d8f0c44d77188f19f877e4fc9ad" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab2_curl_inventory_srvc_browser.png" width="1000" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<h1 id="strangling-your-monolith-lab-architecture">Strangling Your Monolith Lab Architecture</h1>
+
+<blockquote>
+<p>Once the new Microservices are deployed, this is the Architecture of this Lab</p>
+</blockquote>
+
+<p><img src="../img/lab3_arch1.png" width="700" /></p>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/strangling_the_monolith/lab1/">&larr; Previous: Lab - Building and Deploying a Fast-Moving Monolith</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/strangling_the_monolith/lab3/">Next: Lab - Microservice Integration Patterns &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/strangling_the_monolith">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Lab 06 - API Developer Portal | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Lab 06 - API Developer Portal</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/agile_integrations_ci">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/agile_integrations_ci/lab05/">&larr; Previous: Lab 05 - API Security</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/agile_integrations_ci/lab07/">Next: Lab 07 - Testing Your Application &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    
+
+<h1 id="lab-6">Lab 6</h1>
+
+<h2 id="api-developer-portal">API Developer Portal</h2>
+
+<h3 id="publishing-apis-to-developer-portal">Publishing APIs to Developer Portal</h3>
+
+<ul>
+<li>Duration: 20 mins</li>
+<li>Audience: API Owners, Product Managers, Developers, Architects</li>
+</ul>
+
+<p><br><img src="../images/agenda-05.png "Login" width="900" /><br><br></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>The focal point of your developers experience is the API developer portal, and the level of effort you put into it will directly correlate to the level of success of your API program, and API developer engagement.</p>
+
+<h3 id="why-red-hat">Why Red Hat?</h3>
+
+<p><a href="https://www.3scale.net/">Red Hat 3scale API Management</a> Solution provides a built-in, state-of-the-art CMS portal, making it very easy to create your own branded hub with a custom domain to manage developer interactions, and help increase API adoption.</p>
+
+<p>You can customize the look and feel of the entire Developer Portal to match your own branding. You have complete control over every element of the portal, so you can make it as easy as possible for developers to learn how to use your API.</p>
+
+<h2 id="lab-instructions">Lab Instructions</h2>
+
+<h2 id="step-1-customizing-developer-portal">Step 1: Customizing Developer Portal</h2>
+
+<ol>
+<li><p>Open a browser window and navigate to the 3scale admin app.  Please check with your instructor.</p></li>
+
+<li><p>Log into 3scale using your designated user and password. Click on <strong>Sign In</strong>.</p>
+
+<p><br><img src="../images/01-login.png" width="900" /><br><br></p></li>
+
+<li><p>Click on the <strong>Developer Portal</strong> tab to access the developer portal settings.</p>
+
+<p><br><img src="../images/10-developer-portal.png" width="900" /><br><br></p></li>
+
+<li><p>Click on the <strong>Visit Developer Portal</strong> to take a look of how your developer portal looks like.</p>
+
+<p><br><img src="../images/11-visit-devportal.png" width="900" /><br><br></p></li>
+
+<li><p>You can see there is a default portal with information on your API, and how to signup. Unfortunately the API information is incorrect.</p>
+
+<p><br><img src="../images/12-devportal-overview.png" width="900" /><br><br></p>
+
+<p><em>We will edit our portal to update it with the correct information, and we will add the cool shadowman logo</em>.</p></li>
+
+<li><p>Go back to your admin portal browser tab and scroll down to the content sub-sections for the <strong>Layouts</strong> and select the <strong>Main layout</strong> menu option.</p>
+
+<p><br><img src="../images/12-main-layout.png" width="900" /><br><br></p></li>
+
+<li><p>First look for the <strong>navbar</strong> section of the main HTML. Replace the <strong>{{ provider.name }}</strong> for the shadowman image link:</p>
+
+<p><code>&lt;img src=&quot;https://www.redhat.com/profiles/rh/themes/redhatdotcom/img/logo.png&quot; alt=&quot;{{ provider.name }}&quot;&gt;</code></p>
+
+<p><br><img src="../images/13-custom-logo.png" width="900" /><br><br></p></li>
+
+<li><p>Click the <em>Publish</em> button at the bottom of the editor to save the changes and made them available in the site.</p>
+
+<p><br><img src="../images/14-publish-devportal.png" width="900" /><br><br></p></li>
+
+<li><p>Go back to browse the top of the content sub-sections and find the <strong>Homepage</strong> section.</p>
+
+<p><br><img src="../images/15-homepage-devportal.png" width="900" /><br><br></p></li>
+
+<li><p>Change all the code <strong>Echo</strong> references in the homepage code for <strong>Office Locations</strong>.</p></li>
+
+<li><p>Click the <strong>Publish</strong> button.</p></li>
+
+<li><p>Refresh your Developer Portal's browser tab to check the changes. Your Developer Portal should now look like this:</p>
+
+<p><br><img src="../images/16-updated-devportal.png" width="900" /><br><br></p></li>
+</ol>
+
+<h3 id="step-2-register-new-accounts-using-developer-portal">Step 2: Register New Accounts Using Developer Portal</h3>
+
+<ol>
+<li><p>Take the place of one of your developers and signup for the <strong>Basic</strong> plan.</p>
+
+<p><br><img src="../images/16a-signup-limited.png" width="900" /><br><br></p></li>
+
+<li><p>Fill in your information and an email to register as a developer. Click on the <strong>Sign up</strong> button.</p>
+
+<p><br><img src="../images/16b-signup-form.png" width="900" /><br><br></p></li>
+
+<li><p>The system will try to send a message with an activation link.</p>
+
+<p><br><img src="../images/16bb-signup-thankyou.png" width="900" /><br><br></p>
+
+<p><em>Currently the lab environment doesn't have a configured email server, so we won't be able to receive the email</em>.</p></li>
+
+<li><p>Go back to your <em>Admin Portal</em> tab and navigate to <strong>Developers</strong> to activate the new account.</p>
+
+<p><br><img src="../images/16bc-developers-tab.png" width="900" /><br><br></p></li>
+
+<li><p>Find your user under the <em>Accounts</em> and click the <strong>Activate</strong> link.</p>
+
+<p><br><img src="../images/16cc-activate-account.png" width="900" /><br><br></p>
+
+<p><em>Your user is now active and can log into the portal</em>.</p></li>
+</ol>
+
+<h3 id="step-3-login-to-developer-portal">Step 3: Login to Developer Portal</h3>
+
+<ol>
+<li><p>As your portal is not currently public, you will need your portal code to login. You can get the code in your admin portal navigating to: <strong>Settings &gt; Developer Portal &gt; Domains &amp; Access</strong>.</p>
+
+<p><br><img src="../images/16d-access-portal.png" width="900" /><br><br></p></li>
+
+<li><p>Open a new <em>Incognito/Private</em> browser window to test the Developer Portal login. Navigate to the following.  Make sure your user and Openshift environment is correct.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> http://<span style="color:#f92672">[</span>userX<span style="color:#f92672">]</span>.apps.<span style="color:#f92672">[</span>OCP_URL<span style="color:#f92672">]</span></code></pre></div></li>
+
+<li><p>Type your portal code to finish the login.</p>
+
+<p><br><img src="../images/16e-ingress-code.png" width="900" /><br><br></p></li>
+
+<li><p>Sign in to the portal.</p>
+
+<p><br><img src="../images/16f-dev-signin.png" width="900" /><br><br></p></li>
+
+<li><p>You will land in the developers homepage, where you will be able to check your developers settings and retrieve your newly created <strong>Client ID</strong> and <strong>Client Secret</strong>.</p>
+
+<p><br><img src="../images/16g-user-credentials.png "Application Credentials"" width="900" /><br><br></p></li>
+</ol>
+
+<p><em>Congratulations!</em> You have successfully customized your Developer Portal and completed a Sign Up process.</p>
+
+<h2 id="steps-beyond">Steps Beyond</h2>
+
+<p>So, you want more? Click the <strong>Documentation</strong> link. Where does it takes you? <em>API Docs</em> is where you can add your interactive documentation for your APIs. Is based on the known <em>Swagger UI</em> interface.</p>
+
+<p>You can add from the Admin Portal under <em>API Docs</em> the API definition to generate the live testing.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab you discovered how to add a developer facing experience to your APIs. Developers in your organization or outside of it can now register, gain access to API keys and develop sample applications.</p>
+
+<p>You can now proceed to <a href="../lab07/#lab-7">Lab 7</a></p>
+
+<h2 id="notes-and-further-reading">Notes and Further Reading</h2>
+
+<p>Red Hat 3scale Developer Portal's CMS consists of a few elements:</p>
+
+<ul>
+<li>Horizontal menu in the Admin Portal with access to content, redirects, and changes</li>
+<li>The main area containing details of the sections above</li>
+
+<li><p>CMS mode, accessible through the preview option</p>
+
+<p><br><img src="../images/09-developer-portal.png" width="900" /><br><br></p></li>
+</ul>
+
+<p><a href="https://github.com/Shopify/liquid">Liquid</a> is a simple programming language used for displaying and processing most of the data from the 3scale system available for API providers. In 3scale, it is used to expose server-side data to your API developers, greatly extending the usefulness of the CMS while maintaining a high level of security.</p>
+
+<h3 id="links">Links</h3>
+
+<ul>
+<li><a href="https://access.redhat.com/documentation/en-us/red_hat_3scale/2.2/html/developer_portal/">Developer Portal Documentation</a></li>
+<li><a href="https://github.com/Shopify/liquid">Liquid markup language</a></li>
+<li><a href="https://www.shopify.com/partners/blog/115244038-an-overview-of-liquid-shopifys-templating-language">And Overview of Liquid</a></li>
+</ul>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/agile_integrations_ci/lab05/">&larr; Previous: Lab 05 - API Security</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/agile_integrations_ci/lab07/">Next: Lab 07 - Testing Your Application &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/agile_integrations_ci">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

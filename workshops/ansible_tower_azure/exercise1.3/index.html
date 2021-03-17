@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Exercise 1.3 - Using Variables, Loops, and Handlers | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Exercise 1.3 - Using Variables, Loops, and Handlers</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/ansible_tower_azure">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/ansible_tower_azure/exercise1.2/">&larr; Previous: Exercise 1.2 - Running Your Playbook</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/ansible_tower_azure/exercise1.4/">Next: Exercise 1.4 - Running the apache-basic-playbook &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div class="sect1">
+<h2 id="_exercise_description">Exercise Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In previous exercises, we showed you the basics of the Ansible core.  In the next few exercises, we are going
+to teach some more advanced Ansible skills that will add flexibility and power to your playbooks.</p>
+</div>
+<div class="paragraph">
+<p>Ansible exists to make tasks <strong>simple and repeatable</strong>.  We also know that not all systems are exactly alike and often require
+some slight customization to the way an Ansible playbook is run.  Variables, loops and handlers make customization easier.</p>
+</div>
+<div class="paragraph">
+<p>Variables are used to address differences between your systems, enabling you to account for a change in port, IP address
+or directory.</p>
+</div>
+<div class="paragraph">
+<p>Loops enable us to repeat the same task over and over again.  For example, lets say you want to install 10 packages.
+By using an Ansible loop, you can do that in a single task.</p>
+</div>
+<div class="paragraph">
+<p>Handlers are the way in which we restart services.  Did you just deploy a new config file, install a new package?
+If so, you may need to restart a service, for those changes to take effect.  We do that with a handler.</p>
+</div>
+<div class="paragraph">
+<p>For a full understanding of variables, loops, and handlers; check out our Ansible documentation on these subjects.<br>
+<a href="http://docs.ansible.com/ansible/latest/playbooks_variables.html">Ansible Variables</a><br>
+<a href="http://docs.ansible.com/ansible/latest/playbooks_loops.html">Ansible Loops</a><br>
+<a href="http://docs.ansible.com/ansible/latest/playbooks_intro.html#handlers-running-operations-on-change">Ansible Handlers</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_section_1_running_the_playbook">Section 1: Running the Playbook</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To begin, we are going to create a new playbook, but it should look very familiar to the one you created in exercise 1.2</p>
+</div>
+<div class="paragraph">
+<p>We are now going to run you&#8217;re brand spankin' new playbook on your web node.  To do this, you are going to use the <code>ansible-playbook</code> command.</p>
+</div>
+<div class="sect2">
+<h3 id="_step_1create_a_new_project_and_playbook">Step 1:Create a new project and playbook</h3>
+<div class="paragraph">
+<p>Navigate to your home directory create a new project and playbook.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cd
+mkdir apache-basic-playbook
+cd apache-basic-playbook
+vim site.yml</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_add_a_play_definition_and_variables">Step 2: Add a play definition and variables</h3>
+<div class="paragraph">
+<p>Add a play definition and some variables to your playbook.  These include additional packages that your playbook will install on your web servers, plus some web server-specific configurations.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">---
+- hosts: web
+  name: This is a play within a playbook
+  become: yes
+  vars:
+    httpd_packages:
+      - httpd
+      - mod_wsgi
+    apache_test_message: This is a test message
+    apache_max_keep_alive_requests: 115</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3_add_a_task">Step 3: Add a task</h3>
+<div class="paragraph">
+<p>Add a new task called <strong>install httpd packages</strong>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">  tasks:
+    - name: install httpd packages
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ httpd_packages }}"
+      notify: restart apache service</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Explanation of the <strong>install httpd packages</strong> task actions.<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>vars:</code> You&#8217;ve told Ansible the next thing it sees will be a variable name<br></p>
+</li>
+<li>
+<p><code>httpd_packages</code> You are defining a list-type variable called httpd_packages.  What follows
+is a list of those packages<br></p>
+</li>
+<li>
+<p><code>{{ item }}</code> You are telling Ansible that this will expand into a list item like <code>httpd</code> and <code>mod_wsgi</code>.<br></p>
+</li>
+<li>
+<p><code>with_items: "{{ httpd_packages }}</code> This is your loop which is instructing Ansible to perform this task on
+every <code>item</code> in <code>httpd_packages</code></p>
+</li>
+<li>
+<p><code>notify: restart apache service</code> This statement is a <code>handler</code>, so we&#8217;ll come back to it in Section 3.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_section_2_deploying_files_and_starting_a_service">Section 2: Deploying files and starting a service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you need to do pretty much anything with files and directories, use one of the <a href="http://docs.ansible.com/ansible/latest/list_of_files_modules.html">Ansible Files</a> modules.  In this case, we&#8217;ll leverage the <code>file</code> and <code>template</code> modules.</p>
+</div>
+<div class="paragraph">
+<p>After that, you will define a task to start the start the apache service.</p>
+</div>
+<div class="sect2">
+<h3 id="_step_1_create_a_template_directory">Step 1: Create a template directory</h3>
+<div class="paragraph">
+<p>Create a <code>templates</code> directory in your project directory and download two files.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">mkdir templates
+cd templates
+curl -O http://ansible-workshop.redhatgov.io/workshop-files/httpd.conf.j2
+curl -O http://ansible-workshop.redhatgov.io/workshop-files/index.html.j2</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_add_file_and_service_tasks">Step 2: Add file and service tasks</h3>
+<div class="paragraph">
+<p>Add some file tasks and a service task to your playbook.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">    - name: create site-enabled directory
+      file:
+        name: /etc/httpd/conf/sites-enabled
+        state: directory
+
+    - name: copy httpd.conf
+      template:
+        src: templates/httpd.conf.j2
+        dest: /etc/httpd/conf/httpd.conf
+      notify: restart apache service
+
+    - name: copy index.html
+      template:
+        src: templates/index.html.j2
+        dest: /var/www/html/index.html
+
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>What actions are performed by the playbook we just wrote?</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>file:</code> This module is used to create, modify, delete files, directories, and symlinks.</p>
+</li>
+<li>
+<p><code>template:</code> This module specifies that a jinja2 template is being used and deployed. <code>template</code> is part of the <code>Files</code>
+module family and we encourage you to check out all of the other <a href="http://docs.ansible.com/ansible/latest/list_of_files_modules.html">file-management modules here</a>.</p>
+</li>
+<li>
+<p><strong>jinja-who?</strong> - Not to be confused with 2013&#8217;s blockbuster "Ninja II - Shadow of a Tear", <a href="http://docs.ansible.com/ansible/latest/playbooks_templating.html">jinja2</a> is
+used in Ansible to transform data inside a template expression, i.e. filters.</p>
+</li>
+<li>
+<p><strong>service</strong> - The Service module starts/stops/restarts services.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_section_3_defining_and_using_handlers">Section 3: Defining and Using Handlers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Often, we may find ourselves needing to restart a service or process. Reasons may include the deployment of a configuration file, installation of a new package, etc. Here,  we are going to learn about using handlers in this situation.</p>
+</div>
+<div class="paragraph">
+<p>There are really two parts to this Section; adding a handler to the playbook and calling the handler after the a task.  We will start with the former.</p>
+</div>
+<div class="sect2">
+<h3 id="_step_1_define_a_handler">Step 1: Define a handler</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">  handlers:
+    - name: restart apache service
+      service:
+        name: httpd
+        state: restarted
+        enabled: yes</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>handler:</code> This is telling the <strong>play</strong> that the <code>tasks:</code> are over, and now we are defining <code>handlers:</code>.
+Everything below that looks the same as any other task, i.e. you give it a name, a module, and the options for that
+module.  This is the definition of a handler.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_calling_the_handlers">Step 2: Calling the handlers</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can&#8217;t have a former if you don&#8217;t mention the latter
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>notify: restart apache service</code> &#8230;&#8203;and here is your latter. Finally!  The <code>notify</code> statement is the invocation of a handler by
+name.  Quite the reveal, we know.   You already noticed that you&#8217;ve added a <code>notify</code> statement to the <code>copy httpd.conf</code>
+task, now you know why.
+===</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_section_4_review">Section 4: Review</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Your new, improved playbook is done! But don&#8217;t run it just yet, we&#8217;ll do that in our next exercise.  For now, let&#8217;s take a second look to make sure everything
+looks the way you intended.  If not, now is the time to fix it up. The figure below shows line counts and spacing.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">---
+- hosts: web
+  name: This is a play within a playbook
+  become: yes
+  vars:
+    httpd_packages:
+      - httpd
+      - mod_wsgi
+    apache_test_message: This is a test message
+    apache_max_keep_alive_requests: 115
+
+  tasks:
+    - name: httpd packages are present
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ httpd_packages }}"
+      notify: restart apache service
+
+    - name: site-enabled directory is present
+      file:
+        name: /etc/httpd/conf/sites-enabled
+        state: directory
+
+    - name: latest httpd.conf is present
+      template:
+        src: templates/httpd.conf.j2
+        dest: /etc/httpd/conf/httpd.conf
+      notify: restart apache service
+
+    - name: latest index.html is present
+      template:
+        src: templates/index.html.j2
+        dest: /var/www/html/index.html
+
+    - name: httpd is started and enabled
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: restart apache service
+      service:
+        name: httpd
+        state: restarted
+        enabled: yes</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<script type="text/javascript">
+
+function replaceclasstext(cname,cvalue) {
+    var x = document.getElementsByClassName(cname);
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].innerHTML= cvalue;
+    }
+}
+
+function setCookie(cname,cvalue) {
+    var date = new Date();
+    date.setTime(date.getTime() + 86400000);
+    var expires =  date.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";expires=" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function loadVariables() {
+
+    var userid=getCookie("userid");
+    var prefix=getCookie("prefix");
+    var domain=getCookie("domain");
+    var region=getCookie("region");
+
+    if (userid != "") {
+    	document.getElementById("userid").value = userid;
+    }
+    if (prefix != "") {
+    	document.getElementById("prefix").value = prefix;
+    } else {
+    	document.getElementById("prefix").value = "example";
+    }
+    if (region != "") {
+      document.getElementById("region").value = region;
+    } else {
+      document.getElementById("region").value = "example";
+    }
+    if (domain != "") {
+    	document.getElementById("domain").value = domain;
+        replaceclasstext("domain",domain)
+        replaceclasstext("prefix",prefix)
+        replaceclasstext("userid",userid)
+        replaceclasstext("region",region)
+    }
+}
+
+function defaultVariables() {
+
+    document.getElementById("userid").value = "0";
+    document.getElementById("prefix").value = "example";
+    document.getElementById("domain").value = "cloudapp.azure.com";
+    document.getElementById("region").value = "example";
+    setCookie("userid", document.getElementById("userid").value);
+    setCookie("prefix", document.getElementById("prefix").value);
+    setCookie("domain", document.getElementById("domain").value);
+    setCookie("region", document.getElementById("region").value);
+
+    var userid = document.getElementById("userid").value;
+    var prefix = document.getElementById("prefix").value;
+    var domain = document.getElementById("domain").value;
+    var region = document.getElementById("region").value;
+    var fqdn = userid + "." + prefix + "." + domain;
+
+    replaceclasstext("domain",domain)
+    replaceclasstext("prefix",prefix)
+    replaceclasstext("userid",userid)
+    replaceclasstext("region",region)
+
+}
+
+function setupWorkshop() {
+    var userid = document.getElementById("userid").value;
+    var prefix = document.getElementById("prefix").value;
+    var domain = document.getElementById("domain").value;
+    var region = document.getElementById("region").value;
+
+    setCookie("userid", userid);
+    setCookie("prefix", prefix);
+    setCookie("domain", domain);
+    setCookie("region", region);
+
+    replaceclasstext("domain",domain)
+    replaceclasstext("prefix",prefix)
+    replaceclasstext("userid",userid)
+    replaceclasstext("region",region)
+
+}
+</script>
+<hr>
+<h3>Workshop Details</h3>
+<table border=1>
+<tr>
+<td>
+  <table><tr><td>Student ID: </td><td>
+  <select id="userid">
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+    <option value="16">16</option>
+    <option value="17">17</option>
+    <option value="18">18</option>
+    <option value="19">19</option>
+    <option value="20">20</option>
+    <option value="21">21</option>
+    <option value="22">22</option>
+    <option value="23">23</option>
+    <option value="24">24</option>
+    <option value="25">25</option>
+    <option value="26">26</option>
+    <option value="27">27</option>
+    <option value="28">28</option>
+    <option value="29">29</option>
+    <option value="30">30</option>
+    <option value="31">31</option>
+    <option value="32">32</option>
+    <option value="33">33</option>
+    <option value="34">34</option>
+    <option value="35">35</option>
+    <option value="36">36</option>
+    <option value="37">37</option>
+    <option value="38">38</option>
+    <option value="39">39</option>
+    <option value="40">40</option>
+    <option value="41">41</option>
+    <option value="42">42</option>
+    <option value="43">43</option>
+    <option value="44">44</option>
+    <option value="45">45</option>
+    <option value="46">46</option>
+    <option value="47">47</option>
+    <option value="48">48</option>
+    <option value="49">49</option>
+    <option value="50">50</option>
+  </select>
+  </td></tr></table>
+</td>
+<td>
+  <table><tr><td>Workshop: </td><td>
+   <input id="prefix" type="text" size=8>
+  </td></tr></table>
+</td>
+<td>
+  <table><tr><td>Region: </td><td>
+   <input id="region" type="text" size=8>
+  </td></tr></table>
+</td>
+<td>
+  <select id="domain">
+    <option value="cloudapp.azure.com">cloudapp.azure.com</option>
+  </select>
+</td>
+<td>
+  <button onclick="setupWorkshop()">Enter</button><br>
+  <button onclick="defaultVariables()">Default</button>
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<td align=right><b>Domain: </b></td>
+<td><span class="domain"></span></td>
+<td rowspan=3>
+<img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" onload=loadVariables()>
+</td>
+</tr>
+<tr>
+<td align=right><b>Workshop Name: </b></td>
+<td><span class="prefix"></span></td>
+</tr>
+<tr>
+<td align=right><b>Region: </b></td>
+<td><span class="region"></span></td>
+</tr>
+<tr>
+<td align=right><b>User ID: </b></td>
+<td><span class="userid"></span></td>
+</tr>
+</table>
+<hr>
+
+
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/ansible_tower_azure/exercise1.2/">&larr; Previous: Exercise 1.2 - Running Your Playbook</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/ansible_tower_azure/exercise1.4/">Next: Exercise 1.4 - Running the apache-basic-playbook &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/ansible_tower_azure">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Lab 03 - Swagger to REST | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Lab 03 - Swagger to REST</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/agile_integrations_dev">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/agile_integrations_dev/lab02/">&larr; Previous: Lab 02 - API Mocking</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/agile_integrations_dev/lab04/">Next: Lab 04 - SOAP to REST (Optional) &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    
+
+<h1 id="lab-3">Lab 3</h1>
+
+<h2 id="swagger-to-rest">Swagger to REST</h2>
+
+<h3 id="contract-first-api-development-with-a-database-interface-implemented-using-eclipse-che">Contract-first API development with a database interface, implemented using Eclipse Che</h3>
+
+<ul>
+<li>Duration: 20 mins</li>
+<li>Audience: Developers and Architects</li>
+</ul>
+
+<p><br><img src="../images/agenda-03.png "Login" width="900" /><br><br></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>In the context of defining API's, it's common for a Business Analyst (or Citizen Integrator) to first create an API specification or contract.  By beginning the process with a clearly defined contract, a Developer can easily take the contract and auto-generate the underlying service to implement that API.  This <em>separation of concern</em>, whereby a Citizen Integrator and Developer can independently collaborate and contribute to create an end-to-end API implementation, is a powerful method for defining API's.</p>
+
+<h3 id="why-red-hat">Why Red Hat?</h3>
+
+<p>Eclipse Che, our online IDE, provides important functionality for implementing API services. In this lab you can see how our API tooling fits together with 3scale, Fuse and OpenShift to create a scalable API.</p>
+
+<h2 id="lab-instructions">Lab Instructions</h2>
+
+<h3 id="step-1-create-an-eclipse-che-environment-for-your-personal-use">Step 1: Create an Eclipse Che environment for your personal use</h3>
+
+<ol>
+<li><p>Open a browser window and navigate to Openshift.</p></li>
+
+<li><p>Click on your User Tools Project.</p></li>
+
+<li><p>Click on the link for Eclipse Che.</p></li>
+
+<li><p>Use your unique username as your workspace name e.g. userX.</p></li>
+
+<li><p>Select &quot;day in the life workshop&quot; stack, increase the RAM to 4GB and then click <strong>Create</strong>.</p>
+
+<p><br><img src="../images/00-new-workspace.png "New Workspace" width="900" /><br><br></p></li>
+
+<li><p>Click on <strong>Create</strong> to generate and open the workspace.</p>
+
+<p><br><img src="../images/00-open-workspace.png "Open Workspace" width="900" /><br><br></p></li>
+
+<li><p>Click on <strong>Open in IDE</strong></p></li>
+
+<li><p>Once in the CHE IDE, Click <strong>Start</strong></p></li>
+</ol>
+
+<h3 id="step-2-create-your-own-personal-openshift-project-and-setup-a-sample-database">Step 2: Create your own personal Openshift project and setup a sample database</h3>
+
+<ol>
+<li><p>Open a browser window and navigate to Openshift</p></li>
+
+<li><p>Click on your unique namespace to enter your workspace e.g. <code>user39</code>.</p>
+
+<p><br><img src="../images/00-create-ocp-project.png "Create Project" width="900" /><br><br></p></li>
+
+<li><p>Click on <strong>Catalog</strong> on the left menu, then navigate to the <strong>Databases</strong> menu and select <strong>Postgres</strong>.  From there, select the <strong>PostgreSQL</strong> (Ephemeral) template.</p>
+
+<p><br><img src="../images/00-select-postgres.png "Select Postgres" width="900" /><br><br></p></li>
+
+<li><p>In the pop-up window that appears, click the <strong>Next</strong> button to reach the <strong>Configuration</strong> page.</p></li>
+
+<li><p>Update <strong>PostgreSQL Connection Username</strong> to <code>dbuser</code> and <strong>PostgreSQL Connection Password</strong> to <code>password</code>.</p>
+
+<p><br><img src="../images/00-postgres-credentials.png "Postgres Credentials" width="900" /><br><br></p></li>
+
+<li><p>Click <strong>Next</strong> and ensure <em>Do not Bind at this time</em> is selected.  Click <strong>Create</strong> to generate the service.</p></li>
+
+<li><p>Click <strong>Close</strong> once it's created.</p></li>
+</ol>
+
+<h3 id="step-3-import-the-skeleton-projects-from-git-and-convert-them-to-maven-projects">Step 3: Import the skeleton projects from Git and convert them to Maven projects.</h3>
+
+<ol>
+<li><p>In Eclipse Che, click on Workspace &gt; Import Project from the main menu.  A pop-up will appear.</p>
+
+<p><br><img src="../images/00-import-project.png "Import Project" width="900" /><br><br></p></li>
+
+<li><p>Enter your gogs repository.  It should be similar to <code>http://gogs.apps.ocp-ai.redhatgov.io/userX/dayintheliferepo</code>, making sure to update <code>userX</code> with your unique username.</p>
+
+<ul>
+<li>Select <strong>Import Recursively</strong> and then click <strong>Import</strong>. <br><br></li>
+</ul></li>
+
+<li><p>When the &quot;Save&quot; pop-up appears, click the &quot;X&quot; to close the pop-up.</p>
+
+<p><br><img src="../images/00-close-save.png "Close Save" width="900" /><br><br></p></li>
+
+<li><p>Open the newly created folder, and right-click on the <strong>location-soap2rest</strong> project and select <strong>Convert to Project</strong></p>
+
+<p><br><img src="../images/00-convert-project.png "Convert Project" width="900" /><br><br></p></li>
+
+<li><p>Select <strong>Maven</strong> then click <strong>Save</strong>.</p>
+
+<p><br><img src="../images/00-select-maven.png "Select Maven" width="900" /><br><br></p></li>
+
+<li><p>Convert the remaining projects to Maven, by repeating steps 4 &amp; 5 for the <strong>location-service</strong> and <strong>location-gateway</strong> projects.</p></li>
+</ol>
+
+<h3 id="step-4-import-the-swagger-specification">Step 4: Import the Swagger specification</h3>
+
+<p>Once you've received the swagger specification (API contract) from your friendly Citizen Integrator, we need to import it into our skeleton Maven project (<code>location-service</code>).  Follow these steps:</p>
+
+<ol>
+<li><p>Expand the <code>location-service</code> project and right-click on the <code>src</code> folder, selecting New &gt; Folder.  Give the folder the name <code>spec</code>.</p>
+
+<p><br><img src="../images/00-create-spec.png "Create Spec" width="900" /><br><br></p></li>
+
+<li><p>Right-click on your newly created spec folder and select New &gt; File.  Name the file <code>location.yaml</code>.</p>
+
+<p><br><img src="../images/00-location-yaml.png "location" width="900" /><br><br></p></li>
+
+<li><p>Copy the contents of this <a href="https://raw.githubusercontent.com/epe105/dayinthelife-integration/master/docs/labs/developer-track/resources/Locations.yaml">file</a> to your newly created <code>location.yaml</code> file.  The file will auto-save so no need to click <strong>Save</strong>.</p></li>
+
+<li><p>Open the <code>pom.xml</code> file, and examine and update the plugin entry for <code>camel-restdsl-swagger-plugin</code> located at the bottom of the file.  Take a look at the location of the yaml file, make sure it maps to the one you created.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">  <span style="color:#f92672">&lt;plugin&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.camel<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>camel-restdsl-swagger-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+      <span style="color:#f92672">&lt;version&gt;</span>2.21.0<span style="color:#f92672">&lt;/version&gt;</span>
+      <span style="color:#f92672">&lt;configuration&gt;</span>
+        <span style="color:#f92672">&lt;specificationUri&gt;</span>${project.basedir}/src/spec/location.yaml<span style="color:#f92672">&lt;/specificationUri&gt;</span>
+        <span style="color:#f92672">&lt;className&gt;</span>CamelRoutes<span style="color:#f92672">&lt;/className&gt;</span>
+        <span style="color:#f92672">&lt;packageName&gt;</span>com.redhat<span style="color:#f92672">&lt;/packageName&gt;</span>
+        <span style="color:#f92672">&lt;outputDirectory&gt;</span>${project.basedir}/src/main/java<span style="color:#f92672">&lt;/outputDirectory&gt;</span>      
+      <span style="color:#f92672">&lt;/configuration&gt;</span>
+  <span style="color:#f92672">&lt;/plugin&gt;</span></code></pre></div>
+<p><br><img src="../images/00-terminal.png "terminal" width="900" /><br><br></p></li>
+
+<li><p>After you've updated the <code>pom.xml</code> file, we need to run a Maven command to generate the Camel RESTdsl from our specification.  To do this, first highlight the <code>location-service</code> project then click the <strong>Manage Commands</strong> button.</p>
+
+<p><br><img src="../images/00-select-mvn.png "select" width="900" /><br><br></p></li>
+
+<li><p>Double-click the <strong>Generate REST DSL from..</strong> script to open the command window.</p>
+
+<ul>
+<li>Click <strong>Run</strong> to execute the script.</li>
+<li>If everything completes successfully, it should generate a new file under <code>src/main/java/com/redhat</code> called <code>CamelRoutes.java</code>.<br /></li>
+<li>If the Maven script fails, it's probably because you forgot to first highlight the <code>location-service</code> project in the previous step.  Be sure to do this and re-run the command to fix the error.</li>
+</ul>
+
+<p><br><img src="../images/00-run-mvn.png "run" width="900" /><br><br></p></li>
+
+<li><p>Click on the workspace button (located next to the <strong>Manage Commands</strong> button).</p>
+
+<ul>
+<li>Open the <code>CamelRoutes.java</code> file under <code>src/main/java/com/redhat</code>.<br /></li>
+<li>Notice that the <code>camel-restdsl-swagger-plugin</code> maven plugin has generated Camel RESTdsl code for the various HTTP GET and POST operations.<br /></li>
+<li>What is missing though are the underlying Camel routes, which will form our API service implementations.</li>
+<li>If the <code>CamelRoutes.java</code> hasn't appeared, please right-click on the <code>location-service</code> project and click <strong>Refresh</strong> to manually refresh the project tree.</li>
+</ul>
+
+<p><br><img src="../images/00-camel-routes.png "camel" width="900" /><br><br></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#f92672">package</span> com.redhat<span style="color:#f92672">;</span>
+
+    <span style="color:#f92672">import</span> javax.annotation.Generated<span style="color:#f92672">;</span>
+    <span style="color:#f92672">import</span> org.apache.camel.builder.RouteBuilder<span style="color:#f92672">;</span>
+    <span style="color:#f92672">import</span> org.apache.camel.model.rest.RestParamType<span style="color:#f92672">;</span>
+
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Generated from Swagger specification by Camel REST DSL generator.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@Generated</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;org.apache.camel.generator.swagger.PathGenerator&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CamelRoutes</span> <span style="color:#66d9ef">extends</span> RouteBuilder <span style="color:#f92672">{</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * Defines Apache Camel routes using REST DSL fluent API.
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configure</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+            rest<span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/locations&#34;</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:rest1&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">post</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/locations&#34;</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:rest2&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/locations/{id}&#34;</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">param</span><span style="color:#f92672">()</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">name</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">)</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">type</span><span style="color:#f92672">(</span>RestParamType<span style="color:#f92672">.</span><span style="color:#a6e22e">path</span><span style="color:#f92672">)</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">dataType</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;integer&#34;</span><span style="color:#f92672">)</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">required</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">endParam</span><span style="color:#f92672">()</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:rest3&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/location/phone/{id}&#34;</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">param</span><span style="color:#f92672">()</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">name</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">)</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">type</span><span style="color:#f92672">(</span>RestParamType<span style="color:#f92672">.</span><span style="color:#a6e22e">path</span><span style="color:#f92672">)</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">dataType</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;integer&#34;</span><span style="color:#f92672">)</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">required</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">endParam</span><span style="color:#f92672">()</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:rest4&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span></code></pre></div></li>
+
+<li><p>Open the generated <code>CamelRoutes.java</code> file.  Replace the contents of the CamelRoutes.java with the contents below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.redhat<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> javax.annotation.Generated<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.camel.builder.RouteBuilder<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.camel.model.rest.RestParamType<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> com.redhat.processor.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> com.redhat.model.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.springframework.stereotype.Component<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.camel.model.rest.RestBindingMode<span style="color:#f92672">;</span>
+
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Generated from Swagger specification by Camel REST DSL generator.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@Generated</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;org.apache.camel.generator.swagger.PathGenerator&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Component</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CamelRoutes</span> <span style="color:#66d9ef">extends</span> RouteBuilder <span style="color:#f92672">{</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * Defines Apache Camel routes using REST DSL fluent API.
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#a6e22e">@Override</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configure</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+
+            ContactInfoResultProcessor ciResultProcessor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ContactInfoResultProcessor<span style="color:#f92672">();</span>
+            LocationResultProcessor locationResultProcessor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LocationResultProcessor<span style="color:#f92672">();</span>
+
+            restConfiguration<span style="color:#f92672">()</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">component</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;servlet&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">port</span><span style="color:#f92672">(</span>8080<span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">bindingMode</span><span style="color:#f92672">(</span>RestBindingMode<span style="color:#f92672">.</span><span style="color:#a6e22e">json</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">contextPath</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">dataFormatProperty</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;prettyPrint&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">enableCORS</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">apiContextPath</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/api-doc&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">apiProperty</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;api.title&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Location and Contact Info API&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">apiProperty</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;api.version&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;1.0.0&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">;</span>
+
+            rest<span style="color:#f92672">()</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/locations&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:getalllocations&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">post</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/locations&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">type</span><span style="color:#f92672">(</span>Location<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:addlocation&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/locations/{id}&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">param</span><span style="color:#f92672">()</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">name</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">type</span><span style="color:#f92672">(</span>RestParamType<span style="color:#f92672">.</span><span style="color:#a6e22e">path</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">dataType</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;integer&#34;</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">required</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">endParam</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:getlocation&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/location/phone/{id}&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">param</span><span style="color:#f92672">()</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">name</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">type</span><span style="color:#f92672">(</span>RestParamType<span style="color:#f92672">.</span><span style="color:#a6e22e">path</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">dataType</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;integer&#34;</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">required</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">endParam</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">outType</span><span style="color:#f92672">(</span>ContactInfo<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:getlocationdetail&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">;</span>
+
+            from<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:getalllocations&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sql:select * from locations?dataSource=dataSource&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">process</span><span style="color:#f92672">(</span>locationResultProcessor<span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;${body}&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">;</span>
+
+            from<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:getlocation&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sql:select * from locations where id=cast(:#id as int)?dataSource=dataSource&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">process</span><span style="color:#f92672">(</span>locationResultProcessor<span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">choice</span><span style="color:#f92672">()</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">when</span><span style="color:#f92672">(</span>simple<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;${body.size} &gt; 0&#34;</span><span style="color:#f92672">))</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">setBody</span><span style="color:#f92672">(</span>simple<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;${body[0]}&#34;</span><span style="color:#f92672">))</span>
+                    <span style="color:#f92672">.</span><span style="color:#a6e22e">otherwise</span><span style="color:#f92672">()</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">setHeader</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;HTTP_RESPONSE_CODE&#34;</span><span style="color:#f92672">,</span>constant<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;404&#34;</span><span style="color:#f92672">))</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;${body}&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">;</span>
+
+            from<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:addlocation&#34;</span><span style="color:#f92672">)</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Creating new location&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sql:INSERT INTO locations (id,name,lat,lng,location_type,status) VALUES (:#${body.id},:#${body.name},:#${body.location.lat},:#${body.location.lng},:#${body.type},:#${body.status});?dataSource=dataSource&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">;</span>
+
+            from<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:getlocationdetail&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sql:select * from location_detail where id=cast(:#id as int)?dataSource=dataSource&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">process</span><span style="color:#f92672">(</span>ciResultProcessor<span style="color:#f92672">)</span>
+        <span style="color:#f92672">;</span>                
+      <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span></code></pre></div></li>
+
+<li><p>Next, notice instantiation of our newly created Result Processors' with the include the necessary imports.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#f92672">import</span> com.redhat.processor.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> com.redhat.model.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.springframework.stereotype.Component<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.camel.model.rest.RestBindingMode<span style="color:#f92672">;</span>
+<span style="color:#f92672">...</span></code></pre></div></li>
+
+<li><p>As we're using SpringBoot, we also include the <code>@Component</code> declaration to the class definition statement (under the <code>@Generated</code>).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#f92672">...</span>
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">    * Generated from Swagger specification by Camel REST DSL generator.
+</span><span style="color:#75715e">    */</span>
+    <span style="color:#a6e22e">@Generated</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;org.apache.camel.generator.swagger.PathGenerator&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Component</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CamelRoutes</span> <span style="color:#66d9ef">extends</span> RouteBuilder <span style="color:#f92672">{</span>
+    <span style="color:#f92672">...</span></code></pre></div></li>
+
+<li><p>Next notice the <code>@Override</code> statement for our <code>configure()</code> method, and include references to our result processors.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#a6e22e">@Override</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configure</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>      
+
+    ContactInfoResultProcessor ciResultProcessor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ContactInfoResultProcessor<span style="color:#f92672">();</span>
+    LocationResultProcessor locationResultProcessor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LocationResultProcessor<span style="color:#f92672">();</span>
+<span style="color:#f92672">...</span></code></pre></div></li>
+
+<li><p>In order to startup an HTTP server for our REST service, we instantiate the <code>restConfiguration</code> bean with the corresponding properties.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+    restConfiguration<span style="color:#f92672">()</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">component</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;servlet&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">port</span><span style="color:#f92672">(</span>8080<span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">bindingMode</span><span style="color:#f92672">(</span>RestBindingMode<span style="color:#f92672">.</span><span style="color:#a6e22e">json</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">contextPath</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">dataFormatProperty</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;prettyPrint&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">enableCORS</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">apiContextPath</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/api-doc&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">apiProperty</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;api.title&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Location and Contact Info API&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">apiProperty</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;api.version&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;1.0.0&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#f92672">;</span>
+<span style="color:#f92672">...</span></code></pre></div>
+<p>If the IDE has any issues compiling the code and you receive errors, then navigate to <strong>Project &gt; Configure Classpath</strong> then click <strong>Done</strong>.  This will trigger the compiler to run in the background and should eliminate any errors.</p>
+
+<p>Notice that we now have both ResultProcessor's instantiated, and we've stood-up an Servlet HTTP listener for our RESTful endpoint, together with some basic self-documenting API docs that describe our new service.</p></li>
+
+<li><p>Next notice how we implement our Camel routes.  We create 4 routes, each matching their associated HTTP GET / POST endpoint.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+    from<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:getalllocations&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sql:select * from locations?dataSource=dataSource&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">process</span><span style="color:#f92672">(</span>locationResultProcessor<span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;${body}&#34;</span><span style="color:#f92672">)</span>
+     <span style="color:#f92672">;</span>
+
+    from<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:getlocation&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sql:select * from locations where id=cast(:#id as int)?dataSource=dataSource&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">process</span><span style="color:#f92672">(</span>locationResultProcessor<span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">choice</span><span style="color:#f92672">()</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">when</span><span style="color:#f92672">(</span>simple<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;${body.size} &gt; 0&#34;</span><span style="color:#f92672">))</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">setBody</span><span style="color:#f92672">(</span>simple<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;${body[0]}&#34;</span><span style="color:#f92672">))</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">otherwise</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">setHeader</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;HTTP_RESPONSE_CODE&#34;</span><span style="color:#f92672">,</span>constant<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;404&#34;</span><span style="color:#f92672">))</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;${body}&#34;</span><span style="color:#f92672">)</span>
+     <span style="color:#f92672">;</span>
+
+    from<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:addlocation&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Creating new location&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sql:INSERT INTO locations (id,name,lat,lng,location_type,status) VALUES (:#${body.id},:#${body.name},:#${body.location.lat},:#${body.location.lng},:#${body.type},:#${body.status});?dataSource=dataSource&#34;</span><span style="color:#f92672">)</span>
+     <span style="color:#f92672">;</span>
+
+    from<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:getlocationdetail&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sql:select * from location_detail where id=cast(:#id as int)?dataSource=dataSource&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">process</span><span style="color:#f92672">(</span>ciResultProcessor<span style="color:#f92672">)</span>
+     <span style="color:#f92672">;</span>
+<span style="color:#f92672">...</span></code></pre></div></li>
+
+<li><p>Lastly, notice the RESTdsl code to accommodate our new routes.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+   rest<span style="color:#f92672">()</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/locations&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:getalllocations&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">post</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/locations&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">type</span><span style="color:#f92672">(</span>Location<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:addlocation&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/locations/{id}&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">param</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">name</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">type</span><span style="color:#f92672">(</span>RestParamType<span style="color:#f92672">.</span><span style="color:#a6e22e">path</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">dataType</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;integer&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">required</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">endParam</span><span style="color:#f92672">()</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:getlocation&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/location/phone/{id}&#34;</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">param</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">name</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">type</span><span style="color:#f92672">(</span>RestParamType<span style="color:#f92672">.</span><span style="color:#a6e22e">path</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">dataType</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;integer&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">required</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">endParam</span><span style="color:#f92672">()</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">outType</span><span style="color:#f92672">(</span>ContactInfo<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;direct:getlocationdetail&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#f92672">;</span></code></pre></div></li>
+
+<li><p>Before we test our newly created Camel Routes, we need to update <code>src/main/resources/application.properties</code> to point to our Postgres database.</p>
+
+<ul>
+<li>Set the <code>postgresql.service.name</code> property to <code>postgresql.OCPPROJECT.svc</code> so that it points to our OpenShift service.</li>
+<li>Replace <code>OCPPROJECT</code> with the OpenShift project name you used in the previous step to host Postgres Database (this should be your unique username).</li>
+</ul>
+
+<p><br><img src="../images/00-update-properties.png "Update Properties" width="900" /><br><br></p></li>
+
+<li><p>Now we are ready to test our new Camel route locally. To do this, navigate back to the <strong>Manage commands</strong> screen, double-click the <strong>run:spring-boot</strong> script and hit <strong>Run</strong>.  The script will run locally in Eclipse Che.</p>
+
+<p><br><img src="../images/00-run-locally.png "Maven Deploy" width="900" /><br><br></p></li>
+
+<li><p>Once SpringBoot has started-up, right-click the dev-machine (under <strong>Machines</strong>) and select <strong>Servers</strong>.  Click the link corresponding to port 8080.  A new tab should open with a <strong>Page Can't be Found</strong>.</p>
+
+<p><br><img src="../images/00-open-servers.png "Open Servers" width="900" /><br><br></p></li>
+
+<li><p>Click on the route link above the location-service pod and append <code>/locations</code> to the URI.  As a result, you should receive a list of all locations</p>
+
+<p><br><img src="../images/00-location-list.png "Location List" width="900" /><br><br></p></li>
+
+<li><p>Now that we've tested our API service implementation locally, we can deploy it to our running OpenShift environment.  First we need to login to OpenShift via the Terminal.  Navigate back to the OpenShift web UI and click the <strong>Copy Login Command</strong> link.</p>
+
+<p><br><img src="../images/00-login-ocp-cli.png "OCP CLI Login" width="900" /><br><br></p></li>
+
+<li><p>Navigate back to Eclipse Che, open the terminal, and paste the login command from your clipboard.  Once you've logged-in, select the OpenShift project you used earlier using <code>oc project userX</code> (replacing userX with your username).</p>
+
+<p><br><img src="../images/00-login-terminal.png "OCP Terminal Login" width="900" /><br><br></p></li>
+
+<li><p>To run the fabric8 Maven command to deploy our project, navigate back to the <strong>Manage commands</strong> screen, double-click the <strong>fabric8:deploy</strong> script.</p>
+
+<ol>
+<li>Click <strong>Run</strong>.  The script will run and deploy to your OCPPROJECT.</li>
+</ol>
+
+<p><br><img src="../images/00-mvn-deploy.png "Maven Deploy" width="900" /><br><br></p></li>
+
+<li><p>If the deployment script completes successfully, navigate back to your OCPPROJECT web console and verify the pod is running in your UserX project.</p>
+
+<p><br><img src="../images/00-verify-location-service.png "Location Service" width="900" /><br><br></p></li>
+
+<li><p>Click on the route link above the location-service pod and append <code>locations</code> to the URI.  Initially, you may receive a <code>404</code> error when opening the route URL, but once you append <code>locations</code> and refresh you should receive a list of all locations</p>
+
+<p><br><img src="../images/00-location-list.png "Location List" width="900" /><br><br></p></li>
+
+<li><p>You can also search for individual locations by adjusting the URI to <code>/locations/{id}</code> e.g. <code>/locations/100</code>.</p></li>
+
+<li><p>Lastly, via the Eclipse Che terminal, test the HTTP POST using curl.  You can use the following below. Remember to the Route Link you got previously and replace OCPPROJECT with your username.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl --header <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> --request POST --data <span style="color:#e6db74">&#39;{&#34;id&#34;: 101,&#34;name&#34;: &#34;Kakadu&#34;,&#34;type&#34;: &#34;HQ&#34;,&#34;status&#34;: &#34;1&#34;,&#34;location&#34;: {&#34;lat&#34;: &#34;78.88436&#34;,&#34;lng&#34;: &#34;99.05295&#34;}}&#39;</span> http://location-service-OCPPROJECT.apps.ocp-ai.redhatgov.io/locations</code></pre></div></li>
+
+<li><p>If the HTTP POST is successful, you should be able to view it by repeating the HTTP GET /locations test.</p></li>
+</ol>
+
+<p><em>Congratulations!</em> You have now an application to test your Swagger to RESTdsl integration.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>You have now successfully created a contract-first API using a Swagger contract together with generated Camel RESTdsl, incorporating both HTTP GET and POST requests that perform select and inserts on a Postgres database table.</p>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/agile_integrations_dev/lab02/">&larr; Previous: Lab 02 - API Mocking</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/agile_integrations_dev/lab04/">Next: Lab 04 - SOAP to REST (Optional) &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/agile_integrations_dev">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

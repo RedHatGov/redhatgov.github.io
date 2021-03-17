@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Exercise 1.5 - Atomic Scanner | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Exercise 1.5 - Atomic Scanner</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/security_openshift">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/security_openshift/exercise1.4/">&larr; Previous: Exercise 1.4 - Skopeo</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/security_openshift/exercise1.6/">Next: Exercise 1.6 - SCC &amp; Seccomp &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div id="preamble">
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/security_openshift/images/atomic-scan.png" alt="atomic scan">
+</div>
+</div>
+<div class="paragraph">
+<p>The atomic command-line tool provides a way to interact and manage Atomic Host
+systems and containers. It provides a high level, coherent entrypoint to the
+system and makes it easier to interact with special kinds of containers, such
+as super-privileged containers, and debugging tools.</p>
+</div>
+<div class="paragraph">
+<p>The atomic command uses tools such as <code>docker</code>, <code>ostree</code> and <code>skopeo</code> to manage
+containers and container host systems. There are also a lot of features built
+into the atomic command that are not available in the docker command. These
+features allow you to use special commands for image signing, image
+verification, the ability to install a container - mounting file systems and
+opening privileges.</p>
+</div>
+<div class="paragraph">
+<p>Before containers are run, it makes good sense to be able to scan container
+images for known vulnerabilities and configuration problems. A number of
+container scanning tools are beginning to appear including RHEL’s  <code>atomic
+scan</code> command.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_atomic_scan">Atomic Scan</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This lab will get you familiar with the <code>atomic scan</code> command and also how to
+extend <code>atomic scan</code> with a custom scanner.</p>
+</div>
+<div class="sect2">
+<h3 id="_step_1">Step 1:</h3>
+<div class="paragraph">
+<p><strong>Pull some images</strong></p>
+</div>
+<div class="listingblock">
+<div class="title">Pull a RHEL 7.1 &amp; 7.6 image</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker pull registry.access.redhat.com/rhel7.1
+
+sudo docker pull registry.access.redhat.com/rhel7.6</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s see what types of scanners are available</p>
+</div>
+<div class="listingblock">
+<div class="title">List scanners</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan --list</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>First lets take a look at RHEL7.1</p>
+</div>
+<div class="listingblock">
+<div class="title">Atomic default scan OpenSCAP</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan registry.access.redhat.com/rhel7.1</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Atomic Compliance scan</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan --scan_type standards_compliance
+registry.access.redhat.com/rhel7.1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s take a look at RHEL7.6 (latest)</p>
+</div>
+<div class="listingblock">
+<div class="title">Atomic default scan OpenSCAP</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan registry.access.redhat.com/rhel7.6</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Atomic Compliance scan</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan --scan_type standards_compliance
+registry.access.redhat.com/rhel7.6</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will notice that over time vulnerabilities are found in OS and
+applications. So you can see that security is more of a race against time to
+find and patch vulnerabilities before an attacker can exploit them. This is
+where containers can really help to enhance security by being able to make a
+security fix to a base image and have OpenShift deploy that image to all
+containers that are running outdated versions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2">Step 2:</h3>
+<div class="paragraph">
+<p><strong>Writing a Custom Scanner</strong></p>
+</div>
+<div class="paragraph">
+<p>The atomic scanner was designed with a pluggable architecture to allow
+developers to write custom scanners using any programming language supported by
+RHEL. Adding a scanner plugin involves the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Make atomic aware of your plug­in.</p>
+</li>
+<li>
+<p>Ensure the plugin obtains the proper input from the / scanin directory.</p>
+</li>
+<li>
+<p>Ensure the plugin writes the results to the  /scanout directory.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">cd  into <code>/home/ec2-user/workshopfiles</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd /home/ec2-user/workshopfiles</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">build the <code>Dockerfile</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker build --rm=true --force-rm=true --tag=example_plugin .</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Notice <code>.</code> it means in the current directory.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">see the newly built container</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker images
+
+...
+
+REPOSITORY          TAG          IMAGE ID         CREATED             SIZE
+example_plugin      latest       008f60125ce5     16 seconds ago      192.5 MB</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">install the new plugin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic install --name example_plugin example_plugin</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse3048be6d454cec1ea8349a6fed791c04" class="collapsed">
+      
+        Result
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse3048be6d454cec1ea8349a6fed791c04" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">docker run -it --rm --privileged -v /etc/atomic.d/:/host/etc/atomic.d/ example_plugin sh /install.sh
+Copying example_plugin configuration file to host filesystem...
+'/example_plugin' -&gt; '/host/etc/atomic.d/example_plugin'</code></pre>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+<div class="listingblock">
+<div class="title">view the new scanner as a operation</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan --list</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now lets try the get rpms scan</p>
+</div>
+<div class="listingblock">
+<div class="title">rpm-list</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan --scanner example_plugin --scan_type=rpm-list registry.access.redhat.com/rhel7.6</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse50ad04980647ef4ae1dd09d37c6cb2b0" class="collapsed">
+      
+        Result
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse50ad04980647ef4ae1dd09d37c6cb2b0" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">docker run -t --rm -v /etc/localtime:/etc/localtime -v /run/atomic/2018-11-13-01-50-10-642277:/scanin -v /var/lib/atomic/example_plugin/2018-11-13-01-50-10-642
+277:/scanout:rw,Z -v /tmp/foobar:/foobar example_plugin python list_rpms.py list-rpms
+registry.access.redhat.com/rhel7.6 (3da40a1670b5eee)
+The following results were found:
+       rpms:
+         redhat-release-server-7.6-4.el7.x86_64
+         filesystem-3.2-25.el7.x86_64
+         basesystem-10.0-7.el7.noarch
+         ncurses-base-5.9-14.20130511.el7_4.noarch
+         glibc-common-2.17-260.el7.x86_64
+         nspr-4.19.0-1.el7_5.x86_64
+         libstdc++-4.8.5-36.el7.x86_64
+         bash-4.2.46-31.el7.x86_64
+         pcre-8.32-17.el7.x86_64
+         zlib-1.2.7-18.el7.x86_64
+         xz-libs-5.2.2-1.el7.x86_64
+         libdb-5.3.21-24.el7.x86_64
+         elfutils-libelf-0.172-2.el7.x86_64
+         libgpg-error-1.12-3.el7.x86_64
+         libacl-2.2.51-14.el7.x86_64
+         chkconfig-1.7.4-1.el7.x86_64
+         libxml2-2.9.1-6.el7_2.3.x86_64
+         lua-5.1.4-15.el7.x86_64
+         libuuid-2.23.2-59.el7.x86_64
+         sqlite-3.7.17-8.el7.x86_64
+         grep-2.20-3.el7.x86_64
+         expat-2.1.0-10.el7_3.x86_64
+         audit-libs-2.8.4-4.el7.x86_64
+         libassuan-2.1.0-3.el7.x86_64
+         xz-5.2.2-1.el7.x86_64
+         findutils-4.5.11-6.el7.x86_64
+         lz4-1.7.5-2.el7.x86_64
+         pinentry-0.8.1-17.el7.x86_64
+         tar-1.26-35.el7.x86_64
+         kmod-libs-20-23.el7.x86_64
+         libidn-1.28-4.el7.x86_64
+         gmp-6.0.0-15.el7.x86_64
+         libsmartcols-2.23.2-59.el7.x86_64
+         ustr-1.0.4-16.el7.x86_64
+         libverto-0.2.5-4.el7.x86_64
+         qrencode-libs-3.4.1-3.el7.x86_64
+         libtasn1-4.10-1.el7.x86_64
+         ca-certificates-2018.2.22-70.0.el7_5.noarch
+         coreutils-8.22-23.el7.x86_64
+         python-libs-2.7.5-76.el7.x86_64
+         libblkid-2.23.2-59.el7.x86_64
+         glib2-2.56.1-2.el7.x86_64
+         python-iniparse-0.4-9.el7.noarch
+         cracklib-2.9.0-11.el7.x86_64
+         cracklib-dicts-2.9.0-11.el7.x86_64
+         pam-1.1.8-22.el7.x86_64
+         libxml2-python-2.9.1-6.el7_2.3.x86_64
+         python-six-1.9.0-2.el7.noarch
+         python-gobject-base-3.22.0-1.el7_4.1.x86_64
+         pkgconfig-0.27.1-4.el7.x86_64
+         python-backports-1.0-8.el7.x86_64
+         python-decorator-3.4.0-3.el7.noarch
+         python-backports-ssl_match_hostname-3.5.0.1-1.el7.noarch
+         python-inotify-0.9.4-4.el7.noarch
+         pyxattr-0.5.1-5.el7.x86_64
+         python-kitchen-1.1.1-5.el7.noarch
+         nss-pem-1.0.3-5.el7.x86_64
+         nss-sysinit-3.36.0-7.el7_5.x86_64
+         binutils-2.27-34.base.el7.x86_64
+         libcurl-7.29.0-51.el7.x86_64
+         rpm-libs-4.11.3-35.el7.x86_64
+         openldap-2.4.44-20.el7.x86_64
+         passwd-0.79-4.el7.x86_64
+         python-urlgrabber-3.10-9.el7.noarch
+         util-linux-2.23.2-59.el7.x86_64
+         kpartx-0.4.9-123.el7.x86_64
+         device-mapper-libs-1.02.149-10.el7_6.1.x86_64
+         dracut-033-554.el7.x86_64
+         elfutils-libs-0.172-2.el7.x86_64
+         dbus-libs-1.10.24-12.el7.x86_64
+         dbus-1.10.24-12.el7.x86_64
+         dbus-glib-0.100-7.el7.x86_64
+         virt-what-1.18-4.el7.x86_64
+         pth-2.0.7-23.el7.x86_64
+         rpm-build-libs-4.11.3-35.el7.x86_64
+         subscription-manager-rhsm-1.21.10-3.el7_6.x86_64
+         pygpgme-0.3-9.el7.x86_64
+         subscription-manager-1.21.10-3.el7_6.x86_64
+         yum-plugin-ovl-1.1.31-50.el7.noarch
+         vim-minimal-7.4.160-5.el7.x86_64
+         rootfiles-8.1-11.el7.noarch
+         libgcc-4.8.5-36.el7.x86_64
+         setup-2.8.71-10.el7.noarch
+         tzdata-2018g-1.el7.noarch
+         subscription-manager-rhsm-certificates-1.21.10-3.el7_6.x86_64
+         nss-softokn-freebl-3.36.0-5.el7_5.x86_64
+         glibc-2.17-260.el7.x86_64
+         nss-util-3.36.0-1.el7_5.x86_64
+         ncurses-libs-5.9-14.20130511.el7_4.x86_64
+         libsepol-2.5-10.el7.x86_64
+         libselinux-2.5-14.1.el7.x86_64
+         info-5.1-5.el7.x86_64
+         bzip2-libs-1.0.6-13.el7.x86_64
+         popt-1.13-16.el7.x86_64
+         libffi-3.0.13-18.el7.x86_64
+         libattr-2.4.46-13.el7.x86_64
+         libcap-2.22-9.el7.x86_64
+         libgcrypt-1.5.3-14.el7.x86_64
+         readline-6.2-10.el7.x86_64
+         sed-4.2.2-5.el7.x86_64
+         libcom_err-1.42.9-13.el7.x86_64
+         cpio-2.11-27.el7.x86_64
+         diffutils-3.3-4.el7.x86_64
+         libcap-ng-0.7.5-4.el7.x86_64
+         nss-softokn-3.36.0-5.el7_5.x86_64
+         p11-kit-0.23.5-3.el7.x86_64
+         gawk-4.0.2-4.el7_3.1.x86_64
+         file-libs-5.11-35.el7.x86_64
+         keyutils-libs-1.5.8-3.el7.x86_64
+         acl-2.2.51-14.el7.x86_64
+         libdb-utils-5.3.21-24.el7.x86_64
+         which-2.20-7.el7.x86_64
+         ncurses-5.9-14.20130511.el7_4.x86_64
+         dmidecode-3.1-2.el7.x86_64
+         libnl-1.1.4-3.el7.x86_64
+         libsemanage-2.5-14.el7.x86_64
+         hardlink-1.0-19.el7.x86_64
+         gdbm-1.10-8.el7.x86_64
+         p11-kit-trust-0.23.5-3.el7.x86_64
+         openssl-libs-1.0.2k-16.el7.x86_64
+         krb5-libs-1.15.1-34.el7.x86_64
+         python-2.7.5-76.el7.x86_64
+         libmount-2.23.2-59.el7.x86_64
+         shared-mime-info-1.8-4.el7.x86_64
+         gzip-1.5-10.el7.x86_64
+         shadow-utils-4.1.5.1-25.el7.x86_64
+         libpwquality-1.2.3-5.el7.x86_64
+         gobject-introspection-1.56.1-1.el7.x86_64
+         python-dateutil-1.5-7.el7.noarch
+         python-dmidecode-3.12.2-3.el7.x86_64
+         libutempter-1.1.6-4.el7.x86_64
+         yum-metadata-parser-1.1.4-10.el7.x86_64
+         python-ethtool-0.8-7.el7.x86_64
+         python-ipaddress-1.0.16-2.el7.noarch
+         python-setuptools-0.9.8-7.el7.noarch
+         pyliblzma-0.5.3-11.el7.x86_64
+         python-chardet-2.2.1-1.el7_1.noarch
+         cyrus-sasl-lib-2.1.26-23.el7.x86_64
+         nss-3.36.0-7.el7_5.x86_64
+         nss-tools-3.36.0-7.el7_5.x86_64
+         libssh2-1.4.3-12.el7.x86_64
+         curl-7.29.0-51.el7.x86_64
+         rpm-4.11.3-35.el7.x86_64
+         libuser-0.60-9.el7.x86_64
+         python-pycurl-7.19.0-19.el7.x86_64
+         json-c-0.11-4.el7_0.x86_64
+         device-mapper-1.02.149-10.el7_6.1.x86_64
+         procps-ng-3.3.10-23.el7.x86_64
+         cryptsetup-libs-2.0.3-3.el7.x86_64
+         kmod-20-23.el7.x86_64
+         systemd-libs-219-62.el7.x86_64
+         systemd-219-62.el7.x86_64
+         elfutils-default-yama-scope-0.172-2.el7.noarch
+         dbus-python-1.1.1-9.el7.x86_64
+         usermode-1.111-5.el7.x86_64
+         gnupg2-2.0.22-5.el7_5.x86_64
+         rpm-python-4.11.3-35.el7.x86_64
+         gpgme-1.3.2-5.el7.x86_64
+         yum-3.4.3-161.el7.noarch
+         yum-utils-1.1.31-50.el7.noarch
+         gdb-gdbserver-7.6.1-114.el7.x86_64
+
+Files associated with this scan are in /var/lib/atomic/example_plugin/2018-11-13-01-50-10-642277.</code></pre>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_fun">Additional Fun</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Have a look at the files in the <code>/home/ec2-user/workshopfiles</code> directory. They
+contain the files that make up your new <code>example_scanner</code>. The meat of the
+scanner is the <code>list_rpms.py</code> Python file. This is a similar architecture to
+writing
+<a href="http://docs.ansible.com/ansible/dev_guide/developing_modules.html">Ansible
+Module</a>, by that as long as you adhere to the api you can write the plugin in
+any language you like. Basically returning proper json that is defined in
+<code>example_plugin</code>. Let see that now;</p>
+</div>
+<div class="listingblock">
+<div class="title">example_plugin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">type: scanner
+scanner_name: example_plugin
+image_name: example_plugin
+default_scan: rpm-list
+custom_args: ['-v', '/tmp/foobar:/foobar']
+scans: [
+ { name: rpm-list,
+   args: ['python', 'list_rpms.py', 'list-rpms'],
+   description: "List all RPMS",
+ },
+ { name: get-os,
+   args: ['python', 'list_rpms.py', 'get-os'],
+   description: "Get the OS of the object",
+ }
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So you can see that as long as you package up the scanner code in the container
+and adhere to the api it should be easy to add your own custom scanner.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://developers.redhat.com/blog/2016/05/20/creating-a-custom-atomic-scan-plug-in/#more-421256">Creating
+a custom atomic scan plugin</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/cli_reference/atomic_commands">Atomic
+Scan Commands</a></p>
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/security_openshift/exercise1.4/">&larr; Previous: Exercise 1.4 - Skopeo</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/security_openshift/exercise1.6/">Next: Exercise 1.6 - SCC &amp; Seccomp &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/security_openshift">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

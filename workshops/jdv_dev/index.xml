@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JBoss Data Virtualization Development on Red Hat | Public Sector</title>
+    <link>/workshops/jdv_dev/</link>
+    <description>Recent content in JBoss Data Virtualization Development on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/jdv_dev/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Exercise 1 - Install JDV and JBDS</title>
+      <link>/workshops/jdv_dev/exercise1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/exercise1/</guid>
+      <description>Table of Contents  Download JDV Download JBDS Install JDV  Run JDV  Install JBDS  Run JBDS Install teiid designer Configure server settings   Download JBoss Data Virtualization   jboss-dv-6.3.0-1-installer.jar  Download JBoss Developer Studio   devstudio-11.0.0.GA-installer-standalone.jar  Install JBoss Data Virtualization (JDV)   In the location where you downloaded the installer, run the following command
+java -jar jboss-dv-6.3.0-1-installer.jar Follow the default prompts with the following exceptions below</description>
+    </item>
+    
+    <item>
+      <title>Exercise 10 - View data in AngularJS client</title>
+      <link>/workshops/jdv_dev/exercise10/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/exercise10/</guid>
+      <description>View the data services  Go back to the Angualar client at http://localhost:8181
+ View each of the data services we created by navigating the lefthand pane, including the combined data service for all 3 sources
+  Change users to view masking/filtering  In the upper right, click the user icon and change the user to maskUser
+ Go to the Federated page or click reload if already on the page.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 2 - Prepare the datasources</title>
+      <link>/workshops/jdv_dev/exercise2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/exercise2/</guid>
+      <description>Get the course repositories  There are two repositories, one that contains a sample JDV project with helper data/scripts and another which is the AngularJS frontend.
+ Pull down the JDV project
+git clone https://github.com/mechevarria/jdv-demo Next pull down the AngularJS client
+https://github.com/mechevarria/jdv-demo-client  Add the workshop data to PostgreSQL  The script that needs to be run is  jdv-demo/assets/postgres/create_insert.sql
+ If you are running the instance from TurnKey Linux, you can load the data via a browser.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 3 - Prepare Postman and AngularJS client</title>
+      <link>/workshops/jdv_dev/exercise3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/exercise3/</guid>
+      <description>Prepare the AngularJS client  In the jdv-demo-client folder run the following command
+npm install Afterwards run
+npm run dev To start a node webserver that will host the AngularJS application.
+  * To check go to http://localhost:8181 in your browser. You will get an error when checking the pages. That is ok since we are going to be building the data services for the web application.
+Prepare Postman  Import the REST tests into Postman by going to file  import Select jdv-demo/assets/demo-jdv.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 4 - Create new teiid project</title>
+      <link>/workshops/jdv_dev/exercise4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/exercise4/</guid>
+      <description>Create a new JDV project  In JBDS, do window  perspective  open perspective  other  teiid designer
+ file  new  teiid model project
+ Name the project jdv-demo and its ok to leave the default location.
+ Do change the default folders to sources, views and federated
+   [teiid](http://teiid.jboss.org/) is the the upstream community project for JBoss Data Virtualization  Create a VDB  file  New  Teiid VDB</description>
+    </item>
+    
+    <item>
+      <title>Exercise 5 - Import PostgreSQL data</title>
+      <link>/workshops/jdv_dev/exercise5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/exercise5/</guid>
+      <description>Import JDBC datasource  file  import  teiid designer  JDBC Database &amp;gt;&amp;gt; source model   Under Connection Profile, select new
+ Select PostgreSQL as the Connection Profile Type, Next
+ In the next window, click the New Driver Definition icon
+ Under the Jar List tab, select Add JAR/Zip and then select jdv-demo/assets/postgres/postgresql-42.1.4.jar, then ok
+ In the New JDBC Connection Profile window make sure to use the IP address of your PostgreSQL instance and put the credentails for the postgres user and check Save Password.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 6 - Import REST data</title>
+      <link>/workshops/jdv_dev/exercise6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/exercise6/</guid>
+      <description>Import REST source  file  import  Web Service Source &amp;gt;&amp;gt; Source and View Model (REST)
+ Click New Connection Profile, then next
+ Connection URL https://jsonplaceholder.typicode.com/users
+ Response type JSON
+ Make sure Test Connection returns Ping Succeeded!, then Finish
+   Click Next
+ Set the following values like the screenshot below
+   Next and put JNDI as java:/RestDS, then Next
+ In the Import from REST Web Service Source, expand the first response element then right click on the second response element and select Set as Root path</description>
+    </item>
+    
+    <item>
+      <title>Exercise 7 - Import Excel data</title>
+      <link>/workshops/jdv_dev/exercise7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/exercise7/</guid>
+      <description>Verify Settings  You need to first verify that the Excel extensions were imported correctly into the designer
+ window  show view  other 
+ Teiid Designer  Model Extension Registry
+   In the Model Extension Registry tab at the bottom, verify in the Namespace Prefix you see the value excel and a checkbox in the imported column. If not, close the designer, re-open, click the start button to mark the server as started, and check again.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 8 - Federate Data</title>
+      <link>/workshops/jdv_dev/exercise8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/exercise8/</guid>
+      <description>Create the combined view file -&amp;gt; new -&amp;gt; teiid metadata model
+ Location demo-jdv/federated
+ Model Name FedView
+ Model Type View Model
+ Do not select any options under model builder and click Finish
+ Right-click on the FedView Package diagram and select new -&amp;gt; child -&amp;gt; table
+ Select Option 1: Build with new table wizard
+ Name combined
+  Under the PK tab, check the include box then put id_pk in the name field.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 9 - Secure Data Services</title>
+      <link>/workshops/jdv_dev/exercise9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/exercise9/</guid>
+      <description>Overview  To secure the services we created in our VDB, we need to create an additional user on the server.  Create the additional user  In $JBOSS_HOME/bin directory run the following script with the answers to the prompts below
+./add-user.sh   For windows users, the script will be **add-user.bat**   Type: b) Application User Username: maskUser Password: Password1! (same as the one used during installation groups: odata,mask Remoting: no</description>
+    </item>
+    
+    <item>
+      <title>Prerequisites for JDV Development</title>
+      <link>/workshops/jdv_dev/prerequisites/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/prerequisites/</guid>
+      <description> What you need  A free account on Red Hat Developers to download JBoss Data Virtualization and JBoss Developer Studio A Java Development Kit (JDK) 8 git available as a local command Node.js runtime, 6.x or higher Postman for testing An accessible PostgreSQL instance  Recommended: Download a pre-built VM, ISO or docker image from TurnKey Linux. The provided VM/ISO also provides an web interface for loading data. Step by step instructions are provided for a Turnkey linux instance   </description>
+    </item>
+    
+    <item>
+      <title>Workshop is done!</title>
+      <link>/workshops/jdv_dev/wrapup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/wrapup/</guid>
+      <description> Congratulations  You imported 3 different disparate datasources and exposed them as data services. You also combined them into a federated view and applied role based security. Congratulations!  Additional resources  JDV Documentation Teiid, upstream project for JDV odata, documentation for REST data services. JDV uses odata(v2) and odata(v4). V4 must be called with the context of /odata4 Teiid Examples. Github with various source examples  </description>
+    </item>
+    
+  </channel>
+</rss>

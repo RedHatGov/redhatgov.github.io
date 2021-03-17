@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Exercise 1.17 - Introduction to the Automate Datastore | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Exercise 1.17 - Introduction to the Automate Datastore</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/cloudforms41">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/cloudforms41/exercise1.16/">&larr; Previous: Exercise 1.16 - Explore Containers</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/cloudforms41/exercise1.18/">Next: Exercise 1.18 - “Hello, World!” Automation Script &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    
+
+<h1 id="exercise-1-17-introduction-to-the-automate-datastore">Exercise 1.17 - Introduction to the Automate Datastore</h1>
+
+<h2 id="exercise-description">Exercise Description</h2>
+
+<p>In this exercise, you will learn about scripting actions, used to control automation datastore functions.</p>
+
+<p>When we use the Automate capability of CloudForms, we write scripts in the Ruby language and use objects that the CloudForms Automation Engine makes available to us. The Automate model is arranged to provide an object oriented hierarchy to control automation functions. The model uses the following organizational units arranged in a hierarchy:</p>
+
+<ul>
+<li><strong>Datastore</strong> - The main organization unit that stores the entire model.</li>
+<li><strong>Domains</strong> - Domains act as collection of automation functions. Functions are executed depending on the order of Domain priority, which means a function in a Domain with a higher priority overrides the same functions specified in a lower-priority Domain. This allows CloudForms Management Engine to specify a core Domain (ManageIQ) but allow users to override automate functions with custom Domains. Each Domain contains a set of Namespaces.</li>
+<li><strong>Namespaces</strong> - Containers that organize and categorize functions of the model. Namespaces can contain child Namespaces as well as Classes.</li>
+<li><strong>Classes</strong> - Templates for a specific function of the model. Each Class uses a Schema to apply to Instances to populate with default values. Each class also can contain a set of methods.</li>
+<li><strong>Instances</strong> - An instance is a version of a class populated with initial configuration data. An instance can include a collection of any number of attributes, calls to methods, and relationships.</li>
+<li><strong>Methods</strong> - Methods are functions within the model. Methods use Ruby code to execute various operations needed for a Class.</li>
+</ul>
+
+<h2 id="section-1-exploring-automate">Section 1: Exploring Automate</h2>
+
+<p>Go to <strong>Automate</strong> → <strong>Explorer</strong>.</p>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate.png" width="1000"/><br/>
+<em>Automate Navigation</em></p>
+
+<p>The first menu item that we see takes us to the Explorer.  This is our visual interface into the Automate Datastore, and it contains the various kinds of Automate objects that we’ll use throughout this lab.</p>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-explorer.png" width="1000"/><br/>
+<em>Automate Explorer</em></p>
+
+<p>Before we start our journey into learning CloudForms Automate, we’ll take a tour of the Automate Datastore to familiarize ourselves with the objects that we’ll find there.</p>
+
+<h2 id="section-2-the-automate-datastore">Section 2: The Automate Datastore</h2>
+
+<p>The Automate Datastore has a directory-like structure, consisting of several types of organizational units arranged in a hierarchy:</p>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-datastore.png" width="300"/><br/>
+<em>Automate Datastore</em></p>
+
+<p>Next, we’ll look at each type of object in more detail.</p>
+
+<h2 id="section-3-domains">Section 3: Domains</h2>
+
+<p>A <em>domain</em> is a collection of namespaces, classes, instances, and methods. The ManageIQ project provides a single <em>ManageIQ</em> domain for all supplied automation code, while Red Hat adds the supplemental RedHat domain containing added-value code for the CloudForms product.  Both the <em>ManageIQ</em> and <em>RedHat</em> domains are locked, indicating their read-only nature, but we can create new domains for our own custom automation code.</p>
+
+<p>
+
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+   Organizing our own code into custom domains greatly simplifies the task of exporting and importing code (simplifying code portability and reuse).  It also leaves ManageIQ or Red Hat free to update the locked domains through minor releases without fear of overwriting our customizations. 
+</div>
+</p>
+
+<div class="panel-group">
+  
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse22849b243564c2cca6c36bd4a62477bb" class="collapsed">
+      
+        Domain Priority
+      </a>
+    </h4>
+  </div>
+  
+
+<p><div id="collapse22849b243564c2cca6c36bd4a62477bb" class="panel-collapse collapse "></p>
+<pre><code>&lt;div class=&#34;panel-body&#34;&gt;
+   &lt;p&gt;User-added domains can be individually enabled or disabled and can be ordered by priority such that if code exists in the same path in multiple domain; for example, &lt;em&gt;/Cloud/VM/Provisioning/StateMachines&lt;/em&gt;.  The code in the highest-priority enabled domain will be executed.&lt;/p&gt;</code></pre>
+<h3 id="step-1-we-can-change-the-priority-order-of-our-user-added-domains-using-the">Step 1. We can change the priority order of our user-added domains using the:</h3>
+
+<blockquote>
+<p><strong>Configuration</strong> → <strong>Edit Priority Order of Domains</strong> menu</p>
+</blockquote>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-datastore-conf-priority.png" width="1000"/><br/>
+<em>Edit priority</em></p>
+
+<h3 id="step-2-try-using-the-up-and-down-arrows-to-switch-the-priority-of-a-domain-then-save">Step 2. Try using the up and down arrows to switch the priority of a domain, then save.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-datastore-conf-priority-save.png" width="1000"/><br/>
+<em>Save priority</em></p>
+<pre><code>&lt;/div&gt;</code></pre>
+<p></div>
+</div></p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse7d2e2e0b418c152acefe8ec51a2652a8" class="collapsed">
+      
+        Importing/Exporting Domains
+      </a>
+    </h4>
+  </div>
+  
+
+<p><div id="collapse7d2e2e0b418c152acefe8ec51a2652a8" class="panel-collapse collapse "></p>
+<pre><code>&lt;div class=&#34;panel-body&#34;&gt;
+   &lt;p&gt;We can export domains using rake from the command line and import them either using rake or from the WebUI.  Using rake enables us to specify more import and export options.  A typical rake import line is as follows:&lt;/p&gt;</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/rake evm:automate:import YAML_FILE<span style="color:#f92672">=</span>bit63.yaml IMPORT_AS<span style="color:#f92672">=</span>Bit63 SYSTEM<span style="color:#f92672">=</span>false ENABLED<span style="color:#f92672">=</span>true DOMAIN<span style="color:#f92672">=</span>Export PREVIEW<span style="color:#f92672">=</span>false</code></pre></div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse1f7e3b8d9043eafc52e39fd82add727e" class="collapsed">
+      
+        Copying Objects Between Domains
+      </a>
+    </h4>
+  </div>
+  
+
+<p><div id="collapse1f7e3b8d9043eafc52e39fd82add727e" class="panel-collapse collapse "></p>
+<pre><code>&lt;div class=&#34;panel-body&#34;&gt;
+   &lt;h4 id=&#34;customizing-code-in-the-domain&#34;&gt;Customizing code in the domain&lt;/h4&gt;</code></pre>
+<p>We frequently need to customize code in the locked RedHat or ManageIQ domains — for example, when implementing our own custom VM placement method.  Fortunately, we can easily copy any object from the locked domains into our own, using the following steps.</p>
+
+<p>Step 1.  <strong>Configuration</strong> → <strong>Copy this Class</strong></p>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-copy-object.png" width="1000"/><br/>
+<em>Copying a class</em></p>
+
+<p>Step 2. When we copy an object, such as a class, we are prompted for the From and To domains.</p>
+
+<p>Step 3. We can optionally deselect “Copy to same path” d specify our own destination path for the object.</p>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-copy-object-class.png" /><br/>
+<em>Specifying the destination domain and path</em></p>
+<pre><code>&lt;/div&gt;</code></pre>
+<p></div>
+</div></p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse4741c5496e8d47b2bbefd7edca24a5d1" class="collapsed">
+      
+        Importing Old Format Exports
+      </a>
+    </h4>
+  </div>
+  
+
+<p><div id="collapse4741c5496e8d47b2bbefd7edca24a5d1" class="panel-collapse collapse "></p>
+<pre><code>&lt;div class=&#34;panel-body&#34;&gt;
+   &lt;p&gt;Domains were a new feature of the Automate Datastore in CloudForms 3.1.  All factory-supplied and user-created automation code was contained in a common structure prior to the CloudForms 3.1 release.  This made updates difficult when any user-added code was introduced.  User-supplied modifications needed to be exported and reimported/merged whenever an automation update was released.&lt;/p&gt;</code></pre>
+<p>To import a Datastore backup from a CloudForms 3.0 and prior format Datastore, we must convert it to the new Datastore format first, like so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /var/www/miq/vmdb</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/rake evm:automate:convert FILE<span style="color:#f92672">=</span>database.xml DOMAIN<span style="color:#f92672">=</span>SAMPLE ZIP_FILE<span style="color:#f92672">=</span>/tmp/sample_converted.zip</code></pre></div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+
+
+## Section 4: Namespaces
+
+A *namespace* is a folder-like container for classes, instances, and methods, and is used purely for organizational purposes.  We create namespaces to arrange our code logically, and namespaces often contain other namespaces.
+
+<img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-namespaces.png" width="300"/><br/>
+*Namespaces*
+
+
+## Section 5: Classes
+
+A *class* is similar to a template: it contains a generic definition for a set of automation operations.  Each class has a *schema* that defines the variables, states, relationships, or methods that instances of the class will use.
+
+<p>
+
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+   The Automate Datastore uses object-oriented terminology for these objects.  A *class* is a generic definition for a set of automation operations, and these classes are *instantiated* as specific instances.
+
+The classes that we work with in the Automate Datastore are not the same as Ruby classes that we work with in our automation scripts.  
+</div>
+</p>
+
+<div class="panel-group">
+  
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapsee101028ffb23b53f005e5067cc2c0b05" class="collapsed">
+      
+        Schemas
+      </a>
+    </h4>
+  </div>
+  
+
+<p><div id="collapsee101028ffb23b53f005e5067cc2c0b05" class="panel-collapse collapse "></p>
+<pre><code>&lt;div class=&#34;panel-body&#34;&gt;
+   &lt;p&gt;A &lt;em&gt;schema&lt;/em&gt; is made up of a number of elements, or &lt;em&gt;fields&lt;/em&gt;, that describe the properties of the class.  A schema often has just one entry—to run a single method—but in many cases it has several components.  The following shows the schema for a &lt;em&gt;placement&lt;/em&gt; class, which has several different field types.&lt;/p&gt;</code></pre>
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-schemas.png" width="1000"/><br/>
+<em>A more complex schema</em></p>
+<pre><code>&lt;/div&gt;</code></pre>
+<p></div>
+</div></p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapsec2db60bd398407ae3df1ddcf36ed4541" class="collapsed">
+      
+        Adding or Editing a Schema
+      </a>
+    </h4>
+  </div>
+  
+
+<p><div id="collapsec2db60bd398407ae3df1ddcf36ed4541" class="panel-collapse collapse "></p>
+<pre><code>&lt;div class=&#34;panel-body&#34;&gt;
+   &lt;blockquote&gt;</code></pre>
+<p>Go to <b><i class="fa fa-cog fa-lg" aria-hidden="true"></i> Configuration</b> → <b><i class="fa fa-pencil fa-lg" aria-hidden="true"></i> Edit selected schema</b>.</p>
+</blockquote>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-schemas-edit.png" width="1000"/><br/>
+<em>Edit selected schema</em></p>
+
+<p>We add or edit each schema field in the schema editor by specifying the field type from a drop-down list.</p>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-schemas-edit-field.png" width="1000"/><br/>
+<em>Edit field</em></p>
+
+<p>Each field type has an associated data type, which is also selectable from a drop-down list.</p>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-schemas-edit-field-type.png" width="1000"/><br/>
+<em>Edit field type</em></p>
+
+<p>We can define default values for fields in a class schema.  These will be inherited by all instances created from the class but can be optionally overridden in the schema of any particular instance.</p>
+<pre><code>&lt;/div&gt;</code></pre>
+<p></div>
+</div></p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse9c42a8dad75b66b9f15317b0ddba75a1" class="collapsed">
+      
+        Relationships
+      </a>
+    </h4>
+  </div>
+  
+
+<p><div id="collapse9c42a8dad75b66b9f15317b0ddba75a1" class="panel-collapse collapse "></p>
+<pre><code>&lt;div class=&#34;panel-body&#34;&gt;
+   &lt;p&gt;One of the schema field types is a &lt;em&gt;relationship&lt;/em&gt;, which links to other instances elsewhere in the Automate Datastore.  We often use relationships as a way of chaining instances together, and relationship values can accept variable substitutions for flexibility.&lt;/p&gt;</code></pre>
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-schemas-field-type-relationship.png" width="600"/><br/>
+<em>Relationship fields showing variable substitutions</em></p>
+<pre><code>&lt;/div&gt;</code></pre>
+<p></div>
+</div></p>
+
+<p></div></p>
+
+<h2 id="section-6-instances">Section 6. Instances</h2>
+
+<p>An <em>instance</em> is a specific <em>instantiation</em> or “clone” of the generic class and is the entity run by the Automation Engine.  An instance contains a copy of the class schema but with actual values of the fields filled in.</p>
+
+<p><img title="" src="../images/cfme-nav-automate-instances.png" width="300"/><br/>
+<em>Single class definition with three instances</em></p>
+
+<h2 id="section-7-methods">Section 7. Methods</h2>
+
+<p>A <em>method</em> is a self-contained block of Ruby code that gets executed when we run any automation operation.  A typical method looks like this:</p>
+
+<!-- TODO configure ruby highlighting for the block of text below.  Specifying ruby results in very poor color contrast (light colors on light grey background) and significant reformatting of code -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#75715e">#</span>
+<span style="color:#75715e"># Description: This method checks to see if the VM has been powered off or suspended.</span>
+<span style="color:#75715e">#</span>
+
+<span style="color:#75715e"># Get vm from root object</span>
+vm <span style="color:#f92672">=</span> $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;vm&#39;</span><span style="color:#f92672">]</span>
+
+<span style="color:#66d9ef">if</span> vm
+  power_state <span style="color:#f92672">=</span> vm<span style="color:#f92672">.</span>attributes<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;power_state&#39;</span><span style="color:#f92672">]</span>
+  ems <span style="color:#f92672">=</span> vm<span style="color:#f92672">.</span>ext_management_system
+  $evm<span style="color:#f92672">.</span>log(<span style="color:#e6db74">&#39;info&#39;</span>, <span style="color:#e6db74">&#34;VM:&lt;</span><span style="color:#e6db74">#{</span>vm<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&gt; on provider:&lt;</span><span style="color:#e6db74">#{</span>ems<span style="color:#f92672">.</span>try(<span style="color:#e6db74">:name</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74"> has Power \
+</span><span style="color:#e6db74">           State:&lt;</span><span style="color:#e6db74">#{</span>power_state<span style="color:#e6db74">}</span><span style="color:#e6db74">&gt;&#34;</span>)
+
+  <span style="color:#75715e"># If VM is powered off or suspended exit</span>
+  <span style="color:#66d9ef">if</span> <span style="color:#e6db74">%w(off suspended)</span><span style="color:#f92672">.</span>include?(power_state)
+    <span style="color:#75715e"># Bump State</span>
+    $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;ae_result&#39;</span><span style="color:#f92672">]</span>         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ok&#39;</span>
+  <span style="color:#66d9ef">elsif</span> power_state <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;never&#34;</span>
+    <span style="color:#75715e"># If never then this VM is a template so exit the retirement state machine</span>
+    $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;ae_result&#39;</span><span style="color:#f92672">]</span>         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;error&#39;</span>
+  <span style="color:#66d9ef">else</span>
+    $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;ae_result&#39;</span><span style="color:#f92672">]</span>         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;retry&#39;</span>
+    $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;ae_retry_interval&#39;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;60.seconds&#39;</span>
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span></code></pre></div>
+<p>Methods can have one of three <em>location</em> values: <em>inline</em>, <em>built-in</em>, or <em>URI</em>.  In practice most of the methods that we create are inline methods, which means they run as a separate Ruby process outside of Rails.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab exercise we’ve learned about the fundamental objects or organizational units that we work with in the Automate Datastore: domains, namespaces, classes, instances, and methods.</p>
+
+<p>We are now ready to use this information to write our first automation script!</p>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/cloudforms41/exercise1.16/">&larr; Previous: Exercise 1.16 - Explore Containers</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/cloudforms41/exercise1.18/">Next: Exercise 1.18 - “Hello, World!” Automation Script &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/cloudforms41">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

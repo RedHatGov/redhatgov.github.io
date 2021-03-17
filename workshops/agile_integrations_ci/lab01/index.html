@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Lab 01 - API Design | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Lab 01 - API Design</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/agile_integrations_ci">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/agile_integrations_ci/openshift/">&larr; Previous: Welcome to OpenShift</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/agile_integrations_ci/lab02/">Next: Lab 02 - API Mocking &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    
+
+<h2 id="lab-1">Lab 1</h2>
+
+<h2 id="api-design">API Design</h2>
+
+<h3 id="create-an-openapi-specification-using-apicurio-studio">Create an OpenAPI Specification using Apicurio Studio</h3>
+
+<ul>
+<li>Duration: 10 mins</li>
+<li>Audience: API Owner, Product Manager, Developers, Architects</li>
+</ul>
+
+<p><br><img src="../images/agenda-01.png "Login" width="900" /><br><br></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>As APIs become more widespread in the enterprise, consistent design and usage is critically important to improve reusability. The more reusable APIs are, the less friction there is for other internal or external teams to make progress. Having design standards and tools baked into the API development and maintenance process is a very powerful way to enable this consistency.</p>
+
+<h3 id="why-red-hat">Why Red Hat?</h3>
+
+<p>Red Hat is one of the founding members of the Linux Foundation OpenAPI Initiative (OAI) which produces the leading standard for REST API specifications. Red Hat consistently uses this standard throughout its tooling, starting with the Apicurio Studio API Designer editor.</p>
+
+<h2 id="lab-instructions">Lab Instructions</h2>
+
+<h3 id="step-1-creating-apis-with-apicurio-studio">Step 1: Creating APIs with Apicurio Studio</h3>
+
+<ol>
+<li><p>Open a browser window and navigate to Apicurio.  Please ask your Instructor if you do not have the link.</p></li>
+
+<li><p>Log in using your designated user and password.</p>
+
+<p><br><img src="../images/design-01.png "Login" width="900" /><br><br></p></li>
+
+<li><p>Click on <strong>Create New API</strong>.</p>
+
+<p><br><img src="../images/design-03.png "Create New API" width="900" /><br><br></p></li>
+
+<li><p>Create a brand new API by completing the following information:</p>
+
+<ul>
+<li>Type: <strong>Open API 3.0.2</strong></li>
+<li>Name: <strong>Locations-UserX</strong> (Replace <em>X</em> with your user number)</li>
+<li>Description: <strong>Locations API</strong></li>
+</ul>
+
+<p><br><img src="../images/design-04.png "Create API" width="900" /><br><br></p></li>
+
+<li><p>Click on <strong>Create API</strong>.</p></li>
+
+<li><p>Finally, click on <strong>Edit API</strong> to start editing your newly created API.</p>
+
+<p><br><img src="../images/design-05.png "Edit API" width="900" /><br><br></p></li>
+</ol>
+
+<h3 id="step-2-editing-apis">Step 2: Editing APIs</h3>
+
+<p>You are now in the main screen to edit your APIs. Apicurio is a graphical, form-based API editor. With Apicurio you don't need master in and out all the details of the <strong>OpenAPI Specification</strong>. It allows you to design beautiful, functionals APIs with zero coding.</p>
+
+<p>Let's start crafting your API.</p>
+
+<ol>
+<li><p>Time to prepare our data definitions for the API. Click on the <strong>Add a datatype</strong> link under the <em>Data Types</em>.</p>
+
+<p><br><img src="../images/design-15.png "Add Datatype" width="900" /><br><br></p></li>
+
+<li><p>Fill in the <em>Name</em> field with the value <strong>location</strong>. Expand the <em>Enter the JSON Example (optional)</em> to paste the following example, then click <strong>Save</strong>:</p>
+
+<ul>
+<li>Name: <strong>location</strong></li>
+
+<li><p>JSON Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;id&#34;</span>: 1,
+    <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;International Inc Corporate Office&#34;</span>,
+    <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
+        <span style="color:#e6db74">&#34;lat&#34;</span>: 51.5013673,
+        <span style="color:#e6db74">&#34;lng&#34;</span>: -0.1440787
+    <span style="color:#f92672">}</span>,
+    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;headquarter&#34;</span>,
+    <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
+<span style="color:#f92672">}</span></code></pre></div></li>
+
+<li><p>Choose to create a REST Resource with the Data Type: <strong>No Resource</strong></p></li>
+</ul>
+
+<p><br><img src="../images/design-16.png "JSON Example" width="900" /><br><br></p></li>
+
+<li><p>Apicurio automatically tries to detect the data types from the provided example.</p>
+
+<p><br><img src="../images/design-17.png "Definition Data Types" width="900" /><br><br></p>
+
+<p><em>Time to start creating some paths</em>.</p></li>
+</ol>
+
+<h3 id="step-3-adding-paths">Step 3: Adding Paths</h3>
+
+<h4 id="3a-add-locations-path-with-get-method">3a: Add <code>/locations</code> path with GET method</h4>
+
+<p>The <code>/locations</code> path with an HTTP GET method will return a complete set of all location records in the database.</p>
+
+<ol>
+<li><p>Click on the <strong>Add a path</strong> link under the <em>Paths</em> section. APIs need at least one path.</p>
+
+<p><br><img src="../images/design-06.png "Add Path" width="900" /><br><br></p></li>
+
+<li><p>Fill in the new resource path with the following information:</p>
+
+<ul>
+<li>Path: <strong>/locations</strong></li>
+</ul>
+
+<p><br><img src="../images/design-07.png "Path" width="900" /><br><br></p></li>
+
+<li><p>Click <strong>Add</strong>.</p>
+
+<p><em>By default, Apicurio suggest a series of available operations for your new path</em>.</p></li>
+
+<li><p>Click <strong>Create Operation</strong> under the <em>GET</em> operation.</p>
+
+<p><br><img src="../images/design-08.png "Create Operation" width="900" /><br><br></p></li>
+
+<li><p>Click on the green <strong>GET</strong> operation button to edit the operation information.</p>
+
+<p><br><img src="../images/design-09.png "Get Operation" width="900" /><br><br></p>
+
+<p><em>As you can notice, Apicurio Editor guides you with warning for the elements missing in your design</em>.</p></li>
+
+<li><p>Click on the <strong>Add a response</strong> link under <em>Responses</em> to edit the response for this operation.</p>
+
+<p><br><img src="../images/design-58.png "Add Response" width="900" /><br><br></p></li>
+
+<li><p>Leave the <strong>200</strong> option selected in the  <em>Response Status Code</em> combo box and click on <strong>Add</strong>.</p>
+
+<p><br><img src="../images/design-11.png "Add Response Code" width="900" /><br><br></p></li>
+
+<li><p>Scroll down to the bottom of the page. Move your mouse over the <strong>200 OK</strong> response to enable the options. Click the <em>No response media types defined</em> drop-down. Now click on the <strong>Add Media Type</strong> button.</p>
+
+<p><br><img src="../images/design-59.png "Add Media Type" width="900" /><br><br></p></li>
+
+<li><p>Click on the <em>Add</em> button to accept <strong>application/json</strong> as the Media Type.</p>
+
+<p><br><img src="../images/design-18.png "Location Type" width="900" /><br><br></p></li>
+
+<li><p>Click on the <em>Type</em> dropdown and select <strong>Array</strong> and <strong>location</strong>.</p>
+
+<p><br><img src="../images/design-18a.png "Location Type" width="900" /><br><br></p></li>
+
+<li><p>Click the <strong>Add an example</strong> link to add a Response Example.</p>
+
+<p><em>This will be useful to mock your API in the next lab</em>.</p>
+
+<p><br><img src="../images/design-19.png "Add Example" width="900" /><br><br></p></li>
+
+<li><p>Fill in the information for your response example:</p>
+
+<ul>
+<li>Name: <strong>all</strong></li>
+
+<li><p>Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>
+    <span style="color:#f92672">{</span>
+        <span style="color:#e6db74">&#34;id&#34;</span>: 1,
+        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;International Inc Corporate Office&#34;</span>,
+        <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
+            <span style="color:#e6db74">&#34;lat&#34;</span>: 51.5013673,
+            <span style="color:#e6db74">&#34;lng&#34;</span>: -0.1440787
+        <span style="color:#f92672">}</span>,
+        <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;headquarter&#34;</span>,
+        <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
+    <span style="color:#f92672">}</span>,
+    <span style="color:#f92672">{</span>
+        <span style="color:#e6db74">&#34;id&#34;</span>: 2,
+        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;International Inc North America&#34;</span>,
+        <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
+            <span style="color:#e6db74">&#34;lat&#34;</span>: 40.6976701,
+            <span style="color:#e6db74">&#34;lng&#34;</span>: -74.259876
+        <span style="color:#f92672">}</span>,
+        <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;office&#34;</span>,
+        <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
+    <span style="color:#f92672">}</span>,
+    <span style="color:#f92672">{</span>
+        <span style="color:#e6db74">&#34;id&#34;</span>: 3,
+        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;International Inc France&#34;</span>,
+        <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
+            <span style="color:#e6db74">&#34;lat&#34;</span>: 48.859,
+            <span style="color:#e6db74">&#34;lng&#34;</span>: 2.2069746
+        <span style="color:#f92672">}</span>,
+        <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;office&#34;</span>,
+        <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">]</span></code></pre></div></li>
+</ul>
+
+<p><br><img src="../images/design-20.png "Response Example" width="900" /><br><br></p></li>
+
+<li><p>Click on the drop-down next to the <code>No description</code> message, and enter <code>Returns an array of location records</code> as the description.  Click the check-mark button to accept the description.</p>
+
+<p><br><img src="../images/design-54.png "Enter description" width="900" /><br><br></p></li>
+
+<li><p>Click on the green <strong>GET</strong> operation button to highlight the list of operations.</p>
+
+<p><br><img src="../images/design-31.png "Get Operation" width="900" /><br><br></p></li>
+</ol>
+
+<h4 id="3b-update-locations-path-with-post-method">3b: Update <code>/locations</code> path with POST method</h4>
+
+<p>The HTTP POST method will allow us to insert a new locations record into the database.</p>
+
+<ol>
+<li><p>Click on the <strong>Create Operation</strong> link under <em>POST</em> to create a new POST operation.</p>
+
+<p><br><img src="../images/design-32.png "Create POST operation" width="900" /><br><br></p></li>
+
+<li><p>Click the orange <strong>POST</strong> button to edit the operation.</p>
+
+<p><br><img src="../images/design-33.png "Edit POST operation" width="900" /><br><br></p></li>
+
+<li><p>Click the <strong>Add a response</strong> link.</p>
+
+<p><br><img src="../images/design-34.png "Edit POST operation" width="900" /><br><br></p></li>
+
+<li><p>Set the <strong>Response Status Code</strong> value to <code>201</code>.  Click Add.</p>
+
+<p><br><img src="../images/design-35.png "Edit POST operation" width="900" /><br><br></p></li>
+
+<li><p>Click on the drop-down next to the <code>No description</code> message, and enter <code>Creates a new location record</code> as the description.  Click the check-mark button to accept the description.</p>
+
+<p><br><img src="../images/design-55.png "Enter description" width="900" /><br><br></p></li>
+
+<li><p>Scroll down to the bottom of the page. Move your mouse over the <strong>201 Created</strong> response to enable the options. Click the <em>No response media types defined</em> drop-down. Now click on the <strong>Add Media Type</strong> button.</p>
+
+<p><br><img src="../images/design-60.png "Add Media Type" width="900" /><br><br></p></li>
+
+<li><p>Click on the <em>Add</em> button to accept <strong>application/json</strong> as the Media Type.</p>
+
+<p><br><img src="../images/design-18.png "Location Type" width="900" /><br><br></p></li>
+
+<li><p>Click on the <em>Type</em> dropdown and select <strong>location</strong>.</p>
+
+<p><br><img src="../images/design-36.png "Location" width="900" /><br><br></p></li>
+</ol>
+
+<h4 id="3c-add-locations-id-path-with-get-method">3c: Add <code>/locations/{id}</code> path with GET method</h4>
+
+<p>The <code>/locations/{id}</code> path will return a single location record based on a single <code>id</code> parameter, passed via the URL.</p>
+
+<ol>
+<li><p>Now we need to create another path.  Click on the <code>+</code> symbol to add a new path, then enter <code>/locations/{id}</code> for the <strong>Path</strong> property.  Click <strong>Add</strong>.</p>
+
+<p><br><img src="../images/design-37.png "Location" width="900" /><br><br></p></li>
+
+<li><p>Scroll over the <code>id</code> <em>Path Parameter</em> value, then click the <strong>Create</strong> button.</p>
+
+<p><br><img src="../images/design-37a.png "Location" width="900" /><br><br></p></li>
+
+<li><p>Click the drop-down arrow, then update the <code>id</code> Path Parameter by selecting <code>Integer</code> as the <strong>Type</strong> and <code>32-Bit Integer</code> as the sub-type.</p>
+
+<p><br><img src="../images/design-38.png "Path Parameter" width="900" /><br><br></p></li>
+
+<li><p>Click on the <code>Create Operation</code> button underneath <strong>GET</strong>, then click the green <strong>GET</strong> button.</p>
+
+<p><br><img src="../images/design-39.png "Path Parameter" width="900" /><br><br></p></li>
+
+<li><p>Click on the <strong>Add a response</strong> link under <em>Responses</em> to edit the response for this operation.</p>
+
+<p><br><img src="../images/design-10.png "Add Response" width="900" /><br><br></p></li>
+
+<li><p>Leave the <strong>200</strong> option selected in the  <em>Response Status Code</em> combo box and click on <strong>Add</strong>.</p>
+
+<p><br><img src="../images/design-11.png "Add Response Code" width="900" /><br><br></p></li>
+
+<li><p>Scroll down to the bottom of the page. Move your mouse over the <strong>200 OK</strong> response to enable the options. Click the <em>No response media types defined</em> drop-down. Now click on the <strong>Add Media Type</strong> button.</p>
+
+<p><br><img src="../images/design-12.png "Add Media Type" width="900" /><br><br></p></li>
+
+<li><p>Click on the <em>Add</em> button to accept <strong>application/json</strong> as the Media Type.</p>
+
+<p><br><img src="../images/design-18.png "Location Type" width="900" /><br><br></p></li>
+
+<li><p>Click on the <em>Type</em> dropdown and select <strong>location</strong>.</p>
+
+<p><br><img src="../images/design-40.png "Location Type" width="900" /><br><br></p></li>
+
+<li><p>Click on the drop-down next to the <code>No description</code> message, and enter <code>Returns a single location record</code> as the description.  Click the check-mark button to accept the description.</p>
+
+<p><br><img src="../images/design-56.png "Enter description" width="900" /><br><br></p></li>
+</ol>
+
+<h4 id="3d-add-locations-phone-id-path-with-get-method">3d: Add <code>/locations/phone/{id}</code> path with GET method</h4>
+
+<p>The <code>/locations/phone/{id}</code> path will return a single location record based on a single phone number parameter, passed via the URL.</p>
+
+<ol>
+<li><p>Now we need to create another path.  Click on the <code>+</code> symbol to add a new path, then enter <code>/locations/phone/{id}</code> for the <strong>Path</strong> property.  Click <strong>Add</strong>.</p>
+
+<p><br><img src="../images/design-41.png "Location" width="900" /><br><br></p></li>
+
+<li><p>Click on the <code>Create Operation</code> button underneath <strong>Get</strong>, then click the green <strong>Get</strong> button.</p>
+
+<p><br><img src="../images/design-42.png "Get operation" width="900" /><br><br></p></li>
+
+<li><p>Scroll down to the <code>id</code> path parameter to highlight the row, and click the <code>Create</code> button that appears.</p>
+
+<p><br><img src="../images/design-53.png "Get operation" width="900" /><br><br></p></li>
+
+<li><p>Click the drop-down arrow next to <code>No Type</code>, then update the <code>id</code> Path Parameter by selecting <code>Integer</code> as the <strong>Type</strong> and <code>32-Bit Integer</code> as the sub-type.</p>
+
+<p><br><img src="../images/design-64.png "Path Parameter" width="900" /><br><br></p></li>
+
+<li><p>Click on the <strong>Add a response</strong> link under <em>Responses</em> to edit the response for this operation.</p>
+
+<p><br><img src="../images/design-61.png "Add Response" width="900" /><br><br>)</p></li>
+
+<li><p>Leave the <strong>200</strong> option selected in the  <em>Response Status Code</em> combo box and click on <strong>Add</strong>.</p>
+
+<p><br><img src="../images/design-11.png "Add Response Code" width="900" /><br><br></p></li>
+
+<li><p>Scroll down to the bottom of the page. Move your mouse over the <strong>200 OK</strong> response to enable the options. Click the <em>No response media types defined</em> drop-down. Now click on the <strong>Add Media Type</strong> button.</p>
+
+<p><br><img src="../images/design-62.png "Add Media Type" width="900" /><br><br></p></li>
+
+<li><p>Click on the <em>Add</em> button to accept <strong>application/json</strong> as the Media Type.</p>
+
+<p><br><img src="../images/design-18.png "Location Type" width="900" /><br><br></p></li>
+
+<li><p>Click on the <em>Type</em> dropdown and select <strong>location</strong>.</p>
+
+<p><br><img src="../images/design-63.png "Location Type" width="900" /><br><br></p></li>
+
+<li><p>Click on the drop-down next to the <code>No description</code> message, and enter <code>Returns a location record</code> as the description.  Click the check-mark button to accept the description.</p>
+
+<p><br><img src="../images/design-57.png "Enter description" width="900" /><br><br></p></li>
+</ol>
+
+<h3 id="step-4-download-the-api-definition">Step 4: Download the API definition</h3>
+
+<ol>
+<li><p>Click the <strong>Locations-UserX</strong> link to return to the API admin page.</p>
+
+<p><br><img src="../images/design-22.png "Locations API" width="900" /><br><br></p></li>
+
+<li><p>To start using your new API definition, display the API menu from the kebab link. Click the <strong>Download (YAML)</strong> option from the menu.</p>
+
+<p><br><img src="../images/design-23.png "Download API" width="900" /><br><br></p></li>
+
+<li><p>This will start the download of your API definition file. It could take a few seconds to start the download. <strong>Save</strong> it to your local disk drive.</p></li>
+
+<li><p>You can open the file with any text editor. Take a look at the source file. Everything is there.</p>
+
+<p><br><img src="../images/design-24.png "API Definition Source" width="900" /><br><br></p></li>
+</ol>
+
+<p><em>Congratulations!</em> You have created your first API definition based on the OpenAPI Specification  using Red Hat's Apicurio. Don't lose track of the file, you will use this definition for your next lab.</p>
+
+<h2 id="steps-beyond">Steps Beyond</h2>
+
+<p>So, you want more? Did you notice the link <strong>source</strong> when editing the <em>Paths</em> or the <em>Definitions</em>? Get back to the API editor and follow the link. What do you see? Apicurio lets you follow the form-based editor or go one step beyond and also lets you direct edit the source of your API definition.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab you used Apicurio Studio to create a simple API definition using the OpenAPI Specification. You learned how to author and download a standards compliant API Specification using Red Hat's APICurio.</p>
+
+<h2 id="notes-and-further-reading">Notes and Further Reading</h2>
+
+<ul>
+<li>Apicurio
+
+<ul>
+<li><a href="https://www.apicur.io">Webpage</a></li>
+<li><a href="https://www.apicur.io/roadmap/">Roadmap</a></li>
+</ul></li>
+<li>OpenAPI
+
+<ul>
+<li><a href="https://www.openapis.org/">OpenAPI Initiative</a></li>
+<li><a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md">OpenAPI Specification 3.0.2</a></li>
+</ul></li>
+</ul>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/agile_integrations_ci/openshift/">&larr; Previous: Welcome to OpenShift</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/agile_integrations_ci/lab02/">Next: Lab 02 - API Mocking &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/agile_integrations_ci">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

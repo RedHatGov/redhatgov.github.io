@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Workshops on Red Hat | Public Sector</title>
+    <link>/workshops/</link>
+    <description>Recent content in Workshops on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Agile Integrations Workshop - Citizen Integrator</title>
+      <link>/workshops/agile_integrations_ci/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/agile_integrations_ci/</guid>
+      <description>Description The Agile Integration Workshop teaches the development, testing, and deployment of cloud-native and connected solutions. You will walk through an API Development and Agile Integration process leveraging OpenShift, Apicurio, Microcks, Fuse, and 3scale for a sample application.
+Who should attend  Developers API Owners API Consumers Architects Technical leads  What you will learn  Exploring OpenAPI contracts Create contract-first APIs Convert existing SOAP APIs to REST API Management API Security  Introduction Red Hat&#39;s integration solutions give you the power to connect everything in your enterprise—from apps and APIs to data and devices—to provide greater value to your customers.</description>
+    </item>
+    
+    <item>
+      <title>Agile Integrations Workshop - Developer</title>
+      <link>/workshops/agile_integrations_dev/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/agile_integrations_dev/</guid>
+      <description>Description The Agile Integration Workshop teaches the development, testing, and deployment of cloud-native and connected solutions. You will walk through an API Development and Agile Integration process leveraging OpenShift, Apicurio, Microcks, Fuse, and 3scale for a sample application.
+Who should attend  Developers API Owners API Consumers Architects Technical leads  What you will learn  Exploring OpenAPI contracts Create contract-first APIs Convert existing SOAP APIs to REST API Management API Security  Introduction Red Hat&#39;s integration solutions give you the power to connect everything in your enterprise—from apps and APIs to data and devices—to provide greater value to your customers.</description>
+    </item>
+    
+    <item>
+      <title>Ansible Automation Workshop</title>
+      <link>/workshops/ansible_automation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/ansible_automation/</guid>
+      <description>Workshop Description Ansible Tower will enable you to create playbooks, while building in security. Automation features will save time, empower junior staff, offload senior staff and automate your most tedious tasks!
+   Who should attend   Architects
+  Developers
+  Technical Leads
+  Operations Engineers
+     What you will learn   How to run ad hoc commands
+  How to write a playbook</description>
+    </item>
+    
+    <item>
+      <title>Ansible Tower Workshop on Azure</title>
+      <link>/workshops/ansible_tower_azure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/ansible_tower_azure/</guid>
+      <description>Workshop Description Learn to build Red Hat Ansible Tower playbooks to build in security, empower junior staff and offload senior staff, by automating your most tedious tasks!
+   Who should attend   Architects
+  Developers
+  Technical Leads
+  Operations Engineers
+     What you will learn   How to run ad hoc commands
+  How to write a playbook</description>
+    </item>
+    
+    <item>
+      <title>ansible_ansible</title>
+      <link>/workshops/ansible_ansible/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/ansible_ansible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CloudForms Workshops</title>
+      <link>/workshops/cloudforms41/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/</guid>
+      <description>CloudForms Workshop Workshop Description Manage the hybrid environment, on-premise and commercial cloud providers to include: Quota management, auditing, Continuous discovery and tracking.
+Who should attend  Architects Developers Technical Leads Operations Engineers  What you will learn  Resource usage, optimization, and capacity planning. Cloud and container fundamentals. Configuration auditing, change tracking, and drift analysis. Continuous discovery, monitoring, and tracking.  Exercise Overview  Learn the basics of a CloudForms environment.</description>
+    </item>
+    
+    <item>
+      <title>Container Security - A Practical Introduction</title>
+      <link>/workshops/security_container_intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_container_intro/</guid>
+      <description>A PRACTICAL INTRODUCTION TO CONTAINER SECURITY Red Hat Summit 2020 Bob Kozdemba (bkozdemb@redhat.com) Dan Walsh (dwalsh@redhat.com)
+    Abstract Linux containers provide convenient application packaging and run-time isolation in multi-tenant environments. However, the security implications of running containerized applications is often taken for granted. For example, today it is very easy to pull container images from the internet and run them in the enterprise without examining their content and authenticity.</description>
+    </item>
+    
+    <item>
+      <title>Container Security Workshop</title>
+      <link>/workshops/security_containers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/</guid>
+      <description>Description Learn how to scan, secure and leverage properties in the Linux kernel like seccomp, namespaces, ccgroups to secure your docker containers.
+   Who should attend   People familiar with containers that have had Containers 101
+  Architects
+  Developers
+  Technical leads
+  Operations Engineers
+     What you will learn   Cockpit
+  CGroups
+  Namespaces</description>
+    </item>
+    
+    <item>
+      <title>Containers 101 Workshop</title>
+      <link>/workshops/containers_101/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/containers_101/</guid>
+      <description>Workshop Description This workshop will introduce you to Linux containers and provide you with foundational container hands-on training.
+   Who should attend Today&amp;#8217;s container workshop is meant for anyone who has any exposure to Linux containers, whether you have used it or not.
+   What you will learn   How to install docker, buildah, podman, and skopeo
+  How to run an existing container image</description>
+    </item>
+    
+    <item>
+      <title>DevSecOps Workshop - Secure Software Factory</title>
+      <link>/workshops/secure_software_factory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/</guid>
+      <description>Description In this workshop, you&#39;ll be building a Secure Software Factory for a Java based website leveraging several containerized tools such as Gogs, Nexus, Jenkins, Sonarqube, and Che hosted on the OpenShift Container Platform
+Who Should Attend  Anyone who has had OpenShift 101 Architects Developers Technical leads Operations Engineers  What you will learn  A tiny bit of Jenkins Automating the development process Trusted Software Supply Chain  Agenda  Introductions and Agenda Familiarization with the Environment Setting the Context  Labs   Verify Prerequisites     Login Tour - Wetty     Lab 01 - Welcome to OpenShift     Lab 02 - Trusted Software Supply Chain     Lab 03 - CI/CD Project and Pods     Lab 04 - Jenkins and OpenShift     Lab 05 - Creating Your Pipeline     Lab 06 - Build App Stage     Lab 07 - Test Stage     Lab 08 - Static Application Security Testing     Lab 09 - Archive App     Lab 10 - Create Image Builder     Lab 11 - Build Image     Lab 12 - Create and Deploy to Dev     Lab 13 - Promote and Deploy to Stage     Lab 14 - Run Pipeline     Lab 15 - Trigger the Software Supply Chain     Lab 16 - Create Quay Account     Lab 17 - Clair Vulnerability Scan     Lab 18 - OpenSCAP DISA STIG Scan     Fin    .</description>
+    </item>
+    
+    <item>
+      <title>dynatrace_openshift</title>
+      <link>/workshops/dynatrace_openshift/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/dynatrace_openshift/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JBoss Data Virtualization Development</title>
+      <link>/workshops/jdv_dev/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/jdv_dev/</guid>
+      <description>Who should attend  Developers People who are comfortable using the command line People with knowledge of SQL People who can work with Virtual Machines or Docker People who understand REST services and JSON  What you will create  Brand new JBoss Data Virtualization install JBoss Developer Studio development environment Consume, compose and create REST data services from several data sources Apply role based security and column masking to the create REST data services An AngularJS based web application to consume and view the REST data services  Your end product You will walk away from this workshop with a basic end to end JBoss Data Virtualization environment.</description>
+    </item>
+    
+    <item>
+      <title>Linux Containers the Hard Way</title>
+      <link>/workshops/containers_the_hard_way/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/containers_the_hard_way/</guid>
+      <description>Workshop Description This workshop will deep dive into the Linux internals that enable containers to work. Containers will be demystified so developers and admins will have a better grasp at what their favorite container engine is doing at runtime.
+   Who should attend Today&amp;#8217;s container workshop is meant for anyone who has any exposure to Linux containers, and assumes that you have run a container or two. If you have had no exposure to containers, that&amp;#8217;s fine too, just don&amp;#8217;t be shy about asking questions.</description>
+    </item>
+    
+    <item>
+      <title>Microservices Workshop - Strangling the Monolith</title>
+      <link>/workshops/strangling_the_monolith/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/strangling_the_monolith/</guid>
+      <description>Microservices Workshop - Strangling the Monolith Description Large organizations have a tremendous amount of resources invested in existing monolithic applications, in the workshop you will learn a sane way to capture the benefits of containers and orchestration without having to execute a complete rewrite.
+Who should attend  Anyone who has had Containers 101 Architects Developers Technical leads -Operations Engineers  What you will learn Tour of Openshift Strangling your Monolith Microservice Integration Patterns</description>
+    </item>
+    
+    <item>
+      <title>OpenShift 101 - DC Metro Map Workshop</title>
+      <link>/workshops/openshift_101_dcmetromap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_101_dcmetromap/</guid>
+      <description>OpenShift 101 - DC Metro Map Workshop Description This workshop will have you deploying and creating native docker images for a Node.js based website and learning to leverage the power of OpenShift to build, deploy, scale, and automate.
+Who should attend  Anyone who has had any exposure to Containers Architects Developers Technical leads Operations Engineers  What you will learn  S21 Rollback Replication and Recovery Using Labels CI/CD pipeline Blue/Green Deployment  Introduction Welcome to the workshop!</description>
+    </item>
+    
+    <item>
+      <title>OpenShift 4 101</title>
+      <link>/workshops/openshift_4_101/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/</guid>
+      <description>OpenShift 4 101 Description This workshop will have you deploying and creating native docker images for a Node.js based website and learning to leverage the power of OpenShift 4 to build, deploy, scale, and automate.
+Who should attend  Anyone who has had any exposure to Containers Architects Developers Technical leads Operations Engineers  What you will learn  S2I Rollback Replication and Recovery Using Labels CI/CD pipeline Blue/Green Deployment  Introduction Welcome to the workshop!</description>
+    </item>
+    
+    <item>
+      <title>OpenShift 4 101 w/Dynatrace</title>
+      <link>/workshops/openshift_4_101_dynatrace/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/</guid>
+      <description>OpenShift 4 101 w/Dynatrace Description This workshop will have you deploying and creating native docker images for a Node.js based website and learning to leverage the power of OpenShift 4 to build, deploy, scale, and automate. Additionaly, you will learn how to monitor the applications through the deployment of a Dynatrace OneAgent Operator.
+Who should attend  Anyone who has had any exposure to Containers Architects Developers Technical leads Operations Engineers  What you will learn  Enabling Dynatrace OneAgent Operator and integration with Dynatrace ActiveGate (optional) S2I Rollback Replication and Recovery Using Labels CI/CD pipeline Blue/Green Deployment  Introduction Welcome to the workshop!</description>
+    </item>
+    
+    <item>
+      <title>OpenShift Security Workshop</title>
+      <link>/workshops/security_openshift/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/</guid>
+      <description>Description Learn about secrets and how to Secure your microservices and containers by using and extending Linux scanning features, SCC, Seccomp and the security API.
+   Who should attend   Anyone who has had any exposure to Containers
+  Architects
+  Developers
+  Technical leads
+  Operations Engineers
+     What you will learn   SELinux
+  Openshift deployment</description>
+    </item>
+    
+    <item>
+      <title>OpenShift Service Mesh</title>
+      <link>/workshops/openshift_service_mesh/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_service_mesh/</guid>
+      <description>OpenShift Service Mesh Description As modern applications move toward microservices based architectures the importance of a platform to back both development and operational work grows. Development teams struggle with building, debugging, and connecting services properly. And application operations teams face increasing challenges with hybrid deployments, scaling bottlenecks, recovering from failure, and gathering metrics. Red Hat’s OpenShift Service Mesh lets you connect, secure, control, and observe your microservice based applications.</description>
+    </item>
+    
+    <item>
+      <title>Red Hat Enterprise Linux 8</title>
+      <link>/workshops/rhel_8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhel_8/</guid>
+      <description>Workshop Description This workshop will cover the features, specifications and improvements that comprise the release of Red Hat Enterprise Linux Version 8 (RHEL 8). RHEL 8 brings many improvements over previous releases, including:
+   Application streams, which enables the use of bleeding edge interpreters, compilers and libraries, while maintaining full backwards compatibility and stability of the system
+  The web console has been completely overhauled, and significant new features have been added</description>
+    </item>
+    
+    <item>
+      <title>Red Hat OpenStack Platform 101</title>
+      <link>/workshops/rhosp_101/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhosp_101/</guid>
+      <description>Red Hat OpenStack Platform 101 Description During this workshop, you get your first taste of using and operating a Red Hat OpenStack Platform cloud. After the workshop, you will have hands on experience working with software defined networking, software defined storage, managing security groups and using heat to define application stacks.
+Who should attend  System Administrators Architects Technical leads Operations Engineers  What you will learn  Working in the OpenStack Dashboard and CLI Managing Neutron Networks and Floating IPs Managing Security Groups, Images and Instances Using Heat for Orchestration Using Software defined block and object Storage  Introduction This workshop on Red Hat OpenStack Platform is designed as an introduction for those who are intending to implement a cloud computing environment using OpenStack.</description>
+    </item>
+    
+    <item>
+      <title>SELinux Policy Workshop</title>
+      <link>/workshops/selinux_policy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/selinux_policy/</guid>
+      <description>Workshop Description Writing your own SELinux policies doesn&amp;#8217;t have to be a terrifying prospect! This workshop will walk you through the process of creating a custom policy for a source-compiled application, using the advanced tooling present in Red Hat Enterprise Linux.
+   Who should attend   Architects
+  Developers
+  Technical Leads
+  Operations Engineers
+     What you will learn   Where to find SELinux reference information</description>
+    </item>
+    
+    <item>
+      <title>Source to Image</title>
+      <link>/workshops/source_to_image/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/source_to_image/</guid>
+      <description>Source-to-Image - Accelerating Application Development Description Containers have transformed the IT space by leaps and bounds. Source-to-image allows developers to take advantage of containers and truly focus on their code. S2I also allows infrastructure managers to standardize both the development and deployment environments. This starts you on a path towards a high-speed, high-efficiency DevOps organization
+Who Should Attend  Anyone who has had Containers 101 Architects Developers Technical leads Operations Engineers  What you will learn  A tiny bit of Golang How to install S2I tooling How to use S2I to deploy apps with cutom frameworks  Agenda  Arrivals Introductions and Agenda Familiarization with the Environment Setting the Context Build a Container Image Create a Custom S2I Builder Create an OCP Template  Labs   Prerequisites     The Setup     Lab - Run the App     Lab - Containerize the App     Lab - Source-to-Image     Lab - Gochat S2I     Lab - Roll Dice     Conclusion    .</description>
+    </item>
+    
+    <item>
+      <title>zOpenShift Service Mesh</title>
+      <link>/workshops/openshift_service_mesh_v1.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_service_mesh_v1.0/</guid>
+      <description>OpenShift Service Mesh Description As modern applications move toward microservices based architectures the importance of a platform to back both development and operational work grows. Development teams struggle with building, debugging, and connecting services properly. And application operations teams face increasing challenges with hybrid deployments, scaling bottlenecks, recovering from failure, and gathering metrics. Red Hat’s OpenShift Service Mesh lets you connect, secure, control, and observe your microservice based applications.</description>
+    </item>
+    
+  </channel>
+</rss>

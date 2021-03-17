@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DevSecOps Workshop - Secure Software Factory on Red Hat | Public Sector</title>
+    <link>/workshops/secure_software_factory/</link>
+    <description>Recent content in DevSecOps Workshop - Secure Software Factory on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/secure_software_factory/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fin</title>
+      <link>/workshops/secure_software_factory/fin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/fin/</guid>
+      <description>That&#39;s it! Hopefully, you understand how to build a Trusted Software Supply Chain on OpenShift.</description>
+    </item>
+    
+    <item>
+      <title>Lab 01 - Welcome to OpenShift</title>
+      <link>/workshops/secure_software_factory/lab01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab01/</guid>
+      <description>Welcome to OpenShift! This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.
+Key Terms We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with. You&#39;ll learn more terms along the way, but these are the basics to get you started.</description>
+    </item>
+    
+    <item>
+      <title>Lab 02 - Trusted Software Supply Chain</title>
+      <link>/workshops/secure_software_factory/lab02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab02/</guid>
+      <description>Trusted Software Supply Chain The notion of Trusted Software Supply Chain is that of applying an assembly line approach to software that includes building increasing levels of assurance before marking an artifact as ready to deploy to production.
+In this workshop, you will use build orchestration tools such as Jenkins, Kubernetes, and OpenShift to support implementing and integrating continuous delivery (CD) as the foundation of automating the various stages of the deployment lifecycle are represented – from development, multiple types of testing, user acceptance, staging, to production release.</description>
+    </item>
+    
+    <item>
+      <title>Lab 03 - CI/CD Project and Pods</title>
+      <link>/workshops/secure_software_factory/lab03/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab03/</guid>
+      <description>Before moving forward, it is important to understand the difference between Continuous Integration (CI), Continuous Delivery (CD), and Continuous Deployment.
+Also, a part of this lab we’ll be using using Pipelines in OpenShift for CI/CD, which gives you control over building, deploying, and promoting your applications on OpenShift. Using a combination of the Jenkins Pipeline Build Strategy, Jenkinsfiles, and the OpenShift Domain Specific Language (DSL) (provided by the OpenShift Jenkins Client Plug-in), you can create advanced build, test, deploy, and promote pipelines for any scenario.</description>
+    </item>
+    
+    <item>
+      <title>Lab 04 - Jenkins and OpenShift</title>
+      <link>/workshops/secure_software_factory/lab04/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab04/</guid>
+      <description>Jenkins can be integrated with OpenShift in 3 ways. Today, you&#39;ll be working with a containerized Jenkins Server that&#39;s fully integrated with OpenShift.
+Login through SSO with Jenkins Go into your CI/CD project and find the running Jenkins Pod.
+Click the external route (https://jenkins…) to go into your Jenkins Server
+Click Login with OpenShift.
+Login with your OpenShift Credentials. You maybe asked to accept authorizations. Go ahead and do so and re-login.</description>
+    </item>
+    
+    <item>
+      <title>Lab 05 - Creating Your Pipeline</title>
+      <link>/workshops/secure_software_factory/lab05/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab05/</guid>
+      <description>Today, you will be building your Trusted Software Supply Chain using a Jenkins Pipeline that is integrated with OpenShift.
+In addition to standard Jenkins Pipeline Syntax, the OpenShift Jenkins image provides the OpenShift Domain Specific Language (DSL) (through the OpenShift Jenkins Client Plug-in), which aims to provide a readable, concise, comprehensive, and fluent syntax for rich interactions with an OpenShift API server, allowing for even more control over the build, deployment, and promotion of applications on your OpenShift cluster.</description>
+    </item>
+    
+    <item>
+      <title>Lab 06 - Build App Stage</title>
+      <link>/workshops/secure_software_factory/lab06/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab06/</guid>
+      <description>Add Build App Stage to Pipeline Text File Next, you will add the Build App Stage to your pipeline.
+The git branch step will clone the openshift-tasks project with the git branch locally from your gogs server to your jenkins node. The jenkins node is leveraging the git jenkins plugin to communicate to gogs.
+Please note that we are leveraging the eap-7 branch in our git project and not the master branch.</description>
+    </item>
+    
+    <item>
+      <title>Lab 07 - Test Stage</title>
+      <link>/workshops/secure_software_factory/lab07/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab07/</guid>
+      <description>Add Test Stage Add the configuration for the Test Stage below to your pipeline text file.
+Maven will run the test stage in the life cycle that we skipped at the previous stages.
+Maven will place the test results in the surefire-reports folder. The maven surefire-reports plugin allows for the generation of reports for your unit tests.
+
+Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit</description>
+    </item>
+    
+    <item>
+      <title>Lab 08 - Static Application Security Testing</title>
+      <link>/workshops/secure_software_factory/lab08/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab08/</guid>
+      <description>Static Application Security Testing Next we will add a Code Analysis Stage into the pipeline.
+We will leverage the Maven Sonar plugin to run SonarQube scanning against our source code.
+SonarQube is an open source static code analysis tool that we can use to automate running security scans against your source code to further improve the security of your application. Every time you check-in code, SonarQube will scan the quality and perform a threat analysis of that code.</description>
+    </item>
+    
+    <item>
+      <title>Lab 09 - Archive App</title>
+      <link>/workshops/secure_software_factory/lab09/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab09/</guid>
+      <description>Add Archive Stage Archiving the built and tested application into a trusted repository is important to making sure you are building with trusted parts. You assume this application is built properly and all the previous stages have passed. With that confidence, your built and tested application should be immutable in a trusted repository. The repository will version or audit any changes to the application, configuration, and dependencies.
+Add Archive Stage Steps into your pipeline.</description>
+    </item>
+    
+    <item>
+      <title>Lab 10 - Create Image Builder</title>
+      <link>/workshops/secure_software_factory/lab10/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab10/</guid>
+      <description>Containers Containers are an important foundation for your application in building a Trusted Software Supply Chain. You want a secure and blessed golden container image that your application will inherit security controls from.
+Containers are built using a layered approach. For example, to create a container of a Java web application, you could do so in multiple layers: the OS, the JVM, the web server, and the code itself.</description>
+    </item>
+    
+    <item>
+      <title>Lab 11 - Build Image</title>
+      <link>/workshops/secure_software_factory/lab11/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab11/</guid>
+      <description>Add Build Image Stage Add the Build Image Stage into your pipeline.
+The &amp;quot;sh&amp;quot; are shell commands in your pipeline that are executed on the Jenkins Slave. Maven built the openshift-tasks.war in it the target directory and it will be copied into the created oc-builds directory.
+The startBuild stage is kicked off from Openshift and pointing to the local directory &amp;quot;oc-build&amp;quot; on the Jenkins slave.
+
+Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit</description>
+    </item>
+    
+    <item>
+      <title>Lab 12 - Create and Deploy to Dev</title>
+      <link>/workshops/secure_software_factory/lab12/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab12/</guid>
+      <description>Add Create Dev Stage Add Create Dev Stage into the pipeline.
+We first check if an deployment config for the Dev Project already exists. If it does not exists, a new application is created and deployment config is defined for the Dev Project.
+Before a trigger is created, the pipeline sleeps for 10 seconds. A deployment configuration can contain triggers, which drive the creation of new deployment processes in response to events inside the cluster.</description>
+    </item>
+    
+    <item>
+      <title>Lab 13 - Promote and Deploy to Stage</title>
+      <link>/workshops/secure_software_factory/lab13/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab13/</guid>
+      <description>Add Promote to Stage Enter the Promote to STAGE below into your pipeline.
+We set an approval to promote to the application to the Stage Project. The approval process is a good feature for various gates of your deployments. We also set a 15 minute timeout on the approval. You also tag the tasks image with latest and the version from the pom file.
+
+Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit</description>
+    </item>
+    
+    <item>
+      <title>Lab 14 - Run Pipeline</title>
+      <link>/workshops/secure_software_factory/lab14/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab14/</guid>
+      <description>Verify Completed Pipeline Before we kick off your pipeline, let&#39;s verify it.
+In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit YAML
+Take a look and see if it matches the below text. If not, please correct it.
+apiVersion: v1 kind: BuildConfig metadata: annotations: pipeline.alpha.openshift.io/uses: &amp;#39;[{&amp;#34;name&amp;#34;: &amp;#34;jenkins&amp;#34;, &amp;#34;namespace&amp;#34;: &amp;#34;&amp;#34;, &amp;#34;kind&amp;#34;: &amp;#34;DeploymentConfig&amp;#34;}]&amp;#39; labels: app: cicd-pipeline name: cicd-pipeline name: tasks-pipeline spec: triggers: - type: GitHub github: secret: &amp;#34;secret101&amp;#34; - type: Generic generic: secret: &amp;#34;secret101&amp;#34; runPolicy: Serial source: type: None strategy: jenkinsPipelineStrategy: env: - name: DEV_PROJECT value: dev-userYOUR# - name: STAGE_PROJECT value: stage-userYOUR# jenkinsfile: |- def version, mvnCmd = &amp;#34;mvn -s configuration/cicd-settings-nexus3.</description>
+    </item>
+    
+    <item>
+      <title>Lab 15 - Trigger the Software Supply Chain</title>
+      <link>/workshops/secure_software_factory/lab15/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab15/</guid>
+      <description>Trigger the Trusted Software Supply Chain with Code Check-ins Through automation, you will trigger the Trusted Software Supply Chain with code check-ins.
+
+Verify Webhook in Gogs The Webhook is what triggers your pipeline upon code check-ins. You want your SCM to trigger the pipeline as opposed to Jenkins constantly polling the source code for changes.
+Click on the Gogs route url in the CI/CD project which takes you to the home page.</description>
+    </item>
+    
+    <item>
+      <title>Lab 16 - Create Quay Account</title>
+      <link>/workshops/secure_software_factory/lab16/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab16/</guid>
+      <description>Create Quay Account Please go to the Quay Login with the link given to you by your instructor
+Click Create Account at the bottom of the page.
+
+
+Fill in the account information for Quay.
+ Username: your assigned username i.e userYOUR# E-mail address: your email address Password: openshift Confirm Password: openshift  Click Create Account
+
+
+
+ .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
+    </item>
+    
+    <item>
+      <title>Lab 17 - Clair Vulnerability Scan</title>
+      <link>/workshops/secure_software_factory/lab17/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab17/</guid>
+      <description>Add Clair Container Scan Add the configuration for the Container Vulnerability Scan below to your pipeline text file.
+
+
+Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit
+In your pipeline, add and update the following variables after the version and mvnCmd definitions. Please fill in the values between the quotes.
+ ocuser : the openshift user given to you by your insturctor ocpass : the openshift password given to you by your insturctor ocp : the openshift host given to you by your instuctor quayuser : the quay user you created previously quaypass : the quay password you created previously quayrepo : the quay repo you will push your app image to i.</description>
+    </item>
+    
+    <item>
+      <title>Lab 18 - OpenSCAP DISA STIG Scan</title>
+      <link>/workshops/secure_software_factory/lab18/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/lab18/</guid>
+      <description>Add OpenSCAP DISA STIG Scan Add the configuration for the OpenSCAP Scan below to your pipeline text file.
+
+
+Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit
+In your pipeline, verify the following variables are there after the version and mvnCmd definitions. Please fill in the values between the quotes if not done previously.
+ ocuser : the openshift user given to you by your insturctor ocpass : the openshift password given to you by your insturctor ocp : the openshift host given to you by your instuctor</description>
+    </item>
+    
+    <item>
+      <title>Login Tour - Wetty</title>
+      <link>/workshops/secure_software_factory/login_tour_wetty/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/login_tour_wetty/</guid>
+      <description>Introduction to Wetty (Browser-based SSH) This lab provides a quick tour of the browser based SSH client Wetty. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
+Accessing Wetty Ask your instructor for the wetty URL.
+Login Info login: userYOUR# Password: &amp;lt;Instructor Provided&amp;gt; After logging in, you should see a shell.
+The wetty instance will already have the &#39;oc&#39; command installed on them.</description>
+    </item>
+    
+    <item>
+      <title>Verify Prerequisites</title>
+      <link>/workshops/secure_software_factory/prerequisites/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/secure_software_factory/prerequisites/</guid>
+      <description>Prerequisites  This workshop is done entirely through the browser.   Chrome is the preferred browser for this workshop   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); -webkit-animation-name: fadeIn; -webkit-animation-duration: 0.4s; animation-name: fadeIn; animation-duration: 0.4s } .modal-content { position: fixed; bottom: 0; background-color: #fefefe; width: 100%; -webkit-animation-name: slideIn; -webkit-animation-duration: 0.4s; animation-name: slideIn; animation-duration: 0.</description>
+    </item>
+    
+  </channel>
+</rss>

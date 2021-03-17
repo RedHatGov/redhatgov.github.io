@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Lab 7 - Using the OpenStack CLI(s) | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Lab 7 - Using the OpenStack CLI(s)</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/rhosp_101">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/rhosp_101/7_managing_instances/">&larr; Previous: Lab 6 - Managing Instances</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/rhosp_101/9_heat/">Next: Lab 8 - Using Heat to Describe Stacks &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    
+
+<h1 id="okay-uis-are-cool-and-all-but-can-t-i-just-use-the-cli">Okay. UIs Are Cool and All, But Can't I Just Use the CLI?</h1>
+
+<p>Absolutely! There are 3 ways to interact with OpenStack.</p>
+
+<ul>
+<li>API<br /></li>
+<li>CLI<br /></li>
+<li>GUI</li>
+</ul>
+
+<p>In this lab, we are going to walk through some of the activities that we did in the previous labs via the CLI.</p>
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+  
+When you see a CLI command starting with **openstack**, the command is part of the Unified CLI.
+
+When you see a CLI command that starts with a project name like **nova**, these are the individual CLIs.
+
+You can read more about the OpenStack CLIs at:  
+https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/command_line_interface_reference/index
+
+</div>
+
+<h2 id="first-we-need-access-to-a-system-with-the-clis-installed">First, We Need Access to a System with the CLIs Installed</h2>
+
+<div class="alert alert-warning">
+  
+  <span class="pficon pficon-warning-triangle-o"></span>
+  
+In order to complete this lab, you will need an SSH client.
+
+On Linux or Mac, you can just use your favorite terminal.
+
+On Windows, you will need to download [putty](http://192.168.0.8/repos/putty.exe) if you don't already have it. This is an exe file that does not need to be installed. It will just run directly.
+
+</div>
+
+<blockquote>
+<p>On Linux or Mac, in your terminal, ssh to 192.168.1.90 on port 22</p>
+</blockquote>
+<pre><code>$ ssh student<span class="userid">1</span>@192.168.1.90</code></pre>
+<p>If on Windows, run putty, enter <strong>192.168.1.90</strong> as the host and <strong>22</strong> as the port.</p>
+
+<p>You will get asked if you are sure you want to connect. Type <strong>yes</strong> and hit enter.</p>
+
+<p>Login with your <strong>student<span class="userid">1</span></strong> credentials.</p>
+
+<h2 id="let-s-autenticate-to-the-openstack-cloud">Let's Autenticate to the OpenStack Cloud</h2>
+
+<blockquote>
+<p>Source your student<span class="userid">1</span>rc file</p>
+</blockquote>
+<pre><code>$ source student<span class="userid">1</span>rc</code></pre>
+<blockquote>
+<p>Verify that you are connected by running openstack server list</p>
+</blockquote>
+<pre><code>$ openstack server list</code></pre>
+<p>You should see the two instances you created in the previous lab.</p>
+<pre><code>(overcloud) [student1@bastion ~]$ openstack server list
++--------------------------------------+-------------------+--------+-------------------------------------+-----------------+---------+
+| ID                                   | Name              | Status | Networks                            | Image           | Flavor  |
++--------------------------------------+-------------------+--------+-------------------------------------+-----------------+---------+
+| 45a45a6e-6e51-4858-b5d0-9e16a9308c33 | student1-cirros-1 | ACTIVE | private-a=172.16.0.6, 192.168.1.106 | student1-cirros | m1.tiny |
+| cbd781be-cc64-4302-b15c-5a7ae805a917 | student1-cirros-2 | ACTIVE | private-a=172.16.0.14               | student1-cirros | m1.tiny |
++--------------------------------------+-------------------+--------+-------------------------------------+-----------------+---------+</code></pre>
+<h2 id="now-let-s-upload-another-cirros-image-for-fun">Now Let's Upload Another Cirros Image for Fun</h2>
+
+<blockquote>
+<p>First we'll download the image using curl</p>
+</blockquote>
+<pre><code>$ curl -o ~/cirros.img http://192.168.0.8/images/cirros.img</code></pre><pre><code>(overcloud) [student1@bastion ~]$ curl -o ~/cirros.img http://192.168.0.8/images/cirros.img
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 44.0M  100 44.0M    0     0   103M      0 --:--:-- --:--:-- --:--:--  103M</code></pre>
+<blockquote>
+<p>Upload the cirros test image to glance</p>
+</blockquote>
+<pre><code>$ openstack image create --disk-format raw --container-format bare --private --min-disk 1 --min-ram 64 --file ~/cirros.img student<span class="userid">1</span>-cirros-cli</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack image create --disk-format raw --container-format bare --private --min-disk 1 --min-ram 64 --file ~/cirros.img student1-cirros-cli
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field            | Value                                                                                                                                                                                                                                             |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| checksum         | ba3cd24377dde5dfdd58728894004abb                                                                                                                                                                                                                  |
+| container_format | bare                                                                                                                                                                                                                                              |
+| created_at       | 2019-07-13T20:22:50Z                                                                                                                                                                                                                              |
+| disk_format      | raw                                                                                                                                                                                                                                               |
+| file             | /v2/images/8ac9ad11-8de3-477c-96f7-184f784ed629/file                                                                                                                                                                                              |
+| id               | 8ac9ad11-8de3-477c-96f7-184f784ed629                                                                                                                                                                                                              |
+| min_disk         | 1                                                                                                                                                                                                                                                 |
+| min_ram          | 64                                                                                                                                                                                                                                                |
+| name             | student1-cirros-cli                                                                                                                                                                                                                               |
+| owner            | b32431890c454e55920e7bc50b6ddba3                                                                                                                                                                                                                  |
+| properties       | direct_url=&#39;rbd://fcd7abfc-9f3e-11e9-8480-52540035d3ce/images/8ac9ad11-8de3-477c-96f7-184f784ed629/snap&#39;, locations=&#39;[{u&#39;url&#39;: u&#39;rbd://fcd7abfc-9f3e-11e9-8480-52540035d3ce/images/8ac9ad11-8de3-477c-96f7-184f784ed629/snap&#39;, u&#39;metadata&#39;: {}}]&#39; |
+| protected        | False                                                                                                                                                                                                                                             |
+| schema           | /v2/schemas/image                                                                                                                                                                                                                                 |
+| size             | 46137344                                                                                                                                                                                                                                          |
+| status           | active                                                                                                                                                                                                                                            |
+| tags             |                                                                                                                                                                                                                                                   |
+| updated_at       | 2019-07-13T20:22:53Z                                                                                                                                                                                                                              |
+| virtual_size     | None                                                                                                                                                                                                                                              |
+| visibility       | private                                                                                                                                                                                                                                           |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</code></pre>
+<p>You will now see two images in your openstack image list prefixed with student<span class="userid">1</span> in their name.</p>
+
+<blockquote>
+<p>Run openstack image list to see the available images</p>
+</blockquote>
+<pre><code>$ openstack image list</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack image list
++--------------------------------------+---------------------+--------+
+| ID                                   | Name                | Status |
++--------------------------------------+---------------------+--------+
+| f04b16d2-cd9e-4c03-947b-20383282009b | centos7             | active |
+| 663a45fa-a947-45a2-9dbe-4ac25803d85b | cirros              | active |
+| 57f3da04-f33b-40d5-8851-ee9ddfe708f1 | rhel76              | active |
+| ed758583-0a2f-4cbd-b85e-bda14837e199 | student1-cirros     | active |
+| 8ac9ad11-8de3-477c-96f7-184f784ed629 | student1-cirros-cli | active |
+| 03352bdc-142e-47b3-b42f-75364f6aa7ae | ubuntu1604          | active |
+| 96d74563-846b-43a2-a18e-070a537d52ab | win2012r2           | active |
++--------------------------------------+---------------------+--------+</code></pre>
+<h2 id="let-s-list-the-available-instance-flavors-now">Let's List the Available Instance Flavors Now</h2>
+
+<blockquote>
+<p>Run the following command to see the existing flavors</p>
+</blockquote>
+<pre><code>$ openstack flavor list</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack flavor list
++----+-------------+-------+------+-----------+-------+-----------+
+| ID | Name        |   RAM | Disk | Ephemeral | VCPUs | Is Public |
++----+-------------+-------+------+-----------+-------+-----------+
+| 1  | m1.tiny     |   256 |    1 |         0 |     1 | True      |
+| 2  | m1.small    |  1024 |   10 |         0 |     1 | True      |
+| 3  | m1.medium   |  2048 |   20 |         0 |     2 | True      |
+| 4  | m1.large    |  4096 |   40 |         0 |     4 | True      |
+| 5  | m1.xlarge   |  8192 |   80 |         0 |     8 | True      |
+| 6  | cf.min      | 12288 |   80 |         0 |     4 | True      |
+| 7  | ocp1.master | 16384 |   80 |         0 |     8 | True      |
+| 8  | ocp1.node   | 32768 |   80 |         0 |     8 | True      |
+| 9  | sat6.min    | 12288 |   80 |         0 |     4 | True      |
++----+-------------+-------+------+-----------+-------+-----------+</code></pre>
+<h2 id="now-we-will-list-our-project-s-floating-ip-addresses">Now We Will List Our Project's Floating IP Addresses</h2>
+
+<blockquote>
+<p>List the existing floating IP addresses</p>
+</blockquote>
+<pre><code>$ openstack floating ip list</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack floating ip list
++--------------------------------------+---------------------+------------------+--------------------------------------+--------------------------------------+----------------------------------+
+| ID                                   | Floating IP Address | Fixed IP Address | Port                                 | Floating Network                     | Project                          |
++--------------------------------------+---------------------+------------------+--------------------------------------+--------------------------------------+----------------------------------+
+| 3179f0b8-64f2-4959-b7a3-2a32f5852552 | 192.168.1.106       | 172.16.0.6       | 6ff12e22-4d1f-4473-95d5-c5254a2b6391 | a9995d51-dd08-4837-b6b7-8b565bf989bc | b32431890c454e55920e7bc50b6ddba3 |
+| 92599c17-dfdc-4b1b-b295-17c28be76eca | 192.168.1.75        | None             | None                                 | a9995d51-dd08-4837-b6b7-8b565bf989bc | b32431890c454e55920e7bc50b6ddba3 |
+| fcdbc24b-8b67-45fe-92d8-c3fa3287f778 | 192.168.1.113       | None             | None                                 | a9995d51-dd08-4837-b6b7-8b565bf989bc | b32431890c454e55920e7bc50b6ddba3 |
++--------------------------------------+---------------------+------------------+--------------------------------------+--------------------------------------+----------------------------------+</code></pre>
+<h2 id="let-s-now-create-a-second-private-network">Let's Now Create a Second Private Network</h2>
+
+<blockquote>
+<p>First create the network</p>
+</blockquote>
+<pre><code>$ openstack network create private-b</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack network create private-b
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | UP                                   |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2019-07-13T20:30:30Z                 |
+| description               |                                      |
+| dns_domain                | None                                 |
+| id                        | 797fe261-340a-41a0-bb21-4171326cd70d |
+| ipv4_address_scope        | None                                 |
+| ipv6_address_scope        | None                                 |
+| is_default                | False                                |
+| is_vlan_transparent       | None                                 |
+| mtu                       | 1450                                 |
+| name                      | private-b                            |
+| port_security_enabled     | True                                 |
+| project_id                | b32431890c454e55920e7bc50b6ddba3     |
+| provider:network_type     | None                                 |
+| provider:physical_network | None                                 |
+| provider:segmentation_id  | None                                 |
+| qos_policy_id             | None                                 |
+| revision_number           | 3                                    |
+| router:external           | Internal                             |
+| segments                  | None                                 |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| updated_at                | 2019-07-13T20:30:30Z                 |
++---------------------------+--------------------------------------+</code></pre>
+<blockquote>
+<p>Then let's create the private-b subnet</p>
+</blockquote>
+<pre><code>$ openstack subnet create --network private-b --subnet-range 172.16.1.0/24 --dns-nameserver 192.168.0.4 private-b-subnet</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack subnet create --network private-b --subnet-range 172.16.1.0/24 --dns-nameserver 192.168.0.4 private-b-subnet
++-------------------+--------------------------------------+
+| Field             | Value                                |
++-------------------+--------------------------------------+
+| allocation_pools  | 172.16.1.2-172.16.1.254              |
+| cidr              | 172.16.1.0/24                        |
+| created_at        | 2019-07-13T20:31:14Z                 |
+| description       |                                      |
+| dns_nameservers   | 192.168.0.4                          |
+| enable_dhcp       | True                                 |
+| gateway_ip        | 172.16.1.1                           |
+| host_routes       |                                      |
+| id                | 24a033df-7707-44ac-88b6-87bdde2d522f |
+| ip_version        | 4                                    |
+| ipv6_address_mode | None                                 |
+| ipv6_ra_mode      | None                                 |
+| name              | private-b-subnet                     |
+| network_id        | 797fe261-340a-41a0-bb21-4171326cd70d |
+| project_id        | b32431890c454e55920e7bc50b6ddba3     |
+| revision_number   | 0                                    |
+| segment_id        | None                                 |
+| service_types     |                                      |
+| subnetpool_id     | None                                 |
+| tags              |                                      |
+| updated_at        | 2019-07-13T20:31:14Z                 |
++-------------------+--------------------------------------+</code></pre>
+<blockquote>
+<p>List the Neutron Networks and Subnets</p>
+</blockquote>
+<pre><code>$ openstack network list &amp;&amp; openstack subnet list</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack network list &amp;&amp; openstack subnet list
++--------------------------------------+-----------+--------------------------------------+
+| ID                                   | Name      | Subnets                              |
++--------------------------------------+-----------+--------------------------------------+
+| 797fe261-340a-41a0-bb21-4171326cd70d | private-b | 24a033df-7707-44ac-88b6-87bdde2d522f |
+| a9995d51-dd08-4837-b6b7-8b565bf989bc | public    | c8e9c906-63cb-4937-8ba6-529b3a25316d |
+| f6a47e55-b213-4a40-8265-dc249a56741b | private-a | 00debc08-d555-4d3c-ab51-7b0b34a571b1 |
++--------------------------------------+-----------+--------------------------------------+
++--------------------------------------+------------------+--------------------------------------+----------------+
+| ID                                   | Name             | Network                              | Subnet         |
++--------------------------------------+------------------+--------------------------------------+----------------+
+| 00debc08-d555-4d3c-ab51-7b0b34a571b1 | private-a-sub    | f6a47e55-b213-4a40-8265-dc249a56741b | 172.16.0.0/24  |
+| 24a033df-7707-44ac-88b6-87bdde2d522f | private-b-subnet | 797fe261-340a-41a0-bb21-4171326cd70d | 172.16.1.0/24  |
+| c8e9c906-63cb-4937-8ba6-529b3a25316d | public-sub       | a9995d51-dd08-4837-b6b7-8b565bf989bc | 192.168.0.0/23 |
++--------------------------------------+------------------+--------------------------------------+----------------+</code></pre>
+<h2 id="lastly-let-s-create-an-instance-using-the-cli">Lastly, Let's Create an Instance Using the CLI</h2>
+
+<blockquote>
+<p>Run the following command to boot a nova instance using the m1.tiny flavor, and the newest cirros image that we uploaded earlier in this lab.<br />
+We will also attach it to the new <strong>private-b</strong> network</p>
+</blockquote>
+<pre><code>$ openstack server create --image student<span class="userid">1</span>-cirros-cli --flavor m1.tiny --key-name student<span class="userid">1</span> --network private-b student<span class="userid">1</span>-cirros-cli-1</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack server create --image student1-cirros-cli --flavor m1.tiny --key-name student1 --network private-b student1-cirros-cli-1
++-----------------------------+------------------------------------------------------------+
+| Field                       | Value                                                      |
++-----------------------------+------------------------------------------------------------+
+| OS-DCF:diskConfig           | MANUAL                                                     |
+| OS-EXT-AZ:availability_zone |                                                            |
+| OS-EXT-STS:power_state      | NOSTATE                                                    |
+| OS-EXT-STS:task_state       | scheduling                                                 |
+| OS-EXT-STS:vm_state         | building                                                   |
+| OS-SRV-USG:launched_at      | None                                                       |
+| OS-SRV-USG:terminated_at    | None                                                       |
+| accessIPv4                  |                                                            |
+| accessIPv6                  |                                                            |
+| addresses                   |                                                            |
+| adminPass                   | GYr35n7VsrLf                                               |
+| config_drive                |                                                            |
+| created                     | 2019-07-13T20:33:27Z                                       |
+| flavor                      | m1.tiny (1)                                                |
+| hostId                      |                                                            |
+| id                          | e0c0187f-e437-48fc-a415-36bfcb5fc2e6                       |
+| image                       | student1-cirros-cli (8ac9ad11-8de3-477c-96f7-184f784ed629) |
+| key_name                    | student1                                                   |
+| name                        | student1-cirros-cli-1                                      |
+| progress                    | 0                                                          |
+| project_id                  | b32431890c454e55920e7bc50b6ddba3                           |
+| properties                  |                                                            |
+| security_groups             | name=&#39;default&#39;                                             |
+| status                      | BUILD                                                      |
+| updated                     | 2019-07-13T20:33:27Z                                       |
+| user_id                     | 1ae2f6781ade4af384fe770c135847b3                           |
+| volumes_attached            |                                                            |
++-----------------------------+------------------------------------------------------------+</code></pre>
+<blockquote>
+<p>You can watch openstack server list to see it go through the provisioning process and become active</p>
+</blockquote>
+<pre><code>$ watch openstack server list</code></pre><pre><code>Every 2.0s: openstack server list                                                                                                                                                                                      Sat Jul 13 16:39:03 2019
+
++--------------------------------------+-----------------------+--------+-------------------------------------+---------------------+---------+
+| ID                                   | Name                  | Status | Networks                            | Image               | Flavor  |
++--------------------------------------+-----------------------+--------+-------------------------------------+---------------------+---------+
+| e0c0187f-e437-48fc-a415-36bfcb5fc2e6 | student1-cirros-cli-1 | ACTIVE | private-b=172.16.1.6                | student1-cirros-cli | m1.tiny |
+| 45a45a6e-6e51-4858-b5d0-9e16a9308c33 | student1-cirros-1     | ACTIVE | private-a=172.16.0.6, 192.168.1.106 | student1-cirros     | m1.tiny |
+| cbd781be-cc64-4302-b15c-5a7ae805a917 | student1-cirros-2     | ACTIVE | private-a=172.16.0.14               | student1-cirros     | m1.tiny |
++--------------------------------------+-----------------------+--------+-------------------------------------+---------------------+---------+</code></pre>
+<h1 id="summary">Summary</h1>
+
+<p>We have now gone through some of the same excercises that we accomplished in Horizon, using strictly the CLI. The flexibility with which we can interact with OpenStack is a tremendous benefit.</p>
+
+<p>What if we could now take all of these manual steps we have gone through and put them into a template that does them all for us, the same way, every time?</p>
+
+<p>We can do this with Heat. That will be our next lab.</p>
+
+<hr>
+<h3>Workshop Details</h3>
+<div class="row">
+  <div class="col-lg-4 col-md-5 col-sm-12" id="workshopFooterDetails">
+    <table>
+      <tr>
+        <td class="text-right"><b>Domain</b></td>
+        <td><span class="domain"></span></td>
+        <td rowspan="3">
+          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Student ID</b></td>
+        <td><span class="userid"></span></td>
+      </tr>
+      <tr>
+        <td class="text-right"><b> </b></td>
+        <td><span></span></td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-lg-8 col-md-7 col-sm-12">
+    <form id="footerForm" onsubmit="return false;" class="row" style="padding: 1.75rem 0 0 0;">
+      <div class="form-group col-sm-6 col-md-6 col-lg-2">
+        <label for="userid">Student ID</label>
+        <select id="userid" name="userid" class="form-control">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-4">
+        <label for="domain">Domain</label>
+        <select id="domain" name="domain" class="form-control">
+          <option value="hattrick1.lab">hattrick1.lab</option>
+          <option value="hattrick2.lab">hattrick2.lab</option>
+          <option value="hattrick3.lab">hattrick3.lab</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-3">
+        <button type="submit" class="btn btn-primary form-control" style="margin-bottom:1rem;">Enter</button>
+        <button type="reset" class="btn btn-default form-control">Default</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<hr>
+
+<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
+<script type="text/javascript">
+<!--
+  
+  var Cookies2 = Cookies.noConflict();
+
+  var cookiePathArr = cleanArray(window.location.pathname.split('/'));
+  var cookiePath = '/' + cookiePathArr[0] + '/' + cookiePathArr[1] + '/';
+
+  function cleanArray(actual) {
+    var newArray = new Array();
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i]) {
+        newArray.push(actual[i]);
+      }
+    }
+    return newArray;
+  }
+  function replaceClassText() {
+    jQuery("span.domain").html(Cookies2.get("domain"));
+    jQuery("span.userid").html(Cookies2.get("userid"));
+  }
+  function pageLoadWorkshopFooterTest() {
+    
+    if (Cookies2.get("domain") === undefined) {
+      resetWorkshopFooter();
+    }
+    else {
+      replaceClassText();
+      setWorkshopFooterInputValues()
+    }
+  }
+  function setWorkshopFooterData() {
+    
+    Cookies2.set("domain", jQuery("select#domain").val(), { path: cookiePath, expires: 7 } );
+    Cookies2.set("userid", jQuery("select#userid").val(), { path: cookiePath, expires: 7 } );
+    replaceClassText();
+  }
+  function setWorkshopFooterInputValues() {
+    jQuery("select#domain").val(Cookies2.get("domain"));
+    jQuery("select#userid").val(Cookies2.get("userid"));
+  }
+  function resetWorkshopFooter() {
+    
+    jQuery("select#domain, select#userid").prop("selectedIndex", 0);
+    
+    Cookies2.set("domain", jQuery("select#domain option").first().val(), { path: cookiePath, expires: 7 } ); 
+    Cookies2.set("userid", jQuery("select#userid option").first().val(), { path: cookiePath, expires: 7 } ); 
+    
+    
+    replaceClassText();
+  }
+
+  jQuery(document).ready(function() {
+    pageLoadWorkshopFooterTest();
+
+    jQuery("form#footerForm").submit(function() {
+      setWorkshopFooterData();
+      return false; 
+    });
+
+    jQuery("form#footerForm").bind("reset", function() {
+      resetWorkshopFooter();
+      return true;
+    });
+
+    return false;
+  });
+-->
+</script>
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/rhosp_101/7_managing_instances/">&larr; Previous: Lab 6 - Managing Instances</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/rhosp_101/9_heat/">Next: Lab 8 - Using Heat to Describe Stacks &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/rhosp_101">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

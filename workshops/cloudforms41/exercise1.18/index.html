@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Exercise 1.18 - “Hello, World!” Automation Script | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Exercise 1.18 - “Hello, World!” Automation Script</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/cloudforms41">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/cloudforms41/exercise1.17/">&larr; Previous: Exercise 1.17 - Introduction to the Automate Datastore</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/cloudforms41/exercise1.19/">Next: Exercise 1.19 - Ansible Inside &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    
+
+<h1 id="exercise-1-18-hello-world-automation-script">Exercise 1.18 - “Hello, World!” Automation Script</h1>
+
+<h2 id="exercise-description">Exercise Description</h2>
+
+<p>Let’s jump right in and start writing our first automation script.  In time-honored fashion we’ll write “Hello, World!” to the Automate Engine logfile.</p>
+
+<p>Before we do anything, we need to ensure that the Automation Engine server role is selected on our CloudForms appliance.  We do this from the <strong>Configure</strong> → <strong>Configuration</strong> menu, selecting the CloudForms server in the Settings accordion.</p>
+
+<p>
+
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+   The Automation Engine server role is now enabled by default in CloudForms 4.1, but it’s still worthwhile to check that this role is set on our CloudForms appliance. 
+</div>
+</p>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-settings-configure-automation-engine.png" width="1000"/><br/>
+<em>Setting the Automation Engine server role</em></p>
+
+<h2 id="the-automation-engine-role">The Automation Engine Role</h2>
+
+<p>Setting the Automation Engine role is necessary to be able to run <em>queued</em> Automate tasks.  Automate actions initiated directly from the WebUI—such as running instances from Simulation, or processing methods to populate dynamic dialogs—are run on the WebUI appliance itself, regardless of whether it has the Automation Engine role enabled.</p>
+
+<h2 id="section-1-creating-the-environment">Section 1: Creating the Environment</h2>
+
+<p>Before we create our first automation script, we need to put some things in place.  We’ll begin by adding a new domain called <em>ACME</em>. We’ll add all of our automation code into this new domain.</p>
+
+<h3 id="step-1-goto-automate-explorer-then-i-class-fa-fa-cog-fa-lg-aria-hidden-true-i-configuration-i-class-fa-fa-plus-circle-fa-lg-aria-hidden-true-i-add-a-new-domain">Step 1. Goto <strong>Automate</strong> → <strong>Explorer</strong>, then <strong><i class="fa fa-cog fa-lg" aria-hidden="true"></i> Configuration</strong> → <strong><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> Add a New Domain</strong>.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-domain.png" width="1000"/><br/>
+<em>Adding a new domain</em></p>
+
+<h3 id="step-2-name-the-domain-acme-type-in-the-description-acme-corp-and-ensure-that-the-enabled-checkbox-is-selected">Step 2. Name the domain <strong>ACME</strong>, type in the Description <strong>ACME Corp.</strong>, and ensure that the Enabled checkbox is selected.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-domain-acme.png" width="1000"/><br/>
+<em>ACME Domain</em></p>
+
+<h2 id="section-2-adding-a-namespace">Section 2: Adding a Namespace</h2>
+
+<h3 id="step-1-add-a-namespace-into-this-domain-called-general-highlight-the-acme-domain-icon-in-the-sidebar-and-click-configuration-add-a-new-namespace">Step 1. Add a namespace into this domain, called <strong>General</strong>.  Highlight the ACME domain icon in the sidebar, and click <strong>Configuration</strong> → <strong>Add a New Namespace</strong>.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-domain-namespace.png" width="1000"/><br/>
+<em>Adding a new namespace</em></p>
+
+<h3 id="step-2-give-the-namespace-the-name-general-and-the-description-general-content">Step 2. Give the namespace the name <strong>General</strong> and the description <strong>General Content</strong>.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-domain-namespace-general.png" width="1000"/><br/>
+<em>General namespace</em></p>
+
+<h2 id="section-3-adding-a-class">Section 3:  Adding a Class</h2>
+
+<h3 id="step-1-now-we-ll-add-a-new-class-called-methods">Step 1. Now we’ll add a new class, called <em>Methods</em>.</h3>
+
+<p>
+
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+   Naming a class Methods may seem somewhat confusing, but many of the generic classes in the ManageIQ and RedHat domains in the Automate Datastore are called Methods to signify their general-purpose nature. 
+</div>
+</p>
+
+<h3 id="step-2-highlight-the-general-domain-icon-in-the-sidebar-and-click-configuration-add-a-new-class">Step 2. Highlight the General domain icon in the sidebar, and click <strong>Configuration</strong> → <strong>Add a New Class</strong>.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-namespace-class.png" width="1000"/><br/>
+<em>Adding a new class</em></p>
+
+<h3 id="step-3-give-the-class-the-name-methods-and-the-description-general-instances-and-methods-we-ll-leave-the-display-name-empty-for-this-example">Step 3. Give the class the name <strong>Methods</strong> and the description <strong>General Instances and Methods</strong>. We’ll leave the display name empty for this example.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-namespace-class-methods.png" width="1000"/><br/>
+<em>Methods class</em></p>
+
+<h2 id="section-4-editing-the-schema">Section 4: Editing the Schema</h2>
+
+<h3 id="step-1-now-we-ll-create-a-simple-schema-click-the-schema-tab-for-the-methods-class-and-click-configuration-edit-selected-schema">Step 1. Now we’ll create a simple schema. Click the Schema tab for the <em>Methods</em> class, and click <strong>Configuration</strong> → <strong>Edit selected Schema</strong>.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-schema.png" width="1000"/><br/>
+<em>Editing the schema</em></p>
+
+<h3 id="step-2-click-new-field-and-add-a-single-field-with-name-execute-type-method-and-data-type-string">Step 2. Click New Field, and add a single field with name <strong>execute</strong>, type <strong>Method</strong>, and data type <strong>String</strong>.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-schema-field.png" /><br/>
+<em>Adding a new schema field</em></p>
+
+<h3 id="step-3-click-the-checkmark-in-the-lefthand-column-to-save-the-field-entry-and-click-the-save-button-to-save-the-schema-we-now-have-our-generic-class-definition-called-methods-set-up-with-a-simple-schema-that-executes-a-single-method">Step 3. Click the checkmark in the lefthand column to save the field entry, and click the <strong>Save</strong> button to save the schema.  We now have our generic class definition called <em>Methods</em> set up, with a simple schema that executes a single method.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-schema-field-save.png" width="1000"/><br/>
+<em>Save schema field</em></p>
+
+<h1 id="hello-world">Hello, World!</h1>
+
+<h3 id="step-4-our-first-automate-method-is-very-simple-we-ll-write-an-entry-to-the-automation-log-file-using-this-two-line-script">Step 4. Our first Automate method is very simple; we’ll write an entry to the <em>automation.log</em> file using this two-line script:</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$evm.log<span style="color:#f92672">(</span>:info, <span style="color:#e6db74">&#34;Hello, World!&#34;</span><span style="color:#f92672">)</span>
+exit MIQ_OK</code></pre></div>
+<h2 id="section-5-adding-a-new-instance">Section 5. Adding a New Instance</h2>
+
+<h3 id="step-1-first-we-need-to-create-an-instance-from-our-class-in-the-instances-tab-of-the-new-methods-class-select-configuration-add-a-new-instance">Step 1. First we need to create an instance from our class.  In the Instances tab of the new <em>Methods</em> class, select <strong>Configuration</strong> → <strong>Add a New Instance</strong>.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-instance.png" width="1000"/><br/>
+<em>Adding a new instance to our class</em></p>
+
+<h3 id="step-2-we-ll-call-the-instance-helloworld-and-it-ll-run-execute-a-method-called-hello-world">Step 2. We’ll call the instance <strong>HelloWorld</strong>, and it’ll run (execute) a method called <em>hello_world</em>.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-instance-helloworld.png" /><br/>
+<em>Entering the instance details</em></p>
+
+<h3 id="step-3-click-the-add-button">Step 3. Click the <strong>Add</strong> button.</h3>
+
+<h2 id="section-6-adding-a-new-method">Section 6. Adding a New Method</h2>
+
+<h3 id="step-1-in-the-methods-tab-of-the-new-methods-class-select-configuration-add-a-new-method">Step 1. In the Methods tab of the new <em>Methods</em> class, select <strong>Configuration</strong> → <strong>Add a New Method</strong>.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-method.png" width="1000"/><br/>
+<em>Adding a new method to our class</em></p>
+
+<h3 id="step-2-name-the-method-hello-world-and-paste-our-two-lines-of-code-into-the-data-window">Step 2. Name the method <strong>hello_world</strong>, and paste our two lines of code into the Data window.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-method-helloworld.png" /><br/>
+<em>Entering the method details</em></p>
+
+<h3 id="step-3-click-validate-and-then-add">Step 3. Click <strong>Validate</strong> and then <strong>Add</strong>.</h3>
+
+<p>
+
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+   Get into the habit of using the Validate button; it can save you a lot of time catching Ruby syntactical typos when you develop more complex scripts. 
+</div>
+</p>
+
+<h2 id="section-7-running-the-instance">Section 7:  Running the Instance</h2>
+
+<h3 id="step-1-we-ll-run-our-new-instance-using-the-simulation-functionality-of-automate-before-we-do-that-log-in-to-cloudforms-again-from-another-browser-or-a-private-browsing-tab-and-navigate-to-automate-log">Step 1. We’ll run our new instance using the <em>Simulation</em> functionality of Automate. Before we do that, log in to CloudForms again from another browser or a private browsing tab and navigate to <strong>Automate</strong> → <strong>Log</strong>.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-log.png" width="1000"/><br/>
+<em>Automate log file</em></p>
+
+<p>
+
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+   The CloudForms WebUI uses browser session cookies, so if we want two or more concurrent login sessions (particularly as different users), it helps to use different web browsers or private/incognito windows. 
+</div>
+</p>
+
+<p>Alternatively, <em>ssh</em> into the CloudForms appliance as root and enter:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tail -f /var/www/miq/vmdb/log/automation.log</code></pre></div>
+<p>In the simulation, we actually run an instance called Call_Instance in the <em>/System/Request/</em> namespace of the <em>ManageIQ</em> domain, and this in turn calls our <em>HelloWorld</em> instance using the namespace, class, and instance attribute/value pairs that we pass to it.</p>
+
+<h3 id="step-2-from-the-automate-simulation-menu-complete-the-details">Step 2. From the <strong>Automate</strong> → <strong>Simulation</strong> menu, complete the details.</h3>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-simulation-helloworld.png" /><br/>
+<em>Completing the Simulation details</em></p>
+
+<h3 id="step-3-click-submit">Step 3. Click <strong>Submit</strong>.</h3>
+
+<p>If all went well, we should see our “Hello, World!” message appear in the <em>automation.log</em> file:</p>
+<pre><code>Invoking [inline] method [/ACME/General/Methods/hello_world] with inputs [{}]
+&lt;AEMethod [/ACME/General/Methods/hello_world]&gt; Starting
+&lt;AEMethod hello_world&gt; Hello, World!
+&lt;AEMethod [/ACME/General/Methods/hello_world]&gt; Ending
+Method exited with rc=MIQ_OK</code></pre>
+<p>Or, like so from a private browser session:</p>
+
+<p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-log-helloworld.png" /><br/>
+<em>&quot;Hello World!&quot; log message</em></p>
+
+<p>Success!</p>
+
+<h2 id="section-8-exit-status-codes">Section 8: Exit Status Codes</h2>
+
+<p>In our example we used an exit status code of MIQ_OK.  Although with simple methods such as this we don’t strictly need to specify an exit code, it’s good practice to do so.  When we build more advanced multi-method classes and state machines, an exit code can signal an error condition to the Automation Engine so that action can be taken.</p>
+
+<p>There are four exit codes that we can use:</p>
+<pre><code>MIQ_OK (0)
+  Continues normal processing. This is logged to automation.log as:
+  Method exited with rc=MIQ_OK
+MIQ_WARN(4)
+  Warning message, continues processing. This is logged to automation.log as:
+  Method exited with rc=MIQ_WARN
+MIQ_ERROR / MIQ_STOP (8)
+  Stops processing current object. This is logged to automation.log as:
+  Stopping instantiation because [Method exited with rc=MIQ_STOP]
+MIQ_ABORT (16)
+  Aborts entire automation instantiation. This is logged to automation.log as:
+  Aborting instantiation because [Method exited with rc=MIQ_ABORT]</code></pre>
+<p>
+
+
+<div class="alert alert-info">
+  
+  <span class="pficon pficon-info"></span>
+   The difference between **MIQ_STOP** and **MIQ_ABORT** is subtle but comes into play as we develop more advanced Automate workflows. 
+</div>
+</p>
+
+<p><strong>MIQ_STOP</strong> stops the currently running instance, but if this instance was called via a reference from another “parent” instance, the subsequent steps in the parent instance would still complete.</p>
+
+<p><strong>MIQ_ABORT</strong> stops the currently running instance and any parent instance that called it, thereby terminating the Automate task altogether.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>In this exercise we’ve seen how simple it is to create our own domain, namespace, class, instance, and method, and run our script from Simulation.  These are the fundamental techniques that we use for all of automation scripts!</p>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/cloudforms41/exercise1.17/">&larr; Previous: Exercise 1.17 - Introduction to the Automate Datastore</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="/workshops/cloudforms41/exercise1.19/">Next: Exercise 1.19 - Ansible Inside &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/cloudforms41">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

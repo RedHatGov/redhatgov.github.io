@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Red Hat OpenStack Platform 101 on Red Hat | Public Sector</title>
+    <link>/workshops/rhosp_101/</link>
+    <description>Recent content in Red Hat OpenStack Platform 101 on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/rhosp_101/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fin.</title>
+      <link>/workshops/rhosp_101/fin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhosp_101/fin/</guid>
+      <description>That&#39;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenStack environment. And hopefully, you have a deeper understanding of how Infrastructure-as-a-Service works.
+Get even deeper Here are some good resources to continue learning OpenStack:
+ OpenStack Foundation RDO Project - Our midstream, open source OpenStack distrobution for RHEL variants Red Hat OpenStack Platform Official Docs  There are two ways to get started with RDO: TripleO Quickstart and PackStack</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Red Hat OpenStack Platform</title>
+      <link>/workshops/rhosp_101/1_introduction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhosp_101/1_introduction/</guid>
+      <description>Red Hat OpenStack Platform Overview Red Hat OpenStack Platform is implemented as a collection of interacting services that control compute, storage, and networking resources. The following diagram provides a high-level overview of the OpenStack core services.
+  OpenStack Services Overview    Horizon - User interface built to give a graphical way to interact with OpenStack services Keystone - Identity management service for projects, users, groups, roles, endpoints, etc.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1 - Login to Horizon</title>
+      <link>/workshops/rhosp_101/2_login_to_horizon/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhosp_101/2_login_to_horizon/</guid>
+      <description>Welcome to Red Hat OpenStack Platform (RHOSP)! This lab provides a quick tour of the Horizon dashboard to help you get familiar with the user interface. If you are already familiar with the basics of Horizon simply ensure you can login and have access to your student project.
+Accessing Horizon RHOSP provides a web dashboard that allows you to perform various tasks via a web browser. Let&#39;s get started by logging into Horizon and checking the status of the platform.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2 - Managing Neutron Networks</title>
+      <link>/workshops/rhosp_101/3_managing_networks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhosp_101/3_managing_networks/</guid>
+      <description>Neutron - Overlay Networking for OpenStack Neutron is an OpenStack project to provide &amp;quot;networking as a service&amp;quot; between interface devices (e.g., vNICs) managed by other Openstack services (e.g., nova).
+Starting in the Folsom release, Neutron is a core and supported part of the OpenStack platform.
+Examining Project Network Topology  Navigate to Network -&amp;gt; Network Topology using the second level navigation tabs.
+   Lab 2 Figure 1: Neutron Network Topology   There are two ways to view the project network layout.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3 - Managing Floating IP Addresses</title>
+      <link>/workshops/rhosp_101/4_managing_floating_ip_addresses/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhosp_101/4_managing_floating_ip_addresses/</guid>
+      <description>Floating IP vs. Private IP Addresses Private IP Address A private IP address is assigned to an instance&#39;s network-interface by the DHCP server. The address is visible from within the instance by using a command like “ip a”. The address is typically part of a private network and is used for communication between instances in the same broadcast domain via virtual switch (L2 agent on each compute node). It can also be accessible from instances in other private networks via virtual router (L3 agent).</description>
+    </item>
+    
+    <item>
+      <title>Lab 4 - Managing Security Groups</title>
+      <link>/workshops/rhosp_101/5_managing_security_groups/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhosp_101/5_managing_security_groups/</guid>
+      <description>Security Groups in OpenStack A security group is a named collection of network access rules that are used to limit the types of traffic that have access to instances. When you launch an instance, you can assign one or more security groups to it. If you do not create security groups, new instances are automatically assigned to the default security group, unless you explicitly specify a different security group.</description>
+    </item>
+    
+    <item>
+      <title>Lab 5 - Managing Images</title>
+      <link>/workshops/rhosp_101/6_managing_images/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhosp_101/6_managing_images/</guid>
+      <description>Where Shall We Store Our Golden Images? Glance The Image service (glance) project provides a service where users can upload and discover data assets that are meant to be used with other services. This currently includes images and metadata definitions.
+Glance image services include discovering, registering, and retrieving virtual machine (VM) images. Glance has a RESTful API that allows querying of VM image metadata as well as retrieval of the actual image.</description>
+    </item>
+    
+    <item>
+      <title>Lab 6 - Managing Instances</title>
+      <link>/workshops/rhosp_101/7_managing_instances/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhosp_101/7_managing_instances/</guid>
+      <description>Now We are Ready to Launch an OpenStack Instance First, What is an Instance? Instances are virtual machines that run inside the OpenStack cloud. You can launch an instance from the following sources:
+ Images uploaded to the Image service
+ Image that you have copied to a persistent volume. The instance launches from the volume, which is provided by the cinder-volume API Instance snapshot that you took  Second.</description>
+    </item>
+    
+    <item>
+      <title>Lab 7 - Using the OpenStack CLI(s)</title>
+      <link>/workshops/rhosp_101/8_using_the_cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhosp_101/8_using_the_cli/</guid>
+      <description>Okay. UIs Are Cool and All, But Can&#39;t I Just Use the CLI? Absolutely! There are 3 ways to interact with OpenStack.
+ API
+ CLI
+ GUI  In this lab, we are going to walk through some of the activities that we did in the previous labs via the CLI.
+ When you see a CLI command starting with **openstack**, the command is part of the Unified CLI.</description>
+    </item>
+    
+    <item>
+      <title>Lab 8 - Using Heat to Describe Stacks</title>
+      <link>/workshops/rhosp_101/9_heat/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhosp_101/9_heat/</guid>
+      <description>We Have Done a Ton of Stuff, But All Manually. How Do We Orchestrate? In OpenStack, the answer to that is Heat.
+Heat is the main project for orchestration in OpenStack. It implements an orchestration engine to launch multiple composite cloud applications based on templates in the form of text files that can be treated like code. A native Heat template format is evolving, but Heat also endeavours to provide compatibility with the AWS CloudFormation template format, so that many existing CloudFormation templates can be launched on OpenStack.</description>
+    </item>
+    
+    <item>
+      <title>Lab 9 - Managing Block and Object Storage</title>
+      <link>/workshops/rhosp_101/10_storage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/rhosp_101/10_storage/</guid>
+      <description>Working With Block and Object Storage in OpenStack Block Storage is Handled by Cinder The OpenStack Block Storage service works through the interaction of a series of daemon processes named cinder-* that reside persistently on the host machine or machines. You can run all the binaries from a single node, or spread across multiple nodes. You can also run them on the same node as other OpenStack services.
+To administer the OpenStack Block Storage service, it is helpful to understand a number of concepts.</description>
+    </item>
+    
+  </channel>
+</rss>

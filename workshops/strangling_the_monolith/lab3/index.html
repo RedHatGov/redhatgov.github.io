@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Lab - Microservice Integration Patterns | Red Hat | Public Sector</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/toastr.min.css" />
+
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+
+    
+    <script src="/js/toastr.min.js"></script>
+
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+      <svg width=150 height=auto id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 613 145"><defs><style>.cls-1{fill:#e00;}.cls-2{fill:#fff;}</style></defs><path class="cls-1" d="M127.47,83.49c12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42l-7.45-32.36c-1.72-7.12-3.23-10.35-15.73-16.6C124.89,8.69,103.76.5,97.51.5,91.69.5,90,8,83.06,8c-6.68,0-11.64-5.6-17.89-5.6-6,0-9.91,4.09-12.93,12.5,0,0-8.41,23.72-9.49,27.16A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33C22.27,52,.5,55,.5,74.22c0,31.48,74.59,70.28,133.65,70.28,45.28,0,56.7-20.48,56.7-36.65,0-12.72-11-27.16-30.83-35.78"/><path d="M160,72.07c1.73,8.19,1.73,9.05,1.73,10.13,0,14-15.74,21.77-36.43,21.77C78.54,104,37.58,76.6,37.58,58.49a18.45,18.45,0,0,1,1.51-7.33l3.66-9.06A6.43,6.43,0,0,0,42.53,44c0,9.22,36.3,39.45,84.94,39.45,12.51,0,30.61-2.58,30.61-17.46a14,14,0,0,0-.31-3.42Z"/><path class="cls-2" d="M579.74,92.8c0,11.89,7.15,17.67,20.19,17.67a52.11,52.11,0,0,0,11.89-1.68V95a24.84,24.84,0,0,1-7.68,1.16c-5.37,0-7.36-1.68-7.36-6.73V68.3h15.56V54.1H596.78v-18l-17,3.68V54.1H568.49V68.3h11.25Zm-53,.32c0-3.68,3.69-5.47,9.26-5.47a43.12,43.12,0,0,1,10.1,1.26v7.15a21.51,21.51,0,0,1-10.63,2.63c-5.46,0-8.73-2.1-8.73-5.57m5.2,17.56c6,0,10.84-1.26,15.36-4.31v3.37h16.82V74.08c0-13.56-9.14-21-24.39-21-8.52,0-16.94,2-26,6.1l6.1,12.52c6.52-2.74,12-4.42,16.83-4.42,7,0,10.62,2.73,10.62,8.31v2.73a49.53,49.53,0,0,0-12.62-1.58c-14.31,0-22.93,6-22.93,16.73,0,9.78,7.78,17.24,20.19,17.24m-92.44-.94h18.09V80.92h30.29v28.82H506V36.12H487.93V64.41H457.64V36.12H439.55ZM370.62,81.87c0-8,6.31-14.1,14.62-14.1A17.22,17.22,0,0,1,397,72.09V91.54A16.36,16.36,0,0,1,385.24,96c-8.2,0-14.62-6.1-14.62-14.09m26.61,27.87h16.83V32.44l-17,3.68V57.05a28.3,28.3,0,0,0-14.2-3.68c-16.19,0-28.92,12.51-28.92,28.5a28.25,28.25,0,0,0,28.4,28.6,25.12,25.12,0,0,0,14.93-4.83ZM320,67c5.36,0,9.88,3.47,11.67,8.83H308.47C310.15,70.3,314.36,67,320,67M291.33,82c0,16.2,13.25,28.82,30.28,28.82,9.36,0,16.2-2.53,23.25-8.42l-11.26-10c-2.63,2.74-6.52,4.21-11.14,4.21a14.39,14.39,0,0,1-13.68-8.83h39.65V83.55c0-17.67-11.88-30.39-28.08-30.39a28.57,28.57,0,0,0-29,28.81M262,51.58c6,0,9.36,3.78,9.36,8.31S268,68.2,262,68.2H244.11V51.58Zm-36,58.16h18.09V82.92h13.77l13.89,26.82H292l-16.2-29.45a22.27,22.27,0,0,0,13.88-20.72c0-13.25-10.41-23.45-26-23.45H226Z"/></svg>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.redhat.com/en/events">Events</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/jr-sa/">Junior SA Program</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_automation/">Ansible Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/ansible_tower_azure/">Ansible Tower Workshop on Azure</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_container_intro/">Container Security - A Practical Introduction</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/jdv_dev/">JBoss Data Virtualization Development</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_the_hard_way/">Linux Containers the Hard Way</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Microservices Workshop - Strangling the Monolith</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_101_dcmetromap/">OpenShift 101 - DC Metro Map Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101/">OpenShift 4 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_4_101_dynatrace/">OpenShift 4 101 w/Dynatrace</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_openshift/">OpenShift Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh/">OpenShift Service Mesh</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhel_8/">Red Hat Enterprise Linux 8</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/rhosp_101/">Red Hat OpenStack Platform 101</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/openshift_service_mesh_v1.0/">zOpenShift Service Mesh</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Lab - Microservice Integration Patterns</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="/workshops/strangling_the_monolith">Return to Workshop</a>
+    </p>
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/strangling_the_monolith/lab2/">&larr; Previous: Lab - Strangle Your Monolith</a>
+    </li>
+    
+    
+    
+    
+    
+  </ul>
+</nav>
+
+    
+
+<h1 id="microservice-integration-patterns">Microservice Integration Patterns</h1>
+
+<ul>
+<li>In previous labs, we created two new microservices with the intention of replacing functionality (“strangling”) the monolithic application.
+Currently no traffic is routed to them.</li>
+<li>If you were to re-route traffic from the monolith’s /services/products API to the new catalog service’s /services/catalog endpoint, you would be missing the inventory data.</li>
+<li>In this lab we will consider different options and architectures for integrating the microservices’ functionality into our app.</li>
+</ul>
+
+<blockquote>
+<p>Option 1: Client Aggregation</p>
+</blockquote>
+
+<ul>
+<li>Microservices implement functionality previously found in monoliths</li>
+<li>Some microservices depend upon other microservices</li>
+<li>Client applications (e.g. web browsers) depend on all of them in one way or another, and are usually “outside the firewall”</li>
+<li>This option means that the client side code (typically run in a browser) is responsible for talking to each microservice and aggregating/combining the results</li>
+<li>Client aggregation benefits
+
+<ul>
+<li>No development bottleneck on the server / ESB-style funnel</li>
+</ul></li>
+<li>Client aggregation drawbacks
+
+<ul>
+<li>Network bandwidth/latency of multiple calls to multiple microservices</li>
+<li>Unfriendly protocols - web proxies, ports, etc</li>
+<li>Difficulty in later refactoring microservices - the client must change too</li>
+<li>Client application code complexity</li>
+</ul></li>
+</ul>
+
+<p><img src="../img/lab3_phone2.png" width="500" /></p>
+
+<blockquote>
+<p>Option 2: Chaining</p>
+</blockquote>
+
+<ul>
+<li>Chaining means that one microservice calls another, which calls another, etc.</li>
+<li>A complete chain is typically not desirable or necessary, but short chains are OK</li>
+<li>Chaining benefits
+
+<ul>
+<li>Client code simpler - there is only a single entry into the chain</li>
+<li>Less network bandwidth (also due to single entry point)</li>
+</ul></li>
+<li>Chaining drawbacks
+
+<ul>
+<li>Potential for cascading failures (resilience patterns can help minimize this)</li>
+<li>Complex “stack traces” when things go wrong (tracing libraries a must)</li>
+<li>Exposes internal structure of app logic (the first microservice in the chain would be difficult to change)</li>
+</ul></li>
+</ul>
+
+<p><img src="../img/lab3_phone3.png" width="700" /></p>
+
+<blockquote>
+<p>Option 3: API Gateway</p>
+</blockquote>
+
+<ul>
+<li>The API Gateway pattern:
+
+<ul>
+<li>Keeps business logic on server side</li>
+<li>Aggregates results from back-end services</li>
+</ul></li>
+<li>API Gateway Pattern benefits
+
+<ul>
+<li>Encapsulates internal structure of application’s services</li>
+<li>Less chatty network traffic</li>
+<li>Simplified client code (no aggregation)</li>
+</ul></li>
+<li>Drawbacks
+
+<ul>
+<li>Possible bottleneck depending on difficulty of adding new services</li>
+</ul></li>
+</ul>
+
+<p><img src="../img/lab3_phone4.png" width="500" /></p>
+
+<h1 id="step-1">Step 1</h1>
+
+<ul>
+<li>In this lab, the previously developed microservices will be placed behind a gateway service</li>
+<li>The client application will then call the gateway service to retrieve its data</li>
+<li>This will “strangle” the monolith by replacing its catalog/inventory services with new microservices.</li>
+</ul>
+
+<blockquote>
+<p>First, deploy the API gateway:</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone -b app-partner https://github.com/epe105/gateway</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd gateway</code></pre></div>
+<div class="alert alert-warning">
+  
+  <span class="pficon pficon-warning-triangle-o"></span>
+  
+
+Please update ``<USERNAME>`` below with your assigned username
+
+
+</div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project coolstore-&lt;USERNAME&gt;</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean fabric8:deploy -Popenshift -DskipTests</code></pre></div>
+<h1 id="step-2">Step 2</h1>
+
+<ul>
+<li>The Coolstore Gateway microservice is a Spring Boot application that implements its logic using an Apache Camel route.</li>
+</ul>
+
+<blockquote>
+<p>Take a look at the code for the Gateway in your browser :
+   <a href="https://github.com/modernize-legacy-apps/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java">https://github.com/epe105/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java</a></p>
+</blockquote>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59</span>restConfiguration()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60</span>		.contextPath(&#34;/services&#34;).apiContextPath(&#34;/services-docs&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61</span>		.apiProperty(&#34;host&#34;, &#34;&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62</span>		.apiProperty(&#34;api.title&#34;, &#34;CoolStore Gateway API&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63</span>		.apiProperty(&#34;api.version&#34;, &#34;1.0&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64</span>		.component(&#34;servlet&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65</span>		.bindingMode(RestBindingMode.json);</code></pre></div>
+
+<ul>
+<li>The beginning of this route uses the Camel Java DSL (Domain-Specific Language) to configure the REST system and define the base paths of the API itself (/services) and paths to Swagger documentation (/services-docs).</li>
+</ul>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67</span>rest(&#34;/products&#34;).description(&#34;Access the CoolStore products and their availability&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68</span>            .produces(MediaType.APPLICATION_JSON_VALUE)</code></pre></div>
+
+<ul>
+<li>This begins the REST DSL portion, defining the primary access point for the catalog of products (/products) and the format of the data it produces (JSON)</li>
+</ul>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70</span>.get(&#34;/&#34;).description(&#34;Retrieves the product catalog, including inventory availability&#34;).outType(Product.class)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71</span>    .route().id(&#34;productRoute&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72</span>          .setBody(simple(&#34;null&#34;))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73</span>          .removeHeaders(&#34;CamelHttp*&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74</span>          .recipientList(simple(&#34;http4://{{env:CATALOG_ENDPOINT:catalog:8080}}/api/catalog&#34;)).end()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75</span>          .unmarshal(productFormatter)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76</span>          .split(body()).parallelProcessing()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77</span>          .enrich(&#34;direct:inventory&#34;, new InventoryEnricher())
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78</span>      .end()	            
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79</span>.endRest();</code></pre></div>
+
+<ul>
+<li>This configures the endpoint for retrieving a list of products by first contacting the Catalog microservice, .split()ing the resulting list, and enriching (via enrich()) each of the products with its inventory by passing each product to the direct:inventory route.</li>
+</ul>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94</span>from(&#34;direct:inventory&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95</span>          .id(&#34;inventoryRoute&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96</span>          .setHeader(&#34;itemId&#34;, simple(&#34;${body.itemId}&#34;))            
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97</span>    .setBody(simple(&#34;null&#34;))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98</span>    .removeHeaders(&#34;CamelHttp*&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99</span>          .recipientList(simple(&#34;http4://{{env:INVENTORY_ENDPOINT:inventory:8080}}/api/inventory/${header.itemId}&#34;)).end()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100</span>          .setHeader(&#34;CamelJacksonUnmarshalType&#34;, simple(Inventory.class.getName()))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101</span>          .unmarshal().json(JsonLibrary.Jackson, Inventory.class);</code></pre></div>
+
+<ul>
+<li>This is the direct:inventory route, which takes in a Product object (in the body()) and calls out to the Inventory microservice to retrieve its inventory. The resulting inventory is placed back into the Camel exchange for enrichment by the enricher:</li>
+</ul>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108</span>@Override
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109</span>public Exchange aggregate(Exchange original, Exchange resource) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111</span>	// Add the discovered availability to the product and set it back
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112</span>	Product p = original.getIn().getBody(Product.class);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113</span>	Inventory i = resource.getIn().getBody(Inventory.class);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114</span>	p.setQuantity(i.getQuantity());
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115</span>	p.setLocation(i.getLocation());
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116</span>	p.setLink(i.getLink());
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117</span>	original.getOut().setBody(p);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119</span>	return original;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121</span>}</code></pre></div>
+
+<ul>
+<li>This is the enricher logic which takes the Product and matching Inventory objects, enriches the Product object with information from the Inventory object, and returns it.</li>
+<li>The resulting list sent back to the client is the list of products, each of which is enriched with inventory information</li>
+<li>The client then renders the aggregate list in the UI.</li>
+</ul>
+
+<h1 id="step-3">Step 3</h1>
+
+<ul>
+<li>Now that the gateway microservice is deployed, let’s hook it into the application using OpenShift routing.</li>
+<li>A route is a way to expose a service by giving it an externally-reachable hostname like www.example.com, or in our example www-coolstore.<domain></li>
+<li>Routes can be created using oc expose command line, or through the GUI.</li>
+<li>Path based routes specify a path component that can be compared against a URL such that multiple routes can be served using the same underlying service/pod, each with a different path.</li>
+<li>In this case, we already have a route that sends all traffic destined for our monolith to the monolith deployment.</li>
+<li>We want to setup a route such that when the monolith’s GUI calls /services/products, it is re-routed to our new CoolStore gateway microservice, thus completing the partial strangulation of the Inventory and Product Catalog features of our app.<br /></li>
+</ul>
+
+<blockquote>
+<p>Navigate to Applications → Routes to list the current routes.<br />
+ Notice the www route is the primary route for our monolith:</p>
+</blockquote>
+
+<p><img src="../img/lab3_route1.png" width="1000" /></p>
+
+<h1 id="step-4">Step 4</h1>
+
+<blockquote>
+<ul>
+<li>Click Create Route to begin creating a new route with the following values:
+
+<ul>
+<li>Name: gateway-redirect</li>
+<li>Hostname: The full hostname of the existing route as seen above (without the http://). For example:
+
+<ul>
+<li>www-coolstore-user1.apps.ocp.naps-redhat.com</li>
+</ul></li>
+<li>Path: /services/products</li>
+<li>Service: gateway</li>
+<li>Leave other values as-is (see next page for complete example)</li>
+</ul></li>
+<li>Click Create to create the route</li>
+</ul>
+</blockquote>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse435ff668501f34d823f8354e17f1a95e" class="collapsed">
+      
+        Create Route
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse435ff668501f34d823f8354e17f1a95e" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab3_create_route.png" width="1000" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<h1 id="step-5">Step 5</h1>
+
+<ul>
+<li>Test the new route by visiting the application UI (click on the coolstore-prod route in the Overview). It will be no different than the original monolith. How do you know your new microservices are being used in place of the original services?</li>
+</ul>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse775e295deb3bf9aa9cfabba0d64329cb" class="collapsed">
+      
+        Test New Route to Cool Store
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse775e295deb3bf9aa9cfabba0d64329cb" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab3_coolstore_before.png" width="1000" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<h1 id="step-6">Step 6</h1>
+
+<ul>
+<li>Let’s pretend that there is a lengthy and cumbersome process for getting products and inventories into and out of the backend system.</li>
+<li>We have a high priority task to remove the Red Hat Fedoras from the product list due to a manufacturing defect.</li>
+<li>Let’s filter the product out of the result using our gateway.</li>
+</ul>
+
+<blockquote>
+<p>Open the gateway source code file and un-comment the lines that implement a filter based on product ID (around line 80). The highlighted code shows you the predicate used for the filter</p>
+</blockquote>
+
+<p>Use vi to make changes in the code.  If you need help in using vi, please click <a href="https://www.cs.colostate.edu/helpdocs/vi.html">here</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vi ~/coolstore/gateway/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77</span>//
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78</span>// Uncomment the below lines to filter out products
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79</span>//
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">80</span>//		.process(exchange -&gt; {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">81</span>//                    List&lt;<span style="color:#f92672">Product</span>&gt; originalProductList = (List&lt;<span style="color:#f92672">Product</span>&gt;)exchange.getIn().getBody(List.class);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">82</span>//                    List&lt;<span style="color:#f92672">Product</span>&gt; newProductList = originalProductList.stream().filter(product -&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">83</span>//							!(&#34;329299&#34;.equals(product.itemId)))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">84</span>//						.collect(Collectors.toList());
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">85</span>//                    exchange.getIn().setBody(newProductList);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">86</span>//                })</code></pre></div>
+
+<blockquote>
+<p>Save your changes and quit</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ shift + Z
+$ shift + Z</code></pre></div>
+<h1 id="step-7">Step 7</h1>
+
+<ul>
+<li><p>Re-deploy the modified code using the same procedure as before:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore/gateway</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean fabric8:deploy -Popenshift -DskipTests</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc logs -f dc/gateway
+...
+--&gt; Success       <span style="color:#75715e"># --&gt; wait for it!</span></code></pre></div></li>
+</ul>
+
+<h1 id="step-8">Step 8</h1>
+
+<ul>
+<li>Once the new version of the code is deployed and up and running, reload the browser and the Red Hat Fedora product should be gone:</li>
+</ul>
+
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse1114c6b3ae3f8d4903d10760736c64e8" class="collapsed">
+      
+        See Changes to Cool Store
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse1114c6b3ae3f8d4903d10760736c64e8" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p><img src="../img/lab3_coolstore_after.png" width="1000" /></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<h1 id="congratulations">Congratulations!!!</h1>
+
+<ul>
+<li>Our monolith’s UI is now talking to our new Camel-based API Gateway to retrieve products and inventories from our WildFly Swarm and Spring Boot microservices!</li>
+<li>Further strangling can eventually eliminate the monolith entirely.</li>
+</ul>
+
+<p><img src="../img/lab3_api_gtw_arch1.png" width="600" /></p>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="/workshops/strangling_the_monolith/lab2/">&larr; Previous: Lab - Strangle Your Monolith</a>
+    </li>
+    
+    
+    
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="/workshops/strangling_the_monolith">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2021 Red Hat, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>

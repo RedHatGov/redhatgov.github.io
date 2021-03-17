@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dynatrace_openshift on Red Hat | Public Sector</title>
+    <link>/workshops/dynatrace_openshift/</link>
+    <description>Recent content in dynatrace_openshift on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/dynatrace_openshift/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fin.</title>
+      <link>/workshops/openshift_4_101_dynatrace/fin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/fin/</guid>
+      <description>That&#39;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenShift environment. And hopefully, you have a deeper understanding of how containers and container orchestration works. Please feel free to continue to &amp;quot;kick the tires&amp;quot; in the demo environment we&#39;ve setup and explore both the web console and the oc command line client.
+ OpenShift Architecture OpenShift Developer&#39;s Site   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1 - Welcome</title>
+      <link>/workshops/openshift_4_101_dynatrace/lab1-welcome/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/lab1-welcome/</guid>
+      <description>Welcome to OpenShift! This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content. If you are already familiar with the basics of OpenShift simply ensure you can login and create the project.
+Key Terms We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with.</description>
+    </item>
+    
+    <item>
+      <title>Lab 10 - Labels (Optional)</title>
+      <link>/workshops/openshift_4_101_dynatrace/lab10-labels/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/lab10-labels/</guid>
+      <description>Labels This is a pretty simple lab, we are going to explore labels. You can use labels to organize, group, or select API objects.
+For example, pods are &amp;quot;tagged&amp;quot; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.
+Labels on a pod In a previous lab we added our web app using a S2I template.</description>
+    </item>
+    
+    <item>
+      <title>Lab 11 - Webhooks and Rollbacks (Optional)</title>
+      <link>/workshops/openshift_4_101_dynatrace/lab11-cicd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/lab11-cicd/</guid>
+      <description>Build Triggers, Webhooks and Rollbacks - Oh My! Once you have an app deployed in OpenShift you can take advantage of some continuous capabilities that help to enable DevOps and automate your management process. We will cover some of those in this lab: Build triggers, webhooks, and rollbacks.
+A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&#39;t already have an account, you can create one here.</description>
+    </item>
+    
+    <item>
+      <title>Lab 12 - Blue | Green Deployment (Optional)</title>
+      <link>/workshops/openshift_4_101_dynatrace/lab12-bluegreen/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/lab12-bluegreen/</guid>
+      <description>Blue/Green deployments When implementing continuous delivery for your software one very useful technique is called Blue/Green deployments. It addresses the desire to minimize downtime during the release of a new version of an application to production. Essentially, it involves running two production versions of your app side-by-side and then switching the routing from the last stable version to the new version once it is verified. Using OpenShift, this can be very seamless because using containers we can easily and rapidly deploy a duplicate infrastructure to support alternate versions and modify routes as a service.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2 - BYO Container</title>
+      <link>/workshops/openshift_4_101_dynatrace/lab2-byocontainer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/lab2-byocontainer/</guid>
+      <description>Bring your own docker It&#39;s easy to get started with OpenShift whether you&#39;re using our app templates or bringing your existing assets. In this quick lab we will deploy an application using an exisiting container image. OpenShift will create an image stream for the image as well as deploy and manage containers based on that image. And we will dig into the details to show how all that works.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3 - Install Dynatrace Agent</title>
+      <link>/workshops/openshift_4_101_dynatrace/lab3-installagent/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/lab3-installagent/</guid>
+      <description>Deploy the Dynatrace OneAgent Operator on OpenShift 4.4+  Prerequisites: 1) If no existing account, sign-up for a trial with Dynatrace at https://www.dynatrace.com/trial/ 2) Dynatrace API Token from Settings  Integration  Dynatrace API  Generate Token Activate the following settings: * Access problem and event feed, metrics, and topology * Read log content * Write configuration 3) Dynatrace PaaS token PaaS (used to download OneAgent and ActiveGate installers) from Settings  Integration  Platform as a Service  Generate Token 4) apiUrl - URL to the API of your Dynatrace environment.</description>
+    </item>
+    
+    <item>
+      <title>Lab 4 - Configuring Dynatrace ActiveGate (Optional)</title>
+      <link>/workshops/openshift_4_101_dynatrace/lab4-configdynatraceactivegate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/lab4-configdynatraceactivegate/</guid>
+      <description>Connect your OpenShift clusters to Dynatrace with an ActiveGate to take advantage of the dedicated OpenShift overview page Connecting your OpenShift clusters to Dynatrace to take advantage of the dedicated OpenShift overview page requires that you run an ActiveGate in your environment (version 1.163+).
+See https://www.dynatrace.com/support/help/technology-support/cloud-platforms/openshift/monitoring/monitor-openshift-clusters-with-dynatrace/
+oc project dynatrace oc apply -f https://www.dynatrace.com/support/help/codefiles/kubernetes/kubernetes-monitoring-service-account.yaml serviceaccount/dynatrace-monitoring created clusterrole.rbac.authorization.k8s.io/dynatrace-monitoring-cluster created clusterrolebinding.rbac.authorization.k8s.io/dynatrace-monitoring-cluster createdoc config view --minify -o jsonpath=&amp;#39;{.clusters[0].cluster.server}&amp;#39; https://api.ocp4.local:6443  Get the Bearer token for the OpenShift cluster using the following command: Copy the secret returned by the following command:  oc get secret $(oc get sa dynatrace-monitoring -o jsonpath=&amp;#39;{.</description>
+    </item>
+    
+    <item>
+      <title>Lab 5 - Deploying an App with S2I</title>
+      <link>/workshops/openshift_4_101_dynatrace/lab5-s2i/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/lab5-s2i/</guid>
+      <description>Source to Image (S2I) One of the useful components of OpenShift is its source-to-image capability. S2I is a framework that makes it easy to turn your source code into runnable images. The main advantage of using S2I for building reproducible docker images is the ease of use for developers. You&#39;ll see just how simple it can be in this lab.
+Let&#39;s build a node.js web app, using S2I We can do this either via the command line or the web console.</description>
+    </item>
+    
+    <item>
+      <title>Lab 6 - Deploying a 3 Tier App</title>
+      <link>/workshops/openshift_4_101_dynatrace/lab6-deploy3tierapp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/lab6-deploy3tierapp/</guid>
+      <description>Deploying a 3 Tier App This builds on the work done in the labs so far to deploy a 3 Tier App. The reason for this lab are to highlight the capabilities of OpenShift to handle more complex application stacks and to show how Dynatrace automatically captures new applications and interactions between them.
+ Instructions are located in a Red Hat blog post at:  https://developers.redhat.com/articles/deploy-a-NodeJS-app-OpenShift   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
+    </item>
+    
+    <item>
+      <title>Lab 7 - Developing and Managing Your Application</title>
+      <link>/workshops/openshift_4_101_dynatrace/lab7-devmanage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/lab7-devmanage/</guid>
+      <description>Developing and managing an application in OpenShift In this lab we will explore some of the common activities undertaken by developers working in OpenShift. You will become familiar with how to use environment variables, secrets, build configurations, and more. Let&#39;s look at some of the basic things a developer might care about for a deployed app.
+Setup From the previous lab you should have the DC Metro Maps web app running in OpenShift.</description>
+    </item>
+    
+    <item>
+      <title>Lab 8 - Webhooks and Rollbacks (Optional)</title>
+      <link>/workshops/openshift_4_101_dynatrace/lab8-rollbacks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/lab8-rollbacks/</guid>
+      <description>Build Triggers, Webhooks and Rollbacks - Oh My! Once you have an app deployed in OpenShift you can take advantage of some continuous capabilities that help to enable DevOps and automate your management process. We will cover some of those in this lab: Build triggers, webhooks, and rollbacks.
+A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&#39;t already have an account, you can create one here.</description>
+    </item>
+    
+    <item>
+      <title>Lab 9 - Replication and Recovery (Optional)</title>
+      <link>/workshops/openshift_4_101_dynatrace/lab9-replicationrecovery/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/lab9-replicationrecovery/</guid>
+      <description>Things will go wrong, and that&#39;s why we have replication and recovery Things will go wrong with your software, or your hardware, or from something out of your control. But we can plan for that failure, and planning for it let&#39;s us minimize the impact. OpenShift supports this via what we call replication and recovery.
+Replication Let&#39;s walk through a simple example of how the replication controller can keep your deployment at a desired state.</description>
+    </item>
+    
+    <item>
+      <title>Verify Prerequisites</title>
+      <link>/workshops/openshift_4_101_dynatrace/prerequisites/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101_dynatrace/prerequisites/</guid>
+      <description>Prerequisites  This workshop is done entirely through the browser, but you do need a free personal GitHub account.  Create a Github account If you don&#39;t have a person GitHub account please sign up here to create a free account.
+ Create GitHub Account Download Git Client (optional)   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
+    </item>
+    
+  </channel>
+</rss>
