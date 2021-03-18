@@ -11,6 +11,12 @@ When implementing continuous delivery for your software one very useful techniqu
 ## Before starting
 Before we get started with the Blue/Green deployment lab, lets clean up some of the projects from the previous lab. 
 
+### Terminal access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" "/terminal" >}}
+</pre>
+
 ``` bash
 $ oc delete all -l app=jenkins-ephemeral
 $ oc delete project cicd-{{< span "userid" "YOUR#" >}}
@@ -54,6 +60,12 @@ Now that we are satisfied with our change we can do the Green/Blue switch.  With
 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
+
+### Terminal access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" "/terminal" >}}
+</pre>
       
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
@@ -78,6 +90,13 @@ This will bring up the Route configuration yaml. Edit the element "spec:". On th
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
+
+
+### Web Console access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+</pre>
 
 > As "Administrator", in the "bluegreen-{{< span "userid" "YOUR#" >}}" project, navigate to "Routes", and select "green"
 
