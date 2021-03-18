@@ -16,6 +16,12 @@ In a previous lab we added our web app using a S2I template.  When we did that, 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
 
+### Terminal access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" "/terminal" >}}
+</pre>
+
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and try the following:
 </blockquote>
@@ -64,6 +70,13 @@ Labels:       app=dc-metro-map
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
+
+
+### Web Console access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+</pre>
 
 <blockquote>
 Click "Workloads", click on "Pods", then click on the three vertical dots next to the "Running" pod.  Consider filtering for Status "Running".

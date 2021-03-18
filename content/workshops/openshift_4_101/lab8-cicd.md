@@ -17,6 +17,12 @@ Create a new project named “cicd-{{< span "userid" "YOUR#" >}}”.
 
 {{% panel "CLI Steps" %}}
 
+### Terminal access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" "/terminal" >}}
+</pre>
+
 <i class="fa fa-terminal"></i> Create the project cicd-{{< span "userid" "YOUR#" >}}
 
 <code>
@@ -26,6 +32,13 @@ $ oc new-project cicd-{{< span2 "userid" "YOUR#" >}}
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
+
+
+### Web Console access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+</pre>
 
 <blockquote>
 Switch modes to 
@@ -54,6 +67,12 @@ Fill in the Name and Display Name of the project as "cicd-{{< span "userid" "YOU
 
 {{% panel "CLI Steps" %}}
 
+### Terminal access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" "/terminal" >}}
+</pre>
+
 ```bash
 $ oc new-app jenkins-ephemeral --as-deployment-config=true
 $ oc logs -f dc/jenkins
@@ -68,6 +87,13 @@ NOTE: this may take some time
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
+
+
+### Web Console access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+</pre>
 
 <blockquote>
 In "Developer" mode, click "+Add"
@@ -129,6 +155,12 @@ $ oc create -f https://raw.githubusercontent.com/openshift/origin/master/example
 
 {{% panel "CLI Steps" %}}
 
+### Terminal access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" "/terminal" >}}
+</pre>
+
 <blockquote>
 <i class="fa fa-terminal"></i> Get the route to the Jenkins server:
 </blockquote>
@@ -141,6 +173,13 @@ Copy the above URL, and paste it in your web browser, to access Jenkins.
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
+
+
+### Web Console access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+</pre>
 
 <blockquote>
 In "Developer" mode, under "Topology", click the arrow, in the upper right corner of the "jenkins" icon
@@ -172,6 +211,12 @@ Once logged in, click the [Allow selected permissions] button and you should see
 
 {{% panel "CLI Steps" %}}
 
+### Terminal access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" "/terminal" >}}
+</pre>
+
 <i class="fa fa-terminal"></i> Launch the pipeline:
 
 ```bash
@@ -181,6 +226,13 @@ $ oc start-build nodejs-sample-pipeline
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
+
+
+### Web Console access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+</pre>
 
 
 > Using the OpenShift Web Console, in "Administrator" mode, choose *Builds* -> *Build Configs*, and then click on "nodejs-sample-pipeline"
