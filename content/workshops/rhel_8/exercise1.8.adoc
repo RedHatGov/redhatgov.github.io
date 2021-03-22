@@ -262,6 +262,17 @@ podman stop 11fcab28fd31
 
 Running as ec2-user, the container work that you have done is stored in your home directory. We will move it to the system image store in /var/lib/, enable it and start the application.
 
+=== Step 0: Disable Fapolicyd
+
+Before we get started, we need to disable Fapolicyd (the File Access Policy Daemon) for this exercise. You enabled this during the mitigation steps in Exercise 1.7. Fapolicyd will prevent the container based application from starting.
+[source, bash]
+----
+sudo systemctl disable --now fapolicyd.service
+----
+....
+Removed /etc/systemd/system/multi-user.target.wants/fapolicyd.service.
+....
+
 === Step 1: Inspecting the httpd image 
 
 First let's use skopeo to inspect the image.
