@@ -212,7 +212,13 @@ Copy the SSL certificates from the registry servers and update the trust store.
 [source,bash]
 ----
 sudo scp ec2-user@{{< urifqdn "" "node1" "" >}}:/etc/pki/ca-trust/source/anchors/myserver.cert /etc/pki/ca-trust/source/anchors/node1.cert
+----
+[source,bash]
+----
 sudo scp ec2-user@{{< urifqdn "" "node2" "" >}}:/etc/pki/ca-trust/source/anchors/myserver.cert /etc/pki/ca-trust/source/anchors/node2.cert
+----
+[source,bash]
+----
 sudo update-ca-trust
 ----
 
