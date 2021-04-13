@@ -30,6 +30,13 @@ Jump back to your OpenShift web console and let's add the webapp to our project.
 {{< panel_group >}}
 {{% panel "Web Console Steps" %}}
 
+
+### Web Console access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+</pre>
+
 <blockquote>
 Click the "Add to Project" button
 </blockquote>
@@ -76,6 +83,12 @@ The node.js builder template creates a number of resources for you, but what we 
 
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
+
+### Terminal access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" "/terminal" >}}
+</pre>
 
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
@@ -126,6 +139,13 @@ Copy the "Webhook Generic" URL to the clipboard, so that we can use it in GitHub
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
+
+
+### Web Console access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+</pre>
         
 <blockquote>
 in "Administrator" mode, click on "Builds" and then click on "Build Configs"
@@ -221,6 +241,12 @@ This will not work in today's workshop, as we have not yet made a second deploym
 {{< panel_group >}}
 {{% panel "CLI Steps" %}}
 
+### Terminal access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" "/terminal" >}}
+</pre>
+
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
@@ -235,6 +261,13 @@ $ oc get pods -w
 {{% /panel %}}
 
 {{% panel "Web Console Steps" %}}
+
+
+### Web Console access
+
+<pre>
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+</pre>
 
 <blockquote>
 Click on "Builds" and then click on "Builds"
