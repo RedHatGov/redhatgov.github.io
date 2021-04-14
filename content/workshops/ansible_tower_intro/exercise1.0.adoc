@@ -1,0 +1,134 @@
+---
+title: "Exercise 1.0 - Configuring Ansible Tower"
+workshops: ansible_tower_intro
+workshop_weight: 10
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/ansible_tower_intro/images
+:license_url: https://s3.amazonaws.com/ansible-tower-workshop-license/license
+:image_links: https://s3.amazonaws.com/ansible-workshop-bos.redhatgov.io/_images
+:cred_url: http://docs.ansible.com/ansible-tower/latest/html/userguide/credentials.html#credential-types
+
+= Exercise 1.0 - Configuring Red Hat Ansible Tower
+
+
+
+== Exercise Description
+
+In this exercise, we are going to configure Red Hat Ansible Tower, so that we can run a playbook.
+
+There are a number of constructs in the Ansible Tower UI that enable multi-tenancy, notifications, scheduling, etc.
+However, we are only going to focus on the key concepts required for this workshop today.
+
+
+* Credentials
+* Projects
+* Inventory
+* Job Template
+
+
+== Section 1: Logging into Ansible Tower and installing the license key
+
+
+=== Step 1: Log in
+
+To log in, use the username `admin` and and the password provided by your instructor.
+
+
+
+image::ansible-lab-figure01-logon-screen.png[caption="Figure 3: ", title="Ansible Tower Login Screen"]
+
+
+== Section 2: Review credentials
+
+Credentials are utilized by Ansible Tower for authentication when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.
+
+There are many link:{cred_url}[types of credentials] including machine, network, and various cloud providers.  In this workshop, we are using a *machine* credential.
+
+
+=== Step 1: View Available Credentials
+Select CREDENTIALS, from the left-side menu bar.   image:at_credentials.png[Cred,100,35]
+
+You will see a lit of credentials, like the following:
+
+image::at_cred_list.png[caption="Figure 4: ", title="Ansible Tower Credentials"]
+
+=== Step 2: View credential attributes
+
+Click the pencil icon image:at_pencil_icon.png[Cred,50,50] to access the details of the `Workshop Credential` credential. Redundant, aren't we?
+
+image::at_cred_detail.png[Cred_Detail, 700,caption="Figure 5: ",title="Reviewing a Credential"]
+
+
+=== Step 3: Cancel
+
+Scroll down, and review the rest of the credential data:
+
+image::at_cred_detail2.png[Cred_Detail, 700,caption="Figure 6: ",title="Reviewing a Credential, continued"]
+
+Select image:at_cancel.png[Cancel,105,58] to exit.
+
+
+== Section 3: Reviewing a Project
+
+A Project is a logical collection of Ansible playbooks, represented in Ansible Tower.  You can manage playbooks and playbook directories, by either placing them manually under the Project Base Path on your Ansible Tower server, or by placing your playbooks into a source code management (SCM) system supported by Ansible Tower, including Git, Subversion, and Mercurial.
+
+=== Step 1: Open a project
+
+Select image:at_projects.png[Projects,125,35] from the left-side menu.
+
+=== Step 2: Review the list of projects
+
+Review the list of projects, and then click on `Ansible Workshop Project`, to see what it contains:
+
+image::at_project_list.png[Project_List, 700,caption="Figure 7: ",title="Project List"]
+
+=== Step 3: View the Project Form
+
+Review the details of the project:
+
+image::at_project_detail.png[Project_Detail, 700,caption="Figure 8: ",title="Reviewing a Project"]
+
+
+=== Step 4: Cancel
+
+Select image:at_cancel.png[Cancel,105,58] to exit.
+
+
+== Section 4: Reviewing an Inventory
+
+An inventory is a collection of hosts, against which jobs may be launched.  Inventories are divided into groups and these groups contain the actual hosts.
+
+Groups may be sourced *manually*, by entering host names into Ansible Tower, or from one of Ansible Tower’s supported cloud providers.
+
+An Inventory can also be *imported* into Ansible Tower using the `tower-manage` command. This is how we are going to add an inventory for this workshop.
+
+=== Step 1: Navigate to Inventories main link
+
+Select image:at_inv_icon.png[Inventories, 149,32] from the left-side menu.
+
+=== Step 2: Review the inventory list
+
+image::at_inventory_list.png[Inventory_List, 700,caption="Figure 9: ",title="Inventory List"]
+
+=== Step 3: Complete the Inventory form
+
+Click on `Ansible Workshop Inventory` to see the details of the inventory:
+
+image::at_inv_detail.png[Inventory_Details,700,caption="Figure 10: ",title="Inventory Details"]
+
+You can click on image:at_hosts_icon.png[Hosts, 108,50] to see the list of hosts:
+
+image::at_inventory_hosts.png[Inventory_Details,700,caption="Figure 11: ",title="Inventory Hosts"]
+
+You can click on image:at_groups_icon.png[Groups, 108,50] to see the list of groups:
+
+image::at_inventory_groups.png[Inventory_Details,700,caption="Figure 12: ",title="Inventory Groups"]
+
+=== End Result
+
+At this point, we are working with our basic configuration of Ansible Tower.  In Exercise 1.1, we will be solely focused on creating and running a job template so you can see Ansible Tower in action.
+
+{{< importPartial "footer/footer.html" >}}

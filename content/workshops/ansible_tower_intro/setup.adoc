@@ -1,0 +1,40 @@
+---
+title: "Setup"
+workshops: ansible_tower_intro
+workshop_weight: 1
+layout: lab
+---
+
+:badges:
+:icons: font
+:iconsdir: http://people.redhat.com/~jduncan/images/icons
+:imagesdir: /workshops/ansible_automation/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+
+= Workshop Lab Setup
+
+image::tower.002.png['Tower']
+
+== What you will learn: Red Hat Web Console - Terminal
+
+This lab provides a quick tour of the browser based Terminal via the Red Hat Web Console. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
+
+
+== Accessing Ansible Tower
+
+Use this URL to access the Ansible Tower interface. Your instructor will provide the password, and the user ID is `admin`:
+
+[source,bash]
+----
+{{< urifqdn "https://" "tower" "" >}}
+----
+
+=== Ensuring Workshop Success
+
+You know you were successful if you are able to browse to your Ansible Tower's url and get something like this:
+
+image::ansible-lab-figure01-logon-screen.png[caption="Figure 2: ", title="Ansible Tower Login Screen"]
+
+{{< importPartial "footer/footer.html" >}}

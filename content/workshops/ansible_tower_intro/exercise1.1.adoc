@@ -1,0 +1,171 @@
+---
+title: "Exercise 1.1 - Creating and Running a Job Template"
+workshops: ansible_tower_intro
+workshop_weight: 11
+layout: lab
+---
+
+:license_url: http://ansible-workshop-bos.redhatgov.io/wslic.txt
+:icons: font
+:imagesdir: /workshops/ansible_automation/images
+
+= Exercise 1.1 - Creating and Running a Job Template
+
+
+== Exercise Description
+This exercise will walk you through the steps required to create a job template and run it.  A job template is a definition and set of parameters for running an Ansible job. In other words, a template combines an Ansible project playbook and the settings required to launch it, into one package.
+
+Templates save setup time, for jobs that are launched repetitively. Once the template is set, it can be edited for future jobs, with different settings.  Templates also drive uniformity, by running templates exactly the same way every time. And, because we're using templates, production responsibilities can be delegated to less experienced production personnel.
+
+
+== Section1: Creating a job template
+
+
+=== Step 1: Navigate to the Templates tab
+
+Select TEMPLATES image:at_templates.png[temp,120,35]
+
+=== Step 2: Create a new template
+
+Click image:at_add.png[Add,35,25] and select JOB TEMPLATE image:at_jobtemplate.png[jobT,150,100]
+
+=== Step 3: Complete the job Template form
+
+Complete the template form, by entering the following values:
+
+|===
+|NAME |Apache Basic Job Template
+|DESCRIPTION|Template for the apache-basic-playbook
+|JOB TYPE|Run
+|INVENTORY|Ansible Workshop Inventory
+|PROJECT|Ansible Workshop Project
+|PLAYBOOK|examples/apache-basic-playbook/site.yml
+|MACHINE CREDENTIAL|Workshop Credentials
+|LIMIT|web
+|VERBOSITY|0(Normal)
+|OPTIONS
+a|
+- [*] Enable Privilege Escalation
+|===
+
+
+
+image::at_jt_detail.png[caption="Figure 11: ",700,title="Job Template Form"]
+
+
+
+=== Step 4: Save
+
+Click SAVE image:at_save.png[Save] and then select ADD SURVEY image:at_addsurvey.png[Add Survey]
+
+=== Step 5: Complete survey
+
+Job surveys provide extra playbook variables and present them in a user-friendly way. They also enable validation of the input you provide.
+
+Complete the survey form with following values.
+
+|===
+|PROMPT|Please enter a test message for your new website
+|DESCRIPTION|Website test message prompt
+|ANSWER VARIABLE NAME|apache_test_message
+|ANSWER TYPE|Text
+|MINIMUM/MAXIMUM LENGTH| Use the defaults
+|DEFAULT ANSWER| Be creative, keep it clean, we're all professionals here
+|===
+
+
+
+image::at_survey_detail.png[caption="Figure 12: ",500,title="Survey Form"]
+
+
+
+=== Step 6: Add the survey input
+
+Select +ADD 
+
+=== Step 7: Save
+
+Select SAVE image:at_save.png[Save,35,25]
+
+=== Step 8: Save at the main page
+
+Back on the main Job Template page, select SAVE image:at_save.png[Save,35,25] again.
+
+
+
+
+== Section 2: Running a job template
+
+Now that you've sucessfully created your Job Template, you are ready to launch it.
+You will be redirected to a job screen, which refreshes in realtime
+and displays the status of the job.
+
+
+=== Step 1: Select the Template tab
+
+Select TEMPLATES
+[NOTE]
+Alternatively, if you haven't navigated away from the job templates creation page, you can scroll down to see all existing job templates
+
+=== Step 2: Access Apache Basic Job Template
+
+Click the rocketship icon image:at_launch_icon.png[Add,35,25] for the *Apache Basic Job Template*
+
+=== Step 3: Enter test message
+
+When prompted, enter your desired test message
+
+
+
+image::at_survey_prompt.png[caption="Figure 13: ",title="Survey Prompt",width=800]
+
+
+
+=== Step 4: Launch the job
+
+Select LAUNCH image:at_launch_icon.png[Add,35,25]
+
+=== Step 5: View job summary
+
+Sit back, watch the magic happen
+
+One of the first things you will notice is the RESULTS section.  This section provides job details, such as who launched it, what playbook it's running, what the status is, i.e. Pending, Running, or Complete.
+
+
+
+image::at_job_status.png[caption="Figure 14: ",title="Job Summary"]
+
+
+To the right, you can view standard output; the same way you could if you were running Ansible Core from the command line.
+
+
+
+image::at_job_stdout.png[caption="Figure 15: ",700,title="Job Standard Output"]
+
+
+
+=== Step 6: View the new website
+
+Once your job is sucessful, navigate to your new website, where *workshopname* is the name of your workshop, and *#* is your student number:
+
+[source,bash]
+----
+{{< urifqdn "http://" "node" "" >}}
+----
+
+
+If all went well, you should see something like this, but with your own custom message:
+
+
+
+image::at_web_tm.png[caption="Figure 16: ",700,title="New Website with Personalized Test Message"]
+
+
+
+
+
+== End Result
+At this point in the workshop, you've experienced the core functionality of Ansible Tower.  But wait... there's more!
+You've just begun to explore the possibilities of Ansible Core and Tower.  Take a look at the resources page in this guide, to explore some more features.
+
+{{< importPartial "footer/footer.html" >}}
