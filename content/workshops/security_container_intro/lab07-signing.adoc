@@ -68,7 +68,7 @@ mkdir -p /usr/tmp/sigstore/{{< urifqdn "" "node1" "" >}}
 
 === Generating key pairs
 
-Generate the gpg key pair. You'll be prompted to set a pass phrase. Set it to `redhat` so you don't forget. :)
+Generate the gpg key pair. You'll be prompted to set a pass phrase. Set it to `1234567890` so you don't forget. :)
 [source,bash]
 ----
 gpg2 --quick-gen-key --yes ec2-user
