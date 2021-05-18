@@ -1,0 +1,84 @@
+---
+title: "Exercise 3.1 - Setup Ansible template to stage temporary access token on edge node"
+workshops: alpha/ansible_with_rhocp_edge
+workshop_weight: 31
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/alpha/ansible_with_rhocp_edge/images
+:package_url: https://docs.ansible.com/ansible/latest/modules/package_module.html
+:service_url: https://docs.ansible.com/ansible/latest/modules/service_module.html
+:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
+
+== Exercise 3.1 - Setup a template to load a temporary token on the edge node
+
+=== Let's bring Projects, Inventories, and Crentials all together with ... Templates
+
+Select *Templates*
+
+image::tower_templates_select.png[caption="Templates tab - Left hand side of screen", title='', 50]
+
+Select the *+* sign to add a new template; then select *Job Template*
+
+image::tower_templates_plus.png[caption="Add Job Template", title='', 200]
+
+|===
+|NAME |Setup edge authentication to registry
+|DESCRIPTION|Podman login
+|JOB TYPE|Run
+|INVENTORY|{{< user >}}-inventory
+|PROJECT|{{< user >}}-playbooks
+|PLAYBOOK|podman_login.yml
+|MACHINE CREDENTIAL|{{< user >}}-cred
+|LIMIT|edge
+|VERBOSITY|0 (Normal)
+|OPTIONS
+a|
+- [*] Enable Privilege Escalation
+|===
+
+Next set extra variables to personalize the playbook to your environment.  Start on line 2.
+
+|===
+|userid: {{< userid >}}
+|domain: {{< domain >}} 
+|prefix: {{< prefix >}}
+|===
+
+image::tower_templates_extravars.png[caption="Example - Extra Variables", title='', 200]
+
+When complete, select *SAVE*
+
+image::tower_template_save.png[caption="", title='', 50]
+
+Next, select *Templates* at the left hand side of the page and then select *Setup edge authentication to registry*.
+*__Note:__* You may need to reload or you may need to wait for your browser to refresh
+
+---
+
+Select *Add Survey*
+
+image::tower_template_add_survey.png[caption="", title='', 50]
+
+image::tower_template_survey.png[caption="", title='', 500]
+
+|===
+|PROMPT|OpenShift user API token
+|Description|User temporary token (expires)
+|ANSWER VARIABLE NAME|token
+|ANSWER TYPE|Password
+|MINIMUM LENGTH|16
+|MAXIMUM LENGTH|128
+|
+a|
+- [*] Required
+|===
+
+Select *+ADD* and *SAVE*
+
+Select *Save* one more time on the main template page
+
+
+
+{{< importPartial "footer/footer.html" >}}

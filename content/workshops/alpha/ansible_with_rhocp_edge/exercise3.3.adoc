@@ -1,0 +1,70 @@
+---
+title: "Exercise 3.3 - Create new template to stage containers on edge node"
+workshops: alpha/ansible_with_rhocp_edge
+workshop_weight: 33
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/alpha/ansible_with_rhocp_edge/images
+:package_url: https://docs.ansible.com/ansible/latest/modules/package_module.html
+:service_url: https://docs.ansible.com/ansible/latest/modules/service_module.html
+:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
+
+== Exercise 3.3 - Configure podman, systemd, and pull a container from OpenShift
+
+=== Configure new template to field containers to edge node
+
+Select *Templates*
+
+image::tower_templates_select.png[caption="Templates tab - Left hand side of screen", title='', 50]
+
+Select the *+* sign to add a new template; then select *Job Template*
+
+image::tower_templates_plus.png[caption="Add Job Template", title='', 200]
+
+|===
+|NAME |Field container to edge node
+|DESCRIPTION|Update to latest container release in OpenShift
+|JOB TYPE|Run
+|INVENTORY|{{< user >}}-inventory
+|PROJECT|{{< user >}}-playbooks
+|PLAYBOOK|field-container.yml
+|MACHINE CREDENTIAL|{{< user >}}-cred
+|LIMIT|edge
+|VERBOSITY|0 (Normal)
+|OPTIONS
+a|
+- [*] Enable Privilege Escalation
+|===
+
+Next set extra variables to personalize the playbook to your environment.  Start on line 2.
+
+|===
+|userid: {{< userid >}}
+|domain: {{< domain >}} 
+|prefix: {{< prefix >}}
+|===
+
+When complete, select *SAVE*
+
+image::tower_template_save.png[caption="", title='', 50]
+
+Next, select *Templates* at the left hand side of the page and then select *Field container to edge node*.
+
+*__Note:__* You may need to reload or you may need to wait for your browser to refresh
+
+Launch the playbook by pressing the rocket ship associated with the template.
+
+image::tower_rocket.png[caption="", title='', 50]
+
+Ensure that the playbook runs successfully.
+
+image::tower_templates_field.gif[caption="", title='', 500]
+
+Review the container now running on the edge node
+
+```
+{{< urifqdn "http://" "edge" "/" >}}
+```
+{{< importPartial "footer/footer.html" >}}

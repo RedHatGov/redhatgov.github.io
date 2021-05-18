@@ -1,0 +1,47 @@
+---
+title: "Exercise 2.1 - Run CI/CD pipeline (powered by Tekton) in Red Hat OpenShift"
+workshops: alpha/ansible_with_rhocp_edge
+workshop_weight: 21
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/alpha/ansible_with_rhocp_edge/images
+:package_url: https://docs.ansible.com/ansible/latest/modules/package_module.html
+:service_url: https://docs.ansible.com/ansible/latest/modules/service_module.html
+:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
+
+= Exercise 2.1 - Run CI/CD pipeline in Red Hat OpenShift
+
+== Exercise Description
+View the created pipeline and review the container that Ansible orchestrate deploying to the edge node.
+
+=== Let's review the container build
+Select *Pipelines* in the left menu
+
+image::s2i_pipelines.png[caption="", title='', 50]
+
+image::s2i_view_pipeline.gif[caption="", title='', 350]
+
+=== Wait until pipeline details are green.
+Feel gree to watch the progress by selecting the *Logs* tab
+
+
+image::s2i_view_pipeline_green.png[caption="", title='', 150]
+
+
+=== View built container images ...
+Select *Topology* in the left menu
+
+image::s2i_view_topology.png[caption="", title='', 50]
+
+
+=== Review running container
+
+image::s2i_view_topology_url.png[caption="", title='', 150]
+
+=== Ensure that you see the running container return the output *"Release 1"*
+
+image::s2i_view_edge_release.gif[caption="Review running container", title='', 500]
+
+{{< importPartial "footer/footer.html" >}}

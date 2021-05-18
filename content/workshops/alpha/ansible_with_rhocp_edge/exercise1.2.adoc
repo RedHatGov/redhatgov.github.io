@@ -1,0 +1,172 @@
+---
+title: "Exercise 1.2 - Writing a playbook to push podman to the edge"
+workshops: alpha/ansible_with_rhocp_edge
+workshop_weight: 12
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/alpha/ansible_with_rhocp_edge/images
+:figure-caption!:
+:become_url: https://docs.ansible.com/ansible/latest/user_guide/become.html
+:dir_url: https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html
+:package_url: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/package_module.html#ansible-collections-ansible-builtin-package-module
+:service_url: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/service_module.html#ansible-collections-ansible-builtin-service-module
+:yaml_url: http://docs.ansible.com/ansible/YAMLSyntax.html
+
+== Objective
+
+This exercise showcases using Ansible to configure podman and the podman API on a standalone Red Hat Enterprise Linux edge server.
+
+As part of the execise, you will be exposed to the following elements:
+
+- Ansible modules and supporting parameters (example: '*package*' and '*service*' modules)
+- How to use loops to make your ansible more efficient and smaller
+
+
+== Section 1: Creating a directory structure and files for your own playbook
+
+For our playbook, we are only going to write one play with two tasks.
+
+There is a link:{dir_url}[best practice] regarding the preferred directory structures for playbooks.  We strongly encourage you to read and understand these practices as you develop your Ansible skills.
+
+That said, our playbook today is very basic, because creating a complex structure can create unnecessary challenges.
+
+Instead, we are going to create a very simple directory structure for our playbook, and add just a couple of files to it.
+
+
+===  Create a directory & file
+Create a directory called *install_podman* in your projects directory and create a file call init-edge.yml:
+
+[*File*] -> [*New Folder*] -> Enter "*install_podman*" -> Select [*Ok*] -> right click on the "*install_podman*" folder -> select [*New File*] -> Enter "*init-edge.yml*"
+
+image::install_podman.gif[caption="", title='Create "init-edge.yml" file in the /projects/install_podman/ directory', 500]
+
+== Section 2: Defining Your play
+
+Now that you are editing `init-edge.yml`, let's begin by defining the play. Then, we'll take some time to understand what each line accomplishes.
+
+
+
+[source,bash]
+----
+---
+- name: Configure Container Management on Edge 
+  hosts: edge
+  become: yes
+----
+
+- `---` Defines the beginning of YAML
+- `hosts: edge` Defines the host group in your inventory on which this play will run against.
+- `name: Configure Container Management on Edge` This describes our play.
+- `become: yes` Enables user privilege escalation.  The default is sudo; but su, pbrun, and link:{become_url}[several others] are also supported.
+
+
+== Section 3: Adding tasks to your play
+
+Now that we've defined your play, let's add some tasks to get some things done.  Align (vertically) the *t* in `task` with the *b* `become`.  +
+
+Yes, it does actually matter.  In fact, you should make sure all of your playbook statements are aligned, as shown here. +
+
+If you want to see the entire playbook for reference, skip to the bottom of this exercise.
+
+
+[source,bash]
+----
+  tasks:
+  - name: Install podman & cockpit
+    package:
+      name: "{{ item }}"
+      state: latest
+    loop:
+      - podman
+      - cockpit
+      - cockpit-podman
+----
+
+
+
+- `tasks:` This denotes that one or more tasks are about to be defined
+- `- name:` Each task requires a name, which will print to standard output when you run your playbook.
+- `loop:` Allow you to repeat a task multiple times with different variables
+Therefore, give your tasks a name that is short, sweet, and to the point
+
+
+- These three lines are calling the Ansible module *package* to install podman, cockpit, and cockpit-podman.
+link:{package_url}[Click here] to see all options for the package module.
+
+
+
+[source,text]
+----
+  - name: Enable Podman API & cockpit
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+    loop:
+      - podman.socket
+      - cockpit.socket
+----
+
+
+- The next few lines are using the ansible module *service* to start the podman api service.  The service module
+is the preferred way of controlling services on remote hosts.  link:{service_url}[Click here] to learn more
+about the *service* module.
+
+
+
+== Section 4: Saving your playbook
+
+Now that you've completed writing your playbook, it would be a shame not to keep it for later use by selecting [*File*] -> [*Save*]
+
+image::install_podman_save.gif[caption="Figure 2: ", title='Save "init-edge.yml" file in the /projects/install_podman/ directory', 500]
+
+And that should do it.  You should now have a fully written playbook called `init-edge.yml`.
+You are ready to automate!
+
+[NOTE]
+Ansible (well, YAML really) can be a bit particular about formatting, especially around indentation/spacing.  When you all get back to the office,
+read up on this link:{yaml_url}[YAML Syntax] a bit more and it will save you some headaches later.  In the meantime, your completed playbook should look
+like this.  Take note of the spacing and alignment.
+
+[source,bash]
+----
+---
+- name: Configure Container Management on Edge 
+  hosts: edge
+  become: yes
+  tasks:
+  - name: Install podman & cockpit
+    package:
+      name: "{{ item }}"
+      state: latest
+    loop:
+      - podman
+      - cockpit
+      - cockpit-podman 
+  - name: Enable Podman API & cockpit
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+    loop:
+      - podman.socket
+      - cockpit.socket
+----
+
+Prior to running the playbook, ensure that the Ansible syntax is correct.
+----
+cd ~/install_podman
+ansible-playbook init-edge.yml --syntax-check
+----
+
+== Running the Ansible playbook
+
+----
+ansible-playbook init-edge.yml
+----
+
+---
+
+{{< importPartial "footer/footer.html" >}}

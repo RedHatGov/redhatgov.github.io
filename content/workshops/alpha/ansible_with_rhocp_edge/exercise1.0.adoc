@@ -1,0 +1,102 @@
+---
+title: "Exercise 1.0 - Running Ad hoc commands"
+workshops: alpha/ansible_with_rhocp_edge 
+workshop_weight: 10
+layout: lab
+---
+
+:domain_name: redhatgov.io
+:icons: font
+:imagesdir: /workshops/alpha/ansible_with_rhocp_edge/images
+
+= Exercise 1.0 - Running Ad Hoc Commands
+
+
+== Exercise Description
+
+For our first exercise, we are going to run some ad hoc commands to help you get a feel for how Red Hat Ansible Automation works.  Ansible ad hoc commands enable you to perform repeatable tasks on local or remote nodes, without having to write a playbook.  They are very useful when you simply need to do one or two tasks quickly and often, to many remote nodes.
+
+=== Managing remote hosts
+
+First, in order to manage remote systems - we need to set up our dependencies:
+
+Define your inventory.  Inventories are crucial to Ansible, as they define remote machines on which you will run commands or your playbook(s).  Use the Code Ready Workspaces editor (Eclipse Che) to create a file called `hosts` by selecting [File] -> [New File] -> hosts (no .txt extention) file in /projects; then, click [Ok]
+
+image::ansible_hosts.gif[caption="Figure 1: ", title='Creating the Ansible inventory file called "hosts"', 500]
+
+====
+[NOTE]
+The *workshopname*, in the example below, will be provided to you by your instructor.  The *#* should be replaced by your student number.
+
+For example, a recent workshop student used:
+*{{< urifqdn "" "edge" "" >}}*
+====
+
+Put the following content into the file:
+
+....
+[edge]
+{{< urifqdn "" "edge" "" >}}
+....
+When complete, select "[File] -> [Save]" to write out the content.
+
+image::ansible_hosts_save.gif[caption="Figure 2: ", title='Saving the Ansible inventory file called "hosts"', 500]
+
+=== Step 1: Test the edge host response
+
+Let's start with something basic - pinging a host.  The `ping` module tests the responsiveness of our edge host from the Code Ready Workspaces Terminal.
+
+[source,bash]
+----
+ansible edge --module-name ping
+----
+
+=== Step 2: Run a Linux command
+
+Now let's see how we can run a Linux command and format the output, using the `command` module.
+
+[source,bash]
+----
+ansible edge --module-name command --args "uname -m" --one-line
+----
+
+=== Step 3: Review the setup module
+
+Take a look at your edge node's configuration.  The `setup` module displays Ansible facts (and a lot of them) about an endpoint.
+
+[source,bash]
+----
+ansible edge --module-name setup
+----
+
+
+====
+[NOTE]
+Like many Linux commands, *ansible* allows for long-form and short-form command-line arguments.  For example:
+
+[source,bash]
+----
+ansible edge --module-name command --args "uname -m" --one-line --become
+----
+The command above is the same as running the command below:
+[source,bash]
+----
+ansible edge -m command -a "uname -m" -o -b
+----
+
+We are going to be using the short-form options, going forward.
+
+====
+
+=== Step 4:  Install a package on the edge. 
+
+For this example, we will use the 'skopeo' package; which, provides a way inspect, copy, and sync (plus more) containers repositories.
+
+Now, let's install 'skopeo', using the Ansible `package` module.
+
+[source,bash]
+----
+ansible edge -m package -a "name=skopeo state=present" -b
+----
+
+{{< importPartial "footer/footer.html" >}}

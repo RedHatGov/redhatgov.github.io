@@ -1,0 +1,73 @@
+---
+title: "Setup"
+workshops: alpha/ansible_with_rhocp_edge
+workshop_weight: 1
+layout: lab
+---
+
+:badges:
+:icons: font
+:imagesdir: /workshops/alpha/ansible_with_rhocp_edge/images
+:source-highlighter: highlight.js
+:source-language: yaml
+
+
+== In order for you to __'write'__ your first bit of Ansible, you will need an *editor* ...
+Ansible playbooks are written in YAML and you can use an text editor "like vim" or an editor like Visual Studio Code to get started.  For this workshop, we will be utilizing a web-based IDE (integrated development environment) call Red Hat CodeReady Workspaces.  Red Hat CodeReady Workspaces is a developer tool that makes cloud-native development practical for teams, using Kubernetes and containers to provide any member of the development or IT team with a consistent, preconfigured development environment.
+
+== Red Hat CodeReady Workspaces
+
+Built on Eclipse Che, Red Hat CodeReady Workspaces provides a collaborative Kubernetes-native solution for rapid application development.  For this workshop, you will use Code Ready Workspaces to run the Ansible CLI and write blueprints of automation tasks (known as Ansible playbooks).
+
+
+== Accessing Red Hat CodeReady Workspaces
+
+Use this URL to access your private workspace, just change the workshop name (if applicable). Ask your instructor for the workshop name.
+
+[source,bash]
+----
+{{< urishortfqdn "https://" "codeready-codeready-workspaces.apps" "/dashboard/#/workspaces" >}}
+----
+
+You will be presented with a login window.
+
+image::crw_login.png[caption="", title='Code Ready Workspaces Login', 500]
+
+|===
+|USERNAME |{{< user >}}
+|PASSWORD| *<will be provided by instructor>*
+|===
+
+[IMPORTANT]
+Please accept any self-signed certificates (if prompted).  If you get the following certificate error, follow the instructions on the page.
+
+image::crw_login_cert.png[caption="", title='Code Ready Workspaces Login - Certificate Import', 275]
+
+
+After logging in, you should see the Workspaces landing page.
+
+image::crw_landingpage.png[caption="", title='Red Hat CodeReady Workspaces default landing page', 300]
+
+image::crw_play.png[caption="", title='Play Ansible Workspace by selecting che-ansible-demo-XXXX', 300]
+
+Once the workspace is running (status will turn green) and the IDE will open.
+
+image::crw_restartcancel.png[caption="", title='If presented with the following menu, press "Cancel".  There is not need to restart the workspace and apply the new features for this workshop.', 125]
+
+
+After entering the workspace, we have configured you a custom "Task" to setup your SSH keys for the session.
+Go to "Terminal" -> "Run Task" -> select "Set ssh-key file permissions"
+
+After the permissions are set, launch an interactive terminal with preloaded Ansible utilities within your web IDE.
+Go to "Terminal" -> "Open Terminal in specific container" -> select "ansible"
+
+image::crw_launch_terminal.gif[caption="", title='Launch Ansible terminal', 500]
+
+
+image::crw_tour.png[caption="", title='Quick Tour', 600]
+
+== End Result
+
+At this point, you should have logged into your environment.  If you haven't, let us know so we can get you fixed up.
+
+{{< importPartial "footer/footer.html" >}}

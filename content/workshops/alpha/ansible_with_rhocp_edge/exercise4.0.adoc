@@ -1,0 +1,64 @@
+---
+title: "Exercise 4.0 - Update to a new container on OpenShift and field to edge"
+workshops: alpha/ansible_with_rhocp_edge
+workshop_weight: 40
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/alpha/ansible_with_rhocp_edge/images
+:package_url: https://docs.ansible.com/ansible/latest/modules/package_module.html
+:service_url: https://docs.ansible.com/ansible/latest/modules/service_module.html
+:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
+
+= Exercise 4.0 - Update to a new container on OpenShift and field to edge
+
+== Exercise Description
+Now that we can pull a container from OpenShift and move it to an edge node via Ansible Automation, let's repeat the process with a new release using the artifacts that we created.
+
+== Let's Login to the Web Console
+In your browser & in a new tab, connect to the Red Hat OpenShift console
+
+``
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+``
+
+image::rhocp_login.png[caption="", title='', 400]
+
+
+=== Let's build the pipeline with a new release
+
+Select *Pipelines* in the left menu
+
+image::s2i_pipelines.png[caption="", title='', 50]
+
+Click the 3 veritcal dots next to the far right of the *edge* pipeline
+
+image::s2i_pipelines_start.png[caption="", title='', 400]
+
+Change *GIT_REVISION* from "*release1*" to "*release2*" and hit *[Start]*
+
+|===
+|GIT_VERSION|release2
+|===
+
+Once the deploy is complete, you will see that the edge workload on Red Hat OpenShift is on release2 
+
+Select *Topology* in the left menu
+
+image::s2i_view_topology.png[caption="", title='', 50]
+
+
+=== Review running container
+
+image::s2i_view_topology_url.png[caption="", title='', 150]
+
+While the edge workload on the edge node is on release1
+
+``
+{{< urifqdn "http://" "edge" "/" >}}
+``
+
+Now on your own, log into Ansible Tower and rerun the *Field container to edge node* template by pressing the rocket to field release2 to the edge - Red Hat Enterprise Linux system 
+
+{{< importPartial "footer/footer.html" >}}

@@ -1,0 +1,80 @@
+---
+title: "Exercise 3.0 - Configure Red Hat Enterprise Linux to run containers"
+workshops: alpha/ansible_with_rhocp_edge
+workshop_weight: 30
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/alpha/ansible_with_rhocp_edge/images
+:package_url: https://docs.ansible.com/ansible/latest/modules/package_module.html
+:service_url: https://docs.ansible.com/ansible/latest/modules/service_module.html
+:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
+
+= Exercise 3.0 - Configure Red Hat Enterprise Linux to run containers
+
+== Exercise Description
+As part of the exercise, we are going to run a login command on the edge node to set a temporary token.  This token will allow the edge node to log into the Red Hat OpenShift registry and download containers.
+
+As part of the exercise, we have built a playbook for you; however, no all of the variables are assigned.  This allows us to distribute the playbook to multiple workshops and you the capability to understand how to run playbooks in Ansible tower and assign custom variables to those plays.  As part of the exercise, you will create a Template within Ansible tower to run the defined playbook, set the custom variables, and define a *survey* to prompt you to enter the sensitive credential via a prompt.
+
+
+Navigate in your browser to ...
+
+``
+{{< urishortfqdn "https://" "ansible-tower-web-svc-tower.apps" >}}
+``
+
+image::tower_login.png[caption="Login with your credentials", title='', 500]
+
+---
+
+=== Let's explore ... Projects
+
+Select *Project*
+
+image::tower_projects_select.png[caption="Projects tab - Left hand side of screen", title='', 50]
+
+Click on *{{< user >}}-playbooks [GIT]*
+
+The following menu reflects where all of the playbooks delegated to your user exist.
+
+image::tower_projects_info.png[caption="", title='', 500]
+
+---
+
+=== Let's explore ... Inventories
+
+Select *Inventories*
+
+image::tower_inv_select.png[caption="Inventories tab - Left hand side of screen", title='', 50]
+
+Click on *{{< user >}}-inventory*
+
+As part of the workshop, we have preconfigured an inventory for you.  
+
+image::tower_inv_select_host.png[caption="", title='', 50]
+
+If you select *HOSTS*, you will notice that you will continue to utilize the edge node from the prior sections.
+
+---
+
+=== Let's explore ... Credentials
+
+Select *Credentials*
+
+image::tower_cred_select.png[caption="Credentials tab - Left hand side of screen", title='', 50]
+
+Click on *{{< user >}}-cred*
+
+A SSH key has been loaded into this credential to allow you to connect to your edge node
+
+image::tower_cred_ssh.png[caption="Encrypted credential", title='', 350]
+
+*__Note__*: Different credential types exists for different types of nodes that you want to manage.
+
+---
+
+=== Navigate to the next lab to bring it all together
+
+{{< importPartial "footer/footer.html" >}}
