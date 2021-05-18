@@ -17,9 +17,11 @@ layout: lab
 View the created pipeline and review the container that Ansible orchestrate deploying to the edge node.
 
 === Let's review the container build
-Select *Pipelines* in the left menu
+Select *Pipelines* in the left menu:
 
 image::s2i_pipelines.png[caption="", title='', 50]
+
+Click *Edge*:
 
 image::s2i_view_pipeline.gif[caption="", title='', 350]
 
