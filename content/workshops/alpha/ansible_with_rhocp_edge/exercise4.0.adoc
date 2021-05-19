@@ -36,7 +36,7 @@ Click the 3 veritcal dots next to the far right of the *edge* pipeline
 
 image::s2i_pipelines_start.png[caption="", title='', 400]
 
-Change *GIT_REVISION* from "*release1*" to "*release2*" and hit *[Start]*
+Click *Edit Pipeline* and then change *GIT_REVISION* from "*release1*" to "*release2*" and hit *[Start]*:
 
 |===
 |GIT_VERSION|release2
