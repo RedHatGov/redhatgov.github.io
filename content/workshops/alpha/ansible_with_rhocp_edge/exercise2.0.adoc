@@ -58,7 +58,7 @@ Select *Deployment*
 
 === Pipelines
 
-Ensure *Add pipeline* is check
+Ensure *Add pipeline* is checked:
 
 image::s2i_pipeline.png[caption="Select > Show pipeline visualization", title='', 100]
 
