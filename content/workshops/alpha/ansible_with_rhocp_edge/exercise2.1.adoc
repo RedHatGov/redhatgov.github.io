@@ -22,7 +22,7 @@ Select *Pipelines* in the left menu:
 image::s2i_pipelines.png[caption="", title='', 50]
 
 
-=======
+===
 Click on *Pipeline Runs* in the menu, and then *edge-??????* (where ?????? is some alphanumeric sequence):
 
 image::s2i_view_pipeline.gif[caption="", title='', 350]
