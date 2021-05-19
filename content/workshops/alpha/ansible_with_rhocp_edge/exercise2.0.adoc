@@ -26,11 +26,11 @@ In your browser & in a new tab, connect to the Red Hat OpenShift console
 image::rhocp_login.png[caption="", title='', 400]
 
 
-After login, you will have access to 2 projects (read-only) and 1 project *(edge-#)* to build your CI/CD pipeline
+After login, you will have access to 2 projects (read-only) and 1 project *(edge-{{< span2 "userid" "YOUR#" >}}*) to build your CI/CD pipeline. Click on *(edge-{{< span2 "userid" "YOUR#" >}})*:
 
 image::rhocp_edge_namespace.gif[caption="", title='', 200]
 
-Select to build your container *From Git*
+Select to build your container *From Git*:
 
 image::s2i_git.png[caption="", title='', 200]
 
