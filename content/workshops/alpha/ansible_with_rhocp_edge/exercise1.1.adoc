@@ -1,0 +1,61 @@
+---
+title: "Exercise 1.1 - Running an Ansible playbook"
+workshops: alpha/ansible_with_rhocp_edge
+workshop_weight: 11
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/alpha/ansible_with_rhocp_edge/images
+:package_url: https://docs.ansible.com/ansible/latest/modules/package_module.html
+:service_url: https://docs.ansible.com/ansible/latest/modules/service_module.html
+:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
+
+
+= Exercise 1.1 - Running an Ansible playbook
+
+
+== Objective: Configure Edge node to run a Performance CoPilot agent
+
+
+As part of this exercise, you will be running a pre-existing Ansible playbook pre-loaded into your CodeReady Workspace.  
+
+The playbook is written to showcase a series of basic Ansible concepts.
+
+*Note:* The following commands below need to be run from within the Ansible terminal
+
+=== Step 1: Checking a playbook playbook for correct syntax
+
+However, before you run the playbook, lets take a few moments to understand the options.
+
+- *init-pcp.yml* This is the name of the playbook that we are running.
+- *-v* Altough not used here, this increases verbosity.  Try running your playbook a second time using `-v` or `-vv` to increase the verbosity (debugging information).
+
+
+[NOTE]
+- *--syntax-check* If you run into any issues with your playbook running properly (from the copy/pasting that we told you not to do), you could use this option to help find those issues like so...
+
+
+
+Go to your playbook directory ( `~/edge` ), and run a syntax check of your playbook:
+
+[source,bash]
+----
+cd ~/edge
+ansible-playbook init-pcp.yml --syntax-check
+----
+
+Now, let's look at the playbook by selecting it from the file list on the left.
+
+image::pcp_setup_code_review.png[caption="",title=""]
+
+---
+
+Based on the above, let's run the playbook
+
+[source,bash]
+----
+ansible-playbook init-pcp.yml
+----
+
+{{< importPartial "footer/footer.html" >}}
