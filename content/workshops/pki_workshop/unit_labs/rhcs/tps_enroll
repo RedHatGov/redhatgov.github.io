@@ -1,0 +1,14 @@
+# Specificy the TPS server hostname.
+op=var_set name=ra_host value=ca1.redhat.example.com
+
+#Specify the TPS server non-ssl port.
+op=var_set name=ra_port value=8080
+
+#Specify the TPS Service path.
+op=var_set name=ra_uri value=/tps/tps
+
+op=token_set cuid=40906145C76224192D2B man=0120304 app_ver=6FBBC105 key_info=0101 major_ver=0 minor_ver=0
+
+op=ra_enroll uid=brian pwd=redhat num_threads=1 extensions=tokenType=userKey
+
+op=exit
