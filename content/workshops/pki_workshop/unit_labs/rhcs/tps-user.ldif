@@ -1,0 +1,13 @@
+dn: uid=brian,ou=People,dc=tps,dc=redhat,dc=example,dc=com
+changetype: add
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+uid: brian
+cn: Brian Gribble
+sn: Gribble
+givenName: Brian
+userPassword: redhat
+description: Account for brian
+mail: brian@redhat.example.com
+

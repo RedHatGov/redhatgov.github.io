@@ -1,0 +1,25 @@
+dn: cn=config
+changetype: modify
+replace: nsslapd-port
+nsslapd-port: 389
+
+dn: cn=config
+changetype: modify
+replace: nsslapd-secureport
+nsslapd-secureport: 636
+
+dn: cn=config
+changetype: modify
+replace: nsslapd-listenhost
+nsslapd-listenhost: ds1.redhat.example.com
+
+dn: cn=config
+changetype: modify
+replace: nsslapd-securelistenhost
+nsslapd-securelistenhost: ds1.redhat.example.com
+
+dn: cn=config
+changetype: modify
+replace: nsslapd-saslpath
+nsslapd-saslpath: /etc/dirsrv/slapd-ds1/sasl2
+
