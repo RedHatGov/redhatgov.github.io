@@ -34,6 +34,8 @@ Select to build your container *From Git*
 
 image::s2i_git.png[caption="", title='', 200]
 
+Click *Show advanced Git options* to see the other fields that you will need to fill out:
+
 === Build a OCI (aka docker) container from only source code via source-to-image (s2i).
 |===
 |Git Repo URL |https://github.com/matmille/s2i-php-edge-workshop.git
