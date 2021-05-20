@@ -30,7 +30,7 @@ image::tower_templates_plus.png[caption="Add Job Template", title='', 200]
 |INVENTORY|{{< user >}}-inventory
 |PROJECT|{{< user >}}-playbooks
 |PLAYBOOK|podman_login.yml
-|MACHINE CREDENTIAL|{{< user >}}-cred
+|CREDENTIAL|{{< user >}}-cred
 |LIMIT|edge
 |VERBOSITY|0 (Normal)
 |OPTIONS
@@ -53,6 +53,7 @@ When complete, select *SAVE*
 image::tower_template_save.png[caption="", title='', 50]
 
 Next, select *Templates* at the left hand side of the page and then select *Setup edge authentication to registry*.
+
 *__Note:__* You may need to reload or you may need to wait for your browser to refresh
 
 ---

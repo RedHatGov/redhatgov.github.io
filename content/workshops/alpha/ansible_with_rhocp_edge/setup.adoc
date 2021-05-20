@@ -63,6 +63,7 @@ Go to "Terminal" -> "Open Terminal in specific container" -> select "ansible"
 
 image::crw_launch_terminal.gif[caption="", title='Launch Ansible terminal', 500]
 
+*IMPORTANT NOTE*: If you allow the CodeReady Workspace to timeout or close, you will need to repeat this step.
 
 image::crw_tour.png[caption="", title='Quick Tour', 600]
 

@@ -44,6 +44,9 @@ image::s2i_view_topology.png[caption="", title='', 50]
 
 image::s2i_view_topology_url.png[caption="", title='', 150]
 
+*__IMPORTANT__*: If your deployment does not say "edge" and begins with s2i; then, you missed a step in exercise 2.0 (Resources) where you declared the name.  Please go back and repeat exercise 2.0.
+
+
 === Ensure that you see the running container return the output *"Release 1"*
 
 image::s2i_view_edge_release.gif[caption="Review running container", title='', 500]

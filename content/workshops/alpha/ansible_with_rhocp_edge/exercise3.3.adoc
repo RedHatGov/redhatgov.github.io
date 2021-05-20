@@ -30,7 +30,7 @@ image::tower_templates_plus.png[caption="Add Job Template", title='', 200]
 |INVENTORY|{{< user >}}-inventory
 |PROJECT|{{< user >}}-playbooks
 |PLAYBOOK|field-container.yml
-|MACHINE CREDENTIAL|{{< user >}}-cred
+|CREDENTIAL|{{< user >}}-cred
 |LIMIT|edge
 |VERBOSITY|0 (Normal)
 |OPTIONS
