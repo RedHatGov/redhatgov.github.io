@@ -21,7 +21,7 @@ layout: lab
 
 image::rhocp_login.png[caption="", title='', 400]
 
-Navigate to the *{{ user }}* menu in the upper right hand corner and select *Copy login command*.  
+Navigate to the *{{< user >}}* menu in the upper right hand corner and select *Copy login command*.  
 
 You will be prompted to login again.  Once complete, select *Display Token*
 
