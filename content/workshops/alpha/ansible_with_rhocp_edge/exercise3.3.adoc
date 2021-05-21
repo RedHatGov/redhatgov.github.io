@@ -24,7 +24,7 @@ Select the *+* sign to add a new template; then select *Job Template*
 image::tower_templates_plus.png[caption="Add Job Template", title='', 200]
 
 |===
-|NAME |Field container to edge node
+|NAME |Field container to edge node - {{< user >}}
 |DESCRIPTION|Update to latest container release in OpenShift
 |JOB TYPE|Run
 |INVENTORY|{{< user >}}-inventory
