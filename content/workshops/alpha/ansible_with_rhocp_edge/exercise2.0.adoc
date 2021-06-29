@@ -1,0 +1,73 @@
+---
+title: "Exercise 2.0 - Build a CI/CD pipeline and container in Red Hat OpenShift"
+workshops: alpha/ansible_with_rhocp_edge
+workshop_weight: 20
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/alpha/ansible_with_rhocp_edge/images
+:package_url: https://docs.ansible.com/ansible/latest/modules/package_module.html
+:service_url: https://docs.ansible.com/ansible/latest/modules/service_module.html
+:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
+
+= Exercise 2.0 - Build a CI/CD pipeline and container in Red Hat OpenShift
+
+== Exercise Description
+As part of the Applied Ansible workshop, you will deploy __(copy/transfer)__ a container built on top of Red Hat OpenShift to an edge node running only Red Hat Enterprise Linux utilizing Ansible Automation.  Prior to that step, we need to actually "create" a container on Red Hat OpenShift.
+
+== Let's Login to the Web Console
+In your browser & in a new tab, connect to the Red Hat OpenShift console
+
+``
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+``
+
+image::rhocp_login.png[caption="", title='', 400]
+
+
+After login, you will have access to 2 projects (read-only) and 1 project *(edge-{{< span2 "userid" "YOUR#" >}}*) to build your CI/CD pipeline. Click on *(edge-{{< span2 "userid" "YOUR#" >}})*:
+
+image::rhocp_edge_namespace.gif[caption="", title='', 200]
+
+Select to build your container *From Git*:
+
+image::s2i_git.png[caption="", title='', 200]
+
+Click *Show advanced Git options* to see the other fields that you will need to fill out:
+
+=== Build a OCI (aka docker) container from only source code via source-to-image (s2i).
+|===
+|Git Repo URL |https://github.com/matmille/s2i-php-edge-workshop.git
+|Git reference|release1
+|Context Dir|/
+|===
+
+=== Select language (PHP) 
+__and of course, yes ... we could have used many other languages ...__
+
+image::s2i_php.png[caption="", title='', 100]
+
+=== Resources
+Select *Deployment*
+
+=== Resources
+|===
+|Application name|edge
+|Name|edge
+|Resourece|Deployment
+|===
+
+=== Pipelines
+
+Ensure *Add pipeline* is checked:
+
+image::s2i_pipeline.png[caption="Select > Show pipeline visualization", title='', 100]
+
+=== Advanced options
+Ensure *Create a Route to the Application* is checked
+
+=== Lastly, select ...
+image::s2i_create.png[caption="", title='', 50]
+
+{{< importPartial "footer/footer.html" >}}

@@ -1,0 +1,47 @@
+---
+title: "Exercise 3.2 - Running an Ansible Automation template"
+workshops: alpha/ansible_with_rhocp_edge
+workshop_weight: 32
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/alpha/ansible_with_rhocp_edge/images
+:package_url: https://docs.ansible.com/ansible/latest/modules/package_module.html
+:service_url: https://docs.ansible.com/ansible/latest/modules/service_module.html
+:gather_facts_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts
+
+== Exercise 3.2 - Retrieve user token from OpenShift and launch login template
+
+=== In a new tab, log into Red Hat OpenShift
+
+``
+{{< urishortfqdn "https://" "console-openshift-console.apps" >}}
+``
+
+image::rhocp_login.png[caption="", title='', 400]
+
+Navigate to the *{{< user >}}* menu in the upper right hand corner and select *Copy login command*.  
+
+You will be prompted to login again.  Once complete, select *Display Token*
+
+image::rhocp_token.gif[caption="", title='', 500]
+
+Highlight and copy the API token, it will look like *sha256~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq*
+
+---
+
+Return to the Ansible Tower interface tab or navigate to
+``
+{{< urishortfqdn "https://" "ansible-tower-web-svc-tower.apps" >}}
+``
+
+Select *Template* and select the rocket ship next to *Setup edge authentication to registry*
+
+Paste in the token copied from the previous section and select *Next*
+
+Finally, select *Launch*
+
+image::tower_podman_login_run.gif[caption="", title='', 500]
+
+{{< importPartial "footer/footer.html" >}}
