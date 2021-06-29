@@ -16,20 +16,20 @@ layout: lab
 
 In this final exercise, we will finish the `testapp` SELinux policy.
 
-== Section 1: A Last Interface
+== Section 1: A Last-ish Interface
 
 === Step 1: Check for AVC denials
 
 Let's again restart our app, to get an updated list of denials.  
 
 {{< highlight bash >}}
-sudo systemctl restart testapp
+systemctl restart testapp
 {{< /highlight >}}
 
 We only have a few denials left, and you will see that they all (probably!) reference `/etc/resolv.conf` or to `/etc/hosts`.
 
 {{< highlight bash >}}
-sudo ausearch -m AVC -ts recent | egrep '^type=AVC'
+ausearch -m AVC -ts recent | egrep '^type=AVC'
 {{< /highlight >}}
 
 [source,bash]
@@ -112,25 +112,130 @@ sysnet_read_config(testapp_t)
 And compile your policy, and restart the service:
 
 {{< highlight bash >}}
-sudo ./testapp.sh
-sudo systemctl restart testapp
+./testapp.sh
+systemctl restart testapp
 {{< /highlight >}}
 
 ...and last, check to see if there are still any AVC denials:
 
 {{< highlight bash >}}
-sudo systemctl restart testapp
-sudo ausearch -m AVC -ts recent | wc -l
+systemctl restart testapp
+ausearch -m AVC -ts recent | wc -l
 {{< /highlight >}}
 
 [source,bash]
 -----
-0
+14
 -----
 
-Doesn't it feel great to be almost done?
+Ah, well! Let's try to handle those last AVCs.
 
-== Section 2: Set Enforcing Mode
+== Section 2: A Last Interface (no, really!)
+
+=== Step 1: Check for AVC denials
+
+Let's get an updated list of denials:  
+
+{{< highlight bash >}}
+ausearch -m AVC -ts recent | egrep '^type=AVC'
+{{< /highlight >}}
+
+The last few denials should reference `openssl` and `pki`:
+
+[source,bash]
+-----
+ausearch -m AVC -ts recent
+----
+time->Tue Jun 29 15:36:12 2021
+type=PROCTITLE msg=audit(1624980972.923:10134): proctitle="/usr/local/sbin/testapp"
+type=PATH msg=audit(1624980972.923:10134): item=0 name="/etc/pki/tls/openssl.cnf" inode=5283193 dev=103:02 mode=0100644 ouid=0 ogid=0 rdev=00:00 obj=system_u:object_r:cert_t:s0 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0
+type=CWD msg=audit(1624980972.923:10134): cwd="/"
+type=SYSCALL msg=audit(1624980972.923:10134): arch=c000003e syscall=257 success=yes exit=3 a0=ffffff9c a1=15c12a0 a2=0 a3=0 items=1 ppid=63073 pid=63074 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1624980972.923:10134): avc:  denied  { open } for  pid=63074 comm="testapp" path="/etc/pki/tls/openssl.cnf" dev="nvme0n1p2" ino=5283193 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:cert_t:s0 tclass=file permissive=1
+type=AVC msg=audit(1624980972.923:10134): avc:  denied  { read } for  pid=63074 comm="testapp" name="openssl.cnf" dev="nvme0n1p2" ino=5283193 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:cert_t:s0 tclass=file permissive=1
+type=AVC msg=audit(1624980972.923:10134): avc:  denied  { search } for  pid=63074 comm="testapp" name="pki" dev="nvme0n1p2" ino=8410010 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:cert_t:s0 tclass=dir permissive=1
+----
+time->Tue Jun 29 15:36:12 2021
+type=PROCTITLE msg=audit(1624980972.923:10135): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1624980972.923:10135): arch=c000003e syscall=5 success=yes exit=0 a0=3 a1=7ffcd2c0c890 a2=7ffcd2c0c890 a3=7fa695266e80 items=0 ppid=63073 pid=63074 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1624980972.923:10135): avc:  denied  { getattr } for  pid=63074 comm="testapp" path="/etc/pki/tls/openssl.cnf" dev="nvme0n1p2" ino=5283193 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:cert_t:s0 tclass=file permissive=1
+-----
+
+=== Step 2: Find an interface
+
+Let's search for an interface, referencing `ssl certificate` and `read` as that's what's being reported:
+
+{{< highlight bash >}}
+find /usr/share/selinux/devel/include -type f -name "*.if" -exec grep -iH 'ssl certificate' {} \; | grep -i read
+{{< /highlight >}}
+
+[source,bash]
+-----
+/usr/share/selinux/devel/include/system/miscfiles.if:## Read all SSL certificates.
+/usr/share/selinux/devel/include/system/miscfiles.if:## Read all SSL certificates.
+/usr/share/selinux/devel/include/system/miscfiles.if:## Read generic SSL certificates.
+/usr/share/selinux/devel/include/system/miscfiles.if:## Read SSL certificates.
+/usr/share/selinux/devel/include/system/userdomain.if:##        Read system SSL certificates in the users homedir.
+-----
+
+From the list above, we aren't touching `home directories`, so the others are involved with reading SSL certificates. Let's open `miscfiles.if` and see what we can find, that matches the most basic, `Read generic SSL certificates`:
+
+[source,bash]
+-----
+########################################
+## <summary>
+##      Read generic SSL certificates.
+## </summary>
+## <param name="domain">
+##      <summary>
+##      Domain allowed access.
+##      </summary>
+## </param>
+## <rolecap/>
+#
+interface(`miscfiles_read_generic_certs',`
+-----
+
+
+=== Step 3: Add the interface
+
+So, as before, add the interface to your `testapp.te` file, using a line like this:
+
+[source,bash]
+-----
+miscfiles_read_generic_certs(testapp_t) 
+-----
+
+=== Step 4: Recompile the policy
+
+Now, let's recompile the policy, and reload it into memory.
+
+{{< highlight bash >}}
+./testapp.sh
+{{< /highlight >}}
+
+=== Step 5: Restart the application
+
+To see if that fixed the problem, let's restart the application:
+
+{{< highlight bash >}}
+systemctl restart testapp
+{{< /highlight >}}
+
+...and see if there are any AVC messages left:
+
+{{< highlight bash >}}
+ausearch -m AVC -ts recent | egrep 'tcp|udp' | wc -l
+{{< /highlight >}}
+
+[source,bash] 
+----
+0
+----
+
+Fantastic, we've knocked them all out.
+
+== Section 3: Set Enforcing Mode
 
 === Step 1: Change the Domain to Enforcing
 
@@ -160,7 +265,7 @@ type testapp_t;
 type testapp_exec_t;
 init_daemon_domain(testapp_t, testapp_exec_t)
 
-# permissive testapp_t;
+permissive testapp_t;
 
 type testapp_var_run_t;
 files_pid_file(testapp_var_run_t)
@@ -171,13 +276,14 @@ files_pid_file(testapp_var_run_t)
 #
 allow testapp_t self:process { fork };
 allow testapp_t self:fifo_file rw_fifo_file_perms;
-allow testapp_t self:tcp_socket { connect create getattr getopt };
-allow testapp_t self:udp_socket { connect create getattr };
+allow testapp_t self:tcp_socket { connect create getattr getopt setopt };
+allow testapp_t self:udp_socket { connect create getattr setopt };
 allow testapp_t self:unix_stream_socket create_stream_socket_perms;
 
 manage_dirs_pattern(testapp_t, testapp_var_run_t, testapp_var_run_t)
 manage_files_pattern(testapp_t, testapp_var_run_t, testapp_var_run_t)
 manage_lnk_files_pattern(testapp_t, testapp_var_run_t, testapp_var_run_t)
+miscfiles_read_generic_certs(testapp_t)
 files_pid_filetrans(testapp_t, testapp_var_run_t, { dir file lnk_file })
 
 corenet_tcp_connect_http_port(testapp_t)
@@ -200,7 +306,7 @@ sysnet_read_config(testapp_t)
 Now, let's recompile the policy, and reload it into memory.
 
 {{< highlight bash >}}
-sudo ./testapp.sh
+./testapp.sh
 {{< /highlight >}}
 
 === Step 4: Restart the application
@@ -208,13 +314,13 @@ sudo ./testapp.sh
 To see if that fixed the problem, let's restart the application:
 
 {{< highlight bash >}}
-sudo systemctl restart testapp
+systemctl restart testapp
 {{< /highlight >}}
 
 ...and see if there are any AVC messages left:
 
 {{< highlight bash >}}
-sudo ausearch -m AVC -ts recent | egrep 'tcp|udp' | wc -l
+ausearch -m AVC -ts recent | egrep 'tcp|udp' | wc -l
 {{< /highlight >}}
 
 [source,bash] 
