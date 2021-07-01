@@ -16,7 +16,7 @@ If you want to build RedHatGov.io right away:
 
 - You have a working [Hugo environment][hugo] - and *probably* at the correct version.
   - we keep a current working version in the `./bin/` folder
-- You have Ruby and the asciidoctor gem installed (*gem install asciidoctor*)
+- You have Ruby and the asciidoctor gem installed (*yum install asciidoctor* or *gem install asciidoctor*)
 
     `$ git clone https://github.com/RedHatGov/redhatgov.github.io`
 
