@@ -143,7 +143,7 @@ skopeo inspect docker://registry.access.redhat.com/ubi8/ubi
 Skopeo can also copy images between two registries. See the `skopeo(1)` man page for details and give it a try. An example is shown below. To make this work, the proper image tags must exist and authentication to registries must be in place.
 [source,bash]
 ----
-skopeo copy {{< urifqdn "docker://" "node1" ":5000/ubi8/ubi" >}} {{< urifqdn "docker://" "node2" ":5000/ubi8/ubi" >}}
+skopeo copy {{< urifqdnrev "docker://" "node1" ":5000/ubi8/ubi" >}} {{< urifqdnrev "docker://" "node2" ":5000/ubi8/ubi" >}}
 ----
 ....
 Getting image source signatures

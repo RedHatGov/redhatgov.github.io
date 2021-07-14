@@ -74,10 +74,10 @@ REPOSITORY                            TAG      IMAGE ID       CREATED      SIZE
 ubi8/ubi   latest   8121a9f5303b   8 days ago   240 MB
 ....
 
-Next tag the image for the remote registry hosted at `{{< urifqdn "" "node1" "" >}}`:
+Next tag the image for the remote registry hosted at `{{< urifqdnrev "" "node1" "" >}}`:
 [source,bash]
 ----
-podman tag ubi8/ubi {{< urifqdn "" "node1" ":5000/ubi8/ubi" >}}
+podman tag ubi8/ubi {{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}
 ----
 
 Confirm the tag is correct:
@@ -91,17 +91,17 @@ ubi8/ubi   latest   8121a9f5303b   8 days ago   240 MB
 node1.8l829.internal:5000/ubi8/ubi    latest   8121a9f5303b   8 days ago   240 MB
 ....
 
-Login to the `{{< urifqdn "" "node1" "" >}}` registry. Do the same for `{{< urifqdn "" "node2" "" >}}`. Both of these actions should be taken from `{{< urifqdn "" "bastion" "" >}}`:
+Login to the `{{< urifqdnrev "" "node1" "" >}}` registry. Do the same for `{{< urifqdnrev "" "node2" "" >}}`. Both of these actions should be taken from `{{< urifqdnrev "" "bastion" "" >}}`:
 
 [source,bash]
 ----
-podman login -u redhat -p redhat {{< urifqdn "" "node1" ":5000" >}}
+podman login -u redhat -p redhat {{< urifqdnrev "" "node1" ":5000" >}}
 ----
 ....
 Login Succeeded!
 ....
 ----
-podman login -u redhat -p redhat {{< urifqdn "" "node2" ":5000" >}}
+podman login -u redhat -p redhat {{< urifqdnrev "" "node2" ":5000" >}}
 ----
 ....
 Login Succeeded!
@@ -110,7 +110,7 @@ Login Succeeded!
 Finally, push the image:
 [source,bash]
 ----
-podman push {{< urifqdn "" "node1" ":5000/ubi8/ubi" >}}
+podman push {{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}
 ----
 ....
 Getting image source signatures
@@ -125,7 +125,7 @@ Storing signatures
 Confirm the push succeeded and the repository was created:
 [source,bash]
 ----
-curl --user redhat:redhat {{< urifqdn "https://" "node1" ":5000/v2/_catalog" >}}
+curl --user redhat:redhat {{< urifqdnrev "https://" "node1" ":5000/v2/_catalog" >}}
 ----
 ....
 {"repositories":["ubi8/ubi"]}

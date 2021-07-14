@@ -41,14 +41,14 @@ sudo -i
 Create the configuration for node1.
 [source,bash]
 ----
-cat <<EOF > /etc/containers/registries.d/{{< urifqdn "" "node1" ".yaml" >}}
+cat <<EOF > /etc/containers/registries.d/{{< urifqdnrev "" "node1" ".yaml" >}}
 ----
 [source,bash]
 ----
 docker:
-  {{< urifqdn "" "node1" ":5000:" >}}
-    sigstore: file:///var/tmp/sigstore/{{< urifqdn "" "node1" "" >}}
-    sigstore-staging: file:///var/tmp/sigstore/{{< urifqdn "" "node1" "" >}}
+  {{< urifqdnrev "" "node1" ":5000:" >}}
+    sigstore: file:///var/tmp/sigstore/{{< urifqdnrev "" "node1" "" >}}
+    sigstore-staging: file:///var/tmp/sigstore/{{< urifqdnrev "" "node1" "" >}}
 EOF
 ----
 
@@ -63,7 +63,7 @@ Notice we are using the `/var/tmp/sigstore` directory to store signature claims.
 Create a directory for the signature claims for the node1 registry.
 [source,bash]
 ----
-mkdir -p /usr/tmp/sigstore/{{< urifqdn "" "node1" "" >}}
+mkdir -p /usr/tmp/sigstore/{{< urifqdnrev "" "node1" "" >}}
 ----
 
 === Generating key pairs
@@ -84,25 +84,25 @@ gpg2 --export ec2-user > /usr/tmp/keys/gpg-pubkey.gpg
 Confirm you have a container image with the **correct REPOSITORY and TAG** as shown.
 [source,bash]
 ----
-podman tag registry.access.redhat.com/ubi8/ubi {{< urifqdn "" "node1" ":5000/ubi8/ubi" >}}
+podman tag registry.access.redhat.com/ubi8/ubi {{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}
 podman images
 ----
 ....
 REPOSITORY                                  TAG      IMAGE ID       CREATED       SIZE
-{{< urifqdn "" "node1" ":5000/ubi8/ubi" >}}          latest   a4a954bf99ed   2 weeks ago   831 MB
+{{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}          latest   a4a954bf99ed   2 weeks ago   831 MB
 registry.access.redhat.com/ubi8/ubi         latest   a4a954bf99ed   2 weeks ago   831 MB
 ....
 
 Login to the registry, then sign and push the image. When `podman` signs the image it will prompt for the gpg key pass phrase you used to create the key pair. It then creates a signature claim.
 [source,bash]
 ----
-podman login --username=redhat --password=redhat {{< urifqdn "" "node1" ":5000" >}}
+podman login --username=redhat --password=redhat {{< urifqdnrev "" "node1" ":5000" >}}
 ----
 ....
 Login Succeeded!
 ....
 ----
-podman push --sign-by ec2-user {{< urifqdn "" "node1" ":5000/ubi8/ubi" >}}
+podman push --sign-by ec2-user {{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}
 ----
 ....
 Getting image source signatures
@@ -124,7 +124,7 @@ tree /var/tmp/sigstore
 ----
 ....
 /var/tmp/sigstore
-└── {{< urifqdn "" "node1" "" >}}
+└── {{< urifqdnrev "" "node1" "" >}}
     └── ubi8/ubi@sha256=348abe443209236c7359717d582b3a63160628d2e452a5eead05dcb3a453beb6
         └── signature-1
 
@@ -134,7 +134,7 @@ tree /var/tmp/sigstore
 Confirm the push succeeded.
 [source,bash]
 ----
-curl  --user redhat:redhat {{< urifqdn "https://" "node1" ":5000/v2/_catalog" >}}
+curl  --user redhat:redhat {{< urifqdnrev "https://" "node1" ":5000/v2/_catalog" >}}
 ----
 ....
 {"repositories":["ubi8/ubi"]}
@@ -170,7 +170,7 @@ default   reject
 Now we are ready to try an image pull. To make certain you are authenticated to the registry, login again.
 [source,bash]
 ----
-podman login --username=redhat --password=redhat {{< urifqdn "" "node1" ":5000" >}}
+podman login --username=redhat --password=redhat {{< urifqdnrev "" "node1" ":5000" >}}
 ----
 ....
 Login Succeeded!
@@ -179,18 +179,18 @@ Login Succeeded!
 Now test that image pulls are rejected by default.
 [source,bash]
 ----
-podman pull {{< urifqdn "" "node1" ":5000/ubi8/ubi" >}}
+podman pull {{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}
 ----
 ....
-Trying to pull {{< urifqdn "https://" "node1" ":5000/ubi8/ubi" >}}...
-  Running image {{< urifqdn "docker://" "node1" ":5000/ubi8/ubi:latest" >}} is rejected by policy.
-Error: error pulling image "{{< urifqdn "" "node1" ":5000/ubi8/ubi" >}}": unable to pull {{< urifqdn "" "node1" ":5000/ubi8/ubi:" >}} unable to pull image: Source image rejected: Running image {{< urifqdn "docker://" "node1" ":5000/ubi8/ubi:latest" >}} is rejected by policy.
+Trying to pull {{< urifqdnrev "https://" "node1" ":5000/ubi8/ubi" >}}...
+  Running image {{< urifqdnrev "docker://" "node1" ":5000/ubi8/ubi:latest" >}} is rejected by policy.
+Error: error pulling image "{{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}": unable to pull {{< urifqdnrev "" "node1" ":5000/ubi8/ubi:" >}} unable to pull image: Source image rejected: Running image {{< urifqdnrev "docker://" "node1" ":5000/ubi8/ubi:latest" >}} is rejected by policy.
 ....
 
-Set a trust policy for `{{< urifqdn "" "node1" "" >}}` using your exported public gpg key.
+Set a trust policy for `{{< urifqdnrev "" "node1" "" >}}` using your exported public gpg key.
 [source,bash]
 ----
-sudo podman image trust set --type signedBy --pubkeysfile /usr/tmp/keys/gpg-pubkey.gpg {{< urifqdn "" "node1" ":5000" >}}
+sudo podman image trust set --type signedBy --pubkeysfile /usr/tmp/keys/gpg-pubkey.gpg {{< urifqdnrev "" "node1" ":5000" >}}
 ----
 
 Now examine the image trust again. It should show that any image pulls from *node1.{GUID}.internal* must be signed.
@@ -200,16 +200,16 @@ podman image trust show
 ----
 ....
 default                      reject                              
-{{< urifqdn "" "node1" ":5000" >}}   signedBy                 ec2-user   file:///var/tmp/sigstore/{{< urifqdn "" "node1" "" >}}
+{{< urifqdnrev "" "node1" ":5000" >}}   signedBy                 ec2-user   file:///var/tmp/sigstore/{{< urifqdnrev "" "node1" "" >}}
 ....
 
-Finally, try to pull the image from the trusted registry on `{{< urifqdn "" "node1" "" >}}` and it should succeed.
+Finally, try to pull the image from the trusted registry on `{{< urifqdnrev "" "node1" "" >}}` and it should succeed.
 [source,bash]
 ----
-podman pull {{< urifqdn "" "node1" ":5000/ubi8/ubi:latest" >}}
+podman pull {{< urifqdnrev "" "node1" ":5000/ubi8/ubi:latest" >}}
 ----
 ....
-Trying to pull {{< urifqdn "" "node1" ":5000/ubi8/ubi" >}}...
+Trying to pull {{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}...
 Getting image source signatures
 Checking if image destination supports signatures
 Copying blob e9bd946da7a5 skipped: already exists
@@ -312,15 +312,15 @@ There are a few ways to approach this:
 
 Take what you've learned and give each a try.
 
-Now try to pull the image from `{{< urifqdn "" "node2" "" >}}`, it should fail.
+Now try to pull the image from `{{< urifqdnrev "" "node2" "" >}}`, it should fail.
 [source,bash]
 ----
-podman pull {{< urifqdn "" "node2" ":5000/ubi8/ubi" >}}
+podman pull {{< urifqdnrev "" "node2" ":5000/ubi8/ubi" >}}
 ----
 ....
-Trying to pull {{< urifqdn "https://" "node2" ":5000/ubi8/ubi" >}}...
-  Running image {{< urifqdn "docker://" "node2" ":5000/ubi8/ubi:latest" >}} is rejected by policy.
-Error: error pulling image "{{< urifqdn "" "node2" ":5000/ubi8/ubi" >}}": unable to pull {{< urifqdn "" "node2" ":5000/ubi8/ubi:" >}} unable to pull image: Source image rejected: Running image {{< urifqdn "docker://" "node2" ":5000/ubi8/ubi:latest" >}} is rejected by policy.
+Trying to pull {{< urifqdnrev "https://" "node2" ":5000/ubi8/ubi" >}}...
+  Running image {{< urifqdnrev "docker://" "node2" ":5000/ubi8/ubi:latest" >}} is rejected by policy.
+Error: error pulling image "{{< urifqdnrev "" "node2" ":5000/ubi8/ubi" >}}": unable to pull {{< urifqdnrev "" "node2" ":5000/ubi8/ubi:" >}} unable to pull image: Source image rejected: Running image {{< urifqdnrev "docker://" "node2" ":5000/ubi8/ubi:latest" >}} is rejected by policy.
 ....
 
 {{< importPartial "footer/footer.html" >}}
