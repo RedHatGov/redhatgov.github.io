@@ -2,7 +2,7 @@
 
 In this unit you will install [Red Hat Directory Server](https://www.redhat.com/en/technologies/cloud-computing/directory-server "Red Hat Directory Server"). Red Hat Directory Server provides a centralized directory service for an intranet, network, and extranet information. Directory Server integrates with existing systems and acts as a centralized repository for the consolidation of employee, customer, supplier, and partner information. Directory Server can even be extended to manage user profiles, preferences, and authentication. 
 
-Red Hat Directory Server is used as the backend for Certificate System. The setup script can be used interactively but we are going to use an automated install with pre-configured settings.
+Red Hat Directory Server is used as the backend for Red Hat Certificate System. The setup script can be used interactively but we are going to use an automated install with pre-configured settings.
 
 Note: The default password is **redhat**.
 
@@ -18,7 +18,7 @@ Note: The default password is **redhat**.
 
     `setup-ds.pl --silent --file=ds1-setup.ldif`
 
-4. Ensure Directory Server is running and enabled.
+4. Ensure the Directory Server is running and enabled.
 
     `systemctl is-enabled dirsrv@ds1.service`
 

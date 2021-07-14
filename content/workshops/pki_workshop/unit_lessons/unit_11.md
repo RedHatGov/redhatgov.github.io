@@ -2,7 +2,7 @@
 
 In this unit you will go over the caUserCert profile. This certificate profile is for enrolling user certificates.
 
-The CA profiles are located here:
+The CA (certificate authority) profiles are located here:
 
     /var/lib/pki/ca1/ca/profiles/ca
 
@@ -10,7 +10,15 @@ The [caUserCert.cfg](https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/
 
 ## Example caUserCert Profile
 
-The first part of a certificate profile is the description. This shows the name, long description, whether it is enabled, and who enabled it.
+The fields you will see in a CA User Profile are as follows:
+
+desc is a long description of the user certificate profile
+visible (true/false) controls whether the certificate will be visible to users
+enable, when selected (true), will allow the certificate to be used
+enableBy identifies the user who enabled the certificate
+name is the short name used for the certificate that will be viewable by users
+
+Here is what it will look like, in the file:
 
     desc=This certificate profile is for enrolling user certificates.
     visible=true
