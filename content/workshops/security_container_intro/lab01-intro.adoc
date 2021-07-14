@@ -73,15 +73,15 @@ Use the web console to login to the bastion:
 
 [source,bash]
 ----
-{{< urifqdn "https://" "bastion" ":9090/system/terminal" >}}
+{{< urifqdnrev "https://" "bastion" ":9090/system/terminal" >}}
 ----
 
 ==== Use `ssh` to login to the nodes, from the bastion:
 
 [source,bash]
 ----
-{{< urifqdn "ssh " "node1" "" >}}
-{{< urifqdn "ssh " "node2" "" >}}
+{{< urifqdnrev "ssh " "node1" "" >}}
+{{< urifqdnrev "ssh " "node2" "" >}}
 ----
 
 {{< importPartial "footer/footer.html" >}}
