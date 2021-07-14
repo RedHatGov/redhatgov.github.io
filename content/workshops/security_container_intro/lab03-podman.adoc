@@ -31,30 +31,31 @@ over client-server based architectures.
 
 The container image that you will be using through out most of this lab is the RHEL 8 Universal Base Image https://access.redhat.com/containers/#/product/5c180b28bed8bd75a2c29a63[(UBI)]. The UBI is designed and engineered to be the base layer for containerized applications, middleware and utilities. This base image is freely distributable. However, Red Hat only supports Red Hat technologies through subscriptions for Red Hat products. When you get a chance, read more about https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html-single/getting_started_with_containers/index#using_red_hat_universal_base_images_standard_minimal_and_runtimes[ using the UBI]. 
 
-Pull the RHEL 8 UBI image from RedHat's container registry:
+For this first part of the lab, we will be using the most current Fedora (the community upstream distribution for Red Hat Enterprise Linux) container image.
+
+Pull the latest Fedora image from RedHat's container registry:
 [source,bash]
 ----
-podman pull ubi8/ubi
+podman pull fedora:latest
 ----
 ....
-Trying to pull ubi8/ubi...
+Resolved "fedora" as an alias (/etc/containers/registries.conf.d/000-shortnames.conf)
+Trying to pull registry.fedoraproject.org/fedora:latest...
 Getting image source signatures
-Copying blob 941e1e2b31a8 skipped: already exists
-Copying blob 0bb54aa5e977 skipped: already exists
-Copying config 0c46e5c7a8 done
+Copying blob ca594071dfff done
+Copying config abec9a7a7d done
 Writing manifest to image destination
 Storing signatures
-0c46e5c7a82a97d21447ee6a1ef0d407317642c9361b562456395e087be08774
+abec9a7a7dc640768e6dc51b6a5728e470411615c62e9ff46215206bde816772
 ....
 
 Now do the same as the root user:
 [source,bash]
 ----
-sudo podman pull ubi8/ubi
+sudo podman pull fedora:latest
 ----
 
-Notice that pulling the UBI does not require 
-authentication from RedHat's registries.
+Notice that pulling Fedora does not require authentication from RedHat's registries.
 
 Next, we'll work with the registries that were configured
 in the previous modules.
@@ -71,13 +72,13 @@ podman images
 ----
 ....
 REPOSITORY                            TAG      IMAGE ID       CREATED      SIZE
-ubi8/ubi   latest   8121a9f5303b   8 days ago   240 MB
+registry.fedoraproject.org/fedora  latest  abec9a7a7dc6  4 weeks ago  184 MB
 ....
 
 Next tag the image for the remote registry hosted at `{{< urifqdnrev "" "node1" "" >}}`:
 [source,bash]
 ----
-podman tag ubi8/ubi {{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}
+podman tag fedora {{< urifqdnrev "" "node1" ":5000/fedora/latest" >}}
 ----
 
 Confirm the tag is correct:
@@ -87,8 +88,8 @@ podman images
 ----
 ....
 REPOSITORY                            TAG      IMAGE ID       CREATED      SIZE
-ubi8/ubi   latest   8121a9f5303b   8 days ago   240 MB
-node1.8l829.internal:5000/ubi8/ubi    latest   8121a9f5303b   8 days ago   240 MB
+registry.fedoraproject.org/fedora             latest  abec9a7a7dc6  4 weeks ago  184 MB
+node1.0.jajcsec.rhnaps.io:5000/fedora/latest  latest  abec9a7a7dc6  4 weeks ago  184 MB
 ....
 
 Login to the `{{< urifqdnrev "" "node1" "" >}}` registry. Do the same for `{{< urifqdnrev "" "node2" "" >}}`. Both of these actions should be taken from `{{< urifqdnrev "" "bastion" "" >}}`:
@@ -110,7 +111,7 @@ Login Succeeded!
 Finally, push the image:
 [source,bash]
 ----
-podman push {{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}
+podman push {{< urifqdnrev "" "node1" ":5000/fedora/latest" >}}
 ----
 ....
 Getting image source signatures
@@ -128,7 +129,7 @@ Confirm the push succeeded and the repository was created:
 curl --user redhat:redhat {{< urifqdnrev "https://" "node1" ":5000/v2/_catalog" >}}
 ----
 ....
-{"repositories":["ubi8/ubi"]}
+{"repositories":["fedora/latest"]}
 ....
 
 === Working with root and rootless containers.
@@ -147,7 +148,8 @@ podman images
 ----
 ....
 REPOSITORY                            TAG      IMAGE ID       CREATED       SIZE
-ubi8/ubi   latest   8121a9f5303b   8 days ago   240 MB
+registry.fedoraproject.org/fedora             latest  abec9a7a7dc6  4 weeks ago  184 MB
+node1.0.jajcsec.rhnaps.io:5000/fedora/latest  latest  abec9a7a7dc6  4 weeks ago  184 MB
 ....
 
 Where are the images actually stored? Here is a clue:
@@ -164,6 +166,14 @@ Run a rootless container:
 podman run --name=rootless -d registry.access.redhat.com/ubi8/ubi sleep 999
 ----
 ....
+Trying to pull registry.access.redhat.com/ubi8/ubi:latest...
+Getting image source signatures
+Checking if image destination supports signatures
+Copying blob 5f6bf015319e done
+Copying blob 45cc8b7f2b43 done
+Copying config 8215cb84fa done
+Writing manifest to image destination
+Storing signatures
 815dd74131decfed827b4087785e54b780eef12e44392ff1146c31179b29a855
 ....
 
@@ -183,6 +193,15 @@ Now do the same for a root container:
 sudo podman run --name=root -d registry.access.redhat.com/ubi8/ubi sleep 999 
 ----
 ....
+sudo podman run --name=root -d registry.access.redhat.com/ubi8/ubi sleep 999
+Trying to pull registry.access.redhat.com/ubi8/ubi:latest...
+Getting image source signatures
+Checking if image destination supports signatures
+Copying blob 45cc8b7f2b43 done
+Copying blob 5f6bf015319e done
+Copying config 8215cb84fa done
+Writing manifest to image destination
+Storing signatures
 815dd74131decfed827b4087785e54b780eef12e44392ff1146c31179b29a855
 ....
 
@@ -193,6 +212,8 @@ sudo podman ps
 CONTAINER ID  IMAGE                       COMMAND    CREATED         STATUS             PORTS  NAMES
 493da8f543de  ubi8/ubi  sleep 999  43 seconds ago  Up 42 seconds ago         root
 ....
+
+Note that podman automatically pulled down the UBI image for each request. This is because we hadn't used that image, before.
 
 === Stopping and removing containers
 
@@ -205,6 +226,8 @@ podman rm rootless
 sudo podman stop root
 sudo podman rm root
 ----
+
+*NOTE:* You will get an error from the below commands, if you ran the commands above, since the containers are stopped, and their images removed.
 
 With brute force:
 [source,bash]
