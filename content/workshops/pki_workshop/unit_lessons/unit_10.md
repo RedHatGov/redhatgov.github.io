@@ -32,11 +32,11 @@ In this section you will use **ldapmodify** to create the user directly in the D
 
 ## Generate Virtual Token
 
-1. Edit the **phoneHome.xml** file and change the Operation URL from https to http, and ensure the port listed is the unsecure port (by default 8080).
+1. Edit the **phoneHome.xml** file and change the Operation URL from https to http. Ensure the port listed is the unsecured port (by default 8080).
 
     `vim /etc/pki/ca1/tps/phoneHome.xml`
 
-2. Restart the CA.
+2. Restart the CA (certificate authority) service.
 
     `systemctl restart pki-tomcatd@ca1.service`
 
