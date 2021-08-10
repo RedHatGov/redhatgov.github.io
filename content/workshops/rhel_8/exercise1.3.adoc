@@ -47,7 +47,7 @@ image::su_updates_restart.png[Software Updates, 900, caption="Figure 3: ", title
 
 === Step 2: Restart the system
 
-Click the `Restart Now` button, to reboot your managed host, and cause the changes to take effect. You will see screens like these, while the system is rebooting:
+If required, click the `Restart Now` button to reboot your managed host and cause the changes to take effect. You will see screens like these while the system is rebooting:
 
 image::su_updates_restarting.png[Software Updates, 900, caption="Figure 4: ", title="System Restarting"]
 
