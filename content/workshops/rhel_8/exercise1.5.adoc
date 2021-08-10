@@ -15,7 +15,7 @@ layout: lab
 == Exercise Description
 RHEL 8 makes it easy to enforce a strong and consistent cryptographic policy on your systems.
 
-In the following exercises we'll use the new commands for managing your crypto configurations and test them.
+In the following exercises we'll use the new commands for managing your crypto configurations and test them. We will be using the web site https://badssl.com[badssl.com] to test connections using different versions of relevant protocols, such as TLS.
 
 == Section 1: Viewing and changing the crypto policy
 
@@ -50,7 +50,10 @@ Change the crypto policy to LEGACY.
 ----
 sudo update-crypto-policies --set LEGACY
 ----
-And now let's test communication to the same site; now it connects, and reports TLS v1.1:
+
+Note: You may see a warning requesting a reboot for the policy change to fully take place, but this is not necessary for this exercise.
+
+Let's test communication to the same site; It should connect successfully, and report TLS v1.1:
 [source, bash]
 ----
 timeout 3 openssl s_client --connect tls-v1-1.badssl.com:1011 | grep Protocol
