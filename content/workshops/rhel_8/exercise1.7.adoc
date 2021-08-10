@@ -19,8 +19,8 @@ SCAP (Security Content Automation Protocol) is a NIST project that standardizes 
 
 The essential components of SCAP are:
 
-* XCCDF: The Extensible Configuration Checklist Description Format
-* OVAL®: Open Vulnerability and Assessment Language
+* XCCDF: The Extensible Configuration Checklist Description Format, to describe security checklists
+* OVAL®: Open Vulnerability and Assessment Language, a declarative language for making logical assertions about the state of a system
 * CCE™: Common Configuration Enumeration
 * CPE™: Common Platform Enumeration
 * CVE®: Common Vulnerabilities and Exposures
@@ -109,6 +109,8 @@ To perform a basic compliance scan using the OSPP profile for RHEL 8, run the fo
 sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /var/www/html/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
 ----
 
+The command above outputs the result of the compliance scan into an Asset Reporting Format (ARF) file, and generates a HTML-based report
+
 Once the command completes, open this link in another tab to view the resulting report:
 [source, bash]
 ----
@@ -147,6 +149,8 @@ sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.co
 
 Once the command completes, open this link in another tab to view the resulting report:
 [source, bash]
+
+You may notice that the playbook may not have fixed every single issue found.  This may be due to a specific check requiring a change to a configuration that cannot be corrected by Ansible or script, or requiring a fundamental system change (such as partitioning schemes).
 ----
 {{< urifqdn "http://" "node" "/report.html" >}}
 ----
