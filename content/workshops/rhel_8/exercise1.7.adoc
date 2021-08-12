@@ -147,6 +147,10 @@ To see what differences the application of the hardening profile has made, re-ru
 sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_ospp --results-arf /tmp/arf.xml --report /var/www/html/report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
 ----
 
+
+[NOTE]
+Issue under investigation: If the command above ends with a one line message saying "Killed", then the report will not generate.  This can be remediated via a reboot until the root cause is found.
+
 Once the command completes, open this link in another tab to view the resulting report:
 [source, bash]
 
