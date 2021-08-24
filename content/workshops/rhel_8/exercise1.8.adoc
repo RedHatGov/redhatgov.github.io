@@ -90,7 +90,7 @@ Installing:
 Complete!
 ....
 
-This subcommand acts like the RUN directive in an OCIFile. Since the yum command includes a switch, we need to use the ##--## syntax to tell ##buildah run## there are no buildah options to look for past this point.
+This subcommand acts like the RUN directive in an OCIFile (also known as a ContainerFile or DockerFile). Since the yum command includes a switch, we need to use the ##--## syntax to tell ##buildah run## there are no buildah options to look for past this point.
 
 === Step 2: Install a simple home page
 
@@ -111,7 +111,7 @@ Instead of using init scripts, the webserver will be started directly when the c
 buildah config --cmd "/usr/sbin/httpd -D FOREGROUND" ubi-working-container
 ----
 
-The above option to ##buildah config## is equivalent to the CMD directive in an OCIFile.
+The above option to ##buildah config## is equivalent to the CMD directive in an OCIFile (ContainerFile, DockerFile)
 
 === Step 4: Expose the http port on the container
 
@@ -196,6 +196,9 @@ CONTAINER ID  IMAGE                        COMMAND              CREATED         
 f4d9db69e9b5  localhost/httpd:latest   /usr/bin/run-http... 16 seconds ago  Up 16 seconds ago  0.0.0.0:8080->80/tcp  amazing_tharp
 ....
 
+[NOTE]
+You may ask yourself what this "amazing_tharp" business is about in the output above. Podman generates random two word names for new containers, which you can use to refer to specific container.  What two word name was generated for your container?
+
 Further, you can view the container's processes with the following:
 
 [source, bash]
@@ -224,6 +227,9 @@ Welcome to the RHEL8 workshop!
 
 [NOTE]
 Note the URL specified matches the port mapping specified on the ##podman run## command.
+
+[NOTE]
+If you get an error message such as "You don't have permission to access this resource.", you may need to inspect the permissions of the index.html file you copied into the container image.
 
 ==== Step 4: Stop the container
 
