@@ -63,7 +63,7 @@ vim inventory
 
 === Step 6: Identify variables
 
-Fill out a couple variables in the inventory file, *admin_password* and *pg_password*:
+Fill out a couple variables in the inventory file, *admin_password* and *pg_password*. Also, fill in the *web_server_ssl_cert* and *web_server_ssl_key* fields, and uncomment both, as shown:
 
 [subs=+quotes]
 ----
@@ -94,8 +94,8 @@ pg_sslmode='prefer'  # set to 'verify-full' for client-side enforced SSL
 # custom_ca_cert=/path/to/ca.crt
 
 # Certificate and key to install in nginx for the web UI and API
-# web_server_ssl_cert=/path/to/tower.cert
-# web_server_ssl_key=/path/to/tower.key
+web_server_ssl_cert=*/home/ec2-user/cert.pem*
+web_server_ssl_key=*/home/ec2-user/key.pem*
 
 # Server-side SSL settings for PostgreSQL (when we are installing it).
 # postgres_use_ssl=False
@@ -118,13 +118,12 @@ Step 7 will take approx. 10-15 minutes to complete.  This may be a good time to 
 
 === Step 8: Confirm results
 
-At this point, your Ansible Tower installation should be complete.
-You can access your Tower workshop (not forgetting that *workshopname* is the name of your workshop, and *#* is your student number) at:
+At this point, your Ansible Tower installation should be complete. You can access your Tower workshop using the URL below:
 
 
 [source,bash]
 ----
-{{< urifqdn "https://" "tower" "" >}}
+{{< uriwildfqdn "https://" "tower" "" >}}
 ----
 
 === Ensuring Installation Success

@@ -62,8 +62,9 @@ podman pod list
 
 Connect to the web based editor in a browser window, using the following URL:
 
+[source,bash]
 ----
-{{< urifqdn "https://" "tower" ":8443" >}}
+{{< uriwildfqdn "https://" "tower" ":8443" >}}
 ----
 
 === Managing remote hosts
@@ -90,7 +91,7 @@ Put the following content into the file:
 
 ....
 [web]
-{{< urifqdn "" "node" "" >}}
+{{< uriwildfqdn "" "node" "" >}}
 ....
 
 === Step 1: Test webhost response
@@ -177,13 +178,13 @@ Demo site (unit test):
 [source,bash]
 ----
 ansible web -m uri -a "url=http://localhost:8080 return_content=yes"
-ansible localhost -m uri -a "url=http://{{< urifqdn "" "node" "" >}}:8080 return_content=yes"
+ansible localhost -m uri -a "url={{< uriwildfqdn "" "node" "" >}}:8080 return_content=yes"
 ----
 
 Demo site (open this in your web browser):
 [source,bash]
 ----
-http://{{< urifqdn "" "node" "" >}}:8080
+{{< uriwildfqdn "http://" "node" "" >}}:8080
 ----
 
 === Step 7: Cleanup

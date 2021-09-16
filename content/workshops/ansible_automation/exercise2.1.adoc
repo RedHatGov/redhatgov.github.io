@@ -242,11 +242,8 @@ Switch back to your terminal session.  If by any chance you closed the Red Hat W
 
 [source,bash]
 ----
-{{< urifqdn "https://" "tower" ":9090/system/terminal" >}}
+{{< uriwildfqdn "https://" "tower" ":9090/system/terminal" >}}
 ----
-
-
-
 
 === Step 6: Import an existing inventory
 
