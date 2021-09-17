@@ -47,7 +47,7 @@ image::cockpit_system.png[caption="Figure 2: ", title='Web Console System Tab', 
 
 
 [IMPORTANT]
-Be sure that you can log in to your instances.  If you can't log in start shouting, loudly, and waving your hands!
+Be sure that you can log in to your instances.  If you can't log in, start shouting loudly and wave your hands!
 
 
 == End Result
