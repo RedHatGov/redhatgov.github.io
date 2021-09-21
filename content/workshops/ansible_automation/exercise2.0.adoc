@@ -63,7 +63,7 @@ vim inventory
 
 === Step 6: Identify variables
 
-Fill out a couple variables in the inventory file, *admin_password* and *pg_password*. Also, fill in the *web_server_ssl_cert* and *web_server_ssl_key* fields, and uncomment both, as shown:
+Fill out a couple of variables in the inventory file, *admin_password* and *pg_password*. Also, fill in the *web_server_ssl_cert* and *web_server_ssl_key* fields, and uncomment both, as shown:
 
 [subs=+quotes]
 ----
