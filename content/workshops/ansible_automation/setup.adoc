@@ -28,7 +28,7 @@ Use this URL to access the Web Console node, just change the workshop name (if a
 
 [source,bash]
 ----
-{{< urifqdn "https://" "tower" ":9090/system/terminal" >}}
+{{< uriwildfqdn "https://" "tower" ":9090/system/terminal" >}}
 ----
 
 You will be presented with a login window.

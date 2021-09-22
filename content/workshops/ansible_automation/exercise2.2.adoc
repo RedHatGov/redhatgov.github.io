@@ -150,7 +150,7 @@ Once your job is sucessful, navigate to your new website, where *workshopname* i
 
 [source,bash]
 ----
-{{< urifqdn "http://" "node" "" >}}
+{{< uriwildfqdn "http://" "node" "" >}}
 ----
 
 
