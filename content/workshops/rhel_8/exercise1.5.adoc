@@ -34,6 +34,9 @@ DEFAULT is one of the four crypto policies, along with LEGACY, FIPS 140, and FUT
 
 `man crypto-policies`
 
+[NOTE]
+The system-wide crypto policies functionality is new to RHEL 8.  It is part of Red Hat's efforts to further reduce the attack surface of your RHEL systems and the applications you build on them.
+
 To see the effect of the DEFAULT policy, try pasting in this command:
 
 [source, bash]
