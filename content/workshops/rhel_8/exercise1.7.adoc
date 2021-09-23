@@ -120,6 +120,9 @@ Once the command completes, open this link in another tab to view the resulting 
 {{< urifqdn "http://" "node" "/report.html" >}}
 ----
 
+[NOTE]
+The FQDN in the URL above is an example.  Yours will need to have the FQDN used to reach your host via the Cockpit Web Console, e.g. {{< urifqdn "" "node" >}}
+
 Here's a snippet of what the report looks like:
 
 image::openscap-example-report.png[caption="Figure 1: ", title="OpenSCAP report", width=800]
