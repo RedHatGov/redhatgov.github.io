@@ -84,4 +84,42 @@ Use the web console to login to the bastion:
 {{< urifqdnrev "ssh " "node2" "" >}}
 ----
 
+For each node, you will be asked to confirm that the key fingerprint is OK, as you haven't logged into it, before.
+
+Node 1:
+
+....
+The authenticity of host '{{< urifqdnrev "" "node1" "" >}} (10.0.2.128)' can't be established.
+ECDSA key fingerprint is SHA256:X6KOWD5YgDqcGxnSKDgT0ZYWqBeG8yw9CKTvgFwT6sQ.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+....
+
+Respond with `yes` or `y` to accept the key:
+
+[source,bash]
+----
+yes
+----
+
+Logout when done.
+
+Node 2:
+
+....
+The authenticity of host '{{< urifqdnrev "" "node2" "" >}} (10.0.2.125)' can't be established.
+ECDSA key fingerprint is SHA256:n2/LxFOXS2of8osIEcY/5911N6OmqaJJpsYRgnVrsiA.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+....
+
+Again, respond with `yes` or `y` to accept the key:
+
+[source,bash]
+----
+yes
+----
+
+Logout when done.
+
+Now, let's move on to lab #2!
+
 {{< importPartial "footer/footer.html" >}}

@@ -71,7 +71,7 @@ Now examine the capabilities bit mask of a *root* process on the host.
 sudo grep CapEff /proc/self/status
 ----
 ....
-CapEff:	0000003fffffffff
+CapEff:	000000ffffffffff
 ....
 
 Notice that all 38 capability bits are set indicating this process has a full set of capabilities. In a later exercise, you'll discover that a container
@@ -80,15 +80,40 @@ running as **root** has a filtered set of capabilities by default but this can b
 The `capsh` command can decode a capabilities bitmask into a human readable output. Try it out!
 [source,bash]
 ----
-capsh --decode=3fffffffff
+capsh --decode=ffffffffff
 ----
 ....
-0x0000003fffffffff=cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,ca
-p_setpcap,cap_linux_immutable,cap_net_bind_service,cap_net_broadcast,cap_net_admin,cap_net_raw,cap_ipc_lock,cap_ipc_owner
-,cap_sys_module,cap_sys_rawio,cap_sys_chroot,cap_sys_ptrace,cap_sys_pacct,cap_sys_admin,cap_sys_boot,cap_sys_nice,cap_sys
-_resource,cap_sys_time,cap_sys_tty_config,cap_mknod,cap_lease,cap_audit_write,cap_audit_control,cap_setfcap,cap_mac_overr
-ide,cap_mac_admin,cap_syslog,cap_wake_alarm,cap_block_suspend,cap_audit_read
+0x000000ffffffffff=cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,cap_setpcap,cap_linux_immutable,cap_net_bind_service,cap_net_broadcast,cap_net_admin,cap_net_raw,cap_ipc_lock,cap_ipc_owner,cap_sys_module,cap_sys_rawio,cap_sys_chroot,cap_sys_ptrace,cap_sys_pacct,cap_sys_admin,cap_sys_boot,cap_sys_nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_mknod,cap_lease,cap_audit_write,cap_audit_control,cap_setfcap,cap_mac_override,cap_mac_admin,cap_syslog,cap_wake_alarm,cap_block_suspend,cap_audit_read,38,39
 ....
+
+*NOTE: for those interested, capability '38' allows the following:*
+....
+* CAP_PERFMON relaxes the verifier checks further:
+ * - BPF progs can use of pointer-to-integer conversions
+ * - speculation attack hardening measures are bypassed
+ * - bpf_probe_read to read arbitrary kernel memory is allowed
+ * - bpf_trace_printk to print kernel memory is allowed
+....
+
+*NOTE: for those interested, capability '39' allows the following:*
+....
+ * CAP_BPF allows the following BPF operations:
+ * - Creating all types of BPF maps
+ * - Advanced verifier features
+ *   - Indirect variable access
+ *   - Bounded loops
+ *   - BPF to BPF function calls
+ *   - Scalar precision tracking
+ *   - Larger complexity limits
+ *   - Dead code elimination
+ *   - And potentially other features
+ * - Loading BPF Type Format (BTF) data
+ * - Retrieve xlated and JITed code of BPF programs
+ * - Use bpf_spin_lock() helper
+....
+
+In comparison, '200' indicates the immutable capability (CAP_LINUX_IMMUTABLE):
+
 [source,bash]
 ----
 capsh --decode=200
@@ -125,7 +150,7 @@ Now run a container as privileged and compare the results to the previous exerci
 sudo podman run --user=0 --rm -it --privileged registry.access.redhat.com/ubi8/ubi grep CapEff /proc/self/status
 ----
 ....
-CapEff: 0000003fffffffff
+CapEff: 000000ffffffffff
 ....
 
 === Examining container processes
@@ -162,7 +187,7 @@ podman top -h
 
 How could you determine which capabilities podman _filters_ from a _root_ process running in a container? 
 
-From a previous exercise we know that a root process on the host has a capabilities mask of CapEff = `0000003fffffffff`
+From a previous exercise we know that a root process on the host has a capabilities mask of CapEff = `000000ffffffffff`
 
 From a previous exercise we know that a root process in a container has a capabilities mask of CapEff = `00000000a80427fb`
 
@@ -233,29 +258,28 @@ exit
 
 === Example Solutions to Challenges
 
-Challenge #1: One approach would be to use your favorite binary calculator (`bc`) to calculate the difference in `CapEff` between a host root process `(0x3fffffffff)` and a containerized root process `(0xa80427fb)`.
+Challenge #1: One approach would be to use your favorite binary calculator (`bc`) to calculate the difference in `CapEff` between a host root process `(0xffffffffff)` and a containerized root process `(0xa80427fb)`.
 ....
-  0x3FFFFFFFFF
+  0xFFFFFFFFFF
 - 0x00A80427FB
   ------------
-  0x3F57FBD804
+  0xFF57FBD804
 ....
 [source,bash]
 ----
-echo 'obase=16;ibase=16;3FFFFFFFFF-A80427FB' | bc
+echo 'obase=16;ibase=16;FFFFFFFFFF-A80427FB' | bc
 ----
 ....
-3F57FBD804
+FF57FBD804
 ....
 
 To produce a human readable list, use `capsh` to decode the vector.
 [source,bash]
 ----
-capsh --decode=3F57FBD804
+capsh --decode=FF57FBD804
 ----
 ....
-0x0000003f57fbd804=cap_dac_read_search,cap_net_broadcast,cap_net_admin,cap_ipc_lock,cap_ipc_owner,cap_sys_module,cap_sys_rawio,cap_sys_ptrace,cap_sys_pacct,cap_sys_admin,cap_sys_boot,cap_sys
-_nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_lease,cap_audit_control,cap_mac_override,cap_mac_admin,cap_syslog,cap_wake_alarm,cap_block_suspend,cap_audit_read
+0x000000ff57fbd804=cap_dac_read_search,cap_net_broadcast,cap_net_admin,cap_ipc_lock,cap_ipc_owner,cap_sys_module,cap_sys_rawio,cap_sys_ptrace,cap_sys_pacct,cap_sys_admin,cap_sys_boot,cap_sys_nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_lease,cap_audit_control,cap_mac_override,cap_mac_admin,cap_syslog,cap_wake_alarm,cap_block_suspend,cap_audit_read,38,39
 ....
 
 Challenge #2: To allow a container to set the system clock, the `sys_time` capability must be added. Add this capability then try setting the date again.
@@ -279,15 +303,6 @@ Challenge #3: Drop all capabilities then add `linux_immutable`. The trick with t
 ----
 sudo podman run -it --name=chattr_no_ping --rm --cap-drop=all --cap-add=linux_immutable quay.io/bkozdemb/utils bash
 ----
-
-The `ping` command should fail.
-[source,bash]
-----
-ping -c1 127.0.0.1
-----
-....
-ping: socket: Operation not permitted
-....
 
 The `chattr` command should succeed in making a file read only:
 [source,bash]
