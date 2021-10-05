@@ -84,13 +84,12 @@ gpg2 --export ec2-user > /usr/tmp/keys/gpg-pubkey.gpg
 Confirm you have a container image with the **correct REPOSITORY and TAG** as shown.
 [source,bash]
 ----
-podman tag registry.access.redhat.com/ubi8/ubi {{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}
+podman tag registry.fedoraproject.org/fedora:latest {{< urifqdnrev "" "node1" ":5000/fedora:latest" >}}
 podman images
 ----
 ....
-REPOSITORY                                  TAG      IMAGE ID       CREATED       SIZE
-{{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}          latest   a4a954bf99ed   2 weeks ago   831 MB
-registry.access.redhat.com/ubi8/ubi         latest   a4a954bf99ed   2 weeks ago   831 MB
+REPOSITORY                                          TAG      IMAGE ID       CREATED       SIZE
+{{< urifqdnrev "" "node1" ":5000/fedora/latest" >}}   latest   a4a954bf99ed   2 weeks ago   184 MB
 ....
 
 Login to the registry, then sign and push the image. When `podman` signs the image it will prompt for the gpg key pass phrase you used to create the key pair. It then creates a signature claim.
@@ -102,7 +101,7 @@ podman login --username=redhat --password=redhat {{< urifqdnrev "" "node1" ":500
 Login Succeeded!
 ....
 ----
-podman push --sign-by ec2-user {{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}
+podman push --sign-by ec2-user {{< urifqdnrev "" "node1" ":5000/fedora/latest" >}}
 ----
 ....
 Getting image source signatures
@@ -125,8 +124,9 @@ tree /var/tmp/sigstore
 ....
 /var/tmp/sigstore
 └── {{< urifqdnrev "" "node1" "" >}}
-    └── ubi8/ubi@sha256=348abe443209236c7359717d582b3a63160628d2e452a5eead05dcb3a453beb6
-        └── signature-1
+    └── fedora
+        └── latest@sha256=f1b2dc7705f263e24b6cc0f925df2593e087bfbca5e36053a2868e0c2a190569
+            └── signature-1
 
 2 directories, 1 file
 ....
@@ -137,7 +137,7 @@ Confirm the push succeeded.
 curl  --user redhat:redhat {{< urifqdnrev "https://" "node1" ":5000/v2/_catalog" >}}
 ----
 ....
-{"repositories":["ubi8/ubi"]}
+{"repositories":["fedora/latest"]}
 ....
 
 === Working with trust policies
@@ -179,12 +179,12 @@ Login Succeeded!
 Now test that image pulls are rejected by default.
 [source,bash]
 ----
-podman pull {{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}
+podman pull {{< urifqdnrev "" "node1" ":5000/fedora/latest" >}}
 ----
 ....
-Trying to pull {{< urifqdnrev "https://" "node1" ":5000/ubi8/ubi" >}}...
-  Running image {{< urifqdnrev "docker://" "node1" ":5000/ubi8/ubi:latest" >}} is rejected by policy.
-Error: error pulling image "{{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}": unable to pull {{< urifqdnrev "" "node1" ":5000/ubi8/ubi:" >}} unable to pull image: Source image rejected: Running image {{< urifqdnrev "docker://" "node1" ":5000/ubi8/ubi:latest" >}} is rejected by policy.
+Trying to pull {{< urifqdnrev "https://" "node1" ":5000/fedora/latest" >}}...
+  Running image {{< urifqdnrev "docker://" "node1" ":5000/fedora/latest:latest" >}} is rejected by policy.
+Error: error pulling image "{{< urifqdnrev "" "node1" ":5000/fedora/latest" >}}": unable to pull {{< urifqdnrev "" "node1" ":5000/fedora/latest:" >}} unable to pull image: Source image rejected: Running image {{< urifqdnrev "docker://" "node1" ":5000/fedora/latest:latest" >}} is rejected by policy.
 ....
 
 Set a trust policy for `{{< urifqdnrev "" "node1" "" >}}` using your exported public gpg key.
@@ -206,10 +206,10 @@ default                      reject
 Finally, try to pull the image from the trusted registry on `{{< urifqdnrev "" "node1" "" >}}` and it should succeed.
 [source,bash]
 ----
-podman pull {{< urifqdnrev "" "node1" ":5000/ubi8/ubi:latest" >}}
+podman pull {{< urifqdnrev "" "node1" ":5000/fedora/latest" >}}
 ----
 ....
-Trying to pull {{< urifqdnrev "" "node1" ":5000/ubi8/ubi" >}}...
+Trying to pull {{< urifqdnrev "" "node1" ":5000/fedora/latest" >}}...
 Getting image source signatures
 Checking if image destination supports signatures
 Copying blob e9bd946da7a5 skipped: already exists
@@ -276,10 +276,10 @@ Examine the trust policy again.
 podman image trust show
 ----
 ....
-                             insecureAcceptAnything
-default                      reject
-node1.{GUID}.internal:5000   signedBy                 ec2-user                                   file:///var/tmp/sigstore
-registry.access.redhat.com   signedBy                 security@redhat.com, security@redhat.com   https://access.redhat.com/webassets/docker/content/sigstore
+default                              reject
+registry.access.redhat.com           signedBy                security@redhat.com, security@redhat.com  https://access.redhat.com/webassets/docker/content/sigstore
+{{< urifqdnrev "" "node1" ":5000" >}}  signedBy                ec2-user                                  file:///var/tmp/sigstore/node1-0.jajcontainer.rhnaps.io
+                                     insecureAcceptAnything
 ....
 
 Try the image pull again.
@@ -315,12 +315,12 @@ Take what you've learned and give each a try.
 Now try to pull the image from `{{< urifqdnrev "" "node2" "" >}}`, it should fail.
 [source,bash]
 ----
-podman pull {{< urifqdnrev "" "node2" ":5000/ubi8/ubi" >}}
+podman pull {{< urifqdnrev "" "node2" ":5000/fedora/latest" >}}
 ----
 ....
-Trying to pull {{< urifqdnrev "https://" "node2" ":5000/ubi8/ubi" >}}...
-  Running image {{< urifqdnrev "docker://" "node2" ":5000/ubi8/ubi:latest" >}} is rejected by policy.
-Error: error pulling image "{{< urifqdnrev "" "node2" ":5000/ubi8/ubi" >}}": unable to pull {{< urifqdnrev "" "node2" ":5000/ubi8/ubi:" >}} unable to pull image: Source image rejected: Running image {{< urifqdnrev "docker://" "node2" ":5000/ubi8/ubi:latest" >}} is rejected by policy.
+Trying to pull {{< urifqdnrev "https://" "node2" ":5000/fedora/latest" >}}...
+  Running image {{< urifqdnrev "docker://" "node2" ":5000/fedora/latest:latest" >}} is rejected by policy.
+Error: error pulling image "{{< urifqdnrev "" "node2" ":5000/fedora/latest" >}}": unable to pull {{< urifqdnrev "" "node2" ":5000/fedora/latest:" >}} unable to pull image: Source image rejected: Running image {{< urifqdnrev "docker://" "node2" ":5000/fedora/latest:latest" >}} is rejected by policy.
 ....
 
 {{< importPartial "footer/footer.html" >}}
