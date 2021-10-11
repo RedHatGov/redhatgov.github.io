@@ -15,7 +15,7 @@ layout: lab
 == Exercise Description
 RHEL 7.4 introduced RHEL System Roles, a collection of Ansible roles and modules that provide a stable and consistent configuration interface for remote management of Red Hat Enterprise Linux.  These System Roles are applicable to RHEL 6.10 and above, easing management of 3 generations of RHEL.  The effort is based on development of the Linux System Roles project (link: https://linux-system-roles.github.io/upstream). The following roles are provided and supported as follows:
 
-There are five roles available on RHEL 8:
+There are a number of roles available in RHEL 8, including:
 
 * selinux
 * kdump (kernel crash dump)
@@ -24,7 +24,9 @@ There are five roles available on RHEL 8:
 * storage
 * postfix
 
-For further information, see the Ansible Quick-Start Guide for Sysadmins (https://www.redhat.com/en/blog/system-administrators-guide-getting-started-ansible-fast) or Quick Start Video (https://www.ansible.com/resources/videos/quick-start-video) for help learning how to use Ansible.
+The full list can be found here: https://access.redhat.com/articles/3050101[Red Hat Enterprise Linux (RHEL) System Roles]
+
+For further information on Ansible, see the Ansible Quick-Start Guide for Sysadmins (https://www.redhat.com/en/blog/system-administrators-guide-getting-started-ansible-fast) or Quick Start Video (https://www.ansible.com/resources/videos/quick-start-video) for help learning how to use Ansible.
 
 == Section 1: Installing RHEL System Roles and Ansible
 

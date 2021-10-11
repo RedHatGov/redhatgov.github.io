@@ -23,6 +23,9 @@ In order to work with session recording, your system will need to have the follo
 
 For this workshop/lab the environment is already configured to have tlog and SSSD installed, but if you were to install these prerequisites yourself, you would run `sudo yum install -y tlog cockpit-session-recording systemd-journal-remote`
 
+[NOTE]
+In RHEL 8, software installation is enabled by the new version of the YUM tool (YUM v4), which is based on DNF technology. We use the `yum` command in all of today's documentation, but welcome you to start getting used to typing `dnf` instead.  Read more here: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/managing-software-packages_configuring-basic-system-settings[Managing software packages]
+
 === Step 1.2: Configuring the recorded users or user groups with SSSD from web UI
 Specify recorded users or user groups using SSSD by listing them directly in the RHEL 8 web console.
 
