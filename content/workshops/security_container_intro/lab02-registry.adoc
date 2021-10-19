@@ -33,10 +33,10 @@ Login to `{{< urifqdnrev "" "node1" "" >}}` (from the bastion) and configure the
 ----
 You'll be asked to confirm the key fingerprint, the first time that you login. Please answer `yes`.
 ....
-The authenticity of host 'jajcs.node1.0.rhnaps.io (10.0.2.88)' can't be established.
+The authenticity of host '{{< urifqdnrev "" "node1" "" >}} (10.0.2.88)' can't be established.
 ECDSA key fingerprint is SHA256:t019FDEhEgp1uhivEZy1gwqaNaXM75tOem4MHpmLRaw.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added 'jajcs.node1.0.rhnaps.io,10.0.2.88' (ECDSA) to the list of known hosts.
+Warning: Permanently added '{{< urifqdnrev "" "node1" "" >}},10.0.2.88' (ECDSA) to the list of known hosts.
 Last login: Tue Jan 12 02:10:26 2021 from 10.0.2.245
 [ec2-user@ip-10-0-2-88 ~]$
 ....
@@ -208,21 +208,7 @@ exit
 
 === Configuring and testing the bastion
 
-Copy the SSL certificates from the registry servers and update the trust store.
-[source,bash]
-----
-sudo scp ec2-user@{{< urifqdnrev "" "node1" "" >}}:/etc/pki/ca-trust/source/anchors/myserver.cert /etc/pki/ca-trust/source/anchors/node1.cert
-----
-[source,bash]
-----
-sudo scp ec2-user@{{< urifqdnrev "" "node2" "" >}}:/etc/pki/ca-trust/source/anchors/myserver.cert /etc/pki/ca-trust/source/anchors/node2.cert
-----
-[source,bash]
-----
-sudo update-ca-trust
-----
-
-Now try to curl the registries from the bastion using the `FQDN`:
+Now try to curl the registries from the bastion using the fully-qualified domain name:
 [source,bash]
 ----
 curl --user redhat:redhat {{< urifqdnrev "https://" "node1" ":5000/v2/_catalog" >}}

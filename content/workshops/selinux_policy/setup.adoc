@@ -28,7 +28,7 @@ Use this URL to access the Cockpit node, just change the workshop name (if appli
 
 [source,bash]
 ----
-{{< urifqdn "https://" "node" ":9090" >}}
+{{< urifqdnrev "https://" "node" ":9090/system/terminal" >}}
 ----
 
 The login screen looks like this:
