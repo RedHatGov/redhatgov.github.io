@@ -28,7 +28,7 @@ Use this URL to access the Web Console node, just change the workshop name (if a
 
 [source,bash]
 ----
-{{< urifqdn "https://" "node" ":9090" >}}
+{{< urifqdnrev "https://" "node" ":9090" >}}
 ----
 
 You will be presented with a login window.  Once there, please log in, using the credentials below:

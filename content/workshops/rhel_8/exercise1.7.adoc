@@ -115,13 +115,14 @@ Issue under investigation: If the command above ends with a one line message say
 The command above outputs the result of the compliance scan into an Asset Reporting Format (ARF) file, and generates a HTML-based report
 
 Once the command completes, open this link in another tab to view the resulting report:
+
 [source, bash]
 ----
-{{< urifqdn "http://" "node" "/report.html" >}}
+{{< urifqdnrev "http://" "node" "/report.html" >}}
 ----
 
 [NOTE]
-The FQDN in the URL above is an example.  Yours will need to have the FQDN used to reach your host via the Cockpit Web Console, e.g. {{< urifqdn "" "node" >}}
+The FQDN in the URL above is an example.  Yours will need to have the FQDN used to reach your host via the Cockpit Web Console, e.g. `{{< urifqdnrev "" "node" >}}`
 
 Here's a snippet of what the report looks like:
 
@@ -157,12 +158,13 @@ sudo oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.co
 Issue under investigation: If the command above ends with a one line message saying "Killed", then the report will not generate.  This can be remediated via a reboot until the root cause is found.
 
 Once the command completes, open this link in another tab to view the resulting report:
+
 [source, bash]
+----
+{{< urifqdnrev "http://" "node" "/report.html" >}}
+----
 
 You may notice that the playbook may not have fixed every single issue found.  This may be due to a specific check requiring a change to a configuration that cannot be corrected by Ansible or script, or requiring a fundamental system change (such as partitioning schemes).
-----
-{{< urifqdn "http://" "node" "/report.html" >}}
-----
 
 // OPTIONAL:  reboot the system to enable the changes.
 // [source, bash]

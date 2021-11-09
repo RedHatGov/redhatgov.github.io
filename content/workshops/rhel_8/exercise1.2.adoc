@@ -19,8 +19,9 @@ To get started, we will take a tour of the web console. The web console (called 
 
 Connect to your personal lab environment. Ensure that the information in the footer of the page is correctly filled out and the URL for your environment should show up below
 
+[source,bash]
 ----
-{{< urifqdn "http://" "node" ":9090" >}}
+{{< urifqdnrev "https://" "node" ":9090" >}}
 ----
 
 === Section 1: Overview of the web console
