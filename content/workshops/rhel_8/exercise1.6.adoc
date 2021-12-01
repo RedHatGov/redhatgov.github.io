@@ -13,7 +13,7 @@ layout: lab
 
 == Overview
 
-Application streams are a new RHEL 8 capability that provides access to the latest tools, languages and libraries, without affecting core system components. This is done by including all of those `streams` in containers. The containers are automatically instantiated, when needed, and go away, when they are not in use.
+Application streams are new to RHEL 8 and provide access to the latest tools, languages and libraries, without affecting core system components.  This capability gives users access to multiple versions of packages, with a known period of support. These application streams, usually provided as _modules_, can be thought of as package groups that represent an application, a set of tools, or runtime languages.
 
 == Section 1: Stream Availability
 
