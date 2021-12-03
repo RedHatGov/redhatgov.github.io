@@ -2,7 +2,7 @@
 title: Red Hat OpenStack Platform 101
 menu:
   main:
-    parent: workshops
+    parent: Retired
 ---
 
 # Red Hat OpenStack Platform 101
