@@ -2,7 +2,7 @@
 title: Container Security Workshop
 menu:
   main:
-    parent: workshops
+    parent: Retired
     pre: fa fa-lock
 ---
 

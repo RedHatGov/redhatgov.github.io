@@ -2,7 +2,7 @@
 title: OpenShift 101 - DC Metro Map Workshop
 menu:
   main:
-    parent: workshops
+    parent: Retired
     pre: fa fa-map-o
 ---
 
