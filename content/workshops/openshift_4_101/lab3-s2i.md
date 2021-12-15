@@ -40,7 +40,7 @@ $ oc expose service dc-metro-map
 </pre>
 
 <blockquote>
-Click "Developer" profile", "+Add", and "From Git"
+Click "Developer" profile", "+Add", and "Import from Git (under Git Repository)"
 </blockquote>
 <img src="../images/ocp-FromGitButton.gif"><br/>
 
@@ -50,6 +50,7 @@ Fill out the "Git Repo URL" field as follows:
 <p>
 <table>
 <tr><td><b>Git Repo URL</b></td><td><a href>https://github.com/RedHatGov/openshift-workshops.git</a></td></tr>
+<tr><td><b>Git type</b></td><td>GitHub</td></tr>
 </table>
 
 <img src="../images/ocp-git-dc-metro-map.png" width="700"><br/>
@@ -57,7 +58,7 @@ Fill out the "Git Repo URL" field as follows:
 <br>Ensure that the repository is validated (as shown above)</br><br>
 
 <blockquote>
-Click on the "Show Advanced Git Options" expender
+Click on the "Show advanced Git options" expender
 </blockquote>
 <img src="../images/ocp-lab-s2i-ago.png" width="200"><br/><br>
 
@@ -69,30 +70,18 @@ Fill out the "Context Dir" field as follows:
 <tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
 </table>
 
-
-<blockquote>
-Under "Builder", click click on the "Node.js" icon
-</blockquote>
-<img src="../images/ocp-lab-s2i-builder.png" width="600"><br/>
-
-<blockquote>
-Select Node.js 
-</blockquote>
-<img src="../images/ocp-lab-s2i-nodejs.png" width="400"><br/>
-
 <blockquote>
 Fill out the fields, under "General" as follows:
 </blockquote>
 <p>
 <table>
-<tr><td><b>Application</b></td><td>Create Application</td></tr>
-<tr><td><b>Application Name</b></td><td>dc-metro-map</td></tr>
+<tr><td><b>Application name</b></td><td>dc-metro-map</td></tr>
 <tr><td><b>Name</b></td><td>dc-metro-map</td></tr>
 </table>
 </p>
 
 <blockquote>
-Choose "Deployment Configuration" 
+Choose "DeploymentConfig" 
 </blockquote>
 <img src="../images/ocp-lab-s2i-nodejs-dc.png" width="400"><br/>
 

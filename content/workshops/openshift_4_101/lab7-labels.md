@@ -79,7 +79,7 @@ Labels:       app=dc-metro-map
 </pre>
 
 <blockquote>
-Click "Workloads", click on "Pods", then click on the three vertical dots next to the "Running" pod.  Consider filtering for Status "Running".
+From the "Administrator" view, click "Workloads", click on "Pods", then click on the three vertical dots next to the "Running" pod.  Consider filtering for Status "Running".
 </blockquote>
 
 <img src="../images/ocp-lab-labels-pods.png" width="900"></br>
@@ -94,9 +94,10 @@ Here, at the top, you can see the labels on this pod
 <blockquote>
 Add 'testedby=mylastname' and click "Save"
 </blockquote>
-<img src="../images/ocp-lab-labels-podedit.png" width="500"><br/>
-
 Your updated label will show up in the running pods.
+
+<img src="../images/ocp-lab-labels-podedit.gif"><br/>
+
 
 <blockquote>
 Select Workloads -> Pods -> dc-metro-map (Running POD), then scroll down to "Labels"

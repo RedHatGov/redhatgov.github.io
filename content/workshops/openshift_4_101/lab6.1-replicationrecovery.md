@@ -56,7 +56,7 @@ Click one of the running pods (not a build pod)
 <blockquote>
 Click the "Actions" button in the top right and then select "Delete Pod"
 </blockquote>
-<img src="../images/ocp-lab-replicationrecovery-podaction.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-podaction.gif" width="900"><br/>
 
 <blockquote>
 Now click the "Delete" button in the popup to confirm the pod deletion
@@ -71,9 +71,6 @@ If you're fast enough you'll see the pod you deleted unfill a portion of the dep
 
 <img src="../images/ocp-lab-replicationrecovery-poddelete.png" width="300"><br/>
 
-You can browse the pods list again to see the old pod was deleted and a new pod with a recent age.
-
-<img src="../images/ocp-lab-replicationrecovery-podrecovery.png" width="900"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}

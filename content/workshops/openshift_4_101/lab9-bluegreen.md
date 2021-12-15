@@ -18,6 +18,7 @@ Before we get started with the Blue/Green deployment lab, lets clean up some of 
 </pre>
 
 ``` bash
+$ oc project cicd-{{< span2 "userid" "YOUR#" >}}
 $ oc delete all -l app=jenkins-ephemeral
 $ oc delete project cicd-{{< span "userid" "YOUR#" >}}
 ```
@@ -98,9 +99,9 @@ This will bring up the Route configuration yaml. Edit the element "spec:". On th
 {{< urishortfqdn "https://" "console-openshift-console.apps" >}}
 </pre>
 
-> As "Administrator", in the "bluegreen-{{< span "userid" "YOUR#" >}}" project, navigate to "Routes", and select "green"
+> In the "Administrator" view, in the "bluegreen-{{< span "userid" "YOUR#" >}}" project, navigate to "Networking -> Routes", and select "green"
 
-<img src="../images/ocp-lab-bluegreen-routesoverview.png" width="900">
+<img src="../images/ocp-lab-bluegreen-routesoverview.gif" width="900">
 <br/>
 
 >In the Route detail page, click on Actions > Edit:
