@@ -38,20 +38,21 @@ Jump back to your OpenShift web console and let's add the webapp to our project.
 </pre>
 
 <blockquote>
-Click the "Add to Project" button
+From the "Developer" view, select the demo-{{< span2 userid "YOUR#" >}} project, then select "+Add" button
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="400"><br/>
 <br>
 <blockquote>
-Select the "From Git" icon
+Select "Import from Git" 
 </blockquote>
 
 
-Make sure that you replace <b>YOUR_ACCOUNT</b> with your GitHub user ID. Click on the "Show Advanced Git Options" expander to fill in the "Context Dir" field:
+Make sure that you replace <b>YOUR_ACCOUNT</b> with your GitHub user ID. Click on the "Show advanced Git options" expander to fill in the "Context Dir" field:
 
 <p>
 <table>
 <tr><td><b>Git Repo URL</b></td><td>https://github.com/<b>YOUR_ACCOUNT</b>/openshift-workshops.git</td></tr>
+<tr><td><b>Git type</b></td><td>GitHub</td></tr>
 <tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
 </table>
 </p>
@@ -69,7 +70,7 @@ Select Node.js
 </p>
 
 <blockquote>
-Select "Deployment Configuration"
+Select "DeploymentConfig"
 </blockquote>
 
 <blockquote>
@@ -148,16 +149,19 @@ Copy the "Webhook Generic" URL to the clipboard, so that we can use it in GitHub
 </pre>
         
 <blockquote>
-in "Administrator" mode, click on "Builds" and then click on "Build Configs"
+in "Administrator" view, click on "Builds" and then click on "Build Configs"
 </blockquote>
+
 This is going to show basic details for all build configurations in this project
-<img src="../images/ocp-lab-rollbacks-buildsList.png" width="600"><br/>
+
+<br><img src="../images/ocp-lab-rollbacks-buildsList.png" width="600"><br/>
 
 <blockquote>
 Click the "dc-metro-map" build config
 </blockquote>
 You will see the summary of builds using this build config
-<img src="../images/ocp-lab-rollbacks-buildconfigsummary.png" width="600"><br/>
+
+<br><img src="../images/ocp-lab-rollbacks-buildconfigsummary.png" width="600"><br/>
 
 <blockquote>
 Scroll to the bottom of the window.
@@ -281,9 +285,9 @@ Click the "dc-metro-map" build that you want to roll back to. For the purposes o
 <br/>
 Click on 'Actions', and then 'Rebuild', from the menu, in the upper right corner of the window.
 </blockquote>
-<img src="../images/ocp-lab-rollbacks-actions-rebuild.png" width="900"><br/>
+<img src="../images/ocp-lab-rollbacks-actions-rebuild.gif" width="900"><br/>
 
-You can go back to the 'Workloads', 'Deployments', 'dc-metro-map' page, and click on the 'Events' tab, to see your previous deployment spinning down and your new one spinning up.<br/>
+You can go back to the 'Workloads', 'DeploymentConfigs', 'dc-metro-map' page, and click on the 'Events' tab, to see your previous deployment spinning down and your new one spinning up.<br/>
 <img src="../images/ocp-lab-rollbacks-workloads-deployments-dcmm-events.png" width="900"><br/>
 
 {{% /panel %}}

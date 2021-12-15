@@ -107,8 +107,8 @@ Enter the values shown, in the image above.
 <tr><td><b>Application Name</b></td><td>nexus-app</td></tr>
 <tr><td><b>Name</b></td><td>nexus</td></tr>
 <tr><td><b>Resources</b></td><td>Deployment Config</td></tr>
-<tr><td><b>Create a route to the application</b></td><td>Checked</td></tr>
-<tr><td colspan=2><b>Click "Routing"</b></td></tr>
+<tr><td><b>Create a route to the Application</b></td><td>Checked</td></tr>
+<tr><td colspan=2><b>Click "Show advanced Routing options"</b></td></tr>
 <tr><td><b>Path</b></td><td>/nexus</td></tr>
 </table>
 </p>

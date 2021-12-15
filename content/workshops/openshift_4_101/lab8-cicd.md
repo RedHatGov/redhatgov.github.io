@@ -41,17 +41,10 @@ $ oc new-project cicd-{{< span2 "userid" "YOUR#" >}}
 </pre>
 
 <blockquote>
-Switch modes to 
-<img src="../images/ocp-administrator-mode.png" width="257">
+From the "Developer" view, click "Topology", Select "Project:" drop down, and click "Create Project"
 </blockquote>
 
-<img src="../images/ocp-lab-cicd-new-project-landing.png" width="300"><br/>
-
-<blockquote>
-click "Create Project".
-</blockquote>
-
-<img src="../images/ocp-lab-cicd-new-project.png" width="400"><br/>
+<img src="../images/ocp-lab-cicd-new-project.gif"><br/>
 
 <blockquote>
 Fill in the Name and Display Name of the project as "cicd-{{< span "userid" "YOUR#" >}}" and click "Create"
@@ -96,20 +89,24 @@ NOTE: this may take some time
 </pre>
 
 <blockquote>
-In "Developer" mode, click "+Add"
+In "Developer" view, click "+Add"
 </blockquote>
 
 <br><img src="../images/ocp-developer-add.png" width="300"><br/>
 
 <blockquote>
-Select the "From Catalog" button, Select "Template"
-</blockqote>
-<br><img src="../images/ocp-developer-add-template.png" width="150"><br/>
-<blockquote>
-Filter on "Jenkins (Ephemeral)". Then select "Jenkins (Ephemeral)".
+From the "Developer Catalog", Select "All services"
 </blockquote>
 
-<img src="../images/ocp-lab-cicd-jenkins-instantiate.png" width="900"><br/>
+<blockquote>
+Search for "Jenkins"
+</blockquote>
+
+<blockquote>
+Select "Jenkins (Ephemeral)". 
+</blockquote>
+
+<img src="../images/ocp-lab-cicd-jenkins-instantiate.gif" width="900"><br/>
 
 <img src="../images/ocp-lab-cicd-jenkins-instantiate1.png" width="900"><br/>
 
@@ -121,7 +118,7 @@ Click
 <img src="../images/ocp-lab-cicd-jenkins-instantiate2.png" width="900"><br/>
 
 <blockquote>
-Select the Project cicd-{{< span "userid" "YOUR#" >}} from "Namespace"
+Select the cicd-{{< span "userid" "YOUR#" >}} from available "Namespace"
 </blockquote>
 
 <img src="../images/ocp-lab-cicd-jenkins-instantiate3.png" width="900"><br/>
@@ -133,8 +130,6 @@ Scroll down to the bottom, and click
 
 <br><img src="../images/ocp-lab-cicd-jenkins-instantiate4.png" width="900"><br/>
 
-<blockquote>
-Go to "Topology", select the deployment configuration for jenkins, under details ... wait to pod scales to 1.
 <br><img src="../images/ocp-lab-cicd-jenkins-instantiate-wait.png" width="900"><br/>
 </blockquote>
 
@@ -146,6 +141,7 @@ Go to "Topology", select the deployment configuration for jenkins, under details
 
 
 ```bash
+$ oc project cicd-{{< span "userid" "YOUR#" >}}
 $ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/nodejs-sample-pipeline.yaml
 ```
 
@@ -182,7 +178,7 @@ Copy the above URL, and paste it in your web browser, to access Jenkins.
 </pre>
 
 <blockquote>
-In "Developer" mode, under "Topology", click the arrow, in the upper right corner of the "jenkins" icon
+In "Developer" view, under "Topology", click the arrow, in the upper right corner of the "jenkins" icon
 </blockquote>
 
 <img src="../images/ocp-lab-cicd-jenkins-overview.png" width="500"><br/>
@@ -235,9 +231,9 @@ $ oc start-build nodejs-sample-pipeline
 </pre>
 
 
-> Using the OpenShift Web Console, in "Administrator" mode, choose *Builds* -> *Build Configs*, and then click on "nodejs-sample-pipeline"
+> Using the OpenShift Web Console, in "Administrator" view, choose *Builds* -> *Build Configs*, and then click on "nodejs-sample-pipeline"
 
-<img src="../images/ocp-lab-cicd-start-pipeline.png" width="900">
+<img src="../images/ocp-lab-cicd-start-pipeline.gif" width="900">
 
 > From the "Actions" menu, choose "Start Build"
 
@@ -260,7 +256,7 @@ Back in the OpenShift Web Console, watch the pipeline execute.
 ## Confirm that the application is available
 
 <blockquote>
-In "Developer" mode, select the "cicd-{{< span2 "userid" "YOUR#" >}}" project, and click on "Topology"
+In "Developer" view, select the "cicd-{{< span2 "userid" "YOUR#" >}}" project, and click on "Topology"
 </blockquote>
 
 <img src="../images/ocp-lab-cicd-jenkins-app-overview.png" width="900"><br/>
