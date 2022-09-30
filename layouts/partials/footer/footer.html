@@ -337,7 +337,6 @@
       </div>
       <div class="form-group col-sm-6 col-md-6 col-lg-3">
         <label for="prefix">Workshop</label>
-        <input id="prefix" name="prefix" type="text" size="16" class="form-control" placeholder="example" onkeyup="this.value = this.value.toLowerCase();this.value = this.value.replace(/ /g, '');this.value = this.value.replace(/\W/g, '');this.value = this.value.replace(/_/g, '');"/>
         <input id="prefix" name="prefix" type="text" size="16" class="form-control" placeholder="example" onkeyup="this.value = this.value.toLowerCase();this.value = this.value.replace(/[^-.a-zA-Z0-9]/g, '');"/>
       </div>
       <div class="form-group col-sm-6 col-md-6 col-lg-3">
@@ -392,7 +391,7 @@
   function setWorkshopFooterData() {
     //Sets the cookies, nom nom nom...
     Cookies2.set("domain", jQuery("select#domain").val(), { path: cookiePath, expires: 7 } );
-    Cookies2.set("prefix", jQuery("input#prefix").val().replace(/\W/g, ''), { path: cookiePath, expires: 7 } );
+    Cookies2.set("prefix", jQuery("input#prefix").val().replace(/[^-.a-zA-Z0-9]/g, ''), { path: cookiePath, expires: 7 } );
     Cookies2.set("userid", jQuery("select#userid").val(), { path: cookiePath, expires: 7 } );
     replaceClassText();
     modal.style.display = "none";
