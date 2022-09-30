@@ -76,7 +76,7 @@ In the tab bar for this pod, click on "Terminal"
 <blockquote>
 Click inside the terminal view and type $ pkill -9 node
 </blockquote>
-<img src="../images/ocp-lab-replicationrecovery-terminal.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-terminal.gif" width="900"><br/>
 
 </br>This is going to kill the node.js web server, and kick you off of the container's terminal.</br></br>
 
@@ -92,9 +92,7 @@ Click the refresh button (on your web browser), and do that a couple more times
 Go back to the pod overview
 </blockquote>
 
-<img src="../images/ocp-lab-replicationrecovery-backoff.png" width="900"><br/>
-
-The container died multiple times so quickly that OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn't waste resources trying to restart containers that are continuously crashing.
+If the container dies multiple times so quickly; then OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn't waste resources trying to restart containers that are continuously crashing.
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -103,7 +101,7 @@ The container died multiple times so quickly that OpenShift is going to put the 
 ## Clean up
 Let's scale back down to 1 replica.  If you are using the web console just click the down arrow from the Deployments Configs Overview page.  If you are using the command line use the "oc scale" command.
 
-<img src="../images/ocp-lab-replicationrecovery-cleanup.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-cleanup.gif" width="900"><br/>
 
 # Summary
 In this lab we learned about replication controllers and how they can be used to scale your applications and services.  We also tried to break a few things and saw how OpenShift responded to heal the system and keep it running.  

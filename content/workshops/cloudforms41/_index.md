@@ -3,7 +3,7 @@ title: CloudForms Workshops
 subtitle: Don't just read about what CloudForms 4.1 can do — try it for yourself with these workshops!
 menu:
   main:
-    parent: workshops
+    parent: Retired
     pre: fa fa-cloud
 ---
 

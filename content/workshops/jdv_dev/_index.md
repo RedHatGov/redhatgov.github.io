@@ -2,7 +2,7 @@
 title: JBoss Data Virtualization Development
 menu:
   main:
-    parent: workshops
+    parent: Retired
     pre: fa fa-database
 ---
 
