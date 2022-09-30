@@ -2,7 +2,7 @@
 title: Ansible Tower Workshop on Azure
 menu:
   main:
-    parent: workshops
+    parent: Retired
     pre: fa fa-magic
 ---
 

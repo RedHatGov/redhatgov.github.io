@@ -193,7 +193,7 @@ You will see in the output details of your app starting up and any status messag
 </pre>
 
 <blockquote>
-Click on "Workloads" and then click on "Pods"
+From the "Administrator" view, click on "Workloads" and then click on "Pods"
 </blockquote>
 <img src="../images/ocp-lab-devman-apppods.png" width="300"><br/>
 
@@ -205,7 +205,7 @@ This is going to show basic details for all pods in this project (including the 
 <blockquote>
 Next let's look at the log for the pod running our application.
 <br/>
-Click the pod that starts with "dc-metro-map-"
+Click on the "Running" pod that starts with "dc-metro-map-"
 <br/>
 Here you see the status details of your pod as well as its configuration.  Take a minute here and look at what details are available.
 </blockquote>
@@ -267,7 +267,7 @@ Due to the deployment config strategy being set to "Rolling" and the "ConfigChan
 </pre>
 
 <blockquote>
-Click on "Workloads", and last, click on "Deployment Configs", in the left-side menu.
+From the "Administrator" view, click on "Workloads", and last, click on "DeploymentConfigs", in the left-side menu.
 </blockquote>
 This is going to show basic details for all build configurations in this project
 
@@ -282,17 +282,16 @@ Click the "Environment" tab next to the "Pods" tab .
 This opens up a tab with the environment variables for this deployment config.
 
 <blockquote>
-Add an environment variable with the name BEERME and a value of 'true'
+"Add Value" BEERME with a value of 'true'; then hit "[Save]"
 </blockquote>
 <img src="../images/ocp-lab-devman-deployconfigdetails-populated.png" width="600">
 <br/>
 
 <blockquote>
-Click "Workloads", and then "Pods", from the left-side menu.
+From the "Administrator" view, click "Workloads", and then "Pods", from the left-side menu.
 <br/>
 If you are quick enough, you will see a new pod spin up, and the old pod spin down.  This is due to the deployment config strategy being set to "Rolling", and having a "ConfigChange" trigger. Thus, OpenShift auto deployed a new pod as soon as you updated with the environment variable.
 </blockquote>
-<img src="../images/ocp-lab-devman-BuildRunning.png" width="600">
 
 {{% /panel %}}
 {{< /panel_group >}}
@@ -356,7 +355,7 @@ $ exit
 </pre>
 
 <blockquote>
-Click on "Workloads" and then click on "Pods"
+From the "Administrator" view, click on "Workloads" and then click on "Pods"
 </blockquote>
 
 <blockquote>
@@ -393,6 +392,7 @@ That should return **BEERME=true**, matching the value that we set in the deploy
 > <i class="fa fa-terminal"></i> Let's clean up all this to get ready for the next lab:
 
 ```bash
+$ oc project demo-{{< span2 userid "YOUR#" >}}
 $ oc delete all -l app=dc-metro-map
 $ oc delete secrets dc-metro-map-generic-webhook-secret dc-metro-map-github-webhook-secret 2>/dev/null
 ```

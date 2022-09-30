@@ -2,7 +2,7 @@
 title: Source to Image
 menu:
   main:
-    parent: workshops
+    parent: Retired
 ---
 
 # Source-to-Image - Accelerating Application Development

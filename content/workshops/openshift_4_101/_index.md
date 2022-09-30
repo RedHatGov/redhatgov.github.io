@@ -43,7 +43,7 @@ If you are on-site with us, the instructor will walk you through and kick off ea
 <br>
 
 {{% alert info %}}
-These labs have been tailored for OpenShift v4.6
+These labs have been tailored for OpenShift v4.9.10
 {{% /alert %}}
 
 {{< importPartial "footer/footer.html" >}}

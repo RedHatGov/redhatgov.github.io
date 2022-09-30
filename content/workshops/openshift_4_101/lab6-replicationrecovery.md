@@ -50,19 +50,19 @@ Notice that you now have 4 unique pods available to inspect.  If you want go ahe
 </pre>
 
 <blockquote>
-Click "Workloads", then "Deployment Configuration", and then "dc-metro-map"
+Click "Workloads", then "DeploymentConfigs", and then "dc-metro-map"
 </blockquote>
 <blockquote>
 In the Deployment Config Details, click the up arrow 3 times.
 </blockquote>
 The deployment should indicate that it is scaling to 4 pods, and eventually you will have 4 running pods.  Keep in mind that each pod has it's own container which is an identical deployment of the webapp.  OpenShift is now (by default) round robin load-balancing traffic to each pod.
-<img src="../images/ocp-lab-replicationrecovery-4pods.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-4pods.gif" width="900"><br/>
 
 <blockquote>
-Click the Pods tab, and select one of the pods (ex: dc-metro-map-X-XXXX)
+Click the Pods tab, one of the pods (ex: dc-metro-map-X-XXXX), and metrics
 </blockquote>
 Notice that you now have 4 unique webapp pods available to inspect.  If you want go ahead and inspect them you can see that each has its own IP address and logs.
-<img src="../images/ocp-lab-replicationrecovery-4podslist.png" width="900"><br/>
+<img src="../images/ocp-lab-replicationrecovery-4podslist.gif" width="900"><br/>
 
 {{% /panel %}}
 {{< /panel_group >}}
