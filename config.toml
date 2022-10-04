@@ -31,3 +31,17 @@ metaDataFormat = "yaml"
     identifier = "events"
     weight = 30
     url = "https://www.redhat.com/en/events"
+
+[security]
+enableInlineShortcodes = false
+
+[security.exec]
+allow = ["^dart-sass-embedded$", "^go$", "^npx$", "^postcss$", "^asciidoctor$"]
+osEnv = ["(?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM|RUBYLIB)$"]
+
+[security.funcs]
+getenv = ["^HUGO_"]
+
+[security.http]
+methods = ["(?i)GET|POST"]
+urls = [".*"]
