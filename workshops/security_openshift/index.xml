@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenShift Security Workshop on Red Hat | Public Sector</title>
+    <link>/workshops/security_openshift/</link>
+    <description>Recent content in OpenShift Security Workshop on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/security_openshift/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Exercise 1.0 - Deploy OpenShift</title>
+      <link>/workshops/security_openshift/exercise1.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/exercise1.0/</guid>
+      <description>OpenShift v3 is a layered system designed to expose underlying Docker-formatted container image and Kubernetes concepts as accurately as possible, with a focus on easy composition of applications by a developer. For example, install Ruby, push code, and add MySQL.
+   OpenShift Step 1: Use the oc command
+ These instances have been preconfigured with docker and the oc command. The oc command makes deploying OpenShift for development purposes incredibly easy.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.1 - OpenShift Templates</title>
+      <link>/workshops/security_openshift/exercise1.1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/exercise1.1/</guid>
+      <description>What are OpenShift Templates A template describes a set of objects that can be parameterized and processed to produce a list of objects for creation by OpenShift Container Platform. A template can be processed to create anything you have permission to create within a project, for example services, build configurations, and deployment configurations. A template may also define a set of labels to apply to every object defined in the template.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.2 - Linux Kernel Capabilities</title>
+      <link>/workshops/security_openshift/exercise1.2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/exercise1.2/</guid>
+      <description>Before we get into OpenShift lets explore what Linux Kernel Capabilities are and some of the steps that OpenShift has taken to remove certain capabilities by default.
+   What are Linux Capabilities? According to the capabilities man page;
+ Capabilities are distinct units of privilege that can be independently enabled or disabled.
+ Capabilities were added to the kernel around 15 or so years ago to try to divide up the power of root.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.3 - SELinux</title>
+      <link>/workshops/security_openshift/exercise1.3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/exercise1.3/</guid>
+      <description>SELinux is primarily a labeling system that assigns a label (name) to every process and system object. This allows every aspect of kernel operations to be first labeled, second classified, and then ultimately enforced by a set of rules that the provider maintains.
+ BENEFITS OF RUNNING SELINUX
+   All processes and files are labeled with a type. A type defines a domain for processes, and a type for files.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.4 - Skopeo</title>
+      <link>/workshops/security_openshift/exercise1.4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/exercise1.4/</guid>
+      <description>Skopeo is a command line utility for various operations on container images and image repositories.
+ Skopeo is able to inspect a repository on a Docker registry and fetch images layers. By inspect I mean it fetches the repository&amp;#8217;s manifest and it is able to show you a docker inspect-like json output about a whole repository or a tag.
+ This tool, in contrast to docker inspect, helps you gather useful information about a repository or a tag before pulling it (using disk space) - e.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.5 - Atomic Scanner</title>
+      <link>/workshops/security_openshift/exercise1.5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/exercise1.5/</guid>
+      <description>The atomic command-line tool provides a way to interact and manage Atomic Host systems and containers. It provides a high level, coherent entrypoint to the system and makes it easier to interact with special kinds of containers, such as super-privileged containers, and debugging tools.
+ The atomic command uses tools such as docker, ostree and skopeo to manage containers and container host systems. There are also a lot of features built into the atomic command that are not available in the docker command.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.6 - SCC &amp; Seccomp</title>
+      <link>/workshops/security_openshift/exercise1.6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/exercise1.6/</guid>
+      <description>In addition to authorization policies that control what a user can do, OpenShift Container Platform provides security context constraints (SCC) that control the actions that a pod can perform and what it has the ability to access. Administrators can manage SCCs using the CLI. This is a great way to lock down you individual application to make sure that they have hardened settings. This applies to applications running on OpenShift.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.7 - Red Hat Container Catalog</title>
+      <link>/workshops/security_openshift/exercise1.7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/exercise1.7/</guid>
+      <description>Red Hat Container Catalog
+  While public registries and uncurated repositories are acceptable for some cloud-native development and proof-of-concept projects, they do not always provide content that is fit for production consumption; enterprise workloads require enterprise-ready tools.   MATTHEW HICKSVICE PRESIDENT, ENGINEERING, OPENSHIFT AND MANAGEMENT, RED HAT
+ While container-based applications have begun moving into production, not all containers are created or maintained equally. Every container starts with a Linux base layer, which means that every ISV building container images is distributing Linux content.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.8 - Red Hat Security API</title>
+      <link>/workshops/security_openshift/exercise1.8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/exercise1.8/</guid>
+      <description>Red Hat Product Security is committed to providing tools and security data to help you better understand security threats. This data has been available on our Security Data page and will now also be available in a machine-consumable format with the Security Data API. This tool will allow customers to programmatically query the API for data that was previously exposed only through files on our Security Data page.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.9 - Image Streams &amp; Secrets</title>
+      <link>/workshops/security_openshift/exercise1.9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/exercise1.9/</guid>
+      <description>Image Stream Image streams can be used to automatically perform an action when new images are created. Builds and deployments can watch an image stream to receive notifications when new images are added and react by performing a build or deployment, respectively.
+ For example, if a deployment is using a certain image and a new version of that image is created, a deployment could be automatically performed.</description>
+    </item>
+    
+    <item>
+      <title>Setup</title>
+      <link>/workshops/security_openshift/setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/setup/</guid>
+      <description>Introduction to Wetty (Browser-based SSH) This lab provides a quick tour of the browser based SSH client Wetty. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
+   Accessing Wetty Use this URL to access the Wetty node, just change the workshopname. Ask your instructor for the workshopname.
+ https://&amp;lt;workshopname&amp;gt;.master.&amp;lt;student number&amp;gt;.redhatgov.io:8888   After logging in, you should see a shell.</description>
+    </item>
+    
+    <item>
+      <title>Wrap Up</title>
+      <link>/workshops/security_openshift/wrapup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_openshift/wrapup/</guid>
+      <description>That wraps up what we have planned for today. We hope you&amp;#8217;ve learned something valuable about OpenShift Security that you can apply in your daily role.
+ What do you think? How can we help you understand OpenShift Security better?
+ Before you leave, check out the Resources page that is part of this guide. There you can find a ton of links that will further your OpenShift education.
+ This Participant Guide will remain active for the next two weeks.</description>
+    </item>
+    
+  </channel>
+</rss>

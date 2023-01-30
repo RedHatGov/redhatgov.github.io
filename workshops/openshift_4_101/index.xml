@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenShift 4 101 on Red Hat | Public Sector</title>
+    <link>/workshops/openshift_4_101/</link>
+    <description>Recent content in OpenShift 4 101 on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/openshift_4_101/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fin.</title>
+      <link>/workshops/openshift_4_101/fin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/fin/</guid>
+      <description>That&#39;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenShift environment. And hopefully, you have a deeper understanding of how containers and container orchestration works. Please feel free to continue to &amp;quot;kick the tires&amp;quot; in the demo environment we&#39;ve setup and explore both the web console and the oc command line client.
+ OpenShift Architecture OpenShift Developer&#39;s Site   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
+    </item>
+    
+    <item>
+      <title>Key Terms</title>
+      <link>/workshops/openshift_4_101/keyterms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/keyterms/</guid>
+      <description>Key Terms We will be using the following terms throughout the workshop labs; so, here are some basic definitions you should be familiar with. You&#39;ll learn more terms along the way; but, these are the basics to get you started.
+ Container - Your software wrapped in a complete filesystem containing everything it needs to run Image - We are talking about docker images; read-only and used to create containers Image Stream - An image stream comprises one or more OCI images identified by tags.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1 - Welcome</title>
+      <link>/workshops/openshift_4_101/lab1-welcome/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab1-welcome/</guid>
+      <description>Welcome to OpenShift! This lab provides a quick tour of the OpenShift console to help you get familiar with the user interface. If you are already familiar with the basics of OpenShift, this will be easy in that we are simply ensuring you can login and create a project.
+Accessing OpenShift OpenShift provides a web console that allows you to perform various tasks via a web browser.
+Let&#39;s Login to the Web Console  Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2 - BYO Container</title>
+      <link>/workshops/openshift_4_101/lab2-byocontainer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab2-byocontainer/</guid>
+      <description>Bring your own OCI image It&#39;s easy to get started with OpenShift whether you&#39;re using our app templates or bringing your existing assets. In this quick lab we will deploy an application using an exisiting container image. OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.
+Let&#39;s point OpenShift to an existing built container image Choose either to complete the steps via CLI or Web Console.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2.1 - Reviewing container details</title>
+      <link>/workshops/openshift_4_101/lab2.1-byocontainer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab2.1-byocontainer/</guid>
+      <description>Now that we have a running container, we can browse our project details with the command line  https://console-openshift-console.apps.example.redhatgov.io/terminal 
+  Try typing the following to see what is available to &#39;get&#39;:
+ $ oc project demo-YOUR# $ oc get all   Now let&#39;s look at what our image stream has in it:
+ $ oc get is$ oc describe is/nexus  An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, in our case a new version of the nexus image, is created.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2.2 - Clean-up &amp; Summary</title>
+      <link>/workshops/openshift_4_101/lab2.2-byocontainer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab2.2-byocontainer/</guid>
+      <description>Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal 
+Let&#39;s clean this up   Let&#39;s clean up all this to get ready for the next lab:
+ $ oc project demo-YOUR# $ oc delete all --selector app=nexus Summary In this lab, you&#39;ve deployed an example container image into a pod running in OpenShift. You exposed a route for clients to access that service via their web browsers. And you learned how to get and describe resources using the command line and the web console.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3 - Deploying an App with S2I</title>
+      <link>/workshops/openshift_4_101/lab3-s2i/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab3-s2i/</guid>
+      <description>Source to Image (S2I) One of the useful components of OpenShift is its source-to-image capability. S2I is a framework that makes it easy to turn your source code into runnable images. The main advantage of using S2I for building reproducible docker images is the ease of use for developers. You&#39;ll see just how simple it can be in this lab.
+Let&#39;s build a node.js web app, using S2I We can do this either via the command line or the web console.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3.1 - Check out the build details</title>
+      <link>/workshops/openshift_4_101/lab3.1-s2i/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab3.1-s2i/</guid>
+      <description>Check out the build details We can see the details of what the S2I builder did. This can be helpful to diagnose issues if builds are failing.
+ TIP: For a node.js app, running &amp;quot;npm shrinkwrap&amp;quot; is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I
+CLI Steps    Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal    Goto the terminal and type the following:  $ oc get builds  Note the name of your build from the above command output and use it to see the logs with:  $ oc logs builds/[BUILD_NAME] The console will print out the full log for your build.</description>
+    </item>
+    
+    <item>
+      <title>Lab 4 - Developing and Managing Your Application</title>
+      <link>/workshops/openshift_4_101/lab4-devmanage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab4-devmanage/</guid>
+      <description>Developing and managing an application in OpenShift In this lab we will explore some of the common activities undertaken by developers working in OpenShift. You will become familiar with how to use environment variables, secrets, build configurations, and more. Let&#39;s look at some of the basic things a developer might care about for a deployed app.
+Setup From the previous lab you should have the DC Metro Maps web app running in OpenShift.</description>
+    </item>
+    
+    <item>
+      <title>Lab 5 - Webhooks and Rollbacks</title>
+      <link>/workshops/openshift_4_101/lab5-rollbacks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab5-rollbacks/</guid>
+      <description>Build Triggers, Webhooks and Rollbacks - Oh My! Once you have an app deployed in OpenShift you can take advantage of some continuous capabilities that help to enable DevOps and automate your management process. We will cover some of those in this lab: Build triggers, webhooks, and rollbacks.
+A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&#39;t already have an account, you can create one here.</description>
+    </item>
+    
+    <item>
+      <title>Lab 6 - Application Replication</title>
+      <link>/workshops/openshift_4_101/lab6-replicationrecovery/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab6-replicationrecovery/</guid>
+      <description>Things will go wrong, and that&#39;s why we have replication and recovery Things will go wrong with your software, or your hardware, or from something completely out of your control. But, we can plan for such failures, thus minimizing their impact. OpenShift supports this via the replication and recovery functionality.
+Replication Let&#39;s walk through a simple example of how the replication controller can keep your deployment at a desired state.</description>
+    </item>
+    
+    <item>
+      <title>Lab 6.1 - Application Recovery</title>
+      <link>/workshops/openshift_4_101/lab6.1-replicationrecovery/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab6.1-replicationrecovery/</guid>
+      <description>Recovery Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy. Let&#39;s forcibly inflict an issue and see how OpenShift responds.
+CLI Steps    Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal    Choose a random pod and delete it:  $ oc get pods $ oc delete pod/PODNAME $ oc get pods -w If you&#39;re fast enough you&#39;ll see the pod you deleted go &amp;quot;Terminating&amp;quot; and you&#39;ll also see a new pod immediately get created and transition from &amp;quot;Pending&amp;quot; to &amp;quot;Running&amp;quot;.</description>
+    </item>
+    
+    <item>
+      <title>Lab 6.2 - Application Health</title>
+      <link>/workshops/openshift_4_101/lab6.2-replicationrecovery/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab6.2-replicationrecovery/</guid>
+      <description>Application Health In addition to the health of your application&#39;s pods, OpenShift will watch the containers inside those pods. Let&#39;s forcibly inflict some issues and see how OpenShift responds.
+CLI Steps    Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal    Choose a running pod and shell into it:  $ oc get pods $ oc exec PODNAME -it /bin/bash You are now executing a bash shell running in the container of the pod.</description>
+    </item>
+    
+    <item>
+      <title>Lab 7 - Labels</title>
+      <link>/workshops/openshift_4_101/lab7-labels/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab7-labels/</guid>
+      <description>Labels This is a pretty simple lab, we are going to explore labels. You can use labels to organize, group, or select API objects.
+For example, pods are &amp;quot;tagged&amp;quot; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.
+Labels on a pod In a previous lab we added our web app using a S2I template.</description>
+    </item>
+    
+    <item>
+      <title>Lab 8 - CI / CD Pipeline</title>
+      <link>/workshops/openshift_4_101/lab8-cicd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab8-cicd/</guid>
+      <description>CI/CD Defined In modern software projects many teams utilize the concept of Continuous Integration (CI) and Continuous Delivery (CD). By setting up a tool chain that continuously builds, tests, and stages software releases, a team can ensure that their product can be reliably released at any time. OpenShift can be an enabler in the creation and management of this tool chain.
+In this lab we walk through creating a simple example of a CI/CD [pipeline] utilizing Jenkins, all running on top of OpenShift!</description>
+    </item>
+    
+    <item>
+      <title>Lab 9 - Blue | Green Deployment</title>
+      <link>/workshops/openshift_4_101/lab9-bluegreen/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/lab9-bluegreen/</guid>
+      <description>Blue/Green deployments When implementing continuous delivery for your software one very useful technique is called Blue/Green deployments. It addresses the desire to minimize downtime during the release of a new version of an application to production. Essentially, it involves running two production versions of your app side-by-side and then switching the routing from the last stable version to the new version once it is verified. Using OpenShift, this can be very seamless because using containers we can easily and rapidly deploy a duplicate infrastructure to support alternate versions and modify routes as a service.</description>
+    </item>
+    
+    <item>
+      <title>Verify Prerequisites</title>
+      <link>/workshops/openshift_4_101/prerequisites/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/openshift_4_101/prerequisites/</guid>
+      <description>Prerequisites  This workshop is done entirely through the browser, but you do need a free personal GitHub account.  Create a Github account If you don&#39;t have a person GitHub account please sign up here to create a free account.
+ Create GitHub Account   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); -webkit-animation-name: fadeIn; -webkit-animation-duration: 0.</description>
+    </item>
+    
+  </channel>
+</rss>

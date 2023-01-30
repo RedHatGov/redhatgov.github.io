@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Source to Image on Red Hat | Public Sector</title>
+    <link>/workshops/source_to_image/</link>
+    <description>Recent content in Source to Image on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/source_to_image/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Conclusion</title>
+      <link>/workshops/source_to_image/conclusion/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/source_to_image/conclusion/</guid>
+      <description>Congratulations You have gone through a methodical process to develop container technology that is custom to a framework, yet repeatable. We have:
+ Run the application from the command line to understand what it does and how it is supposed to behave.
+ Containerized the applicaiton.
+ Built Source-to-Image mechanisms that allow us to inject raw source code to be built inside the container.
+ Created an OpenShift template to make repeated deployments easier.</description>
+    </item>
+    
+    <item>
+      <title>Lab - Containerize the App</title>
+      <link>/workshops/source_to_image/containerize_app/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/source_to_image/containerize_app/</guid>
+      <description>Introduction Now we want to containerize the Gochat app. If you are using the CLI on your own computer, you could use the docker command. However, if you are in the Wetty terminal, remember you are actually in a container. We could have exposed the container socket on the host to your Wetty container. However, this would break the security model.
+Fortunately we can build from a Dockerfile using the oc command line tool.</description>
+    </item>
+    
+    <item>
+      <title>Lab - Gochat S2I</title>
+      <link>/workshops/source_to_image/gochat_s2i/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/source_to_image/gochat_s2i/</guid>
+      <description>Step 1 - Create a New Project Space In the Wetty terminal, create a new project.
+oc new-project gochat-s2i-userYOUR#  Step 2 - Create the Golang S2I Builder Image Create a new build for the Golang S2I builder image
+cd ~oc new-build golang-s2i/ --to=golang-s2i Start the new build for the Golang S2I builder image
+oc start-build golang-s2i --from-dir=golang-s2i/ Step 3 - Import YAML Template in to OpenShift In the OpenShift WebUI, on the catalog page, seclect Import YAML/JSON Import YAML/JSON        Step 4 - Configure the Import Select the project to which you want to import the template</description>
+    </item>
+    
+    <item>
+      <title>Lab - Roll Dice</title>
+      <link>/workshops/source_to_image/dice/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/source_to_image/dice/</guid>
+      <description>In an attempt at nostalgia, we are going to once again create an S2I builder, this time for a Fortran app. Yes, Fortran. The objective is to make our little chat program a bit more interesting.
+Step 1 - Create the S2I Project cd ~s2i create fortran-s2i fortran-s2i Step 2 - Edit the Dockerfile cd ~cat /dev/null &amp;gt; ~/fortran-s2i/Dockerfilevi ~/fortran-s2i/Dockerfile Copy the following text and paste it in to the editor.</description>
+    </item>
+    
+    <item>
+      <title>Lab - Run the App</title>
+      <link>/workshops/source_to_image/run_the_app/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/source_to_image/run_the_app/</guid>
+      <description>Step 1 - Create a Route to the Gochat Service First we expose the pod with a service.
+oc expose dc wetty --port=8080 --target-port=8080 --name=gochat Then we expose the service with a route.
+oc expose svc gochat Step 2 - Download the App Source go get -d github.com/kevensen/openshift-gochat-client Step 3 - Build the App cd go/src/github.com/kevensen/openshift-gochat-clientglide install -v &amp;amp;&amp;amp; go install Step 4 - Annotate the Service Account to Use OpenShift Authorization These annotations allow for the Gochat Client to communicate to the OpenShift API for user credential verification.</description>
+    </item>
+    
+    <item>
+      <title>Lab - Source-to-Image</title>
+      <link>/workshops/source_to_image/source_to_image/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/source_to_image/source_to_image/</guid>
+      <description>Step 1 - Create a new Project Space In the Wetty terminal, create a new project.
+oc new-project s2i-userYOUR#  Step 2 - Go Get S2I Library cd ~go get github.com/openshift/source-to-image Step 3 - Build the S2I Tooling cd $GOPATH/src/github.com/openshift/source-to-imagehack/build-go.shexport PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/local/bin/linux/amd64/ Step 4 - Create the S2I Project cd ~s2i create golang-s2i golang-s2i Now let&#39;s inspect the project directory
+tree -a golang-s2i Step 5 - Edit the Dockerfile cd ~cat /dev/null &amp;gt; ~/golang-s2i/Dockerfilevi ~/golang-s2i/Dockerfile Copy the following text and paste it in to the editor.</description>
+    </item>
+    
+    <item>
+      <title>Prerequisites</title>
+      <link>/workshops/source_to_image/prerequisites/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/source_to_image/prerequisites/</guid>
+      <description>Getting Started If you choose to work from your own command line, instead of the web terminal (Wetty) environment, that&#39;s just fine! You&#39;ll have to install a few of utilities first.
+Install oc Click here for instructions on how to install the OpenShift Container Platform CLI.
+Install git Click here for instructions on how to install Git on your workstation.
+Install golang Click here for instructions on how to install Golang.</description>
+    </item>
+    
+    <item>
+      <title>The Setup</title>
+      <link>/workshops/source_to_image/setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/source_to_image/setup/</guid>
+      <description>Step 1 - Log in to the Web User Interface The workshop moderator will provide you with the URL, your username, and password.
+OpenShift WebUI Login        Step 2 - Create a Project for Your Wetty Terminal Create a new project by clicking the &amp;quot;New Project&amp;quot; button in the upper right of the WebUI.
+Create a Project        Step 3 - Name Your Project Name your project as follows.</description>
+    </item>
+    
+  </channel>
+</rss>

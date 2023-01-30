@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ansible Tower - an Introduction on Red Hat | Public Sector</title>
+    <link>/workshops/ansible_tower_intro/</link>
+    <description>Recent content in Ansible Tower - an Introduction on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/ansible_tower_intro/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Exercise 1.0 - Configuring Ansible Tower</title>
+      <link>/workshops/ansible_tower_intro/exercise1.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/ansible_tower_intro/exercise1.0/</guid>
+      <description>Exercise Description In this exercise, we are going to configure Red Hat Ansible Tower, so that we can run a playbook.
+ There are a number of constructs in the Ansible Tower UI that enable multi-tenancy, notifications, scheduling, etc. However, we are only going to focus on the key concepts required for this workshop today.
+   Credentials
+  Projects
+  Inventory
+  Job Template
+     Section 1: Logging into Ansible Tower and installing the license key Step 1: Log in To log in, use the username admin and and the password provided by your instructor.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.1 - Creating and Running a Job Template</title>
+      <link>/workshops/ansible_tower_intro/exercise1.1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/ansible_tower_intro/exercise1.1/</guid>
+      <description>Exercise Description This exercise will walk you through the steps required to create a job template and run it. A job template is a definition and set of parameters for running an Ansible job. In other words, a template combines an Ansible project playbook and the settings required to launch it, into one package.
+ Templates save setup time, for jobs that are launched repetitively. Once the template is set, it can be edited for future jobs, with different settings.</description>
+    </item>
+    
+    <item>
+      <title>Setup</title>
+      <link>/workshops/ansible_tower_intro/setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/ansible_tower_intro/setup/</guid>
+      <description>What you will learn: Red Hat Web Console - Terminal This lab provides a quick tour of the browser based Terminal via the Red Hat Web Console. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
+   Accessing Ansible Tower Use this URL to access the Ansible Tower interface. Your instructor will provide the password, and the user ID is admin:</description>
+    </item>
+    
+    <item>
+      <title>Wrapup</title>
+      <link>/workshops/ansible_tower_intro/wrapup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/ansible_tower_intro/wrapup/</guid>
+      <description>That wraps up what we have planned for today. We hope you&amp;#8217;ve learned something valuable about Ansible and Red Hat Ansible Tower that you can apply in your daily role.
+ What do you think? How can we help you understand Ansible Tower better?
+ Before you leave, check out the Resources page that is part of this guide. There, you can find a ton of links that will further your Ansible education.</description>
+    </item>
+    
+  </channel>
+</rss>

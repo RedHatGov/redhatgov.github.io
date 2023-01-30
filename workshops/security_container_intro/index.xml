@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Container Security - A Practical Introduction on Red Hat | Public Sector</title>
+    <link>/workshops/security_container_intro/</link>
+    <description>Recent content in Container Security - A Practical Introduction on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/security_container_intro/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Conclusion - Closing thoughts &amp; homework</title>
+      <link>/workshops/security_container_intro/lab99-conclusion/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_container_intro/lab99-conclusion/</guid>
+      <description>As a final homework assignment, we encourage you to watch a video entitled the State of Container Security that Sally and Urvashi presented at an OpenShift Commons briefing on March 27, 2020. Their talk goes into additional detail on many of the concepts covered in this lab along with a sneak peak at future work by the upstream community. They also show some great demos that you will want to see.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1.0 - Workshop introduction</title>
+      <link>/workshops/security_container_intro/lab01-intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_container_intro/lab01-intro/</guid>
+      <description>Table of Contents Important Conventions used in this lab Getting access to the servers     This lab session is a low-level, hands-on introduction to container security using the container tools included with Red Hat Enterprise Linux 8. It is intended to be consumed as a series of self paced exercises.
+ Prerequisites   An introductory knowledge of Linux and containers is helpful.
+  Basic text editing skills using vim or nano.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2.0 - Container registries</title>
+      <link>/workshops/security_container_intro/lab02-registry/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_container_intro/lab02-registry/</guid>
+      <description>Table of Contents Configuring the registries Node 1 Testing the registries Node 2 Testing the registries Configuring and testing the bastion     During this module you will configure both nodes to host secure container registries. The registry software runs in a container and listens on port 5000. Configuring the registry consists of generating a self-signed SSL certificate and running the container. Two simple bash scripts are provided to do this.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3.0 - Intro to Podman and base images</title>
+      <link>/workshops/security_container_intro/lab03-podman/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_container_intro/lab03-podman/</guid>
+      <description>Table of Contents What is a pod? The Universal Base Image Tagging and pushing images to a remote registry Working with root and rootless containers. Stopping and removing containers Container process information User Namespace Support Auditing containers UID Mapping Challenge References     What is a pod? A pod is a group of one or more containers with shared storage, network and a specification for how to run the containers.</description>
+    </item>
+    
+    <item>
+      <title>Lab 4.0 - Linux kernel capabilities</title>
+      <link>/workshops/security_container_intro/lab04-isolation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_container_intro/lab04-isolation/</guid>
+      <description>Table of Contents Capabilities Exploring the capabilities of containers. Examining container processes Capabilities Challenge #1 Capabilities Challenge #2 Capabilities Challenge #3 Example Solutions to Challenges     Containers provide a certain degree of process isolation via kernel namespaces. In this module, we’ll examine the capabilities of a process running in a containerized namespace. Specifically we&amp;#8217;ll look at how Linux capabilities can be used to grant a particular or subset of root privileges to a process running in a container.</description>
+    </item>
+    
+    <item>
+      <title>Lab 5.0 - SELinux container integration</title>
+      <link>/workshops/security_container_intro/lab05-selinux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_container_intro/lab05-selinux/</guid>
+      <description>Table of Contents !Namespaced Warmup Exercise Bind Mounts and Labeling Private Mounts Shared Mounts Read-Only Containers     In this section, we’ll cover the basics of SELinux and containers. SELinux policy prevents a lot of break out situations where the other security mechanisms fail. By default, podman processes are labeled with container_runtime_t and they are prevented from doing (almost) all SELinux operations. But processes within containers do not know that they are running within a container.</description>
+    </item>
+    
+    <item>
+      <title>Lab 6.0 - Container inspection with Podman &amp; Skopeo</title>
+      <link>/workshops/security_container_intro/lab06-inspecting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_container_intro/lab06-inspecting/</guid>
+      <description>Table of Contents Podman inspect Podman diff Podman live mounts Working with Skopeo Inspecting images     Container images can easily be pulled from any public registry and run on a container host but is this good practice? Can you trust this image and what are its contents? A better practice would be to inspect the image before running it.
+ Podman inspect Use podman to inspect the registry.</description>
+    </item>
+    
+    <item>
+      <title>Lab 7.0 - Container image signing</title>
+      <link>/workshops/security_container_intro/lab07-signing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_container_intro/lab07-signing/</guid>
+      <description>Table of Contents Configuring the signature claim store Generating key pairs Working with trust policies Pulling signed images Create a trust policy for Red Hat images. Blocking a registry     In this lab, you will use podman to sign container images and create trust policies to control access to registries.
+ To begin the image signing procedure, a signature claim is generated by encrypting a container image manifest using a private gpg key.</description>
+    </item>
+    
+    <item>
+      <title>Lab 8.0 - Composing containers with Buildah</title>
+      <link>/workshops/security_container_intro/lab08-builds/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_container_intro/lab08-builds/</guid>
+      <description>Table of Contents Building from Universal Base Images Build using Docker (BuD)   This module will introduce Buildah, a command line tool for building Open Container Initiative compatible container images. Buildah is easy to incorporate into scripts and build pipelines, and best of all, it doesn&amp;#8217;t require a running container daemon to build its image. You can read more about Buildah at the buildah.io web site. Also, have a look at the buildah chapter in the RHEL 8 documentation.</description>
+    </item>
+    
+  </channel>
+</rss>

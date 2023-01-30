@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ansible_ansible on Red Hat | Public Sector</title>
+    <link>/workshops/ansible_ansible/</link>
+    <description>Recent content in ansible_ansible on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/ansible_ansible/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Wrapup</title>
+      <link>/workshops/alpha/ansible_with_rhocp_edge/wrapup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/alpha/ansible_with_rhocp_edge/wrapup/</guid>
+      <description>That wraps up what we have planned for today. We hope you&amp;#8217;ve learned something valuable about Ansible and Red Hat Ansible Tower that you can apply in your daily role.
+ What do you think? How can we help you understand Ansible Tower better?
+ Before you leave, check out the Resources page that is part of this guide. There, you can find a ton of links that will further your Ansible education.</description>
+    </item>
+    
+    <item>
+      <title>Wrapup</title>
+      <link>/workshops/ansible_automation/wrapup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/ansible_automation/wrapup/</guid>
+      <description>That wraps up what we have planned for today. We hope you&amp;#8217;ve learned something valuable about Ansible and Red Hat Ansible Tower that you can apply in your daily role.
+ What do you think? How can we help you understand Ansible Tower better?
+ Before you leave, check out the Resources page that is part of this guide. There, you can find a ton of links that will further your Ansible education.</description>
+    </item>
+    
+  </channel>
+</rss>

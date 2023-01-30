@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Container Security Workshop on Red Hat | Public Sector</title>
+    <link>/workshops/security_containers/</link>
+    <description>Recent content in Container Security Workshop on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/security_containers/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Exercise 1.0 - Intro to Cockpit</title>
+      <link>/workshops/security_containers/exercise1.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/exercise1.0/</guid>
+      <description>Exercise 1.0 - Intro to Cockpit   Exercise Description In this workshop, you will learn to navigate Cockpit and examine its features and capabilities.
+ What is Cockpit? A remote manager for GNU/Linux servers
+ Cockpit is a server manager that makes it easy to administer your GNU/Linux servers via a web browser.
+ Cockpit makes it easy for any sysadmin to perform simple tasks, such as administering storage, inspecting journals and starting and stopping services.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.1 - Reproducible and Trustworthy Dockerfiles</title>
+      <link>/workshops/security_containers/exercise1.1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/exercise1.1/</guid>
+      <description>Exercise 1.1 - Reproducible and Trustworthy Dockerfiles   Exercise Description Now that you&amp;#8217;ve gotten a sense of how Cockpit works, we are going to start digging in at the command line on Container security. You can use either the Terminal in Cockpit from your browser, a SSH terminal or Terminal client like PuTTy. The choice is yours.
+   Section 1: Best Practices Step 1.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.2 - Docker `USER`</title>
+      <link>/workshops/security_containers/exercise1.2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/exercise1.2/</guid>
+      <description>Exercise 1.2 - Docker USER   Exercise Description Now that you&amp;#8217;ve gotten a sense of software provenance in Dockerfiles lets take a look at the USER in Dockerfiles.
+ By default, containers run as root. A container running as root has full control of the host system. As container technology matures, more secure default options may become available. For now, requiring root is dangerous for others and may not be available in all environments.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.3 - Remove setuid/setgid Binaries</title>
+      <link>/workshops/security_containers/exercise1.3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/exercise1.3/</guid>
+      <description>Exercise 1.3 - Remove setuid/setgid Binaries   Exercise Description This exercise covers permissions that can be set for setuid and setgid binaries and best practices for managing them.
+   SETUID/SETGID Overview There are two special permissions that can be set on executable files: Set User ID (setuid) and Set Group ID (sgid). These permissions allow the file being executed to be executed with the privileges of the owner or the group.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.4 - CGroups</title>
+      <link>/workshops/security_containers/exercise1.4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/exercise1.4/</guid>
+      <description>Exercise 1.4 - CGroups   Exercise Description The Device Cgroup is primary in isolating and limiting containers to their own shares of CPU, memory, disk I/O, network, etc., otherwise the container will be denied. This exercise covers management of memory and CPU limitations.
+   Section 1: Memory Limits Container technology uses Cgroups to control and limit the amount of system resources a container can use, and provide administrators with fine-grained control over allocating, prioritizing, denying, managing and monitoring system resources.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.5 - Namespaces</title>
+      <link>/workshops/security_containers/exercise1.5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/exercise1.5/</guid>
+      <description>Exercise 1.5 - Namespaces   Exercise Description In this exercise, we will examine how to use namespaces to manage initialization processes, in multiple containers.
+ PID namespaces enable processes in different containers to have the same PID (process identifier). This means each container can have its own init (PID1) process that manages various system initialization tasks, as well as the container life cycle.
+ Also, each container has its unique /proc directory.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.6 - Read Only Containers</title>
+      <link>/workshops/security_containers/exercise1.6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/exercise1.6/</guid>
+      <description>Exercise 1.6 - Read Only Containers   Exercise Description Let&amp;#8217;s move on to &#34;Read Only&#34; Containers. This exercise will examine read-only containers and how to manage them.
+ Overview
+ Imagine a scenario where an application gets compromised. The first thing the bad guy wants to do is to patch a backdoor into the application, so that the next time the application starts up, it starts up with the backdoor in place.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.7 - Seccomp</title>
+      <link>/workshops/security_containers/exercise1.7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/exercise1.7/</guid>
+      <description>Exercise 1.7 - Seccomp   Exercise Description Secure Computing Mode (seccomp) is a kernel feature that enables you to filter system calls to the kernel from a container. The combination of restricted and allowed calls are arranged in profiles, and you can pass different profiles to different containers. Seccomp provides more fine-grained control than capabilities, giving an attacker a limited number of syscalls from the container. This exercise examines how seccomp works and how it can be employed to provide container security.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.8 - SELinux</title>
+      <link>/workshops/security_containers/exercise1.8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/exercise1.8/</guid>
+      <description>Exercise 1.8 - SELinux   Exercise Description Let&amp;#8217;s move on to Security Enhanced Linux (SELinux). We will cover SELinux basics, Docker SELinux security policy and the &#34;SELinux Coloring Book.&#34;
+   Section 1: Basics of SELINUX In this section, we’ll cover the basics of SELinux and containers. SELinux policy prevents a lot of break out situations, where the other security mechanisms fail. With SELinux on Docker, we write policy that says that the container process running as svirt_lxc_net_t can only read/write files with the svirt_sandbox_file_t label.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.9 - Linux Kernel Capabilities</title>
+      <link>/workshops/security_containers/exercise1.9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/exercise1.9/</guid>
+      <description>Exercise 1.9 - Linux Kernel Capabilities   Exercise Description In this exercise, we will examine Linux capabilities: how they are defined, their purpose,and how they affect security.
+ Linux Capabilities Defined
+ According to the capabilities man page;
+ Capabilities are distinct units of privilege that can be independently enabled or disabled.
+ Capabilities were added to the kernel around 15 or so years ago, to try to divide up the power of root.</description>
+    </item>
+    
+    <item>
+      <title>Setup</title>
+      <link>/workshops/security_containers/setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/setup/</guid>
+      <description>What you will learn: Red Hat Web Console - Terminal This lab provides a quick tour of the browser based Terminal via the Red Hat Web Console. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
+   Accessing Red Hat Enterprise Linux Web Console (cockpit) Use this URL to access the Web Console node, just change the workshop name (if applicable).</description>
+    </item>
+    
+    <item>
+      <title>Wrap Up</title>
+      <link>/workshops/security_containers/wrapup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/security_containers/wrapup/</guid>
+      <description>That wraps up what we have planned for today. We hope you&amp;#8217;ve learned something valuable about Container Security that you can apply in your daily role.
+ What do you think? How can we help you understand Container Security better?
+ Before you leave, check out the Resources page that is part of this guide. There you can find a ton of links that will further your Container education.
+ This Participant Guide will remain active for the next two weeks.</description>
+    </item>
+    
+  </channel>
+</rss>

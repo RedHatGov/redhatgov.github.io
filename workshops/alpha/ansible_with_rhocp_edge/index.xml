@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Applied Ansible Automation - Containerized Edge Workshop on Red Hat | Public Sector</title>
+    <link>/workshops/alpha/ansible_with_rhocp_edge/</link>
+    <description>Recent content in Applied Ansible Automation - Containerized Edge Workshop on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/alpha/ansible_with_rhocp_edge/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Exercise 1.0 - Running Ad hoc commands</title>
+      <link>/workshops/alpha/ansible_with_rhocp_edge/exercise1.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/alpha/ansible_with_rhocp_edge/exercise1.0/</guid>
+      <description>Exercise Description For our first exercise, we are going to run some ad hoc commands to help you get a feel for how Red Hat Ansible Automation works. Ansible ad hoc commands enable you to perform repeatable tasks on local or remote nodes, without having to write a playbook. They are very useful when you simply need to do one or two tasks quickly and often, to many remote nodes.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.1 - Running an Ansible playbook</title>
+      <link>/workshops/alpha/ansible_with_rhocp_edge/exercise1.1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/alpha/ansible_with_rhocp_edge/exercise1.1/</guid>
+      <description>Objective: Configure Edge node to run a Performance CoPilot agent As part of this exercise, you will be running a pre-existing Ansible playbook pre-loaded into your CodeReady Workspace.
+ The playbook is written to showcase a series of basic Ansible concepts.
+ Note: The following commands below need to be run from within the Ansible terminal
+ Step 1: Checking a playbook playbook for correct syntax However, before you run the playbook, lets take a few moments to understand the options.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.2 - Writing a playbook to push podman to the edge</title>
+      <link>/workshops/alpha/ansible_with_rhocp_edge/exercise1.2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/alpha/ansible_with_rhocp_edge/exercise1.2/</guid>
+      <description>Objective This exercise showcases using Ansible to configure podman and the podman API on a standalone Red Hat Enterprise Linux edge server.
+ As part of the execise, you will be exposed to the following elements:
+   Ansible modules and supporting parameters (example: &#39;package&#39; and &#39;service&#39; modules)
+  How to use loops to make your ansible more efficient and smaller
+     Section 1: Creating a directory structure and files for your own playbook For our playbook, we are only going to write one play with two tasks.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 2.0 - Build a CI/CD pipeline and container in Red Hat OpenShift</title>
+      <link>/workshops/alpha/ansible_with_rhocp_edge/exercise2.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/alpha/ansible_with_rhocp_edge/exercise2.0/</guid>
+      <description>Exercise Description As part of the Applied Ansible workshop, you will deploy (copy/transfer) a container built on top of Red Hat OpenShift to an edge node running only Red Hat Enterprise Linux utilizing Ansible Automation. Prior to that step, we need to actually &#34;create&#34; a container on Red Hat OpenShift.
+   Let&amp;#8217;s Login to the Web Console In your browser &amp;amp; in a new tab, connect to the Red Hat OpenShift console</description>
+    </item>
+    
+    <item>
+      <title>Exercise 2.1 - Run CI/CD pipeline (powered by Tekton) in Red Hat OpenShift</title>
+      <link>/workshops/alpha/ansible_with_rhocp_edge/exercise2.1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/alpha/ansible_with_rhocp_edge/exercise2.1/</guid>
+      <description>Exercise Description View the created pipeline and review the container that Ansible orchestrate deploying to the edge node.
+ Let&amp;#8217;s review the container build Select Pipelines in the left menu:
+    === Click on Pipeline Runs in the menu, and then edge-?????? (where ?????? is some alphanumeric sequence):
+     Wait until pipeline details are green. Feel gree to watch the progress by selecting the Logs tab</description>
+    </item>
+    
+    <item>
+      <title>Exercise 3.0 - Configure Red Hat Enterprise Linux to run containers</title>
+      <link>/workshops/alpha/ansible_with_rhocp_edge/exercise3.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/alpha/ansible_with_rhocp_edge/exercise3.0/</guid>
+      <description>Exercise Description As part of the exercise, we are going to run a login command on the edge node to set a temporary token. This token will allow the edge node to log into the Red Hat OpenShift registry and download containers.
+ As part of the exercise, we have built a playbook for you; however, no all of the variables are assigned. This allows us to distribute the playbook to multiple workshops and you the capability to understand how to run playbooks in Ansible tower and assign custom variables to those plays.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 3.1 - Setup Ansible template to stage temporary access token on edge node</title>
+      <link>/workshops/alpha/ansible_with_rhocp_edge/exercise3.1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/alpha/ansible_with_rhocp_edge/exercise3.1/</guid>
+      <description>Exercise 3.1 - Setup a template to load a temporary token on the edge node Let&amp;#8217;s bring Projects, Inventories, and Crentials all together with &amp;#8230;&amp;#8203; Templates Select Templates
+  Templates tab - Left hand side of screen  Select the + sign to add a new template; then select Job Template
+  Add Job Template      NAME
+ Setup edge authentication to registry - user1</description>
+    </item>
+    
+    <item>
+      <title>Exercise 3.2 - Running an Ansible Automation template</title>
+      <link>/workshops/alpha/ansible_with_rhocp_edge/exercise3.2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/alpha/ansible_with_rhocp_edge/exercise3.2/</guid>
+      <description>Exercise 3.2 - Retrieve user token from OpenShift and launch login template In a new tab, log into Red Hat OpenShift  https://console-openshift-console.apps.example.redhatgov.io 
+    Navigate to the user1 menu in the upper right hand corner and select Copy login command.
+ You will be prompted to login again. Once complete, select Display Token
+    Highlight and copy the API token, it will look like sha256~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq</description>
+    </item>
+    
+    <item>
+      <title>Exercise 3.3 - Create new template to stage containers on edge node</title>
+      <link>/workshops/alpha/ansible_with_rhocp_edge/exercise3.3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/alpha/ansible_with_rhocp_edge/exercise3.3/</guid>
+      <description>Exercise 3.3 - Configure podman, systemd, and pull a container from OpenShift Configure new template to field containers to edge node Select Templates
+  Templates tab - Left hand side of screen  Select the + sign to add a new template; then select Job Template
+  Add Job Template      NAME
+ Field container to edge node - user1
+   DESCRIPTION</description>
+    </item>
+    
+    <item>
+      <title>Exercise 4.0 - Update to a new container on OpenShift and field to edge</title>
+      <link>/workshops/alpha/ansible_with_rhocp_edge/exercise4.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/alpha/ansible_with_rhocp_edge/exercise4.0/</guid>
+      <description>Exercise Description Now that we can pull a container from OpenShift and move it to an edge node via Ansible Automation, let&amp;#8217;s repeat the process with a new release using the artifacts that we created.
+   Let&amp;#8217;s Login to the Web Console In your browser &amp;amp; in a new tab, connect to the Red Hat OpenShift console
+  https://console-openshift-console.apps.example.redhatgov.io 
+    Let&amp;#8217;s build the pipeline with a new release Select Pipelines in the left menu</description>
+    </item>
+    
+    <item>
+      <title>Setup</title>
+      <link>/workshops/alpha/ansible_with_rhocp_edge/setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/alpha/ansible_with_rhocp_edge/setup/</guid>
+      <description>In order for you to &#39;write&#39; your first bit of Ansible, you will need an editor &amp;#8230;&amp;#8203; Ansible playbooks are written in YAML and you can use an text editor &#34;like vim&#34; or an editor like Visual Studio Code to get started. For this workshop, we will be utilizing a web-based IDE (integrated development environment) call Red Hat CodeReady Workspaces. Red Hat CodeReady Workspaces is a developer tool that makes cloud-native development practical for teams, using Kubernetes and containers to provide any member of the development or IT team with a consistent, preconfigured development environment.</description>
+    </item>
+    
+  </channel>
+</rss>

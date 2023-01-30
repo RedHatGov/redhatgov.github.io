@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CloudForms Workshops on Red Hat | Public Sector</title>
+    <link>/workshops/cloudforms41/</link>
+    <description>Recent content in CloudForms Workshops on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/cloudforms41/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CloudForms Workshop Prerequisites</title>
+      <link>/workshops/cloudforms41/prerequisites/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/prerequisites/</guid>
+      <description>If we have provided a laptop or cloud environment to you for this workshop, the following steps are already set up for you. Please jump to Exercise 1.0  Install git We will use a few git commands directly in some of the advanced labs, please make sure git is installed on your system. You can download the latest version here.
+Create GitHub account Create a FREE GitHub account by going to this link and following their step-by-step instructions.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.0 - A Guided Tour of CloudForms</title>
+      <link>/workshops/cloudforms41/exercise1.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.0/</guid>
+      <description>Exercise 1.0: How to Access CloudForms Exercise Description This exercise provides a quick tour of the console to help you get familiar with the user interface, along with some key terminology we will use in subsequent workshop content. If you are already familiar with the basics of CloudForms you can skip this exercise — after making sure you can login.
+Key Terms Before sinking our teeth into Cloud Forms, it is important to understand some terminology.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.1 - Explore Your First Infrastructure Provider</title>
+      <link>/workshops/cloudforms41/exercise1.1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.1/</guid>
+      <description>Exercise 1.1: Working with Infrastructure Providers Exercise Description Learn to view, search and manage infrastructure providers, in Red Hat CloudForms.
+In Red Hat CloudForms, an infrastructure provider is a virtual infrastructure environment that you can add to a Red Hat CloudForms appliance, to manage and interact with the resources, in that environment.
+In other words, a infrastructure provider is a management platform for managing virtual machines from a single type of hypervisor.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.10 - Explore Catalog Configuration</title>
+      <link>/workshops/cloudforms41/exercise1.10/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.10/</guid>
+      <description>Log in to CloudForms using the **admin** account (if not done already).  Exercise 1.10 - Explore Catalog Configuration Section 1: Explore Catalog Configuration Step 1. Select Services → Catalogs.  Services Catalog
+Step 2. Select the Catalog Items accordion.  Services Catalog Items
+Step 3. Select All Catalog Items → VMware Operations → Deploy Ticket Monster on VMware  Services Catalog Ticket Monster
+Step 4. Explore the Details and Selected Resources tabs.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.11 - Explore Chargeback</title>
+      <link>/workshops/cloudforms41/exercise1.11/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.11/</guid>
+      <description>Exercise 1.11 - Explore Chargeback Exercise Description In Red Hat CloudForms, the chargeback feature of CloudForms Management Engine (CFME) enables you to calculate monetary virtual machine charges, based on owner or company tag. In this exercise you will learn how to review chargebacks, and explore related reports, rates and assignments.
+Section 1: Explore Chargebacks CloudForms Management Engine provides a default set of rates for calculating chargeback costs, but you can create your own set of computing and storage costs, as well.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.12 - Explore Utilization</title>
+      <link>/workshops/cloudforms41/exercise1.12/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.12/</guid>
+      <description>Exercise 1.12 - Explore Utilization Exercise Description CloudForms Management Engine server can collect and analyze capacity and utilization data from your virtual infrastructure. In this exercise, you will learn how to view utilization metrics.
+Section 1: Explore Utilization Step 1. Select Optimize → Utilization.  Utilization
+Step 2. Select Region 10 → Cloud/Infrastructure Providers → RHV-M.  Region 10 RHV-M Utilization
+Step 3. On the Summary tab, review the daily utilization chart.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.13 - Explore Planning</title>
+      <link>/workshops/cloudforms41/exercise1.13/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.13/</guid>
+      <description># Exercise 1.13 - Explore Planning
+## Exercise Description In this exercise you will learn how to plan and optimize a deployment.
+Section 1: Explore Planning Step 1. Select Optimize → Planning.  Optimize Planning
+Step 2. Under Reference VM Selection, select All VMs.  Reference VM Selection
+Step 3. Choose the CFME027 VM. Step 4. Under VM Options, set the Source to Usage. Step 5. Under Target Options/Limits, set Show to Hosts.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.14 - Examine Policies</title>
+      <link>/workshops/cloudforms41/exercise1.14/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.14/</guid>
+      <description>Exercise 1.14 - Examine Policies Exercise Description Policy profiles are groups of policies that you can apply to entities within CloudForms. Two common types of policies are Compliance policies, which check for a specific state in a host or VM, and Control policies, which control a host or VM, depending on certain criteria.
+In this exercise, you will learn how to work with policies, events, conditions, actions, alerts, and profiles.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.15 - Explore Network Topology</title>
+      <link>/workshops/cloudforms41/exercise1.15/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.15/</guid>
+      <description>Exercise 1.15 - Explore Network Topology Exercise Description When working in complex provider environments, with many objects, Red Hat CloudForms topology feature can be extremely useful, to quickly view and categorize information. The topology view enables you to view a container provider’s objects, plus their details, such as the properties, status, and relationships to other provider objects. In this exercise, you will learn how to explore the topology of a network.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.16 - Explore Containers</title>
+      <link>/workshops/cloudforms41/exercise1.16/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.16/</guid>
+      <description>Exercise 1.16 - Explore Containers Exercise Description In this exercise we will take a general overview of containers and how you will work with them in Red Hat CloudForms.
+First, it is important to know the definition of a container: A container is an application sandbox that wraps your software in a complete filesystem, containing everything it needs to run.
+ Traditional OS vs. Containers
+Exploring Containers Step 1. Go to Compute → Containers.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.17 - Introduction to the Automate Datastore</title>
+      <link>/workshops/cloudforms41/exercise1.17/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.17/</guid>
+      <description>Exercise 1.17 - Introduction to the Automate Datastore Exercise Description In this exercise, you will learn about scripting actions, used to control automation datastore functions.
+When we use the Automate capability of CloudForms, we write scripts in the Ruby language and use objects that the CloudForms Automation Engine makes available to us. The Automate model is arranged to provide an object oriented hierarchy to control automation functions. The model uses the following organizational units arranged in a hierarchy:</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.18 - “Hello, World!” Automation Script</title>
+      <link>/workshops/cloudforms41/exercise1.18/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.18/</guid>
+      <description>Exercise 1.18 - “Hello, World!” Automation Script Exercise Description Let’s jump right in and start writing our first automation script. In time-honored fashion we’ll write “Hello, World!” to the Automate Engine logfile.
+Before we do anything, we need to ensure that the Automation Engine server role is selected on our CloudForms appliance. We do this from the Configure → Configuration menu, selecting the CloudForms server in the Settings accordion.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.19 - Ansible Inside</title>
+      <link>/workshops/cloudforms41/exercise1.19/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.19/</guid>
+      <description>Exercise 1.19 - Ansible Inside Exercise Description Red Hat Ansible integration delivers out-of-the-box support for backing service, alert and policy actions using Ansible playbooks. Sync your existing playbook repositories with CloudForms, add credentials to access providers, and create service catalog items for actions ranging from creating and retiring VMs, updating security software, or adding additional disks when space runs low.
+Ansible integrates with Red Hat CloudForms to provide automation solutions, using playbooks, for Service, Policy and Alert actions.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.2 - Discovering Virtualization Host Systems</title>
+      <link>/workshops/cloudforms41/exercise1.2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.2/</guid>
+      <description>Exercise 1.2 - Discovering Virtualization Host Systems Exercise Description In this exercise, you will learn how to view, search and manage host systems.
+In Red Hat CloudForms, hosts are hypervisors running on physical hardware providing virtual machines and infrastructure.
+The CloudForms Management Engine automatically adds hosts from discovered providers. However, you can also discover hosts directly if not using a provider. Discovering hosts is only supported for standalone VMware vSphere servers.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.20 - Ansible Tower</title>
+      <link>/workshops/cloudforms41/exercise1.20/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.20/</guid>
+      <description>Ansible Tower Exercise Description Ansible Tower is a management tool integrated with Red Hat CloudForms, designed to help automate infrastructure operations. Red Hat CloudForms allows you to execute Ansible Tower jobs using service catalogs and Automate. No custom configuration or Ruby scripting is needed in Red Hat CloudForms, as configuration is done in Ansible Tower using playbooks.
+You can use the large library of existing Ansible playbooks as Red Hat CloudForms state machines to automate tasks such as backups, package updates, and maintenance in your Red Hat CloudForms environment.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.3 - Discovering VM Systems</title>
+      <link>/workshops/cloudforms41/exercise1.3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.3/</guid>
+      <description>Exercise 1.3 - Discovering VM Systems Exercise Description In Red Hat CloudForms, infrastructure VMs are operating systems running under a hypervisor. This exercise will enable you to view and manage infrastructure VMs.
+Section 1: Explore Infrastructure VMs Step 1: Select Compute → Infrastructure → Virtual Machines.  Infrastructure VMs
+Step 2: View the list of your private datacenter’s infrastructure virtual machines. Section 2: Explore the Virtual Thumbnail for Infrastructure VMs The web interface uses virtual thumbnails to represent providers.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.4 - Explore Reports</title>
+      <link>/workshops/cloudforms41/exercise1.4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.4/</guid>
+      <description>Exercise 1.4 - Explore Reports Exercise Description In this exercise, you will learn how to view, search and customize reports.
+In Red Hat CloudForms, reports have been constructed to help you view the most commonly requested and significant data. With appropriate access credentials, you can also create reports. CloudForms Management Engine provides a large group of default reports, organized into categories. Each category has a set of subfolders.
+Section 1: Explore Reports Step 1: Select Cloud Intel → Reports.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.5 - Examine Infrastructure Provisioning</title>
+      <link>/workshops/cloudforms41/exercise1.5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.5/</guid>
+      <description>Exercise 1.5: Examine Infrastructure Provisioning Exercise Description Learn to provision infrastructures, using Red Hat CloudForms. CloudForms enables provisioning and management across physical, virtual, and private cloud platforms.
+Red Hat CloudForms Infrastructure Provisioning process (Summary) In Red Hat CloudForms, when a virtual machine or cloud instance is provisioned, it goes through multiple phases. First, the request must be made. The request includes ownership information, tags, virtual hardware requirements, the operating system, and any customization of the request.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.6 - Explore Cloud Providers</title>
+      <link>/workshops/cloudforms41/exercise1.6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.6/</guid>
+      <description>Exercise 1.6 - Explore Cloud Providers Exercise Description This exercise will explain how to view cloud providers and related details.
+In Red Hat CloudForms, a cloud provider is a computing platform that manages instances and enables the creation of multi-tenant infrastructure services, independently from underlying hypervisors.
+Section 1: Explore Cloud Providers Step 1: Select Compute → Clouds → Providers.  Cloud Providers
+A list of your private and public cloud providers, such as OpenStack and Amazon EC2, displays.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.7 - Explore Cloud Instances</title>
+      <link>/workshops/cloudforms41/exercise1.7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.7/</guid>
+      <description>#Exercise 1.7 - Explore Cloud Instances
+Exercise Description In Red Hat CloudForms, a cloud instance is a virtual machine running under cloud infrastructure. In this exercise, you will learn how to search for cloud instances and review the details related to the cloud instance.
+Section 1: Explore Cloud Instances &amp;gt; Select Compute → Clouds → Instances.  Cloud Instances
+A list of your public and private cloud instances displays.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.8 - Explore Group and User Access Controls</title>
+      <link>/workshops/cloudforms41/exercise1.8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.8/</guid>
+      <description>Exercise 1.8 - Explore Group and User Access Controls Exercise Description This exercise is designed to provide an understanding of Red Hat CloudForms group controls and access controls.
+Section 1: Explore Access Control Step 1. Go to Administrator (in the top right corner of the screen) → Configuration and select the Access Control accordion.  Configuration Dashboard
+ Access Control
+Step 2. Add a role by modifying a copy of an existing role: Step 3.</description>
+    </item>
+    
+    <item>
+      <title>Exercise 1.9 - Introduction to Catalogs</title>
+      <link>/workshops/cloudforms41/exercise1.9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/exercise1.9/</guid>
+      <description>The following steps are initially run as a non-admin customer account.  Exercise 1.9 - Introduction to Catalogs Exercise Description This exercise enables you to explore and verify the catalog configuration.
+Section 1: Explore Catalog Configuration Step 1. Select Services → Catalogs.  Services Catalog
+Step 2. On the right, select the Deploy Ticket Monster on VMware catalog item.  Ticket Monster
+Step 3. Click Order to order the service.</description>
+    </item>
+    
+    <item>
+      <title>Workshop is Done</title>
+      <link>/workshops/cloudforms41/wrapup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/cloudforms41/wrapup/</guid>
+      <description>That&#39;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the CloudForms environment. And hopefully, you have a deeper understanding of how CloudForms simplifies IT, providing unified management and operations in a hybrid environment.
+As your IT infrastructure progresses from traditional virtualization toward an Infrastructure-as-a-Service (IaaS) model, CloudForms evolves, protecting your investments and providing consistent user experience and functionality.
+Please feel free to continue to &amp;quot;kick the tires&amp;quot; in the demo environment we&#39;ve setup and explore the web console.</description>
+    </item>
+    
+  </channel>
+</rss>

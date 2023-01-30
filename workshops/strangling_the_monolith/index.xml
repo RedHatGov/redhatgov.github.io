@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Microservices Workshop - Strangling the Monolith on Red Hat | Public Sector</title>
+    <link>/workshops/strangling_the_monolith/</link>
+    <description>Recent content in Microservices Workshop - Strangling the Monolith on Red Hat | Public Sector</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/strangling_the_monolith/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lab - Building and Deploying a Fast-Moving Monolith</title>
+      <link>/workshops/strangling_the_monolith/lab1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/strangling_the_monolith/lab1/</guid>
+      <description>FAST-MOVING MONOLITH  Large organizations have a tremendous amount of resources invested in existing monolith applications Looking for a sane way to capture the benefits of containers and orchestration without having to complete rewrite OpenShift provides the platform for their existing investment with the benefit of a path forward for microservice based apps in the future  FAST-MOVING MONOLITH ADVANTAGES  Easier to develop since all dependencies are included Single code base for teams to work on No API backwards compatibility issues since all logic is packaged with the application Single deployable unit  Step 1  In this lab, the coolstore monolith will be built and deployed to OpenShift from your local workstation demonstrating a typical Java application developer workflow A sample pipeline is included which will be used to deploy across dev and prod environment   First, deploy the coolstore monolith dev project (don’t forget to include -b app-partner when you run git clone - this is the branch in use for this lab!</description>
+    </item>
+    
+    <item>
+      <title>Lab - Login &amp; Tour of OpenShift</title>
+      <link>/workshops/strangling_the_monolith/login_tour_oc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/strangling_the_monolith/login_tour_oc/</guid>
+      <description>Welcome to OpenShift! This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content. If you are already familiar with the basics of OpenShift you can skip this lab - after making sure you can login.
+Wetty Environment Links Your instructor will assign you an OpenShift environment and login.
+Please click &amp;quot;Return to Workshop&amp;quot; above to view the OpenShift Environment Links.</description>
+    </item>
+    
+    <item>
+      <title>Lab - Login &amp; Tour of Wetty</title>
+      <link>/workshops/strangling_the_monolith/login_tour_wetty/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/strangling_the_monolith/login_tour_wetty/</guid>
+      <description>Introduction to Wetty (Browser-based SSH) This lab provides a quick tour of the browser based SSH client Wetty. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
+Accessing Wetty Use this URL to access the Wetty node, just change the workshopname. Ask your instructor for rthe workshopname.
+https://&amp;lt;workshopname&amp;gt;.wetty.redhatgov.io:8888 After logging in, you should see a shell.
+The wetty instance will already have the &#39;oc&#39; command installed on them.</description>
+    </item>
+    
+    <item>
+      <title>Lab - Microservice Integration Patterns</title>
+      <link>/workshops/strangling_the_monolith/lab3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/strangling_the_monolith/lab3/</guid>
+      <description>Microservice Integration Patterns  In previous labs, we created two new microservices with the intention of replacing functionality (“strangling”) the monolithic application. Currently no traffic is routed to them. If you were to re-route traffic from the monolith’s /services/products API to the new catalog service’s /services/catalog endpoint, you would be missing the inventory data. In this lab we will consider different options and architectures for integrating the microservices’ functionality into our app.</description>
+    </item>
+    
+    <item>
+      <title>Lab - Strangle Your Monolith</title>
+      <link>/workshops/strangling_the_monolith/lab2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/strangling_the_monolith/lab2/</guid>
+      <description>Strangling the Monolith Design Pattern  Strangling - incrementally replacing functionality in app with something better (cheaper, faster, easier to maintain). As functionality is replaced, “dead” parts of monolith can be removed/retired. You can also wait for all functionality to be replaced before retiring anything! You can optionally include new functionality during strangulation to make it more attractive to business stakeholders.   [https://paulhammant.com/2013/07/14/legacy-application-strangulation-case-studies/](https://paulhammant.com/2013/07/14/legacy-application-strangulation-case-studies/)  Steps for Strangling the Monolith  1) Strangle Monolith</description>
+    </item>
+    
+    <item>
+      <title>Prerequisites</title>
+      <link>/workshops/strangling_the_monolith/prerequisites/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/workshops/strangling_the_monolith/prerequisites/</guid>
+      <description>If we provided you a laptop or cloud environment. We already set all this up for you — feel free to skip everything below!  Install oc Click here for instructions on how to install the OpenShift Container Platform CLI.
+Install git Click here for instructions on how to install Git on your workstation.
+Create GitHub account Click here for instructions on how to setup an account.</description>
+    </item>
+    
+  </channel>
+</rss>
