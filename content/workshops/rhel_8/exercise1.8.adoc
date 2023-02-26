@@ -264,7 +264,8 @@ Alternatively, if you would prefer to stop only a single container, you can util
 podman stop 11fcab28fd31
 ----
 
-== Section 5: Use skopeo and podman to integrate the container into systemd
+
+== Section 6: Use skopeo and podman to integrate the container into systemd
 
 Running as ec2-user, the container work that you have done is stored in your home directory. We will move it to the system image store in /var/lib/, enable it and start the application.
 
@@ -300,7 +301,7 @@ skopeo inspect containers-storage:localhost/httpd
 }
 ....
 
-=== Step 2: Transfer the image into the operating system image store ====
+=== Step 2: Transfer the image into the operating system image store
 
 First export the image from ec2-user's image store into an archive file. Skopeo can export containers into either docker archive or OCI archive if we want to put the container into a file. Using the OCI archive format:
 
@@ -346,7 +347,38 @@ REPOSITORY        TAG      IMAGE ID       CREATED          SIZE
 localhost/httpd   latest   80dd2eb93b53   37 minutes ago   242 MB
 ....
 
-=== Step 3: Integrate container into systemd
+=== Step 3: Scan the container image for CVEs
+
+Before using this container image in a system service, let's check it for CVEs.  Since RHEL 8.2, the ##oscap-podman## utility has been included for scanning container images.  Let's see how this works!
+
+[NOTE]
+##oscap-podman## requires root privilege.
+
+==== Step 3a: Download the latest Red Hat Security Advisories
+
+Red Hat continuously updates security data feeds on ##https://access.redhat.com/security/data##.  Let's start by retrieving and decompressing the latest RHEL advisories in OVAL format:
+[source, bash]
+----
+curl https://www.redhat.com/security/data/oval/v2/RHEL8/rhel-8.oval.xml.bz2 | bzip2 --decompress > rhel-8.oval.xml
+----
+
+==== Step 3b: Scan a container image with oscap-podman
+
+Pick an ##IMAGE ID## from the previous ##sudo podman images## output -- in this case, the httpd image -- and run the scan with:
+
+[source, bash]
+----
+sudo oscap-podman 80dd2eb93b53 oval eval --report /var/www/html/image-oval-report.html rhel-8.oval.xml
+----
+
+Once the command completes, open this link in another tab to view the resulting report:
+
+[source, bash]
+----
+{{< urifqdnrev "http://" "node" "/image-oval-report.html" >}}
+----
+
+=== Step 4: Integrate container into systemd
 
 To finish this section, let's integrate our new container into systemd so you can have it start at boot time and otherwise manage it using systemd. Before getting started, ensure that the webserver started in the openSCAP section is not running:
 
