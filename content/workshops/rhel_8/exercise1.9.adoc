@@ -13,18 +13,23 @@ layout: lab
 :var_prec_url: http://docs.ansible.com/ansible/latest/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
 
 == Exercise Description
-RHEL 7.4 introduced RHEL System Roles, a collection of Ansible roles and modules that provide a stable and consistent configuration interface for remote management of Red Hat Enterprise Linux.  These System Roles are applicable to RHEL 6.10 and above, easing management of 3 generations of RHEL.  The effort is based on development of the Linux System Roles project (link: https://linux-system-roles.github.io/upstream). The following roles are provided and supported as follows:
+RHEL System Roles, announced with the launch of RHEL 8, are a collection of Ansible roles and modules that provide a stable and consistent configuration interface for remote management of Red Hat Enterprise Linux.  They address many commmon configuration, security and workload uses on RHEL systems.  These roles can manage systems running RHEL 7 and above, easing management of 3 generations of RHEL.  The effort is based on development of the Linux System Roles project (link: https://linux-system-roles.github.io/upstream).  These roles are fully supported by Red Hat, so make use of them and avoid duplication of effort in your automation endeavors.
 
-There are a number of roles available in RHEL 8, including:
+There are a number of roles available, including:
 
 * selinux
+* ssh & sshd
+* crypto_policy
 * kdump (kernel crash dump)
 * network
+* vpn
 * timesync
+* logging
 * storage
 * postfix
+* ha_cluster
 
-The full list can be found here: https://access.redhat.com/articles/3050101[Red Hat Enterprise Linux (RHEL) System Roles]
+The full list and compatibility matrix can be found here: https://access.redhat.com/articles/3050101[Red Hat Enterprise Linux (RHEL) System Roles]
 
 For further information on Ansible, see the Ansible Quick-Start Guide for Sysadmins (https://www.redhat.com/en/blog/system-administrators-guide-getting-started-ansible-fast) or Quick Start Video (https://www.ansible.com/resources/videos/quick-start-video) for help learning how to use Ansible.
 
@@ -51,7 +56,8 @@ And install the required packages:
 
 [source, bash]
 ----
-sudo yum install rhel-system-roles ansible
+sudo yum -y module install python36
+sudo yum -y install rhel-system-roles ansible
 ----
 
 == Step 2: Documentation
@@ -193,8 +199,11 @@ Now let's run our playbook to create a new connection profile called DBnic, turn
 
 [source, bash]
 ----
-ansible-playbook example-network-playbook.yml
+ansible-playbook --extra-vars "ansible_python_interpreter=/usr/bin/python3.6" example-network-playbook.yml
 ----
+
+[NOTE]
+Starting in RHEL 8.7, Python 3.9 is the default Python3 interpreter.
 
 ....
 [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
