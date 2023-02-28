@@ -5,7 +5,10 @@ languageCode = "en-us"
 metaDataFormat = "yaml"
 
 [markup]
-    defaultMarkdownHandler = "blackfriday"
+    defaultMarkdownHandler = "goldmark"
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+            unsafe = true
 
 [params]
     description = "Tried. Tested. Trusted."
