@@ -307,132 +307,108 @@
   </ul>
 </nav>
 
-    
-
-<h2 id="lab-1">Lab 1</h2>
-
+    <h2 id="lab-1">Lab 1</h2>
 <h2 id="api-design">API Design</h2>
-
 <h3 id="import-an-openapi-specification-using-apicurio-studio">Import an OpenAPI Specification using Apicurio Studio</h3>
-
 <ul>
 <li>Duration: 10 mins</li>
 <li>Audience: Developers, Architects</li>
 </ul>
-
-<p><br><img src="../images/agenda-01.png "Login" width="900" /><br><br></p>
-
+<p><br>&lt;img src=&quot;../images/agenda-01.png &ldquo;Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
 <h2 id="overview">Overview</h2>
-
 <p>As APIs become more widespread in the enterprise, consistent design and usage is critically important to improve reusability. The more reusable APIs are, the less friction there is for other internal or external teams to make progress. Having design standards and tools baked into the API development and maintenance process is a very powerful way to enable this consistency.</p>
-
-<p>As a developer, we need to be familiar with API Design even though it's not our core capability.  Therefore, in this lab we will review Red Hat's API Designer product, Apicurio, so that we're familiar with it's capabilities only.</p>
-
+<p>As a developer, we need to be familiar with API Design even though it&rsquo;s not our core capability.  Therefore, in this lab we will review Red Hat&rsquo;s API Designer product, Apicurio, so that we&rsquo;re familiar with it&rsquo;s capabilities only.</p>
 <h3 id="why-red-hat">Why Red Hat?</h3>
-
 <p>Red Hat is one of the founding members of the Linux Foundation Open API Initiative (OAI) which produces the leading standard for REST API specifications. Red Hat consistently uses this standard throughout its tooling, starting with the Apicurio Studio API Design editor.</p>
-
 <h2 id="lab-instructions">Lab Instructions</h2>
-
 <h3 id="step-1-importing-apis-with-apicurio-studio">Step 1: Importing APIs with Apicurio Studio</h3>
-
 <ol>
-<li><p>Open a browser window and navigate to Apicurio.  Please ask your Instructor if you do not have the link.</p></li>
-
-<li><p>Log in using your designated user and password.</p>
-
-<p><br><img src="../images/design-01.png "Login" width="900" /><br><br></p></li>
-
-<li><p>Click on <strong>APIs</strong> in the left side navigation menu from the Dashboard page.</p>
-
-<p><br><img src="../images/design-02.png "APIs" width="900" /><br><br></p></li>
-
-<li><p>Click on <strong>Import API</strong>.</p>
-
-<p><br><img src="../images/design-03.png "Import API" width="900" /><br><br></p></li>
-
-<li><p>Import the API created by your friendly Citizen Integrator:</p>
-
+<li>
+<p>Open a browser window and navigate to Apicurio.  Please ask your Instructor if you do not have the link.</p>
+</li>
+<li>
+<p>Log in using your designated user and password.</p>
+<p><br>&lt;img src=&quot;../images/design-01.png &ldquo;Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on <strong>APIs</strong> in the left side navigation menu from the Dashboard page.</p>
+<p><br>&lt;img src=&quot;../images/design-02.png &ldquo;APIs&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on <strong>Import API</strong>.</p>
+<p><br>&lt;img src=&quot;../images/design-03.png &ldquo;Import API&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Import the API created by your friendly Citizen Integrator:</p>
 <ul>
 <li>Import Type: <strong>Import From URL</strong></li>
 <li>Url: <code>https://raw.githubusercontent.com/epe105/dayinthelife-integration/master/docs/labs/developer-track/resources/Locations.yaml</code></li>
 </ul>
-
-<p><br><img src="../images/design-04.png "Import API" width="900" /><br><br></p></li>
-
-<li><p>Click on <strong>Import API</strong>.</p></li>
-
-<li><p>Finally, click on <strong>Edit API</strong> to walkthrough your newly imported API.</p>
-
-<p><br><img src="../images/design-05.png "Edit API" width="900" /><br><br></p></li>
+<p><br>&lt;img src=&quot;../images/design-04.png &ldquo;Import API&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on <strong>Import API</strong>.</p>
+</li>
+<li>
+<p>Finally, click on <strong>Edit API</strong> to walkthrough your newly imported API.</p>
+<p><br>&lt;img src=&quot;../images/design-05.png &ldquo;Edit API&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
 </ol>
-
 <h3 id="step-2-verifying-apis">Step 2: Verifying APIs</h3>
-
-<p>You are now in the main screen to edit your APIs. Different from other API editor products, Apicurio's Editor is a graphical, form-based editor. With Apicurio you don't need master in and out all the details of the <strong>OpenAPI Specification</strong>. It allows you to design beautiful, functionals APIs with zero coding.</p>
-
-<p>Let's start verifying your API.</p>
-
+<p>You are now in the main screen to edit your APIs. Different from other API editor products, Apicurio&rsquo;s Editor is a graphical, form-based editor. With Apicurio you don&rsquo;t need master in and out all the details of the <strong>OpenAPI Specification</strong>. It allows you to design beautiful, functionals APIs with zero coding.</p>
+<p>Let&rsquo;s start verifying your API.</p>
 <ol>
-<li><p>Time to verify our data definitions for the API. Click on the <code>location/phone{id}</code> link under the <em>Paths</em>.</p>
-
-<p><br><img src="../images/design-15.png "Add Definition" width="900" /><br><br></p></li>
-
-<li><p>Notice that this API path has a single path parameter (<code>id</code> defined as an <code>int32</code>) and a single GET operation defined.  Click on the GET operation, then click the location drop-down which is part of the 200 OK response.</p>
-
-<p><br><img src="../images/design-16.png "Definition Name" width="900" /><br><br></p></li>
-
-<li><p>Notice that this API path has a single response defined (a <code>200 OK</code> response) and the type that is returned is a <code>location</code> object.</p>
-
-<p><br><img src="../images/design-17.png "Definition Data Types" width="900" /><br><br></p></li>
+<li>
+<p>Time to verify our data definitions for the API. Click on the <code>location/phone{id}</code> link under the <em>Paths</em>.</p>
+<p><br>&lt;img src=&quot;../images/design-15.png &ldquo;Add Definition&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Notice that this API path has a single path parameter (<code>id</code> defined as an <code>int32</code>) and a single GET operation defined.  Click on the GET operation, then click the location drop-down which is part of the 200 OK response.</p>
+<p><br>&lt;img src=&quot;../images/design-16.png &ldquo;Definition Name&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Notice that this API path has a single response defined (a <code>200 OK</code> response) and the type that is returned is a <code>location</code> object.</p>
+<p><br>&lt;img src=&quot;../images/design-17.png &ldquo;Definition Data Types&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
 </ol>
-
 <h3 id="step-3-verify-the-location-object">Step 3: Verify the location object</h3>
-
 <ol>
-<li><p>Click on the <code>&lt;/&gt; location</code> object link under the <em>Data Types</em> section.  Notice that the object has a bunch of properties defined which make up the object.</p>
-
-<p><br><img src="../images/design-06.png "Add Path" width="900" /><br><br></p></li>
-
-<li><p>Click on the source link and notice that we have both YAML and JSON schemas generated by our object design:</p>
-
-<p><br><img src="../images/design-07.png "Path" width="900" /><br><br></p></li>
+<li>
+<p>Click on the <code>&lt;/&gt; location</code> object link under the <em>Data Types</em> section.  Notice that the object has a bunch of properties defined which make up the object.</p>
+<p><br>&lt;img src=&quot;../images/design-06.png &ldquo;Add Path&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the source link and notice that we have both YAML and JSON schemas generated by our object design:</p>
+<p><br>&lt;img src=&quot;../images/design-07.png &ldquo;Path&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
 </ol>
-
 <h3 id="step-4-verify-the-locations-path">Step 4: Verify the /locations path</h3>
-
 <ol>
-<li><p>Click the <strong>/locations</strong> path.  Then click on the source tab.  Notice that we have both a GET and POST request defined, together with a couple of example requests.  Using a POST method, we can insert a new record into our sample database with Fuse.</p>
-
-<p><br><img src="../images/design-23.png "Locations API" width="900" /><br><br></p></li>
+<li>
+<p>Click the <strong>/locations</strong> path.  Then click on the source tab.  Notice that we have both a GET and POST request defined, together with a couple of example requests.  Using a POST method, we can insert a new record into our sample database with Fuse.</p>
+<p><br>&lt;img src=&quot;../images/design-23.png &ldquo;Locations API&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
 </ol>
-
-<p><em>Congratulations!</em> You have imported your first API definition based on the OpenAPI Specification  using Red Hat's Apicurio.</p>
-
+<p><em>Congratulations!</em> You have imported your first API definition based on the OpenAPI Specification  using Red Hat&rsquo;s Apicurio.</p>
 <h2 id="steps-beyond">Steps Beyond</h2>
-
 <p>So, you want more? Did you notice the link <strong>source</strong> when editing the <em>Paths</em> or the <em>Definitions</em>? Get back to the API editor and follow the link. What do you see? Apicurio lets you follow the form-based editor or go one step beyond and also lets you direct edit the source of your API definition.</p>
-
 <h2 id="summary">Summary</h2>
-
-<p>In this lab you used Apicurio Studio to import a simple API definition using the OpenAPI Specification (Swagger 2.0). You learned how to author and download a standards compliant API Specification using Red Hat's APICurio.</p>
-
+<p>In this lab you used Apicurio Studio to import a simple API definition using the OpenAPI Specification (Swagger 2.0). You learned how to author and download a standards compliant API Specification using Red Hat&rsquo;s APICurio.</p>
 <h2 id="notes-and-further-reading">Notes and Further Reading</h2>
-
 <ul>
 <li>Apicurio
-
 <ul>
 <li><a href="https://www.apicur.io">Webpage</a></li>
 <li><a href="https://www.apicur.io/roadmap/">Roadmap</a></li>
-</ul></li>
+</ul>
+</li>
 <li>OpenAPI
-
 <ul>
 <li><a href="https://www.openapis.org/">OpenAPI Initiative</a></li>
 <li><a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md">Swagger Specification 2.0</a></li>
 <li><a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md">OpenAPI Specification 3.0.2</a></li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
 

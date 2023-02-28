@@ -307,33 +307,21 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="developing-and-managing-an-application-in-openshift">Developing and managing an application in OpenShift</h1>
-
-<p>In this lab we will explore some of the common activities undertaken by developers working in OpenShift.  You will become familiar with how to use environment variables, secrets, build configurations, and more.  Let's look at some of the basic things a developer might care about for a deployed app.</p>
-
+    <h1 id="developing-and-managing-an-application-in-openshift">Developing and managing an application in OpenShift</h1>
+<p>In this lab we will explore some of the common activities undertaken by developers working in OpenShift.  You will become familiar with how to use environment variables, secrets, build configurations, and more.  Let&rsquo;s look at some of the basic things a developer might care about for a deployed app.</p>
 <h2 id="setup">Setup</h2>
-
 <p>From the previous lab you should have the DC Metro Maps web app running in OpenShift.</p>
-
 <div class="alert alert-warning">
-  
-  <span class="pficon pficon-warning-triangle-o"></span>
-  
-Only if you don't already have it running, add it with the following steps.
-
+<p><span class="pficon pficon-warning-triangle-o"></span></p>
+<p>Only if you don&rsquo;t already have it running, add it with the following steps.</p>
 </div>
-
 <blockquote>
 <p><i class="fa fa-terminal"></i> Goto the terminal and type these commands:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-app --name<span style="color:#f92672">=</span>dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir<span style="color:#f92672">=</span>dc-metro-map
-$ oc expose service dc-metro-map</code></pre></div>
-<h2 id="see-the-app-in-action-and-inspect-some-details">See the app in action and inspect some details</h2>
-
-<p>There is no more ambiguity or confusion about where the app came from.  OpenShift provides traceability for your running deployment back to the docker image and the registry it came from, as well as (for images built by OpenShift) back to the exact source code branch and commit.  Let's take a look at that.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc new-app --name<span style="color:#f92672">=</span>dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir<span style="color:#f92672">=</span>dc-metro-map
+</span></span><span style="display:flex;"><span>$ oc expose service dc-metro-map
+</span></span></code></pre></div><h2 id="see-the-app-in-action-and-inspect-some-details">See the app in action and inspect some details</h2>
+<p>There is no more ambiguity or confusion about where the app came from.  OpenShift provides traceability for your running deployment back to the docker image and the registry it came from, as well as (for images built by OpenShift) back to the exact source code branch and commit.  Let&rsquo;s take a look at that.</p>
 <div class="panel-group">
   
 
@@ -341,51 +329,46 @@ $ oc expose service dc-metro-map</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse5ec7fe8aef48fc22f6e9a938abb97927" class="collapsed">
+      <a data-toggle="collapse" href="#collapsedf4d6fb4f5af885550af9525c043155c" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse5ec7fe8aef48fc22f6e9a938abb97927" class="panel-collapse collapse ">
+  <div id="collapsedf4d6fb4f5af885550af9525c043155c" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc status</code></pre></div>
-<p>This is going to show the status of your current project.  In this case it will show the dc-metro-map service (svc) with a nested deployment config (dc) along with some more info that you can ignore for now.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc status
+</span></span></code></pre></div><p>This is going to show the status of your current project.  In this case it will show the dc-metro-map service (svc) with a nested deployment config (dc) along with some more info that you can ignore for now.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i>  A deployment in OpenShift is a replication controller based on a user defined template called a deployment configuration <br/>
 </blockquote>
-
-<p>The dc provides us details we care about to see where our application image comes from, so let's check it out in more detail.</p>
-
+<p>The dc provides us details we care about to see where our application image comes from, so let&rsquo;s check it out in more detail.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Type the following to find out more about our dc:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe dc/dc-metro-map</code></pre></div>
-<p>Notice under the template section it lists the containers it wants to deploy along with the path to the container image.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe dc/dc-metro-map
+</span></span></code></pre></div><p>Notice under the template section it lists the containers it wants to deploy along with the path to the container image.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i> There are a few other ways you could get to this information.  If you are feeling adventurous, you might want to describe the replication controller (oc describe rc -l app=dc-metro-map), the image stream (oc describe is -l app=dc-metro-map) or the running pod itself (oc describe pod -l app=dc-metro-map).
 </blockquote>
-
-<p>Because we built this app using S2I, we get to see the details about the build - including the container image that was used for building the source code.  So let's find out where the image came from.  Here are the steps to get more information about the build configuration (bc) and the builds themselves.</p>
-
+<p>Because we built this app using S2I, we get to see the details about the build - including the container image that was used for building the source code.  So let&rsquo;s find out where the image came from.  Here are the steps to get more information about the build configuration (bc) and the builds themselves.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Type the following to find out more about our bc:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe bc/dc-metro-map</code></pre></div>
-<p>Notice the information about the configuration of how this app gets built.  In particular look at the github URL, the webhooks you can use to automatically trigger a new build, the docker image where the build runs inside of, and the builds that have been completed.  New let's look at one of those builds.</p>
-
-<p><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe bc/dc-metro-map
+</span></span></code></pre></div><p>Notice the information about the configuration of how this app gets built.  In particular look at the github URL, the webhooks you can use to automatically trigger a new build, the docker image where the build runs inside of, and the builds that have been completed.  New let&rsquo;s look at one of those builds.</p>
+<blockquote>
 <i class="fa fa-terminal"></i> Type the following:
-</blockquote></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe build/dc-metro-map-1</code></pre></div>
-<p>This shows us even more about the deployed container's build and source code including exact commit GUID for this build.  We can also can see the commit's author, and the commit message.  You can inspect the code by opening a web browser and pointing it to: <a href="https://github.com/RedHatGov/openshift-workshops/commit/[COMMIT_GUID">https://github.com/RedHatGov/openshift-workshops/commit/[COMMIT_GUID</a>]</p>
+</blockquote>
+```bash
+$ oc describe build/dc-metro-map-1
+```
+<p>This shows us even more about the deployed container&rsquo;s build and source code including exact commit GUID for this build.  We can also can see the commit&rsquo;s author, and the commit message.  You can inspect the code by opening a web browser and pointing it to: <a href="https://github.com/RedHatGov/openshift-workshops/commit/%5BCOMMIT_GUID%5D">https://github.com/RedHatGov/openshift-workshops/commit/[COMMIT_GUID]</a></p>
 
     </div>
   </div>
@@ -397,14 +380,14 @@ $ oc expose service dc-metro-map</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsed1e9e1e4252d69ad7b71181af8c4b067" class="collapsed">
+      <a data-toggle="collapse" href="#collapse0cc2e41c2457ca048898efd20e8349b0" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsed1e9e1e4252d69ad7b71181af8c4b067" class="panel-collapse collapse ">
+  <div id="collapse0cc2e41c2457ca048898efd20e8349b0" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
@@ -414,37 +397,29 @@ Click "Overview", and expand dc-metra-map details (if applicable) by clicking >|
 Check out the details within the deployment (above and to the right of the Pods circle). 
 </blockquote>
 <img src="../images/ocp-lab-devman-deployment-shortcut.png" width="700"><br/>
-
-Within the deployment for the dc-metro-map is a container summary that shows both the GUID for the image and the GUID for the git branch.
-<img src="../images/ocp-lab-devman-imageGuid.png" width="600"><br/>
-
+<p>Within the deployment for the dc-metro-map is a container summary that shows both the GUID for the image and the GUID for the git branch.
+<img src="../images/ocp-lab-devman-imageGuid.png" width="600"><br/></p>
 <blockquote>
 Click on the link next to "Image:"
 </blockquote>
 Here are the details of the image stream for this deployment.<br/>
 <img src="../images/ocp-lab-devman-isDetails.png" width="900"><br/>
-
 <blockquote>
 Click "Builds" and then "Builds" to get back to the build summary
 </blockquote>
-
-<p><blockquote>
-Click &quot;#1&quot; to see the build details
+<blockquote>
+Click "#1" to see the build details
 </blockquote>
-<img src="../images/ocp-lab-buildsnoone.png" width="400"><br/></p>
-
-<p>Because we built this app using S2I, we get to see the details about the build - including the container image that was used for building the source code.  Note that you can kick-off a rebuild here if something went wrong with the initial build and you'd like to attempt it again.<br/>
+<img src="../images/ocp-lab-buildsnoone.png" width="400"><br/>
+<p>Because we built this app using S2I, we get to see the details about the build - including the container image that was used for building the source code.  Note that you can kick-off a rebuild here if something went wrong with the initial build and you&rsquo;d like to attempt it again.<br/>
 <img src="../images/ocp-lab-devman-buildsummary.png" width="900"><br/></p>
-
-<p><blockquote>
-Click &quot;Overview&quot; and then the deployment detail link to get back to the deployment summary again
+<blockquote>
+Click "Overview" and then the deployment detail link to get back to the deployment summary again
 </blockquote>
 <img src="../images/ocp-lab-devman-deployment-shortcut.png" width="600">
+<br/>
+<p>Notice in the Source line you can see the comment from the last commit when the build was started.  And you can see the that commit&rsquo;s author.  You can click that commit GUID to be taken to the exact version of the source code that is in this deployed application.
 <br/></p>
-
-<p>Notice in the Source line you can see the comment from the last commit when the build was started.  And you can see the that commit's author.  You can click that commit GUID to be taken to the exact version of the source code that is in this deployed application.
-<br/></p>
-
 <p><img src="../images/ocp-lab-devman-commitmsg.png" width="600"><br/></p>
 
     </div>
@@ -454,11 +429,8 @@ Click &quot;Overview&quot; and then the deployment detail link to get back to th
 
 </div>
 
-
 <h2 id="pod-logs">Pod logs</h2>
-
-<p>In the S2I lab we looked at a build log to inspect the process of turning source code into an image.  Now let's inspect the log for a running pod - in particular let's see the web application's logs.</p>
-
+<p>In the S2I lab we looked at a build log to inspect the process of turning source code into an image.  Now let&rsquo;s inspect the log for a running pod - in particular let&rsquo;s see the web application&rsquo;s logs.</p>
 <div class="panel-group">
   
 
@@ -466,28 +438,26 @@ Click &quot;Overview&quot; and then the deployment detail link to get back to th
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse726dc169a07c255cf6214955aafbfc3c" class="collapsed">
+      <a data-toggle="collapse" href="#collapseb8c8014515ee60c7623e0becfd66ac4a" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse726dc169a07c255cf6214955aafbfc3c" class="panel-collapse collapse ">
+  <div id="collapseb8c8014515ee60c7623e0becfd66ac4a" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods</code></pre></div>
-<p>This is going to show basic details for all pods in this project (including the builders).  Let's look at the log for the pod running our application.  Look for the POD NAME that that is &quot;Running&quot; you will use it below.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span></code></pre></div><p>This is going to show basic details for all pods in this project (including the builders).  Let&rsquo;s look at the log for the pod running our application.  Look for the POD NAME that that is &ldquo;Running&rdquo; you will use it below.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following (replacing the POD ID with your pod's ID):
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc logs <span style="color:#f92672">[</span>POD NAME<span style="color:#f92672">]</span></code></pre></div>
-<p>You will see in the output details of your app starting up and any status messages it has reported since it started.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc logs <span style="color:#f92672">[</span>POD NAME<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>You will see in the output details of your app starting up and any status messages it has reported since it started.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i> You can see more details about the pod itself with 'oc describe pod/<POD NAME>'
 </blockquote>
@@ -502,36 +472,33 @@ Click &quot;Overview&quot; and then the deployment detail link to get back to th
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse0be8ce4ac51c7ebe06c36291d5121fe0" class="collapsed">
+      <a data-toggle="collapse" href="#collapsebaa350a1242a81539c4c05a737781ce9" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse0be8ce4ac51c7ebe06c36291d5121fe0" class="panel-collapse collapse ">
+  <div id="collapsebaa350a1242a81539c4c05a737781ce9" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><blockquote>
-Click on &quot;Applications&quot; and then click on &quot;Pods&quot;
+       <blockquote>
+Click on "Applications" and then click on "Pods"
 </blockquote>
-<img src="../images/ocp-lab-devman-apppods.png" width="600"><br/></p>
-
+<img src="../images/ocp-lab-devman-apppods.png" width="600"><br/>
 <p>This is going to show basic details for all pods in this project (including the builders).<br/>
 <img src="../images/ocp-lab-devman-pods.png" width="900"><br/>
-Next let's look at the log for the pod running our application.</p>
-
-<p><blockquote>
-Click the pod that starts with &quot;dc-metro-map-&quot; and has a status of Running
+Next let&rsquo;s look at the log for the pod running our application.</p>
+<blockquote>
+Click the pod that starts with "dc-metro-map-" and has a status of Running
 </blockquote>
 <img src="../images/ocp-lab-devman-poddetails.png" width="900"><br/>
-Here you see the status details of your pod as well as its configuration.  Take a minute here and look at what details are available.</p>
-
-<p><blockquote>
-Click the &quot;Logs&quot; button
+Here you see the status details of your pod as well as its configuration.  Take a minute here and look at what details are available.
+<blockquote>
+Click the "Logs" button
 </blockquote>
 <img src="../images/ocp-lab-devman-podslogs.png" width="900"><br/>
-Now you can see in the output window the details of your app starting up and any status messages it has reported since it started.</p>
+Now you can see in the output window the details of your app starting up and any status messages it has reported since it started.
 
     </div>
   </div>
@@ -540,11 +507,8 @@ Now you can see in the output window the details of your app starting up and any
 
 </div>
 
-
 <h2 id="how-about-we-set-some-environment-variables">How about we set some environment variables?</h2>
-
-<p>Whether it's a database name or a configuration variable, most applications make use of environment variables.  It's best not to bake these into your containers because they do change and you don't want to rebuild an image just to change an environment variable.  Good news!  You don't have to.  OpenShift let's you specify environment variables in your deployment configuration and they get passed along through the pod to the container.  Let's try doing that.</p>
-
+<p>Whether it&rsquo;s a database name or a configuration variable, most applications make use of environment variables.  It&rsquo;s best not to bake these into your containers because they do change and you don&rsquo;t want to rebuild an image just to change an environment variable.  Good news!  You don&rsquo;t have to.  OpenShift let&rsquo;s you specify environment variables in your deployment configuration and they get passed along through the pod to the container.  Let&rsquo;s try doing that.</p>
 <div class="panel-group">
   
 
@@ -552,27 +516,26 @@ Now you can see in the output window the details of your app starting up and any
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse4874c486b33f5da32bed008c4afea62e" class="collapsed">
+      <a data-toggle="collapse" href="#collapsef29b0634000f9ff8c48e2bb4bebdac15" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse4874c486b33f5da32bed008c4afea62e" class="panel-collapse collapse ">
+  <div id="collapsef29b0634000f9ff8c48e2bb4bebdac15" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p>Let's have a little fun.  The app has some easter eggs that get triggered when certain env vars are set to 'true'.
+       <p>Let&rsquo;s have a little fun.  The app has some easter eggs that get triggered when certain env vars are set to &rsquo;true'.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
-</blockquote></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc set env dc/dc-metro-map -e BEERME<span style="color:#f92672">=</span>true</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods -w</code></pre></div>
-<p>Due to the deployment config strategy being set to &quot;Rolling&quot; and the &quot;ConfigChange&quot; trigger being set, OpenShift auto deployed a new pod as soon as you updated with the env variable.  If you were quick enough you saw this happening with the get pods command</p>
-
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc set env dc/dc-metro-map -e BEERME<span style="color:#f92672">=</span>true
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods -w
+</span></span></code></pre></div><p>Due to the deployment config strategy being set to &ldquo;Rolling&rdquo; and the &ldquo;ConfigChange&rdquo; trigger being set, OpenShift auto deployed a new pod as soon as you updated with the env variable.  If you were quick enough you saw this happening with the get pods command</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Type Ctrl+C to stop watching the pods
 </blockquote>
-
 <blockquote>
 <i class="fa fa-info-circle"></i> You can set env variables across all deployment configs with 'dc --all' instead of specifying a specifc config
 </blockquote>
@@ -587,41 +550,37 @@ Now you can see in the output window the details of your app starting up and any
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsea9a67027efc9731585f0951dd0a0608e" class="collapsed">
+      <a data-toggle="collapse" href="#collapsee7f2614f64413d8eeb8949329b7480a5" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsea9a67027efc9731585f0951dd0a0608e" class="panel-collapse collapse ">
+  <div id="collapsee7f2614f64413d8eeb8949329b7480a5" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><blockquote>
-Click on &quot;Applications&quot; and then click on &quot;Deployments&quot;
+       <blockquote>
+Click on "Applications" and then click on "Deployments"
 </blockquote>
-This is going to show basic details for all deployment configurations in this project</p>
-
-<p><blockquote>
-Click the &quot;dc-metro-map&quot; deployment config
+This is going to show basic details for all deployment configurations in this project
+<blockquote>
+Click the "dc-metro-map" deployment config
 </blockquote>
-There are a lot of details here, feel free to check them out and ask questions, but we are here to set some new environment variables.</p>
-
-<p><blockquote>
+There are a lot of details here, feel free to check them out and ask questions, but we are here to set some new environment variables.  
+<blockquote>
 Click the Environment tab next to the Details tab .
 </blockquote>
 <img src="../images/ocp-lab-devman-deployconfigdetails-config.png" width="900"><br/>
-This opens up a tab with the environment variables for this deployment config.</p>
-
-<p><blockquote>
+This opens up a tab with the environment variables for this deployment config.
+<blockquote>
 Add an environment variable with the name BEERME and a value of 'true'
 </blockquote>
-<img src="../images/ocp-lab-devman-deployconfigdetails-populated.png" width="900"><br/></p>
-
-<p><blockquote>
-Click &quot;Save&quot;.  And go back to the summary view by clicking &quot;Overview&quot; on the left menu bar
+<img src="../images/ocp-lab-devman-deployconfigdetails-populated.png" width="900"><br/>
+<blockquote>
+Click "Save".  And go back to the summary view by clicking "Overview" on the left menu bar
 </blockquote>
-If you are quick enough you will see a new pod spin up and an the old pod spin down.  This is due to the deployment config strategy being set to &quot;Rolling&quot; and having a &quot;ConfigChange&quot; trigger, OpenShift auto deployed a new pod as soon as you updated with the env variable.</p>
+If you are quick enough you will see a new pod spin up and an the old pod spin down.  This is due to the deployment config strategy being set to "Rolling" and having a "ConfigChange" trigger, OpenShift auto deployed a new pod as soon as you updated with the env variable.
 
     </div>
   </div>
@@ -630,19 +589,12 @@ If you are quick enough you will see a new pod spin up and an the old pod spin d
 
 </div>
 
-
 <p>With the new environment variables set the app should look like this in your web browser (with beers instead of busses):</p>
-
 <p><img src="../images/ocp-lab-devman-beerme.png" width="900"><br/></p>
-
 <h2 id="what-about-passwords-and-private-keys">What about passwords and private keys?</h2>
-
-<p>Environment variables are great, but sometimes we don't want sensitive data exposed in the environment.  We will get into using <strong>secrets</strong> later when you do the lab: Keep it Secret, Keep it Safe</p>
-
+<p>Environment variables are great, but sometimes we don&rsquo;t want sensitive data exposed in the environment.  We will get into using <strong>secrets</strong> later when you do the lab: Keep it Secret, Keep it Safe</p>
 <h2 id="getting-into-a-pod">Getting into a pod</h2>
-
-<p>There are situations when you might want to jump into a running pod, and OpenShift lets you do that pretty easily.  We set some environment variables and secrets in this lab, let's jump onto our pod to inspect them.</p>
-
+<p>There are situations when you might want to jump into a running pod, and OpenShift lets you do that pretty easily.  We set some environment variables and secrets in this lab, let&rsquo;s jump onto our pod to inspect them.</p>
 <div class="panel-group">
   
 
@@ -650,26 +602,27 @@ If you are quick enough you will see a new pod spin up and an the old pod spin d
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsedd53e2e5ac0ace50879aed0e6f8b8894" class="collapsed">
+      <a data-toggle="collapse" href="#collapse4cce3b2a133bc5daca49351b8dd9f0ac" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsedd53e2e5ac0ace50879aed0e6f8b8894" class="panel-collapse collapse ">
+  <div id="collapse4cce3b2a133bc5daca49351b8dd9f0ac" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods</code></pre></div>
-<p>Find the pod name for your Running pod</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc exec -it <span style="color:#f92672">[</span>POD NAME<span style="color:#f92672">]</span> /bin/bash</code></pre></div>
-<p>You are now interactively attached to the container in your pod.  Let's look for the environment variables we set:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ env | grep BEER</code></pre></div>
-<p>That should return the <strong>BEERME=true</strong> matching the value that we set in the deployment config.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ exit</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span></code></pre></div><p>Find the pod name for your Running pod</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc exec -it <span style="color:#f92672">[</span>POD NAME<span style="color:#f92672">]</span> /bin/bash
+</span></span></code></pre></div><p>You are now interactively attached to the container in your pod.  Let&rsquo;s look for the environment variables we set:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ env | grep BEER
+</span></span></code></pre></div><p>That should return the <strong>BEERME=true</strong> matching the value that we set in the deployment config.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ exit
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -680,35 +633,31 @@ If you are quick enough you will see a new pod spin up and an the old pod spin d
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse944a4b1d38b0ecf1b292526f4c8bfb19" class="collapsed">
+      <a data-toggle="collapse" href="#collapse646143aa730c973571f7cc4e21a71b6f" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse944a4b1d38b0ecf1b292526f4c8bfb19" class="panel-collapse collapse ">
+  <div id="collapse646143aa730c973571f7cc4e21a71b6f" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Click on "Applications" and then click on "Pods"
 </blockquote>
-
 <blockquote>
 Click the pod that starts with "dc-metro-map-" and has a status of Running
 </blockquote>
-
 <blockquote>
 Click the "Terminal" button
 </blockquote>
-
 <p><img src="../images/ocp-lab-devman-terminal.png" width="900"><br/>
-Let's look for the environment variables we set:</p>
-
-<p><blockquote>
+Let&rsquo;s look for the environment variables we set:</p>
+<blockquote>
 Inside the web page's terminal type: 'env | grep BEER'
 </blockquote>
-That should return the <strong>BEERME=true</strong> matching the value that we set in the deployment config.</p>
+That should return the **BEERME=true** matching the value that we set in the deployment config.
 
     </div>
   </div>
@@ -717,19 +666,14 @@ That should return the <strong>BEERME=true</strong> matching the value that we s
 
 </div>
 
-
-<h2 id="good-work-let-s-clean-this-up">Good work, let's clean this up</h2>
-
+<h2 id="good-work-lets-clean-this-up">Good work, let&rsquo;s clean this up</h2>
 <blockquote>
-<p><i class="fa fa-terminal"></i> Let's clean up all this to get ready for the next lab:</p>
+<p><i class="fa fa-terminal"></i> Let&rsquo;s clean up all this to get ready for the next lab:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc delete all -l app<span style="color:#f92672">=</span>dc-metro-map</code></pre></div>
-<h1 id="summary">Summary</h1>
-
-<p>In this lab you've seen how to trace running software back to its roots, how to see details on the pods running your software, how to update deployment configurations, how to inspect logs files, how to set environment variables consistently across your environment, and how to interactively attach to running containers.  All these things should come in handy for any developer working in an OpenShift platform.</p>
-
-<p>To dig deeper in to details behind the steps you performed in this lab, check out the OpenShift <a href="https://docs.openshift.com/container-platform/3.4/dev_guide/index.html">developer's guide</a>.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc delete all -l app<span style="color:#f92672">=</span>dc-metro-map
+</span></span></code></pre></div><h1 id="summary">Summary</h1>
+<p>In this lab you&rsquo;ve seen how to trace running software back to its roots, how to see details on the pods running your software, how to update deployment configurations, how to inspect logs files, how to set environment variables consistently across your environment, and how to interactively attach to running containers.  All these things should come in handy for any developer working in an OpenShift platform.</p>
+<p>To dig deeper in to details behind the steps you performed in this lab, check out the OpenShift <a href="https://docs.openshift.com/container-platform/3.4/dev_guide/index.html">developer&rsquo;s guide</a>.</p>
 <style>
 
  

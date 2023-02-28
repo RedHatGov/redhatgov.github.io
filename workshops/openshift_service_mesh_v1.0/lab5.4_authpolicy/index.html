@@ -307,25 +307,18 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="authorizing-and-authenticating-access-via-policy">Authorizing and Authenticating Access via Policy</h1>
-
-<p>In the previous labs we secured and verified the service-to-service communication. But what about user-to-service communication (aka origin authentication)? The service mesh can help with that too. To do this, we need to bring in an identity provider that will issue JSON Web Tokens (JWTs) to signed in users. JWTs are an open, industry standard (RFC 7519) way of sharing identity. The app-ui service will pass those JWTs along with it's API requests. This lets the service mesh's sidecar proxies can verify, get role data, and enforce access.</p>
-
-<p>Let's walk through a basic example of restricting service access via Authentication and Authorization policies.</p>
-
+    <h1 id="authorizing-and-authenticating-access-via-policy">Authorizing and Authenticating Access via Policy</h1>
+<p>In the previous labs we secured and verified the service-to-service communication. But what about user-to-service communication (aka origin authentication)? The service mesh can help with that too. To do this, we need to bring in an identity provider that will issue JSON Web Tokens (JWTs) to signed in users. JWTs are an open, industry standard (RFC 7519) way of sharing identity. The app-ui service will pass those JWTs along with it&rsquo;s API requests. This lets the service mesh&rsquo;s sidecar proxies can verify, get role data, and enforce access.</p>
+<p>Let&rsquo;s walk through a basic example of restricting service access via Authentication and Authorization policies.</p>
 <h2 id="authenticated-users-only">Authenticated Users Only</h2>
-
 <p>We can lock down the service entirely and only let authenticated users access it.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Apply a new authentication policy and service entry with the following commands:
 </blockquote>
-<pre><code> sed &#34;s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|&#34; ./istio-configuration/policy-boards-jwt.yaml | oc apply -f -
- sed &#34;s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|&#34; ./istio-configuration/serviceentry-keycloak.yaml | oc apply -f -</code></pre>
-<p>The policy specifies the requirements for traffic to the boards service to have a JWT with specific properties. It looks like this:</p>
-<pre><code>apiVersion: authentication.istio.io/v1alpha1
+<pre tabindex="0"><code> sed &#34;s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|&#34; ./istio-configuration/policy-boards-jwt.yaml | oc apply -f -
+ sed &#34;s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|&#34; ./istio-configuration/serviceentry-keycloak.yaml | oc apply -f -
+</code></pre><p>The policy specifies the requirements for traffic to the boards service to have a JWT with specific properties. It looks like this:</p>
+<pre tabindex="0"><code>apiVersion: authentication.istio.io/v1alpha1
 kind: Policy
 metadata:
   name: boards-jwt
@@ -340,61 +333,46 @@ spec:
       - excludedPaths:
         - exact: /health_check
         - prefix: /status/
-  principalBinding: USE_ORIGIN</code></pre>
-<p>
+  principalBinding: USE_ORIGIN
+</code></pre><p>
 <i class="fa fa-info-circle"></i>
 We mentioned earlier that JWT shares identity info, the JWKS endpoint gives us keys to verify the data of the JWT is from our trusted source.
 </p>
-
 <p>
 <i class="fa fa-info-circle"></i>
 Don't worry about the service entry for now - we'll explain that in another lab.
 </p>
-
-<p><br></p>
-
+<br>
 <blockquote>
 <i class="fa fa-desktop"></i> Goto your webapp and click the Shared navigation button
 </blockquote>
 <blockquote>
 <i class="fa fa-desktop"></i> Refresh the page a few times and try to add something to the shared board
 </blockquote>
-
 <p>It will fail with the following error (once it takes effect).</p>
-
 <p><img src="../images/app-boardsshared-failedget.png" width="1024" class="screenshot"><br/></p>
-
-<p><br></p>
-
+<br>
 <blockquote>
 <i class="fa fa-desktop"></i> Login as user "demo" with password "demo"
 </blockquote>
-
 <blockquote>
 <i class="fa fa-desktop"></i> Try to access the page again
 </blockquote>
-
 <p>You should now see a list of shared items</p>
-
 <p><img src="../images/app-boardsshared-successget.png" width="1024" class="screenshot"><br/></p>
-
 <p><i class="fa fa-info-circle"></i>
 You might need to refresh the page a few times before it takes effect
 </p>
-
-<p><br>
-<br></p>
-
+<br>
+<br>
 <h2 id="only-the-cool-kids">Only The Cool Kids</h2>
-
-<p>In this scenario we want to further secure access to the shared boards list so only a certain group of users can post to it. And we will do this this purely via the Service Mesh configuration. It's pretty straightforward to do.</p>
-
+<p>In this scenario we want to further secure access to the shared boards list so only a certain group of users can post to it. And we will do this this purely via the Service Mesh configuration. It&rsquo;s pretty straightforward to do.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Apply an authorization policy with the following command:
 </blockquote>
-<pre><code>sed &#34;s|microservices-demo|$PROJECT_NAME|&#34; ./istio-configuration/authorization-boards-shared-lockdown.yaml | oc apply -f -</code></pre>
-<p>That configuration looks like this:</p>
-<pre><code>apiVersion: security.istio.io/v1beta1
+<pre tabindex="0"><code>sed &#34;s|microservices-demo|$PROJECT_NAME|&#34; ./istio-configuration/authorization-boards-shared-lockdown.yaml | oc apply -f -
+</code></pre><p>That configuration looks like this:</p>
+<pre tabindex="0"><code>apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: boards-shared-lockdown
@@ -423,77 +401,60 @@ spec:
         methods: [&#34;GET&#34;]
     when:
     - key: request.auth.claims[scope]
-      values: [&#34;openid&#34;]</code></pre>
-<p>An authorization policy includes a selector and a list of rules. The selector specifies the <strong>target</strong> that the policy applies to - in this case our boards microservice. While the rules specify <strong>who</strong> (from) is allowed to do <strong>what</strong> (to) under <strong>which</strong> (when) conditions - in this case any source can POST as long as they have the &quot;cool-kids&quot; role listed in their JWT payload.</p>
-
-<p>So, now that we've applied it, let's try to access your boards service when you're not in the cool kids club.</p>
-
-<p><br></p>
-
+      values: [&#34;openid&#34;]
+</code></pre><p>An authorization policy includes a selector and a list of rules. The selector specifies the <strong>target</strong> that the policy applies to - in this case our boards microservice. While the rules specify <strong>who</strong> (from) is allowed to do <strong>what</strong> (to) under <strong>which</strong> (when) conditions - in this case any source can POST as long as they have the &ldquo;cool-kids&rdquo; role listed in their JWT payload.</p>
+<p>So, now that we&rsquo;ve applied it, let&rsquo;s try to access your boards service when you&rsquo;re not in the cool kids club.</p>
+<br>
 <blockquote>
 <i class="fa fa-desktop"></i> Goto your webapp and shared page of the website
 </blockquote>
 <blockquote>
 <i class="fa fa-desktop"></i> Try to add something to the shared board
 </blockquote>
-
 <p>You should be able to see the items, but posting will fail with the following error.</p>
-
 <p><img src="../images/app-boardsshared-failedpost.png" width="1024" class="screenshot"><br/></p>
-
-<p><br></p>
-
+<br>
 <blockquote>
 <i class="fa fa-desktop"></i> Now login as user "theterminator" with password "illbeback"
 </blockquote>
-
 <blockquote>
 <i class="fa fa-desktop"></i> Try again to add something to the shared board
 </blockquote>
-
 <p>Your new item should show in the shared list</p>
-
 <p><img src="../images/app-boardsshared-successpost.png" width="1024" class="screenshot"><br/></p>
-
-<p><br></p>
-
+<br>
 <blockquote>
 <i class="fa fa-terminal"></i> Now let's put things back to normal:
 </blockquote>
-<pre><code>oc delete authorizationpolicy/boards-shared-lockdown</code></pre><pre><code>oc delete policy/boards-jwt</code></pre><pre><code>oc delete serviceentry/keycloak-egress</code></pre><pre><code>SSO_SVC=$(oc get route keycloak-alt --template=&#39;{{.spec.host}}&#39;)
-oc set env dc/app-ui FAKE_USER=true SSO_SVC_HOST=$SSO_SVC</code></pre>
-<h2 id="how-it-works">How it Works</h2>
-
-<p>Our app-ui microservice gets the JWT from the Keycloak SSO whenever a user logs in. If logged in, the JWT is always passed (in the request header) from the app-ui to any services it calls. All our services have Envoy sidecar proxies running and are seeing the traffic, including the JWT in app-ui request headers. So the configuration we applied is used to inform sidecar proxies to follow the policies we set. When we weren't logged in there was no JWT to pass along so our call requests failed. Only after we were logged in with as a valid user did we pass along a valid JWT. And each user's JWT was different, so the <em>when</em> conditions only matched for theterminator, allowing him able to POST to the shared board.</p>
-
+<pre tabindex="0"><code>oc delete authorizationpolicy/boards-shared-lockdown
+</code></pre><pre tabindex="0"><code>oc delete policy/boards-jwt
+</code></pre><pre tabindex="0"><code>oc delete serviceentry/keycloak-egress
+</code></pre><pre tabindex="0"><code>SSO_SVC=$(oc get route keycloak-alt --template=&#39;{{.spec.host}}&#39;)
+oc set env dc/app-ui FAKE_USER=true SSO_SVC_HOST=$SSO_SVC
+</code></pre><h2 id="how-it-works">How it Works</h2>
+<p>Our app-ui microservice gets the JWT from the Keycloak SSO whenever a user logs in. If logged in, the JWT is always passed (in the request header) from the app-ui to any services it calls. All our services have Envoy sidecar proxies running and are seeing the traffic, including the JWT in app-ui request headers. So the configuration we applied is used to inform sidecar proxies to follow the policies we set. When we weren&rsquo;t logged in there was no JWT to pass along so our call requests failed. Only after we were logged in with as a valid user did we pass along a valid JWT. And each user&rsquo;s JWT was different, so the <em>when</em> conditions only matched for theterminator, allowing him able to POST to the shared board.</p>
 <p>If you have the time and want to dig deeper, you should read more about <a href="https://www.keycloak.org/docs/latest/securing_apps/">configuring Keycloak</a> and about <a href="https://en.wikipedia.org/wiki/JSON_Web_Token">JWTs</a>.</p>
-
 <p>Check out high-level diagrams of the flows we executed below:</p>
-
-<p><br>
-<em>Fail Case</em>
+<br>
+*Fail Case*
 <img src="../images/architecture-jwtfail.png" width="600" class="architecture"><br/>
 <br>
-<em>Success Case</em>
+*Success Case*
 <img src="../images/architecture-jwtsuccess.png" width="800" class="architecture"><br/>
 <p><i class="fa fa-info-circle"></i>
 Note: these diagrams have been simplified for discussion purposes
-</p></p>
-
+</p>
 <h2 id="authorization-policy-summary">Authorization Policy Summary</h2>
-
 <ul>
 <li>Authorization via dynamically configurable policy</li>
 <li>Secures user-to-service communication</li>
 <li>Utilizes industry standard JSON Web Tokens (JWTs)</li>
 <li>Supports HTTP, HTTPS and HTTP2 natively, as well as any plain TCP protocols</li>
-<li>Policy let's us specify a target, who can do what, and in which condition - <a href="https://archive.istio.io/v1.4/docs/concepts/security/#authorization">see more examples here</a></li>
+<li>Policy let&rsquo;s us specify a target, who can do what, and in which condition - <a href="https://archive.istio.io/v1.4/docs/concepts/security/#authorization">see more examples here</a></li>
 <li>Pulls some the burden, typically required of individual microservices, up to the platform level and makes it config vs. code</li>
 </ul>
-
 <p><i class="fa fa-info-circle"></i>
-If you have used RBAC prior to 1.4 of Istio you might have noticed that it's a lot easier now. Here's a blog post outlining the differences: <a href="https://istio.io/blog/2019/v1beta1-authorization-policy/">https://istio.io/blog/2019/v1beta1-authorization-policy/</a></p>
-
+If you have used RBAC prior to 1.4 of Istio you might have noticed that it&rsquo;s a lot easier now. Here&rsquo;s a blog post outlining the differences: <a href="https://istio.io/blog/2019/v1beta1-authorization-policy/">https://istio.io/blog/2019/v1beta1-authorization-policy/</a></p>
 <style>
 
  

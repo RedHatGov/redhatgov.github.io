@@ -307,245 +307,261 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="lab-3">Lab 3</h1>
-
+    <h1 id="lab-3">Lab 3</h1>
 <h2 id="fuse-online">Fuse Online</h2>
-
 <ul>
 <li>Duration: 20 mins</li>
 <li>Audience: Developers and Architects</li>
 </ul>
-
-<p><br><img src="../images/agenda-03.png "Login" width="900" /><br><br></p>
-
+<p><br>&lt;img src=&quot;../images/agenda-03.png &ldquo;Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
 <h2 id="overview">Overview</h2>
-
 <p>When it comes to quick API development, you need both the integration experts as well as application developers to easily develop and deploy the APIs. Here is how to create a simple API with Fuse Online.</p>
-
 <h3 id="why-red-hat">Why Red Hat?</h3>
-
 <p>Red Hat Fuse integration solution empowers integration experts, application developers, and business users to engage in enterprise-wide collaboration and high-productivity self-service.</p>
-
 <h2 id="lab-instructions">Lab Instructions</h2>
-
 <h3 id="step-1-create-database-connection">Step 1: Create database connection</h3>
-
 <ol>
-<li><p>Navigate to OpenShift.</p></li>
-
-<li><p>Click on your Tools Project.</p></li>
-
-<li><p>Click on your Fuse Online Route and Log In.</p></li>
-
-<li><p>The first time that you hit the Fuse Online URL, you will be presented with an <em>Authorize Access</em> page.  Click the <strong>Allow selected permissions</strong> button to accept the defaults.</p>
-
-<p><br><img src="../images/design-54.png "Accept permissions" width="900" /><br><br></p></li>
-
-<li><p>Click on <strong>Connections &gt; Create Connection</strong></p>
-
-<p><br><img src="../images/00-create-connection.png "Create Connection" width="900" /><br><br></p></li>
-
-<li><p>Select <strong>Database</strong></p>
-
-<p><br><img src="../images/01-select-database.png "Select Database" width="900" /><br><br></p></li>
-
-<li><p>Enter below values for Database Configuration</p>
-<pre><code>Connection URL: jdbc:postgresql://postgresql.international.svc:5432/sampledb
+<li>
+<p>Navigate to OpenShift.</p>
+</li>
+<li>
+<p>Click on your Tools Project.</p>
+</li>
+<li>
+<p>Click on your Fuse Online Route and Log In.</p>
+</li>
+<li>
+<p>The first time that you hit the Fuse Online URL, you will be presented with an <em>Authorize Access</em> page.  Click the <strong>Allow selected permissions</strong> button to accept the defaults.</p>
+<p><br>&lt;img src=&quot;../images/design-54.png &ldquo;Accept permissions&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on <strong>Connections &gt; Create Connection</strong></p>
+<p><br>&lt;img src=&quot;../images/00-create-connection.png &ldquo;Create Connection&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Select <strong>Database</strong></p>
+<p><br>&lt;img src=&quot;../images/01-select-database.png &ldquo;Select Database&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Enter below values for Database Configuration</p>
+<pre tabindex="0"><code>Connection URL: jdbc:postgresql://postgresql.international.svc:5432/sampledb
 Username      : dbuser
 Password      : password
-Schema        : &lt;blank&gt;</code></pre></li>
+Schema        : &lt;blank&gt;
+</code></pre></li>
 </ol>
-
 <p><em>Remember to replace the OCPPROJECT with the OpenShift project(NameSpace) you used in last lab.  It should be your username</em></p>
-
 <ol>
-<li><p>Click <strong>Validate</strong> and verify if the connection is successful. Click <strong>Next</strong> to proceed.</p>
-
-<p><br><img src="../images/02-click-validate.png "Validate" width="900" /><br><br></p></li>
-
-<li><p>Add Connection details:</p>
-
-<ul>
-<li>Connection Name: LocationDB</li>
-<li>Description: Location Database</li>
-<li>Click <strong>Create</strong>.</li>
-</ul>
-
-<p><br><img src="../images/03-connection-details.png "Add Connection Details" width="900" /><br><br></p></li>
-
-<li><p>Verify that the Location Database is successfully created.</p></li>
+<li>
+<p>Click <strong>Validate</strong> and verify if the connection is successful. Click <strong>Next</strong> to proceed.</p>
+<p><br>&lt;img src=&quot;../images/02-click-validate.png &ldquo;Validate&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Add Connection details:</p>
+</li>
 </ol>
-
+<ul>
+<li>
+<p>Connection Name: LocationDB</p>
+</li>
+<li>
+<p>Description: Location Database</p>
+</li>
+<li>
+<p>Click <strong>Create</strong>.</p>
+<p><br>&lt;img src=&quot;../images/03-connection-details.png &ldquo;Add Connection Details&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+</ul>
+<ol>
+<li>Verify that the Location Database is successfully created.</li>
+</ol>
 <h3 id="step-2-create-webhook-integration">Step 2: Create webhook integration</h3>
-
 <p>Description goes here</p>
-
 <ol>
-<li><p>Click on <strong>Integrations &gt; Create Integration</strong></p>
-
-<p><br><img src="../images/04-create-integration.png "Create Integration" width="900" /><br><br></p></li>
-
-<li><p>Choose <strong>Webhook</strong></p>
-
-<p><br><img src="../images/05-choose-weebhook.png "Choose webhook"Integration" width="900" /><br><br></p></li>
-
-<li><p>Click on Incoming webhook</p>
-
-<p><br><img src="../images/06-incoming-webhook.png "Add incoming webhook" width="900" /><br><br></p></li>
-
-<li><p>It navigates to the Webhook Token screen. Click <strong>Next</strong></p>
-
-<p><br><img src="../images/07-webhook-configuration.png "Webhook Configuration" width="900" /><br><br></p></li>
-
-<li><p>Define the Output Data Type.</p>
-
-<ul>
-<li>Select type from the dropdown as JSON instance.</li>
-<li>Enter Data type Name: Custom</li>
-<li>For Definition:, copy below JSON data.</li>
-
-<li><p>Click Done</p>
-<pre><code>{
-&#34;id&#34;: 1,
-&#34;name&#34;: &#34;Kamarhati&#34;,
-&#34;type&#34;: &#34;Regional Branch&#34;,
-&#34;status&#34;: &#34;1&#34;,
-&#34;location&#34;: {
-&#34;lat&#34;: &#34;-28.32555&#34;,
-&#34;lng&#34;: &#34;-5.91531&#34;
-}
-}</code></pre></li>
-</ul>
-
-<p><br> <br> <img src="../images/08-data-type.png "Data Type" width="900" /><br><br></p></li>
-
-<li><p>Click on LocationDB from the catalog and then select Invoke SQL</p>
-
-<p><br><img src="../images/09-invoke-sql.png "Invoke SQL" width="900" /><br><br></p></li>
-
-<li><p>Enter the SQL statement and click <strong>Done</strong>.</p>
-<pre><code>INSERT INTO locations (id,name,lat,lng,location_type,status) VALUES (:#id,:#name,:#lat,:#lng,:#location_type,:#status )</code></pre>
-<p><br><img src="../images/10-invoke-sql-2.png "Invoke SQL 2" width="900" /><br><br></p></li>
-
-<li><p>Click on Add step and select Data mapper</p>
-
-<p><br><img src="../images/11-data-mapper.png "Data Mapper" width="900" /><br><br></p></li>
-
-<li><p>Drag and drop the matching <strong>Source</strong> Data types to all their corresponding <strong>Targets</strong> as per the following screenshot. When finished, click <strong>Done</strong>.</p>
-
-<p><br><img src="../images/12-configure-mapper.png "Configure Mapper" width="900" /><br><br></p></li>
-
-<li><p>Click <strong>Publish</strong> on the next screen</p></li>
-
-<li><p>Add Integration Name: addLocation.</p></li>
-
-<li><p>Again Click <strong>Publish</strong>.</p>
-
-<p><br><img src="../images/13-publish-integration.png "Publish Integration" width="900" /><br><br></p></li>
+<li>
+<p>Click on <strong>Integrations &gt; Create Integration</strong></p>
+<p><br>&lt;img src=&quot;../images/04-create-integration.png &ldquo;Create Integration&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Choose <strong>Webhook</strong></p>
+<p><br>&lt;img src=&quot;../images/05-choose-weebhook.png &ldquo;Choose webhook&quot;Integration&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on Incoming webhook</p>
+<p><br>&lt;img src=&quot;../images/06-incoming-webhook.png &ldquo;Add incoming webhook&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>It navigates to the Webhook Token screen. Click <strong>Next</strong></p>
+<p><br>&lt;img src=&quot;../images/07-webhook-configuration.png &ldquo;Webhook Configuration&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Define the Output Data Type.</p>
+</li>
 </ol>
-
-<p><em>Congratulations</em>. You successfully published the integration. (Wait for few minutes to for the integration to be built and published)</p>
-
-<h3 id="step-3-create-a-post-request">Step 3: Create a POST request</h3>
-
-<p>We will use an online cURL tool to create the 101st record field in database.  If you'd prefer to use the Terminal in your Che instance, go ahead and skip the online cURL instructions and just use the cURL command in your Che Terminal.</p>
-
+<ul>
+<li>
+<p>Select type from the dropdown as JSON instance.</p>
+</li>
+<li>
+<p>Enter Data type Name: Custom</p>
+</li>
+<li>
+<p>For Definition:, copy below JSON data.</p>
+</li>
+<li>
+<p>Click Done</p>
+<pre tabindex="0"><code>{
+  &#34;id&#34;: 1,
+  &#34;name&#34;: &#34;Kamarhati&#34;,
+  &#34;type&#34;: &#34;Regional Branch&#34;,
+  &#34;status&#34;: &#34;1&#34;,
+  &#34;location&#34;: {
+    &#34;lat&#34;: &#34;-28.32555&#34;,
+    &#34;lng&#34;: &#34;-5.91531&#34;
+  }
+}
+</code></pre><p><br> <br> &lt;img src=&quot;../images/08-data-type.png &ldquo;Data Type&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+</ul>
 <ol>
-<li><p>Copy the External URL per the below screenshot</p>
-
-<p><br><img src="../images/14-copy-URL.png "Copy URL" width="900" /><br><br></p></li>
-
-<li><p>Open a browser window and navigate to: <a href="https://onlinecurl.com/">https://onlinecurl.com/</a></p></li>
-
-<li><p>Below are the values for the request.</p>
-
+<li>
+<p>Click on LocationDB from the catalog and then select Invoke SQL</p>
+<p><br>&lt;img src=&quot;../images/09-invoke-sql.png &ldquo;Invoke SQL&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Enter the SQL statement and click <strong>Done</strong>.</p>
+<pre tabindex="0"><code></code></pre></li>
+</ol>
+<p>INSERT INTO locations (id,name,lat,lng,location_type,status) VALUES (:#id,:#name,:#lat,:#lng,:#location_type,:#status )
+```</p>
+<pre><code>&lt;br&gt;&lt;img src=&quot;../images/10-invoke-sql-2.png &quot;Invoke SQL 2&quot; width=&quot;900&quot; /&gt;&lt;br&gt;&lt;br&gt;
+</code></pre>
+<ol>
+<li>
+<p>Click on Add step and select Data mapper</p>
+<p><br>&lt;img src=&quot;../images/11-data-mapper.png &ldquo;Data Mapper&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Drag and drop the matching <strong>Source</strong> Data types to all their corresponding <strong>Targets</strong> as per the following screenshot. When finished, click <strong>Done</strong>.</p>
+<p><br>&lt;img src=&quot;../images/12-configure-mapper.png &ldquo;Configure Mapper&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click <strong>Publish</strong> on the next screen</p>
+</li>
+<li>
+<p>Add Integration Name: addLocation.</p>
+</li>
+<li>
+<p>Again Click <strong>Publish</strong>.</p>
+<p><br>&lt;img src=&quot;../images/13-publish-integration.png &ldquo;Publish Integration&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+</ol>
+<p><em>Congratulations</em>. You successfully published the integration. (Wait for few minutes to for the integration to be built and published)</p>
+<h3 id="step-3-create-a-post-request">Step 3: Create a POST request</h3>
+<p>We will use an online cURL tool to create the 101st record field in database.  If you&rsquo;d prefer to use the Terminal in your Che instance, go ahead and skip the online cURL instructions and just use the cURL command in your Che Terminal.</p>
+<ol>
+<li>
+<p>Copy the External URL per the below screenshot</p>
+<p><br>&lt;img src=&quot;../images/14-copy-URL.png &ldquo;Copy URL&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Open a browser window and navigate to: <a href="https://onlinecurl.com/">https://onlinecurl.com/</a></p>
+</li>
+<li>
+<p>Below are the values for the request.</p>
+</li>
+</ol>
 <ul>
-<li>Past the URL you just copied for the curl command</li>
-<li>Click &quot;+ ADD Option&quot; 3 times
-
+<li>
+<p>Past the URL you just copied for the curl command</p>
+</li>
+<li>
+<p>Click &ldquo;+ ADD Option&rdquo; 3 times</p>
 <ul>
-<li>for --request (x) enter:
-
+<li>for &ndash;request (x) enter:
 <ul>
 <li>POST</li>
-</ul></li>
-<li>for --data (-d) enter:
-
+</ul>
+</li>
+<li>for &ndash;data (-d) enter:
 <ul>
-<li>{&quot;id&quot;: 101, &quot;name&quot;: &quot;Kamarhati&quot;, &quot;type&quot;: &quot;Regional Branch&quot;, &quot;status&quot;: &quot;1&quot;, &quot;location&quot;: { &quot;lat&quot;: &quot;-28.32555&quot;, &quot;lng&quot;: &quot;-5.91531&quot; }}</li>
-</ul></li>
-<li>for --header (-H)
-
+<li>{&ldquo;id&rdquo;: 101, &ldquo;name&rdquo;: &ldquo;Kamarhati&rdquo;, &ldquo;type&rdquo;: &ldquo;Regional Branch&rdquo;, &ldquo;status&rdquo;: &ldquo;1&rdquo;, &ldquo;location&rdquo;: { &ldquo;lat&rdquo;: &ldquo;-28.32555&rdquo;, &ldquo;lng&rdquo;: &ldquo;-5.91531&rdquo; }}</li>
+</ul>
+</li>
+<li>for &ndash;header (-H)
 <ul>
 <li>Content-Type: application/json</li>
-</ul></li>
-</ul></li>
-<li>Note: id:101 in the payload as we are creating 101th record in the database.</li>
-<li>Click START YOUR CURL
-
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Note: id:101 in the payload as we are creating 101th record in the database.</p>
+</li>
+<li>
+<p>Click START YOUR CURL</p>
 <ul>
 <li>URL: <a href="https://i-addlocation-fuse-18308937-d7b6-11e8-96c6-0a580a810006.apps.ocp-ai.redhatgov.io/webhook/4dTcVchE8evWz3dVvtHFK3wvfFbFzpVLPEMq1TkcF0MGIbJmu4">https://i-addlocation-fuse-18308937-d7b6-11e8-96c6-0a580a810006.apps.ocp-ai.redhatgov.io/webhook/4dTcVchE8evWz3dVvtHFK3wvfFbFzpVLPEMq1TkcF0MGIbJmu4</a></li>
-<li>--header (-H):  Content-Type: application/json</li>
-<li>--data (-d): {&quot;id&quot;: 101, &quot;name&quot;: &quot;Kamarhati&quot;, &quot;type&quot;: &quot;Regional Branch&quot;, &quot;status&quot;: &quot;1&quot;, &quot;location&quot;: { &quot;lat&quot;: &quot;-28.32555&quot;, &quot;lng&quot;: &quot;-5.91531&quot; }}</li>
-<li>--request (-X): POST</li>
-</ul></li>
+<li>&ndash;header (-H):  Content-Type: application/json</li>
+<li>&ndash;data (-d): {&ldquo;id&rdquo;: 101, &ldquo;name&rdquo;: &ldquo;Kamarhati&rdquo;, &ldquo;type&rdquo;: &ldquo;Regional Branch&rdquo;, &ldquo;status&rdquo;: &ldquo;1&rdquo;, &ldquo;location&rdquo;: { &ldquo;lat&rdquo;: &ldquo;-28.32555&rdquo;, &ldquo;lng&rdquo;: &ldquo;-5.91531&rdquo; }}</li>
+<li>&ndash;request (-X): POST</li>
 </ul>
-
-<p><br><img src="../images/15-online-curl.png "Online URL" width="900" /><br><br></p></li>
-
-<li><p>The page will load the 204 response information from the service which means the request was successfully fulfilled.</p>
-
-<ul>
-<li>If you get an SSL error, please see the next step.</li>
+<p><br>&lt;img src=&quot;../images/15-online-curl.png &ldquo;Online URL&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
 </ul>
-
-<p><br><img src="../images/16-response-header.png "Response Header" width="900" /><br><br></p></li>
-
-<li><p>If you are using an Environment with self signed certificates and get an SSL error, you can also use the curl utility in the terminal of your Eclipse Che environment instead of online curl.</p>
-
+<ol>
+<li>The page will load the 204 response information from the service which means the request was successfully fulfilled.</li>
+</ol>
 <ul>
-<li><p>Please make sure to use the your URL you copied and pasted</p>
-<pre><code>curl -k \
+<li>
+<p>If you get an SSL error, please see the next step.</p>
+<p><br>&lt;img src=&quot;../images/16-response-header.png &ldquo;Response Header&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+</ul>
+<ol>
+<li>If you are using an Environment with self signed certificates and get an SSL error, you can also use the curl utility in the terminal of your Eclipse Che environment instead of online curl.</li>
+</ol>
+<ul>
+<li>
+<p>Please make sure to use the your URL you copied and pasted</p>
+<pre tabindex="0"><code>curl -k \
 --header &#34;Content-Type: application/json&#34; \
 --request POST \
 --data &#39;{&#34;id&#34;: 101, &#34;name&#34;: &#34;Kamarhati&#34;, &#34;type&#34;: &#34;Regional Branch&#34;, &#34;status&#34;: &#34;1&#34;, &#34;location&#34;: { &#34;lat&#34;: &#34;-28.32555&#34;, &#34;lng&#34;: &#34;-5.91531&#34; }}&#39; \
-https://i-addlocation-tools1.apps.ocp-ai.redhatgov.io/webhook/KcZ3E86SUJTqIUsA8iB7Yb5Sa1KLp9cchnRO5twYnr6UTruYd1</code></pre></li>
-</ul></li>
-
-<li><p>Click on <strong>Activity &gt; Refresh</strong> and verify if the newly record is created.</p>
-
-<p><br><img src="../images/17-activity-refresh.png "Activity Refresh" width="900" /><br><br></p></li>
-
-<li><p><em>(Optional)</em> Visit the application URL in the browser from the Location Service created in the previous lab and verify if the record can be fetched.</p></li>
+https://i-addlocation-tools1.apps.ocp-ai.redhatgov.io/webhook/KcZ3E86SUJTqIUsA8iB7Yb5Sa1KLp9cchnRO5twYnr6UTruYd1
+</code></pre></li>
+</ul>
+<ol>
+<li>
+<p>Click on <strong>Activity &gt; Refresh</strong> and verify if the newly record is created.</p>
+<p><br>&lt;img src=&quot;../images/17-activity-refresh.png &ldquo;Activity Refresh&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p><em>(Optional)</em> Visit the application URL in the browser from the Location Service created in the previous lab and verify if the record can be fetched.</p>
+</li>
 </ol>
-
 <p><strong>RESPONSE</strong></p>
-<pre><code>    {
-      &#34;id&#34; : 101,
-      &#34;name&#34; : &#34;Kamarhati&#34;,
-      &#34;type&#34; : &#34;Regional Branch&#34;,
-      &#34;status&#34; : &#34;1&#34;,
-      &#34;location&#34; : {
-        &#34;lat&#34; : &#34;-28.32555&#34;,
-        &#34;lng&#34; : &#34;-5.91531&#34;
-      }
-    }</code></pre>
-<h2 id="summary">Summary</h2>
-
+<pre tabindex="0"><code>  {
+    &#34;id&#34; : 101,
+    &#34;name&#34; : &#34;Kamarhati&#34;,
+    &#34;type&#34; : &#34;Regional Branch&#34;,
+    &#34;status&#34; : &#34;1&#34;,
+    &#34;location&#34; : {
+      &#34;lat&#34; : &#34;-28.32555&#34;,
+      &#34;lng&#34; : &#34;-5.91531&#34;
+    }
+  }
+</code></pre><h2 id="summary">Summary</h2>
 <p>In this lab you discovered how to create an adhoc API service using Fuse Online.</p>
-
 <h2 id="notes-and-further-reading">Notes and Further Reading</h2>
-
 <ul>
 <li>Fuse Online
-
 <ul>
 <li><a href="https://www.redhat.com/en/technologies/jboss-middleware/fuse-online">Webpage</a></li>
 <li><a href="https://access.redhat.com/documentation/en-us/red_hat_fuse/7.1/html-single/fuse_online_sample_integration_tutorials/index">Sample tutorials</a></li>
 <li><a href="https://developers.redhat.com/blog/2017/11/02/work-done-less-code-fuse-online-tech-preview-today/">Blog</a></li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
 

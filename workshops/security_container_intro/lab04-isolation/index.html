@@ -307,23 +307,9 @@
   </ul>
 </nav>
 
-    <div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_capabilities">Capabilities</a>
-<ul class="sectlevel2">
-<li><a href="#_exploring_the_capabilities_of_containers">Exploring the capabilities of containers.</a></li>
-<li><a href="#_examining_container_processes">Examining container processes</a></li>
-<li><a href="#_capabilities_challenge_1">Capabilities Challenge #1</a></li>
-<li><a href="#_capabilities_challenge_2">Capabilities Challenge #2</a></li>
-<li><a href="#_capabilities_challenge_3">Capabilities Challenge #3</a></li>
-<li><a href="#_example_solutions_to_challenges">Example Solutions to Challenges</a></li>
-</ul>
-</li>
-</ul>
-</div>
+    
 <div class="paragraph">
-<p>Containers provide a certain degree of process isolation via kernel namespaces. In this module, we’ll examine the capabilities of a process running in a containerized namespace. Specifically we&#8217;ll look at how Linux capabilities can be used to grant a particular or subset of root privileges to a process running in a container.</p>
+<p>Containers provide a certain degree of process isolation via kernel namespaces. In this module, we’ll examine the capabilities of a process running in a containerized namespace. Specifically we’ll look at how Linux capabilities can be used to grant a particular or subset of root privileges to a process running in a container.</p>
 </div>
 <div class="paragraph">
 <p>It would be worth taking a few minutes to read this <a href="http://rhelblog.redhat.com/2016/10/17/secure-your-containers-with-this-one-weird-trick">blog post</a> before beginning this lab.</p>
@@ -404,7 +390,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Notice that all 38 capability bits are set indicating this process has a full set of capabilities. In a later exercise, you&#8217;ll discover that a container
+<p>Notice that all 38 capability bits are set indicating this process has a full set of capabilities. In a later exercise, you’ll discover that a container
 running as <strong>root</strong> has a filtered set of capabilities by default but this can be changed at run time.</p>
 </div>
 <div class="paragraph">
@@ -421,7 +407,7 @@ running as <strong>root</strong> has a filtered set of capabilities by default b
 </div>
 </div>
 <div class="paragraph">
-<p><strong>NOTE: for those interested, capability '38' allows the following:</strong></p>
+<p><strong>NOTE: for those interested, capability &#39;38&#39; allows the following:</strong></p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -433,7 +419,7 @@ running as <strong>root</strong> has a filtered set of capabilities by default b
 </div>
 </div>
 <div class="paragraph">
-<p><strong>NOTE: for those interested, capability '39' allows the following:</strong></p>
+<p><strong>NOTE: for those interested, capability &#39;39&#39; allows the following:</strong></p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -453,7 +439,7 @@ running as <strong>root</strong> has a filtered set of capabilities by default b
 </div>
 </div>
 <div class="paragraph">
-<p>In comparison, '200' indicates the immutable capability (CAP_LINUX_IMMUTABLE):</p>
+<p>In comparison, &#39;200&#39; indicates the immutable capability (CAP_LINUX_IMMUTABLE):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -484,7 +470,7 @@ running as <strong>root</strong> has a filtered set of capabilities by default b
 </div>
 </div>
 <div class="paragraph">
-<p>Next run a rootless container as <code>--user=0</code> and look at it’s capabilities. Note that it&#8217;s capabilities are filtered from that of a root process on the host.</p>
+<p>Next run a rootless container as <code>--user=0</code> and look at it’s capabilities. Note that it’s capabilities are filtered from that of a root process on the host.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -521,7 +507,7 @@ running as <strong>root</strong> has a filtered set of capabilities by default b
 </div>
 </div>
 <div class="paragraph">
-<p>Use <code>podman top</code> to examine the container&#8217;s capabilities.</p>
+<p>Use <code>podman top</code> to examine the container’s capabilities.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -568,7 +554,7 @@ AUDIT_WRITE,CHOWN,DAC_OVERRIDE,FOWNER,FSETID,KILL,MKNOD,NET_BIND_SERVICE,NET_RAW
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo yum install bc -y
-echo 'obase=16;ibase=16;9+1' | bc</code></pre>
+echo &#39;obase=16;ibase=16;9+1&#39; | bc</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -589,7 +575,7 @@ echo 'obase=16;ibase=16;9+1' | bc</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -ti --user 0 --name temp registry.access.redhat.com/ubi8/ubi bash
 savethedate=$(date)
-date -s "$savethedate"</code></pre>
+date -s &#34;$savethedate&#34;</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -607,7 +593,7 @@ Mon Apr  8 21:45:24 UTC 2019</pre>
 <div class="sect2">
 <h3 id="_capabilities_challenge_3">Capabilities Challenge #3</h3>
 <div class="paragraph">
-<p>You have been given a container image to deploy (<code>quay.io/bkozdemb/hello</code>). The application needs to use the <code>chattr</code> utility but must not be allowed to <code>ping</code> any hosts. Use what you&#8217;ve learned about capabilities to properly deploy this application using <code>podman</code>.</p>
+<p>You have been given a container image to deploy (<code>quay.io/bkozdemb/hello</code>). The application needs to use the <code>chattr</code> utility but must not be allowed to <code>ping</code> any hosts. Use what you’ve learned about capabilities to properly deploy this application using <code>podman</code>.</p>
 </div>
 <div class="paragraph">
 <p>For example, <code>ping</code> succeeds but <code>chattr</code> fails. We want the opposite.</p>
@@ -664,7 +650,7 @@ chattr +i file</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo 'obase=16;ibase=16;FFFFFFFFFF-A80427FB' | bc</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo &#39;obase=16;ibase=16;FFFFFFFFFF-A80427FB&#39; | bc</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -692,7 +678,7 @@ chattr +i file</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run --rm -ti --user 0 --name temp --cap-add=sys_time registry.access.redhat.com/ubi8/ubi bash
 savethedate=$(date)
-date -s "$savethedate"</code></pre>
+date -s &#34;$savethedate&#34;</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -729,7 +715,7 @@ rm -rf file</code></pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>rm: cannot remove 'file': Operation not permitted</pre>
+<pre>rm: cannot remove &#39;file&#39;: Operation not permitted</pre>
 </div>
 </div>
 <div class="listingblock">

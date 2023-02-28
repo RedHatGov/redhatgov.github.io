@@ -307,14 +307,9 @@
   </ul>
 </nav>
 
-    
-
-<h2 id="check-out-the-build-details">Check out the build details</h2>
-
+    <h2 id="check-out-the-build-details">Check out the build details</h2>
 <p>We can see the details of what the S2I builder did.  This can be helpful to diagnose issues if builds are failing.</p>
-
-<p><i class="fa fa-magic fa-2x"></i> TIP: For a node.js app, running &quot;npm shrinkwrap&quot; is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I</p>
-
+<p><i class="fa fa-magic fa-2x"></i> TIP: For a node.js app, running &ldquo;npm shrinkwrap&rdquo; is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I</p>
 <div class="panel-group">
   
 
@@ -322,31 +317,29 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse4fec79407020893ddea63b5c09b452e9" class="collapsed">
+      <a data-toggle="collapse" href="#collapseef4738849cb0c34350961c8902f3eb1e" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse4fec79407020893ddea63b5c09b452e9" class="panel-collapse collapse ">
+  <div id="collapseef4738849cb0c34350961c8902f3eb1e" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get builds</code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get builds
+</span></span></code></pre></div><blockquote>
 Note the name of your build from the above command output and use it to see the logs with:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc logs builds/<span style="color:#f92672">[</span>BUILD_NAME<span style="color:#f92672">]</span></code></pre></div>
-<p>The console will print out the full log for your build.  Note, you could pipe this to more or less for easier viewing in the CLI.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc logs builds/<span style="color:#f92672">[</span>BUILD_NAME<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>The console will print out the full log for your build.  Note, you could pipe this to more or less for easier viewing in the CLI.</p>
 
     </div>
   </div>
@@ -357,27 +350,24 @@ Note the name of your build from the above command output and use it to see the 
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse9e26f0d8e74b26edf2f1403a9fb22b39" class="collapsed">
+      <a data-toggle="collapse" href="#collapse5f76a959cdec8b21f99703cba994eb90" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse9e26f0d8e74b26edf2f1403a9fb22b39" class="panel-collapse collapse ">
+  <div id="collapse5f76a959cdec8b21f99703cba994eb90" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="web-console-access">Web Console access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
 </pre>
-
-<p><blockquote>
-Click on &quot;Topology&quot;, the &quot;node&quot;/&quot;dc-metro-map&quot; icon, and then on &quot;View logs&quot;
+<blockquote>
+Click on "Topology", the "node"/"dc-metro-map" icon, and then on "View logs"
 </blockquote>
-<img src="../images/ocp-lab-s2i-topology.png" width="800"><br/></p>
-
+<img src="../images/ocp-lab-s2i-topology.png" width="800"><br/>
 <p>You should see a log output similar to the one below:<br>
 <img src="../images/ocp-lab-s2i-logs.png" width="700"><br/></p>
 
@@ -388,11 +378,8 @@ Click on &quot;Topology&quot;, the &quot;node&quot;/&quot;dc-metro-map&quot; ico
 
 </div>
 
-
 <h2 id="see-the-app-in-action">See the app in action</h2>
-
-<p>Let's see this app in action!</p>
-
+<p>Let&rsquo;s see this app in action!</p>
 <div class="panel-group">
   
 
@@ -400,27 +387,25 @@ Click on &quot;Topology&quot;, the &quot;node&quot;/&quot;dc-metro-map&quot; ico
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsed46b1dc527d4d8be5022049665a4bc34" class="collapsed">
+      <a data-toggle="collapse" href="#collapse675287386c21cbb3052e784ec6f3181c" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsed46b1dc527d4d8be5022049665a4bc34" class="panel-collapse collapse ">
+  <div id="collapse675287386c21cbb3052e784ec6f3181c" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following (ensure you are in the right project):
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get routes</code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get routes
+</span></span></code></pre></div><blockquote>
 Copy the HOST/PORT and paste into your favorite web browser:
 </blockquote>
 
@@ -434,31 +419,28 @@ Copy the HOST/PORT and paste into your favorite web browser:
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse85969d6e536b29ac9c27553bd2981307" class="collapsed">
+      <a data-toggle="collapse" href="#collapse8012a54bc3871b1ad927be5c02fb9606" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse85969d6e536b29ac9c27553bd2981307" class="panel-collapse collapse ">
+  <div id="collapse8012a54bc3871b1ad927be5c02fb9606" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="web-console-access">Web Console access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
 </pre>
-
-<p><blockquote>
-Click on &quot;Topology&quot;
+<blockquote>
+Click on "Topology"
 </blockquote>
-<img src="../images/ocp-TopologyButton.png" width="150"><br/></p>
-
-<p><blockquote>
-Click the arrow, at the top right corner of the &quot;dc-metro-map&quot; icon, to launch a new tab/window, with the running app
+<img src="../images/ocp-TopologyButton.png" width="150"><br/>
+<blockquote>
+Click the arrow, at the top right corner of the "dc-metro-map" icon, to launch a new tab/window, with the running app
 </blockquote>
-<img src="../images/ocp-dc-metro-map-icon.png" width="150"><br/></p>
+<img src="../images/ocp-dc-metro-map-icon.png" width="150"><br/>
 
     </div>
   </div>
@@ -467,17 +449,11 @@ Click the arrow, at the top right corner of the &quot;dc-metro-map&quot; icon, t
 
 </div>
 
-
 <p>The app should look like this in your web browser:</p>
-
 <p><img src="../images/dc-metro-map-app.png" width="900"><br/></p>
-
 <p>Clicking the checkboxes will toggle on/off the individual metro stations on each colored line.  A numbered icon indicates there is more than one metro station in that area and they have been consolidated - click the number or zoom in to see more.</p>
-
 <h1 id="summary">Summary</h1>
-
-<p>In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  In the next lab we will look at some details of this app's deployment and make some changes to see how OpenShift can help to automate our development processes. More information about creating new applications can be found <a href="https://docs.openshift.com/container-platform/3.4/dev_guide/application_lifecycle/new_app.html">here</a>.</p>
-
+<p>In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  In the next lab we will look at some details of this app&rsquo;s deployment and make some changes to see how OpenShift can help to automate our development processes. More information about creating new applications can be found <a href="https://docs.openshift.com/container-platform/3.4/dev_guide/application_lifecycle/new_app.html">here</a>.</p>
 <style>
 
  

@@ -307,67 +307,57 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="create-a-new-jdv-project">Create a new JDV project</h1>
-
+    <h1 id="create-a-new-jdv-project">Create a new JDV project</h1>
 <ul>
-<li><p>In JBDS, do window <i class="fa fa-arrow-right"></i> perspective <i class="fa fa-arrow-right"></i> open perspective <i class="fa fa-arrow-right"></i> other <i class="fa fa-arrow-right"></i> teiid designer</p></li>
-
-<li><p>file <i class="fa fa-arrow-right"></i> new <i class="fa fa-arrow-right"></i> teiid model project</p></li>
-
-<li><p>Name the project <strong>jdv-demo</strong> and its ok to leave the default location.</p></li>
-
-<li><p>Do change the default folders to <strong>sources, views and federated</strong></p></li>
+<li>
+<p>In JBDS, do window <i class="fa fa-arrow-right"></i> perspective <i class="fa fa-arrow-right"></i> open perspective <i class="fa fa-arrow-right"></i> other <i class="fa fa-arrow-right"></i> teiid designer</p>
+</li>
+<li>
+<p>file <i class="fa fa-arrow-right"></i> new <i class="fa fa-arrow-right"></i> teiid model project</p>
+</li>
+<li>
+<p>Name the project <strong>jdv-demo</strong> and its ok to leave the default location.</p>
+</li>
+<li>
+<p>Do change the default folders to <strong>sources, views and federated</strong></p>
+</li>
 </ul>
-
-<p><img src="../images/4-folders.png"></p>
-
+<img src="../images/4-folders.png">
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-[teiid](http://teiid.jboss.org/) is the the upstream community project for JBoss Data Virtualization
-
+<p><span class="pficon pficon-info"></span></p>
+<p><a href="http://teiid.jboss.org/">teiid</a> is the the upstream community project for JBoss Data Virtualization</p>
 </div>
-
 <h1 id="create-a-vdb">Create a VDB</h1>
-
 <ul>
-<li><p>file <i class="fa fa-arrow-right"></i> New <i class="fa fa-arrow-right"></i> Teiid VDB</p></li>
-
-<li><p>name the vdb <strong>demo-jdv</strong></p></li>
+<li>
+<p>file <i class="fa fa-arrow-right"></i> New <i class="fa fa-arrow-right"></i> Teiid VDB</p>
+</li>
+<li>
+<p>name the vdb <strong>demo-jdv</strong></p>
+</li>
 </ul>
-
 <h1 id="deploy-a-vdb">Deploy a VDB</h1>
-
 <ul>
-<li><p>Double click the new vdb and then click the <strong>Deploy</strong></p></li>
-
-<li><p>You will be prompted to create a datasource, click <strong>ok</strong></p></li>
+<li>
+<p>Double click the new vdb and then click the <strong>Deploy</strong></p>
+</li>
+<li>
+<p>You will be prompted to create a datasource, click <strong>ok</strong></p>
+</li>
 </ul>
-
-<p><img src="../images/4-deploy-vdb.png"></p>
-
+<img src="../images/4-deploy-vdb.png">
 <h1 id="test-vdb">Test VDB</h1>
-
 <ul>
 <li>Open Postman and run the test called <strong>VDB Check</strong></li>
 </ul>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-The **test** button in the VDB will initiate a JDBC connection and create a SQL query environment for the VDB.  We want to verify REST connectivity.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>The <strong>test</strong> button in the VDB will initiate a JDBC connection and create a SQL query environment for the VDB.  We want to verify REST connectivity.</p>
 </div>
-
 <ul>
 <li>Verify that you get an xml response like below</li>
 </ul>
-
-<p><img src="../images/4-postman.png"></p>
+<img src="../images/4-postman.png">
 
 
     

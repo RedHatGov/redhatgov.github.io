@@ -307,29 +307,20 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="circuit-breaking-your-services">Circuit Breaking Your Services</h1>
-
+    <h1 id="circuit-breaking-your-services">Circuit Breaking Your Services</h1>
 <p>Fault Injection lets you see how the service mesh behaves when there are failures in network calls to a specific service.  But how do you protect a service if it has overloaded or failing instances serving traffic?  Ideally, you would like to identify an instance that is failing and prevent clients from connecting to it once it meets a certain threshold.</p>
-
 <p>In OpenShift, an instance is equivalent to a Kubernetes pod running the microservice.</p>
-
-<p>This concept is called Circuit Breaking - you set threshold limits for instances that run a microservice and if the threshold limits are reached, the circuit breaker &quot;trips&quot; and Istio prevents any further connections to that instance.  Circuit breaking is another way to build resilient services in your service mesh.</p>
-
+<p>This concept is called Circuit Breaking - you set threshold limits for instances that run a microservice and if the threshold limits are reached, the circuit breaker &ldquo;trips&rdquo; and Istio prevents any further connections to that instance.  Circuit breaking is another way to build resilient services in your service mesh.</p>
 <p>In Istio, you can define circuit breaking limits using destination rules.</p>
-
 <h2 id="define-threshold-limits">Define Threshold Limits</h2>
-
 <p>A circuit breaking rule has already been written for you for the user profile service.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 View the destination rule in your favorite editor or via bash:
 </blockquote>
-<pre><code>cat ./istio-configuration/destinationrule-circuitbreaking.yaml</code></pre>
-<p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>cat ./istio-configuration/destinationrule-circuitbreaking.yaml
+</code></pre><p>Output (snippet):</p>
+<pre tabindex="0"><code>...
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL
@@ -342,80 +333,62 @@ View the destination rule in your favorite editor or via bash:
       interval: 1s
       baseEjectionTime: 10m
       maxEjectionPercent: 100
-...</code></pre>
-<p>The circuit breaking rule is only applied to v3 of the user profile service.  The connection pool settings restrict the maximum number of requests to each instance to 1 (this makes it easier for you to trip the circuit for demo purposes).  The outlier detection settings define the thresholds - an instance that fails once with a 50x error is ejected from the mesh for 10 minutes.  You can read about the various settings in the Istio <a href="https://istio.io/docs/reference/config/networking/destination-rule/#OutlierDetection">docs</a>.</p>
-
+...
+</code></pre><p>The circuit breaking rule is only applied to v3 of the user profile service.  The connection pool settings restrict the maximum number of requests to each instance to 1 (this makes it easier for you to trip the circuit for demo purposes).  The outlier detection settings define the thresholds - an instance that fails once with a 50x error is ejected from the mesh for 10 minutes.  You can read about the various settings in the Istio <a href="https://istio.io/docs/reference/config/networking/destination-rule/#OutlierDetection">docs</a>.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Deploy this circuit breaking rule:
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/destinationrule-circuitbreaking.yaml</code></pre>
-<p><br></p>
-
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/destinationrule-circuitbreaking.yaml
+</code></pre><br>
 <h2 id="trip-the-circuit-breaker">Trip the Circuit Breaker</h2>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 First, route traffic evenly between v1 and v3 of the user profile service.
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml</code></pre>
-<blockquote>
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Send load to the user profile service:
 </blockquote>
-<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done</code></pre>
-<blockquote>
+<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 In another tab in terminal, kill the server running version 3 of the user profile service:
 </blockquote>
-<pre><code>USERPROFILE_POD=$(oc get pod -l deploymentconfig=userprofile,version=3.0 -o jsonpath=&#39;{.items[0].metadata.name}&#39;)
-oc exec $USERPROFILE_POD -- kill 1</code></pre>
-<p><br></p>
-
-<p>Inspect the change in Kiali.<br />
+<pre tabindex="0"><code>USERPROFILE_POD=$(oc get pod -l deploymentconfig=userprofile,version=3.0 -o jsonpath=&#39;{.items[0].metadata.name}&#39;)
+oc exec $USERPROFILE_POD -- kill 1
+</code></pre><br>
+<p>Inspect the change in Kiali.</p>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Navigate to 'Graph' in the left navigation bar.
-</blockquote></p>
-
+</blockquote>
 <p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
-
 <p><code>echo $KIALI_CONSOLE</code></p>
-
 <blockquote>
 <i class="fa fa-desktop"></i>
 Switch to the 'Versioned app graph' view and change to 'Last 1m'.  Change the 'No edge labels' dropdown to 'Requests percentage'.  
 </blockquote>
-
 <p><img src="../images/kiali-circuitbreaking.png" width="1024"><br/>
 <em>Traces to User Profile Service with Fault Delays</em></p>
-
 <p>You should gradually see the percentage of traffic directed away from v3 to v1.  The lightning icon indicates a circuit breaking rule, and the circuit breaker was tripped so traffic was routed to v1.</p>
-
 <p>OpenShift will attempt to revive the server once the health check fails.  If you see traffic rebalancing itself, run the command to kill the server again.</p>
-
-<p><br></p>
-
+<br>
 <h2 id="clean-up">Clean up</h2>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 Revert the changes you made before ending this lab.
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/destinationrules-all.yaml</code></pre>
-<p><br></p>
-
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/destinationrules-all.yaml
+</code></pre><br>
 <h2 id="summary">Summary</h2>
-
 <p>Congratulations, you configured circuit breaking in Istio!</p>
-
 <p>A few key highlights are:</p>
-
 <ul>
 <li>Circuit breaking can build resiliency in the service mesh by tripping connections to an unhealthy service instance</li>
 <li>The threshold limits for tripping a circuit can be set in the Destination Rule</li>
 </ul>
-
 <style>
 
  

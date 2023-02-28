@@ -316,10 +316,10 @@
 <div class="sect2">
 <h3 id="_step_1_examine_a_context">Step 1: Examine a context</h3>
 <div class="paragraph">
-<p>To get started, let&#8217;s check the context of a file in the <code>ec2-user</code> user&#8217;s home directory:</p>
+<p>To get started, let’s check the context of a file in the <code>ec2-user</code> user’s home directory:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -Z ~ec2-user/.vimrc</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls -Z ~ec2-user/.vimrc</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -339,11 +339,11 @@
 <div class="sect2">
 <h3 id="_step_2_domain_transitions">Step 2: Domain transitions</h3>
 <div class="paragraph">
-<p>To demonstrate the difference between confined and unconfined processes, let&#8217;s launch an application which doesn&#8217;t have a defined domain transition:</p>
+<p>To demonstrate the difference between confined and unconfined processes, let’s launch an application which doesn’t have a defined domain transition:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yes &gt;/dev/null &amp;
-ps -Z | grep yes</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yes &gt;/dev/null &amp;
+</span></span><span style="display:flex;"><span>ps -Z | grep yes</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -357,10 +357,10 @@ ps -Z | grep yes</code></pre></div>
 <p>On the other hand, if we launch the <code>passwd</code> utility, we will see a different story:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kill %1
-ps -Z | grep yes
-passwd ec2-user &gt;/dev/null &amp;
-ps -Z | grep passwd</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kill %1
+</span></span><span style="display:flex;"><span>ps -Z | grep yes
+</span></span><span style="display:flex;"><span>passwd ec2-user &gt;/dev/null &amp;
+</span></span><span style="display:flex;"><span>ps -Z | grep passwd</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -373,26 +373,26 @@ ps -Z | grep passwd</code></pre></div>
 <p>See that the third field is <code>passwd_t</code>, indicating that the <code>passwd</code> process has been confined by the <code>passwd_t</code> domain.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s kill that hanging <code>passwd</code> process, and move on:</p>
+<p>Let’s kill that hanging <code>passwd</code> process, and move on:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kill %1</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kill %1</span></span></code></pre></div>
 </div>
 <div class="paragraph">
-<p>This changing of the context, when an application in SELinux&#8217;s ruleset is launched, is called a <code>domain transition</code>.</p>
+<p>This changing of the context, when an application in SELinux’s ruleset is launched, is called a <code>domain transition</code>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_3_useful_utility_1_restorecon">Step 3: Useful utility #1: restorecon</h3>
 <div class="paragraph">
-<p>If I had to suggest to a new SELinux user the one thing that they should remember (no, it&#8217;s not <code>setenforce 0</code>!), it&#8217;d be <code>restorecon</code>.  Restorecon will reset the SELinux context to what is defined in the system&#8217;s context database.</p>
+<p>If I had to suggest to a new SELinux user the one thing that they should remember (no, it’s not <code>setenforce 0</code>!), it’d be <code>restorecon</code>.  Restorecon will reset the SELinux context to what is defined in the system’s context database.</p>
 </div>
 <div class="paragraph">
-<p>To try this out, let&#8217;s purposefully set the context incorrectly on our example SELinux AVC log:</p>
+<p>To try this out, let’s purposefully set the context incorrectly on our example SELinux AVC log:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">chcon -t httpd_sys_content_t ./testaudit
-ls -Z ./testaudit</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chcon -t httpd_sys_content_t ./testaudit
+</span></span><span style="display:flex;"><span>ls -Z ./testaudit</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -403,8 +403,8 @@ ls -Z ./testaudit</code></pre></div>
 <p>And we can change it back, magically, with restorecon.  Note that this would have fixed the problem reported in our test AVC, by setting the context to <code>httpd_sys_content_t</code>:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">restorecon -v ./testaudit
-ls -Z ./testaudit</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>restorecon -v ./testaudit
+</span></span><span style="display:flex;"><span>ls -Z ./testaudit</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">

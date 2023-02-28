@@ -273,82 +273,78 @@
 </div>
 
 <div class="container">
-  
-
-<h1 id="unit-10-token-management-system">Unit 10: Token Management System</h1>
-
+  <h1 id="unit-10-token-management-system">Unit 10: Token Management System</h1>
 <p>In this unit you will login to the TPS web interface, add a new user, and generate a virtual token.</p>
-
 <h2 id="tps-web-interface">TPS Web Interface</h2>
-
 <p>The admin certificate needs to be in your browser. This was completed during <a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_4.md">Unit 4</a>.</p>
-
 <ul>
-<li><p>Open the TPS webpage.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/tps/</code></p></li>
-
-<li><p>Click the <strong>Log In</strong> button.</p></li>
-
-<li><p>Go through the different tabs to become familiar with the interface. It will be mostly blank until we create users and tokens.</p></li>
+<li>
+<p>Open the TPS webpage.</p>
+<p><code>https://ca1.redhat.example.com:8443/tps/</code></p>
+</li>
+<li>
+<p>Click the <strong>Log In</strong> button.</p>
+</li>
+<li>
+<p>Go through the different tabs to become familiar with the interface. It will be mostly blank until we create users and tokens.</p>
+</li>
 </ul>
-
 <h2 id="add-new-user">Add new user</h2>
-
 <p>In this section you will use <strong>ldapmodify</strong> to create the user directly in the Directory Server. You can add a new user on the TPS subsytem page but the password will need to be manually changed in Directory Server. Apache Directory Studio can be used.</p>
-
 <ol>
-<li><p>Change to the pki-workshop/unit_labs/rhcs directory. This was cloned during the prerequisites.</p></li>
-
-<li><p>Modify the <strong>tps-user.ldif</strong> to replace <strong>brian</strong> with another user name.</p></li>
-
-<li><p>Run this command to add the user.</p>
-
-<p><code>ldapmodify -x -W -h ds1.redhat.example.com -p 389 -D &quot;cn=Directory Manager&quot; -c -f tps-user.ldif</code></p></li>
-
-<li><p>Verify the user was added.</p>
-
-<p><code>ldapsearch -W -h ds1.redhat.example.com -p 389 -D &quot;cn=Directory Manager&quot; -b &quot;ou=People,dc=tps,dc=redhat,dc=example,dc=com&quot;</code></p></li>
+<li>
+<p>Change to the pki-workshop/unit_labs/rhcs directory. This was cloned during the prerequisites.</p>
+</li>
+<li>
+<p>Modify the <strong>tps-user.ldif</strong> to replace <strong>brian</strong> with another user name.</p>
+</li>
+<li>
+<p>Run this command to add the user.</p>
+<p><code>ldapmodify -x -W -h ds1.redhat.example.com -p 389 -D &quot;cn=Directory Manager&quot; -c -f tps-user.ldif</code></p>
+</li>
+<li>
+<p>Verify the user was added.</p>
+<p><code>ldapsearch -W -h ds1.redhat.example.com -p 389 -D &quot;cn=Directory Manager&quot; -b &quot;ou=People,dc=tps,dc=redhat,dc=example,dc=com&quot;</code></p>
+</li>
 </ol>
-
 <h2 id="generate-virtual-token">Generate Virtual Token</h2>
-
 <ol>
-<li><p>Edit the <strong>phoneHome.xml</strong> file and change the Operation URL from https to http. Ensure the port listed is the unsecured port (by default 8080).</p>
-
-<p><code>vim /etc/pki/ca1/tps/phoneHome.xml</code></p></li>
-
-<li><p>Restart the CA (certificate authority) service.</p>
-
-<p><code>systemctl restart pki-tomcatd@ca1.service</code></p></li>
-
-<li><p>Change to the pki-workshop/unit_labs/rhcs directory. This was cloned during the prerequisites.</p></li>
-
-<li><p>Edit <strong>tps_format</strong> and <strong>tps_enroll</strong> to ensure the username and passwords match.</p>
-
+<li>
+<p>Edit the <strong>phoneHome.xml</strong> file and change the Operation URL from https to http. Ensure the port listed is the unsecured port (by default 8080).</p>
+<p><code>vim /etc/pki/ca1/tps/phoneHome.xml</code></p>
+</li>
+<li>
+<p>Restart the CA (certificate authority) service.</p>
+<p><code>systemctl restart pki-tomcatd@ca1.service</code></p>
+</li>
+<li>
+<p>Change to the pki-workshop/unit_labs/rhcs directory. This was cloned during the prerequisites.</p>
+</li>
+<li>
+<p>Edit <strong>tps_format</strong> and <strong>tps_enroll</strong> to ensure the username and passwords match.</p>
 <p><code>vim tps_format</code></p>
-
-<p><code>vim tps_enroll</code></p></li>
-
-<li><p>Format the virtual token.</p>
-
-<p><code>tpsclient &lt; tps_format</code></p></li>
-
-<li><p>Enroll the virtual token.</p>
-
-<p><code>tpsclient &lt; tps_enroll</code></p></li>
-
-<li><p>View the token.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; tps-token-find</code></p></li>
-
-<li><p>View the certificates.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; tps-cert-find</code></p></li>
-
-<li><p>The token and certs can be viewed on the TPS subsystem page.</p></li>
+<p><code>vim tps_enroll</code></p>
+</li>
+<li>
+<p>Format the virtual token.</p>
+<p><code>tpsclient &lt; tps_format</code></p>
+</li>
+<li>
+<p>Enroll the virtual token.</p>
+<p><code>tpsclient &lt; tps_enroll</code></p>
+</li>
+<li>
+<p>View the token.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; tps-token-find</code></p>
+</li>
+<li>
+<p>View the certificates.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; tps-cert-find</code></p>
+</li>
+<li>
+<p>The token and certs can be viewed on the TPS subsystem page.</p>
+</li>
 </ol>
-
 <p>The next lesson is <a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_11.md">Unit 11: Certificate profiles</a>.</p>
 
 </div>

@@ -307,50 +307,34 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="add-test-stage">Add Test Stage</h1>
-
+    <h1 id="add-test-stage">Add Test Stage</h1>
 <p>Add the configuration for the Test Stage below to your pipeline text file.</p>
-
-<p><img src="../images/pipeline_test.png" width="900" /></p>
-
+<img src="../images/pipeline_test.png" width="900" />
 <p>Maven will run the test stage in the life cycle that we skipped at the previous stages.</p>
-
 <p>Maven will place the test results in the surefire-reports folder.  The maven surefire-reports plugin allows for the generation of reports for your unit tests.</p>
-
-<p><br></p>
-
+<br>
 <h1 id="append-to-jenkins-pipeline-configuration">Append to Jenkins Pipeline Configuration</h1>
-
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-
-<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
-
+<img src="../images/pipeline_actions_edit.png" width="900" />
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre><code>    stage(&#39;Test&#39;) {
+<pre tabindex="0"><code>    stage(&#39;Test&#39;) {
       steps {
         sh &#34;${mvnCmd} test&#34;
         step([$class: &#39;JUnitResultArchiver&#39;, testResults: &#39;**/target/surefire-reports/TEST-*.xml&#39;])
       }
-    }</code></pre>
-<h1 id="test-your-pipeline">Test Your Pipeline</h1>
-
-<p>If you'd like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
-<pre><code>  }
-}</code></pre>
-<p>Save your Jenkinsfile.</p>
-
+    }
+</code></pre><h1 id="test-your-pipeline">Test Your Pipeline</h1>
+<p>If you&rsquo;d like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
+<pre tabindex="0"><code>  }
+}
+</code></pre><p>Save your Jenkinsfile.</p>
 <p>Go back to Builds &gt; Pipelines</p>
-
 <p>Click Start Pipeline</p>
-
 <h1 id="delete-brackets">Delete Brackets</h1>
-
-<p>Please delete the brackets you just added once testing is complete. We can add them later if you'd like to test your pipeline as you go along.</p>
-<pre><code>  }
-}</code></pre>
-<p>Click Save
+<p>Please delete the brackets you just added once testing is complete. We can add them later if you&rsquo;d like to test your pipeline as you go along.</p>
+<pre tabindex="0"><code>  }
+}
+</code></pre><p>Click Save
 <style>
 
  

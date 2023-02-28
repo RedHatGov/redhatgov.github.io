@@ -5,18 +5,14 @@
     <link>/workshops/agile_integrations_ci/</link>
     <description>Recent content in Agile Integrations Workshop - Citizen Integrator on Red Hat | Public Sector</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="/workshops/agile_integrations_ci/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="/workshops/agile_integrations_ci/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Lab 01 - API Design</title>
       <link>/workshops/agile_integrations_ci/lab01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/agile_integrations_ci/lab01/</guid>
-      <description>Lab 1 API Design Create an OpenAPI Specification using Apicurio Studio  Duration: 10 mins Audience: API Owner, Product Manager, Developers, Architects  
+      <description>Lab 1 API Design Create an OpenAPI Specification using Apicurio Studio Duration: 10 mins Audience: API Owner, Product Manager, Developers, Architects &amp;lt;img src=&amp;quot;../images/agenda-01.png &amp;ldquo;Login&amp;rdquo; width=&amp;ldquo;900&amp;rdquo; /&amp;gt;
 Overview As APIs become more widespread in the enterprise, consistent design and usage is critically important to improve reusability. The more reusable APIs are, the less friction there is for other internal or external teams to make progress. Having design standards and tools baked into the API development and maintenance process is a very powerful way to enable this consistency.</description>
     </item>
     
@@ -26,7 +22,7 @@ Overview As APIs become more widespread in the enterprise, consistent design and
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/agile_integrations_ci/lab02/</guid>
-      <description>Lab 2 API Mocking Bring your APIs to life  Duration: 20 mins Audience: Developers, Architects, Testers, Quality Engineers  
+      <description>Lab 2 API Mocking Bring your APIs to life Duration: 20 mins Audience: Developers, Architects, Testers, Quality Engineers &amp;lt;img src=&amp;quot;../images/agenda-02.png &amp;ldquo;Login&amp;rdquo; width=&amp;ldquo;900&amp;rdquo; /&amp;gt;
 Overview When building and working with APIs, you often need to simulate the responses of the system before it has been fully completed. This is what we explore in this workshop - mocking up API structures quickly so they can be subjected to testing without having to create all the final service code.</description>
     </item>
     
@@ -36,7 +32,7 @@ Overview When building and working with APIs, you often need to simulate the res
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/agile_integrations_ci/lab03/</guid>
-      <description>Lab 3 Fuse Online  Duration: 20 mins Audience: Developers and Architects  
+      <description>Lab 3 Fuse Online Duration: 20 mins Audience: Developers and Architects &amp;lt;img src=&amp;quot;../images/agenda-03.png &amp;ldquo;Login&amp;rdquo; width=&amp;ldquo;900&amp;rdquo; /&amp;gt;
 Overview When it comes to quick API development, you need both the integration experts as well as application developers to easily develop and deploy the APIs. Here is how to create a simple API with Fuse Online.
 Why Red Hat? Red Hat Fuse integration solution empowers integration experts, application developers, and business users to engage in enterprise-wide collaboration and high-productivity self-service.</description>
     </item>
@@ -47,8 +43,8 @@ Why Red Hat? Red Hat Fuse integration solution empowers integration experts, app
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/agile_integrations_ci/lab04/</guid>
-      <description>Lab 4 Managing API Endpoints Take control of your APIs  Duration: 15 mins Audience: API Owners, Product Managers, Developers, Architects  
-Overview Once you have APIs deployed in your environment, it becomes critically important to manage who may use them, and for what purpose. You also need to begin to track usage of these different users to know who is or is not succeeding in their usage. For this reason, in this lab, you will be adding management capabilities to the API to give you control and visibility of it&#39;s usage.</description>
+      <description>Lab 4 Managing API Endpoints Take control of your APIs Duration: 15 mins Audience: API Owners, Product Managers, Developers, Architects &amp;lt;img src=&amp;quot;../images/agenda-04.png &amp;ldquo;Login&amp;rdquo; width=&amp;ldquo;900&amp;rdquo; /&amp;gt;
+Overview Once you have APIs deployed in your environment, it becomes critically important to manage who may use them, and for what purpose. You also need to begin to track usage of these different users to know who is or is not succeeding in their usage.</description>
     </item>
     
     <item>
@@ -57,7 +53,7 @@ Overview Once you have APIs deployed in your environment, it becomes critically 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/agile_integrations_ci/lab05/</guid>
-      <description>Lab 5 API Security Securing APIs with OpenID Connect and Red Hat Single Sign On  Duration: 20 mins Audience: API Owners, Product Managers, Developers, Architects  
+      <description>Lab 5 API Security Securing APIs with OpenID Connect and Red Hat Single Sign On Duration: 20 mins Audience: API Owners, Product Managers, Developers, Architects &amp;lt;img src=&amp;quot;../images/agenda-05.png &amp;ldquo;Login&amp;rdquo; width=&amp;ldquo;900&amp;rdquo; /&amp;gt;
 Overview Once you have APIs in your organization and have applications being written, you also want to be sure in many cases that the various types of users of the APIs are correctly authenticated. In this lab you will discover how to set up the widely used OpenID connect pattern for Authentication.</description>
     </item>
     
@@ -67,7 +63,7 @@ Overview Once you have APIs in your organization and have applications being wri
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/agile_integrations_ci/lab06/</guid>
-      <description>Lab 6 API Developer Portal Publishing APIs to Developer Portal  Duration: 20 mins Audience: API Owners, Product Managers, Developers, Architects  
+      <description>Lab 6 API Developer Portal Publishing APIs to Developer Portal Duration: 20 mins Audience: API Owners, Product Managers, Developers, Architects &amp;lt;img src=&amp;quot;../images/agenda-05.png &amp;ldquo;Login&amp;rdquo; width=&amp;ldquo;900&amp;rdquo; /&amp;gt;
 Overview The focal point of your developers experience is the API developer portal, and the level of effort you put into it will directly correlate to the level of success of your API program, and API developer engagement.
 Why Red Hat? Red Hat 3scale API Management Solution provides a built-in, state-of-the-art CMS portal, making it very easy to create your own branded hub with a custom domain to manage developer interactions, and help increase API adoption.</description>
     </item>
@@ -78,7 +74,7 @@ Why Red Hat? Red Hat 3scale API Management Solution provides a built-in, state-o
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/agile_integrations_ci/lab07/</guid>
-      <description>Lab 7 Testing the International Inc. Locations webpage Testing your web application  Duration: 10 mins Audience: API Consumers, Developers, Architects  
+      <description>Lab 7 Testing the International Inc. Locations webpage Testing your web application Duration: 10 mins Audience: API Consumers, Developers, Architects &amp;lt;img src=&amp;quot;../images/agenda-05.png &amp;ldquo;Login&amp;rdquo; width=&amp;ldquo;900&amp;rdquo; /&amp;gt;
 Overview This lab demonstrates the International Inc. Locations page using our newly authenticated locations API.
 Why Red Hat? Applications can be built from many technologies. In this case we use a simple web application, but a wide range of Red Hat and non-Red Hat technologies could be used.</description>
     </item>
@@ -89,7 +85,8 @@ Why Red Hat? Applications can be built from many technologies. In this case we u
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/agile_integrations_ci/prerequisites/</guid>
-      <description> Prerequisites  This workshop is done entirely through the browser.   Chrome is the preferred browser for this workshop  </description>
+      <description>Prerequisites This workshop is done entirely through the browser.
+Chrome is the preferred browser for this workshop </description>
     </item>
     
     <item>
@@ -99,7 +96,7 @@ Why Red Hat? Applications can be built from many technologies. In this case we u
       
       <guid>/workshops/agile_integrations_ci/openshift/</guid>
       <description>Welcome to OpenShift! This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.
-Key Terms We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with. You&#39;ll learn more terms along the way, but these are the basics to get you started.</description>
+Key Terms We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with. You&amp;rsquo;ll learn more terms along the way, but these are the basics to get you started.</description>
     </item>
     
   </channel>

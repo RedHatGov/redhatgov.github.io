@@ -311,7 +311,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/openshift-ocp.svg" alt="openshift ocp">
+<img src="/workshops/security_openshift/images/openshift-ocp.svg" alt="openshift ocp"/>
 </div>
 </div>
 <div class="paragraph">
@@ -352,11 +352,11 @@ configured registry, router, image streams, and default templates.</p>
 <p>Next use the following command to bring up the cluster on your local machine.</p>
 </div>
 <div class="paragraph">
-<p>&lt;div class="alert alert-warning"&gt;</p>
+<p>&lt;div class=&#34;alert alert-warning&#34;&gt;</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>&lt;span class="pficon pficon-warning-triangle-o"&gt;&lt;/span&gt;</pre>
+<pre>&lt;span class=&#34;pficon pficon-warning-triangle-o&#34;&gt;&lt;/span&gt;</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -398,11 +398,11 @@ To login as administrator:
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>OpenShift Web Console, EXAMPLE: <code><a href="https://107.21.72.239:8443" class="bare">https://107.21.72.239:8443</a></code>  or use the DNS name with your student number, Example: <code><a href="https://openshiftsecurity.0.redhatgov.io:8443" class="bare">https://openshiftsecurity.0.redhatgov.io:8443</a></code></td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
@@ -427,7 +427,7 @@ for your first app.</p>
 <div class="listingblock">
 <div class="title">create new project</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project flask --description="Python Flask App" --display-name="Flask App"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project flask --description=&#34;Python Flask App&#34; --display-name=&#34;Flask App&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -470,7 +470,7 @@ Password:  developer</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/login-ocp.png" alt="login ocp">
+<img src="/workshops/security_openshift/images/login-ocp.png" alt="login ocp"/>
 </div>
 <div class="title">Figure 1. OpenShift Main Login</div>
 </div>
@@ -479,7 +479,7 @@ Password:  developer</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/flask-app.png" alt="flask app">
+<img src="/workshops/security_openshift/images/flask-app.png" alt="flask app"/>
 </div>
 <div class="title">Figure 2. Flask App</div>
 </div>
@@ -494,7 +494,7 @@ to see the app.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/create-route.png" alt="create route">
+<img src="/workshops/security_openshift/images/create-route.png" alt="create route"/>
 </div>
 <div class="title">Figure 3. create route</div>
 </div>
@@ -510,19 +510,19 @@ this <code><a href="http://http://flask-app-flask.apps.ose.0.redhatgov.io" class
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsec32e30114960effaeaad995e56ca8757" class="collapsed">
+      <a data-toggle="collapse" href="#collapse7ec800931703c6ba1263d9ed28b348b7" class="collapsed">
       
         Result!
       </a>
     </h4>
   </div>
   
-  <div id="collapsec32e30114960effaeaad995e56ca8757" class="panel-collapse collapse ">
+  <div id="collapse7ec800931703c6ba1263d9ed28b348b7" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/ocp-result.png" alt="ocp result">
+<img src="/workshops/security_openshift/images/ocp-result.png" alt="ocp result"/>
 </div>
 </div>
 
@@ -571,9 +571,9 @@ this <code><a href="http://http://flask-app-flask.apps.ose.0.redhatgov.io" class
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This sets OpenShift&#8217;s public name to the public ip of the AMI, via the AWS
+<td>This sets OpenShift’s public name to the public ip of the AMI, via the AWS
 metadata service (169.254.169.254).</td>
 </tr>
 <tr>
@@ -591,7 +591,7 @@ flag that allows setting the directory on the host for these volumes.</td>
 <td>To persist data across restarts, specify a valid host directory when
 starting your cluster with <code>oc</code> cluster up.</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>

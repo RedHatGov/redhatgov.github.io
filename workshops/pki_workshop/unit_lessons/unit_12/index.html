@@ -273,46 +273,39 @@
 </div>
 
 <div class="container">
-  
-
-<h1 id="unit-12-troubleshooting">Unit 12: Troubleshooting</h1>
-
-<p>In this unit you will troubleshoot common issues with maintaining a Certificate System. Each section has a shell script to run that will &quot;break&quot; the system. A hint will be offered to help you hone your troubleshooting skills.</p>
-
+  <h1 id="unit-12-troubleshooting">Unit 12: Troubleshooting</h1>
+<p>In this unit you will troubleshoot common issues with maintaining a Certificate System. Each section has a shell script to run that will &ldquo;break&rdquo; the system. A hint will be offered to help you hone your troubleshooting skills.</p>
 <h2 id="instructions">Instructions</h2>
-
 <p>To solve, the CA should be accessible in a browser without errors in status output or logs.</p>
-
 <h3 id="run-script-to-break-ca-1st-lab">Run script to break CA (1st lab)</h3>
-
 <ol>
-<li><p>Change to labs troubleshooting directory.</p>
-
-<p><code>cd pki-workshop/unit_labs/rhcs</code></p></li>
-
-<li><p>Run first lab.</p>
-
+<li>
+<p>Change to labs troubleshooting directory.</p>
+<p><code>cd pki-workshop/unit_labs/rhcs</code></p>
+</li>
+<li>
+<p>Run first lab.</p>
 <p><code>bash break1.sh</code></p>
-<pre><code>Break Script #1
+<pre><code> Break Script #1
 
----------------------------------
-***********SYSTEM DOWN***********
-*                               *
-* Investigate the cause of the  *
-* first outage using your elite *
-* troubleshooting skills!       *
-*                               *
-*********************************
----------------------------------</code></pre></li>
-
-<li><p>Troubleshoot.</p></li>
+ ---------------------------------
+ ***********SYSTEM DOWN***********
+ *                               *
+ * Investigate the cause of the  *
+ * first outage using your elite *
+ * troubleshooting skills!       *
+ *                               *
+ *********************************
+ ---------------------------------
+</code></pre>
+</li>
+<li>
+<p>Troubleshoot.</p>
+</li>
 </ol>
-
 <h3 id="solution">Solution</h3>
-
 <details>
 <summary>Click to expand solution.</summary>
-
 <ol>
   <li>The webpage is shows a java error but no real clues.</li>
   <li>The status command does not list anything relevant.<br>
@@ -330,41 +323,37 @@
     <code>systemctl restart pki-tomcatd@ca1.service</code></li>
   <li>Check webpage. Should be accessible.</li>
 </ol>
-
 </details>
-
-<hr />
-
+<hr>
 <h3 id="run-script-to-break-ca-2nd-lab">Run script to break CA (2nd lab)</h3>
-
 <ol>
-<li><p>Change to labs troubleshooting directory.</p>
-
-<p><code>cd pki-workshop/unit_labs/rhcs</code></p></li>
-
-<li><p>Run second lab.</p>
-
+<li>
+<p>Change to labs troubleshooting directory.</p>
+<p><code>cd pki-workshop/unit_labs/rhcs</code></p>
+</li>
+<li>
+<p>Run second lab.</p>
 <p><code>bash break2.sh</code></p>
-<pre><code>Break Script #2
+<pre><code> Break Script #2
 
----------------------------------
-***********SYSTEM DOWN***********
-*                               *
-* Investigate the cause of the  *
-* second outage using your elite*
-* troubleshooting skills!       *
-*                               *
-*********************************
----------------------------------</code></pre></li>
-
-<li><p>Troubleshoot.</p></li>
+ ---------------------------------
+ ***********SYSTEM DOWN***********
+ *                               *
+ * Investigate the cause of the  *
+ * second outage using your elite*
+ * troubleshooting skills!       *
+ *                               *
+ *********************************
+ ---------------------------------
+</code></pre>
+</li>
+<li>
+<p>Troubleshoot.</p>
+</li>
 </ol>
-
 <h3 id="solution-1">Solution</h3>
-
 <details>
 <summary>Click to expand solution.</summary>
-
 <ol>
   <li>The webpage is inaccessible.</li>
   <li>The status command has a clue.<br>
@@ -381,41 +370,37 @@
     <code>`systemctl restart pki-tomcatd@ca1.service`</code></li>
   <li>Check webpage. Should be accessible.</li>
 </ol>
-
 </details>
-
-<hr />
-
+<hr>
 <h3 id="run-script-to-break-ca-3rd-lab">Run script to break CA (3rd lab)</h3>
-
 <ol>
-<li><p>Change to labs troubleshooting directory.</p>
-
-<p><code>cd pki-workshop/unit_labs/rhcs</code></p></li>
-
-<li><p>Run third lab.</p>
-
+<li>
+<p>Change to labs troubleshooting directory.</p>
+<p><code>cd pki-workshop/unit_labs/rhcs</code></p>
+</li>
+<li>
+<p>Run third lab.</p>
 <p><code>bash break3.sh</code></p>
-<pre><code>Break Script #3
+<pre><code> Break Script #3
 
----------------------------------
-***********SYSTEM DOWN***********
-*                               *
-* Investigate the cause of the  *
-* third outage using your elite *
-* troubleshooting skills!       *
-*                               *
-*********************************
----------------------------------</code></pre></li>
-
-<li><p>Troubleshoot.</p></li>
+ ---------------------------------
+ ***********SYSTEM DOWN***********
+ *                               *
+ * Investigate the cause of the  *
+ * third outage using your elite *
+ * troubleshooting skills!       *
+ *                               *
+ *********************************
+ ---------------------------------
+</code></pre>
+</li>
+<li>
+<p>Troubleshoot.</p>
+</li>
 </ol>
-
 <h3 id="solution-2">Solution</h3>
-
 <details>
 <summary>Click to expand solution.</summary>
-
 <ol>
   <li>The webpage is inaccessible.</li>
   <li>The status command shows a partial java error.<br>
@@ -438,41 +423,37 @@
     <code>`systemctl restart pki-tomcatd@ca1.service`</code></li>
   <li>Check webpage. Should be accessible.</li>
 </ol>
-
 </details>
-
-<hr />
-
+<hr>
 <h3 id="run-script-to-break-ca-4th-lab">Run script to break CA (4th lab)</h3>
-
 <ol>
-<li><p>Change to labs troubleshooting directory.</p>
-
-<p><code>cd pki-workshop/unit_labs/rhcs</code></p></li>
-
-<li><p>Run fourth lab.</p>
-
+<li>
+<p>Change to labs troubleshooting directory.</p>
+<p><code>cd pki-workshop/unit_labs/rhcs</code></p>
+</li>
+<li>
+<p>Run fourth lab.</p>
 <p><code>bash break4.sh</code></p>
-<pre><code>Break Script #4
+<pre><code> Break Script #4
 
----------------------------------
-***********SYSTEM DOWN***********
-*                               *
-* Investigate the cause of the  *
-* fourth outage using your elite*
-* troubleshooting skills!       *
-*                               *
-*********************************
----------------------------------</code></pre></li>
-
-<li><p>Troubleshoot.</p></li>
+ ---------------------------------
+ ***********SYSTEM DOWN***********
+ *                               *
+ * Investigate the cause of the  *
+ * fourth outage using your elite*
+ * troubleshooting skills!       *
+ *                               *
+ *********************************
+ ---------------------------------
+</code></pre>
+</li>
+<li>
+<p>Troubleshoot.</p>
+</li>
 </ol>
-
 <h3 id="solution-3">Solution</h3>
-
 <details>
 <summary>Click to expand solution.</summary>
-
 <ol>
   <li>The webpage is shows a java error but no real clues.</li>
   <li>The status command does not list anything relevant.<br>
@@ -489,10 +470,8 @@
     <code>systemctl restart pki-tomcatd@ca1.service</code></li>
   <li>Check webpage. Should be accessible.</li>
 </ol>
-
 </details>
-
-<hr />
+<hr>
 
 </div>
 

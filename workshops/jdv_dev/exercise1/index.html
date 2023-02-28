@@ -307,213 +307,167 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="table-of-contents">Table of Contents</h1>
-
+    <h1 id="table-of-contents">Table of Contents</h1>
 <ul>
 <li><a href="#link1">Download JDV</a></li>
 <li><a href="#link2">Download JBDS</a></li>
 <li><a href="#link3">Install JDV</a>
-
 <ul>
 <li><a href="#link4">Run JDV</a></li>
-</ul></li>
+</ul>
+</li>
 <li><a href="#link5">Install JBDS</a>
-
 <ul>
 <li><a href="#link6">Run JBDS</a></li>
 <li><a href="#link7">Install teiid designer</a></li>
 <li><a href="#link8">Configure server settings</a></li>
-</ul></li>
 </ul>
-
-<h1 id="download-jboss-data-virtualization-https-developers-redhat-com-products-datavirt-download-a-name-link1-a">Download <a href="https://developers.redhat.com/products/datavirt/download/">JBoss Data Virtualization</a> <a name="link1"></a></h1>
-
+</li>
+</ul>
+<h1 id="download-jboss-data-virtualizationhttpsdevelopersredhatcomproductsdatavirtdownload-a-namelink1a">Download <a href="https://developers.redhat.com/products/datavirt/download/">JBoss Data Virtualization</a> <a name="link1"></a></h1>
 <ul>
 <li><code>jboss-dv-6.3.0-1-installer.jar</code></li>
 </ul>
-
-<p><img src="../images/1-download-jdv.png" width="640px"></p>
-
-<h1 id="download-jboss-developer-studio-https-developers-redhat-com-products-devstudio-download-a-name-link2-a">Download <a href="https://developers.redhat.com/products/devstudio/download/">JBoss Developer Studio</a> <a name="link2"></a></h1>
-
+<img src="../images/1-download-jdv.png" width="640px">
+<h1 id="download-jboss-developer-studiohttpsdevelopersredhatcomproductsdevstudiodownload-a-namelink2a">Download <a href="https://developers.redhat.com/products/devstudio/download/">JBoss Developer Studio</a> <a name="link2"></a></h1>
 <ul>
 <li><code>devstudio-11.0.0.GA-installer-standalone.jar</code></li>
 </ul>
-
-<p><img src="../images/1-download-jbds.png" width="640px"></p>
-
-<h1 id="install-jboss-data-virtualization-jdv-a-name-link3-a">Install JBoss Data Virtualization (JDV) <a name="link3"></a></h1>
-
+<img src="../images/1-download-jbds.png" width="640px">
+<h1 id="install-jboss-data-virtualization-jdv-a-namelink3a">Install JBoss Data Virtualization (JDV) <a name="link3"></a></h1>
 <ul>
-<li><p>In the location where you downloaded the installer, run the following command</p>
-<pre><code>java -jar jboss-dv-6.3.0-1-installer.jar</code></pre></li>
-
-<li><p>Follow the default prompts with the following exceptions below</p></li>
+<li>In the location where you downloaded the installer, run the following command</li>
 </ul>
-
-<p><img src="../images/1-jdv-location.png" width="640px"></p>
-
+<pre tabindex="0"><code>java -jar jboss-dv-6.3.0-1-installer.jar
+</code></pre><ul>
+<li>Follow the default prompts with the following exceptions below</li>
+</ul>
+<img src="../images/1-jdv-location.png" width="640px">
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-Take note of the directory you use to install JDV, it will be helpful when installing JBoss Developer studio.  In the instructions it will be referred to as `$JBOSS_HOME`
-
+<p><span class="pficon pficon-info"></span></p>
+<p>Take note of the directory you use to install JDV, it will be helpful when installing JBoss Developer studio.  In the instructions it will be referred to as <code>$JBOSS_HOME</code></p>
 </div>
-
 <ul>
-<li><p>On the <strong>Create Users</strong> form, enable <strong>Check to use one password for all default passwords</strong></p></li>
-
-<li><p>Use the following password <strong>Password1!</strong></p></li>
-
-<li><p>Also check the Add <strong>OData</strong> role</p></li>
+<li>
+<p>On the <strong>Create Users</strong> form, enable <strong>Check to use one password for all default passwords</strong></p>
+</li>
+<li>
+<p>Use the following password <strong>Password1!</strong></p>
+</li>
+<li>
+<p>Also check the Add <strong>OData</strong> role</p>
+</li>
 </ul>
-
-<p><img src="../images/1-user-password.png" width="640px"></p>
-
-<h2 id="run-jdv-a-name-link4-a">Run JDV <a name="link4"></a></h2>
-
+<img src="../images/1-user-password.png" width="640px">
+<h2 id="run-jdv-a-namelink4a">Run JDV <a name="link4"></a></h2>
 <ul>
-<li><p>In <code>$JBOSS_HOME/bin</code> directory run the following</p>
-<pre><code>./standalone.sh</code></pre></li>
+<li>In <code>$JBOSS_HOME/bin</code> directory run the following</li>
 </ul>
-
-<p><img src="../images/1-jdv-run.png" width="640px"></p>
-
+<pre tabindex="0"><code>./standalone.sh
+</code></pre><img src="../images/1-jdv-run.png" width="640px">
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-If you are connecting to this server from machines other than `localhost`.  You need to allow outside connections like this
-```
-./standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
-```
-
-</div>
-
+<p><span class="pficon pficon-info"></span></p>
+<p>If you are connecting to this server from machines other than <code>localhost</code>.  You need to allow outside connections like this</p>
+<pre tabindex="0"><code>./standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
+</code></pre></div>
 <ul>
-<li>Verify your installation by going to <a href="http://localhost:9990/console">http://localhost:9990/console</a> and logging in as <code>admin/Password1!</code></li>
+<li>Verify your installation by going to http://localhost:9990/console and logging in as <code>admin/Password1!</code></li>
 </ul>
-
-<p><img src="../images/1-admin.png" width="640px"></p>
-
+<img src="../images/1-admin.png" width="640px">
 <ul>
 <li>Your server is now up!  Leave it running and proceed to the next steps</li>
 </ul>
-
-<h1 id="install-jboss-developer-studio-jbds-a-name-link5-a">Install JBoss Developer Studio (JBDS) <a name="link5"></a></h1>
-
+<h1 id="install-jboss-developer-studio-jbds-a-namelink5a">Install JBoss Developer Studio (JBDS) <a name="link5"></a></h1>
 <ul>
-<li><p>In the location where you downloaded the installer, run the following command</p>
-<pre><code>java -jar devstudio-11.0.0.GA-installer-standalone.jar</code></pre></li>
-
-<li><p>Follow the default prompts with the following exceptions</p></li>
-
-<li><p>In step 5, <strong>Select Platforms and Servers</strong>, add the location of <code>$JBOSS_HOME</code> to the location to scan for runtimes.  Make sure <strong>Scan every start</strong> is unchecked.</p></li>
+<li>In the location where you downloaded the installer, run the following command</li>
 </ul>
-
-<p><img src="../images/1-jbds-jdv-location.png"></p>
-
-<h2 id="run-jbds-a-name-link6-a">Run JBDS <a name="link6"></a></h2>
-
+<pre tabindex="0"><code>java -jar devstudio-11.0.0.GA-installer-standalone.jar
+</code></pre><ul>
+<li>
+<p>Follow the default prompts with the following exceptions</p>
+</li>
+<li>
+<p>In step 5, <strong>Select Platforms and Servers</strong>, add the location of <code>$JBOSS_HOME</code> to the location to scan for runtimes.  Make sure <strong>Scan every start</strong> is unchecked.</p>
+</li>
+</ul>
+<img src="../images/1-jbds-jdv-location.png">
+<h2 id="run-jbds-a-namelink6a">Run JBDS <a name="link6"></a></h2>
 <ul>
-<li><p>The path where you installed JBoss Developer Studio will be referred to as <code>$STUDIO_HOME</code></p></li>
-
-<li><p>Launch JBDS with the following command in the <code>$STUDIO_HOME</code> directory</p>
-<pre><code>./devstudio</code></pre></li>
-
-<li><p>On startup select ok add the datavirt server install you specified during installation</p></li>
+<li>
+<p>The path where you installed JBoss Developer Studio will be referred to as <code>$STUDIO_HOME</code></p>
+</li>
+<li>
+<p>Launch JBDS with the following command in the <code>$STUDIO_HOME</code> directory</p>
+</li>
 </ul>
-
-<p><img src="../images/1-jbds-runtime.png"></p>
-
+<pre tabindex="0"><code>./devstudio
+</code></pre><ul>
+<li>On startup select ok add the datavirt server install you specified during installation</li>
+</ul>
+<img src="../images/1-jbds-runtime.png">
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-For Linux and/or Mac users running via the command prompt, if you see the following errors:
-
-```
-(Red Hat JBoss Developer Studio:23670): Gtk-WARNING **: Negative content width -5 (allocation 1, extents 3x3) while allocating gadget (node toolbar, owner GtkToolbar)
-```
-
-You need a tweak to the launcher to force usage of GTK2 instead of GTK3.  
-Either create a wrapper script like this
-
-```
-#!/bin/bash
+<p><span class="pficon pficon-info"></span></p>
+<p>For Linux and/or Mac users running via the command prompt, if you see the following errors:</p>
+<pre tabindex="0"><code>(Red Hat JBoss Developer Studio:23670): Gtk-WARNING **: Negative content width -5 (allocation 1, extents 3x3) while allocating gadget (node toolbar, owner GtkToolbar)
+</code></pre><p>You need a tweak to the launcher to force usage of GTK2 instead of GTK3.<br>
+Either create a wrapper script like this</p>
+<pre tabindex="0"><code>#!/bin/bash
 export SWT_GTK3=0
 
 $STUDIO_HOME/./devstudio
-```
-
-or edit 
-`$STUDIO_HOME/studio/devstudio.ini`
-and add
-
-```
---launcher.GTK_version
+</code></pre><p>or edit
+<code>$STUDIO_HOME/studio/devstudio.ini</code>
+and add</p>
+<pre tabindex="0"><code>--launcher.GTK_version
 2
-```
-
-at the very beginning of the file
-
+</code></pre><p>at the very beginning of the file</p>
 </div>
-
-<h2 id="install-teiid-designer-a-name-link7-a">Install teiid Designer <a name="link7"></a></h2>
-
+<h2 id="install-teiid-designer-a-namelink7a">Install teiid Designer <a name="link7"></a></h2>
 <ul>
-<li><p>In the <strong>Red Hat Central</strong> window in the center, click the <strong>Software/Update</strong> tab at the bottom</p></li>
-
-<li><p>Check the box next to <strong>JBoss Data Virtualization Development</strong></p></li>
-
-<li><p>Click the <strong>Install/Update</strong> button to install the teiid designer</p></li>
+<li>
+<p>In the <strong>Red Hat Central</strong> window in the center, click the <strong>Software/Update</strong> tab at the bottom</p>
+</li>
+<li>
+<p>Check the box next to <strong>JBoss Data Virtualization Development</strong></p>
+</li>
+<li>
+<p>Click the <strong>Install/Update</strong> button to install the teiid designer</p>
+</li>
 </ul>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-If you do not see **JBoss Data Virtualization Development** listed, check the **Enable Early Access** checkbox in the lower right.  Sometimes the teiid designer release does not sync with the JBDS release.
-
-
+<p><span class="pficon pficon-info"></span></p>
+<p>If you do not see <strong>JBoss Data Virtualization Development</strong> listed, check the <strong>Enable Early Access</strong> checkbox in the lower right.  Sometimes the teiid designer release does not sync with the JBDS release.</p>
 </div>
-
-<p><img src="../images/1-teiid-designer.png" width="640px"></p>
-
+<img src="../images/1-teiid-designer.png" width="640px">
 <ul>
 <li>After installation, restart JBDS.  On reboot you will be asked for a <strong>secure storage password</strong>, you can choose something simple like <code>redhat</code></li>
 </ul>
-
-<h2 id="configure-the-server-settings-a-name-link8-a">Configure the server settings <a name="link8"></a></h2>
-
+<h2 id="configure-the-server-settings-a-namelink8a">Configure the server settings <a name="link8"></a></h2>
 <ul>
-<li>Click the <strong>green arrow</strong> in the bottom of the server tab to start the server.<br /></li>
+<li>Click the <strong>green arrow</strong> in the bottom of the server tab to start the server.</li>
 </ul>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-  It is recommended to start the JDV outside of the designer to keep the server running between designer restarts.  If you start the server outside the designer you will receive a prompt to **Mark the server as started**.  This is fine.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>It is recommended to start the JDV outside of the designer to keep the server running between designer restarts.  If you start the server outside the designer you will receive a prompt to <strong>Mark the server as started</strong>.  This is fine.</p>
 </div>
-
 <ul>
-<li><p>Then double-click the server name and go to the <strong>teiid instance</strong> tab</p></li>
-
-<li><p>Click <strong>test the administration connection</strong> and check for <strong>ok</strong></p></li>
-
-<li><p>Enter the jdbc connection username of <strong>teiidUser</strong> with the password from installation, <strong>Password1!</strong></p></li>
-
-<li><p>Click <strong>Test the JDBC connection</strong> and check for <strong>ok</strong></p></li>
-
-<li><p>Finally, <strong>save</strong> the changes by clicking the disk icon in the upper left or <strong>ctrl+s</strong></p></li>
+<li>
+<p>Then double-click the server name and go to the <strong>teiid instance</strong> tab</p>
+</li>
+<li>
+<p>Click <strong>test the administration connection</strong> and check for <strong>ok</strong></p>
+</li>
+<li>
+<p>Enter the jdbc connection username of <strong>teiidUser</strong> with the password from installation, <strong>Password1!</strong></p>
+</li>
+<li>
+<p>Click <strong>Test the JDBC connection</strong> and check for <strong>ok</strong></p>
+</li>
+<li>
+<p>Finally, <strong>save</strong> the changes by clicking the disk icon in the upper left or <strong>ctrl+s</strong></p>
+</li>
 </ul>
-
-<p><img src="../images/1-teiid-settings.png" width="640px"></p>
+<img src="../images/1-teiid-settings.png" width="640px">
 
 
     

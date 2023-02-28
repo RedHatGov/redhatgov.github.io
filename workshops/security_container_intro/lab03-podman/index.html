@@ -307,30 +307,12 @@
   </ul>
 </nav>
 
-    <div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_what_is_a_pod">What is a pod?</a>
-<ul class="sectlevel2">
-<li><a href="#_the_universal_base_image">The Universal Base Image</a></li>
-<li><a href="#_tagging_and_pushing_images_to_a_remote_registry">Tagging and pushing images to a remote registry</a></li>
-<li><a href="#_working_with_root_and_rootless_containers">Working with root and rootless containers.</a></li>
-<li><a href="#_stopping_and_removing_containers">Stopping and removing containers</a></li>
-<li><a href="#_container_process_information">Container process information</a></li>
-<li><a href="#_user_namespace_support">User Namespace Support</a></li>
-<li><a href="#_auditing_containers">Auditing containers</a></li>
-<li><a href="#_uid_mapping">UID Mapping</a></li>
-<li><a href="#_challenge">Challenge</a></li>
-<li><a href="#_references">References</a></li>
-</ul>
-</li>
-</ul>
-</div>
+    
 <div class="sect1">
 <h2 id="_what_is_a_pod">What is a pod?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A pod is a group of one or more containers with shared storage, network and a specification for how to run the containers. In this module you&#8217;ll be working at the container level. Since you are here to learn more about
+<p>A pod is a group of one or more containers with shared storage, network and a specification for how to run the containers. In this module you’ll be working at the container level. Since you are here to learn more about
 container security, we have a quick review of
 container basics then get right into the good stuff.</p>
 </div>
@@ -351,7 +333,7 @@ over client-server based architectures.</p>
 <p>For this first part of the lab, we will be using the most current Fedora (the community upstream distribution for Red Hat Enterprise Linux) container image.</p>
 </div>
 <div class="paragraph">
-<p>Pull the latest Fedora image from RedHat&#8217;s container registry:</p>
+<p>Pull the latest Fedora image from RedHat’s container registry:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -360,7 +342,7 @@ over client-server based architectures.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>Resolved "fedora" as an alias (/etc/containers/registries.conf.d/000-shortnames.conf)
+<pre>Resolved &#34;fedora&#34; as an alias (/etc/containers/registries.conf.d/000-shortnames.conf)
 Trying to pull registry.fedoraproject.org/fedora:latest...
 Getting image source signatures
 Copying blob ca594071dfff done
@@ -379,10 +361,10 @@ abec9a7a7dc640768e6dc51b6a5728e470411615c62e9ff46215206bde816772</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Notice that pulling Fedora does not require authentication from RedHat&#8217;s registries.</p>
+<p>Notice that pulling Fedora does not require authentication from RedHat’s registries.</p>
 </div>
 <div class="paragraph">
-<p>Next, we&#8217;ll work with the registries that were configured
+<p>Next, we’ll work with the registries that were configured
 in the previous modules.</p>
 </div>
 </div>
@@ -481,17 +463,17 @@ Storing signatures</pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>{"repositories":["fedora/latest"]}</pre>
+<pre>{&#34;repositories&#34;:[&#34;fedora/latest&#34;]}</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_working_with_root_and_rootless_containers">Working with root and rootless containers.</h3>
 <div class="paragraph">
-<p>Podman supports storing and running root and rootless containers. Effectively, each user manages it&#8217;s own containers.</p>
+<p>Podman supports storing and running root and rootless containers. Effectively, each user manages it’s own containers.</p>
 </div>
 <div class="paragraph">
-<p>The UBI container images should be loaded into the podman&#8217;s local image storage for both root and rootless (ec2-user) usage.</p>
+<p>The UBI container images should be loaded into the podman’s local image storage for both root and rootless (ec2-user) usage.</p>
 </div>
 <div class="paragraph">
 <p>Confirm these images exist using <code>podman</code>. Note the <code>podman</code> command may be run as <strong>root</strong> (privileged) or as a <strong>root-less</strong> (non-privileged) user.</p>
@@ -521,7 +503,7 @@ node1.0.jajcsec.rhnaps.io:5000/fedora/latest  latest  abec9a7a7dc6  4 weeks ago 
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s start with a few warmup exercises. Note that a random <em>container ID</em> is returned when the container starts.</p>
+<p>Let’s start with a few warmup exercises. Note that a random <em>container ID</em> is returned when the container starts.</p>
 </div>
 <div class="paragraph">
 <p>Run a rootless container:</p>
@@ -592,7 +574,7 @@ Storing signatures
 </div>
 </div>
 <div class="paragraph">
-<p>Note that podman automatically pulled down the UBI image for each request. This is because we hadn&#8217;t used that image, before.</p>
+<p>Note that podman automatically pulled down the UBI image for each request. This is because we hadn’t used that image, before.</p>
 </div>
 </div>
 <div class="sect2">
@@ -691,11 +673,11 @@ ec2-user  1701  1690  0 07:30 ?        00:00:00 /usr/bin/coreutils --coreutils-p
 </div>
 </div>
 <div class="paragraph">
-<p>Compare those ID&#8217;s to the same process running in the hosts' namespace:</p>
+<p>Compare those ID’s to the same process running in the hosts&#39; namespace:</p>
 </div>
 <div class="admonitionblock tip">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-tip" title="Tip"></i>
 </td>
@@ -703,10 +685,10 @@ ec2-user  1701  1690  0 07:30 ?        00:00:00 /usr/bin/coreutils --coreutils-p
 Take note of 2 important concepts from this example.
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
-<p>The <code>sleep</code> process in the container is owned by <code>root</code> but the process on the host is owned by <code>ec2-user</code>. This is user namespaces in action. The <strong>fork/exec</strong> model used by podman improves the security auditing of containers. It allows an administrator to identify users that run containers as root. Container engines that use a <strong><strong>client/server</strong></strong> model can&#8217;t provide this.</p>
+<p>The <code>sleep</code> process in the container is owned by <code>root</code> but the process on the host is owned by <code>ec2-user</code>. This is user namespaces in action. The <strong>fork/exec</strong> model used by podman improves the security auditing of containers. It allows an administrator to identify users that run containers as root. Container engines that use a <strong><strong>client/server</strong></strong> model can’t provide this.</p>
 </div>
 <div class="paragraph">
 <p>The <code>sleep</code> process in the container has a PID of 1 but on the host the PID is <strong>rootless</strong> (a PID &gt;1). This is kernel namespaces in action.</p>
@@ -727,7 +709,7 @@ Take note of 2 important concepts from this example.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run --name sleepy --rm -it registry.access.redhat.com/ubi8/ubi bash -c "cat /proc/self/loginuid;echo"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run --name sleepy --rm -it registry.access.redhat.com/ubi8/ubi bash -c &#34;cat /proc/self/loginuid;echo&#34;</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -744,7 +726,7 @@ Take note of 2 important concepts from this example.
 </div>
 </div>
 <div class="paragraph">
-<p>Run a privileged container that bind mounts the host&#8217;s file system then touches <code>/etc/shadow</code>:</p>
+<p>Run a privileged container that bind mounts the host’s file system then touches <code>/etc/shadow</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -756,7 +738,7 @@ Take note of 2 important concepts from this example.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo ausearch -m path -ts recent -i | grep touch | grep --color=auto 'auid=[^ ]*'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo ausearch -m path -ts recent -i | grep touch | grep --color=auto &#39;auid=[^ ]*&#39;</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -766,7 +748,7 @@ Take note of 2 important concepts from this example.
 </div>
 <div class="admonitionblock tip">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-tip" title="Tip"></i>
 </td>
@@ -776,13 +758,13 @@ will notice that the offending audit ID is reported as <strong>4294967295</stron
 In other words, the malicious user is unknown.
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_uid_mapping">UID Mapping</h3>
 <div class="paragraph">
-<p>A container administrator can make use podman&#8217;s <strong>--uidmap</strong> option to force a range of UID&#8217;s to be used. See <strong>podman-run(1)</strong> for details.</p>
+<p>A container administrator can make use podman’s <strong>--uidmap</strong> option to force a range of UID’s to be used. See <strong>podman-run(1)</strong> for details.</p>
 </div>
 <div class="paragraph">
 <p>Run a container that maps <strong>5000</strong> UIDs starting at <strong>100,000</strong>. This example maps uids <strong>0-5000</strong> in the container to the uids <strong>100,000 - 104,999</strong> on the host:</p>

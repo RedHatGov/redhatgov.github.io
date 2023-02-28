@@ -273,52 +273,44 @@
 </div>
 
 <div class="container">
-  
-
-<h1 id="unit-11-certificate-profiles">Unit 11: Certificate profiles</h1>
-
+  <h1 id="unit-11-certificate-profiles">Unit 11: Certificate profiles</h1>
 <p>In this unit you will go over the caUserCert profile. This certificate profile is for enrolling user certificates.</p>
-
 <p>The CA (certificate authority) profiles are located here:</p>
-<pre><code>/var/lib/pki/ca1/ca/profiles/ca</code></pre>
+<pre><code>/var/lib/pki/ca1/ca/profiles/ca
+</code></pre>
 <p>The <a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_labs/rhcs/caUserCert.cfg">caUserCert.cfg</a> profile is located in the rhcs labs folder.</p>
-
 <h2 id="example-causercert-profile">Example caUserCert Profile</h2>
-
 <p>The fields you will see in a CA User Profile are as follows:</p>
-
 <p>desc is a long description of the user certificate profile
 visible (true/false) controls whether the certificate will be visible to users
 enable, when selected (true), will allow the certificate to be used
 enableBy identifies the user who enabled the certificate
 name is the short name used for the certificate that will be viewable by users</p>
-
 <p>Here is what it will look like, in the file:</p>
 <pre><code>desc=This certificate profile is for enrolling user certificates.
 visible=true
 enable=true
 enableBy=admin
-name=Manual User Dual-Use Certificate Enrollment</code></pre>
-<hr />
-
+name=Manual User Dual-Use Certificate Enrollment
+</code></pre>
+<hr>
 <p>The missing auth.instance_id= entry in this profile means that with this profile, authentication is not needed to submit the enrollment request.</p>
-<pre><code>auth.class_id=</code></pre>
-<hr />
-
+<pre><code>auth.class_id=
+</code></pre>
+<hr>
 <p>Next, the profile lists all of the required inputs for the profile. For the <strong>caUserCert</strong> profile, this defines the keys to generate, the fields to use in the subject name, and the fields to use for the person submitting the certificate.</p>
 <pre><code>input.list=i1,i2,i3
 input.i1.class_id=keyGenInputImpl
 input.i2.class_id=subjectNameInputImpl
-input.i3.class_id=submitterInfoInputImpl</code></pre>
-<hr />
-
+input.i3.class_id=submitterInfoInputImpl
+</code></pre>
+<hr>
 <p>Next, the profile must define the output, meaning the format of the final certificate. There are several pre-defined outputs. More than one of these can be used, but none of the values of the output can be modified.</p>
 <pre><code>output.list=o1
-output.o1.class_id=certOutputImpl</code></pre>
-<hr />
-
+output.o1.class_id=certOutputImpl
+</code></pre>
+<hr>
 <p>The last — largest — block of configuration is the policy set for the profile. Policy sets list all of the settings that are applied to the final certificate, like its validity period, its renewal settings, and the actions the certificate can be used for. The policyset.list parameter identifies the block name of the policies that apply to one certificate; the policyset.userCertSet.list lists the individual policies to apply.</p>
-
 <p>For example, the sixth policy populates the Key Usage Extension automatically in the certificate, according to the configuration in the policy. It sets the defaults and requires the certificate to use those defaults by setting the constraints.</p>
 <pre><code>policyset.list=userCertSet
 policyset.userCertSet.list=1,10,2,3,4,5,6,7,8,9
@@ -347,9 +339,9 @@ policyset.userCertSet.6.default.params.keyUsageKeyCertSign=false
 policyset.userCertSet.6.default.params.keyUsageCrlSign=false
 policyset.userCertSet.6.default.params.keyUsageEncipherOnly=false
 policyset.userCertSet.6.default.params.keyUsageDecipherOnly=false
-...</code></pre>
-<hr />
-
+...
+</code></pre>
+<hr>
 <p>The last lesson is <a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_12.md">Unit 12: Troubleshooting</a>.</p>
 
 </div>

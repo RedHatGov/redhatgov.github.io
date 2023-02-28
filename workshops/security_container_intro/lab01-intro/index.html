@@ -303,17 +303,7 @@
   </ul>
 </nav>
 
-    <div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_important">Important</a>
-<ul class="sectlevel2">
-<li><a href="#_conventions_used_in_this_lab">Conventions used in this lab</a></li>
-<li><a href="#_getting_access_to_the_servers">Getting access to the servers</a></li>
-</ul>
-</li>
-</ul>
-</div>
+    
 <div class="paragraph">
 <p>This lab session is a low-level, hands-on introduction to container security using the container tools included with Red Hat Enterprise Linux 8. It is intended to be consumed as a series of self paced exercises.</p>
 </div>
@@ -333,15 +323,15 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_container_intro/images/lab-diagram.png" alt="Lab diagram">
+<img src="/workshops/security_container_intro/images/lab-diagram.png" alt="Lab diagram"/>
 </div>
 <div class="title">Figure 1. Lab Environment</div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Lab Resources</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <thead>
 <tr>
@@ -371,7 +361,7 @@
 <div class="sectionbody">
 <div class="admonitionblock tip">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-tip" title="Tip"></i>
 </td>
@@ -379,7 +369,7 @@
 These servers can not be rebuilt in a timely fashion.
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="ulist">
 <div class="title">TIPS</div>
@@ -434,14 +424,14 @@ ssh node2-<span class="userid">0</span>.<span class="prefix">example</span>.<spa
 </div>
 </div>
 <div class="paragraph">
-<p>For each node, you will be asked to confirm that the key fingerprint is OK, as you haven&#8217;t logged into it, before.</p>
+<p>For each node, you will be asked to confirm that the key fingerprint is OK, as you haven’t logged into it, before.</p>
 </div>
 <div class="paragraph">
 <p>Node 1:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>The authenticity of host 'node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span> (10.0.2.128)' can't be established.
+<pre>The authenticity of host &#39;node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span> (10.0.2.128)&#39; can&#39;t be established.
 ECDSA key fingerprint is SHA256:X6KOWD5YgDqcGxnSKDgT0ZYWqBeG8yw9CKTvgFwT6sQ.
 Are you sure you want to continue connecting (yes/no/[fingerprint])?</pre>
 </div>
@@ -462,7 +452,7 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?</pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>The authenticity of host 'node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span> (10.0.2.125)' can't be established.
+<pre>The authenticity of host &#39;node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span> (10.0.2.125)&#39; can&#39;t be established.
 ECDSA key fingerprint is SHA256:n2/LxFOXS2of8osIEcY/5911N6OmqaJJpsYRgnVrsiA.
 Are you sure you want to continue connecting (yes/no/[fingerprint])?</pre>
 </div>
@@ -479,7 +469,7 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?</pre>
 <p>Logout when done.</p>
 </div>
 <div class="paragraph">
-<p>Now, let&#8217;s move on to lab #2!</p>
+<p>Now, let’s move on to lab #2!</p>
 </div>
 <div class="paragraph">
 <style>

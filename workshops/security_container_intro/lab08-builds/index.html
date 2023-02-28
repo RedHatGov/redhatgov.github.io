@@ -307,18 +307,12 @@
   </ul>
 </nav>
 
-    <div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_building_from_universal_base_images">Building from Universal Base Images</a></li>
-<li><a href="#_build_using_docker_bud">Build using Docker (BuD)</a></li>
-</ul>
-</div>
+    
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>This module will introduce <em>Buildah</em>, a command line tool for building <a href="https://https://www.opencontainers.org/">Open Container Initiative</a>
-compatible container images. <em>Buildah</em> is easy to incorporate into scripts and build pipelines, and best of all, it doesn&#8217;t require a running container daemon to build its image. You can read more about <em>Buildah</em> at the <a href="https://buildah.io">buildah.io</a> web site. Also, have a look at the <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/building_running_and_managing_containers/index#building-container-images-with-buildah_building-running-and-managing-containers">buildah</a> chapter in the RHEL 8 documentation.</p>
+compatible container images. <em>Buildah</em> is easy to incorporate into scripts and build pipelines, and best of all, it doesn’t require a running container daemon to build its image. You can read more about <em>Buildah</em> at the <a href="https://buildah.io">buildah.io</a> web site. Also, have a look at the <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/building_running_and_managing_containers/index#building-container-images-with-buildah_building-running-and-managing-containers">buildah</a> chapter in the RHEL 8 documentation.</p>
 </div>
 </div>
 </div>
@@ -339,10 +333,10 @@ buildah run myapp -- dnf -y install python3</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo "The container is working." &gt; index.html
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo &#34;The container is working.&#34; &gt; index.html
 buildah copy myapp index.html /
-buildah config --cmd 'python3 -m http.server' myapp
-buildah config --author "me_at_myorg_dot_com @twitter-handle" --label name=myapp myapp
+buildah config --cmd &#39;python3 -m http.server&#39; myapp
+buildah config --author &#34;me_at_myorg_dot_com @twitter-handle&#34; --label name=myapp myapp
 buildah commit myapp myapp
 podman run -d --name=test -p8000:8000 localhost/myapp</code></pre>
 </div>
@@ -385,12 +379,12 @@ podman run -d --name=test -p8000:8000 localhost/myapp</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &gt; Dockerfile &lt;&lt;EOF
 FROM registry.access.redhat.com/ubi8/ubi
-LABEL description="Minimal python web server" maintainer="yourname@mail.net"
+LABEL description=&#34;Minimal python web server&#34; maintainer=&#34;yourname@mail.net&#34;
 RUN dnf -y update; dnf -y clean all
 RUN dnf -y install python3 --setopt install_weak_deps=false; dnf -y clean all
-RUN echo "The python http.server module is running." &gt; /index.html
+RUN echo &#34;The python http.server module is running.&#34; &gt; /index.html
 EXPOSE 8000
-CMD [ "/usr/bin/python3",  "-m", "http.server" ]
+CMD [ &#34;/usr/bin/python3&#34;,  &#34;-m&#34;, &#34;http.server&#34; ]
 EOF</code></pre>
 </div>
 </div>
@@ -405,7 +399,7 @@ EOF</code></pre>
 <div class="literalblock">
 <div class="content">
 <pre>STEP 1: FROM registry.access.redhat.com/ubi8/ubi
-STEP 2: LABEL description="Minimal python web server" maintainer="yourname@mail.net"
+STEP 2: LABEL description=&#34;Minimal python web server&#34; maintainer=&#34;yourname@mail.net&#34;
 ...
 ...
 ...

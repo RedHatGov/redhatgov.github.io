@@ -314,7 +314,7 @@
 <p>The networking namespace in the Kernel is actually responsible for a surprisingly large number of things. It keeps tabs on all the network interfaces and their state, routing tables (Did you know there is more than one? By default, there are 4.), firewall rules, etc. All of these things are explored using the <code>ip</code> command. This command allows root to view and modify the networking stack.</p>
 </div>
 <div class="paragraph">
-<p>The hostname of the machine is stored in a few places. First, the Kernel tracks the machine&#8217;s hostname. Next, the <code>/etc/hostname</code> file stores the statically defined hostname. Finally, a hostname can be derived from DHCP and DNS. What is important to note is that the <code>hostnamectl</code> command will change the hostname value in the Kernel and the value in <code>/etc/hostname</code>. Because our sandbox is using the same filesystem as our host, this is not desireable. Instead of using <code>hostnamectl</code> to manipulate the hostname, we will only use the <code>hostname</code> command as it only changes the Kernel&#8217;s value.</p>
+<p>The hostname of the machine is stored in a few places. First, the Kernel tracks the machine’s hostname. Next, the <code>/etc/hostname</code> file stores the statically defined hostname. Finally, a hostname can be derived from DHCP and DNS. What is important to note is that the <code>hostnamectl</code> command will change the hostname value in the Kernel and the value in <code>/etc/hostname</code>. Because our sandbox is using the same filesystem as our host, this is not desireable. Instead of using <code>hostnamectl</code> to manipulate the hostname, we will only use the <code>hostname</code> command as it only changes the Kernel’s value.</p>
 </div>
 </div>
 </div>
@@ -322,10 +322,10 @@
 <h2 id="_exercise_3_2_network_and_uts_namespaces">Exercise 3.2 - Network and UTS Namespaces</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Network Namespace allows a new network stack to exist in the sandbox. This means our sandboxed environment can have its own network interfaces, routing tables, DNS lookup servers, IP addresses, subnets&#8230;&#8203; you name it! The Unix Time Sharing (UTS) Namespace exists solely for storing the system&#8217;s hostname. Seriously. A whole namespace to store one string. This namespace has a long history and has changed quite a bit along the way. It exists the way it is for historical reasons.</p>
+<p>The Network Namespace allows a new network stack to exist in the sandbox. This means our sandboxed environment can have its own network interfaces, routing tables, DNS lookup servers, IP addresses, subnets…​ you name it! The Unix Time Sharing (UTS) Namespace exists solely for storing the system’s hostname. Seriously. A whole namespace to store one string. This namespace has a long history and has changed quite a bit along the way. It exists the way it is for historical reasons.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s create a sandbox with a new Network and UTS Namespace.</p>
+<p>Let’s create a sandbox with a new Network and UTS Namespace.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -357,10 +357,10 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Just the loopback. Good news, our network namespace worked! Bad news, we can&#8217;t reach the internet. Keep this issue in mind, we will revisit it later.</p>
+<p>Just the loopback. Good news, our network namespace worked! Bad news, we can’t reach the internet. Keep this issue in mind, we will revisit it later.</p>
 </div>
 <div class="paragraph">
-<p>Now let&#8217;s change our hostname.</p>
+<p>Now let’s change our hostname.</p>
 </div>
 <div class="listingblock">
 <div class="content">

@@ -307,119 +307,82 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="accessing-openshift">Accessing OpenShift</h1>
-
+    <h1 id="accessing-openshift">Accessing OpenShift</h1>
 <p>OpenShift provides a web console that allows you to perform various tasks via a web browser.</p>
-
-<h2 id="let-s-login-to-the-web-console">Let's Login to the Web Console</h2>
-
+<h2 id="lets-login-to-the-web-console">Let&rsquo;s Login to the Web Console</h2>
 <blockquote>
 <p>Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:8443</code></pre></div>
-<p><img src="../images/ocp-login.png" width="600"><br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>https://master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:8443
+</span></span></code></pre></div><p><img src="../images/ocp-login.png" width="600"><br/>
 <em>Login Webpage</em></p>
-
 <p>Once logged in you should see your available projects - or a button to create a project if none exist already.</p>
-
 <h2 id="so-this-is-what-an-empty-project-looks-like">So this is what an empty project looks like</h2>
-
-<p>First let's create a new project to do our workshop work in.  We will use the student number you were given to ensure you don't clash with classmates, so in the steps below replace 'YOUR#' with your student number (if applicable).</p>
-
+<p>First let&rsquo;s create a new project to do our workshop work in.  We will use the student number you were given to ensure you don&rsquo;t clash with classmates, so in the steps below replace &lsquo;YOUR#&rsquo; with your student number (if applicable).</p>
 <blockquote>
-<p>Click on the &quot;Create Project&quot; button and give it a name of demo-<span class="userid">YOUR#</span>
+<p>Click on the &ldquo;Create Project&rdquo; button and give it a name of demo-<span class="userid">YOUR#</span>
 </p>
-
-<p>Populate &quot;Name&quot; with &quot;demo-<span class="userid">YOUR#</span>
-&quot; and populate &quot;Description&quot; boxes with whatever you like.  And click &quot;Create&quot;</p>
 </blockquote>
-
-<p>This is going to take you to the next logical step of adding something to the project, but we don't want to do that just yet.</p>
-
 <blockquote>
-<p>Click the &quot;demo-<span class="userid">YOUR#</span>
-&quot; link on the top left to goto your project</p>
+<p>Populate &ldquo;Name&rdquo; with &ldquo;demo-<span class="userid">YOUR#</span>
+&rdquo; and populate &ldquo;Description&rdquo; boxes with whatever you like.  And click &ldquo;Create&rdquo;</p>
 </blockquote>
-
-<p>Don't worry, it's supposed to look empty right now because you currently don't have anything in your project (we'll fix that in the next lab).</p>
-
-<h2 id="let-s-deploy-butterfly-browser-based-ssh">Let's deploy Butterfly (Browser-based SSH)</h2>
-
+<p>This is going to take you to the next logical step of adding something to the project, but we don&rsquo;t want to do that just yet.</p>
+<blockquote>
+<p>Click the &ldquo;demo-<span class="userid">YOUR#</span>
+&rdquo; link on the top left to goto your project</p>
+</blockquote>
+<p>Don&rsquo;t worry, it&rsquo;s supposed to look empty right now because you currently don&rsquo;t have anything in your project (we&rsquo;ll fix that in the next lab).</p>
+<h2 id="lets-deploy-butterfly-browser-based-ssh">Let&rsquo;s deploy Butterfly (Browser-based SSH)</h2>
 <blockquote>
 Click "Add to Project"
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="150"><br/>
-
 <blockquote>
 Select the "Deploy Image" option from the drop down
 </blockquote>
 <img src="../images/ocp-deploy-image.png" width="600"><br/>
-
 <blockquote>
 Select the option for "Image Name" and enter "quay.io/openshifthomeroom/workshop-terminal", then click the magnifying glass to the far right to search for the image.
 </blockquote>
 <img src="../images/ocp-butterfly-imagename-expand.png" width="600"><br/>
-
 <blockquote>
 Observe default values that are populated in the search results
 </blockquote>
 <img src="../images/ocp-butterfly-create-1.png" width="600"><br/>
-
 <blockquote>
 Click "Deploy" then click "Close"
 </blockquote>
-
 <h2 id="does-this-butterfly-do-anything">Does this Butterfly do anything?</h2>
-
 <p>Good catch, your service is running but there is no way for users to access it yet.  We can fix that from the web console.</p>
-
 <blockquote>
 "Overview"
 </blockquote>
-
 <p><img src="../images/ocp-butterfly-overview.png" width="400"><br/></p>
-
 <blockquote>
 Select the arrow '>' next to 'workshop-terminal, #'
 </blockquote>
-
 <p><img src="../images/ocp-butterfly-arrow1.png" width="200"><br/>
 <img src="../images/ocp-butterfly-arrow2.png" width="200"><br/></p>
-
 <blockquote>
 To get to this view
 </blockquote>
-
 <p><img src="../images/ocp-butterfly-noroute.png" width="600"><br/></p>
-
 <p>Notice there is no exposed route </p>
-
 <blockquote>
 Click on the "Create Route" link
 </blockquote>
-
 <p><img src="../images/ocp-butterfly-createRoute.png" width="600"><br/></p>
-
 <p>This is where you could specify route parameters, but we will just use the defaults.</p>
-
 <blockquote>
 Click "Create"
 </blockquote>
-
 <h2 id="test-out-the-butterfly-webapp">Test out the Butterfly webapp</h2>
-
 <p>Notice that in the web console overview, you now have a URL in the service box.  You can see the webapp running by clicking the route you just exposed.</p>
-
 <p><img src="../images/ocp-butterfly-route.png" width="600"><br/></p>
-
 <p>After clicking on the URL, you should see a shell.</p>
-
 <p><img src="../images/butterfly-session.png" width="600"><br/></p>
-
-<p>Now, type the command oc. We'll explain what this tool is later in the workshop.</p>
-
+<p>Now, type the command oc. We&rsquo;ll explain what this tool is later in the workshop.</p>
 <style>
 
  

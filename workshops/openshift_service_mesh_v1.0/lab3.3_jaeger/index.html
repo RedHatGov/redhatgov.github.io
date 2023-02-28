@@ -307,192 +307,137 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="distributed-tracing-with-jaeger">Distributed Tracing with Jaeger</h1>
-
+    <h1 id="distributed-tracing-with-jaeger">Distributed Tracing with Jaeger</h1>
 <p><a href="https://www.jaegertracing.io">Jaeger</a> is a distributed tracing tool that lets you trace requests as they flow through your service mesh.  This is incredibly useful for debugging performance issues in your microservices architecture.</p>
-
 <h2 id="explore-jaeger">Explore Jaeger</h2>
-
-<p>First, let's explore the Jaeger user interface.</p>
-
+<p>First, let&rsquo;s explore the Jaeger user interface.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Open the Jaeger console.  Retrieve the endpoint for Jaeger:
 </blockquote>
-<pre><code>JAEGER_CONSOLE=$(oc get route jaeger -n istio-system --template=&#39;https://{{.spec.host}}&#39;)
-echo $JAEGER_CONSOLE</code></pre>
-<p><i class="fa fa-info-circle"></i> Click 'Allow selected permissions' if prompted to authorized access.</p>
-
+<pre tabindex="0"><code>JAEGER_CONSOLE=$(oc get route jaeger -n istio-system --template=&#39;https://{{.spec.host}}&#39;)
+echo $JAEGER_CONSOLE
+</code></pre><p><i class="fa fa-info-circle"></i> Click 'Allow selected permissions' if prompted to authorized access.</p>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Navigate to this URL in the browser.  Login with the same credentials you were provided to access OpenShift. 
 </blockquote>
-
 <p>Once logged in, you should be presented with the Jaeger console:</p>
-
 <p><img src="../images/jaeger-welcome.png" width="1024"><br/>
 <em>Jaeger Welcome</em></p>
-
-<p><br></p>
-
+<br>
 <p>You need to create traces to explore how requests flow in your mesh.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 Send load to the application user interface:
 </blockquote>
-<pre><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL; done</code></pre>
-<p><br>
-Let's inspect the traces.</p>
-
+<pre tabindex="0"><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL; done
+</code></pre><br>
+Let's inspect the traces.  
 <blockquote>
 <i class="fa fa-desktop"></i>
 On the left bar under 'Search', select 'app-ui.user<span class="userid">YOUR#</span>
 ' for 'Service' and 'boards-user<span class="userid">YOUR#</span>
 .svc.cluster.local' for 'Operation'.  
 </blockquote>
-
 <p>It should look like this:</p>
-
 <p><img src="../images/jaeger-search-boards.png" width="400"><br/>
 <em>Search for Traces to Boards Service</em></p>
-
-<p><br></p>
-
+<br>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Click the 'Find Traces' button and Jaeger should reload with traces to the Boards service.
 </blockquote>
-
 <p><img src="../images/jaeger-boards-traces.png" width="1024"><br/>
 <em>Traces to Boards Service</em></p>
-
-<p><br></p>
-
+<br>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Select one of these traces.  
 </blockquote>
-
-<p>You'll notice the information includes 'Duration' and 'Total Spans'.  'Duration' indicates the total time it took to send and receive a response for this trace.  'Total Spans' indicates the number of spans; each span represents a unit of work executed for this trace.  In the example below, 'app-ui' took 9.52ms in which 5.14ms was spent on calling the boards service.  The boards service itself took 3.56ms to execute before returning a response.</p>
-
+<p>You&rsquo;ll notice the information includes &lsquo;Duration&rsquo; and &lsquo;Total Spans&rsquo;.  &lsquo;Duration&rsquo; indicates the total time it took to send and receive a response for this trace.  &lsquo;Total Spans&rsquo; indicates the number of spans; each span represents a unit of work executed for this trace.  In the example below, &lsquo;app-ui&rsquo; took 9.52ms in which 5.14ms was spent on calling the boards service.  The boards service itself took 3.56ms to execute before returning a response.</p>
 <p><img src="../images/jaeger-boards-example.png" width="1024"><br/>
 <em>Boards Service Example</em></p>
-
-<p><br></p>
-
+<br>
 <p>You can inspect more information about each span by clicking on the span itself.</p>
-
 <blockquote>
 <i class="fa fa-desktop"></i>
 Expand the two lowest spans in the tree like this:
 </blockquote>
-
 <p><img src="../images/jaeger-boards-expanded.png" width="1024"><br/>
 <em>Boards Service Expanded</em></p>
-
-<p>Each span gives you the duration of the span and its start time relative to the total duration.  Under 'Tags', you can see additional information such as the HTTP URL, method, and response.  Finally, you can see the actual IPs of the process that executed this span.  You can verify the IPs match the pods that served this traffic.</p>
-
-<p><br></p>
-
+<p>Each span gives you the duration of the span and its start time relative to the total duration.  Under &lsquo;Tags&rsquo;, you can see additional information such as the HTTP URL, method, and response.  Finally, you can see the actual IPs of the process that executed this span.  You can verify the IPs match the pods that served this traffic.</p>
+<br>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Verify the app-ui pod IP:
 </blockquote>
-<pre><code>oc get pods -l deploymentconfig=app-ui -o jsonpath=&#39;{.items[*].status.podIP}{&#34;\n&#34;}&#39;</code></pre>
-<blockquote>
+<pre tabindex="0"><code>oc get pods -l deploymentconfig=app-ui -o jsonpath=&#39;{.items[*].status.podIP}{&#34;\n&#34;}&#39;
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Verify the boards pod IP:
 </blockquote>
-<pre><code>oc get pods -l deploymentconfig=boards -o jsonpath=&#39;{.items[*].status.podIP}{&#34;\n&#34;}&#39;</code></pre>
-<p>The pod IPs should match to the process IPs in the spans you expanded.</p>
-
-<p><br></p>
-
+<pre tabindex="0"><code>oc get pods -l deploymentconfig=boards -o jsonpath=&#39;{.items[*].status.podIP}{&#34;\n&#34;}&#39;
+</code></pre><p>The pod IPs should match to the process IPs in the spans you expanded.</p>
+<br>
 <h2 id="debug-user-profile">Debug User Profile</h2>
-
-<p>Let's use what we learned to debug the performance of the user profile service.</p>
-
+<p>Let&rsquo;s use what we learned to debug the performance of the user profile service.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Send load to the user profile service:
 </blockquote>
-<pre><code>for ((i=1;i&lt;=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done</code></pre>
-<p><i class="fa fa-info-circle"></i> Wait for this to complete as the profile service is slow.</p>
-
-<p><br>
-Inspect the traces.<br />
+<pre tabindex="0"><code>for ((i=1;i&lt;=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+</code></pre><p><i class="fa fa-info-circle"></i> Wait for this to complete as the profile service is slow.</p>
+<br>
+Inspect the traces.  
 <blockquote>
 <i class="fa fa-desktop"></i>
 On the left bar under 'Search', select 'app-ui.user<span class="userid">YOUR#</span>
 ' for 'Service' and 'userprofile-user<span class="userid">YOUR#</span>
-.svc.cluster.local' for 'Operation'.<br />
-</blockquote></p>
-
+.svc.cluster.local' for 'Operation'.  
+</blockquote>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Select 'Find Traces' and Jaeger should reload with traces to the user profile service.
 </blockquote>
-
 <p><img src="../images/jaeger-userprofile-traces.png" width="1024"><br/>
 <em>Traces to User Profile Service</em></p>
-
 <p>Notice that some of these traces are fast (on the order of ms) and some are slow (about 10s).</p>
-
-<p><br></p>
-
+<br>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Select one of the fast traces to start, and expand the lowest span.  
 </blockquote>
-
 <p>Your view should look like this:</p>
-
 <p><img src="../images/jaeger-userprofile-fast.png" width="1024"><br/>
 <em>User Profile Fast Service</em></p>
-
 <p>In the example above, it took a total of 13.48ms for the trace to complete.  The user profile service itself took 3.5ms to execute and return a response.  You can verify the pod that served this request was the version 1 user profile service.</p>
-
-<p><br></p>
-
+<br>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Verify the userprofile-v1 pod IP:
 </blockquote>
-<pre><code>oc get pods -l deploymentconfig=userprofile,version=1.0 -o jsonpath=&#39;{.items[*].status.podIP}{&#34;\n&#34;}&#39;</code></pre>
-<p>The pod IP should match to the process IP in the span you expanded.</p>
-
-<p><br></p>
-
+<pre tabindex="0"><code>oc get pods -l deploymentconfig=userprofile,version=1.0 -o jsonpath=&#39;{.items[*].status.podIP}{&#34;\n&#34;}&#39;
+</code></pre><p>The pod IP should match to the process IP in the span you expanded.</p>
+<br>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Now, select one of the slow traces and expand the lowest span.
 </blockquote>
-
 <p>Your view should look like this:</p>
-
 <p><img src="../images/jaeger-userprofile-slow.png" width="1024"><br/>
 <em>User Profile Slow Service</em></p>
-
 <p>In this view, you can easily see that the total time of the request was spent by the userprofile service itself.  In the example above, it started execution at 5:23ms and took 10 seconds to complete.  You can further verify the pod that served this request was the version 2 user profile service.</p>
-
-<p><br></p>
-
+<br>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Verify the userprofile-v2 pod IP:
 </blockquote>
-<pre><code>oc get pods -l deploymentconfig=userprofile,version=2.0 -o jsonpath=&#39;{.items[*].status.podIP}{&#34;\n&#34;}&#39;</code></pre>
-<p>The pod IP should match to the process IP in the span you expanded.</p>
-
-<p><br></p>
-
+<pre tabindex="0"><code>oc get pods -l deploymentconfig=userprofile,version=2.0 -o jsonpath=&#39;{.items[*].status.podIP}{&#34;\n&#34;}&#39;
+</code></pre><p>The pod IP should match to the process IP in the span you expanded.</p>
+<br>
 <p>At this point, it is really clear that there is a performance issue directly in the version 2 source.  Although the example was simplistic, distributed tracing is incredibly helpful when you have a complicated network of service calls in your mesh.</p>
-
-<p><br></p>
-
+<br>
 <style>
 
  

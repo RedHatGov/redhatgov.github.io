@@ -307,231 +307,154 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="security-groups-in-openstack">Security Groups in OpenStack</h1>
-
+    <h1 id="security-groups-in-openstack">Security Groups in OpenStack</h1>
 <p>A security group is a named collection of network access rules that are used to limit the types of traffic that have access to instances. When you launch an instance, you can assign one or more security groups to it. If you do not create security groups, new instances are automatically assigned to the default security group, unless you explicitly specify a different security group.</p>
-
 <p>The associated rules in each security group control the traffic to instances in the group. Any incoming traffic that is not matched by a rule is denied access by default. You can add rules to or remove rules from a security group, and you can modify rules for the default and any other security group.</p>
-
 <p>You can modify the rules in a security group to allow access to instances through different ports and protocols. For example, you can modify rules to allow access to instances through SSH, to ping instances, or to allow UDP traffic.</p>
-
 <p>You specify the following parameters for rules:</p>
-
-<p><strong>Source of traffic</strong> - Enable traffic to instances from either IP addresses inside the cloud from other group members or from all IP addresses.<br />
-<strong>Protocol</strong> - Choose TCP for SSH, ICMP for pings, or UDP.<br />
-<strong>Destination port on virtual machine</strong> - Define a port range. To open a single port only, enter the same value twice. ICMP does not support ports; instead, you enter values to define the codes and types of ICMP traffic to be allowed.<br />
+<p><strong>Source of traffic</strong> - Enable traffic to instances from either IP addresses inside the cloud from other group members or from all IP addresses.<br>
+<strong>Protocol</strong> - Choose TCP for SSH, ICMP for pings, or UDP.<br>
+<strong>Destination port on virtual machine</strong> - Define a port range. To open a single port only, enter the same value twice. ICMP does not support ports; instead, you enter values to define the codes and types of ICMP traffic to be allowed.<br>
 <strong>Rules</strong> - automatically enforced as soon as you create or modify them.</p>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-You cannot delete the default security group for a project. Also, you cannot delete a security group that is assigned to a running instance.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>You cannot delete the default security group for a project. Also, you cannot delete a security group that is assigned to a running instance.</p>
 </div>
-
-<h1 id="let-s-look-at-the-default-security-group">Let's Look at the Default Security Group</h1>
-
+<h1 id="lets-look-at-the-default-security-group">Let&rsquo;s Look at the Default Security Group</h1>
 <blockquote>
 <p>Navigate to Network -&gt; Security Groups using the second level navigation tabs</p>
 </blockquote>
-
-<figure>
-    <img src="../images/lab4-security-groups-1.png"/> <figcaption>
+<figure><img src="../images/lab4-security-groups-1.png"/><figcaption>
             <h4>Lab 4 Figure 1: Security Group Listing</h4>
         </figcaption>
 </figure>
-
 
 <blockquote>
 <p>Click <strong>Manage Rules</strong> on the right hand side of the row for default security group</p>
 </blockquote>
-
-<figure>
-    <img src="../images/lab4-security-groups-2.png"/> <figcaption>
+<figure><img src="../images/lab4-security-groups-2.png"/><figcaption>
             <h4>Lab 4 Figure 2: Viewing Rules for default Security Group</h4>
         </figcaption>
 </figure>
 
-
-<h2 id="now-let-s-add-two-rules-to-the-default-security-group-for-icmp-and-ssh">Now Let's Add Two Rules to the default Security Group for ICMP and SSH</h2>
-
+<h2 id="now-lets-add-two-rules-to-the-default-security-group-for-icmp-and-ssh">Now Let&rsquo;s Add Two Rules to the default Security Group for ICMP and SSH</h2>
 <blockquote>
-<p>On the <strong>Manage Rules</strong> screen for default security group, click <strong>Add Rule</strong><br />
-Select <strong>All ICMP</strong> for <strong>Rule</strong><br />
-Leave <strong>Direction</strong> set to <strong>Ingress</strong><br />
+<p>On the <strong>Manage Rules</strong> screen for default security group, click <strong>Add Rule</strong><br>
+Select <strong>All ICMP</strong> for <strong>Rule</strong><br>
+Leave <strong>Direction</strong> set to <strong>Ingress</strong><br>
 Leave <strong>Remote</strong> set to <strong>CIDR</strong>
-Enter <strong>192.168.0.0/23</strong> for <strong>CIDR</strong> (this is our external network)<br />
+Enter <strong>192.168.0.0/23</strong> for <strong>CIDR</strong> (this is our external network)<br>
 Click <strong>Add</strong></p>
 </blockquote>
-
-<figure>
-    <img src="../images/lab4-security-groups-3.png"/> <figcaption>
+<figure><img src="../images/lab4-security-groups-3.png"/><figcaption>
             <h4>Lab 4 Figure 3: Add ICMP Rule to default Security Group</h4>
         </figcaption>
 </figure>
 
-
 <div class="alert alert-success">
-  
-  <span class="pficon pficon-ok"></span>
-  
-You should see a green box appear in the upper right corner of the screen that says "Success: Successfully added rule: ALLOW IPv4 icmp from 192.168.0.0/23"
-
-If you did not see a success message, let the intstructor know now
-
+<p><span class="pficon pficon-ok"></span></p>
+<p>You should see a green box appear in the upper right corner of the screen that says &ldquo;Success: Successfully added rule: ALLOW IPv4 icmp from 192.168.0.0/23&rdquo;</p>
+<p>If you did not see a success message, let the intstructor know now</p>
 </div>
-
 <blockquote>
-<p>On the <strong>Manage Rules</strong> screen for default security group, click <strong>Add Rule</strong><br />
-Select <strong>SSH</strong> for <strong>Rule</strong><br />
+<p>On the <strong>Manage Rules</strong> screen for default security group, click <strong>Add Rule</strong><br>
+Select <strong>SSH</strong> for <strong>Rule</strong><br>
 Leave <strong>Remote</strong> set to <strong>CIDR</strong>
-Enter <strong>192.168.0.0/23</strong> for <strong>CIDR</strong> (this is our external network)<br />
+Enter <strong>192.168.0.0/23</strong> for <strong>CIDR</strong> (this is our external network)<br>
 Click <strong>Add</strong></p>
 </blockquote>
-
-<figure>
-    <img src="../images/lab4-security-groups-4.png"/> <figcaption>
+<figure><img src="../images/lab4-security-groups-4.png"/><figcaption>
             <h4>Lab 4 Figure 4: Add SSH Rule to default Security Group</h4>
         </figcaption>
 </figure>
 
-
 <div class="alert alert-success">
-  
-  <span class="pficon pficon-ok"></span>
-  
-You should see a green box appear in the upper right corner of the screen that says "Success: Successfully added rule: ALLOW IPv4 22/tcp from 192.168.0.0/23"
-
-If you did not see a success message, let the intstructor know now
-
+<p><span class="pficon pficon-ok"></span></p>
+<p>You should see a green box appear in the upper right corner of the screen that says &ldquo;Success: Successfully added rule: ALLOW IPv4 22/tcp from 192.168.0.0/23&rdquo;</p>
+<p>If you did not see a success message, let the intstructor know now</p>
 </div>
-
 <p>If we now look at the Manage Rules screen for the default security group, we will see our two new rules for ICMP and SSH ingress traffic allowed only from 192.168.0.0/23 CIDR.</p>
-
-<figure>
-    <img src="../images/lab4-security-groups-5.png"/> <figcaption>
+<figure><img src="../images/lab4-security-groups-5.png"/><figcaption>
             <h4>Lab 4 Figure 5: Manage Rules Screen Showing Two New Rules for ICMP and SSH in the default Security Group</h4>
         </figcaption>
 </figure>
 
-
 <h1 id="now-we-will-create-a-new-security-group-for-web-servers">Now We will Create a New Security Group for Web Servers</h1>
-
 <blockquote>
 <p>Navigate to Network -&gt; Security Groups using the second level navigation tabs</p>
 </blockquote>
-
-<figure>
-    <img src="../images/lab4-security-groups-1.png"/> <figcaption>
+<figure><img src="../images/lab4-security-groups-1.png"/><figcaption>
             <h4>Lab 4 Figure 1: Security Group Listing</h4>
         </figcaption>
 </figure>
 
-
 <blockquote>
-<p>Click <strong>Create Security Group</strong> next to the filter search box<br />
-Enter <strong>web-server</strong> for the <strong>Name</strong><br />
-<strong>Description</strong> is optional, but as you can see below, I used it to describe the purpose of this security group<br />
+<p>Click <strong>Create Security Group</strong> next to the filter search box<br>
+Enter <strong>web-server</strong> for the <strong>Name</strong><br>
+<strong>Description</strong> is optional, but as you can see below, I used it to describe the purpose of this security group<br>
 Click <strong>Create Security Group</strong></p>
 </blockquote>
-
-<figure>
-    <img src="../images/lab4-security-groups-6.png"/> <figcaption>
+<figure><img src="../images/lab4-security-groups-6.png"/><figcaption>
             <h4>Lab 4 Figure 6: Create a New Security Group</h4>
         </figcaption>
 </figure>
 
-
 <div class="alert alert-success">
-  
-  <span class="pficon pficon-ok"></span>
-  
-You should see a green box appear in the upper right corner of the screen that says "Success: Successfully created security group: web-server"
-
-If you did not see a success message, let the intstructor know now
-
+<p><span class="pficon pficon-ok"></span></p>
+<p>You should see a green box appear in the upper right corner of the screen that says &ldquo;Success: Successfully created security group: web-server&rdquo;</p>
+<p>If you did not see a success message, let the intstructor know now</p>
 </div>
-
-<figure>
-    <img src="../images/lab4-security-groups-7.png"/> <figcaption>
+<figure><img src="../images/lab4-security-groups-7.png"/><figcaption>
             <h4>Lab 4 Figure 7: Security Group Listing Showing New web-server Group</h4>
         </figcaption>
 </figure>
 
-
-<h2 id="now-let-s-add-two-rules-to-the-web-server-security-group-for-http-and-https">Now Let's Add Two Rules to the web-server Security Group for HTTP and HTTPS</h2>
-
+<h2 id="now-lets-add-two-rules-to-the-web-server-security-group-for-http-and-https">Now Let&rsquo;s Add Two Rules to the web-server Security Group for HTTP and HTTPS</h2>
 <blockquote>
-<p>Click <strong>Manage Rules</strong> in the row for the web-server security group<br />
-click <strong>Add Rule</strong><br />
-Select <strong>HTTP</strong> for <strong>Rule</strong><br />
+<p>Click <strong>Manage Rules</strong> in the row for the web-server security group<br>
+click <strong>Add Rule</strong><br>
+Select <strong>HTTP</strong> for <strong>Rule</strong><br>
 Leave <strong>Remote</strong> set to <strong>CIDR</strong>
-Leave <strong>0.0.0.0/0</strong> for <strong>CIDR</strong><br />
+Leave <strong>0.0.0.0/0</strong> for <strong>CIDR</strong><br>
 Click <strong>Add</strong></p>
 </blockquote>
-
-<figure>
-    <img src="../images/lab4-security-groups-8.png"/> <figcaption>
+<figure><img src="../images/lab4-security-groups-8.png"/><figcaption>
             <h4>Lab 4 Figure 8: Add HTTP Rule to web-server Security Group</h4>
         </figcaption>
 </figure>
 
-
 <div class="alert alert-success">
-  
-  <span class="pficon pficon-ok"></span>
-  
-You should see a green box appear in the upper right corner of the screen that says "Success: Successfully added rule: ALLOW IPv4 80/tcp from 0.0.0.0/0"
-
-If you did not see a success message, let the intstructor know now
-
+<p><span class="pficon pficon-ok"></span></p>
+<p>You should see a green box appear in the upper right corner of the screen that says &ldquo;Success: Successfully added rule: ALLOW IPv4 80/tcp from 0.0.0.0/0&rdquo;</p>
+<p>If you did not see a success message, let the intstructor know now</p>
 </div>
-
 <blockquote>
-<p>On the <strong>Manage Rules</strong> screen for web-server security group, click <strong>Add Rule</strong><br />
-Select <strong>HTTPS</strong> for <strong>Rule</strong><br />
+<p>On the <strong>Manage Rules</strong> screen for web-server security group, click <strong>Add Rule</strong><br>
+Select <strong>HTTPS</strong> for <strong>Rule</strong><br>
 Leave <strong>Remote</strong> set to <strong>CIDR</strong>
-Enter <strong>0.0.0.0/0</strong> for <strong>CIDR</strong><br />
+Enter <strong>0.0.0.0/0</strong> for <strong>CIDR</strong> <br>
 Click <strong>Add</strong></p>
 </blockquote>
-
-<figure>
-    <img src="../images/lab4-security-groups-9.png"/> <figcaption>
+<figure><img src="../images/lab4-security-groups-9.png"/><figcaption>
             <h4>Lab 4 Figure 9: Add HTTPS Rule to web-server Security Group</h4>
         </figcaption>
 </figure>
 
-
 <div class="alert alert-success">
-  
-  <span class="pficon pficon-ok"></span>
-  
-You should see a green box appear in the upper right corner of the screen that says "Success: Successfully added rule: ALLOW IPv4 443/tcp from 0.0.0.0/0"
-
-If you did not see a success message, let the intstructor know now
-
+<p><span class="pficon pficon-ok"></span></p>
+<p>You should see a green box appear in the upper right corner of the screen that says &ldquo;Success: Successfully added rule: ALLOW IPv4 443/tcp from 0.0.0.0/0&rdquo;</p>
+<p>If you did not see a success message, let the intstructor know now</p>
 </div>
-
 <p>If we now look at the Manage Rules screen for the web-server security group, we will see our two new rules for HTTP and HTTPS ingress traffic allowed from all sources.</p>
-
-<figure>
-    <img src="../images/lab4-security-groups-10.png"/> <figcaption>
+<figure><img src="../images/lab4-security-groups-10.png"/><figcaption>
             <h4>Lab 4 Figure 10: Manage Rules Screen Showing Two New Rules for HTTP and HTTPS in the web-server Security Group</h4>
         </figcaption>
 </figure>
 
-
 <h1 id="summary">Summary</h1>
-
 <p>We have now learned how to create and modify security groups in our project. We can utilize these to build up firewall sets for our resources.</p>
-
 <p>Note that security groups can be combined together on instances to build up a set of rules depening on the instance role in your applications.</p>
-
 <p>In our next lab, we will start working with images.</p>
-
 <hr>
 <h3>Workshop Details</h3>
 <div class="row">

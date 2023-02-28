@@ -307,27 +307,19 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="basics-on-routing-traffic-through-the-mesh">Basics on Routing Traffic Through the Mesh</h1>
-
-<p>One of Istio's core capabilities is the ability to dynamically control how services communicate without modifying the application code itself.  The general concept is called <a href="https://istio.io/docs/concepts/traffic-management">Traffic Management</a>.  It allows you to do things such as A/B test, canary rollouts, rollbacks, and more.</p>
-
+    <h1 id="basics-on-routing-traffic-through-the-mesh">Basics on Routing Traffic Through the Mesh</h1>
+<p>One of Istio&rsquo;s core capabilities is the ability to dynamically control how services communicate without modifying the application code itself.  The general concept is called <a href="https://istio.io/docs/concepts/traffic-management">Traffic Management</a>.  It allows you to do things such as A/B test, canary rollouts, rollbacks, and more.</p>
 <p>The two core API objects for traffic management are the <a href="https://istio.io/docs/concepts/traffic-management/#virtual-services">Virtual Service</a> and the <a href="https://istio.io/docs/concepts/traffic-management/#destination-rules">Destination Rule</a>.  The destination rule is for the owner of a microservice - what versions do I expose and what happens to traffic before it reaches my service?  The virtual service is for the client of a microservice - how do I want to route traffic to the microservice?</p>
-
-<p>For example, a destination rule can expose two versions of a service (e.g. 'v1', 'v2') and prescribe different load balancing policies for each version.  Then, a virtual service can split traffic to each of those versions when the microservice is called by a client.</p>
-
+<p>For example, a destination rule can expose two versions of a service (e.g. &lsquo;v1&rsquo;, &lsquo;v2&rsquo;) and prescribe different load balancing policies for each version.  Then, a virtual service can split traffic to each of those versions when the microservice is called by a client.</p>
 <h2 id="traffic-routing">Traffic Routing</h2>
-
 <p>Traffic routing rules have been constructed for you already.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 View the destination rules in your favorite editor or via bash:
 </blockquote>
-<pre><code>cat ./istio-configuration/destinationrules-all.yaml</code></pre>
-<p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>cat ./istio-configuration/destinationrules-all.yaml
+</code></pre><p>Output (snippet):</p>
+<pre tabindex="0"><code>...
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
@@ -347,16 +339,15 @@ spec:
       trafficPolicy:
         loadBalancer:
           simple: RANDOM
-...</code></pre>
-<p>Most of the destination rules do not have specific configurations except for the tls configuration, which we will discuss in a later lab.  However, the 'userprofile' destination rule exposes 'subsets' - version of the service that can be called on.  You can see different load balancer policies for versions '1.0' and '2.0'.  By default, Istio uses 'ROUND_ROBIN' load balancing.</p>
-
+...
+</code></pre><p>Most of the destination rules do not have specific configurations except for the tls configuration, which we will discuss in a later lab.  However, the &lsquo;userprofile&rsquo; destination rule exposes &lsquo;subsets&rsquo; - version of the service that can be called on.  You can see different load balancer policies for versions &lsquo;1.0&rsquo; and &lsquo;2.0&rsquo;.  By default, Istio uses &lsquo;ROUND_ROBIN&rsquo; load balancing.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 View the virtual services in your favorite editor or via bash:
 </blockquote>
-<pre><code>cat ./istio-configuration/virtual-services-all-v2.yaml</code></pre>
-<p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>cat ./istio-configuration/virtual-services-all-v2.yaml
+</code></pre><p>Output (snippet):</p>
+<pre tabindex="0"><code>...
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -371,101 +362,81 @@ spec:
         host: userprofile
         subset: v2
 ---
-...</code></pre>
-<p>Most of the virtual services do not have specific configurations.  However, the 'userprofile' virtual service routes specifically to version 'v2' of the 'userprofile' microservice.</p>
-
+...
+</code></pre><p>Most of the virtual services do not have specific configurations.  However, the &lsquo;userprofile&rsquo; virtual service routes specifically to version &lsquo;v2&rsquo; of the &lsquo;userprofile&rsquo; microservice.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Let's deploy these routing rules:
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/destinationrules-all.yaml 
-oc apply -f ./istio-configuration/virtual-services-all-v2.yaml</code></pre>
-<blockquote>
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/destinationrules-all.yaml 
+oc apply -f ./istio-configuration/virtual-services-all-v2.yaml
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Verify the destination rules:
 </blockquote>
-<pre><code>oc get dr</code></pre>
-<p>Output:</p>
-<pre><code>NAME                     HOST                     AGE
+<pre tabindex="0"><code>oc get dr
+</code></pre><p>Output:</p>
+<pre tabindex="0"><code>NAME                     HOST                     AGE
 app-ui                   app-ui                   24m
 boards                   boards                   24m
 boards-mongodb           boards-mongodb           24m
 userprofile              userprofile              20m
-userprofile-postgresql   userprofile-postgresql   16m</code></pre>
-<blockquote>
+userprofile-postgresql   userprofile-postgresql   16m
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Verify the virtual services:
 </blockquote>
-<pre><code>oc get vs</code></pre>
-<p>Output (sample):</p>
-<pre><code>NAME                     GATEWAYS                       HOSTS                      AGE
+<pre tabindex="0"><code>oc get vs
+</code></pre><p>Output (sample):</p>
+<pre tabindex="0"><code>NAME                     GATEWAYS                       HOSTS                      AGE
 app-ui                                                  [app-ui]                   25m
 boards                                                  [boards]                   25m
 boards-mongodb                                          [boards-mongodb]           25m
 context-scraper                                         [context-scraper]          25m
 demogateway-userX        [demogateway-userX]            [*]                        44m
 userprofile                                             [userprofile]              25m
-userprofile-postgresql                                  [userprofile-postgresql]   25m</code></pre>
-<p>Let's test the application UI in the browser.</p>
-
+userprofile-postgresql                                  [userprofile-postgresql]   25m
+</code></pre><p>Let&rsquo;s test the application UI in the browser.</p>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Navigate to the 'Profile' section in the header.  
 </blockquote>
-
 <p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
-
 <p><code>echo $GATEWAY_URL</code></p>
-
 <p>There should be no change at this point.  You are routing to version 2 of the user profile service you deployed in an earlier lab, and it is really slow.</p>
-
-<p><br></p>
-
-<p>Let's see what this looks like in Kiali.</p>
-
+<br>
+<p>Let&rsquo;s see what this looks like in Kiali.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Send load to the user profile service:
 </blockquote>
-<pre><code>for ((i=1;i&lt;=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done</code></pre>
-<p><br></p>
-
+<pre tabindex="0"><code>for ((i=1;i&lt;=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+</code></pre><br>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Navigate to 'Graph' in the left navigation bar.
 </blockquote>
-
 <p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
-
 <p><code>echo $KIALI_CONSOLE</code></p>
-
-<p><br></p>
-
+<br>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Switch to the 'Versioned app graph' view and change to 'Last 1m'.  
 </blockquote>
-
-<p>You should see traffic flowing to user profile version '2.0'.</p>
-
+<p>You should see traffic flowing to user profile version &lsquo;2.0&rsquo;.</p>
 <p>The flow of traffic is indicated by a green highlight in the graph.</p>
-
 <p><img src="../images/kiali-userprofile-v2.png" width="1024"><br/>
 <em>Kiali Graph with v2 Routing</em></p>
-
-<p><br></p>
-
+<br>
 <h2 id="change-traffic-routing">Change Traffic Routing</h2>
-
-<p>One of the advantages of Istio is that you can change traffic routing without modifying application code.  There is a performance issue with version 2 of our profile service so let's roll back to version 1.  All you need to do is change your virtual service configuration.</p>
-
+<p>One of the advantages of Istio is that you can change traffic routing without modifying application code.  There is a performance issue with version 2 of our profile service so let&rsquo;s roll back to version 1.  All you need to do is change your virtual service configuration.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 View the modified virtual service in your favorite editor or via bash:
 </blockquote>
-<pre><code>cat ./istio-configuration/virtual-service-userprofile-v1.yaml</code></pre>
-<p>Output:</p>
-<pre><code>apiVersion: networking.istio.io/v1alpha3
+<pre tabindex="0"><code>cat ./istio-configuration/virtual-service-userprofile-v1.yaml
+</code></pre><p>Output:</p>
+<pre tabindex="0"><code>apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: userprofile
@@ -476,21 +447,20 @@ spec:
   - route:
     - destination:
         host: userprofile
-        subset: v1</code></pre>
-<p>In this configuration, you will route to 'v1' of the virtual service.</p>
-
+        subset: v1
+</code></pre><p>In this configuration, you will route to &lsquo;v1&rsquo; of the virtual service.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Deploy the change:
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v1.yaml</code></pre>
-<blockquote>
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v1.yaml
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Verify the change:
 </blockquote>
-<pre><code>oc describe vs userprofile</code></pre>
-<p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>oc describe vs userprofile
+</code></pre><p>Output (snippet):</p>
+<pre tabindex="0"><code>...
 Spec:
   Hosts:
     userprofile
@@ -499,54 +469,40 @@ Spec:
       Destination:
         Host:    userprofile
         Subset:  v1
-Events:          &lt;none&gt;</code></pre>
-<p><br></p>
-
+Events:          &lt;none&gt;
+</code></pre><br>
 <blockquote>
 <i class="fa fa-desktop"></i>
 In the application UI, navigate to the 'Profile' section in the header.  
 </blockquote>
-
 <p>The page should load quickly and you are back to routing to version 1 of the user profile service.</p>
-
-<p><br></p>
-
+<br>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Let's send 100 user profile requests to generate traffic
 </blockquote>
-<pre><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done</code></pre>
-<blockquote>
+<pre tabindex="0"><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+</code></pre><blockquote>
 <i class="fa fa-desktop"></i>
 Now in Kiali, navigate to 'Graph' in the left navigation bar.
 </blockquote>
-
 <blockquote>
 <i class="fa fa-desktop"></i>
 Switch to the 'Versioned app graph' view and change to 'Last 1m'.  
 </blockquote>
-
-<p>You should see traffic flowing to user profile version '1.0'.</p>
-
+<p>You should see traffic flowing to user profile version &lsquo;1.0&rsquo;.</p>
 <p>The flow of traffic is indicated by a green highlight in the graph.</p>
-
 <p><img src="../images/kiali-userprofile-v1.png" width="1024"><br/>
 <em>Kiali Graph with v1 Routing</em></p>
-
-<p><br></p>
-
+<br>
 <h2 id="summary">Summary</h2>
-
 <p>Congratulations, you configured traffic routing with Istio!</p>
-
 <p>A few key highlights are:</p>
-
 <ul>
 <li>The two core API objects for traffic management are the Virtual Service and Destination Rule</li>
 <li>We can change which version of a service we call by modifying the Virtual Service</li>
 <li>Kiali provides a service graph view while traffic is flowing in the mesh</li>
 </ul>
-
 <style>
 
  

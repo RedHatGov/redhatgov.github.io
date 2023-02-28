@@ -307,52 +307,35 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="blue-green-deployments">Blue/Green deployments</h1>
-
+    <h1 id="bluegreen-deployments">Blue/Green deployments</h1>
 <p>When implementing continuous delivery for your software one very useful technique is called Blue/Green deployments.  It addresses the desire to minimize downtime during the release of a new version of an application to production.  Essentially, it involves running two production versions of your app side-by-side and then switching the routing from the last stable version to the new version once it is verified.  Using OpenShift, this can be very seamless because using containers we can easily and rapidly deploy a duplicate infrastructure to support alternate versions and modify routes as a service.  In this lab, we will walk through a simple Blue/Green workflow with an simple web application on OpenShift.</p>
-
 <h2 id="before-starting">Before starting</h2>
-
 <p>Before we get started with the Blue/Green deployment lab, lets clean up some of the projects from the previous lab.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc delete all -l app<span style="color:#f92672">=</span>jenkins-ephemeral
-$ oc delete project cicd-<span class="userid">YOUR#</span>
-</code></pre></div>
-<h2 id="lets-deploy-an-application">Lets deploy an application</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc delete all -l app<span style="color:#f92672">=</span>jenkins-ephemeral
+</span></span><span style="display:flex;"><span>$ oc delete project cicd-<span class="userid">YOUR#</span>
 
-<p>To demonstrate Blue/Green deployments, we'll use a simple application that renders a colored box as an example. Using your GitHub account, please fork the following <a href="https://github.com/RedHatGov/openshift-workshops">https://github.com/RedHatGov/openshift-workshops</a> project.</p>
-
+</span></span></code></pre></div><h2 id="lets-deploy-an-application">Lets deploy an application</h2>
+<p>To demonstrate Blue/Green deployments, we&rsquo;ll use a simple application that renders a colored box as an example. Using your GitHub account, please fork the following <a href="https://github.com/RedHatGov/openshift-workshops">https://github.com/RedHatGov/openshift-workshops</a> project.</p>
 <p>You should be comfortable deploying an app at this point, but here are the steps anyway:</p>
-
 <blockquote>
 <p><i class="fa fa-terminal"></i> Goto the terminal and type these commands:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-project bluegreen-<span class="userid">YOUR#</span>
-$ oc new-app --name<span style="color:#f92672">=</span>green https://github.com/your-github-uid-goes-here/openshift-workshops --context-dir<span style="color:#f92672">=</span>dc-metro-map
-$ oc expose service green</code></pre></div>
-<p>Note that we exposed this application using a route named &quot;green&quot;. Wait for the application to become available, then navigate to your application and validate it deployed correctly.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc new-project bluegreen-<span class="userid">YOUR#</span>
+</span></span><span style="display:flex;"><span>$ oc new-app --name<span style="color:#f92672">=</span>green https://github.com/your-github-uid-goes-here/openshift-workshops --context-dir<span style="color:#f92672">=</span>dc-metro-map
+</span></span><span style="display:flex;"><span>$ oc expose service green
+</span></span></code></pre></div><p>Note that we exposed this application using a route named &ldquo;green&rdquo;. Wait for the application to become available, then navigate to your application and validate it deployed correctly.</p>
 <h2 id="release-a-new-version-of-our-app-and-test-it-in-the-same-environment">Release a new version of our app and test it in the same environment</h2>
-
-<p>What we'll do next is create a new version of the application called &quot;blue&quot;. The quickest way to make a change to the code is directly in the GitHub web interface. In GitHub, edit the dc-metro-map/views/dcmetro.jade file in your repo.</p>
-
+<p>What we&rsquo;ll do next is create a new version of the application called &ldquo;blue&rdquo;. The quickest way to make a change to the code is directly in the GitHub web interface. In GitHub, edit the dc-metro-map/views/dcmetro.jade file in your repo.</p>
 <p><img src="../images/ocp-lab-bluegreen-editgithub.png" width="900"><br/></p>
-
-<p>We can change the text labels indicated by name of a color. If you want to change the label for the &quot;Red Line&quot;, change line 22 from &quot;Red Line&quot; to  &quot;Silver Line&quot;. These changes will be easily viewable on the main screen of the application.</p>
-
-<p>Use the same commands to deploy this new version of the app, but this time name the service &quot;blue&quot;. No need to expose a new route -- we'll instead switch the &quot;green&quot; route to point to the &quot;blue&quot; service once we've verified it.</p>
-
+<p>We can change the text labels indicated by name of a color. If you want to change the label for the &ldquo;Red Line&rdquo;, change line 22 from &ldquo;Red Line&rdquo; to  &ldquo;Silver Line&rdquo;. These changes will be easily viewable on the main screen of the application.</p>
+<p>Use the same commands to deploy this new version of the app, but this time name the service &ldquo;blue&rdquo;. No need to expose a new route &ndash; we&rsquo;ll instead switch the &ldquo;green&rdquo; route to point to the &ldquo;blue&rdquo; service once we&rsquo;ve verified it.</p>
 <blockquote>
 <p><i class="fa fa-terminal"></i> Goto the terminal and type these commands:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-app --name<span style="color:#f92672">=</span>blue https://github.com/your-github-uid-goes-here/openshift-workshops --context-dir<span style="color:#f92672">=</span>dc-metro-map</code></pre></div>
-<p>Wait for the &quot;blue&quot; application to become avialable before proceeding.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc new-app --name<span style="color:#f92672">=</span>blue https://github.com/your-github-uid-goes-here/openshift-workshops --context-dir<span style="color:#f92672">=</span>dc-metro-map
+</span></span></code></pre></div><p>Wait for the &ldquo;blue&rdquo; application to become avialable before proceeding.</p>
 <h2 id="switch-from-green-to-blue">Switch from Green to Blue</h2>
-
 <p>Now that we are satisfied with our change we can do the Green/Blue switch.  With OpenShift services and routes, this is super simple.  Follow the steps below to make the switch:</p>
-
 <div class="panel-group">
   
 
@@ -360,31 +343,32 @@ $ oc expose service green</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse1c1246cae16675c66e1bf587637d477c" class="collapsed">
+      <a data-toggle="collapse" href="#collapsef96163b4b0737e99578e5f014895edc8" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse1c1246cae16675c66e1bf587637d477c" class="panel-collapse collapse ">
+  <div id="collapsef96163b4b0737e99578e5f014895edc8" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc edit route green</code></pre></div>
-<p>This will bring up the Route configuration yaml. Edit the element &quot;spec:&quot;. On the &quot;to:&quot; &quot;name:&quot; line, change its value from &quot;green&quot; to &quot;blue&quot;:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">spec:
-  host: green-bluegreen-&lt;span class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;userid&#34;</span>&gt;YOUR#&lt;/span&gt;
-.apps.alexocp43.redhatgov.io
-  port:
-    targetPort: 8080-tcp
-  to:
-    kind: Service
-    name: blue
-    weight: <span style="color:#ae81ff">100</span>
-  wildcardPolicy: None</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc edit route green
+</span></span></code></pre></div><p>This will bring up the Route configuration yaml. Edit the element &ldquo;spec:&rdquo;. On the &ldquo;to:&rdquo; &ldquo;name:&rdquo; line, change its value from &ldquo;green&rdquo; to &ldquo;blue&rdquo;:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  host: green-bluegreen-&lt;span class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;userid&#34;</span>&gt;YOUR#&lt;/span&gt;
+</span></span><span style="display:flex;"><span>.apps.alexocp43.redhatgov.io
+</span></span><span style="display:flex;"><span>  port:
+</span></span><span style="display:flex;"><span>    targetPort: 8080-tcp
+</span></span><span style="display:flex;"><span>  to:
+</span></span><span style="display:flex;"><span>    kind: Service
+</span></span><span style="display:flex;"><span>    name: blue
+</span></span><span style="display:flex;"><span>    weight: <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>  wildcardPolicy: None
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -395,34 +379,29 @@ $ oc expose service green</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsefc6078f2177d0b0fff703b838953abea" class="collapsed">
+      <a data-toggle="collapse" href="#collapse233e6b6eb264561020df97e5b64b85c7" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsefc6078f2177d0b0fff703b838953abea" class="panel-collapse collapse ">
+  <div id="collapse233e6b6eb264561020df97e5b64b85c7" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
-<p>As &quot;Administrator&quot;, in the &quot;bluegreen-<span class="userid">YOUR#</span>
-&quot; project, navigate to &quot;Routes&quot;, and select &quot;green&quot;</p>
+<p>As &ldquo;Administrator&rdquo;, in the &ldquo;bluegreen-<span class="userid">YOUR#</span>
+&quot; project, navigate to &ldquo;Routes&rdquo;, and select &ldquo;green&rdquo;</p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-bluegreen-routesoverview.png" width="900">
-<br/></p>
-
+<img src="../images/ocp-lab-bluegreen-routesoverview.png" width="900">
+<br/>
 <blockquote>
 <p>In the Route detail page, click on Actions &gt; Edit:</p>
 </blockquote>
-
 <p><img src="../images/ocp-lab-bluegreen-routedetail.png" width="200"><br/></p>
-
 <blockquote>
-<p>Edit the Route: change the &quot;spec:&quot; -&gt; &quot;to:&quot; section &quot;name:&quot; from &quot;green&quot; to &quot;blue&quot;, and click &quot;Save&quot;</p>
+<p>Edit the Route: change the &ldquo;spec:&rdquo; -&gt; &ldquo;to:&rdquo; section &ldquo;name:&rdquo; from &ldquo;green&rdquo; to &ldquo;blue&rdquo;, and click &ldquo;Save&rdquo;</p>
 </blockquote>
-
 <p><img src="../images/ocp-lab-bluegreen-edit.png" width="700"><br/></p>
 
     </div>
@@ -432,13 +411,9 @@ $ oc expose service green</code></pre></div>
 
 </div>
 
-
 <h1 id="summary">Summary</h1>
-
 <p>Pretty easy, right?</p>
-
 <p>If you want to read more about Blue/Green check out <a href="http://martinfowler.com/bliki/BlueGreenDeployment.html">this post</a> with a longer description as well as links to additional resources.</p>
-
 <style>
 
  

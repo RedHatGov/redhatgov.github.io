@@ -273,109 +273,114 @@
 </div>
 
 <div class="container">
-  
-
-<h1 id="unit-7-recovering-a-certificate">Unit 7. Recovering a certificate</h1>
-
-<p>In this unit we will simulate recovering a user's private key.</p>
-
+  <h1 id="unit-7-recovering-a-certificate">Unit 7. Recovering a certificate</h1>
+<p>In this unit we will simulate recovering a user&rsquo;s private key.</p>
 <h2 id="recover-private-key">Recover Private Key</h2>
-
-<p>The URL is different in the images. I'm lazy.</p>
-
+<p>The URL is different in the images. I&rsquo;m lazy.</p>
 <ol>
-<li><p>In new tab, open KRA webpage.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/kra/agent/kra</code></p></li>
-
-<li><p>Select <code>PKI Administrator</code> certificate (if prompted).</p></li>
-
-<li><p>Add Exception for insecure connection (if prompted).</p></li>
-
-<li><p>Click <code>Search for Keys</code>.</p>
-
-<p><img src="images/keyrecover_lab_1.png" alt="Alt text" /></p></li>
-
-<li><p>Check <code>Key Identifiers</code> box and click <code>Show Key</code> (scroll down).</p>
-
-<p><img src="images/keyrecover_lab_2.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Details</code> button.</p>
-
-<p><img src="images/keyrecover_lab_3.png" alt="Alt text" /></p></li>
-
-<li><p>Details of key.</p>
-
-<p><img src="images/keyrecover_lab_4.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Recover Keys</code>.</p>
-
-<p><img src="images/keyrecover_lab_5.png" alt="Alt text" /></p></li>
-
-<li><p>Check <code>Key Identifiers</code> box and click <code>Show Key</code> (scroll down).</p>
-
-<p><img src="images/keyrecover_lab_6.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Recover</code> button.</p>
-
-<p><img src="images/keyrecover_lab_7.png" alt="Alt text" /></p></li>
-
-<li><p>Open new tab.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/ca/agent/ca</code></p></li>
-
-<li><p>Click <code>List Certificates</code>.</p>
-
-<p><img src="images/keyrecover_lab_8.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Find</code> button.</p>
-
-<p><img src="images/keyrecover_lab_9.png" alt="Alt text" /></p></li>
-
-<li><p>Click certificate with <code>UID=</code>.</p>
-
-<p><img src="images/keyrecover_lab_10.png" alt="Alt text" /></p></li>
-
-<li><p>Scroll down to <code>Base 64 encoded certificate</code>.</p>
-
-<p><img src="images/keyrecover_lab_11.png" alt="Alt text" /></p></li>
-
-<li><p>Copy entire certificate into buffer. Include <code>-----BEGIN</code> and <code>-----END</code> lines.</p></li>
-
-<li><p>Go back to KRA tab.</p></li>
-
-<li><p>Paste into <code>Certificate</code> box.</p>
-
-<p><img src="images/keyrecover_lab_12.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Recover</code> button.</p>
-
-<p><img src="images/keyrecover_lab_13.png" alt="Alt text" /></p></li>
-
-<li><p>Click request number.</p>
-
-<p><img src="images/keyrecover_lab_14.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Grant</code> link.</p>
-
-<p><img src="images/keyrecover_lab_15.png" alt="Alt text" /></p></li>
-
-<li><p>Click request number.</p>
-
-<p><img src="images/keyrecover_lab_16.png" alt="Alt text" /></p></li>
-
-<li><p>Enter <code>redhat</code> in both password fields.</p>
-
-<p><img src="images/keyrecover_lab_17.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Retrieve PKCS#12</code>.</p>
-
-<p><img src="images/keyrecover_lab_18.png" alt="Alt text" /></p></li>
-
-<li><p>Save file somewhere.</p></li>
-
-<li><p>View recovered key.</p>
-
+<li>
+<p>In new tab, open KRA webpage.</p>
+<p><code>https://ca1.redhat.example.com:8443/kra/agent/kra</code></p>
+</li>
+<li>
+<p>Select <code>PKI Administrator</code> certificate (if prompted).</p>
+</li>
+<li>
+<p>Add Exception for insecure connection (if prompted).</p>
+</li>
+<li>
+<p>Click <code>Search for Keys</code>.</p>
+<pre><code>![Alt text](images/keyrecover_lab_1.png)
+</code></pre>
+</li>
+<li>
+<p>Check <code>Key Identifiers</code> box and click <code>Show Key</code> (scroll down).</p>
+<pre><code>![Alt text](images/keyrecover_lab_2.png)
+</code></pre>
+</li>
+<li>
+<p>Click <code>Details</code> button.</p>
+<pre><code>![Alt text](images/keyrecover_lab_3.png)
+</code></pre>
+</li>
+<li>
+<p>Details of key.</p>
+<pre><code>![Alt text](images/keyrecover_lab_4.png)
+</code></pre>
+</li>
+<li>
+<p>Click <code>Recover Keys</code>.</p>
+<pre><code>![Alt text](images/keyrecover_lab_5.png)
+</code></pre>
+</li>
+<li>
+<p>Check <code>Key Identifiers</code> box and click <code>Show Key</code> (scroll down).</p>
+<pre><code>![Alt text](images/keyrecover_lab_6.png)
+</code></pre>
+</li>
+<li>
+<p>Click <code>Recover</code> button.</p>
+<p><img src="images/keyrecover_lab_7.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Open new tab.</p>
+<p><code>https://ca1.redhat.example.com:8443/ca/agent/ca</code></p>
+</li>
+<li>
+<p>Click <code>List Certificates</code>.</p>
+<p><img src="images/keyrecover_lab_8.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click <code>Find</code> button.</p>
+<p><img src="images/keyrecover_lab_9.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click certificate with <code>UID=</code>.</p>
+<p><img src="images/keyrecover_lab_10.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Scroll down to <code>Base 64 encoded certificate</code>.</p>
+<p><img src="images/keyrecover_lab_11.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Copy entire certificate into buffer. Include <code>-----BEGIN</code> and <code>-----END</code> lines.</p>
+</li>
+<li>
+<p>Go back to KRA tab.</p>
+</li>
+<li>
+<p>Paste into <code>Certificate</code> box.</p>
+<p><img src="images/keyrecover_lab_12.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click <code>Recover</code> button.</p>
+<p><img src="images/keyrecover_lab_13.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click request number.</p>
+<p><img src="images/keyrecover_lab_14.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click <code>Grant</code> link.</p>
+<p><img src="images/keyrecover_lab_15.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click request number.</p>
+<p><img src="images/keyrecover_lab_16.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Enter <code>redhat</code> in both password fields.</p>
+<p><img src="images/keyrecover_lab_17.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click <code>Retrieve PKCS#12</code>.</p>
+<p><img src="images/keyrecover_lab_18.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Save file somewhere.</p>
+</li>
+<li>
+<p>View recovered key.</p>
 <p><code>openssl pkcs12 -in getAsyncPk12</code></p>
 <pre><code>Enter Import Password: redhat
 MAC verified OK
@@ -384,9 +389,10 @@ Bag Attributes
     friendlyName: UID=brian-test
 Key Attributes: &lt;No Attributes&gt;
 Enter PEM pass phrase: redhat
-Verifying - Enter PEM pass phrase: redhat</code></pre></li>
+Verifying - Enter PEM pass phrase: redhat
+</code></pre>
+</li>
 </ol>
-
 <p>The next lesson is <a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_8.md">Unit 8: Revoking a certificate</a>.</p>
 
 </div>

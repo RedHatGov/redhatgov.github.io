@@ -307,22 +307,13 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="welcome-to-openshift">Welcome to OpenShift!</h1>
-
+    <h1 id="welcome-to-openshift">Welcome to OpenShift!</h1>
 <p>This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.  If you are already familiar with the basics of OpenShift you can skip this lab - after making sure you can login.</p>
-
 <h1 id="wetty-environment-links">Wetty Environment Links</h1>
-
 <p>Your instructor will assign you an OpenShift environment and login.</p>
-
-<p>Please click &quot;Return to Workshop&quot; above to view the OpenShift Environment Links.</p>
-
+<p>Please click &ldquo;Return to Workshop&rdquo; above to view the OpenShift Environment Links.</p>
 <h1 id="key-terms">Key Terms</h1>
-
-<p>We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with.  And you'll learn more terms along the way, but these are the basics to get you started.</p>
-
+<p>We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with.  And you&rsquo;ll learn more terms along the way, but these are the basics to get you started.</p>
 <ul>
 <li>Container - Your software wrapped in a complete filesystem containing everything it needs to run</li>
 <li>Image - We are talking about Docker images; read-only and used to create containers</li>
@@ -336,98 +327,67 @@
 <li>Master - The foreman of the OpenShift architecture, the master schedules operations, watches for problems, and orchestrates everything</li>
 <li>Node - Where the compute happens, your software is run on nodes</li>
 </ul>
-
 <h1 id="accessing-openshift">Accessing OpenShift</h1>
-
-<p>OpenShift provides a web console that allow you to perform various tasks via a web browser.  Additionally, you can utilize a command line tool to perfrom tasks.  Let's get started by logging into both of these and checking the status of the platform.</p>
-
-<h1 id="let-s-login">Let's Login</h1>
-
+<p>OpenShift provides a web console that allow you to perform various tasks via a web browser.  Additionally, you can utilize a command line tool to perfrom tasks.  Let&rsquo;s get started by logging into both of these and checking the status of the platform.</p>
+<h1 id="lets-login">Let&rsquo;s Login</h1>
 <blockquote>
-<p>Navigate to the URI provided by your instructor and login with the user/password provided (if there's an icon on the Desktop, just double click that)</p>
+<p>Navigate to the URI provided by your instructor and login with the user/password provided (if there&rsquo;s an icon on the Desktop, just double click that)</p>
 </blockquote>
-
-<p><img src="../img/ose-login.png" width="1000" />
-<em>Login Webpage</em></p>
-
+<img src="../img/ose-login.png" width="1000" />
+*Login Webpage*
 <p>Once logged in you should see your available projects.</p>
-
-<p>An OpenShift project allows a community of users (or a user) to organize and manage their content in isolation from other communities. Each project has its own resources, policies (who can or cannot perform actions), and constraints (quotas and limits on resources, etc). Projects act as a &quot;wrapper&quot; around all the application services and endpoints you (or your teams) are using for your work.</p>
-
+<p>An OpenShift project allows a community of users (or a user) to organize and manage their content in isolation from other communities. Each project has its own resources, policies (who can or cannot perform actions), and constraints (quotas and limits on resources, etc). Projects act as a &ldquo;wrapper&rdquo; around all the application services and endpoints you (or your teams) are using for your work.</p>
 <p>Users must be given access to projects by administrators, or if allowed to create projects, automatically have access to their own projects.</p>
-
 <p>Projects can have a separate <strong>name</strong>, <strong>displayName</strong>, and <strong>description</strong>.</p>
-
 <ul>
 <li>The mandatory <strong>name</strong> is a unique identifier for the project and is most visible when using the CLI tools or API.</li>
 <li>The optional <strong>displayName</strong> is how the project is displayed in the web console (defaults to name).</li>
 <li>The optional <strong>description</strong> can be a more detailed description of the project and is also visible in the web console.</li>
 </ul>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-A project is technically a Kubernetes namespace with additional annotations.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>A project is technically a Kubernetes namespace with additional annotations.</p>
 </div>
-
 <h1 id="so-this-is-what-an-empty-project-looks-like">So this is what an empty project looks like</h1>
-
 <blockquote>
 <p>Click on one of the projects from the project list</p>
 </blockquote>
-
-<p>Don't worry, it's supposed to look empty right now because you currently don't have anything in your project.  We'll fix that in the next lab.</p>
-
+<p>Don&rsquo;t worry, it&rsquo;s supposed to look empty right now because you currently don&rsquo;t have anything in your project.  We&rsquo;ll fix that in the next lab.</p>
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-If you do not see an available project, go ahead and click `New Project` and create one.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>If you do not see an available project, go ahead and click <code>New Project</code> and create one.</p>
 </div>
-
-<h1 id="let-s-try-the-command-line">Let's try the command line</h1>
-
+<h1 id="lets-try-the-command-line">Let&rsquo;s try the command line</h1>
 <blockquote>
 <p><i class="fa fa-terminal"></i> Open a terminal and login using the same URI/user/password with following command:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc login <span style="color:#f92672">[</span>URI<span style="color:#f92672">]</span> --insecure-skip-tls-verify<span style="color:#f92672">=</span>true</code></pre></div>
-<p>See example below:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc login https://&lt;workshopname&gt;master.0.redhatgov.io:8443 --insecure-skip-tls-verify<span style="color:#f92672">=</span>true</code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc login <span style="color:#f92672">[</span>URI<span style="color:#f92672">]</span> --insecure-skip-tls-verify<span style="color:#f92672">=</span>true
+</span></span></code></pre></div><p>See example below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc login https://&lt;workshopname&gt;master.0.redhatgov.io:8443 --insecure-skip-tls-verify<span style="color:#f92672">=</span>true
+</span></span></code></pre></div><blockquote>
 <p><i class="fa fa-terminal"></i> Check to see what projects you have access to:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get projects</code></pre></div>
-<h1 id="it-looks-empty-via-the-command-line-too">It looks empty via the command line too</h1>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get projects
+</span></span></code></pre></div><h1 id="it-looks-empty-via-the-command-line-too">It looks empty via the command line too</h1>
 <blockquote>
-<p><i class="fa fa-terminal"></i> Type the following command to use the demo project (replace 'demo' with the project you want to use if there isn't a demo project):</p>
+<p><i class="fa fa-terminal"></i> Type the following command to use the demo project (replace &lsquo;demo&rsquo; with the project you want to use if there isn&rsquo;t a demo project):</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-project demo</code></pre></div>
-<div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-You may recieve the message "Error from server: project "demo" already exists". Try another project name i.e. your first initial and lastname.
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc new-project demo
+</span></span></code></pre></div><div class="alert alert-info">
+<p><span class="pficon pficon-info"></span></p>
+<p>You may recieve the message &ldquo;Error from server: project &ldquo;demo&rdquo; already exists&rdquo;. Try another project name i.e. your first initial and lastname.</p>
 </div>
-
 <blockquote>
 <p><i class="fa fa-terminal"></i> If you create more than one project, then you can switch projects with the following command:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project <span style="color:#f92672">[</span>NAME<span style="color:#f92672">]</span></code></pre></div>
-<h1 id="help-about-any-command">Help about any command</h1>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc project <span style="color:#f92672">[</span>NAME<span style="color:#f92672">]</span>
+</span></span></code></pre></div><h1 id="help-about-any-command">Help about any command</h1>
 <p>To see the full list of commands supported, run <code>oc help</code>.</p>
-
 <blockquote>
 <p><i class="fa fa-terminal"></i> Type the following command to read more information about services, deployment configs, build configurations, and active deployments:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc status -h</code></pre></div>
-<h1 id="summary">Summary</h1>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc status -h
+</span></span></code></pre></div><h1 id="summary">Summary</h1>
 <p>You should now be ready to get hands-on with our workshop labs.</p>
 
 

@@ -307,14 +307,9 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="bring-your-own-docker">Bring your own docker</h1>
-
-<p>It's easy to get started with OpenShift whether you're using our app templates or bringing your existing docker assets.  In this quick lab we will deploy an application using an exisiting docker image.  OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.  And we will dig into the details to show how all that works.</p>
-
-<h2 id="let-s-point-openshift-to-an-existing-built-docker-image">Let's point OpenShift to an existing built docker image</h2>
-
+    <h1 id="bring-your-own-docker">Bring your own docker</h1>
+<p>It&rsquo;s easy to get started with OpenShift whether you&rsquo;re using our app templates or bringing your existing docker assets.  In this quick lab we will deploy an application using an exisiting docker image.  OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.  And we will dig into the details to show how all that works.</p>
+<h2 id="lets-point-openshift-to-an-existing-built-docker-image">Let&rsquo;s point OpenShift to an existing built docker image</h2>
 <div class="panel-group">
   
 
@@ -322,38 +317,43 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse9e06057a58fec568305980b6b1aff44f" class="collapsed">
+      <a data-toggle="collapse" href="#collapse09cbc645cfc1e62afbd37ef335123895" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse9e06057a58fec568305980b6b1aff44f" class="panel-collapse collapse ">
+  <div id="collapse09cbc645cfc1e62afbd37ef335123895" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><blockquote>
+       <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
-</blockquote></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-app sonatype/nexus:oss</code></pre></div>
-<p><blockquote>
-The output should show something <em>similar</em> to below:
-</blockquote></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">--&gt; Found Docker image adffc23 <span style="color:#f92672">(</span><span style="color:#ae81ff">13</span> days old<span style="color:#f92672">)</span> from Docker Hub <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#34;sonatype/nexus:oss&#34;</span>
-    * An image stream tag will be created as <span style="color:#e6db74">&#34;nexus:oss&#34;</span> that will track this image
-    * This image will be deployed in deployment config <span style="color:#e6db74">&#34;nexus&#34;</span>
-    * Port 8081/tcp will be load balanced by service <span style="color:#e6db74">&#34;nexus&#34;</span>
-      * Other containers can access this service through the hostname <span style="color:#e6db74">&#34;nexus&#34;</span>
+</blockquote>
+```bash
+$ oc new-app sonatype/nexus:oss
+```
+<blockquote>
+The output should show something *similar* to below:
+</blockquote>
+```bash
+--> Found Docker image adffc23 (13 days old) from Docker Hub for "sonatype/nexus:oss"
+    * An image stream tag will be created as "nexus:oss" that will track this image
+    * This image will be deployed in deployment config "nexus"
+    * Port 8081/tcp will be load balanced by service "nexus"
+      * Other containers can access this service through the hostname "nexus"
     * This image declares volumes and will default to use non-persistent, host-local storage.
-      You can add persistent volumes later by running <span style="color:#e6db74">&#39;volume dc/nexus --add ...&#39;</span>
---&gt; Creating resources ...
-    imagestream.image.openshift.io <span style="color:#e6db74">&#34;nexus&#34;</span> created
-    deploymentconfig.apps.openshift.io <span style="color:#e6db74">&#34;nexus&#34;</span> created
-    service <span style="color:#e6db74">&#34;nexus&#34;</span> created
---&gt; Success
+      You can add persistent volumes later by running 'volume dc/nexus --add ...'
+--> Creating resources ...
+    imagestream.image.openshift.io "nexus" created
+    deploymentconfig.apps.openshift.io "nexus" created
+    service "nexus" created
+--> Success
     Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
-     <span style="color:#e6db74">&#39;oc expose svc/nexus&#39;</span> 
-    Run <span style="color:#e6db74">&#39;oc status&#39;</span> to view your app.</code></pre></div>
+     'oc expose svc/nexus' 
+    Run 'oc status' to view your app.
+```
+
     </div>
   </div>
 </div>
@@ -364,36 +364,32 @@ The output should show something <em>similar</em> to below:
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse5da4f31bf73fb8936b73fa92e7071332" class="collapsed">
+      <a data-toggle="collapse" href="#collapse97f329ebc772ac1b31427cdd2d86e900" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse5da4f31bf73fb8936b73fa92e7071332" class="panel-collapse collapse ">
+  <div id="collapse97f329ebc772ac1b31427cdd2d86e900" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Click "Add to Project"
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="150"><br/>
-
 <blockquote>
 Select the "Deploy Image" option from the drop down
 </blockquote>
 <img src="../images/ocp-nexus-deploy-image.png" width="200"><br/>
-
 <blockquote>
 Select the option for "Image Name" and enter "sonatype/nexus:oss", then click the magnifying glass to the far right to search for the image.
 </blockquote>
 <img src="../images/ocp-nexus-imagename-expand.png" width="600"><br/>
-
 <blockquote>
 Observe default values that are populated in the search results
 </blockquote>
 <img src="../images/ocp-nexus-create-1.png" width="600"><br/>
-
 <blockquote>
 Click "Deploy" then click "Close"
 </blockquote>
@@ -405,53 +401,38 @@ Click "Deploy" then click "Close"
 
 </div>
 
-
 <h2 id="we-can-browse-our-project-details-with-the-command-line">We can browse our project details with the command line</h2>
-
 <blockquote>
-<p><i class="fa fa-terminal"></i> Try typing the following to see what is available to 'get':</p>
+<p><i class="fa fa-terminal"></i> Try typing the following to see what is available to &lsquo;get&rsquo;:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get all</code></pre></div>
-<blockquote>
-<p><i class="fa fa-terminal"></i> Now let's look at what our image stream has in it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get all
+</span></span></code></pre></div><blockquote>
+<p><i class="fa fa-terminal"></i> Now let&rsquo;s look at what our image stream has in it:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get is</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe is/nexus</code></pre></div>
-<div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, in our case a new version of the nexus image, is created.
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get is
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe is/nexus
+</span></span></code></pre></div><div class="alert alert-info">
+<p><span class="pficon pficon-info"></span></p>
+<p>An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, in our case a new version of the nexus image, is created.</p>
 </div>
-
 <blockquote>
-<p><i class="fa fa-terminal"></i> The app is running in a pod, let's look at that:</p>
+<p><i class="fa fa-terminal"></i> The app is running in a pod, let&rsquo;s look at that:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe pods</code></pre></div>
-<h2 id="we-can-see-those-details-using-the-web-console-too">We can see those details using the web console too</h2>
-
-<p>Let's look at the image stream.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe pods
+</span></span></code></pre></div><h2 id="we-can-see-those-details-using-the-web-console-too">We can see those details using the web console too</h2>
+<p>Let&rsquo;s look at the image stream.</p>
 <blockquote>
 Click on "Builds -> Images"
 </blockquote>
-
 <p><img src="../images/ocp-nexus-buildimages.png" width="200"><br/></p>
-
 <p>This shows a list of all image streams within the project.</p>
-
 <blockquote>
 Now click on the "nexus" image stream
 </blockquote>
-
 <p>You should see something similar to this:</p>
-
 <p><img src="../images/ocp-nexus-is.png" width="600"><br/></p>
-
 <h2 id="does-this-nexus-do-anything">Does this nexus do anything?</h2>
-
-<p>Good catch, your service is running but there is no way for users to access it yet.  We can fix that from the web console or the command line. You decide which you'd rather do from the steps below.</p>
-
+<p>Good catch, your service is running but there is no way for users to access it yet.  We can fix that from the web console or the command line. You decide which you&rsquo;d rather do from the steps below.</p>
 <div class="panel-group">
   
 
@@ -460,20 +441,21 @@ Now click on the "nexus" image stream
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse5dd460beeebdd5fea1453bc02cdc2f8b" class="collapsed">
+      <a data-toggle="collapse" href="#collapse07ae853123d924ba40d5c02b63c9c2f0" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse5dd460beeebdd5fea1453bc02cdc2f8b" class="panel-collapse collapse ">
+  <div id="collapse07ae853123d924ba40d5c02b63c9c2f0" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> In the command line type this:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc expose service nexus</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc expose service nexus
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -484,45 +466,35 @@ Now click on the "nexus" image stream
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseb470ba857654189cfb21c9a7ea1e83e5" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3cbcfdf3e6d5400ba8baa08a46c00e2b" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapseb470ba857654189cfb21c9a7ea1e83e5" class="panel-collapse collapse ">
+  <div id="collapse3cbcfdf3e6d5400ba8baa08a46c00e2b" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 "Overview"
 </blockquote>
-
 <p><img src="../images/ocp-nexus-overview.png" width="400"><br/></p>
-
 <blockquote>
 Select the arrow '>' next to 'nexus, #' 
 </blockquote>
-
 <p><img src="../images/ocp-nexus-arrow1.png" width="200"><br/>
 <img src="../images/ocp-nexus-arrow2.png" width="200"><br/></p>
-
 <blockquote>
 To get to this view
 </blockquote>
-
 <p><img src="../images/ocp-nexus-noroute.png" width="600"><br/></p>
-
 <p>Notice there is no exposed route </p>
-
 <blockquote>
 Click on the "Create Route" link
 </blockquote>
-
 <p><img src="../images/ocp-nexus-createRoute.png" width="600"><br/></p>
-
 <p>This is where you could specify route parameters, but we will just use the defaults.</p>
-
 <blockquote>
 Click "Create"
 </blockquote>
@@ -534,41 +506,26 @@ Click "Create"
 
 </div>
 
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-You can also create secured HTTPS routes, but that's a topic for a more advanced workshop
-
+<p><span class="pficon pficon-info"></span></p>
+<p>You can also create secured HTTPS routes, but that&rsquo;s a topic for a more advanced workshop</p>
 </div>
-
 <h2 id="test-out-the-nexus-webapp">Test out the nexus webapp</h2>
-
 <p>Notice that in the web console overview, you now have a URL in the service box.  There is no database setup, but you can see the webapp running by clicking the route you just exposed.</p>
-
 <blockquote>
 <p>Click the link in the service box. You should see:</p>
 </blockquote>
-
 <p><img src="../images/ocp-nexus-app.png" width="300"><br/></p>
-
-<h2 id="good-work-this-error-is-expected-since-the-nexus-console-is-on-nexus">Good work - this error is expected; since the nexus console is on /nexus</h2>
-
+<h2 id="good-work---this-error-is-expected-since-the-nexus-console-is-on-nexus">Good work - this error is expected; since the nexus console is on /nexus</h2>
 <p>Go to URL:  http://nexus-demo-<span class="userid">0</span>.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/nexus/ to get the Nexus console.  Of course, we have not provided persistent storage; so, any and all work will be lost.</p>
-
 <p><img src="../images/ocp-nexus-app2.png" width="600"><br/></p>
-
-<h2 id="let-s-clean-this-up">Let's clean this up</h2>
-
+<h2 id="lets-clean-this-up">Let&rsquo;s clean this up</h2>
 <blockquote>
-<p><i class="fa fa-terminal"></i> Let's clean up all this to get ready for the next lab:</p>
+<p><i class="fa fa-terminal"></i> Let&rsquo;s clean up all this to get ready for the next lab:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc delete all --all</code></pre></div>
-<h1 id="summary">Summary</h1>
-
-<p>In this lab you've deployed an example docker image, pulled from docker hub, into a pod running in OpenShift.  You exposed a route for clients to access that service via thier web browsers.  And you learned how to get and describe resources using the command line and the web console.  Hopefully, this basic lab also helped to get you familiar with using the CLI and navigating within the web console.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc delete all --all
+</span></span></code></pre></div><h1 id="summary">Summary</h1>
+<p>In this lab you&rsquo;ve deployed an example docker image, pulled from docker hub, into a pod running in OpenShift.  You exposed a route for clients to access that service via thier web browsers.  And you learned how to get and describe resources using the command line and the web console.  Hopefully, this basic lab also helped to get you familiar with using the CLI and navigating within the web console.</p>
 <style>
 
  

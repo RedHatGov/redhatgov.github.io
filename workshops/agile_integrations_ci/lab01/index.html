@@ -307,384 +307,355 @@
   </ul>
 </nav>
 
-    
-
-<h2 id="lab-1">Lab 1</h2>
-
+    <h2 id="lab-1">Lab 1</h2>
 <h2 id="api-design">API Design</h2>
-
 <h3 id="create-an-openapi-specification-using-apicurio-studio">Create an OpenAPI Specification using Apicurio Studio</h3>
-
 <ul>
 <li>Duration: 10 mins</li>
 <li>Audience: API Owner, Product Manager, Developers, Architects</li>
 </ul>
-
-<p><br><img src="../images/agenda-01.png "Login" width="900" /><br><br></p>
-
+<p><br>&lt;img src=&quot;../images/agenda-01.png &ldquo;Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
 <h2 id="overview">Overview</h2>
-
 <p>As APIs become more widespread in the enterprise, consistent design and usage is critically important to improve reusability. The more reusable APIs are, the less friction there is for other internal or external teams to make progress. Having design standards and tools baked into the API development and maintenance process is a very powerful way to enable this consistency.</p>
-
 <h3 id="why-red-hat">Why Red Hat?</h3>
-
 <p>Red Hat is one of the founding members of the Linux Foundation OpenAPI Initiative (OAI) which produces the leading standard for REST API specifications. Red Hat consistently uses this standard throughout its tooling, starting with the Apicurio Studio API Designer editor.</p>
-
 <h2 id="lab-instructions">Lab Instructions</h2>
-
 <h3 id="step-1-creating-apis-with-apicurio-studio">Step 1: Creating APIs with Apicurio Studio</h3>
-
 <ol>
-<li><p>Open a browser window and navigate to Apicurio.  Please ask your Instructor if you do not have the link.</p></li>
-
-<li><p>Log in using your designated user and password.</p>
-
-<p><br><img src="../images/design-01.png "Login" width="900" /><br><br></p></li>
-
-<li><p>Click on <strong>Create New API</strong>.</p>
-
-<p><br><img src="../images/design-03.png "Create New API" width="900" /><br><br></p></li>
-
-<li><p>Create a brand new API by completing the following information:</p>
-
+<li>
+<p>Open a browser window and navigate to Apicurio.  Please ask your Instructor if you do not have the link.</p>
+</li>
+<li>
+<p>Log in using your designated user and password.</p>
+<p><br>&lt;img src=&quot;../images/design-01.png &ldquo;Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on <strong>Create New API</strong>.</p>
+<p><br>&lt;img src=&quot;../images/design-03.png &ldquo;Create New API&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Create a brand new API by completing the following information:</p>
 <ul>
 <li>Type: <strong>Open API 3.0.2</strong></li>
 <li>Name: <strong>Locations-UserX</strong> (Replace <em>X</em> with your user number)</li>
 <li>Description: <strong>Locations API</strong></li>
 </ul>
-
-<p><br><img src="../images/design-04.png "Create API" width="900" /><br><br></p></li>
-
-<li><p>Click on <strong>Create API</strong>.</p></li>
-
-<li><p>Finally, click on <strong>Edit API</strong> to start editing your newly created API.</p>
-
-<p><br><img src="../images/design-05.png "Edit API" width="900" /><br><br></p></li>
+<p><br>&lt;img src=&quot;../images/design-04.png &ldquo;Create API&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on <strong>Create API</strong>.</p>
+</li>
+<li>
+<p>Finally, click on <strong>Edit API</strong> to start editing your newly created API.</p>
+<p><br>&lt;img src=&quot;../images/design-05.png &ldquo;Edit API&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
 </ol>
-
 <h3 id="step-2-editing-apis">Step 2: Editing APIs</h3>
-
-<p>You are now in the main screen to edit your APIs. Apicurio is a graphical, form-based API editor. With Apicurio you don't need master in and out all the details of the <strong>OpenAPI Specification</strong>. It allows you to design beautiful, functionals APIs with zero coding.</p>
-
-<p>Let's start crafting your API.</p>
-
+<p>You are now in the main screen to edit your APIs. Apicurio is a graphical, form-based API editor. With Apicurio you don&rsquo;t need master in and out all the details of the <strong>OpenAPI Specification</strong>. It allows you to design beautiful, functionals APIs with zero coding.</p>
+<p>Let&rsquo;s start crafting your API.</p>
 <ol>
-<li><p>Time to prepare our data definitions for the API. Click on the <strong>Add a datatype</strong> link under the <em>Data Types</em>.</p>
-
-<p><br><img src="../images/design-15.png "Add Datatype" width="900" /><br><br></p></li>
-
-<li><p>Fill in the <em>Name</em> field with the value <strong>location</strong>. Expand the <em>Enter the JSON Example (optional)</em> to paste the following example, then click <strong>Save</strong>:</p>
-
+<li>
+<p>Time to prepare our data definitions for the API. Click on the <strong>Add a datatype</strong> link under the <em>Data Types</em>.</p>
+<p><br>&lt;img src=&quot;../images/design-15.png &ldquo;Add Datatype&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Fill in the <em>Name</em> field with the value <strong>location</strong>. Expand the <em>Enter the JSON Example (optional)</em> to paste the following example, then click <strong>Save</strong>:</p>
 <ul>
-<li>Name: <strong>location</strong></li>
-
-<li><p>JSON Example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;id&#34;</span>: 1,
-    <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;International Inc Corporate Office&#34;</span>,
-    <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
-        <span style="color:#e6db74">&#34;lat&#34;</span>: 51.5013673,
-        <span style="color:#e6db74">&#34;lng&#34;</span>: -0.1440787
-    <span style="color:#f92672">}</span>,
-    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;headquarter&#34;</span>,
-    <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
-<span style="color:#f92672">}</span></code></pre></div></li>
-
-<li><p>Choose to create a REST Resource with the Data Type: <strong>No Resource</strong></p></li>
+<li>
+<p>Name: <strong>location</strong></p>
+</li>
+<li>
+<p>JSON Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;id&#34;</span>: 1,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;International Inc Corporate Office&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;lat&#34;</span>: 51.5013673,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;lng&#34;</span>: -0.1440787
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;headquarter&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Choose to create a REST Resource with the Data Type: <strong>No Resource</strong></p>
+</li>
 </ul>
-
-<p><br><img src="../images/design-16.png "JSON Example" width="900" /><br><br></p></li>
-
-<li><p>Apicurio automatically tries to detect the data types from the provided example.</p>
-
-<p><br><img src="../images/design-17.png "Definition Data Types" width="900" /><br><br></p>
-
-<p><em>Time to start creating some paths</em>.</p></li>
+<p><br>&lt;img src=&quot;../images/design-16.png &ldquo;JSON Example&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Apicurio automatically tries to detect the data types from the provided example.</p>
+<p><br>&lt;img src=&quot;../images/design-17.png &ldquo;Definition Data Types&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><em>Time to start creating some paths</em>.</p>
+</li>
 </ol>
-
 <h3 id="step-3-adding-paths">Step 3: Adding Paths</h3>
-
 <h4 id="3a-add-locations-path-with-get-method">3a: Add <code>/locations</code> path with GET method</h4>
-
 <p>The <code>/locations</code> path with an HTTP GET method will return a complete set of all location records in the database.</p>
-
 <ol>
-<li><p>Click on the <strong>Add a path</strong> link under the <em>Paths</em> section. APIs need at least one path.</p>
-
-<p><br><img src="../images/design-06.png "Add Path" width="900" /><br><br></p></li>
-
-<li><p>Fill in the new resource path with the following information:</p>
-
+<li>
+<p>Click on the <strong>Add a path</strong> link under the <em>Paths</em> section. APIs need at least one path.</p>
+<p><br>&lt;img src=&quot;../images/design-06.png &ldquo;Add Path&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Fill in the new resource path with the following information:</p>
 <ul>
 <li>Path: <strong>/locations</strong></li>
 </ul>
-
-<p><br><img src="../images/design-07.png "Path" width="900" /><br><br></p></li>
-
-<li><p>Click <strong>Add</strong>.</p>
-
-<p><em>By default, Apicurio suggest a series of available operations for your new path</em>.</p></li>
-
-<li><p>Click <strong>Create Operation</strong> under the <em>GET</em> operation.</p>
-
-<p><br><img src="../images/design-08.png "Create Operation" width="900" /><br><br></p></li>
-
-<li><p>Click on the green <strong>GET</strong> operation button to edit the operation information.</p>
-
-<p><br><img src="../images/design-09.png "Get Operation" width="900" /><br><br></p>
-
-<p><em>As you can notice, Apicurio Editor guides you with warning for the elements missing in your design</em>.</p></li>
-
-<li><p>Click on the <strong>Add a response</strong> link under <em>Responses</em> to edit the response for this operation.</p>
-
-<p><br><img src="../images/design-58.png "Add Response" width="900" /><br><br></p></li>
-
-<li><p>Leave the <strong>200</strong> option selected in the  <em>Response Status Code</em> combo box and click on <strong>Add</strong>.</p>
-
-<p><br><img src="../images/design-11.png "Add Response Code" width="900" /><br><br></p></li>
-
-<li><p>Scroll down to the bottom of the page. Move your mouse over the <strong>200 OK</strong> response to enable the options. Click the <em>No response media types defined</em> drop-down. Now click on the <strong>Add Media Type</strong> button.</p>
-
-<p><br><img src="../images/design-59.png "Add Media Type" width="900" /><br><br></p></li>
-
-<li><p>Click on the <em>Add</em> button to accept <strong>application/json</strong> as the Media Type.</p>
-
-<p><br><img src="../images/design-18.png "Location Type" width="900" /><br><br></p></li>
-
-<li><p>Click on the <em>Type</em> dropdown and select <strong>Array</strong> and <strong>location</strong>.</p>
-
-<p><br><img src="../images/design-18a.png "Location Type" width="900" /><br><br></p></li>
-
-<li><p>Click the <strong>Add an example</strong> link to add a Response Example.</p>
-
+<p><br>&lt;img src=&quot;../images/design-07.png &ldquo;Path&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click <strong>Add</strong>.</p>
+<p><em>By default, Apicurio suggest a series of available operations for your new path</em>.</p>
+</li>
+<li>
+<p>Click <strong>Create Operation</strong> under the <em>GET</em> operation.</p>
+<p><br>&lt;img src=&quot;../images/design-08.png &ldquo;Create Operation&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the green <strong>GET</strong> operation button to edit the operation information.</p>
+<p><br>&lt;img src=&quot;../images/design-09.png &ldquo;Get Operation&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><em>As you can notice, Apicurio Editor guides you with warning for the elements missing in your design</em>.</p>
+</li>
+<li>
+<p>Click on the <strong>Add a response</strong> link under <em>Responses</em> to edit the response for this operation.</p>
+<p><br>&lt;img src=&quot;../images/design-58.png &ldquo;Add Response&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Leave the <strong>200</strong> option selected in the  <em>Response Status Code</em> combo box and click on <strong>Add</strong>.</p>
+<p><br>&lt;img src=&quot;../images/design-11.png &ldquo;Add Response Code&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Scroll down to the bottom of the page. Move your mouse over the <strong>200 OK</strong> response to enable the options. Click the <em>No response media types defined</em> drop-down. Now click on the <strong>Add Media Type</strong> button.</p>
+<p><br>&lt;img src=&quot;../images/design-59.png &ldquo;Add Media Type&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <em>Add</em> button to accept <strong>application/json</strong> as the Media Type.</p>
+<p><br>&lt;img src=&quot;../images/design-18.png &ldquo;Location Type&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <em>Type</em> dropdown and select <strong>Array</strong> and <strong>location</strong>.</p>
+<p><br>&lt;img src=&quot;../images/design-18a.png &ldquo;Location Type&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click the <strong>Add an example</strong> link to add a Response Example.</p>
 <p><em>This will be useful to mock your API in the next lab</em>.</p>
-
-<p><br><img src="../images/design-19.png "Add Example" width="900" /><br><br></p></li>
-
-<li><p>Fill in the information for your response example:</p>
-
+<p><br>&lt;img src=&quot;../images/design-19.png &ldquo;Add Example&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Fill in the information for your response example:</p>
 <ul>
-<li>Name: <strong>all</strong></li>
-
-<li><p>Example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>
-    <span style="color:#f92672">{</span>
-        <span style="color:#e6db74">&#34;id&#34;</span>: 1,
-        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;International Inc Corporate Office&#34;</span>,
-        <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
-            <span style="color:#e6db74">&#34;lat&#34;</span>: 51.5013673,
-            <span style="color:#e6db74">&#34;lng&#34;</span>: -0.1440787
-        <span style="color:#f92672">}</span>,
-        <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;headquarter&#34;</span>,
-        <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
-    <span style="color:#f92672">}</span>,
-    <span style="color:#f92672">{</span>
-        <span style="color:#e6db74">&#34;id&#34;</span>: 2,
-        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;International Inc North America&#34;</span>,
-        <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
-            <span style="color:#e6db74">&#34;lat&#34;</span>: 40.6976701,
-            <span style="color:#e6db74">&#34;lng&#34;</span>: -74.259876
-        <span style="color:#f92672">}</span>,
-        <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;office&#34;</span>,
-        <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
-    <span style="color:#f92672">}</span>,
-    <span style="color:#f92672">{</span>
-        <span style="color:#e6db74">&#34;id&#34;</span>: 3,
-        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;International Inc France&#34;</span>,
-        <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
-            <span style="color:#e6db74">&#34;lat&#34;</span>: 48.859,
-            <span style="color:#e6db74">&#34;lng&#34;</span>: 2.2069746
-        <span style="color:#f92672">}</span>,
-        <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;office&#34;</span>,
-        <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">]</span></code></pre></div></li>
+<li>
+<p>Name: <strong>all</strong></p>
+</li>
+<li>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;id&#34;</span>: 1,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;International Inc Corporate Office&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;lat&#34;</span>: 51.5013673,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;lng&#34;</span>: -0.1440787
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;headquarter&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;id&#34;</span>: 2,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;International Inc North America&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;lat&#34;</span>: 40.6976701,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;lng&#34;</span>: -74.259876
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;office&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;id&#34;</span>: 3,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;International Inc France&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;lat&#34;</span>: 48.859,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;lng&#34;</span>: 2.2069746
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;office&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">]</span>
+</span></span></code></pre></div></li>
 </ul>
-
-<p><br><img src="../images/design-20.png "Response Example" width="900" /><br><br></p></li>
-
-<li><p>Click on the drop-down next to the <code>No description</code> message, and enter <code>Returns an array of location records</code> as the description.  Click the check-mark button to accept the description.</p>
-
-<p><br><img src="../images/design-54.png "Enter description" width="900" /><br><br></p></li>
-
-<li><p>Click on the green <strong>GET</strong> operation button to highlight the list of operations.</p>
-
-<p><br><img src="../images/design-31.png "Get Operation" width="900" /><br><br></p></li>
+<p><br>&lt;img src=&quot;../images/design-20.png &ldquo;Response Example&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the drop-down next to the <code>No description</code> message, and enter <code>Returns an array of location records</code> as the description.  Click the check-mark button to accept the description.</p>
+<p><br>&lt;img src=&quot;../images/design-54.png &ldquo;Enter description&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the green <strong>GET</strong> operation button to highlight the list of operations.</p>
+<p><br>&lt;img src=&quot;../images/design-31.png &ldquo;Get Operation&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
 </ol>
-
 <h4 id="3b-update-locations-path-with-post-method">3b: Update <code>/locations</code> path with POST method</h4>
-
 <p>The HTTP POST method will allow us to insert a new locations record into the database.</p>
-
 <ol>
-<li><p>Click on the <strong>Create Operation</strong> link under <em>POST</em> to create a new POST operation.</p>
-
-<p><br><img src="../images/design-32.png "Create POST operation" width="900" /><br><br></p></li>
-
-<li><p>Click the orange <strong>POST</strong> button to edit the operation.</p>
-
-<p><br><img src="../images/design-33.png "Edit POST operation" width="900" /><br><br></p></li>
-
-<li><p>Click the <strong>Add a response</strong> link.</p>
-
-<p><br><img src="../images/design-34.png "Edit POST operation" width="900" /><br><br></p></li>
-
-<li><p>Set the <strong>Response Status Code</strong> value to <code>201</code>.  Click Add.</p>
-
-<p><br><img src="../images/design-35.png "Edit POST operation" width="900" /><br><br></p></li>
-
-<li><p>Click on the drop-down next to the <code>No description</code> message, and enter <code>Creates a new location record</code> as the description.  Click the check-mark button to accept the description.</p>
-
-<p><br><img src="../images/design-55.png "Enter description" width="900" /><br><br></p></li>
-
-<li><p>Scroll down to the bottom of the page. Move your mouse over the <strong>201 Created</strong> response to enable the options. Click the <em>No response media types defined</em> drop-down. Now click on the <strong>Add Media Type</strong> button.</p>
-
-<p><br><img src="../images/design-60.png "Add Media Type" width="900" /><br><br></p></li>
-
-<li><p>Click on the <em>Add</em> button to accept <strong>application/json</strong> as the Media Type.</p>
-
-<p><br><img src="../images/design-18.png "Location Type" width="900" /><br><br></p></li>
-
-<li><p>Click on the <em>Type</em> dropdown and select <strong>location</strong>.</p>
-
-<p><br><img src="../images/design-36.png "Location" width="900" /><br><br></p></li>
+<li>
+<p>Click on the <strong>Create Operation</strong> link under <em>POST</em> to create a new POST operation.</p>
+<p><br>&lt;img src=&quot;../images/design-32.png &ldquo;Create POST operation&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click the orange <strong>POST</strong> button to edit the operation.</p>
+<p><br>&lt;img src=&quot;../images/design-33.png &ldquo;Edit POST operation&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click the <strong>Add a response</strong> link.</p>
+<p><br>&lt;img src=&quot;../images/design-34.png &ldquo;Edit POST operation&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Set the <strong>Response Status Code</strong> value to <code>201</code>.  Click Add.</p>
+<p><br>&lt;img src=&quot;../images/design-35.png &ldquo;Edit POST operation&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the drop-down next to the <code>No description</code> message, and enter <code>Creates a new location record</code> as the description.  Click the check-mark button to accept the description.</p>
+<p><br>&lt;img src=&quot;../images/design-55.png &ldquo;Enter description&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Scroll down to the bottom of the page. Move your mouse over the <strong>201 Created</strong> response to enable the options. Click the <em>No response media types defined</em> drop-down. Now click on the <strong>Add Media Type</strong> button.</p>
+<p><br>&lt;img src=&quot;../images/design-60.png &ldquo;Add Media Type&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <em>Add</em> button to accept <strong>application/json</strong> as the Media Type.</p>
+<p><br>&lt;img src=&quot;../images/design-18.png &ldquo;Location Type&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <em>Type</em> dropdown and select <strong>location</strong>.</p>
+<p><br>&lt;img src=&quot;../images/design-36.png &ldquo;Location&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
 </ol>
-
-<h4 id="3c-add-locations-id-path-with-get-method">3c: Add <code>/locations/{id}</code> path with GET method</h4>
-
+<h4 id="3c-add-locationsid-path-with-get-method">3c: Add <code>/locations/{id}</code> path with GET method</h4>
 <p>The <code>/locations/{id}</code> path will return a single location record based on a single <code>id</code> parameter, passed via the URL.</p>
-
 <ol>
-<li><p>Now we need to create another path.  Click on the <code>+</code> symbol to add a new path, then enter <code>/locations/{id}</code> for the <strong>Path</strong> property.  Click <strong>Add</strong>.</p>
-
-<p><br><img src="../images/design-37.png "Location" width="900" /><br><br></p></li>
-
-<li><p>Scroll over the <code>id</code> <em>Path Parameter</em> value, then click the <strong>Create</strong> button.</p>
-
-<p><br><img src="../images/design-37a.png "Location" width="900" /><br><br></p></li>
-
-<li><p>Click the drop-down arrow, then update the <code>id</code> Path Parameter by selecting <code>Integer</code> as the <strong>Type</strong> and <code>32-Bit Integer</code> as the sub-type.</p>
-
-<p><br><img src="../images/design-38.png "Path Parameter" width="900" /><br><br></p></li>
-
-<li><p>Click on the <code>Create Operation</code> button underneath <strong>GET</strong>, then click the green <strong>GET</strong> button.</p>
-
-<p><br><img src="../images/design-39.png "Path Parameter" width="900" /><br><br></p></li>
-
-<li><p>Click on the <strong>Add a response</strong> link under <em>Responses</em> to edit the response for this operation.</p>
-
-<p><br><img src="../images/design-10.png "Add Response" width="900" /><br><br></p></li>
-
-<li><p>Leave the <strong>200</strong> option selected in the  <em>Response Status Code</em> combo box and click on <strong>Add</strong>.</p>
-
-<p><br><img src="../images/design-11.png "Add Response Code" width="900" /><br><br></p></li>
-
-<li><p>Scroll down to the bottom of the page. Move your mouse over the <strong>200 OK</strong> response to enable the options. Click the <em>No response media types defined</em> drop-down. Now click on the <strong>Add Media Type</strong> button.</p>
-
-<p><br><img src="../images/design-12.png "Add Media Type" width="900" /><br><br></p></li>
-
-<li><p>Click on the <em>Add</em> button to accept <strong>application/json</strong> as the Media Type.</p>
-
-<p><br><img src="../images/design-18.png "Location Type" width="900" /><br><br></p></li>
-
-<li><p>Click on the <em>Type</em> dropdown and select <strong>location</strong>.</p>
-
-<p><br><img src="../images/design-40.png "Location Type" width="900" /><br><br></p></li>
-
-<li><p>Click on the drop-down next to the <code>No description</code> message, and enter <code>Returns a single location record</code> as the description.  Click the check-mark button to accept the description.</p>
-
-<p><br><img src="../images/design-56.png "Enter description" width="900" /><br><br></p></li>
+<li>
+<p>Now we need to create another path.  Click on the <code>+</code> symbol to add a new path, then enter <code>/locations/{id}</code> for the <strong>Path</strong> property.  Click <strong>Add</strong>.</p>
+<p><br>&lt;img src=&quot;../images/design-37.png &ldquo;Location&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Scroll over the <code>id</code> <em>Path Parameter</em> value, then click the <strong>Create</strong> button.</p>
+<p><br>&lt;img src=&quot;../images/design-37a.png &ldquo;Location&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click the drop-down arrow, then update the <code>id</code> Path Parameter by selecting <code>Integer</code> as the <strong>Type</strong> and <code>32-Bit Integer</code> as the sub-type.</p>
+<p><br>&lt;img src=&quot;../images/design-38.png &ldquo;Path Parameter&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <code>Create Operation</code> button underneath <strong>GET</strong>, then click the green <strong>GET</strong> button.</p>
+<p><br>&lt;img src=&quot;../images/design-39.png &ldquo;Path Parameter&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <strong>Add a response</strong> link under <em>Responses</em> to edit the response for this operation.</p>
+<p><br>&lt;img src=&quot;../images/design-10.png &ldquo;Add Response&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Leave the <strong>200</strong> option selected in the  <em>Response Status Code</em> combo box and click on <strong>Add</strong>.</p>
+<p><br>&lt;img src=&quot;../images/design-11.png &ldquo;Add Response Code&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Scroll down to the bottom of the page. Move your mouse over the <strong>200 OK</strong> response to enable the options. Click the <em>No response media types defined</em> drop-down. Now click on the <strong>Add Media Type</strong> button.</p>
+<p><br>&lt;img src=&quot;../images/design-12.png &ldquo;Add Media Type&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <em>Add</em> button to accept <strong>application/json</strong> as the Media Type.</p>
+<p><br>&lt;img src=&quot;../images/design-18.png &ldquo;Location Type&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <em>Type</em> dropdown and select <strong>location</strong>.</p>
+<p><br>&lt;img src=&quot;../images/design-40.png &ldquo;Location Type&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the drop-down next to the <code>No description</code> message, and enter <code>Returns a single location record</code> as the description.  Click the check-mark button to accept the description.</p>
+<p><br>&lt;img src=&quot;../images/design-56.png &ldquo;Enter description&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
 </ol>
-
-<h4 id="3d-add-locations-phone-id-path-with-get-method">3d: Add <code>/locations/phone/{id}</code> path with GET method</h4>
-
+<h4 id="3d-add-locationsphoneid-path-with-get-method">3d: Add <code>/locations/phone/{id}</code> path with GET method</h4>
 <p>The <code>/locations/phone/{id}</code> path will return a single location record based on a single phone number parameter, passed via the URL.</p>
-
 <ol>
-<li><p>Now we need to create another path.  Click on the <code>+</code> symbol to add a new path, then enter <code>/locations/phone/{id}</code> for the <strong>Path</strong> property.  Click <strong>Add</strong>.</p>
-
-<p><br><img src="../images/design-41.png "Location" width="900" /><br><br></p></li>
-
-<li><p>Click on the <code>Create Operation</code> button underneath <strong>Get</strong>, then click the green <strong>Get</strong> button.</p>
-
-<p><br><img src="../images/design-42.png "Get operation" width="900" /><br><br></p></li>
-
-<li><p>Scroll down to the <code>id</code> path parameter to highlight the row, and click the <code>Create</code> button that appears.</p>
-
-<p><br><img src="../images/design-53.png "Get operation" width="900" /><br><br></p></li>
-
-<li><p>Click the drop-down arrow next to <code>No Type</code>, then update the <code>id</code> Path Parameter by selecting <code>Integer</code> as the <strong>Type</strong> and <code>32-Bit Integer</code> as the sub-type.</p>
-
-<p><br><img src="../images/design-64.png "Path Parameter" width="900" /><br><br></p></li>
-
-<li><p>Click on the <strong>Add a response</strong> link under <em>Responses</em> to edit the response for this operation.</p>
-
-<p><br><img src="../images/design-61.png "Add Response" width="900" /><br><br>)</p></li>
-
-<li><p>Leave the <strong>200</strong> option selected in the  <em>Response Status Code</em> combo box and click on <strong>Add</strong>.</p>
-
-<p><br><img src="../images/design-11.png "Add Response Code" width="900" /><br><br></p></li>
-
-<li><p>Scroll down to the bottom of the page. Move your mouse over the <strong>200 OK</strong> response to enable the options. Click the <em>No response media types defined</em> drop-down. Now click on the <strong>Add Media Type</strong> button.</p>
-
-<p><br><img src="../images/design-62.png "Add Media Type" width="900" /><br><br></p></li>
-
-<li><p>Click on the <em>Add</em> button to accept <strong>application/json</strong> as the Media Type.</p>
-
-<p><br><img src="../images/design-18.png "Location Type" width="900" /><br><br></p></li>
-
-<li><p>Click on the <em>Type</em> dropdown and select <strong>location</strong>.</p>
-
-<p><br><img src="../images/design-63.png "Location Type" width="900" /><br><br></p></li>
-
-<li><p>Click on the drop-down next to the <code>No description</code> message, and enter <code>Returns a location record</code> as the description.  Click the check-mark button to accept the description.</p>
-
-<p><br><img src="../images/design-57.png "Enter description" width="900" /><br><br></p></li>
+<li>
+<p>Now we need to create another path.  Click on the <code>+</code> symbol to add a new path, then enter <code>/locations/phone/{id}</code> for the <strong>Path</strong> property.  Click <strong>Add</strong>.</p>
+<p><br>&lt;img src=&quot;../images/design-41.png &ldquo;Location&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <code>Create Operation</code> button underneath <strong>Get</strong>, then click the green <strong>Get</strong> button.</p>
+<p><br>&lt;img src=&quot;../images/design-42.png &ldquo;Get operation&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Scroll down to the <code>id</code> path parameter to highlight the row, and click the <code>Create</code> button that appears.</p>
+<p><br>&lt;img src=&quot;../images/design-53.png &ldquo;Get operation&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click the drop-down arrow next to <code>No Type</code>, then update the <code>id</code> Path Parameter by selecting <code>Integer</code> as the <strong>Type</strong> and <code>32-Bit Integer</code> as the sub-type.</p>
+<p><br>&lt;img src=&quot;../images/design-64.png &ldquo;Path Parameter&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <strong>Add a response</strong> link under <em>Responses</em> to edit the response for this operation.</p>
+<p><br>&lt;img src=&quot;../images/design-61.png &ldquo;Add Response&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br>)</p>
+</li>
+<li>
+<p>Leave the <strong>200</strong> option selected in the  <em>Response Status Code</em> combo box and click on <strong>Add</strong>.</p>
+<p><br>&lt;img src=&quot;../images/design-11.png &ldquo;Add Response Code&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Scroll down to the bottom of the page. Move your mouse over the <strong>200 OK</strong> response to enable the options. Click the <em>No response media types defined</em> drop-down. Now click on the <strong>Add Media Type</strong> button.</p>
+<p><br>&lt;img src=&quot;../images/design-62.png &ldquo;Add Media Type&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <em>Add</em> button to accept <strong>application/json</strong> as the Media Type.</p>
+<p><br>&lt;img src=&quot;../images/design-18.png &ldquo;Location Type&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <em>Type</em> dropdown and select <strong>location</strong>.</p>
+<p><br>&lt;img src=&quot;../images/design-63.png &ldquo;Location Type&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the drop-down next to the <code>No description</code> message, and enter <code>Returns a location record</code> as the description.  Click the check-mark button to accept the description.</p>
+<p><br>&lt;img src=&quot;../images/design-57.png &ldquo;Enter description&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
 </ol>
-
 <h3 id="step-4-download-the-api-definition">Step 4: Download the API definition</h3>
-
 <ol>
-<li><p>Click the <strong>Locations-UserX</strong> link to return to the API admin page.</p>
-
-<p><br><img src="../images/design-22.png "Locations API" width="900" /><br><br></p></li>
-
-<li><p>To start using your new API definition, display the API menu from the kebab link. Click the <strong>Download (YAML)</strong> option from the menu.</p>
-
-<p><br><img src="../images/design-23.png "Download API" width="900" /><br><br></p></li>
-
-<li><p>This will start the download of your API definition file. It could take a few seconds to start the download. <strong>Save</strong> it to your local disk drive.</p></li>
-
-<li><p>You can open the file with any text editor. Take a look at the source file. Everything is there.</p>
-
-<p><br><img src="../images/design-24.png "API Definition Source" width="900" /><br><br></p></li>
+<li>
+<p>Click the <strong>Locations-UserX</strong> link to return to the API admin page.</p>
+<p><br>&lt;img src=&quot;../images/design-22.png &ldquo;Locations API&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>To start using your new API definition, display the API menu from the kebab link. Click the <strong>Download (YAML)</strong> option from the menu.</p>
+<p><br>&lt;img src=&quot;../images/design-23.png &ldquo;Download API&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>This will start the download of your API definition file. It could take a few seconds to start the download. <strong>Save</strong> it to your local disk drive.</p>
+</li>
+<li>
+<p>You can open the file with any text editor. Take a look at the source file. Everything is there.</p>
+<p><br>&lt;img src=&quot;../images/design-24.png &ldquo;API Definition Source&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+</li>
 </ol>
-
-<p><em>Congratulations!</em> You have created your first API definition based on the OpenAPI Specification  using Red Hat's Apicurio. Don't lose track of the file, you will use this definition for your next lab.</p>
-
+<p><em>Congratulations!</em> You have created your first API definition based on the OpenAPI Specification  using Red Hat&rsquo;s Apicurio. Don&rsquo;t lose track of the file, you will use this definition for your next lab.</p>
 <h2 id="steps-beyond">Steps Beyond</h2>
-
 <p>So, you want more? Did you notice the link <strong>source</strong> when editing the <em>Paths</em> or the <em>Definitions</em>? Get back to the API editor and follow the link. What do you see? Apicurio lets you follow the form-based editor or go one step beyond and also lets you direct edit the source of your API definition.</p>
-
 <h2 id="summary">Summary</h2>
-
-<p>In this lab you used Apicurio Studio to create a simple API definition using the OpenAPI Specification. You learned how to author and download a standards compliant API Specification using Red Hat's APICurio.</p>
-
+<p>In this lab you used Apicurio Studio to create a simple API definition using the OpenAPI Specification. You learned how to author and download a standards compliant API Specification using Red Hat&rsquo;s APICurio.</p>
 <h2 id="notes-and-further-reading">Notes and Further Reading</h2>
-
 <ul>
 <li>Apicurio
-
 <ul>
 <li><a href="https://www.apicur.io">Webpage</a></li>
 <li><a href="https://www.apicur.io/roadmap/">Roadmap</a></li>
-</ul></li>
+</ul>
+</li>
 <li>OpenAPI
-
 <ul>
 <li><a href="https://www.openapis.org/">OpenAPI Initiative</a></li>
 <li><a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md">OpenAPI Specification 3.0.2</a></li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
 

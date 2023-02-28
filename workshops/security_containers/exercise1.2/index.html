@@ -311,7 +311,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_containers/images/term.png" alt="term">
+<img src="/workshops/security_containers/images/term.png" alt="term"/>
 </div>
 </div>
 </div>
@@ -326,7 +326,7 @@
 <h2 id="_exercise_description">Exercise Description</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you&#8217;ve gotten a sense of software provenance in Dockerfiles lets take
+<p>Now that you’ve gotten a sense of software provenance in Dockerfiles lets take
 a look at the <code>USER</code> in <code>Dockerfiles</code>.</p>
 </div>
 <div class="paragraph">
@@ -356,7 +356,7 @@ beginning of your Dockerfile then change back to the correct user with another
 <pre class="highlight"><code class="language-bash" data-lang="bash">FROM fedora:29
 
 RUN groupadd -r swuser -g 433 &amp;&amp; \
-    useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
+    useradd -u 431 -r -g swuser -s /sbin/nologin -c &#34;Docker image user&#34; swuser
 
 USER root
 
@@ -395,7 +395,7 @@ USER swuser</code></pre>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -404,7 +404,7 @@ Copy the <code>Dockerfile</code> above. Press <code>i</code> for Insert, then cu
 <code>control + v</code>, then escape and write the file <code>esc</code>, <code>:wq</code>.
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="title">Dockerfile</div>
@@ -412,7 +412,7 @@ Copy the <code>Dockerfile</code> above. Press <code>i</code> for Insert, then cu
 <pre class="highlight"><code class="language-bash" data-lang="bash">FROM fedora:29
 
 RUN groupadd -r swuser -g 433 &amp;&amp; \
-    useradd -u 431 -r -g swuser -s /sbin/nologin -c "Docker image user" swuser
+    useradd -u 431 -r -g swuser -s /sbin/nologin -c &#34;Docker image user&#34; swuser
 
 USER root
 
@@ -451,7 +451,7 @@ USER swuser</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="http://www.projectatomic.io/blog/2015/08/why-we-dont-let-non-root-users-run-docker-in-centos-fedora-or-rhel/">Why we don&#8217;t let non-root users run Docker in CentOS, Fedora, or RHEL</a></p>
+<p><a href="http://www.projectatomic.io/blog/2015/08/why-we-dont-let-non-root-users-run-docker-in-centos-fedora-or-rhel/">Why we don’t let non-root users run Docker in CentOS, Fedora, or RHEL</a></p>
 </li>
 <li>
 <p><a href="http://www.projectatomic.io/docs/docker-image-author-guidance/">Guidance for Docker Image Authors</a>

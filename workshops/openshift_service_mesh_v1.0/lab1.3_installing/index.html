@@ -307,96 +307,75 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="setup">Setup</h1>
-
+    <h1 id="setup">Setup</h1>
 <p>You will conduct these labs in an OpenShift cluster.  As in the previous terminal deployment exercise, you can access your cluster via console and CLI.</p>
-
 <h2 id="openshift">OpenShift</h2>
-
-<p>You will use the OpenShift 'oc' CLI  to execute commands for the majority of this lab.</p>
-
+<p>You will use the OpenShift &lsquo;oc&rsquo; CLI  to execute commands for the majority of this lab.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Login using API endpoint and remember to add the '--insecure-skip-tls-verify=true' flag
 </blockquote>
-<pre><code>$ oc login https://api.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:6443 --insecure-skip-tls-verify=true
+<pre tabindex="0"><code>$ oc login https://api.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:6443 --insecure-skip-tls-verify=true
 Authentication required for https://api.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:6443 (openshift)
  Username: user<span class="userid">YOUR#</span>
  Password:
-Login successful.</code></pre>
-<p><br></p>
-
+Login successful.
+</code></pre><br>
 <p>The instructor will have preconfigured your projects for you.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i> List your projects:
 </blockquote>
-<pre><code>oc projects</code></pre>
-<p>You should see two projects: your user project (e.g. 'userX') and 'istio-system'.</p>
-
-<p><br></p>
-
+<pre tabindex="0"><code>oc projects
+</code></pre><p>You should see two projects: your user project (e.g. &lsquo;userX&rsquo;) and &lsquo;istio-system&rsquo;.</p>
+<br>
 <blockquote>
 <i class="fa fa-terminal"></i> Switch to your user project.  For example:
 </blockquote>
-<pre><code>oc project user<span class="userid">YOUR#</span>
-</code></pre>
-<p><br></p>
+<pre tabindex="0"><code>oc project user<span class="userid">YOUR#</span>
 
-<p>Let's take a look at the project.</p>
-
+</code></pre><br>
+<p>Let&rsquo;s take a look at the project.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> List the pods in the project:
 </blockquote>
-<pre><code>oc get pods</code></pre>
-<p>Output (sample):</p>
-<pre><code>NAME                                       READY   STATUS    RESTARTS   AGE
+<pre tabindex="0"><code>oc get pods
+</code></pre><p>Output (sample):</p>
+<pre tabindex="0"><code>NAME                                       READY   STATUS    RESTARTS   AGE
 istio-demogateway-user1-xxxxxxxxxx-xxxxx   1/1     Running   0          2m41s
-keycloak-operator-xxxxxxxxx-xxxxx          1/1     Running   0          15h</code></pre>
-<p>The gateway is a load balancer dedicated to your project.  You will configure this load balancer in the next lab.  The keycloak operator will be used in the security labs.</p>
-
-<p><br></p>
-
+keycloak-operator-xxxxxxxxx-xxxxx          1/1     Running   0          15h
+</code></pre><p>The gateway is a load balancer dedicated to your project.  You will configure this load balancer in the next lab.  The keycloak operator will be used in the security labs.</p>
+<br>
 <p>Finally, set the project name variable.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 Run this command:
 </blockquote>
-<pre><code>PROJECT_NAME=$(oc project -q)</code></pre>
-<p><br></p>
-
+<pre tabindex="0"><code>PROJECT_NAME=$(oc project -q)
+</code></pre><br>
 <h2 id="application-code">Application Code</h2>
-
 <p>Next we need a local copy of our application code.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Clone the repository:
 </blockquote>
-<pre><code>git clone https://github.com/RedHatGov/openshift-microservices.git</code></pre>
-<blockquote>
+<pre tabindex="0"><code>git clone https://github.com/RedHatGov/openshift-microservices.git
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i> Checkout the workshop-stable branch:
 </blockquote>
-<pre><code>cd openshift-microservices &amp;&amp; git checkout workshop-stable</code></pre>
-<blockquote>
+<pre tabindex="0"><code>cd openshift-microservices &amp;&amp; git checkout workshop-stable
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Navigate to the workshop directory:
 </blockquote>
-<pre><code>cd deployment/workshop</code></pre>
-<p><br></p>
-
+<pre tabindex="0"><code>cd deployment/workshop
+</code></pre><br>
 <h2 id="istio">Istio</h2>
-
-<p>Istio should have been installed in the cluster by the instructor.  Let's make sure Istio is running in the cluster.  You will only have view access to the Istio project.</p>
-
+<p>Istio should have been installed in the cluster by the instructor.  Let&rsquo;s make sure Istio is running in the cluster.  You will only have view access to the Istio project.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 List all the Istio components:
 </blockquote>
-<pre><code>oc get pods -n istio-system</code></pre>
-<p>Output:</p>
-<pre><code>NAME                                      READY   STATUS    RESTARTS   AGE
+<pre tabindex="0"><code>oc get pods -n istio-system
+</code></pre><p>Output:</p>
+<pre tabindex="0"><code>NAME                                      READY   STATUS    RESTARTS   AGE
 grafana-xxxxxxxxx-xxxxx                  2/2     Running   0          17m
 istio-citadel-xxxxxxxxx-xxxxx            1/1     Running   0          20m
 istio-egressgateway-xxxxxxxx-xxxxx       1/1     Running   0          17m
@@ -408,9 +387,8 @@ istio-sidecar-injector-xxxxxxxxx-xxxxx   1/1     Running   0          17m
 istio-telemetry-xxxxxxxxx-xxxxx          2/2     Running   0          19m
 jaeger-xxxxxxxxx-xxxxx                   2/2     Running   0          19m
 kiali-xxxxxxxxx-xxxxx                    1/1     Running   0          16m
-prometheus-xxxxxxxxx-xxxxx               2/2     Running   0          19m</code></pre>
-<p>The primary control plane components are <a href="https://istio.io/docs/concepts/traffic-management/">Pilot</a>, <a href="https://istio.io/docs/concepts/observability/">Mixer</a>, and <a href="https://istio.io/docs/concepts/security/">Citadel</a>.  Pilot handles traffic management.  Mixer handles policy and telemetry.  Citadel handles security.</p>
-
+prometheus-xxxxxxxxx-xxxxx               2/2     Running   0          19m
+</code></pre><p>The primary control plane components are <a href="https://istio.io/docs/concepts/traffic-management/">Pilot</a>, <a href="https://istio.io/docs/concepts/observability/">Mixer</a>, and <a href="https://istio.io/docs/concepts/security/">Citadel</a>.  Pilot handles traffic management.  Mixer handles policy and telemetry.  Citadel handles security.</p>
 <style>
 
  

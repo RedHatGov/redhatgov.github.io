@@ -307,19 +307,12 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="ci-cd-defined">CI/CD Defined</h1>
-
+    <h1 id="cicd-defined">CI/CD Defined</h1>
 <p>In modern software projects many teams utilize the concept of Continuous Integration (CI) and Continuous Delivery (CD). By setting up a tool chain that continuously builds, tests, and stages software releases, a team can ensure that their product can be reliably released at any time. OpenShift can be an enabler in the creation and management of this tool chain.</p>
-
 <p>In this lab we walk through creating a simple example of a CI/CD [pipeline] utilizing Jenkins, all running on top of OpenShift! The Jenkins job will trigger OpenShift to build and deploy a test version of the application, validate that the deployment works, and then tag the test version into production.</p>
-
 <h2 id="create-a-new-project">Create a new project</h2>
-
 <p>Create a new project named “cicd-<span class="userid">YOUR#</span>
 ”.</p>
-
 <div class="panel-group">
   
 
@@ -328,27 +321,24 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse6249e0e1ac670c42eba09f473433a601" class="collapsed">
+      <a data-toggle="collapse" href="#collapsebc5c489acf4115a6426f36fabd578433" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse6249e0e1ac670c42eba09f473433a601" class="panel-collapse collapse ">
+  <div id="collapsebc5c489acf4115a6426f36fabd578433" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-
 <p><i class="fa fa-terminal"></i> Create the project cicd-<span class="userid">YOUR#</span></p>
-
-<p><code>
+<code>
 $ oc new-project cicd-<span class="userid">YOUR#</span>
-</code></p>
+</code>
 
     </div>
   </div>
@@ -360,33 +350,29 @@ $ oc new-project cicd-<span class="userid">YOUR#</span>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsedc5250f7dc3086a6f962624626c14d6e" class="collapsed">
+      <a data-toggle="collapse" href="#collapse0efa0c43583201db2af650785458cb9b" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsedc5250f7dc3086a6f962624626c14d6e" class="panel-collapse collapse ">
+  <div id="collapse0efa0c43583201db2af650785458cb9b" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="web-console-access">Web Console access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
 </pre>
-
 <blockquote>
 From the "Developer" view, click "Topology", Select "Project:" drop down, and click "Create Project"
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-new-project.gif"><br/></p>
-
-<p><blockquote>
-Fill in the Name and Display Name of the project as &quot;cicd-<span class="userid">YOUR#</span>
-&quot; and click &quot;Create&quot;
+<blockquote>
+Fill in the Name and Display Name of the project as "cicd-<span class="userid">YOUR#</span>
+" and click "Create"
 </blockquote>
-<img src="../images/ocp-lab-cicd-new-project-detail.png" width="500"><br/></p>
+<img src="../images/ocp-lab-cicd-new-project-detail.png" width="500"><br/>
 
     </div>
   </div>
@@ -396,9 +382,7 @@ Fill in the Name and Display Name of the project as &quot;cicd-<span class="user
 
 </div>
 
-
 <h2 id="instantiate-a-jenkins-server-in-your-project">Instantiate a Jenkins server in your project</h2>
-
 <div class="panel-group">
   
 
@@ -407,30 +391,26 @@ Fill in the Name and Display Name of the project as &quot;cicd-<span class="user
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsed3dd43ca808ba9ebfc1bd435db32b3f3" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3b5a0becc58fdbb21a57ceb6e36ac208" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsed3dd43ca808ba9ebfc1bd435db32b3f3" class="panel-collapse collapse ">
+  <div id="collapse3b5a0becc58fdbb21a57ceb6e36ac208" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-app jenkins-ephemeral --as-deployment-config<span style="color:#f92672">=</span>true
-$ oc logs -f dc/jenkins</code></pre></div>
-<p>Wait for logs to return &quot;Success&quot;.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc new-app jenkins-ephemeral --as-deployment-config<span style="color:#f92672">=</span>true
+</span></span><span style="display:flex;"><span>$ oc logs -f dc/jenkins
+</span></span></code></pre></div><p>Wait for logs to return &ldquo;Success&rdquo;.</p>
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
+<p><span class="pficon pficon-info"></span></p>
   <p>NOTE: this may take some time</p>
-
 </div>
 
     </div>
@@ -443,67 +423,52 @@ $ oc logs -f dc/jenkins</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse07a1734352a4b1f6d641c9e30822cf3a" class="collapsed">
+      <a data-toggle="collapse" href="#collapse9127aa25b8298eb8b95406464db8c3ae" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse07a1734352a4b1f6d641c9e30822cf3a" class="panel-collapse collapse ">
+  <div id="collapse9127aa25b8298eb8b95406464db8c3ae" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="web-console-access">Web Console access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
 </pre>
-
 <blockquote>
 In "Developer" view, click "+Add"
 </blockquote>
-
 <p><br><img src="../images/ocp-developer-add.png" width="300"><br/></p>
-
 <blockquote>
 From the "Developer Catalog", Select "All services"
 </blockquote>
-
 <blockquote>
 Search for "Jenkins"
 </blockquote>
-
 <blockquote>
 Select "Jenkins (Ephemeral)". 
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-instantiate.gif" width="900"><br/></p>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-instantiate1.png" width="900"><br/></p>
-
 <blockquote>
 Click
 <img src="../images/ocp-instantiate-template-button.png" width="165"><br/>
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-instantiate2.png" width="900"><br/></p>
-
 <blockquote>
 Select the cicd-<span class="userid">YOUR#</span>
  from available "Namespace"
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-instantiate3.png" width="900"><br/></p>
-
 <blockquote>
 Scroll down to the bottom, and click 
 <img src="../images/ocp-create-button.png" width="75">
 </blockquote>
-
 <p><br><img src="../images/ocp-lab-cicd-jenkins-instantiate4.png" width="900"><br/></p>
-
-<p><br><img src="../images/ocp-lab-cicd-jenkins-instantiate-wait.png" width="900"><br/>
-</blockquote></p>
+<p><br><img src="../images/ocp-lab-cicd-jenkins-instantiate-wait.png" width="900"><br/></p>
+</blockquote>
 
     </div>
   </div>
@@ -513,13 +478,11 @@ Scroll down to the bottom, and click
 
 </div>
 
-
 <h2 id="create-a-sample-application-configuration">Create a sample application configuration</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project cicd-<span class="userid">YOUR#</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc project cicd-<span class="userid">YOUR#</span>
 
-$ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/nodejs-sample-pipeline.yaml</code></pre></div>
-<h2 id="confirm-you-can-access-jenkins">Confirm you can access Jenkins</h2>
-
+</span></span><span style="display:flex;"><span>$ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/nodejs-sample-pipeline.yaml
+</span></span></code></pre></div><h2 id="confirm-you-can-access-jenkins">Confirm you can access Jenkins</h2>
 <div class="panel-group">
   
 
@@ -528,27 +491,25 @@ $ oc create -f https://raw.githubusercontent.com/openshift/origin/master/example
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse1b050ab88bca5d95e60ec45943634b5e" class="collapsed">
+      <a data-toggle="collapse" href="#collapse27b42ff2f97af7c60be8ce4639d23446" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse1b050ab88bca5d95e60ec45943634b5e" class="panel-collapse collapse ">
+  <div id="collapse27b42ff2f97af7c60be8ce4639d23446" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Get the route to the Jenkins server:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get route | grep jenkins | awk <span style="color:#e6db74">&#39;{ print $2 }&#39;</span></code></pre></div>
-<p>Copy the above URL, and paste it in your web browser, to access Jenkins.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get route | grep jenkins | awk <span style="color:#e6db74">&#39;{ print $2 }&#39;</span>
+</span></span></code></pre></div><p>Copy the above URL, and paste it in your web browser, to access Jenkins.</p>
 
     </div>
   </div>
@@ -560,26 +521,23 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsee064ef7274578cf13f0b9e47d7a5f4cc" class="collapsed">
+      <a data-toggle="collapse" href="#collapsefc8e35a87aaf131788756f88cd52fee6" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsee064ef7274578cf13f0b9e47d7a5f4cc" class="panel-collapse collapse ">
+  <div id="collapsefc8e35a87aaf131788756f88cd52fee6" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="web-console-access">Web Console access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
 </pre>
-
 <blockquote>
 In "Developer" view, under "Topology", click the arrow, in the upper right corner of the "jenkins" icon
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-overview.png" width="500"><br/></p>
 
     </div>
@@ -590,27 +548,19 @@ In "Developer" view, under "Topology", click the arrow, in the upper right corne
 
 </div>
 
-
 <blockquote>
-<p>Select &quot;Login with OpenShift&quot; from Jenkins login page</p>
+<p>Select &ldquo;Login with OpenShift&rdquo; from Jenkins login page</p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-cicd-jenkins-login-1.png" width="400">
-</br></p>
-
+<img src="../images/ocp-lab-cicd-jenkins-login-1.png" width="400">
+</br>
 <p>The OpenShift login page is displayed in a new browser tab.</p>
-
 <blockquote>
 <p>Login with your OpenShift user name and password</p>
 </blockquote>
-
-<p><img src="../images/ocp-login.png" width="600">
-<br/></p>
-
+<img src="../images/ocp-login.png" width="600">
+<br/>
 <p>Once logged in, click the [Allow selected permissions] button and you should see the Jenkins dashboard.</p>
-
 <h2 id="start-the-pipeline">Start the pipeline</h2>
-
 <div class="panel-group">
   
 
@@ -619,24 +569,23 @@ In "Developer" view, under "Topology", click the arrow, in the upper right corne
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse3a6cb3970333e4d64abbefb3d0ad0454" class="collapsed">
+      <a data-toggle="collapse" href="#collapse41d40a2436af6961d1c04beede9c0622" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse3a6cb3970333e4d64abbefb3d0ad0454" class="panel-collapse collapse ">
+  <div id="collapse41d40a2436af6961d1c04beede9c0622" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-
 <p><i class="fa fa-terminal"></i> Launch the pipeline:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc start-build nodejs-sample-pipeline</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc start-build nodejs-sample-pipeline
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -647,33 +596,28 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsec8e456ecb303fe166e6b303370c55f9e" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3d66d6cbebfc5a51ca34b948f044a22d" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsec8e456ecb303fe166e6b303370c55f9e" class="panel-collapse collapse ">
+  <div id="collapse3d66d6cbebfc5a51ca34b948f044a22d" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="web-console-access">Web Console access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
 </pre>
-
 <blockquote>
-<p>Using the OpenShift Web Console, in &quot;Administrator&quot; view, choose <em>Builds</em> -&gt; <em>Build Configs</em>, and then click on &quot;nodejs-sample-pipeline&quot;</p>
+<p>Using the OpenShift Web Console, in &ldquo;Administrator&rdquo; view, choose <em>Builds</em> -&gt; <em>Build Configs</em>, and then click on &ldquo;nodejs-sample-pipeline&rdquo;</p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-cicd-start-pipeline.gif" width="900"></p>
-
+<img src="../images/ocp-lab-cicd-start-pipeline.gif" width="900">
 <blockquote>
-<p>From the &quot;Actions&quot; menu, choose &quot;Start Build&quot;</p>
+<p>From the &ldquo;Actions&rdquo; menu, choose &ldquo;Start Build&rdquo;</p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-cicd-pipeline-actions-start_build.png" width="200"></p>
+<img src="../images/ocp-lab-cicd-pipeline-actions-start_build.png" width="200">
 
     </div>
   </div>
@@ -683,38 +627,24 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 
 </div>
 
-
-<h2 id="monitor-the-pipeline-s-progress">Monitor the pipeline's progress</h2>
-
+<h2 id="monitor-the-pipelines-progress">Monitor the pipeline&rsquo;s progress</h2>
 <p>When the pipeline starts, OpenShift uploads the pipeline to the Jenkins server for execution.</p>
-
 <p>The Jenkins dashboard should indicate that a new build is executing.</p>
-
-<p><img src="../images/ocp-lab-cicd-jenkins-build-exec-status.png" width=600></p>
-
+<img src="../images/ocp-lab-cicd-jenkins-build-exec-status.png" width=600>
 <p>Back in the OpenShift Web Console, watch the pipeline execute.</p>
-
 <h2 id="confirm-that-the-application-is-available">Confirm that the application is available</h2>
-
 <blockquote>
 In "Developer" view, select the "cicd-<span class="userid">YOUR#</span>" project, and click on "Topology"
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-app-overview.png" width="900"><br/></p>
-
 <blockquote>
 Click on the arrow, at the upper right corner of the "nodejs-mongodb6-example" icon, to launch the web page
 <img src="../images/ocp-launch-button.png" width="50"><br/>
 </blockquote>
-
 <p>Service web page displayed:</p>
-
 <p><img src="../images/ocp-lab-cicd-app-test.png" width=700><br/></p>
-
 <h1 id="summary">Summary</h1>
-
 <p>In this lab you have very quickly and easily constructed a basic pipeline.</p>
-
 <style>
 
  

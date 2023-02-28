@@ -307,26 +307,16 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="add-promote-to-stage">Add Promote to Stage</h1>
-
+    <h1 id="add-promote-to-stage">Add Promote to Stage</h1>
 <p>Enter the Promote to STAGE below into your pipeline.</p>
-
-<p><img src="../images/pipeline_promote.png" width="900" /></p>
-
+<img src="../images/pipeline_promote.png" width="900" />
 <p>We set an approval to promote to the application to the Stage Project.  The approval process is a good feature for various gates of your deployments.  We also set a 15 minute timeout on the approval.  You also tag the tasks image with latest and the version from the pom file.</p>
-
-<p><br></p>
-
-<h1 id="append-to-jenkins-pipeline-configuration">Append to Jenkins Pipeline Configuration</h1>
-
+<br>
+# Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-
-<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
-
+<img src="../images/pipeline_actions_edit.png" width="900" />
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre><code>    stage(&#39;Promote to STAGE?&#39;) {
+<pre tabindex="0"><code>    stage(&#39;Promote to STAGE?&#39;) {
       steps {
         timeout(time:15, unit:&#39;MINUTES&#39;) {
             input message: &#34;Promote to STAGE?&#34;, ok: &#34;Promote&#34;
@@ -338,27 +328,18 @@
           }
         }
       }
-    }</code></pre>
-<h1 id="add-deploy-stage">Add Deploy Stage</h1>
-
+    }
+</code></pre><h1 id="add-deploy-stage">Add Deploy Stage</h1>
 <p>Add the Deploy Stage into your pipeline.</p>
-
-<p><img src="../images/pipeline_deploy_stage.png" width="900" /></p>
-
+<img src="../images/pipeline_deploy_stage.png" width="900" />
 <p>If the deployment config for the application already exists in the Stage Project or Environment the deployment config , service, and route are deleted.  This allows for the pipeline to be rerun.</p>
-
 <p>The new-app is recreated in the Stage Environment from the image that you tagged in the previous stage.  The image also has a route created for with the svc.expose command.</p>
-
-<p><br></p>
-
-<h1 id="append-to-jenkins-pipeline-configuration-1">Append to Jenkins Pipeline Configuration</h1>
-
+<br>
+# Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-
-<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
-
+<img src="../images/pipeline_actions_edit.png" width="900" />
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre><code>    stage(&#39;Deploy STAGE&#39;) {
+<pre tabindex="0"><code>    stage(&#39;Deploy STAGE&#39;) {
       steps {
         script {
           openshift.withCluster() {
@@ -376,8 +357,8 @@
       }
     }
   }
-}</code></pre>
-<p>Congratulations, this should be the final step in your Trusted Software Supply Chain.  Go on to the next lab to verify and run the pipeline.
+}
+</code></pre><p>Congratulations, this should be the final step in your Trusted Software Supply Chain.  Go on to the next lab to verify and run the pipeline.
 <style>
 
  

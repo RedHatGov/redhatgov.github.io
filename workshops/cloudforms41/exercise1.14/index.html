@@ -307,145 +307,88 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="exercise-1-14-examine-policies">Exercise 1.14 - Examine Policies</h1>
-
+    <h1 id="exercise-114---examine-policies">Exercise 1.14 - Examine Policies</h1>
 <h2 id="exercise-description">Exercise Description</h2>
-
 <p>Policy profiles are groups of policies that you can apply to entities within CloudForms.  Two common types of policies are Compliance policies, which check for a specific state in a host or VM, and Control policies, which control a host or VM, depending on certain criteria.</p>
-
 <p>In this exercise, you will learn how to work with policies, events, conditions, actions, alerts, and profiles.</p>
-
 <ul>
 <li>An <strong>Event</strong> is a trigger to check a condition.</li>
 <li>A <strong>Condition</strong> is a test triggered by an event.</li>
 <li>An <strong>Action</strong> is an execution that occurs if a condition is met.</li>
 </ul>
-
 <h2 id="section-1-examine-policies">Section 1: Examine Policies</h2>
-
-<h3 id="step-1-select-control-explorer">Step 1. Select <strong>Control</strong> → <strong>Explorer</strong>.</h3>
-
+<h3 id="step-1-select-control--explorer">Step 1. Select <strong>Control</strong> → <strong>Explorer</strong>.</h3>
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-control-explorer.png" width="1000"/><br/>
 <em>Control Explorer</em></p>
-
 <h3 id="step-2-select-the-policy-profiles-accordion">Step 2. Select the <strong>Policy Profiles</strong> accordion.</h3>
-
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-policy-profile-accordion.png" /><br/>
 <em>Policy Profile Accordion</em></p>
-
-<h3 id="step-3-select-all-policy-profiles-linux-compliance-check-vm-and-instance-compliance-shell-shock-vulnerability-vulnerable-bash-package-shellshock">Step 3. Select <strong>All Policy Profiles</strong> → <strong>Linux Compliance Check</strong> → <strong>VM and Instance Compliance: Shell-Shock Vulnerability</strong> → <strong>Vulnerable bash Package (ShellShock)</strong>.</h3>
-
+<h3 id="step-3-select-all-policy-profiles--linux-compliance-check--vm-and-instance-compliance-shell-shock-vulnerability--vulnerable-bash-package-shellshock">Step 3. Select <strong>All Policy Profiles</strong> → <strong>Linux Compliance Check</strong> → <strong>VM and Instance Compliance: Shell-Shock Vulnerability</strong> → <strong>Vulnerable bash Package (ShellShock)</strong>.</h3>
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-shell-shock.png" width="1000"/><br/>
 <em>Shell-Shock Vulnerability</em></p>
-
 <h3 id="step-4-on-the-right-observe-the-expression-used-for-this-policy">Step 4. On the right, observe the Expression used for this policy.</h3>
-
 <h2 id="section-2-explore-events">Section 2: Explore Events</h2>
-
 <h3 id="step-1-select-the-events-accordion">Step 1. Select the <strong>Events</strong> accordion.</h3>
-
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-events-accordion.png" /><br/>
 <em>Events Accordion</em></p>
-
-<h3 id="step-2-select-all-events-container-image-discovered">Step 2. Select <strong>All Events</strong> → <strong>Container Image Discovered</strong>.</h3>
-
+<h3 id="step-2-select-all-events--container-image-discovered">Step 2. Select <strong>All Events</strong> → <strong>Container Image Discovered</strong>.</h3>
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-container-image-discovered.png" width="1000"/><br/>
 <em>Container Image Discovered</em></p>
-
 <h3 id="step-3-observe-that-the-imported-policy-shows-up-as-assigned">Step 3. Observe that the imported policy shows up as assigned.</h3>
-
 <h2 id="section-3-explore-conditions">Section 3. Explore Conditions</h2>
-
 <h3 id="step-1-select-the-conditions-accordion">Step 1. Select the <strong>Conditions</strong> accordion.</h3>
-
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-conditions-accordion.png" /><br/>
 <em>Conditions Accordion</em></p>
-
-<h3 id="step-2-select-all-conditions-all-vm-and-instance-conditions-vulnerable-bash-package-shellshock">Step 2. Select <strong>All Conditions</strong> → <strong>All VM and Instance Conditions</strong> → <strong>Vulnerable bash Package (ShellShock)</strong></h3>
-
+<h3 id="step-2-select-all-conditions--all-vm-and-instance-conditions--vulnerable-bash-package-shellshock">Step 2. Select <strong>All Conditions</strong> → <strong>All VM and Instance Conditions</strong> → <strong>Vulnerable bash Package (ShellShock)</strong></h3>
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-conditions-shellshock.png" width="1000"/><br/>
 <em>Conditions ShellShock</em></p>
-
 <h3 id="step-3-examine-the-expression">Step 3. Examine the <strong>Expression</strong>.</h3>
-
 <h2 id="section-4-explore-actions">Section 4: Explore Actions</h2>
-
 <h3 id="step-1-select-the-actions-accordion">Step 1. Select the <strong>Actions</strong> accordion.</h3>
-
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-actions-accordion.png" /><br/>
 <em>Actions Accordion</em></p>
-
-<h3 id="step-2-select-all-actions-send-email-to-security-team">Step 2. Select <strong>All Actions</strong> → <strong>Send Email to Security Team</strong>.</h3>
-
+<h3 id="step-2-select-all-actions--send-email-to-security-team">Step 2. Select <strong>All Actions</strong> → <strong>Send Email to Security Team</strong>.</h3>
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-actions-send-email.png" width="1000"/><br/>
 <em>Send Email</em></p>
-
 <h3 id="step-3-observe-what-this-action-does-and-the-policies-to-which-it-is-assigned">Step 3. Observe what this action does and the policies to which it is assigned.</h3>
-
 <h3 id="step-4-examine-other-actions-and-results">Step 4. Examine other actions and results.</h3>
-
 <h2 id="section-5-explore-alerts">Section 5. Explore Alerts</h2>
-
 <h3 id="step-1-select-the-alerts-accordion">Step 1. Select the <strong>Alerts</strong> accordion.</h3>
-
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alerts-accordion.png" /><br/>
 <em>Alerts Accordion</em></p>
-
-<h3 id="step-2-select-all-alerts-vm-memory-was-decreased">Step 2. Select <strong>All Alerts</strong> → <strong>VM Memory was decreased</strong>.</h3>
-
+<h3 id="step-2-select-all-alerts--vm-memory-was-decreased">Step 2. Select <strong>All Alerts</strong> → <strong>VM Memory was decreased</strong>.</h3>
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alerts-vm-decrease.png" width="1000"/><br/>
 <em>VM Memory Alerts</em></p>
-
 <h3 id="step-3-review-the-hardware-reconfigured-parameters-section-to-see-what-this-alert-monitors">Step 3. Review the <strong>Hardware Reconfigured Parameters</strong> section to see what this alert monitors.</h3>
-
 <h2 id="section-6-explore-alert-profiles">Section 6. Explore Alert Profiles</h2>
-
 <h3 id="step-1-select-the-alert-profiles-accordion">Step 1. Select the <strong>Alert Profiles</strong> accordion.</h3>
-
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alert-profile.png" /><br/>
 <em>Alerts Profile Accordion</em></p>
-
-<h3 id="step-2-select-all-alert-profiles-vm-and-instance-alert-profiles">Step 2. Select <strong>All Alert Profiles</strong> → <strong>VM and Instance Alert Profiles</strong>.</h3>
-
+<h3 id="step-2-select-all-alert-profiles--vm-and-instance-alert-profiles">Step 2. Select <strong>All Alert Profiles</strong> → <strong>VM and Instance Alert Profiles</strong>.</h3>
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alert-profile-vm-instance.png" width="1000"/><br/>
 <em>All VM and Instance Alert Profiles</em></p>
-
 <h3 id="step-3-add-an-alert-profile">Step 3. Add an alert profile:</h3>
-
 <ol>
 <li>Click <i class="fa fa-cog fa-lg" aria-hidden="true"></i> (<strong>Configuration</strong>) → <strong>Add a New VM and Instance Alert Profile</strong>.</li>
 <li>Enter <strong>VM Memory Decrease</strong> for <strong>Description</strong>.</li>
 <li>In <strong>Alert Selection</strong>, select <strong>VM Memory was decreased</strong> and click <i class="fa fa-caret-right fa-lg" aria-hidden="true"></i>.</li>
 <li>Click <strong>Add</strong>.</li>
 </ol>
-
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alert-profile-add.png" width="1000"/><br/>
 <em>Add Alert Profile</em></p>
-
 <p>
-
-
 <div class="alert alert-warning">
-  
-  <span class="pficon pficon-warning-triangle-o"></span>
-   You cannot assign an alert directly to an entity; you must put alerts into an alert profile as you did here. 
+<p><span class="pficon pficon-warning-triangle-o"></span>
+You cannot assign an alert directly to an entity; you must put alerts into an alert profile as you did here.</p>
 </div>
 </p>
-
 <p>
-
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-   An alert profile can contain many alerts or just one. 
+<p><span class="pficon pficon-info"></span>
+An alert profile can contain many alerts or just one.</p>
 </div>
 </p>
-
 <h3 id="step-4-assign-your-alert-profile">Step 4. Assign your alert profile:</h3>
-
 <ol>
 <li>Select the new alert profile you just created.</li>
 <li>Click <i class="fa fa-cog fa-lg" aria-hidden="true"></i> (<strong>Configuration</strong>) → <strong>Edit assignments for this Alert Profile</strong>.</li>
@@ -453,10 +396,8 @@
 <li>Check the <strong>Raleigh</strong> box.</li>
 <li>Click <strong>Save</strong>.</li>
 </ol>
-
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-alert-profile-assign.png" width="1000"/><br/>
 <em>Assign Alert Profile</em></p>
-
 <p>You have now assigned this alert to any VM in the Raleigh cluster.</p>
 
 

@@ -307,18 +307,12 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="verify-completed-pipeline">Verify Completed Pipeline</h1>
-
-<p>Before we kick off your pipeline, let's verify it.</p>
-
+    <h1 id="verify-completed-pipeline">Verify Completed Pipeline</h1>
+<p>Before we kick off your pipeline, let&rsquo;s verify it.</p>
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit YAML</p>
-
-<p><img src="../images/pipeline_actions_edityaml.png" width="900" /></p>
-
+<img src="../images/pipeline_actions_edityaml.png" width="900" />
 <p>Take a look and see if it matches the below text.  If not, please correct it.</p>
-<pre><code>apiVersion: v1
+<pre tabindex="0"><code>apiVersion: v1
 kind: BuildConfig
 metadata:
     annotations:
@@ -485,61 +479,37 @@ spec:
               }
             }
           }
-      type: JenkinsPipeline</code></pre>
-<p><br></p>
-
-<h1 id="verify-your-user-dev-and-stage-projects">Verify your user Dev and Stage projects</h1>
-
+      type: JenkinsPipeline
+</code></pre><br>
+# Verify your user Dev and Stage projects
 <p>In your pipeline text file, make sure &lt;user&gt; reflects your user # and project.</p>
-<pre><code>- name: DEV_PROJECT
+<pre tabindex="0"><code>- name: DEV_PROJECT
   value: dev-user<span class="userid">YOUR#</span>
 - name: STAGE_PROJECT
-  value: stage-user<span class="userid">YOUR#</span></code></pre>
-<p><br></p>
-
-<h1 id="import-pipeline-into-openshift-if-not-created-already">Import pipeline into OpenShift (if not created already)</h1>
-
+  value: stage-user<span class="userid">YOUR#</span>
+</code></pre><br>
+# Import pipeline into OpenShift (if not created already)
 <p>If you created your pipeline in a text editor, you can import your text file in OpenShift.</p>
-
 <p>At the top right select Add to Project &gt; Import YAML / JSON</p>
-
 <p><img src="../images/import_yaml_json.png" width="500"><br/></p>
-
 <p>Copy and Paste your pipeline from your text editor to your</p>
-
 <p>Click Create and Close</p>
-
 <p><img src="../images/import_pipeline.png" width="900"><br/></p>
-
-<p><br></p>
-
-<h1 id="run-pipeline">Run Pipeline</h1>
-
+<br>
+# Run Pipeline
 <p>Go to Builds &gt; Pipeline</p>
-
 <p>Click Start Pipeline for the pipeline you just created called tasks-pipeline.</p>
-
 <p>Your pipeline should now execute through all the stages you created.</p>
-
 <p>Go ahead and click View Log.  This will take you to the Jenkins logs and you can follow the various stages in your pipeline.</p>
-
 <p>When it asks to promote to stage, go ahead and promote it.</p>
-
 <p><img src="../images/pipeline_execution.png" width="900"><br/></p>
-
-<p><br></p>
-
-<h1 id="explore-pipeline-run">Explore Pipeline Run</h1>
-
-<ul>
-<li>Explore the snapshots repository in Nexus and verify tasks is pushed to the repository</li>
-<li>Explore SonarQube and show the metrics, stats, code coverage, etc</li>
-<li>Explore Tasks - Dev project in OpenShift console and verify the application is deployed in the DEV environment</li>
-<li>Explore Tasks - Stage project in OpenShift console and verify the application is deployed in the STAGE environment</li>
-</ul>
-
+<br>
+# Explore Pipeline Run
+- Explore the snapshots repository in Nexus and verify tasks is pushed to the repository
+- Explore SonarQube and show the metrics, stats, code coverage, etc
+- Explore Tasks - Dev project in OpenShift console and verify the application is deployed in the DEV environment
+- Explore Tasks - Stage project in OpenShift console and verify the application is deployed in the STAGE environment
 <p>Sonarqube metrics, stats, and code coverage can be seen such as this screenshot below.</p>
-
 <p><img src="../images/sonarqube-analysis.png" width="900"><br/>
 <style>
 

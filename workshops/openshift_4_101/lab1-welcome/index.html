@@ -307,68 +307,46 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="welcome-to-openshift">Welcome to OpenShift!</h1>
-
+    <h1 id="welcome-to-openshift">Welcome to OpenShift!</h1>
 <p>This lab provides a quick tour of the OpenShift console to help you get familiar with the user interface. If you are already familiar with the basics of OpenShift, this will be easy in that we are simply ensuring you can login and create a project.</p>
-
 <h1 id="accessing-openshift">Accessing OpenShift</h1>
-
 <p>OpenShift provides a web console that allows you to perform various tasks via a web browser.</p>
-
-<h2 id="let-s-login-to-the-web-console">Let's Login to the Web Console</h2>
-
+<h2 id="lets-login-to-the-web-console">Let&rsquo;s Login to the Web Console</h2>
 <blockquote>
 <p>Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.</p>
 </blockquote>
-
-<p><code>
-https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
-</code></p>
-
+<p><code>https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span></code></p>
 <p><img src="../images/ocp-login.png" width="600"><br/>
 <em>Login Webpage</em></p>
-
-<p>Once logged in you should see your available projects - or you will be provided with an informational box that &quot;No projects exist&quot;</p>
-
+<p>Once logged in you should see your available projects - or you will be provided with an informational box that &ldquo;No projects exist&rdquo;</p>
 <p><img src="../images/ocp-dev-view.png" width="600"><br/>
 <em>Developer Default View</em></p>
-
 <h2 id="so-this-is-what-an-empty-project-looks-like">So this is what an empty project looks like</h2>
-
-<p>First let's create a new project to do our workshop work in.  We will use the student number you were given to ensure you don't clash with classmates:</p>
-
+<p>First let&rsquo;s create a new project to do our workshop work in.  We will use the student number you were given to ensure you don&rsquo;t clash with classmates:</p>
 <blockquote>
-<p>Click on the &quot;Project: all projects&quot; button and select &quot;Create Project&quot; from the drop down menu
+<p>Click on the &ldquo;Project: all projects&rdquo; button and select &ldquo;Create Project&rdquo; from the drop down menu
 <br><img src="../images/ocp-dev-create-project-terminal.gif"><br/></p>
-
-<p>Populate &quot;Name&quot; with &quot;terminal-<span class="userid">YOUR#</span>
-&quot; and populate &quot;Description&quot; boxes with whatever you like.  And click &quot;Create&quot;</p>
 </blockquote>
-
-<p>This is going to take you to the next logical step of adding something to the project, but we don't want to do that just yet.</p>
-
-<h2 id="let-s-launch-a-terminal">Let's launch a terminal.</h2>
-
-<p>At the top of the screen, click the <strong>[&gt;_]</strong> button.</p>
-
-<p><img src="../images/ocp-redhat-terminal-launch.gif"<br>
-<strong><em>Note:</em></strong> If the button does not exist, it may be necessary for the cluster administrator to load the <strong>&quot;Red Hat Terminal Operator&quot;</strong>.</p>
-
-<p><i class="fa fa-terminal"></i> Check to see what projects you have access to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get projects
-oc get projects
-NAME          DISPLAY NAME   STATUS
-terminal-<span class="userid">YOUR#</span>                  Active</code></pre></div>
 <blockquote>
+<p>Populate &ldquo;Name&rdquo; with &ldquo;terminal-<span class="userid">YOUR#</span>
+&rdquo; and populate &ldquo;Description&rdquo; boxes with whatever you like.  And click &ldquo;Create&rdquo;</p>
+</blockquote>
+<p>This is going to take you to the next logical step of adding something to the project, but we don&rsquo;t want to do that just yet.</p>
+<h2 id="lets-launch-a-terminal">Let&rsquo;s launch a terminal.</h2>
+<p>At the top of the screen, click the <strong>[&gt;_]</strong> button.</p>
+<p>&lt;img src=&quot;../images/ocp-redhat-terminal-launch.gif&quot;<br>
+<em><strong>Note:</strong></em> If the button does not exist, it may be necessary for the cluster administrator to load the <strong>&ldquo;Red Hat Terminal Operator&rdquo;</strong>.</p>
+<p><i class="fa fa-terminal"></i> Check to see what projects you have access to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get projects
+</span></span><span style="display:flex;"><span>oc get projects
+</span></span><span style="display:flex;"><span>NAME          DISPLAY NAME   STATUS
+</span></span><span style="display:flex;"><span>terminal-<span class="userid">YOUR#</span>                  Active
+</span></span></code></pre></div><blockquote>
 <p><i class="fa fa-terminal"></i> Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc status</code></pre></div>
-<h1 id="summary">Summary</h1>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc status
+</span></span></code></pre></div><h1 id="summary">Summary</h1>
 <p>You should now be ready to get hands-on with our workshop labs.</p>
-
 <style>
 
  

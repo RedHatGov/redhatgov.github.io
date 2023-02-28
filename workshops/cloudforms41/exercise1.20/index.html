@@ -307,16 +307,10 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="ansible-tower">Ansible Tower</h1>
-
+    <h1 id="ansible-tower">Ansible Tower</h1>
 <h2 id="exercise-description">Exercise Description</h2>
-
 <p>Ansible Tower is a management tool integrated with Red Hat CloudForms, designed to help automate infrastructure operations. Red Hat CloudForms allows you to execute Ansible Tower jobs using service catalogs and Automate. No custom configuration or Ruby scripting is needed in Red Hat CloudForms, as configuration is done in Ansible Tower using playbooks.</p>
-
 <p>You can use the large library of existing Ansible playbooks as Red Hat CloudForms state machines to automate tasks such as backups, package updates, and maintenance in your Red Hat CloudForms environment. This also includes deploying Red Hat Satellite agents on bare metal machines as required. This can be particularly useful for quickly applying changes across large environments with many virtual machines or instances. Using Ansible Tower, you can schedule Ansible playbook runs and monitor current and historical results, allowing for troubleshooting or identification of issues before they occur.</p>
-
 <table>
 <thead>
 <tr>
@@ -324,43 +318,34 @@
 <th></th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>1. Create an Ansible playbook which performs a specific task.</td>
 <td></td>
 </tr>
-
 <tr>
 <td>2. A new Ansible Tower job template is created from the playbook, which is then retrieved by Red Hat CloudForms.</td>
 <td></td>
 </tr>
-
 <tr>
 <td>3. From the Ansible Tower job template, create a new catalog item in Red Hat CloudForms, optionally with a service dialog that allows the user to enter parameters if needed.</td>
 <td></td>
 </tr>
-
 <tr>
 <td>4. The user orders the service from the Red Hat CloudForms user interface, and fills out any additional arguments (for example, limiting the task to run on a specific set of virtual machines).</td>
 <td></td>
 </tr>
-
 <tr>
 <td>5. The job executes.</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="section-1-explore-ansible-tower">Section 1: Explore Ansible Tower</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Automate / Ansible Tower / Explore</code></pre></div>
-<p><img src="../images/tower.png" width="1000" /></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Automate / Ansible Tower / Explore
+</span></span></code></pre></div><img src="../images/tower.png" width="1000" />
 <p>Red Hat CloudForms automatically updates its inventory from Ansible Tower. This includes system groups (known as Inventories in Ansible Tower), basic information about individual systems, and available Ansible Tower job templates to be executed from the service catalog or Automate.</p>
-
 <h2 id="section-2-explore-adding-an-ansible-tower-provider">Section 2: Explore adding an Ansible Tower Provider</h2>
-
 <table>
 <thead>
 <tr>
@@ -368,85 +353,59 @@
 <th></th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>1. Navigate to Automation → Ansible Tower → Explorer and click on the Providers accordion tab.</td>
 <td></td>
 </tr>
-
 <tr>
 <td>2. Under Configuration, click Add a new Provider.</td>
 <td></td>
 </tr>
-
 <tr>
 <td>3. In the Add a new Provider area:</td>
 <td></td>
 </tr>
-
 <tr>
 <td>4. Select the Verify Peer Certificate checkbox if desired.</td>
 <td></td>
 </tr>
-
 <tr>
 <td>5. In the Credentials area, provide the Username and Password, and Confirm Password.</td>
 <td></td>
 </tr>
-
 <tr>
 <td>6. Click Validate to verify credentials.</td>
 <td></td>
 </tr>
-
 <tr>
 <td>7. Click Add.</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="inventories">Inventories</h2>
-
 <p>Select your Ansible Tower provider to expand and list the inventory groups on that Ansible
 Tower system. The inventory groups can be expanded to view the systems contained within
 each group, as well as configuration details for these systems.</p>
-
-<p><img src="../images/inventory.png" width="1000" /></p>
-
-<h2 id="playbooks-templates">Playbooks/Templates</h2>
-
+<img src="../images/inventory.png" width="1000" />
+<h2 id="playbookstemplates">Playbooks/Templates</h2>
 <p>You must first create the job template in Ansible Tower. The job templates are automatically discovered by Red Hat CloudForms when refreshing your Ansible Tower provider’s inventory.</p>
-
-<p><img src="../images/templates.png" width="1000" /></p>
-
+<img src="../images/templates.png" width="1000" />
 <p>You can execute an Ansible Tower playbook from Red Hat CloudForms by creating a service catalog item from an Ansible Tower job template.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Services / Catalog / Catalog Items</code></pre></div>
-<p><img src="../images/tower1.png" width="1000" /></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Services / Catalog / Catalog Items
+</span></span></code></pre></div><img src="../images/tower1.png" width="1000" />
 <p>Now you can look at adding another Ansible Tower Playbook to the service catalog. When you check display in catalog your new service will show up in the self service catalog as a item a user can order.</p>
-
-<p><img src="../images/tower2.png" width="1000" /></p>
-
+<img src="../images/tower2.png" width="1000" />
 <h2 id="self-service-portal">Self Service Portal</h2>
-
 <p>To see the services that are in the service catalog, change the url to <a href="https://cf.db.redhatgov.io/self_service">https://cf.db.redhatgov.io/self_service</a>. By adding self_service to the end of the URL you will be directed to the user portal where you can order services from the service catalog.</p>
-
-<p><img src="../images/service.png" width="1000" /></p>
-
+<img src="../images/service.png" width="1000" />
 <p>Here we can see the Ansible Playbook for creating a new CloudForms user we viewed previously.</p>
-
-<p><img src="../images/service2.png" width="1000" /></p>
-
+<img src="../images/service2.png" width="1000" />
 <p>You can click on the playbook and see that there is basic info to fill out for the playbook and then you click order just like you are shopping on Amazon! Ansible Tower in the background will kickoff the playbook.</p>
-
-<p><img src="../images/service3.png" width="1000" /></p>
-
-<p><img src="../images/service4.png" width="1000" /></p>
-
+<img src="../images/service3.png" width="1000" />
+<img src="../images/service4.png" width="1000" />
 <h2 id="summary">Summary</h2>
-
 <p>In this exercise you got a overview of the integration with Ansible Tower and how you can take any playbook and offer it up as a service item in CloudForms.</p>
 
 

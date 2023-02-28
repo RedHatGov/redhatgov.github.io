@@ -307,16 +307,10 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="things-will-go-wrong-and-that-s-why-we-have-replication-and-recovery">Things will go wrong, and that's why we have replication and recovery</h1>
-
-<p>Things will go wrong with your software, or your hardware, or from something out of your control.  But we can plan for that failure, and planning for it let's us minimize the impact.  OpenShift supports this via what we call replication and recovery.</p>
-
+    <h1 id="things-will-go-wrong-and-thats-why-we-have-replication-and-recovery">Things will go wrong, and that&rsquo;s why we have replication and recovery</h1>
+<p>Things will go wrong with your software, or your hardware, or from something out of your control.  But we can plan for that failure, and planning for it let&rsquo;s us minimize the impact.  OpenShift supports this via what we call replication and recovery.</p>
 <h2 id="replication">Replication</h2>
-
-<p>Let's walk through a simple example of how the replication controller can keep your deployment at a desired state.  Assuming you still have the dc-metro-map project running we can manually scale up our replicas to handle increased user load.</p>
-
+<p>Let&rsquo;s walk through a simple example of how the replication controller can keep your deployment at a desired state.  Assuming you still have the dc-metro-map project running we can manually scale up our replicas to handle increased user load.</p>
 <div class="panel-group">
   
 
@@ -324,25 +318,25 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse3aa48093926234a6bac1773f021af777" class="collapsed">
+      <a data-toggle="collapse" href="#collapse098510ee7a35794d5d9fe522d8601802" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse3aa48093926234a6bac1773f021af777" class="panel-collapse collapse ">
+  <div id="collapse098510ee7a35794d5d9fe522d8601802" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and try the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc scale --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span> dc/dc-metro-map</code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc scale --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span> dc/dc-metro-map
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> Check out the new pods:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods</code></pre></div>
-<p>Notice that you now have 4 unique pods available to inspect.  If you want go ahead and inspect them, using 'oc describe pod/<b>POD NAME</b>'. You can see that each has its own IP address and logs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span></code></pre></div><p>Notice that you now have 4 unique pods available to inspect.  If you want go ahead and inspect them, using &lsquo;oc describe pod/<b>POD NAME</b>&rsquo;. You can see that each has its own IP address and logs.</p>
 
     </div>
   </div>
@@ -354,30 +348,29 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse91b938db786d3ca5246401c196b58945" class="collapsed">
+      <a data-toggle="collapse" href="#collapse100a38ffa99f7abd27c827b592922437" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse91b938db786d3ca5246401c196b58945" class="panel-collapse collapse ">
+  <div id="collapse100a38ffa99f7abd27c827b592922437" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><blockquote>
-Click &quot;Workloads&quot;, then &quot;Deployment Configuration&quot;, and then &quot;dc-metro-map&quot;
+       <blockquote>
+Click "Workloads", then "Deployment Configuration", and then "dc-metro-map"
 </blockquote>
 <blockquote>
 In the Deployment Config Details, click the up arrow 3 times.
 </blockquote>
 The deployment should indicate that it is scaling to 4 pods, and eventually you will have 4 running pods.  Keep in mind that each pod has it's own container which is an identical deployment of the webapp.  OpenShift is now (by default) round robin load-balancing traffic to each pod.
-<img src="../images/ocp-lab-replicationrecovery-4pods.png" width="900"><br/></p>
-
-<p><blockquote>
+<img src="../images/ocp-lab-replicationrecovery-4pods.png" width="900"><br/>
+<blockquote>
 Click the Pods tab, and select one of the pods (ex: dc-metro-map-X-XXXX)
 </blockquote>
 Notice that you now have 4 unique webapp pods available to inspect.  If you want go ahead and inspect them you can see that each has its own IP address and logs.
-<img src="../images/ocp-lab-replicationrecovery-4podslist.png" width="900"><br/></p>
+<img src="../images/ocp-lab-replicationrecovery-4podslist.png" width="900"><br/>
 
     </div>
   </div>
@@ -386,13 +379,9 @@ Notice that you now have 4 unique webapp pods available to inspect.  If you want
 
 </div>
 
-
-<p>So you've told OpenShift that you'd like to maintain 4 running, load-balanced, instances of our web app.</p>
-
+<p>So you&rsquo;ve told OpenShift that you&rsquo;d like to maintain 4 running, load-balanced, instances of our web app.</p>
 <h2 id="recovery">Recovery</h2>
-
-<p>Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy.  Let's forcibly inflict an issue and see how OpenShift responds.</p>
-
+<p>Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy.  Let&rsquo;s forcibly inflict an issue and see how OpenShift responds.</p>
 <div class="panel-group">
   
 
@@ -400,28 +389,28 @@ Notice that you now have 4 unique webapp pods available to inspect.  If you want
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsec2d00dc6588f7815b918ce9bce22adfc" class="collapsed">
+      <a data-toggle="collapse" href="#collapse795ec71b1119c359a3c0b98d33ff36ea" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsec2d00dc6588f7815b918ce9bce22adfc" class="panel-collapse collapse ">
+  <div id="collapse795ec71b1119c359a3c0b98d33ff36ea" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Choose a random pod and delete it:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
-$ oc delete pod/PODNAME
-$ oc get pods -w</code></pre></div>
-<p>If you're fast enough you'll see the pod you deleted go &quot;Terminating&quot; and you'll also see a new pod immediately get created and transition from &quot;Pending&quot; to &quot;Running&quot;.  If you weren't fast enough you can see that your old pod is gone and a new pod is in the list with an age of only a few seconds.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span><span style="display:flex;"><span>$ oc delete pod/PODNAME
+</span></span><span style="display:flex;"><span>$ oc get pods -w
+</span></span></code></pre></div><p>If you&rsquo;re fast enough you&rsquo;ll see the pod you deleted go &ldquo;Terminating&rdquo; and you&rsquo;ll also see a new pod immediately get created and transition from &ldquo;Pending&rdquo; to &ldquo;Running&rdquo;.  If you weren&rsquo;t fast enough you can see that your old pod is gone and a new pod is in the list with an age of only a few seconds.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i>  You can see the more details about your deployment configuration with:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe dc/dc-metro-map</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe dc/dc-metro-map
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -432,18 +421,17 @@ $ oc get pods -w</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseccd00ba1d5e8c7131214c9e8eed9d365" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3080c70c71b2bcd2735ccf9b8b53825b" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapseccd00ba1d5e8c7131214c9e8eed9d365" class="panel-collapse collapse ">
+  <div id="collapse3080c70c71b2bcd2735ccf9b8b53825b" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <p>From the browse pods list:</p>
-
 <blockquote>
 Click one of the running pods (not a build pod)
 </blockquote>
@@ -451,22 +439,16 @@ Click one of the running pods (not a build pod)
 Click the "Actions" button in the top right and then select "Delete Pod"
 </blockquote>
 <img src="../images/ocp-lab-replicationrecovery-podaction.png" width="900"><br/>
-
 <blockquote>
 Now click the "Delete" button in the popup to confirm the pod deletion
 </blockquote>
 <img src="../images/ocp-lab-replicationrecovery-deletepod.png" width="900"><br/>
-
 <blockquote>
 Quickly switch back to the deployment configuration overview
 </blockquote>
-
-<p>If you're fast enough you'll see the pod you deleted unfill a portion of the deployment circle, and then a new pod fill it back up.</p>
-
+<p>If you&rsquo;re fast enough you&rsquo;ll see the pod you deleted unfill a portion of the deployment circle, and then a new pod fill it back up.</p>
 <p><img src="../images/ocp-lab-replicationrecovery-poddelete.png" width="300"><br/></p>
-
 <p>You can browse the pods list again to see the old pod was deleted and a new pod with a recent age.</p>
-
 <p><img src="../images/ocp-lab-replicationrecovery-podrecovery.png" width="900"><br/></p>
 
     </div>
@@ -476,11 +458,8 @@ Quickly switch back to the deployment configuration overview
 
 </div>
 
-
 <h2 id="application-health">Application Health</h2>
-
-<p>In addition to the health of your application's pods, OpenShift will watch the containers inside those pods.  Let's forcibly inflict some issues and see how OpenShift responds.</p>
-
+<p>In addition to the health of your application&rsquo;s pods, OpenShift will watch the containers inside those pods.  Let&rsquo;s forcibly inflict some issues and see how OpenShift responds.</p>
 <div class="panel-group">
   
 
@@ -488,42 +467,38 @@ Quickly switch back to the deployment configuration overview
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsefb390b4c61aa287c013526bea65dd205" class="collapsed">
+      <a data-toggle="collapse" href="#collapse4259ced397e22ccb9804c7e6630687bb" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsefb390b4c61aa287c013526bea65dd205" class="panel-collapse collapse ">
+  <div id="collapse4259ced397e22ccb9804c7e6630687bb" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Choose a running pod and shell into it:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
-$ oc exec PODNAME -it /bin/bash</code></pre></div>
-<p>You are now executing a bash shell running in the container of the pod.  Let's kill our webapp and see what happens.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span><span style="display:flex;"><span>$ oc exec PODNAME -it /bin/bash
+</span></span></code></pre></div><p>You are now executing a bash shell running in the container of the pod.  Let&rsquo;s kill our webapp and see what happens.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i> If we had multiple containers in the pod we could use "-c CONTAINER_NAME" to select the right one
 </blockquote>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Choose a running pod and shell into its container:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pkill -9 node</code></pre></div>
-<p>This will kick you out off the container with an error like &quot;Error executing command in container&quot;</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pkill -9 node
+</span></span></code></pre></div><p>This will kick you out off the container with an error like &ldquo;Error executing command in container&rdquo;</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Do it again - shell in and execute the same command to kill node
 </blockquote>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Watch for the container restart
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods -w</code></pre></div>
-<p>If a container dies multiple times quickly, OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn't waste resources trying to restart containers that are continuously crashing.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods -w
+</span></span></code></pre></div><p>If a container dies multiple times quickly, OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn&rsquo;t waste resources trying to restart containers that are continuously crashing.</p>
 
     </div>
   </div>
@@ -535,14 +510,14 @@ $ oc exec PODNAME -it /bin/bash</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseec10b68c3db32c23b414d220f45def11" class="collapsed">
+      <a data-toggle="collapse" href="#collapse0252affc99e191c8b44dd7634f977444" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapseec10b68c3db32c23b414d220f45def11" class="panel-collapse collapse ">
+  <div id="collapse0252affc99e191c8b44dd7634f977444" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
@@ -555,24 +530,17 @@ In the tab bar for this pod, click on "Terminal"
 Click inside the terminal view and type $ pkill -9 node
 </blockquote>
 <img src="../images/ocp-lab-replicationrecovery-terminal.png" width="900"><br/>
-
-</br>This is going to kill the node.js web server, and kick you off of the container's terminal.</br></br>
-
-<img src="../images/ocp-lab-replicationrecovery-terminalkick.png" width="400"><br/>
-
+<p></br>This is going to kill the node.js web server, and kick you off of the container&rsquo;s terminal.</br></br></p>
+<p><img src="../images/ocp-lab-replicationrecovery-terminalkick.png" width="400"><br/></p>
 </br>
-
 <blockquote>
 Click the refresh button (on your web browser), and do that a couple more times
 </blockquote>
-
 <blockquote>
 Go back to the pod overview
 </blockquote>
-
 <p><img src="../images/ocp-lab-replicationrecovery-backoff.png" width="900"><br/></p>
-
-<p>The container died multiple times so quickly that OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn't waste resources trying to restart containers that are continuously crashing.</p>
+<p>The container died multiple times so quickly that OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn&rsquo;t waste resources trying to restart containers that are continuously crashing.</p>
 
     </div>
   </div>
@@ -581,17 +549,11 @@ Go back to the pod overview
 
 </div>
 
-
 <h2 id="clean-up">Clean up</h2>
-
-<p>Let's scale back down to 1 replica.  If you are using the web console just click the down arrow from the Deployments Configs Overview page.  If you are using the command line use the &quot;oc scale&quot; command.</p>
-
+<p>Let&rsquo;s scale back down to 1 replica.  If you are using the web console just click the down arrow from the Deployments Configs Overview page.  If you are using the command line use the &ldquo;oc scale&rdquo; command.</p>
 <p><img src="../images/ocp-lab-replicationrecovery-cleanup.png" width="900"><br/></p>
-
 <h1 id="summary">Summary</h1>
-
 <p>In this lab we learned about replication controllers and how they can be used to scale your applications and services.  We also tried to break a few things and saw how OpenShift responded to heal the system and keep it running.</p>
-
 <style>
 
  

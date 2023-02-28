@@ -307,16 +307,10 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="source-to-image-s2i">Source to Image (S2I)</h1>
-
-<p>One of the useful components of OpenShift is its source-to-image capability.  S2I is a framework that makes it easy to turn your source code into runnable images.  The main advantage of using S2I for building reproducible docker images is the ease of use for developers.  You'll see just how simple it can be in this lab.</p>
-
-<h2 id="let-s-build-a-node-js-web-app-using-s2i">Let's build a node.js web app, using S2I</h2>
-
-<p>We can do this either via the command line or the web console.  You decide which you'd rather do and follow the steps below.</p>
-
+    <h1 id="source-to-image-s2i">Source to Image (S2I)</h1>
+<p>One of the useful components of OpenShift is its source-to-image capability.  S2I is a framework that makes it easy to turn your source code into runnable images.  The main advantage of using S2I for building reproducible docker images is the ease of use for developers.  You&rsquo;ll see just how simple it can be in this lab.</p>
+<h2 id="lets-build-a-nodejs-web-app-using-s2i">Let&rsquo;s build a node.js web app, using S2I</h2>
+<p>We can do this either via the command line or the web console.  You decide which you&rsquo;d rather do and follow the steps below.</p>
 <div class="panel-group">
   
 
@@ -324,22 +318,23 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse2981b08574576db5de79b468d310d804" class="collapsed">
+      <a data-toggle="collapse" href="#collapseee3406b8c37aecd7def71a407e0cdb56" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse2981b08574576db5de79b468d310d804" class="panel-collapse collapse ">
+  <div id="collapseee3406b8c37aecd7def71a407e0cdb56" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-project metro-map
-$ oc new-app --name<span style="color:#f92672">=</span>dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir<span style="color:#f92672">=</span>dc-metro-map
-$ oc expose service dc-metro-map</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc new-project metro-map
+</span></span><span style="display:flex;"><span>$ oc new-app --name<span style="color:#f92672">=</span>dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir<span style="color:#f92672">=</span>dc-metro-map
+</span></span><span style="display:flex;"><span>$ oc expose service dc-metro-map
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -361,31 +356,28 @@ $ oc expose service dc-metro-map</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse59cbb35e449bf69b638e3e0db57ba066" class="collapsed">
+      <a data-toggle="collapse" href="#collapse40772e4787847b674371132e566592f6" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse59cbb35e449bf69b638e3e0db57ba066" class="panel-collapse collapse ">
+  <div id="collapse40772e4787847b674371132e566592f6" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Switch to developer mode, if you're not already there
 </blockquote>
 <img src="../images/ocp-switch-developer.png" width="500"><br/>
-
 <blockquote>
 Click "+Add"
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="450"><br/>
-
 <blockquote>
 Click "From Git"
 </blockquote>
 <img src="../images/ocp-FromGitButton.png" width="200"><br/>
-
 <blockquote>
 Fill out the "Git Repo URL" field as follows:
 </blockquote>
@@ -393,16 +385,12 @@ Fill out the "Git Repo URL" field as follows:
 <table>
 <tr><td><b>Git Repo URL</b></td><td><a href>https://github.com/RedHatGov/openshift-workshops.git</a></td></tr>
 </table>
-
-<img src="../images/ocp-git-dc-metro-map.png" width="700"><br/>
-
-<br>Ensure that the repository is validated (as shown above)</br><br>
-
+<p><img src="../images/ocp-git-dc-metro-map.png" width="700"><br/></p>
+<p><br>Ensure that the repository is validated (as shown above)</br><br></p>
 <blockquote>
 Click on the "Show Advanced Git Options" expender
 </blockquote>
 <img src="../images/ocp-lab-s2i-ago.png" width="200"><br/><br>
-
 <blockquote>
 Fill out the "Context Dir" field as follows:
 </blockquote>
@@ -410,18 +398,14 @@ Fill out the "Context Dir" field as follows:
 <table>
 <tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
 </table>
-
-
 <blockquote>
 Under "Builder", click click on the "Node.js" icon
 </blockquote>
 <img src="../images/ocp-lab-s2i-builder.png" width="600"><br/>
-
 <blockquote>
 Select Node.js 
 </blockquote>
 <img src="../images/ocp-lab-s2i-nodejs.png" width="400"><br/>
-
 <blockquote>
 Fill out the fields, under "General" as follows:
 </blockquote>
@@ -432,12 +416,10 @@ Fill out the fields, under "General" as follows:
 <tr><td><b>Name</b></td><td>dc-metro-map</td></tr>
 </table>
 </p>
-
 <blockquote>
 Choose "Deployment Configuration" 
 </blockquote>
 <img src="../images/ocp-lab-s2i-nodejs-dc.png" width="400"><br/>
-
 <blockquote>
 Scroll to the bottom and click "Create"
 </blockquote>
@@ -449,13 +431,9 @@ Scroll to the bottom and click "Create"
 
 </div>
 
-
 <h2 id="check-out-the-build-details">Check out the build details</h2>
-
 <p>We can see the details of what the S2I builder did.  This can be helpful to diagnose issues if builds are failing.</p>
-
-<p><i class="fa fa-magic fa-2x"></i> TIP: For a node.js app, running &quot;npm shrinkwrap&quot; is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I</p>
-
+<p><i class="fa fa-magic fa-2x"></i> TIP: For a node.js app, running &ldquo;npm shrinkwrap&rdquo; is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I</p>
 <div class="panel-group">
   
 
@@ -463,25 +441,25 @@ Scroll to the bottom and click "Create"
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsed931291220e9a7dacabe80a3424b9bd6" class="collapsed">
+      <a data-toggle="collapse" href="#collapse7c672af06b6df64420bceddff9219c42" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsed931291220e9a7dacabe80a3424b9bd6" class="panel-collapse collapse ">
+  <div id="collapse7c672af06b6df64420bceddff9219c42" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get builds</code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get builds
+</span></span></code></pre></div><blockquote>
 Note the name of your build from the above command output and use it to see the logs with:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc logs builds/<span style="color:#f92672">[</span>BUILD_NAME<span style="color:#f92672">]</span></code></pre></div>
-<p>The console will print out the full log for your build.  Note, you could pipe this to more or less for easier viewing in the CLI.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc logs builds/<span style="color:#f92672">[</span>BUILD_NAME<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>The console will print out the full log for your build.  Note, you could pipe this to more or less for easier viewing in the CLI.</p>
 
     </div>
   </div>
@@ -492,21 +470,20 @@ Note the name of your build from the above command output and use it to see the 
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse75a0543ea03b167f8f63edae6a25d2ae" class="collapsed">
+      <a data-toggle="collapse" href="#collapse5c52afa081ed37a255cc869b15150cb6" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse75a0543ea03b167f8f63edae6a25d2ae" class="panel-collapse collapse ">
+  <div id="collapse5c52afa081ed37a255cc869b15150cb6" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><blockquote>
-Click on &quot;Topology&quot;, the &quot;node&quot;/&quot;dc-metro-map&quot; icon, and then on &quot;View logs&quot;
+       <blockquote>
+Click on "Topology", the "node"/"dc-metro-map" icon, and then on "View logs"
 </blockquote>
-<img src="../images/ocp-lab-s2i-topology.png" width="800"><br/></p>
-
+<img src="../images/ocp-lab-s2i-topology.png" width="800"><br/>
 <p>You should see a log output similar to the one below:<br>
 <img src="../images/ocp-lab-s2i-logs.png" width="700"><br/></p>
 
@@ -517,11 +494,8 @@ Click on &quot;Topology&quot;, the &quot;node&quot;/&quot;dc-metro-map&quot; ico
 
 </div>
 
-
 <h2 id="see-the-app-in-action">See the app in action</h2>
-
-<p>Let's see this app in action!</p>
-
+<p>Let&rsquo;s see this app in action!</p>
 <div class="panel-group">
   
 
@@ -529,21 +503,21 @@ Click on &quot;Topology&quot;, the &quot;node&quot;/&quot;dc-metro-map&quot; ico
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse3fab5597c6dd95e2f0e9ca1014c0c8f4" class="collapsed">
+      <a data-toggle="collapse" href="#collapse5063e6c3ec761dc3140668a72392b1ab" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse3fab5597c6dd95e2f0e9ca1014c0c8f4" class="panel-collapse collapse ">
+  <div id="collapse5063e6c3ec761dc3140668a72392b1ab" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get routes</code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get routes
+</span></span></code></pre></div><blockquote>
 Copy the HOST/PORT and paste into your favorite web browser:
 </blockquote>
 
@@ -557,25 +531,24 @@ Copy the HOST/PORT and paste into your favorite web browser:
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsedaa181efb34bca4d350776a5d7912eb5" class="collapsed">
+      <a data-toggle="collapse" href="#collapse958b24d2aef4dd41051879458794b7af" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsedaa181efb34bca4d350776a5d7912eb5" class="panel-collapse collapse ">
+  <div id="collapse958b24d2aef4dd41051879458794b7af" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><blockquote>
-Click on &quot;Topology&quot;
+       <blockquote>
+Click on "Topology"
 </blockquote>
-<img src="../images/ocp-TopologyButton.png" width="150"><br/></p>
-
-<p><blockquote>
-Click the arrow, at the top right corner of the &quot;dc-metro-map&quot; icon, to launch a new tab/window, with the running app
+<img src="../images/ocp-TopologyButton.png" width="150"><br/>
+<blockquote>
+Click the arrow, at the top right corner of the "dc-metro-map" icon, to launch a new tab/window, with the running app
 </blockquote>
-<img src="../images/ocp-dc-metro-map-icon.png" width="150"><br/></p>
+<img src="../images/ocp-dc-metro-map-icon.png" width="150"><br/>
 
     </div>
   </div>
@@ -584,43 +557,24 @@ Click the arrow, at the top right corner of the &quot;dc-metro-map&quot; icon, t
 
 </div>
 
-
 <p>The app should look like this in your web browser:</p>
-
 <p><img src="../images/ocp-lab-s2i-apprunning.png" width="900"><br/></p>
-
 <p>Clicking the checkboxes will toggle on/off the individual metro stations on each colored line.  A numbered icon indicates there is more than one metro station in that area and they have been consolidated - click the number or zoom in to see more.</p>
-
-<h1 id="now-let-s-examine-the-application-in-dynatrace">Now let's examine the application in Dynatrace</h1>
-
-<p>Switch back to the Dynatrace interface and select &quot;Smartscape topology&quot; -&gt; &quot;Services&quot; -&gt; &quot;dc-metro-map&quot; and observice the dependency mapping of this single-tier application.</p>
-
+<h1 id="now-lets-examine-the-application-in-dynatrace">Now let&rsquo;s examine the application in Dynatrace</h1>
+<p>Switch back to the Dynatrace interface and select &ldquo;Smartscape topology&rdquo; -&gt; &ldquo;Services&rdquo; -&gt; &ldquo;dc-metro-map&rdquo; and observice the dependency mapping of this single-tier application.</p>
 <p><img src="../images/ocp-lab-s2i-dynatrace-smartscape.png" width="900"><br/></p>
-
 <p>The vertical mapping on the left shows the underlying process groups, host(s), and Data center(s) for the dc-metro-map service.  On the right hand side of the Smartscape topology view shows the peer services that the dc-metro-map service is communicating with. Continue to navigate the Dynatrace interface to examine the details of the dc-metro-map service and the node.js process group it is running in.</p>
-
 <p><img src="../images/ocp-lab-s2i-dynatrace-dc-metro-map-service.png" width="900"><br/></p>
-
-<p>Although the processes and services are automatically discovered once the OneAgent is deployed, we still need to define the web entry point as an application using an application detection rule.  By default, all user traffic is placed under &quot;My web application.&quot;  To create the &quot;DC Metro Map&quot; application and track the real user performance data for this application, start by defining the dc-metro-map entry point.  Click on &quot;Settings&quot; -&gt; &quot;Web and mobile monitoring&quot; -&gt; &quot;Application detection and RUM&quot; -&gt; &quot;Create application detection rule&quot;</p>
-
+<p>Although the processes and services are automatically discovered once the OneAgent is deployed, we still need to define the web entry point as an application using an application detection rule.  By default, all user traffic is placed under &ldquo;My web application.&rdquo;  To create the &ldquo;DC Metro Map&rdquo; application and track the real user performance data for this application, start by defining the dc-metro-map entry point.  Click on &ldquo;Settings&rdquo; -&gt; &ldquo;Web and mobile monitoring&rdquo; -&gt; &ldquo;Application detection and RUM&rdquo; -&gt; &ldquo;Create application detection rule&rdquo;</p>
 <p><img src="../images/ocp-lab-s2i-dynatrace-application-detection.png" width="900"><br/></p>
-
-<p>Enter &quot;DC Metro Map&quot; for the new application.  Select &quot;If the URL&quot; and &quot;begins with...&quot; as the definition.  Enter &quot;<a href="http://dc-metro-map&quot;">http://dc-metro-map&quot;</a> in the example text box.  Finish defining the application by clicking on &quot;Save.&quot;</p>
-
+<p>Enter &ldquo;DC Metro Map&rdquo; for the new application.  Select &ldquo;If the URL&rdquo; and &ldquo;begins with&hellip;&rdquo; as the definition.  Enter &ldquo;http://dc-metro-map&rdquo; in the example text box.  Finish defining the application by clicking on &ldquo;Save.&rdquo;</p>
 <p><img src="../images/ocp-lab-s2i-dynatrace-application-detection-rule.png" width="600"><br/></p>
-
-<p>To verify you created the new application in Dynatrace, select &quot;Applications&quot; in the upper left corner and click on &quot;DC Metro Map&quot; in the center section.</p>
-
+<p>To verify you created the new application in Dynatrace, select &ldquo;Applications&rdquo; in the upper left corner and click on &ldquo;DC Metro Map&rdquo; in the center section.</p>
 <p><img src="../images/ocp-lab-s2i-dynatrace-dc-metro-map-application.png" width="900"><br/></p>
-
 <p>No user interaction with the DC Metro Map application will be detected until you go back to the application interface and navigate the elements again.  It will still take a couple of minutes for the data to be processed and data to start populating this view.</p>
-
 <p><img src="../images/ocp-lab-s2i-dynatrace-dc-metro-map-application-finish.png" width="900"><br/></p>
-
 <h1 id="summary">Summary</h1>
-
 <p>In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  We then examined the discovered architecture of the application in Dynatrace.  In the next lab we will deploy a multi-tier that includes a frontend, backend, and database tier.</p>
-
 <style>
 
  

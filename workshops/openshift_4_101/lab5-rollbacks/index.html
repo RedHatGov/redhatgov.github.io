@@ -307,32 +307,19 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="build-triggers-webhooks-and-rollbacks-oh-my">Build Triggers, Webhooks and Rollbacks - Oh My!</h1>
-
+    <h1 id="build-triggers-webhooks-and-rollbacks---oh-my">Build Triggers, Webhooks and Rollbacks - Oh My!</h1>
 <p>Once you have an app deployed in OpenShift you can take advantage of some continuous capabilities that help to enable DevOps and automate your management process.  We will cover some of those in this lab: Build triggers, webhooks, and rollbacks.</p>
-
 <h2 id="a-bit-of-configuration">A bit of configuration</h2>
-
-<p>We are going to do some integration and coding with an external git repository.  For this lab we are going to use github, if you don't already have an account, <a href="https://github.com/join?source=header-home">you can create one here</a>.</p>
-
-<p>OK, let's fork the dc-metro-map app from <strong>my</strong> account into <strong>your</strong> github account.  Goto <a href="https://github.com/RedHatGov/openshift-workshops.git">https://github.com/RedHatGov/openshift-workshops</a> and look to the top right for the &quot;Fork&quot; button.</p>
-
+<p>We are going to do some integration and coding with an external git repository.  For this lab we are going to use github, if you don&rsquo;t already have an account, <a href="https://github.com/join?source=header-home">you can create one here</a>.</p>
+<p>OK, let&rsquo;s fork the dc-metro-map app from <strong>my</strong> account into <strong>your</strong> github account.  Goto <a href="https://github.com/RedHatGov/openshift-workshops.git">https://github.com/RedHatGov/openshift-workshops</a> and look to the top right for the &ldquo;Fork&rdquo; button.</p>
 <p><img src="../images/ocp-lab-rollbacks-fork.png" width="500"><br/></p>
-
 <blockquote>
-<p>Click the &quot;Fork&quot; button</p>
+<p>Click the &ldquo;Fork&rdquo; button</p>
 </blockquote>
-
 <p>Github should redirect you to the newly created fork of the source code.</p>
-
-<h2 id="build-trigger-code-change-webhook">Build Trigger / Code Change Webhook</h2>
-
-<p>When using S2I there are a few different things that can be used to [trigger] a rebuild of your source code.  The first is a configuration change, the second is an image change, and the last (which we are covering here) is a webhook.  A webhook is basically your git source code repository telling OpenShift that the code we care about has changed.  Let's set that up for our project now to see it in action.</p>
-
-<p>Jump back to your OpenShift web console and let's add the webapp to our project.  You should know how to do this from previous lab work, but this time point to <em>your</em> github URL for the source code.  If you need a refresher expand the box below.</p>
-
+<h2 id="build-trigger--code-change-webhook">Build Trigger / Code Change Webhook</h2>
+<p>When using S2I there are a few different things that can be used to [trigger] a rebuild of your source code.  The first is a configuration change, the second is an image change, and the last (which we are covering here) is a webhook.  A webhook is basically your git source code repository telling OpenShift that the code we care about has changed.  Let&rsquo;s set that up for our project now to see it in action.</p>
+<p>Jump back to your OpenShift web console and let&rsquo;s add the webapp to our project.  You should know how to do this from previous lab work, but this time point to <em>your</em> github URL for the source code.  If you need a refresher expand the box below.</p>
 <div class="panel-group">
   
 
@@ -340,22 +327,20 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsed4c6dafa7ddbcd4a130d58e71cd7751b" class="collapsed">
+      <a data-toggle="collapse" href="#collapse0113c4472690e22039b15605dc11f4e9" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsed4c6dafa7ddbcd4a130d58e71cd7751b" class="panel-collapse collapse ">
+  <div id="collapse0113c4472690e22039b15605dc11f4e9" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="web-console-access">Web Console access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
 </pre>
-
 <blockquote>
 From the "Developer" view, select the demo-<span class="userid">YOUR#</span> project, then select "+Add" button
 </blockquote>
@@ -364,9 +349,7 @@ From the "Developer" view, select the demo-<span class="userid">YOUR#</span> pro
 <blockquote>
 Select "Import from Git" 
 </blockquote>
-
-<p>Make sure that you replace <b>YOUR_ACCOUNT</b> with your GitHub user ID. Click on the &quot;Show advanced Git options&quot; expander to fill in the &quot;Context Dir&quot; field:</p>
-
+<p>Make sure that you replace <b>YOUR_ACCOUNT</b> with your GitHub user ID. Click on the &ldquo;Show advanced Git options&rdquo; expander to fill in the &ldquo;Context Dir&rdquo; field:</p>
 <p>
 <table>
 <tr><td><b>Git Repo URL</b></td><td>https://github.com/<b>YOUR_ACCOUNT</b>/openshift-workshops.git</td></tr>
@@ -375,22 +358,18 @@ Select "Import from Git"
 </table>
 </p>
 <br>
-
 <blockquote>
 Select Node.js
 </blockquote>
-
 <p>
 <table>
 <tr><td><b>Application Name</b></td><td>dc-metro-map</td></tr>
 <tr><td><b>Name</b></td><td>dc-metro-map</td></tr>
 </table>
 </p>
-
 <blockquote>
 Select "DeploymentConfig"
 </blockquote>
-
 <blockquote>
 When you are done, scroll to the bottom and click 'Create'
 </blockquote>
@@ -402,9 +381,7 @@ When you are done, scroll to the bottom and click 'Create'
 
 </div>
 
-
 <p>The node.js builder template creates a number of resources for you, but what we care about right now is the build configuration because that contains the webhooks.  So to get the URL:</p>
-
 <div class="panel-group">
   
 
@@ -412,45 +389,43 @@ When you are done, scroll to the bottom and click 'Create'
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse09f7629c7cd69d4998efdc9a292308fe" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3a0aa5144f11cd4b1052f37fb2e84426" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse09f7629c7cd69d4998efdc9a292308fe" class="panel-collapse collapse ">
+  <div id="collapse3a0aa5144f11cd4b1052f37fb2e84426" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get bc/dc-metro-map -o yaml | grep github-webhook</code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get bc/dc-metro-map -o yaml | grep github-webhook
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> ...which returns the name of the secret that we need to find:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">name: dc-metro-map-github-webhook-secret</code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>name: dc-metro-map-github-webhook-secret
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> Now that you have the name of the secret, you can get its value:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -o jq -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
-$ chmod <span style="color:#ae81ff">0755</span> jq
-$ SECRET<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>oc get secrets dc-metro-map-github-webhook-secret -o json | ./jq <span style="color:#e6db74">&#34;.data.WebHookSecretKey&#34;</span> | base64 -di<span style="color:#e6db74">`</span></code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ curl -o jq -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+</span></span><span style="display:flex;"><span>$ chmod <span style="color:#ae81ff">0755</span> jq
+</span></span><span style="display:flex;"><span>$ SECRET<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>oc get secrets dc-metro-map-github-webhook-secret -o json | ./jq <span style="color:#e6db74">&#34;.data.WebHookSecretKey&#34;</span> | base64 -di<span style="color:#e6db74">`</span>
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> Last, we can get the URL for the webhook, this way:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe bc/dc-metro-map | awk <span style="color:#e6db74">&#39;/github$/{print $2}&#39;</span> | sed <span style="color:#e6db74">&#34;s/&lt;secret&gt;/</span><span style="color:#e6db74">${</span>SECRET<span style="color:#e6db74">}</span><span style="color:#e6db74">/&#34;</span></code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe bc/dc-metro-map | awk <span style="color:#e6db74">&#39;/github$/{print $2}&#39;</span> | sed <span style="color:#e6db74">&#34;s/&lt;secret&gt;/</span><span style="color:#e6db74">${</span>SECRET<span style="color:#e6db74">}</span><span style="color:#e6db74">/&#34;</span>
+</span></span></code></pre></div><blockquote>
 ... which results in the information that we need:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://api.alexocp43.redhatgov.io:6443/apis/build.openshift.io/v1/namespaces/cicd-1/buildconfigs/dc-metro-map/webhooks/1234abcd5678efgh/github</code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>https://api.alexocp43.redhatgov.io:6443/apis/build.openshift.io/v1/namespaces/cicd-1/buildconfigs/dc-metro-map/webhooks/1234abcd5678efgh/github
+</span></span></code></pre></div><blockquote>
 Copy the "Webhook Generic" URL to the clipboard, so that we can use it in GitHub.
 </blockquote>
 
@@ -464,44 +439,35 @@ Copy the "Webhook Generic" URL to the clipboard, so that we can use it in GitHub
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse496be76598ce02d8be98a4b41aebaceb" class="collapsed">
+      <a data-toggle="collapse" href="#collapsee5d5955a9fc1762dd9bf4336be395cf3" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse496be76598ce02d8be98a4b41aebaceb" class="panel-collapse collapse ">
+  <div id="collapsee5d5955a9fc1762dd9bf4336be395cf3" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="web-console-access">Web Console access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
 </pre>
-        
-
 <blockquote>
 in "Administrator" view, click on "Builds" and then click on "Build Configs"
 </blockquote>
-
 <p>This is going to show basic details for all build configurations in this project</p>
-
 <p><br><img src="../images/ocp-lab-rollbacks-buildsList.png" width="600"><br/></p>
-
 <blockquote>
 Click the "dc-metro-map" build config
 </blockquote>
 You will see the summary of builds using this build config
-
-<br><img src="../images/ocp-lab-rollbacks-buildconfigsummary.png" width="600"><br/>
-
+<p><br><img src="../images/ocp-lab-rollbacks-buildconfigsummary.png" width="600"><br/></p>
 <blockquote>
 Scroll to the bottom of the window.
 </blockquote>
 <img src="../images/ocp-lab-rollbacks-deployconfigconfig.png" width="600"><br/>
 Now you can see the links to get the various secrets.
-
 <blockquote>
 Copy the Generic webhook to the clipboard, by clicking on "Copy URL with Secret"
 </blockquote>
@@ -513,13 +479,10 @@ Copy the Generic webhook to the clipboard, by clicking on "Copy URL with Secret"
 
 </div>
 
-
-<p><br/></p>
-
+<br/>
 <blockquote>
 <p>Now switch back over to github</p>
 </blockquote>
-
 <div class="panel-group">
   
 
@@ -527,31 +490,26 @@ Copy the Generic webhook to the clipboard, by clicking on "Copy URL with Secret"
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseef2a634009ee5ae0c724c8ebedcbe52c" class="collapsed">
+      <a data-toggle="collapse" href="#collapse98f888bf08ce63538cbf91ee0dca217b" class="collapsed">
       
         Github Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapseef2a634009ee5ae0c724c8ebedcbe52c" class="panel-collapse collapse ">
+  <div id="collapse98f888bf08ce63538cbf91ee0dca217b" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p>Let's put the webhook URL into the repository. At the main page for this repository (the fork), you should see a tab bar with code, pull requests, pulse, graphs, and settings.</p>
-
+       <p>Let&rsquo;s put the webhook URL into the repository. At the main page for this repository (the fork), you should see a tab bar with code, pull requests, pulse, graphs, and settings.</p>
 <p><img src="../images/ocp-lab-rollbacks-settings.png" width="900"><br/></p>
-
 <blockquote>
 Click the "Settings" tab
 </blockquote>
-
 <p>Now you will see a vertical list of settings groups.<br/><br/></p>
-
 <blockquote>
 Click the "Webhooks" link
 </blockquote>
 <img src="../images/ocp-lab-rollbacks-githubwebhooks.png" width="900"><br/>
-
 <blockquote>
 Click the "Add webhook" button
 </blockquote>
@@ -564,13 +522,10 @@ Change content type to "application/json"
 <blockquote>
 Disable SSL verification by clicking the button
 </blockquote>
-
 <blockquote>
 <i class="fa fa-info-circle"></i> You can learn how to setup SSL in the secrets lab<br/><br/>
 </blockquote>
-
 <p><img src="../images/ocp-lab-rollbacks-githubwebhooks-add.png" width="600"><br/></p>
-
 <blockquote>
 Click the "Add webhook" button
 </blockquote>
@@ -582,31 +537,18 @@ Click the "Add webhook" button
 
 </div>
 
-
-<p>Good work! Now any &quot;push&quot; to the forked repository will send a webhook that triggers OpenShift to: re-build the code and image using s2i, and then perform a new pod deployment.  In fact Github should have sent a test trigger and OpenShift should have kicked off a new build already.</p>
-
+<p>Good work! Now any &ldquo;push&rdquo; to the forked repository will send a webhook that triggers OpenShift to: re-build the code and image using s2i, and then perform a new pod deployment.  In fact Github should have sent a test trigger and OpenShift should have kicked off a new build already.</p>
 <h2 id="deployment-triggers">Deployment Triggers</h2>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-In addition to setting up triggers for rebuilding code, we can setup a different type of trigger to deploy pods.  Deployment triggers can be due to a configuration change (e.g. environment variables) or due to an image change.  This powerful feature will be covered in one of the advanced labs. See the Triggers link under More Information below.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>In addition to setting up triggers for rebuilding code, we can setup a different type of trigger to deploy pods.  Deployment triggers can be due to a configuration change (e.g. environment variables) or due to an image change.  This powerful feature will be covered in one of the advanced labs. See the Triggers link under More Information below.</p>
 </div>
-
 <h2 id="rollbacks">Rollbacks</h2>
-
-<p>Well, what if something isn't quite right with the latest version of our app?  Let's say some feature we thought was ready for the world really isn't - and we didn't figure that out until after we deployed it.  No problem, we can roll it back with the click of a button.</p>
-
+<p>Well, what if something isn&rsquo;t quite right with the latest version of our app?  Let&rsquo;s say some feature we thought was ready for the world really isn&rsquo;t - and we didn&rsquo;t figure that out until after we deployed it.  No problem, we can roll it back with the click of a button.</p>
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-This will not work in today's workshop, as we have not yet made a second deployment.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>This will not work in today&rsquo;s workshop, as we have not yet made a second deployment.</p>
 </div>
-
 <div class="panel-group">
   
 
@@ -614,27 +556,26 @@ This will not work in today's workshop, as we have not yet made a second deploym
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse7bd53c4635f208949a781a71520ffd42" class="collapsed">
+      <a data-toggle="collapse" href="#collapse4c684719295e613e63e09b847d425fcb" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse7bd53c4635f208949a781a71520ffd42" class="panel-collapse collapse ">
+  <div id="collapse4c684719295e613e63e09b847d425fcb" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc rollout undo dc/dc-metro-map
-$ oc get pods -w</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc rollout undo dc/dc-metro-map
+</span></span><span style="display:flex;"><span>$ oc get pods -w
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -645,37 +586,33 @@ $ oc get pods -w</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse58e7cb9d1e12a7e732cf7f0d120326f5" class="collapsed">
+      <a data-toggle="collapse" href="#collapse53ae3357b2a4ccd37d7af625ef7e1937" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse58e7cb9d1e12a7e732cf7f0d120326f5" class="panel-collapse collapse ">
+  <div id="collapse53ae3357b2a4ccd37d7af625ef7e1937" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="web-console-access">Web Console access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
 </pre>
-
-<p><blockquote>
-Click on &quot;Builds&quot; and then click on &quot;Builds&quot;
+<blockquote>
+Click on "Builds" and then click on "Builds"
 <br/>
 This is going to show basic details for all builds, for the dc-metro-map application.
 </blockquote>
-<img src="../images/ocp-lab-rollbacks-builds-builds.png" width="900"><br/></p>
-
-<p><blockquote>
-Click the &quot;dc-metro-map&quot; build that you want to roll back to. For the purposes of this lab, click dc-metro-map-1.
+<img src="../images/ocp-lab-rollbacks-builds-builds.png" width="900"><br/>
+<blockquote>
+Click the "dc-metro-map" build that you want to roll back to. For the purposes of this lab, click dc-metro-map-1.
 <br/>
 Click on 'Actions', and then 'Rebuild', from the menu, in the upper right corner of the window.
 </blockquote>
-<img src="../images/ocp-lab-rollbacks-actions-rebuild.gif" width="900"><br/></p>
-
-<p>You can go back to the 'Workloads', 'DeploymentConfigs', 'dc-metro-map' page, and click on the 'Events' tab, to see your previous deployment spinning down and your new one spinning up.<br/>
+<img src="../images/ocp-lab-rollbacks-actions-rebuild.gif" width="900"><br/>
+<p>You can go back to the &lsquo;Workloads&rsquo;, &lsquo;DeploymentConfigs&rsquo;, &lsquo;dc-metro-map&rsquo; page, and click on the &lsquo;Events&rsquo; tab, to see your previous deployment spinning down and your new one spinning up.<br/>
 <img src="../images/ocp-lab-rollbacks-workloads-deployments-dcmm-events.png" width="900"><br/></p>
 
     </div>
@@ -685,29 +622,17 @@ Click on 'Actions', and then 'Rebuild', from the menu, in the upper right corner
 
 </div>
 
-
 <p>OpenShift has done a graceful removal of the old pod and created a new one.</p>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-Note that the old pod wasn't killed until the new pod was successfully started and ready to be used.  This is so that OpenShift could continue to route traffic to the old pod until the new one was ready.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>Note that the old pod wasn&rsquo;t killed until the new pod was successfully started and ready to be used.  This is so that OpenShift could continue to route traffic to the old pod until the new one was ready.</p>
 </div>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-You can integrate your CI/CD tools to do rollbacks with the REST API. See the Rollbacks With the REST API link under More Information below.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>You can integrate your CI/CD tools to do rollbacks with the REST API. See the Rollbacks With the REST API link under More Information below.</p>
 </div>
-
 <h1 id="summary">Summary</h1>
-
 <p>In this lab we saw how you can configure a source code repository to trigger builds with webhooks.  This webhook could come from Github, Jenkins, Travis-CI, or any tool capable of sending a URL POST.  Keep in mind that there are other types of build triggers you can setup.  For example: if a new version of the upstream RHEL image changes.  We also inspected our deployment history and did a rollback of our running deployment to one based on an older image with the click of a button.</p>
-
 <style>
 
  

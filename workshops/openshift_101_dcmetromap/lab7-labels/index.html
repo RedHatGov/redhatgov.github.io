@@ -307,18 +307,11 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="labels">Labels</h1>
-
+    <h1 id="labels">Labels</h1>
 <p>This is a pretty simple lab, we are going to explore labels.  You can use labels to organize, group, or select API objects.</p>
-
-<p>For example, pods are &quot;tagged&quot; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.</p>
-
+<p>For example, pods are &ldquo;tagged&rdquo; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.</p>
 <h2 id="labels-on-a-pod">Labels on a pod</h2>
-
-<p>In a previous lab we added our web app using a S2I template.  When we did that, OpenShift labeled our objects for us.  Let's look at the labels on our running pod.</p>
-
+<p>In a previous lab we added our web app using a S2I template.  When we did that, OpenShift labeled our objects for us.  Let&rsquo;s look at the labels on our running pod.</p>
 <div class="panel-group">
   
 
@@ -326,35 +319,35 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse12adf7a1c063b02f53d4331f8c6d8e7e" class="collapsed">
+      <a data-toggle="collapse" href="#collapse84a9ab480470b043feb3ece11712285a" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse12adf7a1c063b02f53d4331f8c6d8e7e" class="panel-collapse collapse ">
+  <div id="collapse84a9ab480470b043feb3ece11712285a" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and try the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
-$ oc describe pod/&lt;POD NAME&gt; | more</code></pre></div>
-<p>You can see the Labels automatically added contain the app, deployment, and deploymentconfig.  Let's add a new label to this pod.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span><span style="display:flex;"><span>$ oc describe pod/&lt;POD NAME&gt; | more
+</span></span></code></pre></div><p>You can see the Labels automatically added contain the app, deployment, and deploymentconfig.  Let&rsquo;s add a new label to this pod.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Add a label
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc label pod/&lt;POD NAME&gt; testdate<span style="color:#f92672">=</span>4.30.2018 testedby<span style="color:#f92672">=</span>mylastname</code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc label pod/&lt;POD NAME&gt; testdate<span style="color:#f92672">=</span>4.30.2018 testedby<span style="color:#f92672">=</span>mylastname
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> Look at the labels
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe pod/&lt;POD NAME&gt; | more</code></pre></div>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe pod/&lt;POD NAME&gt; | more
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-info-circle"></i> Here's a handy way to search through all objects and look at all the labels:<br/>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe all | grep -i <span style="color:#e6db74">&#34;labels:&#34;</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe all | grep -i <span style="color:#e6db74">&#34;labels:&#34;</span>
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -365,14 +358,14 @@ $ oc describe pod/&lt;POD NAME&gt; | more</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse78182e30f190beca09b8ff60e25f7a3b" class="collapsed">
+      <a data-toggle="collapse" href="#collapse97c1bf511ce2c82e053598cd6c7f8a0c" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse78182e30f190beca09b8ff60e25f7a3b" class="panel-collapse collapse ">
+  <div id="collapse97c1bf511ce2c82e053598cd6c7f8a0c" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
@@ -381,40 +374,30 @@ Click "Applications" and then click on "Pods"
 This is going to show basic details for all pods in this project (including the builders).
 <img src="../images/ocp-lab-labels-pods.png" width="900"></br>
 </br>
-
-Next let's look at the log for the pod running our application.
-</br>
-
+<p>Next let&rsquo;s look at the log for the pod running our application.
+</br></p>
 <blockquote>
 Click the pod for the dc metro map webapp (it shoud have a status of Running)
 </blockquote>
 <img src="../images/ocp-lab-labels-poddetails.png" width="900"></br>
 Here, at the top, you can see the labels on this pod
-
 <blockquote>
 Click the "Actions" button, then click "Edit YAML" for the pod
 </blockquote>
 <img src="../images/ocp-lab-labels-podedit.png" width="900"><br/>
 You will see all the labels under the metadata->labels section.
-
 <blockquote>
 Add a new label into the labels section
-
-testdate: 4.30.2018
-testedby: mylastname
+<p>testdate: 4.30.2018
+testedby: mylastname</p>
 </blockquote>
-
 <p><img src="../images/ocp-lab-labels-podedit2.png" width="300"><br/></p>
-
-<p>Your updated label will show up in the running pod's.</p>
-
+<p>Your updated label will show up in the running pod&rsquo;s.</p>
 <p>Select Application -&gt; Pods -&gt; dc-metro-map (Running POD)</p>
-
 <blockquote>
 If you see "More labels..", then click that link
 <img src="../images/ocp-lab-labels-podedit3.png" width="500"><br/>
 </blockquote>
-
 <p>Labels will appear in the list:</br>
 <img src="../images/ocp-lab-labels-podedit4.png" width="600"><br/></p>
 
@@ -425,11 +408,8 @@ If you see "More labels..", then click that link
 
 </div>
 
-
 <h1 id="summary">Summary</h1>
-
-<p>That's it for this lab. Now you know that all the objects in OpenShift can be labeled.  This is important because those labels can be used as part of your CI/CD process.  An upcoming lab will cover using labels for Blue/Green deployments. Labels can also be used for running your apps on specific nodes (e.g. just on SSD nodes or just on east coast nodes).  You can read more about labels <a href="https://docs.openshift.com/enterprise/latest/architecture/core_concepts/pods_and_services.html#labels">here</a> and <a href="http://kubernetes.io/docs/user-guide/labels/">here</a>.</p>
-
+<p>That&rsquo;s it for this lab. Now you know that all the objects in OpenShift can be labeled.  This is important because those labels can be used as part of your CI/CD process.  An upcoming lab will cover using labels for Blue/Green deployments. Labels can also be used for running your apps on specific nodes (e.g. just on SSD nodes or just on east coast nodes).  You can read more about labels <a href="https://docs.openshift.com/enterprise/latest/architecture/core_concepts/pods_and_services.html#labels">here</a> and <a href="http://kubernetes.io/docs/user-guide/labels/">here</a>.</p>
 <style>
 
  

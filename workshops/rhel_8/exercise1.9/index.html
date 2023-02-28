@@ -311,15 +311,21 @@
 <h2 id="_exercise_description">Exercise Description</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>RHEL 7.4 introduced RHEL System Roles, a collection of Ansible roles and modules that provide a stable and consistent configuration interface for remote management of Red Hat Enterprise Linux.  These System Roles are applicable to RHEL 6.10 and above, easing management of 3 generations of RHEL.  The effort is based on development of the Linux System Roles project (link: <a href="https://linux-system-roles.github.io/upstream" class="bare">https://linux-system-roles.github.io/upstream</a>). The following roles are provided and supported as follows:</p>
+<p>RHEL System Roles, announced with the launch of RHEL 8, are a collection of Ansible roles and modules that provide a stable and consistent configuration interface for remote management of Red Hat Enterprise Linux.  They address many commmon configuration, security and workload uses on RHEL systems.  These roles can manage systems running RHEL 7 and above, easing management of 3 generations of RHEL.  The effort is based on development of the Linux System Roles project (link: <a href="https://linux-system-roles.github.io/upstream" class="bare">https://linux-system-roles.github.io/upstream</a>).  These roles are fully supported by Red Hat, so make use of them and avoid duplication of effort in your automation endeavors.</p>
 </div>
 <div class="paragraph">
-<p>There are a number of roles available in RHEL 8, including:</p>
+<p>There are a number of roles available, including:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>selinux</p>
+</li>
+<li>
+<p>ssh &amp; sshd</p>
+</li>
+<li>
+<p>crypto_policy</p>
 </li>
 <li>
 <p>kdump (kernel crash dump)</p>
@@ -328,7 +334,13 @@
 <p>network</p>
 </li>
 <li>
+<p>vpn</p>
+</li>
+<li>
 <p>timesync</p>
+</li>
+<li>
+<p>logging</p>
 </li>
 <li>
 <p>storage</p>
@@ -336,10 +348,13 @@
 <li>
 <p>postfix</p>
 </li>
+<li>
+<p>ha_cluster</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The full list can be found here: <a href="https://access.redhat.com/articles/3050101">Red Hat Enterprise Linux (RHEL) System Roles</a></p>
+<p>The full list and compatibility matrix can be found here: <a href="https://access.redhat.com/articles/3050101">Red Hat Enterprise Linux (RHEL) System Roles</a></p>
 </div>
 <div class="paragraph">
 <p>For further information on Ansible, see the Ansible Quick-Start Guide for Sysadmins (<a href="https://www.redhat.com/en/blog/system-administrators-guide-getting-started-ansible-fast" class="bare">https://www.redhat.com/en/blog/system-administrators-guide-getting-started-ansible-fast</a>) or Quick Start Video (<a href="https://www.ansible.com/resources/videos/quick-start-video" class="bare">https://www.ansible.com/resources/videos/quick-start-video</a>) for help learning how to use Ansible.</p>
@@ -352,7 +367,7 @@
 <div class="sect2">
 <h3 id="_step_1_install_required_packages">Step 1: Install required packages</h3>
 <div class="paragraph">
-<p>We need to install two packages RPM packages to use system roles: <code>ansible</code> and <code>rhel-system-roles</code>.  Use subscription-manager to list the Ansible Engine repositories available. Note that the generic "2" repository will always provide the latest release of the 2.X stream as opposed to configuring a more specific version such as 2.8.</p>
+<p>We need to install two packages RPM packages to use system roles: <code>ansible</code> and <code>rhel-system-roles</code>.  Use subscription-manager to list the Ansible Engine repositories available. Note that the generic &#34;2&#34; repository will always provide the latest release of the 2.X stream as opposed to configuring a more specific version such as 2.8.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -373,7 +388,8 @@ sudo subscription-manager repos --list | grep ansible</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">sudo yum install rhel-system-roles ansible</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo yum -y module install python36
+sudo yum -y install rhel-system-roles ansible</code></pre>
 </div>
 </div>
 </div>
@@ -412,13 +428,13 @@ sudo subscription-manager repos --list | grep ansible</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Generally, Ansible is not installed on every system, but rather on a single system designated as the Ansible management or control node who&#8217;s purpose is to manage other systems via Ansible.</p>
+<p>Generally, Ansible is not installed on every system, but rather on a single system designated as the Ansible management or control node who’s purpose is to manage other systems via Ansible.</p>
 </li>
 <li>
-<p>Since we&#8217;re running Ansible on the same instance we&#8217;re changing, the target of the Ansible playbook is <code>localhost</code>.</p>
+<p>Since we’re running Ansible on the same instance we’re changing, the target of the Ansible playbook is <code>localhost</code>.</p>
 </li>
 <li>
-<p>We&#8217;ve added a 2nd network interface to our test system, <code>eth1</code>.</p>
+<p>We’ve added a 2nd network interface to our test system, <code>eth1</code>.</p>
 </li>
 </ul>
 </div>
@@ -448,7 +464,7 @@ sudo subscription-manager repos --list | grep ansible</code></pre>
           dhcp4: no
           auto6: no
           address:
-           - "10.10.10.{{ 254 | random( start=2) }}/24"
+           - &#34;10.10.10.{{ 254 | random( start=2) }}/24&#34;
   roles:
     - role: rhel-system-roles.network</pre>
 </div>
@@ -460,7 +476,7 @@ sudo subscription-manager repos --list | grep ansible</code></pre>
 <div class="sect2">
 <h3 id="_step_2">Step 2:</h3>
 <div class="paragraph">
-<p>Now let&#8217;s test access to our <code>localhost</code> using the Ansible ad-hoc command:</p>
+<p>Now let’s test access to our <code>localhost</code> using the Ansible ad-hoc command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -470,8 +486,8 @@ sudo subscription-manager repos --list | grep ansible</code></pre>
 <div class="literalblock">
 <div class="content">
 <pre>localhost | SUCCESS =&gt; {
-    "changed": false,
-    "ping": "pong"
+    &#34;changed&#34;: false,
+    &#34;ping&#34;: &#34;pong&#34;
 }</pre>
 </div>
 </div>
@@ -483,20 +499,20 @@ sudo subscription-manager repos --list | grep ansible</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible localhost -m setup -a 'gather_subset=network filter=ansible_interfaces'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible localhost -m setup -a &#39;gather_subset=network filter=ansible_interfaces&#39;</code></pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>localhost | SUCCESS =&gt; {
-    "ansible_facts": {
-        "ansible_interfaces": [
-            "lo",
-            "eth1",
-            "eth0"
+    &#34;ansible_facts&#34;: {
+        &#34;ansible_interfaces&#34;: [
+            &#34;lo&#34;,
+            &#34;eth1&#34;,
+            &#34;eth0&#34;
         ]
     },
-    "changed": false
+    &#34;changed&#34;: false
 }</pre>
 </div>
 </div>
@@ -550,16 +566,28 @@ ens3                50e9a523-3280-4238-a07b-dbfd7d335273  ethernet  --</pre>
 <div class="sect2">
 <h3 id="_step_5">Step 5:</h3>
 <div class="paragraph">
-<p>Now let&#8217;s run our playbook to create a new connection profile called DBnic, turn off DHCP, and assign a static ip address:</p>
+<p>Now let’s run our playbook to create a new connection profile called DBnic, turn off DHCP, and assign a static ip address:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible-playbook example-network-playbook.yml</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible-playbook --extra-vars &#34;ansible_python_interpreter=/usr/bin/python3.6&#34; example-network-playbook.yml</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Starting in RHEL 8.7, Python 3.9 is the default Python3 interpreter.
+</td>
+</tr>
+</tbody></table>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+<pre>[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match &#39;all&#39;
 
 
 PLAY [localhost] ******************************************************************************************************
@@ -575,7 +603,7 @@ ok: [localhost]
 
 TASK [rhel-system-roles.network : Print network provider] *************************************************************
 ok: [localhost] =&gt; {
-    "msg": "Using network provider: nm"
+    &#34;msg&#34;: &#34;Using network provider: nm&#34;
 }
 
 TASK [rhel-system-roles.network : Install packages] *******************************************************************
@@ -591,10 +619,10 @@ TASK [rhel-system-roles.network : Ensure initscripts network file dependency is 
 skipping: [localhost]
 
 TASK [rhel-system-roles.network : Configure networking connection profiles] *******************************************
-[WARNING]: [003] &lt;info&gt;  #0, state:up persistent_state:present, 'DBnic': connection DBnic,
+[WARNING]: [003] &lt;info&gt;  #0, state:up persistent_state:present, &#39;DBnic&#39;: connection DBnic,
 3b54603b-c603-46b9-9bd9-e6fc295e7a11 already up to date
 
-[WARNING]: [004] &lt;info&gt;  #0, state:up persistent_state:present, 'DBnic': up connection DBnic,
+[WARNING]: [004] &lt;info&gt;  #0, state:up persistent_state:present, &#39;DBnic&#39;: up connection DBnic,
 3b54603b-c603-46b9-9bd9-e6fc295e7a11 (not-active)
 
 changed: [localhost]
@@ -610,7 +638,7 @@ localhost                  : ok=7    changed=1    unreachable=0    failed=0    s
 <div class="sect2">
 <h3 id="_step_6">Step 6:</h3>
 <div class="paragraph">
-<p>Now let&#8217;s see how the Ansible playbook changed our network configuration:</p>
+<p>Now let’s see how the Ansible playbook changed our network configuration:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -657,7 +685,7 @@ Wired connection 1  9738a5c6-39dd-3515-aa1c-895f763851a6  ethernet  --</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_summary_what_weve_learned">Summary - What We&#8217;ve Learned</h2>
+<h2 id="_summary_what_weve_learned">Summary - What We’ve Learned</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Linux System Roles based on Ansible playbooks make it easy and consistent to enable specific services and configurations on your RHEL hosts, and across many versions.  We experimented with the <strong>network</strong> system role in this exercise, but <strong>storage</strong>, <strong>kdump (kernel crash dump)</strong>, <strong>selinux</strong>, and <strong>timesync</strong> are also available.</p>

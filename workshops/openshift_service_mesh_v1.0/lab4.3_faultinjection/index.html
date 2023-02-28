@@ -307,25 +307,18 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="testing-resiliency-with-fault-injection">Testing Resiliency with Fault Injection</h1>
-
+    <h1 id="testing-resiliency-with-fault-injection">Testing Resiliency with Fault Injection</h1>
 <p>Your application is working great now with the new version of the user profile service.  But the previous version caused performance issues, and future updates may cause issues in other areas of the application.  How can you test how your application behaves when a failure occurs?</p>
-
 <p>You need a way to simulate failure in the service mesh.  By doing so, you can test if your application functions correctly in a degraded state.  This concept is more generally known as <a href="https://en.wikipedia.org/wiki/Chaos_engineering">Chaos Engineering</a>.  In Chaos Engineering, you test your software by causing breakdowns in the production environment.</p>
-
-<p>Istio provides ways to inject failure at the application layer with <a href="https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-delay-fault">Delay Faults</a> and <a href="https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-abort-fault">Abort Faults</a> using virtual services.  Let's try this with the paste board application.</p>
-
+<p>Istio provides ways to inject failure at the application layer with <a href="https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-delay-fault">Delay Faults</a> and <a href="https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-abort-fault">Abort Faults</a> using virtual services.  Let&rsquo;s try this with the paste board application.</p>
 <h2 id="abort-faults">Abort Faults</h2>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
 </blockquote>
-<pre><code>cat ./istio-configuration/virtual-service-userprofile-503.yaml</code></pre>
-<p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>cat ./istio-configuration/virtual-service-userprofile-503.yaml
+</code></pre><p>Output (snippet):</p>
+<pre tabindex="0"><code>...
   http:
   - fault:
       abort:
@@ -335,31 +328,26 @@ View the virtual service in your favorite editor or via bash:
     - destination:
         host: userprofile
         subset: v3
-...</code></pre>
-<p>This configuration tells Istio to inject 503 errors into 50% of the traffic sent to the user profile service.</p>
-
+...
+</code></pre><p>This configuration tells Istio to inject 503 errors into 50% of the traffic sent to the user profile service.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Deploy the routing rule:
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-503.yaml</code></pre>
-<blockquote>
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-503.yaml
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 If you aren't already (from previous labs) - Send load to the user profile service:
 </blockquote>
-<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done</code></pre>
-<p><br></p>
-
-<p>Inspect the change in Kiali.
+<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+</code></pre><br>
+<p>Inspect the change in Kiali.</p>
 <blockquote>
 <i class="fa fa-desktop"></i>
-Navigate to 'Graph' in the left navigation bar.
-</blockquote></p>
-
+Navigate to 'Graph' in the left navigation bar. 
+</blockquote>
 <p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
-
 <p><code>echo $KIALI_CONSOLE</code></p>
-
 <blockquote>
 <i class="fa fa-desktop"></i>
 Switch to the 'Versioned app graph' view and change to 'Last 1m'.
@@ -368,50 +356,36 @@ Switch to the 'Versioned app graph' view and change to 'Last 1m'.
 <i class="fa fa-desktop"></i>
 Change the 'No edge labels' dropdown to 'Requests percentage'
 </blockquote>
-
 <blockquote>
 <i class="fa fa-desktop"></i>
 Click on the connection between  the 'app-ui' (square) and 'userprofile' service (triangle).  
 </blockquote>
-
 <p>On the right, you should see roughly 50% of requests returned as HTTP errors.</p>
-
 <p><img src="../images/kiali-userprofile-503.png" width="1024"><br/>
 <em>Kiali Graph with abort faults</em></p>
-
-<p>Let's test the application in the browser.</p>
-
+<p>Let&rsquo;s test the application in the browser.</p>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Navigate to the 'Profile' section in the header.  
 </blockquote>
-
 <p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
-
 <p><code>echo $GATEWAY_URL</code></p>
-
 <blockquote>
 <i class="fa fa-desktop"></i>
 Refresh the brower a couple of times.  
 </blockquote>
-
-<p>Sometimes you will see the profile page show up; other times, you will see 'Unknown User'.</p>
-
+<p>Sometimes you will see the profile page show up; other times, you will see &lsquo;Unknown User&rsquo;.</p>
 <p>Injecting an abort fault is a great mechanism to test how your application handles failure.  In more complex service meshes, you can use this to identify and prevent cascading failures in which an erroring service causes a chain of other services to fail.</p>
-
-<p><br></p>
-
+<br>
 <h2 id="delay-faults">Delay Faults</h2>
-
 <p>Version 2 of the user profile service had a performance issue.  You can synthetically simulate this scenario with delay faults in Istio.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
 </blockquote>
-<pre><code>cat ./istio-configuration/virtual-service-userprofile-delay.yaml</code></pre>
-<p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>cat ./istio-configuration/virtual-service-userprofile-delay.yaml
+</code></pre><p>Output (snippet):</p>
+<pre tabindex="0"><code>...
   http:
   - fault:
       delay:
@@ -421,63 +395,49 @@ View the virtual service in your favorite editor or via bash:
     - destination:
         host: userprofile
         subset: v3
-...</code></pre>
-<p>This configuration tells Istio to inject a 5 second delay into 50% of the traffic sent to the user profile service.</p>
-
+...
+</code></pre><p>This configuration tells Istio to inject a 5 second delay into 50% of the traffic sent to the user profile service.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Deploy the routing rule:
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-delay.yaml</code></pre>
-<blockquote>
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-delay.yaml
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 If you aren't already - Send load to the user profile service:
 </blockquote>
-<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done</code></pre>
-<p><br></p>
-
+<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+</code></pre><br>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Let's inspect the change in Kiali's embedded Jaeger view.
 </blockquote>
-
 <blockquote>
 <i class="fa fa-desktop"></i>
 From the Graph view right click on the userprofile service (the triangle shape). Then click "show traces"
 </blockquote>
-
 <p><img src="../images/kiali-userprofile-showtraces.png" width="1024"><br/>
 <em>Graphed Service - Right Click Menu</em></p>
-
 <p>Notice some the traces are about 5s in duration while others are in the millisecond range.</p>
-
 <p>Injecting a delay fault is a great mechanism to test how your application handles slow outbound service calls.</p>
-
 <p><img src="../images/kiali-userprofile-faultdelaytraces.png" width="1024"><br/>
 <em>Traces to User Profile Service with Fault Delays</em></p>
-
 <h2 id="clean-up">Clean up</h2>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 Revert the changes you made before ending this lab.
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml</code></pre>
-<p><br></p>
-
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
+</code></pre><br>
 <h2 id="summary">Summary</h2>
-
 <p>Congratulations, you configured fault injection with Istio!</p>
-
 <p>A few key highlights are:</p>
-
 <ul>
 <li>We can test the resiliency of our service mesh using Delay Faults and Abort Faults</li>
 <li>Abort Faults synthetically inject 50x errors in responses to a service call</li>
 <li>Delay Faults synthetically add latency in responses to a service call</li>
 <li>Jaeger can capture performance delays with distributed tracing</li>
 </ul>
-
 <style>
 
  

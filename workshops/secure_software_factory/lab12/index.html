@@ -307,28 +307,17 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="add-create-dev-stage">Add Create Dev Stage</h1>
-
+    <h1 id="add-create-dev-stage">Add Create Dev Stage</h1>
 <p>Add Create Dev Stage into the pipeline.</p>
-
-<p><img src="../images/pipeline_create_dev.png" width="900" /></p>
-
+<img src="../images/pipeline_create_dev.png" width="900" />
 <p>We first check if an deployment config for the Dev Project already exists.  If it does not exists, a new application is created and deployment config is defined for the Dev Project.</p>
-
 <p>Before a trigger is created, the pipeline sleeps for 10 seconds.  A deployment configuration can contain triggers, which drive the creation of new deployment processes in response to events inside the cluster.  In this case, the trigger is set to a manual deployment of the tasks deployment config.  The deployment will happen in Deploy Stage.</p>
-
-<p><br></p>
-
-<h1 id="append-to-jenkins-pipeline-configuration">Append to Jenkins Pipeline Configuration</h1>
-
+<br>
+# Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-
-<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
-
+<img src="../images/pipeline_actions_edit.png" width="900" />
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre><code>    stage(&#39;Create DEV&#39;) {
+<pre tabindex="0"><code>    stage(&#39;Create DEV&#39;) {
       when {
         expression {
           openshift.withCluster() {
@@ -354,25 +343,17 @@
           }
         }
       }
-    }</code></pre>
-<h1 id="deploy-dev-stage">Deploy Dev Stage</h1>
-
+    }
+</code></pre><h1 id="deploy-dev-stage">Deploy Dev Stage</h1>
 <p>Enter the Deploy Dev Stage to your pipeline text file.</p>
-
-<p><img src="../images/pipeline_deploy_dev.png" width="900" /></p>
-
-<p>OpenShift deploys the application and it's deployment configuration to Dev as previously defined from the Create Dev Stage.</p>
-
-<p><br></p>
-
-<h1 id="append-to-jenkins-pipeline-configuration-1">Append to Jenkins Pipeline Configuration</h1>
-
+<img src="../images/pipeline_deploy_dev.png" width="900" />
+<p>OpenShift deploys the application and it&rsquo;s deployment configuration to Dev as previously defined from the Create Dev Stage.</p>
+<br>
+# Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-
-<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
-
+<img src="../images/pipeline_actions_edit.png" width="900" />
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre><code>    stage(&#39;Deploy DEV&#39;) {
+<pre tabindex="0"><code>    stage(&#39;Deploy DEV&#39;) {
       steps {
         script {
           openshift.withCluster() {
@@ -382,24 +363,19 @@
           }
         }
       }
-    }</code></pre>
-<h1 id="test-your-pipeline">Test Your Pipeline</h1>
-
-<p>If you'd like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
-<pre><code>  }
-}</code></pre>
-<p>Save your Jenkinsfile.</p>
-
+    }
+</code></pre><h1 id="test-your-pipeline">Test Your Pipeline</h1>
+<p>If you&rsquo;d like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
+<pre tabindex="0"><code>  }
+}
+</code></pre><p>Save your Jenkinsfile.</p>
 <p>Go back to Builds &gt; Pipelines</p>
-
 <p>Click Start Pipeline</p>
-
 <h1 id="delete-brackets">Delete Brackets</h1>
-
-<p>Please delete the brackets you just added once testing is complete. We can add them later if you'd like to test your pipeline as you go along.</p>
-<pre><code>  }
-}</code></pre>
-<p>Click Save
+<p>Please delete the brackets you just added once testing is complete. We can add them later if you&rsquo;d like to test your pipeline as you go along.</p>
+<pre tabindex="0"><code>  }
+}
+</code></pre><p>Click Save
 <style>
 
  

@@ -332,16 +332,16 @@
 <p>First, go ahead and switch users to root:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo -i</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo -i</span></span></code></pre></div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_2_what_mode_are_we_in">Step 2: What mode are we in?</h3>
 <div class="paragraph">
-<p>Next, let&#8217;s check to see what SELinux mode your host is in:</p>
+<p>Next, let’s check to see what SELinux mode your host is in:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">getenforce</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>getenforce</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -355,8 +355,8 @@
 <p>Now, we can change the mode that your host is in:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">setenforce <span style="color:#ae81ff">0</span>
-getenforce</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>setenforce <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>getenforce</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -367,8 +367,8 @@ getenforce</code></pre></div>
 <p>And we can change it back:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">setenforce <span style="color:#ae81ff">1</span>
-getenforce</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>setenforce <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>getenforce</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -382,8 +382,8 @@ getenforce</code></pre></div>
 <p>You can also set individual SELinux domains (like <code>httpd_t</code>, which controls web server access control) to permissve mode:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">semanage permissive -a httpd_t
-semanage permissive -l</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>semanage permissive -a httpd_t
+</span></span><span style="display:flex;"><span>semanage permissive -l</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -398,7 +398,7 @@ httpd_t</code></pre>
 <p>And again, we can change it back:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">semanage permissive -d httpd_t</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>semanage permissive -d httpd_t</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -415,7 +415,7 @@ httpd_t</code></pre>
 <p>SELinux messages are logged to the <code>/var/log/audit/audit.log</code> file.  We can read the messages with this command:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -m MAC_POLICY_LOAD -i --just-one</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ausearch -m MAC_POLICY_LOAD -i --just-one</span></span></code></pre></div>
 </div>
 <div class="paragraph">
 <p>We have asked the <code>ausearch</code> utility to look for SELinux policies being loaded (<code>-m MAC_POLICY_LOAD</code>), to make the result human-readable (<code>-i</code>), and to return only a single result (<code>--just-one</code>):</p>
@@ -439,7 +439,7 @@ type=MAC_POLICY_LOAD msg=audit(05/17/2019 23:47:54.147:1896) : auid=ec2-user ses
 </ul>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -m avc,user_avc,selinux_err,user_selinux_err</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ausearch -m avc,user_avc,selinux_err,user_selinux_err</span></span></code></pre></div>
 </div>
 <div class="ulist">
 <ul>
@@ -449,7 +449,7 @@ type=MAC_POLICY_LOAD msg=audit(05/17/2019 23:47:54.147:1896) : auid=ec2-user ses
 </ul>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -m avc -ts today</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ausearch -m avc -ts today</span></span></code></pre></div>
 </div>
 <div class="ulist">
 <ul>
@@ -459,7 +459,7 @@ type=MAC_POLICY_LOAD msg=audit(05/17/2019 23:47:54.147:1896) : auid=ec2-user ses
 </ul>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -m avc -ts recent</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ausearch -m avc -ts recent</span></span></code></pre></div>
 </div>
 <div class="paragraph">
 <p>You can try these, if you like, but they may or may not return any results.</p>
@@ -471,14 +471,14 @@ type=MAC_POLICY_LOAD msg=audit(05/17/2019 23:47:54.147:1896) : auid=ec2-user ses
 <p>If you use <code>ausearch</code> to find AVC messages, you can see exactly what caused SELinux to deny access:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -if ./testaudit -m AVC</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ausearch -if ./testaudit -m AVC</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">----
 time-&gt;Mon Nov 17 00:45:36 2008
-type=SYSCALL msg=audit(1226882736.442:86): arch=40000003 syscall=196 success=no exit=-13 a0=b9a1e198 a1=bfc2921c a2=54dff4 a3=2008171 items=0 ppid=2425 pid=2427 auid=502 uid=48 gid=48 euid=48 suid=48 fsuid=48 egid=48 sgid=48 fsgid=48 tty=(none) ses=4 comm="httpd" exe="/usr/sbin/httpd" subj=unconfined_u:system_r:httpd_t:s0 key=(null)
-type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 comm="httpd" path="/var/www/html/file1" dev=dm-0 ino=284133 scontext=unconfined_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:samba_share_t:s0 tclass=file</code></pre>
+type=SYSCALL msg=audit(1226882736.442:86): arch=40000003 syscall=196 success=no exit=-13 a0=b9a1e198 a1=bfc2921c a2=54dff4 a3=2008171 items=0 ppid=2425 pid=2427 auid=502 uid=48 gid=48 euid=48 suid=48 fsuid=48 egid=48 sgid=48 fsgid=48 tty=(none) ses=4 comm=&#34;httpd&#34; exe=&#34;/usr/sbin/httpd&#34; subj=unconfined_u:system_r:httpd_t:s0 key=(null)
+type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 comm=&#34;httpd&#34; path=&#34;/var/www/html/file1&#34; dev=dm-0 ino=284133 scontext=unconfined_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:samba_share_t:s0 tclass=file</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -488,14 +488,14 @@ type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 c
 <div class="sect2">
 <h3 id="_step_7_getting_advice">Step 7: Getting advice</h3>
 <div class="paragraph">
-<p>There is a neat utility called <code>audit2why</code>, which can make suggestions as to how you might solve SELinux AVC messages.  Let&#8217;s try it on our test error:</p>
+<p>There is a neat utility called <code>audit2why</code>, which can make suggestions as to how you might solve SELinux AVC messages.  Let’s try it on our test error:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -if ./testaudit -m AVC | audit2why</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ausearch -if ./testaudit -m AVC | audit2why</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 comm="httpd" path="/var/www/html/file1" dev=dm-0 ino=284133 scontext=unconfined_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:samba_share_t:s0 tclass=file
+<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 comm=&#34;httpd&#34; path=&#34;/var/www/html/file1&#34; dev=dm-0 ino=284133 scontext=unconfined_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:samba_share_t:s0 tclass=file
 
 	Was caused by:
 		Missing type enforcement (TE) allow rule.
@@ -504,7 +504,7 @@ type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 c
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>audit2why</code> utility is telling us that the problem was caused by a missing <code>allow</code> rule, which would grant access for <code>httpd_t</code> processes to <code>samba_share_t</code> files.  This is obviously not the whole story, in this case, but it points us to the problem of the file&#8217;s context being incorrect.</p>
+<p>The <code>audit2why</code> utility is telling us that the problem was caused by a missing <code>allow</code> rule, which would grant access for <code>httpd_t</code> processes to <code>samba_share_t</code> files.  This is obviously not the whole story, in this case, but it points us to the problem of the file’s context being incorrect.</p>
 </div>
 <div class="paragraph">
 <style>

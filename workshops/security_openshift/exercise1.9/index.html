@@ -311,7 +311,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/secrets.png" alt="secrets">
+<img src="/workshops/security_openshift/images/secrets.png" alt="secrets"/>
 </div>
 </div>
 </div>
@@ -414,7 +414,7 @@ oc create -n openshift -f jboss-image-streams.json</code></pre>
 <div class="listingblock">
 <div class="title">SSO Project</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project sso --description="Red Hat SSO" --display-name="SSO Keycloak"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project sso --description=&#34;Red Hat SSO&#34; --display-name=&#34;SSO Keycloak&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -422,7 +422,7 @@ oc create -n openshift -f jboss-image-streams.json</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/sso-project.png" alt="sso project">
+<img src="/workshops/security_openshift/images/sso-project.png" alt="sso project"/>
 </div>
 <div class="title">Figure 1. Click SSO Keycloak Project</div>
 </div>
@@ -453,16 +453,16 @@ to hold the sensitive information.</p>
 <div class="listingblock">
 <div class="title">sso-app-secret.json</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">"kind": "Secret", <b class="conum">(1)</b>
-"apiVersion": "v1",
-"metadata": {
-    "annotations": {
-        "description": "Default secret file with name 'jboss' and password 'mykeystorepass'"
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">&#34;kind&#34;: &#34;Secret&#34;, <b class="conum">(1)</b>
+&#34;apiVersion&#34;: &#34;v1&#34;,
+&#34;metadata&#34;: {
+    &#34;annotations&#34;: {
+        &#34;description&#34;: &#34;Default secret file with name &#39;jboss&#39; and password &#39;mykeystorepass&#39;&#34;
       },
-        "name": "sso-app-secret" <b class="conum">(2)</b>
+        &#34;name&#34;: &#34;sso-app-secret&#34; <b class="conum">(2)</b>
       },
-        "data": {
-                "keystore.jks": "/u3+7QAAAAIAAAABAAAAAQAF.....&lt;snip&gt; <b class="conum">(3)</b></code></pre>
+        &#34;data&#34;: {
+                &#34;keystore.jks&#34;: &#34;/u3+7QAAAAIAAAABAAAAAQAF.....&lt;snip&gt; <b class="conum">(3)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -508,7 +508,7 @@ via a <code>https</code> route. Click the top url (example for student 0:
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/sso-overview.png" alt="sso overview">
+<img src="/workshops/security_openshift/images/sso-overview.png" alt="sso overview"/>
 </div>
 <div class="title">Figure 2. SSO Keycloak Project</div>
 </div>
@@ -517,7 +517,7 @@ via a <code>https</code> route. Click the top url (example for student 0:
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/sso-auth.png" alt="sso auth">
+<img src="/workshops/security_openshift/images/sso-auth.png" alt="sso auth"/>
 </div>
 </div>
 <div class="paragraph">
@@ -525,7 +525,7 @@ via a <code>https</code> route. Click the top url (example for student 0:
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/sso-admin-console.png" alt="sso admin console">
+<img src="/workshops/security_openshift/images/sso-admin-console.png" alt="sso admin console"/>
 </div>
 </div>
 <div class="paragraph">
@@ -541,12 +541,12 @@ password:  admin</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/sso-main-login.png" alt="sso main login">
+<img src="/workshops/security_openshift/images/sso-main-login.png" alt="sso main login"/>
 </div>
 <div class="title">Figure 3. Red Hat SSO Login</div>
 </div>
 <div class="paragraph">
-<p>This is Red Hat&#8217;s SSO server. Red Hat Single Sign-On (RH-SSO) is based on the
+<p>This is Red Hat’s SSO server. Red Hat Single Sign-On (RH-SSO) is based on the
 Keycloak project and enables you to secure your web applications by providing
 Web single sign-on (SSO) capabilities based on popular standards such as SAML
 2.0, OpenID Connect and OAuth 2.0.</p>
@@ -584,7 +584,7 @@ and client applications with easy-to-use Administration GUI and REST APIs.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/sso-main.png" alt="sso main">
+<img src="/workshops/security_openshift/images/sso-main.png" alt="sso main"/>
 </div>
 <div class="title">Figure 4. Red Hat SSO Overview</div>
 </div>

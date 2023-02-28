@@ -307,126 +307,88 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="service-mesh-metrics-with-grafana">Service Mesh Metrics with Grafana</h1>
-
-<p><a href="https://grafana.com">Grafana</a> is a monitoring tool that can be integrated with Istio for metric observation.  Using Grafana, you can look at metrics associated with services in your mesh.  Let's use Grafana to get more information about the user profile service.</p>
-
+    <h1 id="service-mesh-metrics-with-grafana">Service Mesh Metrics with Grafana</h1>
+<p><a href="https://grafana.com">Grafana</a> is a monitoring tool that can be integrated with Istio for metric observation.  Using Grafana, you can look at metrics associated with services in your mesh.  Let&rsquo;s use Grafana to get more information about the user profile service.</p>
 <h2 id="explore-grafana">Explore Grafana</h2>
-
-<p>First, let's explore the Grafana user interface.</p>
-
+<p>First, let&rsquo;s explore the Grafana user interface.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Open the Grafana console.  Retrieve the endpoint for Grafana:
 </blockquote>
-<pre><code>GRAFANA_CONSOLE=$(oc get route grafana -n istio-system --template=&#39;https://{{.spec.host}}&#39;)
-echo $GRAFANA_CONSOLE</code></pre>
-<p><i class="fa fa-info-circle"></i> Click 'Allow selected permissions' if prompted to authorized access.</p>
-
+<pre tabindex="0"><code>GRAFANA_CONSOLE=$(oc get route grafana -n istio-system --template=&#39;https://{{.spec.host}}&#39;)
+echo $GRAFANA_CONSOLE
+</code></pre><p><i class="fa fa-info-circle"></i> Click 'Allow selected permissions' if prompted to authorized access.</p>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Navigate to this URL in the browser.  Login with the same credentials you were provided to access OpenShift. 
 </blockquote>
-
 <p>Once logged in, you should be presented with the Grafana console:</p>
-
 <p><img src="../images/grafana-welcome.png" width="600"><br/>
 <em>Grafana Welcome</em></p>
-
-<p><br></p>
-
+<br>
 <blockquote>
 <i class="fa fa-desktop"></i>
 On the left bar, hover over the second icon from the top (Dashboards) and select 'Manage'.  Expand the 'istio' folder.
 </blockquote>
-
 <p>It should look like this:</p>
-
 <p><img src="../images/grafana-istio.png" width="1024"><br/>
 <em>Grafana Istio Dashboards</em></p>
-
-<p><br></p>
-
+<br>
 <p>You need to send load to the application before viewing any metrics.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 Send load to the application user interface:
 </blockquote>
-<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL; done</code></pre>
-<p><br></p>
-
-<p>While that is running, let's look at some dashboards.</p>
-
+<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL; done
+</code></pre><br>
+<p>While that is running, let&rsquo;s look at some dashboards.</p>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Select 'Istio Mesh Dashboard' in Grafana.
 </blockquote>
-
 <p>It should look like this:</p>
-
 <p><img src="../images/grafana-istio-mesh.png" width="1024"><br/>
 <em>Grafana Istio Mesh Dashboard</em></p>
-
-<p><br></p>
-
-<p>This gives you a holistic view of your services and metrics associated with those services.  For example, you can see that globally there are no error responses, and you get a quick snapshot of the throughput and latencies for each service.  But we're missing data on the user profile service so let's send some load to that service.</p>
-
+<br>
+<p>This gives you a holistic view of your services and metrics associated with those services.  For example, you can see that globally there are no error responses, and you get a quick snapshot of the throughput and latencies for each service.  But we&rsquo;re missing data on the user profile service so let&rsquo;s send some load to that service.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Send that terminal job to the background:
 </blockquote>
-<pre><code>^Z
+<pre tabindex="0"><code>^Z
 [1]+  Stopped                 curl -s -o /dev/null $GATEWAY_URL
 bg                                                     
-[1]+ curl -s -o /dev/null $GATEWAY_URL &amp;</code></pre>
-<blockquote>
+[1]+ curl -s -o /dev/null $GATEWAY_URL &amp;
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Now, send load to the user profile service:
 </blockquote>
-<pre><code>GATEWAY_URL=$(oc get route istio-demogateway-$(oc project -q) --template=&#39;http://{{.spec.host}}&#39;)
-while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done</code></pre>
-<p>The mesh dashboard should dynamically update.  It should look like this now:</p>
-
+<pre tabindex="0"><code>GATEWAY_URL=$(oc get route istio-demogateway-$(oc project -q) --template=&#39;http://{{.spec.host}}&#39;)
+while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+</code></pre><p>The mesh dashboard should dynamically update.  It should look like this now:</p>
 <p><img src="../images/grafana-istio-mesh-updated.png" width="1024"><br/>
 <em>Grafana Istio Mesh Dashboard Updated</em></p>
-
-<p><br></p>
-
+<br>
 <p>Notice the userprofile service has two different workloads: userprofile (version 1) and userprofile-2.  Calls to userprofile-2 are vastly slower.  You can further inspect the metrics associated with the service by selecting the service dashboard.</p>
-
 <blockquote>
 <i class="fa fa-desktop"></i>
 In the Service column, hover over the userprofile FQDN and select it.
 </blockquote>
-
 <p>That will take you to the service view, it looks like this:</p>
-
 <p><img src="../images/grafana-istio-service.png" width="1024"><br/>
 <em>Grafana Istio Service Dashboard</em></p>
-
-<p><br></p>
-
-<p>These are metrics specific to the user profile service.  Scroll down under 'Service Workloads' and you can see a breakdown of how the different workload versions differ for that service.</p>
-
+<br>
+<p>These are metrics specific to the user profile service.  Scroll down under &lsquo;Service Workloads&rsquo; and you can see a breakdown of how the different workload versions differ for that service.</p>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Hover over the Incoming Request Duration by Source under 'Service Workloads'.
 </blockquote>
-
 <p>It should look like this:</p>
-
 <p><img src="../images/grafana-istio-service-duration.png" width="1024"><br/>
 <em>Grafana Istio Service Dashboard - Request Duration</em></p>
-
-<p><br></p>
-
+<br>
 <p>This provides a visual representation of the latencies we saw on the Mesh Dashboard, and it is clear that the version 2 latencies are much higher.</p>
-
-<p><br></p>
-
+<br>
 <style>
 
  

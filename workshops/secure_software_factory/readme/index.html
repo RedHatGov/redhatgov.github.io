@@ -273,47 +273,30 @@
 </div>
 
 <div class="container">
-  
-
-<h1 id="must-have-existing-openshift-environment">Must have existing OpenShift Environment</h1>
-
-<p>You can use either of the OpenShift provsioners from RedHatGov
- - <a href="https://github.com/RedHatGov/redhatgov.workshops/tree/master/openshift-aws-setup">https://github.com/RedHatGov/redhatgov.workshops/tree/master/openshift-aws-setup</a>
- - <a href="https://github.com/RedHatGov/redhatgov.workshops/tree/master/openshift_terraform">https://github.com/RedHatGov/redhatgov.workshops/tree/master/openshift_terraform</a>
- - <a href="https://github.com/gnunn1/openshift-aws-setup">https://github.com/gnunn1/openshift-aws-setup</a>
- - <a href="https://github.com/jaredhocutt/openshift-provision">https://github.com/jaredhocutt/openshift-provision</a>
- - <a href="https://github.com/bit4man/ansible_agnostic_deployer">https://github.com/bit4man/ansible_agnostic_deployer</a></p>
-
+  <h1 id="must-have-existing-openshift-environment">Must have existing OpenShift Environment</h1>
+<p>You can use either of the OpenShift provsioners from RedHatGov</p>
+<ul>
+<li><a href="https://github.com/RedHatGov/redhatgov.workshops/tree/master/openshift-aws-setup">https://github.com/RedHatGov/redhatgov.workshops/tree/master/openshift-aws-setup</a></li>
+<li><a href="https://github.com/RedHatGov/redhatgov.workshops/tree/master/openshift_terraform">https://github.com/RedHatGov/redhatgov.workshops/tree/master/openshift_terraform</a></li>
+<li><a href="https://github.com/gnunn1/openshift-aws-setup">https://github.com/gnunn1/openshift-aws-setup</a></li>
+<li><a href="https://github.com/jaredhocutt/openshift-provision">https://github.com/jaredhocutt/openshift-provision</a></li>
+<li><a href="https://github.com/bit4man/ansible_agnostic_deployer">https://github.com/bit4man/ansible_agnostic_deployer</a></li>
+</ul>
 <h1 id="environment-setup">Environment Setup</h1>
-
-<p>If you'd like to setup an individual environment, use the commands below to set it up or delete the single environment.</p>
-
+<p>If you&rsquo;d like to setup an individual environment, use the commands below to set it up or delete the single environment.</p>
 <h2 id="help">Help</h2>
-
-<p>$ scripts/provision.sh --help</p>
-
+<p>$ scripts/provision.sh &ndash;help</p>
 <h3 id="individual-environment">Individual Environment</h3>
-
-<p>$ scripts/provision.sh deploy --deploy-che --ephemeral</p>
-
+<p>$ scripts/provision.sh deploy &ndash;deploy-che &ndash;ephemeral</p>
 <h3 id="individual-delete">Individual Delete</h3>
-
 <p>$ scripts/provision.sh delete</p>
-
 <h1 id="batch-setup">Batch Setup</h1>
-
-<p>If you'd like to setup the workshop for numerous users, go into the provision-batch-setup.sh script and update for loop with the amount of users .  This will create an isolated environment per user.</p>
-
+<p>If you&rsquo;d like to setup the workshop for numerous users, go into the provision-batch-setup.sh script and update for loop with the amount of users .  This will create an isolated environment per user.</p>
 <p>To run the script</p>
-
 <p>$ ./provision-batch-setup.sh</p>
-
 <h1 id="batch-delete">Batch Delete</h1>
-
-<p>If you'd like to delete, run the script for the users you'd like to delete by updating the for loop</p>
-
+<p>If you&rsquo;d like to delete, run the script for the users you&rsquo;d like to delete by updating the for loop</p>
 <p>To run the script</p>
-
 <p>$ ./provision-batch-delete.sh</p>
 
 </div>

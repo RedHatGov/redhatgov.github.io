@@ -311,7 +311,7 @@
 <h2 id="_exercise_description">Exercise Description</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you&#8217;ve gotten a sense of how Red Hat Ansible Tower works, we are going to write our first Ansible playbook.  The playbook is where you can take some of those ad hoc commands you just ran and put them into a repeatable set of <strong>plays</strong> and <strong>tasks</strong>.</p>
+<p>Now that you’ve gotten a sense of how Red Hat Ansible Tower works, we are going to write our first Ansible playbook.  The playbook is where you can take some of those ad hoc commands you just ran and put them into a repeatable set of <strong>plays</strong> and <strong>tasks</strong>.</p>
 </div>
 <div class="paragraph">
 <p>A playbook can have multiple plays and a play can have one or multiple tasks.  The goal of a <strong>play</strong> is to map a group of hosts.  The goal of a <strong>task</strong> is to implement modules against those hosts.</p>
@@ -322,15 +322,15 @@
 <h2 id="_section_1_running_a_pre_existing_playbook_from_scm">Section 1: Running a pre-existing playbook from SCM</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s clone a source code repository locally to get the sample playbook.</p>
+<p>Let’s clone a source code repository locally to get the sample playbook.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible localhost -m git -a "repo=https://github.com/RedHatGov/workshop.artifacts.git dest=artifacts"</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible localhost -m git -a &#34;repo=https://github.com/RedHatGov/workshop.artifacts.git dest=artifacts&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now, let&#8217;s run a playbook.  This playbook will open firewall ports on the remote node.</p>
+<p>Now, let’s run a playbook.  This playbook will open firewall ports on the remote node.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -380,7 +380,7 @@ cd ~/apache_basic</code></pre>
 <h2 id="_section_2_defining_your_play">Section 2: Defining Your play</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you are editing <code>install_apache.yml</code>, let&#8217;s begin by defining the play. Then, we&#8217;ll take some time to understand what each line accomplishes.</p>
+<p>Now that you are editing <code>install_apache.yml</code>, let’s begin by defining the play. Then, we’ll take some time to understand what each line accomplishes.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -412,10 +412,10 @@ cd ~/apache_basic</code></pre>
 <h2 id="_section_3_adding_tasks_to_your_play">Section 3: Adding tasks to your play</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that we&#8217;ve defined your play, let&#8217;s add some tasks to get some things done.  Align (vertically) the <strong>t</strong> in <code>task</code> with the <strong>b</strong> <code>become</code>. <br></p>
+<p>Now that we’ve defined your play, let’s add some tasks to get some things done.  Align (vertically) the <strong>t</strong> in <code>task</code> with the <strong>b</strong> <code>become</code>. <br/></p>
 </div>
 <div class="paragraph">
-<p>Yes, it does actually matter.  In fact, you should make sure all of your playbook statements are aligned, as shown here.<br></p>
+<p>Yes, it does actually matter.  In fact, you should make sure all of your playbook statements are aligned, as shown here.<br/></p>
 </div>
 <div class="paragraph">
 <p>If you want to see the entire playbook for reference, skip to the bottom of this exercise.</p>
@@ -482,7 +482,7 @@ about the <strong>service</strong> module.</p>
 <h2 id="_section_4_saving_your_playbook">Section 4: Saving your playbook</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you&#8217;ve completed writing your playbook, it would be a shame not to keep it for later use.</p>
+<p>Now that you’ve completed writing your playbook, it would be a shame not to keep it for later use.</p>
 </div>
 <div class="paragraph">
 <p>Use the <code>write/quit</code> method in <code>vi</code> or <code>vim</code> to save your playbook, i.e. <code>Esc :wq!</code></p>
@@ -493,7 +493,7 @@ You are ready to automate!</p>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -503,7 +503,7 @@ read up on this <a href="http://docs.ansible.com/ansible/YAMLSyntax.html">YAML S
 like this.  Take note of the spacing and alignment.
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="content">

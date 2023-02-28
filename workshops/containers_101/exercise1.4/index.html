@@ -337,7 +337,7 @@
 <p>tightly control where your images are being stored</p>
 </li>
 <li>
-<p>fully own your image&#8217;s distribution pipeline</p>
+<p>fully own your image’s distribution pipeline</p>
 </li>
 <li>
 <p>integrate image storage and distribution tightly into your in-house development workflow</p>
@@ -394,27 +394,27 @@
 <pre>Generating a 4096 bit RSA private key
 ............................................................++
 ...............................................................++
-writing new private key to 'domain.key'
+writing new private key to &#39;domain.key&#39;
 -----
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
 What you are about to enter is what is called a Distinguished Name or a DN.
 There are quite a few fields but you can leave some blank
 For some fields there will be a default value,
-If you enter '.', the field will be left blank.
+If you enter &#39;.&#39;, the field will be left blank.
 -----
 Country Name (2 letter code) [XX]:US
 State or Province Name (full name) []:Ohio
 Locality Name (eg, city) [Default City]:Dublin
 Organization Name (eg, company) [Default Company Ltd]:workshop
 Organizational Unit Name (eg, section) []:workshop
-Common Name (eg, your name or your server's hostname) []:localhost
+Common Name (eg, your name or your server&#39;s hostname) []:localhost
 Email Address []:student@lab.local</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_4_to_finish_this_configuration_add_the_cert_to_the_systems_trusted_database">Step 4. To finish this configuration,  add the cert to the system&#8217;s trusted database:</h3>
+<h3 id="_step_4_to_finish_this_configuration_add_the_cert_to_the_systems_trusted_database">Step 4. To finish this configuration,  add the cert to the system’s trusted database:</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cp domain.crt /etc/pki/tls/certs</code></pre>
@@ -429,7 +429,7 @@ Email Address []:student@lab.local</pre>
 <div class="sect2">
 <h3 id="_step_5_add_secure_mode_to_the_container_registry_configuration">Step 5. Add secure mode to the container registry configuration.</h3>
 <div class="paragraph">
-<p>Edit the file '/etc/docker-distribution/registry/config.yml' to match the example below.  Pay close attention to the last five lines, starting with tls, as these are required for configuration file.</p>
+<p>Edit the file &#39;/etc/docker-distribution/registry/config.yml&#39; to match the example below.  Pay close attention to the last five lines, starting with tls, as these are required for configuration file.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -471,7 +471,7 @@ http:
 <div class="sect2">
 <h3 id="_step_7_view_images_in_the_local_image_database">Step 7. View images in the local image database.</h3>
 <div class="paragraph">
-<p>Before we upload anything, let&#8217;s take a look to see what images we have in the local image database:</p>
+<p>Before we upload anything, let’s take a look to see what images we have in the local image database:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -494,7 +494,7 @@ docker.io/library/fedora_postgresql   latest   b105a704d05d   10 minutes ago   4
 </div>
 <div class="admonitionblock important">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-important" title="Important"></i>
 </td>
@@ -502,7 +502,7 @@ docker.io/library/fedora_postgresql   latest   b105a704d05d   10 minutes ago   4
 Choose only one of the following two commands (<code>buildah push</code> or <code>skopeo copy</code>).  Both accomplish the same purpose.
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -514,7 +514,7 @@ Choose only one of the following two commands (<code>buildah push</code> or <cod
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -522,7 +522,7 @@ Choose only one of the following two commands (<code>buildah push</code> or <cod
 This image ID will vary, and you should use the value from the output produced on your workshop instance:
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -533,7 +533,7 @@ This image ID will vary, and you should use the value from the output produced o
 <div class="sect2">
 <h3 id="_step_9_verify_the_image_location_in_the_registry">Step 9. Verify the image location in the registry.</h3>
 <div class="paragraph">
-<p>Next, let&#8217;s search the registry to make sure that our image made it, and is available:</p>
+<p>Next, let’s search the registry to make sure that our image made it, and is available:</p>
 </div>
 <div class="listingblock">
 <div class="content">

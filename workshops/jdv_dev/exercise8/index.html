@@ -307,68 +307,72 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="create-the-combined-view">Create the combined view</h1>
-
+    <h1 id="create-the-combined-view">Create the combined view</h1>
 <p>file -&gt; new -&gt; teiid metadata model</p>
-
 <ul>
-<li><p>Location <strong>demo-jdv/federated</strong></p></li>
-
-<li><p>Model Name <strong>FedView</strong></p></li>
-
-<li><p>Model Type <strong>View Model</strong></p></li>
-
-<li><p>Do not select any options under model builder and click <strong>Finish</strong></p></li>
-
-<li><p>Right-click on the FedView Package diagram and select new -&gt; child -&gt; table</p></li>
-
-<li><p>Select <strong>Option 1: Build with new table wizard</strong></p></li>
-
-<li><p>Name <strong>combined</strong></p></li>
-
-<li><ul>
+<li>
+<p>Location <strong>demo-jdv/federated</strong></p>
+</li>
+<li>
+<p>Model Name <strong>FedView</strong></p>
+</li>
+<li>
+<p>Model Type <strong>View Model</strong></p>
+</li>
+<li>
+<p>Do not select any options under model builder and click <strong>Finish</strong></p>
+</li>
+<li>
+<p>Right-click on the FedView Package diagram and select new -&gt; child -&gt; table</p>
+</li>
+<li>
+<p>Select <strong>Option 1: Build with new table wizard</strong></p>
+</li>
+<li>
+<p>Name <strong>combined</strong></p>
+</li>
+<li>
+<ul>
 <li>Under the <strong>PK</strong> tab, check the <strong>include</strong> box then put <strong>id_pk</strong> in the <strong>name</strong> field.  Click <strong>ok</strong>.  There will be model errors, this is ok</li>
-</ul></li>
-
-<li><p>Double-click the <strong>combined</strong> table to bring up the <strong>Transformation Diagram</strong>.</p></li>
-
-<li><p>Hold down <strong>ctrl</strong> and highlight all 3 <strong>Sheet1, order_details and users</strong> tables in the views.  Then drag them into the <strong>Transformation Editor</strong></p></li>
 </ul>
-
-<p><img src="../images/8-drag.png" width="800px"></p>
-
+</li>
+<li>
+<p>Double-click the <strong>combined</strong> table to bring up the <strong>Transformation Diagram</strong>.</p>
+</li>
+<li>
+<p>Hold down <strong>ctrl</strong> and highlight all 3 <strong>Sheet1, order_details and users</strong> tables in the views.  Then drag them into the <strong>Transformation Editor</strong></p>
+</li>
+</ul>
+<img src="../images/8-drag.png" width="800px">
 <ul>
-<li><p>In the <strong>Transformation Editor</strong>, copy the following where clause to the end of the transformation SQL to join the added tables on the 'id' field</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">	<span style="color:#66d9ef">WHERE</span>
-		(ExcelView.Sheet1.id <span style="color:#f92672">=</span> PostgresView.order_details.id) <span style="color:#66d9ef">AND</span> (PostgresView.order_details.id <span style="color:#f92672">=</span> RestView.users.id)</code></pre></div></li>
-
-<li><p>Now click the <strong>Save and Validate</strong> button to check our work</p></li>
+<li>In the <strong>Transformation Editor</strong>, copy the following where clause to the end of the transformation SQL to join the added tables on the &lsquo;id&rsquo; field</li>
 </ul>
-
-<p><img src="../images/8-validate.png" width="800px"></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>	<span style="color:#66d9ef">WHERE</span>
+</span></span><span style="display:flex;"><span>		(ExcelView.Sheet1.id <span style="color:#f92672">=</span> PostgresView.order_details.id) <span style="color:#66d9ef">AND</span> (PostgresView.order_details.id <span style="color:#f92672">=</span> RestView.users.id)
+</span></span></code></pre></div><ul>
+<li>Now click the <strong>Save and Validate</strong> button to check our work</li>
+</ul>
+<img src="../images/8-validate.png" width="800px">
 <ul>
-<li><p>Cleanup the unnecessary colums by right-clicking on the <strong>id_1, id_2, ROW_ID</strong> fields and delete each one</p></li>
-
-<li><p>Select <strong>pk_id</strong> and edit the <strong>Columns</strong> property.  From the <strong>Choices</strong> column, move over <strong>id</strong> to <strong>feature</strong>.  Click <strong>ok</strong></p></li>
-
-<li><p><strong>Save</strong> FedView</p></li>
-
-<li><p>Go to the <strong>Model Editor</strong> tab and click the <strong>preview data</strong> button.  10 Records should return in the <strong>SQL Results</strong></p></li>
+<li>
+<p>Cleanup the unnecessary colums by right-clicking on the <strong>id_1, id_2, ROW_ID</strong> fields and delete each one</p>
+</li>
+<li>
+<p>Select <strong>pk_id</strong> and edit the <strong>Columns</strong> property.  From the <strong>Choices</strong> column, move over <strong>id</strong> to <strong>feature</strong>.  Click <strong>ok</strong></p>
+</li>
+<li>
+<p><strong>Save</strong> FedView</p>
+</li>
+<li>
+<p>Go to the <strong>Model Editor</strong> tab and click the <strong>preview data</strong> button.  10 Records should return in the <strong>SQL Results</strong></p>
+</li>
 </ul>
-
-<p><img src="../images/8-preview.png" width="800px"></p>
-
+<img src="../images/8-preview.png" width="800px">
 <h1 id="deploy-view-model">Deploy View Model</h1>
-
 <ul>
 <li>Open the vdb <strong>demo-jdv.vdb</strong> and click the <strong>Add Model</strong> button in the lower left.  Select <strong>FedView</strong> and save the vdb. Click the <strong>Deploy</strong> button</li>
 </ul>
-
 <h1 id="test-with-postman">Test with Postman</h1>
-
 <ul>
 <li>In postman, run the <strong>FedView</strong> test.  Verify that the <strong>Test Results</strong> tab returns <strong>PASS</strong></li>
 </ul>

@@ -322,7 +322,7 @@
 <p>The User Namespaces allow our sandboxed environment to have its own set of user and group IDs that will map to very high, unique, user and group IDs back on the host system. They also allow the root user in the sandbox to be mapped to another user on the host.</p>
 </div>
 <div class="paragraph">
-<p>Because we are now invoking the User Namespace, we no longer need to work as root. Let&#8217;s switch to a non-priviledged user.</p>
+<p>Because we are now invoking the User Namespace, we no longer need to work as root. Let’s switch to a non-priviledged user.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -330,7 +330,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Now let&#8217;s unshare some namespaces!</p>
+<p>Now let’s unshare some namespaces!</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -344,10 +344,10 @@ whoami</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Wait&#8230;&#8203; We are root again? I thought we just left root!</p>
+<p>Wait…​ We are root again? I thought we just left root!</p>
 </div>
 <div class="paragraph">
-<p>Well&#8230;&#8203; yes and no. Inside of our sandbox, we are the root user, but we have instructed unshare to map the root user to our actual UID outside the sandbox. That is what the <code>r</code> option does. The <code>U</code> option creates the new User Namespace.</p>
+<p>Well…​ yes and no. Inside of our sandbox, we are the root user, but we have instructed unshare to map the root user to our actual UID outside the sandbox. That is what the <code>r</code> option does. The <code>U</code> option creates the new User Namespace.</p>
 </div>
 <div class="paragraph">
 <p>To inspect how UIDs are being mapped, we can query the Kernel state.</p>
@@ -366,7 +366,7 @@ whoami</code></pre>
 <p>This tells us that root (UID 0) is mapped to rhel (UID 1001) and a span of 1 UID is available for mapping. It is possible to allocate additional UIDs to the sandbox, but that is outside the scope of this workshop.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the UID mapping in the host&#8217;s native namespace. Switch to a terminal that is not in your sandbox.</p>
+<p>Let’s look at the UID mapping in the host’s native namespace. Switch to a terminal that is not in your sandbox.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -382,7 +382,7 @@ whoami</code></pre>
 <p>This says that root (UID 0) is mapped to root (UID 0) and a span of 4294967295 UIDs are available. That number may seem odd until you realize it is the maximum value for a 32-bit unsigned integer.</p>
 </div>
 <div class="paragraph">
-<p>So&#8230;&#8203; let&#8217;s test the limts of our root powers. If we were root, we could do some pretty destructive things&#8230;&#8203; Like delete Bash! Go back to the terminal that is in your sandbox.</p>
+<p>So…​ let’s test the limts of our root powers. If we were root, we could do some pretty destructive things…​ Like delete Bash! Go back to the terminal that is in your sandbox.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -391,14 +391,14 @@ whoami</code></pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>rm: cannot remove '/bin/bash': Permission denied</pre>
+<pre>rm: cannot remove &#39;/bin/bash&#39;: Permission denied</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>However, since we are not root outside of the sandbox, we cannot remove files owned by the real root outside of the sandbox.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s do another test.</p>
+<p>Let’s do another test.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -412,7 +412,7 @@ ls -la /tmp/test</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Makes sense. We are root so the files we create are owned by root. But lets leave our sandbox and check that same file in the host&#8217;s native namespace. Run the following commands on a terminal that is not in your sandbox.</p>
+<p>Makes sense. We are root so the files we create are owned by root. But lets leave our sandbox and check that same file in the host’s native namespace. Run the following commands on a terminal that is not in your sandbox.</p>
 </div>
 <div class="listingblock">
 <div class="content">

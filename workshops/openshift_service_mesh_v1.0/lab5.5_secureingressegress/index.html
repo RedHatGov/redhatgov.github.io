@@ -307,46 +307,35 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="securing-ingress-and-egress">Securing Ingress and Egress</h1>
-
+    <h1 id="securing-ingress-and-egress">Securing Ingress and Egress</h1>
 <p>In cases where strict security is required we need to configure specifics around securing ingress and egress traffic. Security around egress is often used to lock down and deny access to potentially harmful resources outside the network. Additionally, it is a good practice to prevent malicious activities from originating from the cluster.</p>
-
-<p>You are probably already familiar with basic ingress security concepts. Essentially, only exposing particular services to be accessible from outside the cluster and using basic TLS/SSL. The service mesh has an ingress router (a standalone Envoy) running by default and we already configured it during the &quot;Deploying an App into the Service Mesh&quot; lab.</p>
-
-<p>An even better way to track/lockdown inbound traffic for our microservices is to leverage API management in front of all the API services. We could do this with a service mesh plugin for 3scale. We aren't going to walk through it today - if that's something that interest you, <a href="https://docs.openshift.com/container-platform/4.3/service_mesh/threescale_adapter/threescale-adapter.html">read more about that here</a> <a href="https://www.redhat.com/en/technologies/jboss-middleware/3scale">and here</a>.</p>
-
-<p>For now let's lockdown egress.</p>
-
+<p>You are probably already familiar with basic ingress security concepts. Essentially, only exposing particular services to be accessible from outside the cluster and using basic TLS/SSL. The service mesh has an ingress router (a standalone Envoy) running by default and we already configured it during the &ldquo;Deploying an App into the Service Mesh&rdquo; lab.</p>
+<p>An even better way to track/lockdown inbound traffic for our microservices is to leverage API management in front of all the API services. We could do this with a service mesh plugin for 3scale. We aren&rsquo;t going to walk through it today - if that&rsquo;s something that interest you, <a href="https://docs.openshift.com/container-platform/4.3/service_mesh/threescale_adapter/threescale-adapter.html">read more about that here</a> <a href="https://www.redhat.com/en/technologies/jboss-middleware/3scale">and here</a>.</p>
+<p>For now let&rsquo;s lockdown egress.</p>
 <h2 id="lock-down-egress">Lock Down Egress</h2>
-
 <p>In this example we are going to restrict access to external endpoints to only approved hosts. The service mesh has an egress router (a standalone Envoy) running by default and we just need to configure it.</p>
-
 <p>The <code>ServiceMeshControlPlane</code> custom resource we used to install Istio has a <code>global</code> config which allows control of the defaults for egress security. That looks like this:</p>
-<pre><code># Set the default behavior of the sidecar for handling outbound traffic from the application:
+<pre tabindex="0"><code># Set the default behavior of the sidecar for handling outbound traffic from the application:
 # ALLOW_ANY - outbound traffic to unknown destinations will be allowed, in case there are no
 #   services or ServiceEntries for the destination port
 # REGISTRY_ONLY - restrict outbound traffic to services defined in the service registry as well
 #   as those defined through ServiceEntries  
 outboundTrafficPolicy:
-  mode: REGISTRY_ONLY</code></pre>
-<p>The mesh you're using in this workshop should already have the mode set to <code>REGISTRY_ONLY</code>. Let's verify that in the auto-generated config map:</p>
-
+  mode: REGISTRY_ONLY
+</code></pre><p>The mesh you&rsquo;re using in this workshop should already have the mode set to <code>REGISTRY_ONLY</code>. Let&rsquo;s verify that in the auto-generated config map:</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Run this command and look for outboundTrafficPolicy
 </blockquote>
-<pre><code>oc describe cm/istio -n istio-system</code></pre>
-<p><br></p>
-
+<pre tabindex="0"><code>oc describe cm/istio -n istio-system
+</code></pre><br>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Now let's verify it's working - Run this command to scrape some data:
 </blockquote>
-<pre><code>oc run curl-scraper-1 -i --restart=Never --image=appropriate/curl --timeout=30s -- -v context-scraper:8080/scrape/custom_search?term==skynet</code></pre>
-<p>We should get an output similar to the one below, with error of ECONNRESET:</p>
-<pre><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+<pre tabindex="0"><code>oc run curl-scraper-1 -i --restart=Never --image=appropriate/curl --timeout=30s -- -v context-scraper:8080/scrape/custom_search?term==skynet
+</code></pre><p>We should get an output similar to the one below, with error of ECONNRESET:</p>
+<pre tabindex="0"><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 172.30.83.172...
 * TCP_NODELAY set
@@ -370,26 +359,19 @@ Now let's verify it's working - Run this command to scrape some data:
 { [682 bytes data]
 100   682  100   682    0     0  16634      0 --:--:-- --:--:-- --:--:-- 16634
 * Connection #0 to host context-scraper left intact
-{&#34;oops&#34;:{&#34;name&#34;:&#34;RequestError&#34;,&#34;message&#34;:&#34;Error: read ECONNRESET&#34;,&#34;cause&#34;:{&#34;errno&#34;:&#34;ECONNRESET&#34;,&#34;code&#34;:&#34;ECONNRESET&#34;,&#34;syscall&#34;:&#34;read&#34;},&#34;error&#34;:{&#34;errno&#34;:&#34;ECONNRESET&#34;,&#34;code&#34;:&#34;ECONNRESET&#34;,&#34;syscall&#34;:&#34;read&#34;},&#34;options&#34;:{&#34;method&#34;:&#34;GET&#34;,&#34;uri&#34;:&#34;https://www.googleapis.com/customsearch/v1/siterestrict&#34;,&#34;qs&#34;:{&#34;key&#34;:&#34;AIzaSyDRdgirA2Pakl4PMi7t-8LFfnnjEFHnbY4&#34;,&#34;cx&#34;:&#34;005627457786250373845:lwanzyzfwji&#34;,&#34;q&#34;:&#34;=skynet&#34;},&#34;headers&#34;:{&#34;user-agent&#34;:&#34;curl/7.59.0&#34;,&#34;x-request-id&#34;:&#34;d78cf7b9-0010-9ecf-b520-f3d6a83376a0&#34;,&#34;x-b3-traceid&#34;:&#34;21b58b1725b20a81f914496d9a55455d&#34;,&#34;x-b3-spanid&#34;:&#34;f914496d9a55455d&#34;,&#34;x-b3-sampled&#34;:&#34;1&#34;},&#34;json&#34;:true,&#34;simple&#34;:true,&#34;resolveWithFullResponse&#34;:false,&#34;transform2xxOnly&#34;:false}}}</code></pre>
-<p>Which is curl (running in a pod in our project) trying to talk to the context-scraper microservice (in the mesh). You can see from the error details that the service is trying to get out to googleapis.com but fails.</p>
-
-<p><br></p>
-
+{&#34;oops&#34;:{&#34;name&#34;:&#34;RequestError&#34;,&#34;message&#34;:&#34;Error: read ECONNRESET&#34;,&#34;cause&#34;:{&#34;errno&#34;:&#34;ECONNRESET&#34;,&#34;code&#34;:&#34;ECONNRESET&#34;,&#34;syscall&#34;:&#34;read&#34;},&#34;error&#34;:{&#34;errno&#34;:&#34;ECONNRESET&#34;,&#34;code&#34;:&#34;ECONNRESET&#34;,&#34;syscall&#34;:&#34;read&#34;},&#34;options&#34;:{&#34;method&#34;:&#34;GET&#34;,&#34;uri&#34;:&#34;https://www.googleapis.com/customsearch/v1/siterestrict&#34;,&#34;qs&#34;:{&#34;key&#34;:&#34;AIzaSyDRdgirA2Pakl4PMi7t-8LFfnnjEFHnbY4&#34;,&#34;cx&#34;:&#34;005627457786250373845:lwanzyzfwji&#34;,&#34;q&#34;:&#34;=skynet&#34;},&#34;headers&#34;:{&#34;user-agent&#34;:&#34;curl/7.59.0&#34;,&#34;x-request-id&#34;:&#34;d78cf7b9-0010-9ecf-b520-f3d6a83376a0&#34;,&#34;x-b3-traceid&#34;:&#34;21b58b1725b20a81f914496d9a55455d&#34;,&#34;x-b3-spanid&#34;:&#34;f914496d9a55455d&#34;,&#34;x-b3-sampled&#34;:&#34;1&#34;},&#34;json&#34;:true,&#34;simple&#34;:true,&#34;resolveWithFullResponse&#34;:false,&#34;transform2xxOnly&#34;:false}}}
+</code></pre><p>Which is curl (running in a pod in our project) trying to talk to the context-scraper microservice (in the mesh). You can see from the error details that the service is trying to get out to googleapis.com but fails.</p>
+<br>
 <blockquote>
 <i class="fa fa-desktop"></i>
 (Optional) If you were to look at Kiali now you'd see the request going to a blackhole:
 </blockquote>
-
 <p><img src="../images/kiali-egress-blackhole.png" width="1024" class="screenshot"><br/></p>
-
-<p><br></p>
-
+<br>
 <h2 id="allow-egress-to-approved-hosts">Allow Egress to Approved Hosts</h2>
-
 <p>Now we will be using an Istio API object of type <a href="https://istio.io/docs/concepts/traffic-management/#service-entries">ServiceEntry</a> to allow controlled egress. After you add this ServiceEntry, our microservices (via their Envoy sidecars) can send traffic to the specified external service as if it was a service in your mesh.</p>
-
 <p>Our ServiceEntry looks like this:</p>
-<pre><code>apiVersion: networking.istio.io/v1alpha3
+<pre tabindex="0"><code>apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
   name: context-scraper-egress
@@ -401,57 +383,44 @@ spec:
     name: https
     protocol: HTTPS
   resolution: DNS
-  location: MESH_EXTERNAL</code></pre>
-<p><br></p>
-
+  location: MESH_EXTERNAL
+</code></pre><br>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Apply it with the following command:
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/serviceentry-googleapis.yaml</code></pre>
-<p><br></p>
-
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/serviceentry-googleapis.yaml
+</code></pre><br>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Run a new curl job to try scrape some data again:
 </blockquote>
-<pre><code>oc run curl-scraper-2 -i --restart=Never --image=appropriate/curl --timeout=30s -- context-scraper:8080/scrape/custom_search?term==skynet</code></pre>
-<p>Now we should get an output similar to the one below - showing results:</p>
-<pre><code>custom_search?term==skynet
+<pre tabindex="0"><code>oc run curl-scraper-2 -i --restart=Never --image=appropriate/curl --timeout=30s -- context-scraper:8080/scrape/custom_search?term==skynet
+</code></pre><p>Now we should get an output similar to the one below - showing results:</p>
+<pre tabindex="0"><code>custom_search?term==skynet
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[{&#34;link&#34;:&#34;https://www.reddit.com/r/movies/comments/1jqo8m/in_the_terminator_franchise_what_does_skynet/&#34;,&#34;title&#34;:&#34;In the Terminator franchise, what does Skynet actually want? : movies&#34;,&#34;snippet&#34;:&#34;Skynet perceived this as an attack and came to the conclusion that all of \nhumanity would attempt to destroy it. To defend itself, Skynet launched nuclear \nmissiles ...&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/incremental_games/comments/akfdz3/skynet_in_alpha_v2_10min_feedback_welcome/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSq88CbTfa-lnWG4n7Y3xEVP4mD4A66tKWsBRRKJi7uPmPhacMeeVuexYI&#34;,&#34;width&#34;:&#34;310&#34;,&#34;height&#34;:&#34;163&#34;}],&#34;title&#34;:&#34;Skynet. In Alpha v2 (~10min). Feedback welcome ...&#34;,&#34;snippet&#34;:&#34;r/incremental_games: This subreddit is for lovers of games that feature an \nincremental mechanism, such as unlocking progressively more powerful …&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/DeepBrainChain/comments/8rar5b/deepbrain_chain_launches_skynet_project/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrwBIFnOZygv1EKJ1z7TnNeWIfom8Kp0Zgbs6YvM4DXYP0zvra6GNCnh0&#34;,&#34;width&#34;:&#34;225&#34;,&#34;height&#34;:&#34;225&#34;}],&#34;title&#34;:&#34;DeepBrain Chain Launches &#39;&#39;Skynet Project&#39;&#39;— Recruiting AI ...&#34;,&#34;snippet&#34;:&#34;To achieve that, DeepBrain Chain Foundation will activate the &#39;&#39;Skynet Project&#39;&#39; \non June 15th Beijing time and, recruit AI computing power from the globe.&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/OutOfTheLoop/comments/24obct/what_is_skynet_and_why_do_people_reference_it/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrwBIFnOZygv1EKJ1z7TnNeWIfom8Kp0Zgbs6YvM4DXYP0zvra6GNCnh0&#34;,&#34;width&#34;:&#34;225&#34;,&#34;height&#34;:&#34;225&#34;}],&#34;title&#34;:&#34;What is Skynet and why do people reference it often? : OutOfTheLoop&#34;,&#34;snippet&#34;:&#34;It is a reference to the movie Terminator. Skynet is the fictional computer entity \nwhich becomes self-aware and takes over all other computers it is linked to. Then\n, ...&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/linux/comments/2vyhr6/apparently_terminator_runs_linux_version/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSpw8eEnexhK7SlaTQPtFUIqBZYb-Qt5Pa28s8fPAMI4uydC7nmbCc_bU&#34;,&#34;width&#34;:&#34;300&#34;,&#34;height&#34;:&#34;168&#34;}],&#34;title&#34;:&#34;Apparently Terminator runs Linux version 4.1.15-1.1381 ...&#34;,&#34;snippet&#34;:&#34;The real question is why skynet bothers making visuals displays for data. \nContinue this thread. level 1. ptrwis. 177 points · 5 years ago. It&#39;s systemd, \nevolved and ...&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/siacoin/comments/elqcyi/taek_teases_skynet_huge_news_in_the_pipeline/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcez9TMXJ9S-onsmNDs7ZxIJEdM8hhhneEJgjELCbomsACnBA2ywgnPvo&#34;,&#34;width&#34;:&#34;152&#34;,&#34;height&#34;:&#34;331&#34;}],&#34;title&#34;:&#34;Taek teases Skynet - huge news in the pipeline, game-changing ...&#34;,&#34;snippet&#34;:&#34;r/siacoin: Sia is a cryptocurrency engineered to provide industrial grade cloud \nstorage at consumer prices.&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/incremental_games/comments/98oj1p/skynet_in_alpha_5min_feedback_welcome/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSq88CbTfa-lnWG4n7Y3xEVP4mD4A66tKWsBRRKJi7uPmPhacMeeVuexYI&#34;,&#34;width&#34;:&#34;310&#34;,&#34;height&#34;:&#34;163&#34;}],&#34;title&#34;:&#34;Skynet. In Alpha (~5min). Feedback welcome : incremental_games&#34;,&#34;snippet&#34;:&#34;r/incremental_games: This subreddit is for lovers of games that feature an \nincremental mechanism, such as unlocking progressively more powerful …&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/AskScienceFiction/comments/3msulj/terminator_why_doesnt_skynet_use_bio_weapons/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrwBIFnOZygv1EKJ1z7TnNeWIfom8Kp0Zgbs6YvM4DXYP0zvra6GNCnh0&#34;,&#34;width&#34;:&#34;225&#34;,&#34;height&#34;:&#34;225&#34;}],&#34;title&#34;:&#34;[Terminator] why doesn&#39;t skynet use bio weapons? : AskScienceFiction&#34;,&#34;snippet&#34;:&#34;When skynet came online initially it calculated that humanities greatest threat \nwas itself and so it launched our best weapons against Americas most well ...&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/AskScienceFiction/comments/9yp425/terminator_why_does_skynet_only_send_robots_back/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrwBIFnOZygv1EKJ1z7TnNeWIfom8Kp0Zgbs6YvM4DXYP0zvra6GNCnh0&#34;,&#34;width&#34;:&#34;225&#34;,&#34;height&#34;:&#34;225&#34;}],&#34;title&#34;:&#34;[Terminator] Why does Skynet only send robots back within one life ...&#34;,&#34;snippet&#34;:&#34;Skynet&#39;s existence exists as a mobius strip in time, centered around Judgement \nDay. Judgement Day is inevitable, and nothing can stop it from taking place.&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/AskScienceFiction/comments/7q7766/terminator_why_doesnt_skynet_just_poison_the/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrwBIFnOZygv1EKJ1z7TnNeWIfom8Kp0Zgbs6YvM4DXYP0zvra6GNCnh0&#34;,&#34;width&#34;:&#34;225&#34;,&#34;height&#34;:&#34;225&#34;}],&#34;title&#34;:&#34;[Terminator] Why doesn&#39;t Skynet just poison the atmosphere if they ...&#34;,&#34;snippet&#34;:&#34;Skynet uses Terminators because, so far as it is concerned100  5049  100  5049    0     0   9350      0 --:--:-- --:--:-- --:--:--  9332e humans. It&#39;s goal is to \nfulfill ..</code></pre>
-<p><br></p>
-
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[{&#34;link&#34;:&#34;https://www.reddit.com/r/movies/comments/1jqo8m/in_the_terminator_franchise_what_does_skynet/&#34;,&#34;title&#34;:&#34;In the Terminator franchise, what does Skynet actually want? : movies&#34;,&#34;snippet&#34;:&#34;Skynet perceived this as an attack and came to the conclusion that all of \nhumanity would attempt to destroy it. To defend itself, Skynet launched nuclear \nmissiles ...&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/incremental_games/comments/akfdz3/skynet_in_alpha_v2_10min_feedback_welcome/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSq88CbTfa-lnWG4n7Y3xEVP4mD4A66tKWsBRRKJi7uPmPhacMeeVuexYI&#34;,&#34;width&#34;:&#34;310&#34;,&#34;height&#34;:&#34;163&#34;}],&#34;title&#34;:&#34;Skynet. In Alpha v2 (~10min). Feedback welcome ...&#34;,&#34;snippet&#34;:&#34;r/incremental_games: This subreddit is for lovers of games that feature an \nincremental mechanism, such as unlocking progressively more powerful …&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/DeepBrainChain/comments/8rar5b/deepbrain_chain_launches_skynet_project/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrwBIFnOZygv1EKJ1z7TnNeWIfom8Kp0Zgbs6YvM4DXYP0zvra6GNCnh0&#34;,&#34;width&#34;:&#34;225&#34;,&#34;height&#34;:&#34;225&#34;}],&#34;title&#34;:&#34;DeepBrain Chain Launches &#39;&#39;Skynet Project&#39;&#39;— Recruiting AI ...&#34;,&#34;snippet&#34;:&#34;To achieve that, DeepBrain Chain Foundation will activate the &#39;&#39;Skynet Project&#39;&#39; \non June 15th Beijing time and, recruit AI computing power from the globe.&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/OutOfTheLoop/comments/24obct/what_is_skynet_and_why_do_people_reference_it/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrwBIFnOZygv1EKJ1z7TnNeWIfom8Kp0Zgbs6YvM4DXYP0zvra6GNCnh0&#34;,&#34;width&#34;:&#34;225&#34;,&#34;height&#34;:&#34;225&#34;}],&#34;title&#34;:&#34;What is Skynet and why do people reference it often? : OutOfTheLoop&#34;,&#34;snippet&#34;:&#34;It is a reference to the movie Terminator. Skynet is the fictional computer entity \nwhich becomes self-aware and takes over all other computers it is linked to. Then\n, ...&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/linux/comments/2vyhr6/apparently_terminator_runs_linux_version/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSpw8eEnexhK7SlaTQPtFUIqBZYb-Qt5Pa28s8fPAMI4uydC7nmbCc_bU&#34;,&#34;width&#34;:&#34;300&#34;,&#34;height&#34;:&#34;168&#34;}],&#34;title&#34;:&#34;Apparently Terminator runs Linux version 4.1.15-1.1381 ...&#34;,&#34;snippet&#34;:&#34;The real question is why skynet bothers making visuals displays for data. \nContinue this thread. level 1. ptrwis. 177 points · 5 years ago. It&#39;s systemd, \nevolved and ...&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/siacoin/comments/elqcyi/taek_teases_skynet_huge_news_in_the_pipeline/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcez9TMXJ9S-onsmNDs7ZxIJEdM8hhhneEJgjELCbomsACnBA2ywgnPvo&#34;,&#34;width&#34;:&#34;152&#34;,&#34;height&#34;:&#34;331&#34;}],&#34;title&#34;:&#34;Taek teases Skynet - huge news in the pipeline, game-changing ...&#34;,&#34;snippet&#34;:&#34;r/siacoin: Sia is a cryptocurrency engineered to provide industrial grade cloud \nstorage at consumer prices.&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/incremental_games/comments/98oj1p/skynet_in_alpha_5min_feedback_welcome/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSq88CbTfa-lnWG4n7Y3xEVP4mD4A66tKWsBRRKJi7uPmPhacMeeVuexYI&#34;,&#34;width&#34;:&#34;310&#34;,&#34;height&#34;:&#34;163&#34;}],&#34;title&#34;:&#34;Skynet. In Alpha (~5min). Feedback welcome : incremental_games&#34;,&#34;snippet&#34;:&#34;r/incremental_games: This subreddit is for lovers of games that feature an \nincremental mechanism, such as unlocking progressively more powerful …&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/AskScienceFiction/comments/3msulj/terminator_why_doesnt_skynet_use_bio_weapons/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrwBIFnOZygv1EKJ1z7TnNeWIfom8Kp0Zgbs6YvM4DXYP0zvra6GNCnh0&#34;,&#34;width&#34;:&#34;225&#34;,&#34;height&#34;:&#34;225&#34;}],&#34;title&#34;:&#34;[Terminator] why doesn&#39;t skynet use bio weapons? : AskScienceFiction&#34;,&#34;snippet&#34;:&#34;When skynet came online initially it calculated that humanities greatest threat \nwas itself and so it launched our best weapons against Americas most well ...&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/AskScienceFiction/comments/9yp425/terminator_why_does_skynet_only_send_robots_back/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrwBIFnOZygv1EKJ1z7TnNeWIfom8Kp0Zgbs6YvM4DXYP0zvra6GNCnh0&#34;,&#34;width&#34;:&#34;225&#34;,&#34;height&#34;:&#34;225&#34;}],&#34;title&#34;:&#34;[Terminator] Why does Skynet only send robots back within one life ...&#34;,&#34;snippet&#34;:&#34;Skynet&#39;s existence exists as a mobius strip in time, centered around Judgement \nDay. Judgement Day is inevitable, and nothing can stop it from taking place.&#34;},{&#34;link&#34;:&#34;https://www.reddit.com/r/AskScienceFiction/comments/7q7766/terminator_why_doesnt_skynet_just_poison_the/&#34;,&#34;thumbnail&#34;:[{&#34;src&#34;:&#34;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrwBIFnOZygv1EKJ1z7TnNeWIfom8Kp0Zgbs6YvM4DXYP0zvra6GNCnh0&#34;,&#34;width&#34;:&#34;225&#34;,&#34;height&#34;:&#34;225&#34;}],&#34;title&#34;:&#34;[Terminator] Why doesn&#39;t Skynet just poison the atmosphere if they ...&#34;,&#34;snippet&#34;:&#34;Skynet uses Terminators because, so far as it is concerned100  5049  100  5049    0     0   9350      0 --:--:-- --:--:-- --:--:--  9332e humans. It&#39;s goal is to \nfulfill ..
+</code></pre><br>
 <p>If we wanted to we could now configure virtual services and destination rules to control traffic to the service entry in a more granular way. The same way we configured traffic for the other services in our mesh.</p>
-
-<p>And Kiali tracks this ServiceEntry too, let's look at the graph to see how things are visualized.</p>
-
-<p><br></p>
-
+<p>And Kiali tracks this ServiceEntry too, let&rsquo;s look at the graph to see how things are visualized.</p>
+<br>
 <blockquote>
 <i class="fa fa-desktop"></i>
 (Optional) And now, if your were to open the graph view of Kiali you'd see the external service represented
 <br>
 </blockquote>
-
 <p><img src="../images/kiali-egress.png" width="1024" class="screenshot"><br/></p>
-
-<p><br></p>
-
+<br>
 <h1 id="summary">Summary</h1>
-
 <p>Congrats! You successfully locked down egress to known external hosts and configured tracking of that via the Service Mesh. This is an advanced capability of the mesh - and you can read more about managing <a href="https://istio.io/docs/tasks/traffic-management/ingress/">ingress here</a> and <a href="https://istio.io/docs/tasks/traffic-management/egress/">egress here</a>.</p>
-
 <p>A few key highlights are:</p>
-
 <ul>
 <li>We can lock down egress traffic to only approved external endpoints or services</li>
 <li>We can lock down ingress traffic to only approved external endpoints or services</li>
 <li>We can secure ingress traffic via standard TLS or mutual TLS</li>
 <li>We can leverage 3scale API management to limit who can access exposed APIs and how</li>
 </ul>
-
 <style>
 
  

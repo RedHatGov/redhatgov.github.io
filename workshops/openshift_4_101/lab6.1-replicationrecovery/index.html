@@ -307,12 +307,8 @@
   </ul>
 </nav>
 
-    
-
-<h2 id="recovery">Recovery</h2>
-
-<p>Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy.  Let's forcibly inflict an issue and see how OpenShift responds.</p>
-
+    <h2 id="recovery">Recovery</h2>
+<p>Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy.  Let&rsquo;s forcibly inflict an issue and see how OpenShift responds.</p>
 <div class="panel-group">
   
 
@@ -320,34 +316,32 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse94d71e630cc7eb240ed1e585296fa678" class="collapsed">
+      <a data-toggle="collapse" href="#collapse1d01816793a60d477f2642f3ca4916b2" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse94d71e630cc7eb240ed1e585296fa678" class="panel-collapse collapse ">
+  <div id="collapse1d01816793a60d477f2642f3ca4916b2" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Choose a random pod and delete it:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
-$ oc delete pod/PODNAME
-$ oc get pods -w</code></pre></div>
-<p>If you're fast enough you'll see the pod you deleted go &quot;Terminating&quot; and you'll also see a new pod immediately get created and transition from &quot;Pending&quot; to &quot;Running&quot;.  If you weren't fast enough you can see that your old pod is gone and a new pod is in the list with an age of only a few seconds.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span><span style="display:flex;"><span>$ oc delete pod/PODNAME
+</span></span><span style="display:flex;"><span>$ oc get pods -w
+</span></span></code></pre></div><p>If you&rsquo;re fast enough you&rsquo;ll see the pod you deleted go &ldquo;Terminating&rdquo; and you&rsquo;ll also see a new pod immediately get created and transition from &ldquo;Pending&rdquo; to &ldquo;Running&rdquo;.  If you weren&rsquo;t fast enough you can see that your old pod is gone and a new pod is in the list with an age of only a few seconds.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i>  You can see the more details about your deployment configuration with:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe dc/dc-metro-map</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe dc/dc-metro-map
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -358,24 +352,21 @@ $ oc get pods -w</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsec2a3b0b3a906021bae06d723c1bd9e2a" class="collapsed">
+      <a data-toggle="collapse" href="#collapseb877b59b483ea90fbc882c81cac25f4b" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsec2a3b0b3a906021bae06d723c1bd9e2a" class="panel-collapse collapse ">
+  <div id="collapseb877b59b483ea90fbc882c81cac25f4b" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="web-console-access">Web Console access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
 </pre>
-
 <p>From the browse pods list:</p>
-
 <blockquote>
 Click one of the running pods (not a build pod)
 </blockquote>
@@ -383,18 +374,14 @@ Click one of the running pods (not a build pod)
 Click the "Actions" button in the top right and then select "Delete Pod"
 </blockquote>
 <img src="../images/ocp-lab-replicationrecovery-podaction.gif" width="900"><br/>
-
 <blockquote>
 Now click the "Delete" button in the popup to confirm the pod deletion
 </blockquote>
 <img src="../images/ocp-lab-replicationrecovery-deletepod.png" width="900"><br/>
-
 <blockquote>
 Quickly switch back to the deployment configuration overview
 </blockquote>
-
-<p>If you're fast enough you'll see the pod you deleted unfill a portion of the deployment circle, and then a new pod fill it back up.</p>
-
+<p>If you&rsquo;re fast enough you&rsquo;ll see the pod you deleted unfill a portion of the deployment circle, and then a new pod fill it back up.</p>
 <p><img src="../images/ocp-lab-replicationrecovery-poddelete.png" width="300"><br/></p>
 
     </div>
@@ -403,7 +390,6 @@ Quickly switch back to the deployment configuration overview
 
 
 </div>
-
 
 <style>
 
