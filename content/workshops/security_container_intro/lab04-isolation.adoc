@@ -187,9 +187,9 @@ podman top -h
 
 How could you determine which capabilities podman _filters_ from a _root_ process running in a container? 
 
-From a previous exercise we know that a root process on the host has a capabilities mask of CapEff = `000000ffffffffff`
+From a previous exercise we know that a root process on the host has a capabilities mask of CapEff = `000000FFFFFFFFFF`
 
-From a previous exercise we know that a root process in a container has a capabilities mask of CapEff = `00000000a80427fb`
+From a previous exercise we know that a root process in a container has a capabilities mask of CapEff = `00000000A80427FB`
 
 Hint: Below is an example that uses the Linux binary calculator `bc` to add hexadecimal numbers `(0x9 + 0x1) = A`.
 [source,bash]
