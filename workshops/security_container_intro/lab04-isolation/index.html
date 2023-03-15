@@ -543,10 +543,10 @@ AUDIT_WRITE,CHOWN,DAC_OVERRIDE,FOWNER,FSETID,KILL,MKNOD,NET_BIND_SERVICE,NET_RAW
 <p>How could you determine which capabilities podman <em>filters</em> from a <em>root</em> process running in a container?</p>
 </div>
 <div class="paragraph">
-<p>From a previous exercise we know that a root process on the host has a capabilities mask of CapEff = <code>000000ffffffffff</code></p>
+<p>From a previous exercise we know that a root process on the host has a capabilities mask of CapEff = <code>000000FFFFFFFFFF</code></p>
 </div>
 <div class="paragraph">
-<p>From a previous exercise we know that a root process in a container has a capabilities mask of CapEff = <code>00000000a80427fb</code></p>
+<p>From a previous exercise we know that a root process in a container has a capabilities mask of CapEff = <code>00000000A80427FB</code></p>
 </div>
 <div class="paragraph">
 <p>Hint: Below is an example that uses the Linux binary calculator <code>bc</code> to add hexadecimal numbers <code>(0x9 + 0x1) = A</code>.</p>
