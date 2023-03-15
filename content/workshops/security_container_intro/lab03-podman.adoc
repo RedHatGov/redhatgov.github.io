@@ -29,7 +29,7 @@ over client-server based architectures.
 
 === The Universal Base Image
 
-The container image that you will be using through out most of this lab is the RHEL 8 Universal Base Image https://access.redhat.com/containers/#/product/5c180b28bed8bd75a2c29a63[(UBI)]. The UBI is designed and engineered to be the base layer for containerized applications, middleware and utilities. This base image is freely distributable. However, Red Hat only supports Red Hat technologies through subscriptions for Red Hat products. When you get a chance, read more about https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html-single/getting_started_with_containers/index#using_red_hat_universal_base_images_standard_minimal_and_runtimes[ using the UBI]. 
+The container image that you will be using through out most of this lab is the RHEL 8 Universal Base Image https://access.redhat.com/containers/#/product/5c180b28bed8bd75a2c29a63[(UBI)]. The UBI is designed and engineered to be the base layer for containerized applications, middleware and utilities. This base image is freely usable and distributable, though support will require a Red Hat subscription. When you get a chance, read more about https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html-single/getting_started_with_containers/index#using_red_hat_universal_base_images_standard_minimal_and_runtimes[ using the UBI]. 
 
 For this first part of the lab, we will be using the most current Fedora (the community upstream distribution for Red Hat Enterprise Linux) container image.
 

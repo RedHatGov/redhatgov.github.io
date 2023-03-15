@@ -85,9 +85,11 @@ exit
 
 As you learned above, bind mounts allow a container to mount a directory on the host for general application usage. This lab will help you understand how selinux behaves in different bind mounting scenarios. 
 
-On the bastion, there should be a directory named `/data`. Make note of the file permissions. Could a container read or write to this directory?
+On the bastion, let's create a directory named `/data`. Make note of the file permissions. Could a container read or write to this directory?
 [source,bash]
 ----
+sudo mkdir /data
+sudo chmod 755 /data
 ls -ld /data
 ----
 ....

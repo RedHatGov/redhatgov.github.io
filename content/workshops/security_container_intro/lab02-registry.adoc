@@ -85,6 +85,7 @@ Now move up one directory and run the `run-registry.sh` script to start the regi
 [source,bash]
 ----
 cd ..
+loginctl enable-linger
 sh ./run-registry.sh
 ----
 
@@ -176,6 +177,7 @@ Now move up one directory and run the `run-registry.sh` script to start the regi
 [source,bash]
 ----
 cd ..
+loginctl enable-linger
 sh ./run-registry.sh
 ----
 

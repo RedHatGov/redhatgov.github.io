@@ -193,7 +193,7 @@ Set a trust policy for `{{< urifqdnrev "" "node1" "" >}}` using your exported pu
 sudo podman image trust set --type signedBy --pubkeysfile /usr/tmp/keys/gpg-pubkey.gpg {{< urifqdnrev "" "node1" ":5000" >}}
 ----
 
-Now examine the image trust again. It should show that any image pulls from *node1.{GUID}.internal* must be signed.
+Now examine the image trust again. It should show that any image pulls from `{{< urifqdnrev "" "node1" "" >}}` must be signed.
 [source,bash]
 ----
 podman image trust show
