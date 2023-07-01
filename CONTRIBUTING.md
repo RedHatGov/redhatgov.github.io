@@ -1,6 +1,6 @@
 # Contributing
 
-> **WARNING:** This guide is a work in progress and will continue to evolve over
+> WARNING:** This guide is a work in progress and will continue to evolve over
 > time. If you have content to contribute, please refer to this document
 > each time as things may have changed since the last time you contributed.
 >
