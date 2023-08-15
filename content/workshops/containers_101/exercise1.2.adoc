@@ -43,10 +43,10 @@ Additionally you can also...
 
 [source, bash]
 ----
-podman run --rm -it registry.access.redhat.com/rhel7 /bin/bash
+podman run --rm -it registry.access.redhat.com/ubi8 /bin/bash
 ----
 ....
-Trying to pull registry.access.redhat.com/rhel7...Getting image source signatures
+Trying to pull registry.access.redhat.com/ubi8...Getting image source signatures
 Copying blob sha256:e0f71f706c2a1ff9efee4025e27d4dfd4f328190f31d16e11ef3283bc16d6842
  71.45 MB / ? [--------------------=---------------------------------------] 7s
 Copying blob sha256:121ab4741000471a7e2ddc687dedb440060bf9845ca415a45e99e361706f1098
@@ -103,13 +103,13 @@ Note: The following command will fail as the "ip" command is not present in the 
 
 Container images are very minimal installs of their referenced operating system, so commonly-used commands may not be present.
 
-.nonexistent command "ip"
+.nonexistent command "lshw"
 [source, bash]
 ----
-podman run --rm -it rhel7 /usr/sbin/ip a
+podman run --rm -it ubi8/python-39 /usr/sbin/lshw
 ----
 ....
-container create failed: container_linux.go:348: starting container process caused "exec: \"/usr/sbin/ip\": stat /usr/sbin/ip: no such file or directory"
+container create failed: container_linux.go:348: starting container process caused "exec: \"/usr/sbin/lshw\": stat /usr/sbin/lshw: no such file or directory"
 : internal libpod error
 ....
 
@@ -117,21 +117,16 @@ However, if we use `-v <source>:<destination>`, the `<source>` file or directory
 
 [source, bash]
 ----
-podman run -v /usr/sbin:/usr/sbin --rm -it rhel7 /usr/sbin/ip a
+podman run -v /usr/sbin:/usr/sbin --rm -it ubi8/python-39 /usr/sbin/lshw
 ----
 ....
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-       valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host
-       valid_lft forever preferred_lft forever
-3: eth0@if6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
-    link/ether 22:06:a3:f0:c6:a0 brd ff:ff:ff:ff:ff:ff link-netnsid 0
-    inet 10.88.0.4/16 scope global eth0
-       valid_lft forever preferred_lft forever
-    inet6 fe80::2006:a3ff:fef0:c6a0/64 scope link tentative
-       valid_lft forever preferred_lft forever
+  *-input:7
+       product: Power Button
+       physical id: 8
+       logical name: input2
+       logical name: /dev/input/event2
+       capabilities: platform
+WARNING: output may be incomplete or inaccurate, you should run this program as super-user.
 ....
 
 === Volume Mounts (continued)
@@ -142,7 +137,7 @@ Volume mounts can be used for logging to the container host for event retention.
 .mounting logs via volumes
 [source, bash]
 ----
-podman run -v /dev/log:/dev/log --rm rhel7 logger Testing logging to the host
+podman run -v /dev/log:/dev/log --rm ubi8 logger Testing logging to the host
 ----
 
 Search for the container event on the container host log, using the following command.
@@ -165,15 +160,16 @@ The -w switch specifies the working directory where binaries are executed.  If u
 .Run Python simple server
 [source, bash]
 ----
-mkdir /opt/rhel_data
+sudo mkdir -m 775 /opt/rhel_data
+sudo chgrp adm /opt/rhel_data
 ----
 
 [source, bash]
 ----
 podman run -d -p 8080:8000 --name="python_web" \
        -w /opt \
-       -v /opt/rhel_data:/opt rhel7 \
-       /bin/python -m SimpleHTTPServer 8000
+       -v /opt/rhel_data:/var/www/html ubi8/python-39 \
+       -- python -m http.server -d /var/www/html
 ----
 
 === Step 1. Verify the container is running using the podman `ps` switch
@@ -186,7 +182,7 @@ podman ps
 
 ....
 CONTAINER ID   IMAGE                                     COMMAND                  CREATED AT                      STATUS              PORTS                                            NAMES
-fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp...   2018-05-23 17:21:40 +0000 UTC   Up 45 seconds ago   0.0.0.0:8080->8000/udp, 0.0.0.0:8080->8000/tcp   python_web
+fcd06aee9533   registry.access.redhat.com/ubi8/python-39:latest   python -m http...   2021-05-23 17:21:40 +0000 UTC   Up 45 seconds ago   0.0.0.0:8080->8000/udp, 0.0.0.0:8080->8000/tcp   python_web
 ....
 
 
@@ -294,11 +290,12 @@ podman inspect python_web
 [{
     "ID": "fcd06aee95338748ab86faddd696c2cda212e7797b1e44428434da4a0d0b2b45",
     "Created": "2018-05-23T17:21:40.315773016Z",
-    "Path": "/bin/python",
+    "Path": "python",
     "Args": [
       "-m",
-      "SimpleHTTPServer",
-      "8000"
+      "http.server",
+      "-d",
+      "/var/www/html"
     ],
 ...
     "Name": "python_web",
@@ -316,21 +313,19 @@ You can use a dot notation to parse the metadata returned by 'podman inspect' an
 
 [source, bash]
 ----
-podman inspect -f {{.NetworkSettings.IPAddress}} python_web
+podman inspect -f {{.State.StartedAt}} python_web
 ----
 
 ....
-10.88.0.6
+2023-08-10 22:49:35.001785165 -0400 EDT
 ....
 
-
-Note: Output has been truncated slightly for readability
 
 You can see the use of cgroups when attached to the container tty.
 
 [source, bash]
 ----
-podman run --rm -it rhel7 bash
+podman run --rm -it ubi8 bash
 ----
 
 Listing the contents of `/proc/1/cgroup` will show the cgroup labels.
@@ -341,17 +336,18 @@ cat /proc/1/cgroup
 ----
 
 ....
-11:blkio:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-10:hugetlb:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-9:pids:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-8:cpuacct,cpu:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-7:freezer:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-6:cpuset:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-5:net_prio,net_cls:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-4:perf_event:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-3:devices:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-2:memory:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-1:name=systemd:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
+12:perf_event:/
+11:pids:/user.slice/user-1000.slice/session-8.scope
+10:rdma:/
+9:freezer:/
+8:devices:/system.slice/sshd.service
+7:net_cls,net_prio:/
+6:cpu,cpuacct:/
+5:memory:/user.slice/user-1000.slice/session-8.scope
+4:hugetlb:/
+3:blkio:/system.slice/sshd.service
+2:cpuset:/
+1:name=systemd:/user.slice/user-1000.slice/user@1000.service/user.slice/podman-295131.scope/f5eacdea88411f2cd160e4a027f9f1bbb49f68d3735b2b99352ab73b7b844fb1
 ....
 
 Type `exit` to exit the container.  Running the same command from your student system, outside of the container context, will list the same top level groups without labels.
@@ -362,17 +358,18 @@ cat /proc/1/cgroup
 ----
 
 ....
-11:devices:/
-10:cpuset:/
+12:perf_event:/
+11:pids:/init.scope
+10:rdma:/
 9:freezer:/
-8:hugetlb:/
-7:pids:/
-6:net_prio,net_cls:/
-5:perf_event:/
-4:blkio:/
-3:memory:/
-2:cpuacct,cpu:/
-1:name=systemd:/
+8:devices:/
+7:net_cls,net_prio:/
+6:cpu,cpuacct:/
+5:memory:/init.scope
+4:hugetlb:/
+3:blkio:/
+2:cpuset:/
+1:name=systemd:/init.scope
 ....
 
 {{< importPartial "footer/footer.html" >}}
