@@ -17,7 +17,7 @@
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab1.2_terminal/</guid>
       <description>Accessing OpenShift OpenShift provides a web console that allows you to perform various tasks via a web browser.
-Let&#39;s Login to the Web Console  Use your browser to navigate to the below URI, and login with the username userYOUR#  and the password provided by your instructor:
+Let&amp;rsquo;s Login to the Web Console  Use your browser to navigate to the below URI, and login with the username userYOUR#  and the password provided by your instructor:
  https://console-openshift-console.apps.example.redhatgov.io  Login Webpage
 Once logged in you should see your available projects - or a button to create a project if none exist already:</description>
     </item>
@@ -28,7 +28,7 @@ Once logged in you should see your available projects - or a button to create a 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/fin/</guid>
-      <description>That&#39;s it! Hopefully, these labs provided you some idea of why a service mesh is critical when developing and operating microservice applications. Istio is an emerging technology so keep checking the upstream announcements and blog for exciting news.
+      <description>That&amp;rsquo;s it! Hopefully, these labs provided you some idea of why a service mesh is critical when developing and operating microservice applications. Istio is an emerging technology so keep checking the upstream announcements and blog for exciting news.
 Also, release notes are a great place to see changes that occurred between releases. You can find the OpenShift Service Mesh release notes here and the upstream Istio project release notes here.</description>
     </item>
     
@@ -39,7 +39,7 @@ Also, release notes are a great place to see changes that occurred between relea
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab2.2_deployuserprofile/</guid>
       <description>Adding a New Service to the Mesh You need to deploy the new user profile application into the service mesh.
-Deploy Application The deployment file &#39;userprofile-deploy-all.yaml&#39; was created for you to deploy the application. The file creates the user profile service and an accompanying PostgreSQL database. Similar to the other source files, an annotation &#39;sidecar.istio.io/inject&#39; was added to tell Istio to inject a sidecar proxy and add this to the mesh.</description>
+Deploy Application The deployment file &amp;lsquo;userprofile-deploy-all.yaml&amp;rsquo; was created for you to deploy the application. The file creates the user profile service and an accompanying PostgreSQL database. Similar to the other source files, an annotation &amp;lsquo;sidecar.istio.io/inject&amp;rsquo; was added to tell Istio to inject a sidecar proxy and add this to the mesh.</description>
     </item>
     
     <item>
@@ -49,11 +49,9 @@ Deploy Application The deployment file &#39;userprofile-deploy-all.yaml&#39; was
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab2.1_userprofile/</guid>
       <description>Building a Microservice   In the browser, navigate to the &#39;Profile&#39; section in the header.   If you lost the URL, you can retrieve it via:
-echo $GATEWAY_URL
-
-You should see the following:
+`echo $GATEWAY_URL` You should see the following:
  Unknown Profile Page
-The UI shows an unknown user and that&#39;s because there&#39;s no profile service for your application. You are going to build a new microservice for user profiles and add this to your service mesh.</description>
+The UI shows an unknown user and that&amp;rsquo;s because there&amp;rsquo;s no profile service for your application. You are going to build a new microservice for user profiles and add this to your service mesh.</description>
     </item>
     
     <item>
@@ -62,7 +60,7 @@ The UI shows an unknown user and that&#39;s because there&#39;s no profile servi
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab1.4_deploymsa/</guid>
-      <description>Deploying an App into the Service Mesh It&#39;s time to deploy your microservices application. The application you are working on is a paste board application in which users can post comments in shared boards. Here is a diagram of the architecture:
+      <description>Deploying an App into the Service Mesh It&amp;rsquo;s time to deploy your microservices application. The application you are working on is a paste board application in which users can post comments in shared boards. Here is a diagram of the architecture:
 
 App Architecture
 The microservices include single sign-on (SSO), user interface (UI), the boards application, and the context scraper. In this scenario, you are going to deploy these services and then add a new user profile service.</description>
@@ -85,8 +83,8 @@ Why microservices? Agility. Deliver application updates faster. Isolate and fix 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab3.1_featureupdate/</guid>
-      <description>Digging into Observability Istio provides additional capabilities to analyze the service mesh and its performance. Let&#39;s deploy a new version of the user profile service and analyze its effect on the service mesh.
-Feature Update The code has already been written for you on the &#39;workshop-feature-update&#39; branch of the repo.
+      <description>Digging into Observability Istio provides additional capabilities to analyze the service mesh and its performance. Let&amp;rsquo;s deploy a new version of the user profile service and analyze its effect on the service mesh.
+Feature Update The code has already been written for you on the &amp;lsquo;workshop-feature-update&amp;rsquo; branch of the repo.
   Create a new build on this feature branch:  oc new-app -f ./openshift-configuration/userprofile-build.yaml \ -p APPLICATION_NAME=userprofile \ -p APPLICATION_CODE_URI=https://github.</description>
     </item>
     
@@ -96,9 +94,9 @@ Feature Update The code has already been written for you on the &#39;workshop-fe
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab3.2_grafana/</guid>
-      <description>Service Mesh Metrics with Grafana Grafana is a monitoring tool that can be integrated with Istio for metric observation. Using Grafana, you can look at metrics associated with services in your mesh. Let&#39;s use Grafana to get more information about the user profile service.
-Explore Grafana First, let&#39;s explore the Grafana user interface.
-  Open the Grafana console. Retrieve the endpoint for Grafana:  GRAFANA_CONSOLE=$(oc get route grafana -n istio-system --template=&amp;#39;https://{{.</description>
+      <description>Service Mesh Metrics with Grafana Grafana is a monitoring tool that can be integrated with Istio for metric observation. Using Grafana, you can look at metrics associated with services in your mesh. Let&amp;rsquo;s use Grafana to get more information about the user profile service.
+Explore Grafana First, let&amp;rsquo;s explore the Grafana user interface.
+  Open the Grafana console. Retrieve the endpoint for Grafana:  GRAFANA_CONSOLE=$(oc get route grafana -n istio-system --template=&#39;https://{{.</description>
     </item>
     
     <item>
@@ -108,8 +106,8 @@ Explore Grafana First, let&#39;s explore the Grafana user interface.
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab3.3_jaeger/</guid>
       <description>Distributed Tracing with Jaeger Jaeger is a distributed tracing tool that lets you trace requests as they flow through your service mesh. This is incredibly useful for debugging performance issues in your microservices architecture.
-Explore Jaeger First, let&#39;s explore the Jaeger user interface.
-  Open the Jaeger console. Retrieve the endpoint for Jaeger:  JAEGER_CONSOLE=$(oc get route jaeger -n istio-system --template=&amp;#39;https://{{.spec.host}}&amp;#39;) echo $JAEGER_CONSOLE  Click &#39;Allow selected permissions&#39; if prompted to authorized access.</description>
+Explore Jaeger First, let&amp;rsquo;s explore the Jaeger user interface.
+  Open the Jaeger console. Retrieve the endpoint for Jaeger:  JAEGER_CONSOLE=$(oc get route jaeger -n istio-system --template=&#39;https://{{.spec.host}}&#39;) echo $JAEGER_CONSOLE  Click &#39;Allow selected permissions&#39; if prompted to authorized access.</description>
     </item>
     
     <item>
@@ -118,7 +116,7 @@ Explore Jaeger First, let&#39;s explore the Jaeger user interface.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab2.3_kiali/</guid>
-      <description>Introducing Kiali for Observability All of your microservices are running in the service mesh. Now, you need a way to visualize the service mesh topology. That is, what&#39;s running in your service mesh and how are they connected?
+      <description>Introducing Kiali for Observability All of your microservices are running in the service mesh. Now, you need a way to visualize the service mesh topology. That is, what&amp;rsquo;s running in your service mesh and how are they connected?
 Istio provides Kiali, an open source project that gives you a console view of your service mesh. You can inspect the health of your service mesh, and it has further integrations for metric querying and tracing that we will cover in later labs.</description>
     </item>
     
@@ -128,7 +126,7 @@ Istio provides Kiali, an open source project that gives you a console view of yo
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab5.4_authpolicy/</guid>
-      <description>Authorizing and Authenticating Access via Policy In the previous labs we secured and verified the service-to-service communication. But what about user-to-service communication (aka origin authentication)? The service mesh can help with that too. To do this, we need to bring in an identity provider that will issue JSON Web Tokens (JWTs) to signed in users. JWTs are an open, industry standard (RFC 7519) way of sharing identity. The app-ui service will pass those JWTs along with it&#39;s API requests.</description>
+      <description>Authorizing and Authenticating Access via Policy In the previous labs we secured and verified the service-to-service communication. But what about user-to-service communication (aka origin authentication)? The service mesh can help with that too. To do this, we need to bring in an identity provider that will issue JSON Web Tokens (JWTs) to signed in users. JWTs are an open, industry standard (RFC 7519) way of sharing identity. The app-ui service will pass those JWTs along with it&amp;rsquo;s API requests.</description>
     </item>
     
     <item>
@@ -139,7 +137,7 @@ Istio provides Kiali, an open source project that gives you a console view of yo
       <guid>/workshops/openshift_service_mesh_v1.0/lab5.3_prep/</guid>
       <description>Single Sign-On Login, registration, and role-based authorization is handled via Red Hat SSO (aka Keycloak). SSO is included as part of OpenShift or any middleware product subscription you have from Red Hat - woot!
 Installation Because the service mesh will leverage SSO to authenticate users and generate JWT we need to install it. You will install it via Operator into your namespace.
-Customize the Resources Check out the .yaml files here and customize for this workshop cluster&#39;s domain, and your user project.</description>
+Customize the Resources Check out the .yaml files here and customize for this workshop cluster&amp;rsquo;s domain, and your user project.</description>
     </item>
     
     <item>
@@ -148,7 +146,7 @@ Customize the Resources Check out the .yaml files here and customize for this wo
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab5.1_intromtls/</guid>
-      <description>Mutual TLS One of the key features of the Service Mesh is its ability to bring additional security to your applications. It does this in a several different ways that will be explored in the next few labs. The first of which is a concept known as &amp;quot;Mutual TLS&amp;quot; or mTLS for short.
+      <description>Mutual TLS One of the key features of the Service Mesh is its ability to bring additional security to your applications. It does this in a several different ways that will be explored in the next few labs. The first of which is a concept known as &amp;ldquo;Mutual TLS&amp;rdquo; or mTLS for short.
 Imagine a scenario where you are deploying a microservices application and are expecting a lot of PII to flow between the services.</description>
     </item>
     
@@ -168,7 +166,7 @@ You are probably already familiar with basic ingress security concepts. Essentia
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab5.2_verifymtls/</guid>
-      <description>Checking and Verification of mTLS OK, now that all our services are encrypting traffic Let&#39;s take a look in Kiali to see our encryption setup.
+      <description>Checking and Verification of mTLS OK, now that all our services are encrypting traffic Let&amp;rsquo;s take a look in Kiali to see our encryption setup.
   Open up the dashboard to Kiali (if you don&#39;t already have it open) and navigate to the Graph view. In the first drop down select the &#34;Service graph&#34; and in the &#34;Display&#34; drop down make sure the &#34;Security&#34; check box is checked.  You should see something like this screenshot with little locks indicating that mTLS is working for service-to-service communication.</description>
     </item>
     
@@ -179,7 +177,7 @@ You are probably already familiar with basic ingress security concepts. Essentia
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab1.3_installing/</guid>
       <description>Setup You will conduct these labs in an OpenShift cluster. As in the previous terminal deployment exercise, you can access your cluster via console and CLI.
-OpenShift You will use the OpenShift &#39;oc&#39; CLI to execute commands for the majority of this lab.
+OpenShift You will use the OpenShift &amp;lsquo;oc&amp;rsquo; CLI to execute commands for the majority of this lab.
   Login using API endpoint and remember to add the &#39;--insecure-skip-tls-verify=true&#39; flag  $ oc login https://api.example.redhatgov.io:6443 --insecure-skip-tls-verify=true Authentication required for https://api.example.redhatgov.io:6443 (openshift) Username: userYOUR# Password: Login successful.</description>
     </item>
     
@@ -209,7 +207,7 @@ You need a way to simulate failure in the service mesh. By doing so, you can tes
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab4.1_routingtraffic/</guid>
-      <description>Basics on Routing Traffic Through the Mesh One of Istio&#39;s core capabilities is the ability to dynamically control how services communicate without modifying the application code itself. The general concept is called Traffic Management. It allows you to do things such as A/B test, canary rollouts, rollbacks, and more.
+      <description>Basics on Routing Traffic Through the Mesh One of Istio&amp;rsquo;s core capabilities is the ability to dynamically control how services communicate without modifying the application code itself. The general concept is called Traffic Management. It allows you to do things such as A/B test, canary rollouts, rollbacks, and more.
 The two core API objects for traffic management are the Virtual Service and the Destination Rule. The destination rule is for the owner of a microservice - what versions do I expose and what happens to traffic before it reaches my service?</description>
     </item>
     
@@ -219,8 +217,8 @@ The two core API objects for traffic management are the Virtual Service and the 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab4.2_trafficsplitting/</guid>
-      <description>Splitting Traffic Amongst Service Versions It&#39;s time to fix the performance issue of the application. Previously, you deployed a new version of the application and routed 100% of traffic to the new version. This time, you&#39;ll use Istio traffic routing to do canary rollouts and split traffic.
-Feature Fix The code to fix the performance issue of the user profile service has already been written for you on the &#39;workshop-feature-fix&#39; branch.</description>
+      <description>Splitting Traffic Amongst Service Versions It&amp;rsquo;s time to fix the performance issue of the application. Previously, you deployed a new version of the application and routed 100% of traffic to the new version. This time, you&amp;rsquo;ll use Istio traffic routing to do canary rollouts and split traffic.
+Feature Fix The code to fix the performance issue of the user profile service has already been written for you on the &amp;lsquo;workshop-feature-fix&amp;rsquo; branch.</description>
     </item>
     
   </channel>

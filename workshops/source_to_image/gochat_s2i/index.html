@@ -307,21 +307,17 @@
   </ul>
 </nav>
 
-    
-
-<h2 id="step-1-create-a-new-project-space">Step 1 - Create a New Project Space</h2>
-
+    <h2 id="step-1---create-a-new-project-space">Step 1 - Create a New Project Space</h2>
 <p>In the Wetty terminal, create a new project.</p>
 <pre><code class="language-terminal" data-lang="terminal">oc new-project gochat-s2i-user<span class="userid">YOUR#</span>
-</code></pre>
-<h2 id="step-2-create-the-golang-s2i-builder-image">Step 2 - Create the Golang S2I Builder Image</h2>
 
+</code></pre><h2 id="step-2---create-the-golang-s2i-builder-image">Step 2 - Create the Golang S2I Builder Image</h2>
 <p>Create a new build for the Golang S2I builder image</p>
-<pre><code class="language-terminal" data-lang="terminal">cd ~</code></pre><pre><code class="language-terminal" data-lang="terminal">oc new-build golang-s2i/ --to=golang-s2i</code></pre>
-<p>Start the new build for the Golang S2I builder image</p>
-<pre><code class="language-terminal" data-lang="terminal">oc start-build golang-s2i --from-dir=golang-s2i/</code></pre>
-<h2 id="step-3-import-yaml-template-in-to-openshift">Step 3 - Import YAML Template in to OpenShift</h2>
-
+<pre><code class="language-terminal" data-lang="terminal">cd ~
+</code></pre><pre><code class="language-terminal" data-lang="terminal">oc new-build golang-s2i/ --to=golang-s2i
+</code></pre><p>Start the new build for the Golang S2I builder image</p>
+<pre><code class="language-terminal" data-lang="terminal">oc start-build golang-s2i --from-dir=golang-s2i/
+</code></pre><h2 id="step-3---import-yaml-template-in-to-openshift">Step 3 - Import YAML Template in to OpenShift</h2>
 <p>In the OpenShift WebUI, on the catalog page, seclect Import YAML/JSON
 <div class="panel-group">
   
@@ -349,14 +345,10 @@
 
 </div>
 </p>
-
-<h2 id="step-4-configure-the-import">Step 4 - Configure the Import</h2>
-
+<h2 id="step-4---configure-the-import">Step 4 - Configure the Import</h2>
 <p>Select the project to which you want to import the template</p>
-
 <p><em>gochat-s2i-user<span class="userid">YOUR#</span>
 </em></p>
-
 <p>Copy and paste the following YAML in to the text box.
 <div class="panel-group">
   
@@ -365,14 +357,14 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse743a6a16318f157bc4df3e4ee81971e4" class="collapsed">
+      <a data-toggle="collapse" href="#collapse67bac97790c72c2661fabb8ec6b7f790" class="collapsed">
       
         Golang Template
       </a>
     </h4>
   </div>
   
-  <div id="collapse743a6a16318f157bc4df3e4ee81971e4" class="panel-collapse collapse ">
+  <div id="collapse67bac97790c72c2661fabb8ec6b7f790" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
@@ -518,7 +510,8 @@
   <span style="color:#66d9ef">displayName</span>: Application Domain
 - <span style="color:#66d9ef">description</span>: Command line arguments to provide to the Golang application
   <span style="color:#66d9ef">name</span>: APP_ARGS
-  <span style="color:#66d9ef">displayName</span>: Application Command Line Arguments</code></pre></div>
+  <span style="color:#66d9ef">displayName</span>: Application Command Line Arguments
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -526,11 +519,8 @@
 
 </div>
 </p>
-
-<h2 id="step-5-create-the-import">Step 5 - Create the Import</h2>
-
+<h2 id="step-5---create-the-import">Step 5 - Create the Import</h2>
 <p>Ensure your configuration looks similar to the following.  If so, click <strong>Create</strong>.</p>
-
 <div class="panel-group">
   
 
@@ -557,13 +547,9 @@
 
 </div>
 
-
-<h2 id="step-6-add-the-template">Step 6 - Add the Template</h2>
-
+<h2 id="step-6---add-the-template">Step 6 - Add the Template</h2>
 <p>Uncheck <strong>Process the template</strong></p>
-
 <p>Check <strong>Save template</strong></p>
-
 <div class="panel-group">
   
 
@@ -590,13 +576,9 @@
 
 </div>
 
-
 <p>Click <strong>Add</strong>.</p>
-
 <p>On the next screen click <strong>Close</strong>.</p>
-
-<h2 id="step-7-select-the-template">Step 7 - Select the Template</h2>
-
+<h2 id="step-7---select-the-template">Step 7 - Select the Template</h2>
 <p>From the Catalog page, click <strong>Select from Project</strong>.
 <div class="panel-group">
   
@@ -624,9 +606,7 @@
 
 </div>
 </p>
-
-<h2 id="step-8-really-select-the-template">Step 8 - Really Select the Template</h2>
-
+<h2 id="step-8---really-select-the-template">Step 8 - Really Select the Template</h2>
 <p>On the next screen, choose your <strong>gochat-s2i-{{USERNAME}}</strong> project, then the <strong>golang-s2i</strong> template.
 <div class="panel-group">
   
@@ -654,31 +634,22 @@
 
 </div>
 </p>
-
-<h2 id="step-9-configure-the-deployment">Step 9 - Configure the Deployment</h2>
-
+<h2 id="step-9---configure-the-deployment">Step 9 - Configure the Deployment</h2>
 <p>Click <strong>Next</strong> to get to the <em>Information</em> screen.</p>
-
 <p>Click <strong>Next</strong> again to get to the <em>Configuration</em> screen.</p>
-
 <p>In the <strong>Add to Project</strong> field, select your <strong>gochat-s2i-user<span class="userid">YOUR#</span>
 </strong> project.</p>
-
 <p>In the <strong>Application Source URL</strong> field, enter <a href="https://github.com/kevensen/openshift-gochat-client.git">https://github.com/kevensen/openshift-gochat-client.git</a></p>
-
 <p>In the <strong>Application Name</strong> field, enter <strong>gochat-client</strong></p>
-
 <p>In the <strong>Application Command Line Arguments</strong> field, enter the following:</p>
-<pre><code class="language-terminal" data-lang="terminal">-host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr -insecure</code></pre>
-<p>Click <strong>Create</strong></p>
-
-<h2 id="step-10-annotate-the-service-account-to-use-openshift-authorization">Step 10 - Annotate the Service Account to Use OpenShift Authorization</h2>
-
+<pre><code class="language-terminal" data-lang="terminal">-host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr -insecure
+</code></pre><p>Click <strong>Create</strong></p>
+<h2 id="step-10---annotate-the-service-account-to-use-openshift-authorization">Step 10 - Annotate the Service Account to Use OpenShift Authorization</h2>
 <p>As in the previous lab, we must annotate the service account for the Gochat Client to communicate to the OpenShift API for user credential verification.</p>
-<pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirectreference.1=&#39;{&#34;kind&#34;:&#34;OAuthRedirectReference&#34;,&#34;apiVersion&#34;:&#34;v1&#34;,&#34;reference&#34;:{&#34;kind&#34;:&#34;Route&#34;,&#34;name&#34;:&#34;gochat-client&#34;}}&#39; --overwrite</code></pre><pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirecturi.1=auth/callback/openshift --overwrite</code></pre>
-<h2 id="step-11-sign-in-to-the-app">Step 11 - Sign in to the App</h2>
-
-<p>Click the blue &quot;Login&quot; button.
+<pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirectreference.1='{&quot;kind&quot;:&quot;OAuthRedirectReference&quot;,&quot;apiVersion&quot;:&quot;v1&quot;,&quot;reference&quot;:{&quot;kind&quot;:&quot;Route&quot;,&quot;name&quot;:&quot;gochat-client&quot;}}' --overwrite
+</code></pre><pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirecturi.1=auth/callback/openshift --overwrite
+</code></pre><h2 id="step-11---sign-in-to-the-app">Step 11 - Sign in to the App</h2>
+<p>Click the blue &ldquo;Login&rdquo; button.
 <div class="panel-group">
   
 
@@ -686,17 +657,17 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsea36c36c082cb3877a00642f73bd6390a" class="collapsed">
+      <a data-toggle="collapse" href="#collapsec7396eae5999b18e7b8172050454e4af" class="collapsed">
       
         Gochat Signin
       </a>
     </h4>
   </div>
   
-  <div id="collapsea36c36c082cb3877a00642f73bd6390a" class="panel-collapse collapse ">
+  <div id="collapsec7396eae5999b18e7b8172050454e4af" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/gochat_signin.png" width="800" align="middle"/></p>
+       <img src="../images/gochat_signin.png" width="800" align="middle"/>
 
     </div>
   </div>
@@ -706,7 +677,6 @@
 </div>
 
 Log in to the app with your OpenShift credentials.  The workshop moderator will provide you with the URL, your username, and password.</p>
-
 <div class="panel-group">
   
 
@@ -733,13 +703,9 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
 
 </div>
 
-
-<h2 id="step-12-test-the-app">Step 12 - Test the App</h2>
-
+<h2 id="step-12---test-the-app">Step 12 - Test the App</h2>
 <p>Send a message and chat with friends!</p>
-
-<h2 id="step-13-logout">Step 13 - Logout</h2>
-
+<h2 id="step-13---logout">Step 13 - Logout</h2>
 <div class="panel-group">
   
 
@@ -747,17 +713,17 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse0737a268f3700413f797817fbe002377" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3c5928a4d784fca28c1fe619674b750f" class="collapsed">
       
         Gochat Logout
       </a>
     </h4>
   </div>
   
-  <div id="collapse0737a268f3700413f797817fbe002377" class="panel-collapse collapse ">
+  <div id="collapse3c5928a4d784fca28c1fe619674b750f" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/gochat_logout.png" width="600" align="middle"/></p>
+       <img src="../images/gochat_logout.png" width="600" align="middle"/>
 
     </div>
   </div>
@@ -765,7 +731,6 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
 
 
 </div>
-
 
 <style>
 

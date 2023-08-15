@@ -307,50 +307,37 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="now-we-are-ready-to-launch-an-openstack-instance">Now We are Ready to Launch an OpenStack Instance</h1>
-
+    <h1 id="now-we-are-ready-to-launch-an-openstack-instance">Now We are Ready to Launch an OpenStack Instance</h1>
 <h2 id="first-what-is-an-instance">First, What is an Instance?</h2>
-
 <p>Instances are virtual machines that run inside the OpenStack cloud. You can launch an instance from the following sources:</p>
-
 <ul>
-<li>Images uploaded to the Image service<br /></li>
+<li>Images uploaded to the Image service</li>
 <li>Image that you have copied to a persistent volume. The instance launches from the volume, which is provided by the cinder-volume API</li>
 <li>Instance snapshot that you took</li>
 </ul>
-
 <h1 id="second-we-need-a-key-pair-before-we-launch-our-first-instance">Second. We need a key pair before we launch our first instance</h1>
-
 <blockquote>
 <p>Navigate to Compute -&gt; Key Pairs using the second level navigation tabs</p>
 </blockquote>
-
 <p>We need a key pair created to use when we provision instances. The public key is passed to the instance and put in the authorized_keys file on the login user account.</p>
-
 <blockquote>
 <p>Click <strong>Create Key Pair</strong></p>
 </blockquote>
-
 <figure>
     <img src="../images/lab6-keypair-1.png"/> <figcaption>
             <h4>Lab 6 Figure 1: Key Pair list</h4>
         </figcaption>
 </figure>
 
-
 <blockquote>
-<p>Enter <strong>student<span class="userid">1</span></strong> for <strong>Key Pair Name</strong><br />
+<p>Enter <strong>student<span class="userid">1</span></strong> for <strong>Key Pair Name</strong><br>
 Click <strong>Create Keypair</strong></p>
 </blockquote>
-
 <figure>
     <img src="../images/lab6-keypair-2.png"/> <figcaption>
             <h4>Lab 6 Figure 2: Create New Key Pair</h4>
         </figcaption>
 </figure>
-
 
 <figure>
     <img src="../images/lab6-keypair-3.png"/> <figcaption>
@@ -358,169 +345,127 @@ Click <strong>Create Keypair</strong></p>
         </figcaption>
 </figure>
 
-
 <div class="alert alert-warning">
-  
-  <span class="pficon pficon-warning-triangle-o"></span>
-  
-Note that when you create a key pair, it should get automatically downloaded. You should verify that you definitely have the pem file in your downloads.
-
-You need this key file in order to access instances later.
-
+<p><span class="pficon pficon-warning-triangle-o"></span></p>
+<p>Note that when you create a key pair, it should get automatically downloaded. You should verify that you definitely have the pem file in your downloads.</p>
+<p>You need this key file in order to access instances later.</p>
 </div>
-
-<h1 id="let-s-go-launch-a-new-instance">Let's Go Launch a New Instance</h1>
-
+<h1 id="lets-go-launch-a-new-instance">Let&rsquo;s Go Launch a New Instance</h1>
 <blockquote>
 <p>Navigate to Compute -&gt; Instances using the second level navigation tabs</p>
 </blockquote>
-
 <figure>
     <img src="../images/lab6-instances-1.png"/> <figcaption>
             <h4>Lab 6 Figure 4: Project Instance Listing</h4>
         </figcaption>
 </figure>
 
-
 <blockquote>
-<p>Click <strong>Launch Instance</strong> on the right hand side of the screen<br />
-Enter <strong>student<span class="userid">1</span>-cirros</strong> for <strong>Name</strong><br />
-Leave <strong>Availability</strong> set to <strong>nova</strong><br />
-Enter <strong>2</strong> for <strong>Count</strong><br />
+<p>Click <strong>Launch Instance</strong> on the right hand side of the screen<br>
+Enter <strong>student<span class="userid">1</span>-cirros</strong> for <strong>Name</strong><br>
+Leave <strong>Availability</strong> set to <strong>nova</strong><br>
+Enter <strong>2</strong> for <strong>Count</strong><br>
 Click <strong>Next</strong></p>
 </blockquote>
-
 <figure>
     <img src="../images/lab6-instances-2.png"/> <figcaption>
             <h4>Lab 6 Figure 5: Details for New Instance</h4>
         </figcaption>
 </figure>
 
-
 <blockquote>
-<p>Leave <strong>Select Boot Source</strong> set to <strong>Image</strong><br />
-Click <strong>No</strong> for <strong>Create New Volume</strong><br />
-Click the <strong>Up Arrow</strong> symbol to the right of <strong>student<span class="userid">1</span>-cirros</strong> to move that image up to the <strong>Allocated</strong> section<br />
+<p>Leave <strong>Select Boot Source</strong> set to <strong>Image</strong><br>
+Click <strong>No</strong> for <strong>Create New Volume</strong> <br>
+Click the <strong>Up Arrow</strong> symbol to the right of <strong>student<span class="userid">1</span>-cirros</strong> to move that image up to the <strong>Allocated</strong> section <br>
 Click <strong>Next</strong></p>
 </blockquote>
-
 <figure>
     <img src="../images/lab6-instances-3.png"/> <figcaption>
             <h4>Lab 6 Figure 6: Source for New Instance</h4>
         </figcaption>
 </figure>
 
-
 <blockquote>
-<p>Click the <strong>Up Arrow</strong> symbol to the right of <strong>m1.tiny</strong> to move that flavor up to the <strong>Allocated</strong> section<br />
+<p>Click the <strong>Up Arrow</strong> symbol to the right of <strong>m1.tiny</strong> to move that flavor up to the <strong>Allocated</strong> section <br>
 Click <strong>Next</strong></p>
 </blockquote>
-
 <figure>
     <img src="../images/lab6-instances-4.png"/> <figcaption>
             <h4>Lab 6 Figure 7: Flavor for New Instance</h4>
         </figcaption>
 </figure>
 
-
 <blockquote>
-<p>Click the <strong>Up Arrow</strong> symbol to the right of <strong>private-a</strong> to move that network up to the <strong>Allocated</strong> section<br />
+<p>Click the <strong>Up Arrow</strong> symbol to the right of <strong>private-a</strong> to move that network up to the <strong>Allocated</strong> section <br>
 Click on <strong>Security Groups</strong> in the left list of options on with dialog</p>
 </blockquote>
-
 <figure>
     <img src="../images/lab6-instances-5.png"/> <figcaption>
             <h4>Lab 6 Figure 8: Networks for New Instance</h4>
         </figcaption>
 </figure>
 
-
 <blockquote>
-<p>Leave the <strong>default</strong> security group allocated<br />
+<p>Leave the <strong>default</strong> security group allocated<br>
 Click <strong>Next</strong></p>
 </blockquote>
-
 <figure>
     <img src="../images/lab6-instances-6.png"/> <figcaption>
             <h4>Lab 6 Figure 9: Security Groups for New Instance</h4>
         </figcaption>
 </figure>
 
-
 <blockquote>
-<p>You can ignore the rest of the option pages<br />
+<p>You can ignore the rest of the option pages<br>
 Click <strong>Launch Instance</strong></p>
 </blockquote>
-
 <figure>
     <img src="../images/lab6-instances-9.png"/> <figcaption>
             <h4>Lab 6 Figure 10: Key Pair Selected and Launching New Instance</h4>
         </figcaption>
 </figure>
 
-
 <div class="alert alert-success">
-  
-  <span class="pficon pficon-ok"></span>
-  
-You should see a green box appear in the upper right corner of the screen that says "Success: 2 instances launched."
-
-If you did not, let the intstructor know now
-
+<p><span class="pficon pficon-ok"></span></p>
+<p>You should see a green box appear in the upper right corner of the screen that says &ldquo;Success: 2 instances launched.&rdquo;</p>
+<p>If you did not, let the intstructor know now</p>
 </div>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-The instances will take a little while to become active.
-
-If for some reason they do not, let the instructor know
-
+<p><span class="pficon pficon-info"></span></p>
+<p>The instances will take a little while to become active.</p>
+<p>If for some reason they do not, let the instructor know</p>
 </div>
-
 <figure>
     <img src="../images/lab6-instances-10.png"/> <figcaption>
             <h4>Lab 6 Figure 11: New Instances Created and Active in Project</h4>
         </figcaption>
 </figure>
 
-
-<h1 id="now-let-s-associate-a-floating-ip-address-with-one-of-our-instances">Now Let's Associate a Floating IP Address with one of our instances</h1>
-
+<h1 id="now-lets-associate-a-floating-ip-address-with-one-of-our-instances">Now Let&rsquo;s Associate a Floating IP Address with one of our instances</h1>
 <blockquote>
-<p>Look all the way to the right in the row for your <strong>student<span class="userid">1</span>-cirros-1</strong> instance, Click the down arrow<br />
-Click <strong>Associate Floating IP</strong><br />
-Select any one of your available floating IP addresses for <strong>IP Address</strong><br />
-Leave <strong>Port to be Associated</strong> as is<br />
+<p>Look all the way to the right in the row for your <strong>student<span class="userid">1</span>-cirros-1</strong> instance, Click the down arrow<br>
+Click <strong>Associate Floating IP</strong><br>
+Select any one of your available floating IP addresses for <strong>IP Address</strong><br>
+Leave <strong>Port to be Associated</strong> as is<br>
 Click <strong>Associate</strong></p>
 </blockquote>
-
 <figure>
     <img src="../images/lab6-instances-fip-1.png"/> <figcaption>
             <h4>Lab 6 Figure 12: Selecting Floating IP to Associate with Our Instance</h4>
         </figcaption>
 </figure>
 
-
 <div class="alert alert-success">
-  
-  <span class="pficon pficon-ok"></span>
-  
-You should see a green box appear in the upper right corner of the screen that says something similar to "Success: IP address 192.168.1.106 associated."
-
-Note that your floating IP will be a different address than the one shown here.
-
-If you did not, let the intstructor know now
-
+<p><span class="pficon pficon-ok"></span></p>
+<p>You should see a green box appear in the upper right corner of the screen that says something similar to &ldquo;Success: IP address 192.168.1.106 associated.&rdquo;</p>
+<p>Note that your floating IP will be a different address than the one shown here.</p>
+<p>If you did not, let the intstructor know now</p>
 </div>
-
 <figure>
     <img src="../images/lab6-instances-fip-2.png"/> <figcaption>
             <h4>Lab 6 Figure 13: Floating IP Address Associated with Our Instance</h4>
         </figcaption>
 </figure>
-
 
 <figure>
     <img src="../images/lab6-instances-network-topology.png"/> <figcaption>
@@ -528,17 +473,11 @@ If you did not, let the intstructor know now
         </figcaption>
 </figure>
 
-
 <h1 id="summary">Summary</h1>
-
 <p>At this point, we now have two running instances in our project. These instances are based on the cirros image we uploaded earlier.</p>
-
 <p>The instances have IP addresses on the private-a network we created and are using the default security group as a baseline firewall setup.</p>
-
 <p>One of our instances also has a Floating IP Address assigned and is routable on the 192.168.0.0/23 public network via both ICMP and SSH.</p>
-
 <p>In our next lab, we will use the CLI to go through some of the steps we have done in previous labs.</p>
-
 <hr>
 <h3>Workshop Details</h3>
 <div class="row">

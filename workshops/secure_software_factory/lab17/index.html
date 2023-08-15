@@ -307,99 +307,68 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="add-clair-container-scan">Add Clair Container Scan</h1>
-
+    <h1 id="add-clair-container-scan">Add Clair Container Scan</h1>
 <p>Add the configuration for the Container Vulnerability Scan below to your pipeline text file.</p>
-
 <p><img src="../images/pipeline_container_scan.png" width="900"><br/></p>
-
-<p><br></p>
-
+<br>
 <h1 id="append-to-jenkins-pipeline-configuration">Append to Jenkins Pipeline Configuration</h1>
-
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-
 <p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
-
 <p>In your pipeline, add and update the following variables after the version and mvnCmd definitions.  Please fill in the values between the quotes.</p>
-
 <ul>
 <li>ocuser : the openshift user given to you by your insturctor</li>
 <li>ocpass : the openshift password given to you by your insturctor</li>
 <li>ocp : the openshift host given to you by your instuctor</li>
 <li>quayuser : the quay user you created previously</li>
 <li>quaypass : the quay password you created previously</li>
-
-<li><p>quayrepo : the quay repo you will push your app image to i.e. tasks</p>
-<pre><code>def ocuser = &#34; &#34;
-def ocpass = &#34; &#34;
-def ocp = &#34; &#34;
-def quayuser = &#34; &#34;
-def quaypass = &#34; &#34;
-def quayrepo = &#34; &#34;</code></pre></li>
+<li>quayrepo : the quay repo you will push your app image to i.e. tasks</li>
 </ul>
-
-<p>For Example:</p>
-<pre><code>def ocuser = &#34;user<span class="userid">YOUR#</span>&#34;
-def ocpass = &#34;openshift&#34;
-def ocp = &#34;master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>&#34;
-def quayuser = &#34;user<span class="userid">YOUR#</span>&#34;
-def quaypass = &#34;openshift&#34;
-def quayrepo = &#34;jboss-eap70-openshift&#34;</code></pre>
-<p>In your pipeline, replace the Jenkins agent 'maven' with 'jenkins-slave-image-mgmt'.</p>
+<pre><code>def ocuser = &quot; &quot;
+def ocpass = &quot; &quot;
+def ocp = &quot; &quot;
+def quayuser = &quot; &quot;
+def quaypass = &quot; &quot;
+def quayrepo = &quot; &quot;
+</code></pre><p>For Example:</p>
+<pre><code>def ocuser = &quot;user<span class="userid">YOUR#</span>&quot;
+def ocpass = &quot;openshift&quot;
+def ocp = &quot;master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>&quot;
+def quayuser = &quot;user<span class="userid">YOUR#</span>&quot;
+def quaypass = &quot;openshift&quot;
+def quayrepo = &quot;jboss-eap70-openshift&quot;
+</code></pre><p>In your pipeline, replace the Jenkins agent &lsquo;maven&rsquo; with &lsquo;jenkins-slave-image-mgmt&rsquo;.</p>
 <pre><code>pipeline {
   agent {
-    label &#39;jenkins-slave-image-mgmt&#39;
-  }</code></pre>
-<p>In your pipeline, add the Vulnerability Scan Stage after the Build Image Stage.</p>
-<pre><code>    stage(&#39;Clair Container Vulnerability Scan&#39;) {
+    label 'jenkins-slave-image-mgmt'
+  }
+</code></pre><p>In your pipeline, add the Vulnerability Scan Stage after the Build Image Stage.</p>
+<pre><code>    stage('Clair Container Vulnerability Scan') {
       steps {
-            sh &#34;oc login -u $ocuser -p $ocpass --insecure-skip-tls-verify https://$ocp 2&gt;&amp;1&#34;
-            sh &#39;skopeo --debug copy --src-creds=&#34;$(oc whoami)&#34;:&#34;$(oc whoami -t)&#34; --src-tls-verify=false --dest-tls-verify=false&#39; + &#34; --dest-creds=$quayuser:$quaypass docker://docker-registry.default.svc:5000/cicd-$ocuser/jboss-eap70-openshift:1.5 docker://quay-enterprise-quay-enterprise.apps.$ocp/$quayuser/$quayrepo:1.5&#34;
+            sh &quot;oc login -u $ocuser -p $ocpass --insecure-skip-tls-verify https://$ocp 2&gt;&amp;1&quot;
+            sh 'skopeo --debug copy --src-creds=&quot;$(oc whoami)&quot;:&quot;$(oc whoami -t)&quot; --src-tls-verify=false --dest-tls-verify=false' + &quot; --dest-creds=$quayuser:$quaypass docker://docker-registry.default.svc:5000/cicd-$ocuser/jboss-eap70-openshift:1.5 docker://quay-enterprise-quay-enterprise.apps.$ocp/$quayuser/$quayrepo:1.5&quot;
         }
-    }</code></pre>
-<p>Save your Jenkins file</p>
-
+    }
+</code></pre><p>Save your Jenkins file</p>
 <h1 id="run-pipeline">Run Pipeline</h1>
-
 <p>Go to Builds &gt; Pipeline</p>
-
 <p>Click Start Pipeline for the pipeline you just created called tasks-pipeline.</p>
-
 <p>Your pipeline should now execute through all the stages you created.</p>
-
 <p>Go ahead and click View Log.  This will take you to the Jenkins logs and you can follow the various stages in your pipeline.</p>
-
 <p>When it asks to promote to stage, go ahead and promote it.</p>
-
 <p><img src="../images/pipeline_execution.png" width="900"><br/></p>
-
-<p><br></p>
-
+<br>
 <h1 id="view-clair-container-scan-report-in-quay">View Clair Container Scan Report in Quay</h1>
-
 <p>Select the Repository that was created</p>
-
 <p><img src="../images/quay_repo.png" width="900"><br/></p>
-
-<p><br></p>
-
+<br>
 <p>Select Repository Tags on the left hand menu</p>
-
 <ul>
 <li>If your scan is queued, you will need to wait for the scan to finish to view the report</li>
 </ul>
-
 <p>Select the Security Scan for your Image</p>
-
 <p><img src="../images/quay_repo_tags.png" width="900"><br/></p>
-
-<p><br></p>
-
+<br>
 <p>View the Security Scan Report</p>
-
 <p><img src="../images/quay_scan.png" width="900"><br/>
 <style>
 

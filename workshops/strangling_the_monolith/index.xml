@@ -27,7 +27,7 @@
       <guid>/workshops/strangling_the_monolith/login_tour_oc/</guid>
       <description>Welcome to OpenShift! This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content. If you are already familiar with the basics of OpenShift you can skip this lab - after making sure you can login.
 Wetty Environment Links Your instructor will assign you an OpenShift environment and login.
-Please click &amp;quot;Return to Workshop&amp;quot; above to view the OpenShift Environment Links.</description>
+Please click &amp;ldquo;Return to Workshop&amp;rdquo; above to view the OpenShift Environment Links.</description>
     </item>
     
     <item>
@@ -39,7 +39,7 @@ Please click &amp;quot;Return to Workshop&amp;quot; above to view the OpenShift 
       <description>Introduction to Wetty (Browser-based SSH) This lab provides a quick tour of the browser based SSH client Wetty. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
 Accessing Wetty Use this URL to access the Wetty node, just change the workshopname. Ask your instructor for rthe workshopname.
 https://&amp;lt;workshopname&amp;gt;.wetty.redhatgov.io:8888 After logging in, you should see a shell.
-The wetty instance will already have the &#39;oc&#39; command installed on them.</description>
+The wetty instance will already have the &amp;lsquo;oc&amp;rsquo; command installed on them.</description>
     </item>
     
     <item>
@@ -57,7 +57,9 @@ The wetty instance will already have the &#39;oc&#39; command installed on them.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/strangling_the_monolith/lab2/</guid>
-      <description>Strangling the Monolith Design Pattern  Strangling - incrementally replacing functionality in app with something better (cheaper, faster, easier to maintain). As functionality is replaced, “dead” parts of monolith can be removed/retired. You can also wait for all functionality to be replaced before retiring anything! You can optionally include new functionality during strangulation to make it more attractive to business stakeholders.   [https://paulhammant.com/2013/07/14/legacy-application-strangulation-case-studies/](https://paulhammant.com/2013/07/14/legacy-application-strangulation-case-studies/)  Steps for Strangling the Monolith  1) Strangle Monolith</description>
+      <description>Strangling the Monolith Design Pattern  Strangling - incrementally replacing functionality in app with something better (cheaper, faster, easier to maintain). As functionality is replaced, “dead” parts of monolith can be removed/retired. You can also wait for all functionality to be replaced before retiring anything! You can optionally include new functionality during strangulation to make it more attractive to business stakeholders.  
+https://paulhammant.com/2013/07/14/legacy-application-strangulation-case-studies/
+ Steps for Strangling the Monolith   Strangle Monolith   Strangle Monolith         Add a Microservice   Add a Microservice         And Another   And Another         Squeeze Monolith   Squeeze Monolith         And Remove Dead   And Remove Dead        Step 1  In this lab, you will begin to ‘strangle’ the coolstore monolith by implementing two of its services as external microservices, split along business boundaries Once implemented, traffic destined to the original monolith’s services will be redirected (via OpenShift software-defined routing) to the new services We will be using the Fabric8 Maven Plugin to automatically deploy to openshift    First, build and deploy the catalog microservice (Based on Spring Boot)   $ cd ~/coolstore $ git clone -b app-partner https://github.</description>
     </item>
     
     <item>
@@ -66,7 +68,8 @@ The wetty instance will already have the &#39;oc&#39; command installed on them.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/strangling_the_monolith/prerequisites/</guid>
-      <description>If we provided you a laptop or cloud environment. We already set all this up for you — feel free to skip everything below!  Install oc Click here for instructions on how to install the OpenShift Container Platform CLI.
+      <description>If we provided you a laptop or cloud environment. We already set all this up for you — feel free to skip everything below!
+ Install oc Click here for instructions on how to install the OpenShift Container Platform CLI.
 Install git Click here for instructions on how to install Git on your workstation.
 Create GitHub account Click here for instructions on how to setup an account.</description>
     </item>

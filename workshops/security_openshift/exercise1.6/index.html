@@ -371,7 +371,7 @@ the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u system:admin</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc login -u system:admin</code></pre>
 </div>
 </div>
 </div>
@@ -382,7 +382,7 @@ the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get scc</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc get scc</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -390,7 +390,7 @@ the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe scc restricted</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc describe scc restricted</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -484,7 +484,7 @@ file.</p>
 <div class="listingblock">
 <div class="title">drop-capabilities.yml</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">---
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">---
 kind: SecurityContextConstraints
 apiVersion: v1
 metadata:
@@ -531,7 +531,7 @@ Insert, then cut and paste <code>control + v</code>, then escape and write the f
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f drop-capabilities.yml</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc create -f drop-capabilities.yml</code></pre>
 </div>
 </div>
 </div>
@@ -546,7 +546,7 @@ Insert, then cut and paste <code>control + v</code>, then escape and write the f
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create serviceaccount section9</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc create serviceaccount section9</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -554,7 +554,7 @@ Insert, then cut and paste <code>control + v</code>, then escape and write the f
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe serviceaccount section9</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc describe serviceaccount section9</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -563,7 +563,7 @@ Insert, then cut and paste <code>control + v</code>, then escape and write the f
 <div class="listingblock">
 <div class="title">add the policy <code>drop-capabilities.yml</code> to the service account</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc adm policy add-scc-to-user drop-capabilities system:serviceaccount:sso:section9</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc adm policy add-scc-to-user drop-capabilities system:serviceaccount:sso:section9</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -571,7 +571,7 @@ Insert, then cut and paste <code>control + v</code>, then escape and write the f
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe scc drop-capabilities</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc describe scc drop-capabilities</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -704,7 +704,7 @@ be made, rather than a full filter specification.</p>
 <div class="listingblock">
 <div class="title">check to see if seccomp is enabled</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat /boot/config-`uname -r` | grep CONFIG_SECCOMP=</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat /boot/config-`uname -r` | grep CONFIG_SECCOMP=</code></pre>
 </div>
 </div>
 <div class="sect2">
@@ -714,13 +714,13 @@ be made, rather than a full filter specification.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">annotations:
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">annotations:
   seccomp.security.alpha.kubernetes.io/pod                          <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">annotations:
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">annotations:
   container.seccomp.security.alpha.kubernetes.io/&lt;container_name&gt;   <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
@@ -747,7 +747,7 @@ be made, rather than a full filter specification.</p>
 <div class="listingblock">
 <div class="title">unconfined</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apiVersion: v1
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">apiVersion: v1
 kind: Pod
 metadata:
   name: trustworthy-pod
@@ -776,7 +776,7 @@ spec:
 <div class="listingblock">
 <div class="title">custom restricted</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apiVersion: v1
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">apiVersion: v1
 kind: Pod
 metadata:
   name: explorer

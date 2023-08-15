@@ -273,99 +273,97 @@
 </div>
 
 <div class="container">
-  
-
-<h1 id="unit-4-accessing-the-web-interface">Unit 4: Accessing the Web Interface</h1>
-
+  <h1 id="unit-4-accessing-the-web-interface">Unit 4: Accessing the Web Interface</h1>
 <p>In this unit you will access the web interface of each subsystem. Each Certificate System instance is a Tomcat server instance and each Certificate System subsystem (such as CA or KRA) is deployed as a web application in Tomcat.</p>
-
 <p>All subsystems share a common administrative interface and have an agent interface that allows for agents to perform the tasks assigned to them. A CA Subsystem has an end-entity interface that allows end-entities to enroll in the PKI. An OCSP Responder subsystem has an end-entity interface allowing end-entities and applications to check for current certificate revocation status. Finally, a TPS has an operator interface.</p>
-
 <h2 id="import-admin-certificate-into-browser">Import Admin certificate into browser</h2>
-
-<p>Since there are no users you'll need to use the admin certificate to access the Agent subsystem pages.</p>
-
+<p>Since there are no users you&rsquo;ll need to use the admin certificate to access the Agent subsystem pages.</p>
 <ol>
-<li><p>Copy the admin cert to your local computer.</p>
-
-<p><code>/root/.dogtag/ca1/ca_admin_cert.p12</code></p></li>
-
-<li><p>Start Firefox with a new profile since we'll be adding certificates that you may not want included in your default profile.</p>
-
-<p><code>firefox -P cs</code></p></li>
-
-<li><p>Import certificate into Firefox. The password is <strong>redhat</strong>.</p>
-<pre><code>Preferences
-Privacy &amp; Security
-View Certificates
-Your Certificates tab
-Import
-Select ca_admin_cert.p12
-Input password</code></pre></li>
+<li>
+<p>Copy the admin cert to your local computer.</p>
+<p><code>/root/.dogtag/ca1/ca_admin_cert.p12</code></p>
+</li>
+<li>
+<p>Start Firefox with a new profile since we&rsquo;ll be adding certificates that you may not want included in your default profile.</p>
+<p><code>firefox -P cs</code></p>
+</li>
+<li>
+<p>Import certificate into Firefox. The password is <strong>redhat</strong>.</p>
+<pre><code> Preferences
+ Privacy &amp; Security
+ View Certificates
+ Your Certificates tab
+ Import
+ Select ca_admin_cert.p12
+ Input password
+</code></pre>
+</li>
 </ol>
-
 <h2 id="import-ca-chain">Import CA Chain</h2>
-
-<p>Next, you'll need to add the CA chain into Firefox.</p>
-
+<p>Next, you&rsquo;ll need to add the CA chain into Firefox.</p>
 <ol>
-<li><p>Open CA webpage.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/ca</code></p></li>
-
-<li><p>Select <code>PKI Administrator</code> certificate.</p></li>
-
-<li><p>Add Exception for insecure connection.</p></li>
-
-<li><p>Click link for <code>SSL End Users Services</code>.</p></li>
-
-<li><p>Click <code>Retrieval</code> tab.</p></li>
-
-<li><p>Click link for <code>Import CA Certificate Chain</code>.</p></li>
-
-<li><p>Choose <code>Import the CA certificate chain into your browser</code>.</p></li>
-
-<li><p>Click Submit.</p></li>
-
-<li><p>Check all 3 Trust boxes.</p></li>
-
-<li><p>Click OK.</p></li>
+<li>
+<p>Open CA webpage.</p>
+<p><code>https://ca1.redhat.example.com:8443/ca</code></p>
+</li>
+<li>
+<p>Select <code>PKI Administrator</code> certificate.</p>
+</li>
+<li>
+<p>Add Exception for insecure connection.</p>
+</li>
+<li>
+<p>Click link for <code>SSL End Users Services</code>.</p>
+</li>
+<li>
+<p>Click <code>Retrieval</code> tab.</p>
+</li>
+<li>
+<p>Click link for <code>Import CA Certificate Chain</code>.</p>
+</li>
+<li>
+<p>Choose <code>Import the CA certificate chain into your browser</code>.</p>
+</li>
+<li>
+<p>Click Submit.</p>
+</li>
+<li>
+<p>Check all 3 Trust boxes.</p>
+</li>
+<li>
+<p>Click OK.</p>
+</li>
 </ol>
-
 <h2 id="view-each-subsystem-page">View each subsystem page</h2>
-
 <p>The agent services pages are where almost all of the certificate and token management tasks are performed. The end-entities (ee) pages are where end users interact with the subsystems.</p>
-
 <p>Test access with each subsystem webpage to become familiar with the web interface. For some of the webpages you will be prompted to choose a certificate. The admin certificate from the previous steps is the correct one. The password is <strong>redhat</strong>.</p>
-
 <ul>
-<li><p>Main page.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/</code></p></li>
-
-<li><p>Subsystems page.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/pki/ui/</code></p></li>
-
-<li><p>Certificate Authority pages.</p>
-
+<li>
+<p>Main page.</p>
+<p><code>https://ca1.redhat.example.com:8443/</code></p>
+</li>
+<li>
+<p>Subsystems page.</p>
+<p><code>https://ca1.redhat.example.com:8443/pki/ui/</code></p>
+</li>
+<li>
+<p>Certificate Authority pages.</p>
 <p><code>https://ca1.redhat.example.com:8443/ca/ee/ca</code></p>
-
-<p><code>https://ca1.redhat.example.com:8443/ca/agent/ca</code></p></li>
-
-<li><p>Key Recovery Authority page.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/kra/agent/kra</code></p></li>
-
-<li><p>OCSP page.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/ocsp/agent/ocsp</code></p></li>
-
-<li><p>TPS page.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/tps/</code></p></li>
+<p><code>https://ca1.redhat.example.com:8443/ca/agent/ca</code></p>
+</li>
+<li>
+<p>Key Recovery Authority page.</p>
+<p><code>https://ca1.redhat.example.com:8443/kra/agent/kra</code></p>
+</li>
+<li>
+<p>OCSP page.</p>
+<p><code>https://ca1.redhat.example.com:8443/ocsp/agent/ocsp</code></p>
+</li>
+<li>
+<p>TPS page.</p>
+<p><code>https://ca1.redhat.example.com:8443/tps/</code></p>
+</li>
 </ul>
-
 <p>The next lesson is <a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_5.md">Unit 5: CLI tools</a>.</p>
 
 </div>

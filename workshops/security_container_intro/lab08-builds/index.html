@@ -330,7 +330,7 @@ compatible container images. <em>Buildah</em> is easy to incorporate into script
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah from --name=myapp registry.access.redhat.com/ubi8/ubi
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">buildah from --name=myapp registry.access.redhat.com/ubi8/ubi
 buildah run myapp -- dnf -y install python3</code></pre>
 </div>
 </div>
@@ -339,7 +339,7 @@ buildah run myapp -- dnf -y install python3</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo "The container is working." &gt; index.html
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">echo "The container is working." &gt; index.html
 buildah copy myapp index.html /
 buildah config --cmd 'python3 -m http.server' myapp
 buildah config --author "me_at_myorg_dot_com @twitter-handle" --label name=myapp myapp
@@ -352,7 +352,7 @@ podman run -d --name=test -p8000:8000 localhost/myapp</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl localhost:8000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl localhost:8000</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -365,7 +365,7 @@ podman run -d --name=test -p8000:8000 localhost/myapp</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman rm -f test</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman rm -f test</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -383,7 +383,7 @@ podman run -d --name=test -p8000:8000 localhost/myapp</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &gt; Dockerfile &lt;&lt;EOF
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &gt; Dockerfile &lt;&lt;EOF
 FROM registry.access.redhat.com/ubi8/ubi
 LABEL description="Minimal python web server" maintainer="yourname@mail.net"
 RUN dnf -y update; dnf -y clean all
@@ -399,7 +399,7 @@ EOF</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah bud -t buildahbuddemo Dockerfile</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">buildah bud -t buildahbuddemo Dockerfile</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -426,7 +426,7 @@ a60515321805733cdd83216ad249fb857cdd2389ead39b2fc59446b1650e78fc</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah inspect --type image buildahbuddemo</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">buildah inspect --type image buildahbuddemo</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -434,7 +434,7 @@ a60515321805733cdd83216ad249fb857cdd2389ead39b2fc59446b1650e78fc</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman images</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman images</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -445,7 +445,7 @@ localhost/buildahbuddemo                              latest   a60515321805   2 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -it -d --name=test -p8000:8000 localhost/buildahbuddemo</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run -it -d --name=test -p8000:8000 localhost/buildahbuddemo</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -458,7 +458,7 @@ localhost/buildahbuddemo                              latest   a60515321805   2 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl localhost:8000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl localhost:8000</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -471,7 +471,7 @@ localhost/buildahbuddemo                              latest   a60515321805   2 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman rm -f test</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman rm -f test</code></pre>
 </div>
 </div>
 <div class="literalblock">

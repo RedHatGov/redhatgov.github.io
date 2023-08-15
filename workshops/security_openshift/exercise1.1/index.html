@@ -338,7 +338,7 @@
 <div class="listingblock">
 <div class="title">See Template Parameters</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project template --description="Exploring Templates" --display-name="Templates"</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc new-project template --description="Exploring Templates" --display-name="Templates"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -347,7 +347,7 @@
 <div class="listingblock">
 <div class="title">See Template Parameters</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc process --parameters -n openshift nodejs-mongo-persistent</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc process --parameters -n openshift nodejs-mongo-persistent</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -504,7 +504,7 @@
 <div class="listingblock">
 <div class="title">Login as the System user</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u system:admin</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc login -u system:admin</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -513,13 +513,13 @@
 <div class="listingblock">
 <div class="title">View/Edit Template Parameters</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc edit -n openshift template nodejs-mongo-persistent</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc edit -n openshift template nodejs-mongo-persistent</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Exit by <code>esc + : + q</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">esc + : + q</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">esc + : + q</code></pre>
 </div>
 </div>
 </div>
@@ -531,13 +531,13 @@
 <div class="listingblock">
 <div class="title">Launch the Template</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc process -n openshift nodejs-mongo-persistent | oc create -f -</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc process -n openshift nodejs-mongo-persistent | oc create -f -</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Multiple OpenShift objects created</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">secret "nodejs-mongo-persistent" created
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">secret "nodejs-mongo-persistent" created
 service "nodejs-mongo-persistent" created
 route "nodejs-mongo-persistent" created
 imagestream "nodejs-mongo-persistent" created

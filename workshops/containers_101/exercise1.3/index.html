@@ -345,7 +345,7 @@
 <h3 id="_step_1_get_the_dockerfile_from_github_using_curl">Step 1. Get the Dockerfile from GitHub using cURL:</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -s -o Dockerfile https://raw.githubusercontent.com/ajacocks/Dockerfile_fedora-postgres/master/Dockerfile_fedora-postgres</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl -s -o Dockerfile https://raw.githubusercontent.com/ajacocks/Dockerfile_fedora-postgres/master/Dockerfile_fedora-postgres</code></pre>
 </div>
 </div>
 </div>
@@ -356,7 +356,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat Dockerfile</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat Dockerfile</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -396,12 +396,12 @@ CMD ["/bin/postgres", "-D", "/var/lib/pgsql/data", "-c", "config_file=/var/lib/p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir build; mv Dockerfile build/Dockerfile; cd build</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir build; mv Dockerfile build/Dockerfile; cd build</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah bud -t fedora_postgresql .</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">buildah bud -t fedora_postgresql .</code></pre>
 </div>
 </div>
 </div>
@@ -412,7 +412,7 @@ CMD ["/bin/postgres", "-D", "/var/lib/pgsql/data", "-c", "config_file=/var/lib/p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -d --name fpg fedora_postgresql</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run -d --name fpg fedora_postgresql</code></pre>
 </div>
 </div>
 </div>
@@ -423,7 +423,7 @@ CMD ["/bin/postgres", "-D", "/var/lib/pgsql/data", "-c", "config_file=/var/lib/p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman exec -it fpg psql</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman exec -it fpg psql</code></pre>
 </div>
 </div>
 </div>
@@ -431,7 +431,7 @@ CMD ["/bin/postgres", "-D", "/var/lib/pgsql/data", "-c", "config_file=/var/lib/p
 <h3 id="_step_6_lets_do_a_quick_check_to_see_what_databases_are_available">Step 6. Let&#8217;s do a quick check to see what databases are available:</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">\l</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">\l</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -455,7 +455,7 @@ template1 | postgres | SQL_ASCII | C       | C     | =c/postgres          +
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">\q</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">\q</code></pre>
 </div>
 </div>
 <div class="paragraph">

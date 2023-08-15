@@ -307,110 +307,106 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="import-jdbc-datasource">Import JDBC datasource</h1>
-
+    <h1 id="import-jdbc-datasource">Import JDBC datasource</h1>
 <ul>
-<li>file <i class="fa fa-arrow-right"></i> import <i class="fa fa-arrow-right"></i> teiid designer <i class="fa fa-arrow-right"></i> JDBC Database &gt;&gt; source model</li>
+<li>file <i class="fa fa-arrow-right"></i> import <i class="fa fa-arrow-right"></i> teiid designer <i class="fa fa-arrow-right"></i> JDBC Database &raquo; source model</li>
 </ul>
-
-<p><img src="../images/5-import-jdbc-1.png"></p>
-
+<img src="../images/5-import-jdbc-1.png">
 <ul>
-<li><p>Under Connection Profile, select <strong>new</strong></p></li>
-
-<li><p>Select <strong>PostgreSQL</strong> as the Connection Profile Type, <strong>Next</strong></p></li>
-
-<li><p>In the next window, click the <strong>New Driver Definition</strong> icon</p></li>
-
-<li><p>Under the <strong>Jar List</strong> tab, select <strong>Add JAR/Zip</strong> and then select <code>jdv-demo/assets/postgres/postgresql-42.1.4.jar</code>, then <strong>ok</strong></p></li>
-
-<li><p>In the <strong>New JDBC Connection Profile</strong> window make sure to use the IP address of your PostgreSQL instance and put the credentails for the <strong>postgres</strong> user and check <strong>Save Password</strong>.</p></li>
-
-<li><p>Click <strong>Test Connection</strong> and verify you get a <strong>Ping Succeeded</strong> response before selecting <strong>Finish</strong></p></li>
+<li>
+<p>Under Connection Profile, select <strong>new</strong></p>
+</li>
+<li>
+<p>Select <strong>PostgreSQL</strong> as the Connection Profile Type, <strong>Next</strong></p>
+</li>
+<li>
+<p>In the next window, click the <strong>New Driver Definition</strong> icon</p>
+</li>
+<li>
+<p>Under the <strong>Jar List</strong> tab, select <strong>Add JAR/Zip</strong> and then select <code>jdv-demo/assets/postgres/postgresql-42.1.4.jar</code>, then <strong>ok</strong></p>
+</li>
+<li>
+<p>In the <strong>New JDBC Connection Profile</strong> window make sure to use the IP address of your PostgreSQL instance and put the credentails for the <strong>postgres</strong> user and check <strong>Save Password</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Test Connection</strong> and verify you get a <strong>Ping Succeeded</strong> response before selecting <strong>Finish</strong></p>
+</li>
 </ul>
-
-<p><img src="../images/5-jdbc-connection.png" width="1020px"></p>
-
+<img src="../images/5-jdbc-connection.png" width="1020px">
 <ul>
 <li>Select <strong>TABLE</strong> to import</li>
 </ul>
-
-<p><img src="../images/5-import-jdbc-2.png"></p>
-
+<img src="../images/5-import-jdbc-2.png">
 <ul>
 <li>Then select the <strong>order_details</strong> table, then click <strong>next</strong></li>
 </ul>
-
-<p><img src="../images/5-import-jdbc-3.png"></p>
-
+<img src="../images/5-import-jdbc-3.png">
 <ul>
-<li><p>Name your model <strong>PostgresDS.xmi</strong></p></li>
-
-<li><p>In folder <strong>demo-jdv/sources</strong></p></li>
-
-<li><p>JNDI Name <strong>java:/PostgresDS</strong></p></li>
-
-<li><p>Click <strong>Finish</strong></p></li>
+<li>
+<p>Name your model <strong>PostgresDS.xmi</strong></p>
+</li>
+<li>
+<p>In folder <strong>demo-jdv/sources</strong></p>
+</li>
+<li>
+<p>JNDI Name <strong>java:/PostgresDS</strong></p>
+</li>
+<li>
+<p>Click <strong>Finish</strong></p>
+</li>
 </ul>
-
-<p><img src="../images/5-import-jdbc-4.png"></p>
-
+<img src="../images/5-import-jdbc-4.png">
 <h1 id="fix-import-default-values">Fix import default values</h1>
-
 <ul>
-<li><p>We have to fix the default values for two properties.</p></li>
-
-<li><p>Click on the <strong>Package Diagram</strong> tab and then click on <strong>lastupdatedate</strong> and then change the property <strong>Default Value</strong> in the lower left to <strong>now()</strong></p></li>
-
-<li><p>Click on <strong>status</strong> and then change the property <strong>Default Value</strong> in the lower left to <strong>'ACTIVE'</strong> and then save the model</p></li>
+<li>
+<p>We have to fix the default values for two properties.</p>
+</li>
+<li>
+<p>Click on the <strong>Package Diagram</strong> tab and then click on <strong>lastupdatedate</strong> and then change the property <strong>Default Value</strong> in the lower left to <strong>now()</strong></p>
+</li>
+<li>
+<p>Click on <strong>status</strong> and then change the property <strong>Default Value</strong> in the lower left to <strong>&lsquo;ACTIVE&rsquo;</strong> and then save the model</p>
+</li>
 </ul>
-
-<p><img src="../images/5-default-value.png" width="1020px"></p>
-
+<img src="../images/5-default-value.png" width="1020px">
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-This is a common issue when importing tables that have existing contraints.  The data preview would fail and you would need to check the server log for the error.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>This is a common issue when importing tables that have existing contraints.  The data preview would fail and you would need to check the server log for the error.</p>
 </div>
-
 <ul>
 <li>On the <strong>Model Editor</strong> tab, highlight <strong>order_details</strong> then click the <strong>preview data</strong> button.  You should see the Postgres data in the <strong>SQL Results</strong> tab</li>
 </ul>
-
-<p><img src="../images/5-preview.png" width="1020px"></p>
-
+<img src="../images/5-preview.png" width="1020px">
 <h1 id="create-view-model">Create View Model</h1>
-
 <ul>
-<li><p>Lets now create a REST view on top of this base layer</p></li>
-
-<li><p>file <i class="fa fa-arrow-right"></i> new Teiid Metadata Model</p></li>
-
-<li><p>Location <strong>demo-jdv/views</strong></p></li>
-
-<li><p>Name <strong>PostgresView</strong></p></li>
-
-<li><p>Model Type <strong>View Model</strong></p></li>
-
-<li><p><strong>Transform from an existing model</strong>, click <strong>next</strong></p></li>
-
-<li><p>In the next window select the existing model as <strong>PostgresDS</strong>, click <strong>Finish</strong> and save the view model</p></li>
+<li>
+<p>Lets now create a REST view on top of this base layer</p>
+</li>
+<li>
+<p>file <i class="fa fa-arrow-right"></i> new Teiid Metadata Model</p>
+</li>
+<li>
+<p>Location <strong>demo-jdv/views</strong></p>
+</li>
+<li>
+<p>Name <strong>PostgresView</strong></p>
+</li>
+<li>
+<p>Model Type <strong>View Model</strong></p>
+</li>
+<li>
+<p><strong>Transform from an existing model</strong>, click <strong>next</strong></p>
+</li>
+<li>
+<p>In the next window select the existing model as <strong>PostgresDS</strong>, click <strong>Finish</strong> and save the view model</p>
+</li>
 </ul>
-
-<p><img src="../images/5-view.png"></p>
-
+<img src="../images/5-view.png">
 <h1 id="deploy-view-model">Deploy View Model</h1>
-
 <ul>
 <li>Open the vdb <strong>demo-jdv.vdb</strong> and click the <strong>Add Model</strong> button in the lower left.  Select <strong>PostgresView</strong> and save the vdb. Click the <strong>Deploy</strong> button</li>
 </ul>
-
 <h1 id="test-with-postman">Test with Postman</h1>
-
 <ul>
 <li>In postman, run the <strong>PostgresView</strong> test.  Verify that the <strong>Test Results</strong> tab returns <strong>PASS</strong></li>
 </ul>

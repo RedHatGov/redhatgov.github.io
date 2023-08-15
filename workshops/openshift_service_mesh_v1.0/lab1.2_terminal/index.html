@@ -307,100 +307,68 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="accessing-openshift">Accessing OpenShift</h1>
-
+    <h1 id="accessing-openshift">Accessing OpenShift</h1>
 <p>OpenShift provides a web console that allows you to perform various tasks via a web browser.</p>
-
-<h2 id="let-s-login-to-the-web-console">Let's Login to the Web Console</h2>
-
+<h2 id="lets-login-to-the-web-console">Let&rsquo;s Login to the Web Console</h2>
 <blockquote>
 <p>Use your browser to navigate to the below URI, and login with the username <code>user<span class="userid">YOUR#</span>
 </code> and the password provided by your instructor:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span></code></pre></div>
-<p><img src="../images/ocp-login.png" width="600"><br/>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
+</code></pre></div><p><img src="../images/ocp-login.png" width="600"><br/>
 <em>Login Webpage</em></p>
-
 <p>Once logged in you should see your available projects - or a button to create a project if none exist already:</p>
-
 <p><img src="../images/ocp-admin-default.png" width="600"><br/>
 <em>Administrator Default View, with No Projects</em></p>
-
 <h2 id="so-this-is-what-an-empty-project-looks-like">So this is what an empty project looks like</h2>
-
-<p>First let's create a new project to do our workshop work in.  We will use the student number you were given to ensure you don't clash with classmates:</p>
-
+<p>First let&rsquo;s create a new project to do our workshop work in.  We will use the student number you were given to ensure you don&rsquo;t clash with classmates:</p>
 <blockquote>
-<p>Click on the &quot;Create Project&quot; button and give it a name of terminal-<span class="userid">YOUR#</span>
+<p>Click on the &ldquo;Create Project&rdquo; button and give it a name of terminal-<span class="userid">YOUR#</span>
 </p>
-
-<p>Populate &quot;Name&quot; with &quot;terminal-<span class="userid">YOUR#</span>
-&quot; and populate &quot;Description&quot; boxes with whatever you like.  And click &quot;Create&quot;</p>
 </blockquote>
-
+<blockquote>
+<p>Populate &ldquo;Name&rdquo; with &ldquo;terminal-<span class="userid">YOUR#</span>
+&rdquo; and populate &ldquo;Description&rdquo; boxes with whatever you like.  And click &ldquo;Create&rdquo;</p>
+</blockquote>
 <p><img src="../images/ocp-admin-create-project.png" width="600"><br/><br></p>
-
-<p>This is going to take you to the next logical step of adding something to the project, but we don't want to do that just yet.</p>
-
-<h2 id="let-s-deploy-butterfly-browser-based-ssh">Let's deploy Butterfly (Browser-based SSH)</h2>
-
-<p>First, we need to change views from the &quot;Administrator&quot; view to the &quot;Developer&quot; view. There is a pop-up menu, in the top left corner of the screen, just below the menu (three horizontal lines) button.</p>
-
+<p>This is going to take you to the next logical step of adding something to the project, but we don&rsquo;t want to do that just yet.</p>
+<h2 id="lets-deploy-butterfly-browser-based-ssh">Let&rsquo;s deploy Butterfly (Browser-based SSH)</h2>
+<p>First, we need to change views from the &ldquo;Administrator&rdquo; view to the &ldquo;Developer&rdquo; view. There is a pop-up menu, in the top left corner of the screen, just below the menu (three horizontal lines) button.</p>
 <blockquote>
 Click "Administrator", and change it to "Developer"
 </blockquote>
 <img src="../images/ocp-menu-administrator.png" width="450"><br/><br>
-
-
 <blockquote>
 Click "+Add", to add a new item to the project
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="450"><br/><br>
-
-
 <blockquote>
 Click "Container Image", to add an existing image from the container registry
 </blockquote>
 <img src="../images/ocp-ContainerImageButton.png" width="300"><br/>
-
 <blockquote>
 In the dialog box under the default radio button, "Image name from external registry", enter "quay.io/openshifthomeroom/workshop-terminal", the image should be "Validated" when found.
 </blockquote>
 <img src="../images/ocp-deploy-image.png" width="600"><br/>
-
 <blockquote>
 Observe default values that are populated in the search results
 </blockquote>
 <img src="../images/ocp-butterfly-create-1.png" width="600"><br/>
-
 <blockquote>
 Click "Create"
 </blockquote>
-
 <p>You will now see a screen that shows a thumbnail view of your deployed application. Click on it, to expand the screen, and see details of the running pod:</p>
-
 <p><img src="../images/ocp-workshop-terminal-thumb.png" width="150"><br/></p>
-
 <blockquote>
 "Topology"
 </blockquote>
-
 <p><img src="../images/ocp-butterfly-topology.png" width="600"><br/></p>
-
 <h2 id="test-out-the-butterfly-webapp">Test out the Butterfly webapp</h2>
-
 <p>Notice that in the web console overview, you now have a URL in the service box.  You can see the webapp running by clicking the route you just exposed.</p>
-
 <p><img src="../images/ocp-butterfly-route.png" width="600"><br/></p>
-
 <p>After clicking on the URL, you should see a shell.</p>
-
 <p><img src="../images/butterfly-session.png" width="600"><br/></p>
-
-<p>Now, type the command <code>oc</code>. We'll explain what this tool is, later in the workshop.</p>
-
+<p>Now, type the command <code>oc</code>. We&rsquo;ll explain what this tool is, later in the workshop.</p>
 <style>
 
  

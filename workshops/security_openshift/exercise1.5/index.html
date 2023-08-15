@@ -351,7 +351,7 @@ extend <code>atomic scan</code> with a custom scanner.</p>
 <div class="listingblock">
 <div class="title">Pull a RHEL 7.1 &amp; 7.6 image</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker pull registry.access.redhat.com/rhel7.1
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo docker pull registry.access.redhat.com/rhel7.1
 
 sudo docker pull registry.access.redhat.com/rhel7.6</code></pre>
 </div>
@@ -362,7 +362,7 @@ sudo docker pull registry.access.redhat.com/rhel7.6</code></pre>
 <div class="listingblock">
 <div class="title">List scanners</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan --list</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo atomic scan --list</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -371,13 +371,13 @@ sudo docker pull registry.access.redhat.com/rhel7.6</code></pre>
 <div class="listingblock">
 <div class="title">Atomic default scan OpenSCAP</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan registry.access.redhat.com/rhel7.1</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo atomic scan registry.access.redhat.com/rhel7.1</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Atomic Compliance scan</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan --scan_type standards_compliance
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo atomic scan --scan_type standards_compliance
 registry.access.redhat.com/rhel7.1</code></pre>
 </div>
 </div>
@@ -387,13 +387,13 @@ registry.access.redhat.com/rhel7.1</code></pre>
 <div class="listingblock">
 <div class="title">Atomic default scan OpenSCAP</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan registry.access.redhat.com/rhel7.6</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo atomic scan registry.access.redhat.com/rhel7.6</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Atomic Compliance scan</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan --scan_type standards_compliance
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo atomic scan --scan_type standards_compliance
 registry.access.redhat.com/rhel7.6</code></pre>
 </div>
 </div>
@@ -432,13 +432,13 @@ RHEL. Adding a scanner plugin involves the following:</p>
 <div class="listingblock">
 <div class="title">cd  into <code>/home/ec2-user/workshopfiles</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd /home/ec2-user/workshopfiles</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cd /home/ec2-user/workshopfiles</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">build the <code>Dockerfile</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker build --rm=true --force-rm=true --tag=example_plugin .</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo docker build --rm=true --force-rm=true --tag=example_plugin .</code></pre>
 </div>
 </div>
 <div class="admonitionblock important">
@@ -456,7 +456,7 @@ Notice <code>.</code> it means in the current directory.
 <div class="listingblock">
 <div class="title">see the newly built container</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker images
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo docker images
 
 ...
 
@@ -467,7 +467,7 @@ example_plugin      latest       008f60125ce5     16 seconds ago      192.5 MB</
 <div class="listingblock">
 <div class="title">install the new plugin</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic install --name example_plugin example_plugin</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo atomic install --name example_plugin example_plugin</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -507,7 +507,7 @@ Copying example_plugin configuration file to host filesystem...
 <div class="listingblock">
 <div class="title">view the new scanner as a operation</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan --list</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo atomic scan --list</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -516,7 +516,7 @@ Copying example_plugin configuration file to host filesystem...
 <div class="listingblock">
 <div class="title">rpm-list</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo atomic scan --scanner example_plugin --scan_type=rpm-list registry.access.redhat.com/rhel7.6</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo atomic scan --scanner example_plugin --scan_type=rpm-list registry.access.redhat.com/rhel7.6</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -737,7 +737,7 @@ any language you like. Basically returning proper json that is defined in
 <div class="listingblock">
 <div class="title">example_plugin</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">type: scanner
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">type: scanner
 scanner_name: example_plugin
 image_name: example_plugin
 default_scan: rpm-list

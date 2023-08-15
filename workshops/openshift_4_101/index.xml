@@ -16,8 +16,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/fin/</guid>
-      <description>That&#39;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenShift environment. And hopefully, you have a deeper understanding of how containers and container orchestration works. Please feel free to continue to &amp;quot;kick the tires&amp;quot; in the demo environment we&#39;ve setup and explore both the web console and the oc command line client.
- OpenShift Architecture OpenShift Developer&#39;s Site   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
+      <description>That&amp;rsquo;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenShift environment. And hopefully, you have a deeper understanding of how containers and container orchestration works. Please feel free to continue to &amp;ldquo;kick the tires&amp;rdquo; in the demo environment we&amp;rsquo;ve setup and explore both the web console and the oc command line client.
+ OpenShift Architecture OpenShift Developer&amp;rsquo;s Site   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/keyterms/</guid>
-      <description>Key Terms We will be using the following terms throughout the workshop labs; so, here are some basic definitions you should be familiar with. You&#39;ll learn more terms along the way; but, these are the basics to get you started.
+      <description>Key Terms We will be using the following terms throughout the workshop labs; so, here are some basic definitions you should be familiar with. You&amp;rsquo;ll learn more terms along the way; but, these are the basics to get you started.
  Container - Your software wrapped in a complete filesystem containing everything it needs to run Image - We are talking about docker images; read-only and used to create containers Image Stream - An image stream comprises one or more OCI images identified by tags.</description>
     </item>
     
@@ -38,7 +38,7 @@
       <guid>/workshops/openshift_4_101/lab1-welcome/</guid>
       <description>Welcome to OpenShift! This lab provides a quick tour of the OpenShift console to help you get familiar with the user interface. If you are already familiar with the basics of OpenShift, this will be easy in that we are simply ensuring you can login and create a project.
 Accessing OpenShift OpenShift provides a web console that allows you to perform various tasks via a web browser.
-Let&#39;s Login to the Web Console  Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.</description>
+Let&amp;rsquo;s Login to the Web Console  Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.</description>
     </item>
     
     <item>
@@ -47,8 +47,8 @@ Let&#39;s Login to the Web Console  Use your browser to navigate to the URI prov
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab2-byocontainer/</guid>
-      <description>Bring your own OCI image It&#39;s easy to get started with OpenShift whether you&#39;re using our app templates or bringing your existing assets. In this quick lab we will deploy an application using an exisiting container image. OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.
-Let&#39;s point OpenShift to an existing built container image Choose either to complete the steps via CLI or Web Console.</description>
+      <description>Bring your own OCI image It&amp;rsquo;s easy to get started with OpenShift whether you&amp;rsquo;re using our app templates or bringing your existing assets. In this quick lab we will deploy an application using an exisiting container image. OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.
+Let&amp;rsquo;s point OpenShift to an existing built container image Choose either to complete the steps via CLI or Web Console.</description>
     </item>
     
     <item>
@@ -57,10 +57,11 @@ Let&#39;s point OpenShift to an existing built container image Choose either to 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab2.1-byocontainer/</guid>
-      <description>Now that we have a running container, we can browse our project details with the command line  https://console-openshift-console.apps.example.redhatgov.io/terminal 
-  Try typing the following to see what is available to &#39;get&#39;:
- $ oc project demo-YOUR# $ oc get all   Now let&#39;s look at what our image stream has in it:
- $ oc get is$ oc describe is/nexus  An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, in our case a new version of the nexus image, is created.</description>
+      <description>Now that we have a running container, we can browse our project details with the command line https://console-openshift-console.apps.example.redhatgov.io/terminal
+  Try typing the following to see what is available to &amp;lsquo;get&amp;rsquo;:
+ $ oc project demo-YOUR# $ oc get all   Now let&amp;rsquo;s look at what our image stream has in it:
+ $ oc get is $ oc describe is/nexus 
+An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, in our case a new version of the nexus image, is created.</description>
     </item>
     
     <item>
@@ -69,9 +70,9 @@ Let&#39;s point OpenShift to an existing built container image Choose either to 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab2.2-byocontainer/</guid>
-      <description>Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal 
-Let&#39;s clean this up   Let&#39;s clean up all this to get ready for the next lab:
- $ oc project demo-YOUR# $ oc delete all --selector app=nexus Summary In this lab, you&#39;ve deployed an example container image into a pod running in OpenShift. You exposed a route for clients to access that service via their web browsers. And you learned how to get and describe resources using the command line and the web console.</description>
+      <description>Terminal access https://console-openshift-console.apps.example.redhatgov.io/terminal
+Let&amp;rsquo;s clean this up   Let&amp;rsquo;s clean up all this to get ready for the next lab:
+ $ oc project demo-YOUR# $ oc delete all --selector app=nexus Summary In this lab, you&amp;rsquo;ve deployed an example container image into a pod running in OpenShift. You exposed a route for clients to access that service via their web browsers. And you learned how to get and describe resources using the command line and the web console.</description>
     </item>
     
     <item>
@@ -80,8 +81,8 @@ Let&#39;s clean this up   Let&#39;s clean up all this to get ready for the next 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab3-s2i/</guid>
-      <description>Source to Image (S2I) One of the useful components of OpenShift is its source-to-image capability. S2I is a framework that makes it easy to turn your source code into runnable images. The main advantage of using S2I for building reproducible docker images is the ease of use for developers. You&#39;ll see just how simple it can be in this lab.
-Let&#39;s build a node.js web app, using S2I We can do this either via the command line or the web console.</description>
+      <description>Source to Image (S2I) One of the useful components of OpenShift is its source-to-image capability. S2I is a framework that makes it easy to turn your source code into runnable images. The main advantage of using S2I for building reproducible docker images is the ease of use for developers. You&amp;rsquo;ll see just how simple it can be in this lab.
+Let&amp;rsquo;s build a node.js web app, using S2I We can do this either via the command line or the web console.</description>
     </item>
     
     <item>
@@ -91,7 +92,7 @@ Let&#39;s build a node.js web app, using S2I We can do this either via the comma
       
       <guid>/workshops/openshift_4_101/lab3.1-s2i/</guid>
       <description>Check out the build details We can see the details of what the S2I builder did. This can be helpful to diagnose issues if builds are failing.
- TIP: For a node.js app, running &amp;quot;npm shrinkwrap&amp;quot; is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I
+ TIP: For a node.js app, running &amp;ldquo;npm shrinkwrap&amp;rdquo; is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I
 CLI Steps    Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal    Goto the terminal and type the following:  $ oc get builds  Note the name of your build from the above command output and use it to see the logs with:  $ oc logs builds/[BUILD_NAME] The console will print out the full log for your build.</description>
     </item>
     
@@ -101,7 +102,7 @@ CLI Steps    Terminal access  https://console-openshift-console.apps.example.red
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab4-devmanage/</guid>
-      <description>Developing and managing an application in OpenShift In this lab we will explore some of the common activities undertaken by developers working in OpenShift. You will become familiar with how to use environment variables, secrets, build configurations, and more. Let&#39;s look at some of the basic things a developer might care about for a deployed app.
+      <description>Developing and managing an application in OpenShift In this lab we will explore some of the common activities undertaken by developers working in OpenShift. You will become familiar with how to use environment variables, secrets, build configurations, and more. Let&amp;rsquo;s look at some of the basic things a developer might care about for a deployed app.
 Setup From the previous lab you should have the DC Metro Maps web app running in OpenShift.</description>
     </item>
     
@@ -112,7 +113,7 @@ Setup From the previous lab you should have the DC Metro Maps web app running in
       
       <guid>/workshops/openshift_4_101/lab5-rollbacks/</guid>
       <description>Build Triggers, Webhooks and Rollbacks - Oh My! Once you have an app deployed in OpenShift you can take advantage of some continuous capabilities that help to enable DevOps and automate your management process. We will cover some of those in this lab: Build triggers, webhooks, and rollbacks.
-A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&#39;t already have an account, you can create one here.</description>
+A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&amp;rsquo;t already have an account, you can create one here.</description>
     </item>
     
     <item>
@@ -121,8 +122,8 @@ A bit of configuration We are going to do some integration and coding with an ex
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab6-replicationrecovery/</guid>
-      <description>Things will go wrong, and that&#39;s why we have replication and recovery Things will go wrong with your software, or your hardware, or from something completely out of your control. But, we can plan for such failures, thus minimizing their impact. OpenShift supports this via the replication and recovery functionality.
-Replication Let&#39;s walk through a simple example of how the replication controller can keep your deployment at a desired state.</description>
+      <description>Things will go wrong, and that&amp;rsquo;s why we have replication and recovery Things will go wrong with your software, or your hardware, or from something completely out of your control. But, we can plan for such failures, thus minimizing their impact. OpenShift supports this via the replication and recovery functionality.
+Replication Let&amp;rsquo;s walk through a simple example of how the replication controller can keep your deployment at a desired state. Assuming you still have the dc-metro-map project running we can manually scale up our replicas to handle increased user load.</description>
     </item>
     
     <item>
@@ -131,8 +132,8 @@ Replication Let&#39;s walk through a simple example of how the replication contr
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab6.1-replicationrecovery/</guid>
-      <description>Recovery Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy. Let&#39;s forcibly inflict an issue and see how OpenShift responds.
-CLI Steps    Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal    Choose a random pod and delete it:  $ oc get pods $ oc delete pod/PODNAME $ oc get pods -w If you&#39;re fast enough you&#39;ll see the pod you deleted go &amp;quot;Terminating&amp;quot; and you&#39;ll also see a new pod immediately get created and transition from &amp;quot;Pending&amp;quot; to &amp;quot;Running&amp;quot;.</description>
+      <description>Recovery Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy. Let&amp;rsquo;s forcibly inflict an issue and see how OpenShift responds.
+CLI Steps    Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal    Choose a random pod and delete it:  $ oc get pods $ oc delete pod/PODNAME $ oc get pods -w If you&amp;rsquo;re fast enough you&amp;rsquo;ll see the pod you deleted go &amp;ldquo;Terminating&amp;rdquo; and you&amp;rsquo;ll also see a new pod immediately get created and transition from &amp;ldquo;Pending&amp;rdquo; to &amp;ldquo;Running&amp;rdquo;.</description>
     </item>
     
     <item>
@@ -141,7 +142,7 @@ CLI Steps    Terminal access  https://console-openshift-console.apps.example.red
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab6.2-replicationrecovery/</guid>
-      <description>Application Health In addition to the health of your application&#39;s pods, OpenShift will watch the containers inside those pods. Let&#39;s forcibly inflict some issues and see how OpenShift responds.
+      <description>Application Health In addition to the health of your application&amp;rsquo;s pods, OpenShift will watch the containers inside those pods. Let&amp;rsquo;s forcibly inflict some issues and see how OpenShift responds.
 CLI Steps    Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal    Choose a running pod and shell into it:  $ oc get pods $ oc exec PODNAME -it /bin/bash You are now executing a bash shell running in the container of the pod.</description>
     </item>
     
@@ -152,7 +153,7 @@ CLI Steps    Terminal access  https://console-openshift-console.apps.example.red
       
       <guid>/workshops/openshift_4_101/lab7-labels/</guid>
       <description>Labels This is a pretty simple lab, we are going to explore labels. You can use labels to organize, group, or select API objects.
-For example, pods are &amp;quot;tagged&amp;quot; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.
+For example, pods are &amp;ldquo;tagged&amp;rdquo; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.
 Labels on a pod In a previous lab we added our web app using a S2I template.</description>
     </item>
     
@@ -181,7 +182,9 @@ In this lab we walk through creating a simple example of a CI/CD [pipeline] util
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/prerequisites/</guid>
-      <description>Prerequisites  This workshop is done entirely through the browser, but you do need a free personal GitHub account.  Create a Github account If you don&#39;t have a person GitHub account please sign up here to create a free account.
+      <description>Prerequisites 
+This workshop is done entirely through the browser, but you do need a free personal GitHub account.
+ Create a Github account If you don&amp;rsquo;t have a person GitHub account please sign up here to create a free account.
  Create GitHub Account   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); -webkit-animation-name: fadeIn; -webkit-animation-duration: 0.</description>
     </item>
     

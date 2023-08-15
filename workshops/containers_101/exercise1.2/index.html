@@ -366,12 +366,12 @@
 <h3 id="_step_1_launch_a_container_and_explore_inside_interactively">Step 1. Launch a container and explore inside interactively:</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it registry.access.redhat.com/rhel7 /bin/bash</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --rm -it registry.access.redhat.com/ubi8 /bin/bash</code></pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>Trying to pull registry.access.redhat.com/rhel7...Getting image source signatures
+<pre>Trying to pull registry.access.redhat.com/ubi8...Getting image source signatures
 Copying blob sha256:e0f71f706c2a1ff9efee4025e27d4dfd4f328190f31d16e11ef3283bc16d6842
  71.45 MB / ? [--------------------=---------------------------------------] 7s
 Copying blob sha256:121ab4741000471a7e2ddc687dedb440060bf9845ca415a45e99e361706f1098
@@ -394,7 +394,7 @@ Storing signatures</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">[root@7e5a67870995 /]#</code></pre>
+<pre class="highlightjs highlight"><code data-lang="yaml" class="language-yaml hljs">[root@7e5a67870995 /]#</code></pre>
 </div>
 </div>
 </td>
@@ -406,17 +406,17 @@ Storing signatures</pre>
 <h3 id="_step_2_try_these_commands">Step 2. Try these commands</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">whoami</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">whoami</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">uname -a</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">uname -a</code></pre>
 </div>
 </div>
 </div>
@@ -424,7 +424,7 @@ Storing signatures</pre>
 <h3 id="_step_3_when_you_are_finished_looking_around_the_internals_of_the_container_type_exit_to_exit">Step 3. When you are finished looking around the internals of the container, type <code>exit</code> to exit.</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 </div>
@@ -445,14 +445,14 @@ Storing signatures</pre>
 <p>Container images are very minimal installs of their referenced operating system, so commonly-used commands may not be present.</p>
 </div>
 <div class="listingblock">
-<div class="title">nonexistent command "ip"</div>
+<div class="title">nonexistent command "lshw"</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it rhel7 /usr/sbin/ip a</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --rm -it ubi8/python-39 /usr/sbin/lshw</code></pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>container create failed: container_linux.go:348: starting container process caused "exec: \"/usr/sbin/ip\": stat /usr/sbin/ip: no such file or directory"
+<pre>container create failed: container_linux.go:348: starting container process caused "exec: \"/usr/sbin/lshw\": stat /usr/sbin/lshw: no such file or directory"
 : internal libpod error</pre>
 </div>
 </div>
@@ -461,23 +461,18 @@ Storing signatures</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -v /usr/sbin:/usr/sbin --rm -it rhel7 /usr/sbin/ip a</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run -v /usr/sbin:/usr/sbin --rm -it ubi8/python-39 /usr/sbin/lshw</code></pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-       valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host
-       valid_lft forever preferred_lft forever
-3: eth0@if6: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default
-    link/ether 22:06:a3:f0:c6:a0 brd ff:ff:ff:ff:ff:ff link-netnsid 0
-    inet 10.88.0.4/16 scope global eth0
-       valid_lft forever preferred_lft forever
-    inet6 fe80::2006:a3ff:fef0:c6a0/64 scope link tentative
-       valid_lft forever preferred_lft forever</pre>
+<pre>  *-input:7
+       product: Power Button
+       physical id: 8
+       logical name: input2
+       logical name: /dev/input/event2
+       capabilities: platform
+WARNING: output may be incomplete or inaccurate, you should run this program as super-user.</pre>
 </div>
 </div>
 </div>
@@ -489,7 +484,7 @@ Storing signatures</pre>
 <div class="listingblock">
 <div class="title">mounting logs via volumes</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -v /dev/log:/dev/log --rm rhel7 logger Testing logging to the host</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run -v /dev/log:/dev/log --rm ubi8 logger Testing logging to the host</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -498,7 +493,7 @@ Storing signatures</pre>
 <div class="listingblock">
 <div class="title">search the container host</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">journalctl | grep "Testing logging"</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">journalctl | grep "Testing logging"</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -515,15 +510,16 @@ Storing signatures</pre>
 <div class="listingblock">
 <div class="title">Run Python simple server</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /opt/rhel_data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo mkdir -m 775 /opt/rhel_data
+sudo chgrp adm /opt/rhel_data</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -d -p 8080:8000 --name="python_web" \
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run -d -p 8080:8000 --name="python_web" \
        -w /opt \
-       -v /opt/rhel_data:/opt rhel7 \
-       /bin/python -m SimpleHTTPServer 8000</code></pre>
+       -v /opt/rhel_data:/var/www/html ubi8/python-39 \
+       -- python -m http.server -d /var/www/html</code></pre>
 </div>
 </div>
 </div>
@@ -531,13 +527,13 @@ Storing signatures</pre>
 <h3 id="_step_1_verify_the_container_is_running_using_the_podman_ps_switch">Step 1. Verify the container is running using the podman <code>ps</code> switch</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman ps</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman ps</code></pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>CONTAINER ID   IMAGE                                     COMMAND                  CREATED AT                      STATUS              PORTS                                            NAMES
-fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp...   2018-05-23 17:21:40 +0000 UTC   Up 45 seconds ago   0.0.0.0:8080-&gt;8000/udp, 0.0.0.0:8080-&gt;8000/tcp   python_web</pre>
+fcd06aee9533   registry.access.redhat.com/ubi8/python-39:latest   python -m http...   2021-05-23 17:21:40 +0000 UTC   Up 45 seconds ago   0.0.0.0:8080-&gt;8000/udp, 0.0.0.0:8080-&gt;8000/tcp   python_web</pre>
 </div>
 </div>
 </div>
@@ -546,7 +542,7 @@ fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp... 
 <div class="listingblock">
 <div class="title">Check to see no files in opt</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ll /opt/rhel_data/</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ll /opt/rhel_data/</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -560,7 +556,7 @@ fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp... 
 <div class="listingblock">
 <div class="title">Check to see no files via the web server</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl localhost:8080</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl localhost:8080</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -582,7 +578,7 @@ fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp... 
 <h3 id="_step_4_now_create_several_files_with_a_script_in_the_host_optrhel_data_directory">Step 4. Now create several files with a script in the host <code>/opt/rhel_data</code> directory.</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">for i in {1..10}; do touch /opt/rhel_data/file${i}; done</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">for i in {1..10}; do touch /opt/rhel_data/file${i}; done</code></pre>
 </div>
 </div>
 </div>
@@ -590,7 +586,7 @@ fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp... 
 <h3 id="_step_5_view_the_newly_created_files_in_optrhel_data">Step 5. View the newly created files in <code>/opt/rhel_data</code></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ll /opt/rhel_data/</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ll /opt/rhel_data/</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -613,7 +609,7 @@ fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp... 
 <h3 id="_step_6_then_use_curl_to_view_the_files_from_the_python_webserver_that_is_serving_files_from_the_mounted_optrhel_data_volume">Step 6. Then use curl to view the files from the python webserver that is serving files from the mounted <code>/opt/rhel_data</code> volume:</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl localhost:8080</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl localhost:8080</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -651,7 +647,7 @@ fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp... 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman inspect python_web</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman inspect python_web</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -659,11 +655,12 @@ fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp... 
 <pre>[{
     "ID": "fcd06aee95338748ab86faddd696c2cda212e7797b1e44428434da4a0d0b2b45",
     "Created": "2018-05-23T17:21:40.315773016Z",
-    "Path": "/bin/python",
+    "Path": "python",
     "Args": [
       "-m",
-      "SimpleHTTPServer",
-      "8000"
+      "http.server",
+      "-d",
+      "/var/www/html"
     ],
 ...
     "Name": "python_web",
@@ -681,23 +678,20 @@ fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp... 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman inspect -f {{.NetworkSettings.IPAddress}} python_web</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman inspect -f {{.State.StartedAt}} python_web</code></pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>10.88.0.6</pre>
+<pre>2023-08-10 22:49:35.001785165 -0400 EDT</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Note: Output has been truncated slightly for readability</p>
 </div>
 <div class="paragraph">
 <p>You can see the use of cgroups when attached to the container tty.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it rhel7 bash</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --rm -it ubi8 bash</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -705,22 +699,23 @@ fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp... 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat /proc/1/cgroup</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat /proc/1/cgroup</code></pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>11:blkio:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-10:hugetlb:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-9:pids:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-8:cpuacct,cpu:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-7:freezer:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-6:cpuset:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-5:net_prio,net_cls:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-4:perf_event:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-3:devices:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-2:memory:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/
-1:name=systemd:/libpod_parent/libpod-conmon-592226ddcc0625dce98127b4fc0e2e3ee98cb44fdadc579301d8f8647825964c/</pre>
+<pre>12:perf_event:/
+11:pids:/user.slice/user-1000.slice/session-8.scope
+10:rdma:/
+9:freezer:/
+8:devices:/system.slice/sshd.service
+7:net_cls,net_prio:/
+6:cpu,cpuacct:/
+5:memory:/user.slice/user-1000.slice/session-8.scope
+4:hugetlb:/
+3:blkio:/system.slice/sshd.service
+2:cpuset:/
+1:name=systemd:/user.slice/user-1000.slice/user@1000.service/user.slice/podman-295131.scope/f5eacdea88411f2cd160e4a027f9f1bbb49f68d3735b2b99352ab73b7b844fb1</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -728,22 +723,23 @@ fcd06aee9533   registry.access.redhat.com/rhel7:latest   /bin/python -m Simp... 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat /proc/1/cgroup</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat /proc/1/cgroup</code></pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>11:devices:/
-10:cpuset:/
+<pre>12:perf_event:/
+11:pids:/init.scope
+10:rdma:/
 9:freezer:/
-8:hugetlb:/
-7:pids:/
-6:net_prio,net_cls:/
-5:perf_event:/
-4:blkio:/
-3:memory:/
-2:cpuacct,cpu:/
-1:name=systemd:/</pre>
+8:devices:/
+7:net_cls,net_prio:/
+6:cpu,cpuacct:/
+5:memory:/init.scope
+4:hugetlb:/
+3:blkio:/
+2:cpuset:/
+1:name=systemd:/init.scope</pre>
 </div>
 </div>
 <div class="paragraph">

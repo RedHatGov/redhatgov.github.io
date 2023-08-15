@@ -331,7 +331,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman inspect registry.access.redhat.com/ubi8/ubi</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman inspect registry.access.redhat.com/ubi8/ubi</code></pre>
 </div>
 </div>
 <div class="sect2">
@@ -341,7 +341,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman diff --format=json registry.access.redhat.com/ubi8/ubi</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman diff --format=json registry.access.redhat.com/ubi8/ubi</code></pre>
 </div>
 </div>
 </div>
@@ -355,7 +355,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run -d --name sleepy registry.access.redhat.com/ubi8/ubi sleep 9999</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run -d --name sleepy registry.access.redhat.com/ubi8/ubi sleep 9999</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -368,7 +368,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman exec -it sleepy bash</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman exec -it sleepy bash</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -376,7 +376,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">date &gt;&gt; /tmp/date.txt
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">date &gt;&gt; /tmp/date.txt
 exit</code></pre>
 </div>
 </div>
@@ -385,7 +385,7 @@ exit</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman mount sleepy</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman mount sleepy</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -398,7 +398,7 @@ exit</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export MOUNTED=`sudo ls -tr /var/lib/containers/storage/overlay | tail -2 | grep -v backingFsBlockDev`
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">export MOUNTED=`sudo ls -tr /var/lib/containers/storage/overlay | tail -2 | grep -v backingFsBlockDev`
 sudo cat /var/lib/containers/storage/overlay/$MOUNTED/merged/tmp/date.txt</code></pre>
 </div>
 </div>
@@ -412,7 +412,7 @@ sudo cat /var/lib/containers/storage/overlay/$MOUNTED/merged/tmp/date.txt</code>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo find /var/lib/containers/storage/overlay/$MOUNTED/merged -user root -perm -4000 -exec ls -ldb {} \;</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo find /var/lib/containers/storage/overlay/$MOUNTED/merged -user root -perm -4000 -exec ls -ldb {} \;</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -433,7 +433,7 @@ check
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman umount sleepy</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman umount sleepy</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -446,7 +446,7 @@ check
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman stop sleepy
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman stop sleepy
 sudo podman rm sleepy</code></pre>
 </div>
 </div>
@@ -468,7 +468,7 @@ many layers does the <code>ubi</code> image contain?</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://registry.access.redhat.com/ubi8/ubi</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">skopeo inspect docker://registry.access.redhat.com/ubi8/ubi</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -491,7 +491,7 @@ many layers does the <code>ubi</code> image contain?</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo copy docker://node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest docker://node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">skopeo copy docker://node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest docker://node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
 </div>
 </div>
 <div class="literalblock">

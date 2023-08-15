@@ -379,7 +379,7 @@ the <code>svirt_sandbox_file_t</code> label.</p>
 <div class="listingblock">
 <div class="title">Setup directory and file</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir selinux
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir selinux
 
 cd  selinux
 
@@ -393,7 +393,7 @@ cat data/file1.txt</code></pre>
 <div class="listingblock">
 <div class="title">Get Current SELinux policy</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sestatus | grep mode</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sestatus | grep mode</code></pre>
 </div>
 </div>
 </div>
@@ -402,7 +402,7 @@ cat data/file1.txt</code></pre>
 <div class="listingblock">
 <div class="title">Try to cat out the file (it should fail)</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -410,7 +410,7 @@ cat data/file1.txt</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls --scontext data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls --scontext data</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -424,7 +424,7 @@ notifying the system that you expect these files to be consumed by containers:</
 <div class="listingblock">
 <div class="title">Find the Containers Labels</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo semanage fcontext --list | grep svirt</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo semanage fcontext --list | grep svirt</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -439,7 +439,7 @@ notifying the system that you expect these files to be consumed by containers:</
 <div class="listingblock">
 <div class="title">relable the data dir</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">chcon -Rt svirt_sandbox_file_t data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">chcon -Rt svirt_sandbox_file_t data</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -448,7 +448,7 @@ notifying the system that you expect these files to be consumed by containers:</
 <div class="listingblock">
 <div class="title">run docker again</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo docker run -v $(pwd)/data:/data fedora cat /data/file1.txt</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -460,13 +460,13 @@ notifying the system that you expect these files to be consumed by containers:</
 <div class="listingblock">
 <div class="title">append text</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "REDHAT" &gt;&gt; /data/file1.txt'</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "REDHAT" &gt;&gt; /data/file1.txt'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">see the text you appended from the container</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat data/file1.txt</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat data/file1.txt</code></pre>
 </div>
 </div>
 </div>
@@ -500,7 +500,7 @@ SELinux policy. It is not in layman’s terms, but it is complete.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">system_u:system_r:svirt_lxc_net_t:s0:c186,c641
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">system_u:system_r:svirt_lxc_net_t:s0:c186,c641
 ^      ^           ^          ^     ^--- unique category
 |      |           |          |----  secret-level 0
 |      |           |--- a shared type

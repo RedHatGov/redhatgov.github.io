@@ -475,13 +475,13 @@ The <code>jq</code> utility also can clean up and propperly format json when wri
 <div class="listingblock">
 <div class="title">save API results to file</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl https://access.redhat.com/labs/securitydataapi/cvrf.json | jq '.' &gt; cvrf.json</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl https://access.redhat.com/labs/securitydataapi/cvrf.json | jq '.' &gt; cvrf.json</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">search the file for OpenShift</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">vim cvrf.json</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">vim cvrf.json</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -512,13 +512,13 @@ The <code>jq</code> utility also can clean up and propperly format json when wri
 <div class="listingblock">
 <div class="title">CVE-2016-3703</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl https://access.redhat.com/labs/securitydataapi/cve/CVE-2016-3703 | jq '. | {severity: .threat_severity, details: .details}'</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl https://access.redhat.com/labs/securitydataapi/cve/CVE-2016-3703 | jq '. | {severity: .threat_severity, details: .details}'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">API response</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">{
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">{
   "severity": "Moderate",
   "details": [
     "\nRed Hat OpenShift Enterprise 3.2 and 3.1 do not properly validate the origin of a request when anonymous access is granted to a service/proxy or pod/proxy API for a specific pod, which allows remote attackers to access API credentials in the web browser localStorage via an access_token in the query parameter.\n    ",
@@ -541,7 +541,7 @@ The <code>jq</code> utility also can clean up and propperly format json when wri
 <div class="listingblock">
 <div class="title">CAT 1</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[] | select(.severity == "CAT I")'</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[] | select(.severity == "CAT I")'</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -550,7 +550,7 @@ The <code>jq</code> utility also can clean up and propperly format json when wri
 <div class="listingblock">
 <div class="title">get CVE &amp; Title</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[] | select(.severity == "CAT I") | { CVE: .cvelist, "CAT 1 Name": .title }'</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[] | select(.severity == "CAT I") | { CVE: .cvelist, "CAT 1 Name": .title }'</code></pre>
 </div>
 </div>
 <div class="paragraph">

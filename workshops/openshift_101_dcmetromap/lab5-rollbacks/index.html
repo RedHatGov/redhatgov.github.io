@@ -307,32 +307,19 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="build-triggers-webhooks-and-rollbacks-oh-my">Build Triggers, Webhooks and Rollbacks - Oh My!</h1>
-
+    <h1 id="build-triggers-webhooks-and-rollbacks---oh-my">Build Triggers, Webhooks and Rollbacks - Oh My!</h1>
 <p>Once you have an app deployed in OpenShift you can take advantage of some continuous capabilities that help to enable DevOps and automate your management process.  We will cover some of those in this lab: Build triggers, webhooks, and rollbacks.</p>
-
 <h2 id="a-bit-of-configuration">A bit of configuration</h2>
-
-<p>We are going to do some integration and coding with an external git repository.  For this lab we are going to use github, if you don't already have an account, <a href="https://github.com/join?source=header-home">you can create one here</a>.</p>
-
-<p>OK, let's fork the dc-metro-map app from <strong>my</strong> account into <strong>your</strong> github account.  Goto <a href="https://github.com/RedHatGov/openshift-workshops.git">https://github.com/RedHatGov/openshift-workshops</a> and look to the top right for the &quot;Fork&quot; button.</p>
-
+<p>We are going to do some integration and coding with an external git repository.  For this lab we are going to use github, if you don&rsquo;t already have an account, <a href="https://github.com/join?source=header-home">you can create one here</a>.</p>
+<p>OK, let&rsquo;s fork the dc-metro-map app from <strong>my</strong> account into <strong>your</strong> github account.  Goto <a href="https://github.com/RedHatGov/openshift-workshops.git">https://github.com/RedHatGov/openshift-workshops</a> and look to the top right for the &ldquo;Fork&rdquo; button.</p>
 <p><img src="../images/ocp-lab-rollbacks-fork.png" width="500"><br/></p>
-
 <blockquote>
-<p>Click the &quot;Fork&quot; button</p>
+<p>Click the &ldquo;Fork&rdquo; button</p>
 </blockquote>
-
 <p>Github should redirect you to the newly created fork of the source code.</p>
-
-<h2 id="build-trigger-code-change-webhook">Build Trigger / Code Change Webhook</h2>
-
-<p>When using S2I there are a few different things that can be used to <a href="https://docs.openshift.com/enterprise/3.1/dev_guide/builds.html#build-triggers">trigger</a> a rebuild of your source code.  The first is a configuration change, the second is an image change, and the last (which we are covering here) is a webhook.  A webhook is basically your git source code repository telling OpenShift that the code we care about has changed.  Let's set that up for our project now to see it in action.</p>
-
-<p>Jump back to your OpenShift web console and let's add the webapp to our project.  You should know how to do this from previous lab work, but this time point to <em>your</em> github URL for the source code.  If you need a refresher expand the box below.</p>
-
+<h2 id="build-trigger--code-change-webhook">Build Trigger / Code Change Webhook</h2>
+<p>When using S2I there are a few different things that can be used to <a href="https://docs.openshift.com/enterprise/3.1/dev_guide/builds.html#build-triggers">trigger</a> a rebuild of your source code.  The first is a configuration change, the second is an image change, and the last (which we are covering here) is a webhook.  A webhook is basically your git source code repository telling OpenShift that the code we care about has changed.  Let&rsquo;s set that up for our project now to see it in action.</p>
+<p>Jump back to your OpenShift web console and let&rsquo;s add the webapp to our project.  You should know how to do this from previous lab work, but this time point to <em>your</em> github URL for the source code.  If you need a refresher expand the box below.</p>
 <div class="panel-group">
   
 
@@ -340,14 +327,14 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse118f20c3de2d120e475aec17485939f4" class="collapsed">
+      <a data-toggle="collapse" href="#collapseb5d0ff01eda8fd1672ca14fc06eeb831" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse118f20c3de2d120e475aec17485939f4" class="panel-collapse collapse ">
+  <div id="collapseb5d0ff01eda8fd1672ca14fc06eeb831" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
@@ -360,7 +347,6 @@ Select the "Browse Catalog" tab and search for the nodejs builder image. Click N
 <blockquote>
 Select version <b>[6]</b> then click <b><u>advanced options</u></b> and fill out the boxes to point to the fork and context dir. Note that <b>YOUR_ACCOUNT</b> is the name of your GitHub account.
 </blockquote>
-
 <p>
 <table>
 <tr><td><b>Name</b></td><td>dc-metro-map</td></tr>
@@ -368,7 +354,6 @@ Select version <b>[6]</b> then click <b><u>advanced options</u></b> and fill out
 <tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
 </table>
 </p>
-
 <blockquote>
 When you are done, scroll to the bottom and click 'Create'
 </blockquote>
@@ -380,9 +365,7 @@ When you are done, scroll to the bottom and click 'Create'
 
 </div>
 
-
 <p>The node.js builder template creates a number of resources for you, but what we care about right now is the build configuration because that contains the webhooks.  So to get the URL:</p>
-
 <div class="panel-group">
   
 
@@ -390,21 +373,21 @@ When you are done, scroll to the bottom and click 'Create'
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsee0a2ebf668e2987125380279795d620d" class="collapsed">
+      <a data-toggle="collapse" href="#collapsecf86d5888595f2da86917e08cfd39104" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsee0a2ebf668e2987125380279795d620d" class="panel-collapse collapse ">
+  <div id="collapsecf86d5888595f2da86917e08cfd39104" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe bc/dc-metro-map | grep -i webhook</code></pre></div>
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe bc/dc-metro-map | grep -i webhook
+</code></pre></div><blockquote>
 Copy the Generic webhook to the clipboard
 </blockquote>
 
@@ -418,14 +401,14 @@ Copy the Generic webhook to the clipboard
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsee2cb51418062feda3254e5299c95dfec" class="collapsed">
+      <a data-toggle="collapse" href="#collapse7593df0c6a0a326602b50eeac43bc8a0" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsee2cb51418062feda3254e5299c95dfec" class="panel-collapse collapse ">
+  <div id="collapse7593df0c6a0a326602b50eeac43bc8a0" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
@@ -433,19 +416,16 @@ Click on "Builds" and then click on "Builds"
 </blockquote>
 This is going to show basic details for all build configurations in this project
 <img src="../images/ocp-lab-rollbacks-buildsList.png" width="900"><br/>
-
 <blockquote>
 Click the "dc-metro-map" build config
 </blockquote>
 You will see the summary of builds using this build config
 <img src="../images/ocp-lab-rollbacks-buildconfigsummary.png" width="900"><br/>
-
 <blockquote>
 Click the "Configuration" tab 
 </blockquote>
 <img src="../images/ocp-lab-rollbacks-deployconfigconfig.png" width="900"><br/>
 Now you can see the various configuration details including the Github specific and Generic webhook URLs.
-
 <blockquote>
 Copy the Generic webhook to the clipboard
 </blockquote>
@@ -457,13 +437,10 @@ Copy the Generic webhook to the clipboard
 
 </div>
 
-
-<p><br/></p>
-
+<br/>
 <blockquote>
 <p>Now switch back over to github</p>
 </blockquote>
-
 <div class="panel-group">
   
 
@@ -471,31 +448,26 @@ Copy the Generic webhook to the clipboard
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse2a25b5c392ea6c02c66d2158e9c3d11b" class="collapsed">
+      <a data-toggle="collapse" href="#collapsec85b8ee98076375f8483e6e6ec835f68" class="collapsed">
       
         Github Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse2a25b5c392ea6c02c66d2158e9c3d11b" class="panel-collapse collapse ">
+  <div id="collapsec85b8ee98076375f8483e6e6ec835f68" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p>Let's put the webhook URL into the repository. At the main page for this repository (the fork), you should see a tab bar with code, pull requests, pulse, graphs, and settings.</p>
-
+       <p>Let&rsquo;s put the webhook URL into the repository. At the main page for this repository (the fork), you should see a tab bar with code, pull requests, pulse, graphs, and settings.</p>
 <p><img src="../images/ocp-lab-rollbacks-settings.png" width="900"><br/></p>
-
 <blockquote>
 Click the "Settings" tab
 </blockquote>
-
 <p>Now you will see a vertical list of settings groups.<br/><br/></p>
-
 <blockquote>
 Click the "Webhooks" link
 </blockquote>
 <img src="../images/ocp-lab-rollbacks-githubwebhooks.png" width="900"><br/>
-
 <blockquote>
 Click the "Add webhook" button
 </blockquote>
@@ -505,13 +477,10 @@ Paste in the URL you copied
 <blockquote>
 Disable SSL verification by clicking the button
 </blockquote>
-
 <blockquote>
 <i class="fa fa-info-circle"></i> You can learn how to setup SSL in the secrets lab<br/><br/>
 </blockquote>
-
 <p><img src="../images/ocp-lab-rollbacks-githubwebhooks-add.png" width="600"><br/></p>
-
 <blockquote>
 Click the "Add webhook" button
 </blockquote>
@@ -523,23 +492,14 @@ Click the "Add webhook" button
 
 </div>
 
-
-<p>Good work! Now any &quot;push&quot; to the forked repository will send a webhook that triggers OpenShift to: re-build the code and image using s2i, and then perform a new pod deployment.  In fact Github should have sent a test trigger and OpenShift should have kicked off a new build already.</p>
-
+<p>Good work! Now any &ldquo;push&rdquo; to the forked repository will send a webhook that triggers OpenShift to: re-build the code and image using s2i, and then perform a new pod deployment.  In fact Github should have sent a test trigger and OpenShift should have kicked off a new build already.</p>
 <h2 id="deployment-triggers">Deployment Triggers</h2>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-In addition to setting up triggers for rebuilding code, we can setup a different type of trigger to deploy pods.  Deployment triggers can be due to a configuration change (e.g. environment variables) or due to an image change.  This powerful feature will be covered in one of the advanced labs. See the Triggers link under More Information below.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>In addition to setting up triggers for rebuilding code, we can setup a different type of trigger to deploy pods.  Deployment triggers can be due to a configuration change (e.g. environment variables) or due to an image change.  This powerful feature will be covered in one of the advanced labs. See the Triggers link under More Information below.</p>
 </div>
-
 <h2 id="rollbacks">Rollbacks</h2>
-
-<p>Well, what if something isn't quite right with the latest version of our app?  Let's say some feature we thought was ready for the world really isn't - and we didn't figure that out until after we deployed it.  No problem, we can roll it back with the click of a button.  Let's check that out:</p>
-
+<p>Well, what if something isn&rsquo;t quite right with the latest version of our app?  Let&rsquo;s say some feature we thought was ready for the world really isn&rsquo;t - and we didn&rsquo;t figure that out until after we deployed it.  No problem, we can roll it back with the click of a button.  Let&rsquo;s check that out:</p>
 <div class="panel-group">
   
 
@@ -547,21 +507,22 @@ In addition to setting up triggers for rebuilding code, we can setup a different
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse384f0ce18c36d72a46855d0fc5a1d339" class="collapsed">
+      <a data-toggle="collapse" href="#collapse96dd2ce8e5d882724e769537e24333b1" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse384f0ce18c36d72a46855d0fc5a1d339" class="panel-collapse collapse ">
+  <div id="collapse96dd2ce8e5d882724e769537e24333b1" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc rollback dc-metro-map-1
-$ oc get pods -w</code></pre></div>
+$ oc get pods -w
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -572,40 +533,34 @@ $ oc get pods -w</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse2041a5fcfb495bade0beafb6d14ef197" class="collapsed">
+      <a data-toggle="collapse" href="#collapsee4886ead188bbf40ec3508e0a7b1f26c" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse2041a5fcfb495bade0beafb6d14ef197" class="panel-collapse collapse ">
+  <div id="collapsee4886ead188bbf40ec3508e0a7b1f26c" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Click on "Applications" and then click on "Deployments"
 </blockquote>
 This is going to show basic details for all deployment configurations in this project
-
 <blockquote>
 Click the "dc-metro-map" deployment config
 </blockquote>
 Toward the bottom of the screen you will see a table of deployments using this deployment config
 <img src="../images/ocp-lab-rollbacks-deploymentconfigsummary1.png" width="900"><br/>
-
 <blockquote>
 In the Deployments table click the #1
 </blockquote>
 <img src="../images/ocp-lab-rollbacks-deploymentconfig.png" width="600"><br/>
-
 <blockquote>
 Click the "Rollback button", accept defaults, and click "Rollback" again
 </blockquote>
-
 <p><img src="../images/ocp-lab-rollbacks-rollbackbutton.png" width="300"><br/></p>
-
 <p>You can go back to the overview page to see your previous deployment spinning down and your new one spinning up.<br/></p>
-
 <p><img src="../images/ocp-lab-rollbacks-rollback.png" width="900"><br/></p>
 
     </div>
@@ -615,34 +570,20 @@ Click the "Rollback button", accept defaults, and click "Rollback" again
 
 </div>
 
-
 <p>OpenShift has done a graceful removal of the old pod and created a new one.</p>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-Note that the old pod wasn't killed until the new pod was successfully started and ready to be used.  This is so that OpenShift could continue to route traffic to the old pod until the new one was ready.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>Note that the old pod wasn&rsquo;t killed until the new pod was successfully started and ready to be used.  This is so that OpenShift could continue to route traffic to the old pod until the new one was ready.</p>
 </div>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-You can integrate your CI/CD tools to do rollbacks with the REST API. See the Rollbacks With the REST API link under More Information below.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>You can integrate your CI/CD tools to do rollbacks with the REST API. See the Rollbacks With the REST API link under More Information below.</p>
 </div>
-
 <h1 id="summary">Summary</h1>
-
 <p>In this lab we saw how you can configure a source code repository to trigger builds with webhooks.  This webhook could come from Github, Jenkins, Travis-CI, or any tool capable of sending a URL POST.  Keep in mind that there are other types of build triggers you can setup.  For example: if a new version of the upstream RHEL image changes.  We also inspected our deployment history and did a rollback of our running deployment to one based on an older image with the click of a button.</p>
-
 <h1 id="more-information">More Information</h1>
-
 <p><a href="https://docs.openshift.com/enterprise/3.1/dev_guide/deployments.html#triggers">Triggers</a></br>
 <a href="https://docs.openshift.com/enterprise/3.1/rest_api/openshift_v1.html#create-a-deploymentconfigrollback-2">Rollbacks With the REST API</a></p>
-
 <style>
 
  

@@ -307,105 +307,71 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="floating-ip-vs-private-ip-addresses">Floating IP vs. Private IP Addresses</h1>
-
+    <h1 id="floating-ip-vs-private-ip-addresses">Floating IP vs. Private IP Addresses</h1>
 <h2 id="private-ip-address">Private IP Address</h2>
-
-<p>A private IP address is assigned to an instance's network-interface by the DHCP server. The address is visible from within the instance by using a command like “ip a”. The address is typically part of a private network and is used for communication between instances in the same broadcast domain via virtual switch (L2 agent on each compute node). It can also be accessible from instances in other private networks via virtual router (L3 agent).</p>
-
+<p>A private IP address is assigned to an instance&rsquo;s network-interface by the DHCP server. The address is visible from within the instance by using a command like “ip a”. The address is typically part of a private network and is used for communication between instances in the same broadcast domain via virtual switch (L2 agent on each compute node). It can also be accessible from instances in other private networks via virtual router (L3 agent).</p>
 <h2 id="floating-ip-address">Floating IP Address</h2>
-
-<p>A floating IP address is a service provided by Neutron. It's not using any DHCP service or being set statically within the guest. As a matter of fact the guest's operating system has no idea that it was assigned a floating IP address. The delivery of packets to the interface with the assigned floating address is the responsibility of Neutron's L3 agent. Instances with an assigned floating IP address can be accessed from the public network by the floating IP.</p>
-
+<p>A floating IP address is a service provided by Neutron. It&rsquo;s not using any DHCP service or being set statically within the guest. As a matter of fact the guest&rsquo;s operating system has no idea that it was assigned a floating IP address. The delivery of packets to the interface with the assigned floating address is the responsibility of Neutron&rsquo;s L3 agent. Instances with an assigned floating IP address can be accessed from the public network by the floating IP.</p>
 <p>A floating IP address and a private IP address can be used at the same time on a single network-interface. The private IP address is likely to be used for accessing the instance by other instances in private networks while the floating IP address would be used for accessing the instance from public networks.</p>
-
 <p>You can learn more about the difference between Floating IP and private IP from the RDO website.
 <a href="https://www.rdoproject.org/networking/difference-between-floating-ip-and-private-ip/">https://www.rdoproject.org/networking/difference-between-floating-ip-and-private-ip/</a></p>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-A floating IP range was already created on the public-sub subnet for the public network in our workshop environment.
-
-The range is 192.168.1.70 to 192.168.1.199. Each student project has a quota of 50 Floating IP Addresses
-
+<p><span class="pficon pficon-info"></span></p>
+<p>A floating IP range was already created on the public-sub subnet for the public network in our workshop environment.</p>
+<p>The range is 192.168.1.70 to 192.168.1.199. Each student project has a quota of 50 Floating IP Addresses</p>
 </div>
-
-<h1 id="let-s-go-allocate-some-floating-ip-addresses">Let's Go Allocate Some Floating IP Addresses</h1>
-
+<h1 id="lets-go-allocate-some-floating-ip-addresses">Let&rsquo;s Go Allocate Some Floating IP Addresses</h1>
 <blockquote>
 <p>Navigate to Network -&gt; Floating IPs using the second level navigation tabs</p>
 </blockquote>
-
 <figure>
     <img src="../images/lab3-floating-ips-1.png"/> <figcaption>
             <h4>Lab 3 Figure 1: Floating IP Listing</h4>
         </figcaption>
 </figure>
 
-
 <blockquote>
-<p>Click <strong>Allocate IP to Project</strong> on the right hand side of the screen<br />
-Make sure <strong>public</strong> is selected for <strong>Pool</strong><br />
+<p>Click <strong>Allocate IP to Project</strong> on the right hand side of the screen<br>
+Make sure <strong>public</strong> is selected for <strong>Pool</strong><br>
 Click <strong>Allocate IP</strong></p>
 </blockquote>
-
 <figure>
     <img src="../images/lab3-floating-ips-2.png"/> <figcaption>
             <h4>Lab 3 Figure 2: Allocate Floating IP to Project</h4>
         </figcaption>
 </figure>
 
-
 <div class="alert alert-success">
-  
-  <span class="pficon pficon-ok"></span>
-  
-You should see a green box appear in the upper right corner of the screen that says something similar to "Success: Allocated Floating IP 192.168.1.106."
-
-Note that you will get a different IP from the pool each time you go through this process.
-
-If you did not get an IP allocated, let the intstructor know now
-
+<p><span class="pficon pficon-ok"></span></p>
+<p>You should see a green box appear in the upper right corner of the screen that says something similar to &ldquo;Success: Allocated Floating IP 192.168.1.106.&rdquo;</p>
+<p>Note that you will get a different IP from the pool each time you go through this process.</p>
+<p>If you did not get an IP allocated, let the intstructor know now</p>
 </div>
-
 <figure>
     <img src="../images/lab3-floating-ips-3.png"/> <figcaption>
             <h4>Lab 3 Figure 3: New Floating IP Allocated to Project</h4>
         </figcaption>
 </figure>
 
-
 <blockquote>
 <p>Go through the allocation process 2 more times so that you have a total of 3 floating IPs allocated to your project</p>
 </blockquote>
-
 <figure>
     <img src="../images/lab3-floating-ips-4.png"/> <figcaption>
             <h4>Lab 3 Figure 4: Floating IP List Showing 3 Allocated to Project</h4>
         </figcaption>
 </figure>
 
-
 <h1 id="summary">Summary</h1>
-
 <p>We have now learned how to allocate floating IP addresses to our project. We can now associate these to instances in our project which we will do in a later lab.</p>
-
 <p>In these labs, we are using Horizon to complete tasks. However, remember that there are three ways to interact with OpenStack.</p>
-
 <ul>
-<li>APIs<br /></li>
-<li>CLI<br /></li>
+<li>APIs</li>
+<li>CLI</li>
 <li>Horizon</li>
 </ul>
-
 <p>We could accomplish these same tasks via the other 2 methods as well. In fact in some cases, the CLI and APIs have more options available than Horizon.</p>
-
 <p>In our next lab, we will start working with security groups.</p>
-
 <hr>
 <h3>Workshop Details</h3>
 <div class="row">

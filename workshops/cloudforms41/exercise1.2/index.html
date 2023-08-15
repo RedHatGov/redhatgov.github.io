@@ -307,76 +307,44 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="exercise-1-2-discovering-virtualization-host-systems">Exercise 1.2 - Discovering Virtualization Host Systems</h1>
-
+    <h1 id="exercise-12---discovering-virtualization-host-systems">Exercise 1.2 - Discovering Virtualization Host Systems</h1>
 <h2 id="exercise-description">Exercise Description</h2>
-
 <p>In this exercise, you will learn how to view, search and manage host systems.</p>
-
 <p>In Red Hat CloudForms, hosts are hypervisors running on physical hardware providing virtual machines and infrastructure.</p>
-
 <p>The CloudForms Management Engine automatically adds hosts from discovered providers. However, you can also discover hosts directly if not using a provider. Discovering hosts is only supported for standalone VMware vSphere servers.</p>
-
-<h2 id="section-1-explore-infrastructure-hosts">Section 1:  Explore Infrastructure Hosts</h2>
-
-<h3 id="step-1-select-compute-infrastructure-hosts">Step 1: Select <strong>Compute</strong> → <strong>Infrastructure</strong> → <strong>Hosts</strong>.</h3>
-
+<h2 id="section-1--explore-infrastructure-hosts">Section 1:  Explore Infrastructure Hosts</h2>
+<h3 id="step-1-select-compute--infrastructure--hosts">Step 1: Select <strong>Compute</strong> → <strong>Infrastructure</strong> → <strong>Hosts</strong>.</h3>
 <p><img title="List Infrastructure Hosts" src="../images/cfme-nav-compute-infra-hosts.png"  width="1000"/><br/>
 <em>List Infrastructure Hosts</em></p>
-
 <h3 id="step-2-view-the-list-of-your-private-datacenter-infrastructure-hosts-such-as-vmware-vsphere-and-red-hat-enterprise-virtualization-managed-hosts-red-hat-enterprise-linux-or-red-hat-enterprise-virtualization-hypervisor">Step 2: View the list of your private datacenter infrastructure hosts, such as VMware vSphere and Red Hat Enterprise Virtualization managed hosts (Red Hat Enterprise Linux or Red Hat Enterprise Virtualization Hypervisor).</h3>
-
 <p>
-
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-   You can discover hosts independently, from an infrastructure provider, but this is not recommended because you do not see the relationship between hosts and providers. 
+<p><span class="pficon pficon-info"></span>
+You can discover hosts independently, from an infrastructure provider, but this is not recommended because you do not see the relationship between hosts and providers.</p>
 </div>
 </p>
-
 <h2 id="section-2-discover-infrastructure-hosts">Section 2: Discover Infrastructure Hosts</h2>
-
 <p>In very large environments, you can discover new hosts directly.</p>
-
-<h3 id="step-1-click-i-class-fa-fa-cog-aria-hidden-true-i-configuration-then-click-i-class-fa-fa-search-aria-hidden-true-i-discover-items">Step 1: Click <i class="fa fa-cog" aria-hidden="true"></i> (<strong>Configuration</strong>), then click <i class="fa fa-search" aria-hidden="true"></i> (<strong>Discover items</strong>).</h3>
-
+<h3 id="step-1-click-i-classfa-fa-cog-aria-hiddentruei-configuration-then-click-i-classfa-fa-search-aria-hiddentruei-discover-items">Step 1: Click <i class="fa fa-cog" aria-hidden="true"></i> (<strong>Configuration</strong>), then click <i class="fa fa-search" aria-hidden="true"></i> (<strong>Discover items</strong>).</h3>
 <p><img title="Discover Infrastructure Hosts" src="../images/cfme-nav-discover-infra-hosts.png" width="1000"/><br/>
 <em>Discover Infrastructure Hosts</em></p>
-
 <h3 id="step-2-review-the-data-entry-screen-but-do-not-enter-any-information">Step 2: Review the data entry screen, but do not enter any information.</h3>
-
 <h3 id="step-3-click-cancel-to-return-to-the-previous-screen">Step 3: Click <strong>Cancel</strong> to return to the previous screen.</h3>
-
 <p><img title="Cancel Infrastructure Host Discovery" src="../images/cfme-nav-discover-infra-hosts-cancel.png" width="1000"/><br/>
 <em>Cancel Infrastructure Host Discovery</em></p>
-
 <h2 id="section-3-add-infrastructure-hosts">Section 3: Add Infrastructure Hosts</h2>
-
 <p>You can also manually add infrastructure hosts, if they are known.</p>
-
-<h3 id="step-1-click-i-class-fa-fa-cog-aria-hidden-true-i-configuration-then-click-i-class-fa-fa-plus-circle-fa-lg-aria-hidden-true-i-add">Step 1: Click <i class="fa fa-cog" aria-hidden="true"></i> (<strong>Configuration</strong>), then click <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> (<strong>Add</strong>).</h3>
-
+<h3 id="step-1-click-i-classfa-fa-cog-aria-hiddentruei-configuration-then-click-i-classfa-fa-plus-circle-fa-lg-aria-hiddentruei-add">Step 1: Click <i class="fa fa-cog" aria-hidden="true"></i> (<strong>Configuration</strong>), then click <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> (<strong>Add</strong>).</h3>
 <p><img title="Add Infrastructure Hosts" src="../images/cfme-nav-add-infra-hosts.png" width="1000"/><br/>
 <em>Add Infrastructure Hosts</em></p>
-
 <h3 id="step-2-review-the-data-entry-screen-but-do-not-enter-any-information-1">Step 2: Review the data entry screen, but do not enter any information.</h3>
-
 <h3 id="step-3-click-cancel-to-return-to-the-previous-screen-1">Step 3: Click <strong>Cancel</strong> to return to the previous screen.</h3>
-
 <p><img title="Cancel Add Infrastructure Hosts" src="../images/cfme-nav-add-infra-hosts-cancel.png" width="1000"/><br/>
 <em>Cancel Add Infrastructure Hosts</em></p>
-
 <h2 id="section-4-explore-the-virtual-thumbnail-for-infrastructure-hosts">Section 4: Explore the Virtual Thumbnail for Infrastructure Hosts</h2>
-
 <p>The web interface uses virtual thumbnails to represent providers. Each thumbnail contains four quadrants by default, which display basic information about each provider.</p>
-
 <p><img title="CloudForms Example Virtual Thumbnail" src="../images/cfme-virt-thumbnail-hosts.png"/><br/>
 <em>Example Virtual Thumbnail</em></p>
-
 <ul>
 <li>The top left quadrant shows the number of VMs running on the host.</li>
 <li>The top right quadrant shows the power state of the host.</li>
@@ -384,141 +352,91 @@
 <li>The bottom right quadrant shows the status of the host.</li>
 <li>A <i class="fa fa-shield fa-lg" aria-hidden="true"></i> (<strong>Policy</strong>) in the center indicates that this host has one or more policies applied.</li>
 </ul>
-
-<h3 id="step-1-to-download-the-list-of-hosts-click-i-class-fa-fa-download-fa-lg-aria-hidden-true-i-download-next-to-i-class-fa-fa-power-off-aria-hidden-true-i-power">Step 1: To download the list of hosts, click <i class="fa fa-download fa-lg" aria-hidden="true"></i> (<strong>Download</strong>) next to <i class="fa fa-power-off" aria-hidden="true"></i> (<strong>Power</strong>).</h3>
-
+<h3 id="step-1-to-download-the-list-of-hosts-click-i-classfa-fa-download-fa-lg-aria-hiddentruei-download-next-to-i-classfa-fa-power-off-aria-hiddentruei-power">Step 1: To download the list of hosts, click <i class="fa fa-download fa-lg" aria-hidden="true"></i> (<strong>Download</strong>) next to <i class="fa fa-power-off" aria-hidden="true"></i> (<strong>Power</strong>).</h3>
 <p><img title="CloudForms Download Host Providers" src="../images/cfme-nav-download-infra-hosts.png" width="1000"/><br/>
 <em>Download Host Providers</em></p>
-
-<h3 id="step-2-in-the-top-right-corner-of-the-window-click-i-class-fa-fa-th-fa-lg-aria-hidden-true-i-i-class-fa-fa-th-large-fa-lg-aria-hidden-true-i-i-class-fa-fa-list-fa-lg-aria-hidden-true-i-to-toggle-between-grid-tile-and-list-views">Step 2: In the top right corner of the window, click <i class="fa fa-th fa-lg" aria-hidden="true"></i> <i class="fa fa-th-large fa-lg" aria-hidden="true"></i> <i class="fa fa-list fa-lg" aria-hidden="true"></i> to toggle between <strong>Grid</strong>, <strong>Tile</strong>, and <strong>List</strong> views.</h3>
-
+<h3 id="step-2-in-the-top-right-corner-of-the-window-click-i-classfa-fa-th-fa-lg-aria-hiddentruei-i-classfa-fa-th-large-fa-lg-aria-hiddentruei-i-classfa-fa-list-fa-lg-aria-hiddentruei-to-toggle-between-grid-tile-and-list-views">Step 2: In the top right corner of the window, click <i class="fa fa-th fa-lg" aria-hidden="true"></i> <i class="fa fa-th-large fa-lg" aria-hidden="true"></i> <i class="fa fa-list fa-lg" aria-hidden="true"></i> to toggle between <strong>Grid</strong>, <strong>Tile</strong>, and <strong>List</strong> views.</h3>
 <p><img title="Top Window Host Providers Navigation" src="../images/cfme-nav-grid-title-list-infra-hosts.png" width=1000/><br/>
 <em>Top Window Host Providers Navigation</em></p>
-
 <h3 id="step-3-select-the-infrastructure-host-named-esxi3-with-vmware-and-20-vms-and-observe-the-following-details-on-the-resulting-screen">Step 3: Select the infrastructure host named <strong>esxi3</strong> with VMware and 20 VMs, and observe the following details on the resulting screen:</h3>
-
 <p><img title="vSphere Hosts Dashboard" src="../images/cfme-dashboard-infra-hosts.png" width="1000"/><br/>
 <em>vSphere Hosts Dashboard</em></p>
-
 <ol>
-<li>The <strong>Properties</strong> section displays detailed information about the host.
-
+<li>The <strong>Properties</strong> section displays detailed information about the host.</li>
+</ol>
 <ul>
 <li>Observe these parts of the <strong>Properties</strong> details to see how this host relates to its resources in the provider.</li>
-</ul></li>
+</ul>
+<ol start="2">
 <li>The <strong>Compliance</strong> section shows whether the host is compliant with its applied policies.</li>
 <li>The <strong>Smart Management</strong> section shows that this provider is tagged as existing at a specific location, as well as its provisioning scope.</li>
 <li>The <strong>Authentication</strong> status section shows whether or not CloudForms can log in to the host.</li>
 <li>The <strong>Security</strong> section lists users, groups, patches, firewall rules, and other operating system security-related information.</li>
 <li>The <strong>Configuration</strong> section lists packages, services, and other operating system configuration-related information.</li>
 </ol>
-
 <h2 id="section-5-explore-host-drift-history">Section 5: Explore Host Drift History</h2>
-
 <h3 id="step-1-in-the-relationships-section-click-drift-history">Step 1: In the Relationships section, click Drift History.</h3>
-
 <p><img title="vSphere Host Drift Tab Dashboard" src="../images/cfme-nav-infra-hosts-drift-1.png" width="1000"/><br/>
 <em>vSphere Host Drift Tab Dashboard</em></p>
-
 <p>
-
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-   The **Relationships** section is an accordion tab nested within the host named **esxi3**. 
+<p><span class="pficon pficon-info"></span>
+The <strong>Relationships</strong> section is an accordion tab nested within the host named <strong>esxi3</strong>.</p>
 </div>
 </p>
-
 <h3 id="step-2-on-the-resulting-screen-check-at-least-two-of-the-available-dates">Step 2: On the resulting screen, check at least two of the available dates.</h3>
-
-<h3 id="step-3-click-img-title-cloudforms-drift-icon-src-images-cfme-nav-drift-icon-png-drift-above-the-list-of-timestamps">Step 3:  Click <img title="CloudForms Drift Icon" src="../images/cfme-nav-drift-icon.png"/> (<strong>Drift</strong>) above the list of timestamps.</h3>
-
+<h3 id="step-3--click-img-titlecloudforms-drift-icon-srcimagescfme-nav-drift-iconpng-drift-above-the-list-of-timestamps">Step 3:  Click <img title="CloudForms Drift Icon" src="../images/cfme-nav-drift-icon.png"/> (<strong>Drift</strong>) above the list of timestamps.</h3>
 <p><img title="vSphere Host Drift Dashboard Detail" src="../images/cfme-nav-infra-hosts-drift-2.png" width="1000"/><br/>
 <em>vSphere Host Drift Dashboard Detail</em></p>
-
 <h3 id="step-4-on-the-next-screen-do-not-uncheck-properties-but-check-security-and-configuration">Step 4: On the next screen, do not uncheck Properties, but check Security and Configuration.</h3>
-
 <h3 id="step-5-click-apply">Step 5: Click Apply.</h3>
-
 <p><img title="vSphere Host Drift Dashboard Section Detail" src="../images/cfme-nav-infra-hosts-drift-3.png" width="1000"/><br/>
 <em>vSphere Host Drift Dashboard Section Detail</em></p>
-
 <p>If the host changes between the various points in time, it appears here. Can you see what’s changed over time?</p>
-
-<h3 id="step-6-try-using-the-img-title-cloudforms-drift-icon-src-images-cfme-nav-drift-filter-icon-png-filters-buttons-to-see-which-changes-have-occurred">Step 6: Try using the <img title="CloudForms Drift Icon" src="../images/cfme-nav-drift-filter-icon.png"/> (<strong>Filters Buttons</strong>) to see which changes have occurred.</h3>
-
+<h3 id="step-6-try-using-the-img-titlecloudforms-drift-icon-srcimagescfme-nav-drift-filter-iconpng-filters-buttons-to-see-which-changes-have-occurred">Step 6: Try using the <img title="CloudForms Drift Icon" src="../images/cfme-nav-drift-filter-icon.png"/> (<strong>Filters Buttons</strong>) to see which changes have occurred.</h3>
 <p><img title="vSphere Host Drift Dashboard Filter Detail" src="../images/cfme-nav-infra-hosts-drift-4.png" width="1000"/><br/>
 <em>vSphere Host Drift Dashboard Filter Detail</em></p>
-
 <p>
-
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-   You will likely need to click the little <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i> mark next to the `Host Properties` section to expand and see the details of what’s changed. 
+<p><span class="pficon pficon-info"></span>
+You will likely need to click the little <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i> mark next to the <code>Host Properties</code> section to expand and see the details of what’s changed.</p>
 </div>
 </p>
-
 <h2 id="section-6-explore-infrastructure-host-utilization">Section 6: Explore Infrastructure Host Utilization</h2>
-
 <h3 id="step-1-click-esxi3-summary-to-select-the-host-named-esxi3-from-the-drift-analysis-page">Step 1: Click <strong>esxi3 (Summary)</strong> to select the host named <strong>esxi3</strong> from the <strong>Drift Analysis</strong> page.</h3>
-
 <p><img title="CloudForms vSphere Dashboard" src="../images/cfme-nav-esxi3-from-drift.png" width="1000"/><br/>
 <em>CloudForms vSphere Dashboard</em></p>
-
-<h3 id="step-2-click-img-title-cloudforms-monitor-icon-src-images-cfme-nav-monitor-icon-png-monitoring-and-then-select-img-title-cloudforms-utilization-icon-src-images-cfme-nav-utilization-icon-png-utilization">Step 2: Click <img title="CloudForms Monitor Icon" src="../images/cfme-nav-monitor-icon.png"/> (<strong>Monitoring</strong>) and then select <img title="CloudForms Utilization Icon" src="../images/cfme-nav-utilization-icon.png"/> (<strong>Utilization</strong>).</h3>
-
+<h3 id="step-2-click-img-titlecloudforms-monitor-icon-srcimagescfme-nav-monitor-iconpng-monitoring-and-then-select-img-titlecloudforms-utilization-icon-srcimagescfme-nav-utilization-iconpng-utilization">Step 2: Click <img title="CloudForms Monitor Icon" src="../images/cfme-nav-monitor-icon.png"/> (<strong>Monitoring</strong>) and then select <img title="CloudForms Utilization Icon" src="../images/cfme-nav-utilization-icon.png"/> (<strong>Utilization</strong>).</h3>
 <p><img title="Hosts Monitor Utilization" src="../images/cfme-nav-monitor-infra-hosts.png" width="1000"/><br/>
 <em>Hosts Monitor Utilization</em></p>
-
 <h3 id="step-3-try-changing-the-interval-to-hourly">Step 3: Try changing the <strong>Interval</strong> to <strong>Hourly</strong>.</h3>
-
 <p><img title="CloudForms Dashboard Monitor Utilization Interval" src="../images/cfme-nav-infra-hosts-util-interval.png" width="1000"/><br/>
 <em>Hosts Monitor Utilization Interval</em></p>
-
-<h3 id="step-4-examine-the-screen-that-appears-showing-a-detailed-report-of-cpu-memory-disk-i-o-network-and-running-vms">Step 4: Examine the screen that appears, showing a detailed report of CPU, memory, disk I/O, network, and running VMs.</h3>
-
+<h3 id="step-4-examine-the-screen-that-appears-showing-a-detailed-report-of-cpu-memory-disk-io-network-and-running-vms">Step 4: Examine the screen that appears, showing a detailed report of CPU, memory, disk I/O, network, and running VMs.</h3>
 <ul>
 <li>To see a specific data point, hover over any chart.</li>
 <li>To zoom in on a chart, click <i class="fa fa-search-plus fa-lg" aria-hidden="true"></i> (Zoom In).</li>
 <li>To modify the timeframe displayed in the report, select the date range at the top of the screen.</li>
 </ul>
-
 <p>
-
-
 <div class="alert alert-warning">
-  
-  <span class="pficon pficon-warning-triangle-o"></span>
-   The data in this demo is static, please do not go beyond August 7, 2013. 
+<p><span class="pficon pficon-warning-triangle-o"></span>
+The data in this demo is static, please do not go beyond August 7, 2013.</p>
 </div>
 </p>
-
 <h2 id="section-7-explore-infrastructure-host-power-state-control">Section 7: Explore Infrastructure Host Power State Control</h2>
-
 <h3 id="step-1-return-to-the-list-of-compute-hosts-eg-click-the-hosts-link-in-the-navigation-breadcrumbs-at-the-top-of-the-page">Step 1: Return to the list of Compute Hosts (eg, click the <strong>Hosts</strong> link in the navigation breadcrumbs at the top of the page).</h3>
-
 <p><img title="Infrastructure Hosts Breadcrumb" src="../images/cfme-nav-compute-infra-hosts-breadcrumb.png" width="1000"/><br/>
 <em>Infrastructure Hosts Breadcrumb</em></p>
-
 <h3 id="step-2-check-the-box-next-to-any-host-but-do-not-select-the-host">Step 2: Check the box next to any host, but do not select the host.</h3>
-
 <p>Note that the <img title="CloudForms Power Icon" src="../images/cfme-nav-power-icon.png"/> (<strong>Power</strong>), located above the list of hosts, is now active due to host  selection.</p>
-
 <p>Also, observe the available power states that you can set for this host.</p>
-
 <p><img title="Infrastructure Hosts Power States" src="../images/cfme-nav-compute-infra-hosts-power-states.png" width="1000"/><br/>
 <em>Infrastructure Hosts Power States</em></p>
-
 <p>
-
-
 <div class="alert alert-warning">
-  
-  <span class="pficon pficon-warning-triangle-o"></span>
-   This demo environment is not connected to any real hosts, so changing the power state here does not affect any hosts. 
+<p><span class="pficon pficon-warning-triangle-o"></span>
+This demo environment is not connected to any real hosts, so changing the power state here does not affect any hosts.</p>
 </div>
 </p>
 

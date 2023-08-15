@@ -307,204 +307,184 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="lab-5">Lab 5</h1>
-
+    <h1 id="lab-5">Lab 5</h1>
 <h2 id="api-security">API Security</h2>
-
 <h3 id="securing-apis-with-openid-connect-and-red-hat-single-sign-on">Securing APIs with OpenID Connect and Red Hat Single Sign On</h3>
-
 <ul>
 <li>Duration: 20 mins</li>
 <li>Audience: API Owners, Product Managers, Developers, Architects</li>
 </ul>
-
-<p><br><img src="../images/agenda-05.png "Login" width="900" /><br><br></p>
-
+<p><br>&lt;img src=&rdquo;../images/agenda-05.png &ldquo;Login&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 <h2 id="overview">Overview</h2>
-
 <p>Once you have APIs in your organization and have applications being written, you also want to be sure in many cases that the various types of users of the APIs are correctly authenticated. In this lab you will discover how to set up the widely used OpenID connect pattern for Authentication.</p>
-
 <h3 id="why-red-hat">Why Red Hat?</h3>
-
 <p>The Red Hat SSO product provides important functionality for managing identities at scale. In this lab you will see how it fits together with 3scale and OpenShift.</p>
-
 <p>##Lab Instructions</p>
-
 <h3 id="step-1-get-red-hat-single-sign-on-service-account-credentials">Step 1: Get Red Hat Single Sign On Service Account Credentials</h3>
-
 <ol>
-<li><p>Open a browser window and navigate to your SSO Console.  Please check with your instructor for the link.  It should be similar to the following.  Replace userX with your assigned user and OCP_URL.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">http://sso-sso.apps.<span style="color:#f92672">[</span>OCP_URL<span style="color:#f92672">]</span>/auth/admin/<span style="color:#f92672">[</span>userX<span style="color:#f92672">]</span>/console/</code></pre></div>
-<p><em>Remember to replace the X with your user number.</em></p></li>
-
-<li><p>Log into Red Hat Single Sign On using your designated user and password. Click on <strong>Sign In</strong>.</p>
-
-<p><br><img src="../images/00-login-sso.png "RH SSO Login" width="900" /><br><br></p></li>
-
-<li><p>Select <strong>Clients</strong> from the left menu.</p>
-
-<p><br><img src="../images/00-clients.png "Clients" width="900" /><br><br></p>
-
-<p><em>A 3scale-admin client and service account was already created for you</em>.</p></li>
-
-<li><p>Click on the <strong>3scale-admin</strong> link to view the details.</p>
-
-<p><br><img src="../images/00-3scale-admin.png "3scale admin account"" width="900" /><br><br></p></li>
-
-<li><p>Click the <strong>Credentials</strong> tab.</p>
-
-<p><br><img src="../images/00-sa-credentials.png "Service Account Credentials"" width="900" /><br><br></p></li>
-
-<li><p>Take notice of the service account <strong>Secret</strong>. Copy and save it or write it down as you will use it to configure 3scale.</p>
-
-<p><br><img src="../images/00-sa-secret.png "Service Account Secret"" width="900" /><br><br></p></li>
+<li>
+<p>Open a browser window and navigate to your SSO Console.  Please check with your instructor for the link.  It should be similar to the following.  Replace userX with your assigned user and OCP_URL.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">http://sso-sso.apps.<span style="color:#f92672">[</span>OCP_URL<span style="color:#f92672">]</span>/auth/admin/<span style="color:#f92672">[</span>userX<span style="color:#f92672">]</span>/console/
+</code></pre></div><p><em>Remember to replace the X with your user number.</em></p>
+</li>
+<li>
+<p>Log into Red Hat Single Sign On using your designated user and password. Click on <strong>Sign In</strong>.</p>
+<p><br>&lt;img src=&rdquo;../images/00-login-sso.png &ldquo;RH SSO Login&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Select <strong>Clients</strong> from the left menu.</p>
+<p><br>&lt;img src=&rdquo;../images/00-clients.png &ldquo;Clients&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+<p><em>A 3scale-admin client and service account was already created for you</em>.</p>
+</li>
+<li>
+<p>Click on the <strong>3scale-admin</strong> link to view the details.</p>
+<p><br>&lt;img src=&rdquo;../images/00-3scale-admin.png &ldquo;3scale admin account&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click the <strong>Credentials</strong> tab.</p>
+<p><br>&lt;img src=&rdquo;../images/00-sa-credentials.png &ldquo;Service Account Credentials&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Take notice of the service account <strong>Secret</strong>. Copy and save it or write it down as you will use it to configure 3scale.</p>
+<p><br>&lt;img src=&rdquo;../images/00-sa-secret.png &ldquo;Service Account Secret&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
 </ol>
-
 <h3 id="step-2-add-user-to-realm">Step 2: Add User to Realm</h3>
-
 <ol>
-<li><p>Click on the Users menu on the left side of the screen.</p>
-
-<p><br><img src="../images/00-users.png "Users Menu"" width="900" /><br><br></p></li>
-
-<li><p>Click the <strong>Add user</strong> button.</p>
-
-<p><br><img src="../images/00-add-user.png "Add User"" width="900" /><br><br></p></li>
-
-<li><p>Type <strong>apiuser</strong> as the Username.</p>
-
-<p><br><img src="../images/00-username.png "User Details"" width="900" /><br><br></p></li>
-
-<li><p>Click on the <strong>Save</strong> button.</p></li>
-
-<li><p>Click on the <strong>Credentials</strong> tab to reset the password. Type <strong>apipassword</strong> as the <em>New Password</em> and <em>Password Confirmation</em>. Turn OFF the <strong>Temporary</strong> to avoid the password reset at the next login.</p>
-
-<p><br><img src="../images/00-user-credentials.png "User Credentials"" width="900" /><br><br></p></li>
-
-<li><p>Click on <strong>Reset Password</strong>.</p></li>
-
-<li><p>Click on the <strong>Change password</strong> button in the pop-up dialog.</p>
-
-<p><br><img src="../images/00-change-password.png "Change Password Dialog"" width="900" /><br><br></p>
-
-<p><em>Now you have a user to test your integration.</em></p></li>
+<li>
+<p>Click on the Users menu on the left side of the screen.</p>
+<p><br>&lt;img src=&rdquo;../images/00-users.png &ldquo;Users Menu&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click the <strong>Add user</strong> button.</p>
+<p><br>&lt;img src=&rdquo;../images/00-add-user.png &ldquo;Add User&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Type <strong>apiuser</strong> as the Username.</p>
+<p><br>&lt;img src=&rdquo;../images/00-username.png &ldquo;User Details&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on the <strong>Save</strong> button.</p>
+</li>
+<li>
+<p>Click on the <strong>Credentials</strong> tab to reset the password. Type <strong>apipassword</strong> as the <em>New Password</em> and <em>Password Confirmation</em>. Turn OFF the <strong>Temporary</strong> to avoid the password reset at the next login.</p>
+<p><br>&lt;img src=&rdquo;../images/00-user-credentials.png &ldquo;User Credentials&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on <strong>Reset Password</strong>.</p>
+</li>
+<li>
+<p>Click on the <strong>Change password</strong> button in the pop-up dialog.</p>
+<p><br>&lt;img src=&rdquo;../images/00-change-password.png &ldquo;Change Password Dialog&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+<p><em>Now you have a user to test your integration.</em></p>
+</li>
 </ol>
-
 <h3 id="step-3-configure-3scale-integration">Step 3: Configure 3scale Integration</h3>
-
 <ol>
-<li><p>Open a browser window and navigate to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://userX-admin.apps.ocp-ai.redhatgov.io/p/login</code></pre></div>
-<p><em>Remember to replace the X with your user number.</em></p></li>
-
-<li><p>Accept the self-signed certificate if you haven't.</p></li>
-
-<li><p>Log into 3scale using your designated <a href="#environment">user and password</a>. Click on <strong>Sign In</strong>.</p>
-
-<p><br><img src="../images/01-login.png" width="900" /><br><br></p></li>
-
-<li><p>The first page you will land is the <em>API Management Dashboard</em>. Click on the <strong>API</strong> menu link.</p>
-
-<p><br><img src="../images/01a-dashboard.png" width="900" /><br><br></p></li>
-
-<li><p>This is the <em>API Overview</em> page. Here you can take an overview of all your services. Click on the <strong>Integration</strong> link.</p>
-
-<p><br><img src="../images/02-api-integration.png" width="900" /><br><br></p></li>
-
-<li><p>Click on the <strong>edit integration settings</strong> to edit the API settings for the gateway.</p>
-
-<p><br><img src="../images/03-edit-settings.png" width="900" /><br><br></p></li>
-
-<li><p>Scrolll down the page, under the <em>Authentication</em> deployment options, select <strong>OpenID Connect</strong>.</p>
-
-<p><br><img src="../images/04-authentication.png" width="900" /><br><br></p></li>
-
-<li><p>Click on the <strong>Update Service</strong> button.</p></li>
-
-<li><p>Dismiss the warning about changing the Authentication mode by clicking <strong>OK</strong>.</p>
-
-<p><br><img src="../images/04b-authentication-warning.png" width="900" /><br><br></p></li>
-
-<li><p>Back in the service integration page, click on the <strong>edit APIcast configuration</strong>.</p>
-
-<p><br><img src="../images/05-edit-apicast.png" width="900" /><br><br></p></li>
-
-<li><p>Scroll down the page and expand the authentication options by clicking the <strong>Authentication Settings</strong> link.</p>
-
-<p><br><img src="../images/05-authentication-settings.png" width="900" /><br><br></p></li>
-
-<li><p>In the <strong>OpenID Connect Issuer</strong> field, type in your previously noted client credentials with the URL of your Red Hat Single Sing On instance:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">http://3scale-admin:CLIENT_SECRET@sso-sso.apps.ocp-ai.redhatgov.io/auth/realms/userX</code></pre></div>
-<p><em>Remember to replace the X with user number</em></p>
-
-<p><br><img src="../images/06-openid-issuer.png "OpenID Connect Issuer"" width="900" /><br><br></p></li>
-
-<li><p>Scroll down the page and click on the <strong>Update Staging Environment</strong> button.</p>
-
-<p><br><img src="../images/08-back-integration.png "Back Integration"" width="900" /><br><br></p></li>
-
-<li><p>After the reload, scroll down again and click the <strong>Back to Integration &amp; Configuration</strong> link.</p>
-
-<p><br><img src="../images/07-update-environment.png "Update Environment"" width="900" /><br><br></p></li>
-
-<li><p>Promote to Production by clicking the <strong>Promote to Production</strong> button.</p>
-
-<p><br><img src="../images/08a-promote-production.png "Update Environment"" width="900" /><br><br></p></li>
+<li>
+<p>Open a browser window and navigate to:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://userX-admin.apps.ocp-ai.redhatgov.io/p/login
+</code></pre></div><p><em>Remember to replace the X with your user number.</em></p>
+</li>
+<li>
+<p>Accept the self-signed certificate if you haven&rsquo;t.</p>
+</li>
+<li>
+<p>Log into 3scale using your designated <a href="#environment">user and password</a>. Click on <strong>Sign In</strong>.</p>
+<p><br><img src="../images/01-login.png" width="900" /><br><br></p>
+</li>
+<li>
+<p>The first page you will land is the <em>API Management Dashboard</em>. Click on the <strong>API</strong> menu link.</p>
+<p><br><img src="../images/01a-dashboard.png" width="900" /><br><br></p>
+</li>
+<li>
+<p>This is the <em>API Overview</em> page. Here you can take an overview of all your services. Click on the <strong>Integration</strong> link.</p>
+<p><br><img src="../images/02-api-integration.png" width="900" /><br><br></p>
+</li>
+<li>
+<p>Click on the <strong>edit integration settings</strong> to edit the API settings for the gateway.</p>
+<p><br><img src="../images/03-edit-settings.png" width="900" /><br><br></p>
+</li>
+<li>
+<p>Scrolll down the page, under the <em>Authentication</em> deployment options, select <strong>OpenID Connect</strong>.</p>
+<p><br><img src="../images/04-authentication.png" width="900" /><br><br></p>
+</li>
+<li>
+<p>Click on the <strong>Update Service</strong> button.</p>
+</li>
+<li>
+<p>Dismiss the warning about changing the Authentication mode by clicking <strong>OK</strong>.</p>
+<p><br><img src="../images/04b-authentication-warning.png" width="900" /><br><br></p>
+</li>
+<li>
+<p>Back in the service integration page, click on the <strong>edit APIcast configuration</strong>.</p>
+<p><br><img src="../images/05-edit-apicast.png" width="900" /><br><br></p>
+</li>
+<li>
+<p>Scroll down the page and expand the authentication options by clicking the <strong>Authentication Settings</strong> link.</p>
+<p><br><img src="../images/05-authentication-settings.png" width="900" /><br><br></p>
+</li>
+<li>
+<p>In the <strong>OpenID Connect Issuer</strong> field, type in your previously noted client credentials with the URL of your Red Hat Single Sing On instance:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">http://3scale-admin:CLIENT_SECRET@sso-sso.apps.ocp-ai.redhatgov.io/auth/realms/userX
+</code></pre></div><p><em>Remember to replace the X with user number</em></p>
+<p><br>&lt;img src=&rdquo;../images/06-openid-issuer.png &ldquo;OpenID Connect Issuer&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Scroll down the page and click on the <strong>Update Staging Environment</strong> button.</p>
+<p><br>&lt;img src=&rdquo;../images/08-back-integration.png &ldquo;Back Integration&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>After the reload, scroll down again and click the <strong>Back to Integration &amp; Configuration</strong> link.</p>
+<p><br>&lt;img src=&rdquo;../images/07-update-environment.png &ldquo;Update Environment&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Promote to Production by clicking the <strong>Promote to Production</strong> button.</p>
+<p><br>&lt;img src=&rdquo;../images/08a-promote-production.png &ldquo;Update Environment&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
 </ol>
-
 <h3 id="step-4-create-a-test-app">Step 4: Create a Test App</h3>
-
 <ol>
-<li><p>Go to the <em>Developers</em> tab and click on <strong>Developers</strong>.</p>
-
-<p><br>&lt;img src=&quot;../images/09-developers.png &quot;Developers&quot;)</p></li>
-
-<li><p>Click on the <strong>Applications</strong> link.</p>
-
-<p><br><img src="../images/10-applications.png "Applications"" width="900" /><br><br></p></li>
-
-<li><p>Click on <strong>Create Application</strong> link.</p>
-
-<p><br><img src="../images/11-create-application.png "Create Application"" width="900" /><br><br></p></li>
-
-<li><p>Select <strong>Basic</strong> plan from the combo box. Type the following information:</p>
-
+<li>
+<p>Go to the <em>Developers</em> tab and click on <strong>Developers</strong>.</p>
+<p><br>&lt;img src=&rdquo;../images/09-developers.png &ldquo;Developers&rdquo;)</p>
+</li>
+<li>
+<p>Click on the <strong>Applications</strong> link.</p>
+<p><br>&lt;img src=&rdquo;../images/10-applications.png &ldquo;Applications&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Click on <strong>Create Application</strong> link.</p>
+<p><br>&lt;img src=&rdquo;../images/11-create-application.png &ldquo;Create Application&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Select <strong>Basic</strong> plan from the combo box. Type the following information:</p>
 <ul>
 <li>Name: <strong>Secure App</strong></li>
 <li>Description: <strong>OpenID Connect Secured Application</strong></li>
 </ul>
-
-<p><br><img src="../images/12-application-details.png "Application Details"" width="900" /><br><br></p></li>
-
-<li><p>Finally, scroll down the page and click on the <strong>Create Application</strong> button.</p>
-
-<p><br><img src="../images/13-create-app.png "Create App"" width="900" /><br><br></p></li>
-
-<li><p>Update redirect link to your locations application link.</p>
-
-<ul>
-<li>Please update userX and OCP_URL <a href="http://www-[userX].apps.[OCP_URL]/">http://www-[userX].apps.[OCP_URL]/</a></li>
-<li>And note the <em>API Credentials</em>. Write them down as you will need the <strong>Client ID</strong> and the <strong>Client Secret</strong> to test your integration.
-<br><img src="../images/14-app-credentials.png "App Credentials"" width="900" /><br><br></li>
-</ul></li>
+<p><br>&lt;img src=&rdquo;../images/12-application-details.png &ldquo;Application Details&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Finally, scroll down the page and click on the <strong>Create Application</strong> button.</p>
+<p><br>&lt;img src=&rdquo;../images/13-create-app.png &ldquo;Create App&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+</li>
+<li>
+<p>Update redirect link to your locations application link.</p>
+</li>
 </ol>
-
+<ul>
+<li>Please update userX and OCP_URL http://www-[userX].apps.[OCP_URL]/</li>
+<li>And note the <em>API Credentials</em>. Write them down as you will need the <strong>Client ID</strong> and the <strong>Client Secret</strong> to test your integration.
+<br>&lt;img src=&rdquo;../images/14-app-credentials.png &ldquo;App Credentials&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></li>
+</ul>
 <p><em>Congratulations!</em> You have now an application to test your OpenID Connect Integration.</p>
-
 <h2 id="steps-beyond">Steps Beyond</h2>
-
 <p>So, you want more? Login to the Red Hat Single Sign On admin console for your realm if you are not there already. Click on the Clients menu. Now you can check that 3scale zync component creates a new Client in SSO. This new Client has the same ID as the Client ID and Secret from the 3scale admin portal.</p>
-
 <h2 id="summary">Summary</h2>
-
 <p>Now that you can secure your API using three-leg authentication with Red Hat Single Sign-On, you can leverage the current assets of your organization like current LDAP identities or even federate the authentication using other IdP services.</p>
-
 <p>For more information about Single Sign-On, you can check its <a href="https://access.redhat.com/products/red-hat-single-sign-on">page</a>.</p>
-
 <h2 id="notes-and-further-reading">Notes and Further Reading</h2>
-
 <ul>
 <li><a href="http://3scale.net">Red Hat 3scale API Management</a></li>
 <li><a href="https://access.redhat.com/products/red-hat-single-sign-on">Red Hat Single Sign On</a></li>

@@ -677,7 +677,7 @@ If you get an error message such as "You don&#8217;t have permission to access t
 </div>
 </div>
 <div class="sect1">
-<h2 id="_section_5_use_skopeo_and_podman_to_integrate_the_container_into_systemd">Section 5: Use skopeo and podman to integrate the container into systemd</h2>
+<h2 id="_section_6_use_skopeo_and_podman_to_integrate_the_container_into_systemd">Section 6: Use skopeo and podman to integrate the container into systemd</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Running as ec2-user, the container work that you have done is stored in your home directory. We will move it to the system image store in /var/lib/, enable it and start the application.</p>
@@ -725,7 +725,7 @@ If you get an error message such as "You don&#8217;t have permission to access t
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_2_transfer_the_image_into_the_operating_system_image_store">Step 2: Transfer the image into the operating system image store ====</h3>
+<h3 id="_step_2_transfer_the_image_into_the_operating_system_image_store">Step 2: Transfer the image into the operating system image store</h3>
 <div class="paragraph">
 <p>First export the image from ec2-user&#8217;s image store into an archive file. Skopeo can export containers into either docker archive or OCI archive if we want to put the container into a file. Using the OCI archive format:</p>
 </div>
@@ -781,7 +781,55 @@ localhost/httpd   latest   80dd2eb93b53   37 minutes ago   242 MB</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_3_integrate_container_into_systemd">Step 3: Integrate container into systemd</h3>
+<h3 id="_step_3_scan_the_container_image_for_cves">Step 3: Scan the container image for CVEs</h3>
+<div class="paragraph">
+<p>Before using this container image in a system service, let&#8217;s check it for CVEs.  Since RHEL 8.2, the <mark>oscap-podman</mark> utility has been included for scanning container images.  Let&#8217;s see how this works!</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<mark>oscap-podman</mark> requires root privilege.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_step_3a_download_the_latest_red_hat_security_advisories">Step 3a: Download the latest Red Hat Security Advisories</h4>
+<div class="paragraph">
+<p>Red Hat continuously updates security data feeds on <mark><a href="https://access.redhat.com/security/data" class="bare">https://access.redhat.com/security/data</a></mark>.  Let&#8217;s start by retrieving and decompressing the latest RHEL advisories in OVAL format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl https://www.redhat.com/security/data/oval/v2/RHEL8/rhel-8.oval.xml.bz2 | bzip2 --decompress &gt; rhel-8.oval.xml</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_step_3b_scan_a_container_image_with_oscap_podman">Step 3b: Scan a container image with oscap-podman</h4>
+<div class="paragraph">
+<p>Pick an <mark>IMAGE ID</mark> from the previous <mark>sudo podman images</mark> output&#8201;&#8212;&#8201;in this case, the httpd image&#8201;&#8212;&#8201;and run the scan with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo oscap-podman 80dd2eb93b53 oval eval --report /var/www/html/image-oval-report.html rhel-8.oval.xml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the command completes, open this link in another tab to view the resulting report:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">http://node-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/image-oval-report.html</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_4_integrate_container_into_systemd">Step 4: Integrate container into systemd</h3>
 <div class="paragraph">
 <p>To finish this section, let&#8217;s integrate our new container into systemd so you can have it start at boot time and otherwise manage it using systemd. Before getting started, ensure that the webserver started in the openSCAP section is not running:</p>
 </div>

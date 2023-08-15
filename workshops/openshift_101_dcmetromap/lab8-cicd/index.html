@@ -307,23 +307,15 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="ci-cd-defined">CI/CD Defined</h1>
-
+    <h1 id="cicd-defined">CI/CD Defined</h1>
 <p>In modern software projects many teams utilize the concept of Continuous Integration (CI) and Continuous Delivery (CD). By setting up a tool chain that continuously builds, tests, and stages software releases, a team can ensure that their product can be reliably released at any time. OpenShift can be an enabler in the creation and management of this tool chain.</p>
-
 <p>In this lab we walk through creating a simple example of a CI/CD <a href="https://jenkins.io/doc/book/pipeline/">pipeline</a> utlizing Jenkins, all running on top of OpenShift! The Jenkins job will trigger OpenShift to build and deploy a test version of the application, validate that the deployment works, and then tag the test version into production.</p>
-
 <blockquote>
-<p>In the steps below replace 'YOUR#' with your student number (if applicable).</p>
+<p>In the steps below replace &lsquo;YOUR#&rsquo; with your student number (if applicable).</p>
 </blockquote>
-
 <h2 id="create-a-new-project">Create a new project</h2>
-
 <p>Create a new project named “cicd-<span class="userid">YOUR#</span>
 ”.</p>
-
 <div class="panel-group">
   
 
@@ -332,22 +324,20 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseac29c26e94dfd9555c442d68e87c55d0" class="collapsed">
+      <a data-toggle="collapse" href="#collapsee8192bd08f7c45c9c9ac0e14f84ba81b" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapseac29c26e94dfd9555c442d68e87c55d0" class="panel-collapse collapse ">
+  <div id="collapsee8192bd08f7c45c9c9ac0e14f84ba81b" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <h2 id="create-the-project-cicd-span-class-userid-your-span">Create the project cicd-<span class="userid">YOUR#</span></h2>
-
-<p><code>
-$ oc new-project cicd-<span class="userid">YOUR#</span></p>
-
-<p></code></p>
+       <h2 id="create-the-project-cicd-span-classuseridyourspan">Create the project cicd-<span class="userid">YOUR#</span></h2>
+<code>
+$ oc new-project cicd-<span class="userid">YOUR#</span>
+</code>
 
     </div>
   </div>
@@ -359,33 +349,29 @@ $ oc new-project cicd-<span class="userid">YOUR#</span></p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsef4190da377b45206e420f545decd18c1" class="collapsed">
+      <a data-toggle="collapse" href="#collapse1e9eefa0dadec717eca602b8559f2e80" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsef4190da377b45206e420f545decd18c1" class="panel-collapse collapse ">
+  <div id="collapse1e9eefa0dadec717eca602b8559f2e80" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Browse to original landing page by clicking by "OpenShift Container Platform" in the top left hand corner
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-new-project-landing.png" width="300"><br/></p>
-
 <blockquote>
 click "Create Project".
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-new-project.png" width="400"><br/></p>
-
-<p><blockquote>
-Fill in the Name and Display Name of the project as &quot;cicd-<span class="userid">YOUR#</span>
-&quot; and click &quot;Create&quot;
+<blockquote>
+Fill in the Name and Display Name of the project as "cicd-<span class="userid">YOUR#</span>
+" and click "Create"
 </blockquote>
-<img src="../images/ocp-lab-cicd-new-project-detail.png" width="500"><br/></p>
+<img src="../images/ocp-lab-cicd-new-project-detail.png" width="500"><br/>
 
     </div>
   </div>
@@ -395,13 +381,11 @@ Fill in the Name and Display Name of the project as &quot;cicd-<span class="user
 
 </div>
 
-
 <h2 id="use-the-cicd-hahahugoshortcode-s2-hbhb-project">Use the cicd-<span class="userid">YOUR#</span>
  project</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project cicd-<span class="userid">YOUR#</span>
-</code></pre></div>
-<h2 id="instantiate-a-jenkins-server-in-your-project">Instantiate a Jenkins server in your project</h2>
 
+</code></pre></div><h2 id="instantiate-a-jenkins-server-in-your-project">Instantiate a Jenkins server in your project</h2>
 <div class="panel-group">
   
 
@@ -410,17 +394,18 @@ Fill in the Name and Display Name of the project as &quot;cicd-<span class="user
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseac0d7b59187b4ff3e0ad424c029ca39d" class="collapsed">
+      <a data-toggle="collapse" href="#collapse83cd1f4c7a73bdeb8cf3b4baa1647193" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapseac0d7b59187b4ff3e0ad424c029ca39d" class="panel-collapse collapse ">
+  <div id="collapse83cd1f4c7a73bdeb8cf3b4baa1647193" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-app jenkins-ephemeral</code></pre></div>
+       <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-app jenkins-ephemeral
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -431,47 +416,37 @@ Fill in the Name and Display Name of the project as &quot;cicd-<span class="user
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsee183cd971fd5897f5f8a1670dfc2411b" class="collapsed">
+      <a data-toggle="collapse" href="#collapse323c1425c452fbe2e8a0cb4eb797059b" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsee183cd971fd5897f5f8a1670dfc2411b" class="panel-collapse collapse ">
+  <div id="collapse323c1425c452fbe2e8a0cb4eb797059b" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Click "Add to Project", select "Browse Catalog" tab and search on "jenkins". Then select "Jenkins (Ephemeral)".
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-instantiate.png" width="600"><br/></p>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-instantiate1.png" width="700"><br/></p>
-
 <blockquote>
 Select Next
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-instantiate2.png" width="700"><br/></p>
-
 <blockquote>
 Select the Project cicd-<span class="userid">YOUR#</span>
  from "Add to Project"
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-instantiate3.png" width="700"><br/></p>
-
 <blockquote>
 Select the Create
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-instantiate4.png" width="700"><br/></p>
-
 <blockquote>
 Click the "Continue to the project overview" link
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-overview.png" width="900"><br/></p>
 
     </div>
@@ -482,19 +457,15 @@ Click the "Continue to the project overview" link
 
 </div>
 
-
 <h2 id="create-a-sample-application-configuration">Create a sample application configuration</h2>
-
 <blockquote>
-<p>Use the &quot;oc create&quot; command to create a template resource by filename for a simple nodejs application:</p>
+<p>Use the &ldquo;oc create&rdquo; command to create a template resource by filename for a simple nodejs application:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json</code></pre></div>
-<h2 id="modify-the-sample-application-configuration-to-use-the-node-js-red-hat-universal-base-image-ubi-https-www-redhat-com-en-blog-introducing-red-hat-universal-base-image">Modify the sample application configuration to use the Node.js <a href="https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image">Red Hat Universal Base Image (UBI)</a></h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json
+</code></pre></div><h2 id="modify-the-sample-application-configuration-to-use-the-nodejs-red-hat-universal-base-image-ubihttpswwwredhatcomenblogintroducing-red-hat-universal-base-image">Modify the sample application configuration to use the Node.js <a href="https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image">Red Hat Universal Base Image (UBI)</a></h2>
 <blockquote>
 <p>The template used above references a DEPRECATED: A Centos7 based NodeJS v0.10 image for use with OpenShift v3.</p>
 </blockquote>
-
 <div class="panel-group">
   
 
@@ -503,20 +474,21 @@ Click the "Continue to the project overview" link
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse22fda1492920335c3210fcf4dbda8a14" class="collapsed">
+      <a data-toggle="collapse" href="#collapsecc944a0ec241266bfb41ca8efcb109a4" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse22fda1492920335c3210fcf4dbda8a14" class="panel-collapse collapse ">
+  <div id="collapsecc944a0ec241266bfb41ca8efcb109a4" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Find and replace "nodejs-010-centos7" with "nodejs-10"
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc edit template nodejs-helloworld-sample</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc edit template nodejs-helloworld-sample
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -527,40 +499,32 @@ Find and replace "nodejs-010-centos7" with "nodejs-10"
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse722587eafe2d11d7e2bfa6251b737379" class="collapsed">
+      <a data-toggle="collapse" href="#collapse01dbbc36c8c7a51dd9743cf592ed5806" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse722587eafe2d11d7e2bfa6251b737379" class="panel-collapse collapse ">
+  <div id="collapse01dbbc36c8c7a51dd9743cf592ed5806" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Click "Resources" and "Other Resources"
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-app-resources.png" width="1000"><br/></p>
-
 <blockquote>
 From the "Choose a resource to list..." dropdown menu, select "Template"
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-app-template.png" width="800"><br/></p>
-
 <blockquote>
 Click "Actions" and select "Edit YAML"
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-app-resources-edit.png" width="800"><br/></p>
-
 <blockquote>
 Find and replace "nodejs-010-centos7" with "nodejs-10"
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-app-edit-yaml-template.png" width="800"><br/></p>
-
 <blockquote>
 Click "Save"
 </blockquote>
@@ -573,21 +537,16 @@ Click "Save"
 
 </div>
 
-
 <h2 id="create-a-sample-application-from-template">Create a sample application from template</h2>
-
 <blockquote>
-<p>Use the &quot;oc process&quot; command to create a simple nodejs application from the template file:</p>
+<p>Use the &ldquo;oc process&rdquo; command to create a simple nodejs application from the template file:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc process nodejs-helloworld-sample -p NAMESPACE<span style="color:#f92672">=</span>registry.access.redhat.com/ubi7 | oc create -f -</code></pre></div>
-<blockquote>
-<p>Click on &quot;Overview&quot; within the OpenShift console to display the sample application configuration</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc process nodejs-helloworld-sample -p NAMESPACE<span style="color:#f92672">=</span>registry.access.redhat.com/ubi7 | oc create -f -
+</code></pre></div><blockquote>
+<p>Click on &ldquo;Overview&rdquo; within the OpenShift console to display the sample application configuration</p>
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-app-create.png" width="900"><br/></p>
-
 <h2 id="confirm-you-can-access-jenkins">Confirm you can access Jenkins</h2>
-
 <div class="panel-group">
   
 
@@ -596,14 +555,14 @@ Click "Save"
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse535950d688451506daeaf2cde67ccaba" class="collapsed">
+      <a data-toggle="collapse" href="#collapsef8a6bfa7fdc06b8fe6eb9300cdc3406a" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse535950d688451506daeaf2cde67ccaba" class="panel-collapse collapse ">
+  <div id="collapsef8a6bfa7fdc06b8fe6eb9300cdc3406a" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
@@ -613,8 +572,8 @@ from the example below.
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get route
 NAME       HOST/PORT                            PATH      SERVICES   PORT      TERMINATION     WILDCARD
 frontend   frontend-cicd.192.168.42.27.xip.io             frontend   &lt;all&gt;     edge            None
-jenkins    jenkins-cicd.192.168.42.27.xip.io              jenkins    &lt;all&gt;     edge/Redirect   None</code></pre></div>
-<p>Use Jenkins HOST/PORT to access through web browser</p>
+jenkins    jenkins-cicd.192.168.42.27.xip.io              jenkins    &lt;all&gt;     edge/Redirect   None
+</code></pre></div><p>Use Jenkins HOST/PORT to access through web browser</p>
 
     </div>
   </div>
@@ -626,20 +585,19 @@ jenkins    jenkins-cicd.192.168.42.27.xip.io              jenkins    &lt;all&gt;
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse9b218cdeb1d564c9e51f113e7f7d7c45" class="collapsed">
+      <a data-toggle="collapse" href="#collapse2f9adc49856f4893e0fcf0a239cd9b0c" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse9b218cdeb1d564c9e51f113e7f7d7c45" class="panel-collapse collapse ">
+  <div id="collapse2f9adc49856f4893e0fcf0a239cd9b0c" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Click the URL that is listed in the jenkins header
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-overview.png" width="900"><br/></p>
 
     </div>
@@ -650,43 +608,31 @@ Click the URL that is listed in the jenkins header
 
 </div>
 
-
 <blockquote>
-<p>Select &quot;Login with OpenShift&quot; from Jenkins login page</p>
+<p>Select &ldquo;Login with OpenShift&rdquo; from Jenkins login page</p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-cicd-jenkins-login-1.png" width="400">
-</br></p>
-
+<img src="../images/ocp-lab-cicd-jenkins-login-1.png" width="400">
+</br>
 <p>The OpenShift login page is displayed in a new browser tab.</p>
-
 <blockquote>
 <p>Login with your OpenShift user name and password</p>
 </blockquote>
-
-<p><img src="../images/ocp-login.png" width="600">
-<br/></p>
-
+<img src="../images/ocp-login.png" width="600">
+<br/>
 <p>Once logged in, click the [Allow selected permissions] button and you should see the Jenkins dashboard.</p>
-
 <h2 id="create-a-jenkins-pipeline-using-openshift">Create a Jenkins pipeline using OpenShift</h2>
-
 <p>We will be creating the following very simple (4) stage Jenkins pipeline.</p>
-
 <ol>
 <li>Build the application from source.</li>
 <li>Deploy the test version of the application.</li>
 <li>Submit for approval, then tag the image for production, otherwise abort.</li>
 <li>Scale the application.</li>
 </ol>
-
 <p>The first step is to create a build configuration that is based on a Jenkins pipeline strategy. The pipeline is written
 in the GROOVY language using a Jenkins file format.</p>
-
 <blockquote>
 <p>Use the OpenShift CLI or Web Console to create an OpenShift build configuration object.</p>
 </blockquote>
-
 <div class="panel-group">
   
 
@@ -695,14 +641,14 @@ in the GROOVY language using a Jenkins file format.</p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse70c33cd83a4a7056a76e6e008ba64047" class="collapsed">
+      <a data-toggle="collapse" href="#collapse62e31951cf15246dd9f09978a47f52cb" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse70c33cd83a4a7056a76e6e008ba64047" class="panel-collapse collapse ">
+  <div id="collapse62e31951cf15246dd9f09978a47f52cb" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <p>Copy and paste the following into bash.</p>
@@ -767,9 +713,10 @@ in the GROOVY language using a Jenkins file format.</p>
 </span><span style="color:#e6db74">            }
 </span><span style="color:#e6db74">          }
 </span><span style="color:#e6db74">        }
-</span><span style="color:#e6db74">EOF</span></code></pre></div>
-<p>Expected output:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">buildconfig <span style="color:#e6db74">&#34;pipeline&#34;</span> created</code></pre></div>
+</span><span style="color:#e6db74">EOF</span>
+</code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">buildconfig <span style="color:#e6db74">&#34;pipeline&#34;</span> created
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -780,14 +727,14 @@ in the GROOVY language using a Jenkins file format.</p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse87f54b20d487e463ed1e67d30c49dff9" class="collapsed">
+      <a data-toggle="collapse" href="#collapse49be2700e9c194abf08a0c21d8ec8b70" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse87f54b20d487e463ed1e67d30c49dff9" class="panel-collapse collapse ">
+  <div id="collapse49be2700e9c194abf08a0c21d8ec8b70" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
@@ -852,18 +799,15 @@ spec:
               <span style="color:#f92672">}</span>
             <span style="color:#f92672">}</span>
           <span style="color:#f92672">}</span>
-        <span style="color:#f92672">}</span></code></pre></div>
-<blockquote>
+        <span style="color:#f92672">}</span>
+</code></pre></div><blockquote>
 <p>Choose <em>Add to project</em> -&gt; <em>Import YAML</em></p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-cicd-import-yaml.png" width="900"></p>
-
+<img src="../images/ocp-lab-cicd-import-yaml.png" width="900">
 <blockquote>
-<p>Then copy and paste the above build configuration definition and choose &quot;Create&quot;.</p>
+<p>Then copy and paste the above build configuration definition and choose &ldquo;Create&rdquo;.</p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-cicd-import-yaml-dialog.png"></p>
+<img src="../images/ocp-lab-cicd-import-yaml-dialog.png">
 
     </div>
   </div>
@@ -873,56 +817,37 @@ spec:
 
 </div>
 
-
 <h2 id="start-the-pipeline">Start the pipeline</h2>
-
 <blockquote>
 <p>Using the OpenShift Web Console, choose <em>Builds</em> -&gt; <em>Pipelines</em></p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-cicd-start-pipeline.png" width="900"></p>
-
-<p>When the pipeline starts, OpenShift uploads the pipeline to the Jenkins server for execution. As it runs, the various stages trigger OpenShift to build and deploy the frontend microservice. After a Jenkins user approves the frontend deployment, Jenkins triggers OpenShift to tag the image stream with the &quot;:prod&quot; tag then scales the frontend-prod deployment for (2) replicas.</p>
-
+<img src="../images/ocp-lab-cicd-start-pipeline.png" width="900">
+<p>When the pipeline starts, OpenShift uploads the pipeline to the Jenkins server for execution. As it runs, the various stages trigger OpenShift to build and deploy the frontend microservice. After a Jenkins user approves the frontend deployment, Jenkins triggers OpenShift to tag the image stream with the &ldquo;:prod&rdquo; tag then scales the frontend-prod deployment for (2) replicas.</p>
 <p>The Jenkins dashboard should indicate that a new build is executing.</p>
-
-<p><img src="../images/ocp-lab-cicd-jenkins-build-exec-status.png"></p>
-
-<p>Back in the OpenShift Web Console, watch the pipeline execute. Once the &quot;deployFrontEnd&quot; stage completes, you should be able to visit the route for the frontend service in a web browser.</p>
-
-<p><img src="../images/ocp-lab-cicd-pipeline-input.png"></p>
-
+<img src="../images/ocp-lab-cicd-jenkins-build-exec-status.png">
+<p>Back in the OpenShift Web Console, watch the pipeline execute. Once the &ldquo;deployFrontEnd&rdquo; stage completes, you should be able to visit the route for the frontend service in a web browser.</p>
+<img src="../images/ocp-lab-cicd-pipeline-input.png">
 <blockquote>
-<p>Click on &quot;Input Required&quot; and you should get redirected to the Jenkins Web Console to
+<p>Click on &ldquo;Input Required&rdquo; and you should get redirected to the Jenkins Web Console to
 approve the promotion to production.</p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-cicd-jenkins-promote.png"></p>
-
+<img src="../images/ocp-lab-cicd-jenkins-promote.png">
 <blockquote>
 <p>Now return to the OpenShift Web Console and watch the pipeline finish.</p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-cicd-pipeline-stages.png"></p>
-
+<img src="../images/ocp-lab-cicd-pipeline-stages.png">
 <blockquote>
 <p>Confirm the <em>frontend-prod</em> has deployed 2 pods.</p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-cicd-create-route.png"></p>
-
+<img src="../images/ocp-lab-cicd-create-route.png">
 <blockquote>
 <p>Now <em>create a secure route</em> with TLS edge termination the <em>frontend-prod</em> service so the application can be visited.</p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-cicd-route-tls.png"></p>
-
+<img src="../images/ocp-lab-cicd-route-tls.png">
 <h2 id="confirm-both-the-test-and-production-services-are-available">Confirm both the test and production services are available</h2>
-
 <blockquote>
 <p>Browse to both services</p>
 </blockquote>
-
 <div class="panel-group">
   
 
@@ -931,14 +856,14 @@ approve the promotion to production.</p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse4f0e2874af97f40ef687d372c76d00c3" class="collapsed">
+      <a data-toggle="collapse" href="#collapse21fe62d737f2e9b621aa9cfb14b5eb54" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse4f0e2874af97f40ef687d372c76d00c3" class="panel-collapse collapse ">
+  <div id="collapse21fe62d737f2e9b621aa9cfb14b5eb54" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <p>Use the <code>oc get routes</code> command to get the HOST/PORT (URLs) needed to access the frontend and frontend-prod services. Your HOST/PORT values will differ
@@ -947,8 +872,8 @@ from the example below.</p>
 
 NAME            HOST/PORT                            PATH      SERVICES        PORT      TERMINATION     WILDCARD
 frontend        frontend-cicd-XX.apps.eadgbe.net                  frontend        &lt;all&gt;     edge            None
-frontend-prod   frontend-prod-cicd-XX.apps.eadgbe.net             frontend-prod   web       edge            None</code></pre></div>
-<p>Use a web browser to visit the HOST/PORT (URLs) for the frontend and frontend-prod services. Don't forget the <code>https://</code> prefix.</p>
+frontend-prod   frontend-prod-cicd-XX.apps.eadgbe.net             frontend-prod   web       edge            None
+</code></pre></div><p>Use a web browser to visit the HOST/PORT (URLs) for the frontend and frontend-prod services. Don&rsquo;t forget the <code>https://</code> prefix.</p>
 
     </div>
   </div>
@@ -960,20 +885,19 @@ frontend-prod   frontend-prod-cicd-XX.apps.eadgbe.net             frontend-prod 
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse45211b710ff2818b59a2bad89681b486" class="collapsed">
+      <a data-toggle="collapse" href="#collapsec5322746a6b72fe843fc12bc6de96479" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse45211b710ff2818b59a2bad89681b486" class="panel-collapse collapse ">
+  <div id="collapsec5322746a6b72fe843fc12bc6de96479" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Select services' links from Overview page.
 </blockquote>
-
 <p><img src="../images/ocp-lab-cicd-jenkins-app-overview.png"><br/></p>
 
     </div>
@@ -984,21 +908,15 @@ Select services' links from Overview page.
 
 </div>
 
-
 <p>Service web page displayed:</p>
-
 <p><img src="../images/ocp-lab-cicd-app-test.png"><br/></p>
-
 <h2 id="edit-the-pipeline">Edit the pipeline.</h2>
-
 <blockquote>
 <p>Now make a change to the pipeline. For example, in the <em>scaleUp</em> stage, change the number
 of replicas to 3.</p>
 </blockquote>
-
 <p>Technically speaking, a rebuild from source is not needed to scale up a deployment. We use
 this simple example to illustrate how a pipeline may be edited within OpenShift.</p>
-
 <div class="panel-group">
   
 
@@ -1007,18 +925,19 @@ this simple example to illustrate how a pipeline may be edited within OpenShift.
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseb50fc087925eab1521e616093595d4c5" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3b4d51191166f4b234ea762204841fbb" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapseb50fc087925eab1521e616093595d4c5" class="panel-collapse collapse ">
+  <div id="collapse3b4d51191166f4b234ea762204841fbb" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <p>If you are comfortable using the <strong>vi</strong> editor:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc edit bc/pipeline</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc edit bc/pipeline
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -1029,17 +948,17 @@ this simple example to illustrate how a pipeline may be edited within OpenShift.
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse5c32d00d6332e981fc83f3566add305c" class="collapsed">
+      <a data-toggle="collapse" href="#collapse30db412f1d58f692f3d2a500777f6efd" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse5c32d00d6332e981fc83f3566add305c" class="panel-collapse collapse ">
+  <div id="collapse30db412f1d58f692f3d2a500777f6efd" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/ocp-lab-cicd-pipeline-edit.png"></p>
+       <img src="../images/ocp-lab-cicd-pipeline-edit.png">
 
     </div>
   </div>
@@ -1049,18 +968,13 @@ this simple example to illustrate how a pipeline may be edited within OpenShift.
 
 </div>
 
-
 <blockquote>
 <p>Save your changes and run the pipeline again to confirm the <em>frontend-prod</em> deployment has
 deployed 3 pods.</p>
 </blockquote>
-
-<p><img src="../images/ocp-lab-cicd-app-3-pods.png"></p>
-
+<img src="../images/ocp-lab-cicd-app-3-pods.png">
 <h1 id="summary">Summary</h1>
-
 <p>In this lab you have very quickly and easily constructed a basic Build/Test/Deploy pipeline. Although our example was very basic it introduces you to a powerful DevOps feature of OpenShift through the leveraging of Jenkins. This can be extended to support complex real-world continuous delivery requirements. Read more about the use of Jenkins on OpenShift <a href="https://docs.openshift.com/enterprise/latest/using_images/other_images/jenkins.html">here</a> and more about Jenkins <a href="https://jenkins.io/doc">here</a>.</p>
-
 <style>
 
  

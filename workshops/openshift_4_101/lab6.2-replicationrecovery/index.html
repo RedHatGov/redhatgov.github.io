@@ -307,12 +307,8 @@
   </ul>
 </nav>
 
-    
-
-<h2 id="application-health">Application Health</h2>
-
-<p>In addition to the health of your application's pods, OpenShift will watch the containers inside those pods.  Let's forcibly inflict some issues and see how OpenShift responds.</p>
-
+    <h2 id="application-health">Application Health</h2>
+<p>In addition to the health of your application&rsquo;s pods, OpenShift will watch the containers inside those pods.  Let&rsquo;s forcibly inflict some issues and see how OpenShift responds.</p>
 <div class="panel-group">
   
 
@@ -320,48 +316,42 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsea3668ff90de8ad10cb75cb22d959d9f7" class="collapsed">
+      <a data-toggle="collapse" href="#collapseca2b4950ff749472ab9a02bce546ed4b" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsea3668ff90de8ad10cb75cb22d959d9f7" class="panel-collapse collapse ">
+  <div id="collapseca2b4950ff749472ab9a02bce546ed4b" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Choose a running pod and shell into it:
 </blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
-$ oc exec PODNAME -it /bin/bash</code></pre></div>
-<p>You are now executing a bash shell running in the container of the pod.  Let's kill our webapp and see what happens.</p>
-
+$ oc exec PODNAME -it /bin/bash
+</code></pre></div><p>You are now executing a bash shell running in the container of the pod.  Let&rsquo;s kill our webapp and see what happens.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i> If we had multiple containers in the pod we could use "-c CONTAINER_NAME" to select the right one
 </blockquote>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Choose a running pod and shell into its container:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pkill -9 node</code></pre></div>
-<p>This will kick you out off the container with an error like &quot;Error executing command in container&quot;</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pkill -9 node
+</code></pre></div><p>This will kick you out off the container with an error like &ldquo;Error executing command in container&rdquo;</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Do it again - shell in and execute the same command to kill node
 </blockquote>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Watch for the container restart
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods -w</code></pre></div>
-<p>If a container dies multiple times quickly, OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn't waste resources trying to restart containers that are continuously crashing.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods -w
+</code></pre></div><p>If a container dies multiple times quickly, OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn&rsquo;t waste resources trying to restart containers that are continuously crashing.</p>
 
     </div>
   </div>
@@ -373,22 +363,20 @@ $ oc exec PODNAME -it /bin/bash</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse9e4f19e209874e6fc92a5a5cb7c402a3" class="collapsed">
+      <a data-toggle="collapse" href="#collapse82ff446c509abba7e17ed223b0085e9e" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse9e4f19e209874e6fc92a5a5cb7c402a3" class="panel-collapse collapse ">
+  <div id="collapse82ff446c509abba7e17ed223b0085e9e" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="web-console-access">Web Console access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
 </pre>
-
 <blockquote>
 Navigate to browse the pods list, and click on a running pod
 </blockquote>
@@ -399,22 +387,16 @@ In the tab bar for this pod, click on "Terminal"
 Click inside the terminal view and type $ pkill -9 node
 </blockquote>
 <img src="../images/ocp-lab-replicationrecovery-terminal.gif" width="900"><br/>
-
-</br>This is going to kill the node.js web server, and kick you off of the container's terminal.</br></br>
-
-<img src="../images/ocp-lab-replicationrecovery-terminalkick.png" width="400"><br/>
-
+<p></br>This is going to kill the node.js web server, and kick you off of the container&rsquo;s terminal.</br></br></p>
+<p><img src="../images/ocp-lab-replicationrecovery-terminalkick.png" width="400"><br/></p>
 </br>
-
 <blockquote>
 Click the refresh button (on your web browser), and do that a couple more times
 </blockquote>
-
 <blockquote>
 Go back to the pod overview
 </blockquote>
-
-<p>If the container dies multiple times so quickly; then OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn't waste resources trying to restart containers that are continuously crashing.</p>
+<p>If the container dies multiple times so quickly; then OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn&rsquo;t waste resources trying to restart containers that are continuously crashing.</p>
 
     </div>
   </div>
@@ -423,17 +405,11 @@ Go back to the pod overview
 
 </div>
 
-
 <h2 id="clean-up">Clean up</h2>
-
-<p>Let's scale back down to 1 replica.  If you are using the web console just click the down arrow from the Deployments Configs Overview page.  If you are using the command line use the &quot;oc scale&quot; command.</p>
-
+<p>Let&rsquo;s scale back down to 1 replica.  If you are using the web console just click the down arrow from the Deployments Configs Overview page.  If you are using the command line use the &ldquo;oc scale&rdquo; command.</p>
 <p><img src="../images/ocp-lab-replicationrecovery-cleanup.gif" width="900"><br/></p>
-
 <h1 id="summary">Summary</h1>
-
 <p>In this lab we learned about replication controllers and how they can be used to scale your applications and services.  We also tried to break a few things and saw how OpenShift responded to heal the system and keep it running.</p>
-
 <style>
 
  

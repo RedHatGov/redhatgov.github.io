@@ -354,7 +354,7 @@ images.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo -i</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -362,12 +362,12 @@ images.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt;EOF &gt; /etc/containers/registries.d/node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>.yaml</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt;EOF &gt; /etc/containers/registries.d/node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>.yaml</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker:
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">docker:
   node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000:
     sigstore: file:///var/tmp/sigstore/node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
     sigstore-staging: file:///var/tmp/sigstore/node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
@@ -379,7 +379,7 @@ EOF</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -390,7 +390,7 @@ EOF</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p /usr/tmp/sigstore/node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span></code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir -p /usr/tmp/sigstore/node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span></code></pre>
 </div>
 </div>
 <div class="sect2">
@@ -400,7 +400,7 @@ EOF</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gpg2 --quick-gen-key --yes ec2-user</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">gpg2 --quick-gen-key --yes ec2-user</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -408,7 +408,7 @@ EOF</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /usr/tmp/keys
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir /usr/tmp/keys
 gpg2 --export ec2-user &gt; /usr/tmp/keys/gpg-pubkey.gpg</code></pre>
 </div>
 </div>
@@ -417,7 +417,7 @@ gpg2 --export ec2-user &gt; /usr/tmp/keys/gpg-pubkey.gpg</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman tag registry.fedoraproject.org/fedora:latest node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora:latest
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman tag registry.fedoraproject.org/fedora:latest node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora:latest
 podman images</code></pre>
 </div>
 </div>
@@ -432,7 +432,7 @@ node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span cl
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman login --username=redhat --password=redhat node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman login --username=redhat --password=redhat node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -442,7 +442,7 @@ node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span cl
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">podman push --sign-by ec2-user node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
+<pre class="highlightjs highlight"><code data-lang="yaml" class="language-yaml hljs">podman push --sign-by ec2-user node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -464,7 +464,7 @@ Storing signatures</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">tree /var/tmp/sigstore</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">tree /var/tmp/sigstore</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -483,7 +483,7 @@ Storing signatures</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl  --user redhat:redhat https://node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/v2/_catalog</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl  --user redhat:redhat https://node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/v2/_catalog</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -502,7 +502,7 @@ Storing signatures</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman image trust show</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman image trust show</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -515,7 +515,7 @@ Storing signatures</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman image trust set -t reject default
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman image trust set -t reject default
 podman image trust show</code></pre>
 </div>
 </div>
@@ -533,7 +533,7 @@ default   reject</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman login --username=redhat --password=redhat node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman login --username=redhat --password=redhat node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -546,7 +546,7 @@ default   reject</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman pull node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman pull node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -561,15 +561,15 @@ Error: error pulling image "node1-<span class="userid">0</span>.<span class="pre
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman image trust set --type signedBy --pubkeysfile /usr/tmp/keys/gpg-pubkey.gpg node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman image trust set --type signedBy --pubkeysfile /usr/tmp/keys/gpg-pubkey.gpg node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now examine the image trust again. It should show that any image pulls from <strong>node1.%guid%.internal</strong> must be signed.</p>
+<p>Now examine the image trust again. It should show that any image pulls from <code>node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span></code> must be signed.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman image trust show</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman image trust show</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -583,7 +583,7 @@ node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span cl
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman pull node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman pull node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -612,7 +612,7 @@ Storing signatures</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman pull registry.access.redhat.com/ubi8/ubi</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman pull registry.access.redhat.com/ubi8/ubi</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -630,7 +630,7 @@ Error: error pulling image "registry.access.redhat.com/ubi8/ubi": unable to pull
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo -i</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -638,12 +638,12 @@ Error: error pulling image "registry.access.redhat.com/ubi8/ubi": unable to pull
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt;EOF &gt; /etc/containers/registries.d/registry.access.redhat.com.yaml</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt;EOF &gt; /etc/containers/registries.d/registry.access.redhat.com.yaml</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker:
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">docker:
      registry.access.redhat.com:
          sigstore: https://access.redhat.com/webassets/docker/content/sigstore
 EOF</code></pre>
@@ -654,7 +654,7 @@ EOF</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -662,7 +662,7 @@ EOF</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman image trust set -f /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release registry.access.redhat.com</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman image trust set -f /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release registry.access.redhat.com</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -670,7 +670,7 @@ EOF</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman image trust show</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman image trust show</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -686,7 +686,7 @@ node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span cl
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman pull registry.access.redhat.com/ubi8/ubi</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman pull registry.access.redhat.com/ubi8/ubi</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -732,7 +732,7 @@ Storing signatures
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman pull node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman pull node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
 </div>
 </div>
 <div class="literalblock">

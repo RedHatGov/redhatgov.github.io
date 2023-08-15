@@ -307,16 +307,10 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="welcome-to-openshift">Welcome to OpenShift!</h1>
-
+    <h1 id="welcome-to-openshift">Welcome to OpenShift!</h1>
 <p>This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.</p>
-
 <h1 id="key-terms">Key Terms</h1>
-
-<p>We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with. You'll learn more terms along the way, but these are the basics to get you started.</p>
-
+<p>We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with. You&rsquo;ll learn more terms along the way, but these are the basics to get you started.</p>
 <ul>
 <li>Container - Your software wrapped in a complete filesystem containing everything it needs to run</li>
 <li>Image - We are talking about docker images; read-only and used to create containers</li>
@@ -331,38 +325,28 @@
 <li>Node - Where the compute happens; your software is run on nodes</li>
 <li>Pipeline - Automates the control, building, deploying, and promoting your applications on OpenShift</li>
 </ul>
-
 <h1 id="accessing-openshift">Accessing OpenShift</h1>
-
-<p>OpenShift provides a web console that allows you to perform various tasks via a web browser.  Additionally, you can utilize a command line tool to perform tasks.  Let's get started by logging into both of these and checking the status of the platform.</p>
-
-<h2 id="let-s-login-to-the-web-console">Let's Login to the Web Console</h2>
-
+<p>OpenShift provides a web console that allows you to perform various tasks via a web browser.  Additionally, you can utilize a command line tool to perform tasks.  Let&rsquo;s get started by logging into both of these and checking the status of the platform.</p>
+<h2 id="lets-login-to-the-web-console">Let&rsquo;s Login to the Web Console</h2>
 <p>Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.</p>
-
 <p>For example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:8443</code></pre></div>
-<p><img src="../images/ocp-login.png" width="600"><br/>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:8443
+</code></pre></div><p><img src="../images/ocp-login.png" width="600"><br/>
 <em>Login Webpage</em></p>
-
 <p>Once logged in you should see your available projects - or a button to create a project if none exist already.</p>
-
-<h2 id="let-s-try-the-oc-command-line-cli-tool">Let's try the 'oc' command line (CLI) tool</h2>
-
-<p>Open a terminal and login using the same openshift URI with the oc Login command.  Please add the option --insecure-skip-tls-verify=true.</p>
-
+<h2 id="lets-try-the-oc-command-line-cli-tool">Let&rsquo;s try the &lsquo;oc&rsquo; command line (CLI) tool</h2>
+<p>Open a terminal and login using the same openshift URI with the oc Login command.  Please add the option &ndash;insecure-skip-tls-verify=true.</p>
 <p>For example:</p>
 <pre><code>$ oc login https://master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:8443 --insecure-skip-tls-verify=true
 Authentication required for https://master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:8443 (openshift)
 Username: user<span class="userid">YOUR#</span>
 Password:
-Login successful.</code></pre>
-<p>Check to see what projects you have access to:</p>
-<pre><code>$ oc get projects</code></pre>
-<p>Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):</p>
-<pre><code>$ oc status</code></pre>
-<h1 id="summary">Summary</h1>
-
+Login successful.
+</code></pre><p>Check to see what projects you have access to:</p>
+<pre><code>$ oc get projects
+</code></pre><p>Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):</p>
+<pre><code>$ oc status
+</code></pre><h1 id="summary">Summary</h1>
 <p>You should now be ready to get hands-on with our workshop labs.
 <style>
 

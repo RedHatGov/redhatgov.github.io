@@ -307,72 +307,52 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="static-application-security-testing">Static Application Security Testing</h1>
-
+    <h1 id="static-application-security-testing">Static Application Security Testing</h1>
 <p>Next we will add a Code Analysis Stage into the pipeline.</p>
-
 <p><img src="../images/pipeline_sonar.png" width="900" /></p>
-
 <p>We will leverage the Maven Sonar plugin to run SonarQube scanning against our source code.</p>
-
 <p>SonarQube is an open source static code analysis tool that we can use to automate running security scans against your source code to further improve the security of your application.  Every time you check-in code, SonarQube will scan the quality and perform a threat analysis of that code.</p>
-
-<p>We leverage the sonarqube maven plugin and specify the maven goal &quot;sonar:sonar&quot; to run our project leveraging the sonarqube api.</p>
-
-<p>SonarQube's security rules originate from these standards:</p>
-
+<p>We leverage the sonarqube maven plugin and specify the maven goal &ldquo;sonar:sonar&rdquo; to run our project leveraging the sonarqube api.</p>
+<p>SonarQube&rsquo;s security rules originate from these standards:</p>
 <ul>
-<li><p><a href="http://cwe.mitre.org/about/index.html">CWE Database</a> - Common Weakness Enumeration (CWE™) is a formal list or dictionary of common software weaknesses that can occur in software's architecture, design, code or implementation that can lead to exploitable security vulnerabilities.</p></li>
-
-<li><p><a href="https://www.sans.org/top25-software-errors/">SANS Top 25</a> - The SANS Top 25 list is a collection of the 25-most dangerous errors listed in the CWE, as compiled by the SANS organization.</p></li>
-
-<li><p><a href="https://www.owasp.org/index.php/Top_10-2017_Top_10">OWASP Top 10</a> - The OWASP Top 10 is a list of broad categories of weaknesses, each of which can map to many individual rules.</p></li>
+<li>
+<p><a href="http://cwe.mitre.org/about/index.html">CWE Database</a> - Common Weakness Enumeration (CWE™) is a formal list or dictionary of common software weaknesses that can occur in software&rsquo;s architecture, design, code or implementation that can lead to exploitable security vulnerabilities.</p>
+</li>
+<li>
+<p><a href="https://www.sans.org/top25-software-errors/">SANS Top 25</a> - The SANS Top 25 list is a collection of the 25-most dangerous errors listed in the CWE, as compiled by the SANS organization.</p>
+</li>
+<li>
+<p><a href="https://www.owasp.org/index.php/Top_10-2017_Top_10">OWASP Top 10</a> - The OWASP Top 10 is a list of broad categories of weaknesses, each of which can map to many individual rules.</p>
+</li>
 </ul>
-
-<p><br></p>
-
-<h1 id="append-to-jenkins-pipeline-configuration">Append to Jenkins Pipeline Configuration</h1>
-
+<br>
+# Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-
 <p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
-
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre><code>    stage(&#39;Code Analysis&#39;) {
+<pre><code>    stage('Code Analysis') {
       steps {
         script {
-          sh &#34;${mvnCmd} sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true&#34;
+          sh &quot;${mvnCmd} sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true&quot;
         }
       }
-    }</code></pre>
-<p><br></p>
-
-<h1 id="sonarqube-dashboard">SonarQube Dashboard</h1>
-
+    }
+</code></pre><br>
+# SonarQube Dashboard
 <p>Once we build the full pipeline and run it, we will log into SonarQube and view the various metrics, stats, and code coverage as seen from the screenshot below.</p>
-
 <p><img src="../images/sonarqube-analysis.png" width="900"><br/></p>
-
 <h1 id="test-your-pipeline">Test Your Pipeline</h1>
-
-<p>If you'd like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
+<p>If you&rsquo;d like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
 <pre><code>  }
-}</code></pre>
-<p>Save your Jenkinsfile.</p>
-
+}
+</code></pre><p>Save your Jenkinsfile.</p>
 <p>Go back to Builds &gt; Pipelines</p>
-
 <p>Click Start Pipeline</p>
-
 <h1 id="delete-brackets">Delete Brackets</h1>
-
-<p>Please delete the brackets you just added once testing is complete. We can add them later if you'd like to test your pipeline as you go along.</p>
+<p>Please delete the brackets you just added once testing is complete. We can add them later if you&rsquo;d like to test your pipeline as you go along.</p>
 <pre><code>  }
-}</code></pre>
-<p>Click Save</p>
-
+}
+</code></pre><p>Click Save</p>
 <style>
 
  

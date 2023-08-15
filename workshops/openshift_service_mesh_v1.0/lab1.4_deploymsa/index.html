@@ -307,38 +307,25 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="deploying-an-app-into-the-service-mesh">Deploying an App into the Service Mesh</h1>
-
-<p>It's time to deploy your microservices application.  The application you are working on is a paste board application in which users can post comments in shared boards.  Here is a diagram of the architecture:</p>
-
+    <h1 id="deploying-an-app-into-the-service-mesh">Deploying an App into the Service Mesh</h1>
+<p>It&rsquo;s time to deploy your microservices application.  The application you are working on is a paste board application in which users can post comments in shared boards.  Here is a diagram of the architecture:</p>
 <p><img src="../images/architecture-highlevel.png" width="800"><br/></p>
-
 <p><em>App Architecture</em></p>
-
 <p>The microservices include single sign-on (SSO), user interface (UI), the boards application, and the context scraper.  In this scenario, you are going to deploy these services and then add a new user profile service.</p>
-
-<p><br></p>
-
+<br>
 <h2 id="deploy-microservices">Deploy Microservices</h2>
-
 <p>You are going to build the application images from source code and then deploy the resources in the cluster.</p>
-
-<p>The source files are labeled '{microservice}-fromsource.yaml'.  In each file, an annotation 'sidecar.istio.io/inject' was added to tell Istio to inject a sidecar proxy.</p>
-
+<p>The source files are labeled &lsquo;{microservice}-fromsource.yaml&rsquo;.  In each file, an annotation &lsquo;sidecar.istio.io/inject&rsquo; was added to tell Istio to inject a sidecar proxy.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Verify the annotation in the 'app-ui' file:
 </blockquote>
-<pre><code>cat openshift-configuration/app-ui-fromsource.yaml | grep -B 1 sidecar.istio.io/inject</code></pre>
-<p>Output:</p>
+<pre><code>cat openshift-configuration/app-ui-fromsource.yaml | grep -B 1 sidecar.istio.io/inject
+</code></pre><p>Output:</p>
 <pre><code>	annotations:
-	  sidecar.istio.io/inject: &#34;true&#34;</code></pre>
-<p><br></p>
-
-<p>Now let's deploy the microservices.</p>
-
+	  sidecar.istio.io/inject: &quot;true&quot;
+</code></pre><br>
+<p>Now let&rsquo;s deploy the microservices.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Deploy the boards service:
@@ -349,8 +336,8 @@ Deploy the boards service:
   -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git \
   -p GIT_BRANCH=workshop-stable \
   -p DATABASE_SERVICE_NAME=boards-mongodb \
-  -p MONGODB_DATABASE=boardsDevelopment</code></pre>
-<blockquote>
+  -p MONGODB_DATABASE=boardsDevelopment
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Deploy the context scraper service:
 </blockquote>
@@ -358,8 +345,8 @@ Deploy the context scraper service:
   -p APPLICATION_NAME=context-scraper \
   -p NODEJS_VERSION_TAG=10 \
   -p GIT_BRANCH=workshop-stable \
-  -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git</code></pre>
-<blockquote>
+  -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Deploy the user interface:
 </blockquote>
@@ -368,15 +355,14 @@ Deploy the user interface:
   -p NODEJS_VERSION_TAG=10 \
   -p GIT_BRANCH=workshop-stable \
   -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git \
-  -e FAKE_USER=true</code></pre>
-<blockquote>
+  -e FAKE_USER=true
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Watch the microservices demo installation:
 </blockquote>
-<pre><code>oc get pods --watch</code></pre>
-<p><br></p>
-
-<p>Wait a couple minutes.  You should see the 'app-ui', 'boards', 'context-scraper', and 'sso' pods running.  For example:</p>
+<pre><code>oc get pods --watch
+</code></pre><br>
+<p>Wait a couple minutes.  You should see the &lsquo;app-ui&rsquo;, &lsquo;boards&rsquo;, &lsquo;context-scraper&rsquo;, and &lsquo;sso&rsquo; pods running.  For example:</p>
 <pre><code>NAME                       READY   STATUS      RESTARTS   AGE
 app-ui-1-build             0/1     Completed   0          64m
 app-ui-1-xxxxx             2/2     Running     0          62m
@@ -388,66 +374,51 @@ boards-mongodb-1-xxxxx     2/2     Running     0          64m
 boards-mongodb-1-deploy    0/1     Completed   0          64m
 context-scraper-1-build    0/1     Completed   0          64m
 context-scraper-1-xxxxx    2/2     Running     0          62m
-context-scraper-1-deploy   0/1     Completed   0          62m</code></pre>
-<p><br></p>
-
+context-scraper-1-deploy   0/1     Completed   0          62m
+</code></pre><br>
 <p>Each microservices pod runs two containers: the application itself and the Istio proxy.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 Print the containers in the 'app-ui' pod:
 </blockquote>
-<pre><code>oc get pods -l app=app-ui -o jsonpath=&#39;{.items[*].spec.containers[*].name}{&#34;\n&#34;}&#39;</code></pre>
-<p>Output:</p>
-<pre><code>app-ui istio-proxy</code></pre>
-<p><br></p>
-
+<pre><code>oc get pods -l app=app-ui -o jsonpath='{.items[*].spec.containers[*].name}{&quot;\n&quot;}'
+</code></pre><p>Output:</p>
+<pre><code>app-ui istio-proxy
+</code></pre><br>
 <h2 id="access-application">Access Application</h2>
-
 <p>The application is deployed!  But you need a way to access the application via the user interface.</p>
-
 <p>Istio provides a <a href="https://istio.io/docs/reference/config/networking/gateway/">Gateway</a> resource, which can configure a load balancer at the edge of the service mesh.  In the previous lab, you verified that a load balancer was already created for you in your project.  The next step is to deploy a Gateway resource and configure the load balancer to route to the application user interface.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 Create the gateway configuration and routing rules:
 </blockquote>
 <pre><code>oc process -f ./istio-configuration/ingress-gateway.yaml \
-  -p INGRESS_GATEWAY_NAME=demogateway-$PROJECT_NAME | oc create -f -</code></pre>
-<p>To access the application, you need the endpoint of your load balancer.</p>
-
+  -p INGRESS_GATEWAY_NAME=demogateway-$PROJECT_NAME | oc create -f -
+</code></pre><p>To access the application, you need the endpoint of your load balancer.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Retrieve the URL of the load balancer:
 </blockquote>
-<pre><code>GATEWAY_URL=$(oc get route istio-demogateway-$(oc project -q) --template=&#39;http://{{.spec.host}}&#39;)
-echo $GATEWAY_URL</code></pre>
-<blockquote>
+<pre><code>GATEWAY_URL=$(oc get route istio-demogateway-$(oc project -q) --template='http://{{.spec.host}}')
+echo $GATEWAY_URL
+</code></pre><blockquote>
 <i class="fa fa-desktop"></i>
 Navigate to this URL in the browser:
 </blockquote>
-<pre><code>http://istio-demogateway-user<span class="userid">X</span>-user<span class="userid">X</span>.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:6443</code></pre>
-<p><br></p>
-
+<pre><code>http://istio-demogateway-user<span class="userid">X</span>-user<span class="userid">X</span>.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:6443
+</code></pre><br>
 <p>You should see the application user interface.  Try creating a new board and posting to the shared board.</p>
-
 <p>For example:</p>
-
 <p><img src="../images/app-pasteboard.png" width="1024"><br/>
- <em>Create a new board</em></p>
-
+<em>Create a new board</em></p>
 <h2 id="summary">Summary</h2>
-
 <p>Congratulations, you installed the microservices application!</p>
-
 <p>A few key highlights are:</p>
-
 <ul>
 <li>The demo microservices application is a paste board application</li>
-<li>The annotation 'sidecar.istio.io/inject' tells Istio to inject a sidecar proxy into the microservice pod</li>
+<li>The annotation &lsquo;sidecar.istio.io/inject&rsquo; tells Istio to inject a sidecar proxy into the microservice pod</li>
 <li>A Gateway resource configures an edge load balancer to allow inbound connections into the service mesh</li>
 </ul>
-
 <style>
 
  

@@ -332,7 +332,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">yum install -y fuse3 skopeo</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">yum install -y fuse3 skopeo</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -344,7 +344,7 @@ Skopeo is a utility for interacting with remote container registries without the
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">su - rhel  # if necessary
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">su - rhel  # if necessary
 skopeo copy docker://docker.io/library/fedora:31 dir:fedora</code></pre>
 </div>
 </div>
@@ -368,7 +368,7 @@ We have downloaded the fedora:31 image and saved it to a folder called <code>fed
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd fedora
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cd fedora
 ls -la</code></pre>
 </div>
 </div>
@@ -395,7 +395,7 @@ drwx------. 5 rhel rhel      155 Feb  6 04:29 ..
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir ../LOWER
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir ../LOWER
 cd ../LOWER
 tar xf ../fedora/d318c91bf2a81634e0283fb7e7362efdd7c21164b60b74498360756dc82a95d9
 ls -la
@@ -440,7 +440,7 @@ drwxr-xr-x. 18 rhel rhel  235 Oct 28 01:47 var</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir UPPER WORK ROOTFS
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir UPPER WORK ROOTFS
 fuse-overlayfs -olowerdir=LOWER,upperdir=UPPER,workdir=WORK ROOTFS</code></pre>
 </div>
 </div>
@@ -467,7 +467,7 @@ mountpoint=ROOTFS</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">unshare -mipunUrf chroot ROOTFS /bin/bash
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">unshare -mipunUrf chroot ROOTFS /bin/bash
 mount -t proc none /proc
 mount -t sysfs none /sys
 cat /etc/redhat-release</code></pre>

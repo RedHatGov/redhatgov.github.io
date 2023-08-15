@@ -307,98 +307,103 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="import-rest-source">Import REST source</h1>
-
+    <h1 id="import-rest-source">Import REST source</h1>
 <ul>
-<li><p>file <i class="fa fa-arrow-right"></i> import <i class="fa fa-arrow-right"></i> Web Service Source &gt;&gt; Source and View Model (REST)</p></li>
-
-<li><p>Click <strong>New</strong> Connection Profile, then <strong>next</strong></p></li>
-
-<li><p>Connection URL <strong><a href="https://jsonplaceholder.typicode.com/users">https://jsonplaceholder.typicode.com/users</a></strong></p></li>
-
-<li><p>Response type <strong>JSON</strong></p></li>
-
-<li><p>Make sure <strong>Test Connection</strong> returns <strong>Ping Succeeded!</strong>, then <strong>Finish</strong></p></li>
+<li>
+<p>file <i class="fa fa-arrow-right"></i> import <i class="fa fa-arrow-right"></i> Web Service Source &raquo; Source and View Model (REST)</p>
+</li>
+<li>
+<p>Click <strong>New</strong> Connection Profile, then <strong>next</strong></p>
+</li>
+<li>
+<p>Connection URL <strong><a href="https://jsonplaceholder.typicode.com/users">https://jsonplaceholder.typicode.com/users</a></strong></p>
+</li>
+<li>
+<p>Response type <strong>JSON</strong></p>
+</li>
+<li>
+<p>Make sure <strong>Test Connection</strong> returns <strong>Ping Succeeded!</strong>, then <strong>Finish</strong></p>
+</li>
 </ul>
-
-<p><img src="../images/6-new-connect.png"></p>
-
+<img src="../images/6-new-connect.png">
 <ul>
-<li><p>Click <strong>Next</strong></p></li>
-
-<li><p>Set the following values like the screenshot below</p></li>
+<li>
+<p>Click <strong>Next</strong></p>
+</li>
+<li>
+<p>Set the following values like the screenshot below</p>
+</li>
 </ul>
-
-<p><img src="../images/6-import.png"></p>
-
+<img src="../images/6-import.png">
 <ul>
-<li><p><strong>Next</strong> and put JNDI as <strong>java:/RestDS</strong>, then <strong>Next</strong></p></li>
-
-<li><p>In the Import from REST Web Service Source, expand the first response element then right click on the second <strong>response</strong> element and select <strong>Set as Root path</strong></p></li>
-
-<li><p>Then select the <strong>id</strong> field and then <strong>Add</strong>.  Highlight the added <strong>id</strong> field and select <strong>Edit...</strong> and change the <strong>Data Type</strong> to <strong>biginteger</strong></p></li>
-
-<li><p>Select the following fields to add <strong>name, website, phone, email, username</strong></p></li>
-
-<li><p>Expand the address element and add <strong>zipcode, city, street</strong>, click <strong>Finish</strong> and <strong>save</strong> RestDS and RestView</p></li>
+<li>
+<p><strong>Next</strong> and put JNDI as <strong>java:/RestDS</strong>, then <strong>Next</strong></p>
+</li>
+<li>
+<p>In the Import from REST Web Service Source, expand the first response element then right click on the second <strong>response</strong> element and select <strong>Set as Root path</strong></p>
+</li>
+<li>
+<p>Then select the <strong>id</strong> field and then <strong>Add</strong>.  Highlight the added <strong>id</strong> field and select <strong>Edit&hellip;</strong> and change the <strong>Data Type</strong> to <strong>biginteger</strong></p>
+</li>
+<li>
+<p>Select the following fields to add <strong>name, website, phone, email, username</strong></p>
+</li>
+<li>
+<p>Expand the address element and add <strong>zipcode, city, street</strong>, click <strong>Finish</strong> and <strong>save</strong> RestDS and RestView</p>
+</li>
 </ul>
-
-<p><img src="../images/6-rest-elements.png" width="800px"></p>
-
+<img src="../images/6-rest-elements.png" width="800px">
 <ul>
 <li>In the RestView model click the <strong>new Virtual Table</strong> button</li>
 </ul>
-
-<p><img src="../images/6-new-table.png"></p>
-
+<img src="../images/6-new-table.png">
 <ul>
-<li><p>Select <strong>Option 1: Build with new table wizard</strong></p></li>
-
-<li><p>Name <strong>users</strong></p></li>
-
-<li><p>Under the <strong>PK</strong> tab, check the <strong>include</strong> box then put <strong>id_pk</strong> in the <strong>name</strong> field.  Click <strong>ok</strong>.  There will be model errors, this is ok</p></li>
-
-<li><p>Double-click the new <strong>users</strong> table to get to the Transformation diagram.  Now click and drag the <strong>getUsers</strong> procedure from the left pane into the <strong>select</strong> text box.  The columns should be copied over.</p></li>
+<li>
+<p>Select <strong>Option 1: Build with new table wizard</strong></p>
+</li>
+<li>
+<p>Name <strong>users</strong></p>
+</li>
+<li>
+<p>Under the <strong>PK</strong> tab, check the <strong>include</strong> box then put <strong>id_pk</strong> in the <strong>name</strong> field.  Click <strong>ok</strong>.  There will be model errors, this is ok</p>
+</li>
+<li>
+<p>Double-click the new <strong>users</strong> table to get to the Transformation diagram.  Now click and drag the <strong>getUsers</strong> procedure from the left pane into the <strong>select</strong> text box.  The columns should be copied over.</p>
+</li>
 </ul>
-
-<p><img src="../images/6-drag.png" width="800px"></p>
-
+<img src="../images/6-drag.png" width="800px">
 <ul>
-<li><p>Now select <strong>id_pk</strong> and edit the <strong>Columns</strong> property.  From the <strong>Choices</strong> column, move over <strong>id</strong> to <strong>feature</strong>.  Click <strong>ok</strong></p></li>
-
-<li><p>You must now right-click on each of <strong>name,website,phone,email,username,zipcode,city and street</strong> then <strong>modeling <i class="fa fa-arrow-right"></i> set DataType</strong> and select <strong>string</strong> and set length to <strong>255</strong></p></li>
-
-<li><p>Now save the <strong>users</strong> table.  There should no longer be any <strong>red x</strong> next to the model</p></li>
+<li>
+<p>Now select <strong>id_pk</strong> and edit the <strong>Columns</strong> property.  From the <strong>Choices</strong> column, move over <strong>id</strong> to <strong>feature</strong>.  Click <strong>ok</strong></p>
+</li>
+<li>
+<p>You must now right-click on each of <strong>name,website,phone,email,username,zipcode,city and street</strong> then <strong>modeling <i class="fa fa-arrow-right"></i> set DataType</strong> and select <strong>string</strong> and set length to <strong>255</strong></p>
+</li>
+<li>
+<p>Now save the <strong>users</strong> table.  There should no longer be any <strong>red x</strong> next to the model</p>
+</li>
 </ul>
-
 <h1 id="preview-the-rest-data">Preview the REST data</h1>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-At the bottom of the designer select the **Teiid Execution Plan** tab.  Make sure the **Generate Plans Preference** is set to **DISABLED**.  Leaving this on will result in previews for non-relational sources to take a very long time as the execution plan is calculated
-
+<p><span class="pficon pficon-info"></span></p>
+<p>At the bottom of the designer select the <strong>Teiid Execution Plan</strong> tab.  Make sure the <strong>Generate Plans Preference</strong> is set to <strong>DISABLED</strong>.  Leaving this on will result in previews for non-relational sources to take a very long time as the execution plan is calculated</p>
 </div>
-
 <ul>
-<li><p>Select the <strong>Model Editor</strong> in the RestView model.</p></li>
-
-<li><p>Select the <strong>users</strong> table then click the <strong>Preview data</strong> button</p></li>
-
-<li><p>You will see data now in the <strong>SQL Results</strong> tab at the bottom.</p></li>
+<li>
+<p>Select the <strong>Model Editor</strong> in the RestView model.</p>
+</li>
+<li>
+<p>Select the <strong>users</strong> table then click the <strong>Preview data</strong> button</p>
+</li>
+<li>
+<p>You will see data now in the <strong>SQL Results</strong> tab at the bottom.</p>
+</li>
 </ul>
-
 <h1 id="deploy-view-model">Deploy View Model</h1>
-
 <ul>
 <li>Open the vdb <strong>demo-jdv.vdb</strong> and click the <strong>Add Model</strong> button in the lower left.  Select <strong>RestVew</strong> and save the vdb. Click the <strong>Deploy</strong> button</li>
 </ul>
-
 <h1 id="test-with-postman">Test with Postman</h1>
-
 <ul>
 <li>In postman, run the <strong>RestView</strong> test.  Verify that the <strong>Test Results</strong> tab returns <strong>PASS</strong></li>
 </ul>

@@ -273,90 +273,90 @@
 </div>
 
 <div class="container">
-  
-
-<h1 id="unit-8-revoking-a-certificate">Unit 8: Revoking a certificate</h1>
-
+  <h1 id="unit-8-revoking-a-certificate">Unit 8: Revoking a certificate</h1>
 <p>In this unit we will revoke a certificate generated during the last unit using the web interface and CLI.</p>
-
 <h2 id="revoke-certificate-web-based">Revoke Certificate (web-based)</h2>
-
-<p>The URL is different in the images. I'm lazy.</p>
-
+<p>The URL is different in the images. I&rsquo;m lazy.</p>
 <ol>
-<li><p>Open CA webpage.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/ca/agent/ca</code></p></li>
-
-<li><p>Select <code>PKI Administrator</code> certificate (if prompted).</p></li>
-
-<li><p>Add Exception for insecure connection (if prompted).</p></li>
-
-<li><p>Click <code>List Certificates</code>.</p>
-
-<p><img src="images/revoke_lab_1.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Find</code> button.</p>
-
-<p><img src="images/revoke_lab_2.png" alt="Alt text" /></p></li>
-
-<li><p>Copy Serial Number of <code>UID=</code> cert.</p>
-
-<p><img src="images/revoke_lab_3.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Revoke Certificates</code>.</p>
-
-<p><img src="images/revoke_lab_4.png" alt="Alt text" /></p></li>
-
-<li><p>Check <code>Serial Number Range</code> box and input serial number in both boxes.</p>
-
-<p><img src="images/revoke_lab_5.png" alt="Alt text" /></p></li>
-
-<li><p>Scroll down and click <code>Find</code> button.</p></li>
-
-<li><p>Ensure certificate is correct.</p>
-
-<p><img src="images/revoke_lab_6.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Revoke</code> button.</p>
-
-<p><img src="images/revoke_lab_7.png" alt="Alt text" /></p></li>
-
-<li><p>Select <code>Key compromised</code> and click <code>Submit</code> button.</p>
-
-<p><img src="images/revoke_lab_8.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>List Certificates</code>.</p>
-
-<p><img src="images/revoke_lab_9.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Find</code> button.</p>
-
-<p><img src="images/revoke_lab_10.png" alt="Alt text" /></p></li>
-
-<li><p>Hover mouse over certificate to verify revocation.</p>
-
-<p><img src="images/revoke_lab_11.png" alt="Alt text" /></p></li>
+<li>
+<p>Open CA webpage.</p>
+<p><code>https://ca1.redhat.example.com:8443/ca/agent/ca</code></p>
+</li>
+<li>
+<p>Select <code>PKI Administrator</code> certificate (if prompted).</p>
+</li>
+<li>
+<p>Add Exception for insecure connection (if prompted).</p>
+</li>
+<li>
+<p>Click <code>List Certificates</code>.</p>
+<pre><code>![Alt text](images/revoke_lab_1.png)
+</code></pre>
+</li>
+<li>
+<p>Click <code>Find</code> button.</p>
+<pre><code>![Alt text](images/revoke_lab_2.png)
+</code></pre>
+</li>
+<li>
+<p>Copy Serial Number of <code>UID=</code> cert.</p>
+<pre><code>![Alt text](images/revoke_lab_3.png)
+</code></pre>
+</li>
+<li>
+<p>Click <code>Revoke Certificates</code>.</p>
+<pre><code>![Alt text](images/revoke_lab_4.png)
+</code></pre>
+</li>
+<li>
+<p>Check <code>Serial Number Range</code> box and input serial number in both boxes.</p>
+<pre><code>![Alt text](images/revoke_lab_5.png)
+</code></pre>
+</li>
+<li>
+<p>Scroll down and click <code>Find</code> button.</p>
+</li>
+<li>
+<p>Ensure certificate is correct.</p>
+<p><img src="images/revoke_lab_6.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click <code>Revoke</code> button.</p>
+<p><img src="images/revoke_lab_7.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Select <code>Key compromised</code> and click <code>Submit</code> button.</p>
+<p><img src="images/revoke_lab_8.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click <code>List Certificates</code>.</p>
+<p><img src="images/revoke_lab_9.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click <code>Find</code> button.</p>
+<p><img src="images/revoke_lab_10.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Hover mouse over certificate to verify revocation.</p>
+<p><img src="images/revoke_lab_11.png" alt="Alt text"></p>
+</li>
 </ol>
-
 <h2 id="revoke-certificate-cli">Revoke Certificate (CLI)</h2>
-
 <p>The certificate is already removed but you can run through Unit 6 again to generate a new one.</p>
-
 <ol>
-<li><p>Find the certificate you want to revoke. In this case it will be 0xe or 14.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-find</code></p></li>
-
-<li><p>Revoke certificate with reason <strong>Key_Compromise</strong>. Other reasons can be shown with the <strong>--help</strong> option.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-revoke 14 --reason Key_Compromise</code></p></li>
-
-<li><p>Check to see if certificate has been revoked.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-show 14</code></p></li>
+<li>
+<p>Find the certificate you want to revoke. In this case it will be 0xe or 14.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-find</code></p>
+</li>
+<li>
+<p>Revoke certificate with reason <strong>Key_Compromise</strong>. Other reasons can be shown with the <strong>&ndash;help</strong> option.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-revoke 14 --reason Key_Compromise</code></p>
+</li>
+<li>
+<p>Check to see if certificate has been revoked.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-show 14</code></p>
+</li>
 </ol>
-
 <p>The next lesson is <a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_9.md">Unit 9: OCSP Responder</a>.</p>
 
 </div>

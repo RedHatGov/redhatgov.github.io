@@ -374,13 +374,13 @@ and never come to rest on a node.</p>
 <div class="listingblock">
 <div class="title">see what user you are loged in as</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc whoami</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc whoami</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">login as system:admin</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u system:admin</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc login -u system:admin</code></pre>
 </div>
 </div>
 </div>
@@ -397,7 +397,7 @@ stream</a>. Image streams present a single virtual view of related images.</p>
 <div class="listingblock">
 <div class="title">create the image stream</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd jboss-openshift-templates
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cd jboss-openshift-templates
 
 oc create -n openshift -f jboss-image-streams.json</code></pre>
 </div>
@@ -405,7 +405,7 @@ oc create -n openshift -f jboss-image-streams.json</code></pre>
 <div class="listingblock">
 <div class="title">switch to developer</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u developer</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc login -u developer</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -414,7 +414,7 @@ oc create -n openshift -f jboss-image-streams.json</code></pre>
 <div class="listingblock">
 <div class="title">SSO Project</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project sso --description="Red Hat SSO" --display-name="SSO Keycloak"</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc new-project sso --description="Red Hat SSO" --display-name="SSO Keycloak"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -444,7 +444,7 @@ to hold the sensitive information.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat secrets/sso-app-secret.json</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat secrets/sso-app-secret.json</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -453,7 +453,7 @@ to hold the sensitive information.</p>
 <div class="listingblock">
 <div class="title">sso-app-secret.json</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">"kind": "Secret", <b class="conum">(1)</b>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">"kind": "Secret", <b class="conum">(1)</b>
 "apiVersion": "v1",
 "metadata": {
     "annotations": {
@@ -487,7 +487,7 @@ perform actions on behalf of a pod.</p>
 <div class="listingblock">
 <div class="title">create <code>secrets</code> for <code>SSO</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -n sso -f secrets/sso-app-secret.json</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc create -n sso -f secrets/sso-app-secret.json</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -496,7 +496,7 @@ perform actions on behalf of a pod.</p>
 <div class="listingblock">
 <div class="title">launch <code>SSO</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc process -f sso/sso71-https.json -p HTTPS_NAME=jboss HTTPS_PASSWORD=mykeystorepass | oc create -n sso -f -</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">oc process -f sso/sso71-https.json -p HTTPS_NAME=jboss HTTPS_PASSWORD=mykeystorepass | oc create -n sso -f -</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -534,7 +534,7 @@ via a <code>https</code> route. Click the top url (example for student 0:
 <div class="listingblock">
 <div class="title">login to SSO</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username:  admin
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">username:  admin
 
 password:  admin</code></pre>
 </div>

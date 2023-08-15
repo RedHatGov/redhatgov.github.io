@@ -345,7 +345,7 @@ over client-server based architectures.</p>
 <div class="sect2">
 <h3 id="_the_universal_base_image">The Universal Base Image</h3>
 <div class="paragraph">
-<p>The container image that you will be using through out most of this lab is the RHEL 8 Universal Base Image <a href="https://access.redhat.com/containers/#/product/5c180b28bed8bd75a2c29a63">(UBI)</a>. The UBI is designed and engineered to be the base layer for containerized applications, middleware and utilities. This base image is freely distributable. However, Red Hat only supports Red Hat technologies through subscriptions for Red Hat products. When you get a chance, read more about <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html-single/getting_started_with_containers/index#using_red_hat_universal_base_images_standard_minimal_and_runtimes"> using the UBI</a>.</p>
+<p>The container image that you will be using through out most of this lab is the RHEL 8 Universal Base Image <a href="https://access.redhat.com/containers/#/product/5c180b28bed8bd75a2c29a63">(UBI)</a>. The UBI is designed and engineered to be the base layer for containerized applications, middleware and utilities. This base image is freely usable and distributable, though support will require a Red Hat subscription. When you get a chance, read more about <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html-single/getting_started_with_containers/index#using_red_hat_universal_base_images_standard_minimal_and_runtimes"> using the UBI</a>.</p>
 </div>
 <div class="paragraph">
 <p>For this first part of the lab, we will be using the most current Fedora (the community upstream distribution for Red Hat Enterprise Linux) container image.</p>
@@ -355,7 +355,7 @@ over client-server based architectures.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman pull fedora:latest</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman pull fedora:latest</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -375,7 +375,7 @@ abec9a7a7dc640768e6dc51b6a5728e470411615c62e9ff46215206bde816772</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman pull fedora:latest</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman pull fedora:latest</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -397,7 +397,7 @@ appropriately.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman images</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman images</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -411,7 +411,7 @@ registry.fedoraproject.org/fedora  latest  abec9a7a7dc6  4 weeks ago  184 MB</pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman tag fedora node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman tag fedora node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -419,7 +419,7 @@ registry.fedoraproject.org/fedora  latest  abec9a7a7dc6  4 weeks ago  184 MB</pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman images</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman images</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -434,7 +434,7 @@ node1.0.jajcsec.rhnaps.io:5000/fedora/latest  latest  abec9a7a7dc6  4 weeks ago 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman login -u redhat -p redhat node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman login -u redhat -p redhat node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -444,7 +444,7 @@ node1.0.jajcsec.rhnaps.io:5000/fedora/latest  latest  abec9a7a7dc6  4 weeks ago 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">podman login -u redhat -p redhat node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="yaml" class="language-yaml hljs">podman login -u redhat -p redhat node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -457,7 +457,7 @@ node1.0.jajcsec.rhnaps.io:5000/fedora/latest  latest  abec9a7a7dc6  4 weeks ago 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman push node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman push node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/fedora/latest</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -476,7 +476,7 @@ Storing signatures</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl --user redhat:redhat https://node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/v2/_catalog</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl --user redhat:redhat https://node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/v2/_catalog</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -501,7 +501,7 @@ Storing signatures</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman images
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman images
 podman images</code></pre>
 </div>
 </div>
@@ -517,7 +517,7 @@ node1.0.jajcsec.rhnaps.io:5000/fedora/latest  latest  abec9a7a7dc6  4 weeks ago 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat /etc/containers/storage.conf</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat /etc/containers/storage.conf</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -528,7 +528,7 @@ node1.0.jajcsec.rhnaps.io:5000/fedora/latest  latest  abec9a7a7dc6  4 weeks ago 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --name=rootless -d registry.access.redhat.com/ubi8/ubi sleep 999</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --name=rootless -d registry.access.redhat.com/ubi8/ubi sleep 999</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -549,7 +549,7 @@ Storing signatures
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman ps</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman ps</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -563,7 +563,7 @@ e05c3fc400eb  ubi8/ubi:latest  sleep 999  2 seconds ago   Up 2 seconds ago      
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run --name=root -d registry.access.redhat.com/ubi8/ubi sleep 999</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run --name=root -d registry.access.redhat.com/ubi8/ubi sleep 999</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -582,7 +582,7 @@ Storing signatures
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">sudo podman ps</code></pre>
+<pre class="highlightjs highlight"><code data-lang="yaml" class="language-yaml hljs">sudo podman ps</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -602,7 +602,7 @@ Storing signatures
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman stop rootless
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman stop rootless
 podman rm rootless
 
 sudo podman stop root
@@ -617,7 +617,7 @@ sudo podman rm root</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman rm -f rootless
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman rm -f rootless
 sudo podman rm -f root</code></pre>
 </div>
 </div>
@@ -632,7 +632,7 @@ sudo podman rm -f root</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --name=rootless -d registry.access.redhat.com/ubi8/ubi sleep 999</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --name=rootless -d registry.access.redhat.com/ubi8/ubi sleep 999</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -640,7 +640,7 @@ sudo podman rm -f root</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman top -l args etime</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman top -l args etime</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -648,7 +648,7 @@ sudo podman rm -f root</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman rm -f rootless</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman rm -f rootless</code></pre>
 </div>
 </div>
 </div>
@@ -662,7 +662,7 @@ sudo podman rm -f root</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --name sleepy -d registry.access.redhat.com/ubi8/ubi sleep 999</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --name sleepy -d registry.access.redhat.com/ubi8/ubi sleep 999</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -673,7 +673,7 @@ sudo podman rm -f root</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman top -l</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman top -l</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -681,7 +681,7 @@ sudo podman rm -f root</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ps -ef| grep sleep</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ps -ef| grep sleep</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -716,7 +716,7 @@ Take note of 2 important concepts from this example.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman rm -f sleepy</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman rm -f sleepy</code></pre>
 </div>
 </div>
 </div>
@@ -727,7 +727,7 @@ Take note of 2 important concepts from this example.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run --name sleepy --rm -it registry.access.redhat.com/ubi8/ubi bash -c "cat /proc/self/loginuid;echo"</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run --name sleepy --rm -it registry.access.redhat.com/ubi8/ubi bash -c "cat /proc/self/loginuid;echo"</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -740,7 +740,7 @@ Take note of 2 important concepts from this example.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo auditctl -w /etc/shadow 2&gt;/dev/null</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo auditctl -w /etc/shadow 2&gt;/dev/null</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -748,7 +748,7 @@ Take note of 2 important concepts from this example.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run --privileged --rm -v /:/host registry.access.redhat.com/ubi8/ubi touch /host/etc/shadow</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run --privileged --rm -v /:/host registry.access.redhat.com/ubi8/ubi touch /host/etc/shadow</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -756,7 +756,7 @@ Take note of 2 important concepts from this example.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo ausearch -m path -ts recent -i | grep touch | grep --color=auto 'auid=[^ ]*'</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo ausearch -m path -ts recent -i | grep touch | grep --color=auto 'auid=[^ ]*'</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -789,7 +789,7 @@ In other words, the malicious user is unknown.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run --uidmap 0:100000:5000 -d registry.access.redhat.com/ubi8/ubi sleep 1000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run --uidmap 0:100000:5000 -d registry.access.redhat.com/ubi8/ubi sleep 1000</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -802,7 +802,7 @@ In other words, the malicious user is unknown.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman top --latest user huser | grep --color=auto -B 1 100000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman top --latest user huser | grep --color=auto -B 1 100000</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -816,7 +816,7 @@ root   100000</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ps -f --user=100000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ps -f --user=100000</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -830,7 +830,7 @@ root   100000</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run --uidmap 0:200000:5000 -d registry.access.redhat.com/ubi8/ubi sleep 1000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run --uidmap 0:200000:5000 -d registry.access.redhat.com/ubi8/ubi sleep 1000</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -843,7 +843,7 @@ root   100000</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman top --latest user huser | grep --color=auto -B 1 200000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman top --latest user huser | grep --color=auto -B 1 200000</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -857,7 +857,7 @@ root   200000</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ps -f --user=200000</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ps -f --user=200000</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -877,7 +877,7 @@ root   200000</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman top -l user huser</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman top -l user huser</code></pre>
 </div>
 </div>
 <div class="literalblock">

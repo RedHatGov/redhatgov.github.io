@@ -339,7 +339,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">vim -R /usr/include/linux/capability.h</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">vim -R /usr/include/linux/capability.h</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -347,7 +347,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">:set number</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">:set number</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -371,7 +371,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">:q</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">:q</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -379,7 +379,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">grep CapEff /proc/self/status</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">grep CapEff /proc/self/status</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -395,7 +395,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo grep CapEff /proc/self/status</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo grep CapEff /proc/self/status</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -412,7 +412,7 @@ running as <strong>root</strong> has a filtered set of capabilities by default b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">capsh --decode=ffffffffff</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">capsh --decode=ffffffffff</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -457,7 +457,7 @@ running as <strong>root</strong> has a filtered set of capabilities by default b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">capsh --decode=200</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">capsh --decode=200</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -475,7 +475,7 @@ running as <strong>root</strong> has a filtered set of capabilities by default b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it --user=32767 registry.access.redhat.com/ubi8/ubi grep CapEff /proc/self/status</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --rm -it --user=32767 registry.access.redhat.com/ubi8/ubi grep CapEff /proc/self/status</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -488,7 +488,7 @@ running as <strong>root</strong> has a filtered set of capabilities by default b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --user=0 --rm -it registry.access.redhat.com/ubi8/ubi grep CapEff /proc/self/status</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --user=0 --rm -it registry.access.redhat.com/ubi8/ubi grep CapEff /proc/self/status</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -501,7 +501,7 @@ running as <strong>root</strong> has a filtered set of capabilities by default b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run --user=0 --rm -it --privileged registry.access.redhat.com/ubi8/ubi grep CapEff /proc/self/status</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run --user=0 --rm -it --privileged registry.access.redhat.com/ubi8/ubi grep CapEff /proc/self/status</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -517,7 +517,7 @@ running as <strong>root</strong> has a filtered set of capabilities by default b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --user=0 --name=sleepy -it -d registry.access.redhat.com/ubi8/ubi sleep 999</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --user=0 --name=sleepy -it -d registry.access.redhat.com/ubi8/ubi sleep 999</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -525,7 +525,7 @@ running as <strong>root</strong> has a filtered set of capabilities by default b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman top sleepy capeff</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman top sleepy capeff</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -539,7 +539,7 @@ AUDIT_WRITE,CHOWN,DAC_OVERRIDE,FOWNER,FSETID,KILL,MKNOD,NET_BIND_SERVICE,NET_RAW
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman top -l capeff</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman top -l capeff</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -547,7 +547,7 @@ AUDIT_WRITE,CHOWN,DAC_OVERRIDE,FOWNER,FSETID,KILL,MKNOD,NET_BIND_SERVICE,NET_RAW
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman top -h</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman top -h</code></pre>
 </div>
 </div>
 </div>
@@ -557,17 +557,17 @@ AUDIT_WRITE,CHOWN,DAC_OVERRIDE,FOWNER,FSETID,KILL,MKNOD,NET_BIND_SERVICE,NET_RAW
 <p>How could you determine which capabilities podman <em>filters</em> from a <em>root</em> process running in a container?</p>
 </div>
 <div class="paragraph">
-<p>From a previous exercise we know that a root process on the host has a capabilities mask of CapEff = <code>000000ffffffffff</code></p>
+<p>From a previous exercise we know that a root process on the host has a capabilities mask of CapEff = <code>000000FFFFFFFFFF</code></p>
 </div>
 <div class="paragraph">
-<p>From a previous exercise we know that a root process in a container has a capabilities mask of CapEff = <code>00000000a80427fb</code></p>
+<p>From a previous exercise we know that a root process in a container has a capabilities mask of CapEff = <code>00000000A80427FB</code></p>
 </div>
 <div class="paragraph">
 <p>Hint: Below is an example that uses the Linux binary calculator <code>bc</code> to add hexadecimal numbers <code>(0x9 + 0x1) = A</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo yum install bc -y
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo yum install bc -y
 echo 'obase=16;ibase=16;9+1' | bc</code></pre>
 </div>
 </div>
@@ -587,7 +587,7 @@ echo 'obase=16;ibase=16;9+1' | bc</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -ti --user 0 --name temp registry.access.redhat.com/ubi8/ubi bash
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --rm -ti --user 0 --name temp registry.access.redhat.com/ubi8/ubi bash
 savethedate=$(date)
 date -s "$savethedate"</code></pre>
 </div>
@@ -600,7 +600,7 @@ Mon Apr  8 21:45:24 UTC 2019</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 </div>
@@ -614,7 +614,7 @@ Mon Apr  8 21:45:24 UTC 2019</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -it --name=chattr_no_ping --rm quay.io/bkozdemb/utils bash
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run -it --name=chattr_no_ping --rm quay.io/bkozdemb/utils bash
 ping -c1 127.0.0.1</code></pre>
 </div>
 </div>
@@ -630,7 +630,7 @@ rtt min/avg/max/mdev = 0.035/0.035/0.035/0.000 ms</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd /tmp
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cd /tmp
 touch file
 chattr +i file</code></pre>
 </div>
@@ -645,7 +645,7 @@ chattr +i file</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 </div>
@@ -664,7 +664,7 @@ chattr +i file</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo 'obase=16;ibase=16;FFFFFFFFFF-A80427FB' | bc</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">echo 'obase=16;ibase=16;FFFFFFFFFF-A80427FB' | bc</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -677,7 +677,7 @@ chattr +i file</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">capsh --decode=FF57FBD804</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">capsh --decode=FF57FBD804</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -690,7 +690,7 @@ chattr +i file</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run --rm -ti --user 0 --name temp --cap-add=sys_time registry.access.redhat.com/ubi8/ubi bash
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run --rm -ti --user 0 --name temp --cap-add=sys_time registry.access.redhat.com/ubi8/ubi bash
 savethedate=$(date)
 date -s "$savethedate"</code></pre>
 </div>
@@ -705,7 +705,7 @@ date -s "$savethedate"</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -713,7 +713,7 @@ date -s "$savethedate"</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run -it --name=chattr_no_ping --rm --cap-drop=all --cap-add=linux_immutable quay.io/bkozdemb/utils bash</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run -it --name=chattr_no_ping --rm --cap-drop=all --cap-add=linux_immutable quay.io/bkozdemb/utils bash</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -721,7 +721,7 @@ date -s "$savethedate"</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd /tmp
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cd /tmp
 touch file
 chattr +i file
 rm -rf file</code></pre>
@@ -734,7 +734,7 @@ rm -rf file</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">lsattr file</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">lsattr file</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -747,7 +747,7 @@ rm -rf file</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">chattr -i file
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">chattr -i file
 lsattr file</code></pre>
 </div>
 </div>
@@ -761,7 +761,7 @@ lsattr file</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman top chattr_no_ping capeff</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman top chattr_no_ping capeff</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -775,7 +775,7 @@ LINUX_IMMUTABLE</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 <div class="paragraph">

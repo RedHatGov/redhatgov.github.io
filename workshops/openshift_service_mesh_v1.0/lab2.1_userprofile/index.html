@@ -307,37 +307,26 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="building-a-microservice">Building a Microservice</h1>
-
+    <h1 id="building-a-microservice">Building a Microservice</h1>
 <blockquote>
 <i class="fa fa-desktop"></i>
 In the browser, navigate to the 'Profile' section in the header.
 </blockquote>
-
-<p><p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
-<code>echo $GATEWAY_URL</code></p>
-
-<p><br></p>
-
+<p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
+`echo $GATEWAY_URL`
+<br>
 <p>You should see the following:</p>
-
 <p><img src="../images/app-unknownuser.png" width="1024"><br/>
- <em>Unknown Profile Page</em></p>
-
-<p>The UI shows an unknown user and that's because there's no profile service for your application.  You are going to build a new microservice for user profiles and add this to your service mesh.</p>
-
+<em>Unknown Profile Page</em></p>
+<p>The UI shows an unknown user and that&rsquo;s because there&rsquo;s no profile service for your application.  You are going to build a new microservice for user profiles and add this to your service mesh.</p>
 <h2 id="application-code">Application Code</h2>
-
-<p>Your new application is written in Java, whereas the other backend components such as 'app-ui' and 'boards' are written in NodeJS.  One of the advantages of Istio is that it is agnostic to the programming languages of the running microservices.</p>
-
+<p>Your new application is written in Java, whereas the other backend components such as &lsquo;app-ui&rsquo; and &lsquo;boards&rsquo; are written in NodeJS.  One of the advantages of Istio is that it is agnostic to the programming languages of the running microservices.</p>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Navigate to the 'UserProfile' class in your browser:
 </blockquote>
-<pre><code>https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/json/UserProfile.java</code></pre>
-<p>Output (snippet):</p>
+<pre><code>https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/json/UserProfile.java
+</code></pre><p>Output (snippet):</p>
 <pre><code>...
     }
     public UserProfile(String id, String firstname, String lastname, String aboutme) {
@@ -347,19 +336,16 @@ Navigate to the 'UserProfile' class in your browser:
         this.aboutMe = aboutme;
         this.createdAt = Calendar.getInstance().getTime();
     }
-...</code></pre>
-<p>This class encapsulates information about the user such as the first and last name.</p>
-
-<p><br></p>
-
+...
+</code></pre><p>This class encapsulates information about the user such as the first and last name.</p>
+<br>
 <p>Your application also exposes a REST API to interact with the service.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 Navigate to the 'UserProfileService' interface in your browser:
 </blockquote>
-<pre><code>https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java</code></pre>
-<p>Output (snippet):</p>
+<pre><code>https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
+</code></pre><p>Output (snippet):</p>
 <pre><code>...
     /**
      * return a specific profile
@@ -367,32 +353,25 @@ Navigate to the 'UserProfileService' interface in your browser:
      * @return the specified profile
      */
     UserProfile getProfile(@NotBlank String id);
-...</code></pre>
-<p>This interface includes the REST methods for getting and setting user profile information.</p>
-
-<p><br></p>
-
+...
+</code></pre><p>This interface includes the REST methods for getting and setting user profile information.</p>
+<br>
 <h2 id="build-application">Build Application</h2>
-
 <p>You are ready to build the application.</p>
-
-<p>Use a <a href="https://docs.openshift.com/container-platform/4.2/builds/understanding-buildconfigs.html">BuildConfig</a> to build the application image.  A 'BuildConfig' template was already created for you.</p>
-
+<p>Use a <a href="https://docs.openshift.com/container-platform/4.2/builds/understanding-buildconfigs.html">BuildConfig</a> to build the application image.  A &lsquo;BuildConfig&rsquo; template was already created for you.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Verify the base image used to build the application:
 </blockquote>
-<pre><code>cat ./openshift-configuration/userprofile-build.yaml | grep -A 4 sourceStrategy</code></pre>
-<p>Output (snippet):</p>
+<pre><code>cat ./openshift-configuration/userprofile-build.yaml | grep -A 4 sourceStrategy
+</code></pre><p>Output (snippet):</p>
 <pre><code>      sourceStrategy:
         from:
           kind: ImageStreamTag
           name: java:11
-          namespace: openshift</code></pre>
-<p>Notice the build uses a base Java image to build the application.</p>
-
-<p><br></p>
-
+          namespace: openshift
+</code></pre><p>Notice the build uses a base Java image to build the application.</p>
+<br>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Create the build:
@@ -401,19 +380,18 @@ Create the build:
   -p APPLICATION_NAME=userprofile \
   -p APPLICATION_CODE_URI=https://github.com/RedHatGov/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=workshop-stable \
-  -p APP_VERSION_TAG=1.0</code></pre>
-<blockquote>
+  -p APP_VERSION_TAG=1.0
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Start the build:
 </blockquote>
-<pre><code>oc start-build userprofile-1.0</code></pre>
-<blockquote>
+<pre><code>oc start-build userprofile-1.0
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Follow the build:
 </blockquote>
-<pre><code>oc logs -f bc/userprofile-1.0</code></pre>
-<p>The builder will compile the source code and use the base image to create your deployable image artifact.  You should eventually see a successful build.</p>
-
+<pre><code>oc logs -f bc/userprofile-1.0
+</code></pre><p>The builder will compile the source code and use the base image to create your deployable image artifact.  You should eventually see a successful build.</p>
 <p>Output (snippet):</p>
 <pre><code>...
 [INFO] ------------------------------------------------------------------------
@@ -422,20 +400,18 @@ Follow the build:
 [INFO] Total time:  01:35 min
 [INFO] Finished at: 2020-02-19T21:00:22Z
 [INFO] ------------------------------------------------------------------------
-...</code></pre>
-<p><br></p>
-
+...
+</code></pre><br>
 <p>Once the build is complete, the image is stored in the OpenShift local repository.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 Verify the image was created:
 </blockquote>
-<pre><code>oc get is userprofile</code></pre>
-<p>Output:</p>
+<pre><code>oc get is userprofile
+</code></pre><p>Output:</p>
 <pre><code>NAME          IMAGE REPOSITORY                                                                  TAGS     UPDATED
-userprofile   image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile   1.0   3 minutes ago</code></pre>
-<style>
+userprofile   image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile   1.0   3 minutes ago
+</code></pre><style>
 
  
 .modal {

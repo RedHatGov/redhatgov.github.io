@@ -307,17 +307,11 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="bring-your-own-oci-image">Bring your own OCI image</h1>
-
-<p>It's easy to get started with OpenShift whether you're using our app templates or bringing your existing assets.  In this quick lab we will deploy an application using an exisiting container image.  OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.</p>
-
-<h2 id="let-s-point-openshift-to-an-existing-built-container-image">Let's point OpenShift to an existing built container image</h2>
-
+    <h1 id="bring-your-own-oci-image">Bring your own OCI image</h1>
+<p>It&rsquo;s easy to get started with OpenShift whether you&rsquo;re using our app templates or bringing your existing assets.  In this quick lab we will deploy an application using an exisiting container image.  OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.</p>
+<h2 id="lets-point-openshift-to-an-existing-built-container-image">Let&rsquo;s point OpenShift to an existing built container image</h2>
 <p>Choose either to complete the steps via CLI or Web Console.<br>
 Note: You can only choose one OR the other not both.<br></p>
-
 <div class="panel-group">
   
 
@@ -325,18 +319,17 @@ Note: You can only choose one OR the other not both.<br></p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse4bc412a335f6f16b7cd1469bedc5226c" class="collapsed">
+      <a data-toggle="collapse" href="#collapse302d92297ec4c5cff00b148207896add" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse4bc412a335f6f16b7cd1469bedc5226c" class="panel-collapse collapse ">
+  <div id="collapse302d92297ec4c5cff00b148207896add" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <p>Goto the terminal and type the following to create a new project:</p>
-
 <pre><code style="color:#FFFFFF">$ oc new-project demo-<span class="userid">YOUR#</span>
 Now using project "demo-<span class="userid">YOUR#</span>" on server "https://172.30.0.1:443".
 
@@ -348,25 +341,16 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
 
     kubectl create deployment hello-node --image=k8s.gcr.io/serve_hostname
 </code></pre>
-
 <hr>
-
-<p>By default, create a new project will default you to &quot;using&quot; that project.  In the event that the project is already create, you get set the &quot;using&quot; option by type the following:</p>
-
+By default, create a new project will default you to "using" that project.  In the event that the project is already create, you get set the "using" option by type the following:
 <pre><code style="color:#FFFFFF">$ oc project demo-<span class="userid">YOUR#</span>
 </code></pre>
-
 <hr>
-
-<p>Now, let's launch a pre-existing container from a container registry.</p>
-
+Now, let's launch a pre-existing container from a container registry.
 <pre><code style="color:#FFFFFF">$ oc new-app sonatype/nexus:oss --as-deployment-config=true
 </code></pre>
-
 <hr>
-
-<p>The output should show something <em>similar</em> to below:</p>
-
+The output should show something *similar* to below:
 <pre><code style="color:#FFFFFF">--> Found container image 8027e6d (2 months old) from Docker Hub for "sonatype/nexus:oss"         
                                                                                                   
     Red Hat Universal Base Image 7                                                                
@@ -395,11 +379,8 @@ ore of the commands below:
      'oc expose svc/nexus'                                                                        
     Run 'oc status' to view your app.  
 </code></pre>
-
 <hr>
-
-<p>Now, let's create a route, so that you can get to the app:</p>
-
+Now, let's create a route, so that you can get to the app:
 <pre><code style="color:#FFFFFF">$ oc expose service/nexus --path=/nexus
 </code></pre>
 
@@ -413,45 +394,40 @@ ore of the commands below:
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse98a87c8d0536c8cfe56d3dadbe5e5784" class="collapsed">
+      <a data-toggle="collapse" href="#collapsee66df6f6fb8775ef7bbc52f3b3e756eb" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse98a87c8d0536c8cfe56d3dadbe5e5784" class="panel-collapse collapse ">
+  <div id="collapsee66df6f6fb8775ef7bbc52f3b3e756eb" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p>Ensure that you are in &quot;Developer&quot; mode, by clicking on the menu, in the top left corner under the logo and selecting &quot;Developer&quot;
-<img src="../images/ocp-switch-developer.gif"><br><br>
-<hr></p>
-
-<p>Create a new project by selecting the &quot;Project:&quot; drop down and selecting &quot;Create project&quot;<br>
+       <p>Ensure that you are in &ldquo;Developer&rdquo; mode, by clicking on the menu, in the top left corner under the logo and selecting &ldquo;Developer&rdquo;
+<img src="../images/ocp-switch-developer.gif"><br><br></p>
+<hr>
+<p>Create a new project by selecting the &ldquo;Project:&rdquo; drop down and selecting &ldquo;Create project&quot;<br>
 Note: When prompted, ensure to create the project with the name demo-<span class="userid">YOUR#</span>
-<img src="../images/ocp-addToProjectButton.gif"><br>
-<hr></p>
-
-<p>Click &quot;+Add&quot; and then &quot;Container Image&quot;, to add an existing image from the container registry<br>
-<img src="../images/ocp-ContainerImageButton.png" width="300"><br>
-<hr></p>
-
-<p>Select the option for &quot;Image name from external registry&quot; and enter &quot;sonatype/nexus:oss&quot;, then ensure that the image is validated.
-<img src="../images/ocp-nexus-imagename-expand.png" width="800"><br/>
-<hr></p>
-
-<p>Enter the values shown, in the image above.
+<img src="../images/ocp-addToProjectButton.gif"><br></p>
+<hr>
+<p>Click &ldquo;+Add&rdquo; and then &ldquo;Container Image&rdquo;, to add an existing image from the container registry<br>
+<img src="../images/ocp-ContainerImageButton.png" width="300"><br></p>
+<hr>
+<p>Select the option for &ldquo;Image name from external registry&rdquo; and enter &ldquo;sonatype/nexus:oss&rdquo;, then ensure that the image is validated.
+<img src="../images/ocp-nexus-imagename-expand.png" width="800"><br/></p>
+<hr>
+<p>Enter the values shown, in the image above.</p>
 <p>
 <table>
 <tr><td><b>Application Name</b></td><td>nexus-app</td></tr>
 <tr><td><b>Name</b></td><td>nexus</td></tr>
 <tr><td><b>Resources</b></td><td>Deployment Config</td></tr>
 <tr><td><b>Create a route to the Application</b></td><td>Checked</td></tr>
-<tr><td colspan=2><b>Click &quot;Show advanced Routing options&quot;</b></td></tr>
+<tr><td colspan=2><b>Click "Show advanced Routing options"</b></td></tr>
 <tr><td><b>Path</b></td><td>/nexus</td></tr>
 </table>
-</p></p>
-
+</p>
 <blockquote>
 Click "Create"
 </blockquote>
@@ -462,7 +438,6 @@ Click "Create"
 
 
 </div>
-
 
 <style>
 

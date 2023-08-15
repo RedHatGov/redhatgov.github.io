@@ -273,124 +273,129 @@
 </div>
 
 <div class="container">
-  
-
-<h1 id="unit-6-issuing-a-certificate">Unit 6: Issuing a certificate</h1>
-
+  <h1 id="unit-6-issuing-a-certificate">Unit 6: Issuing a certificate</h1>
 <p>In this unit we will generate different certificates using the web interface and CLI.</p>
-
 <p>The purpose of certificates is to establish trust. Their usage varies depending on the kind of trust they are used to ensure. Some kinds of certificates are used to verify the identity of the presenter; others are used to verify that an object or item has not been tampered with.</p>
-
 <h2 id="certificate-request-message-format-cli">Certificate Request Message Format (CLI)</h2>
-
 <ol>
-<li><p>Ensure the labs were completed in Unit 5.</p></li>
-
-<li><p>Get DRM Transport certificate serial number and store in variable.</p>
-
-<p><code>trans_cert_num=$(pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-find --name &quot;DRM Transport&quot; | grep &quot;Serial Number&quot; | awk '{print $3}')</code></p></li>
-
-<li><p>Save DRM Transport certificate into file.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-show ${trans_cert_num} --output ~/.dogtag/ca1/transport.pem</code></p></li>
-
-<li><p>Submit certificate request.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; client-cert-request &quot;UID=brian-test&quot; --profile caDualCert --type crmf --transport ~/.dogtag/ca1/transport.pem</code></p></li>
-
-<li><p>Get pending request number.</p>
-
-<p><code>cert_req_num=$(pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; cert-request-find | grep -B2 &quot;Request Status: pending&quot; | grep &quot;Request ID:&quot; | awk '{print $3}')</code></p></li>
-
-<li><p>Approve request.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-request-review ${cert_req_num} --action approve</code></p></li>
-
-<li><p>Show approved certificate.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-show ${cert_req_num} --pretty</code></p></li>
-
-<li><p>Remove DRM Transport certificate.</p>
-
-<p><code>rm ~/.dogtag/ca1/transport.pem</code></p></li>
+<li>
+<p>Ensure the labs were completed in Unit 5.</p>
+</li>
+<li>
+<p>Get DRM Transport certificate serial number and store in variable.</p>
+<p><code>trans_cert_num=$(pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-find --name &quot;DRM Transport&quot; | grep &quot;Serial Number&quot; | awk '{print $3}')</code></p>
+</li>
+<li>
+<p>Save DRM Transport certificate into file.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-show ${trans_cert_num} --output ~/.dogtag/ca1/transport.pem</code></p>
+</li>
+<li>
+<p>Submit certificate request.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; client-cert-request &quot;UID=brian-test&quot; --profile caDualCert --type crmf --transport ~/.dogtag/ca1/transport.pem</code></p>
+</li>
+<li>
+<p>Get pending request number.</p>
+<p><code>cert_req_num=$(pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; cert-request-find | grep -B2 &quot;Request Status: pending&quot; | grep &quot;Request ID:&quot; | awk '{print $3}')</code></p>
+</li>
+<li>
+<p>Approve request.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-request-review ${cert_req_num} --action approve</code></p>
+</li>
+<li>
+<p>Show approved certificate.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-cert-show ${cert_req_num} --pretty</code></p>
+</li>
+<li>
+<p>Remove DRM Transport certificate.</p>
+<p><code>rm ~/.dogtag/ca1/transport.pem</code></p>
+</li>
 </ol>
-
 <h2 id="certificate-request-web-ui">Certificate Request (Web UI)</h2>
-
-<p>The URL is different in the images. I'm lazy.</p>
-
+<p>The URL is different in the images. I&rsquo;m lazy.</p>
 <ol>
-<li><p>Open CA webpage.</p>
+<li>
+<p>Open CA webpage.</p>
+<p><code>https://ca1.redhat.example.com:8443/ca/ee/ca</code></p>
+</li>
+<li>
+<p>Select <code>PKI Administrator</code> certificate (if prompted).</p>
+</li>
+<li>
+<p>Add Exception for insecure connection (if prompted).</p>
+</li>
+<li>
+<p>Click <code>Manual User Dual-Use Certificate Enrollment</code>.</p>
+<pre><code>![Alt text](images/certreq_lab_1.png)
+</code></pre>
+</li>
+<li>
+<p>Profile page.</p>
+<pre><code>![Alt text](images/certreq_lab_2.png)
+</code></pre>
+</li>
+<li>
+<p>Fill in with your information.</p>
+<pre><code> UID - brian
+ Email - bgribble@redhat.com
 
-<p><code>https://ca1.redhat.example.com:8443/ca/ee/ca</code></p></li>
-
-<li><p>Select <code>PKI Administrator</code> certificate (if prompted).</p></li>
-
-<li><p>Add Exception for insecure connection (if prompted).</p></li>
-
-<li><p>Click <code>Manual User Dual-Use Certificate Enrollment</code>.</p>
-
-<p><img src="images/certreq_lab_1.png" alt="Alt text" /></p></li>
-
-<li><p>Profile page.</p>
-
-<p><img src="images/certreq_lab_2.png" alt="Alt text" /></p></li>
-
-<li><p>Fill in with your information.</p>
-<pre><code>UID - brian
-Email - bgribble@redhat.com
-
-Requestor Name - Brian
-Requestor Email - bgribble@redhat.com
-Requestor Phone - 555-555-5555</code></pre></li>
-
-<li><p>Click Submit.</p></li>
-
-<li><p>Note request ID.</p>
-
-<p><img src="images/certreq_lab_3.png" alt="Alt text" /></p></li>
-
-<li><p>Open new tab and go to CA Agent webpage.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/ca/agent/ca/</code></p></li>
-
-<li><p>Click Find.</p>
-
-<p><img src="images/certreq_lab_4.png" alt="Alt text" /></p></li>
-
-<li><p>Select request ID (should match step 8).</p>
-
-<p><img src="images/certreq_lab_5.png" alt="Alt text" /></p></li>
-
-<li><p>Verify information and scroll to bottom. Select <code>Approve Request</code> and <code>Submit</code>.</p></li>
-
-<li><p>View certificate.</p></li>
-
-<li><p>Back to first tab or this webpage.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/ca/ee/ca/</code></p></li>
-
-<li><p>Click <code>Retrieval</code> Tab.</p>
-
-<p><img src="images/certreq_lab_6.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>List Certificates</code>.</p>
-
-<p><img src="images/certreq_lab_7.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Find</code>.</p>
-
-<p><img src="images/certreq_lab_8.png" alt="Alt text" /></p></li>
-
-<li><p>Click your certificate.</p></li>
-
-<li><p>Click <code>Import Your Certificate</code>.</p>
-
-<p><img src="images/certreq_lab_9.png" alt="Alt text" /></p></li>
-
-<li><p>Your certificate is now in your browser. Same location as Admin certificate.</p></li>
+ Requestor Name - Brian
+ Requestor Email - bgribble@redhat.com
+ Requestor Phone - 555-555-5555
+</code></pre>
+</li>
+<li>
+<p>Click Submit.</p>
+</li>
+<li>
+<p>Note request ID.</p>
+<pre><code>![Alt text](images/certreq_lab_3.png)
+</code></pre>
+</li>
+<li>
+<p>Open new tab and go to CA Agent webpage.</p>
+<p><code>https://ca1.redhat.example.com:8443/ca/agent/ca/</code></p>
+</li>
+<li>
+<p>Click Find.</p>
+<p><img src="images/certreq_lab_4.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Select request ID (should match step 8).</p>
+<p><img src="images/certreq_lab_5.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Verify information and scroll to bottom. Select <code>Approve Request</code> and <code>Submit</code>.</p>
+</li>
+<li>
+<p>View certificate.</p>
+</li>
+<li>
+<p>Back to first tab or this webpage.</p>
+<p><code>https://ca1.redhat.example.com:8443/ca/ee/ca/</code></p>
+</li>
+<li>
+<p>Click <code>Retrieval</code> Tab.</p>
+<p><img src="images/certreq_lab_6.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click <code>List Certificates</code>.</p>
+<p><img src="images/certreq_lab_7.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click <code>Find</code>.</p>
+<p><img src="images/certreq_lab_8.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click your certificate.</p>
+</li>
+<li>
+<p>Click <code>Import Your Certificate</code>.</p>
+<p><img src="images/certreq_lab_9.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Your certificate is now in your browser. Same location as Admin certificate.</p>
+</li>
 </ol>
-
 <p>The next lesson is <a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_7.md">Unit 7: Recovering a certificate</a>.</p>
 
 </div>

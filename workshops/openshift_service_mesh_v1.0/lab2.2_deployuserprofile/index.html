@@ -307,90 +307,70 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="adding-a-new-service-to-the-mesh">Adding a New Service to the Mesh</h1>
-
+    <h1 id="adding-a-new-service-to-the-mesh">Adding a New Service to the Mesh</h1>
 <p>You need to deploy the new user profile application into the service mesh.</p>
-
 <h2 id="deploy-application">Deploy Application</h2>
-
-<p>The deployment file 'userprofile-deploy-all.yaml' was created for you to deploy the application.  The file creates the user profile service and an accompanying PostgreSQL database.  Similar to the other source files, an annotation 'sidecar.istio.io/inject' was added to tell Istio to inject a sidecar proxy and add this to the mesh.</p>
-
+<p>The deployment file &lsquo;userprofile-deploy-all.yaml&rsquo; was created for you to deploy the application.  The file creates the user profile service and an accompanying PostgreSQL database.  Similar to the other source files, an annotation &lsquo;sidecar.istio.io/inject&rsquo; was added to tell Istio to inject a sidecar proxy and add this to the mesh.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Verify the annotation in the 'userprofile' file:
 </blockquote>
-<pre><code>cat ./openshift-configuration/userprofile-deploy-all.yaml | grep -B 1 sidecar.istio.io/inject</code></pre>
-<p>Output:</p>
+<pre><code>cat ./openshift-configuration/userprofile-deploy-all.yaml | grep -B 1 sidecar.istio.io/inject
+</code></pre><p>Output:</p>
 <pre><code>    annotations:
-      sidecar.istio.io/inject: &#34;true&#34;
+      sidecar.istio.io/inject: &quot;true&quot;
   --
     annotations:
-      sidecar.istio.io/inject: &#34;true&#34;</code></pre>
-<p>The annotation appears twice for the userprofile and PostgreSQL services.</p>
-
-<p><br></p>
-
+      sidecar.istio.io/inject: &quot;true&quot;
+</code></pre><p>The annotation appears twice for the userprofile and PostgreSQL services.</p>
+<br>
 <p>Before deploying the service, you need a reference to the local image you built in the previous lab.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 Run the following commands:
 </blockquote>
-<pre><code>USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template=&#39;{{.status.dockerImageRepository}}&#39;)
-echo $USER_PROFILE_IMAGE_URI</code></pre>
-<p>Output (sample):</p>
-<pre><code>image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile</code></pre>
-<blockquote>
+<pre><code>USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template='{{.status.dockerImageRepository}}')
+echo $USER_PROFILE_IMAGE_URI
+</code></pre><p>Output (sample):</p>
+<pre><code>image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Deploy the service using this image URI:
 </blockquote>
-<pre><code>sed &#34;s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|&#34; ./openshift-configuration/userprofile-deploy-all.yaml | oc create -f -</code></pre>
-<blockquote>
+<pre><code>sed &quot;s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|&quot; ./openshift-configuration/userprofile-deploy-all.yaml | oc create -f -
+</code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Watch the deployment of the user profile:
 </blockquote>
-<pre><code>oc get pods -l deploymentconfig=userprofile --watch</code></pre>
-<p>
+<pre><code>oc get pods -l deploymentconfig=userprofile --watch
+</code></pre><p>
 <i class="fa fa-info-circle"></i>
 The userprofile service may error and restart if the PostgreSQL pod is not running yet.
 </p>
-
 <p>Output:</p>
-<pre><code>userprofile-xxxxxxxxxx-xxxxx              2/2     Running		    0          2m55s</code></pre>
-<p><br></p>
-
+<pre><code>userprofile-xxxxxxxxxx-xxxxx              2/2     Running		    0          2m55s
+</code></pre><br>
 <p>Similar to the other microservices, the user profile service runs the application and the Istio proxy.</p>
-
 <blockquote>
 <i class="fa fa-terminal"></i>
 Print the containers in the 'userprofile' pod:
 </blockquote>
-<pre><code>oc get pods -l deploymentconfig=userprofile -o jsonpath=&#39;{.items[*].spec.containers[*].name}{&#34;\n&#34;}&#39;</code></pre>
-<p>Output:</p>
-<pre><code>userprofile istio-proxy</code></pre>
-<p><br></p>
-
+<pre><code>oc get pods -l deploymentconfig=userprofile -o jsonpath='{.items[*].spec.containers[*].name}{&quot;\n&quot;}'
+</code></pre><p>Output:</p>
+<pre><code>userprofile istio-proxy
+</code></pre><br>
 <h2 id="access-application">Access Application</h2>
-
-<p>The user profile service is deployed!  Let's test this in the browser.</p>
-
+<p>The user profile service is deployed!  Let&rsquo;s test this in the browser.</p>
 <blockquote>
 <i class="fa fa-desktop"></i>
 Navigate to the 'Profile' section in the header.
 </blockquote>
-
-<p><p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
-<code>echo $GATEWAY_URL</code></p>
-
-<p><br></p>
-
+<p><i class="fa fa-info-circle"></i> If you lost the URL, you can retrieve it via:</p>
+`echo $GATEWAY_URL`
+<br>
 <p>You should see the following:</p>
-
 <p><img src="../images/app-profilepage.png" width="1024"><br/>
- <em>Profile Page</em></p>
-
+<em>Profile Page</em></p>
 <style>
 
  

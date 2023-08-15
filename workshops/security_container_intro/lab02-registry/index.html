@@ -338,7 +338,7 @@ configured and running, the <code>curl</code> command can be used to test basic 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ssh node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span></code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ssh node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -359,7 +359,7 @@ Last login: Tue Jan 12 02:10:26 2021 from 10.0.2.245
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd $HOME/files/nodes/registry-files/gen-certs
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cd $HOME/files/nodes/registry-files/gen-certs
 grep ^FQDN myserver.cnf</code></pre>
 </div>
 </div>
@@ -371,7 +371,7 @@ grep ^FQDN myserver.cnf</code></pre>
 <div class="listingblock">
 <div class="title">Run the <code>gen-cert.sh</code> script to generate an SSL certificate.</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sh ./gen-cert.sh</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sh ./gen-cert.sh</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -401,7 +401,8 @@ Certificate:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ..
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cd ..
+loginctl enable-linger
 sh ./run-registry.sh</code></pre>
 </div>
 </div>
@@ -423,7 +424,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl --user redhat:redhat https://node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/v2/_catalog</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl --user redhat:redhat https://node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/v2/_catalog</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -436,7 +437,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 </div>
@@ -447,7 +448,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ssh node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span></code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ssh node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -468,7 +469,7 @@ Last login: Tue Jan 12 02:10:26 2021 from 10.0.2.245
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd $HOME/files/nodes/registry-files/gen-certs
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cd $HOME/files/nodes/registry-files/gen-certs
 grep ^FQDN myserver.cnf</code></pre>
 </div>
 </div>
@@ -480,7 +481,7 @@ grep ^FQDN myserver.cnf</code></pre>
 <div class="listingblock">
 <div class="title">Run the <code>gen-cert.sh</code> script to generate an SSL certificate.</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sh ./gen-cert.sh</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sh ./gen-cert.sh</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -510,7 +511,8 @@ Certificate:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ..
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cd ..
+loginctl enable-linger
 sh ./run-registry.sh</code></pre>
 </div>
 </div>
@@ -532,7 +534,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl --user redhat:redhat https://node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/v2/_catalog</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl --user redhat:redhat https://node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/v2/_catalog</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -545,7 +547,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 </div>
@@ -556,7 +558,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl --user redhat:redhat https://node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/v2/_catalog</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl --user redhat:redhat https://node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/v2/_catalog</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -566,7 +568,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl --user redhat:redhat https://node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/v2/_catalog</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl --user redhat:redhat https://node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:5000/v2/_catalog</code></pre>
 </div>
 </div>
 <div class="literalblock">

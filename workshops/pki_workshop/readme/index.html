@@ -273,18 +273,11 @@
 </div>
 
 <div class="container">
-  
-
-<h2 id="introduction">Introduction</h2>
-
+  <h2 id="introduction">Introduction</h2>
 <p><a href="https://www.redhat.com/en/technologies/cloud-computing/certificate-system" title="Red Hat Certificate System">Red Hat Certificate System</a> is an enterprise software system that gives you a scalable, secure framework to establish and maintain trusted identities and keep communications private.</p>
-
 <p>Red Hat Certificate System provides certificate life-cycle management-issue, renew, suspend, revoke, archive and recover, and manage single and dual-key X.509v3 certificates needed to handle strong authentication, single sign-on, and secure communications.</p>
-
 <p>The upstream release is called <a href="http://www.dogtagpki.org" title="Dogtag PKI">Dogtag</a>.</p>
-
 <h2 id="curriculum-overview">Curriculum overview</h2>
-
 <ul>
 <li><a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_1.md">Unit 1: Installing Directory Server</a></li>
 <li><a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_2.md">Unit 2: Installing a Certificate Authority</a></li>
@@ -299,54 +292,45 @@
 <li><a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_11.md">Unit 11: Certificate profiles</a></li>
 <li><a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_12.md">Unit 12: Troubleshooting</a></li>
 </ul>
-
 <h2 id="preparation">Preparation</h2>
-
 <p>Everything is installed on one (1) VM or physical machine but some preparation is needed prior to starting this workshop.</p>
-
 <h3 id="requirements">Requirements</h3>
-
 <ul>
-<li>Red Hat Enterprise Linux 7 (fully patched)</li>
-<li>RHDS (<strong>rhel-7-server-rhds</strong>) and RHCS (<strong>rhel-7-server-rhcmsys-9-rpms</strong>) entitlements</li>
-
-<li><p>Clone this repository</p>
-
-<p><code>git clone https://gitlab.consulting.redhat.com/pki/pki-workshop.git</code></p></li>
-
-<li><p>Add /etc/hosts entries (IPs can be changed)</p>
-<pre><code>192.168.124.10 ds1.redhat.example.com
-192.168.124.11 ca1.redhat.example.com</code></pre></li>
-
-<li><p>Configure separate interfaces with above IPs. Can be virtual.</p></li>
-
-<li><p>Firewall rules</p>
-
+<li>
+<p>Red Hat Enterprise Linux 7 (fully patched)</p>
+</li>
+<li>
+<p>RHDS (<strong>rhel-7-server-rhds</strong>) and RHCS (<strong>rhel-7-server-rhcmsys-9-rpms</strong>) entitlements</p>
+</li>
+<li>
+<p>Clone this repository</p>
+<p><code>git clone https://gitlab.consulting.redhat.com/pki/pki-workshop.git</code></p>
+</li>
+<li>
+<p>Add /etc/hosts entries (IPs can be changed)</p>
+<pre><code>  192.168.124.10 ds1.redhat.example.com
+  192.168.124.11 ca1.redhat.example.com
+</code></pre>
+</li>
+<li>
+<p>Configure separate interfaces with above IPs. Can be virtual.</p>
+</li>
+<li>
+<p>Firewall rules</p>
 <p><code>firewall-cmd --permanent --add-service=ldap</code></p>
-
 <p><code>firewall-cmd --permanent --add-service=ldaps</code></p>
-
 <p><code>firewall-cmd --permanent --add-port=8080/tcp</code></p>
-
 <p><code>firewall-cmd --permanent --add-port=8443/tcp</code></p>
-
-<p><code>firewall-cmd --reload</code></p></li>
+<p><code>firewall-cmd --reload</code></p>
+</li>
 </ul>
-
 <h2 id="get-started">Get started</h2>
-
 <p>Ready to get started? Start the first lesson <a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_1.md">Unit 1: Installing Directory Server</a>.</p>
-
 <h2 id="after-the-workshop">After the workshop</h2>
-
 <h3 id="additional-resources">Additional Resources</h3>
-
 <p>Links</p>
-
 <p>| <a href="https://access.redhat.com/documentation/en-us/red_hat_certificate_system/9/html/planning_installation_and_deployment_guide/">CS Deployment Guide</a> | <a href="https://access.redhat.com/documentation/en-us/red_hat_certificate_system/9/html/administration_guide/">CS Administration Guide</a> | <a href="https://access.redhat.com/documentation/en-us/red_hat_certificate_system/9/html/command-line_tools_guide/">CS CLI Guide</a> |</p>
-
 <p>| <a href="https://access.redhat.com/documentation/en-us/red_hat_directory_server/10/html/deployment_guide/">DS Deployment Guide</a> | <a href="https://access.redhat.com/documentation/en-us/red_hat_directory_server/10/html/installation_guide/">DS Installation Guide</a> | <a href="https://access.redhat.com/documentation/en-us/red_hat_directory_server/10/html/administration_guide/">DS Administration Guide</a> |</p>
-
 <p>| <a href="http://www.dogtagpki.org/wiki/PKI_Main_Page">Dogtag Wiki</a> |</p>
 
 </div>

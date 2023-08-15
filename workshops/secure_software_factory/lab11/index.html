@@ -307,58 +307,42 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="add-build-image-stage">Add Build Image Stage</h1>
-
+    <h1 id="add-build-image-stage">Add Build Image Stage</h1>
 <p>Add the Build Image Stage into your pipeline.</p>
-
 <p><img src="../images/pipeline_oc_build_image.png" width="900" /></p>
-
-<p>The &quot;sh&quot; are shell commands in your pipeline that are executed on the Jenkins Slave.  Maven built the openshift-tasks.war in it the target directory and it will be copied into the created oc-builds directory.</p>
-
-<p>The startBuild stage is kicked off from Openshift and pointing to the local directory &quot;oc-build&quot; on the Jenkins slave.</p>
-
-<p><br></p>
-
-<h1 id="append-to-jenkins-pipeline-configuration">Append to Jenkins Pipeline Configuration</h1>
-
+<p>The &ldquo;sh&rdquo; are shell commands in your pipeline that are executed on the Jenkins Slave.  Maven built the openshift-tasks.war in it the target directory and it will be copied into the created oc-builds directory.</p>
+<p>The startBuild stage is kicked off from Openshift and pointing to the local directory &ldquo;oc-build&rdquo; on the Jenkins slave.</p>
+<br>
+# Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-
 <p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
-
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre><code>    stage(&#39;Build Image&#39;) {
+<pre><code>    stage('Build Image') {
       steps {
-        sh &#34;rm -rf oc-build &amp;&amp; mkdir -p oc-build/deployments&#34;
-        sh &#34;cp target/openshift-tasks.war oc-build/deployments/ROOT.war&#34;
+        sh &quot;rm -rf oc-build &amp;&amp; mkdir -p oc-build/deployments&quot;
+        sh &quot;cp target/openshift-tasks.war oc-build/deployments/ROOT.war&quot;
 
         script {
           openshift.withCluster() {
             openshift.withProject(env.DEV_PROJECT) {
-              openshift.selector(&#34;bc&#34;, &#34;tasks&#34;).startBuild(&#34;--from-dir=oc-build&#34;, &#34;--wait=true&#34;)
+              openshift.selector(&quot;bc&quot;, &quot;tasks&quot;).startBuild(&quot;--from-dir=oc-build&quot;, &quot;--wait=true&quot;)
             }
           }
         }
       }
-    }</code></pre>
-<h1 id="test-your-pipeline">Test Your Pipeline</h1>
-
-<p>If you'd like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
+    }
+</code></pre><h1 id="test-your-pipeline">Test Your Pipeline</h1>
+<p>If you&rsquo;d like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
 <pre><code>  }
-}</code></pre>
-<p>Save your Jenkinsfile.</p>
-
+}
+</code></pre><p>Save your Jenkinsfile.</p>
 <p>Go back to Builds &gt; Pipelines</p>
-
 <p>Click Start Pipeline</p>
-
 <h1 id="delete-brackets">Delete Brackets</h1>
-
-<p>Please delete the brackets you just added once testing is complete. We can add them later if you'd like to test your pipeline as you go along.</p>
+<p>Please delete the brackets you just added once testing is complete. We can add them later if you&rsquo;d like to test your pipeline as you go along.</p>
 <pre><code>  }
-}</code></pre>
-<p>Click Save
+}
+</code></pre><p>Click Save
 <style>
 
  

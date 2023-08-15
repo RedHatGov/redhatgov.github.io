@@ -321,7 +321,7 @@
 <div class="listingblock">
 <div class="title">podman pull command</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman pull registry.access.redhat.com/rhel7</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman pull registry.access.redhat.com/ubi8</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -333,13 +333,13 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Repository name (rhel)</p>
+<p>Repository name (registry.access.redhat.com)</p>
 </li>
 <li>
-<p>Namespace name (rhel7) and</p>
+<p>Namespace name (ubi8) and</p>
 </li>
 <li>
-<p>Image name (rhel).</p>
+<p>Image name .</p>
 </li>
 <li>
 <p>Optionally, a tag can be added (which defaults to :latest if not entered) to ensure retrieval of the required image.</p>
@@ -347,7 +347,7 @@
 </ol>
 </div>
 <div class="paragraph">
-<p>(There can be multiple versions of the same image, within the registry.  A specific version can be selected by adding a tag, such as :latest to form a name such as rhel:latest or rhel7:7.5-231.)</p>
+<p>(There can be multiple versions of the same image, within the registry.  A specific version can be selected by adding a tag, such as :latest to form a name such as rhel7:latest or ubi8:8.7-231.)</p>
 </div>
 </div>
 <div class="sect2">
@@ -357,7 +357,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://registry.access.redhat.com/rhel7</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">skopeo inspect docker://registry.access.redhat.com/ubi8</code></pre>
 </div>
 </div>
 </div>
@@ -368,13 +368,13 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman images</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman images</code></pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>REPOSITORY                         TAG      IMAGE ID       CREATED      SIZE
-registry.access.redhat.com/rhel7   latest   7a840db7f020   2 days ago   211MB</pre>
+registry.access.redhat.com/ubi8    latest   7a840db7f020   2 days ago   211MB</pre>
 </div>
 </div>
 </div>
@@ -392,7 +392,7 @@ registry.access.redhat.com/rhel7   latest   7a840db7f020   2 days ago   211MB</p
 <div class="listingblock">
 <div class="title">podman info command</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman info</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman info</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -405,7 +405,7 @@ registry.access.redhat.com/rhel7   latest   7a840db7f020   2 days ago   211MB</p
   arch: amd64
   cpus: 1
   hostname: ip-10-0-2-211.ec2.internal
-  kernel: 3.10.0-862.3.2.el7.x86_64
+  kernel: 4.18.0-862.3.2.el7.x86_64
   os: linux
   uptime: 19h 36m 30.42s (Approximately 0.79 days)
 insecure registries:

@@ -273,262 +273,240 @@
 </div>
 
 <div class="container">
-  
-
-<h1 id="unit-5-cli-tools">Unit 5: CLI tools</h1>
-
+  <h1 id="unit-5-cli-tools">Unit 5: CLI tools</h1>
 <p>In this unit you will access the Certificate System using various command-line interface (CLI) tools. Red Hat Certificate System provides a client command-line interface to access various services on the server.</p>
-
 <h2 id="prerequisites">Prerequisites</h2>
-
 <p>Your environment needs to be configured to use the ca_admin certificate to interact with the subsystems via the CLI. The root user does not have be to used but access to /root/.dogtag is required to use the ca_admin certificate.</p>
-
 <ol>
-<li><p>Store the passwords in a text file. The default passwords are <strong>redhat</strong>.</p>
-
+<li>
+<p>Store the passwords in a text file. The default passwords are <strong>redhat</strong>.</p>
 <p><code>echo redhat &gt; ~/.dogtag/ca1/client_password.txt</code></p>
-
-<p><code>echo redhat &gt; ~/.dogtag/ca1/pkcs12_password.txt</code></p></li>
-
-<li><p>Initialize nssdb if it does not exist.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt client-init</code></p></li>
-
-<li><p>Import ca_admin certificate.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt \
-client-cert-import \
---pkcs12 ~/.dogtag/ca1/ca_admin_cert.p12 \
---pkcs12-password-file ~/.dogtag/ca1/pkcs12_password.txt</code></p></li>
+<p><code>echo redhat &gt; ~/.dogtag/ca1/pkcs12_password.txt</code></p>
+</li>
+<li>
+<p>Initialize nssdb if it does not exist.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt client-init</code></p>
+</li>
+<li>
+<p>Import ca_admin certificate.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt \ client-cert-import \ --pkcs12 ~/.dogtag/ca1/ca_admin_cert.p12 \ --pkcs12-password-file ~/.dogtag/ca1/pkcs12_password.txt</code></p>
+</li>
 </ol>
-
 <h2 id="certutil">certutil</h2>
-
 <p>The Certificate Database Tool, <strong>certutil</strong>, is a command-line utility that can create and modify certificate and key databases. It can specifically list, generate, modify, or delete certificates, create or change the password, generate new public and private key pairs, display the contents of the key database, or delete key pairs within the key database.</p>
-
 <ol>
-<li><p>List all certificates.</p>
-
-<p><code>certutil -L -d /var/lib/pki/ca1/alias/ -h all</code></p></li>
-
-<li><p>Show certificate (human-readable).</p>
-
-<p><code>certutil -L -d /var/lib/pki/ca1/alias/ -n &quot;caSigningCert cert-ca1 CA&quot;</code></p></li>
-
-<li><p>Show certificate (ASCII).</p>
-
-<p><code>certutil -L -d /var/lib/pki/ca1/alias/ -n &quot;caSigningCert cert-ca1 CA&quot; -a</code></p></li>
-
-<li><p>Output certificate to file.</p>
-
-<p><code>certutil -L -d /var/lib/pki/ca1/alias/ -n &quot;caSigningCert cert-ca1 CA&quot; -a -o output.crt</code></p></li>
-
-<li><p>List keys (Internal password is in /etc/pki/ca1/password.conf).</p>
-
-<p><code>certutil -K -d /var/lib/pki/ca1/alias/</code></p></li>
-
-<li><p>More documentation can be found in <code>man certutil</code> and the <a href="https://access.redhat.com/documentation/en-us/red_hat_directory_server/9.0/html/administration_guide/managing_ssl-using_certutil">RHDS Administration Guide</a>.</p></li>
+<li>
+<p>List all certificates.</p>
+<p><code>certutil -L -d /var/lib/pki/ca1/alias/ -h all</code></p>
+</li>
+<li>
+<p>Show certificate (human-readable).</p>
+<p><code>certutil -L -d /var/lib/pki/ca1/alias/ -n &quot;caSigningCert cert-ca1 CA&quot;</code></p>
+</li>
+<li>
+<p>Show certificate (ASCII).</p>
+<p><code>certutil -L -d /var/lib/pki/ca1/alias/ -n &quot;caSigningCert cert-ca1 CA&quot; -a</code></p>
+</li>
+<li>
+<p>Output certificate to file.</p>
+<p><code>certutil -L -d /var/lib/pki/ca1/alias/ -n &quot;caSigningCert cert-ca1 CA&quot; -a -o output.crt</code></p>
+</li>
+<li>
+<p>List keys (Internal password is in /etc/pki/ca1/password.conf).</p>
+<p><code>certutil -K -d /var/lib/pki/ca1/alias/</code></p>
+</li>
+<li>
+<p>More documentation can be found in <code>man certutil</code> and the <a href="https://access.redhat.com/documentation/en-us/red_hat_directory_server/9.0/html/administration_guide/managing_ssl-using_certutil">RHDS Administration Guide</a>.</p>
+</li>
 </ol>
-
 <h2 id="pki">pki</h2>
-
 <p>The pki command provides a command-line interface allowing clients to access various services on the Certificate System server.   These  services  include  certificates, groups, keys, security domains, and users.</p>
-
 <h3 id="show-users-using-pki">Show users using pki</h3>
-
 <ol>
-<li><p>List CA users. Accept default answers.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-user-find</code></p></li>
-
-<li><p>List KRA users.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; kra-user-find</code></p></li>
-
-<li><p>List OCSP users.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ocsp-user-find</code></p></li>
-
-<li><p>List TKS users.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; tks-user-find</code></p></li>
-
-<li><p>List TPS users.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; tps-user-find</code></p></li>
+<li>
+<p>List CA users. Accept default answers.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-user-find</code></p>
+</li>
+<li>
+<p>List KRA users.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; kra-user-find</code></p>
+</li>
+<li>
+<p>List OCSP users.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ocsp-user-find</code></p>
+</li>
+<li>
+<p>List TKS users.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; tks-user-find</code></p>
+</li>
+<li>
+<p>List TPS users.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; tps-user-find</code></p>
+</li>
 </ol>
-
 <h3 id="show-groups-using-pki">Show groups using pki</h3>
-
 <ol>
-<li><p>List CA groups.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-group-find</code></p></li>
-
-<li><p>List KRA groups.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; kra-group-find</code></p></li>
-
-<li><p>List OCSP groups.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ocsp-group-find</code></p></li>
-
-<li><p>List TKS groups.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; tks-group-find</code></p></li>
-
-<li><p>List TPS groups.</p>
-
-<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; tps-group-find</code></p></li>
+<li>
+<p>List CA groups.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ca-group-find</code></p>
+</li>
+<li>
+<p>List KRA groups.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; kra-group-find</code></p>
+</li>
+<li>
+<p>List OCSP groups.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; ocsp-group-find</code></p>
+</li>
+<li>
+<p>List TKS groups.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; tks-group-find</code></p>
+</li>
+<li>
+<p>List TPS groups.</p>
+<p><code>pki -C ~/.dogtag/ca1/client_password.txt -n &quot;PKI Administrator for redhat.example.com&quot; tps-group-find</code></p>
+</li>
 </ol>
-
 <h2 id="pki-server">pki-server</h2>
-
 <p>The pki-server command provides a command-line interface allowing administrators to perform various administrative operations on the Certificate System instances. These services include starting/stopping instances, enabling/disabling subsystems, performing certain migrations and enabling/disabling startup using nuxwdog.</p>
-
-<p>Operations are performed using file system utilities, and can only be performed by an administrative user on the local host. This utility does not connect to any of the subsystem's WEB or REST interfaces.</p>
-
+<p>Operations are performed using file system utilities, and can only be performed by an administrative user on the local host. This utility does not connect to any of the subsystem&rsquo;s WEB or REST interfaces.</p>
 <h3 id="pki-server-instance-commands">pki-server instance commands</h3>
-
 <ol>
-<li><p>Show instances.</p>
-
-<p><code>pki-server instance-find</code></p></li>
-
-<li><p>Stop instance.</p>
-
-<p><code>pki-server instance-stop ca1</code></p></li>
-
-<li><p>Start instance.</p>
-
-<p><code>pki-server instance-start ca1</code></p></li>
+<li>
+<p>Show instances.</p>
+<p><code>pki-server instance-find</code></p>
+</li>
+<li>
+<p>Stop instance.</p>
+<p><code>pki-server instance-stop ca1</code></p>
+</li>
+<li>
+<p>Start instance.</p>
+<p><code>pki-server instance-start ca1</code></p>
+</li>
 </ol>
-
 <h3 id="pki-server-subsystem-commands">pki-server subsystem commands</h3>
-
 <ol>
-<li><p>List subsystems.</p>
-
-<p><code>pki-server subsystem-find -i ca1</code></p></li>
-
-<li><p>List subsystem certs.</p>
-
-<p><code>pki-server subsystem-cert-find -i ca1 ca</code></p></li>
-
-<li><p>Show details of certificate.</p>
-
-<p><code>pki-server subsystem-cert-show -i ca1 ca sslserver --show-all</code></p></li>
-
-<li><p>Disable subsystem.</p>
-
-<p><code>pki-server subsystem-disable -i ca1 ocsp</code></p></li>
-
-<li><p>Enable subsystem.</p>
-
-<p><code>pki-server subsystem-enable -i ca1 ocsp</code></p></li>
+<li>
+<p>List subsystems.</p>
+<p><code>pki-server subsystem-find -i ca1</code></p>
+</li>
+<li>
+<p>List subsystem certs.</p>
+<p><code>pki-server subsystem-cert-find -i ca1 ca</code></p>
+</li>
+<li>
+<p>Show details of certificate.</p>
+<p><code>pki-server subsystem-cert-show -i ca1 ca sslserver --show-all</code></p>
+</li>
+<li>
+<p>Disable subsystem.</p>
+<p><code>pki-server subsystem-disable -i ca1 ocsp</code></p>
+</li>
+<li>
+<p>Enable subsystem.</p>
+<p><code>pki-server subsystem-enable -i ca1 ocsp</code></p>
+</li>
 </ol>
-
 <h2 id="pkidaemon">pkidaemon</h2>
-
-<p>The pkidaemon command with the 'status' argument provides a way to display the status of all existing PKI instances on a machine. Optionally, an individual PKI instance may be specified by using an optional [instance-name].</p>
-
-<p>The pkidaemon 'start' argument is currently only used internally by the systemctl scripts.</p>
-
+<p>The pkidaemon command with the &lsquo;status&rsquo; argument provides a way to display the status of all existing PKI instances on a machine. Optionally, an individual PKI instance may be specified by using an optional [instance-name].</p>
+<p>The pkidaemon &lsquo;start&rsquo; argument is currently only used internally by the systemctl scripts.</p>
 <ol>
-<li><p>Show status of instance.</p>
-
+<li>
+<p>Show status of instance.</p>
 <p><code>pkidaemon status ca1</code></p>
-<pre><code>[CA Status Definitions]
-Unsecure URL        = http://ca1.redhat.example.com:8080/ca/ee/ca
-Secure Agent URL    = https://ca1.redhat.example.com:8443/ca/agent/ca
-Secure EE URL       = https://ca1.redhat.example.com:8443/ca/ee/ca
-Secure Admin URL    = https://ca1.redhat.example.com:8443/ca/services
-PKI Console Command = pkiconsole https://ca1.redhat.example.com:8443/ca
-Tomcat Port         = 8005 (for shutdown)
+<pre><code> [CA Status Definitions]
+ Unsecure URL        = http://ca1.redhat.example.com:8080/ca/ee/ca
+ Secure Agent URL    = https://ca1.redhat.example.com:8443/ca/agent/ca
+ Secure EE URL       = https://ca1.redhat.example.com:8443/ca/ee/ca
+ Secure Admin URL    = https://ca1.redhat.example.com:8443/ca/services
+ PKI Console Command = pkiconsole https://ca1.redhat.example.com:8443/ca
+ Tomcat Port         = 8005 (for shutdown)
 
-[KRA Status Definitions]
-Secure Agent URL    = https://ca1.redhat.example.com:8443/kra/agent/kra
-Secure Admin URL    = https://ca1.redhat.example.com:8443/kra/services
-PKI Console Command = pkiconsole https://ca1.redhat.example.com:8443/kra
-Tomcat Port         = 8005 (for shutdown)
+ [KRA Status Definitions]
+ Secure Agent URL    = https://ca1.redhat.example.com:8443/kra/agent/kra
+ Secure Admin URL    = https://ca1.redhat.example.com:8443/kra/services
+ PKI Console Command = pkiconsole https://ca1.redhat.example.com:8443/kra
+ Tomcat Port         = 8005 (for shutdown)
 
-[OCSP Status Definitions]
-Unsecure URL        = http://ca1.redhat.example.com:8080/ocsp/ee/ocsp/&lt;ocsp request blob&gt;
-Secure Agent URL    = https://ca1.redhat.example.com:8443/ocsp/agent/ocsp
-Secure EE URL       = https://ca1.redhat.example.com:8443/ocsp/ee/ocsp/&lt;ocsp request blob&gt;
-Secure Admin URL    = https://ca1.redhat.example.com:8443/ocsp/services
-PKI Console Command = pkiconsole https://ca1.redhat.example.com:8443/ocsp
-Tomcat Port         = 8005 (for shutdown)
+ [OCSP Status Definitions]
+ Unsecure URL        = http://ca1.redhat.example.com:8080/ocsp/ee/ocsp/&lt;ocsp request blob&gt;
+ Secure Agent URL    = https://ca1.redhat.example.com:8443/ocsp/agent/ocsp
+ Secure EE URL       = https://ca1.redhat.example.com:8443/ocsp/ee/ocsp/&lt;ocsp request blob&gt;
+ Secure Admin URL    = https://ca1.redhat.example.com:8443/ocsp/services
+ PKI Console Command = pkiconsole https://ca1.redhat.example.com:8443/ocsp
+ Tomcat Port         = 8005 (for shutdown)
 
-[TKS Status Definitions]
-Secure Agent URL    = https://ca1.redhat.example.com:8443/tks/agent/tks
-Secure Admin URL    = https://ca1.redhat.example.com:8443/tks/services
-PKI Console Command = pkiconsole https://ca1.redhat.example.com:8443/tks
-Tomcat Port         = 8005 (for shutdown)
+ [TKS Status Definitions]
+ Secure Agent URL    = https://ca1.redhat.example.com:8443/tks/agent/tks
+ Secure Admin URL    = https://ca1.redhat.example.com:8443/tks/services
+ PKI Console Command = pkiconsole https://ca1.redhat.example.com:8443/tks
+ Tomcat Port         = 8005 (for shutdown)
 
-[TPS Status Definitions]
-Unsecure URL        = http://ca1.redhat.example.com:8080/tps
-Secure URL          = https://ca1.redhat.example.com:8443/tps
-Unsecure PHONE HOME = http://ca1.redhat.example.com:8080/tps/phoneHome
-Secure PHONE HOME   = https://ca1.redhat.example.com:8443/tps/phoneHome
-Tomcat Port         = 8005 (for shutdown)
+ [TPS Status Definitions]
+ Unsecure URL        = http://ca1.redhat.example.com:8080/tps
+ Secure URL          = https://ca1.redhat.example.com:8443/tps
+ Unsecure PHONE HOME = http://ca1.redhat.example.com:8080/tps/phoneHome
+ Secure PHONE HOME   = https://ca1.redhat.example.com:8443/tps/phoneHome
+ Tomcat Port         = 8005 (for shutdown)
 
-[CA Configuration Definitions]
-PKI Instance Name:   ca1
+ [CA Configuration Definitions]
+ PKI Instance Name:   ca1
 
-PKI Subsystem Type:  Root CA (Security Domain)
+ PKI Subsystem Type:  Root CA (Security Domain)
 
-Registered PKI Security Domain Information:
-==========================================================================
-Name:  redhat.example.com Security Domain
-URL:   https://ca1.redhat.example.com:8443
-==========================================================================
+ Registered PKI Security Domain Information:
+ ==========================================================================
+ Name:  redhat.example.com Security Domain
+ URL:   https://ca1.redhat.example.com:8443
+ ==========================================================================
 
-[KRA Configuration Definitions]
-PKI Instance Name:   ca1
+ [KRA Configuration Definitions]
+ PKI Instance Name:   ca1
 
-PKI Subsystem Type:  KRA
+ PKI Subsystem Type:  KRA
 
-Registered PKI Security Domain Information:
-==========================================================================
-Name:  redhat.example.com Security Domain
-URL:   https://ca1.redhat.example.com:8443
-==========================================================================
+ Registered PKI Security Domain Information:
+ ==========================================================================
+ Name:  redhat.example.com Security Domain
+ URL:   https://ca1.redhat.example.com:8443
+ ==========================================================================
 
-[OCSP Configuration Definitions]
-PKI Instance Name:   ca1
+ [OCSP Configuration Definitions]
+ PKI Instance Name:   ca1
 
-PKI Subsystem Type:  OCSP
+ PKI Subsystem Type:  OCSP
 
-Registered PKI Security Domain Information:
-==========================================================================
-Name:  redhat.example.com Security Domain
-URL:   https://ca1.redhat.example.com:8443
-==========================================================================
+ Registered PKI Security Domain Information:
+ ==========================================================================
+ Name:  redhat.example.com Security Domain
+ URL:   https://ca1.redhat.example.com:8443
+ ==========================================================================
 
-[TKS Configuration Definitions]
-PKI Instance Name:   ca1
+ [TKS Configuration Definitions]
+ PKI Instance Name:   ca1
 
-PKI Subsystem Type:  TKS
+ PKI Subsystem Type:  TKS
 
-Registered PKI Security Domain Information:
-==========================================================================
-Name:  redhat.example.com Security Domain
-URL:   https://ca1.redhat.example.com:8443
-==========================================================================
+ Registered PKI Security Domain Information:
+ ==========================================================================
+ Name:  redhat.example.com Security Domain
+ URL:   https://ca1.redhat.example.com:8443
+ ==========================================================================
 
-[TPS Configuration Definitions]
-PKI Instance Name:   ca1
+ [TPS Configuration Definitions]
+ PKI Instance Name:   ca1
 
-PKI Subsystem Type:  TPS
+ PKI Subsystem Type:  TPS
 
-Registered PKI Security Domain Information:
-==========================================================================
-Name:  redhat.example.com Security Domain
-URL:   https://ca1.redhat.example.com:8443
-==========================================================================</code></pre></li>
+ Registered PKI Security Domain Information:
+ ==========================================================================
+ Name:  redhat.example.com Security Domain
+ URL:   https://ca1.redhat.example.com:8443
+ ==========================================================================
+</code></pre>
+</li>
 </ol>
-
 <p>The next lesson is <a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_6.md">Unit 6: Issuing a certificate</a>.</p>
 
 </div>

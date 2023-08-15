@@ -303,127 +303,116 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="microservice-integration-patterns">Microservice Integration Patterns</h1>
-
+    <h1 id="microservice-integration-patterns">Microservice Integration Patterns</h1>
 <ul>
 <li>In previous labs, we created two new microservices with the intention of replacing functionality (“strangling”) the monolithic application.
 Currently no traffic is routed to them.</li>
 <li>If you were to re-route traffic from the monolith’s /services/products API to the new catalog service’s /services/catalog endpoint, you would be missing the inventory data.</li>
 <li>In this lab we will consider different options and architectures for integrating the microservices’ functionality into our app.</li>
 </ul>
-
 <blockquote>
 <p>Option 1: Client Aggregation</p>
 </blockquote>
-
 <ul>
 <li>Microservices implement functionality previously found in monoliths</li>
 <li>Some microservices depend upon other microservices</li>
 <li>Client applications (e.g. web browsers) depend on all of them in one way or another, and are usually “outside the firewall”</li>
 <li>This option means that the client side code (typically run in a browser) is responsible for talking to each microservice and aggregating/combining the results</li>
 <li>Client aggregation benefits
-
 <ul>
 <li>No development bottleneck on the server / ESB-style funnel</li>
-</ul></li>
+</ul>
+</li>
 <li>Client aggregation drawbacks
-
 <ul>
 <li>Network bandwidth/latency of multiple calls to multiple microservices</li>
 <li>Unfriendly protocols - web proxies, ports, etc</li>
 <li>Difficulty in later refactoring microservices - the client must change too</li>
 <li>Client application code complexity</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p><img src="../img/lab3_phone2.png" width="500" /></p>
-
 <blockquote>
 <p>Option 2: Chaining</p>
 </blockquote>
-
 <ul>
-<li>Chaining means that one microservice calls another, which calls another, etc.</li>
-<li>A complete chain is typically not desirable or necessary, but short chains are OK</li>
-<li>Chaining benefits
-
+<li>
+<p>Chaining means that one microservice calls another, which calls another, etc.</p>
+</li>
+<li>
+<p>A complete chain is typically not desirable or necessary, but short chains are OK</p>
+</li>
+<li>
+<p>Chaining benefits</p>
 <ul>
 <li>Client code simpler - there is only a single entry into the chain</li>
 <li>Less network bandwidth (also due to single entry point)</li>
-</ul></li>
-<li>Chaining drawbacks
-
+</ul>
+</li>
+<li>
+<p>Chaining drawbacks</p>
 <ul>
 <li>Potential for cascading failures (resilience patterns can help minimize this)</li>
 <li>Complex “stack traces” when things go wrong (tracing libraries a must)</li>
 <li>Exposes internal structure of app logic (the first microservice in the chain would be difficult to change)</li>
-</ul></li>
 </ul>
-
 <p><img src="../img/lab3_phone3.png" width="700" /></p>
-
+</li>
+</ul>
 <blockquote>
 <p>Option 3: API Gateway</p>
 </blockquote>
-
 <ul>
-<li>The API Gateway pattern:
-
+<li>
+<p>The API Gateway pattern:</p>
 <ul>
 <li>Keeps business logic on server side</li>
 <li>Aggregates results from back-end services</li>
-</ul></li>
-<li>API Gateway Pattern benefits
-
+</ul>
+</li>
+<li>
+<p>API Gateway Pattern benefits</p>
 <ul>
 <li>Encapsulates internal structure of application’s services</li>
 <li>Less chatty network traffic</li>
 <li>Simplified client code (no aggregation)</li>
-</ul></li>
-<li>Drawbacks
-
+</ul>
+</li>
+<li>
+<p>Drawbacks</p>
 <ul>
 <li>Possible bottleneck depending on difficulty of adding new services</li>
-</ul></li>
 </ul>
-
 <p><img src="../img/lab3_phone4.png" width="500" /></p>
-
+</li>
+</ul>
 <h1 id="step-1">Step 1</h1>
-
 <ul>
 <li>In this lab, the previously developed microservices will be placed behind a gateway service</li>
 <li>The client application will then call the gateway service to retrieve its data</li>
 <li>This will “strangle” the monolith by replacing its catalog/inventory services with new microservices.</li>
 </ul>
-
 <blockquote>
 <p>First, deploy the API gateway:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone -b app-partner https://github.com/epe105/gateway</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd gateway</code></pre></div>
-<div class="alert alert-warning">
-  
-  <span class="pficon pficon-warning-triangle-o"></span>
-  
-
-Please update ``<USERNAME>`` below with your assigned username
-
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone -b app-partner https://github.com/epe105/gateway
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd gateway
+</code></pre></div><div class="alert alert-warning">
+<p><span class="pficon pficon-warning-triangle-o"></span></p>
+<p>Please update <code>&lt;USERNAME&gt;</code> below with your assigned username</p>
 </div>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project coolstore-&lt;USERNAME&gt;</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean fabric8:deploy -Popenshift -DskipTests</code></pre></div>
-<h1 id="step-2">Step 2</h1>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project coolstore-&lt;USERNAME&gt;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean fabric8:deploy -Popenshift -DskipTests
+</code></pre></div><h1 id="step-2">Step 2</h1>
 <ul>
 <li>The Coolstore Gateway microservice is a Spring Boot application that implements its logic using an Apache Camel route.</li>
 </ul>
-
 <blockquote>
 <p>Take a look at the code for the Gateway in your browser :
-   <a href="https://github.com/modernize-legacy-apps/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java">https://github.com/epe105/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java</a></p>
+<a href="https://github.com/modernize-legacy-apps/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java">https://github.com/epe105/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java</a></p>
 </blockquote>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59</span>restConfiguration()
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60</span>		.contextPath(&#34;/services&#34;).apiContextPath(&#34;/services-docs&#34;)
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61</span>		.apiProperty(&#34;host&#34;, &#34;&#34;)
@@ -431,18 +420,14 @@ Please update ``<USERNAME>`` below with your assigned username
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63</span>		.apiProperty(&#34;api.version&#34;, &#34;1.0&#34;)
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64</span>		.component(&#34;servlet&#34;)
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65</span>		.bindingMode(RestBindingMode.json);</code></pre></div>
-
 <ul>
 <li>The beginning of this route uses the Camel Java DSL (Domain-Specific Language) to configure the REST system and define the base paths of the API itself (/services) and paths to Swagger documentation (/services-docs).</li>
 </ul>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67</span>rest(&#34;/products&#34;).description(&#34;Access the CoolStore products and their availability&#34;)
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68</span>            .produces(MediaType.APPLICATION_JSON_VALUE)</code></pre></div>
-
 <ul>
 <li>This begins the REST DSL portion, defining the primary access point for the catalog of products (/products) and the format of the data it produces (JSON)</li>
 </ul>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70</span>.get(&#34;/&#34;).description(&#34;Retrieves the product catalog, including inventory availability&#34;).outType(Product.class)
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71</span>    .route().id(&#34;productRoute&#34;)
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72</span>          .setBody(simple(&#34;null&#34;))
@@ -453,11 +438,9 @@ Please update ``<USERNAME>`` below with your assigned username
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77</span>          .enrich(&#34;direct:inventory&#34;, new InventoryEnricher())
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78</span>      .end()	            
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79</span>.endRest();</code></pre></div>
-
 <ul>
 <li>This configures the endpoint for retrieving a list of products by first contacting the Catalog microservice, .split()ing the resulting list, and enriching (via enrich()) each of the products with its inventory by passing each product to the direct:inventory route.</li>
 </ul>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94</span>from(&#34;direct:inventory&#34;)
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95</span>          .id(&#34;inventoryRoute&#34;)
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96</span>          .setHeader(&#34;itemId&#34;, simple(&#34;${body.itemId}&#34;))            
@@ -466,11 +449,9 @@ Please update ``<USERNAME>`` below with your assigned username
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99</span>          .recipientList(simple(&#34;http4://{{env:INVENTORY_ENDPOINT:inventory:8080}}/api/inventory/${header.itemId}&#34;)).end()
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100</span>          .setHeader(&#34;CamelJacksonUnmarshalType&#34;, simple(Inventory.class.getName()))
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101</span>          .unmarshal().json(JsonLibrary.Jackson, Inventory.class);</code></pre></div>
-
 <ul>
 <li>This is the direct:inventory route, which takes in a Product object (in the body()) and calls out to the Inventory microservice to retrieve its inventory. The resulting inventory is placed back into the Camel exchange for enrichment by the enricher:</li>
 </ul>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108</span>@Override
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109</span>public Exchange aggregate(Exchange original, Exchange resource) {
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110</span>
@@ -485,52 +466,43 @@ Please update ``<USERNAME>`` below with your assigned username
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119</span>	return original;
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121</span>}</code></pre></div>
-
 <ul>
 <li>This is the enricher logic which takes the Product and matching Inventory objects, enriches the Product object with information from the Inventory object, and returns it.</li>
 <li>The resulting list sent back to the client is the list of products, each of which is enriched with inventory information</li>
 <li>The client then renders the aggregate list in the UI.</li>
 </ul>
-
 <h1 id="step-3">Step 3</h1>
-
 <ul>
 <li>Now that the gateway microservice is deployed, let’s hook it into the application using OpenShift routing.</li>
-<li>A route is a way to expose a service by giving it an externally-reachable hostname like www.example.com, or in our example www-coolstore.<domain></li>
+<li>A route is a way to expose a service by giving it an externally-reachable hostname like <a href="http://www.example.com">www.example.com</a>, or in our example www-coolstore.<domain></li>
 <li>Routes can be created using oc expose command line, or through the GUI.</li>
 <li>Path based routes specify a path component that can be compared against a URL such that multiple routes can be served using the same underlying service/pod, each with a different path.</li>
 <li>In this case, we already have a route that sends all traffic destined for our monolith to the monolith deployment.</li>
-<li>We want to setup a route such that when the monolith’s GUI calls /services/products, it is re-routed to our new CoolStore gateway microservice, thus completing the partial strangulation of the Inventory and Product Catalog features of our app.<br /></li>
+<li>We want to setup a route such that when the monolith’s GUI calls /services/products, it is re-routed to our new CoolStore gateway microservice, thus completing the partial strangulation of the Inventory and Product Catalog features of our app.</li>
 </ul>
-
 <blockquote>
-<p>Navigate to Applications → Routes to list the current routes.<br />
- Notice the www route is the primary route for our monolith:</p>
+<p>Navigate to Applications → Routes to list the current routes.<br>
+Notice the www route is the primary route for our monolith:</p>
 </blockquote>
-
 <p><img src="../img/lab3_route1.png" width="1000" /></p>
-
 <h1 id="step-4">Step 4</h1>
-
 <blockquote>
 <ul>
-<li>Click Create Route to begin creating a new route with the following values:
-
+<li>Click Create Route to begin creating a new route with the following values:</li>
+</ul>
+</blockquote>
 <ul>
 <li>Name: gateway-redirect</li>
 <li>Hostname: The full hostname of the existing route as seen above (without the http://). For example:
-
 <ul>
 <li>www-coolstore-user1.apps.ocp.naps-redhat.com</li>
-</ul></li>
+</ul>
+</li>
 <li>Path: /services/products</li>
 <li>Service: gateway</li>
 <li>Leave other values as-is (see next page for complete example)</li>
-</ul></li>
 <li>Click Create to create the route</li>
 </ul>
-</blockquote>
-
 <div class="panel-group">
   
 
@@ -557,13 +529,10 @@ Please update ``<USERNAME>`` below with your assigned username
 
 </div>
 
-
 <h1 id="step-5">Step 5</h1>
-
 <ul>
 <li>Test the new route by visiting the application UI (click on the coolstore-prod route in the Overview). It will be no different than the original monolith. How do you know your new microservices are being used in place of the original services?</li>
 </ul>
-
 <div class="panel-group">
   
 
@@ -590,22 +559,18 @@ Please update ``<USERNAME>`` below with your assigned username
 
 </div>
 
-
 <h1 id="step-6">Step 6</h1>
-
 <ul>
 <li>Let’s pretend that there is a lengthy and cumbersome process for getting products and inventories into and out of the backend system.</li>
 <li>We have a high priority task to remove the Red Hat Fedoras from the product list due to a manufacturing defect.</li>
 <li>Let’s filter the product out of the result using our gateway.</li>
 </ul>
-
 <blockquote>
 <p>Open the gateway source code file and un-comment the lines that implement a filter based on product ID (around line 80). The highlighted code shows you the predicate used for the filter</p>
 </blockquote>
-
 <p>Use vi to make changes in the code.  If you need help in using vi, please click <a href="https://www.cs.colostate.edu/helpdocs/vi.html">here</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vi ~/coolstore/gateway/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java</code></pre></div>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77</span>//
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vi ~/coolstore/gateway/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77</span>//
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78</span>// Uncomment the below lines to filter out products
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79</span>//
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">80</span>//		.process(exchange -&gt; {
@@ -615,27 +580,24 @@ Please update ``<USERNAME>`` below with your assigned username
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">84</span>//						.collect(Collectors.toList());
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">85</span>//                    exchange.getIn().setBody(newProductList);
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">86</span>//                })</code></pre></div>
-
 <blockquote>
 <p>Save your changes and quit</p>
 </blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ shift + Z
-$ shift + Z</code></pre></div>
-<h1 id="step-7">Step 7</h1>
-
+$ shift + Z
+</code></pre></div><h1 id="step-7">Step 7</h1>
 <ul>
-<li><p>Re-deploy the modified code using the same procedure as before:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore/gateway</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean fabric8:deploy -Popenshift -DskipTests</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc logs -f dc/gateway
-...
---&gt; Success       <span style="color:#75715e"># --&gt; wait for it!</span></code></pre></div></li>
+<li>Re-deploy the modified code using the same procedure as before:</li>
 </ul>
-
-<h1 id="step-8">Step 8</h1>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore/gateway
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean fabric8:deploy -Popenshift -DskipTests
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc logs -f dc/gateway
+...
+--&gt; Success       <span style="color:#75715e"># --&gt; wait for it!</span>
+</code></pre></div><h1 id="step-8">Step 8</h1>
 <ul>
 <li>Once the new version of the code is deployed and up and running, reload the browser and the Red Hat Fedora product should be gone:</li>
 </ul>
-
 <div class="panel-group">
   
 
@@ -662,14 +624,11 @@ $ shift + Z</code></pre></div>
 
 </div>
 
-
 <h1 id="congratulations">Congratulations!!!</h1>
-
 <ul>
 <li>Our monolith’s UI is now talking to our new Camel-based API Gateway to retrieve products and inventories from our WildFly Swarm and Spring Boot microservices!</li>
 <li>Further strangling can eventually eliminate the monolith entirely.</li>
 </ul>
-
 <p><img src="../img/lab3_api_gtw_arch1.png" width="600" /></p>
 
 

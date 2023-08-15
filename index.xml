@@ -49,10 +49,10 @@ Red Hat Directory Server is used as the backend for Red Hat Certificate System.<
       <guid>/workshops/pki_workshop/unit_lessons/unit_10/</guid>
       <description>Unit 10: Token Management System In this unit you will login to the TPS web interface, add a new user, and generate a virtual token.
 TPS Web Interface The admin certificate needs to be in your browser. This was completed during Unit 4.
- Open the TPS webpage.
+  Open the TPS webpage.
 https://ca1.redhat.example.com:8443/tps/
- Click the Log In button.
- Go through the different tabs to become familiar with the interface. It will be mostly blank until we create users and tokens.</description>
+  Click the Log In button.
+  Go through the different tabs to become familiar with the interface. It will be mostly blank until we create users and tokens.</description>
     </item>
     
     <item>
@@ -63,7 +63,7 @@ https://ca1.redhat.example.com:8443/tps/
       <guid>/workshops/pki_workshop/unit_lessons/unit_11/</guid>
       <description>Unit 11: Certificate profiles In this unit you will go over the caUserCert profile. This certificate profile is for enrolling user certificates.
 The CA (certificate authority) profiles are located here:
-/var/lib/pki/ca1/ca/profiles/ca The caUserCert.cfg profile is located in the rhcs labs folder.
+/var/lib/pki/ca1/ca/profiles/ca  The caUserCert.cfg profile is located in the rhcs labs folder.
 Example caUserCert Profile The fields you will see in a CA User Profile are as follows:
 desc is a long description of the user certificate profile visible (true/false) controls whether the certificate will be visible to users enable, when selected (true), will allow the certificate to be used enableBy identifies the user who enabled the certificate name is the short name used for the certificate that will be viewable by users</description>
     </item>
@@ -74,9 +74,9 @@ desc is a long description of the user certificate profile visible (true/false) 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/pki_workshop/unit_lessons/unit_12/</guid>
-      <description>Unit 12: Troubleshooting In this unit you will troubleshoot common issues with maintaining a Certificate System. Each section has a shell script to run that will &amp;quot;break&amp;quot; the system. A hint will be offered to help you hone your troubleshooting skills.
+      <description>Unit 12: Troubleshooting In this unit you will troubleshoot common issues with maintaining a Certificate System. Each section has a shell script to run that will &amp;ldquo;break&amp;rdquo; the system. A hint will be offered to help you hone your troubleshooting skills.
 Instructions To solve, the CA should be accessible in a browser without errors in status output or logs.
-Run script to break CA (1st lab)  Change to labs troubleshooting directory.</description>
+Run script to break CA (1st lab)   Change to labs troubleshooting directory.</description>
     </item>
     
     <item>
@@ -126,7 +126,8 @@ Prerequisites Your environment needs to be configured to use the ca_admin certif
       
       <guid>/workshops/pki_workshop/unit_lessons/unit_6/</guid>
       <description>Unit 6: Issuing a certificate In this unit we will generate different certificates using the web interface and CLI.
-The purpose of certificates is to establish trust. Their usage varies depending on the kind of trust they are used to ensure. Some kinds of certificates are used to verify the identity of the presenter; others are used to verify that an object or item has not been tampered with.</description>
+The purpose of certificates is to establish trust. Their usage varies depending on the kind of trust they are used to ensure. Some kinds of certificates are used to verify the identity of the presenter; others are used to verify that an object or item has not been tampered with.
+Certificate Request Message Format (CLI)   Ensure the labs were completed in Unit 5.</description>
     </item>
     
     <item>
@@ -135,15 +136,14 @@ The purpose of certificates is to establish trust. Their usage varies depending 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/pki_workshop/unit_lessons/unit_7/</guid>
-      <description>Unit 7. Recovering a certificate In this unit we will simulate recovering a user&#39;s private key.
-Recover Private Key The URL is different in the images. I&#39;m lazy.
- In new tab, open KRA webpage.
+      <description>Unit 7. Recovering a certificate In this unit we will simulate recovering a user&amp;rsquo;s private key.
+Recover Private Key The URL is different in the images. I&amp;rsquo;m lazy.
+  In new tab, open KRA webpage.
 https://ca1.redhat.example.com:8443/kra/agent/kra
- Select PKI Administrator certificate (if prompted).
- Add Exception for insecure connection (if prompted).
- Click Search for Keys.
- Check Key Identifiers box and click Show Key (scroll down).
- Click Details button.</description>
+  Select PKI Administrator certificate (if prompted).
+  Add Exception for insecure connection (if prompted).
+  Click Search for Keys.
+![Alt text](images/keyrecover_lab_1.png)    Check Key Identifiers box and click Show Key (scroll down).</description>
     </item>
     
     <item>
@@ -153,14 +153,13 @@ https://ca1.redhat.example.com:8443/kra/agent/kra
       
       <guid>/workshops/pki_workshop/unit_lessons/unit_8/</guid>
       <description>Unit 8: Revoking a certificate In this unit we will revoke a certificate generated during the last unit using the web interface and CLI.
-Revoke Certificate (web-based) The URL is different in the images. I&#39;m lazy.
- Open CA webpage.
+Revoke Certificate (web-based) The URL is different in the images. I&amp;rsquo;m lazy.
+  Open CA webpage.
 https://ca1.redhat.example.com:8443/ca/agent/ca
- Select PKI Administrator certificate (if prompted).
- Add Exception for insecure connection (if prompted).
- Click List Certificates.
- Click Find button.
- Copy Serial Number of UID= cert.</description>
+  Select PKI Administrator certificate (if prompted).
+  Add Exception for insecure connection (if prompted).
+  Click List Certificates.
+![Alt text](images/revoke_lab_1.png)    Click Find button.</description>
     </item>
     
     <item>
@@ -170,11 +169,11 @@ https://ca1.redhat.example.com:8443/ca/agent/ca
       
       <guid>/workshops/pki_workshop/unit_lessons/unit_9/</guid>
       <description>Unit 9: OCSP Responder In this unit you will interact with the OCSP Responder using the web interface and CLI tool OCSPClient. You will also issue a CRL to verify the revoked certificate is listed there.
-Check Certificate Revocation List (Web-based) The URL is different in the images. I&#39;m lazy.
- Open CA webpage.
+Check Certificate Revocation List (Web-based) The URL is different in the images. I&amp;rsquo;m lazy.
+  Open CA webpage.
 https://ca1.redhat.example.com:8443/ca/agent/ca/
- Select PKI Administrator certificate (if prompted).
- Add Exception for insecure connection (if prompted).</description>
+  Select PKI Administrator certificate (if prompted).
+  Add Exception for insecure connection (if prompted).</description>
     </item>
     
     <item>
@@ -183,12 +182,12 @@ https://ca1.redhat.example.com:8443/ca/agent/ca/
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/secure_software_factory/readme/</guid>
-      <description>Must have existing OpenShift Environment You can use either of the OpenShift provsioners from RedHatGov - https://github.com/RedHatGov/redhatgov.workshops/tree/master/openshift-aws-setup - https://github.com/RedHatGov/redhatgov.workshops/tree/master/openshift_terraform - https://github.com/gnunn1/openshift-aws-setup - https://github.com/jaredhocutt/openshift-provision - https://github.com/bit4man/ansible_agnostic_deployer
-Environment Setup If you&#39;d like to setup an individual environment, use the commands below to set it up or delete the single environment.
-Help $ scripts/provision.sh --help
-Individual Environment $ scripts/provision.sh deploy --deploy-che --ephemeral
+      <description>Must have existing OpenShift Environment You can use either of the OpenShift provsioners from RedHatGov
+ https://github.com/RedHatGov/redhatgov.workshops/tree/master/openshift-aws-setup https://github.com/RedHatGov/redhatgov.workshops/tree/master/openshift_terraform https://github.com/gnunn1/openshift-aws-setup https://github.com/jaredhocutt/openshift-provision https://github.com/bit4man/ansible_agnostic_deployer  Environment Setup If you&amp;rsquo;d like to setup an individual environment, use the commands below to set it up or delete the single environment.
+Help $ scripts/provision.sh &amp;ndash;help
+Individual Environment $ scripts/provision.sh deploy &amp;ndash;deploy-che &amp;ndash;ephemeral
 Individual Delete $ scripts/provision.sh delete
-Batch Setup If you&#39;d like to setup the workshop for numerous users, go into the provision-batch-setup.</description>
+Batch Setup If you&amp;rsquo;d like to setup the workshop for numerous users, go into the provision-batch-setup.</description>
     </item>
     
     <item>
@@ -197,7 +196,7 @@ Batch Setup If you&#39;d like to setup the workshop for numerous users, go into 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>Open source is not only behind many of the technology industry&#39;s most significant innovations, but it is also pervasive across the U.S. government. For more than a decade, Red Hat has been working closely with federal government customers to help them embrace open source technologies.</description>
+      <description>Open source is not only behind many of the technology industry&amp;rsquo;s most significant innovations, but it is also pervasive across the U.S. government. For more than a decade, Red Hat has been working closely with federal government customers to help them embrace open source technologies.</description>
     </item>
     
     <item>
@@ -206,7 +205,8 @@ Batch Setup If you&#39;d like to setup the workshop for numerous users, go into 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/cloudforms41/prerequisites/</guid>
-      <description>If we have provided a laptop or cloud environment to you for this workshop, the following steps are already set up for you. Please jump to Exercise 1.0  Install git We will use a few git commands directly in some of the advanced labs, please make sure git is installed on your system. You can download the latest version here.
+      <description>If we have provided a laptop or cloud environment to you for this workshop, the following steps are already set up for you. Please jump to Exercise 1.0
+ Install git We will use a few git commands directly in some of the advanced labs, please make sure git is installed on your system. You can download the latest version here.
 Create GitHub account Create a FREE GitHub account by going to this link and following their step-by-step instructions.</description>
     </item>
     
@@ -217,10 +217,10 @@ Create GitHub account Create a FREE GitHub account by going to this link and fol
       
       <guid>/workshops/source_to_image/conclusion/</guid>
       <description>Congratulations You have gone through a methodical process to develop container technology that is custom to a framework, yet repeatable. We have:
- Run the application from the command line to understand what it does and how it is supposed to behave.
- Containerized the applicaiton.
- Built Source-to-Image mechanisms that allow us to inject raw source code to be built inside the container.
- Created an OpenShift template to make repeated deployments easier.</description>
+  Run the application from the command line to understand what it does and how it is supposed to behave.
+  Containerized the applicaiton.
+  Built Source-to-Image mechanisms that allow us to inject raw source code to be built inside the container.
+  Created an OpenShift template to make repeated deployments easier.</description>
     </item>
     
     <item>
@@ -251,7 +251,7 @@ If you find any issues with the content on this site, please file an issue on ou
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab1.2_terminal/</guid>
       <description>Accessing OpenShift OpenShift provides a web console that allows you to perform various tasks via a web browser.
-Let&#39;s Login to the Web Console  Use your browser to navigate to the below URI, and login with the username userYOUR#  and the password provided by your instructor:
+Let&amp;rsquo;s Login to the Web Console  Use your browser to navigate to the below URI, and login with the username userYOUR#  and the password provided by your instructor:
  https://console-openshift-console.apps.example.redhatgov.io  Login Webpage
 Once logged in you should see your available projects - or a button to create a project if none exist already:</description>
     </item>
@@ -262,8 +262,7 @@ Once logged in you should see your available projects - or a button to create a 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/jdv_dev/exercise1/</guid>
-      <description>Table of Contents  Download JDV Download JBDS Install JDV  Run JDV  Install JBDS  Run JBDS Install teiid designer Configure server settings   Download JBoss Data Virtualization   jboss-dv-6.3.0-1-installer.jar  Download JBoss Developer Studio   devstudio-11.0.0.GA-installer-standalone.jar  Install JBoss Data Virtualization (JDV)   In the location where you downloaded the installer, run the following command
-java -jar jboss-dv-6.3.0-1-installer.jar Follow the default prompts with the following exceptions below</description>
+      <description>Table of Contents  Download JDV Download JBDS Install JDV  Run JDV   Install JBDS  Run JBDS Install teiid designer Configure server settings    Download JBoss Data Virtualization   jboss-dv-6.3.0-1-installer.jar  Download JBoss Developer Studio   devstudio-11.0.0.GA-installer-standalone.jar  Install JBoss Data Virtualization (JDV)   In the location where you downloaded the installer, run the following command  java -jar jboss-dv-6.3.0-1-installer.jar  Follow the default prompts with the following exceptions below</description>
     </item>
     
     <item>
@@ -434,7 +433,7 @@ In other words, a infrastructure provider is a management platform for managing 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/containers_101/exercise1.1/</guid>
-      <description>Exercise 1.1 - Pulling Container Images   Section 1: Pull RHEL Images Step 1. Use the following command to pull a RHEL image from the Red Hat repository: podman pull command podman pull registry.access.redhat.com/rhel7   Images are accessed using the container registry URL (registry.access.redhat.com). If the container registry URL is not specified in the pull command, it could result in the retrieval of an image that originates from an untrusted registry.</description>
+      <description>Exercise 1.1 - Pulling Container Images   Section 1: Pull RHEL Images Step 1. Use the following command to pull a RHEL image from the Red Hat repository: podman pull command podman pull registry.access.redhat.com/ubi8   Images are accessed using the container registry URL (registry.access.redhat.com). If the container registry URL is not specified in the pull command, it could result in the retrieval of an image that originates from an untrusted registry.</description>
     </item>
     
     <item>
@@ -496,7 +495,8 @@ In other words, a infrastructure provider is a management platform for managing 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/cloudforms41/exercise1.10/</guid>
-      <description>Log in to CloudForms using the **admin** account (if not done already).  Exercise 1.10 - Explore Catalog Configuration Section 1: Explore Catalog Configuration Step 1. Select Services → Catalogs.  Services Catalog
+      <description>Log in to CloudForms using the admin account (if not done already).
+ Exercise 1.10 - Explore Catalog Configuration Section 1: Explore Catalog Configuration Step 1. Select Services → Catalogs.  Services Catalog
 Step 2. Select the Catalog Items accordion.  Services Catalog Items
 Step 3. Select All Catalog Items → VMware Operations → Deploy Ticket Monster on VMware  Services Catalog Ticket Monster
 Step 4. Explore the Details and Selected Resources tabs.</description>
@@ -530,8 +530,7 @@ Step 3. On the Summary tab, review the daily utilization chart.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/cloudforms41/exercise1.13/</guid>
-      <description># Exercise 1.13 - Explore Planning
-## Exercise Description In this exercise you will learn how to plan and optimize a deployment.
+      <description>Exercise 1.13 - Explore Planning Exercise Description In this exercise you will learn how to plan and optimize a deployment.
 Section 1: Explore Planning Step 1. Select Optimize → Planning.  Optimize Planning
 Step 2. Under Reference VM Selection, select All VMs.  Reference VM Selection
 Step 3. Choose the CFME027 VM. Step 4. Under VM Options, set the Source to Usage. Step 5. Under Target Options/Limits, set Show to Hosts.</description>
@@ -585,7 +584,8 @@ When we use the Automate capability of CloudForms, we write scripts in the Ruby 
       
       <guid>/workshops/cloudforms41/exercise1.18/</guid>
       <description>Exercise 1.18 - “Hello, World!” Automation Script Exercise Description Let’s jump right in and start writing our first automation script. In time-honored fashion we’ll write “Hello, World!” to the Automate Engine logfile.
-Before we do anything, we need to ensure that the Automation Engine server role is selected on our CloudForms appliance. We do this from the Configure → Configuration menu, selecting the CloudForms server in the Settings accordion.</description>
+Before we do anything, we need to ensure that the Automation Engine server role is selected on our CloudForms appliance. We do this from the Configure → Configuration menu, selecting the CloudForms server in the Settings accordion.
+  The Automation Engine server role is now enabled by default in CloudForms 4.</description>
     </item>
     
     <item>
@@ -970,7 +970,8 @@ A list of your private and public cloud providers, such as OpenStack and Amazon 
       <description>#Exercise 1.7 - Explore Cloud Instances
 Exercise Description In Red Hat CloudForms, a cloud instance is a virtual machine running under cloud infrastructure. In this exercise, you will learn how to search for cloud instances and review the details related to the cloud instance.
 Section 1: Explore Cloud Instances &amp;gt; Select Compute → Clouds → Instances.  Cloud Instances
-A list of your public and private cloud instances displays.</description>
+A list of your public and private cloud instances displays.
+Section 2: Explore the Virtual Thumbnail for Cloud Instances The web interface uses virtual thumbnails to represent providers.</description>
     </item>
     
     <item>
@@ -1061,7 +1062,8 @@ Step 2. Add a role by modifying a copy of an existing role: Step 3.</description
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/cloudforms41/exercise1.9/</guid>
-      <description>The following steps are initially run as a non-admin customer account.  Exercise 1.9 - Introduction to Catalogs Exercise Description This exercise enables you to explore and verify the catalog configuration.
+      <description>The following steps are initially run as a non-admin customer account.
+ Exercise 1.9 - Introduction to Catalogs Exercise Description This exercise enables you to explore and verify the catalog configuration.
 Section 1: Explore Catalog Configuration Step 1. Select Services → Catalogs.  Services Catalog
 Step 2. On the right, select the Deploy Ticket Monster on VMware catalog item.  Ticket Monster
 Step 3. Click Order to order the service.</description>
@@ -1086,7 +1088,7 @@ Step 3. Click Order to order the service.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/rhel_8/exercise1.9/</guid>
-      <description>Exercise Description RHEL 7.4 introduced RHEL System Roles, a collection of Ansible roles and modules that provide a stable and consistent configuration interface for remote management of Red Hat Enterprise Linux. These System Roles are applicable to RHEL 6.10 and above, easing management of 3 generations of RHEL. The effort is based on development of the Linux System Roles project (link: https://linux-system-roles.github.io/upstream). The following roles are provided and supported as follows:</description>
+      <description>Exercise Description RHEL System Roles, announced with the launch of RHEL 8, are a collection of Ansible roles and modules that provide a stable and consistent configuration interface for remote management of Red Hat Enterprise Linux. They address many commmon configuration, security and workload uses on RHEL systems. These roles can manage systems running RHEL 7 and above, easing management of 3 generations of RHEL. The effort is based on development of the Linux System Roles project (link: https://linux-system-roles.</description>
     </item>
     
     <item>
@@ -1095,10 +1097,10 @@ Step 3. Click Order to order the service.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/jdv_dev/exercise10/</guid>
-      <description>View the data services  Go back to the Angualar client at http://localhost:8181
- View each of the data services we created by navigating the lefthand pane, including the combined data service for all 3 sources
-  Change users to view masking/filtering  In the upper right, click the user icon and change the user to maskUser
- Go to the Federated page or click reload if already on the page.</description>
+      <description>View the data services   Go back to the Angualar client at http://localhost:8181
+  View each of the data services we created by navigating the lefthand pane, including the combined data service for all 3 sources
+  Change users to view masking/filtering   In the upper right, click the user icon and change the user to maskUser
+  Go to the Federated page or click reload if already on the page.</description>
     </item>
     
     <item>
@@ -1117,10 +1119,9 @@ Step 3. Click Order to order the service.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/jdv_dev/exercise2/</guid>
-      <description>Get the course repositories  There are two repositories, one that contains a sample JDV project with helper data/scripts and another which is the AngularJS frontend.
- Pull down the JDV project
-git clone https://github.com/mechevarria/jdv-demo Next pull down the AngularJS client
-https://github.com/mechevarria/jdv-demo-client  Add the workshop data to PostgreSQL  The script that needs to be run is  jdv-demo/assets/postgres/create_insert.sql
+      <description>Get the course repositories   There are two repositories, one that contains a sample JDV project with helper data/scripts and another which is the AngularJS frontend.
+  Pull down the JDV project
+  git clone https://github.com/mechevarria/jdv-demo  Next pull down the AngularJS client  https://github.com/mechevarria/jdv-demo-client Add the workshop data to PostgreSQL  The script that needs to be run is  jdv-demo/assets/postgres/create_insert.sql
  If you are running the instance from TurnKey Linux, you can load the data via a browser.</description>
     </item>
     
@@ -1287,11 +1288,7 @@ https://github.com/mechevarria/jdv-demo-client  Add the workshop data to Postgre
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/jdv_dev/exercise3/</guid>
-      <description>Prepare the AngularJS client  In the jdv-demo-client folder run the following command
-npm install Afterwards run
-npm run dev To start a node webserver that will host the AngularJS application.
-  * To check go to http://localhost:8181 in your browser. You will get an error when checking the pages. That is ok since we are going to be building the data services for the web application.
-Prepare Postman  Import the REST tests into Postman by going to file  import Select jdv-demo/assets/demo-jdv.</description>
+      <description>Prepare the AngularJS client  In the jdv-demo-client folder run the following command  npm install  Afterwards run  npm run dev  To start a node webserver that will host the AngularJS application.  * To check go to http://localhost:8181 in your browser. You will get an error when checking the pages. That is ok since we are going to be building the data services for the web application.</description>
     </item>
     
     <item>
@@ -1370,11 +1367,12 @@ Prepare Postman  Import the REST tests into Postman by going to file  import Sel
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/jdv_dev/exercise4/</guid>
-      <description>Create a new JDV project  In JBDS, do window  perspective  open perspective  other  teiid designer
- file  new  teiid model project
- Name the project jdv-demo and its ok to leave the default location.
- Do change the default folders to sources, views and federated
-   [teiid](http://teiid.jboss.org/) is the the upstream community project for JBoss Data Virtualization  Create a VDB  file  New  Teiid VDB</description>
+      <description>Create a new JDV project   In JBDS, do window  perspective  open perspective  other  teiid designer
+  file  new  teiid model project
+  Name the project jdv-demo and its ok to leave the default location.
+  Do change the default folders to sources, views and federated
+  
+teiid is the the upstream community project for JBoss Data Virtualization</description>
     </item>
     
     <item>
@@ -1414,11 +1412,11 @@ Prepare Postman  Import the REST tests into Postman by going to file  import Sel
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/jdv_dev/exercise5/</guid>
-      <description>Import JDBC datasource  file  import  teiid designer  JDBC Database &amp;gt;&amp;gt; source model   Under Connection Profile, select new
- Select PostgreSQL as the Connection Profile Type, Next
- In the next window, click the New Driver Definition icon
- Under the Jar List tab, select Add JAR/Zip and then select jdv-demo/assets/postgres/postgresql-42.1.4.jar, then ok
- In the New JDBC Connection Profile window make sure to use the IP address of your PostgreSQL instance and put the credentails for the postgres user and check Save Password.</description>
+      <description>Import JDBC datasource  file  import  teiid designer  JDBC Database &amp;raquo; source model    Under Connection Profile, select new
+  Select PostgreSQL as the Connection Profile Type, Next
+  In the next window, click the New Driver Definition icon
+  Under the Jar List tab, select Add JAR/Zip and then select jdv-demo/assets/postgres/postgresql-42.1.4.jar, then ok
+  In the New JDBC Connection Profile window make sure to use the IP address of your PostgreSQL instance and put the credentails for the postgres user and check Save Password.</description>
     </item>
     
     <item>
@@ -1437,15 +1435,14 @@ Prepare Postman  Import the REST tests into Postman by going to file  import Sel
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/jdv_dev/exercise6/</guid>
-      <description>Import REST source  file  import  Web Service Source &amp;gt;&amp;gt; Source and View Model (REST)
- Click New Connection Profile, then next
- Connection URL https://jsonplaceholder.typicode.com/users
- Response type JSON
- Make sure Test Connection returns Ping Succeeded!, then Finish
-   Click Next
- Set the following values like the screenshot below
-   Next and put JNDI as java:/RestDS, then Next
- In the Import from REST Web Service Source, expand the first response element then right click on the second response element and select Set as Root path</description>
+      <description>Import REST source   file  import  Web Service Source &amp;raquo; Source and View Model (REST)
+  Click New Connection Profile, then next
+  Connection URL https://jsonplaceholder.typicode.com/users
+  Response type JSON
+  Make sure Test Connection returns Ping Succeeded!, then Finish
+    Click Next
+  Set the following values like the screenshot below
+    Next and put JNDI as java:/RestDS, then Next</description>
     </item>
     
     <item>
@@ -1464,9 +1461,9 @@ Prepare Postman  Import the REST tests into Postman by going to file  import Sel
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/jdv_dev/exercise7/</guid>
-      <description>Verify Settings  You need to first verify that the Excel extensions were imported correctly into the designer
- window  show view  other 
- Teiid Designer  Model Extension Registry
+      <description>Verify Settings   You need to first verify that the Excel extensions were imported correctly into the designer
+  window  show view  other 
+  Teiid Designer  Model Extension Registry
    In the Model Extension Registry tab at the bottom, verify in the Namespace Prefix you see the value excel and a checkbox in the imported column. If not, close the designer, re-open, click the start button to mark the server as started, and check again.</description>
     </item>
     
@@ -1477,14 +1474,14 @@ Prepare Postman  Import the REST tests into Postman by going to file  import Sel
       
       <guid>/workshops/jdv_dev/exercise8/</guid>
       <description>Create the combined view file -&amp;gt; new -&amp;gt; teiid metadata model
- Location demo-jdv/federated
- Model Name FedView
- Model Type View Model
- Do not select any options under model builder and click Finish
- Right-click on the FedView Package diagram and select new -&amp;gt; child -&amp;gt; table
- Select Option 1: Build with new table wizard
- Name combined
-  Under the PK tab, check the include box then put id_pk in the name field.</description>
+  Location demo-jdv/federated
+  Model Name FedView
+  Model Type View Model
+  Do not select any options under model builder and click Finish
+  Right-click on the FedView Package diagram and select new -&amp;gt; child -&amp;gt; table
+  Select Option 1: Build with new table wizard
+  Name combined
+   Under the PK tab, check the include box then put id_pk in the name field.</description>
     </item>
     
     <item>
@@ -1493,8 +1490,11 @@ Prepare Postman  Import the REST tests into Postman by going to file  import Sel
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/jdv_dev/exercise9/</guid>
-      <description>Overview  To secure the services we created in our VDB, we need to create an additional user on the server.  Create the additional user  In $JBOSS_HOME/bin directory run the following script with the answers to the prompts below
-./add-user.sh   For windows users, the script will be **add-user.bat**   Type: b) Application User Username: maskUser Password: Password1! (same as the one used during installation groups: odata,mask Remoting: no</description>
+      <description>Overview  To secure the services we created in our VDB, we need to create an additional user on the server.  Create the additional user  In $JBOSS_HOME/bin directory run the following script with the answers to the prompts below  ./add-user.sh 
+For windows users, the script will be add-user.bat
+   Type: b) Application User
+  Username: maskUser
+  Password: Password1! (same as the one used during installation</description>
     </item>
     
     <item>
@@ -1503,7 +1503,7 @@ Prepare Postman  Import the REST tests into Postman by going to file  import Sel
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/secure_software_factory/fin/</guid>
-      <description>That&#39;s it! Hopefully, you understand how to build a Trusted Software Supply Chain on OpenShift.</description>
+      <description>That&amp;rsquo;s it! Hopefully, you understand how to build a Trusted Software Supply Chain on OpenShift.</description>
     </item>
     
     <item>
@@ -1512,8 +1512,8 @@ Prepare Postman  Import the REST tests into Postman by going to file  import Sel
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_101_dcmetromap/fin/</guid>
-      <description>That&#39;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenShift environment. And hopefully, you have a deeper understanding of how containers and container orchestration works. Please feel free to continue to &amp;quot;kick the tires&amp;quot; in the demo environment we&#39;ve setup and explore both the web console and the oc command line client.
-Get even deeper While you&#39;re here, we can help you install the Container Development Kit (CDK) on your laptop.</description>
+      <description>That&amp;rsquo;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenShift environment. And hopefully, you have a deeper understanding of how containers and container orchestration works. Please feel free to continue to &amp;ldquo;kick the tires&amp;rdquo; in the demo environment we&amp;rsquo;ve setup and explore both the web console and the oc command line client.
+Get even deeper While you&amp;rsquo;re here, we can help you install the Container Development Kit (CDK) on your laptop.</description>
     </item>
     
     <item>
@@ -1522,8 +1522,8 @@ Get even deeper While you&#39;re here, we can help you install the Container Dev
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/fin/</guid>
-      <description>That&#39;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenShift environment. And hopefully, you have a deeper understanding of how containers and container orchestration works. Please feel free to continue to &amp;quot;kick the tires&amp;quot; in the demo environment we&#39;ve setup and explore both the web console and the oc command line client.
- OpenShift Architecture OpenShift Developer&#39;s Site   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
+      <description>That&amp;rsquo;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenShift environment. And hopefully, you have a deeper understanding of how containers and container orchestration works. Please feel free to continue to &amp;ldquo;kick the tires&amp;rdquo; in the demo environment we&amp;rsquo;ve setup and explore both the web console and the oc command line client.
+ OpenShift Architecture OpenShift Developer&amp;rsquo;s Site   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
     </item>
     
     <item>
@@ -1532,8 +1532,8 @@ Get even deeper While you&#39;re here, we can help you install the Container Dev
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101_dynatrace/fin/</guid>
-      <description>That&#39;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenShift environment. And hopefully, you have a deeper understanding of how containers and container orchestration works. Please feel free to continue to &amp;quot;kick the tires&amp;quot; in the demo environment we&#39;ve setup and explore both the web console and the oc command line client.
- OpenShift Architecture OpenShift Developer&#39;s Site   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
+      <description>That&amp;rsquo;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenShift environment. And hopefully, you have a deeper understanding of how containers and container orchestration works. Please feel free to continue to &amp;ldquo;kick the tires&amp;rdquo; in the demo environment we&amp;rsquo;ve setup and explore both the web console and the oc command line client.
+ OpenShift Architecture OpenShift Developer&amp;rsquo;s Site   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
     </item>
     
     <item>
@@ -1542,7 +1542,7 @@ Get even deeper While you&#39;re here, we can help you install the Container Dev
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/fin/</guid>
-      <description>That&#39;s it! Hopefully, these labs provided you some idea of why a service mesh is critical when developing and operating microservice applications. Istio is an emerging technology so keep checking the upstream announcements and blog for exciting news.
+      <description>That&amp;rsquo;s it! Hopefully, these labs provided you some idea of why a service mesh is critical when developing and operating microservice applications. Istio is an emerging technology so keep checking the upstream announcements and blog for exciting news.
 Also, release notes are a great place to see changes that occurred between releases. You can find the OpenShift Service Mesh release notes here and the upstream Istio project release notes here.</description>
     </item>
     
@@ -1552,7 +1552,7 @@ Also, release notes are a great place to see changes that occurred between relea
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/rhosp_101/fin/</guid>
-      <description>That&#39;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenStack environment. And hopefully, you have a deeper understanding of how Infrastructure-as-a-Service works.
+      <description>That&amp;rsquo;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenStack environment. And hopefully, you have a deeper understanding of how Infrastructure-as-a-Service works.
 Get even deeper Here are some good resources to continue learning OpenStack:
  OpenStack Foundation RDO Project - Our midstream, open source OpenStack distrobution for RHEL variants Red Hat OpenStack Platform Official Docs  There are two ways to get started with RDO: TripleO Quickstart and PackStack</description>
     </item>
@@ -1564,7 +1564,7 @@ Get even deeper Here are some good resources to continue learning OpenStack:
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab2.2_deployuserprofile/</guid>
       <description>Adding a New Service to the Mesh You need to deploy the new user profile application into the service mesh.
-Deploy Application The deployment file &#39;userprofile-deploy-all.yaml&#39; was created for you to deploy the application. The file creates the user profile service and an accompanying PostgreSQL database. Similar to the other source files, an annotation &#39;sidecar.istio.io/inject&#39; was added to tell Istio to inject a sidecar proxy and add this to the mesh.</description>
+Deploy Application The deployment file &amp;lsquo;userprofile-deploy-all.yaml&amp;rsquo; was created for you to deploy the application. The file creates the user profile service and an accompanying PostgreSQL database. Similar to the other source files, an annotation &amp;lsquo;sidecar.istio.io/inject&amp;rsquo; was added to tell Istio to inject a sidecar proxy and add this to the mesh.</description>
     </item>
     
     <item>
@@ -1574,11 +1574,9 @@ Deploy Application The deployment file &#39;userprofile-deploy-all.yaml&#39; was
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab2.1_userprofile/</guid>
       <description>Building a Microservice   In the browser, navigate to the &#39;Profile&#39; section in the header.   If you lost the URL, you can retrieve it via:
-echo $GATEWAY_URL
-
-You should see the following:
+`echo $GATEWAY_URL` You should see the following:
  Unknown Profile Page
-The UI shows an unknown user and that&#39;s because there&#39;s no profile service for your application. You are going to build a new microservice for user profiles and add this to your service mesh.</description>
+The UI shows an unknown user and that&amp;rsquo;s because there&amp;rsquo;s no profile service for your application. You are going to build a new microservice for user profiles and add this to your service mesh.</description>
     </item>
     
     <item>
@@ -1587,7 +1585,7 @@ The UI shows an unknown user and that&#39;s because there&#39;s no profile servi
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab1.4_deploymsa/</guid>
-      <description>Deploying an App into the Service Mesh It&#39;s time to deploy your microservices application. The application you are working on is a paste board application in which users can post comments in shared boards. Here is a diagram of the architecture:
+      <description>Deploying an App into the Service Mesh It&amp;rsquo;s time to deploy your microservices application. The application you are working on is a paste board application in which users can post comments in shared boards. Here is a diagram of the architecture:
 
 App Architecture
 The microservices include single sign-on (SSO), user interface (UI), the boards application, and the context scraper. In this scenario, you are going to deploy these services and then add a new user profile service.</description>
@@ -1619,7 +1617,7 @@ The microservices include single sign-on (SSO), user interface (UI), the boards 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/keyterms/</guid>
-      <description>Key Terms We will be using the following terms throughout the workshop labs; so, here are some basic definitions you should be familiar with. You&#39;ll learn more terms along the way; but, these are the basics to get you started.
+      <description>Key Terms We will be using the following terms throughout the workshop labs; so, here are some basic definitions you should be familiar with. You&amp;rsquo;ll learn more terms along the way; but, these are the basics to get you started.
  Container - Your software wrapped in a complete filesystem containing everything it needs to run Image - We are talking about docker images; read-only and used to create containers Image Stream - An image stream comprises one or more OCI images identified by tags.</description>
     </item>
     
@@ -1649,8 +1647,8 @@ Fortunately we can build from a Dockerfile using the oc command line tool.</desc
       
       <guid>/workshops/source_to_image/gochat_s2i/</guid>
       <description>Step 1 - Create a New Project Space In the Wetty terminal, create a new project.
-oc new-project gochat-s2i-userYOUR#  Step 2 - Create the Golang S2I Builder Image Create a new build for the Golang S2I builder image
-cd ~oc new-build golang-s2i/ --to=golang-s2i Start the new build for the Golang S2I builder image
+oc new-project gochat-s2i-userYOUR# Step 2 - Create the Golang S2I Builder Image Create a new build for the Golang S2I builder image
+cd ~ oc new-build golang-s2i/ --to=golang-s2i Start the new build for the Golang S2I builder image
 oc start-build golang-s2i --from-dir=golang-s2i/ Step 3 - Import YAML Template in to OpenShift In the OpenShift WebUI, on the catalog page, seclect Import YAML/JSON Import YAML/JSON        Step 4 - Configure the Import Select the project to which you want to import the template</description>
     </item>
     
@@ -1662,7 +1660,7 @@ oc start-build golang-s2i --from-dir=golang-s2i/ Step 3 - Import YAML Template i
       <guid>/workshops/strangling_the_monolith/login_tour_oc/</guid>
       <description>Welcome to OpenShift! This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content. If you are already familiar with the basics of OpenShift you can skip this lab - after making sure you can login.
 Wetty Environment Links Your instructor will assign you an OpenShift environment and login.
-Please click &amp;quot;Return to Workshop&amp;quot; above to view the OpenShift Environment Links.</description>
+Please click &amp;ldquo;Return to Workshop&amp;rdquo; above to view the OpenShift Environment Links.</description>
     </item>
     
     <item>
@@ -1674,7 +1672,7 @@ Please click &amp;quot;Return to Workshop&amp;quot; above to view the OpenShift 
       <description>Introduction to Wetty (Browser-based SSH) This lab provides a quick tour of the browser based SSH client Wetty. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
 Accessing Wetty Use this URL to access the Wetty node, just change the workshopname. Ask your instructor for rthe workshopname.
 https://&amp;lt;workshopname&amp;gt;.wetty.redhatgov.io:8888 After logging in, you should see a shell.
-The wetty instance will already have the &#39;oc&#39; command installed on them.</description>
+The wetty instance will already have the &amp;lsquo;oc&amp;rsquo; command installed on them.</description>
     </item>
     
     <item>
@@ -1693,7 +1691,7 @@ The wetty instance will already have the &#39;oc&#39; command installed on them.
       
       <guid>/workshops/source_to_image/dice/</guid>
       <description>In an attempt at nostalgia, we are going to once again create an S2I builder, this time for a Fortran app. Yes, Fortran. The objective is to make our little chat program a bit more interesting.
-Step 1 - Create the S2I Project cd ~s2i create fortran-s2i fortran-s2i Step 2 - Edit the Dockerfile cd ~cat /dev/null &amp;gt; ~/fortran-s2i/Dockerfilevi ~/fortran-s2i/Dockerfile Copy the following text and paste it in to the editor.</description>
+Step 1 - Create the S2I Project cd ~ s2i create fortran-s2i fortran-s2i Step 2 - Edit the Dockerfile cd ~ cat /dev/null &amp;gt; ~/fortran-s2i/Dockerfile vi ~/fortran-s2i/Dockerfile Copy the following text and paste it in to the editor.</description>
     </item>
     
     <item>
@@ -1704,7 +1702,7 @@ Step 1 - Create the S2I Project cd ~s2i create fortran-s2i fortran-s2i Step 2 - 
       <guid>/workshops/source_to_image/run_the_app/</guid>
       <description>Step 1 - Create a Route to the Gochat Service First we expose the pod with a service.
 oc expose dc wetty --port=8080 --target-port=8080 --name=gochat Then we expose the service with a route.
-oc expose svc gochat Step 2 - Download the App Source go get -d github.com/kevensen/openshift-gochat-client Step 3 - Build the App cd go/src/github.com/kevensen/openshift-gochat-clientglide install -v &amp;amp;&amp;amp; go install Step 4 - Annotate the Service Account to Use OpenShift Authorization These annotations allow for the Gochat Client to communicate to the OpenShift API for user credential verification.</description>
+oc expose svc gochat Step 2 - Download the App Source go get -d github.com/kevensen/openshift-gochat-client Step 3 - Build the App cd go/src/github.com/kevensen/openshift-gochat-client glide install -v &amp;amp;&amp;amp; go install Step 4 - Annotate the Service Account to Use OpenShift Authorization These annotations allow for the Gochat Client to communicate to the OpenShift API for user credential verification.</description>
     </item>
     
     <item>
@@ -1714,8 +1712,8 @@ oc expose svc gochat Step 2 - Download the App Source go get -d github.com/keven
       
       <guid>/workshops/source_to_image/source_to_image/</guid>
       <description>Step 1 - Create a new Project Space In the Wetty terminal, create a new project.
-oc new-project s2i-userYOUR#  Step 2 - Go Get S2I Library cd ~go get github.com/openshift/source-to-image Step 3 - Build the S2I Tooling cd $GOPATH/src/github.com/openshift/source-to-imagehack/build-go.shexport PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/local/bin/linux/amd64/ Step 4 - Create the S2I Project cd ~s2i create golang-s2i golang-s2i Now let&#39;s inspect the project directory
-tree -a golang-s2i Step 5 - Edit the Dockerfile cd ~cat /dev/null &amp;gt; ~/golang-s2i/Dockerfilevi ~/golang-s2i/Dockerfile Copy the following text and paste it in to the editor.</description>
+oc new-project s2i-userYOUR# Step 2 - Go Get S2I Library cd ~ go get github.com/openshift/source-to-image Step 3 - Build the S2I Tooling cd $GOPATH/src/github.com/openshift/source-to-image hack/build-go.sh export PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/local/bin/linux/amd64/ Step 4 - Create the S2I Project cd ~ s2i create golang-s2i golang-s2i Now let&amp;rsquo;s inspect the project directory
+tree -a golang-s2i Step 5 - Edit the Dockerfile cd ~ cat /dev/null &amp;gt; ~/golang-s2i/Dockerfile vi ~/golang-s2i/Dockerfile Copy the following text and paste it in to the editor.</description>
     </item>
     
     <item>
@@ -1724,7 +1722,9 @@ tree -a golang-s2i Step 5 - Edit the Dockerfile cd ~cat /dev/null &amp;gt; ~/gol
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/strangling_the_monolith/lab2/</guid>
-      <description>Strangling the Monolith Design Pattern  Strangling - incrementally replacing functionality in app with something better (cheaper, faster, easier to maintain). As functionality is replaced, “dead” parts of monolith can be removed/retired. You can also wait for all functionality to be replaced before retiring anything! You can optionally include new functionality during strangulation to make it more attractive to business stakeholders.   [https://paulhammant.com/2013/07/14/legacy-application-strangulation-case-studies/](https://paulhammant.com/2013/07/14/legacy-application-strangulation-case-studies/)  Steps for Strangling the Monolith  1) Strangle Monolith</description>
+      <description>Strangling the Monolith Design Pattern  Strangling - incrementally replacing functionality in app with something better (cheaper, faster, easier to maintain). As functionality is replaced, “dead” parts of monolith can be removed/retired. You can also wait for all functionality to be replaced before retiring anything! You can optionally include new functionality during strangulation to make it more attractive to business stakeholders.  
+https://paulhammant.com/2013/07/14/legacy-application-strangulation-case-studies/
+ Steps for Strangling the Monolith   Strangle Monolith   Strangle Monolith         Add a Microservice   Add a Microservice         And Another   And Another         Squeeze Monolith   Squeeze Monolith         And Remove Dead   And Remove Dead        Step 1  In this lab, you will begin to ‘strangle’ the coolstore monolith by implementing two of its services as external microservices, split along business boundaries Once implemented, traffic destined to the original monolith’s services will be redirected (via OpenShift software-defined routing) to the new services We will be using the Fabric8 Maven Plugin to automatically deploy to openshift    First, build and deploy the catalog microservice (Based on Spring Boot)   $ cd ~/coolstore $ git clone -b app-partner https://github.</description>
     </item>
     
     <item>
@@ -1734,6 +1734,7 @@ tree -a golang-s2i Step 5 - Edit the Dockerfile cd ~cat /dev/null &amp;gt; ~/gol
       
       <guid>/workshops/agile_integrations_ci/lab01/</guid>
       <description>Lab 1 API Design Create an OpenAPI Specification using Apicurio Studio  Duration: 10 mins Audience: API Owner, Product Manager, Developers, Architects  
+&amp;lt;img src=&amp;rdquo;../images/agenda-01.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
 Overview As APIs become more widespread in the enterprise, consistent design and usage is critically important to improve reusability. The more reusable APIs are, the less friction there is for other internal or external teams to make progress. Having design standards and tools baked into the API development and maintenance process is a very powerful way to enable this consistency.</description>
     </item>
     
@@ -1744,6 +1745,7 @@ Overview As APIs become more widespread in the enterprise, consistent design and
       
       <guid>/workshops/agile_integrations_dev/lab01/</guid>
       <description>Lab 1 API Design Import an OpenAPI Specification using Apicurio Studio  Duration: 10 mins Audience: Developers, Architects  
+&amp;lt;img src=&amp;rdquo;../images/agenda-01.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
 Overview As APIs become more widespread in the enterprise, consistent design and usage is critically important to improve reusability. The more reusable APIs are, the less friction there is for other internal or external teams to make progress. Having design standards and tools baked into the API development and maintenance process is a very powerful way to enable this consistency.</description>
     </item>
     
@@ -1754,7 +1756,7 @@ Overview As APIs become more widespread in the enterprise, consistent design and
       
       <guid>/workshops/secure_software_factory/lab01/</guid>
       <description>Welcome to OpenShift! This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.
-Key Terms We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with. You&#39;ll learn more terms along the way, but these are the basics to get you started.</description>
+Key Terms We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with. You&amp;rsquo;ll learn more terms along the way, but these are the basics to get you started.</description>
     </item>
     
     <item>
@@ -1764,6 +1766,7 @@ Key Terms We will be using the following terms throughout the workshop labs so h
       
       <guid>/workshops/agile_integrations_ci/lab02/</guid>
       <description>Lab 2 API Mocking Bring your APIs to life  Duration: 20 mins Audience: Developers, Architects, Testers, Quality Engineers  
+&amp;lt;img src=&amp;rdquo;../images/agenda-02.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
 Overview When building and working with APIs, you often need to simulate the responses of the system before it has been fully completed. This is what we explore in this workshop - mocking up API structures quickly so they can be subjected to testing without having to create all the final service code.</description>
     </item>
     
@@ -1774,6 +1777,7 @@ Overview When building and working with APIs, you often need to simulate the res
       
       <guid>/workshops/agile_integrations_dev/lab02/</guid>
       <description>Lab 2 API Mocking Bring your APIs to life  Duration: 20 mins Audience: Developers, Architects, Testers, Quality Engineers  
+&amp;lt;img src=&amp;rdquo;../images/agenda-02.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
 Overview When building and working with APIs, you often need to simulate the responses of the system before it has been fully completed. This is what we explore in this workshop - mocking up API structures quickly so they can be subjected to testing without having to create all the final service code.</description>
     </item>
     
@@ -1804,6 +1808,7 @@ Also, a part of this lab we’ll be using using Pipelines in OpenShift for CI/CD
       
       <guid>/workshops/agile_integrations_ci/lab03/</guid>
       <description>Lab 3 Fuse Online  Duration: 20 mins Audience: Developers and Architects  
+&amp;lt;img src=&amp;rdquo;../images/agenda-03.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
 Overview When it comes to quick API development, you need both the integration experts as well as application developers to easily develop and deploy the APIs. Here is how to create a simple API with Fuse Online.
 Why Red Hat? Red Hat Fuse integration solution empowers integration experts, application developers, and business users to engage in enterprise-wide collaboration and high-productivity self-service.</description>
     </item>
@@ -1815,7 +1820,8 @@ Why Red Hat? Red Hat Fuse integration solution empowers integration experts, app
       
       <guid>/workshops/agile_integrations_dev/lab03/</guid>
       <description>Lab 3 Swagger to REST Contract-first API development with a database interface, implemented using Eclipse Che  Duration: 20 mins Audience: Developers and Architects  
-Overview In the context of defining API&#39;s, it&#39;s common for a Business Analyst (or Citizen Integrator) to first create an API specification or contract. By beginning the process with a clearly defined contract, a Developer can easily take the contract and auto-generate the underlying service to implement that API.</description>
+&amp;lt;img src=&amp;rdquo;../images/agenda-03.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
+Overview In the context of defining API&amp;rsquo;s, it&amp;rsquo;s common for a Business Analyst (or Citizen Integrator) to first create an API specification or contract. By beginning the process with a clearly defined contract, a Developer can easily take the contract and auto-generate the underlying service to implement that API.</description>
     </item>
     
     <item>
@@ -1824,7 +1830,7 @@ Overview In the context of defining API&#39;s, it&#39;s common for a Business An
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/secure_software_factory/lab04/</guid>
-      <description>Jenkins can be integrated with OpenShift in 3 ways. Today, you&#39;ll be working with a containerized Jenkins Server that&#39;s fully integrated with OpenShift.
+      <description>Jenkins can be integrated with OpenShift in 3 ways. Today, you&amp;rsquo;ll be working with a containerized Jenkins Server that&amp;rsquo;s fully integrated with OpenShift.
 Login through SSO with Jenkins Go into your CI/CD project and find the running Jenkins Pod.
 Click the external route (https://jenkins…) to go into your Jenkins Server
 Click Login with OpenShift.
@@ -1838,7 +1844,8 @@ Login with your OpenShift Credentials. You maybe asked to accept authorizations.
       
       <guid>/workshops/agile_integrations_ci/lab04/</guid>
       <description>Lab 4 Managing API Endpoints Take control of your APIs  Duration: 15 mins Audience: API Owners, Product Managers, Developers, Architects  
-Overview Once you have APIs deployed in your environment, it becomes critically important to manage who may use them, and for what purpose. You also need to begin to track usage of these different users to know who is or is not succeeding in their usage. For this reason, in this lab, you will be adding management capabilities to the API to give you control and visibility of it&#39;s usage.</description>
+&amp;lt;img src=&amp;rdquo;../images/agenda-04.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
+Overview Once you have APIs deployed in your environment, it becomes critically important to manage who may use them, and for what purpose. You also need to begin to track usage of these different users to know who is or is not succeeding in their usage.</description>
     </item>
     
     <item>
@@ -1848,7 +1855,8 @@ Overview Once you have APIs deployed in your environment, it becomes critically 
       
       <guid>/workshops/agile_integrations_dev/lab04/</guid>
       <description>Lab 4 SOAP to REST (Optional) Contract-first API development wrapping an existing SOAP service, implemented using Eclipse Che  Duration: 20 mins Audience: Developers and Architects  
-Overview Another important use case in developing API&#39;s is to take an existing legacy SOAP service and wrap it with a new RESTful endpoint. This SOAP to REST transformation is implemented in the API service layer (Fuse). This lab will walk you through taking an existing SOAP contract (WSDL), converting it to Java POJO&#39;s and exposing it using Camel REST DSL.</description>
+&amp;lt;img src=&amp;rdquo;../images/agenda-03.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
+Overview Another important use case in developing API&amp;rsquo;s is to take an existing legacy SOAP service and wrap it with a new RESTful endpoint. This SOAP to REST transformation is implemented in the API service layer (Fuse). This lab will walk you through taking an existing SOAP contract (WSDL), converting it to Java POJO&amp;rsquo;s and exposing it using Camel REST DSL.</description>
     </item>
     
     <item>
@@ -1858,6 +1866,7 @@ Overview Another important use case in developing API&#39;s is to take an existi
       
       <guid>/workshops/agile_integrations_ci/lab05/</guid>
       <description>Lab 5 API Security Securing APIs with OpenID Connect and Red Hat Single Sign On  Duration: 20 mins Audience: API Owners, Product Managers, Developers, Architects  
+&amp;lt;img src=&amp;rdquo;../images/agenda-05.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
 Overview Once you have APIs in your organization and have applications being written, you also want to be sure in many cases that the various types of users of the APIs are correctly authenticated. In this lab you will discover how to set up the widely used OpenID connect pattern for Authentication.</description>
     </item>
     
@@ -1878,6 +1887,7 @@ In addition to standard Jenkins Pipeline Syntax, the OpenShift Jenkins image pro
       
       <guid>/workshops/agile_integrations_dev/lab05/</guid>
       <description>Lab 5 Fuse Online  Duration: 20 mins Audience: Developers and Architects  
+&amp;lt;img src=&amp;rdquo;../images/agenda-03.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
 Overview When it comes to quick API development, you need both the integration experts as well as application developers to easily develop, deploy the APIs. Here is how to create a simple API with Fuse online.
 Why Red Hat? Red Hat Fuse integration solution empowers integration experts, application developers, and business users to engage in enterprise-wide collaboration and high-productivity self-service.</description>
     </item>
@@ -1889,6 +1899,7 @@ Why Red Hat? Red Hat Fuse integration solution empowers integration experts, app
       
       <guid>/workshops/agile_integrations_ci/lab06/</guid>
       <description>Lab 6 API Developer Portal Publishing APIs to Developer Portal  Duration: 20 mins Audience: API Owners, Product Managers, Developers, Architects  
+&amp;lt;img src=&amp;rdquo;../images/agenda-05.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
 Overview The focal point of your developers experience is the API developer portal, and the level of effort you put into it will directly correlate to the level of success of your API program, and API developer engagement.
 Why Red Hat? Red Hat 3scale API Management Solution provides a built-in, state-of-the-art CMS portal, making it very easy to create your own branded hub with a custom domain to manage developer interactions, and help increase API adoption.</description>
     </item>
@@ -1911,7 +1922,8 @@ Please note that we are leveraging the eap-7 branch in our git project and not t
       
       <guid>/workshops/agile_integrations_dev/lab06/</guid>
       <description>Lab 6 Managed API Endpoints Take control of your APIs  Duration: 5 mins Audience: API Owners, Product Managers, Developers, Architects  
-Overview Once you have APIs deployed in your environment, it becomes critically important to manage who may use them and for what purpose. You also need to begin to track usage of these different users to know who is/is not succeeding in their usage. For this reason in this lab you will be adding management capabilities to the API to give you control and visibility of it&#39;s usage.</description>
+&amp;lt;img src=&amp;rdquo;../images/agenda-04.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
+Overview Once you have APIs deployed in your environment, it becomes critically important to manage who may use them and for what purpose. You also need to begin to track usage of these different users to know who is/is not succeeding in their usage.</description>
     </item>
     
     <item>
@@ -1921,6 +1933,7 @@ Overview Once you have APIs deployed in your environment, it becomes critically 
       
       <guid>/workshops/agile_integrations_dev/lab07/</guid>
       <description>Lab 7 API Developer Portal Publishing APIs to Developer Portal  Duration: 20 mins Audience: API Owners, Product Managers, Developers, Architects  
+&amp;lt;img src=&amp;rdquo;../images/agenda-04.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
 Overview The focal point of your developers’ experience is the API developer portal, and the level of effort you put into it will determine the level of decreased support costs and increased developer engagement.
 Why Red Hat? 3scale provides a built-in, state-of-the-art CMS portal, making it very easy to create your own branded hub with a custom domain to manage developer interactions and increase API adoption.</description>
     </item>
@@ -1934,7 +1947,6 @@ Why Red Hat? 3scale provides a built-in, state-of-the-art CMS portal, making it 
       <description>Add Test Stage Add the configuration for the Test Stage below to your pipeline text file.
 Maven will run the test stage in the life cycle that we skipped at the previous stages.
 Maven will place the test results in the surefire-reports folder. The maven surefire-reports plugin allows for the generation of reports for your unit tests.
-
 Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit</description>
     </item>
     
@@ -1945,6 +1957,7 @@ Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; t
       
       <guid>/workshops/agile_integrations_ci/lab07/</guid>
       <description>Lab 7 Testing the International Inc. Locations webpage Testing your web application  Duration: 10 mins Audience: API Consumers, Developers, Architects  
+&amp;lt;img src=&amp;rdquo;../images/agenda-05.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
 Overview This lab demonstrates the International Inc. Locations page using our newly authenticated locations API.
 Why Red Hat? Applications can be built from many technologies. In this case we use a simple web application, but a wide range of Red Hat and non-Red Hat technologies could be used.</description>
     </item>
@@ -1956,7 +1969,8 @@ Why Red Hat? Applications can be built from many technologies. In this case we u
       
       <guid>/workshops/agile_integrations_dev/lab08/</guid>
       <description>Lab 8 API Consumption Connect Applications and APIs  Duration: 15 mins Audience: API Consumers, Developers, Architects  
-Overview APIs provide the building blocks for applications, but it is applications which deliver functionality to the end users. hence to see APIs in action it helps to see how applications can call APIs to provide new functionality. In this lab you&#39;ll be able to create a simple web application which consumes the API you built earlier in the exercises.</description>
+&amp;lt;img src=&amp;rdquo;../images/agenda-05.png &amp;ldquo;Login&amp;rdquo; width=&amp;quot;900&amp;rdquo; /&amp;gt;
+Overview APIs provide the building blocks for applications, but it is applications which deliver functionality to the end users. hence to see APIs in action it helps to see how applications can call APIs to provide new functionality. In this lab you&amp;rsquo;ll be able to create a simple web application which consumes the API you built earlier in the exercises.</description>
     </item>
     
     <item>
@@ -1987,7 +2001,7 @@ Add Archive Stage Steps into your pipeline.</description>
       
       <guid>/workshops/rhosp_101/2_login_to_horizon/</guid>
       <description>Welcome to Red Hat OpenStack Platform (RHOSP)! This lab provides a quick tour of the Horizon dashboard to help you get familiar with the user interface. If you are already familiar with the basics of Horizon simply ensure you can login and have access to your student project.
-Accessing Horizon RHOSP provides a web dashboard that allows you to perform various tasks via a web browser. Let&#39;s get started by logging into Horizon and checking the status of the platform.</description>
+Accessing Horizon RHOSP provides a web dashboard that allows you to perform various tasks via a web browser. Let&amp;rsquo;s get started by logging into Horizon and checking the status of the platform.</description>
     </item>
     
     <item>
@@ -2008,7 +2022,7 @@ Key Terms We will be using the following terms throughout the workshop labs so h
       <guid>/workshops/openshift_4_101/lab1-welcome/</guid>
       <description>Welcome to OpenShift! This lab provides a quick tour of the OpenShift console to help you get familiar with the user interface. If you are already familiar with the basics of OpenShift, this will be easy in that we are simply ensuring you can login and create a project.
 Accessing OpenShift OpenShift provides a web console that allows you to perform various tasks via a web browser.
-Let&#39;s Login to the Web Console  Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.</description>
+Let&amp;rsquo;s Login to the Web Console  Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.</description>
     </item>
     
     <item>
@@ -2039,7 +2053,8 @@ Key Terms We will be using the following terms throughout the workshop labs so h
       
       <guid>/workshops/secure_software_factory/lab10/</guid>
       <description>Containers Containers are an important foundation for your application in building a Trusted Software Supply Chain. You want a secure and blessed golden container image that your application will inherit security controls from.
-Containers are built using a layered approach. For example, to create a container of a Java web application, you could do so in multiple layers: the OS, the JVM, the web server, and the code itself.</description>
+Containers are built using a layered approach. For example, to create a container of a Java web application, you could do so in multiple layers: the OS, the JVM, the web server, and the code itself.
+We can incorporate CVE and vulnerability scanning against images in an automated fashion.</description>
     </item>
     
     <item>
@@ -2049,7 +2064,7 @@ Containers are built using a layered approach. For example, to create a containe
       
       <guid>/workshops/openshift_4_101_dynatrace/lab10-labels/</guid>
       <description>Labels This is a pretty simple lab, we are going to explore labels. You can use labels to organize, group, or select API objects.
-For example, pods are &amp;quot;tagged&amp;quot; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.
+For example, pods are &amp;ldquo;tagged&amp;rdquo; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.
 Labels on a pod In a previous lab we added our web app using a S2I template.</description>
     </item>
     
@@ -2060,10 +2075,9 @@ Labels on a pod In a previous lab we added our web app using a S2I template.</de
       
       <guid>/workshops/secure_software_factory/lab11/</guid>
       <description>Add Build Image Stage Add the Build Image Stage into your pipeline.
-The &amp;quot;sh&amp;quot; are shell commands in your pipeline that are executed on the Jenkins Slave. Maven built the openshift-tasks.war in it the target directory and it will be copied into the created oc-builds directory.
-The startBuild stage is kicked off from Openshift and pointing to the local directory &amp;quot;oc-build&amp;quot; on the Jenkins slave.
-
-Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit</description>
+The &amp;ldquo;sh&amp;rdquo; are shell commands in your pipeline that are executed on the Jenkins Slave. Maven built the openshift-tasks.war in it the target directory and it will be copied into the created oc-builds directory.
+The startBuild stage is kicked off from Openshift and pointing to the local directory &amp;ldquo;oc-build&amp;rdquo; on the Jenkins slave.
+# Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit</description>
     </item>
     
     <item>
@@ -2073,7 +2087,7 @@ Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; t
       
       <guid>/workshops/openshift_4_101_dynatrace/lab11-cicd/</guid>
       <description>Build Triggers, Webhooks and Rollbacks - Oh My! Once you have an app deployed in OpenShift you can take advantage of some continuous capabilities that help to enable DevOps and automate your management process. We will cover some of those in this lab: Build triggers, webhooks, and rollbacks.
-A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&#39;t already have an account, you can create one here.</description>
+A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&amp;rsquo;t already have an account, you can create one here.</description>
     </item>
     
     <item>
@@ -2104,8 +2118,7 @@ Before a trigger is created, the pipeline sleeps for 10 seconds. A deployment co
       <guid>/workshops/secure_software_factory/lab13/</guid>
       <description>Add Promote to Stage Enter the Promote to STAGE below into your pipeline.
 We set an approval to promote to the application to the Stage Project. The approval process is a good feature for various gates of your deployments. We also set a 15 minute timeout on the approval. You also tag the tasks image with latest and the version from the pom file.
-
-Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit</description>
+# Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit</description>
     </item>
     
     <item>
@@ -2114,10 +2127,10 @@ Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; t
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/secure_software_factory/lab14/</guid>
-      <description>Verify Completed Pipeline Before we kick off your pipeline, let&#39;s verify it.
+      <description>Verify Completed Pipeline Before we kick off your pipeline, let&amp;rsquo;s verify it.
 In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit YAML
 Take a look and see if it matches the below text. If not, please correct it.
-apiVersion: v1 kind: BuildConfig metadata: annotations: pipeline.alpha.openshift.io/uses: &amp;#39;[{&amp;#34;name&amp;#34;: &amp;#34;jenkins&amp;#34;, &amp;#34;namespace&amp;#34;: &amp;#34;&amp;#34;, &amp;#34;kind&amp;#34;: &amp;#34;DeploymentConfig&amp;#34;}]&amp;#39; labels: app: cicd-pipeline name: cicd-pipeline name: tasks-pipeline spec: triggers: - type: GitHub github: secret: &amp;#34;secret101&amp;#34; - type: Generic generic: secret: &amp;#34;secret101&amp;#34; runPolicy: Serial source: type: None strategy: jenkinsPipelineStrategy: env: - name: DEV_PROJECT value: dev-userYOUR# - name: STAGE_PROJECT value: stage-userYOUR# jenkinsfile: |- def version, mvnCmd = &amp;#34;mvn -s configuration/cicd-settings-nexus3.</description>
+apiVersion: v1 kind: BuildConfig metadata: annotations: pipeline.alpha.openshift.io/uses: &#39;[{&amp;quot;name&amp;quot;: &amp;quot;jenkins&amp;quot;, &amp;quot;namespace&amp;quot;: &amp;quot;&amp;quot;, &amp;quot;kind&amp;quot;: &amp;quot;DeploymentConfig&amp;quot;}]&#39; labels: app: cicd-pipeline name: cicd-pipeline name: tasks-pipeline spec: triggers: - type: GitHub github: secret: &amp;quot;secret101&amp;quot; - type: Generic generic: secret: &amp;quot;secret101&amp;quot; runPolicy: Serial source: type: None strategy: jenkinsPipelineStrategy: env: - name: DEV_PROJECT value: dev-userYOUR# - name: STAGE_PROJECT value: stage-userYOUR# jenkinsfile: |- def version, mvnCmd = &amp;quot;mvn -s configuration/cicd-settings-nexus3.</description>
     </item>
     
     <item>
@@ -2127,7 +2140,6 @@ apiVersion: v1 kind: BuildConfig metadata: annotations: pipeline.alpha.openshift
       
       <guid>/workshops/secure_software_factory/lab15/</guid>
       <description>Trigger the Trusted Software Supply Chain with Code Check-ins Through automation, you will trigger the Trusted Software Supply Chain with code check-ins.
-
 Verify Webhook in Gogs The Webhook is what triggers your pipeline upon code check-ins. You want your SCM to trigger the pipeline as opposed to Jenkins constantly polling the source code for changes.
 Click on the Gogs route url in the CI/CD project which takes you to the home page.</description>
     </item>
@@ -2141,11 +2153,8 @@ Click on the Gogs route url in the CI/CD project which takes you to the home pag
       <description>Create Quay Account Please go to the Quay Login with the link given to you by your instructor
 Click Create Account at the bottom of the page.
 
-
 Fill in the account information for Quay.
  Username: your assigned username i.e userYOUR# E-mail address: your email address Password: openshift Confirm Password: openshift  Click Create Account
-
-
 
  .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
     </item>
@@ -2157,7 +2166,6 @@ Fill in the account information for Quay.
       
       <guid>/workshops/secure_software_factory/lab17/</guid>
       <description>Add Clair Container Scan Add the configuration for the Container Vulnerability Scan below to your pipeline text file.
-
 
 Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit
 In your pipeline, add and update the following variables after the version and mvnCmd definitions. Please fill in the values between the quotes.
@@ -2172,10 +2180,9 @@ In your pipeline, add and update the following variables after the version and m
       <guid>/workshops/secure_software_factory/lab18/</guid>
       <description>Add OpenSCAP DISA STIG Scan Add the configuration for the OpenSCAP Scan below to your pipeline text file.
 
-
 Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit
 In your pipeline, verify the following variables are there after the version and mvnCmd definitions. Please fill in the values between the quotes if not done previously.
- ocuser : the openshift user given to you by your insturctor ocpass : the openshift password given to you by your insturctor ocp : the openshift host given to you by your instuctor</description>
+ ocuser : the openshift user given to you by your insturctor ocpass : the openshift password given to you by your insturctor ocp : the openshift host given to you by your instuctor  def ocuser = &amp;quot; &amp;quot; def ocpass = &amp;quot; &amp;quot; def ocp = &amp;quot; &amp;quot; For Example:</description>
     </item>
     
     <item>
@@ -2184,8 +2191,8 @@ In your pipeline, verify the following variables are there after the version and
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab2-byocontainer/</guid>
-      <description>Bring your own OCI image It&#39;s easy to get started with OpenShift whether you&#39;re using our app templates or bringing your existing assets. In this quick lab we will deploy an application using an exisiting container image. OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.
-Let&#39;s point OpenShift to an existing built container image Choose either to complete the steps via CLI or Web Console.</description>
+      <description>Bring your own OCI image It&amp;rsquo;s easy to get started with OpenShift whether you&amp;rsquo;re using our app templates or bringing your existing assets. In this quick lab we will deploy an application using an exisiting container image. OpenShift will create an image stream for the image as well as deploy and manage containers based on that image.
+Let&amp;rsquo;s point OpenShift to an existing built container image Choose either to complete the steps via CLI or Web Console.</description>
     </item>
     
     <item>
@@ -2194,7 +2201,8 @@ Let&#39;s point OpenShift to an existing built container image Choose either to 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101_dynatrace/lab2-byocontainer/</guid>
-      <description>Bring your own docker It&#39;s easy to get started with OpenShift whether you&#39;re using our app templates or bringing your existing assets. In this quick lab we will deploy an application using an exisiting container image. OpenShift will create an image stream for the image as well as deploy and manage containers based on that image. And we will dig into the details to show how all that works.</description>
+      <description>Bring your own docker It&amp;rsquo;s easy to get started with OpenShift whether you&amp;rsquo;re using our app templates or bringing your existing assets. In this quick lab we will deploy an application using an exisiting container image. OpenShift will create an image stream for the image as well as deploy and manage containers based on that image. And we will dig into the details to show how all that works.
+Let&amp;rsquo;s point OpenShift to an existing built container image CLI Steps      Verify you&#39;re still in the project we created at the end of the last lab by going to the terminal and typing the following:  $ oc projects  You should see something *similar* in the last line of the output:  $ Using project &amp;#34;demo-0&amp;#34; on server &amp;#34;https://172.</description>
     </item>
     
     <item>
@@ -2203,7 +2211,7 @@ Let&#39;s point OpenShift to an existing built container image Choose either to 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_101_dcmetromap/lab2-byodocker/</guid>
-      <description>Bring your own docker It&#39;s easy to get started with OpenShift whether you&#39;re using our app templates or bringing your existing docker assets. In this quick lab we will deploy an application using an exisiting docker image. OpenShift will create an image stream for the image as well as deploy and manage containers based on that image. And we will dig into the details to show how all that works.</description>
+      <description>Bring your own docker It&amp;rsquo;s easy to get started with OpenShift whether you&amp;rsquo;re using our app templates or bringing your existing docker assets. In this quick lab we will deploy an application using an exisiting docker image. OpenShift will create an image stream for the image as well as deploy and manage containers based on that image. And we will dig into the details to show how all that works.</description>
     </item>
     
     <item>
@@ -2212,7 +2220,7 @@ Let&#39;s point OpenShift to an existing built container image Choose either to 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/rhosp_101/3_managing_networks/</guid>
-      <description>Neutron - Overlay Networking for OpenStack Neutron is an OpenStack project to provide &amp;quot;networking as a service&amp;quot; between interface devices (e.g., vNICs) managed by other Openstack services (e.g., nova).
+      <description>Neutron - Overlay Networking for OpenStack Neutron is an OpenStack project to provide &amp;ldquo;networking as a service&amp;rdquo; between interface devices (e.g., vNICs) managed by other Openstack services (e.g., nova).
 Starting in the Folsom release, Neutron is a core and supported part of the OpenStack platform.
 Examining Project Network Topology  Navigate to Network -&amp;gt; Network Topology using the second level navigation tabs.
    Lab 2 Figure 1: Neutron Network Topology   There are two ways to view the project network layout.</description>
@@ -2233,10 +2241,11 @@ Examining Project Network Topology  Navigate to Network -&amp;gt; Network Topolo
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab2.1-byocontainer/</guid>
-      <description>Now that we have a running container, we can browse our project details with the command line  https://console-openshift-console.apps.example.redhatgov.io/terminal 
-  Try typing the following to see what is available to &#39;get&#39;:
- $ oc project demo-YOUR# $ oc get all   Now let&#39;s look at what our image stream has in it:
- $ oc get is$ oc describe is/nexus  An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, in our case a new version of the nexus image, is created.</description>
+      <description>Now that we have a running container, we can browse our project details with the command line https://console-openshift-console.apps.example.redhatgov.io/terminal
+  Try typing the following to see what is available to &amp;lsquo;get&amp;rsquo;:
+ $ oc project demo-YOUR# $ oc get all   Now let&amp;rsquo;s look at what our image stream has in it:
+ $ oc get is $ oc describe is/nexus 
+An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, in our case a new version of the nexus image, is created.</description>
     </item>
     
     <item>
@@ -2245,9 +2254,9 @@ Examining Project Network Topology  Navigate to Network -&amp;gt; Network Topolo
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab2.2-byocontainer/</guid>
-      <description>Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal 
-Let&#39;s clean this up   Let&#39;s clean up all this to get ready for the next lab:
- $ oc project demo-YOUR# $ oc delete all --selector app=nexus Summary In this lab, you&#39;ve deployed an example container image into a pod running in OpenShift. You exposed a route for clients to access that service via their web browsers. And you learned how to get and describe resources using the command line and the web console.</description>
+      <description>Terminal access https://console-openshift-console.apps.example.redhatgov.io/terminal
+Let&amp;rsquo;s clean this up   Let&amp;rsquo;s clean up all this to get ready for the next lab:
+ $ oc project demo-YOUR# $ oc delete all --selector app=nexus Summary In this lab, you&amp;rsquo;ve deployed an example container image into a pod running in OpenShift. You exposed a route for clients to access that service via their web browsers. And you learned how to get and describe resources using the command line and the web console.</description>
     </item>
     
     <item>
@@ -2256,8 +2265,8 @@ Let&#39;s clean this up   Let&#39;s clean up all this to get ready for the next 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_101_dcmetromap/lab3-s2i/</guid>
-      <description>Source to Image (S2I) One of the useful components of OpenShift is its source-to-image capability. S2I is a framework that makes it easy to turn your source code into runnable images. The main advantage of using S2I for building reproducible docker images is the ease of use for developers. You&#39;ll see just how simple it can be in this lab.
-Let&#39;s build a node.js web server using S2I We can do this either via the command line or the web console.</description>
+      <description>Source to Image (S2I) One of the useful components of OpenShift is its source-to-image capability. S2I is a framework that makes it easy to turn your source code into runnable images. The main advantage of using S2I for building reproducible docker images is the ease of use for developers. You&amp;rsquo;ll see just how simple it can be in this lab.
+Let&amp;rsquo;s build a node.js web server using S2I We can do this either via the command line or the web console.</description>
     </item>
     
     <item>
@@ -2266,8 +2275,8 @@ Let&#39;s build a node.js web server using S2I We can do this either via the com
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab3-s2i/</guid>
-      <description>Source to Image (S2I) One of the useful components of OpenShift is its source-to-image capability. S2I is a framework that makes it easy to turn your source code into runnable images. The main advantage of using S2I for building reproducible docker images is the ease of use for developers. You&#39;ll see just how simple it can be in this lab.
-Let&#39;s build a node.js web app, using S2I We can do this either via the command line or the web console.</description>
+      <description>Source to Image (S2I) One of the useful components of OpenShift is its source-to-image capability. S2I is a framework that makes it easy to turn your source code into runnable images. The main advantage of using S2I for building reproducible docker images is the ease of use for developers. You&amp;rsquo;ll see just how simple it can be in this lab.
+Let&amp;rsquo;s build a node.js web app, using S2I We can do this either via the command line or the web console.</description>
     </item>
     
     <item>
@@ -2276,7 +2285,8 @@ Let&#39;s build a node.js web app, using S2I We can do this either via the comma
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101_dynatrace/lab3-installagent/</guid>
-      <description>Deploy the Dynatrace OneAgent Operator on OpenShift 4.4+  Prerequisites: 1) If no existing account, sign-up for a trial with Dynatrace at https://www.dynatrace.com/trial/ 2) Dynatrace API Token from Settings  Integration  Dynatrace API  Generate Token Activate the following settings: * Access problem and event feed, metrics, and topology * Read log content * Write configuration 3) Dynatrace PaaS token PaaS (used to download OneAgent and ActiveGate installers) from Settings  Integration  Platform as a Service  Generate Token 4) apiUrl - URL to the API of your Dynatrace environment.</description>
+      <description>Deploy the Dynatrace OneAgent Operator on OpenShift 4.4+  Prerequisites: 1) If no existing account, sign-up for a trial with Dynatrace at https://www.dynatrace.com/trial/  Dynatrace API Token from Settings &amp;gt; Integration &amp;gt; Dynatrace API &amp;gt; Generate Token Activate the following settings:
+ Access problem and event feed, metrics, and topology Read log content Write configuration    Dynatrace PaaS token PaaS (used to download OneAgent and ActiveGate installers) from Settings &amp;gt; Integration &amp;gt; Platform as a Service &amp;gt; Generate Token</description>
     </item>
     
     <item>
@@ -2285,7 +2295,7 @@ Let&#39;s build a node.js web app, using S2I We can do this either via the comma
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/rhosp_101/4_managing_floating_ip_addresses/</guid>
-      <description>Floating IP vs. Private IP Addresses Private IP Address A private IP address is assigned to an instance&#39;s network-interface by the DHCP server. The address is visible from within the instance by using a command like “ip a”. The address is typically part of a private network and is used for communication between instances in the same broadcast domain via virtual switch (L2 agent on each compute node). It can also be accessible from instances in other private networks via virtual router (L3 agent).</description>
+      <description>Floating IP vs. Private IP Addresses Private IP Address A private IP address is assigned to an instance&amp;rsquo;s network-interface by the DHCP server. The address is visible from within the instance by using a command like “ip a”. The address is typically part of a private network and is used for communication between instances in the same broadcast domain via virtual switch (L2 agent on each compute node). It can also be accessible from instances in other private networks via virtual router (L3 agent).</description>
     </item>
     
     <item>
@@ -2304,7 +2314,7 @@ Let&#39;s build a node.js web app, using S2I We can do this either via the comma
       
       <guid>/workshops/openshift_4_101/lab3.1-s2i/</guid>
       <description>Check out the build details We can see the details of what the S2I builder did. This can be helpful to diagnose issues if builds are failing.
- TIP: For a node.js app, running &amp;quot;npm shrinkwrap&amp;quot; is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I
+ TIP: For a node.js app, running &amp;ldquo;npm shrinkwrap&amp;rdquo; is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I
 CLI Steps    Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal    Goto the terminal and type the following:  $ oc get builds  Note the name of your build from the above command output and use it to see the logs with:  $ oc logs builds/[BUILD_NAME] The console will print out the full log for your build.</description>
     </item>
     
@@ -2316,7 +2326,7 @@ CLI Steps    Terminal access  https://console-openshift-console.apps.example.red
       <guid>/workshops/openshift_4_101_dynatrace/lab4-configdynatraceactivegate/</guid>
       <description>Connect your OpenShift clusters to Dynatrace with an ActiveGate to take advantage of the dedicated OpenShift overview page Connecting your OpenShift clusters to Dynatrace to take advantage of the dedicated OpenShift overview page requires that you run an ActiveGate in your environment (version 1.163+).
 See https://www.dynatrace.com/support/help/technology-support/cloud-platforms/openshift/monitoring/monitor-openshift-clusters-with-dynatrace/
-oc project dynatrace oc apply -f https://www.dynatrace.com/support/help/codefiles/kubernetes/kubernetes-monitoring-service-account.yaml serviceaccount/dynatrace-monitoring created clusterrole.rbac.authorization.k8s.io/dynatrace-monitoring-cluster created clusterrolebinding.rbac.authorization.k8s.io/dynatrace-monitoring-cluster createdoc config view --minify -o jsonpath=&amp;#39;{.clusters[0].cluster.server}&amp;#39; https://api.ocp4.local:6443  Get the Bearer token for the OpenShift cluster using the following command: Copy the secret returned by the following command:  oc get secret $(oc get sa dynatrace-monitoring -o jsonpath=&amp;#39;{.</description>
+oc project dynatrace oc apply -f https://www.dynatrace.com/support/help/codefiles/kubernetes/kubernetes-monitoring-service-account.yaml serviceaccount/dynatrace-monitoring created clusterrole.rbac.authorization.k8s.io/dynatrace-monitoring-cluster created clusterrolebinding.rbac.authorization.k8s.io/dynatrace-monitoring-cluster created oc config view --minify -o jsonpath=&amp;#39;{.clusters[0].cluster.server}&amp;#39; https://api.ocp4.local:6443  Get the Bearer token for the OpenShift cluster using the following command: Copy the secret returned by the following command:</description>
     </item>
     
     <item>
@@ -2325,7 +2335,7 @@ oc project dynatrace oc apply -f https://www.dynatrace.com/support/help/codefile
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_101_dcmetromap/lab4-devmanage/</guid>
-      <description>Developing and managing an application in OpenShift In this lab we will explore some of the common activities undertaken by developers working in OpenShift. You will become familiar with how to use environment variables, secrets, build configurations, and more. Let&#39;s look at some of the basic things a developer might care about for a deployed app.
+      <description>Developing and managing an application in OpenShift In this lab we will explore some of the common activities undertaken by developers working in OpenShift. You will become familiar with how to use environment variables, secrets, build configurations, and more. Let&amp;rsquo;s look at some of the basic things a developer might care about for a deployed app.
 Setup From the previous lab you should have the DC Metro Maps web app running in OpenShift.</description>
     </item>
     
@@ -2335,7 +2345,7 @@ Setup From the previous lab you should have the DC Metro Maps web app running in
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab4-devmanage/</guid>
-      <description>Developing and managing an application in OpenShift In this lab we will explore some of the common activities undertaken by developers working in OpenShift. You will become familiar with how to use environment variables, secrets, build configurations, and more. Let&#39;s look at some of the basic things a developer might care about for a deployed app.
+      <description>Developing and managing an application in OpenShift In this lab we will explore some of the common activities undertaken by developers working in OpenShift. You will become familiar with how to use environment variables, secrets, build configurations, and more. Let&amp;rsquo;s look at some of the basic things a developer might care about for a deployed app.
 Setup From the previous lab you should have the DC Metro Maps web app running in OpenShift.</description>
     </item>
     
@@ -2345,7 +2355,8 @@ Setup From the previous lab you should have the DC Metro Maps web app running in
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/rhosp_101/5_managing_security_groups/</guid>
-      <description>Security Groups in OpenStack A security group is a named collection of network access rules that are used to limit the types of traffic that have access to instances. When you launch an instance, you can assign one or more security groups to it. If you do not create security groups, new instances are automatically assigned to the default security group, unless you explicitly specify a different security group.</description>
+      <description>Security Groups in OpenStack A security group is a named collection of network access rules that are used to limit the types of traffic that have access to instances. When you launch an instance, you can assign one or more security groups to it. If you do not create security groups, new instances are automatically assigned to the default security group, unless you explicitly specify a different security group.
+The associated rules in each security group control the traffic to instances in the group.</description>
     </item>
     
     <item>
@@ -2363,8 +2374,8 @@ Setup From the previous lab you should have the DC Metro Maps web app running in
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101_dynatrace/lab5-s2i/</guid>
-      <description>Source to Image (S2I) One of the useful components of OpenShift is its source-to-image capability. S2I is a framework that makes it easy to turn your source code into runnable images. The main advantage of using S2I for building reproducible docker images is the ease of use for developers. You&#39;ll see just how simple it can be in this lab.
-Let&#39;s build a node.js web app, using S2I We can do this either via the command line or the web console.</description>
+      <description>Source to Image (S2I) One of the useful components of OpenShift is its source-to-image capability. S2I is a framework that makes it easy to turn your source code into runnable images. The main advantage of using S2I for building reproducible docker images is the ease of use for developers. You&amp;rsquo;ll see just how simple it can be in this lab.
+Let&amp;rsquo;s build a node.js web app, using S2I We can do this either via the command line or the web console.</description>
     </item>
     
     <item>
@@ -2384,7 +2395,7 @@ Glance image services include discovering, registering, and retrieving virtual m
       
       <guid>/workshops/openshift_101_dcmetromap/lab5-rollbacks/</guid>
       <description>Build Triggers, Webhooks and Rollbacks - Oh My! Once you have an app deployed in OpenShift you can take advantage of some continuous capabilities that help to enable DevOps and automate your management process. We will cover some of those in this lab: Build triggers, webhooks, and rollbacks.
-A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&#39;t already have an account, you can create one here.</description>
+A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&amp;rsquo;t already have an account, you can create one here.</description>
     </item>
     
     <item>
@@ -2394,7 +2405,7 @@ A bit of configuration We are going to do some integration and coding with an ex
       
       <guid>/workshops/openshift_4_101/lab5-rollbacks/</guid>
       <description>Build Triggers, Webhooks and Rollbacks - Oh My! Once you have an app deployed in OpenShift you can take advantage of some continuous capabilities that help to enable DevOps and automate your management process. We will cover some of those in this lab: Build triggers, webhooks, and rollbacks.
-A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&#39;t already have an account, you can create one here.</description>
+A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&amp;rsquo;t already have an account, you can create one here.</description>
     </item>
     
     <item>
@@ -2412,8 +2423,8 @@ A bit of configuration We are going to do some integration and coding with an ex
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab6-replicationrecovery/</guid>
-      <description>Things will go wrong, and that&#39;s why we have replication and recovery Things will go wrong with your software, or your hardware, or from something completely out of your control. But, we can plan for such failures, thus minimizing their impact. OpenShift supports this via the replication and recovery functionality.
-Replication Let&#39;s walk through a simple example of how the replication controller can keep your deployment at a desired state.</description>
+      <description>Things will go wrong, and that&amp;rsquo;s why we have replication and recovery Things will go wrong with your software, or your hardware, or from something completely out of your control. But, we can plan for such failures, thus minimizing their impact. OpenShift supports this via the replication and recovery functionality.
+Replication Let&amp;rsquo;s walk through a simple example of how the replication controller can keep your deployment at a desired state. Assuming you still have the dc-metro-map project running we can manually scale up our replicas to handle increased user load.</description>
     </item>
     
     <item>
@@ -2433,8 +2444,7 @@ Replication Let&#39;s walk through a simple example of how the replication contr
       
       <guid>/workshops/rhosp_101/7_managing_instances/</guid>
       <description>Now We are Ready to Launch an OpenStack Instance First, What is an Instance? Instances are virtual machines that run inside the OpenStack cloud. You can launch an instance from the following sources:
- Images uploaded to the Image service
- Image that you have copied to a persistent volume. The instance launches from the volume, which is provided by the cinder-volume API Instance snapshot that you took  Second.</description>
+ Images uploaded to the Image service Image that you have copied to a persistent volume. The instance launches from the volume, which is provided by the cinder-volume API Instance snapshot that you took  Second. We need a key pair before we launch our first instance  Navigate to Compute -&amp;gt; Key Pairs using the second level navigation tabs</description>
     </item>
     
     <item>
@@ -2443,8 +2453,8 @@ Replication Let&#39;s walk through a simple example of how the replication contr
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_101_dcmetromap/lab6-replicationrecovery/</guid>
-      <description>Things will go wrong, and that&#39;s why we have replication and recovery Things will go wrong with your software, or your hardware, or from something out of your control. But we can plan for that failure, and planning for it let&#39;s us minimize the impact. OpenShift supports this via what we call replication and recovery.
-Replication Let&#39;s walk through a simple example of how the replication controller can keep your deployment at a desired state.</description>
+      <description>Things will go wrong, and that&amp;rsquo;s why we have replication and recovery Things will go wrong with your software, or your hardware, or from something out of your control. But we can plan for that failure, and planning for it let&amp;rsquo;s us minimize the impact. OpenShift supports this via what we call replication and recovery.
+Replication Let&amp;rsquo;s walk through a simple example of how the replication controller can keep your deployment at a desired state.</description>
     </item>
     
     <item>
@@ -2463,8 +2473,8 @@ Replication Let&#39;s walk through a simple example of how the replication contr
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab6.1-replicationrecovery/</guid>
-      <description>Recovery Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy. Let&#39;s forcibly inflict an issue and see how OpenShift responds.
-CLI Steps    Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal    Choose a random pod and delete it:  $ oc get pods $ oc delete pod/PODNAME $ oc get pods -w If you&#39;re fast enough you&#39;ll see the pod you deleted go &amp;quot;Terminating&amp;quot; and you&#39;ll also see a new pod immediately get created and transition from &amp;quot;Pending&amp;quot; to &amp;quot;Running&amp;quot;.</description>
+      <description>Recovery Okay, now that we have a slightly more interesting replication state, we can test a service outages scenario. In this scenario, the dc-metro-map replication controller will ensure that other pods are created to replace those that become unhealthy. Let&amp;rsquo;s forcibly inflict an issue and see how OpenShift responds.
+CLI Steps    Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal    Choose a random pod and delete it:  $ oc get pods $ oc delete pod/PODNAME $ oc get pods -w If you&amp;rsquo;re fast enough you&amp;rsquo;ll see the pod you deleted go &amp;ldquo;Terminating&amp;rdquo; and you&amp;rsquo;ll also see a new pod immediately get created and transition from &amp;ldquo;Pending&amp;rdquo; to &amp;ldquo;Running&amp;rdquo;.</description>
     </item>
     
     <item>
@@ -2473,7 +2483,7 @@ CLI Steps    Terminal access  https://console-openshift-console.apps.example.red
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/lab6.2-replicationrecovery/</guid>
-      <description>Application Health In addition to the health of your application&#39;s pods, OpenShift will watch the containers inside those pods. Let&#39;s forcibly inflict some issues and see how OpenShift responds.
+      <description>Application Health In addition to the health of your application&amp;rsquo;s pods, OpenShift will watch the containers inside those pods. Let&amp;rsquo;s forcibly inflict some issues and see how OpenShift responds.
 CLI Steps    Terminal access  https://console-openshift-console.apps.example.redhatgov.io/terminal    Choose a running pod and shell into it:  $ oc get pods $ oc exec PODNAME -it /bin/bash You are now executing a bash shell running in the container of the pod.</description>
     </item>
     
@@ -2483,7 +2493,7 @@ CLI Steps    Terminal access  https://console-openshift-console.apps.example.red
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101_dynatrace/lab7-devmanage/</guid>
-      <description>Developing and managing an application in OpenShift In this lab we will explore some of the common activities undertaken by developers working in OpenShift. You will become familiar with how to use environment variables, secrets, build configurations, and more. Let&#39;s look at some of the basic things a developer might care about for a deployed app.
+      <description>Developing and managing an application in OpenShift In this lab we will explore some of the common activities undertaken by developers working in OpenShift. You will become familiar with how to use environment variables, secrets, build configurations, and more. Let&amp;rsquo;s look at some of the basic things a developer might care about for a deployed app.
 Setup From the previous lab you should have the DC Metro Maps web app running in OpenShift.</description>
     </item>
     
@@ -2494,7 +2504,7 @@ Setup From the previous lab you should have the DC Metro Maps web app running in
       
       <guid>/workshops/openshift_101_dcmetromap/lab7-labels/</guid>
       <description>Labels This is a pretty simple lab, we are going to explore labels. You can use labels to organize, group, or select API objects.
-For example, pods are &amp;quot;tagged&amp;quot; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.
+For example, pods are &amp;ldquo;tagged&amp;rdquo; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.
 Labels on a pod In a previous lab we added our web app using a S2I template.</description>
     </item>
     
@@ -2505,7 +2515,7 @@ Labels on a pod In a previous lab we added our web app using a S2I template.</de
       
       <guid>/workshops/openshift_4_101/lab7-labels/</guid>
       <description>Labels This is a pretty simple lab, we are going to explore labels. You can use labels to organize, group, or select API objects.
-For example, pods are &amp;quot;tagged&amp;quot; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.
+For example, pods are &amp;ldquo;tagged&amp;rdquo; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.
 Labels on a pod In a previous lab we added our web app using a S2I template.</description>
     </item>
     
@@ -2515,11 +2525,11 @@ Labels on a pod In a previous lab we added our web app using a S2I template.</de
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/rhosp_101/8_using_the_cli/</guid>
-      <description>Okay. UIs Are Cool and All, But Can&#39;t I Just Use the CLI? Absolutely! There are 3 ways to interact with OpenStack.
- API
- CLI
- GUI  In this lab, we are going to walk through some of the activities that we did in the previous labs via the CLI.
- When you see a CLI command starting with **openstack**, the command is part of the Unified CLI.</description>
+      <description>Okay. UIs Are Cool and All, But Can&amp;rsquo;t I Just Use the CLI? Absolutely! There are 3 ways to interact with OpenStack.
+ API CLI GUI  In this lab, we are going to walk through some of the activities that we did in the previous labs via the CLI.
+
+When you see a CLI command starting with openstack, the command is part of the Unified CLI.
+When you see a CLI command that starts with a project name like nova, these are the individual CLIs.</description>
     </item>
     
     <item>
@@ -2569,7 +2579,7 @@ Heat is the main project for orchestration in OpenStack. It implements an orches
       
       <guid>/workshops/openshift_4_101_dynatrace/lab8-rollbacks/</guid>
       <description>Build Triggers, Webhooks and Rollbacks - Oh My! Once you have an app deployed in OpenShift you can take advantage of some continuous capabilities that help to enable DevOps and automate your management process. We will cover some of those in this lab: Build triggers, webhooks, and rollbacks.
-A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&#39;t already have an account, you can create one here.</description>
+A bit of configuration We are going to do some integration and coding with an external git repository. For this lab we are going to use github, if you don&amp;rsquo;t already have an account, you can create one here.</description>
     </item>
     
     <item>
@@ -2615,8 +2625,8 @@ To administer the OpenStack Block Storage service, it is helpful to understand a
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101_dynatrace/lab9-replicationrecovery/</guid>
-      <description>Things will go wrong, and that&#39;s why we have replication and recovery Things will go wrong with your software, or your hardware, or from something out of your control. But we can plan for that failure, and planning for it let&#39;s us minimize the impact. OpenShift supports this via what we call replication and recovery.
-Replication Let&#39;s walk through a simple example of how the replication controller can keep your deployment at a desired state.</description>
+      <description>Things will go wrong, and that&amp;rsquo;s why we have replication and recovery Things will go wrong with your software, or your hardware, or from something out of your control. But we can plan for that failure, and planning for it let&amp;rsquo;s us minimize the impact. OpenShift supports this via what we call replication and recovery.
+Replication Let&amp;rsquo;s walk through a simple example of how the replication controller can keep your deployment at a desired state.</description>
     </item>
     
     <item>
@@ -2626,9 +2636,10 @@ Replication Let&#39;s walk through a simple example of how the replication contr
       
       <guid>/workshops/openshift_101_dcmetromap/login_tour_wetty/</guid>
       <description>Accessing OpenShift OpenShift provides a web console that allows you to perform various tasks via a web browser.
-Let&#39;s Login to the Web Console  Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.
+Let&amp;rsquo;s Login to the Web Console  Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.
  https://master.example.redhatgov.io:8443  Login Webpage
-Once logged in you should see your available projects - or a button to create a project if none exist already.</description>
+Once logged in you should see your available projects - or a button to create a project if none exist already.
+So this is what an empty project looks like First let&amp;rsquo;s create a new project to do our workshop work in.</description>
     </item>
     
     <item>
@@ -2640,7 +2651,7 @@ Once logged in you should see your available projects - or a button to create a 
       <description>Introduction to Wetty (Browser-based SSH) This lab provides a quick tour of the browser based SSH client Wetty. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.
 Accessing Wetty Ask your instructor for the wetty URL.
 Login Info login: userYOUR# Password: &amp;lt;Instructor Provided&amp;gt; After logging in, you should see a shell.
-The wetty instance will already have the &#39;oc&#39; command installed on them.</description>
+The wetty instance will already have the &amp;lsquo;oc&amp;rsquo; command installed on them.</description>
     </item>
     
     <item>
@@ -2660,8 +2671,8 @@ Why microservices? Agility. Deliver application updates faster. Isolate and fix 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab3.1_featureupdate/</guid>
-      <description>Digging into Observability Istio provides additional capabilities to analyze the service mesh and its performance. Let&#39;s deploy a new version of the user profile service and analyze its effect on the service mesh.
-Feature Update The code has already been written for you on the &#39;workshop-feature-update&#39; branch of the repo.
+      <description>Digging into Observability Istio provides additional capabilities to analyze the service mesh and its performance. Let&amp;rsquo;s deploy a new version of the user profile service and analyze its effect on the service mesh.
+Feature Update The code has already been written for you on the &amp;lsquo;workshop-feature-update&amp;rsquo; branch of the repo.
   Create a new build on this feature branch:  oc new-app -f ./openshift-configuration/userprofile-build.yaml \ -p APPLICATION_NAME=userprofile \ -p APPLICATION_CODE_URI=https://github.</description>
     </item>
     
@@ -2671,9 +2682,9 @@ Feature Update The code has already been written for you on the &#39;workshop-fe
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab3.2_grafana/</guid>
-      <description>Service Mesh Metrics with Grafana Grafana is a monitoring tool that can be integrated with Istio for metric observation. Using Grafana, you can look at metrics associated with services in your mesh. Let&#39;s use Grafana to get more information about the user profile service.
-Explore Grafana First, let&#39;s explore the Grafana user interface.
-  Open the Grafana console. Retrieve the endpoint for Grafana:  GRAFANA_CONSOLE=$(oc get route grafana -n istio-system --template=&amp;#39;https://{{.</description>
+      <description>Service Mesh Metrics with Grafana Grafana is a monitoring tool that can be integrated with Istio for metric observation. Using Grafana, you can look at metrics associated with services in your mesh. Let&amp;rsquo;s use Grafana to get more information about the user profile service.
+Explore Grafana First, let&amp;rsquo;s explore the Grafana user interface.
+  Open the Grafana console. Retrieve the endpoint for Grafana:  GRAFANA_CONSOLE=$(oc get route grafana -n istio-system --template=&#39;https://{{.</description>
     </item>
     
     <item>
@@ -2683,8 +2694,8 @@ Explore Grafana First, let&#39;s explore the Grafana user interface.
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab3.3_jaeger/</guid>
       <description>Distributed Tracing with Jaeger Jaeger is a distributed tracing tool that lets you trace requests as they flow through your service mesh. This is incredibly useful for debugging performance issues in your microservices architecture.
-Explore Jaeger First, let&#39;s explore the Jaeger user interface.
-  Open the Jaeger console. Retrieve the endpoint for Jaeger:  JAEGER_CONSOLE=$(oc get route jaeger -n istio-system --template=&amp;#39;https://{{.spec.host}}&amp;#39;) echo $JAEGER_CONSOLE  Click &#39;Allow selected permissions&#39; if prompted to authorized access.</description>
+Explore Jaeger First, let&amp;rsquo;s explore the Jaeger user interface.
+  Open the Jaeger console. Retrieve the endpoint for Jaeger:  JAEGER_CONSOLE=$(oc get route jaeger -n istio-system --template=&#39;https://{{.spec.host}}&#39;) echo $JAEGER_CONSOLE  Click &#39;Allow selected permissions&#39; if prompted to authorized access.</description>
     </item>
     
     <item>
@@ -2693,7 +2704,7 @@ Explore Jaeger First, let&#39;s explore the Jaeger user interface.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab2.3_kiali/</guid>
-      <description>Introducing Kiali for Observability All of your microservices are running in the service mesh. Now, you need a way to visualize the service mesh topology. That is, what&#39;s running in your service mesh and how are they connected?
+      <description>Introducing Kiali for Observability All of your microservices are running in the service mesh. Now, you need a way to visualize the service mesh topology. That is, what&amp;rsquo;s running in your service mesh and how are they connected?
 Istio provides Kiali, an open source project that gives you a console view of your service mesh. You can inspect the health of your service mesh, and it has further integrations for metric querying and tracing that we will cover in later labs.</description>
     </item>
     
@@ -2703,7 +2714,7 @@ Istio provides Kiali, an open source project that gives you a console view of yo
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/source_to_image/prerequisites/</guid>
-      <description>Getting Started If you choose to work from your own command line, instead of the web terminal (Wetty) environment, that&#39;s just fine! You&#39;ll have to install a few of utilities first.
+      <description>Getting Started If you choose to work from your own command line, instead of the web terminal (Wetty) environment, that&amp;rsquo;s just fine! You&amp;rsquo;ll have to install a few of utilities first.
 Install oc Click here for instructions on how to install the OpenShift Container Platform CLI.
 Install git Click here for instructions on how to install Git on your workstation.
 Install golang Click here for instructions on how to install Golang.</description>
@@ -2715,7 +2726,8 @@ Install golang Click here for instructions on how to install Golang.</descriptio
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/strangling_the_monolith/prerequisites/</guid>
-      <description>If we provided you a laptop or cloud environment. We already set all this up for you — feel free to skip everything below!  Install oc Click here for instructions on how to install the OpenShift Container Platform CLI.
+      <description>If we provided you a laptop or cloud environment. We already set all this up for you — feel free to skip everything below!
+ Install oc Click here for instructions on how to install the OpenShift Container Platform CLI.
 Install git Click here for instructions on how to install Git on your workstation.
 Create GitHub account Click here for instructions on how to setup an account.</description>
     </item>
@@ -2726,7 +2738,7 @@ Create GitHub account Click here for instructions on how to setup an account.</d
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/jdv_dev/prerequisites/</guid>
-      <description> What you need  A free account on Red Hat Developers to download JBoss Data Virtualization and JBoss Developer Studio A Java Development Kit (JDK) 8 git available as a local command Node.js runtime, 6.x or higher Postman for testing An accessible PostgreSQL instance  Recommended: Download a pre-built VM, ISO or docker image from TurnKey Linux. The provided VM/ISO also provides an web interface for loading data. Step by step instructions are provided for a Turnkey linux instance   </description>
+      <description>What you need  A free account on Red Hat Developers to download JBoss Data Virtualization and JBoss Developer Studio A Java Development Kit (JDK) 8 git available as a local command Node.js runtime, 6.x or higher Postman for testing An accessible PostgreSQL instance  Recommended: Download a pre-built VM, ISO or docker image from TurnKey Linux. The provided VM/ISO also provides an web interface for loading data. Step by step instructions are provided for a Turnkey linux instance    </description>
     </item>
     
     <item>
@@ -2735,7 +2747,7 @@ Create GitHub account Click here for instructions on how to setup an account.</d
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab5.4_authpolicy/</guid>
-      <description>Authorizing and Authenticating Access via Policy In the previous labs we secured and verified the service-to-service communication. But what about user-to-service communication (aka origin authentication)? The service mesh can help with that too. To do this, we need to bring in an identity provider that will issue JSON Web Tokens (JWTs) to signed in users. JWTs are an open, industry standard (RFC 7519) way of sharing identity. The app-ui service will pass those JWTs along with it&#39;s API requests.</description>
+      <description>Authorizing and Authenticating Access via Policy In the previous labs we secured and verified the service-to-service communication. But what about user-to-service communication (aka origin authentication)? The service mesh can help with that too. To do this, we need to bring in an identity provider that will issue JSON Web Tokens (JWTs) to signed in users. JWTs are an open, industry standard (RFC 7519) way of sharing identity. The app-ui service will pass those JWTs along with it&amp;rsquo;s API requests.</description>
     </item>
     
     <item>
@@ -2746,7 +2758,7 @@ Create GitHub account Click here for instructions on how to setup an account.</d
       <guid>/workshops/openshift_service_mesh_v1.0/lab5.3_prep/</guid>
       <description>Single Sign-On Login, registration, and role-based authorization is handled via Red Hat SSO (aka Keycloak). SSO is included as part of OpenShift or any middleware product subscription you have from Red Hat - woot!
 Installation Because the service mesh will leverage SSO to authenticate users and generate JWT we need to install it. You will install it via Operator into your namespace.
-Customize the Resources Check out the .yaml files here and customize for this workshop cluster&#39;s domain, and your user project.</description>
+Customize the Resources Check out the .yaml files here and customize for this workshop cluster&amp;rsquo;s domain, and your user project.</description>
     </item>
     
     <item>
@@ -2755,7 +2767,7 @@ Customize the Resources Check out the .yaml files here and customize for this wo
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab5.1_intromtls/</guid>
-      <description>Mutual TLS One of the key features of the Service Mesh is its ability to bring additional security to your applications. It does this in a several different ways that will be explored in the next few labs. The first of which is a concept known as &amp;quot;Mutual TLS&amp;quot; or mTLS for short.
+      <description>Mutual TLS One of the key features of the Service Mesh is its ability to bring additional security to your applications. It does this in a several different ways that will be explored in the next few labs. The first of which is a concept known as &amp;ldquo;Mutual TLS&amp;rdquo; or mTLS for short.
 Imagine a scenario where you are deploying a microservices application and are expecting a lot of PII to flow between the services.</description>
     </item>
     
@@ -2775,7 +2787,7 @@ You are probably already familiar with basic ingress security concepts. Essentia
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab5.2_verifymtls/</guid>
-      <description>Checking and Verification of mTLS OK, now that all our services are encrypting traffic Let&#39;s take a look in Kiali to see our encryption setup.
+      <description>Checking and Verification of mTLS OK, now that all our services are encrypting traffic Let&amp;rsquo;s take a look in Kiali to see our encryption setup.
   Open up the dashboard to Kiali (if you don&#39;t already have it open) and navigate to the Graph view. In the first drop down select the &#34;Service graph&#34; and in the &#34;Display&#34; drop down make sure the &#34;Security&#34; check box is checked.  You should see something like this screenshot with little locks indicating that mTLS is working for service-to-service communication.</description>
     </item>
     
@@ -2835,7 +2847,7 @@ You are probably already familiar with basic ingress security concepts. Essentia
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab1.3_installing/</guid>
       <description>Setup You will conduct these labs in an OpenShift cluster. As in the previous terminal deployment exercise, you can access your cluster via console and CLI.
-OpenShift You will use the OpenShift &#39;oc&#39; CLI to execute commands for the majority of this lab.
+OpenShift You will use the OpenShift &amp;lsquo;oc&amp;rsquo; CLI to execute commands for the majority of this lab.
   Login using API endpoint and remember to add the &#39;--insecure-skip-tls-verify=true&#39; flag  $ oc login https://api.example.redhatgov.io:6443 --insecure-skip-tls-verify=true Authentication required for https://api.example.redhatgov.io:6443 (openshift) Username: userYOUR# Password: Login successful.</description>
     </item>
     
@@ -2887,7 +2899,7 @@ OpenShift You will use the OpenShift &#39;oc&#39; CLI to execute commands for th
       
       <guid>/workshops/source_to_image/setup/</guid>
       <description>Step 1 - Log in to the Web User Interface The workshop moderator will provide you with the URL, your username, and password.
-OpenShift WebUI Login        Step 2 - Create a Project for Your Wetty Terminal Create a new project by clicking the &amp;quot;New Project&amp;quot; button in the upper right of the WebUI.
+OpenShift WebUI Login        Step 2 - Create a Project for Your Wetty Terminal Create a new project by clicking the &amp;ldquo;New Project&amp;rdquo; button in the upper right of the WebUI.
 Create a Project        Step 3 - Name Your Project Name your project as follows.</description>
     </item>
     
@@ -2917,7 +2929,7 @@ You need a way to simulate failure in the service mesh. By doing so, you can tes
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab4.1_routingtraffic/</guid>
-      <description>Basics on Routing Traffic Through the Mesh One of Istio&#39;s core capabilities is the ability to dynamically control how services communicate without modifying the application code itself. The general concept is called Traffic Management. It allows you to do things such as A/B test, canary rollouts, rollbacks, and more.
+      <description>Basics on Routing Traffic Through the Mesh One of Istio&amp;rsquo;s core capabilities is the ability to dynamically control how services communicate without modifying the application code itself. The general concept is called Traffic Management. It allows you to do things such as A/B test, canary rollouts, rollbacks, and more.
 The two core API objects for traffic management are the Virtual Service and the Destination Rule. The destination rule is for the owner of a microservice - what versions do I expose and what happens to traffic before it reaches my service?</description>
     </item>
     
@@ -2927,8 +2939,8 @@ The two core API objects for traffic management are the Virtual Service and the 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_service_mesh_v1.0/lab4.2_trafficsplitting/</guid>
-      <description>Splitting Traffic Amongst Service Versions It&#39;s time to fix the performance issue of the application. Previously, you deployed a new version of the application and routed 100% of traffic to the new version. This time, you&#39;ll use Istio traffic routing to do canary rollouts and split traffic.
-Feature Fix The code to fix the performance issue of the user profile service has already been written for you on the &#39;workshop-feature-fix&#39; branch.</description>
+      <description>Splitting Traffic Amongst Service Versions It&amp;rsquo;s time to fix the performance issue of the application. Previously, you deployed a new version of the application and routed 100% of traffic to the new version. This time, you&amp;rsquo;ll use Istio traffic routing to do canary rollouts and split traffic.
+Feature Fix The code to fix the performance issue of the user profile service has already been written for you on the &amp;lsquo;workshop-feature-fix&amp;rsquo; branch.</description>
     </item>
     
     <item>
@@ -2937,7 +2949,9 @@ Feature Fix The code to fix the performance issue of the user profile service ha
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/agile_integrations_ci/prerequisites/</guid>
-      <description> Prerequisites  This workshop is done entirely through the browser.   Chrome is the preferred browser for this workshop  </description>
+      <description>Prerequisites 
+This workshop is done entirely through the browser.
+  Chrome is the preferred browser for this workshop  </description>
     </item>
     
     <item>
@@ -2946,7 +2960,9 @@ Feature Fix The code to fix the performance issue of the user profile service ha
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/agile_integrations_dev/prerequisites/</guid>
-      <description> Prerequisites  This workshop is done entirely through the browser.   Chrome is the preferred browser for this workshop  </description>
+      <description>Prerequisites 
+This workshop is done entirely through the browser.
+  Chrome is the preferred browser for this workshop  </description>
     </item>
     
     <item>
@@ -2955,7 +2971,9 @@ Feature Fix The code to fix the performance issue of the user profile service ha
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_101_dcmetromap/prerequisites/</guid>
-      <description>Prerequisites  This workshop is done entirely through the browser, but you do need a free personal GitHub account.  Create a Github account If you don&#39;t have a person GitHub account please sign up here to create a free account.
+      <description>Prerequisites 
+This workshop is done entirely through the browser, but you do need a free personal GitHub account.
+ Create a Github account If you don&amp;rsquo;t have a person GitHub account please sign up here to create a free account.
  Create GitHub Account Download Git Client (optional)   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
     </item>
     
@@ -2965,7 +2983,9 @@ Feature Fix The code to fix the performance issue of the user profile service ha
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101/prerequisites/</guid>
-      <description>Prerequisites  This workshop is done entirely through the browser, but you do need a free personal GitHub account.  Create a Github account If you don&#39;t have a person GitHub account please sign up here to create a free account.
+      <description>Prerequisites 
+This workshop is done entirely through the browser, but you do need a free personal GitHub account.
+ Create a Github account If you don&amp;rsquo;t have a person GitHub account please sign up here to create a free account.
  Create GitHub Account   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); -webkit-animation-name: fadeIn; -webkit-animation-duration: 0.</description>
     </item>
     
@@ -2975,7 +2995,9 @@ Feature Fix The code to fix the performance issue of the user profile service ha
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/openshift_4_101_dynatrace/prerequisites/</guid>
-      <description>Prerequisites  This workshop is done entirely through the browser, but you do need a free personal GitHub account.  Create a Github account If you don&#39;t have a person GitHub account please sign up here to create a free account.
+      <description>Prerequisites 
+This workshop is done entirely through the browser, but you do need a free personal GitHub account.
+ Create a Github account If you don&amp;rsquo;t have a person GitHub account please sign up here to create a free account.
  Create GitHub Account Download Git Client (optional)   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
     </item>
     
@@ -2985,7 +3007,9 @@ Feature Fix The code to fix the performance issue of the user profile service ha
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/secure_software_factory/prerequisites/</guid>
-      <description>Prerequisites  This workshop is done entirely through the browser.   Chrome is the preferred browser for this workshop   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); -webkit-animation-name: fadeIn; -webkit-animation-duration: 0.4s; animation-name: fadeIn; animation-duration: 0.4s } .modal-content { position: fixed; bottom: 0; background-color: #fefefe; width: 100%; -webkit-animation-name: slideIn; -webkit-animation-duration: 0.4s; animation-name: slideIn; animation-duration: 0.</description>
+      <description>Prerequisites 
+This workshop is done entirely through the browser.
+  Chrome is the preferred browser for this workshop   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); -webkit-animation-name: fadeIn; -webkit-animation-duration: 0.4s; animation-name: fadeIn; animation-duration: 0.4s } .modal-content { position: fixed; bottom: 0; background-color: #fefefe; width: 100%; -webkit-animation-name: slideIn; -webkit-animation-duration: 0.4s; animation-name: slideIn; animation-duration: 0.</description>
     </item>
     
     <item>
@@ -2995,7 +3019,7 @@ Feature Fix The code to fix the performance issue of the user profile service ha
       
       <guid>/workshops/agile_integrations_ci/openshift/</guid>
       <description>Welcome to OpenShift! This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.
-Key Terms We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with. You&#39;ll learn more terms along the way, but these are the basics to get you started.</description>
+Key Terms We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with. You&amp;rsquo;ll learn more terms along the way, but these are the basics to get you started.</description>
     </item>
     
     <item>
@@ -3005,7 +3029,7 @@ Key Terms We will be using the following terms throughout the workshop labs so h
       
       <guid>/workshops/agile_integrations_dev/openshift/</guid>
       <description>Welcome to OpenShift! This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.
-Key Terms We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with. You&#39;ll learn more terms along the way, but these are the basics to get you started.</description>
+Key Terms We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with. You&amp;rsquo;ll learn more terms along the way, but these are the basics to get you started.</description>
     </item>
     
     <item>
@@ -3014,9 +3038,9 @@ Key Terms We will be using the following terms throughout the workshop labs so h
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/cloudforms41/wrapup/</guid>
-      <description>That&#39;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the CloudForms environment. And hopefully, you have a deeper understanding of how CloudForms simplifies IT, providing unified management and operations in a hybrid environment.
+      <description>That&amp;rsquo;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the CloudForms environment. And hopefully, you have a deeper understanding of how CloudForms simplifies IT, providing unified management and operations in a hybrid environment.
 As your IT infrastructure progresses from traditional virtualization toward an Infrastructure-as-a-Service (IaaS) model, CloudForms evolves, protecting your investments and providing consistent user experience and functionality.
-Please feel free to continue to &amp;quot;kick the tires&amp;quot; in the demo environment we&#39;ve setup and explore the web console.</description>
+Please feel free to continue to &amp;ldquo;kick the tires&amp;rdquo; in the demo environment we&amp;rsquo;ve setup and explore the web console.</description>
     </item>
     
     <item>
@@ -3025,7 +3049,7 @@ Please feel free to continue to &amp;quot;kick the tires&amp;quot; in the demo e
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/jdv_dev/wrapup/</guid>
-      <description> Congratulations  You imported 3 different disparate datasources and exposed them as data services. You also combined them into a federated view and applied role based security. Congratulations!  Additional resources  JDV Documentation Teiid, upstream project for JDV odata, documentation for REST data services. JDV uses odata(v2) and odata(v4). V4 must be called with the context of /odata4 Teiid Examples. Github with various source examples  </description>
+      <description>Congratulations  You imported 3 different disparate datasources and exposed them as data services. You also combined them into a federated view and applied role based security. Congratulations!  Additional resources  JDV Documentation Teiid, upstream project for JDV odata, documentation for REST data services. JDV uses odata(v2) and odata(v4). V4 must be called with the context of /odata4 [Teiid Examples] (https://github.com/teiid/teiid-embedded-examples). Github with various source examples  </description>
     </item>
     
     <item>

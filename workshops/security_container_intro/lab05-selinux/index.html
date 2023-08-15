@@ -350,7 +350,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -v /sys/fs/selinux:/sys/fs/selinux:ro registry.access.redhat.com/ubi8/ubi id -Z</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --rm -v /sys/fs/selinux:/sys/fs/selinux:ro registry.access.redhat.com/ubi8/ubi id -Z</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -368,7 +368,7 @@ configuration file.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run -it --rm -v /sys/fs/selinux:/sys/fs/selinux:rw --privileged registry.access.redhat.com/ubi8/ubi bash</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run -it --rm -v /sys/fs/selinux:/sys/fs/selinux:rw --privileged registry.access.redhat.com/ubi8/ubi bash</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -376,7 +376,7 @@ configuration file.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">id -Z</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">id -Z</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -389,7 +389,7 @@ configuration file.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">touch /etc/selinux/config
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">touch /etc/selinux/config
 id -Z</code></pre>
 </div>
 </div>
@@ -400,7 +400,7 @@ id -Z</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -lZ /etc/selinux/config</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls -lZ /etc/selinux/config</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -413,7 +413,7 @@ id -Z</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 </div>
@@ -423,11 +423,13 @@ id -Z</code></pre>
 <p>As you learned above, bind mounts allow a container to mount a directory on the host for general application usage. This lab will help you understand how selinux behaves in different bind mounting scenarios.</p>
 </div>
 <div class="paragraph">
-<p>On the bastion, there should be a directory named <code>/data</code>. Make note of the file permissions. Could a container read or write to this directory?</p>
+<p>On the bastion, let&#8217;s create a directory named <code>/data</code>. Make note of the file permissions. Could a container read or write to this directory?</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -ld /data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo mkdir /data
+sudo chmod 755 /data
+ls -ld /data</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -440,7 +442,7 @@ id -Z</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo chmod 777 /data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo chmod 777 /data</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -448,7 +450,7 @@ id -Z</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it -v /data:/data registry.access.redhat.com/ubi8/ubi bash</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --rm -it -v /data:/data registry.access.redhat.com/ubi8/ubi bash</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -462,7 +464,7 @@ id -Z</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">df /data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">df /data</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -476,7 +478,7 @@ id -Z</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls /data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls /data</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -489,7 +491,7 @@ id -Z</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">date &gt; /data/date.txt</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">date &gt; /data/date.txt</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -499,7 +501,7 @@ id -Z</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -510,7 +512,7 @@ id -Z</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo sealert -a /var/log/audit/audit.log</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo sealert -a /var/log/audit/audit.log</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -537,7 +539,7 @@ SELinux is preventing /usr/bin/bash from write access on the directory data.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -ldZ /data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls -ldZ /data</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -550,7 +552,7 @@ SELinux is preventing /usr/bin/bash from write access on the directory data.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo chcon --type container_file_t /data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo chcon --type container_file_t /data</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -558,7 +560,7 @@ SELinux is preventing /usr/bin/bash from write access on the directory data.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -ldZ /data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls -ldZ /data</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -571,7 +573,7 @@ SELinux is preventing /usr/bin/bash from write access on the directory data.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo chown ec2-user /data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo chown ec2-user /data</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -579,7 +581,7 @@ SELinux is preventing /usr/bin/bash from write access on the directory data.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -ldZ /data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls -ldZ /data</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -592,7 +594,7 @@ SELinux is preventing /usr/bin/bash from write access on the directory data.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it -v /data:/data registry.access.redhat.com/ubi8/ubi bash
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --rm -it -v /data:/data registry.access.redhat.com/ubi8/ubi bash
 ls /data
 date &gt; /data/date.txt</code></pre>
 </div>
@@ -602,7 +604,7 @@ date &gt; /data/date.txt</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -ldZ /data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls -ldZ /data</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -615,7 +617,7 @@ date &gt; /data/date.txt</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -623,7 +625,7 @@ date &gt; /data/date.txt</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -lZ /data</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls -lZ /data</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -646,7 +648,7 @@ date &gt; /data/date.txt</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo mkdir /private
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo mkdir /private
 sudo chown ec2-user /private
 ls -dlZ /private</code></pre>
 </div>
@@ -661,7 +663,7 @@ ls -dlZ /private</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -d --name sleepy -v /private:/private:Z registry.access.redhat.com/ubi8/ubi sleep 9999</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run -d --name sleepy -v /private:/private:Z registry.access.redhat.com/ubi8/ubi sleep 9999</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -674,7 +676,7 @@ ls -dlZ /private</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -dlZ /private</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls -dlZ /private</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -690,7 +692,7 @@ ls -dlZ /private</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman rm -f sleepy</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman rm -f sleepy</code></pre>
 </div>
 </div>
 </div>
@@ -704,7 +706,7 @@ ls -dlZ /private</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo mkdir /shared
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo mkdir /shared
 sudo chown ec2-user /shared
 ls -dlZ /shared</code></pre>
 </div>
@@ -719,7 +721,7 @@ ls -dlZ /shared</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -it --rm --name sleepy -v /shared:/shared:z registry.access.redhat.com/ubi8/ubi bash
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run -it --rm --name sleepy -v /shared:/shared:z registry.access.redhat.com/ubi8/ubi bash
 date &gt; /shared/file01.txt
 exit</code></pre>
 </div>
@@ -729,7 +731,7 @@ exit</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -lZ /shared</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls -lZ /shared</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -742,7 +744,7 @@ exit</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -it --rm --name sleepier -v /shared:/shared:z registry.access.redhat.com/ubi8/ubi bash
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run -it --rm --name sleepier -v /shared:/shared:z registry.access.redhat.com/ubi8/ubi bash
 date &gt; /shared/file02.txt
 exit</code></pre>
 </div>
@@ -752,7 +754,7 @@ exit</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -lZ /shared</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls -lZ /shared</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -775,7 +777,7 @@ exit</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it --name tmpfs --read-only --tmpfs /run --tmpfs /tmp registry.access.redhat.com/ubi8/ubi bash</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">podman run --rm -it --name tmpfs --read-only --tmpfs /run --tmpfs /tmp registry.access.redhat.com/ubi8/ubi bash</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -783,7 +785,7 @@ exit</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /newdir</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir /newdir</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -793,7 +795,7 @@ exit</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /run/newdir
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir /run/newdir
 mkdir /tmp/newdir
 exit</code></pre>
 </div>

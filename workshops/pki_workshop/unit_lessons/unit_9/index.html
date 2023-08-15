@@ -273,98 +273,101 @@
 </div>
 
 <div class="container">
-  
-
-<h1 id="unit-9-ocsp-responder">Unit 9: OCSP Responder</h1>
-
+  <h1 id="unit-9-ocsp-responder">Unit 9: OCSP Responder</h1>
 <p>In this unit you will interact with the OCSP Responder using the web interface and CLI tool <strong>OCSPClient</strong>. You will also issue a CRL to verify the revoked certificate is listed there.</p>
-
 <h2 id="check-certificate-revocation-list-web-based">Check Certificate Revocation List (Web-based)</h2>
-
-<p>The URL is different in the images. I'm lazy.</p>
-
+<p>The URL is different in the images. I&rsquo;m lazy.</p>
 <ol>
-<li><p>Open CA webpage.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/ca/agent/ca/</code></p></li>
-
-<li><p>Select <code>PKI Administrator</code> certificate (if prompted).</p></li>
-
-<li><p>Add Exception for insecure connection (if prompted).</p></li>
-
-<li><p>Click <code>Update Revocation List</code>.</p>
-
-<p><img src="images/verifycrl_lab_1.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Update</code> button.</p>
-
-<p><img src="images/verifycrl_lab_2.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Display Revocation List</code>.</p>
-
-<p><img src="images/verifycrl_lab_3.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Display</code> button.</p>
-
-<p><img src="images/verifycrl_lab_4.png" alt="Alt text" /></p></li>
-
-<li><p>Revoked certificate serial number should match.</p>
-
-<p><img src="images/verifycrl_lab_5.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>List Certificates</code>.</p>
-
-<p><img src="images/verifycrl_lab_6.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Find</code> button.</p>
-
-<p><img src="images/verifycrl_lab_7.png" alt="Alt text" /></p></li>
-
-<li><p>Click revoked certificate.</p>
-
-<p><img src="images/verifycrl_lab_8.png" alt="Alt text" /></p></li>
-
-<li><p>Scroll down and copy <code>Base 64 encoded certificate</code>.</p>
-
-<p><img src="images/verifycrl_lab_9.png" alt="Alt text" /></p></li>
-
-<li><p>Open new tab and go to OCSP webpage.</p>
-
-<p><code>https://ca1.redhat.example.com:8443/ocsp/agent/ocsp</code></p></li>
-
-<li><p>Notice number of revoked certificates.</p>
-
-<p><img src="images/verifycrl_lab_10.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Check Certificate Status</code>.</p>
-
-<p><img src="images/verifycrl_lab_11.png" alt="Alt text" /></p></li>
-
-<li><p>Paste certifcate into box.</p>
-
-<p><img src="images/verifycrl_lab_12.png" alt="Alt text" /></p></li>
-
-<li><p>Click <code>Check</code> button.</p>
-
-<p><img src="images/verifycrl_lab_13.png" alt="Alt text" /></p></li>
-
-<li><p>Summary will display status as revoked.</p></li>
+<li>
+<p>Open CA webpage.</p>
+<p><code>https://ca1.redhat.example.com:8443/ca/agent/ca/</code></p>
+</li>
+<li>
+<p>Select <code>PKI Administrator</code> certificate (if prompted).</p>
+</li>
+<li>
+<p>Add Exception for insecure connection (if prompted).</p>
+</li>
+<li>
+<p>Click <code>Update Revocation List</code>.</p>
+<pre><code>![Alt text](images/verifycrl_lab_1.png)
+</code></pre>
+</li>
+<li>
+<p>Click <code>Update</code> button.</p>
+<pre><code>![Alt text](images/verifycrl_lab_2.png)
+</code></pre>
+</li>
+<li>
+<p>Click <code>Display Revocation List</code>.</p>
+<pre><code>![Alt text](images/verifycrl_lab_3.png)
+</code></pre>
+</li>
+<li>
+<p>Click <code>Display</code> button.</p>
+<pre><code>![Alt text](images/verifycrl_lab_4.png)
+</code></pre>
+</li>
+<li>
+<p>Revoked certificate serial number should match.</p>
+<pre><code>![Alt text](images/verifycrl_lab_5.png)
+</code></pre>
+</li>
+<li>
+<p>Click <code>List Certificates</code>.</p>
+<pre><code>![Alt text](images/verifycrl_lab_6.png)
+</code></pre>
+</li>
+<li>
+<p>Click <code>Find</code> button.</p>
+<p><img src="images/verifycrl_lab_7.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click revoked certificate.</p>
+<p><img src="images/verifycrl_lab_8.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Scroll down and copy <code>Base 64 encoded certificate</code>.</p>
+<p><img src="images/verifycrl_lab_9.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Open new tab and go to OCSP webpage.</p>
+<p><code>https://ca1.redhat.example.com:8443/ocsp/agent/ocsp</code></p>
+</li>
+<li>
+<p>Notice number of revoked certificates.</p>
+<p><img src="images/verifycrl_lab_10.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click <code>Check Certificate Status</code>.</p>
+<p><img src="images/verifycrl_lab_11.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Paste certifcate into box.</p>
+<p><img src="images/verifycrl_lab_12.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Click <code>Check</code> button.</p>
+<p><img src="images/verifycrl_lab_13.png" alt="Alt text"></p>
+</li>
+<li>
+<p>Summary will display status as revoked.</p>
+</li>
 </ol>
-
 <h2 id="check-certificate-revocation-list-cli">Check Certificate Revocation List (CLI)</h2>
-
 <ol>
-<li><p>Run OCSPClient with the <strong>--help</strong> option to see default entries.</p>
-
-<p><code>OCSPClient --help</code></p></li>
-
-<li><p>Run OCSPClient (serial Number may be different) to view certificate status.</p>
-
+<li>
+<p>Run OCSPClient with the <strong>&ndash;help</strong> option to see default entries.</p>
+<p><code>OCSPClient --help</code></p>
+</li>
+<li>
+<p>Run OCSPClient (serial Number may be different) to view certificate status.</p>
 <p><code>OCSPClient -d /var/lib/pki/ca1/alias -c &quot;caSigningCert cert-ca1 CA&quot; --serial 14</code></p>
-<pre><code>CertID.serialNumber=14
-CertStatus=Revoked</code></pre></li>
+<pre><code> CertID.serialNumber=14
+ CertStatus=Revoked
+</code></pre>
+</li>
 </ol>
-
 <p>The next lesson is <a href="https://gitlab.consulting.redhat.com/pki/pki-workshop/blob/master/unit_lessons/unit_10.md">Unit 10: Token Management System</a>.</p>
 
 </div>

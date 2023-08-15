@@ -307,16 +307,10 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="source-to-image-s2i">Source to Image (S2I)</h1>
-
-<p>One of the useful components of OpenShift is its source-to-image capability.  S2I is a framework that makes it easy to turn your source code into runnable images.  The main advantage of using S2I for building reproducible docker images is the ease of use for developers.  You'll see just how simple it can be in this lab.</p>
-
-<h2 id="let-s-build-a-node-js-web-server-using-s2i">Let's build a node.js web server using S2I</h2>
-
-<p>We can do this either via the command line or the web console.  You decide which you'd rather do and follow the steps below.</p>
-
+    <h1 id="source-to-image-s2i">Source to Image (S2I)</h1>
+<p>One of the useful components of OpenShift is its source-to-image capability.  S2I is a framework that makes it easy to turn your source code into runnable images.  The main advantage of using S2I for building reproducible docker images is the ease of use for developers.  You&rsquo;ll see just how simple it can be in this lab.</p>
+<h2 id="lets-build-a-nodejs-web-server-using-s2i">Let&rsquo;s build a node.js web server using S2I</h2>
+<p>We can do this either via the command line or the web console.  You decide which you&rsquo;d rather do and follow the steps below.</p>
 <div class="panel-group">
   
 
@@ -324,21 +318,22 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse9e2f752906c7f871e2462f6cbc84476d" class="collapsed">
+      <a data-toggle="collapse" href="#collapse88a61c2eca565ba955bd496fd443ec7d" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse9e2f752906c7f871e2462f6cbc84476d" class="panel-collapse collapse ">
+  <div id="collapse88a61c2eca565ba955bd496fd443ec7d" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-app --name<span style="color:#f92672">=</span>dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir<span style="color:#f92672">=</span>dc-metro-map
-$ oc expose service dc-metro-map</code></pre></div>
+$ oc expose service dc-metro-map
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -360,45 +355,36 @@ $ oc expose service dc-metro-map</code></pre></div>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseb18234d0eda3efe916ea55ef4018ebea" class="collapsed">
+      <a data-toggle="collapse" href="#collapse542cb378af7c947bf527d78cb3d5f1c4" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapseb18234d0eda3efe916ea55ef4018ebea" class="panel-collapse collapse ">
+  <div id="collapse542cb378af7c947bf527d78cb3d5f1c4" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Click "Add to Project"
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="200"><br/>
-
 <blockquote>
 Click "Browse Catalog" and type filter 'nodejs' in the 'Search Catalog' field.
 </blockquote>
-
 <p><img src="../images/ocp-lab-s2i-filternode.png" width="700"><br/></p>
-
 <blockquote>
 Select Node.js 
 </blockquote>
-
 <p><img src="../images/ocp-lab-s2i-filternode2.png" width="800"><br/></p>
-
 <blockquote>
 Select 'Next>', then select version '6'
 </blockquote>
-
 <p><img src="../images/ocp-lab-s2i-nodejs-6.png" width="700"><br/></p>
-
 <blockquote>
 Select 'advanced options'
 </blockquote>
-
 <p><img src="../images/ocp-lab-s2i-nodejs.png" width="700"><br/></p>
-
 <p>
 <table>
 <tr><td><b>Name</b></td><td>dc-metro-map</td></tr>
@@ -406,7 +392,6 @@ Select 'advanced options'
 <tr><td><b>Context Dir</b></td><td>/dc-metro-map</td></tr>
 </table>
 </p>
-
 <blockquote>
 Scroll to the bottom and click "Create"
 </blockquote>
@@ -418,13 +403,9 @@ Scroll to the bottom and click "Create"
 
 </div>
 
-
 <h2 id="check-out-the-build-details">Check out the build details</h2>
-
 <p>We can see the details of what the S2I builder did.  This can be helpful to diagnose issues if builds are failing.</p>
-
-<p><i class="fa fa-magic fa-2x"></i> TIP: For a node.js app, running &quot;npm shrinkwrap&quot; is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I</p>
-
+<p><i class="fa fa-magic fa-2x"></i> TIP: For a node.js app, running &ldquo;npm shrinkwrap&rdquo; is a good practice to perform on your branch before releasing changes that you plan to build/deploy as an image with S2I</p>
 <div class="panel-group">
   
 
@@ -432,25 +413,25 @@ Scroll to the bottom and click "Create"
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsed931291220e9a7dacabe80a3424b9bd6" class="collapsed">
+      <a data-toggle="collapse" href="#collapse70c0688f8dd01883e3bcef2da1a96cae" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsed931291220e9a7dacabe80a3424b9bd6" class="panel-collapse collapse ">
+  <div id="collapse70c0688f8dd01883e3bcef2da1a96cae" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get builds</code></pre></div>
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get builds
+</code></pre></div><blockquote>
 Note the name of your build from the above command output and use it to see the logs with:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc logs builds/<span style="color:#f92672">[</span>BUILD_NAME<span style="color:#f92672">]</span></code></pre></div>
-<p>The console will print out the full log for your build.  Note, you could pipe this to more or less for easier viewing in the CLI.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc logs builds/<span style="color:#f92672">[</span>BUILD_NAME<span style="color:#f92672">]</span>
+</code></pre></div><p>The console will print out the full log for your build.  Note, you could pipe this to more or less for easier viewing in the CLI.</p>
 
     </div>
   </div>
@@ -461,31 +442,28 @@ Note the name of your build from the above command output and use it to see the 
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseb8179b836c4213987ba7b1c8d6ee8891" class="collapsed">
+      <a data-toggle="collapse" href="#collapse673d463e597c2485d751c0113ec11405" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapseb8179b836c4213987ba7b1c8d6ee8891" class="panel-collapse collapse ">
+  <div id="collapse673d463e597c2485d751c0113ec11405" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><blockquote>
-Click on &quot;Builds&quot; and then click on &quot;Builds&quot;
+       <blockquote>
+Click on "Builds" and then click on "Builds"
 </blockquote>
-<img src="../images/ocp-lab-s2i-builds.png" width="800"><br/></p>
-
-<p><blockquote>
-Click on the &quot;dc-metro-map&quot; link
+<img src="../images/ocp-lab-s2i-builds.png" width="800"><br/>
+<blockquote>
+Click on the "dc-metro-map" link
 </blockquote>
-<img src="../images/ocp-lab-s2i-metromapbuild.png" width="900"><br/></p>
-
-<p><blockquote>
-Click on the &quot;View Log&quot; link to see the details of your latest build
+<img src="../images/ocp-lab-s2i-metromapbuild.png" width="900"><br/>
+<blockquote>
+Click on the "View Log" link to see the details of your latest build
 </blockquote>
-<img src="../images/ocp-lab-s2i-viewLog.png" width="700"><br/></p>
-
+<img src="../images/ocp-lab-s2i-viewLog.png" width="700"><br/>
 <p>You should see a log output similar to the one below:<br>
 <img src="../images/ocp-lab-s2i-logs.png" width="700"><br/></p>
 
@@ -496,11 +474,8 @@ Click on the &quot;View Log&quot; link to see the details of your latest build
 
 </div>
 
-
 <h2 id="see-the-app-in-action">See the app in action</h2>
-
-<p>Let's see this app in action!</p>
-
+<p>Let&rsquo;s see this app in action!</p>
 <div class="panel-group">
   
 
@@ -508,21 +483,21 @@ Click on the &quot;View Log&quot; link to see the details of your latest build
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse3fab5597c6dd95e2f0e9ca1014c0c8f4" class="collapsed">
+      <a data-toggle="collapse" href="#collapsea50884c4b9d7fb95a491491eccfbe0ef" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse3fab5597c6dd95e2f0e9ca1014c0c8f4" class="panel-collapse collapse ">
+  <div id="collapsea50884c4b9d7fb95a491491eccfbe0ef" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get routes</code></pre></div>
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get routes
+</code></pre></div><blockquote>
 Copy the HOST/PORT and paste into your favorite web browser:
 </blockquote>
 
@@ -536,25 +511,24 @@ Copy the HOST/PORT and paste into your favorite web browser:
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse8e1016c95391ee602cb547cddce9f9af" class="collapsed">
+      <a data-toggle="collapse" href="#collapse222e8faa326eb4cf5edeadc00b913e68" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse8e1016c95391ee602cb547cddce9f9af" class="panel-collapse collapse ">
+  <div id="collapse222e8faa326eb4cf5edeadc00b913e68" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><blockquote>
+       <blockquote>
 Click on Overview
 </blockquote>
-<img src="../images/ocp-lab-s2i-overview.png" width="200"><br/></p>
-
-<p><blockquote>
+<img src="../images/ocp-lab-s2i-overview.png" width="200"><br/>
+<blockquote>
 Click the URL that is listed in the dc-metro-map header
 </blockquote>
-<img src="../images/ocp-lab-s2i-dcmetromapsvc.png" width="900"><br/></p>
+<img src="../images/ocp-lab-s2i-dcmetromapsvc.png" width="900"><br/>
 
     </div>
   </div>
@@ -563,17 +537,11 @@ Click the URL that is listed in the dc-metro-map header
 
 </div>
 
-
 <p>The app should look like this in your web browser:</p>
-
 <p><img src="../images/ocp-lab-s2i-apprunning.png" width="900"><br/></p>
-
 <p>Clicking the checkboxes will toggle on/off the individual metro stations on each colored line.  A numbered icon indicates there is more than one metro station in that area and they have been consolidated - click the number or zoom in to see more.</p>
-
 <h1 id="summary">Summary</h1>
-
-<p>In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  In the next lab we will look at some details of this app's deployment and make some changes to see how OpenShift can help to automate our development processes. More information about creating new applications can be found <a href="https://docs.openshift.com/container-platform/3.4/dev_guide/application_lifecycle/new_app.html">here</a>.</p>
-
+<p>In this lab we deployed a sample application using source to image.  This process built our code and wrapped that in a docker image.  It then deployed the image into our OpenShift platform in a pod and exposed a route to allow outside web traffic to access our application.  In the next lab we will look at some details of this app&rsquo;s deployment and make some changes to see how OpenShift can help to automate our development processes. More information about creating new applications can be found <a href="https://docs.openshift.com/container-platform/3.4/dev_guide/application_lifecycle/new_app.html">here</a>.</p>
 <style>
 
  

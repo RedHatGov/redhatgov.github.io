@@ -307,16 +307,10 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="things-will-go-wrong-and-that-s-why-we-have-replication-and-recovery">Things will go wrong, and that's why we have replication and recovery</h1>
-
+    <h1 id="things-will-go-wrong-and-thats-why-we-have-replication-and-recovery">Things will go wrong, and that&rsquo;s why we have replication and recovery</h1>
 <p>Things will go wrong with your software, or your hardware, or from something completely out of your control.  But, we can plan for such failures, thus minimizing their impact.  OpenShift supports this via the replication and recovery functionality.</p>
-
 <h2 id="replication">Replication</h2>
-
-<p>Let's walk through a simple example of how the replication controller can keep your deployment at a desired state.  Assuming you still have the dc-metro-map project running we can manually scale up our replicas to handle increased user load.</p>
-
+<p>Let&rsquo;s walk through a simple example of how the replication controller can keep your deployment at a desired state.  Assuming you still have the dc-metro-map project running we can manually scale up our replicas to handle increased user load.</p>
 <div class="panel-group">
   
 
@@ -324,31 +318,29 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsea145493f07835fc82b4ea6a4838c7a3e" class="collapsed">
+      <a data-toggle="collapse" href="#collapsebc06bd33feb3ef4624b901db9f232001" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsea145493f07835fc82b4ea6a4838c7a3e" class="panel-collapse collapse ">
+  <div id="collapsebc06bd33feb3ef4624b901db9f232001" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and try the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc scale --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span> dc/dc-metro-map</code></pre></div>
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc scale --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span> dc/dc-metro-map
+</code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> Check out the new pods:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods</code></pre></div>
-<p>Notice that you now have 4 unique pods available to inspect.  If you want go ahead and inspect them, using 'oc describe pod/<b>POD NAME</b>'. You can see that each has its own IP address and logs.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
+</code></pre></div><p>Notice that you now have 4 unique pods available to inspect.  If you want go ahead and inspect them, using &lsquo;oc describe pod/<b>POD NAME</b>&rsquo;. You can see that each has its own IP address and logs.</p>
 
     </div>
   </div>
@@ -360,36 +352,33 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsef98b8ebb60a4e25befd98f6d76cb79eb" class="collapsed">
+      <a data-toggle="collapse" href="#collapse0fd87c22c3b5a800c3fe0d985cd4c425" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsef98b8ebb60a4e25befd98f6d76cb79eb" class="panel-collapse collapse ">
+  <div id="collapse0fd87c22c3b5a800c3fe0d985cd4c425" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="web-console-access">Web Console access</h3>
-
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
 </pre>
-
-<p><blockquote>
-Click &quot;Workloads&quot;, then &quot;DeploymentConfigs&quot;, and then &quot;dc-metro-map&quot;
+<blockquote>
+Click "Workloads", then "DeploymentConfigs", and then "dc-metro-map"
 </blockquote>
 <blockquote>
 In the Deployment Config Details, click the up arrow 3 times.
 </blockquote>
 The deployment should indicate that it is scaling to 4 pods, and eventually you will have 4 running pods.  Keep in mind that each pod has it's own container which is an identical deployment of the webapp.  OpenShift is now (by default) round robin load-balancing traffic to each pod.
-<img src="../images/ocp-lab-replicationrecovery-4pods.gif" width="900"><br/></p>
-
-<p><blockquote>
+<img src="../images/ocp-lab-replicationrecovery-4pods.gif" width="900"><br/>
+<blockquote>
 Click the Pods tab, one of the pods (ex: dc-metro-map-X-XXXX), and metrics
 </blockquote>
 Notice that you now have 4 unique webapp pods available to inspect.  If you want go ahead and inspect them you can see that each has its own IP address and logs.
-<img src="../images/ocp-lab-replicationrecovery-4podslist.gif" width="900"><br/></p>
+<img src="../images/ocp-lab-replicationrecovery-4podslist.gif" width="900"><br/>
 
     </div>
   </div>
@@ -398,9 +387,7 @@ Notice that you now have 4 unique webapp pods available to inspect.  If you want
 
 </div>
 
-
-<p>So you've told OpenShift that you'd like to maintain 4 running, load-balanced, instances of our web app.</p>
-
+<p>So you&rsquo;ve told OpenShift that you&rsquo;d like to maintain 4 running, load-balanced, instances of our web app.</p>
 <style>
 
  

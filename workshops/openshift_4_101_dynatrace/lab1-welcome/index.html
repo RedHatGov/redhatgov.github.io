@@ -307,16 +307,10 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="welcome-to-openshift">Welcome to OpenShift!</h1>
-
+    <h1 id="welcome-to-openshift">Welcome to OpenShift!</h1>
 <p>This lab provides a quick tour of the console to help you get familiar with the user interface along with some key terminology we will use in subsequent lab content.  If you are already familiar with the basics of OpenShift simply ensure you can login and create the project.</p>
-
 <h1 id="key-terms">Key Terms</h1>
-
-<p>We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with.  You'll learn more terms along the way, but these are the basics to get you started.</p>
-
+<p>We will be using the following terms throughout the workshop labs so here are some basic definitions you should be familiar with.  You&rsquo;ll learn more terms along the way, but these are the basics to get you started.</p>
 <ul>
 <li>Container - Your software wrapped in a complete filesystem containing everything it needs to run</li>
 <li>Image - We are talking about docker images; read-only and used to create containers</li>
@@ -332,136 +326,95 @@
 <li>Node - Where the compute happens, your software is run on nodes</li>
 <li>Operator - A method of packaging, deploying, and managing a Kubernetes-native application.</li>
 </ul>
-
 <h1 id="accessing-openshift-through-the-web-console">Accessing OpenShift through the Web Console</h1>
-
 <p>OpenShift provides a web console that allows you to perform various tasks via a web browser.</p>
-
-<h2 id="let-s-login-to-the-web-console">Let's Login to the Web Console</h2>
-
+<h2 id="lets-login-to-the-web-console">Let&rsquo;s Login to the Web Console</h2>
 <blockquote>
 <p>Use your browser to navigate to the URI provided by your instructor and login with the user/password provided.</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span></code></pre></div>
-<p><img src="../images/ocp-login.png" width="600"><br/>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
+</code></pre></div><p><img src="../images/ocp-login.png" width="600"><br/>
 <em>Login Webpage</em></p>
-
 <p>Once you are logged in you should see the overview page for your cluster:</p>
-
 <p><img src="../images/ocp-admin-default.png" width="600"><br/>
 <em>Administrator Default View</em></p>
-
 <h2 id="this-is-what-an-empty-project-looks-like">This is what an empty project looks like</h2>
-
-<p>First, let's create a new project to run a terminal application that we'll use for the rest of the workshop.</p>
-
+<p>First, let&rsquo;s create a new project to run a terminal application that we&rsquo;ll use for the rest of the workshop.</p>
 <blockquote>
-<p>Click on &quot;Projects&quot; then the &quot;Create Project&quot; button and give it a name of terminal</p>
-
-<p>Populate &quot;Name&quot; with &quot;terminal&quot; and populate the &quot;Display Name&quot; and &quot;Description&quot; boxes with whatever you like.  Click on &quot;Create&quot; to create the project.</p>
+<p>Click on &ldquo;Projects&rdquo; then the &ldquo;Create Project&rdquo; button and give it a name of terminal</p>
 </blockquote>
-
+<blockquote>
+<p>Populate &ldquo;Name&rdquo; with &ldquo;terminal&rdquo; and populate the &ldquo;Display Name&rdquo; and &ldquo;Description&rdquo; boxes with whatever you like.  Click on &ldquo;Create&rdquo; to create the project.</p>
+</blockquote>
 <p><img src="../images/ocp-admin-create-project.png" width="600"><br/><br></p>
-
-<p>This is going to take you to the next logical step of adding something to the project but we don't want to do that just yet.</p>
-
-<h2 id="let-s-deploy-butterfly-browser-based-ssh">Let's deploy Butterfly (Browser-based SSH)</h2>
-
-<p>First, we need to change views from the &quot;Administrator&quot; view to the &quot;Developer&quot; view. There is a pop-up menu in the top left corner of the screen just below the menu (three horizontal lines) button.</p>
-
+<p>This is going to take you to the next logical step of adding something to the project but we don&rsquo;t want to do that just yet.</p>
+<h2 id="lets-deploy-butterfly-browser-based-ssh">Let&rsquo;s deploy Butterfly (Browser-based SSH)</h2>
+<p>First, we need to change views from the &ldquo;Administrator&rdquo; view to the &ldquo;Developer&rdquo; view. There is a pop-up menu in the top left corner of the screen just below the menu (three horizontal lines) button.</p>
 <blockquote>
 Click "Administrator" and change it to "Developer"
 </blockquote>
 <img src="../images/ocp-menu-administrator.png" width="450"><br/><br>
-
-
 <blockquote>
 Click "+Add" to add a new item to the project
 </blockquote>
 <img src="../images/ocp-addToProjectButton.png" width="450"><br/><br>
-
-
 <blockquote>
 Click "Container Image" to add an existing image from the container registry
 </blockquote>
 <img src="../images/ocp-ContainerImageButton.png" width="300"><br/>
-
-
 <blockquote>
 In the dialog box under the default radio button "Image name from external registry", enter "quay.io/openshifthomeroom/workshop-terminal".  The image should be "Validated" when found.
 </blockquote>
 <img src="../images/ocp-deploy-image.png" width="600"><br/>
-
-
 <blockquote>
 Observe the default values that are populated in the search results.
 </blockquote>
 <img src="../images/ocp-butterfly-create-1.png" width="600"><br/>
-
-
 <blockquote>
 Click "Create"
 </blockquote>
-
-<p>You will now see a screen that shows a thumbnail view of your deployed application. Click on &quot;D workshop-termin...&quot; to expand the screen and see the details of the running pod:</p>
-
+<p>You will now see a screen that shows a thumbnail view of your deployed application. Click on &ldquo;D workshop-termin&hellip;&rdquo; to expand the screen and see the details of the running pod:</p>
 <p><img src="../images/ocp-workshop-terminal-thumb.png" width="150"><br/></p>
-
 <blockquote>
 "Topology"
 </blockquote>
-
 <p><img src="../images/ocp-butterfly-topology.png" width="600"><br/></p>
-
 <h2 id="test-out-the-butterfly-webapp">Test out the Butterfly webapp</h2>
-
 <p>Notice that in the web console overview, you now have a URL in the service box.  You can see the webapp running by clicking the exposed route.</p>
-
 <p><img src="../images/ocp-butterfly-route.png" width="600"><br/></p>
-
 <p>After clicking on the URLa new browser window should open placing you into a terminal session.</p>
-
 <p><img src="../images/butterfly-session.png" width="600"><br/></p>
-
 <p>Now, type the command <code>oc</code>.</p>
-
 <h1 id="accessing-openshift-through-the-cli">Accessing OpenShift through the CLI</h1>
-
 <p>In addition to the web console we previously used, you can utilize a command line tool to perform tasks.</p>
-
 <h2 id="using-the-command-line-cli">Using the command line (CLI)</h2>
-
 <blockquote>
  Use your existing Butterfly terminal login following command:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc login</code></pre></div>
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc login
+</code></pre></div><blockquote>
  Using the same username/password combination as before, finish authenticating to the CLI
 </blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Authentication required <span style="color:#66d9ef">for</span> https://api.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:6443 <span style="color:#f92672">(</span>openshift<span style="color:#f92672">)</span>
  Username: kubeadmin
  Password:
-Login successful.</code></pre></div>
-<blockquote>
+Login successful.
+</code></pre></div><blockquote>
  Check to see what projects you have access to:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get projects</code></pre></div>
-<h3 id="you-will-see-58-projects-including-the-terminal-0-project">You will see ~58 projects including the &quot;terminal-0&quot; project.</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get projects
+</code></pre></div><h3 id="you-will-see-58-projects-including-the-terminal-0-project">You will see ~58 projects including the &ldquo;terminal-0&rdquo; project.</h3>
 <h2 id="use-the-cli-to-create-a-new-project">Use the CLI to create a new project</h2>
-
 <blockquote>
  Use the CLI to create and use a new project by typing the following command to create and use the project "demo-0"
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-project demo-0</code></pre></div>
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-project demo-0
+</code></pre></div><blockquote>
  Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc status</code></pre></div>
-<h1 id="summary">Summary</h1>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc status
+</code></pre></div><h1 id="summary">Summary</h1>
 <p>You should now be ready to get hands-on with our workshop labs.</p>
-
 <style>
 
  

@@ -307,24 +307,27 @@
   </ul>
 </nav>
 
-    
-
-<h2 id="step-1-create-a-new-project-space">Step 1 - Create a new Project Space</h2>
-
+    <h2 id="step-1---create-a-new-project-space">Step 1 - Create a new Project Space</h2>
 <p>In the Wetty terminal, create a new project.</p>
 <pre><code class="language-terminal" data-lang="terminal">oc new-project s2i-user<span class="userid">YOUR#</span>
-</code></pre>
-<h2 id="step-2-go-get-s2i-library">Step 2 - Go Get S2I Library</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~</code></pre></div><pre><code class="language-terminal" data-lang="terminal">go get github.com/openshift/source-to-image</code></pre>
-<h2 id="step-3-build-the-s2i-tooling">Step 3 - Build the S2I Tooling</h2>
-<pre><code class="language-terminal" data-lang="terminal">cd $GOPATH/src/github.com/openshift/source-to-image</code></pre><pre><code class="language-terminal" data-lang="terminal">hack/build-go.sh</code></pre><pre><code class="language-terminal" data-lang="terminal">export PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/local/bin/linux/amd64/</code></pre>
-<h2 id="step-4-create-the-s2i-project">Step 4 - Create the S2I Project</h2>
-<pre><code class="language-terminal" data-lang="terminal">cd ~</code></pre><pre><code class="language-terminal" data-lang="terminal">s2i create golang-s2i golang-s2i</code></pre>
-<p>Now let's inspect the project directory</p>
-<pre><code class="language-terminal" data-lang="terminal">tree -a golang-s2i</code></pre>
-<h2 id="step-5-edit-the-dockerfile">Step 5 - Edit the Dockerfile</h2>
-<pre><code class="language-terminal" data-lang="terminal">cd ~</code></pre><pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/golang-s2i/Dockerfile</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/golang-s2i/Dockerfile</code></pre>
-<p>Copy the following text and paste it in to the editor.</p>
+
+</code></pre><h2 id="step-2---go-get-s2i-library">Step 2 - Go Get S2I Library</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~
+</code></pre></div><pre><code class="language-terminal" data-lang="terminal">go get github.com/openshift/source-to-image
+</code></pre><h2 id="step-3---build-the-s2i-tooling">Step 3 - Build the S2I Tooling</h2>
+<pre><code class="language-terminal" data-lang="terminal">cd $GOPATH/src/github.com/openshift/source-to-image
+</code></pre><pre><code class="language-terminal" data-lang="terminal">hack/build-go.sh
+</code></pre><pre><code class="language-terminal" data-lang="terminal">export PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/local/bin/linux/amd64/
+</code></pre><h2 id="step-4---create-the-s2i-project">Step 4 - Create the S2I Project</h2>
+<pre><code class="language-terminal" data-lang="terminal">cd ~
+</code></pre><pre><code class="language-terminal" data-lang="terminal">s2i create golang-s2i golang-s2i
+</code></pre><p>Now let&rsquo;s inspect the project directory</p>
+<pre><code class="language-terminal" data-lang="terminal">tree -a golang-s2i
+</code></pre><h2 id="step-5---edit-the-dockerfile">Step 5 - Edit the Dockerfile</h2>
+<pre><code class="language-terminal" data-lang="terminal">cd ~
+</code></pre><pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/golang-s2i/Dockerfile
+</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/golang-s2i/Dockerfile
+</code></pre><p>Copy the following text and paste it in to the editor.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#75715e"># golang-s2i</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> fedora</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010">
@@ -354,22 +357,20 @@
 </span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> ${HOME}</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">USER</span><span style="color:#e6db74"> 1001</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 8080</span></code></pre></div>
-<p>To exit vi:</p>
-
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 8080</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>To exit vi:</p>
 <p>shift+z</p>
-
 <p>shift+z</p>
-
-<h2 id="step-6-edit-the-assemble-script">Step 6 - Edit the Assemble Script</h2>
-<pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/golang-s2i/s2i/bin/assemble</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/golang-s2i/s2i/bin/assemble</code></pre>
-<p>Copy the following into the editor.</p>
+<h2 id="step-6---edit-the-assemble-script">Step 6 - Edit the Assemble Script</h2>
+<pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/golang-s2i/s2i/bin/assemble
+</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/golang-s2i/s2i/bin/assemble
+</code></pre><p>Copy the following into the editor.</p>
 <pre><code class="language-terminal" data-lang="terminal">#!/bin/bash
 #
-# S2I assemble script for the &#39;golang-s2i&#39; image.
-export GO_REPO=$(echo $OPENSHIFT_BUILD_SOURCE | sed --expression=&#39;s/\.git//g&#39; | sed --expression=&#39;s/https:\/\///g&#39;)
-if [ -z &#34;$GO_REPO&#34; ]; then
-  export GO_REPO=$(grep ^package /opt/app-root/destination/src/glide.yaml | sed &#39;s/package: //&#39;)
+# S2I assemble script for the 'golang-s2i' image.
+export GO_REPO=$(echo $OPENSHIFT_BUILD_SOURCE | sed --expression='s/\.git//g' | sed --expression='s/https:\/\///g')
+if [ -z &quot;$GO_REPO&quot; ]; then
+  export GO_REPO=$(grep ^package /opt/app-root/destination/src/glide.yaml | sed 's/package: //')
 fi
 
 mkdir -p $GOPATH/src/$GO_REPO
@@ -379,85 +380,74 @@ cp -ar /opt/app-root/destination/src/* $GOPATH/src/$GO_REPO
 rm -rf /opt/app-root/destination/src/*
 
 # Restore build artifacts
-if [ &#34;$(ls /opt/app-root/destination/artifacts/ 2&gt;/dev/null)&#34; ]; then
-    echo &#34;Using artifacts from previous build.&#34;
+if [ &quot;$(ls /opt/app-root/destination/artifacts/ 2&gt;/dev/null)&quot; ]; then
+    echo &quot;Using artifacts from previous build.&quot;
     mv /opt/app-root/destination/artifacts/vendor $GOPATH/src/$GO_REPO/vendor
 else
     pushd $GOPATH/src/$GO_REPO
-    echo &#34;Obtaining artifacts.&#34;
+    echo &quot;Obtaining artifacts.&quot;
     glide install -v
     popd
 
 fi
 
-go build -o goexec $GO_REPO</code></pre>
-<p>To exit vi:</p>
-
+go build -o goexec $GO_REPO
+</code></pre><p>To exit vi:</p>
 <p>shift+z</p>
-
 <p>shift+z</p>
-
-<h2 id="step-7-edit-the-run-script">Step 7 - Edit the Run Script</h2>
-<pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/golang-s2i/s2i/bin/run</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/golang-s2i/s2i/bin/run</code></pre>
-<p>Copy the following into the editor.</p>
+<h2 id="step-7---edit-the-run-script">Step 7 - Edit the Run Script</h2>
+<pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/golang-s2i/s2i/bin/run
+</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/golang-s2i/s2i/bin/run
+</code></pre><p>Copy the following into the editor.</p>
 <pre><code class="language-terminal" data-lang="terminal">#!/bin/bash
-exec /opt/app-root/goexec $ARGS</code></pre>
-<p>To exit vi:</p>
-
+exec /opt/app-root/goexec $ARGS
+</code></pre><p>To exit vi:</p>
 <p>shift+z</p>
-
 <p>shift+z</p>
-
-<h2 id="step-8-edit-the-save-artifacts-script">Step 8 - Edit the Save Artifacts Script</h2>
-<pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/golang-s2i/s2i/bin/save-artifacts</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/golang-s2i/s2i/bin/save-artifacts</code></pre>
-<p>Copy the following into the editor.</p>
+<h2 id="step-8---edit-the-save-artifacts-script">Step 8 - Edit the Save Artifacts Script</h2>
+<pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/golang-s2i/s2i/bin/save-artifacts
+</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/golang-s2i/s2i/bin/save-artifacts
+</code></pre><p>Copy the following into the editor.</p>
 <pre><code class="language-terminal" data-lang="terminal">#!/bin/bash
 
-export GO_REPO=$(echo $OPENSHIFT_BUILD_SOURCE | sed --expression=&#39;s/\.git//g&#39; | sed --expression=&#39;s/https:\/\///g&#39;)
-if [ -z &#34;$GO_REPO&#34; ]; then
-  export GO_REPO=$(grep ^package /opt/app-root/destination/src/glide.yaml | sed &#39;s/package: //&#39;)
+export GO_REPO=$(echo $OPENSHIFT_BUILD_SOURCE | sed --expression='s/\.git//g' | sed --expression='s/https:\/\///g')
+if [ -z &quot;$GO_REPO&quot; ]; then
+  export GO_REPO=$(grep ^package /opt/app-root/destination/src/glide.yaml | sed 's/package: //')
 fi
 cd $GOPATH/src/$GO_REPO
-tar cf - vendor</code></pre>
-<p>To exit vi:</p>
-
+tar cf - vendor
+</code></pre><p>To exit vi:</p>
 <p>shift+z</p>
-
 <p>shift+z</p>
-
-<h2 id="step-9-edit-the-usage-script">Step 9 - Edit the Usage Script</h2>
-<pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/golang-s2i/s2i/bin/usage</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/golang-s2i/s2i/bin/usage</code></pre>
-<p>Create your own script!  Use the following as an example.</p>
+<h2 id="step-9---edit-the-usage-script">Step 9 - Edit the Usage Script</h2>
+<pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/golang-s2i/s2i/bin/usage
+</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/golang-s2i/s2i/bin/usage
+</code></pre><p>Create your own script!  Use the following as an example.</p>
 <pre><code class="language-terminal" data-lang="terminal">#!/bin/bash
 
-echo &#34;Hello Golang&#34;</code></pre>
-<p>To exit vi:</p>
-
+echo &quot;Hello Golang&quot;
+</code></pre><p>To exit vi:</p>
 <p>shift+z</p>
-
 <p>shift+z</p>
-
-<h2 id="step-10-create-the-golang-s2i-builder-image">Step 10 - Create the Golang S2I Builder Image</h2>
-
+<h2 id="step-10---create-the-golang-s2i-builder-image">Step 10 - Create the Golang S2I Builder Image</h2>
 <p>Create a new build for the Golang S2I builder image</p>
-<pre><code class="language-terminal" data-lang="terminal">cd ~</code></pre><pre><code class="language-terminal" data-lang="terminal">oc new-build golang-s2i/ --to=golang-s2i</code></pre>
-<p>Start the new build for the Golang S2I builder image</p>
-<pre><code class="language-terminal" data-lang="terminal">oc start-build golang-s2i --from-dir=golang-s2i/</code></pre>
-<h2 id="step-11-wait-for-build-to-complete">Step 11 - Wait for Build to Complete</h2>
-
+<pre><code class="language-terminal" data-lang="terminal">cd ~
+</code></pre><pre><code class="language-terminal" data-lang="terminal">oc new-build golang-s2i/ --to=golang-s2i
+</code></pre><p>Start the new build for the Golang S2I builder image</p>
+<pre><code class="language-terminal" data-lang="terminal">oc start-build golang-s2i --from-dir=golang-s2i/
+</code></pre><h2 id="step-11---wait-for-build-to-complete">Step 11 - Wait for Build to Complete</h2>
 <p>Watch the deployment</p>
-<pre><code class="language-terminal" data-lang="terminal">oc logs -f bc/golang-s2i</code></pre>
-<h2 id="step-12-deploy-the-app-from-the-s2i-builder-image">Step 12 - Deploy the App from the S2I Builder Image</h2>
-<pre><code class="language-terminal" data-lang="terminal">oc new-app https://github.com/kevensen/openshift-gochat-client.git --image-stream=golang-s2i --env ARGS=&#34;-host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr -insecure&#34;</code></pre>
-<h2 id="step-13-expose-the-app">Step 13 - Expose the App</h2>
-<pre><code class="language-terminal" data-lang="terminal">oc expose svc openshift-gochat-client</code></pre>
-<h2 id="step-14-annotate-the-service-account-to-use-openshift-authorization">Step 14 - Annotate the Service Account to Use OpenShift Authorization</h2>
-
+<pre><code class="language-terminal" data-lang="terminal">oc logs -f bc/golang-s2i
+</code></pre><h2 id="step-12---deploy-the-app-from-the-s2i-builder-image">Step 12 - Deploy the App from the S2I Builder Image</h2>
+<pre><code class="language-terminal" data-lang="terminal">oc new-app https://github.com/kevensen/openshift-gochat-client.git --image-stream=golang-s2i --env ARGS=&quot;-host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr -insecure&quot;
+</code></pre><h2 id="step-13---expose-the-app">Step 13 - Expose the App</h2>
+<pre><code class="language-terminal" data-lang="terminal">oc expose svc openshift-gochat-client
+</code></pre><h2 id="step-14---annotate-the-service-account-to-use-openshift-authorization">Step 14 - Annotate the Service Account to Use OpenShift Authorization</h2>
 <p>As in the previous lab, we must annotate the service account for the Gochat Client to communicate to the OpenShift API for user credential verification.</p>
-<pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirectreference.1=&#39;{&#34;kind&#34;:&#34;OAuthRedirectReference&#34;,&#34;apiVersion&#34;:&#34;v1&#34;,&#34;reference&#34;:{&#34;kind&#34;:&#34;Route&#34;,&#34;name&#34;:&#34;openshift-gochat-client&#34;}}&#39; --overwrite</code></pre><pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirecturi.1=auth/callback/openshift --overwrite</code></pre>
-<h2 id="step-15-sign-in-to-the-app">Step 15 - Sign in to the App</h2>
-
-<p>Click the blue &quot;Login&quot; button.
+<pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirectreference.1='{&quot;kind&quot;:&quot;OAuthRedirectReference&quot;,&quot;apiVersion&quot;:&quot;v1&quot;,&quot;reference&quot;:{&quot;kind&quot;:&quot;Route&quot;,&quot;name&quot;:&quot;openshift-gochat-client&quot;}}' --overwrite
+</code></pre><pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirecturi.1=auth/callback/openshift --overwrite
+</code></pre><h2 id="step-15---sign-in-to-the-app">Step 15 - Sign in to the App</h2>
+<p>Click the blue &ldquo;Login&rdquo; button.
 <div class="panel-group">
   
 
@@ -465,17 +455,17 @@ echo &#34;Hello Golang&#34;</code></pre>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsea36c36c082cb3877a00642f73bd6390a" class="collapsed">
+      <a data-toggle="collapse" href="#collapsec7396eae5999b18e7b8172050454e4af" class="collapsed">
       
         Gochat Signin
       </a>
     </h4>
   </div>
   
-  <div id="collapsea36c36c082cb3877a00642f73bd6390a" class="panel-collapse collapse ">
+  <div id="collapsec7396eae5999b18e7b8172050454e4af" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/gochat_signin.png" width="800" align="middle"/></p>
+       <img src="../images/gochat_signin.png" width="800" align="middle"/>
 
     </div>
   </div>
@@ -485,7 +475,6 @@ echo &#34;Hello Golang&#34;</code></pre>
 </div>
 
 Log in to the app with your OpenShift credentials.  The workshop moderator will provide you with the URL, your username, and password.</p>
-
 <div class="panel-group">
   
 
@@ -512,13 +501,9 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
 
 </div>
 
-
-<h2 id="step-16-test-the-app">Step 16 - Test the App</h2>
-
+<h2 id="step-16---test-the-app">Step 16 - Test the App</h2>
 <p>Send a message!</p>
-
-<h2 id="step-17-logout">Step 17 - Logout</h2>
-
+<h2 id="step-17---logout">Step 17 - Logout</h2>
 <div class="panel-group">
   
 
@@ -526,17 +511,17 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse0737a268f3700413f797817fbe002377" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3c5928a4d784fca28c1fe619674b750f" class="collapsed">
       
         Gochat Logout
       </a>
     </h4>
   </div>
   
-  <div id="collapse0737a268f3700413f797817fbe002377" class="panel-collapse collapse ">
+  <div id="collapse3c5928a4d784fca28c1fe619674b750f" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/gochat_logout.png" width="600" align="middle"/></p>
+       <img src="../images/gochat_logout.png" width="600" align="middle"/>
 
     </div>
   </div>
@@ -544,7 +529,6 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
 
 
 </div>
-
 
 <style>
 

@@ -307,18 +307,11 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="labels">Labels</h1>
-
+    <h1 id="labels">Labels</h1>
 <p>This is a pretty simple lab, we are going to explore labels.  You can use labels to organize, group, or select API objects.</p>
-
-<p>For example, pods are &quot;tagged&quot; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.</p>
-
+<p>For example, pods are &ldquo;tagged&rdquo; with labels, and then services use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods, even treating pods with potentially different docker containers as related entities.</p>
 <h2 id="labels-on-a-pod">Labels on a pod</h2>
-
-<p>In a previous lab we added our web app using a S2I template.  When we did that, OpenShift labeled our objects for us.  Let's look at the labels on our running pod.</p>
-
+<p>In a previous lab we added our web app using a S2I template.  When we did that, OpenShift labeled our objects for us.  Let&rsquo;s look at the labels on our running pod.</p>
 <div class="panel-group">
   
 
@@ -326,14 +319,14 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsee344f48a78625720b2cf9ea0c0e461af" class="collapsed">
+      <a data-toggle="collapse" href="#collapsec56ab609e8fbff8859d94a5500e9fd12" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsee344f48a78625720b2cf9ea0c0e461af" class="panel-collapse collapse ">
+  <div id="collapsec56ab609e8fbff8859d94a5500e9fd12" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
@@ -349,14 +342,13 @@ Labels:       app<span style="color:#f92672">=</span>dc-metro-map
               deploymentconfig<span style="color:#f92672">=</span>dc-metro-map
               pod-template-hash<span style="color:#f92672">=</span>7bc46bf89d
 Annotations:  k8s.v1.cni.cncf.io/networks-status:
-                <span style="color:#f92672">[{</span></code></pre></div>
-<p>You can see the Labels automatically added contain the app, deployment, and deploymentconfig.  Let's add a new label to this pod.</p>
-
+                <span style="color:#f92672">[{</span>
+</code></pre></div><p>You can see the Labels automatically added contain the app, deployment, and deploymentconfig.  Let&rsquo;s add a new label to this pod.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Add a label
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc label pod/&lt;POD NAME&gt; testdate<span style="color:#f92672">=</span>4.14.2020 testedby<span style="color:#f92672">=</span>mylastname</code></pre></div>
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc label pod/&lt;POD NAME&gt; testdate<span style="color:#f92672">=</span>4.14.2020 testedby<span style="color:#f92672">=</span>mylastname
+</code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> Look at the labels
 </blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe pod/&lt;POD NAME&gt; | grep Labels: --context<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
@@ -368,7 +360,8 @@ Labels:       app<span style="color:#f92672">=</span>dc-metro-map
               deploymentconfig<span style="color:#f92672">=</span>dc-metro-map
               pod-template-hash<span style="color:#f92672">=</span>7bc46bf89d
               testdate<span style="color:#f92672">=</span>4.14.2020
-              testedby<span style="color:#f92672">=</span>mylastname</code></pre></div>
+              testedby<span style="color:#f92672">=</span>mylastname
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -379,40 +372,35 @@ Labels:       app<span style="color:#f92672">=</span>dc-metro-map
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse23df72d7aaf0c2606d3cce06f9766e91" class="collapsed">
+      <a data-toggle="collapse" href="#collapsece69685519c8e2c9bc70940708650a71" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse23df72d7aaf0c2606d3cce06f9766e91" class="panel-collapse collapse ">
+  <div id="collapsece69685519c8e2c9bc70940708650a71" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Click "Workloads", click on "Pods", then click on the three vertical dots next to the "Running" pod.  Consider filtering for Status "Running".
 </blockquote>
-
 <p><img src="../images/ocp-lab-labels-pods.png" width="900"></br>
 </br></p>
-
-<p><blockquote>
-Click &quot;Edit Labels&quot;
+<blockquote>
+Click "Edit Labels"
 </blockquote>
 <img src="../images/ocp-lab-labels-poddetails.png" width="500"></br>
-Here, at the top, you can see the labels on this pod</p>
-
-<p><blockquote>
-Add 'testedby=mylastname' and click &quot;Save&quot;
+Here, at the top, you can see the labels on this pod
+<blockquote>
+Add 'testedby=mylastname' and click "Save"
 </blockquote>
-<img src="../images/ocp-lab-labels-podedit.png" width="500"><br/></p>
-
+<img src="../images/ocp-lab-labels-podedit.png" width="500"><br/>
 <p>Your updated label will show up in the running pods.</p>
-
-<p><blockquote>
-Select Workloads -&gt; Pods -&gt; dc-metro-map (Running POD), then scroll down to &quot;Labels&quot;
+<blockquote>
+Select Workloads -> Pods -> dc-metro-map (Running POD), then scroll down to "Labels"
 </blockquote>
-<img src="../images/ocp-lab-labels-podedit3.png" width="900"><br/></p>
+<img src="../images/ocp-lab-labels-podedit3.png" width="900"><br/>
 
     </div>
   </div>
@@ -421,11 +409,8 @@ Select Workloads -&gt; Pods -&gt; dc-metro-map (Running POD), then scroll down t
 
 </div>
 
-
 <h1 id="summary">Summary</h1>
-
-<p>That's it for this lab. Now you know that all the objects in OpenShift can be labeled.  This is important because those labels can be used as part of your CI/CD process.  An upcoming lab will cover using labels for Blue/Green deployments. Labels can also be used for running your apps on specific nodes (e.g. just on SSD nodes or just on east coast nodes).</p>
-
+<p>That&rsquo;s it for this lab. Now you know that all the objects in OpenShift can be labeled.  This is important because those labels can be used as part of your CI/CD process.  An upcoming lab will cover using labels for Blue/Green deployments. Labels can also be used for running your apps on specific nodes (e.g. just on SSD nodes or just on east coast nodes).</p>
 <style>
 
  

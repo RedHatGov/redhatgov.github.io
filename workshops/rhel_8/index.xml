@@ -113,7 +113,7 @@ Note that session recording doesn&amp;#8217;t work for graphical desktop session
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/rhel_8/exercise1.9/</guid>
-      <description>Exercise Description RHEL 7.4 introduced RHEL System Roles, a collection of Ansible roles and modules that provide a stable and consistent configuration interface for remote management of Red Hat Enterprise Linux. These System Roles are applicable to RHEL 6.10 and above, easing management of 3 generations of RHEL. The effort is based on development of the Linux System Roles project (link: https://linux-system-roles.github.io/upstream). The following roles are provided and supported as follows:</description>
+      <description>Exercise Description RHEL System Roles, announced with the launch of RHEL 8, are a collection of Ansible roles and modules that provide a stable and consistent configuration interface for remote management of Red Hat Enterprise Linux. They address many commmon configuration, security and workload uses on RHEL systems. These roles can manage systems running RHEL 7 and above, easing management of 3 generations of RHEL. The effort is based on development of the Linux System Roles project (link: https://linux-system-roles.</description>
     </item>
     
     <item>

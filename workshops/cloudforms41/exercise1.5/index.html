@@ -307,56 +307,33 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="exercise-1-5-examine-infrastructure-provisioning">Exercise 1.5: Examine Infrastructure Provisioning</h1>
-
+    <h1 id="exercise-15-examine-infrastructure-provisioning">Exercise 1.5: Examine Infrastructure Provisioning</h1>
 <h2 id="exercise-description">Exercise Description</h2>
-
 <p>Learn to provision infrastructures, using Red Hat CloudForms. CloudForms enables provisioning and management across physical, virtual, and private cloud platforms.</p>
-
 <h3 id="red-hat-cloudforms-infrastructure-provisioning-process-summary">Red Hat CloudForms Infrastructure Provisioning process (Summary)</h3>
-
 <p>In Red Hat CloudForms, when a virtual machine or cloud instance is provisioned, it goes through multiple phases. First, the request must be made. The request includes ownership information, tags, virtual hardware requirements, the operating system, and any customization of the request. Second, the request must go through an approval phase, either automatic or manual. Finally, the request is executed.</p>
-
 <p>Execution consists of pre-processing and post-processing. Pre-processing acquires IP addresses for the user, creates VMDB instances, and creates the virtual machine based on information in the request. Post-processing activates the VMDB instance.</p>
-
 <p><img title="CloudForms Discover Infrastructure Hosts" src="../images/cfme-provision-vm-workflow.png"/><br/>
 <em>Provision VM Workflow</em></p>
-
 <h2 id="infrastructure-provisioning">Infrastructure Provisioning</h2>
-
-<h3 id="step-1-select-compute-infrastructure-virtual-machines">Step 1: &gt; Select <strong>Compute</strong> → <strong>Infrastructure</strong> → <strong>Virtual Machines</strong>.</h3>
-
+<h3 id="step-1--select-compute--infrastructure--virtual-machines">Step 1: &gt; Select <strong>Compute</strong> → <strong>Infrastructure</strong> → <strong>Virtual Machines</strong>.</h3>
 <p><img title="CloudForms Infrastructure VMs" src="../images/cfme-nav-compute-infra-vms.png" width="1000"/><br/>
 <em>Infrastructure VMs</em></p>
-
-<h3 id="step-2-on-the-left-in-the-vms-accordion-select-all-vms-templates">Step 2: On the left, in the <strong>VMs</strong> accordion, select <strong>All VMs &amp; Templates</strong>.</h3>
-
-<h3 id="step-3-on-the-right-click-img-title-cloudforms-infrastructure-vms-src-images-cfme-lifecycle-icon-png-lifecycle">Step 3: On the right, click <img title="CloudForms Infrastructure VMs" src="../images/cfme-lifecycle-icon.png" /> (<strong>Lifecycle</strong>).</h3>
-
-<h3 id="step-4-select-i-class-fa-fa-plus-circle-fa-lg-aria-hidden-true-i-provision-vms-and-observe-the-following">Step 4: Select <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> (<strong>Provision VMs</strong>), and observe the following.</h3>
-
+<h3 id="step-2-on-the-left-in-the-vms-accordion-select-all-vms--templates">Step 2: On the left, in the <strong>VMs</strong> accordion, select <strong>All VMs &amp; Templates</strong>.</h3>
+<h3 id="step-3-on-the-right-click-img-titlecloudforms-infrastructure-vms-srcimagescfme-lifecycle-iconpng--lifecycle">Step 3: On the right, click <img title="CloudForms Infrastructure VMs" src="../images/cfme-lifecycle-icon.png" /> (<strong>Lifecycle</strong>).</h3>
+<h3 id="step-4-select-i-classfa-fa-plus-circle-fa-lg-aria-hiddentruei-provision-vms-and-observe-the-following">Step 4: Select <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> (<strong>Provision VMs</strong>), and observe the following.</h3>
 <p><img title="CloudForms Infrastructure VMs" src="../images/cfme-nav-compute-infra-vms-all-lifecycle.png" width="1000"/><br/>
 <em>Provision VMs</em></p>
-
 <p>A list of templates displays.</p>
-
 <p><img title="CloudForms Infrastructure VMs" src="../images/cfme-provision-vm-1.png" width="1000"/><br/>
 <em>Template List</em></p>
-
 <p>The <strong>Provider</strong> column shows some templates are from Red Hat Enterprise Virtualization Manager and others are from VMware.</p>
-
 <h3 id="step-5-select-any-template-and-click-continue">Step 5: Select any template and click <strong>Continue</strong>.</h3>
-
 <p><img title="CloudForms Infrastructure VMs" src="../images/cfme-provision-vm-2.png" width="1000"/><br/>
 <em>Template Continue</em></p>
-
 <h3 id="step-6-on-the-resulting-page-perform-the-steps-indicated-below-for-each-tab-and-review-the-data-requested">Step 6: On the resulting page, perform the steps indicated below for each tab and review the data requested.</h3>
-
 <p><img title="CloudForms Infrastructure VMs" src="../images/cfme-provision-vm-3.png" width="1000"/><br/>
 <em>Provision Virtual Machines</em></p>
-
 <ul>
 <li>In the <strong>Request</strong> tab, fill out all the fields.</li>
 <li>In the <strong>Catalog</strong> tab, set the VM Name.</li>
@@ -364,29 +341,19 @@
 <li>In the <strong>Network</strong> tab, choose a <strong>vLan</strong>.</li>
 <li>Click <strong>Submit</strong>.</li>
 </ul>
-
 <p>
-
-
 <div class="alert alert-warning">
-  
-  <span class="pficon pficon-warning-triangle-o"></span>
-   Because you are working in a lab environment, nothing happens after these steps. 
+<p><span class="pficon pficon-warning-triangle-o"></span>
+Because you are working in a lab environment, nothing happens after these steps.</p>
 </div>
 </p>
-
 <h3 id="step-7-on-the-resulting-screen-observe-that-your-provision-request-appears-in-a-list-if-you-are-in-an-environment-with-real-infrastructure-you-can-monitor-this-area-for-the-status-of-the-vm-build">Step 7: On the resulting screen, observe that your provision request appears in a list. If you are in an environment with real infrastructure, you can monitor this area for the status of the VM build.</h3>
-
 <p><img title="CloudForms Infrastructure VMs" src="../images/cfme-provision-vm-4.png" width="1000"/><br/>
 <em>Provision Request</em></p>
-
 <p>
-
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-   You can also arrive at this screen by clicking **Services** → **Requests**. 
+<p><span class="pficon pficon-info"></span>
+You can also arrive at this screen by clicking <strong>Services</strong> → <strong>Requests</strong>.</p>
 </div>
 </p>
 

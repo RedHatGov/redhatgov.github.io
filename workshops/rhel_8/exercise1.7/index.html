@@ -346,7 +346,7 @@
 <div class="paragraph">
 <p>OpenSCAP is a project that implements tools for performing SCAP scans and remediating findings.<br>
 You can read more about the project at <code><a href="http://www.open-scap.org/" class="bare">http://www.open-scap.org/</a></code> and the repository for their tools and profiles is on GitHub at <code><a href="https://github.com/OpenSCAP/openscap/" class="bare">https://github.com/OpenSCAP/openscap/</a></code>.
-Red Hat ships SCAP content in the SCAP security guide, but the content the OpenSCAP uses is under active development and latest versions of it can be found at: <code><a href="http://www.github.com/ComplianceAsCode" class="bare">http://www.github.com/ComplianceAsCode</a></code>.</p>
+Red Hat ships SCAP content in the SCAP security guide, but the content the OpenSCAP uses is under active development and latest versions of it can be found at: <code><a href="http://www.github.com/ComplianceAsCode" class="bare">http://www.github.com/ComplianceAsCode</a></code>.  Red Hat also maintains security data feeds, including security advisories in OVAL format, at:  <code><a href="https://access.redhat.com/security/data" class="bare">https://access.redhat.com/security/data</a></code>.</p>
 </div>
 </div>
 </div>
@@ -367,7 +367,7 @@ Red Hat ships SCAP content in the SCAP security guide, but the content the OpenS
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">sudo yum install -y httpd openscap-scanner scap-security-guide</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo yum install -y httpd openscap-scanner openscap-utils scap-security-guide</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -385,44 +385,68 @@ You can get a summary of the profiles in a given definition file with the follow
 <div class="literalblock">
 <div class="content">
 <pre>Document type: Source Data Stream
-Imported: 2020-02-11T13:41:17
+Imported: 2023-02-13T11:49:18
 
-Stream: scap_org.open-scap_datastream_from_xccdf_ssg-rhel8-xccdf-1.2.xml
+Stream: scap_org.open-scap_datastream_from_xccdf_ssg-rhel8-xccdf.xml
 Generated: (null)
 Version: 1.3
 Checklists:
-        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-xccdf-1.2.xml
-Downloading: https://www.redhat.com/security/data/oval/com.redhat.rhsa-RHEL8.xml ... ok
-                Status: draft
-                Generated: 2020-02-11
-                Resolved: true
-                Profiles:
-                        Title: Protection Profile for General Purpose Operating Systems
-                                Id: xccdf_org.ssgproject.content_profile_ospp
-                        Title: PCI-DSS v3.2.1 Control Baseline for Red Hat Enterprise Linux 8
-                                Id: xccdf_org.ssgproject.content_profile_pci-dss
-                        Title: [DRAFT] DISA STIG for Red Hat Enterprise Linux 8
-                                Id: xccdf_org.ssgproject.content_profile_stig
-                        Title: Australian Cyber Security Centre (ACSC) Essential Eight
-                                Id: xccdf_org.ssgproject.content_profile_e8
-                Referenced check files:
-                        ssg-rhel8-oval.xml
-                                system: http://oval.mitre.org/XMLSchema/oval-definitions-5
-                        ssg-rhel8-ocil.xml
-                                system: http://scap.nist.gov/schema/ocil/2
-                        security-data-oval-com.redhat.rhsa-RHEL8.xml
-                                system: http://oval.mitre.org/XMLSchema/oval-definitions-5
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-xccdf.xml
+Downloading: https://access.redhat.com/security/data/oval/com.redhat.rhsa-RHEL8.xml.bz2 ... ok
+		Status: draft
+		Generated: 2023-02-13
+		Resolved: true
+		Profiles:
+			Title: ANSSI-BP-028 (enhanced)
+				Id: xccdf_org.ssgproject.content_profile_anssi_bp28_enhanced
+			Title: ANSSI-BP-028 (high)
+				Id: xccdf_org.ssgproject.content_profile_anssi_bp28_high
+			Title: ANSSI-BP-028 (intermediary)
+				Id: xccdf_org.ssgproject.content_profile_anssi_bp28_intermediary
+			Title: ANSSI-BP-028 (minimal)
+				Id: xccdf_org.ssgproject.content_profile_anssi_bp28_minimal
+			Title: CIS Red Hat Enterprise Linux 8 Benchmark for Level 2 - Server
+				Id: xccdf_org.ssgproject.content_profile_cis
+			Title: CIS Red Hat Enterprise Linux 8 Benchmark for Level 1 - Server
+				Id: xccdf_org.ssgproject.content_profile_cis_server_l1
+			Title: CIS Red Hat Enterprise Linux 8 Benchmark for Level 1 - Workstation
+				Id: xccdf_org.ssgproject.content_profile_cis_workstation_l1
+			Title: CIS Red Hat Enterprise Linux 8 Benchmark for Level 2 - Workstation
+				Id: xccdf_org.ssgproject.content_profile_cis_workstation_l2
+			Title: Unclassified Information in Non-federal Information Systems and Organizations (NIST 800-171)
+				Id: xccdf_org.ssgproject.content_profile_cui
+			Title: Australian Cyber Security Centre (ACSC) Essential Eight
+				Id: xccdf_org.ssgproject.content_profile_e8
+			Title: Health Insurance Portability and Accountability Act (HIPAA)
+				Id: xccdf_org.ssgproject.content_profile_hipaa
+			Title: Australian Cyber Security Centre (ACSC) ISM Official
+				Id: xccdf_org.ssgproject.content_profile_ism_o
+			Title: Protection Profile for General Purpose Operating Systems
+				Id: xccdf_org.ssgproject.content_profile_ospp
+			Title: PCI-DSS v3.2.1 Control Baseline for Red Hat Enterprise Linux 8
+				Id: xccdf_org.ssgproject.content_profile_pci-dss
+			Title: DISA STIG for Red Hat Enterprise Linux 8
+				Id: xccdf_org.ssgproject.content_profile_stig
+			Title: DISA STIG with GUI for Red Hat Enterprise Linux 8
+				Id: xccdf_org.ssgproject.content_profile_stig_gui
+		Referenced check files:
+			ssg-rhel8-oval.xml
+				system: http://oval.mitre.org/XMLSchema/oval-definitions-5
+			ssg-rhel8-ocil.xml
+				system: http://scap.nist.gov/schema/ocil/2
+			security-data-oval-com.redhat.rhsa-RHEL8.xml.bz2
+				system: http://oval.mitre.org/XMLSchema/oval-definitions-5
 Checks:
-        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-oval.xml
-        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-ocil.xml
-        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-oval.xml
-        Ref-Id: scap_org.open-scap_cref_security-data-oval-com.redhat.rhsa-RHEL8.xml
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-oval.xml
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-ocil.xml
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-oval.xml
+	Ref-Id: scap_org.open-scap_cref_security-data-oval-com.redhat.rhsa-RHEL8.xml.bz2
 Dictionaries:
-        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-dictionary.xml</pre>
+	Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-dictionary.xml</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Looking about half-way down, you can see that this file contains two profiles:  one for PCI-DSS and another for OSPP.  The OSPP profile is a general-purpose profile, so it&#8217;s a good choice for testing.</p>
+<p>Towards the bottom of the list, you can see profiles for PCI-DSS and another for OSPP.  The OSPP profile is a general-purpose profile, so it&#8217;s a good choice for testing.</p>
 </div>
 </div>
 </div>
@@ -508,6 +532,19 @@ The FQDN in the URL above is an example.  Yours will need to have the FQDN used 
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">sudo oscap xccdf generate fix --fetch-remote-resources --fix-type ansible --result-id "" /tmp/arf.xml &gt; /tmp/ospp-playbook-fix.yml</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The above example produces a tailored remediation playbook, but you can similarly generate a complete remediation playbook for any profile.  For example, to create a playbook to apply the DISA STIG, you would run:
+<mark>sudo oscap xccdf generate fix --fetch-remote-resources --fix-type ansible --profile xccdf_org.ssgproject.content_profile_stig /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml &gt; /tmp/stig-playbook-fix.yml</mark>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Review the generated YAML file, <mark>/tmp/ospp-playbook-fix.yml</mark>.  Note that the individual tasks are clearly named and delineated.  Once you&#8217;re comfortable with it, run the playbook with:</p>

@@ -307,92 +307,58 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="add-build-app-stage-to-pipeline-text-file">Add Build App Stage to Pipeline Text File</h1>
-
+    <h1 id="add-build-app-stage-to-pipeline-text-file">Add Build App Stage to Pipeline Text File</h1>
 <p>Next, you will add the Build App Stage to your pipeline.</p>
-
 <p><img src="../images/pipeline_build.png" width="900" /></p>
-
 <p>The git branch step will clone the openshift-tasks project with the git branch locally from your gogs server to your jenkins node.  The jenkins node is leveraging the <a href="https://jenkins.io/doc/pipeline/steps/git/">git jenkins plugin</a> to communicate to gogs.</p>
-
 <p>Please note that we are leveraging the eap-7 branch in our git project and not the master branch.</p>
-
-<p><br></p>
-
-<h1 id="append-to-jenkins-pipeline-configuration">Append to Jenkins Pipeline Configuration</h1>
-
+<br>
+# Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-
 <p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
-
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
 <pre><code>  stages {
-    stage(&#39;Build App&#39;) {
+    stage('Build App') {
       steps {
-        git branch: &#39;eap-7&#39;, url: &#39;http://gogs:3000/gogs/openshift-tasks.git&#39;
+        git branch: 'eap-7', url: 'http://gogs:3000/gogs/openshift-tasks.git'
         script {
-            def pom = readMavenPom file: &#39;pom.xml&#39;
+            def pom = readMavenPom file: 'pom.xml'
             version = pom.version
           }
-          sh &#34;${mvnCmd} install -DskipTests=true&#34;
+          sh &quot;${mvnCmd} install -DskipTests=true&quot;
         }
-      }</code></pre>
-<p>Your Jenkinsfile should look like this.</p>
-
+      }
+</code></pre><p>Your Jenkinsfile should look like this.</p>
 <p><img src="../images/jenkinsfile_buildapp.png" width="900" />
 <br></p>
-
 <h1 id="test-your-pipeline">Test Your Pipeline</h1>
-
-<p>If you'd like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
+<p>If you&rsquo;d like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
 <pre><code> }
-}</code></pre>
-<p>Your Jenkinsfile should look like this</p>
-
+}
+</code></pre><p>Your Jenkinsfile should look like this</p>
 <p><img src="../images/jenkinsfile_buildapp_close.png" width="900" /></p>
-
 <p>Click Save</p>
-
 <p>Go back to Builds &gt; Pipelines</p>
-
 <p>Click Start Pipeline</p>
-
 <p>You should see your first stage run successfully.</p>
-
 <p><img src="../images/pipelinerun_buildapp.png" width="900" /></p>
-
 <h1 id="delete-brackets">Delete Brackets</h1>
-
-<p>Please delete the brackets you just added once testing is complete. We can add them later if you'd like to test your pipeline as you go along.</p>
+<p>Please delete the brackets you just added once testing is complete. We can add them later if you&rsquo;d like to test your pipeline as you go along.</p>
 <pre><code> }
-}</code></pre>
-<p>Click Save</p>
-
-<p><br></p>
-
-<h1 id="view-source-code-in-gogs">View Source Code in Gogs</h1>
-
-<p>View your gogs pod and click select the route (<a href="https://gogs...">https://gogs...</a>) to log into your gogs server.</p>
-
+}
+</code></pre><p>Click Save</p>
+<br>
+# View Source Code in Gogs
+<p>View your gogs pod and click select the route (https://gogs&hellip;) to log into your gogs server.</p>
 <p>Use the user name and password given to you by your instructor.</p>
-
 <p>Default Username: gogs
 Default Password: gogs</p>
-
 <p><img src="../images/gogs_route.png" width="900"><br/></p>
-
 <p>View the source of the openshift-tasks project in your gogs server.</p>
-
-<p><br></p>
-
+<br>
 <p><img src="../images/gogs_home.png" width="900"><br/></p>
-
 <h1 id="maven">Maven</h1>
-
 <p>Maven install will run through the <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html">Maven lifecycle</a> and skip the tests.  We will execute tests later in the pipeline.</p>
-
 <ul>
 <li>validate - validate the project is correct and all necessary information is available</li>
 <li>compile - compile the source code of the project</li>
@@ -402,7 +368,6 @@ Default Password: gogs</p>
 <li>install - install the package into the local repository, for use as a dependency in other projects locally</li>
 <li>deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.</li>
 </ul>
-
 <style>
 
  

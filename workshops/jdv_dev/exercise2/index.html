@@ -307,66 +307,51 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="get-the-course-repositories">Get the course repositories</h1>
-
+    <h1 id="get-the-course-repositories">Get the course repositories</h1>
 <ul>
-<li><p>There are two repositories, one that contains a sample JDV project with helper data/scripts and another which is the AngularJS frontend.</p></li>
-
-<li><p>Pull down the JDV project</p>
-<pre><code>git clone https://github.com/mechevarria/jdv-demo</code></pre></li>
-
-<li><p>Next pull down the AngularJS client</p>
-<pre><code>https://github.com/mechevarria/jdv-demo-client</code></pre></li>
+<li>
+<p>There are two repositories, one that contains a sample JDV project with helper data/scripts and another which is the AngularJS frontend.</p>
+</li>
+<li>
+<p>Pull down the JDV project</p>
+</li>
 </ul>
-
-<h1 id="add-the-workshop-data-to-postgresql">Add the workshop data to PostgreSQL</h1>
-
+<pre><code>git clone https://github.com/mechevarria/jdv-demo
+</code></pre><ul>
+<li>Next pull down the AngularJS client</li>
+</ul>
+<pre><code>https://github.com/mechevarria/jdv-demo-client
+</code></pre><h1 id="add-the-workshop-data-to-postgresql">Add the workshop data to PostgreSQL</h1>
 <ul>
 <li>The script that needs to be run is</li>
 </ul>
-
 <p><code>jdv-demo/assets/postgres/create_insert.sql</code></p>
-
 <ul>
 <li>If you are running the instance from <a href="https://www.turnkeylinux.org/postgresql">TurnKey Linux</a>, you can load the data via a browser.</li>
 </ul>
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-When running in a Virtual Machine, I add a second network adapter in addition to the default **NAT** adapter created by VirtualBox or KVM.  The second adapter is **host-only**.  With only **NAT** you cannot connect to your VM as a separate networked device.  The second adapter allows your host machine to talk to your VM without grabbing an additional IP address.  Another option is to change the default **NAT** to **bridged**, but that will not work on restricted networks.
-
+<p><span class="pficon pficon-info"></span></p>
+<p>When running in a Virtual Machine, I add a second network adapter in addition to the default <strong>NAT</strong> adapter created by VirtualBox or KVM.  The second adapter is <strong>host-only</strong>.  With only <strong>NAT</strong> you cannot connect to your VM as a separate networked device.  The second adapter allows your host machine to talk to your VM without grabbing an additional IP address.  Another option is to change the default <strong>NAT</strong> to <strong>bridged</strong>, but that will not work on restricted networks.</p>
 </div>
-
 <ul>
 <li>In your browser go to the IP address of your PostgreSQL VM.  The address below is the one available by using the host only network created by Docker.</li>
 </ul>
-
-<p><img src="../images/2-postgres-start.png" width="640px">
-<br><br></p>
-
+<img src="../images/2-postgres-start.png" width="640px">
+<br><br>
 <ul>
 <li>Login to <strong>Adminer</strong> as the <strong>postgres</strong> user</li>
 </ul>
-
-<p><img src="../images/2-login-postgres.png" width="640px">
-<br><br></p>
-
+<img src="../images/2-login-postgres.png" width="640px">
+<br><br>
 <ul>
 <li>Import into the <strong>public</strong> schema and select <code>jdv-demo/assets/postgres/create_insert.sql</code></li>
 </ul>
-
-<p><img src="../images/2-import-sql.png" width="640px">
-<br><br></p>
-
+<img src="../images/2-import-sql.png" width="640px">
+<br><br>
 <ul>
 <li>To verify, check to make sure you have a <strong>order_details</strong> table like below</li>
 </ul>
-
-<p><img src="../images/2-check-data.png" width="640px"></p>
+<img src="../images/2-check-data.png" width="640px">
 
 
     

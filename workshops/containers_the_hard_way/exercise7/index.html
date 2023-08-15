@@ -358,7 +358,7 @@ Traditionally, when we run containers as the root user, we will create a virtual
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sysctl -w "net.ipv4.ping_group_range=0 2000000"</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sysctl -w "net.ipv4.ping_group_range=0 2000000"</code></pre>
 </div>
 </div>
 </div>
@@ -371,7 +371,7 @@ Traditionally, when we run containers as the root user, we will create a virtual
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">su - rhel   # if necessary
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">su - rhel   # if necessary
 unshare -unUr /bin/bash
 echo $$</code></pre>
 </div>
@@ -394,7 +394,7 @@ echo $$</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">su - rhel  # if necessary
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">su - rhel  # if necessary
 slirp4netns -c 7179 tap0</code></pre>
 </div>
 </div>
@@ -415,7 +415,7 @@ received tapfd=5</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ip a</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ip a</code></pre>
 </div>
 </div>
 <div class="literalblock">

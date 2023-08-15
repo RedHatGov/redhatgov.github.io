@@ -385,13 +385,13 @@ view what capabilities a process has called <code>pscap</code>, available in the
 <div class="listingblock">
 <div class="title">See current processes</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pscap | head -10</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">pscap | head -10</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">See processes of a normal container</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run -d fedora sleep 5 &gt;/dev/null; pscap | grep sleep</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run -d fedora sleep 5 &gt;/dev/null; pscap | grep sleep</code></pre>
 </div>
 </div>
 </div>
@@ -404,7 +404,7 @@ view what capabilities a process has called <code>pscap</code>, available in the
 <div class="listingblock">
 <div class="title">Dropping setfcap, audit_write, mknod</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod \
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run -d --cap-drop=setfcap --cap-drop=audit_write --cap-drop=mknod \
 fedora sleep 5 &gt; /dev/null; pscap | grep sleep</code></pre>
 </div>
 </div>
@@ -418,7 +418,7 @@ drop all capabilities and just add setgid and setuid back in.</p>
 <div class="listingblock">
 <div class="title">Whitelisting Capabilities</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman run -d --cap-drop=all --cap-add=setuid --cap-add=setgid \
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo podman run -d --cap-drop=all --cap-add=setuid --cap-add=setgid \
 fedora sleep 5 &gt; /dev/null; pscap | grep sleep</code></pre>
 </div>
 </div>
@@ -429,7 +429,7 @@ whitelisting.</p>
 <div class="listingblock">
 <div class="title">Compare the output</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">chown, dac_override, fowner, fsetid, kill, setgid, setuid,
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">chown, dac_override, fowner, fsetid, kill, setgid, setuid,
 setpcap, net_bind_service, net_raw, sys_chroot <i class="conum" data-value="1"></i><b>(1)</b>
 
 vs.

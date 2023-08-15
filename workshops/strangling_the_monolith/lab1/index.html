@@ -307,52 +307,41 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="fast-moving-monolith">FAST-MOVING MONOLITH</h1>
-
+    <h1 id="fast-moving-monolith">FAST-MOVING MONOLITH</h1>
 <ul>
 <li>Large organizations have a tremendous amount of resources invested in existing monolith applications</li>
 <li>Looking for a sane way to capture the benefits of containers and orchestration without having to complete rewrite</li>
 <li>OpenShift provides the platform for their existing investment with the benefit of a path forward for microservice based apps in the future</li>
 </ul>
-
 <h1 id="fast-moving-monolith-advantages">FAST-MOVING MONOLITH ADVANTAGES</h1>
-
 <ul>
 <li>Easier to develop since all dependencies are included</li>
 <li>Single code base for teams to work on</li>
 <li>No API backwards compatibility issues since all logic is packaged with the application</li>
 <li>Single deployable unit</li>
 </ul>
-
 <h1 id="step-1">Step 1</h1>
-
 <ul>
 <li>In this lab, the coolstore monolith will be built and deployed to OpenShift from your local workstation demonstrating a typical Java application developer workflow</li>
 <li>A sample pipeline is included which will be used to deploy across dev and prod environment</li>
 </ul>
-
 <blockquote>
 <p>First, deploy the coolstore monolith dev project (don’t forget to include -b app-partner when you run git clone - this is the branch in use for this lab!):</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir ~/coolstore</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone -b app-partner https://github.com/epe105/monolith</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd monolith</code></pre></div>
-<div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-
-Please update ``<USERNAME>`` below with your assigned username
-
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir ~/coolstore
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone -b app-partner https://github.com/epe105/monolith
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd monolith
+</code></pre></div><div class="alert alert-info">
+<p><span class="pficon pficon-info"></span></p>
+<p>Please update <code>&lt;USERNAME&gt;</code> below with your assigned username</p>
 </div>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-project coolstore-&lt;USERNAME&gt;</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc process -f src/main/openshift/template.json | oc create -f -</code></pre></div>
-<h1 id="step-2">Step 2</h1>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-project coolstore-&lt;USERNAME&gt;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc process -f src/main/openshift/template.json | oc create -f -
+</code></pre></div><h1 id="step-2">Step 2</h1>
 <blockquote>
 <p>Notice there is no deployment yet as there is no build yet:</p>
 </blockquote>
-
 <div class="panel-group">
   
 
@@ -379,35 +368,31 @@ Please update ``<USERNAME>`` below with your assigned username
 
 </div>
 
-
 <h1 id="step-3">Step 3</h1>
-
 <ul>
 <li>A number of OpenShift objects were created:</li>
 <li>A Postgres database deployment, service, and route</li>
 <li>A coolstore binary BuildConfig
-
 <ul>
 <li>Binary builds accept source code through stdin in later commands (vs. kicking off a build within an OpenShift pod)</li>
-</ul></li>
-<li>Services, Routes and DeploymentConfig for coolstore-dev</li>
-<li>Service Accounts and Secrets (for cluster permissions)<br /></li>
 </ul>
-
+</li>
+<li>Services, Routes and DeploymentConfig for coolstore-dev</li>
+<li>Service Accounts and Secrets (for cluster permissions)</li>
+</ul>
 <blockquote>
 <p>Build the coolstore monolith (.war file) locally and deploy into the OpenShift via the binary build:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore/monolith</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean package -Popenshift</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc start-build coolstore --from-file deployments/ROOT.war --follow</code></pre></div>
-<h1 id="step-4">Step 4</h1>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore/monolith
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean package -Popenshift
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc start-build coolstore --from-file deployments/ROOT.war --follow
+</code></pre></div><h1 id="step-4">Step 4</h1>
 <ul>
 <li>Binary builds still produce Linux container images and are stored into the container registry.</li>
 </ul>
-
 <blockquote>
 <p>In the web console, navigate to Builds → Images to see the new image created as a result of combining the monolith .war file with the JBoss EAP builder image</p>
 </blockquote>
-
 <div class="panel-group">
   
 
@@ -434,13 +419,10 @@ Please update ``<USERNAME>`` below with your assigned username
 
 </div>
 
-
 <h1 id="step-5">Step 5</h1>
-
 <blockquote>
 <p>Once the deployment is complete, navigate to the application by clicking on its route in the OpenShift web console Overview and exercise the app by adding/removing products to your shopping cart:</p>
 </blockquote>
-
 <div class="panel-group">
   
 
@@ -467,26 +449,24 @@ Please update ``<USERNAME>`` below with your assigned username
 
 </div>
 
-
 <h1 id="step-6">Step 6</h1>
-
 <ul>
 <li>The app contains an AngularJS web frontend which makes REST calls to its backend (e.g. /services/products)</li>
 <li>The app’s backend contains services implement as Stateless and Stateful EJBs backed by JPA entities</li>
 <li>The product catalog and inventory are stored together in the database.</li>
 </ul>
-
 <blockquote>
 <p>Log into the database pod (with postgresql in the pod name) and inspect the values stored (you will need to copy/paste the password from the POSTGRESQL_PASSWORD environment variable when running the psql command):</p>
-
+</blockquote>
+<blockquote>
 <p>Make note of POSTGRESQL_PASSWORD</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc env dc/coolstore-dev-postgresql --list       <span style="color:#75715e"># copy value of POSTGRESQL_PASSWORD to clipboard</span></code></pre></div>
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc env dc/coolstore-dev-postgresql --list       <span style="color:#75715e"># copy value of POSTGRESQL_PASSWORD to clipboard</span>
+</code></pre></div><blockquote>
 <p>Make note of postgresql pod</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods</code></pre></div>
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
+</code></pre></div><blockquote>
 <p>oc rsh into postresql pod</p>
 </blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc rsh coolstore-dev-postgresql-1-3rfuw
@@ -496,53 +476,49 @@ psql <span style="color:#f92672">(</span>9.5.4<span style="color:#f92672">)</spa
 Type <span style="color:#e6db74">&#34;help&#34;</span> <span style="color:#66d9ef">for</span> help.
 
 monolith<span style="color:#f92672">=</span>&gt; <span style="color:#66d9ef">select</span> * from INVENTORY;
-monolith<span style="color:#f92672">=</span>&gt; <span style="color:#66d9ef">select</span> * from PRODUCT_CATALOG;</code></pre></div>
-<blockquote>
+monolith<span style="color:#f92672">=</span>&gt; <span style="color:#66d9ef">select</span> * from PRODUCT_CATALOG;
+
+</code></pre></div><blockquote>
 <p>Exit out of psql and then the postgresql pod</p>
 </blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">monolith<span style="color:#f92672">=</span>&gt; <span style="color:#ae81ff">\q</span>
 sh-4.2$ exit
-exit</code></pre></div>
-<h1 id="step-7">Step 7</h1>
-
+exit
+</code></pre></div><h1 id="step-7">Step 7</h1>
 <ul>
 <li>The coolstore-dev build and deployment is responsible for building new versions of the app after code changes and deploying them to the development environment.</li>
 <li>Production environments will ideally use different projects, and even different nodes in an OpenShift cluster. For simplicity we have dev and prod in the same project.</li>
 </ul>
-
 <blockquote>
 <p>Create the production deployment objects that will be used to promote builds from dev to prod using the supplied CI/CD pipeline:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc process -f ~/coolstore/monolith/src/main/openshift/template-prod.json | oc create -f -</code></pre></div>
-<h1 id="step-8">Step 8</h1>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc process -f ~/coolstore/monolith/src/main/openshift/template-prod.json | oc create -f -
+</code></pre></div><h1 id="step-8">Step 8</h1>
 <ul>
 <li>Several types of OpenShift objects are created:
-
 <ul>
 <li>A production Postgres database deployment, service, and route</li>
 <li>Services, Routes and DeploymentConfig for coolstore-prod (production env)</li>
 <li>Service Accounts and Secrets (for cluster permissions)</li>
 <li>A CI/CD server (Jenkins)</li>
 <li>A CI/CD pipeline</li>
-</ul></li>
+</ul>
+</li>
 <li>Notice that no deployment occurs for the production version of the app.</li>
 <li>Deployment of the production app occurs as a result of images from the dev environment being appropriately tagged.</li>
 </ul>
-
 <blockquote>
 <p>Inspect the pipeline and observe the steps it executes during the pipeline run. Notice at the end of the script, the latest coolstore image is tagged with :prod, triggering a production deployment:</p>
 </blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get bc/monolith-pipeline -o yaml
 ...
           openshiftTag<span style="color:#f92672">(</span>sourceStream: <span style="color:#e6db74">&#39;coolstore&#39;</span>, sourceTag: <span style="color:#e6db74">&#39;latest&#39;</span>, namespace: <span style="color:#e6db74">&#39;&#39;</span>, destinationStream: <span style="color:#e6db74">&#39;coolstore&#39;</span>, destinationTag: <span style="color:#e6db74">&#39;prod&#39;</span>, destinationNamespace: <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">)</span>
-...</code></pre></div>
-<h1 id="step-9">Step 9</h1>
+...
 
+</code></pre></div><h1 id="step-9">Step 9</h1>
 <blockquote>
 <p>Wait for the jenkins service to be completely available, then execute the pipeline by navigating to Builds→ Pipelines and click on Start Pipeline next to the Monolith Pipeline:</p>
 </blockquote>
-
 <div class="panel-group">
   
 
@@ -569,20 +545,16 @@ exit</code></pre></div>
 
 </div>
 
-
 <h1 id="step-10">Step 10</h1>
-
 <ul>
 <li>Observe the pipeline as it executes its stages</li>
 <li>Once the pipeline is complete, the production app is deployed.</li>
 <li>Typically there would be a human approval step before going live</li>
 <li>Pipelines are also good at executing advanced deployment strategies (blue/green, canary)</li>
 </ul>
-
 <blockquote>
 <p>Return to the Overview page, wait for the deployment to complete, then click on the route for the coolstore-prod deployment to test the production app (identical to coolstore-dev).</p>
 </blockquote>
-
 <div class="panel-group">
   
 
@@ -609,13 +581,10 @@ exit</code></pre></div>
 
 </div>
 
-
 <h1 id="step-11">Step 11</h1>
-
 <blockquote>
 <p>You should now have two identical copies of the app deployed, along with two databases:</p>
 </blockquote>
-
 <div class="panel-group">
   
 
@@ -642,13 +611,10 @@ exit</code></pre></div>
 
 </div>
 
-
 <h1 id="step-12">Step 12</h1>
-
 <blockquote>
 <p>Scale down the coolstore-dev environment by clicking the down arrow next to the coolstore-dev and coolstore-dev-postgresql pods:</p>
 </blockquote>
-
 <div class="panel-group">
   
 
@@ -675,20 +641,11 @@ exit</code></pre></div>
 
 </div>
 
-
 <div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-
-If your build pipeline fails to start, you can manually tag the images:
-
-```bash
-$ oc tag coolstore:latest coolstore:prod
-```
-
-
-</div>
+<p><span class="pficon pficon-info"></span></p>
+<p>If your build pipeline fails to start, you can manually tag the images:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc tag coolstore:latest coolstore:prod
+</code></pre></div></div>
 
 
     

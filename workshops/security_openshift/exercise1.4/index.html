@@ -342,7 +342,7 @@ tags are available for the given repository? which labels the image has?</p>
 <div class="listingblock">
 <div class="title">switch to ec2-user</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">exit</code></pre>
 </div>
 </div>
 </div>
@@ -356,7 +356,7 @@ make it look better.</p>
 <div class="listingblock">
 <div class="title">inspect fedora on Docker Hub</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://docker.io/fedora | jq '.'</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">skopeo inspect docker://docker.io/fedora | jq '.'</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -365,7 +365,7 @@ make it look better.</p>
 <div class="listingblock">
 <div class="title">parse Digest</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://docker.io/fedora | jq '.Digest'</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">skopeo inspect docker://docker.io/fedora | jq '.Digest'</code></pre>
 </div>
 </div>
 </div>
@@ -381,7 +381,7 @@ to other remote registries.</p>
 <div class="listingblock">
 <div class="title">copy to filesystem</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /home/ec2-user/busybox
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir /home/ec2-user/busybox
 
 skopeo copy docker://busybox:latest dir:/home/ec2-user/busybox</code></pre>
 </div>
@@ -393,7 +393,7 @@ so we can compare them.</p>
 <div class="listingblock">
 <div class="title">copy OCI image</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir busybox_ocilayout
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir busybox_ocilayout
 
 skopeo copy docker://busybox:latest oci:/home/ec2-user/busybox_ocilayout</code></pre>
 </div>
@@ -405,7 +405,7 @@ the OCI image.</p>
 <div class="listingblock">
 <div class="title">examine the diffrent layouts</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -la /home/ec2-user/busybox
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">ls -la /home/ec2-user/busybox
 
 ls -la /home/ec2-user/busybox_ocilayout</code></pre>
 </div>
@@ -438,7 +438,7 @@ your image, or offer suggestions on other images that may also be needed.</p>
 <div class="listingblock">
 <div class="title">Mongodb image with Kubernetes labels</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://centos/mongodb-26-centos7 | jq '.'
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">skopeo inspect docker://centos/mongodb-26-centos7 | jq '.'
 
 skopeo inspect docker://centos/mongodb-26-centos7 | jq '.Labels'</code></pre>
 </div>
@@ -446,7 +446,7 @@ skopeo inspect docker://centos/mongodb-26-centos7 | jq '.Labels'</code></pre>
 <div class="listingblock">
 <div class="title">Wildfly image with Kubernetes labels</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://openshift/wildfly-101-centos7  | jq '.'
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">skopeo inspect docker://openshift/wildfly-101-centos7  | jq '.'
 
 skopeo inspect docker://openshift/wildfly-101-centos7 | jq '.Labels'</code></pre>
 </div>

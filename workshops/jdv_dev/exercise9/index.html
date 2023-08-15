@@ -307,80 +307,81 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="overview">Overview</h1>
-
+    <h1 id="overview">Overview</h1>
 <ul>
 <li>To secure the services we created in our VDB, we need to create an additional user on the server.</li>
 </ul>
-
 <h1 id="create-the-additional-user">Create the additional user</h1>
-
 <ul>
-<li><p>In <code>$JBOSS_HOME/bin</code> directory run the following script with the answers to the prompts below</p>
-<pre><code>./add-user.sh</code></pre></li>
+<li>In <code>$JBOSS_HOME/bin</code> directory run the following script with the answers to the prompts below</li>
 </ul>
-
-<div class="alert alert-info">
-  
-  <span class="pficon pficon-info"></span>
-  
-For windows users, the script will be **add-user.bat**
-
+<pre><code>./add-user.sh
+</code></pre><div class="alert alert-info">
+<p><span class="pficon pficon-info"></span></p>
+<p>For windows users, the script will be <strong>add-user.bat</strong></p>
 </div>
-
 <ul>
-<li>Type: <strong>b) Application User</strong></li>
-<li>Username: <strong>maskUser</strong></li>
-<li>Password: <strong>Password1!</strong> (same as the one used during installation</li>
-<li>groups: <strong>odata,mask</strong></li>
-
-<li><p>Remoting: <strong>no</strong></p></li>
-
-<li><p>Back in <strong>JBDS</strong> open the <strong>demo-jdv.vdb</strong> and then to Data Roles tab.  In the lower left add a new role</p></li>
-
-<li><p>Name the role <strong>User</strong>.</p></li>
-
-<li><p>In the mapped enterprise role tab add a value of <strong>user</strong>.  Click <strong>finish</strong></p></li>
+<li>
+<p>Type: <strong>b) Application User</strong></p>
+</li>
+<li>
+<p>Username: <strong>maskUser</strong></p>
+</li>
+<li>
+<p>Password: <strong>Password1!</strong> (same as the one used during installation</p>
+</li>
+<li>
+<p>groups: <strong>odata,mask</strong></p>
+</li>
+<li>
+<p>Remoting: <strong>no</strong></p>
+</li>
+<li>
+<p>Back in <strong>JBDS</strong> open the <strong>demo-jdv.vdb</strong> and then to Data Roles tab.  In the lower left add a new role</p>
+</li>
+<li>
+<p>Name the role <strong>User</strong>.</p>
+</li>
+<li>
+<p>In the mapped enterprise role tab add a value of <strong>user</strong>.  Click <strong>finish</strong></p>
+</li>
 </ul>
-
-<p><img src="../images/9-role-mapping.png"></p>
-
+<img src="../images/9-role-mapping.png">
 <ul>
-<li><p>Add another Data Role called <strong>Masked</strong></p></li>
-
-<li><p>In the mapped enterprise role tab add a value of <strong>mask</strong></p></li>
-
-<li><p>Uncheck all the tables <strong>except</strong> for FedView</p></li>
+<li>
+<p>Add another Data Role called <strong>Masked</strong></p>
+</li>
+<li>
+<p>In the mapped enterprise role tab add a value of <strong>mask</strong></p>
+</li>
+<li>
+<p>Uncheck all the tables <strong>except</strong> for FedView</p>
+</li>
 </ul>
-
-<p><img src="../images/9-masked-view.png"></p>
-
+<img src="../images/9-masked-view.png">
 <ul>
-<li><p>In the <strong>row filter tab</strong>, click <strong>add</strong>.  Set target as <strong>FedView.combined</strong></p></li>
-
-<li><p>In the <strong>condition</strong> field add <strong>visibility = 'public'</strong></p></li>
+<li>
+<p>In the <strong>row filter tab</strong>, click <strong>add</strong>.  Set target as <strong>FedView.combined</strong></p>
+</li>
+<li>
+<p>In the <strong>condition</strong> field add <strong>visibility = &lsquo;public&rsquo;</strong></p>
+</li>
 </ul>
-
-<p><img src="../images/9-row-filter.png"></p>
-
+<img src="../images/9-row-filter.png">
 <ul>
-<li><p>In the <strong>column masking</strong> tab, click add</p></li>
-
-<li><p>Target column is <strong>FedView.combined.email</strong>.  Column expression is <strong>'anon@email.com'</strong>.</p></li>
+<li>
+<p>In the <strong>column masking</strong> tab, click add</p>
+</li>
+<li>
+<p>Target column is <strong>FedView.combined.email</strong>.  Column expression is <strong>&lsquo;<a href="mailto:anon@email.com">anon@email.com</a>&rsquo;</strong>.</p>
+</li>
 </ul>
-
-<p><img src="../images/9-column-mask.png"></p>
-
+<img src="../images/9-column-mask.png">
 <h1 id="deploy-the-changes">Deploy the changes</h1>
-
 <ul>
 <li><strong>Save</strong> the changes to vdb then click the <strong>deploy</strong> button.</li>
 </ul>
-
 <h1 id="test-with-postman">Test with Postman</h1>
-
 <ul>
 <li>In postman, run the <strong>FedView masked</strong> test.  Verify that the <strong>Test Results</strong> tab returns <strong>PASS</strong></li>
 </ul>

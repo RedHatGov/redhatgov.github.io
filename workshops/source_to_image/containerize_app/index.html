@@ -307,41 +307,30 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="introduction">Introduction</h1>
-
+    <h1 id="introduction">Introduction</h1>
 <p>Now we want to containerize the Gochat app.  If you are using the CLI on your own computer, you could use the <strong>docker</strong> command.  However, if you are in the Wetty terminal, remember you are actually in a container.  We could have exposed the container socket on the host to your Wetty container.  However, this would break the security model.</p>
-
 <p>Fortunately we can build from a Dockerfile using the <strong>oc</strong> command line tool.  For those on your own computer, we recommend trying it this way as well.</p>
-
-<h2 id="step-1-create-a-new-project">Step 1 - Create a New Project</h2>
-
+<h2 id="step-1---create-a-new-project">Step 1 - Create a New Project</h2>
 <p>Create a new project for your containerized gochat application.</p>
 <pre><code class="language-terminal" data-lang="terminal">oc new-project gochat-container-user<span class="userid">YOUR#</span>
-</code></pre>
-<h2 id="step-2-build-from-dockerfile">Step 2 - Build from Dockerfile</h2>
 
+</code></pre><h2 id="step-2---build-from-dockerfile">Step 2 - Build from Dockerfile</h2>
 <p>Start a new build from the Dockerfile in the <a href="https://github.com/kevensen/gochat-client-container">gochat-container</a> repository.</p>
-<pre><code class="language-terminal" data-lang="terminal">oc new-build https://github.com/kevensen/gochat-client-container -e CHAT_SERVER=gochat-server.gochat-server.svc.cluster.local:8080</code></pre>
-<h2 id="step-3-let-s-take-a-pause">Step 3 - Let's Take a Pause</h2>
-
+<pre><code class="language-terminal" data-lang="terminal">oc new-build https://github.com/kevensen/gochat-client-container -e CHAT_SERVER=gochat-server.gochat-server.svc.cluster.local:8080
+</code></pre><h2 id="step-3---lets-take-a-pause">Step 3 - Let&rsquo;s Take a Pause</h2>
 <p>Watch the deployment</p>
-<pre><code class="language-terminal" data-lang="terminal">oc logs -f bc/gochat-client-container</code></pre>
-<p>Then <strong>ctrl-c</strong> once you've had enough.</p>
-
-<h2 id="step-4-deploy-from-imagestream">Step 4 - Deploy from ImageStream</h2>
-<pre><code class="language-terminal" data-lang="terminal">oc new-app gochat-client-container</code></pre>
-<h2 id="step-5-expose-the-containerized-gochat-app">Step 5 - Expose the Containerized Gochat App</h2>
-<pre><code class="language-terminal" data-lang="terminal">oc expose svc gochat-client-container</code></pre>
-<h2 id="step-6-annotate-the-service-account-to-use-openshift-authorization">Step 6 - Annotate the Service Account to Use OpenShift Authorization</h2>
-
+<pre><code class="language-terminal" data-lang="terminal">oc logs -f bc/gochat-client-container
+</code></pre><p>Then <strong>ctrl-c</strong> once you&rsquo;ve had enough.</p>
+<h2 id="step-4---deploy-from-imagestream">Step 4 - Deploy from ImageStream</h2>
+<pre><code class="language-terminal" data-lang="terminal">oc new-app gochat-client-container
+</code></pre><h2 id="step-5---expose-the-containerized-gochat-app">Step 5 - Expose the Containerized Gochat App</h2>
+<pre><code class="language-terminal" data-lang="terminal">oc expose svc gochat-client-container
+</code></pre><h2 id="step-6---annotate-the-service-account-to-use-openshift-authorization">Step 6 - Annotate the Service Account to Use OpenShift Authorization</h2>
 <p>As in the previous lab, we must annotate the service account for the Gochat Client to communicate to the OpenShift API for user credential verification.</p>
-<pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirectreference.1=&#39;{&#34;kind&#34;:&#34;OAuthRedirectReference&#34;,&#34;apiVersion&#34;:&#34;v1&#34;,&#34;reference&#34;:{&#34;kind&#34;:&#34;Route&#34;,&#34;name&#34;:&#34;gochat-client-container&#34;}}&#39; --overwrite</code></pre><pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirecturi.1=auth/callback/openshift --overwrite</code></pre>
-<h2 id="step-7-access-the-app">Step 7 - Access the App</h2>
-
-<p>Go back to the OpenShift WebUI and click on the &quot;gochat&quot; URL.</p>
-
+<pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirectreference.1='{&quot;kind&quot;:&quot;OAuthRedirectReference&quot;,&quot;apiVersion&quot;:&quot;v1&quot;,&quot;reference&quot;:{&quot;kind&quot;:&quot;Route&quot;,&quot;name&quot;:&quot;gochat-client-container&quot;}}' --overwrite
+</code></pre><pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirecturi.1=auth/callback/openshift --overwrite
+</code></pre><h2 id="step-7---access-the-app">Step 7 - Access the App</h2>
+<p>Go back to the OpenShift WebUI and click on the &ldquo;gochat&rdquo; URL.</p>
 <div class="panel-group">
   
 
@@ -349,17 +338,17 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse270a6795b2f44a6fc8c4249b71efa19f" class="collapsed">
+      <a data-toggle="collapse" href="#collapse0644e96a41228b41f6b022df384a56b2" class="collapsed">
       
         Gochat Service Route - URL
       </a>
     </h4>
   </div>
   
-  <div id="collapse270a6795b2f44a6fc8c4249b71efa19f" class="panel-collapse collapse ">
+  <div id="collapse0644e96a41228b41f6b022df384a56b2" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/gochat_container_url.png" width="800" align="middle"/></p>
+       <img src="../images/gochat_container_url.png" width="800" align="middle"/>
 
     </div>
   </div>
@@ -368,10 +357,8 @@
 
 </div>
 
-
-<h2 id="step-8-sign-in-to-the-app">Step 8 - Sign in to the App</h2>
-
-<p>Click the blue &quot;Login&quot; button.
+<h2 id="step-8---sign-in-to-the-app">Step 8 - Sign in to the App</h2>
+<p>Click the blue &ldquo;Login&rdquo; button.
 <div class="panel-group">
   
 
@@ -379,17 +366,17 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsea36c36c082cb3877a00642f73bd6390a" class="collapsed">
+      <a data-toggle="collapse" href="#collapsec7396eae5999b18e7b8172050454e4af" class="collapsed">
       
         Gochat Signin
       </a>
     </h4>
   </div>
   
-  <div id="collapsea36c36c082cb3877a00642f73bd6390a" class="panel-collapse collapse ">
+  <div id="collapsec7396eae5999b18e7b8172050454e4af" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/gochat_signin.png" width="800" align="middle"/></p>
+       <img src="../images/gochat_signin.png" width="800" align="middle"/>
 
     </div>
   </div>
@@ -399,7 +386,6 @@
 </div>
 
 Log in to the app with your OpenShift credentials.  The workshop moderator will provide you with the URL, your username, and password.</p>
-
 <div class="panel-group">
   
 
@@ -426,17 +412,11 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
 
 </div>
 
-
-<h2 id="step-9-test-the-app">Step 9 - Test the App</h2>
-
+<h2 id="step-9---test-the-app">Step 9 - Test the App</h2>
 <p>Send a message.</p>
-
-<h2 id="step-10-celebrate">Step 10 - Celebrate</h2>
-
+<h2 id="step-10---celebrate">Step 10 - Celebrate</h2>
 <p><strong>Yay</strong></p>
-
-<h2 id="step-11-logout">Step 11 - Logout</h2>
-
+<h2 id="step-11---logout">Step 11 - Logout</h2>
 <div class="panel-group">
   
 
@@ -444,17 +424,17 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse0737a268f3700413f797817fbe002377" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3c5928a4d784fca28c1fe619674b750f" class="collapsed">
       
         Gochat Logout
       </a>
     </h4>
   </div>
   
-  <div id="collapse0737a268f3700413f797817fbe002377" class="panel-collapse collapse ">
+  <div id="collapse3c5928a4d784fca28c1fe619674b750f" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/gochat_logout.png" width="600" align="middle"/></p>
+       <img src="../images/gochat_logout.png" width="600" align="middle"/>
 
     </div>
   </div>
@@ -462,7 +442,6 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
 
 
 </div>
-
 
 <style>
 

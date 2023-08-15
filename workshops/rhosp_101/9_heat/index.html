@@ -307,53 +307,35 @@
   </ul>
 </nav>
 
-    
-
-<h1 id="we-have-done-a-ton-of-stuff-but-all-manually-how-do-we-orchestrate">We Have Done a Ton of Stuff, But All Manually. How Do We Orchestrate?</h1>
-
+    <h1 id="we-have-done-a-ton-of-stuff-but-all-manually-how-do-we-orchestrate">We Have Done a Ton of Stuff, But All Manually. How Do We Orchestrate?</h1>
 <p>In OpenStack, the answer to that is <strong>Heat</strong>.</p>
-
 <p>Heat is the main project for orchestration in OpenStack. It implements an orchestration engine to launch multiple composite cloud applications based on templates in the form of text files that can be treated like code. A native Heat template format is evolving, but Heat also endeavours to provide compatibility with the AWS CloudFormation template format, so that many existing CloudFormation templates can be launched on OpenStack. Heat provides both an OpenStack-native ReST API and a CloudFormation-compatible Query API.</p>
-
 <p>Why <strong>Heat</strong>? It makes the clouds rise!</p>
-
 <p>In this lab, we are going to walk through instantiating a Heat stack via CLI.</p>
-
 <h2 id="first-we-need-access-to-a-system-with-the-clis-installed">First, We Need Access to a System with the CLIs Installed</h2>
-
 <div class="alert alert-warning">
-  
-  <span class="pficon pficon-warning-triangle-o"></span>
-  
-In order to complete this lab, you will need an SSH client.
-
-On Linux or Mac, you can just use your favorite terminal.
-
-On Windows, you will need to download [putty](http://192.168.0.8/repos/putty.exe) if you don't already have it. This is an exe file that does not need to be installed. It will just run directly.
-
+<p><span class="pficon pficon-warning-triangle-o"></span></p>
+<p>In order to complete this lab, you will need an SSH client.</p>
+<p>On Linux or Mac, you can just use your favorite terminal.</p>
+<p>On Windows, you will need to download <a href="http://192.168.0.8/repos/putty.exe">putty</a> if you don&rsquo;t already have it. This is an exe file that does not need to be installed. It will just run directly.</p>
 </div>
-
 <blockquote>
 <p>On Linux or Mac, in your terminal, ssh to 192.168.1.90 on port 22</p>
 </blockquote>
-<pre><code>$ ssh student<span class="userid">1</span>@192.168.1.90</code></pre>
-<p>If on Windows, run putty, enter <strong>192.168.1.90</strong> as the host and <strong>22</strong> as the port.</p>
-
+<pre><code>$ ssh student<span class="userid">1</span>@192.168.1.90
+</code></pre><p>If on Windows, run putty, enter <strong>192.168.1.90</strong> as the host and <strong>22</strong> as the port.</p>
 <p>You will get asked if you are sure you want to connect. Type <strong>yes</strong> and hit enter.</p>
-
 <p>Login with your <strong>student<span class="userid">1</span></strong> credentials.</p>
-
-<h2 id="let-s-autenticate-to-the-openstack-cloud">Let's Autenticate to the OpenStack Cloud</h2>
-
+<h2 id="lets-autenticate-to-the-openstack-cloud">Let&rsquo;s Autenticate to the OpenStack Cloud</h2>
 <blockquote>
 <p>Source your student<span class="userid">1</span>rc file</p>
 </blockquote>
-<pre><code>$ source student<span class="userid">1</span>rc</code></pre>
-<blockquote>
+<pre><code>$ source student<span class="userid">1</span>rc
+</code></pre><blockquote>
 <p>Verify that you are connected by running nova list</p>
 </blockquote>
-<pre><code>$ openstack server list</code></pre>
-<p>You should see the instances you created in the previous labs.</p>
+<pre><code>$ openstack server list
+</code></pre><p>You should see the instances you created in the previous labs.</p>
 <pre><code>(overcloud) [student1@bastion ~]$ openstack server list
 +--------------------------------------+-----------------------+--------+-------------------------------------+---------------------+---------+
 | ID                                   | Name                  | Status | Networks                            | Image               | Flavor  |
@@ -361,8 +343,8 @@ On Windows, you will need to download [putty](http://192.168.0.8/repos/putty.exe
 | e0c0187f-e437-48fc-a415-36bfcb5fc2e6 | student1-cirros-cli-1 | ACTIVE | private-b=172.16.1.6                | student1-cirros-cli | m1.tiny |
 | 45a45a6e-6e51-4858-b5d0-9e16a9308c33 | student1-cirros-1     | ACTIVE | private-a=172.16.0.6, 192.168.1.106 | student1-cirros     | m1.tiny |
 | cbd781be-cc64-4302-b15c-5a7ae805a917 | student1-cirros-2     | ACTIVE | private-a=172.16.0.14               | student1-cirros     | m1.tiny |
-+--------------------------------------+-----------------------+--------+-------------------------------------+---------------------+---------+</code></pre>
-<h2 id="now-let-s-examine-the-heat-template">Now Let's Examine the Heat Template</h2>
++--------------------------------------+-----------------------+--------+-------------------------------------+---------------------+---------+
+</code></pre><h2 id="now-lets-examine-the-heat-template">Now Let&rsquo;s Examine the Heat Template</h2>
 <pre><code>(overcloud) [student1@bastion ~]$ cat heat-example.yaml 
 heat_template_version: 2014-10-16  
 description: A simple server.  
@@ -391,7 +373,7 @@ resources:
           delete_on_termination: true
           volume_id: { get_resource: volume }
       flavor: {get_param: flavor}
-      metadata: {&#34;metering.stack&#34;: {get_param: &#34;OS::stack_id&#34;}}
+      metadata: {&quot;metering.stack&quot;: {get_param: &quot;OS::stack_id&quot;}}
       key_name: {get_param: keypair}
       networks:
         - port: { get_resource: port }
@@ -418,12 +400,12 @@ resources:
     type: OS::Cinder::Volume
     properties:
       image: {get_param: image}
-      size: 10</code></pre>
-<blockquote>
-<p>Let's Launch a Heat Stack with this Template</p>
+      size: 10
+</code></pre><blockquote>
+<p>Let&rsquo;s Launch a Heat Stack with this Template</p>
 </blockquote>
-<pre><code>$ openstack stack create --parameter keypair=student<span class="userid">1</span> --parameter image=rhel76 -t heat-example.yaml student<span class="userid">1</span>-stack</code></pre>
-<p>Here is an example run.</p>
+<pre><code>$ openstack stack create --parameter keypair=student<span class="userid">1</span> --parameter image=rhel76 -t heat-example.yaml student<span class="userid">1</span>-stack
+</code></pre><p>Here is an example run.</p>
 <pre><code>(overcloud) [student1@bastion ~]$ openstack stack create --parameter keypair=student1 --parameter image=rhel76 -t heat-example.yaml student1-stack
 +---------------------+--------------------------------------+
 | Field               | Value                                |
@@ -435,64 +417,52 @@ resources:
 | updated_time        | None                                 |
 | stack_status        | CREATE_IN_PROGRESS                   |
 | stack_status_reason | Stack CREATE started                 |
-+---------------------+--------------------------------------+</code></pre>
-<blockquote>
++---------------------+--------------------------------------+
+</code></pre><blockquote>
 <p>You can watch stack list to see the stack go through the provisioning process and become CREATE_COMPLETE</p>
 </blockquote>
-<pre><code>$ watch openstack stack list</code></pre><pre><code>Every 2.0s: openstack stack list                                                               Sat Jul 13 17:13:58 2019
+<pre><code>$ watch openstack stack list
+</code></pre><pre><code>Every 2.0s: openstack stack list                                                               Sat Jul 13 17:13:58 2019
 
 +--------------------------------------+----------------+-----------------+----------------------+--------------+
 | ID                                   | Stack Name     | Stack Status    | Creation Time        | Updated Time |
 +--------------------------------------+----------------+-----------------+----------------------+--------------+
 | 561d326e-4135-41ff-8254-7527f4261c5e | student1-stack | CREATE_COMPLETE | 2019-07-13T20:49:47Z | None		|
-+--------------------------------------+----------------+-----------------+----------------------+--------------+</code></pre>
-<h1 id="examining-stack-topology-in-horizon">Examining Stack Topology in Horizon</h1>
-
++--------------------------------------+----------------+-----------------+----------------------+--------------+
+</code></pre><h1 id="examining-stack-topology-in-horizon">Examining Stack Topology in Horizon</h1>
 <blockquote>
 <p>Navigate to Orchestration -&gt; Stacks using the second level navigation tabs</p>
 </blockquote>
-
 <figure>
     <img src="../images/lab8-heat-1.png"/> <figcaption>
             <h4>Lab 8 Figure 1: Heat Stack List</h4>
         </figcaption>
 </figure>
 
-
 <blockquote>
 <p>Click on <strong>student<span class="userid">1</span>-stack</strong></p>
 </blockquote>
-
 <figure>
     <img src="../images/lab8-heat-2.png"/> <figcaption>
             <h4>Lab 8 Figure 2: Heat Stack Topology for the New student1-stack</h4>
         </figcaption>
 </figure>
 
-
 <h1 id="examining-project-network-topology">Examining Project Network Topology</h1>
-
 <blockquote>
 <p>Navigate to Network -&gt; Network Topology using the second level navigation tabs.</p>
 </blockquote>
-
 <figure>
     <img src="../images/lab8-heat-3.png"/> <figcaption>
             <h4>Lab 8 Figure 3: Neutron Network Topology</h4>
         </figcaption>
 </figure>
 
-
 <h1 id="summary">Summary</h1>
-
 <p>With the power of Heat, we just did in 1 command with a single YAML Heat Orchestration Template what it took us 6 labs to do previously via Horizon.</p>
-
 <p>The major benefit to this is that we can version control our Heat templates and provisioning can be repeated in the same manner every time.</p>
-
 <p>Heat templates can also be exposed to Red Hat CloudForms to present to end users in a service catalog. CloudForms is included in the purchase of Red Hat OpenStack Platform.</p>
-
 <p>OpenStack has come a long way towards being the cloud software of choice for enterprise data centers.</p>
-
 <hr>
 <h3>Workshop Details</h3>
 <div class="row">
