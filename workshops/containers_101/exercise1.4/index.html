@@ -345,131 +345,18 @@
 </ul>
 </div>
 <div class="sect2">
-<h3 id="_step_1_install_docker_distribution_package">Step 1. Install docker-distribution package</h3>
+<h3 id="_step_1_launch_a_docker_registry_image">Step 1. Launch a Docker registry image</h3>
 <div class="paragraph">
-<p>First, lets install the <code>docker-distribution</code> package, to provide the registry software:</p>
+<p>First, lets run a basic registry container:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">yum install -y docker-distribution</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -d -p 5000:5000 docker.io/registry</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_2_set_the_service_to_auto_start">Step 2. Set the service to auto-start</h3>
-<div class="paragraph">
-<p>Next, lets set the service to auto-start at system boot:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">systemctl enable docker-distribution</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_step_3_enable_use_of_https">Step 3. Enable use of https</h3>
-<div class="paragraph">
-<p>A) The container registry configuration file will need to be modified to allow the use of https (secure) communications.  First, we will generate a certificate.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /etc/docker-distribution/certs</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd /etc/docker-distribution/certs</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -out domain.crt</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>B) Answer the questions that OpenSSL asks, in any way that you see fit, but make sure that you specify a <code>Common Name</code> of <code>localhost</code>.  Here is an example:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Generating a 4096 bit RSA private key
-............................................................++
-...............................................................++
-writing new private key to &#39;domain.key&#39;
------
-You are about to be asked to enter information that will be incorporated
-into your certificate request.
-What you are about to enter is what is called a Distinguished Name or a DN.
-There are quite a few fields but you can leave some blank
-For some fields there will be a default value,
-If you enter &#39;.&#39;, the field will be left blank.
------
-Country Name (2 letter code) [XX]:US
-State or Province Name (full name) []:Ohio
-Locality Name (eg, city) [Default City]:Dublin
-Organization Name (eg, company) [Default Company Ltd]:workshop
-Organizational Unit Name (eg, section) []:workshop
-Common Name (eg, your name or your server&#39;s hostname) []:localhost
-Email Address []:student@lab.local</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_step_4_to_finish_this_configuration_add_the_cert_to_the_systems_trusted_database">Step 4. To finish this configuration,  add the cert to the system’s trusted database:</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cp domain.crt /etc/pki/tls/certs</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">update-ca-trust extract</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_step_5_add_secure_mode_to_the_container_registry_configuration">Step 5. Add secure mode to the container registry configuration.</h3>
-<div class="paragraph">
-<p>Edit the file &#39;/etc/docker-distribution/registry/config.yml&#39; to match the example below.  Pay close attention to the last five lines, starting with tls, as these are required for configuration file.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">vi /etc/docker-distribution/registry/config.yml</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">version: 0.1
-log:
-  fields:
-    service: registry
-storage:
-    cache:
-        layerinfo: inmemory
-    filesystem:
-        rootdirectory: /var/lib/registry
-    delete:
-        enabled: true
-http:
-    addr: :5000
-    tls:
-      certificate: /etc/docker-distribution/certs/domain.crt
-      key: /etc/docker-distribution/certs/domain.key
-    host: https://localhost:5000
-    relativeurls: false</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_step_6_start_the_registry">Step 6. Start the registry:</h3>
-<div class="listingblock">
-<div class="title">Start the registry</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">systemctl start docker-distribution</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_step_7_view_images_in_the_local_image_database">Step 7. View images in the local image database.</h3>
+<h3 id="_step_2_view_images_in_the_local_image_database">Step 2. View images in the local image database.</h3>
 <div class="paragraph">
 <p>Before we upload anything, let’s take a look to see what images we have in the local image database:</p>
 </div>
@@ -480,15 +367,14 @@ http:
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>REPOSITORY                            TAG      IMAGE ID       CREATED          SIZE
-registry.access.redhat.com/rhel7      latest   7a840db7f020   2 days ago       211MB
-docker.io/library/fedora              latest   cc510acfcd70   2 weeks ago      263MB
-docker.io/library/fedora_postgresql   latest   b105a704d05d   10 minutes ago   495MB</pre>
+<pre>REPOSITORY                                 TAG           IMAGE ID      CREATED      SIZE
+registry.access.redhat.com/ubi8/python-39  latest        a7afd78bc9a6  12 days ago  900 MB
+registry.access.redhat.com/ubi8            latest        7e569fa199c0  12 days ago  215 MB</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_8_push_the_container_to_the_local_registry">Step 8. Push the container to the local registry.</h3>
+<h3 id="_step_3_push_the_container_to_the_local_registry">Step 3. Push the container to the local registry.</h3>
 <div class="paragraph">
 <p>To push the container, either of these two commands will work.</p>
 </div>
@@ -506,7 +392,7 @@ Choose only one of the following two commands (<code>buildah push</code> or <cod
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah push fedora_postgresql:latest localhost:5000/fedora_postgresql:latest</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah push --tls-verify=false --remove-signatures ubi8/python-39:latest localhost:5000/ubi8/python-39:latest</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -526,24 +412,24 @@ This image ID will vary, and you should use the value from the output produced o
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo copy containers-storage:7a840db7f020 docker://localhost:5000/fedora_postgresql:latest</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo copy --dest-tls-verify=false --remove-signatures containers-storage:7a840db7f020 docker://localhost:5000/ubi8/python-39:latest</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_9_verify_the_image_location_in_the_registry">Step 9. Verify the image location in the registry.</h3>
+<h3 id="_step_4_verify_the_image_location_in_the_registry">Step 4. Verify the image location in the registry.</h3>
 <div class="paragraph">
 <p>Next, let’s search the registry to make sure that our image made it, and is available:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman search localhost:5000/postgresql</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman search --tls-verify=false localhost:5000/ubi8</code></pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>INDEX            NAME                               DESCRIPTION   STARS   OFFICIAL   AUTOMATED
-localhost:5000   localhost:5000/fedora_postgresql                 0</pre>
+<pre>NAME                           DESCRIPTION
+localhost:5000/ubi8/python-39</pre>
 </div>
 </div>
 <div class="paragraph">
