@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -331,9 +341,9 @@ Click on the line connecting our app-ui to the boards service.
 <i class="fa fa-terminal"></i>
 OK, let's try to run that same command again to snoop on traffic. Run the following:
 </blockquote>
-<pre tabindex="0"><code>oc run curl-boards-2 -i --restart=Never --image=appropriate/curl --timeout=10s -- boards:8080/shareditems
+<pre><code>oc run curl-boards-2 -i --restart=Never --image=appropriate/curl --timeout=10s -- boards:8080/shareditems
 </code></pre><p>You should get an output indicating that the job failed to pull data. This is because the traffic didn&rsquo;t come from a verifiable service known to the mesh and wasn&rsquo;t able to do a secure mTLS token handshake. Your output should look like this:</p>
-<pre tabindex="0"><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+<pre><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 curl: (56) Recv failure: Connection reset by peer
@@ -344,7 +354,7 @@ pod microservices-demo/curl-boards terminated (Error)
 <i class="fa fa-terminal"></i>
 Type the following in the CLI
 </blockquote>
-<pre tabindex="0"><code>oc delete policy/default
+<pre><code>oc delete policy/default
 oc delete dr --all
 </code></pre><h2 id="more-about-mtls-options">More About mTLS Options</h2>
 <p>mTLS in the service mesh isn&rsquo;t <em>just</em> an ON/OFF capability. We kept it basic for the lab, but you could have easily chosen specific services to enforce it on. PERMISSIVE mode is especially useful in a scenario where want to migrate your existing services’ traffic from plain text to mTLS. It allows a service to accept both plaintext traffic and mutual TLS traffic at the same time (without breaking live traffic).</p>

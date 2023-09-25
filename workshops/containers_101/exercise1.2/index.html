@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -317,7 +327,7 @@
 <h2 id="_exercise_description">Exercise Description</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this exercise, you’ll learn the fundamentals of container images, including how to run them and how to see what is  inside of a container. Container storage volumes will be discussed, showing how to mount external file systems, with useful functions and data. We will also discuss container metadata and explain what types of information you can get from them.</p>
+<p>In this exercise, you&#8217;ll learn the fundamentals of container images, including how to run them and how to see what is  inside of a container. Container storage volumes will be discussed, showing how to mount external file systems, with useful functions and data. We will also discuss container metadata and explain what types of information you can get from them.</p>
 </div>
 </div>
 </div>
@@ -325,7 +335,7 @@
 <h2 id="_section_1_container_images">Section 1: Container Images</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>What you can do with container images, using &#39;podman run&#39;</p>
+<p>What you can do with container images, using 'podman run'</p>
 </div>
 <div class="paragraph">
 <p>When you execute the <code>podman run</code> command, a new container is created, from a container image.  That container consists of the image contents, plus any features based on additional selected options.</p>
@@ -347,7 +357,7 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>Additionally you can also…​</p>
+<p>Additionally you can also&#8230;&#8203;</p>
 </div>
 <div class="ulist">
 <ul>
@@ -384,7 +394,7 @@ Storing signatures</pre>
 </div>
 <div class="admonitionblock note">
 <table>
-<tbody><tr>
+<tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -399,7 +409,7 @@ Storing signatures</pre>
 </div>
 </td>
 </tr>
-</tbody></table>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -437,7 +447,7 @@ Storing signatures</pre>
 <p>In this section, we will mount a system volume to a container and use commands that are not present in the container.</p>
 </div>
 <div class="paragraph">
-<p>Note: The following command will fail as the &#34;ip&#34; command is not present in the base rhel7 container image.</p>
+<p>Note: The following command will fail as the "ip" command is not present in the base rhel7 container image.</p>
 </div>
 <div class="sect2">
 <h3 id="_volume_mounts">Volume Mounts</h3>
@@ -445,14 +455,14 @@ Storing signatures</pre>
 <p>Container images are very minimal installs of their referenced operating system, so commonly-used commands may not be present.</p>
 </div>
 <div class="listingblock">
-<div class="title">nonexistent command &#34;lshw&#34;</div>
+<div class="title">nonexistent command "lshw"</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it ubi8/python-39 /usr/sbin/lshw</code></pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>container create failed: container_linux.go:348: starting container process caused &#34;exec: \&#34;/usr/sbin/lshw\&#34;: stat /usr/sbin/lshw: no such file or directory&#34;
+<pre>container create failed: container_linux.go:348: starting container process caused "exec: \"/usr/sbin/lshw\": stat /usr/sbin/lshw: no such file or directory"
 : internal libpod error</pre>
 </div>
 </div>
@@ -493,7 +503,7 @@ WARNING: output may be incomplete or inaccurate, you should run this program as 
 <div class="listingblock">
 <div class="title">search the container host</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">journalctl | grep &#34;Testing logging&#34;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">journalctl | grep "Testing logging"</code></pre>
 </div>
 </div>
 <div class="literalblock">
@@ -516,7 +526,7 @@ sudo chgrp adm /opt/rhel_data</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -d -p 8080:8000 --name=&#34;python_web&#34; \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -d -p 8080:8000 --name="python_web" \
        -w /opt \
        -v /opt/rhel_data:/var/www/html ubi8/python-39 \
        -- python -m http.server -d /var/www/html</code></pre>
@@ -561,7 +571,7 @@ fcd06aee9533   registry.access.redhat.com/ubi8/python-39:latest   python -m http
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>&lt;!DOCTYPE html PUBLIC &#34;-//W3C//DTD HTML 3.2 Final//EN&#34;&gt;&lt;html&gt;
+<pre>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"&gt;&lt;html&gt;
 &lt;title&gt;Directory listing for /&lt;/title&gt;
 &lt;body&gt;
 &lt;h2&gt;Directory listing for /&lt;/h2&gt;
@@ -614,22 +624,22 @@ fcd06aee9533   registry.access.redhat.com/ubi8/python-39:latest   python -m http
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>&lt;!DOCTYPE html PUBLIC &#34;-//W3C//DTD HTML 3.2 Final//EN&#34;&gt;&lt;html&gt;
+<pre>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"&gt;&lt;html&gt;
 &lt;title&gt;Directory listing for /&lt;/title&gt;
 &lt;body&gt;
 &lt;h2&gt;Directory listing for /&lt;/h2&gt;
 &lt;hr&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;file1&#34;&gt;file1&lt;/a&gt;
-&lt;li&gt;&lt;a href=&#34;file10&#34;&gt;file10&lt;/a&gt;
-&lt;li&gt;&lt;a href=&#34;file2&#34;&gt;file2&lt;/a&gt;
-&lt;li&gt;&lt;a href=&#34;file3&#34;&gt;file3&lt;/a&gt;
-&lt;li&gt;&lt;a href=&#34;file4&#34;&gt;file4&lt;/a&gt;
-&lt;li&gt;&lt;a href=&#34;file5&#34;&gt;file5&lt;/a&gt;
-&lt;li&gt;&lt;a href=&#34;file6&#34;&gt;file6&lt;/a&gt;
-&lt;li&gt;&lt;a href=&#34;file7&#34;&gt;file7&lt;/a&gt;
-&lt;li&gt;&lt;a href=&#34;file8&#34;&gt;file8&lt;/a&gt;
-&lt;li&gt;&lt;a href=&#34;file9&#34;&gt;file9&lt;/a&gt;
+&lt;li&gt;&lt;a href="file1"&gt;file1&lt;/a&gt;
+&lt;li&gt;&lt;a href="file10"&gt;file10&lt;/a&gt;
+&lt;li&gt;&lt;a href="file2"&gt;file2&lt;/a&gt;
+&lt;li&gt;&lt;a href="file3"&gt;file3&lt;/a&gt;
+&lt;li&gt;&lt;a href="file4"&gt;file4&lt;/a&gt;
+&lt;li&gt;&lt;a href="file5"&gt;file5&lt;/a&gt;
+&lt;li&gt;&lt;a href="file6"&gt;file6&lt;/a&gt;
+&lt;li&gt;&lt;a href="file7"&gt;file7&lt;/a&gt;
+&lt;li&gt;&lt;a href="file8"&gt;file8&lt;/a&gt;
+&lt;li&gt;&lt;a href="file9"&gt;file9&lt;/a&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;/body&gt;
@@ -653,28 +663,28 @@ fcd06aee9533   registry.access.redhat.com/ubi8/python-39:latest   python -m http
 <div class="literalblock">
 <div class="content">
 <pre>[{
-    &#34;ID&#34;: &#34;fcd06aee95338748ab86faddd696c2cda212e7797b1e44428434da4a0d0b2b45&#34;,
-    &#34;Created&#34;: &#34;2018-05-23T17:21:40.315773016Z&#34;,
-    &#34;Path&#34;: &#34;python&#34;,
-    &#34;Args&#34;: [
-      &#34;-m&#34;,
-      &#34;http.server&#34;,
-      &#34;-d&#34;,
-      &#34;/var/www/html&#34;
+    "ID": "fcd06aee95338748ab86faddd696c2cda212e7797b1e44428434da4a0d0b2b45",
+    "Created": "2018-05-23T17:21:40.315773016Z",
+    "Path": "python",
+    "Args": [
+      "-m",
+      "http.server",
+      "-d",
+      "/var/www/html"
     ],
 ...
-    &#34;Name&#34;: &#34;python_web&#34;,
-    &#34;RestartCount&#34;: 0,
-    &#34;Driver&#34;: &#34;overlay&#34;,
-    &#34;MountLabel&#34;: &#34;system_u:object_r:svirt_sandbox_file_t:s0:c744,c884&#34;,
-    &#34;ProcessLabel&#34;: &#34;system_u:system_r:svirt_lxc_net_t:s0:c744,c884&#34;,
+    "Name": "python_web",
+    "RestartCount": 0,
+    "Driver": "overlay",
+    "MountLabel": "system_u:object_r:svirt_sandbox_file_t:s0:c744,c884",
+    "ProcessLabel": "system_u:system_r:svirt_lxc_net_t:s0:c744,c884",
 ...</pre>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_scripting_pro_tips">Scripting Pro Tips</h3>
 <div class="paragraph">
-<p>You can use a dot notation to parse the metadata returned by &#39;podman inspect&#39; and use it in your scripting, to quickly access properties you need, as shown in the following example.</p>
+<p>You can use a dot notation to parse the metadata returned by 'podman inspect' and use it in your scripting, to quickly access properties you need, as shown in the following example.</p>
 </div>
 <div class="listingblock">
 <div class="content">

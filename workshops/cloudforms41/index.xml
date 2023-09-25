@@ -5,7 +5,11 @@
     <link>/workshops/cloudforms41/</link>
     <description>Recent content in CloudForms Workshops on Red Hat | Public Sector</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/workshops/cloudforms41/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/cloudforms41/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>CloudForms Workshop Prerequisites</title>
       <link>/workshops/cloudforms41/prerequisites/</link>
@@ -13,7 +17,7 @@
       
       <guid>/workshops/cloudforms41/prerequisites/</guid>
       <description>If we have provided a laptop or cloud environment to you for this workshop, the following steps are already set up for you. Please jump to Exercise 1.0
-Install git We will use a few git commands directly in some of the advanced labs, please make sure git is installed on your system. You can download the latest version here.
+ Install git We will use a few git commands directly in some of the advanced labs, please make sure git is installed on your system. You can download the latest version here.
 Create GitHub account Create a FREE GitHub account by going to this link and following their step-by-step instructions.</description>
     </item>
     
@@ -45,10 +49,10 @@ In other words, a infrastructure provider is a management platform for managing 
       
       <guid>/workshops/cloudforms41/exercise1.10/</guid>
       <description>Log in to CloudForms using the admin account (if not done already).
-Exercise 1.10 - Explore Catalog Configuration Section 1: Explore Catalog Configuration Step 1. Select Services → Catalogs. Services Catalog
-Step 2. Select the Catalog Items accordion. Services Catalog Items
-Step 3. Select All Catalog Items → VMware Operations → Deploy Ticket Monster on VMware Services Catalog Ticket Monster
-Step 4. Explore the Details and Selected Resources tabs. In a live environment, this tab displays details about the item the user is ordering.</description>
+ Exercise 1.10 - Explore Catalog Configuration Section 1: Explore Catalog Configuration Step 1. Select Services → Catalogs.  Services Catalog
+Step 2. Select the Catalog Items accordion.  Services Catalog Items
+Step 3. Select All Catalog Items → VMware Operations → Deploy Ticket Monster on VMware  Services Catalog Ticket Monster
+Step 4. Explore the Details and Selected Resources tabs.</description>
     </item>
     
     <item>
@@ -68,9 +72,9 @@ Section 1: Explore Chargebacks CloudForms Management Engine provides a default s
       
       <guid>/workshops/cloudforms41/exercise1.12/</guid>
       <description>Exercise 1.12 - Explore Utilization Exercise Description CloudForms Management Engine server can collect and analyze capacity and utilization data from your virtual infrastructure. In this exercise, you will learn how to view utilization metrics.
-Section 1: Explore Utilization Step 1. Select Optimize → Utilization. Utilization
-Step 2. Select Region 10 → Cloud/Infrastructure Providers → RHV-M. Region 10 RHV-M Utilization
-Step 3. On the Summary tab, review the daily utilization chart. Step 4.</description>
+Section 1: Explore Utilization Step 1. Select Optimize → Utilization.  Utilization
+Step 2. Select Region 10 → Cloud/Infrastructure Providers → RHV-M.  Region 10 RHV-M Utilization
+Step 3. On the Summary tab, review the daily utilization chart.</description>
     </item>
     
     <item>
@@ -80,9 +84,9 @@ Step 3. On the Summary tab, review the daily utilization chart. Step 4.</descrip
       
       <guid>/workshops/cloudforms41/exercise1.13/</guid>
       <description>Exercise 1.13 - Explore Planning Exercise Description In this exercise you will learn how to plan and optimize a deployment.
-Section 1: Explore Planning Step 1. Select Optimize → Planning. Optimize Planning
-Step 2. Under Reference VM Selection, select All VMs. Reference VM Selection
-Step 3. Choose the CFME027 VM. Step 4. Under VM Options, set the Source to Usage. Step 5. Under Target Options/Limits, set Show to Hosts. Step 6.</description>
+Section 1: Explore Planning Step 1. Select Optimize → Planning.  Optimize Planning
+Step 2. Under Reference VM Selection, select All VMs.  Reference VM Selection
+Step 3. Choose the CFME027 VM. Step 4. Under VM Options, set the Source to Usage. Step 5. Under Target Options/Limits, set Show to Hosts.</description>
     </item>
     
     <item>
@@ -112,7 +116,7 @@ In this exercise, you will learn how to work with policies, events, conditions, 
       <guid>/workshops/cloudforms41/exercise1.16/</guid>
       <description>Exercise 1.16 - Explore Containers Exercise Description In this exercise we will take a general overview of containers and how you will work with them in Red Hat CloudForms.
 First, it is important to know the definition of a container: A container is an application sandbox that wraps your software in a complete filesystem, containing everything it needs to run.
-Traditional OS vs. Containers
+ Traditional OS vs. Containers
 Exploring Containers Step 1. Go to Compute → Containers.</description>
     </item>
     
@@ -134,7 +138,7 @@ When we use the Automate capability of CloudForms, we write scripts in the Ruby 
       <guid>/workshops/cloudforms41/exercise1.18/</guid>
       <description>Exercise 1.18 - “Hello, World!” Automation Script Exercise Description Let’s jump right in and start writing our first automation script. In time-honored fashion we’ll write “Hello, World!” to the Automate Engine logfile.
 Before we do anything, we need to ensure that the Automation Engine server role is selected on our CloudForms appliance. We do this from the Configure → Configuration menu, selecting the CloudForms server in the Settings accordion.
-The Automation Engine server role is now enabled by default in CloudForms 4.</description>
+  The Automation Engine server role is now enabled by default in CloudForms 4.</description>
     </item>
     
     <item>
@@ -175,7 +179,7 @@ You can use the large library of existing Ansible playbooks as Red Hat CloudForm
       
       <guid>/workshops/cloudforms41/exercise1.3/</guid>
       <description>Exercise 1.3 - Discovering VM Systems Exercise Description In Red Hat CloudForms, infrastructure VMs are operating systems running under a hypervisor. This exercise will enable you to view and manage infrastructure VMs.
-Section 1: Explore Infrastructure VMs Step 1: Select Compute → Infrastructure → Virtual Machines. Infrastructure VMs
+Section 1: Explore Infrastructure VMs Step 1: Select Compute → Infrastructure → Virtual Machines.  Infrastructure VMs
 Step 2: View the list of your private datacenter’s infrastructure virtual machines. Section 2: Explore the Virtual Thumbnail for Infrastructure VMs The web interface uses virtual thumbnails to represent providers.</description>
     </item>
     
@@ -208,7 +212,7 @@ Red Hat CloudForms Infrastructure Provisioning process (Summary) In Red Hat Clou
       <guid>/workshops/cloudforms41/exercise1.6/</guid>
       <description>Exercise 1.6 - Explore Cloud Providers Exercise Description This exercise will explain how to view cloud providers and related details.
 In Red Hat CloudForms, a cloud provider is a computing platform that manages instances and enables the creation of multi-tenant infrastructure services, independently from underlying hypervisors.
-Section 1: Explore Cloud Providers Step 1: Select Compute → Clouds → Providers. Cloud Providers
+Section 1: Explore Cloud Providers Step 1: Select Compute → Clouds → Providers.  Cloud Providers
 A list of your private and public cloud providers, such as OpenStack and Amazon EC2, displays.</description>
     </item>
     
@@ -220,7 +224,7 @@ A list of your private and public cloud providers, such as OpenStack and Amazon 
       <guid>/workshops/cloudforms41/exercise1.7/</guid>
       <description>#Exercise 1.7 - Explore Cloud Instances
 Exercise Description In Red Hat CloudForms, a cloud instance is a virtual machine running under cloud infrastructure. In this exercise, you will learn how to search for cloud instances and review the details related to the cloud instance.
-Section 1: Explore Cloud Instances &amp;gt; Select Compute → Clouds → Instances. Cloud Instances
+Section 1: Explore Cloud Instances &amp;gt; Select Compute → Clouds → Instances.  Cloud Instances
 A list of your public and private cloud instances displays.
 Section 2: Explore the Virtual Thumbnail for Cloud Instances The web interface uses virtual thumbnails to represent providers.</description>
     </item>
@@ -232,8 +236,8 @@ Section 2: Explore the Virtual Thumbnail for Cloud Instances The web interface u
       
       <guid>/workshops/cloudforms41/exercise1.8/</guid>
       <description>Exercise 1.8 - Explore Group and User Access Controls Exercise Description This exercise is designed to provide an understanding of Red Hat CloudForms group controls and access controls.
-Section 1: Explore Access Control Step 1. Go to Administrator (in the top right corner of the screen) → Configuration and select the Access Control accordion. Configuration Dashboard
-Access Control
+Section 1: Explore Access Control Step 1. Go to Administrator (in the top right corner of the screen) → Configuration and select the Access Control accordion.  Configuration Dashboard
+ Access Control
 Step 2. Add a role by modifying a copy of an existing role: Step 3.</description>
     </item>
     
@@ -244,10 +248,10 @@ Step 2. Add a role by modifying a copy of an existing role: Step 3.</description
       
       <guid>/workshops/cloudforms41/exercise1.9/</guid>
       <description>The following steps are initially run as a non-admin customer account.
-Exercise 1.9 - Introduction to Catalogs Exercise Description This exercise enables you to explore and verify the catalog configuration.
-Section 1: Explore Catalog Configuration Step 1. Select Services → Catalogs. Services Catalog
-Step 2. On the right, select the Deploy Ticket Monster on VMware catalog item. Ticket Monster
-Step 3. Click Order to order the service. Step 4. Enter values for DBName and App Server Name and click Submit.</description>
+ Exercise 1.9 - Introduction to Catalogs Exercise Description This exercise enables you to explore and verify the catalog configuration.
+Section 1: Explore Catalog Configuration Step 1. Select Services → Catalogs.  Services Catalog
+Step 2. On the right, select the Deploy Ticket Monster on VMware catalog item.  Ticket Monster
+Step 3. Click Order to order the service.</description>
     </item>
     
     <item>

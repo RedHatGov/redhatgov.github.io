@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -338,7 +348,7 @@
 <ul>
 <li>In the location where you downloaded the installer, run the following command</li>
 </ul>
-<pre tabindex="0"><code>java -jar jboss-dv-6.3.0-1-installer.jar
+<pre><code>java -jar jboss-dv-6.3.0-1-installer.jar
 </code></pre><ul>
 <li>Follow the default prompts with the following exceptions below</li>
 </ul>
@@ -363,12 +373,12 @@
 <ul>
 <li>In <code>$JBOSS_HOME/bin</code> directory run the following</li>
 </ul>
-<pre tabindex="0"><code>./standalone.sh
+<pre><code>./standalone.sh
 </code></pre><img src="../images/1-jdv-run.png" width="640px">
 <div class="alert alert-info">
 <p><span class="pficon pficon-info"></span></p>
 <p>If you are connecting to this server from machines other than <code>localhost</code>.  You need to allow outside connections like this</p>
-<pre tabindex="0"><code>./standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
+<pre><code>./standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
 </code></pre></div>
 <ul>
 <li>Verify your installation by going to http://localhost:9990/console and logging in as <code>admin/Password1!</code></li>
@@ -381,7 +391,7 @@
 <ul>
 <li>In the location where you downloaded the installer, run the following command</li>
 </ul>
-<pre tabindex="0"><code>java -jar devstudio-11.0.0.GA-installer-standalone.jar
+<pre><code>java -jar devstudio-11.0.0.GA-installer-standalone.jar
 </code></pre><ul>
 <li>
 <p>Follow the default prompts with the following exceptions</p>
@@ -400,7 +410,7 @@
 <p>Launch JBDS with the following command in the <code>$STUDIO_HOME</code> directory</p>
 </li>
 </ul>
-<pre tabindex="0"><code>./devstudio
+<pre><code>./devstudio
 </code></pre><ul>
 <li>On startup select ok add the datavirt server install you specified during installation</li>
 </ul>
@@ -408,17 +418,17 @@
 <div class="alert alert-info">
 <p><span class="pficon pficon-info"></span></p>
 <p>For Linux and/or Mac users running via the command prompt, if you see the following errors:</p>
-<pre tabindex="0"><code>(Red Hat JBoss Developer Studio:23670): Gtk-WARNING **: Negative content width -5 (allocation 1, extents 3x3) while allocating gadget (node toolbar, owner GtkToolbar)
+<pre><code>(Red Hat JBoss Developer Studio:23670): Gtk-WARNING **: Negative content width -5 (allocation 1, extents 3x3) while allocating gadget (node toolbar, owner GtkToolbar)
 </code></pre><p>You need a tweak to the launcher to force usage of GTK2 instead of GTK3.<br>
 Either create a wrapper script like this</p>
-<pre tabindex="0"><code>#!/bin/bash
+<pre><code>#!/bin/bash
 export SWT_GTK3=0
 
 $STUDIO_HOME/./devstudio
 </code></pre><p>or edit
 <code>$STUDIO_HOME/studio/devstudio.ini</code>
 and add</p>
-<pre tabindex="0"><code>--launcher.GTK_version
+<pre><code>--launcher.GTK_version
 2
 </code></pre><p>at the very beginning of the file</p>
 </div>

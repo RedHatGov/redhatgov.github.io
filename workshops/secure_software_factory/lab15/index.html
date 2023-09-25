@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -316,7 +326,7 @@
 <p>Go to the openshift-tasks repository.</p>
 <p>Select Settings.</p>
 <p>Select Webhooks</p>
-<p>Verify the Webhook.  Make sure the url includes the name &rsquo;tasks-pipeline&rsquo; of the your imported pipeline.</p>
+<p>Verify the Webhook.  Make sure the url includes the name &lsquo;tasks-pipeline&rsquo; of the your imported pipeline.</p>
 <p><img src="../images/gogs-webhook.png" width="900"><br/></p>
 <p>This should match the webhook of the pipeline you previously created except the domain will be openshift.default.svc.cluster.local because the gogs pod calls the internal dns to resolve the address.</p>
 <p>The webhook url is located in builds &gt; pipeline &gt; tasks-pipeline &gt; configuration &gt; generic webhook url</p>

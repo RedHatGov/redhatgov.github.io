@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -334,15 +344,15 @@
 <p>Once logged in you should see your available projects - or a button to create a project if none exist already.</p>
 <h2 id="lets-try-the-oc-command-line-cli-tool">Let&rsquo;s try the &lsquo;oc&rsquo; command line (CLI) tool</h2>
 <p>Open a terminal and login using the same URI with following command:</p>
-<pre tabindex="0"><code>$ oc login https://ocp-ai.redhatgov.io/ --insecure-skip-tls-verify=true
-Authentication required for https://ocp-naps.redhatgov.io/ &#34;master&#34; &#34;:8443&#34; &gt;}} (openshift)
+<pre><code>$ oc login https://ocp-ai.redhatgov.io/ --insecure-skip-tls-verify=true
+Authentication required for https://ocp-naps.redhatgov.io/ &quot;master&quot; &quot;:8443&quot; &gt;}} (openshift)
  Username: user#
  Password:
 Login successful.
 </code></pre><p>Check to see what projects you have access to:</p>
-<pre tabindex="0"><code>$ oc get projects
+<pre><code>$ oc get projects
 </code></pre><p>Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):</p>
-<pre tabindex="0"><code>$ oc status
+<pre><code>$ oc status
 </code></pre><h1 id="summary">Summary</h1>
 <p>You should now be ready to get hands-on with our workshop labs.</p>
 

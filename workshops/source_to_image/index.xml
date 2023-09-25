@@ -5,7 +5,11 @@
     <link>/workshops/source_to_image/</link>
     <description>Recent content in Source to Image on Red Hat | Public Sector</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/workshops/source_to_image/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/source_to_image/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Conclusion</title>
       <link>/workshops/source_to_image/conclusion/</link>
@@ -13,10 +17,10 @@
       
       <guid>/workshops/source_to_image/conclusion/</guid>
       <description>Congratulations You have gone through a methodical process to develop container technology that is custom to a framework, yet repeatable. We have:
-Run the application from the command line to understand what it does and how it is supposed to behave.
-Containerized the applicaiton.
-Built Source-to-Image mechanisms that allow us to inject raw source code to be built inside the container.
-Created an OpenShift template to make repeated deployments easier.</description>
+  Run the application from the command line to understand what it does and how it is supposed to behave.
+  Containerized the applicaiton.
+  Built Source-to-Image mechanisms that allow us to inject raw source code to be built inside the container.
+  Created an OpenShift template to make repeated deployments easier.</description>
     </item>
     
     <item>
@@ -38,7 +42,7 @@ Fortunately we can build from a Dockerfile using the oc command line tool.</desc
       <description>Step 1 - Create a New Project Space In the Wetty terminal, create a new project.
 oc new-project gochat-s2i-userYOUR# Step 2 - Create the Golang S2I Builder Image Create a new build for the Golang S2I builder image
 cd ~ oc new-build golang-s2i/ --to=golang-s2i Start the new build for the Golang S2I builder image
-oc start-build golang-s2i --from-dir=golang-s2i/ Step 3 - Import YAML Template in to OpenShift In the OpenShift WebUI, on the catalog page, seclect Import YAML/JSON Import YAML/JSON Step 4 - Configure the Import Select the project to which you want to import the template</description>
+oc start-build golang-s2i --from-dir=golang-s2i/ Step 3 - Import YAML Template in to OpenShift In the OpenShift WebUI, on the catalog page, seclect Import YAML/JSON Import YAML/JSON        Step 4 - Configure the Import Select the project to which you want to import the template</description>
     </item>
     
     <item>
@@ -92,9 +96,8 @@ Install golang Click here for instructions on how to install Golang.</descriptio
       
       <guid>/workshops/source_to_image/setup/</guid>
       <description>Step 1 - Log in to the Web User Interface The workshop moderator will provide you with the URL, your username, and password.
-OpenShift WebUI Login Step 2 - Create a Project for Your Wetty Terminal Create a new project by clicking the &amp;ldquo;New Project&amp;rdquo; button in the upper right of the WebUI.
-Create a Project Step 3 - Name Your Project Name your project as follows.
-wetty-userYOUR# Name the Project Step 4 - Add Wetty to the Project In the Search Catalog bar, enter the name of the template to search for, in this case wetty-persistant.</description>
+OpenShift WebUI Login        Step 2 - Create a Project for Your Wetty Terminal Create a new project by clicking the &amp;ldquo;New Project&amp;rdquo; button in the upper right of the WebUI.
+Create a Project        Step 3 - Name Your Project Name your project as follows.</description>
     </item>
     
   </channel>

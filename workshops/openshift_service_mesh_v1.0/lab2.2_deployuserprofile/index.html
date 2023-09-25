@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -315,13 +325,13 @@
 <i class="fa fa-terminal"></i>
 Verify the annotation in the 'userprofile' file:
 </blockquote>
-<pre tabindex="0"><code>cat ./openshift-configuration/userprofile-deploy-all.yaml | grep -B 1 sidecar.istio.io/inject
+<pre><code>cat ./openshift-configuration/userprofile-deploy-all.yaml | grep -B 1 sidecar.istio.io/inject
 </code></pre><p>Output:</p>
-<pre tabindex="0"><code>    annotations:
-      sidecar.istio.io/inject: &#34;true&#34;
+<pre><code>    annotations:
+      sidecar.istio.io/inject: &quot;true&quot;
   --
     annotations:
-      sidecar.istio.io/inject: &#34;true&#34;
+      sidecar.istio.io/inject: &quot;true&quot;
 </code></pre><p>The annotation appears twice for the userprofile and PostgreSQL services.</p>
 <br>
 <p>Before deploying the service, you need a reference to the local image you built in the previous lab.</p>
@@ -329,35 +339,35 @@ Verify the annotation in the 'userprofile' file:
 <i class="fa fa-terminal"></i>
 Run the following commands:
 </blockquote>
-<pre tabindex="0"><code>USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template=&#39;{{.status.dockerImageRepository}}&#39;)
+<pre><code>USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template='{{.status.dockerImageRepository}}')
 echo $USER_PROFILE_IMAGE_URI
 </code></pre><p>Output (sample):</p>
-<pre tabindex="0"><code>image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile
+<pre><code>image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Deploy the service using this image URI:
 </blockquote>
-<pre tabindex="0"><code>sed &#34;s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|&#34; ./openshift-configuration/userprofile-deploy-all.yaml | oc create -f -
+<pre><code>sed &quot;s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|&quot; ./openshift-configuration/userprofile-deploy-all.yaml | oc create -f -
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Watch the deployment of the user profile:
 </blockquote>
-<pre tabindex="0"><code>oc get pods -l deploymentconfig=userprofile --watch
+<pre><code>oc get pods -l deploymentconfig=userprofile --watch
 </code></pre><p>
 <i class="fa fa-info-circle"></i>
 The userprofile service may error and restart if the PostgreSQL pod is not running yet.
 </p>
 <p>Output:</p>
-<pre tabindex="0"><code>userprofile-xxxxxxxxxx-xxxxx              2/2     Running		    0          2m55s
+<pre><code>userprofile-xxxxxxxxxx-xxxxx              2/2     Running		    0          2m55s
 </code></pre><br>
 <p>Similar to the other microservices, the user profile service runs the application and the Istio proxy.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Print the containers in the 'userprofile' pod:
 </blockquote>
-<pre tabindex="0"><code>oc get pods -l deploymentconfig=userprofile -o jsonpath=&#39;{.items[*].spec.containers[*].name}{&#34;\n&#34;}&#39;
+<pre><code>oc get pods -l deploymentconfig=userprofile -o jsonpath='{.items[*].spec.containers[*].name}{&quot;\n&quot;}'
 </code></pre><p>Output:</p>
-<pre tabindex="0"><code>userprofile istio-proxy
+<pre><code>userprofile istio-proxy
 </code></pre><br>
 <h2 id="access-application">Access Application</h2>
 <p>The user profile service is deployed!  Let&rsquo;s test this in the browser.</p>

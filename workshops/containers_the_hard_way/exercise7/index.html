@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -329,23 +339,23 @@ Of particular interest today are Virtual Ethernet Adapaters, Bridges, and Taps.<
 <h2 id="_exercise_7_2_container_network_devices">Exercise 7.2 - Container Network Devices</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As we have already seen, when a container intiates a new Network Namespace, it wil have no network devices available to it. In order to get network connectivity to the container, we need to add devices to the container’s network namespace from the host.
-Traditionally, when we run containers as the root user, we will create a virtual adpater and attach it to the container’s network namespace as <code>eth0</code>. The virtual adapter then joins a bridge that is shared with the host’s physical network interface. The bridge will have its own subnet that is unique from the host’s physical network and the bridge will handle routing traffic from the internal subnet to the network.</p>
+<p>As we have already seen, when a container intiates a new Network Namespace, it wil have no network devices available to it. In order to get network connectivity to the container, we need to add devices to the container&#8217;s network namespace from the host.
+Traditionally, when we run containers as the root user, we will create a virtual adpater and attach it to the container&#8217;s network namespace as <code>eth0</code>. The virtual adapter then joins a bridge that is shared with the host&#8217;s physical network interface. The bridge will have its own subnet that is unique from the host&#8217;s physical network and the bridge will handle routing traffic from the internal subnet to the network.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/containers_the_hard_way/images/networking_traditional.png" alt="networking traditional" width="500"/>
+<img src="/workshops/containers_the_hard_way/images/networking_traditional.png" alt="networking traditional" width="500">
 </div>
 </div>
 <div class="paragraph">
 <p>This model uses all Kernel native networking primitives. This is great for efficiency and speed. However, none of these devices can be created by a non-root user.</p>
 </div>
 <div class="paragraph">
-<p>When we create a container as a non-root user, we have to do something slightly different. We use an application called slirp4netns. This application creates a tap inside the container’s network namespace and attaches to it. The application then handles traffic routing much the same way the bridge would, except in user space.</p>
+<p>When we create a container as a non-root user, we have to do something slightly different. We use an application called slirp4netns. This application creates a tap inside the container&#8217;s network namespace and attaches to it. The application then handles traffic routing much the same way the bridge would, except in user space.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/containers_the_hard_way/images/networking_rootless.png" alt="networking rootless" width="500"/>
+<img src="/workshops/containers_the_hard_way/images/networking_rootless.png" alt="networking rootless" width="500">
 </div>
 </div>
 </div>
@@ -358,7 +368,7 @@ Traditionally, when we run containers as the root user, we will create a virtual
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sysctl -w &#34;net.ipv4.ping_group_range=0 2000000&#34;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sysctl -w "net.ipv4.ping_group_range=0 2000000"</code></pre>
 </div>
 </div>
 </div>
@@ -367,7 +377,7 @@ Traditionally, when we run containers as the root user, we will create a virtual
 <h2 id="_exercise_7_4_create_a_sandbox">Exercise 7.4 - Create A Sandbox</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let’s create a sandbox and launch a Bash shell into that sandbox.</p>
+<p>Let&#8217;s create a sandbox and launch a Bash shell into that sandbox.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -431,7 +441,7 @@ received tapfd=5</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Look at that! It created and configured our tap0 netork adapter for us! That’s nice.</p>
+<p>Look at that! It created and configured our tap0 netork adapter for us! That&#8217;s nice.</p>
 </div>
 <div class="paragraph">
 <p>From here you can test out the network interface. For example, try pinging 8.8.8.8.</p>

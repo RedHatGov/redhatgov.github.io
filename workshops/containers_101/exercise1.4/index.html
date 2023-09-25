@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -337,7 +347,7 @@
 <p>tightly control where your images are being stored</p>
 </li>
 <li>
-<p>fully own your image’s distribution pipeline</p>
+<p>fully own your image&#8217;s distribution pipeline</p>
 </li>
 <li>
 <p>integrate image storage and distribution tightly into your in-house development workflow</p>
@@ -358,7 +368,7 @@
 <div class="sect2">
 <h3 id="_step_2_view_images_in_the_local_image_database">Step 2. View images in the local image database.</h3>
 <div class="paragraph">
-<p>Before we upload anything, let’s take a look to see what images we have in the local image database:</p>
+<p>Before we upload anything, let&#8217;s take a look to see what images we have in the local image database:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -380,7 +390,7 @@ registry.access.redhat.com/ubi8            latest        7e569fa199c0  12 days a
 </div>
 <div class="admonitionblock important">
 <table>
-<tbody><tr>
+<tr>
 <td class="icon">
 <i class="fa icon-important" title="Important"></i>
 </td>
@@ -388,7 +398,7 @@ registry.access.redhat.com/ubi8            latest        7e569fa199c0  12 days a
 Choose only one of the following two commands (<code>buildah push</code> or <code>skopeo copy</code>).  Both accomplish the same purpose.
 </td>
 </tr>
-</tbody></table>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -400,7 +410,7 @@ Choose only one of the following two commands (<code>buildah push</code> or <cod
 </div>
 <div class="admonitionblock note">
 <table>
-<tbody><tr>
+<tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -408,7 +418,7 @@ Choose only one of the following two commands (<code>buildah push</code> or <cod
 This image ID will vary, and you should use the value from the output produced on your workshop instance:
 </td>
 </tr>
-</tbody></table>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -419,7 +429,7 @@ This image ID will vary, and you should use the value from the output produced o
 <div class="sect2">
 <h3 id="_step_4_verify_the_image_location_in_the_registry">Step 4. Verify the image location in the registry.</h3>
 <div class="paragraph">
-<p>Next, let’s search the registry to make sure that our image made it, and is available:</p>
+<p>Next, let&#8217;s search the registry to make sure that our image made it, and is available:</p>
 </div>
 <div class="listingblock">
 <div class="content">

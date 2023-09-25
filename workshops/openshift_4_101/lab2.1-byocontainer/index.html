@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -312,22 +322,22 @@
 <blockquote>
 <p><i class="fa fa-terminal"></i> Try typing the following to see what is available to &lsquo;get&rsquo;:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc project demo-<span class="userid">YOUR#</span>
-</span></span><span style="display:flex;"><span>$ oc get all
-</span></span></code></pre></div><blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project demo-<span class="userid">YOUR#</span>
+$ oc get all
+</code></pre></div><blockquote>
 <p><i class="fa fa-terminal"></i> Now let&rsquo;s look at what our image stream has in it:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get is
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe is/nexus
-</span></span></code></pre></div><div class="alert alert-info">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get is
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe is/nexus
+</code></pre></div><div class="alert alert-info">
 <p><span class="pficon pficon-info"></span></p>
 <p>An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, in our case a new version of the nexus image, is created.</p>
 </div>
 <blockquote>
 <p><i class="fa fa-terminal"></i> The app is running in a pod, let&rsquo;s look at that:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe pods
-</span></span></code></pre></div><h2 id="we-can-see-those-details-using-the-web-console-too">We can see those details using the web console too</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe pods
+</code></pre></div><h2 id="we-can-see-those-details-using-the-web-console-too">We can see those details using the web console too</h2>
 <p><code>https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span></code></p>
 <p>Let&rsquo;s look at the image stream.</p>
 <blockquote>

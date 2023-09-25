@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -332,7 +342,7 @@ Currently no traffic is routed to them.</li>
 </ul>
 </li>
 </ul>
-<img src="../img/lab3_phone2.png" width="500" />
+<p><img src="../img/lab3_phone2.png" width="500" /></p>
 <blockquote>
 <p>Option 2: Chaining</p>
 </blockquote>
@@ -357,7 +367,7 @@ Currently no traffic is routed to them.</li>
 <li>Complex “stack traces” when things go wrong (tracing libraries a must)</li>
 <li>Exposes internal structure of app logic (the first microservice in the chain would be difficult to change)</li>
 </ul>
-<img src="../img/lab3_phone3.png" width="700" />
+<p><img src="../img/lab3_phone3.png" width="700" /></p>
 </li>
 </ul>
 <blockquote>
@@ -384,7 +394,7 @@ Currently no traffic is routed to them.</li>
 <ul>
 <li>Possible bottleneck depending on difficulty of adding new services</li>
 </ul>
-<img src="../img/lab3_phone4.png" width="500" />
+<p><img src="../img/lab3_phone4.png" width="500" /></p>
 </li>
 </ul>
 <h1 id="step-1">Step 1</h1>
@@ -396,16 +406,16 @@ Currently no traffic is routed to them.</li>
 <blockquote>
 <p>First, deploy the API gateway:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd ~/coolstore
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git clone -b app-partner https://github.com/epe105/gateway
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd gateway
-</span></span></code></pre></div><div class="alert alert-warning">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone -b app-partner https://github.com/epe105/gateway
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd gateway
+</code></pre></div><div class="alert alert-warning">
 <p><span class="pficon pficon-warning-triangle-o"></span></p>
 <p>Please update <code>&lt;USERNAME&gt;</code> below with your assigned username</p>
 </div>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc project coolstore-&lt;USERNAME&gt;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mvn clean fabric8:deploy -Popenshift -DskipTests
-</span></span></code></pre></div><h1 id="step-2">Step 2</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project coolstore-&lt;USERNAME&gt;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean fabric8:deploy -Popenshift -DskipTests
+</code></pre></div><h1 id="step-2">Step 2</h1>
 <ul>
 <li>The Coolstore Gateway microservice is a Spring Boot application that implements its logic using an Apache Camel route.</li>
 </ul>
@@ -413,59 +423,59 @@ Currently no traffic is routed to them.</li>
 <p>Take a look at the code for the Gateway in your browser :
 <a href="https://github.com/modernize-legacy-apps/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java">https://github.com/epe105/gateway/blob/master/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java</a></p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-php" data-lang="php"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59</span><span><span style="color:#a6e22e">restConfiguration</span>()
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60</span><span>		<span style="color:#f92672">.</span><span style="color:#a6e22e">contextPath</span>(<span style="color:#e6db74">&#34;/services&#34;</span>)<span style="color:#f92672">.</span><span style="color:#a6e22e">apiContextPath</span>(<span style="color:#e6db74">&#34;/services-docs&#34;</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61</span><span>		<span style="color:#f92672">.</span><span style="color:#a6e22e">apiProperty</span>(<span style="color:#e6db74">&#34;host&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62</span><span>		<span style="color:#f92672">.</span><span style="color:#a6e22e">apiProperty</span>(<span style="color:#e6db74">&#34;api.title&#34;</span>, <span style="color:#e6db74">&#34;CoolStore Gateway API&#34;</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63</span><span>		<span style="color:#f92672">.</span><span style="color:#a6e22e">apiProperty</span>(<span style="color:#e6db74">&#34;api.version&#34;</span>, <span style="color:#e6db74">&#34;1.0&#34;</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64</span><span>		<span style="color:#f92672">.</span><span style="color:#a6e22e">component</span>(<span style="color:#e6db74">&#34;servlet&#34;</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65</span><span>		<span style="color:#f92672">.</span><span style="color:#a6e22e">bindingMode</span>(<span style="color:#a6e22e">RestBindingMode</span><span style="color:#f92672">.</span><span style="color:#a6e22e">json</span>);</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59</span>restConfiguration()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60</span>		.contextPath(&#34;/services&#34;).apiContextPath(&#34;/services-docs&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61</span>		.apiProperty(&#34;host&#34;, &#34;&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62</span>		.apiProperty(&#34;api.title&#34;, &#34;CoolStore Gateway API&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63</span>		.apiProperty(&#34;api.version&#34;, &#34;1.0&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64</span>		.component(&#34;servlet&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65</span>		.bindingMode(RestBindingMode.json);</code></pre></div>
 <ul>
 <li>The beginning of this route uses the Camel Java DSL (Domain-Specific Language) to configure the REST system and define the base paths of the API itself (/services) and paths to Swagger documentation (/services-docs).</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-php" data-lang="php"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67</span><span><span style="color:#a6e22e">rest</span>(<span style="color:#e6db74">&#34;/products&#34;</span>)<span style="color:#f92672">.</span><span style="color:#a6e22e">description</span>(<span style="color:#e6db74">&#34;Access the CoolStore products and their availability&#34;</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68</span><span>            <span style="color:#f92672">.</span><span style="color:#a6e22e">produces</span>(<span style="color:#a6e22e">MediaType</span><span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON_VALUE</span>)</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67</span>rest(&#34;/products&#34;).description(&#34;Access the CoolStore products and their availability&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68</span>            .produces(MediaType.APPLICATION_JSON_VALUE)</code></pre></div>
 <ul>
 <li>This begins the REST DSL portion, defining the primary access point for the catalog of products (/products) and the format of the data it produces (JSON)</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-php" data-lang="php"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70</span><span><span style="color:#f92672">.</span><span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>)<span style="color:#f92672">.</span><span style="color:#a6e22e">description</span>(<span style="color:#e6db74">&#34;Retrieves the product catalog, including inventory availability&#34;</span>)<span style="color:#f92672">.</span><span style="color:#a6e22e">outType</span>(<span style="color:#a6e22e">Product</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71</span><span>    <span style="color:#f92672">.</span><span style="color:#a6e22e">route</span>()<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span>(<span style="color:#e6db74">&#34;productRoute&#34;</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72</span><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">setBody</span>(<span style="color:#a6e22e">simple</span>(<span style="color:#e6db74">&#34;null&#34;</span>))
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73</span><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">removeHeaders</span>(<span style="color:#e6db74">&#34;CamelHttp*&#34;</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74</span><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">recipientList</span>(<span style="color:#a6e22e">simple</span>(<span style="color:#e6db74">&#34;http4://{{env:CATALOG_ENDPOINT:catalog:8080}}/api/catalog&#34;</span>))<span style="color:#f92672">.</span><span style="color:#a6e22e">end</span>()
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75</span><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">unmarshal</span>(<span style="color:#a6e22e">productFormatter</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76</span><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">split</span>(<span style="color:#a6e22e">body</span>())<span style="color:#f92672">.</span><span style="color:#a6e22e">parallelProcessing</span>()
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77</span><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">enrich</span>(<span style="color:#e6db74">&#34;direct:inventory&#34;</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">InventoryEnricher</span>())
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78</span><span>      <span style="color:#f92672">.</span><span style="color:#a6e22e">end</span>()	            
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79</span><span><span style="color:#f92672">.</span><span style="color:#a6e22e">endRest</span>();</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70</span>.get(&#34;/&#34;).description(&#34;Retrieves the product catalog, including inventory availability&#34;).outType(Product.class)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71</span>    .route().id(&#34;productRoute&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72</span>          .setBody(simple(&#34;null&#34;))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73</span>          .removeHeaders(&#34;CamelHttp*&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74</span>          .recipientList(simple(&#34;http4://{{env:CATALOG_ENDPOINT:catalog:8080}}/api/catalog&#34;)).end()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75</span>          .unmarshal(productFormatter)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76</span>          .split(body()).parallelProcessing()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77</span>          .enrich(&#34;direct:inventory&#34;, new InventoryEnricher())
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78</span>      .end()	            
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79</span>.endRest();</code></pre></div>
 <ul>
 <li>This configures the endpoint for retrieving a list of products by first contacting the Catalog microservice, .split()ing the resulting list, and enriching (via enrich()) each of the products with its inventory by passing each product to the direct:inventory route.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-php" data-lang="php"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94</span><span><span style="color:#a6e22e">from</span>(<span style="color:#e6db74">&#34;direct:inventory&#34;</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95</span><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">id</span>(<span style="color:#e6db74">&#34;inventoryRoute&#34;</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96</span><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">setHeader</span>(<span style="color:#e6db74">&#34;itemId&#34;</span>, <span style="color:#a6e22e">simple</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>body.itemId<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>))            
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97</span><span>    <span style="color:#f92672">.</span><span style="color:#a6e22e">setBody</span>(<span style="color:#a6e22e">simple</span>(<span style="color:#e6db74">&#34;null&#34;</span>))
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98</span><span>    <span style="color:#f92672">.</span><span style="color:#a6e22e">removeHeaders</span>(<span style="color:#e6db74">&#34;CamelHttp*&#34;</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99</span><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">recipientList</span>(<span style="color:#a6e22e">simple</span>(<span style="color:#e6db74">&#34;http4://{{env:INVENTORY_ENDPOINT:inventory:8080}}/api/inventory/</span><span style="color:#e6db74">${</span>header.itemId<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>))<span style="color:#f92672">.</span><span style="color:#a6e22e">end</span>()
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100</span><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">setHeader</span>(<span style="color:#e6db74">&#34;CamelJacksonUnmarshalType&#34;</span>, <span style="color:#a6e22e">simple</span>(<span style="color:#a6e22e">Inventory</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span>()))
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101</span><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">unmarshal</span>()<span style="color:#f92672">.</span><span style="color:#a6e22e">json</span>(<span style="color:#a6e22e">JsonLibrary</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Jackson</span>, <span style="color:#a6e22e">Inventory</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span>);</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94</span>from(&#34;direct:inventory&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95</span>          .id(&#34;inventoryRoute&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96</span>          .setHeader(&#34;itemId&#34;, simple(&#34;${body.itemId}&#34;))            
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97</span>    .setBody(simple(&#34;null&#34;))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98</span>    .removeHeaders(&#34;CamelHttp*&#34;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99</span>          .recipientList(simple(&#34;http4://{{env:INVENTORY_ENDPOINT:inventory:8080}}/api/inventory/${header.itemId}&#34;)).end()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100</span>          .setHeader(&#34;CamelJacksonUnmarshalType&#34;, simple(Inventory.class.getName()))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101</span>          .unmarshal().json(JsonLibrary.Jackson, Inventory.class);</code></pre></div>
 <ul>
 <li>This is the direct:inventory route, which takes in a Product object (in the body()) and calls out to the Inventory microservice to retrieve its inventory. The resulting inventory is placed back into the Camel exchange for enrichment by the enricher:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-php" data-lang="php"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108</span><span><span style="color:#f92672">@</span><span style="color:#a6e22e">Override</span>
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109</span><span><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Exchange</span> <span style="color:#a6e22e">aggregate</span>(<span style="color:#a6e22e">Exchange</span> <span style="color:#a6e22e">original</span>, <span style="color:#a6e22e">Exchange</span> <span style="color:#a6e22e">resource</span>) {
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110</span><span>
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111</span><span>	<span style="color:#75715e">// Add the discovered availability to the product and set it back
-</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112</span><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Product</span> <span style="color:#a6e22e">p</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">original</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getIn</span>()<span style="color:#f92672">.</span><span style="color:#a6e22e">getBody</span>(<span style="color:#a6e22e">Product</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span>);
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113</span><span>	<span style="color:#a6e22e">Inventory</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">resource</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getIn</span>()<span style="color:#f92672">.</span><span style="color:#a6e22e">getBody</span>(<span style="color:#a6e22e">Inventory</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span>);
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114</span><span>	<span style="color:#a6e22e">p</span><span style="color:#f92672">.</span><span style="color:#a6e22e">setQuantity</span>(<span style="color:#a6e22e">i</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getQuantity</span>());
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115</span><span>	<span style="color:#a6e22e">p</span><span style="color:#f92672">.</span><span style="color:#a6e22e">setLocation</span>(<span style="color:#a6e22e">i</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getLocation</span>());
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116</span><span>	<span style="color:#a6e22e">p</span><span style="color:#f92672">.</span><span style="color:#a6e22e">setLink</span>(<span style="color:#a6e22e">i</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getLink</span>());
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117</span><span>	<span style="color:#a6e22e">original</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getOut</span>()<span style="color:#f92672">.</span><span style="color:#a6e22e">setBody</span>(<span style="color:#a6e22e">p</span>);
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118</span><span>
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119</span><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">original</span>;
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120</span><span>
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121</span><span>}</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108</span>@Override
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109</span>public Exchange aggregate(Exchange original, Exchange resource) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111</span>	// Add the discovered availability to the product and set it back
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112</span>	Product p = original.getIn().getBody(Product.class);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113</span>	Inventory i = resource.getIn().getBody(Inventory.class);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114</span>	p.setQuantity(i.getQuantity());
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115</span>	p.setLocation(i.getLocation());
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116</span>	p.setLink(i.getLink());
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117</span>	original.getOut().setBody(p);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119</span>	return original;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121</span>}</code></pre></div>
 <ul>
 <li>This is the enricher logic which takes the Product and matching Inventory objects, enriches the Product object with information from the Inventory object, and returns it.</li>
 <li>The resulting list sent back to the client is the list of products, each of which is enriched with inventory information</li>
@@ -474,7 +484,7 @@ Currently no traffic is routed to them.</li>
 <h1 id="step-3">Step 3</h1>
 <ul>
 <li>Now that the gateway microservice is deployed, let’s hook it into the application using OpenShift routing.</li>
-<li>A route is a way to expose a service by giving it an externally-reachable hostname like <a href="https://www.example.com">www.example.com</a>, or in our example www-coolstore.<domain></li>
+<li>A route is a way to expose a service by giving it an externally-reachable hostname like <a href="http://www.example.com">www.example.com</a>, or in our example www-coolstore.<domain></li>
 <li>Routes can be created using oc expose command line, or through the GUI.</li>
 <li>Path based routes specify a path component that can be compared against a URL such that multiple routes can be served using the same underlying service/pod, each with a different path.</li>
 <li>In this case, we already have a route that sends all traffic destined for our monolith to the monolith deployment.</li>
@@ -484,7 +494,7 @@ Currently no traffic is routed to them.</li>
 <p>Navigate to Applications → Routes to list the current routes.<br>
 Notice the www route is the primary route for our monolith:</p>
 </blockquote>
-  <img src="../img/lab3_route1.png" width="1000" />
+<p><img src="../img/lab3_route1.png" width="1000" /></p>
 <h1 id="step-4">Step 4</h1>
 <blockquote>
 <ul>
@@ -510,17 +520,17 @@ Notice the www route is the primary route for our monolith:</p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse1bb3ed4cdea0d3fb238ced8bfd33f2a6" class="collapsed">
+      <a data-toggle="collapse" href="#collapse435ff668501f34d823f8354e17f1a95e" class="collapsed">
       
         Create Route
       </a>
     </h4>
   </div>
   
-  <div id="collapse1bb3ed4cdea0d3fb238ced8bfd33f2a6" class="panel-collapse collapse ">
+  <div id="collapse435ff668501f34d823f8354e17f1a95e" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <img src="../img/lab3_create_route.png" width="1000" />
+       <p><img src="../img/lab3_create_route.png" width="1000" /></p>
 
     </div>
   </div>
@@ -540,17 +550,17 @@ Notice the www route is the primary route for our monolith:</p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseb9568f44ca403a0bfffe9a9d97d426be" class="collapsed">
+      <a data-toggle="collapse" href="#collapse775e295deb3bf9aa9cfabba0d64329cb" class="collapsed">
       
         Test New Route to Cool Store
       </a>
     </h4>
   </div>
   
-  <div id="collapseb9568f44ca403a0bfffe9a9d97d426be" class="panel-collapse collapse ">
+  <div id="collapse775e295deb3bf9aa9cfabba0d64329cb" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <img src="../img/lab3_coolstore_before.png" width="1000" />
+       <p><img src="../img/lab3_coolstore_before.png" width="1000" /></p>
 
     </div>
   </div>
@@ -569,33 +579,32 @@ Notice the www route is the primary route for our monolith:</p>
 <p>Open the gateway source code file and un-comment the lines that implement a filter based on product ID (around line 80). The highlighted code shows you the predicate used for the filter</p>
 </blockquote>
 <p>Use vi to make changes in the code.  If you need help in using vi, please click <a href="https://www.cs.colostate.edu/helpdocs/vi.html">here</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ vi ~/coolstore/gateway/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-php" data-lang="php"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77</span><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78</span><span><span style="color:#75715e">// Uncomment the below lines to filter out products
-</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79</span><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">80</span><span><span style="color:#75715e">//		.process(exchange -&gt; {
-</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">81</span><span><span style="color:#75715e">//                    List&lt;Product&gt; originalProductList = (List&lt;Product&gt;)exchange.getIn().getBody(List.class);
-</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">82</span><span><span style="color:#75715e">//                    List&lt;Product&gt; newProductList = originalProductList.stream().filter(product -&gt;
-</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">83</span><span><span style="color:#75715e">//							!(&#34;329299&#34;.equals(product.itemId)))
-</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">84</span><span><span style="color:#75715e">//						.collect(Collectors.toList());
-</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">85</span><span><span style="color:#75715e">//                    exchange.getIn().setBody(newProductList);
-</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">86</span><span><span style="color:#75715e">//                })
-</span></span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vi ~/coolstore/gateway/src/main/java/com/redhat/coolstore/api_gateway/ProductGateway.java
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77</span>//
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78</span>// Uncomment the below lines to filter out products
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79</span>//
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">80</span>//		.process(exchange -&gt; {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">81</span>//                    List&lt;<span style="color:#f92672">Product</span>&gt; originalProductList = (List&lt;<span style="color:#f92672">Product</span>&gt;)exchange.getIn().getBody(List.class);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">82</span>//                    List&lt;<span style="color:#f92672">Product</span>&gt; newProductList = originalProductList.stream().filter(product -&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">83</span>//							!(&#34;329299&#34;.equals(product.itemId)))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">84</span>//						.collect(Collectors.toList());
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">85</span>//                    exchange.getIn().setBody(newProductList);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">86</span>//                })</code></pre></div>
 <blockquote>
 <p>Save your changes and quit</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ shift + Z
-</span></span><span style="display:flex;"><span>$ shift + Z
-</span></span></code></pre></div><h1 id="step-7">Step 7</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ shift + Z
+$ shift + Z
+</code></pre></div><h1 id="step-7">Step 7</h1>
 <ul>
 <li>Re-deploy the modified code using the same procedure as before:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd ~/coolstore/gateway
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mvn clean fabric8:deploy -Popenshift -DskipTests
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc logs -f dc/gateway
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>--&gt; Success       <span style="color:#75715e"># --&gt; wait for it!</span>
-</span></span></code></pre></div><h1 id="step-8">Step 8</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/coolstore/gateway
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn clean fabric8:deploy -Popenshift -DskipTests
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc logs -f dc/gateway
+...
+--&gt; Success       <span style="color:#75715e"># --&gt; wait for it!</span>
+</code></pre></div><h1 id="step-8">Step 8</h1>
 <ul>
 <li>Once the new version of the code is deployed and up and running, reload the browser and the Red Hat Fedora product should be gone:</li>
 </ul>
@@ -606,17 +615,17 @@ Notice the www route is the primary route for our monolith:</p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsef00dc90725a09601403066ac218f7800" class="collapsed">
+      <a data-toggle="collapse" href="#collapse1114c6b3ae3f8d4903d10760736c64e8" class="collapsed">
       
         See Changes to Cool Store
       </a>
     </h4>
   </div>
   
-  <div id="collapsef00dc90725a09601403066ac218f7800" class="panel-collapse collapse ">
+  <div id="collapse1114c6b3ae3f8d4903d10760736c64e8" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <img src="../img/lab3_coolstore_after.png" width="1000" />
+       <p><img src="../img/lab3_coolstore_after.png" width="1000" /></p>
 
     </div>
   </div>
@@ -630,7 +639,7 @@ Notice the www route is the primary route for our monolith:</p>
 <li>Our monolith’s UI is now talking to our new Camel-based API Gateway to retrieve products and inventories from our WildFly Swarm and Spring Boot microservices!</li>
 <li>Further strangling can eventually eliminate the monolith entirely.</li>
 </ul>
-<img src="../img/lab3_api_gtw_arch1.png" width="600" />
+<p><img src="../img/lab3_api_gtw_arch1.png" width="600" /></p>
 
 
     

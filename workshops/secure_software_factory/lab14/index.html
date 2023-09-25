@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -310,13 +320,13 @@
     <h1 id="verify-completed-pipeline">Verify Completed Pipeline</h1>
 <p>Before we kick off your pipeline, let&rsquo;s verify it.</p>
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit YAML</p>
-<img src="../images/pipeline_actions_edityaml.png" width="900" />
+<p><img src="../images/pipeline_actions_edityaml.png" width="900" /></p>
 <p>Take a look and see if it matches the below text.  If not, please correct it.</p>
-<pre tabindex="0"><code>apiVersion: v1
+<pre><code>apiVersion: v1
 kind: BuildConfig
 metadata:
     annotations:
-      pipeline.alpha.openshift.io/uses: &#39;[{&#34;name&#34;: &#34;jenkins&#34;, &#34;namespace&#34;: &#34;&#34;, &#34;kind&#34;: &#34;DeploymentConfig&#34;}]&#39;
+      pipeline.alpha.openshift.io/uses: '[{&quot;name&quot;: &quot;jenkins&quot;, &quot;namespace&quot;: &quot;&quot;, &quot;kind&quot;: &quot;DeploymentConfig&quot;}]'
     labels:
       app: cicd-pipeline
       name: cicd-pipeline
@@ -325,10 +335,10 @@ spec:
     triggers:
       - type: GitHub
         github:
-          secret: &#34;secret101&#34;
+          secret: &quot;secret101&quot;
       - type: Generic
         generic:
-          secret: &#34;secret101&#34;
+          secret: &quot;secret101&quot;
     runPolicy: Serial
     source:
       type: None
@@ -340,47 +350,47 @@ spec:
         - name: STAGE_PROJECT
           value: stage-user<span class="userid">YOUR#</span>
         jenkinsfile: |-
-          def version, mvnCmd = &#34;mvn -s configuration/cicd-settings-nexus3.xml&#34;
+          def version, mvnCmd = &quot;mvn -s configuration/cicd-settings-nexus3.xml&quot;
 
           pipeline {
             agent {
-              label &#39;maven&#39;
+              label 'maven'
             }
             stages {
-              stage(&#39;Build App&#39;) {
+              stage('Build App') {
                 steps {
-                  git branch: &#39;eap-7&#39;, url: &#39;http://gogs:3000/gogs/openshift-tasks.git&#39;
+                  git branch: 'eap-7', url: 'http://gogs:3000/gogs/openshift-tasks.git'
                   script {
-                      def pom = readMavenPom file: &#39;pom.xml&#39;
+                      def pom = readMavenPom file: 'pom.xml'
                       version = pom.version
                   }
-                  sh &#34;${mvnCmd} install -DskipTests=true&#34;
+                  sh &quot;${mvnCmd} install -DskipTests=true&quot;
                 }
               }
-              stage(&#39;Test&#39;) {
+              stage('Test') {
                 steps {
-                  sh &#34;${mvnCmd} test&#34;
-                  step([$class: &#39;JUnitResultArchiver&#39;, testResults: &#39;**/target/surefire-reports/TEST-*.xml&#39;])
+                  sh &quot;${mvnCmd} test&quot;
+                  step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
                 }
               }
-              stage(&#39;Code Analysis&#39;) {
+              stage('Code Analysis') {
                 steps {
                   script {
-                    sh &#34;${mvnCmd} sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true&#34;
+                    sh &quot;${mvnCmd} sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true&quot;
                   }
                 }
               }
-              stage(&#39;Archive App&#39;) {
+              stage('Archive App') {
                 steps {
-                  sh &#34;${mvnCmd} deploy -DskipTests=true -P nexus3&#34;
+                  sh &quot;${mvnCmd} deploy -DskipTests=true -P nexus3&quot;
                 }
               }
-              stage(&#39;Create Image Builder&#39;) {
+              stage('Create Image Builder') {
                 when {
                   expression {
                     openshift.withCluster() {
                       openshift.withProject(env.DEV_PROJECT) {
-                        return !openshift.selector(&#34;bc&#34;, &#34;tasks&#34;).exists();
+                        return !openshift.selector(&quot;bc&quot;, &quot;tasks&quot;).exists();
                       }
                     }
                   }
@@ -389,32 +399,32 @@ spec:
                   script {
                     openshift.withCluster() {
                       openshift.withProject(env.DEV_PROJECT) {
-                        openshift.newBuild(&#34;--name=tasks&#34;, &#34;--image-stream=jboss-eap70-openshift:1.5&#34;, &#34;--binary=true&#34;)
+                        openshift.newBuild(&quot;--name=tasks&quot;, &quot;--image-stream=jboss-eap70-openshift:1.5&quot;, &quot;--binary=true&quot;)
                       }
                     }
                   }
                 }
               }
-              stage(&#39;Build Image&#39;) {
+              stage('Build Image') {
                 steps {
-                  sh &#34;rm -rf oc-build &amp;&amp; mkdir -p oc-build/deployments&#34;
-                  sh &#34;cp target/openshift-tasks.war oc-build/deployments/ROOT.war&#34;
+                  sh &quot;rm -rf oc-build &amp;&amp; mkdir -p oc-build/deployments&quot;
+                  sh &quot;cp target/openshift-tasks.war oc-build/deployments/ROOT.war&quot;
 
                   script {
                     openshift.withCluster() {
                       openshift.withProject(env.DEV_PROJECT) {
-                        openshift.selector(&#34;bc&#34;, &#34;tasks&#34;).startBuild(&#34;--from-dir=oc-build&#34;, &#34;--wait=true&#34;)
+                        openshift.selector(&quot;bc&quot;, &quot;tasks&quot;).startBuild(&quot;--from-dir=oc-build&quot;, &quot;--wait=true&quot;)
                       }
                     }
                   }
                 }
               }
-              stage(&#39;Create DEV&#39;) {
+              stage('Create DEV') {
                 when {
                   expression {
                     openshift.withCluster() {
                       openshift.withProject(env.DEV_PROJECT) {
-                        return !openshift.selector(&#39;dc&#39;, &#39;tasks&#39;).exists()
+                        return !openshift.selector('dc', 'tasks').exists()
                       }
                     }
                   }
@@ -423,55 +433,55 @@ spec:
                   script {
                     openshift.withCluster() {
                       openshift.withProject(env.DEV_PROJECT) {
-                        def app = openshift.newApp(&#34;tasks:latest&#34;)
-                        app.narrow(&#34;svc&#34;).expose();
+                        def app = openshift.newApp(&quot;tasks:latest&quot;)
+                        app.narrow(&quot;svc&quot;).expose();
 
-                        def dc = openshift.selector(&#34;dc&#34;, &#34;tasks&#34;)
+                        def dc = openshift.selector(&quot;dc&quot;, &quot;tasks&quot;)
                         while (dc.object().spec.replicas != dc.object().status.availableReplicas) {
                             sleep 10
                         }
-                        openshift.set(&#34;triggers&#34;, &#34;dc/tasks&#34;, &#34;--manual&#34;)
+                        openshift.set(&quot;triggers&quot;, &quot;dc/tasks&quot;, &quot;--manual&quot;)
                       }
                     }
                   }
                 }
               }
-              stage(&#39;Deploy DEV&#39;) {
+              stage('Deploy DEV') {
                 steps {
                   script {
                     openshift.withCluster() {
                       openshift.withProject(env.DEV_PROJECT) {
-                        openshift.selector(&#34;dc&#34;, &#34;tasks&#34;).rollout().latest();
+                        openshift.selector(&quot;dc&quot;, &quot;tasks&quot;).rollout().latest();
                       }
                     }
                   }
                 }
               }
-              stage(&#39;Promote to STAGE?&#39;) {
+              stage('Promote to STAGE?') {
                 steps {
-                  timeout(time:15, unit:&#39;MINUTES&#39;) {
-                      input message: &#34;Promote to STAGE?&#34;, ok: &#34;Promote&#34;
+                  timeout(time:15, unit:'MINUTES') {
+                      input message: &quot;Promote to STAGE?&quot;, ok: &quot;Promote&quot;
                   }
 
                   script {
                     openshift.withCluster() {
-                      openshift.tag(&#34;${env.DEV_PROJECT}/tasks:latest&#34;, &#34;${env.STAGE_PROJECT}/tasks:${version}&#34;)
+                      openshift.tag(&quot;${env.DEV_PROJECT}/tasks:latest&quot;, &quot;${env.STAGE_PROJECT}/tasks:${version}&quot;)
                     }
                   }
                 }
               }
-              stage(&#39;Deploy STAGE&#39;) {
+              stage('Deploy STAGE') {
                 steps {
                   script {
                     openshift.withCluster() {
                       openshift.withProject(env.STAGE_PROJECT) {
-                        if (openshift.selector(&#39;dc&#39;, &#39;tasks&#39;).exists()) {
-                          openshift.selector(&#39;dc&#39;, &#39;tasks&#39;).delete()
-                          openshift.selector(&#39;svc&#39;, &#39;tasks&#39;).delete()
-                          openshift.selector(&#39;route&#39;, &#39;tasks&#39;).delete()
+                        if (openshift.selector('dc', 'tasks').exists()) {
+                          openshift.selector('dc', 'tasks').delete()
+                          openshift.selector('svc', 'tasks').delete()
+                          openshift.selector('route', 'tasks').delete()
                         }
 
-                        openshift.newApp(&#34;tasks:${version}&#34;).narrow(&#34;svc&#34;).expose()
+                        openshift.newApp(&quot;tasks:${version}&quot;).narrow(&quot;svc&quot;).expose()
                       }
                     }
                   }
@@ -483,7 +493,7 @@ spec:
 </code></pre><br>
 # Verify your user Dev and Stage projects
 <p>In your pipeline text file, make sure &lt;user&gt; reflects your user # and project.</p>
-<pre tabindex="0"><code>- name: DEV_PROJECT
+<pre><code>- name: DEV_PROJECT
   value: dev-user<span class="userid">YOUR#</span>
 - name: STAGE_PROJECT
   value: stage-user<span class="userid">YOUR#</span>

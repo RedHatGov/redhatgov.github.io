@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -311,8 +321,8 @@
 <h2 id="_section_1_deploying_session_recording">Section 1. Deploying Session Recording</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To be able to deploy the Session Recording solution you need to have the following packages installed: tlog, SSSD, cockpit-session-recording.<br/>
-Note that session recording doesn’t work for graphical desktop sessions or Cockpit terminal sessions.</p>
+<p>To be able to deploy the Session Recording solution you need to have the following packages installed: tlog, SSSD, cockpit-session-recording.<br>
+Note that session recording doesn&#8217;t work for graphical desktop sessions or Cockpit terminal sessions.</p>
 </div>
 <div class="sect2">
 <h3 id="_step_1_1_pre_requisites">Step 1.1: Pre-Requisites</h3>
@@ -337,15 +347,15 @@ Note that session recording doesn’t work for graphical desktop sessions or Coc
 </div>
 <div class="admonitionblock note">
 <table>
-<tbody><tr>
+<tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In RHEL 8, software installation is enabled by the new version of the YUM tool (YUM v4), which is based on DNF technology. We use the <code>yum</code> command in all of today’s documentation, but welcome you to start getting used to typing <code>dnf</code> instead.  Read more here: <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/managing-software-packages_configuring-basic-system-settings">Managing software packages</a>
+In RHEL 8, software installation is enabled by the new version of the YUM tool (YUM v4), which is based on DNF technology. We use the <code>yum</code> command in all of today&#8217;s documentation, but welcome you to start getting used to typing <code>dnf</code> instead.  Read more here: <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/managing-software-packages_configuring-basic-system-settings">Managing software packages</a>
 </td>
 </tr>
-</tbody></table>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -357,7 +367,7 @@ In RHEL 8, software installation is enabled by the new version of the YUM tool (
 <h4 id="_step_1_2_1_go_to_the_session_recording_page_in_the_menu_on_the_left_of_the_interface">Step 1.2.1: Go to the Session Recording page in the menu on the left of the interface.</h4>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/TerminalRecording-af59f.png" alt="TerminalRecording af59f"/>
+<img src="/workshops/rhel_8/images/TerminalRecording-af59f.png" alt="TerminalRecording af59f">
 </div>
 </div>
 </div>
@@ -365,20 +375,20 @@ In RHEL 8, software installation is enabled by the new version of the YUM tool (
 <h4 id="_step_1_2_2_click_on_the_gear_button_in_the_right_top_corner">Step 1.2.2: Click on the gear button in the right top corner.</h4>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/TerminalRecording-9ee56.png" alt="TerminalRecording 9ee56"/>
+<img src="/workshops/rhel_8/images/TerminalRecording-9ee56.png" alt="TerminalRecording 9ee56">
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_step_1_2_3_set_your_parameters_in_the_sssd_configuration_table">Step 1.2.3: Set your parameters in the SSSD Configuration table.</h4>
 <div class="paragraph">
-<p>There are 2 configuration panes, a General and another for SSSD; scroll down if you don’t see the SSSD pane.
-To keep things simple, choose the <code>All</code> option in the <code>Scope</code> pull-down menu of the SSSD pane, as shown below.  Optionally choosing <code>Some</code> will allow you to provide comma-separated lists of users and groups whose terminal sessions should be recorded.<br/>
+<p>There are 2 configuration panes, a General and another for SSSD; scroll down if you don&#8217;t see the SSSD pane.
+To keep things simple, choose the <code>All</code> option in the <code>Scope</code> pull-down menu of the SSSD pane, as shown below.  Optionally choosing <code>Some</code> will allow you to provide comma-separated lists of users and groups whose terminal sessions should be recorded.<br>
 Be sure to click <code>Save</code> after making a selection.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/TerminalRecording-60f70.png" alt="TerminalRecording 60f70"/>
+<img src="/workshops/rhel_8/images/TerminalRecording-60f70.png" alt="TerminalRecording 60f70">
 </div>
 </div>
 </div>
@@ -386,7 +396,7 @@ Be sure to click <code>Save</code> after making a selection.</p>
 <div class="sect2">
 <h3 id="_step_1_3_test_session_recording">Step 1.3: Test Session Recording</h3>
 <div class="paragraph">
-<p>Let’s create a sample log. SSH back into your server and see what has changed:</p>
+<p>Let&#8217;s create a sample log. SSH back into your server and see what has changed:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -394,12 +404,12 @@ Be sure to click <code>Save</code> after making a selection.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>You should see a banner that says &#34;ATTENTION! Your session is being recorded!&#34;</p>
+<p>You should see a banner that says "ATTENTION! Your session is being recorded!"</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Enter a few commands. For this demo, we’ll do <code>uptime</code>, <code>ls -l</code>,<code>df -h</code> and <code>hostname</code></p>
+<p>Enter a few commands. For this demo, we&#8217;ll do <code>uptime</code>, <code>ls -l</code>,<code>df -h</code> and <code>hostname</code></p>
 </li>
 </ul>
 </div>
@@ -445,7 +455,7 @@ You can choose the session you want to review directly from the Session Recordin
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/TerminalRecording-09d8f.png" alt="TerminalRecording 09d8f"/>
+<img src="/workshops/rhel_8/images/TerminalRecording-09d8f.png" alt="TerminalRecording 09d8f">
 </div>
 </div>
 <div class="paragraph">
@@ -453,7 +463,7 @@ You can choose the session you want to review directly from the Session Recordin
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/TerminalRecording-178f1.png" alt="TerminalRecording 178f1"/>
+<img src="/workshops/rhel_8/images/TerminalRecording-178f1.png" alt="TerminalRecording 178f1">
 </div>
 </div>
 <div class="paragraph">

@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -362,9 +372,9 @@ Naming a class Methods may seem somewhat confusing, but many of the generic clas
 <em>Save schema field</em></p>
 <h1 id="hello-world">Hello, World!</h1>
 <h3 id="step-4-our-first-automate-method-is-very-simple-well-write-an-entry-to-the-automationlog-file-using-this-two-line-script">Step 4. Our first Automate method is very simple; we’ll write an entry to the <em>automation.log</em> file using this two-line script:</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$evm.log<span style="color:#f92672">(</span>:info, <span style="color:#e6db74">&#34;Hello, World!&#34;</span><span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>exit MIQ_OK
-</span></span></code></pre></div><h2 id="section-5-adding-a-new-instance">Section 5. Adding a New Instance</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$evm.log<span style="color:#f92672">(</span>:info, <span style="color:#e6db74">&#34;Hello, World!&#34;</span><span style="color:#f92672">)</span>
+exit MIQ_OK
+</code></pre></div><h2 id="section-5-adding-a-new-instance">Section 5. Adding a New Instance</h2>
 <h3 id="step-1-first-we-need-to-create-an-instance-from-our-class--in-the-instances-tab-of-the-new-methods-class-select-configuration--add-a-new-instance">Step 1. First we need to create an instance from our class.  In the Instances tab of the new <em>Methods</em> class, select <strong>Configuration</strong> → <strong>Add a New Instance</strong>.</h3>
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-add-new-instance.png" width="1000"/><br/>
 <em>Adding a new instance to our class</em></p>
@@ -397,14 +407,14 @@ The CloudForms WebUI uses browser session cookies, so if we want two or more con
 </div>
 </p>
 <p>Alternatively, <em>ssh</em> into the CloudForms appliance as root and enter:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tail -f /var/www/miq/vmdb/log/automation.log
-</span></span></code></pre></div><p>In the simulation, we actually run an instance called Call_Instance in the <em>/System/Request/</em> namespace of the <em>ManageIQ</em> domain, and this in turn calls our <em>HelloWorld</em> instance using the namespace, class, and instance attribute/value pairs that we pass to it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tail -f /var/www/miq/vmdb/log/automation.log
+</code></pre></div><p>In the simulation, we actually run an instance called Call_Instance in the <em>/System/Request/</em> namespace of the <em>ManageIQ</em> domain, and this in turn calls our <em>HelloWorld</em> instance using the namespace, class, and instance attribute/value pairs that we pass to it.</p>
 <h3 id="step-2-from-the-automate--simulation-menu-complete-the-details">Step 2. From the <strong>Automate</strong> → <strong>Simulation</strong> menu, complete the details.</h3>
 <p><img title="CloudForms Top Window Navigation VM Providers" src="../images/cfme-nav-automate-simulation-helloworld.png" /><br/>
 <em>Completing the Simulation details</em></p>
 <h3 id="step-3-click-submit">Step 3. Click <strong>Submit</strong>.</h3>
 <p>If all went well, we should see our “Hello, World!” message appear in the <em>automation.log</em> file:</p>
-<pre tabindex="0"><code>Invoking [inline] method [/ACME/General/Methods/hello_world] with inputs [{}]
+<pre><code>Invoking [inline] method [/ACME/General/Methods/hello_world] with inputs [{}]
 &lt;AEMethod [/ACME/General/Methods/hello_world]&gt; Starting
 &lt;AEMethod hello_world&gt; Hello, World!
 &lt;AEMethod [/ACME/General/Methods/hello_world]&gt; Ending
@@ -416,7 +426,7 @@ Method exited with rc=MIQ_OK
 <h2 id="section-8-exit-status-codes">Section 8: Exit Status Codes</h2>
 <p>In our example we used an exit status code of MIQ_OK.  Although with simple methods such as this we don’t strictly need to specify an exit code, it’s good practice to do so.  When we build more advanced multi-method classes and state machines, an exit code can signal an error condition to the Automation Engine so that action can be taken.</p>
 <p>There are four exit codes that we can use:</p>
-<pre tabindex="0"><code>MIQ_OK (0)
+<pre><code>MIQ_OK (0)
   Continues normal processing. This is logged to automation.log as:
   Method exited with rc=MIQ_OK
 MIQ_WARN(4)

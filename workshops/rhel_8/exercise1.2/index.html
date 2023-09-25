@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -330,13 +340,13 @@
 <div class="content">
 <div class="imageblock left">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_topics.png" alt="cockpit topics" width="450"/>
+<img src="/workshops/rhel_8/images/cockpit_topics.png" alt="cockpit topics" width="450">
 </div>
 <div class="title">Figure 1: Web console functions</div>
 </div>
 <div class="paragraph">
-<p>The various functional sections can be seen in <strong>Figure 1</strong>, and are:<br/>
-<br/></p>
+<p>The various functional sections can be seen in <strong>Figure 1</strong>, and are:<br>
+<br></p>
 </div>
 <div class="dlist">
 <dl>
@@ -347,72 +357,72 @@
 <dt class="hdlist1">Logs</dt>
 <dd>
 <p>Displays current <strong>journald</strong> logs from all services
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Storage</dt>
 <dd>
 <p>Displays storage activity graphs, and logs. Enables the management of NFS mounts, RAID devices, volume groups, VDO (deduplication) devices, and iSCSI targets
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Networking</dt>
 <dd>
 <p>Displays network activity, logs, and allows firewall and network maintenance
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Podman Containers</dt>
 <dd>
 <p>Enables the management of container images and running containers
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Virtual Machines</dt>
 <dd>
 <p>Virtual machines can be created, deleted and controlled
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Accounts</dt>
 <dd>
 <p>Allows for the creation, deletion and configuration of user accounts and ssh keys
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Services</dt>
 <dd>
 <p>Displays all system targets, services, sockets, timers and paths, as managed by <strong>systemd</strong>, the root process
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Session Recording</dt>
 <dd>
 <p>Manages recorded sessions, and allows for the configuration of session recorder defaults
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Applications</dt>
 <dd>
 <p>Allows for the installation and removal of web console modules
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Diagnostic Reports</dt>
 <dd>
 <p>Creates diagnostic reports used by Red Hat support, also known as SOSreports
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Kernel Dump</dt>
 <dd>
 <p>Manages kernel debugging dumps, created when the system crashes
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">SELinux</dt>
 <dd>
 <p>Allows for the setting of SELinux to permissive mode, and shows recent SELinux alerts (<strong>AVCs</strong>)
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Software Updates</dt>
 <dd>
 <p>Manages automatic package updating, and allows for the manual installation of updates
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Subscriptions</dt>
 <dd>
 <p>Manages subscriptions attached to the host
-<br/></p>
+<br></p>
 </dd>
 <dt class="hdlist1">Terminal</dt>
 <dd>
@@ -426,14 +436,14 @@
 <p>As you can see, many of the day-to-day management of a RHEL system can be accomplished without touching the terminal. This makes RHEL 8 the easiest-to-live-with release, yet!</p>
 </div>
 <div class="paragraph">
-<p>Next, let’s proceed to a more detailed examination of each module. Please click through the web console on your host, as you read the explanations, here.</p>
+<p>Next, let&#8217;s proceed to a more detailed examination of each module. Please click through the web console on your host, as you read the explanations, here.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_section_2_system_module">Section 2: System Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_system.png" alt="cockpit system" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_system.png" alt="cockpit system" height="650">
 </div>
 <div class="title">Figure 2: Web Console System Module</div>
 </div>
@@ -511,7 +521,7 @@
 <p>Performance Profile</p>
 </li>
 <li>
-<p>ssh key fingerprints for all created &#39;root&#39; keys</p>
+<p>ssh key fingerprints for all created 'root' keys</p>
 </li>
 <li>
 <p>Toggle to enable or disable storing of metrics.</p>
@@ -522,14 +532,14 @@
 </dl>
 </div>
 <div class="paragraph">
-<p>Additionally, there are graphs that show the system’s CPU, memory, disk, and network utilization.  Each graph may be enlarged, by clicking its associated link.</p>
+<p>Additionally, there are graphs that show the system&#8217;s CPU, memory, disk, and network utilization.  Each graph may be enlarged, by clicking its associated link.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_section_3_logs_module">Section 3: Logs Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_01_logs.png" alt="cockpit 01 logs" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_01_logs.png" alt="cockpit 01 logs" height="650">
 </div>
 <div class="title">Figure 3: Web Console Logs Module</div>
 </div>
@@ -541,7 +551,7 @@
 <h3 id="_section_4_storage_module">Section 4: Storage Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_02_storage.png" alt="cockpit 02 storage" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_02_storage.png" alt="cockpit 02 storage" height="650">
 </div>
 <div class="title">Figure 4: Web Console Storage Module</div>
 </div>
@@ -553,7 +563,7 @@
 <h3 id="_section_5_networking_module">Section 5: Networking Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_03_networking.png" alt="cockpit 03 networking" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_03_networking.png" alt="cockpit 03 networking" height="650">
 </div>
 <div class="title">Figure 5: Web Console Networking Module</div>
 </div>
@@ -565,7 +575,7 @@
 <h3 id="_section_5_podman_containers_module">Section 5: Podman Containers Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_04_podman.png" alt="cockpit 04 podman" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_04_podman.png" alt="cockpit 04 podman" height="650">
 </div>
 <div class="title">Figure 6: Web Console Podman Containers Module</div>
 </div>
@@ -577,7 +587,7 @@
 <h3 id="_section_6_virtual_machines_module">Section 6: Virtual Machines Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_05_vms.png" alt="cockpit 05 vms" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_05_vms.png" alt="cockpit 05 vms" height="650">
 </div>
 <div class="title">Figure 7: Web Console Virtual Machines Module</div>
 </div>
@@ -589,7 +599,7 @@
 <h3 id="_section_7_accounts_module">Section 7: Accounts Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_06_accounts.png" alt="cockpit 06 accounts" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_06_accounts.png" alt="cockpit 06 accounts" height="650">
 </div>
 <div class="title">Figure 8: Web Console Accounts Module</div>
 </div>
@@ -601,7 +611,7 @@
 <h3 id="_section_8_services_module">Section 8: Services Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_07_services.png" alt="cockpit 07 services" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_07_services.png" alt="cockpit 07 services" height="650">
 </div>
 <div class="title">Figure 9: Web Console Services Module</div>
 </div>
@@ -613,7 +623,7 @@
 <h3 id="_section_9_session_recording_module">Section 9: Session Recording Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_08_sr.png" alt="cockpit 08 sr" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_08_sr.png" alt="cockpit 08 sr" height="650">
 </div>
 <div class="title">Figure 10: Web Console Session Recording Module</div>
 </div>
@@ -625,7 +635,7 @@
 <h3 id="_section_10_applications_module">Section 10: Applications Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_09_applications.png" alt="cockpit 09 applications" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_09_applications.png" alt="cockpit 09 applications" height="650">
 </div>
 <div class="title">Figure 11: Web Console Applications Module</div>
 </div>
@@ -637,7 +647,7 @@
 <h3 id="_section_11_diagnostic_reports_module">Section 11: Diagnostic Reports Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_10_dr.png" alt="cockpit 10 dr" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_10_dr.png" alt="cockpit 10 dr" height="650">
 </div>
 <div class="title">Figure 12: Web Console Diagnostic Reports Module</div>
 </div>
@@ -649,7 +659,7 @@
 <h3 id="_section_12_kernel_dump_module">Section 12: Kernel Dump Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_11_kd.png" alt="cockpit 11 kd" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_11_kd.png" alt="cockpit 11 kd" height="650">
 </div>
 <div class="title">Figure 13: Web Console Kernel Dump Module</div>
 </div>
@@ -661,7 +671,7 @@
 <h3 id="_section_13_selinux_module">Section 13: SELinux Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_12_selinux.png" alt="cockpit 12 selinux" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_12_selinux.png" alt="cockpit 12 selinux" height="650">
 </div>
 <div class="title">Figure 14: Web Console SELinux Module</div>
 </div>
@@ -673,7 +683,7 @@
 <h3 id="_section_14_software_update_module">Section 14: Software Update Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_13_su.png" alt="cockpit 13 su" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_13_su.png" alt="cockpit 13 su" height="650">
 </div>
 <div class="title">Figure 15: Web Console Kernel Dump Module</div>
 </div>
@@ -685,7 +695,7 @@
 <h3 id="_section_15_subscriptions_module">Section 15: Subscriptions Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_14_subscriptions.png" alt="cockpit 14 subscriptions" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_14_subscriptions.png" alt="cockpit 14 subscriptions" height="650">
 </div>
 <div class="title">Figure 16: Web Console Subscriptions Module</div>
 </div>
@@ -697,12 +707,12 @@
 <h3 id="_section_16_terminal_module">Section 16: Terminal Module</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/rhel_8/images/cockpit_15_terminal.png" alt="cockpit 15 terminal" height="650"/>
+<img src="/workshops/rhel_8/images/cockpit_15_terminal.png" alt="cockpit 15 terminal" height="650">
 </div>
 <div class="title">Figure 17: Web Console Terminal Module</div>
 </div>
 <div class="paragraph">
-<p>The terminal module provides command-line access to the system, similar to an SSH session.  Section 16.1 has some example commands to try if you’d like to test it out.</p>
+<p>The terminal module provides command-line access to the system, similar to an SSH session.  Section 16.1 has some example commands to try if you&#8217;d like to test it out.</p>
 </div>
 <div class="sect3">
 <h4 id="_section_16_1_example_terminal_usage">Section 16.1: Example terminal usage</h4>
@@ -714,13 +724,13 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Now if you return to the Podman Containers tab (above, in Section 5), you should see this image listed; you may be prompted to start the Podman service as well.  You’ll see more of podman later in Exercise 8.</p>
+<p>Now if you return to the Podman Containers tab (above, in Section 5), you should see this image listed; you may be prompted to start the Podman service as well.  You&#8217;ll see more of podman later in Exercise 8.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_example_2_try_the_skopeo_command">Example 2: Try the Skopeo command</h5>
 <div class="paragraph">
-<p>Skopeo provides the ability to inspect container images stored in a registry. The Inspect feature displays details of the selected image. The &#39;skopeo inspect&#39; command’s ability to list all the tags associated with a selected image is a benefit over the docker tool.</p>
+<p>Skopeo provides the ability to inspect container images stored in a registry. The Inspect feature displays details of the selected image. The 'skopeo inspect' command&#8217;s ability to list all the tags associated with a selected image is a benefit over the docker tool.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -731,7 +741,7 @@
 <div class="sect4">
 <h5 id="_example_3_list_firewall_rules">Example 3: List firewall rules</h5>
 <div class="paragraph">
-<p>nft is the nftables utility.  Similar to &#39;&#39;iptables -L&#39;&#39;, the following lists the system’s active firewall ruleset:</p>
+<p>nft is the nftables utility.  Similar to ''iptables -L'', the following lists the system&#8217;s active firewall ruleset:</p>
 </div>
 <div class="listingblock">
 <div class="content">

@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -310,7 +320,7 @@
 <li>Duration: 15 mins</li>
 <li>Audience: API Consumers, Developers, Architects</li>
 </ul>
-<p><br>&lt;img src=&quot;../images/agenda-05.png &ldquo;Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/agenda-05.png &ldquo;Login&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 <h3 id="overview">Overview</h3>
 <p>APIs provide the building blocks for applications, but it is applications which deliver functionality to the end users. hence to see APIs in action it helps to see how applications can call APIs to provide new functionality. In this lab you&rsquo;ll be able to create a simple web application which consumes the API you built earlier in the exercises.</p>
 <h3 id="why-red-hat">Why Red Hat?</h3>
@@ -324,7 +334,7 @@
 </li>
 <li>
 <p>Scroll down and click in the www link in the BUILDS section.</p>
-<p><br>&lt;img src=&quot;../images/deploy-10.png&quot; &ldquo;Scroll Down&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/deploy-10.png&rdquo; &ldquo;Scroll Down&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>In the build environment variables page, replace the <code>CLIENT_ID</code> from <code>CHANGE_ME</code> to the one generated from the previous lab.</p>
@@ -333,7 +343,7 @@
 <ul>
 <li>
 <p>Also, make note of the API_BACKEND_URL.  That is the 3Scale backend address of your API.  If the 3Scale Environment is configured with self-signed certificates, go ahead and bring up that link in a Browser and have your Browser accept the certificate for later on. 3Scale should give you an authentication error since it&rsquo;s not configured yet.  The important thing is to just accept the certificate.</p>
-<p><br>&lt;img src=&quot;../images/deploy-11.png&quot; &ldquo;Change Client ID&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/deploy-11.png&rdquo; &ldquo;Change Client ID&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ul>
 <ol>
@@ -342,18 +352,18 @@
 </li>
 <li>
 <p>Click the Start Build button to trigger a new build using the new environment variables pointing to your service.</p>
-<p><br>&lt;img src=&quot;../images/deploy-12.png &ldquo;Start Build&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/deploy-12.png &ldquo;Start Build&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>In the Overview Page, a new build will be triggered. Expand the row by clicking the Builds Icon.</p>
-<p><br>&lt;img src=&quot;../images/deploy-13.png &ldquo;View Build&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/deploy-13.png &ldquo;View Build&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ol>
 <p><em>The build process checks out the code from the git repo, runs a source-to-image container image build, and redeploys the container with the new image using a rolling upgrade strategy.</em></p>
 <ol>
 <li>
 <p>Wait for until the new Build to complete and the rolling upgrade to finish to test your new deployment.</p>
-<p><br>&lt;img src=&quot;../images/consume-22.png &ldquo;Updated App&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-22.png &ldquo;Updated App&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ol>
 <h3 id="update-secured-service-with-red-hat-single-sign-on-application-callback">Update Secured Service with Red Hat Single Sign On Application Callback</h3>
@@ -361,22 +371,22 @@
 <ol>
 <li>
 <p>Open a browser window and navigate to your SSO Console.  Please check with your instructor for the link.  It should be similar to the following.  Replace userX with your assigned user and OCP_URL.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>http://sso-sso.apps.<span style="color:#f92672">[</span>OCP_URL<span style="color:#f92672">]</span>/auth/admin/<span style="color:#f92672">[</span>userX<span style="color:#f92672">]</span>/console/
-</span></span></code></pre></div><p><em>Remember to replace the X with your user number.</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">http://sso-sso.apps.<span style="color:#f92672">[</span>OCP_URL<span style="color:#f92672">]</span>/auth/admin/<span style="color:#f92672">[</span>userX<span style="color:#f92672">]</span>/console/
+</code></pre></div><p><em>Remember to replace the X with your user number.</em></p>
 </li>
 <li>
 <p>Log into Red Hat Single Sign On using your designated user and password. Click on <strong>Sign In</strong>.</p>
-<p><br>&lt;img src=&quot;../images/00-login-sso.png &ldquo;RH SSO Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/00-login-sso.png &ldquo;RH SSO Login&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Select <strong>Clients</strong> from the left menu.</p>
-<p><br>&lt;img src=&quot;../images/00-clients.png &ldquo;Clients&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/00-clients.png &ldquo;Clients&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 <p><em>3scale, through it&rsquo;s <a href="https://github.com/3scale/zync/">zync</a> component, already synchronized the application information into the Red Hat SSO security realm</em>.</p>
 </li>
 <li>
 <p>Click on the <strong>CLIENT_ID</strong> link to view the details.</p>
 <p><em>Remember to select correct CLIENT_ID with the one you got in the <a href="../lab07">API Security Lab</a>. It will easily identifiable as its and hexadecimal name</em>.</p>
-<p><br>&lt;img src=&quot;../images/consume-24.png &ldquo;Client Application&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-24.png &ldquo;Client Application&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Scroll down, type in and select the following options in the application configuration below.  Please make sure to use the Redirect URI for your user.</p>
@@ -411,7 +421,7 @@
 </tbody>
 </table>
 <p><em>Remember to replace the X with your user number.</em></p>
-<p><br>&lt;img src=&quot;../images/consume-25.png &ldquo;Client Configuration&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-25.png &ldquo;Client Configuration&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Finally, click <strong>Save</strong> button to persist the changes.</p>
@@ -438,11 +448,11 @@
 <li>Username: <strong>userX</strong></li>
 <li>Password: <strong>password you received from instructor</strong></li>
 </ul>
-<p><br>&lt;img src=&quot;../images/consume-23.png &ldquo;Login Realm&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-23.png &ldquo;Login Realm&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>You will be redirected again to the <strong>LOCATIONS</strong> page where now you will be able to see the map with the International Inc Offices.</p>
-<p><br>&lt;img src=&quot;../images/consume-14.png &ldquo;Locations Page&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-14.png &ldquo;Locations Page&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ol>
 <p><em>Congratulations!</em> You have successfully used the Keycloak Javascript Adapter to protect International Inc&rsquo;s Locations Service with Single Sign On.  If you have any issues, please see the next session.</p>

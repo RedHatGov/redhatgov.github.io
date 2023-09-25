@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -314,7 +324,7 @@
 <li>Duration: 20 mins</li>
 <li>Audience: Developers, Architects, Testers, Quality Engineers</li>
 </ul>
-<p><br>&lt;img src=&quot;../images/agenda-02.png &ldquo;Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/agenda-02.png &ldquo;Login&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 <h2 id="overview">Overview</h2>
 <p>When building and working with APIs, you often need to simulate the responses of the system before it has been fully completed. This is what we explore in this workshop - mocking up API structures quickly so they can be subjected to testing without having to create all the final service code.</p>
 <h3 id="why-red-hat">Why Red Hat?</h3>
@@ -327,36 +337,36 @@
 </li>
 <li>
 <p>Log in into Microcks using your designated user and password.</p>
-<p><br>&lt;img src=&quot;../images/mock-09.png &ldquo;Openshift Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-09.png &ldquo;Openshift Login&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>You are now in the main Microcks page. Click the <strong>Importers</strong> button to access the Importers page.</p>
-<p><br>&lt;img src=&quot;../images/mock-11.png &ldquo;Job&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-11.png &ldquo;Job&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Click the <strong>Upload</strong> button to upload the <strong>Locations-UserX.yaml</strong> spec generated from Lab 1.</p>
-<p><br>&lt;img src=&quot;../images/mock-12.png &ldquo;Upload Spec&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-12.png &ldquo;Upload Spec&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Click on <strong>Upload</strong>.</p>
-<p><br>&lt;img src=&quot;../images/mock-13.png &ldquo;Upload&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-13.png &ldquo;Upload&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 <p><em>Congratulations! The spec is successfully imported</em></p>
 </li>
 <li>
 <p>Navigate to <strong>APIs | Services</strong> tab.</p>
-<p><br>&lt;img src=&quot;../images/mock-14.png &ldquo;Job&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-14.png &ldquo;Job&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Click on the link for your username. eg: <strong>Locations-User1</strong>.</p>
-<p><br>&lt;img src=&quot;../images/mock-15.png &ldquo;Select services&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-15.png &ldquo;Select services&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Click on the arrow to expand the <strong>Operation GET /locations</strong>.</p>
-<p><br>&lt;img src=&quot;../images/mock-16.png &ldquo;Mock Service&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-16.png &ldquo;Mock Service&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>You can check that the example we added to the definition in <a href="lab01.md">Lab 1</a> will be used to return the mock values. Copy and save the <strong>Mocks URL</strong>, we will use that endpoint to test the REST mock service.</p>
-<p><br>&lt;img src=&quot;../images/mock-17.png &ldquo;Mock Operation&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-17.png &ldquo;Mock Operation&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ol>
 <h3 id="step-2-test-the-rest-mock-service">Step 2: Test the REST Mock Service</h3>
@@ -364,19 +374,19 @@
 <ol>
 <li>
 <p>Open a browser window and navigate to:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>https://onlinecurl.com/
-</span></span></code></pre></div></li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://onlinecurl.com/
+</code></pre></div></li>
 <li>
 <p>Enter the copied URL from <strong>Step 9</strong>. It should look similar to this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>http://microcks.apps.ocp-ai.redhatgov.io/rest/Locations-User1/1.0.0/locations
-</span></span></code></pre></div></li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">http://microcks.apps.ocp-ai.redhatgov.io/rest/Locations-User1/1.0.0/locations
+</code></pre></div></li>
 <li>
 <p>Click the <strong>START YOUR CURL</strong> button.</p>
-<p><br>&lt;img src=&quot;../images/mock-18.png &ldquo;cURL Service&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-18.png &ldquo;cURL Service&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>The page will load the response information from the service. You will be able to see the <em>RESPONSE HEADERS</em> and the actual <em>RESPONSE_BODY</em>. This last part contains the examples we add during the design phase.</p>
-<p><br>&lt;img src=&quot;../images/mock-19.png &ldquo;cURL Response&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-19.png &ldquo;cURL Response&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ol>
 <p><em>Congratulations!</em> You have successfully configure a Microcks Job to create a REST mock service to test your API.</p>

@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -325,9 +335,9 @@ In the browser, navigate to the 'Profile' section in the header.
 <i class="fa fa-desktop"></i>
 Navigate to the 'UserProfile' class in your browser:
 </blockquote>
-<pre tabindex="0"><code>https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/json/UserProfile.java
+<pre><code>https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/json/UserProfile.java
 </code></pre><p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
     }
     public UserProfile(String id, String firstname, String lastname, String aboutme) {
         this.id = id;
@@ -344,9 +354,9 @@ Navigate to the 'UserProfile' class in your browser:
 <i class="fa fa-terminal"></i>
 Navigate to the 'UserProfileService' interface in your browser:
 </blockquote>
-<pre tabindex="0"><code>https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
+<pre><code>https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
 </code></pre><p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
     /**
      * return a specific profile
      * @param id
@@ -363,9 +373,9 @@ Navigate to the 'UserProfileService' interface in your browser:
 <i class="fa fa-terminal"></i>
 Verify the base image used to build the application:
 </blockquote>
-<pre tabindex="0"><code>cat ./openshift-configuration/userprofile-build.yaml | grep -A 4 sourceStrategy
+<pre><code>cat ./openshift-configuration/userprofile-build.yaml | grep -A 4 sourceStrategy
 </code></pre><p>Output (snippet):</p>
-<pre tabindex="0"><code>      sourceStrategy:
+<pre><code>      sourceStrategy:
         from:
           kind: ImageStreamTag
           name: java:11
@@ -376,7 +386,7 @@ Verify the base image used to build the application:
 <i class="fa fa-terminal"></i>
 Create the build:
 </blockquote>
-<pre tabindex="0"><code>oc new-app -f ./openshift-configuration/userprofile-build.yaml \
+<pre><code>oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
   -p APPLICATION_CODE_URI=https://github.com/RedHatGov/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=workshop-stable \
@@ -385,15 +395,15 @@ Create the build:
 <i class="fa fa-terminal"></i>
 Start the build:
 </blockquote>
-<pre tabindex="0"><code>oc start-build userprofile-1.0
+<pre><code>oc start-build userprofile-1.0
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Follow the build:
 </blockquote>
-<pre tabindex="0"><code>oc logs -f bc/userprofile-1.0
+<pre><code>oc logs -f bc/userprofile-1.0
 </code></pre><p>The builder will compile the source code and use the base image to create your deployable image artifact.  You should eventually see a successful build.</p>
 <p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
@@ -407,9 +417,9 @@ Follow the build:
 <i class="fa fa-terminal"></i>
 Verify the image was created:
 </blockquote>
-<pre tabindex="0"><code>oc get is userprofile
+<pre><code>oc get is userprofile
 </code></pre><p>Output:</p>
-<pre tabindex="0"><code>NAME          IMAGE REPOSITORY                                                                  TAGS     UPDATED
+<pre><code>NAME          IMAGE REPOSITORY                                                                  TAGS     UPDATED
 userprofile   image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile   1.0   3 minutes ago
 </code></pre><style>
 

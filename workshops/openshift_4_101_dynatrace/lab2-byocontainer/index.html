@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -317,62 +327,62 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse8c2d27d504b039b11a8bb51e889ead25" class="collapsed">
+      <a data-toggle="collapse" href="#collapse64a8ba3fb6546c32d813ca28b49f8129" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse8c2d27d504b039b11a8bb51e889ead25" class="panel-collapse collapse ">
+  <div id="collapse64a8ba3fb6546c32d813ca28b49f8129" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Verify you're still in the project we created at the end of the last lab by going to the terminal and typing the following:  
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc projects
-</span></span></code></pre></div><blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc projects
+</code></pre></div><blockquote>
 You should see something *similar* in the last line of the output:
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ Using project <span style="color:#e6db74">&#34;demo-0&#34;</span> on server <span style="color:#e6db74">&#34;https://172.30.0.1:443&#34;</span>.
-</span></span></code></pre></div><blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ Using project <span style="color:#e6db74">&#34;demo-0&#34;</span> on server <span style="color:#e6db74">&#34;https://172.30.0.1:443&#34;</span>.
+</code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> If you don't, use the following command to use the correct project:
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc project demo-0
-</span></span></code></pre></div><blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project demo-0
+</code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> In the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc new-app sonatype/nexus:oss
-</span></span></code></pre></div><blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-app sonatype/nexus:oss
+</code></pre></div><blockquote>
 The output should show something *similar* to below:
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>--&gt; Found container image ae52f07 <span style="color:#f92672">(</span><span style="color:#ae81ff">4</span> months old<span style="color:#f92672">)</span> from Docker Hub <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#34;sonatype/nexus:oss&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    Red Hat Universal Base Image <span style="color:#ae81ff">7</span>
-</span></span><span style="display:flex;"><span>    ------------------------------
-</span></span><span style="display:flex;"><span>    The Universal Base Image is designed and engineered to be the base layer <span style="color:#66d9ef">for</span> all of your 
-</span></span><span style="display:flex;"><span>containerized applications, middleware and utilities. This base image is freely redistributable, 
-</span></span><span style="display:flex;"><span>but Red Hat only supports Red Hat technologies through subscriptions <span style="color:#66d9ef">for</span> Red Hat products. 
-</span></span><span style="display:flex;"><span>This image is maintained by Red Hat and updated regularly.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    Tags: base rhel7
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    * An image stream tag will be created as <span style="color:#e6db74">&#34;nexus:oss&#34;</span> that will track this image
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>--&gt; Creating resources ...
-</span></span><span style="display:flex;"><span>    imagestream.image.openshift.io <span style="color:#e6db74">&#34;nexus&#34;</span> created
-</span></span><span style="display:flex;"><span>    deployment.apps <span style="color:#e6db74">&#34;nexus&#34;</span> created
-</span></span><span style="display:flex;"><span>    service <span style="color:#e6db74">&#34;nexus&#34;</span> created
-</span></span><span style="display:flex;"><span>--&gt; Success
-</span></span><span style="display:flex;"><span>    Application is not exposed. You can expose services to the outside world by executing one or 
-</span></span><span style="display:flex;"><span>more of the commands below:
-</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#39;oc expose svc/nexus&#39;</span>
-</span></span><span style="display:flex;"><span>    Run <span style="color:#e6db74">&#39;oc status&#39;</span> to view your app.  
-</span></span></code></pre></div><blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">--&gt; Found container image ae52f07 <span style="color:#f92672">(</span><span style="color:#ae81ff">4</span> months old<span style="color:#f92672">)</span> from Docker Hub <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#34;sonatype/nexus:oss&#34;</span>
+
+    Red Hat Universal Base Image <span style="color:#ae81ff">7</span>
+    ------------------------------
+    The Universal Base Image is designed and engineered to be the base layer <span style="color:#66d9ef">for</span> all of your 
+containerized applications, middleware and utilities. This base image is freely redistributable, 
+but Red Hat only supports Red Hat technologies through subscriptions <span style="color:#66d9ef">for</span> Red Hat products. 
+This image is maintained by Red Hat and updated regularly.
+
+    Tags: base rhel7
+
+    * An image stream tag will be created as <span style="color:#e6db74">&#34;nexus:oss&#34;</span> that will track this image
+
+--&gt; Creating resources ...
+    imagestream.image.openshift.io <span style="color:#e6db74">&#34;nexus&#34;</span> created
+    deployment.apps <span style="color:#e6db74">&#34;nexus&#34;</span> created
+    service <span style="color:#e6db74">&#34;nexus&#34;</span> created
+--&gt; Success
+    Application is not exposed. You can expose services to the outside world by executing one or 
+more of the commands below:
+     <span style="color:#e6db74">&#39;oc expose svc/nexus&#39;</span>
+    Run <span style="color:#e6db74">&#39;oc status&#39;</span> to view your app.  
+</code></pre></div><blockquote>
 Now, let's create a route, so that you can get to the app:
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc expose svc/nexus
-</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc expose svc/nexus
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -439,23 +449,23 @@ Click "Create"
 <blockquote>
 <p><i class="fa fa-terminal"></i> Try typing the following to see what is available to &lsquo;get&rsquo;:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc project demo-<span class="userid">YOUR#</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project demo-<span class="userid">YOUR#</span>
 
-</span></span><span style="display:flex;"><span>$ oc get all
-</span></span></code></pre></div><blockquote>
+$ oc get all
+</code></pre></div><blockquote>
 <p><i class="fa fa-terminal"></i> Now let&rsquo;s look at what our image stream has in it:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get is
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe is/nexus
-</span></span></code></pre></div><div class="alert alert-info">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get is
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe is/nexus
+</code></pre></div><div class="alert alert-info">
 <p><span class="pficon pficon-info"></span></p>
 <p>An image stream can be used to automatically perform an action, such as updating a deployment, when a new image, in our case a new version of the nexus image, is created.</p>
 </div>
 <blockquote>
 <p><i class="fa fa-terminal"></i> The app is running in a pod, let&rsquo;s look at that:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe pods
-</span></span></code></pre></div><h2 id="we-can-see-those-details-using-the-web-console-too">We can see those details using the web console too</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe pods
+</code></pre></div><h2 id="we-can-see-those-details-using-the-web-console-too">We can see those details using the web console too</h2>
 <p>Let&rsquo;s look at the image stream.</p>
 <blockquote>
 Click on "Developer", in the top left corner, and change it to "Administrator"
@@ -478,15 +488,15 @@ Now click on the "nexus" image stream
 <p><img src="../images/ocp-nexus-app.png" width="300"><br/></p>
 <p>Good work - this error is expected; since the nexus console is on /nexus</p>
 <p>Go to this URL:</p>
-<h2 id="hahahugoshortcodes3hbhb">http://nexus-demo-<span class="userid">0</span>.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/nexus/</h2>
+<h2 id="hahahugoshortcode-s3-hbhb">http://nexus-demo-<span class="userid">0</span>.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/nexus/</h2>
 <p>&hellip; to get the Nexus console.  Of course, we have not provided persistent storage; so, any and all work will be lost.</p>
 <p><img src="../images/ocp-nexus-app2.png" width="600"><br/></p>
 <h2 id="lets-clean-this-up">Let&rsquo;s clean this up</h2>
 <blockquote>
 <p><i class="fa fa-terminal"></i> Let&rsquo;s clean up all this to get ready for the next lab:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc delete all --selector app<span style="color:#f92672">=</span>nexus
-</span></span></code></pre></div><h1 id="summary">Summary</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc delete all --selector app<span style="color:#f92672">=</span>nexus
+</code></pre></div><h1 id="summary">Summary</h1>
 <p>In this lab you&rsquo;ve deployed an example container image, pulled from Quay.io, into a pod running in OpenShift.  You exposed a route for clients to access that service via thier web browsers.  And you learned how to get and describe resources using the command line and the web console.  Hopefully, this basic lab also helped to get you familiar with using the CLI and navigating within the web console.</p>
 <style>
 

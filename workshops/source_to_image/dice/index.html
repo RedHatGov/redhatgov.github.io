@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -309,58 +319,58 @@
 
     <p>In an attempt at nostalgia, we are going to once again create an S2I builder, this time for a Fortran app.  Yes, <strong>Fortran</strong>.  The objective is to make our little chat program a bit more interesting.</p>
 <h2 id="step-1---create-the-s2i-project">Step 1 - Create the S2I Project</h2>
-<pre tabindex="0"><code class="language-terminal" data-lang="terminal">cd ~
-</code></pre><pre tabindex="0"><code class="language-terminal" data-lang="terminal">s2i create fortran-s2i fortran-s2i
+<pre><code class="language-terminal" data-lang="terminal">cd ~
+</code></pre><pre><code class="language-terminal" data-lang="terminal">s2i create fortran-s2i fortran-s2i
 </code></pre><h2 id="step-2---edit-the-dockerfile">Step 2 - Edit the Dockerfile</h2>
-<pre tabindex="0"><code class="language-terminal" data-lang="terminal">cd ~
-</code></pre><pre tabindex="0"><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/fortran-s2i/Dockerfile
-</code></pre><pre tabindex="0"><code class="language-terminal" data-lang="terminal">vi ~/fortran-s2i/Dockerfile
+<pre><code class="language-terminal" data-lang="terminal">cd ~
+</code></pre><pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/fortran-s2i/Dockerfile
+</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/fortran-s2i/Dockerfile
 </code></pre><p>Copy the following text and paste it in to the editor.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#75715e"># fortran-s2i</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> openshift/base-centos7</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> maintainer<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Kenneth Evensen &lt;kdevensen@gmail.com&gt;&#34;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> BUILDER_VERSION 1.0<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> io.k8s.description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Platform for building Fortran apps&#34;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      io.k8s.display-name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;builder 1.0.0&#34;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      io.openshift.tags<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fortran&#34;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> yum install -y gcc-gfortran <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    yum clean all <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    rm -rf /var/cache/yum/*<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> ./s2i/bin/ /usr/libexec/s2i<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> chown -R 1001:1001 /opt/app-root<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">USER</span><span style="color:#e6db74"> 1001</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;/usr/libexec/s2i/usage&#34;</span>]<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>To exit vi:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#75715e"># fortran-s2i</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> openshift/base-centos7</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> maintainer<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Kenneth Evensen &lt;kdevensen@gmail.com&gt;&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> BUILDER_VERSION 1.0<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> io.k8s.description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Platform for building Fortran apps&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>      io.k8s.display-name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;builder 1.0.0&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>      io.openshift.tags<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fortran&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> yum install -y gcc-gfortran <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    yum clean all <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    rm -rf /var/cache/yum/*<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> ./s2i/bin/ /usr/libexec/s2i<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> chown -R 1001:1001 /opt/app-root<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">USER</span><span style="color:#e6db74"> 1001</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;/usr/libexec/s2i/usage&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>To exit vi:</p>
 <p>shift+z</p>
 <p>shift+z</p>
 <h2 id="step-3---edit-the-assemble-script">Step 3 - Edit the Assemble Script</h2>
-<pre tabindex="0"><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/fortran-s2i/s2i/bin/assemble
-</code></pre><pre tabindex="0"><code class="language-terminal" data-lang="terminal">vi ~/fortran-s2i/s2i/bin/assemble
+<pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/fortran-s2i/s2i/bin/assemble
+</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/fortran-s2i/s2i/bin/assemble
 </code></pre><p>Copy the following into the editor.</p>
-<pre tabindex="0"><code class="language-terminal" data-lang="terminal">#!/bin/bash -e
+<pre><code class="language-terminal" data-lang="terminal">#!/bin/bash -e
 
-echo &#34;---&gt; Installing application source...&#34;
+echo &quot;---&gt; Installing application source...&quot;
 cp -Rf /tmp/src/. ./
 
-echo &#34;---&gt; Building application from source...&#34;
+echo &quot;---&gt; Building application from source...&quot;
 gfortran app.f90 -o /opt/app-root/fortran-app
 </code></pre><p>To exit vi:</p>
 <p>shift+z</p>
 <p>shift+z</p>
 <h2 id="step-4---edit-the-run-script">Step 4 - Edit the Run Script</h2>
-<pre tabindex="0"><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/fortran-s2i/s2i/bin/run
-</code></pre><pre tabindex="0"><code class="language-terminal" data-lang="terminal">vi ~/fortran-s2i/s2i/bin/run
+<pre><code class="language-terminal" data-lang="terminal">cat /dev/null &gt; ~/fortran-s2i/s2i/bin/run
+</code></pre><pre><code class="language-terminal" data-lang="terminal">vi ~/fortran-s2i/s2i/bin/run
 </code></pre><p>Copy the following into the editor.</p>
-<pre tabindex="0"><code class="language-terminal" data-lang="terminal">#!/bin/bash -e
+<pre><code class="language-terminal" data-lang="terminal">#!/bin/bash -e
 exec /opt/app-root/fortran-app $ARGS
 </code></pre><p>To exit vi:</p>
 <p>shift+z</p>
@@ -368,15 +378,15 @@ exec /opt/app-root/fortran-app $ARGS
 <h2 id="step-5---enusre-you-are-still-in-the-gochat-s2i-porject">Step 5 - Enusre You are Still in the Gochat-s2i Porject</h2>
 <p>In the Wetty terminal, change to the <strong>gochat-s2i-user<span class="userid">YOUR#</span>
 </strong> project space</p>
-<pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc project gochat-s2i-user<span class="userid">YOUR#</span>
+<pre><code class="language-terminal" data-lang="terminal">oc project gochat-s2i-user<span class="userid">YOUR#</span>
 
 </code></pre><h2 id="step-6---create-the-fortran-s2i-builder-image">Step 6 - Create the Fortran S2I Builder Image</h2>
 <p>Create a new build for the Fortran S2I builder image</p>
-<pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc new-build fortran-s2i/ --to=fortran-s2i
+<pre><code class="language-terminal" data-lang="terminal">oc new-build fortran-s2i/ --to=fortran-s2i
 </code></pre><p>Start the new build for the Fortran S2I builder image</p>
-<pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc start-build fortran-s2i --from-dir=fortran-s2i/
+<pre><code class="language-terminal" data-lang="terminal">oc start-build fortran-s2i --from-dir=fortran-s2i/
 </code></pre><h2 id="step-7---create-the-fortran-dice-container-from-source">Step 7 - Create the Fortran-Dice Container from Source</h2>
-<pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc new-build https://github.com/kevensen/fortran-dice.git --image-stream=fortran-s2i --name=dice --allow-missing-imagestream-tags
+<pre><code class="language-terminal" data-lang="terminal">oc new-build https://github.com/kevensen/fortran-dice.git --image-stream=fortran-s2i --name=dice --allow-missing-imagestream-tags
 </code></pre><h2 id="step-8---roll-some-dice">Step 8 - Roll Some Dice</h2>
 <p>In the chat window, try:</p>
 <p><strong>//roll</strong></p>

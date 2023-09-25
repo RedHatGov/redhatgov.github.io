@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -310,7 +320,7 @@
     <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you’ve gotten a sense of how ansible works, we are going to write our first
+<p>Now that you&#8217;ve gotten a sense of how ansible works, we are going to write our first
 ansible <strong>playbook</strong>.  The playbook is where you can take some of those ad-hoc commands you just ran
 and put them into a repeatable set of <strong>plays</strong> and <strong>tasks</strong>.</p>
 </div>
@@ -353,7 +363,7 @@ cd ~/apache_basic</code></pre>
 <h2 id="_section_2_defining_your_play">Section 2: Defining Your Play</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you are editing <code>install_apache.yml</code>, let’s begin by defining the play and then understanding what each line accomplishes</p>
+<p>Now that you are editing <code>install_apache.yml</code>, let&#8217;s begin by defining the play and then understanding what each line accomplishes</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -385,8 +395,8 @@ cd ~/apache_basic</code></pre>
 <h2 id="_section_3_adding_tasks_to_your_play">Section 3: Adding Tasks to Your Play</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that we’ve defined your play, let’s add some tasks to get some things done.  Align (vertically) the <strong>t</strong> in <code>task</code> with the <strong>b</strong> <code>become</code>. <br/>
-Yes, it does actually matter.  In fact, you should make sure all of your playbook statements are aligned in the way shown here.<br/>
+<p>Now that we&#8217;ve defined your play, let&#8217;s add some tasks to get some things done.  Align (vertically) the <strong>t</strong> in <code>task</code> with the <strong>b</strong> <code>become</code>. <br>
+Yes, it does actually matter.  In fact, you should make sure all of your playbook statements are aligned in the way shown here.<br>
 If you want to see the entire playbook for reference, skip to the bottom of this exercise.</p>
 </div>
 <div class="listingblock">
@@ -451,7 +461,7 @@ about the <strong>service</strong> module.</p>
 <h2 id="_section_4_saving_your_playbook">Section 4: Saving your Playbook</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you’ve completed writing your playbook, it would be a shame not to keep it.</p>
+<p>Now that you&#8217;ve completed writing your playbook, it would be a shame not to keep it.</p>
 </div>
 <div class="paragraph">
 <p>Use the <code>write/quit</code> method in <code>vi</code> or <code>vim</code> to save your playbook, i.e. <code>Esc :wq!</code></p>
@@ -462,7 +472,7 @@ You are ready to automate!</p>
 </div>
 <div class="admonitionblock note">
 <table>
-<tbody><tr>
+<tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -472,7 +482,7 @@ read up on this <a href="http://docs.ansible.com/ansible/YAMLSyntax.html">YAML S
 like this.  Take note of the spacing and alignment.
 </td>
 </tr>
-</tbody></table>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">

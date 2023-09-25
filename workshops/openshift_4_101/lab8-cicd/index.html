@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -391,23 +401,23 @@ Fill in the Name and Display Name of the project as "cicd-<span class="userid">Y
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse3b5a0becc58fdbb21a57ceb6e36ac208" class="collapsed">
+      <a data-toggle="collapse" href="#collapse891f675bf600bf47672563e1f8cd35dd" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse3b5a0becc58fdbb21a57ceb6e36ac208" class="panel-collapse collapse ">
+  <div id="collapse891f675bf600bf47672563e1f8cd35dd" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc new-app jenkins-ephemeral --as-deployment-config<span style="color:#f92672">=</span>true
-</span></span><span style="display:flex;"><span>$ oc logs -f dc/jenkins
-</span></span></code></pre></div><p>Wait for logs to return &ldquo;Success&rdquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-app jenkins-ephemeral --as-deployment-config<span style="color:#f92672">=</span>true
+$ oc logs -f dc/jenkins
+</code></pre></div><p>Wait for logs to return &ldquo;Success&rdquo;.</p>
 <div class="alert alert-info">
 <p><span class="pficon pficon-info"></span></p>
   <p>NOTE: this may take some time</p>
@@ -479,10 +489,10 @@ Scroll down to the bottom, and click
 </div>
 
 <h2 id="create-a-sample-application-configuration">Create a sample application configuration</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc project cicd-<span class="userid">YOUR#</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project cicd-<span class="userid">YOUR#</span>
 
-</span></span><span style="display:flex;"><span>$ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/nodejs-sample-pipeline.yaml
-</span></span></code></pre></div><h2 id="confirm-you-can-access-jenkins">Confirm you can access Jenkins</h2>
+$ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/nodejs-sample-pipeline.yaml
+</code></pre></div><h2 id="confirm-you-can-access-jenkins">Confirm you can access Jenkins</h2>
 <div class="panel-group">
   
 
@@ -491,14 +501,14 @@ Scroll down to the bottom, and click
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse27b42ff2f97af7c60be8ce4639d23446" class="collapsed">
+      <a data-toggle="collapse" href="#collapse9a88ec51185044e5484cec9f2c8a469e" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse27b42ff2f97af7c60be8ce4639d23446" class="panel-collapse collapse ">
+  <div id="collapse9a88ec51185044e5484cec9f2c8a469e" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
@@ -508,8 +518,8 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <blockquote>
 <i class="fa fa-terminal"></i> Get the route to the Jenkins server:
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get route | grep jenkins | awk <span style="color:#e6db74">&#39;{ print $2 }&#39;</span>
-</span></span></code></pre></div><p>Copy the above URL, and paste it in your web browser, to access Jenkins.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get route | grep jenkins | awk <span style="color:#e6db74">&#39;{ print $2 }&#39;</span>
+</code></pre></div><p>Copy the above URL, and paste it in your web browser, to access Jenkins.</p>
 
     </div>
   </div>
@@ -569,14 +579,14 @@ In "Developer" view, under "Topology", click the arrow, in the upper right corne
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse41d40a2436af6961d1c04beede9c0622" class="collapsed">
+      <a data-toggle="collapse" href="#collapsebcdc858b0e1e54917ea7e82d41e61cf9" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse41d40a2436af6961d1c04beede9c0622" class="panel-collapse collapse ">
+  <div id="collapsebcdc858b0e1e54917ea7e82d41e61cf9" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
@@ -584,8 +594,8 @@ In "Developer" view, under "Topology", click the arrow, in the upper right corne
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
 <p><i class="fa fa-terminal"></i> Launch the pipeline:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc start-build nodejs-sample-pipeline
-</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc start-build nodejs-sample-pipeline
+</code></pre></div>
     </div>
   </div>
 </div>

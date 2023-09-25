@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -320,17 +330,17 @@
 <i class="fa fa-terminal"></i>
 Verify the annotation in the 'app-ui' file:
 </blockquote>
-<pre tabindex="0"><code>cat openshift-configuration/app-ui-fromsource.yaml | grep -B 1 sidecar.istio.io/inject
+<pre><code>cat openshift-configuration/app-ui-fromsource.yaml | grep -B 1 sidecar.istio.io/inject
 </code></pre><p>Output:</p>
-<pre tabindex="0"><code>	annotations:
-	  sidecar.istio.io/inject: &#34;true&#34;
+<pre><code>	annotations:
+	  sidecar.istio.io/inject: &quot;true&quot;
 </code></pre><br>
 <p>Now let&rsquo;s deploy the microservices.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Deploy the boards service:
 </blockquote>
-<pre tabindex="0"><code>oc new-app -f ./openshift-configuration/boards-fromsource.yaml \
+<pre><code>oc new-app -f ./openshift-configuration/boards-fromsource.yaml \
   -p APPLICATION_NAME=boards \
   -p NODEJS_VERSION_TAG=10 \
   -p GIT_URI=https://github.com/RedHatGov/openshift-microservices.git \
@@ -341,7 +351,7 @@ Deploy the boards service:
 <i class="fa fa-terminal"></i>
 Deploy the context scraper service:
 </blockquote>
-<pre tabindex="0"><code>oc new-app -f ./openshift-configuration/context-scraper-fromsource.yaml \
+<pre><code>oc new-app -f ./openshift-configuration/context-scraper-fromsource.yaml \
   -p APPLICATION_NAME=context-scraper \
   -p NODEJS_VERSION_TAG=10 \
   -p GIT_BRANCH=workshop-stable \
@@ -350,7 +360,7 @@ Deploy the context scraper service:
 <i class="fa fa-terminal"></i>
 Deploy the user interface:
 </blockquote>
-<pre tabindex="0"><code>oc new-app -f ./openshift-configuration/app-ui-fromsource.yaml \
+<pre><code>oc new-app -f ./openshift-configuration/app-ui-fromsource.yaml \
   -p APPLICATION_NAME=app-ui \
   -p NODEJS_VERSION_TAG=10 \
   -p GIT_BRANCH=workshop-stable \
@@ -360,10 +370,10 @@ Deploy the user interface:
 <i class="fa fa-terminal"></i>
 Watch the microservices demo installation:
 </blockquote>
-<pre tabindex="0"><code>oc get pods --watch
+<pre><code>oc get pods --watch
 </code></pre><br>
 <p>Wait a couple minutes.  You should see the &lsquo;app-ui&rsquo;, &lsquo;boards&rsquo;, &lsquo;context-scraper&rsquo;, and &lsquo;sso&rsquo; pods running.  For example:</p>
-<pre tabindex="0"><code>NAME                       READY   STATUS      RESTARTS   AGE
+<pre><code>NAME                       READY   STATUS      RESTARTS   AGE
 app-ui-1-build             0/1     Completed   0          64m
 app-ui-1-xxxxx             2/2     Running     0          62m
 app-ui-1-deploy            0/1     Completed   0          62m
@@ -381,9 +391,9 @@ context-scraper-1-deploy   0/1     Completed   0          62m
 <i class="fa fa-terminal"></i>
 Print the containers in the 'app-ui' pod:
 </blockquote>
-<pre tabindex="0"><code>oc get pods -l app=app-ui -o jsonpath=&#39;{.items[*].spec.containers[*].name}{&#34;\n&#34;}&#39;
+<pre><code>oc get pods -l app=app-ui -o jsonpath='{.items[*].spec.containers[*].name}{&quot;\n&quot;}'
 </code></pre><p>Output:</p>
-<pre tabindex="0"><code>app-ui istio-proxy
+<pre><code>app-ui istio-proxy
 </code></pre><br>
 <h2 id="access-application">Access Application</h2>
 <p>The application is deployed!  But you need a way to access the application via the user interface.</p>
@@ -392,20 +402,20 @@ Print the containers in the 'app-ui' pod:
 <i class="fa fa-terminal"></i>
 Create the gateway configuration and routing rules:
 </blockquote>
-<pre tabindex="0"><code>oc process -f ./istio-configuration/ingress-gateway.yaml \
+<pre><code>oc process -f ./istio-configuration/ingress-gateway.yaml \
   -p INGRESS_GATEWAY_NAME=demogateway-$PROJECT_NAME | oc create -f -
 </code></pre><p>To access the application, you need the endpoint of your load balancer.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Retrieve the URL of the load balancer:
 </blockquote>
-<pre tabindex="0"><code>GATEWAY_URL=$(oc get route istio-demogateway-$(oc project -q) --template=&#39;http://{{.spec.host}}&#39;)
+<pre><code>GATEWAY_URL=$(oc get route istio-demogateway-$(oc project -q) --template='http://{{.spec.host}}')
 echo $GATEWAY_URL
 </code></pre><blockquote>
 <i class="fa fa-desktop"></i>
 Navigate to this URL in the browser:
 </blockquote>
-<pre tabindex="0"><code>http://istio-demogateway-user<span class="userid">X</span>-user<span class="userid">X</span>.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:6443
+<pre><code>http://istio-demogateway-user<span class="userid">X</span>-user<span class="userid">X</span>.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:6443
 </code></pre><br>
 <p>You should see the application user interface.  Try creating a new board and posting to the shared board.</p>
 <p>For example:</p>

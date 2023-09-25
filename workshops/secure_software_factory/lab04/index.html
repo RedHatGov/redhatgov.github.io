@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -308,18 +318,18 @@
 </nav>
 
     <p>Jenkins can be integrated with OpenShift in 3 ways.  Today, you&rsquo;ll be working with a containerized Jenkins Server that&rsquo;s fully integrated with OpenShift.</p>
-<img src="../images/jenkins_integrated.png" width="900" />
+<p><img src="../images/jenkins_integrated.png" width="900" /></p>
 <h1 id="login-through-sso-with-jenkins">Login through SSO with Jenkins</h1>
 <p>Go into your CI/CD project and find the running Jenkins Pod.</p>
 <p>Click the external route (https://jenkins…) to go into your Jenkins Server</p>
-<img src="../images/jenkins_pod.png" width="900" />
+<p><img src="../images/jenkins_pod.png" width="900" /></p>
 <p>Click Login with OpenShift.</p>
 <p>Login with your OpenShift Credentials. You maybe asked to accept authorizations. Go ahead and do so and re-login.</p>
-<img src="../images/jenkins_ocp_login.png" width="500" />
+<p><img src="../images/jenkins_ocp_login.png" width="500" /></p>
 <p>You will be asked to authorize access to the jenkins service account.  Go ahead and Allow selected permissions.</p>
-<img src="../images/authorize_jenkins_service.png" width="700" />
+<p><img src="../images/authorize_jenkins_service.png" width="700" /></p>
 <p>You should now see the Jenkins Home Page</p>
-<img src="../images/jenkins_home.png" width="900" />
+<p><img src="../images/jenkins_home.png" width="900" /></p>
 <p>Jenkins follows a master/agent architecture.  Your pipeline will run a process called a Jenkins executor.  A Jenkins executor is one of the basic building blocks which allow a build to run on an agent (e.g. build server). Think of an executor as a single “process ID”, or as the basic unit of resource that Jenkins executes on your machine to run a build.
 <style>
 

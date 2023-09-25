@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -323,7 +333,8 @@
 <blockquote>
 <p>Navigate to Volumes -&gt; Volumes using the second level navigation tabs</p>
 </blockquote>
-<figure><img src="../images/lab9-storage-1.png"/><figcaption>
+<figure>
+    <img src="../images/lab9-storage-1.png"/> <figcaption>
             <h4>Lab 9 Figure 1: Volume Listing</h4>
         </figcaption>
 </figure>
@@ -337,7 +348,8 @@ Enter <strong>15</strong> for <strong>Size (GiB)</strong><br>
 Leave <strong>Availability Zone</strong> as is<br>
 Click <strong>Create Volume</strong></p>
 </blockquote>
-<figure><img src="../images/lab9-storage-2.png"/><figcaption>
+<figure>
+    <img src="../images/lab9-storage-2.png"/> <figcaption>
             <h4>Lab 9 Figure 2: Create Volume</h4>
         </figcaption>
 </figure>
@@ -347,7 +359,8 @@ Click <strong>Create Volume</strong></p>
 <p>You should see an info box appear in the upper right corner of the screen that says something similar to &lsquo;Info: Creating volume &ldquo;student<span class="userid">1</span>-vol-1&rdquo;&rsquo;</p>
 <p>If you did not, let the intstructor know now</p>
 </div>
-<figure><img src="../images/lab9-storage-3.png"/><figcaption>
+<figure>
+    <img src="../images/lab9-storage-3.png"/> <figcaption>
             <h4>Lab 9 Figure 3: New Volume Created in Project</h4>
         </figcaption>
 </figure>
@@ -359,7 +372,8 @@ Select <strong>student<span class="userid">1</span>-cirros-1</strong> from the <
 Leave <strong>Device Name</strong> as is<br>
 Click <strong>Attach Volume</strong></p>
 </blockquote>
-<figure><img src="../images/lab9-storage-4.png"/><figcaption>
+<figure>
+    <img src="../images/lab9-storage-4.png"/> <figcaption>
             <h4>Lab 9 Figure 4: Attach Volume to Instance</h4>
         </figcaption>
 </figure>
@@ -369,7 +383,8 @@ Click <strong>Attach Volume</strong></p>
 <p>You should see an info box appear in the upper right corner of the screen that says something similar to &lsquo;Info: Attaching volume student<span class="userid">1</span>-vol-1 to instance student<span class="userid">1</span>-cirros-1 on /dev/vdb.&rsquo;</p>
 <p>If you did not, let the intstructor know now</p>
 </div>
-<figure><img src="../images/lab9-storage-5.png"/><figcaption>
+<figure>
+    <img src="../images/lab9-storage-5.png"/> <figcaption>
             <h4>Lab 9 Figure 5: New Volume Attached to Instance in Volume Listing</h4>
         </figcaption>
 </figure>
@@ -383,7 +398,8 @@ Click <strong>Attach Volume</strong></p>
 <blockquote>
 <p>Navigate to Object Store -&gt; Containers using the second level navigation tabs</p>
 </blockquote>
-<figure><img src="../images/lab9-storage-6.png"/><figcaption>
+<figure>
+    <img src="../images/lab9-storage-6.png"/> <figcaption>
             <h4>Lab 9 Figure 6: Object Store Container Listing</h4>
         </figcaption>
 </figure>
@@ -394,7 +410,8 @@ Enter <strong>student<span class="userid">1</span>-container</strong> for <stron
 Leave <strong>Not Public</strong> under Container Access selected<br>
 Click <strong>Submit</strong></p>
 </blockquote>
-<figure><img src="../images/lab9-storage-7.png"/><figcaption>
+<figure>
+    <img src="../images/lab9-storage-7.png"/> <figcaption>
             <h4>Lab 9 Figure 7: Create Container</h4>
         </figcaption>
 </figure>
@@ -404,7 +421,8 @@ Click <strong>Submit</strong></p>
 <p>You should see an info box appear in the upper right corner of the screen that says something similar to &ldquo;Success: Container student<span class="userid">1</span>-container created.&rdquo;</p>
 <p>If you did not, let the intstructor know now</p>
 </div>
-<figure><img src="../images/lab9-storage-8.png"/><figcaption>
+<figure>
+    <img src="../images/lab9-storage-8.png"/> <figcaption>
             <h4>Lab 9 Figure 8: New Container Created in Object Store</h4>
         </figcaption>
 </figure>
@@ -417,7 +435,8 @@ Click on the <strong>upload</strong> button to the right of the Filter search bo
 <p><span class="pficon pficon-info"></span></p>
 <p>The <strong>upload button</strong> looks like a <strong>folder with an up arrow</strong></p>
 </div>
-<figure><img src="../images/lab9-storage-9.png"/><figcaption>
+<figure>
+    <img src="../images/lab9-storage-9.png"/> <figcaption>
             <h4>Lab 9 Figure 9: Select Container in Object Store</h4>
         </figcaption>
 </figure>
@@ -428,7 +447,8 @@ Select any small image, text file, pdf, etc. from your device<br>
 Leave <strong>File Name</strong> as is<br>
 Click <strong>Upload File</strong></p>
 </blockquote>
-<figure><img src="../images/lab9-storage-10.png"/><figcaption>
+<figure>
+    <img src="../images/lab9-storage-10.png"/> <figcaption>
             <h4>Lab 9 Figure 10: Upload Form for Adding File to Container</h4>
         </figcaption>
 </figure>
@@ -438,7 +458,8 @@ Click <strong>Upload File</strong></p>
 <p>You should see an info box appear in the upper right corner of the screen that says something similar to &ldquo;Success: File student1.pem uploaded.&rdquo;</p>
 <p>If you did not, let the intstructor know now</p>
 </div>
-<figure><img src="../images/lab9-storage-11.png"/><figcaption>
+<figure>
+    <img src="../images/lab9-storage-11.png"/> <figcaption>
             <h4>Lab 9 Figure 11: New Object in Container Listing</h4>
         </figcaption>
 </figure>

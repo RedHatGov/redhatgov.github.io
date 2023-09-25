@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -333,19 +343,19 @@
 </blockquote>
 <p>This is going to take you to the next logical step of adding something to the project, but we don&rsquo;t want to do that just yet.</p>
 <h2 id="lets-launch-a-terminal">Let&rsquo;s launch a terminal.</h2>
-<p>At the top of the screen, click the <strong>[&gt;_]</strong> button.</p>
-<p>&lt;img src=&quot;../images/ocp-redhat-terminal-launch.gif&quot;<br>
+<p>At the top of the screen, click the **[&gt;_]** button.</p>
+<p>&lt;img src=&rdquo;../images/ocp-redhat-terminal-launch.gif&quot;<br>
 <em><strong>Note:</strong></em> If the button does not exist, it may be necessary for the cluster administrator to load the <strong>&ldquo;Red Hat Terminal Operator&rdquo;</strong>.</p>
 <p><i class="fa fa-terminal"></i> Check to see what projects you have access to:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get projects
-</span></span><span style="display:flex;"><span>oc get projects
-</span></span><span style="display:flex;"><span>NAME          DISPLAY NAME   STATUS
-</span></span><span style="display:flex;"><span>terminal-<span class="userid">YOUR#</span>                  Active
-</span></span></code></pre></div><blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get projects
+oc get projects
+NAME          DISPLAY NAME   STATUS
+terminal-<span class="userid">YOUR#</span>                  Active
+</code></pre></div><blockquote>
 <p><i class="fa fa-terminal"></i> Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc status
-</span></span></code></pre></div><h1 id="summary">Summary</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc status
+</code></pre></div><h1 id="summary">Summary</h1>
 <p>You should now be ready to get hands-on with our workshop labs.</p>
 <style>
 

@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -314,7 +324,7 @@
 <li>Duration: 20 mins</li>
 <li>Audience: Developers, Architects, Testers, Quality Engineers</li>
 </ul>
-<p><br>&lt;img src=&quot;../images/agenda-02.png &ldquo;Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/agenda-02.png &ldquo;Login&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 <h2 id="overview">Overview</h2>
 <p>When building and working with APIs, you often need to simulate the responses of the system before it has been fully completed. This is what we explore in this workshop - mocking up API structures quickly so they can be subjected to testing without having to create all the final service code.</p>
 <h3 id="why-red-hat">Why Red Hat?</h3>
@@ -329,11 +339,11 @@
 </li>
 <li>
 <p>Log into Gogs using your designated user and password. Click on <strong>Sign In</strong>.</p>
-<p><br>&lt;img src=&quot;../images/mock-01.png &ldquo;Sign In&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-01.png &ldquo;Sign In&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>In the main page, click in the <strong>+</strong> sign in the right top corner to display the <em>New</em> menu. Click the <strong>New Migration</strong> option.</p>
-<p><br>&lt;img src=&quot;../images/mock-02.png &ldquo;New Migration&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-02.png &ldquo;New Migration&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Fill in the information of the repository migration with the following values:</p>
@@ -342,39 +352,39 @@
 <li>Owner: <strong>UserX</strong></li>
 <li>Repository Name: <strong>locations-api</strong></li>
 </ul>
-<p><br>&lt;img src=&quot;../images/mock-03.png &ldquo;New Migration Repository&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-03.png &ldquo;New Migration Repository&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Click on <strong>Migrate Repository</strong> to fork the GitHub repo into Gogs.</p>
 </li>
 <li>
 <p>Switch to branch <code>dev-track-lab-02</code></p>
-<p><br>&lt;img src=&quot;../images/mock-04.png &ldquo;Upload File&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-04.png &ldquo;Upload File&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Open the <code>locations-api</code> folder and click on the filename link <strong>Locations-UserX.json</strong> to open and review the file.</p>
-<p><br>&lt;img src=&quot;../images/mock-05.png &ldquo;Click File&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-05.png &ldquo;Click File&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>If everything is fine, click the <strong>Edit</strong> button to apply your personal user settings.</p>
-<p><br>&lt;img src=&quot;../images/mock-06.png &ldquo;Edit file&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-06.png &ldquo;Edit file&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Replace <strong>UserX</strong> with your user number.</p>
-<p><br>&lt;img src=&quot;../images/mock-07.png &ldquo;Rename file&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-07.png &ldquo;Rename file&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Commit the changes to gogs.</p>
-<p><br>&lt;img src=&quot;../images/mock-08.png &ldquo;Commit file&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-08.png &ldquo;Commit file&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Click the <strong>RAW</strong> button to get the raw download version of the file.</p>
-<p><br>&lt;img src=&quot;../images/mock-09.png &ldquo;Raw file&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-09.png &ldquo;Raw file&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Copy the browser tab URL. Store that URL address as you will use it in the next steps of the lab. The URL should look similar to the following:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> http://gogs.apps.ocp-ai.redhatgov.io/userX/locations-api/raw/dev-track-lab-02/locations-api/Locations-UserX.json
-</span></span></code></pre></div><p><em>If you feel more comfortable, you can also copy and paste the RAW button link from the previous step.  Also, don&rsquo;t forget to update the X variable with your user number</em>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> http://gogs.apps.ocp-ai.redhatgov.io/userX/locations-api/raw/dev-track-lab-02/locations-api/Locations-UserX.json
+</code></pre></div><p><em>If you feel more comfortable, you can also copy and paste the RAW button link from the previous step.  Also, don&rsquo;t forget to update the X variable with your user number</em>.</p>
 </li>
 </ol>
 <h3 id="step-1-create-a-microcks-job">Step 1: Create a Microcks Job</h3>
@@ -384,15 +394,15 @@
 </li>
 <li>
 <p>Log in into Microcks using your designated user and password.</p>
-<p><br>&lt;img src=&quot;../images/mock-10.png &ldquo;Openshift Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-10.png &ldquo;Openshift Login&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>You are now in the main Microcks page. Click the <strong>Importers</strong> button to access the Importers page.</p>
-<p><br>&lt;img src=&quot;../images/mock-11.png &ldquo;Job&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-11.png &ldquo;Job&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Click the <strong>Create</strong> button to create your first job.</p>
-<p><br>&lt;img src=&quot;../images/mock-12.png &ldquo;Job&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-12.png &ldquo;Job&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>In the <code>Create a New Job</code> dialog, type in the following information replacing <strong>X</strong> with your user number. Click <strong>Next</strong>.</p>
@@ -404,44 +414,44 @@
 </ul>
 </li>
 </ul>
-<p><br>&lt;img src=&quot;../images/mock-13.png &ldquo;Job Details&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-13.png &ldquo;Job Details&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Click <strong>Next</strong> for the Authentication options.</p>
 </li>
 <li>
 <p>Review the details and click on <strong>Create</strong> to create the job.</p>
-<p><br>&lt;img src=&quot;../images/mock-14.png &ldquo;Create Job&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-14.png &ldquo;Create Job&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>After your job is created, click on the <strong>Activate</strong> option.</p>
-<p><br>&lt;img src=&quot;../images/mock-15.png &ldquo;Activate Job&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-15.png &ldquo;Activate Job&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Repeat the last step, but now select the <strong>Force Import</strong> option. This will start the synchronization job.</p>
-<p><br>&lt;img src=&quot;../images/mock-16.png &ldquo;Start Job&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-16.png &ldquo;Start Job&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Refresh your window to get it to the latest state.</p>
 </li>
 <li>
 <p>You will see 3 labels next to your Job. Click the <strong>Services</strong> label.</p>
-<p><br>&lt;img src=&quot;../images/mock-17.png &ldquo;Job Services&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-17.png &ldquo;Job Services&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>In the dialog you will see your service listed. Click on the <strong>Locations-UserX - 1.0.0.</strong> link.</p>
-<p><br>&lt;img src=&quot;../images/mock-18.png &ldquo;Job Service&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-18.png &ldquo;Job Service&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Click <strong>Close</strong> to dismiss the dialog.</p>
 </li>
 <li>
 <p>This is your new REST mock service based on the OpenAPI definition you just loaded to Microcks. Click on the arrow to expand the <strong>GET /locations</strong> operation.</p>
-<p><br>&lt;img src=&quot;../images/mock-19.png &ldquo;Mock Service&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-19.png &ldquo;Mock Service&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>You can check that the example we added to the definition in Lab 1 will be used to return the mock values. Scroll down, copy and save the <strong>Mocks URL</strong>, we will use that endpoint to test the REST mock service.</p>
-<p><br>&lt;img src=&quot;../images/mock-20.png &ldquo;Mock Operation&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-20.png &ldquo;Mock Operation&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ol>
 <h3 id="step-2-test-the-rest-mock-service">Step 2: Test the REST Mock Service</h3>
@@ -449,19 +459,19 @@
 <ol>
 <li>
 <p>Open a browser window and navigate to:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>https://onlinecurl.com/
-</span></span></code></pre></div></li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://onlinecurl.com/
+</code></pre></div></li>
 <li>
 <p>Copy and paste the Mock URL from earlier step. <em>Remember to replace X with your user number</em>. It should look similar to the link below.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>http://microcks.apps.ocp-ai.redhatgov.io/rest/Locations-UserX/1.0.0/locations
-</span></span></code></pre></div></li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">http://microcks.apps.ocp-ai.redhatgov.io/rest/Locations-UserX/1.0.0/locations
+</code></pre></div></li>
 <li>
 <p>Click the <strong>START YOUR CURL</strong> button.</p>
-<p><br>&lt;img src=&quot;../images/mock-21.png &ldquo;cURL Service&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-21.png &ldquo;cURL Service&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>The page will load the response information from the service. You will be able to see the <em>RESPONSE HEADERS</em> and the actual <em>RESPONSE_BODY</em>. This last part contains the examples we add during the design phase.</p>
-<p><br>&lt;img src=&quot;../images/mock-22.png &ldquo;cURL Response&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/mock-22.png &ldquo;cURL Response&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ol>
 <p><em>Congratulations!</em> You have successfully configure a Microcks Job to create a REST mock service to test your API.</p>

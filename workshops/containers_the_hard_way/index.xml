@@ -5,7 +5,11 @@
     <link>/workshops/containers_the_hard_way/</link>
     <description>Recent content in Linux Containers the Hard Way on Red Hat | Public Sector</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/workshops/containers_the_hard_way/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/containers_the_hard_way/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Exercise 1 - The Mount Namespace</title>
       <link>/workshops/containers_the_hard_way/exercise1/</link>
@@ -13,7 +17,7 @@
       
       <guid>/workshops/containers_the_hard_way/exercise1/</guid>
       <description>Exercise 1.1: Unsharing is Caring New Linux Namespaces are typically spawned by using either the clone or unshare system calls. These exist as C functions but wrappers exist in many other languages. For our purposes today, we will be using the unshare command which is ostensibly a Bash wrapper to the unshare system call.
-unshare --help Usage: unshare [options] [&amp;lt;program&amp;gt; [&amp;lt;argument&amp;gt;...]] Run a program with some namespaces unshared from the parent.</description>
+ unshare --help   Usage: unshare [options] [&amp;lt;program&amp;gt; [&amp;lt;argument&amp;gt;...]] Run a program with some namespaces unshared from the parent.</description>
     </item>
     
     <item>
@@ -23,7 +27,7 @@ unshare --help Usage: unshare [options] [&amp;lt;program&amp;gt; [&amp;lt;argume
       
       <guid>/workshops/containers_the_hard_way/exercise2/</guid>
       <description>Exercise 2.1 - The PID Basics Before we start playing with PID namespaces, it is good to have some background on how PIDs in Linux work.
-Every process that runs on a Linux system gets a Process ID (PID). This exists as a 32-bit integer. Numbering starts at 1 and increments until there are none left. PIDs can be reused once the process terminates. If you run out of PIDs, you’ll have a bad time.</description>
+ Every process that runs on a Linux system gets a Process ID (PID). This exists as a 32-bit integer. Numbering starts at 1 and increments until there are none left. PIDs can be reused once the process terminates. If you run out of PIDs, you&amp;#8217;ll have a bad time.</description>
     </item>
     
     <item>
@@ -50,8 +54,8 @@ Every process that runs on a Linux system gets a Process ID (PID). This exists a
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/containers_the_hard_way/exercise5/</guid>
-      <description>Let’s put all of our new namespace skills to use! Again, we will be working as the rhel user.
-su - rhel # if neccessary unshare -mipfnuUr /bin/bash mount -t proc none /proc mount -t tmpfs none /tmp mount -t sysfs none /sys With the call to unshare, we used all of the flags that we have used in the previous exercises. We also mounted three new filesystems after creating our sandbox.</description>
+      <description>Let&amp;#8217;s put all of our new namespace skills to use! Again, we will be working as the rhel user.
+ su - rhel # if neccessary unshare -mipfnuUr /bin/bash mount -t proc none /proc mount -t tmpfs none /tmp mount -t sysfs none /sys   With the call to unshare, we used all of the flags that we have used in the previous exercises. We also mounted three new filesystems after creating our sandbox.</description>
     </item>
     
     <item>
@@ -60,8 +64,8 @@ su - rhel # if neccessary unshare -mipfnuUr /bin/bash mount -t proc none /proc m
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/containers_the_hard_way/exercise6/</guid>
-      <description>Exercise 6.1 - Some Background All of that is well and good. However, containers are great because they allow us to package and distribute software. All we’ve done is isolate some Linux processes. Where’s the beef?
-Containers get their root filesystem from a container image file. This is typically pulled from a registry. This file is, essentially, a TAR archive with the root filesystem contents and some metadata. Those contents are then made available to the running container through use of an Overlay Filesystem.</description>
+      <description>Exercise 6.1 - Some Background All of that is well and good. However, containers are great because they allow us to package and distribute software. All we&amp;#8217;ve done is isolate some Linux processes. Where&amp;#8217;s the beef?
+ Containers get their root filesystem from a container image file. This is typically pulled from a registry. This file is, essentially, a TAR archive with the root filesystem contents and some metadata. Those contents are then made available to the running container through use of an Overlay Filesystem.</description>
     </item>
     
     <item>
@@ -71,7 +75,7 @@ Containers get their root filesystem from a container image file. This is typica
       
       <guid>/workshops/containers_the_hard_way/exercise7/</guid>
       <description>Exercise 7.1 - Some Background The Linux Kernel provides many useful primitives that can be used to construct very intricate network configurations. They are very flexible and powerful. Of particular interest today are Virtual Ethernet Adapaters, Bridges, and Taps.
-A Virtual Ethernet Adapater operates in the Kernel exactly the way a physical NIC would. The only difference is that instead of receiving data from a physical device, a virtual adapter recieves data from another network adapter in the stack.</description>
+ A Virtual Ethernet Adapater operates in the Kernel exactly the way a physical NIC would. The only difference is that instead of receiving data from a physical device, a virtual adapter recieves data from another network adapter in the stack.</description>
     </item>
     
     <item>
@@ -80,8 +84,8 @@ A Virtual Ethernet Adapater operates in the Kernel exactly the way a physical NI
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/containers_the_hard_way/intro/</guid>
-      <description>What is a container? It is a simple question without a simple answer. Search the internet for this question and you’ll find an endless stream of blog posts explaining how containers differ from virtual machines. That’s great, but that doesn’t answer my question. What is a container? Does anybody really understand what is happening on their server what they podman run?
-By the end of this workshop, you will feel confident answering this question and explaining it to your peers.</description>
+      <description>What is a container? It is a simple question without a simple answer. Search the internet for this question and you&amp;#8217;ll find an endless stream of blog posts explaining how containers differ from virtual machines. That&amp;#8217;s great, but that doesn&amp;#8217;t answer my question. What is a container? Does anybody really understand what is happening on their server what they podman run?
+   By the end of this workshop, you will feel confident answering this question and explaining it to your peers.</description>
     </item>
     
     <item>
@@ -91,7 +95,7 @@ By the end of this workshop, you will feel confident answering this question and
       
       <guid>/workshops/containers_the_hard_way/wrapup/</guid>
       <description>Wrap Up and Q&amp;amp;A That wraps up what we have planned for today.
-We explored Linux Namespaces and the unshare command in great depth. Obviously container enginers make heavy use of these namespaces. Their job is to orchestrate the namespaces, OverlayFS, image files, and active containers so you don’t have to. Obviously, you wouldn’t run containers this way in production, but there may be times that you’d like to make use of namespaces.</description>
+ We explored Linux Namespaces and the unshare command in great depth. Obviously container enginers make heavy use of these namespaces. Their job is to orchestrate the namespaces, OverlayFS, image files, and active containers so you don&amp;#8217;t have to. Obviously, you wouldn&amp;#8217;t run containers this way in production, but there may be times that you&amp;#8217;d like to make use of namespaces.</description>
     </item>
     
   </channel>

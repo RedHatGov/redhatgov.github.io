@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -309,42 +319,42 @@
 
     <h1 id="add-build-app-stage-to-pipeline-text-file">Add Build App Stage to Pipeline Text File</h1>
 <p>Next, you will add the Build App Stage to your pipeline.</p>
-<img src="../images/pipeline_build.png" width="900" />
+<p><img src="../images/pipeline_build.png" width="900" /></p>
 <p>The git branch step will clone the openshift-tasks project with the git branch locally from your gogs server to your jenkins node.  The jenkins node is leveraging the <a href="https://jenkins.io/doc/pipeline/steps/git/">git jenkins plugin</a> to communicate to gogs.</p>
 <p>Please note that we are leveraging the eap-7 branch in our git project and not the master branch.</p>
 <br>
 # Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-<img src="../images/pipeline_actions_edit.png" width="900" />
+<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre tabindex="0"><code>  stages {
-    stage(&#39;Build App&#39;) {
+<pre><code>  stages {
+    stage('Build App') {
       steps {
-        git branch: &#39;eap-7&#39;, url: &#39;http://gogs:3000/gogs/openshift-tasks.git&#39;
+        git branch: 'eap-7', url: 'http://gogs:3000/gogs/openshift-tasks.git'
         script {
-            def pom = readMavenPom file: &#39;pom.xml&#39;
+            def pom = readMavenPom file: 'pom.xml'
             version = pom.version
           }
-          sh &#34;${mvnCmd} install -DskipTests=true&#34;
+          sh &quot;${mvnCmd} install -DskipTests=true&quot;
         }
       }
 </code></pre><p>Your Jenkinsfile should look like this.</p>
-<img src="../images/jenkinsfile_buildapp.png" width="900" />
-<br>
+<p><img src="../images/jenkinsfile_buildapp.png" width="900" />
+<br></p>
 <h1 id="test-your-pipeline">Test Your Pipeline</h1>
 <p>If you&rsquo;d like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
-<pre tabindex="0"><code> }
+<pre><code> }
 }
 </code></pre><p>Your Jenkinsfile should look like this</p>
-<img src="../images/jenkinsfile_buildapp_close.png" width="900" />
+<p><img src="../images/jenkinsfile_buildapp_close.png" width="900" /></p>
 <p>Click Save</p>
 <p>Go back to Builds &gt; Pipelines</p>
 <p>Click Start Pipeline</p>
 <p>You should see your first stage run successfully.</p>
-<img src="../images/pipelinerun_buildapp.png" width="900" />
+<p><img src="../images/pipelinerun_buildapp.png" width="900" /></p>
 <h1 id="delete-brackets">Delete Brackets</h1>
 <p>Please delete the brackets you just added once testing is complete. We can add them later if you&rsquo;d like to test your pipeline as you go along.</p>
-<pre tabindex="0"><code> }
+<pre><code> }
 }
 </code></pre><p>Click Save</p>
 <br>

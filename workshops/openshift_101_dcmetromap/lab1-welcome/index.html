@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -330,27 +340,27 @@
 <blockquote>
 <p><i class="fa fa-terminal"></i> Open a terminal and login using the same URI with following command:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc login https://master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:8443 --insecure-skip-tls-verify<span style="color:#f92672">=</span>true
-</span></span><span style="display:flex;"><span>Authentication required <span style="color:#66d9ef">for</span> https://master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:8443 <span style="color:#f92672">(</span>openshift<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span> Username: user<span class="userid">YOUR#</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc login https://master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:8443 --insecure-skip-tls-verify<span style="color:#f92672">=</span>true
+Authentication required <span style="color:#66d9ef">for</span> https://master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:8443 <span style="color:#f92672">(</span>openshift<span style="color:#f92672">)</span>
+ Username: user<span class="userid">YOUR#</span>
  Password:
-</span></span><span style="display:flex;"><span>Login successful.
-</span></span></code></pre></div><blockquote>
+Login successful.
+</code></pre></div><blockquote>
 <p><i class="fa fa-terminal"></i> Check to see what projects you have access to:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get projects
-</span></span></code></pre></div><h2 id="it-looks-empty-via-the-command-line-too">It looks empty via the command line too</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get projects
+</code></pre></div><h2 id="it-looks-empty-via-the-command-line-too">It looks empty via the command line too</h2>
 <p>You just created a project using the web console, let&rsquo;s tell the terminal command line tool to use it.</p>
 <blockquote>
 <p><i class="fa fa-terminal"></i> Type the following command to use the demo project:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc project demo-<span class="userid">YOUR#</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project demo-<span class="userid">YOUR#</span>
 
-</span></span></code></pre></div><blockquote>
+</code></pre></div><blockquote>
 <p><i class="fa fa-terminal"></i> Type the following command to show services, deployment configs, build configurations, and active deployments (this will come in handy later):</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc status
-</span></span></code></pre></div><h1 id="summary">Summary</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc status
+</code></pre></div><h1 id="summary">Summary</h1>
 <p>You should now be ready to get hands-on with our workshop labs.</p>
 <style>
 

@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -316,21 +326,21 @@
 <i class="fa fa-terminal"></i>
 Send load to the application user interface:
 </blockquote>
-<pre tabindex="0"><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL; done
+<pre><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL; done
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Send load to the user profile service:
 </blockquote>
-<pre tabindex="0"><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><br>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Now let's open the Kiali console.  Retrieve the endpoint for Kiali:
 </blockquote>
-<pre tabindex="0"><code>KIALI_CONSOLE=$(oc get route kiali -n istio-system --template=&#39;https://{{.spec.host}}&#39;)
+<pre><code>KIALI_CONSOLE=$(oc get route kiali -n istio-system --template='https://{{.spec.host}}')
 echo $KIALI_CONSOLE
 </code></pre><p>Output:</p>
-<pre tabindex="0"><code>https://kiali-istio-system.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/
+<pre><code>https://kiali-istio-system.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/
 </code></pre><br>
 <blockquote>
 <i class="fa fa-desktop"></i>

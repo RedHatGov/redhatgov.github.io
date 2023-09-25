@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -309,23 +319,23 @@
 
     <h1 id="add-build-image-stage">Add Build Image Stage</h1>
 <p>Add the Build Image Stage into your pipeline.</p>
-<img src="../images/pipeline_oc_build_image.png" width="900" />
+<p><img src="../images/pipeline_oc_build_image.png" width="900" /></p>
 <p>The &ldquo;sh&rdquo; are shell commands in your pipeline that are executed on the Jenkins Slave.  Maven built the openshift-tasks.war in it the target directory and it will be copied into the created oc-builds directory.</p>
 <p>The startBuild stage is kicked off from Openshift and pointing to the local directory &ldquo;oc-build&rdquo; on the Jenkins slave.</p>
 <br>
 # Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-<img src="../images/pipeline_actions_edit.png" width="900" />
+<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre tabindex="0"><code>    stage(&#39;Build Image&#39;) {
+<pre><code>    stage('Build Image') {
       steps {
-        sh &#34;rm -rf oc-build &amp;&amp; mkdir -p oc-build/deployments&#34;
-        sh &#34;cp target/openshift-tasks.war oc-build/deployments/ROOT.war&#34;
+        sh &quot;rm -rf oc-build &amp;&amp; mkdir -p oc-build/deployments&quot;
+        sh &quot;cp target/openshift-tasks.war oc-build/deployments/ROOT.war&quot;
 
         script {
           openshift.withCluster() {
             openshift.withProject(env.DEV_PROJECT) {
-              openshift.selector(&#34;bc&#34;, &#34;tasks&#34;).startBuild(&#34;--from-dir=oc-build&#34;, &#34;--wait=true&#34;)
+              openshift.selector(&quot;bc&quot;, &quot;tasks&quot;).startBuild(&quot;--from-dir=oc-build&quot;, &quot;--wait=true&quot;)
             }
           }
         }
@@ -333,14 +343,14 @@
     }
 </code></pre><h1 id="test-your-pipeline">Test Your Pipeline</h1>
 <p>If you&rsquo;d like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
-<pre tabindex="0"><code>  }
+<pre><code>  }
 }
 </code></pre><p>Save your Jenkinsfile.</p>
 <p>Go back to Builds &gt; Pipelines</p>
 <p>Click Start Pipeline</p>
 <h1 id="delete-brackets">Delete Brackets</h1>
 <p>Please delete the brackets you just added once testing is complete. We can add them later if you&rsquo;d like to test your pipeline as you go along.</p>
-<pre tabindex="0"><code>  }
+<pre><code>  }
 }
 </code></pre><p>Click Save
 <style>

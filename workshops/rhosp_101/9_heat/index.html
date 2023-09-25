@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -322,7 +332,7 @@
 <blockquote>
 <p>On Linux or Mac, in your terminal, ssh to 192.168.1.90 on port 22</p>
 </blockquote>
-<pre tabindex="0"><code>$ ssh student<span class="userid">1</span>@192.168.1.90
+<pre><code>$ ssh student<span class="userid">1</span>@192.168.1.90
 </code></pre><p>If on Windows, run putty, enter <strong>192.168.1.90</strong> as the host and <strong>22</strong> as the port.</p>
 <p>You will get asked if you are sure you want to connect. Type <strong>yes</strong> and hit enter.</p>
 <p>Login with your <strong>student<span class="userid">1</span></strong> credentials.</p>
@@ -330,13 +340,13 @@
 <blockquote>
 <p>Source your student<span class="userid">1</span>rc file</p>
 </blockquote>
-<pre tabindex="0"><code>$ source student<span class="userid">1</span>rc
+<pre><code>$ source student<span class="userid">1</span>rc
 </code></pre><blockquote>
 <p>Verify that you are connected by running nova list</p>
 </blockquote>
-<pre tabindex="0"><code>$ openstack server list
+<pre><code>$ openstack server list
 </code></pre><p>You should see the instances you created in the previous labs.</p>
-<pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ openstack server list
+<pre><code>(overcloud) [student1@bastion ~]$ openstack server list
 +--------------------------------------+-----------------------+--------+-------------------------------------+---------------------+---------+
 | ID                                   | Name                  | Status | Networks                            | Image               | Flavor  |
 +--------------------------------------+-----------------------+--------+-------------------------------------+---------------------+---------+
@@ -345,7 +355,7 @@
 | cbd781be-cc64-4302-b15c-5a7ae805a917 | student1-cirros-2     | ACTIVE | private-a=172.16.0.14               | student1-cirros     | m1.tiny |
 +--------------------------------------+-----------------------+--------+-------------------------------------+---------------------+---------+
 </code></pre><h2 id="now-lets-examine-the-heat-template">Now Let&rsquo;s Examine the Heat Template</h2>
-<pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ cat heat-example.yaml 
+<pre><code>(overcloud) [student1@bastion ~]$ cat heat-example.yaml 
 heat_template_version: 2014-10-16  
 description: A simple server.  
 parameters:
@@ -373,7 +383,7 @@ resources:
           delete_on_termination: true
           volume_id: { get_resource: volume }
       flavor: {get_param: flavor}
-      metadata: {&#34;metering.stack&#34;: {get_param: &#34;OS::stack_id&#34;}}
+      metadata: {&quot;metering.stack&quot;: {get_param: &quot;OS::stack_id&quot;}}
       key_name: {get_param: keypair}
       networks:
         - port: { get_resource: port }
@@ -404,9 +414,9 @@ resources:
 </code></pre><blockquote>
 <p>Let&rsquo;s Launch a Heat Stack with this Template</p>
 </blockquote>
-<pre tabindex="0"><code>$ openstack stack create --parameter keypair=student<span class="userid">1</span> --parameter image=rhel76 -t heat-example.yaml student<span class="userid">1</span>-stack
+<pre><code>$ openstack stack create --parameter keypair=student<span class="userid">1</span> --parameter image=rhel76 -t heat-example.yaml student<span class="userid">1</span>-stack
 </code></pre><p>Here is an example run.</p>
-<pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ openstack stack create --parameter keypair=student1 --parameter image=rhel76 -t heat-example.yaml student1-stack
+<pre><code>(overcloud) [student1@bastion ~]$ openstack stack create --parameter keypair=student1 --parameter image=rhel76 -t heat-example.yaml student1-stack
 +---------------------+--------------------------------------+
 | Field               | Value                                |
 +---------------------+--------------------------------------+
@@ -421,8 +431,8 @@ resources:
 </code></pre><blockquote>
 <p>You can watch stack list to see the stack go through the provisioning process and become CREATE_COMPLETE</p>
 </blockquote>
-<pre tabindex="0"><code>$ watch openstack stack list
-</code></pre><pre tabindex="0"><code>Every 2.0s: openstack stack list                                                               Sat Jul 13 17:13:58 2019
+<pre><code>$ watch openstack stack list
+</code></pre><pre><code>Every 2.0s: openstack stack list                                                               Sat Jul 13 17:13:58 2019
 
 +--------------------------------------+----------------+-----------------+----------------------+--------------+
 | ID                                   | Stack Name     | Stack Status    | Creation Time        | Updated Time |
@@ -433,7 +443,8 @@ resources:
 <blockquote>
 <p>Navigate to Orchestration -&gt; Stacks using the second level navigation tabs</p>
 </blockquote>
-<figure><img src="../images/lab8-heat-1.png"/><figcaption>
+<figure>
+    <img src="../images/lab8-heat-1.png"/> <figcaption>
             <h4>Lab 8 Figure 1: Heat Stack List</h4>
         </figcaption>
 </figure>
@@ -441,7 +452,8 @@ resources:
 <blockquote>
 <p>Click on <strong>student<span class="userid">1</span>-stack</strong></p>
 </blockquote>
-<figure><img src="../images/lab8-heat-2.png"/><figcaption>
+<figure>
+    <img src="../images/lab8-heat-2.png"/> <figcaption>
             <h4>Lab 8 Figure 2: Heat Stack Topology for the New student1-stack</h4>
         </figcaption>
 </figure>
@@ -450,7 +462,8 @@ resources:
 <blockquote>
 <p>Navigate to Network -&gt; Network Topology using the second level navigation tabs.</p>
 </blockquote>
-<figure><img src="../images/lab8-heat-3.png"/><figcaption>
+<figure>
+    <img src="../images/lab8-heat-3.png"/> <figcaption>
             <h4>Lab 8 Figure 3: Neutron Network Topology</h4>
         </figcaption>
 </figure>

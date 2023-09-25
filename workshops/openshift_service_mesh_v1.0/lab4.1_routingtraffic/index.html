@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -317,9 +327,9 @@
 <i class="fa fa-terminal"></i>
 View the destination rules in your favorite editor or via bash:
 </blockquote>
-<pre tabindex="0"><code>cat ./istio-configuration/destinationrules-all.yaml
+<pre><code>cat ./istio-configuration/destinationrules-all.yaml
 </code></pre><p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
@@ -345,9 +355,9 @@ spec:
 <i class="fa fa-terminal"></i>
 View the virtual services in your favorite editor or via bash:
 </blockquote>
-<pre tabindex="0"><code>cat ./istio-configuration/virtual-services-all-v2.yaml
+<pre><code>cat ./istio-configuration/virtual-services-all-v2.yaml
 </code></pre><p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -368,15 +378,15 @@ spec:
 <i class="fa fa-terminal"></i>
 Let's deploy these routing rules:
 </blockquote>
-<pre tabindex="0"><code>oc apply -f ./istio-configuration/destinationrules-all.yaml 
+<pre><code>oc apply -f ./istio-configuration/destinationrules-all.yaml 
 oc apply -f ./istio-configuration/virtual-services-all-v2.yaml
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Verify the destination rules:
 </blockquote>
-<pre tabindex="0"><code>oc get dr
+<pre><code>oc get dr
 </code></pre><p>Output:</p>
-<pre tabindex="0"><code>NAME                     HOST                     AGE
+<pre><code>NAME                     HOST                     AGE
 app-ui                   app-ui                   24m
 boards                   boards                   24m
 boards-mongodb           boards-mongodb           24m
@@ -386,9 +396,9 @@ userprofile-postgresql   userprofile-postgresql   16m
 <i class="fa fa-terminal"></i>
 Verify the virtual services:
 </blockquote>
-<pre tabindex="0"><code>oc get vs
+<pre><code>oc get vs
 </code></pre><p>Output (sample):</p>
-<pre tabindex="0"><code>NAME                     GATEWAYS                       HOSTS                      AGE
+<pre><code>NAME                     GATEWAYS                       HOSTS                      AGE
 app-ui                                                  [app-ui]                   25m
 boards                                                  [boards]                   25m
 boards-mongodb                                          [boards-mongodb]           25m
@@ -410,7 +420,7 @@ Navigate to the 'Profile' section in the header.
 <i class="fa fa-terminal"></i>
 Send load to the user profile service:
 </blockquote>
-<pre tabindex="0"><code>for ((i=1;i&lt;=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre><code>for ((i=1;i&lt;=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><br>
 <blockquote>
 <i class="fa fa-desktop"></i>
@@ -434,9 +444,9 @@ Switch to the 'Versioned app graph' view and change to 'Last 1m'.
 <i class="fa fa-terminal"></i>
 View the modified virtual service in your favorite editor or via bash:
 </blockquote>
-<pre tabindex="0"><code>cat ./istio-configuration/virtual-service-userprofile-v1.yaml
+<pre><code>cat ./istio-configuration/virtual-service-userprofile-v1.yaml
 </code></pre><p>Output:</p>
-<pre tabindex="0"><code>apiVersion: networking.istio.io/v1alpha3
+<pre><code>apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: userprofile
@@ -453,14 +463,14 @@ spec:
 <i class="fa fa-terminal"></i>
 Deploy the change:
 </blockquote>
-<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v1.yaml
+<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v1.yaml
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Verify the change:
 </blockquote>
-<pre tabindex="0"><code>oc describe vs userprofile
+<pre><code>oc describe vs userprofile
 </code></pre><p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
 Spec:
   Hosts:
     userprofile
@@ -481,7 +491,7 @@ In the application UI, navigate to the 'Profile' section in the header.
 <i class="fa fa-terminal"></i>
 Let's send 100 user profile requests to generate traffic
 </blockquote>
-<pre tabindex="0"><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><blockquote>
 <i class="fa fa-desktop"></i>
 Now in Kiali, navigate to 'Graph' in the left navigation bar.

@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -311,7 +321,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/kernel.png" alt="kernel"/>
+<img src="/workshops/security_openshift/images/kernel.png" alt="kernel">
 </div>
 </div>
 <div class="paragraph">
@@ -360,11 +370,11 @@ done.</p>
 to protect the host system from the containers.</p>
 </div>
 <div class="paragraph">
-<p>&lt;div class=&#34;alert alert-warning&#34;&gt;</p>
+<p>&lt;div class="alert alert-warning"&gt;</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>&lt;span class=&#34;pficon pficon-warning-triangle-o&#34;&gt;&lt;/span&gt;</pre>
+<pre>&lt;span class="pficon pficon-warning-triangle-o"&gt;&lt;/span&gt;</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -447,7 +457,7 @@ setgid, setuid <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 <div class="colist arabic">
 <table>
-<tbody><tr>
+<tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Blacklisting: Specifying each capability you want to drop.</td>
 </tr>
@@ -455,7 +465,7 @@ setgid, setuid <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>Whitelisting: Dropping all and adding back the ones you need.</td>
 </tr>
-</tbody></table>
+</table>
 </div>
 <div class="paragraph">
 <p>The main point is that it is easier to be specific and only allow the capabilities that you know your application needs. However Blacklisting can still be very effective in removing the capabilities you are sure you do not want.</p>
@@ -473,11 +483,11 @@ fdf41302efbc  <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 <div class="colist arabic">
 <table>
-<tbody><tr>
+<tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Container ID to copy</td>
 </tr>
-</tbody></table>
+</table>
 </div>
 <div class="paragraph">
 <p>Then stop and remove the Container.</p>

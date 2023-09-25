@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -315,7 +325,7 @@
 <i class="fa fa-terminal"></i>
 Create a new build on this feature branch:
 </blockquote>
-<pre tabindex="0"><code>oc new-app -f ./openshift-configuration/userprofile-build.yaml \
+<pre><code>oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
   -p APPLICATION_CODE_URI=https://github.com/RedHatGov/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=workshop-feature-fix \
@@ -325,15 +335,15 @@ Create a new build on this feature branch:
 <i class="fa fa-terminal"></i>
 Start the build:
 </blockquote>
-<pre tabindex="0"><code>oc start-build userprofile-3.0
+<pre><code>oc start-build userprofile-3.0
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Follow the build:
 </blockquote>
-<pre tabindex="0"><code>oc logs -f bc/userprofile-3.0
+<pre><code>oc logs -f bc/userprofile-3.0
 </code></pre><p>The builder will compile the source code and use the base image to create your deployable image artifact.  You should eventually see a successful build.</p>
 <p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
 [INFO] [io.quarkus.deployment.pkg.steps.JarResultBuildStep] Building thin jar: /tmp/src/target/userprofile-1.0-SNAPSHOT-runner.jar
 [INFO] [io.quarkus.deployment.QuarkusAugmentor] Quarkus augmentation completed in 7988ms
 [INFO] ------------------------------------------------------------------------
@@ -347,9 +357,9 @@ Follow the build:
 <i class="fa fa-terminal"></i>
 Verify the image was created:
 </blockquote>
-<pre tabindex="0"><code>oc describe is userprofile
+<pre><code>oc describe is userprofile
 </code></pre><p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
 
 3.0
   no spec tag
@@ -368,23 +378,23 @@ Verify the image was created:
 <i class="fa fa-terminal"></i>
 Grab a reference to the local image:
 </blockquote>
-<pre tabindex="0"><code>USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template=&#39;{{.status.dockerImageRepository}}&#39;)
+<pre><code>USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template='{{.status.dockerImageRepository}}')
 echo $USER_PROFILE_IMAGE_URI
 </code></pre><p>Output (sample):</p>
-<pre tabindex="0"><code>image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile
+<pre><code>image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile
 </code></pre><p>The deployment file &lsquo;userprofile-deploy-v3.yaml&rsquo; was created for you to deploy the application.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Deploy the service using the image URI:
 </blockquote>
-<pre tabindex="0"><code>sed &#34;s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|&#34; ./openshift-configuration/userprofile-deploy-v3.yaml | oc create -f -
+<pre><code>sed &quot;s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|&quot; ./openshift-configuration/userprofile-deploy-v3.yaml | oc create -f -
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Watch the deployment of the user profile:
 </blockquote>
-<pre tabindex="0"><code>oc get pods -l deploymentconfig=userprofile --watch
+<pre><code>oc get pods -l deploymentconfig=userprofile --watch
 </code></pre><p>Output:</p>
-<pre tabindex="0"><code>userprofile-3-xxxxxxxxxx-xxxxx              2/2     Running        0          53s
+<pre><code>userprofile-3-xxxxxxxxxx-xxxxx              2/2     Running        0          53s
 userprofile-2-xxxxxxxxxx-xxxxx              2/2     Running        0          13m
 userprofile-xxxxxxxxxx-xxxxx                2/2     Running        0          22h
 </code></pre><br>
@@ -394,9 +404,9 @@ userprofile-xxxxxxxxxx-xxxxx                2/2     Running        0          22
 <i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
 </blockquote>
-<pre tabindex="0"><code>cat ./istio-configuration/virtual-service-userprofile-90-10.yaml
+<pre><code>cat ./istio-configuration/virtual-service-userprofile-90-10.yaml
 </code></pre><p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
 ---
   http:
   - route:
@@ -415,12 +425,12 @@ View the virtual service in your favorite editor or via bash:
 <i class="fa fa-terminal"></i>
 Deploy the routing rule:
 </blockquote>
-<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-90-10.yaml
+<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-90-10.yaml
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 If you aren't already (from the Grafana lab) - send load continuously to the user profile service:
 </blockquote>
-<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><br>
 <p>Inspect the change in Kiali.</p>
 <blockquote>
@@ -446,9 +456,9 @@ Change the 'No edge labels' dropdown to 'Requests percentage'.
 <i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
 </blockquote>
-<pre tabindex="0"><code>cat ./istio-configuration/virtual-service-userprofile-50-50.yaml
+<pre><code>cat ./istio-configuration/virtual-service-userprofile-50-50.yaml
 </code></pre><p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
 ---
   http:
   - route:
@@ -467,12 +477,12 @@ View the virtual service in your favorite editor or via bash:
 <i class="fa fa-terminal"></i>
 Deploy the routing rule:
 </blockquote>
-<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
+<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 If you aren't already - send load to the user profile service:
 </blockquote>
-<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><br>
 <p>Inspect the change again in Kiali.</p>
 <blockquote>
@@ -492,9 +502,9 @@ Switch to the 'Versioned app graph' view.  Change the 'No edge labels' dropdown 
 <i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
 </blockquote>
-<pre tabindex="0"><code>cat ./istio-configuration/virtual-service-userprofile-v3.yaml
+<pre><code>cat ./istio-configuration/virtual-service-userprofile-v3.yaml
 </code></pre><p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
 ---
   http:
   - route:
@@ -507,12 +517,12 @@ View the virtual service in your favorite editor or via bash:
 <i class="fa fa-terminal"></i>
 Deploy the routing rule:
 </blockquote>
-<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
+<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 If you aren't already - Send load to the user profile service:
 </blockquote>
-<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><br>
 <p>Inspect the change again in Kiali.</p>
 <blockquote>

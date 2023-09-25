@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -319,9 +329,9 @@
 <p>Create a <code>src</code> directory, in your home directory.</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd ~
-</span></span><span style="display:flex;"><span>mkdir src
-</span></span><span style="display:flex;"><span>cd src</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~
+mkdir src
+cd src</code></pre></div>
 </div>
 </div>
 <div class="sect2">
@@ -330,8 +340,8 @@
 <p>Download the latest code release</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/ajacocks/selinuxlab.git
-</span></span><span style="display:flex;"><span>cd selinuxlab</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/ajacocks/selinuxlab.git
+cd selinuxlab</code></pre></div>
 </div>
 </div>
 <div class="sect2">
@@ -340,7 +350,7 @@
 <p>Now, use Ansible to deploy the test application</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ansible-playbook setup-testapp.yml</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ansible-playbook setup-testapp.yml</code></pre></div>
 </div>
 </div>
 <div class="sect2">
@@ -349,7 +359,7 @@
 <p>Take a look at the application, and the associated service, that you just installed</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls -l /usr/local/sbin/testapp</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -l /usr/local/sbin/testapp</code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -357,7 +367,7 @@
 </div>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl status testapp</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl status testapp</code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -370,15 +380,15 @@
 <div class="sect2">
 <h3 id="_step_5_start_and_enable_the_service">Step 5: Start and enable the service</h3>
 <div class="paragraph">
-<p>Now, let’s file up the application</p>
+<p>Now, let&#8217;s file up the application</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl enable testapp
-</span></span><span style="display:flex;"><span>sudo systemctl start testapp</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl enable testapp
+sudo systemctl start testapp</code></pre></div>
 </div>
 <div class="paragraph">
 <p>We can see that the app has been launched by systemd:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl status testapp</span></span></code></pre></div></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl status testapp</code></pre></div></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -395,7 +405,7 @@ Feb 20 20:20:06 ip-10-0-2-80.ec2.internal testapp[8497]: daemon ttl 999924</code
 </div>
 <div class="paragraph">
 <p>And, we can also see that the app is running <strong>unconfined</strong>, which means that it is running without an SELinux policy, and can take any action that it wants to:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ps -efZ | grep testapp | grep -v grep</span></span></code></pre></div></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ps -efZ | grep testapp | grep -v grep</code></pre></div></p>
 </div>
 <div class="listingblock">
 <div class="content">

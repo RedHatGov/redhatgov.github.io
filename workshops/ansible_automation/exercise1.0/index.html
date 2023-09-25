@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -319,13 +329,13 @@
 <h2 id="_quick_example">Quick example:</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let’s deploy an application on your local node that can assist you with the workshop.  Using ad hoc commands, we will download a configuration file from a remote git server (gitOps), set up a system service, and start the service.</p>
+<p>Let&#8217;s deploy an application on your local node that can assist you with the workshop.  Using ad hoc commands, we will download a configuration file from a remote git server (gitOps), set up a system service, and start the service.</p>
 </div>
 <div class="exampleblock">
 <div class="content">
 <div class="admonitionblock note">
 <table>
-<tbody><tr>
+<tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -333,7 +343,7 @@
 The service will be a Visual Studio Code container, defined in a Kubernetes POD YAML, launched via podman by systemd.
 </td>
 </tr>
-</tbody></table>
+</table>
 </div>
 </div>
 </div>
@@ -347,21 +357,21 @@ The service will be a Visual Studio Code container, defined in a Kubernetes POD 
 <div class="content">
 <div class="admonitionblock note">
 <table>
-<tbody><tr>
+<tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-We have configured &#39;sudo&#39; for you; however, Ansible can use lots of other methods to become (-b) the superuser.
+We have configured 'sudo' for you; however, Ansible can use lots of other methods to become (-b) the superuser.
 </td>
 </tr>
-</tbody></table>
+</table>
 </div>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible localhost --module-name uri --args &#34;url=https://raw.githubusercontent.com/RedHatGov/redhatgov.workshops/master/ansible_tower_aws/files/code-server.service return_content=yes dest=/etc/systemd/system&#34; --become</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible localhost --module-name uri --args "url=https://raw.githubusercontent.com/RedHatGov/redhatgov.workshops/master/ansible_tower_aws/files/code-server.service return_content=yes dest=/etc/systemd/system" --become</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -369,7 +379,7 @@ We have configured &#39;sudo&#39; for you; however, Ansible can use lots of othe
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible localhost --module-name service --args &#34;name=code-server state=started enabled=yes&#34; --become</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible localhost --module-name service --args "name=code-server state=started enabled=yes" --become</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -408,7 +418,7 @@ We have configured &#39;sudo&#39; for you; however, Ansible can use lots of othe
 <div class="content">
 <div class="admonitionblock note">
 <table>
-<tbody><tr>
+<tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -416,7 +426,7 @@ We have configured &#39;sudo&#39; for you; however, Ansible can use lots of othe
 The <strong>workshopname</strong>, in the example below, will be provided to you by your instructor.  The <strong>#</strong> should be replaced by your student number.
 </td>
 </tr>
-</tbody></table>
+</table>
 </div>
 <div class="paragraph">
 <p>For example, a recent workshop student used:
@@ -443,7 +453,7 @@ node-<span class="userid">0</span>.<span class="prefix">example</span>.<span cla
 <div class="sect2">
 <h3 id="_step_1_test_webhost_response">Step 1: Test webhost response</h3>
 <div class="paragraph">
-<p>Let’s start with something basic - pinging a host.  The <code>ping</code> module tests the responsiveness of our web host.</p>
+<p>Let&#8217;s start with something basic - pinging a host.  The <code>ping</code> module tests the responsiveness of our web host.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -454,18 +464,18 @@ node-<span class="userid">0</span>.<span class="prefix">example</span>.<span cla
 <div class="sect2">
 <h3 id="_step_2_run_a_linux_command">Step 2: Run a Linux command</h3>
 <div class="paragraph">
-<p>Now let’s see how we can run a Linux command and format the output, using the <code>command</code> module.</p>
+<p>Now let&#8217;s see how we can run a Linux command and format the output, using the <code>command</code> module.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web --module-name command --args &#34;uptime&#34; --one-line</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web --module-name command --args "uptime" --one-line</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_3_review_the_setup_module">Step 3: Review the setup module</h3>
 <div class="paragraph">
-<p>Take a look at your web node’s configuration.  The <code>setup</code> module displays Ansible facts (and a lot of them) about an endpoint.</p>
+<p>Take a look at your web node&#8217;s configuration.  The <code>setup</code> module displays Ansible facts (and a lot of them) about an endpoint.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -476,7 +486,7 @@ node-<span class="userid">0</span>.<span class="prefix">example</span>.<span cla
 <div class="content">
 <div class="admonitionblock note">
 <table>
-<tbody><tr>
+<tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -484,11 +494,11 @@ node-<span class="userid">0</span>.<span class="prefix">example</span>.<span cla
 Like many Linux commands, <strong>ansible</strong> allows for long-form and short-form command-line arguments.  For example:
 </td>
 </tr>
-</tbody></table>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web --module-name command --args &#34;uptime&#34; --one-line --become</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web --module-name command --args "uptime" --one-line --become</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -496,7 +506,7 @@ Like many Linux commands, <strong>ansible</strong> allows for long-form and shor
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m command -a &#34;uptime&#34; -o -b</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m command -a "uptime" -o -b</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -508,19 +518,19 @@ Like many Linux commands, <strong>ansible</strong> allows for long-form and shor
 <div class="sect2">
 <h3 id="_step_4_install_node_js">Step 4: Install Node.js</h3>
 <div class="paragraph">
-<p>Now, let’s install Node.js, using the <code>dnf</code> module.</p>
+<p>Now, let&#8217;s install Node.js, using the <code>dnf</code> module.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m dnf -a &#34;name=nodejs state=present&#34; -b</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m dnf -a "name=nodejs state=present" -b</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_5_lets_copy_a_file_to_the_managed_node">Step 5: Let’s copy a file to the managed node.</h3>
+<h3 id="_step_5_lets_copy_a_file_to_the_managed_node">Step 5: Let&#8217;s copy a file to the managed node.</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m copy -a &#34;src=hello.js dest=hello.js&#34;</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m copy -a "src=hello.js dest=hello.js"</code></pre>
 </div>
 </div>
 </div>
@@ -528,7 +538,7 @@ Like many Linux commands, <strong>ansible</strong> allows for long-form and shor
 <h3 id="_step_6_copy_configuration_file_to_priviledged_location">Step 6: Copy configuration file to priviledged location</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m copy -a &#34;src=hello.service dest=/etc/systemd/system/hello.service&#34; -b</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m copy -a "src=hello.service dest=/etc/systemd/system/hello.service" -b</code></pre>
 </div>
 </div>
 </div>
@@ -539,9 +549,9 @@ Like many Linux commands, <strong>ansible</strong> allows for long-form and shor
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m service -a &#34;name=hello state=started enabled=yes&#34; -b
-ansible web -m firewalld -a &#34;port=8080/tcp permanent=yes state=enabled&#34; -b
-ansible web -m systemd -a &#34;name=firewalld state=reloaded&#34; -b</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m service -a "name=hello state=started enabled=yes" -b
+ansible web -m firewalld -a "port=8080/tcp permanent=yes state=enabled" -b
+ansible web -m systemd -a "name=firewalld state=reloaded" -b</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -549,8 +559,8 @@ ansible web -m systemd -a &#34;name=firewalld state=reloaded&#34; -b</code></pre
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m uri -a &#34;url=http://localhost:8080 return_content=yes&#34;
-ansible localhost -m uri -a &#34;url=node-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:8080 return_content=yes&#34;</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m uri -a "url=http://localhost:8080 return_content=yes"
+ansible localhost -m uri -a "url=node-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:8080 return_content=yes"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -565,11 +575,11 @@ ansible localhost -m uri -a &#34;url=node-<span class="userid">0</span>.<span cl
 <div class="sect2">
 <h3 id="_step_7_cleanup">Step 7: Cleanup</h3>
 <div class="paragraph">
-<p>Finally, let’s clean up after ourselves.  First, stop the node service, using the following command.</p>
+<p>Finally, let&#8217;s clean up after ourselves.  First, stop the node service, using the following command.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m service -a &#34;name=hello state=stopped enabled=no&#34; -b</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m service -a "name=hello state=stopped enabled=no" -b</code></pre>
 </div>
 </div>
 </div>
@@ -580,19 +590,19 @@ ansible localhost -m uri -a &#34;url=node-<span class="userid">0</span>.<span cl
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m dnf -a &#34;name=nodejs state=absent&#34; -b</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m dnf -a "name=nodejs state=absent" -b</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_9_clean_files">Step 9: Clean files</h3>
 <div class="paragraph">
-<p>Last, let’s remove the web content and service definition:</p>
+<p>Last, let&#8217;s remove the web content and service definition:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m file -a &#34;path=/home/ec2-user/hello.js state=absent&#34;
-ansible web -m file -a &#34;path=/etc/systemd/system/hello.service state=absent&#34; -b</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible web -m file -a "path=/home/ec2-user/hello.js state=absent"
+ansible web -m file -a "path=/etc/systemd/system/hello.service state=absent" -b</code></pre>
 </div>
 </div>
 <div class="paragraph">

@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -310,7 +320,7 @@
 <li>Duration: 10 mins</li>
 <li>Audience: API Consumers, Developers, Architects</li>
 </ul>
-<p><br>&lt;img src=&quot;../images/agenda-05.png &ldquo;Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/agenda-05.png &ldquo;Login&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 <h3 id="overview">Overview</h3>
 <p>This lab demonstrates the International Inc. Locations page using our newly authenticated locations API.</p>
 <h3 id="why-red-hat">Why Red Hat?</h3>
@@ -324,7 +334,7 @@
 </li>
 <li>
 <p>Scroll down and click in the www link in the BUILDS section.</p>
-<p><br>&lt;img src=&quot;../images/deploy-10.png &ldquo;Scroll Down&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/deploy-10.png &ldquo;Scroll Down&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>In the build environment variables page, replace the <code>CLIENT_ID</code> from <code>CHANGE_ME</code> to the one generated from the previous lab.</p>
@@ -333,7 +343,7 @@
 <ul>
 <li>
 <p>Also, make note of the API_BACKEND_URL.  That is the 3Scale backend address of your API.  If the 3Scale Environment is configured with self-signed certificates, go ahead and bring up that link in a Browser and have your Browser accept the certificate for later on. 3Scale should give you an authentication error since it&rsquo;s not configured yet.  The important thing is to just accept the certificate.</p>
-<p><br>&lt;img src=&quot;../images/deploy-11.png &ldquo;Change Client ID&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/deploy-11.png &ldquo;Change Client ID&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ul>
 <ol>
@@ -342,18 +352,18 @@
 </li>
 <li>
 <p>Click the Start Build button to trigger a new build using the new environment variables pointing to your service.</p>
-<p><br>&lt;img src=&quot;../images/deploy-12.png &ldquo;Start Build&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/deploy-12.png &ldquo;Start Build&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>A new build will be triggered. Expand the row by clicking the Builds Icon.</p>
-<p><br>&lt;img src=&quot;../images/deploy-13.png &ldquo;View Build&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/deploy-13.png &ldquo;View Build&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ol>
 <p><em>The build process checks out the code from the git repo, runs a source-to-image container image build, and redeploys the container with the new image using a rolling upgrade strategy.</em></p>
 <ol>
 <li>
 <p>Wait for until the new Build to complete and the rolling upgrade to finish to test your new deployment.</p>
-<p><br>&lt;img src=&quot;../images/consume-22.png &ldquo;Updated App&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-22.png &ldquo;Updated App&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ol>
 <h3 id="step-2-update-secured-service-with-red-hat-single-sign-on-application-callback">Step 2: Update Secured Service with Red Hat Single Sign On Application Callback</h3>
@@ -361,23 +371,23 @@
 <ol>
 <li>
 <p>Open a browser window and navigate to your SSO Console.  Please check with your instructor for the link.  It should be similar to the following.  Replace userX with your assigned user and OCP_URL.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>http://sso-sso.apps.<span style="color:#f92672">[</span>OCP_URL<span style="color:#f92672">]</span>/auth/admin/<span style="color:#f92672">[</span>userX<span style="color:#f92672">]</span>/console/
-</span></span></code></pre></div><p><em>Remember to replace the X with your user number.</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">http://sso-sso.apps.<span style="color:#f92672">[</span>OCP_URL<span style="color:#f92672">]</span>/auth/admin/<span style="color:#f92672">[</span>userX<span style="color:#f92672">]</span>/console/
+</code></pre></div><p><em>Remember to replace the X with your user number.</em></p>
 </li>
 <li>
 <p>Log into Red Hat Single Sign On using your designated user and password. Click on <strong>Sign In</strong>.</p>
-<p><br>&lt;img src=&quot;../images/00-login-sso.png &ldquo;RH SSO Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/00-login-sso.png &ldquo;RH SSO Login&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Select <strong>Clients</strong> from the left menu.</p>
-<p><br>&lt;img src=&quot;../images/00-clients.png &ldquo;Clients&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/00-clients.png &ldquo;Clients&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 <p><em>3scale, through it&rsquo;s <a href="https://github.com/3scale/zync/">zync</a> component, already synchronized the application information into the Red Hat SSO security realm</em>.</p>
 </li>
 <li>
 <p>Click on the <strong>CLIENT_ID</strong> link to view the details.</p>
 <p><em>Remember to select CLIENT_ID with the one you got in the <a href="../lab05/#step-4-create-a-test-app">API Security Lab</a>. It will easily identifiable as its and hexadecimal name</em>.</p>
 <p><em>If you do not find the CLIENT_ID, make sure you correctly executed the sync between 3scale and RHSSO in <a href="../lab05/#step-3-configure-3scale-integration">Step 3.12 Lab05</a></em></p>
-<p><br>&lt;img src=&quot;../images/consume-24.png &ldquo;Client Application&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-24.png &ldquo;Client Application&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Scroll down, type in and select the following options in the application configuration:</p>
@@ -412,7 +422,7 @@
 </tbody>
 </table>
 <p><em>Remember to replace the X with your user number.</em></p>
-<p><br>&lt;img src=&quot;../images/consume-25.png &ldquo;Client Configuration&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-25.png &ldquo;Client Configuration&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Finally, click <strong>Save</strong> button to persist the changes.</p>
@@ -430,11 +440,11 @@
 <ol>
 <li>
 <p>You should now see what the development team created for International Inc. Click <strong>LOCATIONS</strong> to check the locations page.</p>
-<p><br>&lt;img src=&quot;../images/consume-13.png &ldquo;Webpage&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-13.png &ldquo;Webpage&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>You can notice now the <strong>Sign In</strong> button in the page.</p>
-<p><br>&lt;img src=&quot;../images/consume-222.png &ldquo;Sign-In&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-222.png &ldquo;Sign-In&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ol>
 <h3 id="step-4-test-the-single-sign-on-integration">Step 4: Test the Single Sign On Integration</h3>
@@ -444,22 +454,22 @@
 </li>
 <li>
 <p>You are being redirected to Red Hat Single Sign On <strong>Login Page</strong>. Login using the user credentials you created in the API Security Lab.  Please check with your instructor if you need credentials.</p>
-<p><br>&lt;img src=&quot;../images/consume-23.png &ldquo;Login Realm&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-23.png &ldquo;Login Realm&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>You will be redirected again to the <strong>LOCATIONS</strong> page where now you will be able to see the map with the International Inc Offices.</p>
-<p><br>&lt;img src=&quot;../images/consume-14.png &ldquo;Locations Page&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-14.png &ldquo;Locations Page&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 </ol>
 <h3 id="step-5-troubleshooting-the-locations-page">Step 5: Troubleshooting the Locations Page</h3>
 <ol>
 <li>
 <p>In most cases, the Locations web page will <strong>NOT</strong> show the locations because of a self-signed certificate issue in your web-browser.  See the below example with missing locations:</p>
-<p><br>&lt;img src=&quot;../images/00-missing-locations.png &ldquo;Missing Locations&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/00-missing-locations.png &ldquo;Missing Locations&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>To resolve this issue in Chrome, navigate to <em>View &gt; Developer &gt; Developer Tools</em> menu.  A Developer Tools console should appear.</p>
-<p><br>&lt;img src=&quot;../images/00-developer-console.png &ldquo;Developer Console&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/00-developer-console.png &ldquo;Developer Console&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>In the developer console, a red error should appear indicating a cert issue. Click on the link and accept the certificate.</p>
@@ -469,7 +479,7 @@
 <ol>
 <li>
 <p>Refresh the page, and the locations should appear.</p>
-<p><br>&lt;img src=&quot;../images/consume-14.png &ldquo;Locations Page&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&rdquo;../images/consume-14.png &ldquo;Locations Page&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>If you get an &ldquo;Authentication Parameter is Missing&rdquo; Error.  It&rsquo;s most likely your backend api is not working</p>

@@ -5,7 +5,11 @@
     <link>/workshops/secure_software_factory/</link>
     <description>Recent content in DevSecOps Workshop - Secure Software Factory on Red Hat | Public Sector</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/workshops/secure_software_factory/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/secure_software_factory/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Fin</title>
       <link>/workshops/secure_software_factory/fin/</link>
@@ -166,7 +170,7 @@ We set an approval to promote to the application to the Stage Project. The appro
       <description>Verify Completed Pipeline Before we kick off your pipeline, let&amp;rsquo;s verify it.
 In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit YAML
 Take a look and see if it matches the below text. If not, please correct it.
-apiVersion: v1 kind: BuildConfig metadata: annotations: pipeline.alpha.openshift.io/uses: &amp;#39;[{&amp;#34;name&amp;#34;: &amp;#34;jenkins&amp;#34;, &amp;#34;namespace&amp;#34;: &amp;#34;&amp;#34;, &amp;#34;kind&amp;#34;: &amp;#34;DeploymentConfig&amp;#34;}]&amp;#39; labels: app: cicd-pipeline name: cicd-pipeline name: tasks-pipeline spec: triggers: - type: GitHub github: secret: &amp;#34;secret101&amp;#34; - type: Generic generic: secret: &amp;#34;secret101&amp;#34; runPolicy: Serial source: type: None strategy: jenkinsPipelineStrategy: env: - name: DEV_PROJECT value: dev-userYOUR# - name: STAGE_PROJECT value: stage-userYOUR# jenkinsfile: |- def version, mvnCmd = &amp;#34;mvn -s configuration/cicd-settings-nexus3.</description>
+apiVersion: v1 kind: BuildConfig metadata: annotations: pipeline.alpha.openshift.io/uses: &#39;[{&amp;quot;name&amp;quot;: &amp;quot;jenkins&amp;quot;, &amp;quot;namespace&amp;quot;: &amp;quot;&amp;quot;, &amp;quot;kind&amp;quot;: &amp;quot;DeploymentConfig&amp;quot;}]&#39; labels: app: cicd-pipeline name: cicd-pipeline name: tasks-pipeline spec: triggers: - type: GitHub github: secret: &amp;quot;secret101&amp;quot; - type: Generic generic: secret: &amp;quot;secret101&amp;quot; runPolicy: Serial source: type: None strategy: jenkinsPipelineStrategy: env: - name: DEV_PROJECT value: dev-userYOUR# - name: STAGE_PROJECT value: stage-userYOUR# jenkinsfile: |- def version, mvnCmd = &amp;quot;mvn -s configuration/cicd-settings-nexus3.</description>
     </item>
     
     <item>
@@ -188,9 +192,11 @@ Click on the Gogs route url in the CI/CD project which takes you to the home pag
       <guid>/workshops/secure_software_factory/lab16/</guid>
       <description>Create Quay Account Please go to the Quay Login with the link given to you by your instructor
 Click Create Account at the bottom of the page.
+
 Fill in the account information for Quay.
-Username: your assigned username i.e userYOUR# E-mail address: your email address Password: openshift Confirm Password: openshift Click Create Account
-&amp;times; Workshop Details Domain Workshop Student ID Student ID 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 Domain rhnaps.</description>
+ Username: your assigned username i.e userYOUR# E-mail address: your email address Password: openshift Confirm Password: openshift  Click Create Account
+
+ .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.</description>
     </item>
     
     <item>
@@ -200,9 +206,10 @@ Username: your assigned username i.e userYOUR# E-mail address: your email addres
       
       <guid>/workshops/secure_software_factory/lab17/</guid>
       <description>Add Clair Container Scan Add the configuration for the Container Vulnerability Scan below to your pipeline text file.
+
 Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit
 In your pipeline, add and update the following variables after the version and mvnCmd definitions. Please fill in the values between the quotes.
-ocuser : the openshift user given to you by your insturctor ocpass : the openshift password given to you by your insturctor ocp : the openshift host given to you by your instuctor quayuser : the quay user you created previously quaypass : the quay password you created previously quayrepo : the quay repo you will push your app image to i.</description>
+ ocuser : the openshift user given to you by your insturctor ocpass : the openshift password given to you by your insturctor ocp : the openshift host given to you by your instuctor quayuser : the quay user you created previously quaypass : the quay password you created previously quayrepo : the quay repo you will push your app image to i.</description>
     </item>
     
     <item>
@@ -212,9 +219,10 @@ ocuser : the openshift user given to you by your insturctor ocpass : the openshi
       
       <guid>/workshops/secure_software_factory/lab18/</guid>
       <description>Add OpenSCAP DISA STIG Scan Add the configuration for the OpenSCAP Scan below to your pipeline text file.
+
 Append to Jenkins Pipeline Configuration In Builds &amp;gt; Pipelines &amp;gt; tasks-pipeline &amp;gt; Actions &amp;gt; Edit
 In your pipeline, verify the following variables are there after the version and mvnCmd definitions. Please fill in the values between the quotes if not done previously.
-ocuser : the openshift user given to you by your insturctor ocpass : the openshift password given to you by your insturctor ocp : the openshift host given to you by your instuctor def ocuser = &amp;#34; &amp;#34; def ocpass = &amp;#34; &amp;#34; def ocp = &amp;#34; &amp;#34; For Example:</description>
+ ocuser : the openshift user given to you by your insturctor ocpass : the openshift password given to you by your insturctor ocp : the openshift host given to you by your instuctor  def ocuser = &amp;quot; &amp;quot; def ocpass = &amp;quot; &amp;quot; def ocp = &amp;quot; &amp;quot; For Example:</description>
     </item>
     
     <item>
@@ -235,8 +243,9 @@ The wetty instance will already have the &amp;lsquo;oc&amp;rsquo; command instal
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/workshops/secure_software_factory/prerequisites/</guid>
-      <description>Prerequisites This workshop is done entirely through the browser.
-Chrome is the preferred browser for this workshop &amp;times; Workshop Details Domain Workshop Student ID Student ID 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 Domain rhnaps.</description>
+      <description>Prerequisites 
+This workshop is done entirely through the browser.
+  Chrome is the preferred browser for this workshop   .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); -webkit-animation-name: fadeIn; -webkit-animation-duration: 0.4s; animation-name: fadeIn; animation-duration: 0.4s } .modal-content { position: fixed; bottom: 0; background-color: #fefefe; width: 100%; -webkit-animation-name: slideIn; -webkit-animation-duration: 0.4s; animation-name: slideIn; animation-duration: 0.</description>
     </item>
     
   </channel>

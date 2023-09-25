@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -316,28 +326,28 @@
 <blockquote>
 <i class="fa fa-terminal"></i> let's launch a job using the CLI with to show that:
 </blockquote>
-<pre tabindex="0"><code>oc run curl-boards-1 -i --restart=Never --image=appropriate/curl --timeout=10s -- boards:8080/shareditems
+<pre><code>oc run curl-boards-1 -i --restart=Never --image=appropriate/curl --timeout=10s -- boards:8080/shareditems
 </code></pre><p>This job executes a direct HTTP curl request for the current shared boards list. It&rsquo;ll print out something similar to this:</p>
-<pre tabindex="0"><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+<pre><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[
   {
-    &#34;_id&#34;: &#34;5e5d75b33396fe0043f63e5c&#34;,
-    &#34;owner&#34;: &#34;anonymous&#34;,
-    &#34;type&#34;: &#34;string&#34;,
-    &#34;raw&#34;: &#34;something goes here&#34;,
-    &#34;name&#34;: &#34;&#34;,
-    &#34;id&#34;: &#34;MNCkr3mK&#34;,
-    &#34;created_at&#34;: &#34;2020-03-02T21:08:03+00:00&#34;
+    &quot;_id&quot;: &quot;5e5d75b33396fe0043f63e5c&quot;,
+    &quot;owner&quot;: &quot;anonymous&quot;,
+    &quot;type&quot;: &quot;string&quot;,
+    &quot;raw&quot;: &quot;something goes here&quot;,
+    &quot;name&quot;: &quot;&quot;,
+    &quot;id&quot;: &quot;MNCkr3mK&quot;,
+    &quot;created_at&quot;: &quot;2020-03-02T21:08:03+00:00&quot;
   },
   {
-    &#34;_id&#34;: &#34;5e5d75b63396fe0043f63e5d&#34;,
-    &#34;owner&#34;: &#34;anonymous&#34;,
-    &#34;type&#34;: &#34;string&#34;,
-    &#34;raw&#34;: &#34;another item&#34;,
-    &#34;name&#34;: &#34;&#34;,
-    &#34;id&#34;: &#34;x5ORoJu8&#34;,
-    &#34;created_at&#34;: &#34;2020-03-02T21:08:06+00:00&#34;
+    &quot;_id&quot;: &quot;5e5d75b63396fe0043f63e5d&quot;,
+    &quot;owner&quot;: &quot;anonymous&quot;,
+    &quot;type&quot;: &quot;string&quot;,
+    &quot;raw&quot;: &quot;another item&quot;,
+    &quot;name&quot;: &quot;&quot;,
+    &quot;id&quot;: &quot;x5ORoJu8&quot;,
+    &quot;created_at&quot;: &quot;2020-03-02T21:08:06+00:00&quot;
   }
 100   423  100   423    0     0  23500      0 --:--:-- --:--:-- --:--:-- 23500
 ]
@@ -349,11 +359,11 @@
 Service mesh allows setting policy at the individual service, namespace, and entire mesh levels (applied/enforced in that order)
 </p>
 <p>We already wrote the YAML config to do this. It looks like this:</p>
-<pre tabindex="0"><code>apiVersion: authentication.istio.io/v1alpha1
+<pre><code>apiVersion: authentication.istio.io/v1alpha1
 kind: Policy
 metadata:
-  name: &#34;default&#34;
-  namespace: &#34;microservices-demo&#34;
+  name: &quot;default&quot;
+  namespace: &quot;microservices-demo&quot;
 spec:
   peers:
   - mtls:
@@ -366,13 +376,13 @@ sed "s|microservices-demo|$PROJECT_NAME|" ./istio-configuration/policy-mtls.yaml
 ```
 <br>
 <p>Now we also need to set DestinationRules for each service so that our sidecars know to use mTLS when communicating with each other. The YAML for that looks like this - note the use of a wildcard:</p>
-<pre tabindex="0"><code>apiVersion: &#34;networking.istio.io/v1alpha3&#34;
-kind: &#34;DestinationRule&#34;
+<pre><code>apiVersion: &quot;networking.istio.io/v1alpha3&quot;
+kind: &quot;DestinationRule&quot;
 metadata:
-  name: &#34;destinationrule-mtls-istio-mutual&#34;
-  namespace: &#34;microservices-demo&#34;
+  name: &quot;destinationrule-mtls-istio-mutual&quot;
+  namespace: &quot;microservices-demo&quot;
 spec:
-  host: &#34;*.microservices-demo.svc.cluster.local&#34;
+  host: &quot;*.microservices-demo.svc.cluster.local&quot;
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL

@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -311,7 +321,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/sec-api.png" alt="sec api"/>
+<img src="/workshops/security_openshift/images/sec-api.png" alt="sec api">
 </div>
 </div>
 <div class="paragraph">
@@ -336,7 +346,7 @@
 </div>
 <div class="admonitionblock note">
 <table>
-<tbody><tr>
+<tr>
 <td class="icon">
 <div class="title">Note</div>
 </td>
@@ -344,7 +354,7 @@
 The <code>jq</code> utility also can clean up and propperly format json when writing to a file, other wise with out it the json would look compressed and hard to read.
 </td>
 </tr>
-</tbody></table>
+</table>
 </div>
 <div class="paragraph">
 <div class="panel-group">
@@ -354,19 +364,19 @@ The <code>jq</code> utility also can clean up and propperly format json when wri
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsee3132cc6e2cce2690696e1d6a0efc818" class="collapsed">
+      <a data-toggle="collapse" href="#collapsea57585faceedde9382622981870c0ebe" class="collapsed">
       
         Sample API Results
       </a>
     </h4>
   </div>
   
-  <div id="collapsee3132cc6e2cce2690696e1d6a0efc818" class="panel-collapse collapse ">
+  <div id="collapsea57585faceedde9382622981870c0ebe" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">curl https://access.redhat.com/labs/securitydataapi/cvrf.json | jq &#39;.&#39;
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl https://access.redhat.com/labs/securitydataapi/cvrf.json | jq '.'
 
 
 % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -374,92 +384,92 @@ The <code>jq</code> utility also can clean up and propperly format json when wri
 100           611k    0  611k    0     0   393k      0 --:--:--  0:00:01 --:--:--  392k
 [
   {
-    &#34;RHSA&#34;: &#34;RHSA-2017:1809&#34;,
-    &#34;severity&#34;: &#34;important&#34;,
-    &#34;released_on&#34;: &#34;2017-07-27T03:41:00+00:00&#34;,
-    &#34;CVEs&#34;: [
-      &#34;CVE-2017-5648&#34;,
-      &#34;CVE-2017-5664&#34;
+    "RHSA": "RHSA-2017:1809",
+    "severity": "important",
+    "released_on": "2017-07-27T03:41:00+00:00",
+    "CVEs": [
+      "CVE-2017-5648",
+      "CVE-2017-5664"
     ],
-    &#34;bugzillas&#34;: [
-      &#34;1441223&#34;,
-      &#34;1459158&#34;
+    "bugzillas": [
+      "1441223",
+      "1459158"
     ],
-    &#34;released_packages&#34;: [
-      &#34;tomcat-0:7.0.69-12.el7_3&#34;
+    "released_packages": [
+      "tomcat-0:7.0.69-12.el7_3"
     ],
-    &#34;oval&#34;: {
-      &#34;has_oval&#34;: true,
-      &#34;resource_url&#34;: &#34;https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1809/oval.json&#34;
+    "oval": {
+      "has_oval": true,
+      "resource_url": "https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1809/oval.json"
     },
-    &#34;resource_url&#34;: &#34;https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1809.json&#34;
+    "resource_url": "https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1809.json"
   },
   {
-    &#34;RHSA&#34;: &#34;RHSA-2017:1809&#34;,
-    &#34;severity&#34;: &#34;important&#34;,
-    &#34;released_on&#34;: &#34;2017-07-27T03:41:00+00:00&#34;,
-    &#34;CVEs&#34;: [
-      &#34;CVE-2017-5648&#34;,
-      &#34;CVE-2017-5664&#34;
+    "RHSA": "RHSA-2017:1809",
+    "severity": "important",
+    "released_on": "2017-07-27T03:41:00+00:00",
+    "CVEs": [
+      "CVE-2017-5648",
+      "CVE-2017-5664"
     ],
-    &#34;bugzillas&#34;: [
-      &#34;1441223&#34;,
-      &#34;1459158&#34;
+    "bugzillas": [
+      "1441223",
+      "1459158"
     ],
-    &#34;released_packages&#34;: [
-      &#34;tomcat-0:7.0.69-12.el7_3&#34;
+    "released_packages": [
+      "tomcat-0:7.0.69-12.el7_3"
     ],
-    &#34;oval&#34;: {
-      &#34;has_oval&#34;: true,
-      &#34;resource_url&#34;: &#34;https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1809/oval.json&#34;
+    "oval": {
+      "has_oval": true,
+      "resource_url": "https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1809/oval.json"
     },
-    &#34;resource_url&#34;: &#34;https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1809.json&#34;
+    "resource_url": "https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1809.json"
   },
   {
-    &#34;RHSA&#34;: &#34;RHSA-2017:1802&#34;,
-    &#34;severity&#34;: &#34;important&#34;,
-    &#34;released_on&#34;: &#34;2017-07-25T17:45:00+00:00&#34;,
-    &#34;CVEs&#34;: [
-      &#34;CVE-2017-5645&#34;,
-      &#34;CVE-2017-5647&#34;,
-      &#34;CVE-2017-5648&#34;,
-      &#34;CVE-2017-5664&#34;
+    "RHSA": "RHSA-2017:1802",
+    "severity": "important",
+    "released_on": "2017-07-25T17:45:00+00:00",
+    "CVEs": [
+      "CVE-2017-5645",
+      "CVE-2017-5647",
+      "CVE-2017-5648",
+      "CVE-2017-5664"
     ],
-    &#34;bugzillas&#34;: [
-      &#34;1443635&#34;,
-      &#34;1441205&#34;,
-      &#34;1441223&#34;,
-      &#34;1459158&#34;
+    "bugzillas": [
+      "1443635",
+      "1441205",
+      "1441223",
+      "1459158"
     ],
-    &#34;released_packages&#34;: [],
-    &#34;oval&#34;: {
-      &#34;has_oval&#34;: false,
-      &#34;resource_url&#34;: null
+    "released_packages": [],
+    "oval": {
+      "has_oval": false,
+      "resource_url": null
     },
-    &#34;resource_url&#34;: &#34;https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1802.json&#34;
+    "resource_url": "https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1802.json"
   },
   {
-    &#34;RHSA&#34;: &#34;RHSA-2017:1802&#34;,
-    &#34;severity&#34;: &#34;important&#34;,
-    &#34;released_on&#34;: &#34;2017-07-25T17:45:00+00:00&#34;,
-    &#34;CVEs&#34;: [
-      &#34;CVE-2017-5645&#34;,
-      &#34;CVE-2017-5647&#34;,
-      &#34;CVE-2017-5648&#34;,
-      &#34;CVE-2017-5664&#34;
+    "RHSA": "RHSA-2017:1802",
+    "severity": "important",
+    "released_on": "2017-07-25T17:45:00+00:00",
+    "CVEs": [
+      "CVE-2017-5645",
+      "CVE-2017-5647",
+      "CVE-2017-5648",
+      "CVE-2017-5664"
     ],
-    &#34;bugzillas&#34;: [
-      &#34;1443635&#34;,
-      &#34;1441205&#34;,
-      &#34;1441223&#34;,
-      &#34;1459158&#34;
+    "bugzillas": [
+      "1443635",
+      "1441205",
+      "1441223",
+      "1459158"
     ],
-    &#34;released_packages&#34;: [],
-    &#34;oval&#34;: {
-      &#34;has_oval&#34;: false,
-      &#34;resource_url&#34;: null
+    "released_packages": [],
+    "oval": {
+      "has_oval": false,
+      "resource_url": null
     },
-    &#34;resource_url&#34;: &#34;https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1802.json&#34;
+    "resource_url": "https://access.redhat.com/labs/securitydataapi/cvrf/RHSA-2017:1802.json"
   }</code></pre>
 </div>
 </div>
@@ -475,7 +485,7 @@ The <code>jq</code> utility also can clean up and propperly format json when wri
 <div class="listingblock">
 <div class="title">save API results to file</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl https://access.redhat.com/labs/securitydataapi/cvrf.json | jq &#39;.&#39; &gt; cvrf.json</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl https://access.redhat.com/labs/securitydataapi/cvrf.json | jq '.' &gt; cvrf.json</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -495,7 +505,7 @@ The <code>jq</code> utility also can clean up and propperly format json when wri
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/vim-find.png" alt="vim find"/>
+<img src="/workshops/security_openshift/images/vim-find.png" alt="vim find">
 </div>
 </div>
 </div>
@@ -512,17 +522,17 @@ The <code>jq</code> utility also can clean up and propperly format json when wri
 <div class="listingblock">
 <div class="title">CVE-2016-3703</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl https://access.redhat.com/labs/securitydataapi/cve/CVE-2016-3703 | jq &#39;. | {severity: .threat_severity, details: .details}&#39;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl https://access.redhat.com/labs/securitydataapi/cve/CVE-2016-3703 | jq '. | {severity: .threat_severity, details: .details}'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">API response</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">{
-  &#34;severity&#34;: &#34;Moderate&#34;,
-  &#34;details&#34;: [
-    &#34;\nRed Hat OpenShift Enterprise 3.2 and 3.1 do not properly validate the origin of a request when anonymous access is granted to a service/proxy or pod/proxy API for a specific pod, which allows remote attackers to access API credentials in the web browser localStorage via an access_token in the query parameter.\n    &#34;,
-    &#34;\nAn origin validation vulnerability was found in OpenShift Enterprise. An attacker could potentially access API credentials stored in a web browser&#39;s localStorage if anonymous access was granted to a service/proxy or pod/proxy API for a specific pod, and an authorized access_token was provided in the query parameter.\n    &#34;
+  "severity": "Moderate",
+  "details": [
+    "\nRed Hat OpenShift Enterprise 3.2 and 3.1 do not properly validate the origin of a request when anonymous access is granted to a service/proxy or pod/proxy API for a specific pod, which allows remote attackers to access API credentials in the web browser localStorage via an access_token in the query parameter.\n    ",
+    "\nAn origin validation vulnerability was found in OpenShift Enterprise. An attacker could potentially access API credentials stored in a web browser's localStorage if anonymous access was granted to a service/proxy or pod/proxy API for a specific pod, and an authorized access_token was provided in the query parameter.\n    "
   ]
 }</code></pre>
 </div>
@@ -536,12 +546,12 @@ The <code>jq</code> utility also can clean up and propperly format json when wri
 <p><strong>CAT 1</strong></p>
 </div>
 <div class="paragraph">
-<p>Now we can also look just for CAT 1 severity CVE’s with this query. These might be nice to have in a system that could alert administrators to take action.</p>
+<p>Now we can also look just for CAT 1 severity CVE&#8217;s with this query. These might be nice to have in a system that could alert administrators to take action.</p>
 </div>
 <div class="listingblock">
 <div class="title">CAT 1</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -X GET &#34;https://access.redhat.com/labs/securitydataapi/iava.json&#34; | jq &#39;.[] | select(.severity == &#34;CAT I&#34;)&#39;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[] | select(.severity == "CAT I")'</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -550,7 +560,7 @@ The <code>jq</code> utility also can clean up and propperly format json when wri
 <div class="listingblock">
 <div class="title">get CVE &amp; Title</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -X GET &#34;https://access.redhat.com/labs/securitydataapi/iava.json&#34; | jq &#39;.[] | select(.severity == &#34;CAT I&#34;) | { CVE: .cvelist, &#34;CAT 1 Name&#34;: .title }&#39;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -X GET "https://access.redhat.com/labs/securitydataapi/iava.json" | jq '.[] | select(.severity == "CAT I") | { CVE: .cvelist, "CAT 1 Name": .title }'</code></pre>
 </div>
 </div>
 <div class="paragraph">

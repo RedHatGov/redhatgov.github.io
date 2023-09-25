@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -324,7 +334,8 @@
 <blockquote>
 <p>Navigate to Network -&gt; Security Groups using the second level navigation tabs</p>
 </blockquote>
-<figure><img src="../images/lab4-security-groups-1.png"/><figcaption>
+<figure>
+    <img src="../images/lab4-security-groups-1.png"/> <figcaption>
             <h4>Lab 4 Figure 1: Security Group Listing</h4>
         </figcaption>
 </figure>
@@ -332,7 +343,8 @@
 <blockquote>
 <p>Click <strong>Manage Rules</strong> on the right hand side of the row for default security group</p>
 </blockquote>
-<figure><img src="../images/lab4-security-groups-2.png"/><figcaption>
+<figure>
+    <img src="../images/lab4-security-groups-2.png"/> <figcaption>
             <h4>Lab 4 Figure 2: Viewing Rules for default Security Group</h4>
         </figcaption>
 </figure>
@@ -346,7 +358,8 @@ Leave <strong>Remote</strong> set to <strong>CIDR</strong>
 Enter <strong>192.168.0.0/23</strong> for <strong>CIDR</strong> (this is our external network)<br>
 Click <strong>Add</strong></p>
 </blockquote>
-<figure><img src="../images/lab4-security-groups-3.png"/><figcaption>
+<figure>
+    <img src="../images/lab4-security-groups-3.png"/> <figcaption>
             <h4>Lab 4 Figure 3: Add ICMP Rule to default Security Group</h4>
         </figcaption>
 </figure>
@@ -363,7 +376,8 @@ Leave <strong>Remote</strong> set to <strong>CIDR</strong>
 Enter <strong>192.168.0.0/23</strong> for <strong>CIDR</strong> (this is our external network)<br>
 Click <strong>Add</strong></p>
 </blockquote>
-<figure><img src="../images/lab4-security-groups-4.png"/><figcaption>
+<figure>
+    <img src="../images/lab4-security-groups-4.png"/> <figcaption>
             <h4>Lab 4 Figure 4: Add SSH Rule to default Security Group</h4>
         </figcaption>
 </figure>
@@ -374,7 +388,8 @@ Click <strong>Add</strong></p>
 <p>If you did not see a success message, let the intstructor know now</p>
 </div>
 <p>If we now look at the Manage Rules screen for the default security group, we will see our two new rules for ICMP and SSH ingress traffic allowed only from 192.168.0.0/23 CIDR.</p>
-<figure><img src="../images/lab4-security-groups-5.png"/><figcaption>
+<figure>
+    <img src="../images/lab4-security-groups-5.png"/> <figcaption>
             <h4>Lab 4 Figure 5: Manage Rules Screen Showing Two New Rules for ICMP and SSH in the default Security Group</h4>
         </figcaption>
 </figure>
@@ -383,7 +398,8 @@ Click <strong>Add</strong></p>
 <blockquote>
 <p>Navigate to Network -&gt; Security Groups using the second level navigation tabs</p>
 </blockquote>
-<figure><img src="../images/lab4-security-groups-1.png"/><figcaption>
+<figure>
+    <img src="../images/lab4-security-groups-1.png"/> <figcaption>
             <h4>Lab 4 Figure 1: Security Group Listing</h4>
         </figcaption>
 </figure>
@@ -394,7 +410,8 @@ Enter <strong>web-server</strong> for the <strong>Name</strong><br>
 <strong>Description</strong> is optional, but as you can see below, I used it to describe the purpose of this security group<br>
 Click <strong>Create Security Group</strong></p>
 </blockquote>
-<figure><img src="../images/lab4-security-groups-6.png"/><figcaption>
+<figure>
+    <img src="../images/lab4-security-groups-6.png"/> <figcaption>
             <h4>Lab 4 Figure 6: Create a New Security Group</h4>
         </figcaption>
 </figure>
@@ -404,7 +421,8 @@ Click <strong>Create Security Group</strong></p>
 <p>You should see a green box appear in the upper right corner of the screen that says &ldquo;Success: Successfully created security group: web-server&rdquo;</p>
 <p>If you did not see a success message, let the intstructor know now</p>
 </div>
-<figure><img src="../images/lab4-security-groups-7.png"/><figcaption>
+<figure>
+    <img src="../images/lab4-security-groups-7.png"/> <figcaption>
             <h4>Lab 4 Figure 7: Security Group Listing Showing New web-server Group</h4>
         </figcaption>
 </figure>
@@ -418,7 +436,8 @@ Leave <strong>Remote</strong> set to <strong>CIDR</strong>
 Leave <strong>0.0.0.0/0</strong> for <strong>CIDR</strong><br>
 Click <strong>Add</strong></p>
 </blockquote>
-<figure><img src="../images/lab4-security-groups-8.png"/><figcaption>
+<figure>
+    <img src="../images/lab4-security-groups-8.png"/> <figcaption>
             <h4>Lab 4 Figure 8: Add HTTP Rule to web-server Security Group</h4>
         </figcaption>
 </figure>
@@ -435,7 +454,8 @@ Leave <strong>Remote</strong> set to <strong>CIDR</strong>
 Enter <strong>0.0.0.0/0</strong> for <strong>CIDR</strong> <br>
 Click <strong>Add</strong></p>
 </blockquote>
-<figure><img src="../images/lab4-security-groups-9.png"/><figcaption>
+<figure>
+    <img src="../images/lab4-security-groups-9.png"/> <figcaption>
             <h4>Lab 4 Figure 9: Add HTTPS Rule to web-server Security Group</h4>
         </figcaption>
 </figure>
@@ -446,7 +466,8 @@ Click <strong>Add</strong></p>
 <p>If you did not see a success message, let the intstructor know now</p>
 </div>
 <p>If we now look at the Manage Rules screen for the web-server security group, we will see our two new rules for HTTP and HTTPS ingress traffic allowed from all sources.</p>
-<figure><img src="../images/lab4-security-groups-10.png"/><figcaption>
+<figure>
+    <img src="../images/lab4-security-groups-10.png"/> <figcaption>
             <h4>Lab 4 Figure 10: Manage Rules Screen Showing Two New Rules for HTTP and HTTPS in the web-server Security Group</h4>
         </figcaption>
 </figure>

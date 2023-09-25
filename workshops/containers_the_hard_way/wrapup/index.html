@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -310,13 +320,13 @@
 <p>That wraps up what we have planned for today.</p>
 </div>
 <div class="paragraph">
-<p>We explored Linux Namespaces and the unshare command in great depth. Obviously container enginers make heavy use of these namespaces. Their job is to orchestrate the namespaces, OverlayFS, image files, and active containers so you don’t have to. Obviously, you wouldn’t run containers this way in production, but there may be times that you’d like to make use of namespaces. For example, did you know that Ansible Tower uses namespaces to create isolated environments for running Ansible code? By segragating untrusted code with namespaces, you can maintain a higher degree of security. Chromium uses namespaces for isolating JavaScript code downloaded from the web. Pretty cool, huh?</p>
+<p>We explored Linux Namespaces and the unshare command in great depth. Obviously container enginers make heavy use of these namespaces. Their job is to orchestrate the namespaces, OverlayFS, image files, and active containers so you don&#8217;t have to. Obviously, you wouldn&#8217;t run containers this way in production, but there may be times that you&#8217;d like to make use of namespaces. For example, did you know that Ansible Tower uses namespaces to create isolated environments for running Ansible code? By segragating untrusted code with namespaces, you can maintain a higher degree of security. Chromium uses namespaces for isolating JavaScript code downloaded from the web. Pretty cool, huh?</p>
 </div>
 <div class="paragraph">
 <p>Then we explored Overlay Filesystems and Container Networking basics. These are the extra bits that make containers work.</p>
 </div>
 <div class="paragraph">
-<p>All container engines, be it podman, docker, rkt, etc…​ They all use the same Linux components. Now that the Registry API and Image File Format have been standardized, the underlying container engine can be changed with little affect to the runtime environment. Open source and open standards have provided a vast amount of flexibility.</p>
+<p>All container engines, be it podman, docker, rkt, etc&#8230;&#8203; They all use the same Linux components. Now that the Registry API and Image File Format have been standardized, the underlying container engine can be changed with little affect to the runtime environment. Open source and open standards have provided a vast amount of flexibility.</p>
 </div>
 <div class="paragraph">
 <p>Thank you for your time and participation!</p>

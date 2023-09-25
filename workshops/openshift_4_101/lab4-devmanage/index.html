@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -320,14 +330,14 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsed67a236c617d5a4ee84705c2223ac832" class="collapsed">
+      <a data-toggle="collapse" href="#collapsefcbe379a7736b8cfa3f3938b680b1b38" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsed67a236c617d5a4ee84705c2223ac832" class="panel-collapse collapse ">
+  <div id="collapsefcbe379a7736b8cfa3f3938b680b1b38" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
@@ -337,8 +347,8 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc status
-</span></span></code></pre></div><p>This is going to show the status of your current project.  In this case it will show the dc-metro-map service (svc) with a nested deployment config(also called a &ldquo;DC&rdquo;) along with some more info that you can ignore for now.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc status
+</code></pre></div><p>This is going to show the status of your current project.  In this case it will show the dc-metro-map service (svc) with a nested deployment config(also called a &ldquo;DC&rdquo;) along with some more info that you can ignore for now.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i>  A deployment in OpenShift is a replication controller based on a user defined template called a deployment configuration <br/>
 </blockquote>
@@ -346,8 +356,8 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <blockquote>
 <i class="fa fa-terminal"></i> Type the following to find out more about our dc:
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe deploymentconfig/dc-metro-map
-</span></span></code></pre></div><p>Notice under the template section it lists the containers it wants to deploy along with the path to the container image.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe deploymentconfig/dc-metro-map
+</code></pre></div><p>Notice under the template section it lists the containers it wants to deploy along with the path to the container image.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i> There are a few other ways you could get to this information.  If you are feeling adventurous, you might also want to try to:
 </blockquote>
@@ -372,8 +382,8 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <blockquote>
 <i class="fa fa-terminal"></i> Type the following to find out more about our bc:
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe bc/dc-metro-map
-</span></span></code></pre></div><p>Notice the information about the configuration of how this app gets built.  In particular look at the github URL, the webhooks you can use to automatically trigger a new build, the docker image where the build runs inside of, and the builds that have been completed.  New let&rsquo;s look at one of those builds.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe bc/dc-metro-map
+</code></pre></div><p>Notice the information about the configuration of how this app gets built.  In particular look at the github URL, the webhooks you can use to automatically trigger a new build, the docker image where the build runs inside of, and the builds that have been completed.  New let&rsquo;s look at one of those builds.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Type the following:
 </blockquote>
@@ -462,14 +472,14 @@ Notice that, in the "Git Commit" section, you can see the comment from the last 
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse6f30583dc1df74dfc7b9599820f5187d" class="collapsed">
+      <a data-toggle="collapse" href="#collapsed4f0e0924d122802f1a9465337a19034" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse6f30583dc1df74dfc7b9599820f5187d" class="panel-collapse collapse ">
+  <div id="collapsed4f0e0924d122802f1a9465337a19034" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
@@ -479,13 +489,13 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
-</span></span></code></pre></div><p>This is going to show basic details for all pods in this project (including the builders).  Let&rsquo;s look at the log for the pod running our application.  Look for the POD NAME that that is &ldquo;Running&rdquo; you will use it below.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
+</code></pre></div><p>This is going to show basic details for all pods in this project (including the builders).  Let&rsquo;s look at the log for the pod running our application.  Look for the POD NAME that that is &ldquo;Running&rdquo; you will use it below.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following (replacing the POD ID with your pod's ID):
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc logs <span style="color:#f92672">[</span>POD NAME<span style="color:#f92672">]</span>
-</span></span></code></pre></div><p>You will see in the output details of your app starting up and any status messages it has reported since it started.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc logs <span style="color:#f92672">[</span>POD NAME<span style="color:#f92672">]</span>
+</code></pre></div><p>You will see in the output details of your app starting up and any status messages it has reported since it started.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i> You can see more details about the pod itself with 'oc describe pod/<POD NAME>'
 </blockquote>
@@ -552,27 +562,27 @@ Now you can see, in the output window, the details of your app starting up, and 
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse0d1455f46e82c952d1045de8f7ac1598" class="collapsed">
+      <a data-toggle="collapse" href="#collapsef3cb1768b1b1fc28317bd81fc3d0ca0e" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse0d1455f46e82c952d1045de8f7ac1598" class="panel-collapse collapse ">
+  <div id="collapsef3cb1768b1b1fc28317bd81fc3d0ca0e" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
 <pre>
 https://console-openshift-console.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/terminal
 </pre>
-<p>Let&rsquo;s have a little fun.  The app has some easter eggs that get triggered when certain environment variables are set to &rsquo;true'.</p>
+<p>Let&rsquo;s have a little fun.  The app has some easter eggs that get triggered when certain environment variables are set to &lsquo;true&rsquo;.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc set env deploymentconfig/dc-metro-map -e BEERME<span style="color:#f92672">=</span>true
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods -w
-</span></span></code></pre></div><p>Due to the deployment config strategy being set to &ldquo;Rolling&rdquo; and the &ldquo;ConfigChange&rdquo; trigger being set, OpenShift auto deployed a new pod as soon as you updated the environment variable.  If you were quick enough, you might have seen this happening, with the &ldquo;oc get pods -w&rdquo; command</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc set env deploymentconfig/dc-metro-map -e BEERME<span style="color:#f92672">=</span>true
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods -w
+</code></pre></div><p>Due to the deployment config strategy being set to &ldquo;Rolling&rdquo; and the &ldquo;ConfigChange&rdquo; trigger being set, OpenShift auto deployed a new pod as soon as you updated the environment variable.  If you were quick enough, you might have seen this happening, with the &ldquo;oc get pods -w&rdquo; command</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Type Ctrl+C to stop watching the pods
 </blockquote>
@@ -647,14 +657,14 @@ If you are quick enough, you will see a new pod spin up, and the old pod spin do
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse9b5a4b05e8f2b77c357c9dc9e6e1ee0f" class="collapsed">
+      <a data-toggle="collapse" href="#collapse492c0dd064445b3f37e48423231a4fa3" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse9b5a4b05e8f2b77c357c9dc9e6e1ee0f" class="panel-collapse collapse ">
+  <div id="collapse492c0dd064445b3f37e48423231a4fa3" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
@@ -664,14 +674,14 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
-</span></span></code></pre></div><p>Find the pod name for your Running pod</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc exec -it <span style="color:#f92672">[</span>POD NAME<span style="color:#f92672">]</span> -- /bin/bash
-</span></span></code></pre></div><p>You are now interactively attached to the container in your pod.  Let&rsquo;s look for the environment variables we set:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ env | grep BEER
-</span></span></code></pre></div><p>That should return the <strong>BEERME=true</strong> matching the value that we set in the deployment config.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ exit
-</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
+</code></pre></div><p>Find the pod name for your Running pod</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc exec -it <span style="color:#f92672">[</span>POD NAME<span style="color:#f92672">]</span> -- /bin/bash
+</code></pre></div><p>You are now interactively attached to the container in your pod.  Let&rsquo;s look for the environment variables we set:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ env | grep BEER
+</code></pre></div><p>That should return the <strong>BEERME=true</strong> matching the value that we set in the deployment config.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ exit
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -730,10 +740,10 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <blockquote>
 <p><i class="fa fa-terminal"></i> Let&rsquo;s clean up all this to get ready for the next lab:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc project demo-<span class="userid">YOUR#</span>
-</span></span><span style="display:flex;"><span>$ oc delete all -l app<span style="color:#f92672">=</span>dc-metro-map
-</span></span><span style="display:flex;"><span>$ oc delete secrets dc-metro-map-generic-webhook-secret dc-metro-map-github-webhook-secret 2&gt;/dev/null
-</span></span></code></pre></div><h1 id="summary">Summary</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project demo-<span class="userid">YOUR#</span>
+$ oc delete all -l app<span style="color:#f92672">=</span>dc-metro-map
+$ oc delete secrets dc-metro-map-generic-webhook-secret dc-metro-map-github-webhook-secret 2&gt;/dev/null
+</code></pre></div><h1 id="summary">Summary</h1>
 <p>In this lab you&rsquo;ve seen how to trace running software back to its roots, how to see details on the pods running your software, how to update deployment configurations, how to inspect logs files, how to set environment variables consistently across your environment, and how to interactively attach to running containers.  All these things should come in handy for any developer working in an OpenShift platform.</p>
 <p>To dig deeper into the details behind the steps you performed in this lab, check out the OpenShift documentation<a href="https://docs.openshift.com/container-platform/latest/welcome/index.html">1</a>.</p>
 <style>

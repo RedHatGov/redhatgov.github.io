@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -311,12 +321,12 @@
 <h2 id="_exercise_description">Exercise Description</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As part of the Applied Ansible workshop, you will deploy <em>(copy/transfer)</em> a container built on top of Red Hat OpenShift to an edge node running only Red Hat Enterprise Linux utilizing Ansible Automation.  Prior to that step, we need to actually &#34;create&#34; a container on Red Hat OpenShift.</p>
+<p>As part of the Applied Ansible workshop, you will deploy <em>(copy/transfer)</em> a container built on top of Red Hat OpenShift to an edge node running only Red Hat Enterprise Linux utilizing Ansible Automation.  Prior to that step, we need to actually "create" a container on Red Hat OpenShift.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lets_login_to_the_web_console">Let’s Login to the Web Console</h2>
+<h2 id="_lets_login_to_the_web_console">Let&#8217;s Login to the Web Console</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In your browser &amp; in a new tab, connect to the Red Hat OpenShift console</p>
@@ -328,7 +338,7 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/rhocp_login.png" alt="rhocp login" height="400"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/rhocp_login.png" alt="rhocp login" height="400">
 </div>
 <div class="title"></div>
 </div>
@@ -337,7 +347,7 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/rhocp_edge_namespace.gif" alt="rhocp edge namespace" height="200"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/rhocp_edge_namespace.gif" alt="rhocp edge namespace" height="200">
 </div>
 <div class="title"></div>
 </div>
@@ -346,7 +356,7 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/s2i_git.png" alt="s2i git" height="200"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/s2i_git.png" alt="s2i git" height="200">
 </div>
 <div class="title"></div>
 </div>
@@ -357,8 +367,8 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <h3 id="_build_a_oci_aka_docker_container_from_only_source_code_via_source_to_image_s2i">Build a OCI (aka docker) container from only source code via source-to-image (s2i).</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;"/>
-<col style="width: 50%;"/>
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
 <tbody>
 <tr>
@@ -379,11 +389,11 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <div class="sect2">
 <h3 id="_select_language_php">Select language (PHP)</h3>
 <div class="paragraph">
-<p><em>and of course, yes …​ we could have used many other languages …​</em></p>
+<p><em>and of course, yes &#8230;&#8203; we could have used many other languages &#8230;&#8203;</em></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/s2i_php.png" alt="s2i php" height="100"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/s2i_php.png" alt="s2i php" height="100">
 </div>
 <div class="title"></div>
 </div>
@@ -398,8 +408,8 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <h3 id="_resources_2">Resources</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;"/>
-<col style="width: 50%;"/>
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
 <tbody>
 <tr>
@@ -424,9 +434,9 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/s2i_pipeline.png" alt="s2i pipeline" height="100"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/s2i_pipeline.png" alt="s2i pipeline" height="100">
 </div>
-<div class="title">Select &gt; Show pipeline visualization</div>
+<div class="title">Select > Show pipeline visualization</div>
 </div>
 </div>
 <div class="sect2">
@@ -436,10 +446,10 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 </div>
 </div>
 <div class="sect2">
-<h3 id="_lastly_select">Lastly, select …​</h3>
+<h3 id="_lastly_select">Lastly, select &#8230;&#8203;</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/s2i_create.png" alt="s2i create" height="50"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/s2i_create.png" alt="s2i create" height="50">
 </div>
 <div class="title"></div>
 </div>

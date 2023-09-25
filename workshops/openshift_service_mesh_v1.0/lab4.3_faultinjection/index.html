@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -316,9 +326,9 @@
 <i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
 </blockquote>
-<pre tabindex="0"><code>cat ./istio-configuration/virtual-service-userprofile-503.yaml
+<pre><code>cat ./istio-configuration/virtual-service-userprofile-503.yaml
 </code></pre><p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
   http:
   - fault:
       abort:
@@ -334,12 +344,12 @@ View the virtual service in your favorite editor or via bash:
 <i class="fa fa-terminal"></i>
 Deploy the routing rule:
 </blockquote>
-<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-503.yaml
+<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-503.yaml
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 If you aren't already (from previous labs) - Send load to the user profile service:
 </blockquote>
-<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><br>
 <p>Inspect the change in Kiali.</p>
 <blockquote>
@@ -383,9 +393,9 @@ Refresh the brower a couple of times.
 <i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
 </blockquote>
-<pre tabindex="0"><code>cat ./istio-configuration/virtual-service-userprofile-delay.yaml
+<pre><code>cat ./istio-configuration/virtual-service-userprofile-delay.yaml
 </code></pre><p>Output (snippet):</p>
-<pre tabindex="0"><code>...
+<pre><code>...
   http:
   - fault:
       delay:
@@ -401,12 +411,12 @@ View the virtual service in your favorite editor or via bash:
 <i class="fa fa-terminal"></i>
 Deploy the routing rule:
 </blockquote>
-<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-delay.yaml
+<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-delay.yaml
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 If you aren't already - Send load to the user profile service:
 </blockquote>
-<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><br>
 <blockquote>
 <i class="fa fa-desktop"></i>
@@ -427,7 +437,7 @@ From the Graph view right click on the userprofile service (the triangle shape).
 <i class="fa fa-terminal"></i>
 Revert the changes you made before ending this lab.
 </blockquote>
-<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
+<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
 </code></pre><br>
 <h2 id="summary">Summary</h2>
 <p>Congratulations, you configured fault injection with Istio!</p>

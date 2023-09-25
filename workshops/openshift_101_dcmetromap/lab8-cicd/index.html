@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -381,11 +391,11 @@ Fill in the Name and Display Name of the project as "cicd-<span class="userid">Y
 
 </div>
 
-<h2 id="use-the-cicd-hahahugoshortcodes2hbhb-project">Use the cicd-<span class="userid">YOUR#</span>
+<h2 id="use-the-cicd-hahahugoshortcode-s2-hbhb-project">Use the cicd-<span class="userid">YOUR#</span>
  project</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc project cicd-<span class="userid">YOUR#</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project cicd-<span class="userid">YOUR#</span>
 
-</span></span></code></pre></div><h2 id="instantiate-a-jenkins-server-in-your-project">Instantiate a Jenkins server in your project</h2>
+</code></pre></div><h2 id="instantiate-a-jenkins-server-in-your-project">Instantiate a Jenkins server in your project</h2>
 <div class="panel-group">
   
 
@@ -394,18 +404,18 @@ Fill in the Name and Display Name of the project as "cicd-<span class="userid">Y
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse76e03c948b589f5bc8ff4b5a0d0147c7" class="collapsed">
+      <a data-toggle="collapse" href="#collapse83cd1f4c7a73bdeb8cf3b4baa1647193" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse76e03c948b589f5bc8ff4b5a0d0147c7" class="panel-collapse collapse ">
+  <div id="collapse83cd1f4c7a73bdeb8cf3b4baa1647193" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc new-app jenkins-ephemeral
-</span></span></code></pre></div>
+       <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-app jenkins-ephemeral
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -461,8 +471,8 @@ Click the "Continue to the project overview" link
 <blockquote>
 <p>Use the &ldquo;oc create&rdquo; command to create a template resource by filename for a simple nodejs application:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json
-</span></span></code></pre></div><h2 id="modify-the-sample-application-configuration-to-use-the-nodejs-red-hat-universal-base-image-ubihttpswwwredhatcomenblogintroducing-red-hat-universal-base-image">Modify the sample application configuration to use the Node.js <a href="https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image">Red Hat Universal Base Image (UBI)</a></h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/application-template.json
+</code></pre></div><h2 id="modify-the-sample-application-configuration-to-use-the-nodejs-red-hat-universal-base-image-ubihttpswwwredhatcomenblogintroducing-red-hat-universal-base-image">Modify the sample application configuration to use the Node.js <a href="https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image">Red Hat Universal Base Image (UBI)</a></h2>
 <blockquote>
 <p>The template used above references a DEPRECATED: A Centos7 based NodeJS v0.10 image for use with OpenShift v3.</p>
 </blockquote>
@@ -474,21 +484,21 @@ Click the "Continue to the project overview" link
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse3e0ec758ba39dfc4b4c7ca5b091e0254" class="collapsed">
+      <a data-toggle="collapse" href="#collapsecc944a0ec241266bfb41ca8efcb109a4" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse3e0ec758ba39dfc4b4c7ca5b091e0254" class="panel-collapse collapse ">
+  <div id="collapsecc944a0ec241266bfb41ca8efcb109a4" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 Find and replace "nodejs-010-centos7" with "nodejs-10"
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc edit template nodejs-helloworld-sample
-</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc edit template nodejs-helloworld-sample
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -541,8 +551,8 @@ Click "Save"
 <blockquote>
 <p>Use the &ldquo;oc process&rdquo; command to create a simple nodejs application from the template file:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc process nodejs-helloworld-sample -p NAMESPACE<span style="color:#f92672">=</span>registry.access.redhat.com/ubi7 | oc create -f -
-</span></span></code></pre></div><blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc process nodejs-helloworld-sample -p NAMESPACE<span style="color:#f92672">=</span>registry.access.redhat.com/ubi7 | oc create -f -
+</code></pre></div><blockquote>
 <p>Click on &ldquo;Overview&rdquo; within the OpenShift console to display the sample application configuration</p>
 </blockquote>
 <p><img src="../images/ocp-lab-cicd-app-create.png" width="900"><br/></p>
@@ -555,25 +565,25 @@ Click "Save"
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsec22e63d28bedcbbc7728c13e24b50818" class="collapsed">
+      <a data-toggle="collapse" href="#collapsef8a6bfa7fdc06b8fe6eb9300cdc3406a" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsec22e63d28bedcbbc7728c13e24b50818" class="panel-collapse collapse ">
+  <div id="collapsef8a6bfa7fdc06b8fe6eb9300cdc3406a" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Get the route to the Jenkins server. Your HOST/PORT values will differ
 from the example below.
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get route
-</span></span><span style="display:flex;"><span>NAME       HOST/PORT                            PATH      SERVICES   PORT      TERMINATION     WILDCARD
-</span></span><span style="display:flex;"><span>frontend   frontend-cicd.192.168.42.27.xip.io             frontend   &lt;all&gt;     edge            None
-</span></span><span style="display:flex;"><span>jenkins    jenkins-cicd.192.168.42.27.xip.io              jenkins    &lt;all&gt;     edge/Redirect   None
-</span></span></code></pre></div><p>Use Jenkins HOST/PORT to access through web browser</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get route
+NAME       HOST/PORT                            PATH      SERVICES   PORT      TERMINATION     WILDCARD
+frontend   frontend-cicd.192.168.42.27.xip.io             frontend   &lt;all&gt;     edge            None
+jenkins    jenkins-cicd.192.168.42.27.xip.io              jenkins    &lt;all&gt;     edge/Redirect   None
+</code></pre></div><p>Use Jenkins HOST/PORT to access through web browser</p>
 
     </div>
   </div>
@@ -641,82 +651,82 @@ in the GROOVY language using a Jenkins file format.</p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse44de831e3f83ea27c4d5d31d577cef78" class="collapsed">
+      <a data-toggle="collapse" href="#collapse62e31951cf15246dd9f09978a47f52cb" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse44de831e3f83ea27c4d5d31d577cef78" class="panel-collapse collapse ">
+  <div id="collapse62e31951cf15246dd9f09978a47f52cb" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <p>Copy and paste the following into bash.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc create -f - <span style="color:#e6db74">&lt;&lt;EOF
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">kind: &#34;BuildConfig&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">apiVersion: &#34;v1&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">metadata:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  name: &#34;pipeline&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">spec:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  strategy:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    jenkinsPipelineStrategy:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      jenkinsfile: |-
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        pipeline {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          agent any
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          stages {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            stage(&#39;buildFrontEnd&#39;) {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              steps {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                script {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  openshift.withCluster() {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    openshift.withProject() {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                      openshift.selector(&#34;bc&#34;, &#34;frontend&#34;).startBuild(&#34;--wait=true&#34;, &#34;--follow&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            stage(&#39;deployFrontEnd&#39;) {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              steps {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                script {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  openshift.withCluster() {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    openshift.withProject() {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                      openshift.selector(&#34;dc&#34;, &#34;frontend&#34;).rollout().latest()
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            stage(&#39;promoteToProd&#39;) {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              steps {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                script {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  timeout(time: 15, unit: &#39;MINUTES&#39;) {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    input message: &#34;Promote to PROD?&#34;, ok: &#34;Promote&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  openshift.withCluster() {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    openshift.withProject() {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                      openshift.tag(&#34;origin-nodejs-sample:latest&#34;, &#34;origin-nodejs-sample:prod&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            stage(&#39;scaleUp&#39;) {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              steps {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                script {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  openshift.withCluster() {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    openshift.withProject() {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                      openshift.selector(&#34;dc&#34;, &#34;frontend-prod&#34;).scale(&#34;--replicas=2&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
-</span></span></code></pre></div><p>Expected output:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>buildconfig <span style="color:#e6db74">&#34;pipeline&#34;</span> created
-</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc create -f - <span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">kind: &#34;BuildConfig&#34;
+</span><span style="color:#e6db74">apiVersion: &#34;v1&#34;
+</span><span style="color:#e6db74">metadata:
+</span><span style="color:#e6db74">  name: &#34;pipeline&#34;
+</span><span style="color:#e6db74">spec:
+</span><span style="color:#e6db74">  strategy:
+</span><span style="color:#e6db74">    jenkinsPipelineStrategy:
+</span><span style="color:#e6db74">      jenkinsfile: |-
+</span><span style="color:#e6db74">        pipeline {
+</span><span style="color:#e6db74">          agent any
+</span><span style="color:#e6db74">          stages {
+</span><span style="color:#e6db74">            stage(&#39;buildFrontEnd&#39;) {
+</span><span style="color:#e6db74">              steps {
+</span><span style="color:#e6db74">                script {
+</span><span style="color:#e6db74">                  openshift.withCluster() {
+</span><span style="color:#e6db74">                    openshift.withProject() {
+</span><span style="color:#e6db74">                      openshift.selector(&#34;bc&#34;, &#34;frontend&#34;).startBuild(&#34;--wait=true&#34;, &#34;--follow&#34;)
+</span><span style="color:#e6db74">                    }
+</span><span style="color:#e6db74">                  }
+</span><span style="color:#e6db74">                }
+</span><span style="color:#e6db74">              }
+</span><span style="color:#e6db74">            }
+</span><span style="color:#e6db74">            stage(&#39;deployFrontEnd&#39;) {
+</span><span style="color:#e6db74">              steps {
+</span><span style="color:#e6db74">                script {
+</span><span style="color:#e6db74">                  openshift.withCluster() {
+</span><span style="color:#e6db74">                    openshift.withProject() {
+</span><span style="color:#e6db74">                      openshift.selector(&#34;dc&#34;, &#34;frontend&#34;).rollout().latest()
+</span><span style="color:#e6db74">                    }
+</span><span style="color:#e6db74">                  }
+</span><span style="color:#e6db74">                }
+</span><span style="color:#e6db74">              }
+</span><span style="color:#e6db74">            }
+</span><span style="color:#e6db74">            stage(&#39;promoteToProd&#39;) {
+</span><span style="color:#e6db74">              steps {
+</span><span style="color:#e6db74">                script {
+</span><span style="color:#e6db74">                  timeout(time: 15, unit: &#39;MINUTES&#39;) {
+</span><span style="color:#e6db74">                    input message: &#34;Promote to PROD?&#34;, ok: &#34;Promote&#34;
+</span><span style="color:#e6db74">                  }
+</span><span style="color:#e6db74">                  openshift.withCluster() {
+</span><span style="color:#e6db74">                    openshift.withProject() {
+</span><span style="color:#e6db74">                      openshift.tag(&#34;origin-nodejs-sample:latest&#34;, &#34;origin-nodejs-sample:prod&#34;)
+</span><span style="color:#e6db74">                    }
+</span><span style="color:#e6db74">                  }
+</span><span style="color:#e6db74">                }
+</span><span style="color:#e6db74">              }
+</span><span style="color:#e6db74">            }
+</span><span style="color:#e6db74">            stage(&#39;scaleUp&#39;) {
+</span><span style="color:#e6db74">              steps {
+</span><span style="color:#e6db74">                script {
+</span><span style="color:#e6db74">                  openshift.withCluster() {
+</span><span style="color:#e6db74">                    openshift.withProject() {
+</span><span style="color:#e6db74">                      openshift.selector(&#34;dc&#34;, &#34;frontend-prod&#34;).scale(&#34;--replicas=2&#34;)
+</span><span style="color:#e6db74">                    }
+</span><span style="color:#e6db74">                  }
+</span><span style="color:#e6db74">                }
+</span><span style="color:#e6db74">              }
+</span><span style="color:#e6db74">            }
+</span><span style="color:#e6db74">          }
+</span><span style="color:#e6db74">        }
+</span><span style="color:#e6db74">EOF</span>
+</code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">buildconfig <span style="color:#e6db74">&#34;pipeline&#34;</span> created
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -727,80 +737,80 @@ in the GROOVY language using a Jenkins file format.</p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsef3f741393868e526d81914e65d61fdc9" class="collapsed">
+      <a data-toggle="collapse" href="#collapse49be2700e9c194abf08a0c21d8ec8b70" class="collapsed">
       
         Web Console Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsef3f741393868e526d81914e65d61fdc9" class="panel-collapse collapse ">
+  <div id="collapse49be2700e9c194abf08a0c21d8ec8b70" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <p>Use the following OpenShift build configuration to create the pipeline.</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kind: <span style="color:#e6db74">&#34;BuildConfig&#34;</span>
-</span></span><span style="display:flex;"><span>apiVersion: <span style="color:#e6db74">&#34;v1&#34;</span>
-</span></span><span style="display:flex;"><span>metadata:
-</span></span><span style="display:flex;"><span>  name: <span style="color:#e6db74">&#34;pipeline&#34;</span>
-</span></span><span style="display:flex;"><span>spec:
-</span></span><span style="display:flex;"><span>  strategy:
-</span></span><span style="display:flex;"><span>    jenkinsPipelineStrategy:
-</span></span><span style="display:flex;"><span>      jenkinsfile: |-
-</span></span><span style="display:flex;"><span>        pipeline <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>          agent any
-</span></span><span style="display:flex;"><span>          stages <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;buildFrontEnd&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>              steps <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                script <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                  openshift.withCluster<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                    openshift.withProject<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                      openshift.selector<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;bc&#34;</span>, <span style="color:#e6db74">&#34;frontend&#34;</span><span style="color:#f92672">)</span>.startBuild<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;--wait=true&#34;</span>, <span style="color:#e6db74">&#34;--follow&#34;</span><span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>            stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;deployFrontEnd&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>              steps <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                script <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                  openshift.withCluster<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                    openshift.withProject<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                      openshift.selector<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;dc&#34;</span>, <span style="color:#e6db74">&#34;frontend&#34;</span><span style="color:#f92672">)</span>.rollout<span style="color:#f92672">()</span>.latest<span style="color:#f92672">()</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>            stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;promoteToProd&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>              steps <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                script <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                  timeout<span style="color:#f92672">(</span>time: 15, unit: <span style="color:#e6db74">&#39;MINUTES&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                    input message: <span style="color:#e6db74">&#34;Promote to PROD?&#34;</span>, ok: <span style="color:#e6db74">&#34;Promote&#34;</span>
-</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>                  openshift.withCluster<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                    openshift.withProject<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                      openshift.tag<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;origin-nodejs-sample:latest&#34;</span>, <span style="color:#e6db74">&#34;origin-nodejs-sample:prod&#34;</span><span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>            stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;scaleUp&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>              steps <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                script <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                  openshift.withCluster<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                    openshift.withProject<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                      openshift.selector<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;dc&#34;</span>, <span style="color:#e6db74">&#34;frontend-prod&#34;</span><span style="color:#f92672">)</span>.scale<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;--replicas=2&#34;</span><span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span></code></pre></div><blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kind: <span style="color:#e6db74">&#34;BuildConfig&#34;</span>
+apiVersion: <span style="color:#e6db74">&#34;v1&#34;</span>
+metadata:
+  name: <span style="color:#e6db74">&#34;pipeline&#34;</span>
+spec:
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfile: |-
+        pipeline <span style="color:#f92672">{</span>
+          agent any
+          stages <span style="color:#f92672">{</span>
+            stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;buildFrontEnd&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+              steps <span style="color:#f92672">{</span>
+                script <span style="color:#f92672">{</span>
+                  openshift.withCluster<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                    openshift.withProject<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                      openshift.selector<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;bc&#34;</span>, <span style="color:#e6db74">&#34;frontend&#34;</span><span style="color:#f92672">)</span>.startBuild<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;--wait=true&#34;</span>, <span style="color:#e6db74">&#34;--follow&#34;</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">}</span>
+                  <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span>
+              <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>
+            stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;deployFrontEnd&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+              steps <span style="color:#f92672">{</span>
+                script <span style="color:#f92672">{</span>
+                  openshift.withCluster<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                    openshift.withProject<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                      openshift.selector<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;dc&#34;</span>, <span style="color:#e6db74">&#34;frontend&#34;</span><span style="color:#f92672">)</span>.rollout<span style="color:#f92672">()</span>.latest<span style="color:#f92672">()</span>
+                    <span style="color:#f92672">}</span>
+                  <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span>
+              <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>
+            stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;promoteToProd&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+              steps <span style="color:#f92672">{</span>
+                script <span style="color:#f92672">{</span>
+                  timeout<span style="color:#f92672">(</span>time: 15, unit: <span style="color:#e6db74">&#39;MINUTES&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    input message: <span style="color:#e6db74">&#34;Promote to PROD?&#34;</span>, ok: <span style="color:#e6db74">&#34;Promote&#34;</span>
+                  <span style="color:#f92672">}</span>
+                  openshift.withCluster<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                    openshift.withProject<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                      openshift.tag<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;origin-nodejs-sample:latest&#34;</span>, <span style="color:#e6db74">&#34;origin-nodejs-sample:prod&#34;</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">}</span>
+                  <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span>
+              <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>
+            stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;scaleUp&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+              steps <span style="color:#f92672">{</span>
+                script <span style="color:#f92672">{</span>
+                  openshift.withCluster<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                    openshift.withProject<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                      openshift.selector<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;dc&#34;</span>, <span style="color:#e6db74">&#34;frontend-prod&#34;</span><span style="color:#f92672">)</span>.scale<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;--replicas=2&#34;</span><span style="color:#f92672">)</span>
+                    <span style="color:#f92672">}</span>
+                  <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span>
+              <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>
+          <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+</code></pre></div><blockquote>
 <p>Choose <em>Add to project</em> -&gt; <em>Import YAML</em></p>
 </blockquote>
 <img src="../images/ocp-lab-cicd-import-yaml.png" width="900">
@@ -856,24 +866,24 @@ approve the promotion to production.</p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse29f1baee9aa379382c0431043f997135" class="collapsed">
+      <a data-toggle="collapse" href="#collapse21fe62d737f2e9b621aa9cfb14b5eb54" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse29f1baee9aa379382c0431043f997135" class="panel-collapse collapse ">
+  <div id="collapse21fe62d737f2e9b621aa9cfb14b5eb54" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <p>Use the <code>oc get routes</code> command to get the HOST/PORT (URLs) needed to access the frontend and frontend-prod services. Your HOST/PORT values will differ
 from the example below.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get routes
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>NAME            HOST/PORT                            PATH      SERVICES        PORT      TERMINATION     WILDCARD
-</span></span><span style="display:flex;"><span>frontend        frontend-cicd-XX.apps.eadgbe.net                  frontend        &lt;all&gt;     edge            None
-</span></span><span style="display:flex;"><span>frontend-prod   frontend-prod-cicd-XX.apps.eadgbe.net             frontend-prod   web       edge            None
-</span></span></code></pre></div><p>Use a web browser to visit the HOST/PORT (URLs) for the frontend and frontend-prod services. Don&rsquo;t forget the <code>https://</code> prefix.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get routes
+
+NAME            HOST/PORT                            PATH      SERVICES        PORT      TERMINATION     WILDCARD
+frontend        frontend-cicd-XX.apps.eadgbe.net                  frontend        &lt;all&gt;     edge            None
+frontend-prod   frontend-prod-cicd-XX.apps.eadgbe.net             frontend-prod   web       edge            None
+</code></pre></div><p>Use a web browser to visit the HOST/PORT (URLs) for the frontend and frontend-prod services. Don&rsquo;t forget the <code>https://</code> prefix.</p>
 
     </div>
   </div>
@@ -925,19 +935,19 @@ this simple example to illustrate how a pipeline may be edited within OpenShift.
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseb9d3c3630956842315d73544da431eaf" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3b4d51191166f4b234ea762204841fbb" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapseb9d3c3630956842315d73544da431eaf" class="panel-collapse collapse ">
+  <div id="collapse3b4d51191166f4b234ea762204841fbb" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <p>If you are comfortable using the <strong>vi</strong> editor:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc edit bc/pipeline
-</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc edit bc/pipeline
+</code></pre></div>
     </div>
   </div>
 </div>

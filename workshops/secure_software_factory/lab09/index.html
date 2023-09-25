@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -310,29 +320,29 @@
     <h1 id="add-archive-stage">Add Archive Stage</h1>
 <p>Archiving the built and tested application into a trusted repository is important to making sure you are building with trusted parts.  You assume this application is built properly and all the previous stages have passed.  With that confidence, your built and tested application should be immutable in a trusted repository.  The repository will version or audit any changes to the application, configuration, and dependencies.</p>
 <p>Add Archive Stage Steps into your pipeline.</p>
-<img src="../images/pipeline_nexus.png" width="900" />
+<p><img src="../images/pipeline_nexus.png" width="900" /></p>
 <p>We leveraged the maven nexus plugin for this deployment.  The mvn deploy step is the last step in the maven lifecycle.  The built application is archived into the nexus repository.  We can see it later once we run the pipeline.</p>
 <p>The &ldquo;-P nexus3&rdquo; option activates the nexus3 profile defined in the configuration/cicd-settings-nexus3.xml</p>
 <br>
 # Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-<img src="../images/pipeline_actions_edit.png" width="900" />
+<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre tabindex="0"><code>    stage(&#39;Archive App&#39;) {
+<pre><code>    stage('Archive App') {
       steps {
-        sh &#34;${mvnCmd} deploy -DskipTests=true -P nexus3&#34;
+        sh &quot;${mvnCmd} deploy -DskipTests=true -P nexus3&quot;
       }
     }
 </code></pre><h1 id="test-your-pipeline">Test Your Pipeline</h1>
 <p>If you&rsquo;d like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
-<pre tabindex="0"><code>  }
+<pre><code>  }
 }
 </code></pre><p>Save your Jenkinsfile.</p>
 <p>Go back to Builds &gt; Pipelines</p>
 <p>Click Start Pipeline</p>
 <h1 id="delete-brackets">Delete Brackets</h1>
 <p>Please delete the brackets you just added once testing is complete. We can add them later if you&rsquo;d like to test your pipeline as you go along.</p>
-<pre tabindex="0"><code>  }
+<pre><code>  }
 }
 </code></pre><p>Click Save
 <style>

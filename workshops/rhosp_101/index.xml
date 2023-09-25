@@ -5,7 +5,11 @@
     <link>/workshops/rhosp_101/</link>
     <description>Recent content in Red Hat OpenStack Platform 101 on Red Hat | Public Sector</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/workshops/rhosp_101/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/rhosp_101/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Fin.</title>
       <link>/workshops/rhosp_101/fin/</link>
@@ -14,7 +18,7 @@
       <guid>/workshops/rhosp_101/fin/</guid>
       <description>That&amp;rsquo;s it! Hopefully, these labs provided you some idea of how to perform common tasks within the OpenStack environment. And hopefully, you have a deeper understanding of how Infrastructure-as-a-Service works.
 Get even deeper Here are some good resources to continue learning OpenStack:
-OpenStack Foundation RDO Project - Our midstream, open source OpenStack distrobution for RHEL variants Red Hat OpenStack Platform Official Docs There are two ways to get started with RDO: TripleO Quickstart and PackStack</description>
+ OpenStack Foundation RDO Project - Our midstream, open source OpenStack distrobution for RHEL variants Red Hat OpenStack Platform Official Docs  There are two ways to get started with RDO: TripleO Quickstart and PackStack</description>
     </item>
     
     <item>
@@ -24,7 +28,7 @@ OpenStack Foundation RDO Project - Our midstream, open source OpenStack distrobu
       
       <guid>/workshops/rhosp_101/1_introduction/</guid>
       <description>Red Hat OpenStack Platform Overview Red Hat OpenStack Platform is implemented as a collection of interacting services that control compute, storage, and networking resources. The following diagram provides a high-level overview of the OpenStack core services.
-OpenStack Services Overview Horizon - User interface built to give a graphical way to interact with OpenStack services Keystone - Identity management service for projects, users, groups, roles, endpoints, etc. Neutron - Software defined networking API service that can be backed by different SDN solutions.</description>
+  OpenStack Services Overview    Horizon - User interface built to give a graphical way to interact with OpenStack services Keystone - Identity management service for projects, users, groups, roles, endpoints, etc.</description>
     </item>
     
     <item>
@@ -45,8 +49,8 @@ Accessing Horizon RHOSP provides a web dashboard that allows you to perform vari
       <guid>/workshops/rhosp_101/3_managing_networks/</guid>
       <description>Neutron - Overlay Networking for OpenStack Neutron is an OpenStack project to provide &amp;ldquo;networking as a service&amp;rdquo; between interface devices (e.g., vNICs) managed by other Openstack services (e.g., nova).
 Starting in the Folsom release, Neutron is a core and supported part of the OpenStack platform.
-Examining Project Network Topology Navigate to Network -&amp;gt; Network Topology using the second level navigation tabs.
-Lab 2 Figure 1: Neutron Network Topology There are two ways to view the project network layout.</description>
+Examining Project Network Topology  Navigate to Network -&amp;gt; Network Topology using the second level navigation tabs.
+   Lab 2 Figure 1: Neutron Network Topology   There are two ways to view the project network layout.</description>
     </item>
     
     <item>
@@ -85,7 +89,7 @@ Glance image services include discovering, registering, and retrieving virtual m
       
       <guid>/workshops/rhosp_101/7_managing_instances/</guid>
       <description>Now We are Ready to Launch an OpenStack Instance First, What is an Instance? Instances are virtual machines that run inside the OpenStack cloud. You can launch an instance from the following sources:
-Images uploaded to the Image service Image that you have copied to a persistent volume. The instance launches from the volume, which is provided by the cinder-volume API Instance snapshot that you took Second. We need a key pair before we launch our first instance Navigate to Compute -&amp;gt; Key Pairs using the second level navigation tabs</description>
+ Images uploaded to the Image service Image that you have copied to a persistent volume. The instance launches from the volume, which is provided by the cinder-volume API Instance snapshot that you took  Second. We need a key pair before we launch our first instance  Navigate to Compute -&amp;gt; Key Pairs using the second level navigation tabs</description>
     </item>
     
     <item>
@@ -95,7 +99,8 @@ Images uploaded to the Image service Image that you have copied to a persistent 
       
       <guid>/workshops/rhosp_101/8_using_the_cli/</guid>
       <description>Okay. UIs Are Cool and All, But Can&amp;rsquo;t I Just Use the CLI? Absolutely! There are 3 ways to interact with OpenStack.
-API CLI GUI In this lab, we are going to walk through some of the activities that we did in the previous labs via the CLI.
+ API CLI GUI  In this lab, we are going to walk through some of the activities that we did in the previous labs via the CLI.
+
 When you see a CLI command starting with openstack, the command is part of the Unified CLI.
 When you see a CLI command that starts with a project name like nova, these are the individual CLIs.</description>
     </item>

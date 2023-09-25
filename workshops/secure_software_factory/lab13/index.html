@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -309,48 +319,48 @@
 
     <h1 id="add-promote-to-stage">Add Promote to Stage</h1>
 <p>Enter the Promote to STAGE below into your pipeline.</p>
-<img src="../images/pipeline_promote.png" width="900" />
+<p><img src="../images/pipeline_promote.png" width="900" /></p>
 <p>We set an approval to promote to the application to the Stage Project.  The approval process is a good feature for various gates of your deployments.  We also set a 15 minute timeout on the approval.  You also tag the tasks image with latest and the version from the pom file.</p>
 <br>
 # Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-<img src="../images/pipeline_actions_edit.png" width="900" />
+<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre tabindex="0"><code>    stage(&#39;Promote to STAGE?&#39;) {
+<pre><code>    stage('Promote to STAGE?') {
       steps {
-        timeout(time:15, unit:&#39;MINUTES&#39;) {
-            input message: &#34;Promote to STAGE?&#34;, ok: &#34;Promote&#34;
+        timeout(time:15, unit:'MINUTES') {
+            input message: &quot;Promote to STAGE?&quot;, ok: &quot;Promote&quot;
         }
 
         script {
           openshift.withCluster() {
-            openshift.tag(&#34;${env.DEV_PROJECT}/tasks:latest&#34;, &#34;${env.STAGE_PROJECT}/tasks:${version}&#34;)
+            openshift.tag(&quot;${env.DEV_PROJECT}/tasks:latest&quot;, &quot;${env.STAGE_PROJECT}/tasks:${version}&quot;)
           }
         }
       }
     }
 </code></pre><h1 id="add-deploy-stage">Add Deploy Stage</h1>
 <p>Add the Deploy Stage into your pipeline.</p>
-<img src="../images/pipeline_deploy_stage.png" width="900" />
+<p><img src="../images/pipeline_deploy_stage.png" width="900" /></p>
 <p>If the deployment config for the application already exists in the Stage Project or Environment the deployment config , service, and route are deleted.  This allows for the pipeline to be rerun.</p>
 <p>The new-app is recreated in the Stage Environment from the image that you tagged in the previous stage.  The image also has a route created for with the svc.expose command.</p>
 <br>
 # Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-<img src="../images/pipeline_actions_edit.png" width="900" />
+<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre tabindex="0"><code>    stage(&#39;Deploy STAGE&#39;) {
+<pre><code>    stage('Deploy STAGE') {
       steps {
         script {
           openshift.withCluster() {
             openshift.withProject(env.STAGE_PROJECT) {
-              if (openshift.selector(&#39;dc&#39;, &#39;tasks&#39;).exists()) {
-                openshift.selector(&#39;dc&#39;, &#39;tasks&#39;).delete()
-                openshift.selector(&#39;svc&#39;, &#39;tasks&#39;).delete()
-                openshift.selector(&#39;route&#39;, &#39;tasks&#39;).delete()
+              if (openshift.selector('dc', 'tasks').exists()) {
+                openshift.selector('dc', 'tasks').delete()
+                openshift.selector('svc', 'tasks').delete()
+                openshift.selector('route', 'tasks').delete()
               }
 
-              openshift.newApp(&#34;tasks:${version}&#34;).narrow(&#34;svc&#34;).expose()
+              openshift.newApp(&quot;tasks:${version}&quot;).narrow(&quot;svc&quot;).expose()
             }
           }
         }

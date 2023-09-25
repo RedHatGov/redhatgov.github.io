@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -347,9 +357,9 @@
 <ul>
 <li>In the <strong>Transformation Editor</strong>, copy the following where clause to the end of the transformation SQL to join the added tables on the &lsquo;id&rsquo; field</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>	<span style="color:#66d9ef">WHERE</span>
-</span></span><span style="display:flex;"><span>		(ExcelView.Sheet1.id <span style="color:#f92672">=</span> PostgresView.order_details.id) <span style="color:#66d9ef">AND</span> (PostgresView.order_details.id <span style="color:#f92672">=</span> RestView.users.id)
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">	<span style="color:#66d9ef">WHERE</span>
+		(ExcelView.Sheet1.id <span style="color:#f92672">=</span> PostgresView.order_details.id) <span style="color:#66d9ef">AND</span> (PostgresView.order_details.id <span style="color:#f92672">=</span> RestView.users.id)
+</code></pre></div><ul>
 <li>Now click the <strong>Save and Validate</strong> button to check our work</li>
 </ul>
 <img src="../images/8-validate.png" width="800px">

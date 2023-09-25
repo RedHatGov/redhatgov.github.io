@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -313,32 +323,32 @@
 <br>
 <h1 id="append-to-jenkins-pipeline-configuration">Append to Jenkins Pipeline Configuration</h1>
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-<img src="../images/pipeline_actions_edit.png" width="900" />
+<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
 <p>In your pipeline, verify the following variables are there after the version and mvnCmd definitions.  Please fill in the values between the quotes if not done previously.</p>
 <ul>
 <li>ocuser : the openshift user given to you by your insturctor</li>
 <li>ocpass : the openshift password given to you by your insturctor</li>
 <li>ocp : the openshift host given to you by your instuctor</li>
 </ul>
-<pre tabindex="0"><code>def ocuser = &#34; &#34;
-def ocpass = &#34; &#34;
-def ocp = &#34; &#34;
+<pre><code>def ocuser = &quot; &quot;
+def ocpass = &quot; &quot;
+def ocp = &quot; &quot;
 </code></pre><p>For Example:</p>
-<pre tabindex="0"><code>def ocuser = &#34;user<span class="userid">YOUR#</span>&#34;
-def ocpass = &#34;openshift&#34;
-def ocp = &#34;master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>&#34;
+<pre><code>def ocuser = &quot;user<span class="userid">YOUR#</span>&quot;
+def ocpass = &quot;openshift&quot;
+def ocp = &quot;master.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>&quot;
 </code></pre><p>In your pipeline, make sure you replaced the Jenkins agent &lsquo;maven&rsquo; with &lsquo;jenkins-slave-image-mgmt&rsquo;.</p>
-<pre tabindex="0"><code>pipeline {
+<pre><code>pipeline {
   agent {
-    label &#39;jenkins-slave-image-mgmt&#39;
+    label 'jenkins-slave-image-mgmt'
   }
 </code></pre><p>In your pipeline, add the OpenSCAP DISA STIG Scan after the Container Vulnerability Scan Stage.</p>
-<pre tabindex="0"><code>    stage(&#39;OSCAP DISA STIG Scan&#39;) {
+<pre><code>    stage('OSCAP DISA STIG Scan') {
       steps {
-          sh &#34;oc login -u $ocuser -p $ocpass --insecure-skip-tls-verify https://$ocp 2&gt;&amp;1&#34;
-          sh &#34;sshpass -p $ocpass ssh -oStrictHostKeyChecking=no -t $ocuser@$ocp docker login -u $ocuser -p &#34; + &#39;&#34;$(oc whoami -t)&#34;&#39; + &#34; docker-registry-default.apps.$ocp&#34;
-          sh &#34;sshpass -p $ocpass ssh -oStrictHostKeyChecking=no -t $ocuser@$ocp docker pull docker-registry-default.apps.$ocp/dev-$ocuser/tasks:latest&#34;
-          sh &#34;sshpass -p $ocpass ssh -oStrictHostKeyChecking=no -t $ocuser@$ocp sudo oscap-docker image docker-registry-default.apps.$ocp/dev-$ocuser/tasks:latest xccdf eval --profile xccdf_org.ssgproject.content_profile_stig-rhel7-disa --report report.html /usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml&#34;
+          sh &quot;oc login -u $ocuser -p $ocpass --insecure-skip-tls-verify https://$ocp 2&gt;&amp;1&quot;
+          sh &quot;sshpass -p $ocpass ssh -oStrictHostKeyChecking=no -t $ocuser@$ocp docker login -u $ocuser -p &quot; + '&quot;$(oc whoami -t)&quot;' + &quot; docker-registry-default.apps.$ocp&quot;
+          sh &quot;sshpass -p $ocpass ssh -oStrictHostKeyChecking=no -t $ocuser@$ocp docker pull docker-registry-default.apps.$ocp/dev-$ocuser/tasks:latest&quot;
+          sh &quot;sshpass -p $ocpass ssh -oStrictHostKeyChecking=no -t $ocuser@$ocp sudo oscap-docker image docker-registry-default.apps.$ocp/dev-$ocuser/tasks:latest xccdf eval --profile xccdf_org.ssgproject.content_profile_stig-rhel7-disa --report report.html /usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml&quot;
         }
       } 
 </code></pre><p>Save your Jenkins file</p>

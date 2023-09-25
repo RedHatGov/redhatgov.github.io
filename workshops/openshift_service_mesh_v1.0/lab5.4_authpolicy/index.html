@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -315,10 +325,10 @@
 <blockquote>
 <i class="fa fa-terminal"></i> Apply a new authentication policy and service entry with the following commands:
 </blockquote>
-<pre tabindex="0"><code> sed &#34;s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|&#34; ./istio-configuration/policy-boards-jwt.yaml | oc apply -f -
- sed &#34;s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|&#34; ./istio-configuration/serviceentry-keycloak.yaml | oc apply -f -
+<pre><code> sed &quot;s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|&quot; ./istio-configuration/policy-boards-jwt.yaml | oc apply -f -
+ sed &quot;s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|&quot; ./istio-configuration/serviceentry-keycloak.yaml | oc apply -f -
 </code></pre><p>The policy specifies the requirements for traffic to the boards service to have a JWT with specific properties. It looks like this:</p>
-<pre tabindex="0"><code>apiVersion: authentication.istio.io/v1alpha1
+<pre><code>apiVersion: authentication.istio.io/v1alpha1
 kind: Policy
 metadata:
   name: boards-jwt
@@ -327,8 +337,8 @@ spec:
   - name: boards
   origins:
   - jwt:
-      issuer: &#34;https://keycloak-sso-shared.apps.leonardo.nub3s.io/auth/realms/microservices-demo&#34;
-      jwksUri: &#34;https://keycloak-sso-shared.apps.leonardo.nub3s.io/auth/realms/microservices-demo/protocol/openid-connect/certs&#34;
+      issuer: &quot;https://keycloak-sso-shared.apps.leonardo.nub3s.io/auth/realms/microservices-demo&quot;
+      jwksUri: &quot;https://keycloak-sso-shared.apps.leonardo.nub3s.io/auth/realms/microservices-demo/protocol/openid-connect/certs&quot;
       triggerRules:
       - excludedPaths:
         - exact: /health_check
@@ -370,9 +380,9 @@ You might need to refresh the page a few times before it takes effect
 <blockquote>
 <i class="fa fa-terminal"></i> Apply an authorization policy with the following command:
 </blockquote>
-<pre tabindex="0"><code>sed &#34;s|microservices-demo|$PROJECT_NAME|&#34; ./istio-configuration/authorization-boards-shared-lockdown.yaml | oc apply -f -
+<pre><code>sed &quot;s|microservices-demo|$PROJECT_NAME|&quot; ./istio-configuration/authorization-boards-shared-lockdown.yaml | oc apply -f -
 </code></pre><p>That configuration looks like this:</p>
-<pre tabindex="0"><code>apiVersion: security.istio.io/v1beta1
+<pre><code>apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: boards-shared-lockdown
@@ -385,23 +395,23 @@ spec:
   rules:
   - from:
     - source:
-        requestPrincipals: [&#34;*&#34;]
+        requestPrincipals: [&quot;*&quot;]
     to:
     - operation:
-        methods: [&#34;POST&#34;]
-        paths: [&#34;*/shareditems&#34;]
+        methods: [&quot;POST&quot;]
+        paths: [&quot;*/shareditems&quot;]
     when:
     - key: request.auth.claims[realm_access_roles]
-      values: [&#34;cool-kids&#34;]
+      values: [&quot;cool-kids&quot;]
   - from:
     - source:
-        requestPrincipals: [&#34;*&#34;]
+        requestPrincipals: [&quot;*&quot;]
     to:
     - operation:
-        methods: [&#34;GET&#34;]
+        methods: [&quot;GET&quot;]
     when:
     - key: request.auth.claims[scope]
-      values: [&#34;openid&#34;]
+      values: [&quot;openid&quot;]
 </code></pre><p>An authorization policy includes a selector and a list of rules. The selector specifies the <strong>target</strong> that the policy applies to - in this case our boards microservice. While the rules specify <strong>who</strong> (from) is allowed to do <strong>what</strong> (to) under <strong>which</strong> (when) conditions - in this case any source can POST as long as they have the &ldquo;cool-kids&rdquo; role listed in their JWT payload.</p>
 <p>So, now that we&rsquo;ve applied it, let&rsquo;s try to access your boards service when you&rsquo;re not in the cool kids club.</p>
 <br>
@@ -426,10 +436,10 @@ spec:
 <blockquote>
 <i class="fa fa-terminal"></i> Now let's put things back to normal:
 </blockquote>
-<pre tabindex="0"><code>oc delete authorizationpolicy/boards-shared-lockdown
-</code></pre><pre tabindex="0"><code>oc delete policy/boards-jwt
-</code></pre><pre tabindex="0"><code>oc delete serviceentry/keycloak-egress
-</code></pre><pre tabindex="0"><code>SSO_SVC=$(oc get route keycloak-alt --template=&#39;{{.spec.host}}&#39;)
+<pre><code>oc delete authorizationpolicy/boards-shared-lockdown
+</code></pre><pre><code>oc delete policy/boards-jwt
+</code></pre><pre><code>oc delete serviceentry/keycloak-egress
+</code></pre><pre><code>SSO_SVC=$(oc get route keycloak-alt --template='{{.spec.host}}')
 oc set env dc/app-ui FAKE_USER=true SSO_SVC_HOST=$SSO_SVC
 </code></pre><h2 id="how-it-works">How it Works</h2>
 <p>Our app-ui microservice gets the JWT from the Keycloak SSO whenever a user logs in. If logged in, the JWT is always passed (in the request header) from the app-ui to any services it calls. All our services have Envoy sidecar proxies running and are seeing the traffic, including the JWT in app-ui request headers. So the configuration we applied is used to inform sidecar proxies to follow the policies we set. When we weren&rsquo;t logged in there was no JWT to pass along so our call requests failed. Only after we were logged in with as a valid user did we pass along a valid JWT. And each user&rsquo;s JWT was different, so the <em>when</em> conditions only matched for theterminator, allowing him able to POST to the shared board.</p>

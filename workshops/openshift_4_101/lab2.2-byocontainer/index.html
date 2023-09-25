@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -313,9 +323,9 @@
 <blockquote>
 <p><i class="fa fa-terminal"></i> Let&rsquo;s clean up all this to get ready for the next lab:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc project demo-<span class="userid">YOUR#</span>
-</span></span><span style="display:flex;"><span>$ oc delete all --selector app<span style="color:#f92672">=</span>nexus
-</span></span></code></pre></div><h1 id="summary">Summary</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc project demo-<span class="userid">YOUR#</span>
+$ oc delete all --selector app<span style="color:#f92672">=</span>nexus
+</code></pre></div><h1 id="summary">Summary</h1>
 <p>In this lab, you&rsquo;ve deployed an example container image into a pod running in OpenShift.  You exposed a route for clients to access that service via their web browsers.  And you learned how to get and describe resources using the command line and the web console.  Hopefully, this basic lab also helped to get you familiar with using the CLI and navigating within the web console.</p>
 <style>
 

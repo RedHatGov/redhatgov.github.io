@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -304,10 +314,10 @@
 </nav>
 
     <div class="sect1">
-<h2 id="_in_order_for_you_to_write_your_first_bit_of_ansible_you_will_need_an_editor">In order for you to <em>&#39;write&#39;</em> your first bit of Ansible, you will need an <strong>editor</strong> …​</h2>
+<h2 id="_in_order_for_you_to_write_your_first_bit_of_ansible_you_will_need_an_editor">In order for you to <em>'write'</em> your first bit of Ansible, you will need an <strong>editor</strong> &#8230;&#8203;</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Ansible playbooks are written in YAML and you can use an text editor &#34;like vim&#34; or an editor like Visual Studio Code to get started.  For this workshop, we will be utilizing a web-based IDE (integrated development environment) call Red Hat CodeReady Workspaces.  Red Hat CodeReady Workspaces is a developer tool that makes cloud-native development practical for teams, using Kubernetes and containers to provide any member of the development or IT team with a consistent, preconfigured development environment.</p>
+<p>Ansible playbooks are written in YAML and you can use an text editor "like vim" or an editor like Visual Studio Code to get started.  For this workshop, we will be utilizing a web-based IDE (integrated development environment) call Red Hat CodeReady Workspaces.  Red Hat CodeReady Workspaces is a developer tool that makes cloud-native development practical for teams, using Kubernetes and containers to provide any member of the development or IT team with a consistent, preconfigured development environment.</p>
 </div>
 </div>
 </div>
@@ -335,14 +345,14 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_login.png" alt="crw login" height="500"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_login.png" alt="crw login" height="500">
 </div>
 <div class="title">Code Ready Workspaces Login</div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;"/>
-<col style="width: 50%;"/>
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
 <tbody>
 <tr>
@@ -357,7 +367,7 @@
 </table>
 <div class="admonitionblock important">
 <table>
-<tbody><tr>
+<tr>
 <td class="icon">
 <i class="fa icon-important" title="Important"></i>
 </td>
@@ -365,11 +375,11 @@
 Please accept any self-signed certificates (if prompted).  If you get the following certificate error, follow the instructions on the page.
 </td>
 </tr>
-</tbody></table>
+</table>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_login_cert.png" alt="crw login cert" height="275"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_login_cert.png" alt="crw login cert" height="275">
 </div>
 <div class="title">Code Ready Workspaces Login - Certificate Import</div>
 </div>
@@ -378,13 +388,13 @@ Please accept any self-signed certificates (if prompted).  If you get the follow
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_landingpage.png" alt="crw landingpage" height="300"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_landingpage.png" alt="crw landingpage" height="300">
 </div>
 <div class="title">Red Hat CodeReady Workspaces default landing page</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_play.png" alt="crw play" height="300"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_play.png" alt="crw play" height="300">
 </div>
 <div class="title">Play Ansible Workspace by selecting che-ansible-demo-XXXX</div>
 </div>
@@ -393,21 +403,21 @@ Please accept any self-signed certificates (if prompted).  If you get the follow
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_restartcancel.png" alt="crw restartcancel" height="125"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_restartcancel.png" alt="crw restartcancel" height="125">
 </div>
-<div class="title">If presented with the following menu, press &#34;Cancel&#34;.  There is not need to restart the workspace and apply the new features for this workshop.</div>
+<div class="title">If presented with the following menu, press "Cancel".  There is not need to restart the workspace and apply the new features for this workshop.</div>
 </div>
 <div class="paragraph">
-<p>After entering the workspace, we have configured you a custom &#34;Task&#34; to setup your SSH keys for the session.
-Go to &#34;Terminal&#34; → &#34;Run Task&#34; → select &#34;Set ssh-key file permissions&#34;</p>
+<p>After entering the workspace, we have configured you a custom "Task" to setup your SSH keys for the session.
+Go to "Terminal" &#8594; "Run Task" &#8594; select "Set ssh-key file permissions"</p>
 </div>
 <div class="paragraph">
 <p>After the permissions are set, launch an interactive terminal with preloaded Ansible utilities within your web IDE.
-Go to &#34;Terminal&#34; → &#34;Open Terminal in specific container&#34; → select &#34;ansible&#34;</p>
+Go to "Terminal" &#8594; "Open Terminal in specific container" &#8594; select "ansible"</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_launch_terminal.gif" alt="crw launch terminal" height="500"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_launch_terminal.gif" alt="crw launch terminal" height="500">
 </div>
 <div class="title">Launch Ansible terminal</div>
 </div>
@@ -416,7 +426,7 @@ Go to &#34;Terminal&#34; → &#34;Open Terminal in specific container&#34; → s
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_tour.png" alt="crw tour" height="600"/>
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/crw_tour.png" alt="crw tour" height="600">
 </div>
 <div class="title">Quick Tour</div>
 </div>
@@ -426,7 +436,7 @@ Go to &#34;Terminal&#34; → &#34;Open Terminal in specific container&#34; → s
 <h2 id="_end_result">End Result</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>At this point, you should have logged into your environment.  If you haven’t, let us know so we can get you fixed up.</p>
+<p>At this point, you should have logged into your environment.  If you haven&#8217;t, let us know so we can get you fixed up.</p>
 </div>
 <div class="paragraph">
 <style>

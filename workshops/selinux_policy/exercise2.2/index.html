@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -319,7 +329,7 @@
 <p>Now that our app is up and running, we can check the system logs for AVC (access vector cache, where SELinux caches decisions to grant or deny access) denial messages.</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m AVC -ts today</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ausearch -m AVC -ts today</code></pre></div>
 </div>
 <div class="paragraph">
 <p>There will (and should!) be quite a few denials returned from <code>ausearch</code>.  Here are some from the example machine:</p>
@@ -328,57 +338,57 @@
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">----
 time-&gt;Thu Mar 14 14:36:20 2019
-type=PROCTITLE msg=audit(1552588580.764:25971): proctitle=&#34;/usr/local/sbin/testapp&#34;
-type=SYSCALL msg=audit(1552588580.764:25971): arch=c000003e syscall=2 success=yes exit=4 a0=401a32 a1=0 a2=1b6 a3=24 items=0 ppid=1 pid=1022 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=&#34;testapp&#34; exe=&#34;/usr/local/sbin/testapp&#34; subj=system_u:system_r:testapp_t:s0 key=(null)
-type=AVC msg=audit(1552588580.764:25971): avc:  denied  { open } for  pid=1022 comm=&#34;testapp&#34; path=&#34;/proc/meminfo&#34; dev=&#34;proc&#34; ino=4026532040 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:proc_t:s0 tclass=file permissive=1
-type=AVC msg=audit(1552588580.764:25971): avc:  denied  { read } for  pid=1022 comm=&#34;testapp&#34; name=&#34;meminfo&#34; dev=&#34;proc&#34; ino=4026532040 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:proc_t:s0 tclass=file permissive=1
+type=PROCTITLE msg=audit(1552588580.764:25971): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.764:25971): arch=c000003e syscall=2 success=yes exit=4 a0=401a32 a1=0 a2=1b6 a3=24 items=0 ppid=1 pid=1022 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.764:25971): avc:  denied  { open } for  pid=1022 comm="testapp" path="/proc/meminfo" dev="proc" ino=4026532040 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:proc_t:s0 tclass=file permissive=1
+type=AVC msg=audit(1552588580.764:25971): avc:  denied  { read } for  pid=1022 comm="testapp" name="meminfo" dev="proc" ino=4026532040 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:proc_t:s0 tclass=file permissive=1
 ----
 time-&gt;Thu Mar 14 14:36:20 2019
-type=PROCTITLE msg=audit(1552588580.764:25972): proctitle=&#34;/usr/local/sbin/testapp&#34;
-type=SYSCALL msg=audit(1552588580.764:25972): arch=c000003e syscall=41 success=yes exit=3 a0=a a1=2 a2=0 a3=7ffc9a8c3360 items=0 ppid=1022 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=&#34;testapp&#34; exe=&#34;/usr/local/sbin/testapp&#34; subj=system_u:system_r:testapp_t:s0 key=(null)
-type=AVC msg=audit(1552588580.764:25972): avc:  denied  { create } for  pid=1023 comm=&#34;testapp&#34; scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
+type=PROCTITLE msg=audit(1552588580.764:25972): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.764:25972): arch=c000003e syscall=41 success=yes exit=3 a0=a a1=2 a2=0 a3=7ffc9a8c3360 items=0 ppid=1022 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.764:25972): avc:  denied  { create } for  pid=1023 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
 ----
 time-&gt;Thu Mar 14 14:36:20 2019
-type=PROCTITLE msg=audit(1552588580.765:25973): proctitle=&#34;/usr/local/sbin/testapp&#34;
-type=SYSCALL msg=audit(1552588580.765:25973): arch=c000003e syscall=4 success=yes exit=0 a0=7f22154460c1 a1=7f22110523f0 a2=7f22110523f0 a3=3 items=0 ppid=1022 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=&#34;testapp&#34; exe=&#34;/usr/local/sbin/testapp&#34; subj=system_u:system_r:testapp_t:s0 key=(null)
-type=AVC msg=audit(1552588580.765:25973): avc:  denied  { getattr } for  pid=1023 comm=&#34;testapp&#34; path=&#34;/etc/resolv.conf&#34; dev=&#34;dm-0&#34; ino=67445450 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
+type=PROCTITLE msg=audit(1552588580.765:25973): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.765:25973): arch=c000003e syscall=4 success=yes exit=0 a0=7f22154460c1 a1=7f22110523f0 a2=7f22110523f0 a3=3 items=0 ppid=1022 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.765:25973): avc:  denied  { getattr } for  pid=1023 comm="testapp" path="/etc/resolv.conf" dev="dm-0" ino=67445450 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
 ----
 time-&gt;Thu Mar 14 14:36:20 2019
-type=PROCTITLE msg=audit(1552588580.765:25974): proctitle=&#34;/usr/local/sbin/testapp&#34;
-type=SYSCALL msg=audit(1552588580.765:25974): arch=c000003e syscall=2 success=yes exit=3 a0=7f22154460c1 a1=80000 a2=1b6 a3=24 items=0 ppid=1022 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=&#34;testapp&#34; exe=&#34;/usr/local/sbin/testapp&#34; subj=system_u:system_r:testapp_t:s0 key=(null)
-type=AVC msg=audit(1552588580.765:25974): avc:  denied  { open } for  pid=1023 comm=&#34;testapp&#34; path=&#34;/etc/resolv.conf&#34; dev=&#34;dm-0&#34; ino=67445450 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
-type=AVC msg=audit(1552588580.765:25974): avc:  denied  { read } for  pid=1023 comm=&#34;testapp&#34; name=&#34;resolv.conf&#34; dev=&#34;dm-0&#34; ino=67445450 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
+type=PROCTITLE msg=audit(1552588580.765:25974): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.765:25974): arch=c000003e syscall=2 success=yes exit=3 a0=7f22154460c1 a1=80000 a2=1b6 a3=24 items=0 ppid=1022 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.765:25974): avc:  denied  { open } for  pid=1023 comm="testapp" path="/etc/resolv.conf" dev="dm-0" ino=67445450 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
+type=AVC msg=audit(1552588580.765:25974): avc:  denied  { read } for  pid=1023 comm="testapp" name="resolv.conf" dev="dm-0" ino=67445450 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
 ----
 time-&gt;Thu Mar 14 14:36:20 2019
-type=PROCTITLE msg=audit(1552588580.765:25975): proctitle=&#34;/usr/local/sbin/testapp&#34;
-type=SYSCALL msg=audit(1552588580.765:25975): arch=c000003e syscall=42 success=yes exit=0 a0=3 a1=7f2211053dcc a2=10 a3=7f22110507a0 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=&#34;testapp&#34; exe=&#34;/usr/local/sbin/testapp&#34; subj=system_u:system_r:testapp_t:s0 key=(null)
-type=AVC msg=audit(1552588580.765:25975): avc:  denied  { connect } for  pid=1023 comm=&#34;testapp&#34; scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
+type=PROCTITLE msg=audit(1552588580.765:25975): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.765:25975): arch=c000003e syscall=42 success=yes exit=0 a0=3 a1=7f2211053dcc a2=10 a3=7f22110507a0 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.765:25975): avc:  denied  { connect } for  pid=1023 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
 ----
 time-&gt;Thu Mar 14 14:36:20 2019
-type=PROCTITLE msg=audit(1552588580.766:25976): proctitle=&#34;/usr/local/sbin/testapp&#34;
-type=SYSCALL msg=audit(1552588580.766:25976): arch=c000003e syscall=16 success=yes exit=0 a0=3 a1=541b a2=7f2211050ea0 a3=7f22110507a0 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=&#34;testapp&#34; exe=&#34;/usr/local/sbin/testapp&#34; subj=system_u:system_r:testapp_t:s0 key=(null)
-type=AVC msg=audit(1552588580.766:25976): avc:  denied  { getattr } for  pid=1023 comm=&#34;testapp&#34; path=&#34;socket:[1181449]&#34; dev=&#34;sockfs&#34; ino=1181449 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
+type=PROCTITLE msg=audit(1552588580.766:25976): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.766:25976): arch=c000003e syscall=16 success=yes exit=0 a0=3 a1=541b a2=7f2211050ea0 a3=7f22110507a0 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.766:25976): avc:  denied  { getattr } for  pid=1023 comm="testapp" path="socket:[1181449]" dev="sockfs" ino=1181449 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
 ----
 time-&gt;Thu Mar 14 14:36:20 2019
-type=PROCTITLE msg=audit(1552588580.769:25977): proctitle=&#34;/usr/local/sbin/testapp&#34;
-type=SYSCALL msg=audit(1552588580.769:25977): arch=c000003e syscall=41 success=yes exit=3 a0=2 a1=1 a2=6 a3=7ffc9a8c35e0 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=&#34;testapp&#34; exe=&#34;/usr/local/sbin/testapp&#34; subj=system_u:system_r:testapp_t:s0 key=(null)
-type=AVC msg=audit(1552588580.769:25977): avc:  denied  { create } for  pid=1023 comm=&#34;testapp&#34; scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
+type=PROCTITLE msg=audit(1552588580.769:25977): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.769:25977): arch=c000003e syscall=41 success=yes exit=3 a0=2 a1=1 a2=6 a3=7ffc9a8c35e0 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.769:25977): avc:  denied  { create } for  pid=1023 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
 ----
 time-&gt;Thu Mar 14 14:36:20 2019
-type=PROCTITLE msg=audit(1552588580.769:25978): proctitle=&#34;/usr/local/sbin/testapp&#34;
-type=SYSCALL msg=audit(1552588580.769:25978): arch=c000003e syscall=42 success=no exit=-115 a0=3 a1=7ffc9a8c38d0 a2=10 a3=7ffc9a8c31e0 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=&#34;testapp&#34; exe=&#34;/usr/local/sbin/testapp&#34; subj=system_u:system_r:testapp_t:s0 key=(null)
-type=AVC msg=audit(1552588580.769:25978): avc:  denied  { name_connect } for  pid=1023 comm=&#34;testapp&#34; dest=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:http_port_t:s0 tclass=tcp_socket permissive=1
-type=AVC msg=audit(1552588580.769:25978): avc:  denied  { connect } for  pid=1023 comm=&#34;testapp&#34; scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
+type=PROCTITLE msg=audit(1552588580.769:25978): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.769:25978): arch=c000003e syscall=42 success=no exit=-115 a0=3 a1=7ffc9a8c38d0 a2=10 a3=7ffc9a8c31e0 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.769:25978): avc:  denied  { name_connect } for  pid=1023 comm="testapp" dest=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:http_port_t:s0 tclass=tcp_socket permissive=1
+type=AVC msg=audit(1552588580.769:25978): avc:  denied  { connect } for  pid=1023 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
 ----
 time-&gt;Thu Mar 14 14:36:20 2019
-type=PROCTITLE msg=audit(1552588580.881:25982): proctitle=&#34;/usr/local/sbin/testapp&#34;
-type=SYSCALL msg=audit(1552588580.881:25982): arch=c000003e syscall=55 success=yes exit=0 a0=3 a1=1 a2=4 a3=7ffc9a8c3b20 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=&#34;testapp&#34; exe=&#34;/usr/local/sbin/testapp&#34; subj=system_u:system_r:testapp_t:s0 key=(null)
-type=AVC msg=audit(1552588580.881:25982): avc:  denied  { getopt } for  pid=1023 comm=&#34;testapp&#34; laddr=10.0.1.10 lport=57036 faddr=5.9.243.187 fport=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
+type=PROCTITLE msg=audit(1552588580.881:25982): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.881:25982): arch=c000003e syscall=55 success=yes exit=0 a0=3 a1=1 a2=4 a3=7ffc9a8c3b20 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.881:25982): avc:  denied  { getopt } for  pid=1023 comm="testapp" laddr=10.0.1.10 lport=57036 faddr=5.9.243.187 fport=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
 ----
 time-&gt;Thu Mar 14 14:36:20 2019
-type=PROCTITLE msg=audit(1552588580.881:25983): proctitle=&#34;/usr/local/sbin/testapp&#34;
-type=SYSCALL msg=audit(1552588580.881:25983): arch=c000003e syscall=52 success=yes exit=0 a0=3 a1=7ffc9a8c39f0 a2=7ffc9a8c39ec a3=7ffc9a8c3460 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=&#34;testapp&#34; exe=&#34;/usr/local/sbin/testapp&#34; subj=system_u:system_r:testapp_t:s0 key=(null)
-type=AVC msg=audit(1552588580.881:25983): avc:  denied  { getattr } for  pid=1023 comm=&#34;testapp&#34; laddr=10.0.1.10 lport=57036 faddr=5.9.243.187 fport=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1</code></pre>
+type=PROCTITLE msg=audit(1552588580.881:25983): proctitle="/usr/local/sbin/testapp"
+type=SYSCALL msg=audit(1552588580.881:25983): arch=c000003e syscall=52 success=yes exit=0 a0=3 a1=7ffc9a8c39f0 a2=7ffc9a8c39ec a3=7ffc9a8c3460 items=0 ppid=1 pid=1023 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1552588580.881:25983): avc:  denied  { getattr } for  pid=1023 comm="testapp" laddr=10.0.1.10 lport=57036 faddr=5.9.243.187 fport=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1</code></pre>
 </div>
 </div>
 </div>
@@ -394,8 +404,8 @@ type=AVC msg=audit(1552588580.881:25983): avc:  denied  { getattr } for  pid=102
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1552588580.764:25971): avc:  denied  { open } for  pid=1022 comm=&#34;testapp&#34; path=&#34;/proc/meminfo&#34; dev=&#34;proc&#34; ino=4026532040 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:proc_t:s0 tclass=file permissive=1
-type=AVC msg=audit(1552588580.764:25971): avc:  denied  { read } for  pid=1022 comm=&#34;testapp&#34; name=&#34;meminfo&#34; dev=&#34;proc&#34; ino=4026532040 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:proc_t:s0 tclass=file permissive=1</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1552588580.764:25971): avc:  denied  { open } for  pid=1022 comm="testapp" path="/proc/meminfo" dev="proc" ino=4026532040 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:proc_t:s0 tclass=file permissive=1
+type=AVC msg=audit(1552588580.764:25971): avc:  denied  { read } for  pid=1022 comm="testapp" name="meminfo" dev="proc" ino=4026532040 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:proc_t:s0 tclass=file permissive=1</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -408,8 +418,8 @@ type=AVC msg=audit(1552588580.764:25971): avc:  denied  { read } for  pid=1022 c
 <p>SELinux interface definitions are located in <code>/usr/share/selinux/devel/include</code>, if you install the <code>selinux-policy-devel</code> package.  If we search for <code>/proc</code>, in files named <code>*.if</code> (interface definitions):</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd /usr/share/selinux/devel/include
-</span></span><span style="display:flex;"><span>find . -type f -name <span style="color:#e6db74">&#34;*.if&#34;</span> -exec grep -H <span style="color:#e6db74">&#39;/proc&#39;</span> <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span> | grep <span style="color:#e6db74">&#34;system state information&#34;</span></span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /usr/share/selinux/devel/include
+find . -type f -name <span style="color:#e6db74">&#34;*.if&#34;</span> -exec grep -H <span style="color:#e6db74">&#39;/proc&#39;</span> <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span> | grep <span style="color:#e6db74">&#34;system state information&#34;</span></code></pre></div>
 </div>
 <div class="paragraph">
 <p>We see that in the results, there is a line that says:</p>
@@ -420,7 +430,7 @@ type=AVC msg=audit(1552588580.764:25971): avc:  denied  { read } for  pid=1022 c
 </div>
 </div>
 <div class="paragraph">
-<p>That makes sense, so let’s see what interface has that comment.  Searching for it finds this stanza:</p>
+<p>That makes sense, so let&#8217;s see what interface has that comment.  Searching for it finds this stanza:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -447,25 +457,25 @@ type=AVC msg=audit(1552588580.764:25971): avc:  denied  { read } for  pid=1022 c
 ##      nor process state information (/proc/pid).
 ##      &lt;/p&gt;
 ## &lt;/desc&gt;
-## &lt;param name=&#34;domain&#34;&gt;
+## &lt;param name="domain"&gt;
 ##      &lt;summary&gt;
 ##      Domain allowed access.
 ##      &lt;/summary&gt;
 ## &lt;/param&gt;
-## &lt;infoflow type=&#34;read&#34; weight=&#34;10&#34;/&gt;
+## &lt;infoflow type="read" weight="10"/&gt;
 ## &lt;rolecap/&gt;
 #
-interface(`kernel_read_system_state&#39;,`
+interface(`kernel_read_system_state',`
         gen_require(`
                 attribute kernel_system_state_reader;
-        &#39;)
+        ')
 
         typeattribute $1 kernel_system_state_reader;
-&#39;)</code></pre>
+')</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This interface takes a single parameter (look in the <strong>&lt;param…​&gt;</strong> section), which is the name of the SELinux domain to be allowed access.  In this case, the domain name is <code>testapp</code>, matching the name of our application and policy module.</p>
+<p>This interface takes a single parameter (look in the <strong>&lt;param&#8230;&#8203;&gt;</strong> section), which is the name of the SELinux domain to be allowed access.  In this case, the domain name is <code>testapp</code>, matching the name of our application and policy module.</p>
 </div>
 </div>
 <div class="sect2">
@@ -482,7 +492,7 @@ interface(`kernel_read_system_state&#39;,`
 <p>The file should now look like this:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat ~/src/policy/testapp.te</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat ~/src/policy/testapp.te</code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -527,32 +537,32 @@ miscfiles_read_localization(testapp_t)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Keeping things in alphabetic order doesn’t make any difference to SELinux, but makes the file easier to read.</p>
+<p>Keeping things in alphabetic order doesn&#8217;t make any difference to SELinux, but makes the file easier to read.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_4_recompile_and_reload_the_policy">Step 4: Recompile and reload the policy</h3>
 <div class="paragraph">
-<p>Now, let’s recompile the policy, and reload it into memory.</p>
+<p>Now, let&#8217;s recompile the policy, and reload it into memory.</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd ~/src/policy
-</span></span><span style="display:flex;"><span>sudo ./testapp.sh</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/src/policy
+sudo ./testapp.sh</code></pre></div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_5_restart_the_application">Step 5: Restart the application</h3>
 <div class="paragraph">
-<p>To see if that fixed the problem, let’s restart the application:</p>
+<p>To see if that fixed the problem, let&#8217;s restart the application:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl restart testapp</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl restart testapp</code></pre></div>
 </div>
 <div class="paragraph">
-<p>…​and see if there are any AVC messages about <code>/proc</code>:</p>
+<p>&#8230;&#8203;and see if there are any AVC messages about <code>/proc</code>:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m AVC -ts recent | grep meminfo | wc -l</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ausearch -m AVC -ts recent | grep meminfo | wc -l</code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -569,7 +579,7 @@ miscfiles_read_localization(testapp_t)</code></pre>
 <h2 id="_end_result">End Result</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We’ve now made our first additions to the type enforcement file.  Hopefully, this is starting to make sense.  Don’t hesitate to talk to your instructor about anyything that we have done that isn’t clear.</p>
+<p>We&#8217;ve now made our first additions to the type enforcement file.  Hopefully, this is starting to make sense.  Don&#8217;t hesitate to talk to your instructor about anyything that we have done that isn&#8217;t clear.</p>
 </div>
 <div class="paragraph">
 <style>

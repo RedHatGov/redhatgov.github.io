@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -356,7 +366,7 @@ For more details see unshare(1).</pre>
 <p>The Mount Namespace is the part of the Kernel that stores the mount table. When our sandboxed environment runs in a new Mount Namespace, it can mount filesystems not present on the host.</p>
 </div>
 <div class="paragraph">
-<p>Let’s explore this. First, we are going to create a new mount namespace and start a Bash shell inside that namespace.</p>
+<p>Let&#8217;s explore this. First, we are going to create a new mount namespace and start a Bash shell inside that namespace.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -377,7 +387,7 @@ For more details see unshare(1).</pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>Now let’s mount something in our workspace.</p>
+<p>Now let&#8217;s mount something in our workspace.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -394,7 +404,7 @@ mount | grep mnt</code></pre>
 <p>If you switch to another terminal, one that is in the native namespaces, running the <code>mount</code> command will show nothing mounted to <code>/mnt</code>.</p>
 </div>
 <div class="paragraph">
-<p>On the terminal that is in the new mount namespace, let’s create a file.</p>
+<p>On the terminal that is in the new mount namespace, let&#8217;s create a file.</p>
 </div>
 <div class="listingblock">
 <div class="content">

@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -366,13 +376,13 @@ MAINTAINER alexander@redhat.com
 RUN yum install -y postgresql-server
 USER postgres
 RUN /bin/initdb -D /var/lib/pgsql/data
-RUN /usr/bin/pg_ctl start -D /var/lib/pgsql/data -s -o &#34;-p 5432&#34; -w -t 300 &amp;&amp;\
-                /bin/psql --command &#34;CREATE USER docker WITH SUPERUSER PASSWORD &#39;docker&#39;;&#34; &amp;&amp;\
+RUN /usr/bin/pg_ctl start -D /var/lib/pgsql/data -s -o "-p 5432" -w -t 300 &amp;&amp;\
+                /bin/psql --command "CREATE USER docker WITH SUPERUSER PASSWORD 'docker';" &amp;&amp;\
                 /bin/createdb -O docker docker
-RUN echo &#34;host all  all    0.0.0.0/0  md5&#34; &gt;&gt; /var/lib/pgsql/data/pg_hba.conf
-RUN echo &#34;listen_addresses=&#39;*&#39;&#34; &gt;&gt; /var/lib/pgsql/data/postgresql.conf
+RUN echo "host all  all    0.0.0.0/0  md5" &gt;&gt; /var/lib/pgsql/data/pg_hba.conf
+RUN echo "listen_addresses='*'" &gt;&gt; /var/lib/pgsql/data/postgresql.conf
 EXPOSE 5432
-CMD [&#34;/bin/postgres&#34;, &#34;-D&#34;, &#34;/var/lib/pgsql/data&#34;, &#34;-c&#34;, &#34;config_file=/var/lib/pgsql/data/postgresql.conf&#34;]</pre>
+CMD ["/bin/postgres", "-D", "/var/lib/pgsql/data", "-c", "config_file=/var/lib/pgsql/data/postgresql.conf"]</pre>
 </div>
 </div>
 </div>
@@ -428,7 +438,7 @@ CMD [&#34;/bin/postgres&#34;, &#34;-D&#34;, &#34;/var/lib/pgsql/data&#34;, &#34;
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_6_lets_do_a_quick_check_to_see_what_databases_are_available">Step 6. Let’s do a quick check to see what databases are available:</h3>
+<h3 id="_step_6_lets_do_a_quick_check_to_see_what_databases_are_available">Step 6. Let&#8217;s do a quick check to see what databases are available:</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">\l</code></pre>

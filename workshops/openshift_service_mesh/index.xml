@@ -5,6 +5,10 @@
     <link>/workshops/openshift_service_mesh/</link>
     <description>Recent content in OpenShift Service Mesh on Red Hat | Public Sector</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/workshops/openshift_service_mesh/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    
+	<atom:link href="/workshops/openshift_service_mesh/index.xml" rel="self" type="application/rss+xml" />
+    
+    
   </channel>
 </rss>

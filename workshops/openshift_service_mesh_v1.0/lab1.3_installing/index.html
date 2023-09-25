@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -314,7 +324,7 @@
 <blockquote>
 <i class="fa fa-terminal"></i> Login using API endpoint and remember to add the '--insecure-skip-tls-verify=true' flag
 </blockquote>
-<pre tabindex="0"><code>$ oc login https://api.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:6443 --insecure-skip-tls-verify=true
+<pre><code>$ oc login https://api.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:6443 --insecure-skip-tls-verify=true
 Authentication required for https://api.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>:6443 (openshift)
  Username: user<span class="userid">YOUR#</span>
  Password:
@@ -324,22 +334,22 @@ Login successful.
 <blockquote>
 <i class="fa fa-terminal"></i> List your projects:
 </blockquote>
-<pre tabindex="0"><code>oc projects
+<pre><code>oc projects
 </code></pre><p>You should see two projects: your user project (e.g. &lsquo;userX&rsquo;) and &lsquo;istio-system&rsquo;.</p>
 <br>
 <blockquote>
 <i class="fa fa-terminal"></i> Switch to your user project.  For example:
 </blockquote>
-<pre tabindex="0"><code>oc project user<span class="userid">YOUR#</span>
+<pre><code>oc project user<span class="userid">YOUR#</span>
 
 </code></pre><br>
 <p>Let&rsquo;s take a look at the project.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> List the pods in the project:
 </blockquote>
-<pre tabindex="0"><code>oc get pods
+<pre><code>oc get pods
 </code></pre><p>Output (sample):</p>
-<pre tabindex="0"><code>NAME                                       READY   STATUS    RESTARTS   AGE
+<pre><code>NAME                                       READY   STATUS    RESTARTS   AGE
 istio-demogateway-user1-xxxxxxxxxx-xxxxx   1/1     Running   0          2m41s
 keycloak-operator-xxxxxxxxx-xxxxx          1/1     Running   0          15h
 </code></pre><p>The gateway is a load balancer dedicated to your project.  You will configure this load balancer in the next lab.  The keycloak operator will be used in the security labs.</p>
@@ -349,23 +359,23 @@ keycloak-operator-xxxxxxxxx-xxxxx          1/1     Running   0          15h
 <i class="fa fa-terminal"></i>
 Run this command:
 </blockquote>
-<pre tabindex="0"><code>PROJECT_NAME=$(oc project -q)
+<pre><code>PROJECT_NAME=$(oc project -q)
 </code></pre><br>
 <h2 id="application-code">Application Code</h2>
 <p>Next we need a local copy of our application code.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Clone the repository:
 </blockquote>
-<pre tabindex="0"><code>git clone https://github.com/RedHatGov/openshift-microservices.git
+<pre><code>git clone https://github.com/RedHatGov/openshift-microservices.git
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i> Checkout the workshop-stable branch:
 </blockquote>
-<pre tabindex="0"><code>cd openshift-microservices &amp;&amp; git checkout workshop-stable
+<pre><code>cd openshift-microservices &amp;&amp; git checkout workshop-stable
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Navigate to the workshop directory:
 </blockquote>
-<pre tabindex="0"><code>cd deployment/workshop
+<pre><code>cd deployment/workshop
 </code></pre><br>
 <h2 id="istio">Istio</h2>
 <p>Istio should have been installed in the cluster by the instructor.  Let&rsquo;s make sure Istio is running in the cluster.  You will only have view access to the Istio project.</p>
@@ -373,9 +383,9 @@ Navigate to the workshop directory:
 <i class="fa fa-terminal"></i>
 List all the Istio components:
 </blockquote>
-<pre tabindex="0"><code>oc get pods -n istio-system
+<pre><code>oc get pods -n istio-system
 </code></pre><p>Output:</p>
-<pre tabindex="0"><code>NAME                                      READY   STATUS    RESTARTS   AGE
+<pre><code>NAME                                      READY   STATUS    RESTARTS   AGE
 grafana-xxxxxxxxx-xxxxx                  2/2     Running   0          17m
 istio-citadel-xxxxxxxxx-xxxxx            1/1     Running   0          20m
 istio-egressgateway-xxxxxxxx-xxxxx       1/1     Running   0          17m

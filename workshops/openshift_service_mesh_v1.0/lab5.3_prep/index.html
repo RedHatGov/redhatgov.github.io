@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -319,13 +329,13 @@ SSO is included as part of OpenShift or any middleware product subscription you 
 <blockquote>
 <i class="fa fa-terminal"></i> We create a Keycloak instance using a Kubernetes resource:
 </blockquote>
-<pre tabindex="0"><code>oc apply -f ./istio-configuration/sso-keycloak.yaml
-</code></pre><pre tabindex="0"><code>oc patch cm/keycloak-probes -p &#39;{&#34;data&#34;:{&#34;liveness_probe.sh&#34;:&#34;#!/bin/bash\necho pass\n&#34;,&#34;readiness_probe.sh&#34;:&#34;#!/bin/bash\necho pass\n&#34;}}&#39;
+<pre><code>oc apply -f ./istio-configuration/sso-keycloak.yaml
+</code></pre><pre><code>oc patch cm/keycloak-probes -p '{&quot;data&quot;:{&quot;liveness_probe.sh&quot;:&quot;#!/bin/bash\necho pass\n&quot;,&quot;readiness_probe.sh&quot;:&quot;#!/bin/bash\necho pass\n&quot;}}'
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i> Watch the pods for keycloak-0 to become READY 1/1:
 </blockquote>
-<pre tabindex="0"><code>oc get pods keycloak-0 -w
-</code></pre><pre tabindex="0"><code>NAME                                       READY   STATUS      RESTARTS   AGE
+<pre><code>oc get pods keycloak-0 -w
+</code></pre><pre><code>NAME                                       READY   STATUS      RESTARTS   AGE
 keycloak-0                                 0/1     Pending       0          0s
 keycloak-0                                 0/1     Init:0/1      0          0s
 keycloak-0                                 0/1     Init:0/1      0          3s
@@ -336,15 +346,15 @@ keycloak-0                                 1/1     Running           0          
 <blockquote>
 <i class="fa fa-terminal"></i> We configure via Kubernetes resources to create the realm + roles + clients & users as follows:
 </blockquote>
-<pre tabindex="0"><code>sed &#34;s|http://istio-ingressgateway-istio-system.apps.cluster.domain.com|$GATEWAY_URL|&#34; ./istio-configuration/sso-realm.yaml | oc create -f -
-</code></pre><pre tabindex="0"><code>oc apply -f ./istio-configuration/sso-user1.yaml
-</code></pre><pre tabindex="0"><code>oc apply -f ./istio-configuration/sso-user2.yaml
+<pre><code>sed &quot;s|http://istio-ingressgateway-istio-system.apps.cluster.domain.com|$GATEWAY_URL|&quot; ./istio-configuration/sso-realm.yaml | oc create -f -
+</code></pre><pre><code>oc apply -f ./istio-configuration/sso-user1.yaml
+</code></pre><pre><code>oc apply -f ./istio-configuration/sso-user2.yaml
 </code></pre><h3 id="login-to-the-sso-admin-console">Login to the SSO Admin Console</h3>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Open the SSO console.  Retrieve the endpoint:
 </blockquote>
-<pre tabindex="0"><code>SSO_CONSOLE=$(oc get route keycloak --template=&#39;https://{{.spec.host}}&#39;)
+<pre><code>SSO_CONSOLE=$(oc get route keycloak --template='https://{{.spec.host}}')
 echo $SSO_CONSOLE
 </code></pre><p>
 <i class="fa fa-info-circle"></i>
@@ -398,23 +408,23 @@ Choose one of the options below to find your password:
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse1bf4ec1265580338b7ab4d12d5a6e56b" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3836b71e2e83af3c1da26fd3f75383ce" class="collapsed">
       
         Or you can get the secret with the CLI (click to expand)
       </a>
     </h4>
   </div>
   
-  <div id="collapse1bf4ec1265580338b7ab4d12d5a6e56b" class="panel-collapse collapse ">
+  <div id="collapse3836b71e2e83af3c1da26fd3f75383ce" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i>
 Run the following to print the secret out:
 </blockquote>
-<pre tabindex="0"><code>oc get secret/credential-workshop-keycloak -o yaml
+<pre><code>oc get secret/credential-workshop-keycloak -o yaml
 </code></pre><p>You&rsquo;ll see something like:</p>
-<pre tabindex="0"><code>apiVersion: v1
+<pre><code>apiVersion: v1
 data:
   ADMIN_PASSWORD: SVZuM0pZQmNCeGl3bGc9PQ==
   ADMIN_USERNAME: YWRtaW4=
@@ -426,7 +436,7 @@ From your output, copy the characters you see next to "ADMIN_PASSWORD: "
 <i class="fa fa-terminal"></i>
 Decode the characters by running (replace your copy):
 </blockquote>
-<pre tabindex="0"><code>echo &lt;PASTE_YOUR_DATA_HERE&gt; | base64 -d
+<pre><code>echo &lt;PASTE_YOUR_DATA_HERE&gt; | base64 -d
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Copy the password decoded
@@ -508,8 +518,8 @@ Copy the password decoded
 <i class="fa fa-terminal"></i>
 Type the following in the CLI:
 </blockquote>
-<pre tabindex="0"><code>oc create route reencrypt keycloak-alt --service=keycloak 
-</code></pre><pre tabindex="0"><code>SSO_SVC=$(oc get route keycloak-alt --template=&#39;{{.spec.host}}&#39;)
+<pre><code>oc create route reencrypt keycloak-alt --service=keycloak 
+</code></pre><pre><code>SSO_SVC=$(oc get route keycloak-alt --template='{{.spec.host}}')
 oc set env dc/app-ui FAKE_USER=false SSO_SVC_HOST=$SSO_SVC
 </code></pre><br/>
 <h2 id="access-info--api-documentation">Access Info / API documentation</h2>

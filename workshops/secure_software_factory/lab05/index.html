@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -311,13 +321,13 @@
 <p>In addition to standard Jenkins Pipeline Syntax, the OpenShift Jenkins image provides the OpenShift Domain Specific Language (DSL) (through the OpenShift Jenkins Client Plug-in), which aims to provide a readable, concise, comprehensive, and fluent syntax for rich interactions with an OpenShift API server, allowing for even more control over the build, deployment, and promotion of applications on your OpenShift cluster.</p>
 <p>Please refer to the <a href="https://github.com/openshift/jenkins-client-plugin#examples">OpenShift Jenkins Pipelin(DSL) Plugin examples documentation</a> for more info.</p>
 <p>First, we will need to create a <a href="https://docs.openshift.com/container-platform/3.11/dev_guide/builds/index.html#defining-a-buildconfig">BuildConfig</a> that employs the <a href="https://docs.openshift.com/container-platform/3.11/architecture/core_concepts/builds_and_image_streams.html#pipeline-build">Pipeline Build</a> strategy for our Trusted Software Supply Chain. In the OpenShift Console, we’ll do this by clicking “Add to Project”, “Import YAML / JSON” while using the CI/CD project.</p>
-<img src="../images/import_yaml.png" width="900" />
+<p><img src="../images/import_yaml.png" width="900" /></p>
 <p>Then copy &amp; paste the following into the YAML/JSON input text field and click Create,</p>
-<pre tabindex="0"><code>apiVersion: v1
+<pre><code>apiVersion: v1
 kind: BuildConfig
 metadata:
     annotations:
-      pipeline.alpha.openshift.io/uses: &#39;[{&#34;name&#34;: &#34;jenkins&#34;, &#34;namespace&#34;: &#34;&#34;, &#34;kind&#34;: &#34;DeploymentConfig&#34;}]&#39;
+      pipeline.alpha.openshift.io/uses: '[{&quot;name&quot;: &quot;jenkins&quot;, &quot;namespace&quot;: &quot;&quot;, &quot;kind&quot;: &quot;DeploymentConfig&quot;}]'
     labels:
       app: cicd-pipeline
       name: cicd-pipeline
@@ -326,10 +336,10 @@ spec:
     triggers:
       - type: GitHub
         github:
-          secret: &#34;secret101&#34;
+          secret: &quot;secret101&quot;
       - type: Generic
         generic:
-          secret: &#34;secret101&#34;
+          secret: &quot;secret101&quot;
     runPolicy: Serial
     source:
       type: None
@@ -341,20 +351,20 @@ spec:
         - name: STAGE_PROJECT
           value: stage-user<span class="userid">YOUR#</span>
         jenkinsfile: |-
-          def version, mvnCmd = &#34;mvn -s configuration/cicd-settings-nexus3.xml&#34;
+          def version, mvnCmd = &quot;mvn -s configuration/cicd-settings-nexus3.xml&quot;
           pipeline {
             agent {
-              label &#39;maven&#39;
+              label 'maven'
             }
 </code></pre><p>Close the window once it&rsquo;s imported.</p>
 <p>Then go to “Builds” → “Pipelines” tab.</p>
-<img src="../images/builds_pipelines.png" width="900" />
+<p><img src="../images/builds_pipelines.png" width="900" /></p>
 <p>Verify that you see your &ldquo;tasks pipeline&rdquo; that you just imported.</p>
-<img src="../images/tasks_pipeline.png" width="900" />
+<p><img src="../images/tasks_pipeline.png" width="900" /></p>
 <p>Click on the “tasks-pipeline”</p>
 <p>Click Actions -&gt; Edit YAML</p>
 <p>Update your user Dev and Stage projects to make sure reflects your user #.</p>
-<pre tabindex="0"><code>strategy:
+<pre><code>strategy:
   jenkinsPipelineStrategy:
     env:
     - name: DEV_PROJECT
@@ -364,11 +374,11 @@ spec:
 </code></pre><p>Also, notice that we will be launching a Maven node/agent to execute our pipeline.</p>
 <p>You will also be declaring variables such as version and mvnCmd to be used later in the pipeline.</p>
 <p>The .xml file refers to maven configurations for your application. The reference to this .xml file from our pipeline can be seen here:</p>
-<pre tabindex="0"><code>        jenkinsfile: |-
-          def version, mvnCmd = &#34;mvn -s configuration/cicd-settings-nexus3.xml&#34;
+<pre><code>        jenkinsfile: |-
+          def version, mvnCmd = &quot;mvn -s configuration/cicd-settings-nexus3.xml&quot;
           pipeline {
             agent {
-              label &#39;maven&#39;
+              label 'maven'
             }
 </code></pre><p>Click Save</p>
 <style>

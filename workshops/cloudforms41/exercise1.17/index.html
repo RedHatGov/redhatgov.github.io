@@ -22,6 +22,16 @@
     <link rel="stylesheet" href="/css/toastr.min.css" />
 
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL741MBBZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DL741MBBZQ');
+    </script>
+
+    
     <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
 
     
@@ -371,19 +381,19 @@ Organizing our own code into custom domains greatly simplifies the task of expor
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4 class="panel-title">
-<pre><code>  &lt;a data-toggle=&quot;collapse&quot; href=&quot;#collapse864223a9d4840c9012882a2f671063f2&quot; class=&quot;collapsed&quot;&gt;
+<pre><code>  &lt;a data-toggle=&quot;collapse&quot; href=&quot;#collapsec7415b44347a4a2e6907ac4a3984a364&quot; class=&quot;collapsed&quot;&gt;
   
     Importing/Exporting Domains
   &lt;/a&gt;
 &lt;/h4&gt;
 </code></pre>
   </div>
-  <div id="collapse864223a9d4840c9012882a2f671063f2" class="panel-collapse collapse ">
+  <div id="collapsec7415b44347a4a2e6907ac4a3984a364" class="panel-collapse collapse ">
 <pre><code>&lt;div class=&quot;panel-body&quot;&gt;
    &lt;p&gt;We can export domains using rake from the command line and import them either using rake or from the WebUI.  Using rake enables us to specify more import and export options.  A typical rake import line is as follows:&lt;/p&gt;
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bin/rake evm:automate:import YAML_FILE<span style="color:#f92672">=</span>bit63.yaml IMPORT_AS<span style="color:#f92672">=</span>Bit63 SYSTEM<span style="color:#f92672">=</span>false ENABLED<span style="color:#f92672">=</span>true DOMAIN<span style="color:#f92672">=</span>Export PREVIEW<span style="color:#f92672">=</span>false
-</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/rake evm:automate:import YAML_FILE<span style="color:#f92672">=</span>bit63.yaml IMPORT_AS<span style="color:#f92672">=</span>Bit63 SYSTEM<span style="color:#f92672">=</span>false ENABLED<span style="color:#f92672">=</span>true DOMAIN<span style="color:#f92672">=</span>Export PREVIEW<span style="color:#f92672">=</span>false
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -416,21 +426,21 @@ Organizing our own code into custom domains greatly simplifies the task of expor
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4 class="panel-title">
-<pre><code>  &lt;a data-toggle=&quot;collapse&quot; href=&quot;#collapse196a17def2f35f432d8a1e048b4ee865&quot; class=&quot;collapsed&quot;&gt;
+<pre><code>  &lt;a data-toggle=&quot;collapse&quot; href=&quot;#collapsef36e230838639eac66c1886ce90ef582&quot; class=&quot;collapsed&quot;&gt;
   
     Importing Old Format Exports
   &lt;/a&gt;
 &lt;/h4&gt;
 </code></pre>
   </div>
-  <div id="collapse196a17def2f35f432d8a1e048b4ee865" class="panel-collapse collapse ">
+  <div id="collapsef36e230838639eac66c1886ce90ef582" class="panel-collapse collapse ">
 <pre><code>&lt;div class=&quot;panel-body&quot;&gt;
    &lt;p&gt;Domains were a new feature of the Automate Datastore in CloudForms 3.1.  All factory-supplied and user-created automation code was contained in a common structure prior to the CloudForms 3.1 release.  This made updates difficult when any user-added code was introduced.  User-supplied modifications needed to be exported and reimported/merged whenever an automation update was released.&lt;/p&gt;
 </code></pre>
 <p>To import a Datastore backup from a CloudForms 3.0 and prior format Datastore, we must convert it to the new Datastore format first, like so:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd /var/www/miq/vmdb
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bin/rake evm:automate:convert FILE<span style="color:#f92672">=</span>database.xml DOMAIN<span style="color:#f92672">=</span>SAMPLE ZIP_FILE<span style="color:#f92672">=</span>/tmp/sample_converted.zip
-</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /var/www/miq/vmdb
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/rake evm:automate:convert FILE<span style="color:#f92672">=</span>database.xml DOMAIN<span style="color:#f92672">=</span>SAMPLE ZIP_FILE<span style="color:#f92672">=</span>/tmp/sample_converted.zip
+</code></pre></div>
     </div>
   </div>
 </div>
@@ -526,32 +536,32 @@ The Automate Datastore uses object-oriented terminology for these objects.  A <e
 <h2 id="section-7-methods">Section 7. Methods</h2>
 <p>A <em>method</em> is a self-contained block of Ruby code that gets executed when we run any automation operation.  A typical method looks like this:</p>
 <!-- TODO configure ruby highlighting for the block of text below.  Specifying ruby results in very poor color contrast (light colors on light grey background) and significant reformatting of code -->
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#75715e">#</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Description: This method checks to see if the VM has been powered off or suspended.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get vm from root object</span>
-</span></span><span style="display:flex;"><span>vm <span style="color:#f92672">=</span> $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;vm&#39;</span><span style="color:#f92672">]</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> vm
-</span></span><span style="display:flex;"><span>  power_state <span style="color:#f92672">=</span> vm<span style="color:#f92672">.</span>attributes<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;power_state&#39;</span><span style="color:#f92672">]</span>
-</span></span><span style="display:flex;"><span>  ems <span style="color:#f92672">=</span> vm<span style="color:#f92672">.</span>ext_management_system
-</span></span><span style="display:flex;"><span>  $evm<span style="color:#f92672">.</span>log(<span style="color:#e6db74">&#39;info&#39;</span>, <span style="color:#e6db74">&#34;VM:&lt;</span><span style="color:#e6db74">#{</span>vm<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&gt; on provider:&lt;</span><span style="color:#e6db74">#{</span>ems<span style="color:#f92672">.</span>try(<span style="color:#e6db74">:name</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74"> has Power \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">           State:&lt;</span><span style="color:#e6db74">#{</span>power_state<span style="color:#e6db74">}</span><span style="color:#e6db74">&gt;&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># If VM is powered off or suspended exit</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#e6db74">%w(off suspended)</span><span style="color:#f92672">.</span>include?(power_state)
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Bump State</span>
-</span></span><span style="display:flex;"><span>    $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;ae_result&#39;</span><span style="color:#f92672">]</span>         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ok&#39;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elsif</span> power_state <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;never&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># If never then this VM is a template so exit the retirement state machine</span>
-</span></span><span style="display:flex;"><span>    $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;ae_result&#39;</span><span style="color:#f92672">]</span>         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;error&#39;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>    $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;ae_result&#39;</span><span style="color:#f92672">]</span>         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;retry&#39;</span>
-</span></span><span style="display:flex;"><span>    $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;ae_retry_interval&#39;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;60.seconds&#39;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
-</span></span></code></pre></div><p>Methods can have one of three <em>location</em> values: <em>inline</em>, <em>built-in</em>, or <em>URI</em>.  In practice most of the methods that we create are inline methods, which means they run as a separate Ruby process outside of Rails.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#75715e">#</span>
+<span style="color:#75715e"># Description: This method checks to see if the VM has been powered off or suspended.</span>
+<span style="color:#75715e">#</span>
+
+<span style="color:#75715e"># Get vm from root object</span>
+vm <span style="color:#f92672">=</span> $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;vm&#39;</span><span style="color:#f92672">]</span>
+
+<span style="color:#66d9ef">if</span> vm
+  power_state <span style="color:#f92672">=</span> vm<span style="color:#f92672">.</span>attributes<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;power_state&#39;</span><span style="color:#f92672">]</span>
+  ems <span style="color:#f92672">=</span> vm<span style="color:#f92672">.</span>ext_management_system
+  $evm<span style="color:#f92672">.</span>log(<span style="color:#e6db74">&#39;info&#39;</span>, <span style="color:#e6db74">&#34;VM:&lt;</span><span style="color:#e6db74">#{</span>vm<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&gt; on provider:&lt;</span><span style="color:#e6db74">#{</span>ems<span style="color:#f92672">.</span>try(<span style="color:#e6db74">:name</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74"> has Power \
+</span><span style="color:#e6db74">           State:&lt;</span><span style="color:#e6db74">#{</span>power_state<span style="color:#e6db74">}</span><span style="color:#e6db74">&gt;&#34;</span>)
+
+  <span style="color:#75715e"># If VM is powered off or suspended exit</span>
+  <span style="color:#66d9ef">if</span> <span style="color:#e6db74">%w(off suspended)</span><span style="color:#f92672">.</span>include?(power_state)
+    <span style="color:#75715e"># Bump State</span>
+    $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;ae_result&#39;</span><span style="color:#f92672">]</span>         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ok&#39;</span>
+  <span style="color:#66d9ef">elsif</span> power_state <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;never&#34;</span>
+    <span style="color:#75715e"># If never then this VM is a template so exit the retirement state machine</span>
+    $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;ae_result&#39;</span><span style="color:#f92672">]</span>         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;error&#39;</span>
+  <span style="color:#66d9ef">else</span>
+    $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;ae_result&#39;</span><span style="color:#f92672">]</span>         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;retry&#39;</span>
+    $evm<span style="color:#f92672">.</span>root<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;ae_retry_interval&#39;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;60.seconds&#39;</span>
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>Methods can have one of three <em>location</em> values: <em>inline</em>, <em>built-in</em>, or <em>URI</em>.  In practice most of the methods that we create are inline methods, which means they run as a separate Ruby process outside of Rails.</p>
 <h2 id="summary">Summary</h2>
 <p>In this lab exercise we’ve learned about the fundamental objects or organizational units that we work with in the Automate Datastore: domains, namespaces, classes, instances, and methods.</p>
 <p>We are now ready to use this information to write our first automation script!</p>
