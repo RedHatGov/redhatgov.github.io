@@ -45,6 +45,31 @@ Note: Change the firewall zone to what is required/defined on your host.
 
 Access the web site as follows: https://example.com:1313 (replacing example.com with the FQDN of your container host)
 
+### Updating the site
+
+Since travis CI is now dead, the site has to be updated manually. The process looks like this:
+
+1. make your updates, and send a PR to the docs branch, as in the past
+2. get peer approval/review and merge the changes to docs
+3. clone a new copy of the repository, and switch branch to master
+   1. mkdir ~/src/master
+   2. cd ~/src/master
+   3. git clone git@github.com:RedHatGov/redhatgov.github.io.git
+   4. git checkout master
+4. switch back to your original copy of the repository, on the docs branch, and build the site, using hugo and asciidoctor
+   1. cd ~/src/redhatgo.github.io
+   2. hugo --buildFuture --verbose
+   3. cd public
+   4. touch .nojekyll
+   5. echo "redhatgov.io" > CNAME
+5. sync your changes to the master branch
+   1. cd ~/src/master
+   2. rsync -av /home/ajacocks/src/redhatgov.github.io/public/* .
+   3. git add (list of all changes)
+   4. git commit -m (comment on changes)
+   5. git push
+  
+The site should now be updated. Do a force-refresh on your browser.
 ## Contributing
 
 If you have content that you'd like to contribute, check out our
