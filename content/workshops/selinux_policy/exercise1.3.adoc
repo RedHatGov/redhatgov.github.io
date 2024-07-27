@@ -1,0 +1,137 @@
+---
+title: "Exercise 1.3 - Altering behavior"
+workshops: selinux_policy
+workshop_weight: 13
+layout: lab
+---
+
+:icons: font
+:imagesdir: /workshops/selinux_policy/images
+
+= Exercise 1.3 - Altering behavior
+
+== Exercise Description
+
+Let's take a look at controlling SELinux behavior.
+
+== Exercise 1.3.1
+
+=== Step 1: What mode are we in?
+
+Next, let's check to see what SELinux mode your host is in:
+
+{{< highlight bash >}}
+getenforce
+{{< /highlight >}}
+
+[source,bash]
+----
+Enforcing
+----
+
+=== Step 2: Changing modes
+
+Now, we can change the mode that your host is in:
+
+{{< highlight bash >}}
+setenforce 0
+getenforce
+{{< /highlight >}}
+
+[source,bash]
+----
+Permissive
+----
+
+And we can change it back:
+
+{{< highlight bash >}}
+setenforce 1
+getenforce
+{{< /highlight >}}
+
+[source,bash]
+----
+Enforcing
+----
+
+== Exercise 1.3.2
+
+*Booleans* are if-then-else rules written in SELinux Policy. They are convenient "easy buttons" for customizing
+       the way that SELinux Policy rules effect a confined domain, and are designed with many real-world use cases in mind.  For example, allowing httpd to serve files from users' home directories.
+
+=== Step 1: List available booleans
+
+To list all available booleans with a description of their purpose, use the `semanage` command:
+
+{{< highlight bash >}}
+semanage boolean -l
+{{< /highlight >}}
+
+[source,bash]
+----
+SELinux boolean                State  Default Description
+
+abrt_anon_write                (off  ,  off)  Allow ABRT to modify public files used for public file transfer services.
+abrt_handle_event              (off  ,  off)  Determine whether ABRT can run in the abrt_handle_event_t domain to handle ABRT event scripts.
+abrt_upload_watch_anon_write   (on   ,   on)  Determine whether abrt-handle-upload can modify public files used for public file transfer services in /var/spool/abrt-upload/.
+antivirus_can_scan_system      (off  ,  off)  Allow antivirus programs to read non security files on a system
+antivirus_use_jit              (off  ,  off)  Determine whether antivirus programs can use JIT compiler.
+...
+httpd_enable_homedirs          (off  ,  off)  Allow httpd to read home directories
+httpd_execmem                  (off  ,  off)  Allow httpd scripts and modules execmem/execstack
+httpd_graceful_shutdown        (off  ,  off)  Allow HTTPD to connect to port 80 for graceful shutdown
+httpd_manage_ipa               (off  ,  off)  Allow httpd processes to manage IPA content
+httpd_mod_auth_ntlm_winbind    (off  ,  off)  Allow Apache to use mod_auth_ntlm_winbind
+httpd_mod_auth_pam             (off  ,  off)  Allow Apache to use mod_auth_pam
+httpd_read_user_content        (off  ,  off)  Allow httpd to read user content
+...
+----
+
+Take a look at the list of booleans and you'll see the breadth of options.  Don't worry, you don't have to master all of these; there's about 350 booleans available in RHEL 8!
+
+An alternative way to list booleans, but without their descriptions, is:
+
+{{< highlight bash >}}
+getsebool -a
+{{< /highlight >}}
+
+=== Step 2: Toggling booleans
+
+Each boolean is easily toggled on or off.  To temporarily toggle a boolean, you can enter:
+
+{{< highlight bash >}}
+setsebool httpd_enable_homedirs on
+{{< /highlight >}}
+
+This setting allows the Apache web server to access user home directories.  Used in conjunction with `httpd_read_user_content`, Apache can serve content from users' home directories.
+
+To turn this off again, change 'on' to 'off':
+
+{{< highlight bash >}}
+setsebool httpd_enable_homedirs off
+{{< /highlight >}}
+
+To toggle a boolean but make it persistent, use `semanage` instead of `setsebool`:
+
+{{< highlight bash >}}
+semanage boolean -m --on httpd_enable_homedirs
+{{< /highlight >}}
+
+But how do you check if any booleans have been changed from their default?  There's an option for that!
+
+{{< highlight bash >}}
+semanage boolean -l -C
+{{< /highlight >}}
+
+[source,bash]
+----
+SELinux boolean                State  Default Description
+
+cups_execmem                   (on   ,   on)  Allow cups execmem/execstack
+virt_sandbox_use_all_caps      (on   ,   on)  Allow sandbox containers to use all capabilities
+virt_use_nfs                   (on   ,   on)  Allow confined virtual guests to manage nfs files
+----
+
+
+{{< importPartial "footer/footer.html" >}}

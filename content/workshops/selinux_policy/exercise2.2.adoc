@@ -170,11 +170,20 @@ To allow this, add the interface to `testapp.te`, with a line, in the `testapp l
 kernel_read_system_state(testapp_t)
 ----
 
-The file should now look like this:
+Edit the file and add the line above:
 
 {{< highlight bash >}}
-cat ~/src/policy/testapp.te
+vi ~/src/policy/testapp.te
 {{< /highlight >}}
+
+{empty} +
+
+.A note on editing files
+****
+TIP: We'll be making frequent edits to *testapp.te* for the remainder of the workshop.  If we don't spell it out explicitly, go ahead and re-use the above command each time.  And if *vi* isn't your cup of tea, feel free to install *nano* or another editor instead.
+****
+
+Be sure to save your changes.  Afterwards, it should now look like this:
 
 [source,bash] 
 ----

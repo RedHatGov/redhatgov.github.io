@@ -106,6 +106,13 @@ sudo ausearch -m AVC -ts recent | grep 'dest=80' | wc -l
 
 Yes!  Another AVC denial fixed.
 
+If you `ausearch` still shows AVCs above, you can alternatively limit the query to the testapp's current PID; this should confirm the policy is in effect:
+
+{{< highlight bash >}}
+sudo ausearch -m AVC -ts recent -p $(systemctl show testapp --property=MainPID | cut -d= -f2) | grep 'dest=80' | wc -l
+{{< /highlight >}}
+
+
 == Section 2: Socket Permissions
 
 === Step 1: Take a Shortcut!
@@ -239,7 +246,7 @@ sudo systemctl restart testapp
 ...and see if there are any AVC messages about TCP or UDP:
 
 {{< highlight bash >}}
-sudo ausearch -m AVC -ts recent | egrep 'tcp|udp' | wc -l
+sudo ausearch -m AVC -ts recent -p $(systemctl show testapp --property=MainPID | cut -d= -f2) | egrep 'tcp|udp' | wc -l
 {{< /highlight >}}
 
 [source,bash] 

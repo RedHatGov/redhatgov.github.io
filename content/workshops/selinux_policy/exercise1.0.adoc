@@ -13,17 +13,23 @@ layout: lab
 
 == History
 
-In this exercise, we are going to introduce you to Security Enhanced Linux, commonly known as `SELinux`.
+In this workshop, we are going to introduce you to Security Enhanced Linux, commonly known as `SELinux`.
+
+Standard Linux access policy based on the user, group, and other permissions, known as Discretionary Access Control (DAC), does not enable system administrators to create comprehensive and fine-grained security policies, such as restricting specific applications to only viewing log files, while allowing other applications to append new data to the log files.
 
 SELinux is an implementation of the link:https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/sect-security-enhanced_linux-further_information-other_resources[Flask] system security architecture.  The Flask architecture implements MAC, which focuses on providing an administratively-defined security policy that can control all subjects and objects, basing decisions on all security-relevant information. In addition, Flask focuses on the concept of least privilege, which gives a process exactly the rights it needs to perform its given task.
 
-The Flask model allows you to express a security policy in a naturally flowing manner, so that parts of the security rules are like parts in a sentence. In Flask, changes are supported so you can tune your policy. Added to this architecture in the security server are type enforcement (TE) and robe-based access control (RBAC) security models, providing fine-grained controls that can be transparent to users and applications.
+The Flask model allows you to express a security policy in a naturally flowing manner, so that parts of the security rules are like parts in a sentence. In Flask, changes are supported so you can tune your policy. Added to this architecture in the security server are *type enforcement* (TE) and role-based access control (RBAC) security models, providing fine-grained controls that can be transparent to users and applications.
 
 As a next step in the evolution of SELinux, the NSA integrated SELinux into the Linux kernel using the Linux Security Modules (LSM) framework. SELinux motivated the creation of LSM, at the suggestion of Linus Torvalds, who wanted a modular approach to security instead of accepting just SELinux into the kernel.
 
-Originally, the SELinux implementation used persistent security IDs (PSIDs) stored in an unused field of the ext2 inode. These numerical representations (i.e., non-human-readable) were mapped by SELinux to a security context label. Unfortunately, this required modifying each file system type to support PSIDs, so was not a scalable solution or one that would be supported upstream in the Linux kernel.
+=== What enables SELinux to make access decisions?
 
-The next evolution of SELinux was as a loadable kernel module for the 2.4.<x> series of Linux kernels. This module stored PSIDs in a normal file, and SELinux was able to support more file systems. This solution was not optimal for performance, and was inconsistent across platforms. Finally, the SELinux code was integrated upstream to the 2.6.x kernel, which has full support for LSM and has extended attributes (xattrs) in the ext3 file system. SELinux was moved to using xattrs to store security context information. The xattr namespace provides useful separation for multiple security modules existing on the same system.
+In short, everything on the system is labeled with a security context:  Files, Directories, Memory, Sockets, TCP/UDP ports and more.
+
+Originally, for files, the SELinux implementation used persistent security IDs (PSIDs) stored in an unused field of the ext2 inode. These numerical representations (i.e., non-human-readable) were mapped by SELinux to a security context label. Unfortunately, this required modifying each file system type to support PSIDs, so was not a scalable solution or one that would be supported upstream in the Linux kernel.
+
+The next evolution of SELinux was as a loadable kernel module for the 2.4.<x> series of Linux kernels. This module stored PSIDs in a normal file, and SELinux was able to support more file systems. This solution was not optimal for performance, and was inconsistent across platforms. Finally, the SELinux code was integrated upstream to the 2.6.x kernel, which has full support for LSM and has *extended attributes* (xattrs) in the ext3 file system. SELinux was moved to using xattrs to store security context information. The xattr namespace provides useful separation for multiple security modules existing on the same system.
 
 Much of the work to get the kernel ready for upstream, as well as subsequent SELinux development, has been a joint effort between the NSA, Red Hat, and the community of SELinux developers.
 

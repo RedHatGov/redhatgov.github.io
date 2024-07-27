@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1.1 - Introduction to SELinux"
+title: "Exercise 1.1 - SELinux policy in RHEL"
 workshops: selinux_policy
 workshop_weight: 11
 layout: lab
@@ -8,170 +8,50 @@ layout: lab
 :icons: font
 :imagesdir: /workshops/selinux_policy/images
 
-= Exercise 1.1 - Introduction
 
-== Exercise Description
+= Exercise 1.1 - SELinux policy in RHEL
 
-To better understand SELinux basic concepts, see the following documentation: 
+What are policies?  A policy is a real-world application of SELinux controls.  This chapter is an overview and examination of SELinux policy for Red Hat Enterprise Linux.
+
+=== What is the Targeted Policy?
+
+The SELinux policy is highly configurable. Starting with Red Hat Enterprise Linux 5, Red Hat defaulted to the *targeted policy*. The goal of this policy is to lock down all processes that listen for network connections and pretty much all processes that start at boot.  Under the targeted policy, every subject and object runs in the unconfined_t domain except for the specific targeted daemons. Objects that are in the unconfined_t domain have no restrictions and fall back to using standard Linux security, that is, DAC. The daemons secured by the targeted policy run in their own domains and are restricted via type enforcement in every operation they perform on the system. This way daemons that are exploited or compromised in any way are contained and can only cause limited damage.
+
+For example, the http and ntp daemons are both protected in the default targeted policy, and run in the httpd_t and ntpd_t domains, respectively. The ssh daemon, however, is not protected in this policy, and consequently runs in the unconfined_t domain.  The targeted daemons include most common system daemons (dhcpd, httpd, mysqld, named, nscd, ntpd, portmap, postgres, snmpd, squid, syslogd, and winbind) and the list grows with each RHEL generation.
+
+Refer to the following sample output, which illustrates the various domains for the daemons mentioned above:
+
+```
+user_u:system_r:httpd_t         25129 ?        00:00:00 httpd
+user_u:system_r:ntpd_t          25176 ?        00:00:00 ntpd
+system_u:system_r:unconfined_t         25245 ? 00:00:00 sshd
+```
+
+==== Additional policies are available:
+
+- Multi-level security (MLS)
+- Minimum
+- Sandbox
+
+The *MLS* SELinux policy applies a modified principle called Bell-La Padula with write equality. This means that users can read files at their own sensitivity level and lower, but can write only at exactly their own level. This prevents, for example, low-clearance users from writing content into top-secret files.  MLS is the most strict policy and is rarely used in practice.
+
+*Minimum* policy is built exactly the same as targeted policy, but installs ONLY the base policy package and the unconfined.pp.  All of the SELinux policy modules from the targeted policy are in the selinux-policy-minimum rpm package but they are not compiled and loaded into the kernel in the post install. 
+
+*Sandbox* is a special-purpose policy and utility primarily for testing.  The sandbox security utility adds a set of SELinux policies that allow a system administrator to run an application within a tightly confined SELinux domain. Restrictions on permission to open new files or access to the network can be defined. This enables testing the processing characteristics of untrusted software securely, without risking damage to the system.
+
+We are only working with Targeted Policy in this workshop.
+
+=== Additional reminders
+
+- SELinux policy is consulted after normal DAC controls.  So if DAC permissions already deny a particular access to a file, no further evaluations are done.
+- SELinux is a "default deny" system.  Thus, that which is not explicitly permitted is denied.
+
+=== To learn more
+
+To better understand SELinux basic concepts, see the following resources: 
 
 - link:https://people.redhat.com/duffy/selinux/selinux-coloring-book_A4-Stapled.pdf[The SELinux Coloring Book]
 - link:http://selinuxproject.org/page/FAQ[SELinux Wiki FAQ]
 - link:http://freecomputerbooks.com/books/The_SELinux_Notebook-4th_Edition.pdf[The SELinux Notebook]
-
-=== Step 1: Become root
-
-First, go ahead and switch users to root:
-
-{{< highlight bash >}}
-sudo -i
-{{< /highlight >}}
-
-=== Step 2: What mode are we in?
-
-Next, let's check to see what SELinux mode your host is in:
-
-{{< highlight bash >}}
-getenforce
-{{< /highlight >}}
-
-[source,bash]
-----
-Enforcing
-----
-
-=== Step 3: Changing modes
-
-Now, we can change the mode that your host is in:
-
-{{< highlight bash >}}
-setenforce 0
-getenforce
-{{< /highlight >}}
-
-[source,bash]
-----
-Permissive
-----
-
-And we can change it back:
-
-{{< highlight bash >}}
-setenforce 1
-getenforce
-{{< /highlight >}}
-
-[source,bash]
-----
-Enforcing
-----
-
-=== Step 4: Changing modes for specific domains
-
-You can also set individual SELinux domains (like `httpd_t`, which controls web server access control) to permissve mode:
-
-{{< highlight bash >}}
-semanage permissive -a httpd_t
-semanage permissive -l
-{{< /highlight >}}
-
-[source,bash]
-----
-Builtin Permissive Types
-
-Customized Permissive Types
-
-httpd_t
-----
-
-And again, we can change it back:
-
-{{< highlight bash >}}
-semanage permissive -d httpd_t
-{{< /highlight >}}
-
-[source,bash]
-----
-libsemanage.semanage_direct_remove_key: Removing last permissive_httpd_t module (no other permissive_httpd_t module exists at another priority).
-----
-
-The `permissive` mode means that either the entire system (the first example) or the specific application constrained by a type (the second example) are allowed to bypass SELinux access controls.  However, even though access controls are disabled, full AVC (access vector cache, where SELinux stores its decisions) logging still happens.
-
-=== Step 5: SELinux logging
-
-SELinux messages are logged to the `/var/log/audit/audit.log` file.  We can read the messages with this command:
-
-{{< highlight bash >}}
-ausearch -m MAC_POLICY_LOAD -i --just-one
-{{< /highlight >}}
-
-We have asked the `ausearch` utility to look for SELinux policies being loaded (`-m MAC_POLICY_LOAD`), to make the result human-readable (`-i`), and to return only a single result (`--just-one`):
-
-[source,bash]
------
-----
-type=PROCTITLE msg=audit(05/17/2019 23:47:54.147:1896) : proctitle=/sbin/load_policy 
-type=SYSCALL msg=audit(05/17/2019 23:47:54.147:1896) : arch=x86_64 syscall=write success=yes exit=3857474 a0=0x4 a1=0x7fb57e597000 a2=0x3adc42 a3=0x7ffc8bb993a0 items=0 ppid=16567 pid=16572 auid=ec2-user uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts0 ses=1 comm=load_policy exe=/usr/sbin/load_policy subj=unconfined_u:unconfined_r:load_policy_t:s0-s0:c0.c1023 key=(null) 
-type=MAC_POLICY_LOAD msg=audit(05/17/2019 23:47:54.147:1896) : auid=ec2-user ses=1 lsm=selinux res=yes
------
-
-Other useful searches include:
-
-- all denials:
-
-{{< highlight bash >}}
-ausearch -m avc,user_avc,selinux_err,user_selinux_err
-{{< /highlight >}}
-
-- denials from today:
-
-{{< highlight bash >}}
-ausearch -m avc -ts today
-{{< /highlight >}}
-
-- denials from the last 10 minutes:
-
-{{< highlight bash >}}
-ausearch -m avc -ts recent
-{{< /highlight >}}
-
-You can try these, if you like, but they may or may not return any results.
-
-=== Step 6: Interpreting AVCs
-
-If you use `ausearch` to find AVC messages, you can see exactly what caused SELinux to deny access:
-
-{{< highlight bash >}}
-ausearch -if ./testaudit -m AVC
-{{< /highlight >}}
-
-[source,bash]
------
-----
-time->Mon Nov 17 00:45:36 2008
-type=SYSCALL msg=audit(1226882736.442:86): arch=40000003 syscall=196 success=no exit=-13 a0=b9a1e198 a1=bfc2921c a2=54dff4 a3=2008171 items=0 ppid=2425 pid=2427 auid=502 uid=48 gid=48 euid=48 suid=48 fsuid=48 egid=48 sgid=48 fsgid=48 tty=(none) ses=4 comm="httpd" exe="/usr/sbin/httpd" subj=unconfined_u:system_r:httpd_t:s0 key=(null)
-type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 comm="httpd" path="/var/www/html/file1" dev=dm-0 ino=284133 scontext=unconfined_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:samba_share_t:s0 tclass=file
------
-
-Here, we can see that the `httpd` process, ID `2427`, was disallowed from checking attributes of the file `/var/www/html/file1`.  Additionally, we can see that the domain of the process was `httpd_t`, and the file was labeled with the `samba_share_t` context.
-
-=== Step 7: Getting advice
-
-There is a neat utility called `audit2why`, which can make suggestions as to how you might solve SELinux AVC messages.  Let's try it on our test error:
-
-{{< highlight bash >}}
-ausearch -if ./testaudit -m AVC | audit2why
-{{< /highlight >}}
-
-[source,bash]
------
-type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 comm="httpd" path="/var/www/html/file1" dev=dm-0 ino=284133 scontext=unconfined_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:samba_share_t:s0 tclass=file
-
-	Was caused by:
-		Missing type enforcement (TE) allow rule.
-
-		You can use audit2allow to generate a loadable module to allow this access.
------
-
-The `audit2why` utility is telling us that the problem was caused by a missing `allow` rule, which would grant access for `httpd_t` processes to `samba_share_t` files.  This is obviously not the whole story, in this case, but it points us to the problem of the file's context being incorrect.
 
 {{< importPartial "footer/footer.html" >}}

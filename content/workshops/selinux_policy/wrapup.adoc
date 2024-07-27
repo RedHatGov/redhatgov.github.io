@@ -14,16 +14,31 @@ layout: lab
 
 :figure-caption!:
 
+
 = Wrap Up and Q&A
 
 That wraps up what we have planned for today.  We hope you've learned something valuable about SELinux policies that you can apply in your daily role.
 
 What do you think? How can we help you understand SELinux better?
 
-Before you leave, check out the *Resources* page that is part of this guide.  There, you can find a ton of links that will further your SELinux education.
+Before you leave, check out the *Resources* below; you will find useful links that will further your SELinux education.
 
-This *Participant Guide* will remain active for the next two weeks.  Please take advantage of it by creating your own SELinux policy back at your organization.
+This *Participant Guide* will remain available.  Please take advantage of it by creating your own SELinux policy back at your organization.
 
 Thank you for your time and participation!
+
+= Resources
+
+=== Fun Stuff
+    ** https://stopdisablingselinux.com/
+    ** https://people.redhat.com/duffy/selinux/selinux-coloring-book_A4-Stapled.pdf[SELinux coloring book]
+
+=== Knowledge Articles
+    ** https://access.redhat.com/articles/6964380[SELinux as a security pillar of an operating system - Real-world benefits and examples]
+    ** https://access.redhat.com/articles/2191331[Basic SELinux Troubleshooting in CLI]
+    ** https://access.redhat.com/articles/6999267[Quick start to write a custom SELinux policy]
+    ** https://access.redhat.com/articles/7047896[SELinux hardening with Ansible (makes note of several booleans)]
+    ** https://www.redhat.com/sysadmin/change-selinux-settings-boolean[How to modify SELinux settings with booleans]
+
 
 image::redhat.svg[]
