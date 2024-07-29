@@ -23,13 +23,13 @@ In this final exercise, we will finish the `testapp` SELinux policy.
 Let's again restart our app, to get an updated list of denials.  
 
 {{< highlight bash >}}
-systemctl restart testapp
+sudo systemctl restart testapp
 {{< /highlight >}}
 
 We only have a few denials left, and you will see that they all (probably!) reference `/etc/resolv.conf` or to `/etc/hosts`.
 
 {{< highlight bash >}}
-ausearch -m AVC -ts recent | egrep '^type=AVC'
+sudo ausearch -m AVC -ts recent | egrep '^type=AVC'
 {{< /highlight >}}
 
 [source,bash]
@@ -112,15 +112,15 @@ sysnet_read_config(testapp_t)
 And compile your policy, and restart the service:
 
 {{< highlight bash >}}
-./testapp.sh
-systemctl restart testapp
+sudo ./testapp.sh
+sudo systemctl restart testapp
 {{< /highlight >}}
 
 ...and last, check to see if there are still any AVC denials:
 
 {{< highlight bash >}}
-systemctl restart testapp
-ausearch -m AVC -ts recent | wc -l
+sudo systemctl restart testapp
+sudo ausearch -m AVC -ts recent -p $(systemctl show testapp --property=MainPID | cut -d= -f2) | wc -l
 {{< /highlight >}}
 
 [source,bash]
@@ -137,14 +137,14 @@ Ah, well! Let's try to handle those last AVCs.
 Let's get an updated list of denials:  
 
 {{< highlight bash >}}
-ausearch -m AVC -ts recent | egrep '^type=AVC'
+sudo ausearch -m AVC -ts recent -p $(systemctl show testapp --property=MainPID | cut -d= -f2) | egrep '^type=AVC'
 {{< /highlight >}}
 
 The last few denials should reference `openssl` and `pki`:
 
 [source,bash]
 -----
-ausearch -m AVC -ts recent
+sudo ausearch -m AVC -ts recent
 ----
 time->Tue Jun 29 15:36:12 2021
 type=PROCTITLE msg=audit(1624980972.923:10134): proctitle="/usr/local/sbin/testapp"
@@ -211,7 +211,7 @@ miscfiles_read_generic_certs(testapp_t)
 Now, let's recompile the policy, and reload it into memory.
 
 {{< highlight bash >}}
-./testapp.sh
+sudo ./testapp.sh
 {{< /highlight >}}
 
 === Step 5: Restart the application
@@ -219,13 +219,13 @@ Now, let's recompile the policy, and reload it into memory.
 To see if that fixed the problem, let's restart the application:
 
 {{< highlight bash >}}
-systemctl restart testapp
+sudo systemctl restart testapp
 {{< /highlight >}}
 
 ...and see if there are any AVC messages left:
 
 {{< highlight bash >}}
-ausearch -m AVC -ts recent | egrep 'tcp|udp' | wc -l
+sudo ausearch -m AVC -ts recent | egrep 'tcp|udp' | wc -l
 {{< /highlight >}}
 
 [source,bash] 
@@ -265,7 +265,7 @@ type testapp_t;
 type testapp_exec_t;
 init_daemon_domain(testapp_t, testapp_exec_t)
 
-permissive testapp_t;
+#permissive testapp_t;
 
 type testapp_var_run_t;
 files_pid_file(testapp_var_run_t)
@@ -306,7 +306,7 @@ sysnet_read_config(testapp_t)
 Now, let's recompile the policy, and reload it into memory.
 
 {{< highlight bash >}}
-./testapp.sh
+sudo ./testapp.sh
 {{< /highlight >}}
 
 === Step 4: Restart the application
@@ -314,13 +314,13 @@ Now, let's recompile the policy, and reload it into memory.
 To see if that fixed the problem, let's restart the application:
 
 {{< highlight bash >}}
-systemctl restart testapp
+sudo systemctl restart testapp
 {{< /highlight >}}
 
 ...and see if there are any AVC messages left:
 
 {{< highlight bash >}}
-ausearch -m AVC -ts recent | egrep 'tcp|udp' | wc -l
+sudo ausearch -m AVC -ts recent | egrep 'tcp|udp' | wc -l
 {{< /highlight >}}
 
 [source,bash] 
@@ -328,10 +328,13 @@ ausearch -m AVC -ts recent | egrep 'tcp|udp' | wc -l
 0
 ----
 
+Additionally, you can confirm that there aren't any domains in permissive mode:
+
+{{< highlight bash >}}
+sudo semanage permissive -l
+{{< /highlight >}}
+
 And we are done.
 
-== End Result
-
-This is the conclusion of the SELinux policy workshop.  Please ask any questions that you have left, and thanks so much for coming!
 
 {{< importPartial "footer/footer.html" >}}

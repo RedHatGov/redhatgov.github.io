@@ -38,7 +38,7 @@ Created the following files:
 /home/ec2-user/src/policy/testapp.sh # Setup Script
 ----
 
-You will need all of these files to customize the policy, for the application.
+You will need all of these files to customize the policy for the application.
 
 .SELinux Policy Source Compnents
 . `testapp.te` is the base policy for the application.  It sets the rules for the `testapp_t` domain
@@ -60,9 +60,6 @@ The first 9 lines of the output show the policy compilation, the loading of the 
 Building and Loading Policy
 + make -f /usr/share/selinux/devel/Makefile testapp.pp
 Compiling targeted testapp module
-/usr/bin/checkmodule:  loading policy configuration from tmp/testapp.tmp
-/usr/bin/checkmodule:  policy configuration loaded
-/usr/bin/checkmodule:  writing binary representation (version 19) to tmp/testapp.mod
 Creating targeted testapp.pp policy package
 rm tmp/testapp.mod tmp/testapp.mod.fc
 + /usr/sbin/semodule -i testapp.pp
@@ -75,45 +72,51 @@ In addition to compiling and loading the policy, the `testapp.sh` script also ge
 [source,bash]
 ----
 + /sbin/restorecon -F -R -v /usr/local/sbin/testapp
+Relabeled /usr/local/sbin/testapp from system_u:object_r:bin_t:s0 to system_u:object_r:testapp_exec_t:s0
++ /sbin/restorecon -F -R -v /var/run/testapp.pid
+Relabeled /run/testapp.pid from system_u:object_r:var_run_t:s0 to system_u:object_r:testapp_var_run_t:s0
 ++ pwd
 + pwd=/home/ec2-user/src/policy
 + rpmbuild --define '_sourcedir /home/ec2-user/src/policy' --define '_specdir /home/ec2-user/src/policy' --define '_builddir /home/ec2-user/src/policy' --define '_srcrpmdir /home/ec2-user/src/policy' --define '_rpmdir /home/ec2-user/src/policy' --define '_buildrootdir /home/ec2-user/src/policy/.build' -ba testapp_selinux.spec
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.8GjK3r
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.apQ8LZ
 + umask 022
 + cd /home/ec2-user/src/policy
-+ '[' /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64 '!=' / ']'
-+ rm -rf /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64
-++ dirname /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64
++ '[' /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64 '!=' / ']'
++ rm -rf /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64
+++ dirname /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64
 + mkdir -p /home/ec2-user/src/policy/.build
-+ mkdir /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64
-+ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/usr/share/selinux/packages
-+ install -m 644 /home/ec2-user/src/policy/testapp.pp /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/usr/share/selinux/packages
-+ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/usr/share/selinux/devel/include/contrib
-+ install -m 644 /home/ec2-user/src/policy/testapp.if /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/usr/share/selinux/devel/include/contrib/
-+ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/usr/share/man/man8/
-+ install -m 644 /home/ec2-user/src/policy/testapp_selinux.8 /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/usr/share/man/man8/testapp_selinux.8
-+ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/etc/selinux/targeted/contexts/users/
++ mkdir /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64
++ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/usr/share/selinux/packages
++ install -m 644 /home/ec2-user/src/policy/testapp.pp /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/usr/share/selinux/packages
++ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/usr/share/selinux/devel/include/contrib
++ install -m 644 /home/ec2-user/src/policy/testapp.if /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/usr/share/selinux/devel/include/contrib/
++ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/usr/share/man/man8/
++ install -m 644 /home/ec2-user/src/policy/testapp_selinux.8 /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/usr/share/man/man8/testapp_selinux.8
++ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/etc/selinux/targeted/contexts/users/
 + /usr/lib/rpm/check-buildroot
-+ /usr/lib/rpm/redhat/brp-compress
-+ /usr/lib/rpm/redhat/brp-strip /usr/bin/strip
-+ /usr/lib/rpm/redhat/brp-strip-comment-note /usr/bin/strip /usr/bin/objdump
-+ /usr/lib/rpm/redhat/brp-strip-static-archive /usr/bin/strip
-+ /usr/lib/rpm/brp-python-bytecompile /usr/bin/python 1
-+ /usr/lib/rpm/redhat/brp-python-hardlink
-+ /usr/lib/rpm/redhat/brp-java-repack-jars
-Processing files: testapp_selinux-1.0-1.el7.noarch
-Provides: testapp_selinux = 1.0-1.el7
++ /usr/lib/rpm/redhat/brp-ldconfig
+/sbin/ldconfig: Warning: ignoring configuration file that cannot be opened: /etc/ld.so.conf: No such file or directory
++ /usr/lib/rpm/brp-compress
++ /usr/lib/rpm/brp-strip /usr/bin/strip
++ /usr/lib/rpm/brp-strip-comment-note /usr/bin/strip /usr/bin/objdump
++ /usr/lib/rpm/brp-strip-static-archive /usr/bin/strip
++ /usr/lib/rpm/brp-python-bytecompile '' 1
++ /usr/lib/rpm/brp-python-hardlink
++ PYTHON3=/usr/libexec/platform-python
++ /usr/lib/rpm/redhat/brp-mangle-shebangs
+Processing files: testapp_selinux-1.0-1.el8.noarch
+Provides: testapp_selinux = 1.0-1.el8
 Requires(interp): /bin/sh /bin/sh
 Requires(rpmlib): rpmlib(CompressedFileNames) <= 3.0.4-1 rpmlib(FileDigests) <= 4.6.0-1 rpmlib(PayloadFilesHavePrefix) <= 4.0-1
-Requires(post): /bin/sh policycoreutils selinux-policy-base >= 3.13.1-229
+Requires(post): /bin/sh policycoreutils selinux-policy-base >= 3.14.3-139
 Requires(postun): /bin/sh policycoreutils
-Checking for unpackaged file(s): /usr/lib/rpm/check-files /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64
-Wrote: /home/ec2-user/src/policy/testapp_selinux-1.0-1.el7.src.rpm
-Wrote: /home/ec2-user/src/policy/noarch/testapp_selinux-1.0-1.el7.noarch.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.aqm3qv
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64
+Wrote: /home/ec2-user/src/policy/testapp_selinux-1.0-1.el8.src.rpm
+Wrote: /home/ec2-user/src/policy/noarch/testapp_selinux-1.0-1.el8.noarch.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.ql2Cxs
 + umask 022
 + cd /home/ec2-user/src/policy
-+ /usr/bin/rm -rf /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64
++ /usr/bin/rm -rf /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64
 + exit 0
 ----
 

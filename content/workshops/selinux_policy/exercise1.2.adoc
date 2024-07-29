@@ -1,7 +1,7 @@
 ---
 title: "Exercise 1.2 - SELinux Contexts"
 workshops: selinux_policy
-workshop_weight: 11
+workshop_weight: 12
 layout: lab
 ---
 
@@ -12,9 +12,23 @@ layout: lab
 
 == Exercise Description
 
-All processes and files are labeled with an SELinux context.  The context contains information that SELinux needs to make control decisions.  Contexts contain user, role, type, and level information,
+Let's peer under the hood a bit to see how SELinux works.
+All processes and files are labeled with an SELinux context; contexts contain user, role, type, and level information.  This is information that SELinux needs to enforce the active policy (eg, make access decisions).  But where do files and directories get their contexts?
 
-=== Step 1: Examine a context
+* Contexts are set when files are created, based on their parent directory's context (with a few exceptions)
+* Packages can set contexts as part of installation
+
+Let's take a closer look at contexts.
+
+=== Step 1: Become root
+
+First, go ahead and switch users to root; we'll remain in the root shell for the remainder of Exercise 1:
+
+{{< highlight bash >}}
+sudo -i
+{{< /highlight >}}
+
+=== Step 2: Examine a context
 
 To get started, let's check the context of a file in the `ec2-user` user's home directory:
 
@@ -33,7 +47,7 @@ Following the standard UNIX permissions, user and group information, the SELinux
 
 The SELinux user is not the same as the UNIX user, as it solely exists to associate a UNIX user to a set of roles.  This allows UNIX users to be constrained by SELinux policy.  In this case the `unconfined_u` user means that the user is mapped to the `__default__` SELinux login.  This means that the user is allowed to launch any application that standard filesystem permissions allow.  However, if that application has a defined domain transition, a confined domain will still apply to it.
 
-=== Step 2: Domain transitions
+=== Step 3: Domain transitions
 
 To demonstrate the difference between confined and unconfined processes, let's launch an application which doesn't have a defined domain transition:
 
@@ -75,7 +89,7 @@ kill %1
 
 This changing of the context, when an application in SELinux's ruleset is launched, is called a `domain transition`.
 
-=== Step 3: Useful utility #1: restorecon
+=== Step 4: Useful utility #1: restorecon
 
 If I had to suggest to a new SELinux user the one thing that they should remember (no, it's not `setenforce 0`!), it'd be `restorecon`.  Restorecon will reset the SELinux context to what is defined in the system's context database.
 
@@ -91,7 +105,7 @@ ls -Z ./testaudit
 system_u:object_r:httpd_sys_content_t:s0 ./testaudit
 ----
 
-And we can change it back, magically, with restorecon.  Note that this would have fixed the problem reported in our test AVC, by setting the context to `httpd_sys_content_t`:
+And we can change it back, magically, with restorecon:
 
 {{< highlight bash >}}
 restorecon -v ./testaudit
@@ -105,6 +119,6 @@ Relabeled /root/testaudit from system_u:object_r:httpd_sys_content_t:s0 to syste
 -rw-------. root root system_u:object_r:admin_home_t:s0 ./testaudit
 ----
 
-I also slipped in `chcon`, which you can use to temporarily change the context on a file.
+I also slipped in `chcon`, which you can use to temporarily change the context on a file.  You'll get to use several other SELinux CLI tools throughout the day.
 
 {{< importPartial "footer/footer.html" >}}

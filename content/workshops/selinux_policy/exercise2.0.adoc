@@ -16,7 +16,19 @@ layout: lab
 In this exercise, we are going to download the code for the example application that we are going to write policy for, and build and install it onto our test system.
 
 
-=== Step 1: Change directories
+=== Step 1: Exit root shell
+
+If you haven't already, exit the root shell we started in Section 1.  Running `whoami` should not return `root`:
+
+{{< highlight bash >}}
+whoami
+{{< /highlight >}}
+[source,bash]
+----
+ec2-user
+----
+
+=== Step 2: Change directories
 
 Create a `src` directory, in your home directory.
 
@@ -26,7 +38,7 @@ mkdir src
 cd src
 {{< /highlight >}}
 
-=== Step 2: Check out the source code to the example application from GitHub
+=== Step 3: Check out the source code to the example application from GitHub
 
 Download the latest code release
 
@@ -35,7 +47,7 @@ git clone https://github.com/ajacocks/selinuxlab.git
 cd selinuxlab
 {{< /highlight >}}
 
-=== Step 3: Deploy the lab application, with Ansible
+=== Step 4: Deploy the lab application, with Ansible
 
 Now, use Ansible to deploy the test application
 
@@ -43,7 +55,7 @@ Now, use Ansible to deploy the test application
 ansible-playbook setup-testapp.yml
 {{< /highlight >}}
 
-=== Step 4: Application and Service Info
+=== Step 5: Application and Service Info
 
 Take a look at the application, and the associated service, that you just installed
 
@@ -64,13 +76,12 @@ sudo systemctl status testapp
    Active: inactive (dead)
 ----
 
-=== Step 5: Start and enable the service
+=== Step 6: Start and enable the service
 
-Now, let's file up the application
+Now, let's fire up the application
 
 {{< highlight bash >}}
-sudo systemctl enable testapp
-sudo systemctl start testapp
+sudo systemctl enable --now testapp
 {{< /highlight >}}
 
 We can see that the app has been launched by systemd:
