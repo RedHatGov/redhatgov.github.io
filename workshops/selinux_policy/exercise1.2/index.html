@@ -303,14 +303,14 @@
     
     
     <li class="previous">
-      <a href="/workshops/selinux_policy/exercise1.1/">&larr; Previous: Exercise 1.1 - Introduction to SELinux</a>
+      <a href="/workshops/selinux_policy/exercise1.1/">&larr; Previous: Exercise 1.1 - SELinux policy in RHEL</a>
     </li>
     
     
     
     
     <li class="next">
-      <a href="/workshops/selinux_policy/exercise2.0/">Next: Exercise 2.0 - Creating Custom SELinux Policy &rarr;</a>
+      <a href="/workshops/selinux_policy/exercise1.3/">Next: Exercise 1.3 - Altering behavior &rarr;</a>
     </li>
     
     
@@ -321,15 +321,38 @@
 <h2 id="_exercise_description">Exercise Description</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>All processes and files are labeled with an SELinux context.  The context contains information that SELinux needs to make control decisions.  Contexts contain user, role, type, and level information,</p>
+<p>Let’s peer under the hood a bit to see how SELinux works.
+All processes and files are labeled with an SELinux context; contexts contain user, role, type, and level information.  This is information that SELinux needs to enforce the active policy (eg, make access decisions).  But where do files and directories get their contexts?</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Contexts are set when files are created, based on their parent directory’s context (with a few exceptions)</p>
+</li>
+<li>
+<p>Packages can set contexts as part of installation</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Let’s take a closer look at contexts.</p>
 </div>
 <div class="sect2">
-<h3 id="_step_1_examine_a_context">Step 1: Examine a context</h3>
+<h3 id="_step_1_become_root">Step 1: Become root</h3>
 <div class="paragraph">
-<p>To get started, let&#8217;s check the context of a file in the <code>ec2-user</code> user&#8217;s home directory:</p>
+<p>First, go ahead and switch users to root; we’ll remain in the root shell for the remainder of Exercise 1:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -Z ~ec2-user/.vimrc</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo -i</span></span></code></pre></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_examine_a_context">Step 2: Examine a context</h3>
+<div class="paragraph">
+<p>To get started, let’s check the context of a file in the <code>ec2-user</code> user’s home directory:</p>
+</div>
+<div class="paragraph">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls -Z ~ec2-user/.vimrc</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -347,13 +370,13 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_2_domain_transitions">Step 2: Domain transitions</h3>
+<h3 id="_step_3_domain_transitions">Step 3: Domain transitions</h3>
 <div class="paragraph">
-<p>To demonstrate the difference between confined and unconfined processes, let&#8217;s launch an application which doesn&#8217;t have a defined domain transition:</p>
+<p>To demonstrate the difference between confined and unconfined processes, let’s launch an application which doesn’t have a defined domain transition:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yes &gt;/dev/null &amp;
-ps -Z | grep yes</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yes &gt;/dev/null &amp;
+</span></span><span style="display:flex;"><span>ps -Z | grep yes</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -367,10 +390,10 @@ ps -Z | grep yes</code></pre></div>
 <p>On the other hand, if we launch the <code>passwd</code> utility, we will see a different story:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kill %1
-ps -Z | grep yes
-passwd ec2-user &gt;/dev/null &amp;
-ps -Z | grep passwd</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kill %1
+</span></span><span style="display:flex;"><span>ps -Z | grep yes
+</span></span><span style="display:flex;"><span>passwd ec2-user &gt;/dev/null &amp;
+</span></span><span style="display:flex;"><span>ps -Z | grep passwd</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -383,26 +406,26 @@ ps -Z | grep passwd</code></pre></div>
 <p>See that the third field is <code>passwd_t</code>, indicating that the <code>passwd</code> process has been confined by the <code>passwd_t</code> domain.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s kill that hanging <code>passwd</code> process, and move on:</p>
+<p>Let’s kill that hanging <code>passwd</code> process, and move on:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kill %1</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kill %1</span></span></code></pre></div>
 </div>
 <div class="paragraph">
-<p>This changing of the context, when an application in SELinux&#8217;s ruleset is launched, is called a <code>domain transition</code>.</p>
+<p>This changing of the context, when an application in SELinux’s ruleset is launched, is called a <code>domain transition</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_3_useful_utility_1_restorecon">Step 3: Useful utility #1: restorecon</h3>
+<h3 id="_step_4_useful_utility_1_restorecon">Step 4: Useful utility #1: restorecon</h3>
 <div class="paragraph">
-<p>If I had to suggest to a new SELinux user the one thing that they should remember (no, it&#8217;s not <code>setenforce 0</code>!), it&#8217;d be <code>restorecon</code>.  Restorecon will reset the SELinux context to what is defined in the system&#8217;s context database.</p>
+<p>If I had to suggest to a new SELinux user the one thing that they should remember (no, it’s not <code>setenforce 0</code>!), it’d be <code>restorecon</code>.  Restorecon will reset the SELinux context to what is defined in the system’s context database.</p>
 </div>
 <div class="paragraph">
-<p>To try this out, let&#8217;s purposefully set the context incorrectly on our example SELinux AVC log:</p>
+<p>To try this out, let’s purposefully set the context incorrectly on our example SELinux AVC log:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">chcon -t httpd_sys_content_t ./testaudit
-ls -Z ./testaudit</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chcon -t httpd_sys_content_t ./testaudit
+</span></span><span style="display:flex;"><span>ls -Z ./testaudit</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -410,11 +433,11 @@ ls -Z ./testaudit</code></pre></div>
 </div>
 </div>
 <div class="paragraph">
-<p>And we can change it back, magically, with restorecon.  Note that this would have fixed the problem reported in our test AVC, by setting the context to <code>httpd_sys_content_t</code>:</p>
+<p>And we can change it back, magically, with restorecon:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">restorecon -v ./testaudit
-ls -Z ./testaudit</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>restorecon -v ./testaudit
+</span></span><span style="display:flex;"><span>ls -Z ./testaudit</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -424,7 +447,7 @@ ls -Z ./testaudit</code></pre></div>
 </div>
 </div>
 <div class="paragraph">
-<p>I also slipped in <code>chcon</code>, which you can use to temporarily change the context on a file.</p>
+<p>I also slipped in <code>chcon</code>, which you can use to temporarily change the context on a file.  You’ll get to use several other SELinux CLI tools throughout the day.</p>
 </div>
 <div class="paragraph">
 <style>
@@ -526,7 +549,7 @@ ls -Z ./testaudit</code></pre></div>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -786,7 +809,7 @@ ls -Z ./testaudit</code></pre></div>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -898,7 +921,7 @@ ls -Z ./testaudit</code></pre></div>
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -908,7 +931,7 @@ ls -Z ./testaudit</code></pre></div>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -972,14 +995,14 @@ window.onclick = function(event) {
     
     
     <li class="previous">
-      <a href="/workshops/selinux_policy/exercise1.1/">&larr; Previous: Exercise 1.1 - Introduction to SELinux</a>
+      <a href="/workshops/selinux_policy/exercise1.1/">&larr; Previous: Exercise 1.1 - SELinux policy in RHEL</a>
     </li>
     
     
     
     
     <li class="next">
-      <a href="/workshops/selinux_policy/exercise2.0/">Next: Exercise 2.0 - Creating Custom SELinux Policy &rarr;</a>
+      <a href="/workshops/selinux_policy/exercise1.3/">Next: Exercise 1.3 - Altering behavior &rarr;</a>
     </li>
     
     
@@ -995,7 +1018,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

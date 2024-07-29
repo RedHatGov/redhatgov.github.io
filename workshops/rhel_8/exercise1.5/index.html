@@ -324,7 +324,7 @@
 <p>RHEL 8 makes it easy to enforce a strong and consistent cryptographic policy on your systems.</p>
 </div>
 <div class="paragraph">
-<p>In the following exercises we&#8217;ll use the new commands for managing your crypto configurations and test them. We will be using the web site <a href="https://badssl.com">badssl.com</a> to test connections using different versions of relevant protocols, such as TLS.</p>
+<p>In the following exercises we’ll use the new commands for managing your crypto configurations and test them. We will be using the web site <a href="https://badssl.com">badssl.com</a> to test connections using different versions of relevant protocols, such as TLS.</p>
 </div>
 </div>
 </div>
@@ -340,7 +340,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>You should see something like &#8230;&#8203;</p>
+<p>You should see something like …​</p>
 </div>
 <div class="paragraph">
 <p><code>DEFAULT</code></p>
@@ -353,15 +353,15 @@
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The system-wide crypto policies functionality is new to RHEL 8.  It is part of Red Hat&#8217;s efforts to further reduce the attack surface of your RHEL systems and the applications you build on them.
+The system-wide crypto policies functionality is new to RHEL 8.  It is part of Red Hat’s efforts to further reduce the attack surface of your RHEL systems and the applications you build on them.
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>To see the effect of the DEFAULT policy, try pasting in this command:</p>
@@ -372,10 +372,10 @@ The system-wide crypto policies functionality is new to RHEL 8.  It is part of R
 </div>
 </div>
 <div class="paragraph">
-<p>You can see from the 2nd line of output that it cannot make a TLS connection to that site, and reports "unsupported protocol".</p>
+<p>You can see from the 2nd line of output that it cannot make a TLS connection to that site, and reports &#34;unsupported protocol&#34;.</p>
 </div>
 <div class="paragraph">
-<p>Now let&#8217;s change the default crypto policy from DEFAULT to something less secure, just for testing purposes.  We&#8217;ll set the crypto policy to LEGACY to temporarily allow insecure TLS 1.1 communication from our system.</p>
+<p>Now let’s change the default crypto policy from DEFAULT to something less secure, just for testing purposes.  We’ll set the crypto policy to LEGACY to temporarily allow insecure TLS 1.1 communication from our system.</p>
 </div>
 <div class="paragraph">
 <p>Change the crypto policy to LEGACY.</p>
@@ -389,7 +389,7 @@ The system-wide crypto policies functionality is new to RHEL 8.  It is part of R
 <p>Note: You may see a warning requesting a reboot for the policy change to fully take place, but this is not necessary for this exercise.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s test communication to the same site; It should connect successfully, and report TLS v1.1:</p>
+<p>Let’s test communication to the same site; It should connect successfully, and report TLS v1.1:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -496,7 +496,7 @@ The system-wide crypto policies functionality is new to RHEL 8.  It is part of R
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -756,7 +756,7 @@ The system-wide crypto policies functionality is new to RHEL 8.  It is part of R
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -868,7 +868,7 @@ The system-wide crypto policies functionality is new to RHEL 8.  It is part of R
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -878,7 +878,7 @@ The system-wide crypto policies functionality is new to RHEL 8.  It is part of R
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -964,7 +964,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

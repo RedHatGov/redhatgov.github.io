@@ -348,56 +348,56 @@ e.g. <a href="https://mtx879.dynatrace-managed.com/e/65c5d8d9-9cb4-42bb-b24d-4f7
 <blockquote>
 The first step is to define the new project where we'll deploy the Dynatrace OneAgent pods
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc new-project dynatrace
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc new-project dynatrace
+</span></span></code></pre></div><blockquote>
 Using the information you gathered in the pre-requisites referenced above, define the secret that will be used to provision the operator.  You may update this secret at any time to rotate the tokens.
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc -n dynatrace create secret generic oneagent <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>--from-literal<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;apiToken=&lt;API token&gt;&#34;</span> --from-literal<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;paasToken=&lt;PaaS token&gt;&#34;</span>
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc -n dynatrace create secret generic oneagent <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--from-literal<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;apiToken=&lt;API token&gt;&#34;</span> --from-literal<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;paasToken=&lt;PaaS token&gt;&#34;</span>
+</span></span></code></pre></div><blockquote>
 Optional: Check the latest release at 
 https://github.com/Dynatrace/dynatrace-oneagent-operator/branches/active
 </blockquote>
 <blockquote>
 Apply the latest configuration from Dynatrace:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc apply -f <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>https://github.com/Dynatrace/dynatrace-oneagent-operator/releases/latest/download/openshift.yaml
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>https://github.com/Dynatrace/dynatrace-oneagent-operator/releases/latest/download/openshift.yaml
+</span></span></code></pre></div><blockquote>
 You should see an output *similar* to the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">customresourcedefinition.apiextensions.k8s.io/oneagentapms.dynatrace.com created
-customresourcedefinition.apiextensions.k8s.io/oneagents.dynatrace.com created
-serviceaccount/dynatrace-oneagent created
-serviceaccount/dynatrace-oneagent-operator created
-serviceaccount/dynatrace-oneagent-webhook created
-role.rbac.authorization.k8s.io/dynatrace-oneagent-operator created
-role.rbac.authorization.k8s.io/dynatrace-oneagent-webhook created
-clusterrole.rbac.authorization.k8s.io/dynatrace-oneagent-operator created
-clusterrole.rbac.authorization.k8s.io/dynatrace-oneagent-webhook created
-rolebinding.rbac.authorization.k8s.io/dynatrace-oneagent-operator created
-rolebinding.rbac.authorization.k8s.io/dynatrace-oneagent-webhook created
-clusterrolebinding.rbac.authorization.k8s.io/dynatrace-oneagent-operator created
-clusterrolebinding.rbac.authorization.k8s.io/dynatrace-oneagent-webhook created
-service/dynatrace-oneagent-webhook created
-deployment.apps/dynatrace-oneagent-operator created
-deployment.apps/dynatrace-oneagent-webhook created
-securitycontextconstraints.security.openshift.io/dynatrace-oneagent-privileged created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/dynatrace-oneagent-webhook created
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>customresourcedefinition.apiextensions.k8s.io/oneagentapms.dynatrace.com created
+</span></span><span style="display:flex;"><span>customresourcedefinition.apiextensions.k8s.io/oneagents.dynatrace.com created
+</span></span><span style="display:flex;"><span>serviceaccount/dynatrace-oneagent created
+</span></span><span style="display:flex;"><span>serviceaccount/dynatrace-oneagent-operator created
+</span></span><span style="display:flex;"><span>serviceaccount/dynatrace-oneagent-webhook created
+</span></span><span style="display:flex;"><span>role.rbac.authorization.k8s.io/dynatrace-oneagent-operator created
+</span></span><span style="display:flex;"><span>role.rbac.authorization.k8s.io/dynatrace-oneagent-webhook created
+</span></span><span style="display:flex;"><span>clusterrole.rbac.authorization.k8s.io/dynatrace-oneagent-operator created
+</span></span><span style="display:flex;"><span>clusterrole.rbac.authorization.k8s.io/dynatrace-oneagent-webhook created
+</span></span><span style="display:flex;"><span>rolebinding.rbac.authorization.k8s.io/dynatrace-oneagent-operator created
+</span></span><span style="display:flex;"><span>rolebinding.rbac.authorization.k8s.io/dynatrace-oneagent-webhook created
+</span></span><span style="display:flex;"><span>clusterrolebinding.rbac.authorization.k8s.io/dynatrace-oneagent-operator created
+</span></span><span style="display:flex;"><span>clusterrolebinding.rbac.authorization.k8s.io/dynatrace-oneagent-webhook created
+</span></span><span style="display:flex;"><span>service/dynatrace-oneagent-webhook created
+</span></span><span style="display:flex;"><span>deployment.apps/dynatrace-oneagent-operator created
+</span></span><span style="display:flex;"><span>deployment.apps/dynatrace-oneagent-webhook created
+</span></span><span style="display:flex;"><span>securitycontextconstraints.security.openshift.io/dynatrace-oneagent-privileged created
+</span></span><span style="display:flex;"><span>mutatingwebhookconfiguration.admissionregistration.k8s.io/dynatrace-oneagent-webhook created
+</span></span></code></pre></div><blockquote>
 Create the default custom resource for the Dynatrace OneAgent:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -o cr.yaml https://raw.githubusercontent.com/Dynatrace/dynatrace-oneagent-operator/master/deploy/cr.yaml
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -o cr.yaml https://raw.githubusercontent.com/Dynatrace/dynatrace-oneagent-operator/master/deploy/cr.yaml
+</span></span></code></pre></div><blockquote>
 Update the custom resource (cr.yaml) with apiUrl and the name of secret we create above ("oneagent") as shown below
 <p>e.g.
 apiUrl: <a href="https://eye15053.live.dynatrace.com/api">https://eye15053.live.dynatrace.com/api</a>
 tokens: &ldquo;oneagent&rdquo;</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vi cr.yaml
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vi cr.yaml
+</span></span></code></pre></div><blockquote>
 </blockquote>
-<pre><code>apiVersion: dynatrace.com/v1alpha1
+<pre tabindex="0"><code>apiVersion: dynatrace.com/v1alpha1
 kind: OneAgent
 metadata:
   # a descriptive name for this object.
@@ -412,63 +412,63 @@ spec:
   skipCertCheck: false
   # name of secret holding `apiToken` and `paasToken`
   # if unset, name of custom resource is used
-  tokens: &quot;oneagent&quot;
+  tokens: &#34;oneagent&#34;
 </code></pre><blockquote>
 If you want Dynatrace to monitor OpenShift Service Mesh deployments, set
 </blockquote>
-<pre><code>enableIstio: true
+<pre tabindex="0"><code>enableIstio: true
 </code></pre><blockquote>
 Apply the modified custom resource (cr.yaml)
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc apply -f cr.yaml
-oneagent.dynatrace.com/oneagent configured
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f cr.yaml
+</span></span><span style="display:flex;"><span>oneagent.dynatrace.com/oneagent configured
+</span></span></code></pre></div><blockquote>
 Verify that the operator, webhook, and OneAgent pods have been created and are deploying
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc get pods
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc get pods
+</span></span></code></pre></div><blockquote>
 The outpout should look *similar* to the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">NAME                                           READY   STATUS    RESTARTS   AGE
-dynatrace-oneagent-operator-788fd7f5b4-6lt67   1/1     Running   <span style="color:#ae81ff">0</span>          4m21s
-dynatrace-oneagent-webhook-84747567df-lmltw    2/2     Running   <span style="color:#ae81ff">0</span>          4m21s
-oneagent-4j9xf                                 0/1     Running   <span style="color:#ae81ff">0</span>          102s
-oneagent-55p2k                                 0/1     Running   <span style="color:#ae81ff">0</span>          106s
-oneagent-b7qlb                                 0/1     Running   <span style="color:#ae81ff">0</span>          108s
-oneagent-jhk2f                                 0/1     Running   <span style="color:#ae81ff">0</span>          107s
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>NAME                                           READY   STATUS    RESTARTS   AGE
+</span></span><span style="display:flex;"><span>dynatrace-oneagent-operator-788fd7f5b4-6lt67   1/1     Running   <span style="color:#ae81ff">0</span>          4m21s
+</span></span><span style="display:flex;"><span>dynatrace-oneagent-webhook-84747567df-lmltw    2/2     Running   <span style="color:#ae81ff">0</span>          4m21s
+</span></span><span style="display:flex;"><span>oneagent-4j9xf                                 0/1     Running   <span style="color:#ae81ff">0</span>          102s
+</span></span><span style="display:flex;"><span>oneagent-55p2k                                 0/1     Running   <span style="color:#ae81ff">0</span>          106s
+</span></span><span style="display:flex;"><span>oneagent-b7qlb                                 0/1     Running   <span style="color:#ae81ff">0</span>          108s
+</span></span><span style="display:flex;"><span>oneagent-jhk2f                                 0/1     Running   <span style="color:#ae81ff">0</span>          107s
+</span></span></code></pre></div><blockquote>
 Check the deployment status of one of the pods:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc logs oneagent-jhk2f
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc logs oneagent-jhk2f
+</span></span></code></pre></div><blockquote>
 The output should look *similar* to the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">23:19:49 Started agent deployment as a container, PID 1352627.
-23:19:49 Downloading agent to /tmp/Dynatrace-OneAgent-Linux.sh via https://eye15053.live.dynatrace.com/api/v1/deployment/installer/agent/unix/default/latest?Api-Token<span style="color:#f92672">=</span>***&amp;arch<span style="color:#f92672">=</span>x86&amp;flavor<span style="color:#f92672">=</span>default
-23:20:18 Download complete
-23:20:18 Downloaded version: 1.195.161.20200720-160625
-23:20:18 Verifying agent installer signature
-23:20:21 Verification successful
-23:20:21 Deploying to: /mnt/host_root
-23:20:21 Starting installer...
-23:20:22 Warning: Parameter APP_LOG_CONTENT_ACCESS is deprecated and will be removed in future release. Please use --set-app-log-content-access instead. For details, see https://www.dynatrace.com/support/help/shortlink/oneagentctl
-23:20:23 Checking root privileges...
-23:20:23 OK
-23:20:23 Installation started, version 1.195.161.20200720-160625, build date: 20.07.2020, PID 1352627.
-23:20:25 Detected platform: LINUX arch: X86
-23:20:25 Detected bitness: <span style="color:#ae81ff">64</span>
-23:20:25 Checking free space in /opt/dynatrace/oneagent
-23:20:27 Extracting...
-23:20:28 Unpacking. This may take a few minutes...
-23:20:52 Unpacking complete.
-23:20:52 Moving new binaries into lib folders...
-23:20:54 User <span style="color:#e6db74">&#39;dtuser&#39;</span> added successfully.
-23:20:57 Non-privileged mode is enabled.
-23:20:57 Applying agent configuration
-23:20:58 Storing SELinux policy sources in /opt/dynatrace/oneagent/agent.
-23:20:58 Installing SELinux Dynatrace module. This may take a <span style="color:#66d9ef">while</span>...
-23:21:35 dynatrace_oneagent module was successfully installed
-</code></pre></div><h2 id="verify-that-the-dynatrace-oneagent-operator-is-deployed-in-both-the-openshift-management-console-and-the-dynatrace-tenant">Verify that the Dynatrace OneAgent Operator is deployed in both the OpenShift Management Console and the Dynatrace tenant</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>23:19:49 Started agent deployment as a container, PID 1352627.
+</span></span><span style="display:flex;"><span>23:19:49 Downloading agent to /tmp/Dynatrace-OneAgent-Linux.sh via https://eye15053.live.dynatrace.com/api/v1/deployment/installer/agent/unix/default/latest?Api-Token<span style="color:#f92672">=</span>***&amp;arch<span style="color:#f92672">=</span>x86&amp;flavor<span style="color:#f92672">=</span>default
+</span></span><span style="display:flex;"><span>23:20:18 Download complete
+</span></span><span style="display:flex;"><span>23:20:18 Downloaded version: 1.195.161.20200720-160625
+</span></span><span style="display:flex;"><span>23:20:18 Verifying agent installer signature
+</span></span><span style="display:flex;"><span>23:20:21 Verification successful
+</span></span><span style="display:flex;"><span>23:20:21 Deploying to: /mnt/host_root
+</span></span><span style="display:flex;"><span>23:20:21 Starting installer...
+</span></span><span style="display:flex;"><span>23:20:22 Warning: Parameter APP_LOG_CONTENT_ACCESS is deprecated and will be removed in future release. Please use --set-app-log-content-access instead. For details, see https://www.dynatrace.com/support/help/shortlink/oneagentctl
+</span></span><span style="display:flex;"><span>23:20:23 Checking root privileges...
+</span></span><span style="display:flex;"><span>23:20:23 OK
+</span></span><span style="display:flex;"><span>23:20:23 Installation started, version 1.195.161.20200720-160625, build date: 20.07.2020, PID 1352627.
+</span></span><span style="display:flex;"><span>23:20:25 Detected platform: LINUX arch: X86
+</span></span><span style="display:flex;"><span>23:20:25 Detected bitness: <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span>23:20:25 Checking free space in /opt/dynatrace/oneagent
+</span></span><span style="display:flex;"><span>23:20:27 Extracting...
+</span></span><span style="display:flex;"><span>23:20:28 Unpacking. This may take a few minutes...
+</span></span><span style="display:flex;"><span>23:20:52 Unpacking complete.
+</span></span><span style="display:flex;"><span>23:20:52 Moving new binaries into lib folders...
+</span></span><span style="display:flex;"><span>23:20:54 User <span style="color:#e6db74">&#39;dtuser&#39;</span> added successfully.
+</span></span><span style="display:flex;"><span>23:20:57 Non-privileged mode is enabled.
+</span></span><span style="display:flex;"><span>23:20:57 Applying agent configuration
+</span></span><span style="display:flex;"><span>23:20:58 Storing SELinux policy sources in /opt/dynatrace/oneagent/agent.
+</span></span><span style="display:flex;"><span>23:20:58 Installing SELinux Dynatrace module. This may take a <span style="color:#66d9ef">while</span>...
+</span></span><span style="display:flex;"><span>23:21:35 dynatrace_oneagent module was successfully installed
+</span></span></code></pre></div><h2 id="verify-that-the-dynatrace-oneagent-operator-is-deployed-in-both-the-openshift-management-console-and-the-dynatrace-tenant">Verify that the Dynatrace OneAgent Operator is deployed in both the OpenShift Management Console and the Dynatrace tenant</h2>
 <p>First verify the deployment via the OpenShift Management Conole</p>
 <blockquote>
 In the "Developer" interface, ensure that you are in the project "dynatrace" and choose topology to verify that you have three deployments: dynatrace-oneagent-operator, dynatrace-oneagent-webhook, and oneagent
@@ -578,7 +578,7 @@ In the Dynatrace tenant, select "Deployment status" and ensure that you have 6 D
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -838,7 +838,7 @@ In the Dynatrace tenant, select "Deployment status" and ensure that you have 6 D
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -950,7 +950,7 @@ In the Dynatrace tenant, select "Deployment status" and ensure that you have 6 D
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -960,7 +960,7 @@ In the Dynatrace tenant, select "Deployment status" and ensure that you have 6 D
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1043,7 +1043,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

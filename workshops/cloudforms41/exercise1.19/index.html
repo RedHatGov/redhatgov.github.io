@@ -354,24 +354,24 @@ menu, then Configuration → Settings and select the desired server under Zones.
 the Server Role for Embedded Ansible to On to enable the role.</p>
 <h2 id="section-2-configuration">Section 2: Configuration</h2>
 <h3 id="step-1-select-configuration">Step 1. Select Configuration</h3>
-<p><img src="../images/configure.png" width="300" /></p>
+<img src="../images/configure.png" width="300" />
 <h3 id="step-2-click-embedded-ansible---on">Step 2. Click Embedded Ansible -&gt; On</h3>
 <div class="alert alert-success">
 <p><span class="pficon pficon-ok"></span></p>
 <p>This should already be done for you.</p>
 </div>
-<p><img src="../images/configure2.png" width="1000" /></p>
-<p><img src="../images/configure3.png" width="650" /></p>
+<img src="../images/configure2.png" width="1000" />
+<img src="../images/configure3.png" width="650" />
 <h3 id="step-3-click-automate---ansible">Step 3. Click Automate -&gt; Ansible</h3>
 <p>You will now see Ansible Playbooks.  These playbooks are samples from <a href="https://github.com/jeromemarc/workflow-demo">GitHub</a></p>
-<p><img src="../images/ansible-playbooks.png" width="1000" /></p>
+<img src="../images/ansible-playbooks.png" width="1000" />
 <h2 id="section-3-playbook">Section 3: Playbook</h2>
 <h3 id="step-1-explore-the-first-playbook">Step 1. Explore the first Playbook</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ManageIQ/create_user.yml
-</code></pre></div><p>From here we can see properties such as when it was uploaded and where the playbook came from.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ManageIQ/create_user.yml
+</span></span></code></pre></div><p>From here we can see properties such as when it was uploaded and where the playbook came from.
 <img src="../images/ansible-playbooks2.png" width="1000" /></p>
 <p>If you click on &ldquo;Repository&rdquo; you can see even more detail about the Playbook.</p>
-<p><img src="../images/ansible-playbooks3.png" width="1000" /></p>
+<img src="../images/ansible-playbooks3.png" width="1000" />
 <p>Ansible is built into CloudForms so there is nothing to install.</p>
 <table>
 <thead>
@@ -397,15 +397,15 @@ the Server Role for Embedded Ansible to On to enable the role.</p>
 </table>
 <h3 id="step-2-add-credentials">Step 2. Add Credentials</h3>
 <p>Red Hat CloudForms can store credentials used by playbooks. Credentials saved in CloudForms are matched and executed with a playbook when run.</p>
-<p><img src="../images/ansible-creds.png" width="1000" /></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Automate / Ansible / Credentials
-</code></pre></div><h3 id="step-3-explore-adding-a-new-credential">Step 3. Explore adding a new credential</h3>
+<img src="../images/ansible-creds.png" width="1000" />
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Automate / Ansible / Credentials
+</span></span></code></pre></div><h3 id="step-3-explore-adding-a-new-credential">Step 3. Explore adding a new credential</h3>
 <p>From here you would add a credential adding the Name and Type and actual credential.</p>
-<p><img src="../images/ansible-creds2.png" width="650" /></p>
+<img src="../images/ansible-creds2.png" width="650" />
 <h3 id="step-4-explore-your-new-ansible-service">Step 4. Explore your new Ansible Service</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Services / My Services / Create CloudForms User
-</code></pre></div><p><img src="../images/ansible-create.png" width="1000" /></p>
-<p><img src="../images/ansible-create2.png" width="1000" /></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Services / My Services / Create CloudForms User
+</span></span></code></pre></div><img src="../images/ansible-create.png" width="1000" />
+<img src="../images/ansible-create2.png" width="1000" />
 <p>Now this Ansible Playbook can be offered up as a Service item with CloudForms controlling the access and lifecycle of the automation action.</p>
 <h1 id="summary">Summary</h1>
 <p>In this exercise we’ve seen how simple it is to add and use Ansible Playbooks. Ansible with it&rsquo;s 1300+ modules makes the sky the limit when it comes to automation actions you can perform or offer up as a service in CloudForms.</p>
@@ -448,7 +448,7 @@ the Server Role for Embedded Ansible to On to enable the role.</p>
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

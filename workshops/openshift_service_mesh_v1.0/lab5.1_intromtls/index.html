@@ -326,28 +326,28 @@
 <blockquote>
 <i class="fa fa-terminal"></i> let's launch a job using the CLI with to show that:
 </blockquote>
-<pre><code>oc run curl-boards-1 -i --restart=Never --image=appropriate/curl --timeout=10s -- boards:8080/shareditems
+<pre tabindex="0"><code>oc run curl-boards-1 -i --restart=Never --image=appropriate/curl --timeout=10s -- boards:8080/shareditems
 </code></pre><p>This job executes a direct HTTP curl request for the current shared boards list. It&rsquo;ll print out something similar to this:</p>
-<pre><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+<pre tabindex="0"><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[
   {
-    &quot;_id&quot;: &quot;5e5d75b33396fe0043f63e5c&quot;,
-    &quot;owner&quot;: &quot;anonymous&quot;,
-    &quot;type&quot;: &quot;string&quot;,
-    &quot;raw&quot;: &quot;something goes here&quot;,
-    &quot;name&quot;: &quot;&quot;,
-    &quot;id&quot;: &quot;MNCkr3mK&quot;,
-    &quot;created_at&quot;: &quot;2020-03-02T21:08:03+00:00&quot;
+    &#34;_id&#34;: &#34;5e5d75b33396fe0043f63e5c&#34;,
+    &#34;owner&#34;: &#34;anonymous&#34;,
+    &#34;type&#34;: &#34;string&#34;,
+    &#34;raw&#34;: &#34;something goes here&#34;,
+    &#34;name&#34;: &#34;&#34;,
+    &#34;id&#34;: &#34;MNCkr3mK&#34;,
+    &#34;created_at&#34;: &#34;2020-03-02T21:08:03+00:00&#34;
   },
   {
-    &quot;_id&quot;: &quot;5e5d75b63396fe0043f63e5d&quot;,
-    &quot;owner&quot;: &quot;anonymous&quot;,
-    &quot;type&quot;: &quot;string&quot;,
-    &quot;raw&quot;: &quot;another item&quot;,
-    &quot;name&quot;: &quot;&quot;,
-    &quot;id&quot;: &quot;x5ORoJu8&quot;,
-    &quot;created_at&quot;: &quot;2020-03-02T21:08:06+00:00&quot;
+    &#34;_id&#34;: &#34;5e5d75b63396fe0043f63e5d&#34;,
+    &#34;owner&#34;: &#34;anonymous&#34;,
+    &#34;type&#34;: &#34;string&#34;,
+    &#34;raw&#34;: &#34;another item&#34;,
+    &#34;name&#34;: &#34;&#34;,
+    &#34;id&#34;: &#34;x5ORoJu8&#34;,
+    &#34;created_at&#34;: &#34;2020-03-02T21:08:06+00:00&#34;
   }
 100   423  100   423    0     0  23500      0 --:--:-- --:--:-- --:--:-- 23500
 ]
@@ -359,11 +359,11 @@
 Service mesh allows setting policy at the individual service, namespace, and entire mesh levels (applied/enforced in that order)
 </p>
 <p>We already wrote the YAML config to do this. It looks like this:</p>
-<pre><code>apiVersion: authentication.istio.io/v1alpha1
+<pre tabindex="0"><code>apiVersion: authentication.istio.io/v1alpha1
 kind: Policy
 metadata:
-  name: &quot;default&quot;
-  namespace: &quot;microservices-demo&quot;
+  name: &#34;default&#34;
+  namespace: &#34;microservices-demo&#34;
 spec:
   peers:
   - mtls:
@@ -376,13 +376,13 @@ sed "s|microservices-demo|$PROJECT_NAME|" ./istio-configuration/policy-mtls.yaml
 ```
 <br>
 <p>Now we also need to set DestinationRules for each service so that our sidecars know to use mTLS when communicating with each other. The YAML for that looks like this - note the use of a wildcard:</p>
-<pre><code>apiVersion: &quot;networking.istio.io/v1alpha3&quot;
-kind: &quot;DestinationRule&quot;
+<pre tabindex="0"><code>apiVersion: &#34;networking.istio.io/v1alpha3&#34;
+kind: &#34;DestinationRule&#34;
 metadata:
-  name: &quot;destinationrule-mtls-istio-mutual&quot;
-  namespace: &quot;microservices-demo&quot;
+  name: &#34;destinationrule-mtls-istio-mutual&#34;
+  namespace: &#34;microservices-demo&#34;
 spec:
-  host: &quot;*.microservices-demo.svc.cluster.local&quot;
+  host: &#34;*.microservices-demo.svc.cluster.local&#34;
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL
@@ -508,7 +508,7 @@ Next we will verify the mTLS that we just enabled.
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -768,7 +768,7 @@ Next we will verify the mTLS that we just enabled.
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -880,7 +880,7 @@ Next we will verify the mTLS that we just enabled.
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -890,7 +890,7 @@ Next we will verify the mTLS that we just enabled.
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -973,7 +973,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

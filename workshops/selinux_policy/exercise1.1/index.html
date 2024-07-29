@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Exercise 1.1 - Introduction to SELinux | Red Hat | Public Sector</title>
+    <title>Exercise 1.1 - SELinux policy in RHEL | Red Hat | Public Sector</title>
 
     
     
@@ -279,7 +279,7 @@
 
 
 <div class="jumbotron jumbotron-page text-center">
-  <h1>Exercise 1.1 - Introduction to SELinux</h1>
+  <h1>Exercise 1.1 - SELinux policy in RHEL</h1>
 </div>
 
 <div class="container">
@@ -317,11 +317,77 @@
   </ul>
 </nav>
 
-    <div class="sect1">
-<h2 id="_exercise_description">Exercise Description</h2>
+    <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>To better understand SELinux basic concepts, see the following documentation:</p>
+<p>What are policies?  A policy is a real-world application of SELinux controls.  This chapter is an overview and examination of SELinux policy for Red Hat Enterprise Linux.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_what_is_the_targeted_policy">What is the Targeted Policy?</h3>
+<div class="paragraph">
+<p>The SELinux policy is highly configurable. Starting with Red Hat Enterprise Linux 5, Red Hat defaulted to the <strong>targeted policy</strong>. The goal of this policy is to lock down all processes that listen for network connections and pretty much all processes that start at boot.  Under the targeted policy, every subject and object runs in the unconfined_t domain except for the specific targeted daemons. Objects that are in the unconfined_t domain have no restrictions and fall back to using standard Linux security, that is, DAC. The daemons secured by the targeted policy run in their own domains and are restricted via type enforcement in every operation they perform on the system. This way daemons that are exploited or compromised in any way are contained and can only cause limited damage.</p>
+</div>
+<div class="paragraph">
+<p>For example, the http and ntp daemons are both protected in the default targeted policy, and run in the httpd_t and ntpd_t domains, respectively. The ssh daemon, however, is not protected in this policy, and consequently runs in the unconfined_t domain.  The targeted daemons include most common system daemons (dhcpd, httpd, mysqld, named, nscd, ntpd, portmap, postgres, snmpd, squid, syslogd, and winbind) and the list grows with each RHEL generation.</p>
+</div>
+<div class="paragraph">
+<p>Refer to the following sample output, which illustrates the various domains for the daemons mentioned above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>user_u:system_r:httpd_t         25129 ?        00:00:00 httpd
+user_u:system_r:ntpd_t          25176 ?        00:00:00 ntpd
+system_u:system_r:unconfined_t         25245 ? 00:00:00 sshd</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_additional_policies_are_available">Additional policies are available:</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Multi-level security (MLS)</p>
+</li>
+<li>
+<p>Minimum</p>
+</li>
+<li>
+<p>Sandbox</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <strong>MLS</strong> SELinux policy applies a modified principle called Bell-La Padula with write equality. This means that users can read files at their own sensitivity level and lower, but can write only at exactly their own level. This prevents, for example, low-clearance users from writing content into top-secret files.  MLS is the most strict policy and is rarely used in practice.</p>
+</div>
+<div class="paragraph">
+<p><strong>Minimum</strong> policy is built exactly the same as targeted policy, but installs ONLY the base policy package and the unconfined.pp.  All of the SELinux policy modules from the targeted policy are in the selinux-policy-minimum rpm package but they are not compiled and loaded into the kernel in the post install.</p>
+</div>
+<div class="paragraph">
+<p><strong>Sandbox</strong> is a special-purpose policy and utility primarily for testing.  The sandbox security utility adds a set of SELinux policies that allow a system administrator to run an application within a tightly confined SELinux domain. Restrictions on permission to open new files or access to the network can be defined. This enables testing the processing characteristics of untrusted software securely, without risking damage to the system.</p>
+</div>
+<div class="paragraph">
+<p>We are only working with Targeted Policy in this workshop.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_additional_reminders">Additional reminders</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>SELinux policy is consulted after normal DAC controls.  So if DAC permissions already deny a particular access to a file, no further evaluations are done.</p>
+</li>
+<li>
+<p>SELinux is a &#34;default deny&#34; system.  Thus, that which is not explicitly permitted is denied.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_to_learn_more">To learn more</h3>
+<div class="paragraph">
+<p>To better understand SELinux basic concepts, see the following resources:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -335,186 +401,6 @@
 <p><a href="http://freecomputerbooks.com/books/The_SELinux_Notebook-4th_Edition.pdf">The SELinux Notebook</a></p>
 </li>
 </ul>
-</div>
-<div class="sect2">
-<h3 id="_step_1_become_root">Step 1: Become root</h3>
-<div class="paragraph">
-<p>First, go ahead and switch users to root:</p>
-</div>
-<div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo -i</code></pre></div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_step_2_what_mode_are_we_in">Step 2: What mode are we in?</h3>
-<div class="paragraph">
-<p>Next, let&#8217;s check to see what SELinux mode your host is in:</p>
-</div>
-<div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">getenforce</code></pre></div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">Enforcing</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_step_3_changing_modes">Step 3: Changing modes</h3>
-<div class="paragraph">
-<p>Now, we can change the mode that your host is in:</p>
-</div>
-<div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">setenforce <span style="color:#ae81ff">0</span>
-getenforce</code></pre></div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">Permissive</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And we can change it back:</p>
-</div>
-<div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">setenforce <span style="color:#ae81ff">1</span>
-getenforce</code></pre></div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">Enforcing</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_step_4_changing_modes_for_specific_domains">Step 4: Changing modes for specific domains</h3>
-<div class="paragraph">
-<p>You can also set individual SELinux domains (like <code>httpd_t</code>, which controls web server access control) to permissve mode:</p>
-</div>
-<div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">semanage permissive -a httpd_t
-semanage permissive -l</code></pre></div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">Builtin Permissive Types
-
-Customized Permissive Types
-
-httpd_t</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And again, we can change it back:</p>
-</div>
-<div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">semanage permissive -d httpd_t</code></pre></div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">libsemanage.semanage_direct_remove_key: Removing last permissive_httpd_t module (no other permissive_httpd_t module exists at another priority).</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>permissive</code> mode means that either the entire system (the first example) or the specific application constrained by a type (the second example) are allowed to bypass SELinux access controls.  However, even though access controls are disabled, full AVC (access vector cache, where SELinux stores its decisions) logging still happens.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_step_5_selinux_logging">Step 5: SELinux logging</h3>
-<div class="paragraph">
-<p>SELinux messages are logged to the <code>/var/log/audit/audit.log</code> file.  We can read the messages with this command:</p>
-</div>
-<div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -m MAC_POLICY_LOAD -i --just-one</code></pre></div>
-</div>
-<div class="paragraph">
-<p>We have asked the <code>ausearch</code> utility to look for SELinux policies being loaded (<code>-m MAC_POLICY_LOAD</code>), to make the result human-readable (<code>-i</code>), and to return only a single result (<code>--just-one</code>):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">----
-type=PROCTITLE msg=audit(05/17/2019 23:47:54.147:1896) : proctitle=/sbin/load_policy
-type=SYSCALL msg=audit(05/17/2019 23:47:54.147:1896) : arch=x86_64 syscall=write success=yes exit=3857474 a0=0x4 a1=0x7fb57e597000 a2=0x3adc42 a3=0x7ffc8bb993a0 items=0 ppid=16567 pid=16572 auid=ec2-user uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts0 ses=1 comm=load_policy exe=/usr/sbin/load_policy subj=unconfined_u:unconfined_r:load_policy_t:s0-s0:c0.c1023 key=(null)
-type=MAC_POLICY_LOAD msg=audit(05/17/2019 23:47:54.147:1896) : auid=ec2-user ses=1 lsm=selinux res=yes</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Other useful searches include:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>all denials:</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -m avc,user_avc,selinux_err,user_selinux_err</code></pre></div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>denials from today:</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -m avc -ts today</code></pre></div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>denials from the last 10 minutes:</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -m avc -ts recent</code></pre></div>
-</div>
-<div class="paragraph">
-<p>You can try these, if you like, but they may or may not return any results.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_step_6_interpreting_avcs">Step 6: Interpreting AVCs</h3>
-<div class="paragraph">
-<p>If you use <code>ausearch</code> to find AVC messages, you can see exactly what caused SELinux to deny access:</p>
-</div>
-<div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -if ./testaudit -m AVC</code></pre></div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">----
-time-&gt;Mon Nov 17 00:45:36 2008
-type=SYSCALL msg=audit(1226882736.442:86): arch=40000003 syscall=196 success=no exit=-13 a0=b9a1e198 a1=bfc2921c a2=54dff4 a3=2008171 items=0 ppid=2425 pid=2427 auid=502 uid=48 gid=48 euid=48 suid=48 fsuid=48 egid=48 sgid=48 fsgid=48 tty=(none) ses=4 comm="httpd" exe="/usr/sbin/httpd" subj=unconfined_u:system_r:httpd_t:s0 key=(null)
-type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 comm="httpd" path="/var/www/html/file1" dev=dm-0 ino=284133 scontext=unconfined_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:samba_share_t:s0 tclass=file</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Here, we can see that the <code>httpd</code> process, ID <code>2427</code>, was disallowed from checking attributes of the file <code>/var/www/html/file1</code>.  Additionally, we can see that the domain of the process was <code>httpd_t</code>, and the file was labeled with the <code>samba_share_t</code> context.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_step_7_getting_advice">Step 7: Getting advice</h3>
-<div class="paragraph">
-<p>There is a neat utility called <code>audit2why</code>, which can make suggestions as to how you might solve SELinux AVC messages.  Let&#8217;s try it on our test error:</p>
-</div>
-<div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -if ./testaudit -m AVC | audit2why</code></pre></div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 comm="httpd" path="/var/www/html/file1" dev=dm-0 ino=284133 scontext=unconfined_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:samba_share_t:s0 tclass=file
-
-	Was caused by:
-		Missing type enforcement (TE) allow rule.
-
-		You can use audit2allow to generate a loadable module to allow this access.</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>audit2why</code> utility is telling us that the problem was caused by a missing <code>allow</code> rule, which would grant access for <code>httpd_t</code> processes to <code>samba_share_t</code> files.  This is obviously not the whole story, in this case, but it points us to the problem of the file&#8217;s context being incorrect.</p>
 </div>
 <div class="paragraph">
 <style>
@@ -616,7 +502,7 @@ type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 c
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -876,7 +762,7 @@ type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 c
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -988,7 +874,7 @@ type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 c
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -998,7 +884,7 @@ type=AVC msg=audit(1226882736.442:86): avc:  denied  { getattr } for  pid=2427 c
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1044,8 +930,6 @@ window.onclick = function(event) {
 
 </div>
 </div>
-</div>
-</div>
 
 
     
@@ -1085,7 +969,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

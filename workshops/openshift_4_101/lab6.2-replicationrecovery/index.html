@@ -326,14 +326,14 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseca2b4950ff749472ab9a02bce546ed4b" class="collapsed">
+      <a data-toggle="collapse" href="#collapse08d2c73c7ee40e9b87d7c390cf7b26b2" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapseca2b4950ff749472ab9a02bce546ed4b" class="panel-collapse collapse ">
+  <div id="collapse08d2c73c7ee40e9b87d7c390cf7b26b2" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
@@ -343,25 +343,25 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <blockquote>
 <i class="fa fa-terminal"></i> Choose a running pod and shell into it:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
-$ oc exec PODNAME -it /bin/bash
-</code></pre></div><p>You are now executing a bash shell running in the container of the pod.  Let&rsquo;s kill our webapp and see what happens.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span><span style="display:flex;"><span>$ oc exec PODNAME -it /bin/bash
+</span></span></code></pre></div><p>You are now executing a bash shell running in the container of the pod.  Let&rsquo;s kill our webapp and see what happens.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i> If we had multiple containers in the pod we could use "-c CONTAINER_NAME" to select the right one
 </blockquote>
 <blockquote>
 <i class="fa fa-terminal"></i> Choose a running pod and shell into its container:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pkill -9 node
-</code></pre></div><p>This will kick you out off the container with an error like &ldquo;Error executing command in container&rdquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pkill -9 node
+</span></span></code></pre></div><p>This will kick you out off the container with an error like &ldquo;Error executing command in container&rdquo;</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Do it again - shell in and execute the same command to kill node
 </blockquote>
 <blockquote>
 <i class="fa fa-terminal"></i> Watch for the container restart
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods -w
-</code></pre></div><p>If a container dies multiple times quickly, OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn&rsquo;t waste resources trying to restart containers that are continuously crashing.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods -w
+</span></span></code></pre></div><p>If a container dies multiple times quickly, OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn&rsquo;t waste resources trying to restart containers that are continuously crashing.</p>
 
     </div>
   </div>
@@ -519,7 +519,7 @@ Go back to the pod overview
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -779,7 +779,7 @@ Go back to the pod overview
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -891,7 +891,7 @@ Go back to the pod overview
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -901,7 +901,7 @@ Go back to the pod overview
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -984,7 +984,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

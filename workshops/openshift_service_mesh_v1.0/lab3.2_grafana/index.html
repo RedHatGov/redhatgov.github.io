@@ -325,7 +325,7 @@
 <i class="fa fa-terminal"></i>
 Open the Grafana console.  Retrieve the endpoint for Grafana:
 </blockquote>
-<pre><code>GRAFANA_CONSOLE=$(oc get route grafana -n istio-system --template='https://{{.spec.host}}')
+<pre tabindex="0"><code>GRAFANA_CONSOLE=$(oc get route grafana -n istio-system --template=&#39;https://{{.spec.host}}&#39;)
 echo $GRAFANA_CONSOLE
 </code></pre><p><i class="fa fa-info-circle"></i> Click 'Allow selected permissions' if prompted to authorized access.</p>
 <blockquote>
@@ -349,7 +349,7 @@ On the left bar, hover over the second icon from the top (Dashboards) and select
 <i class="fa fa-terminal"></i>
 Send load to the application user interface:
 </blockquote>
-<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL; done
+<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL; done
 </code></pre><br>
 <p>While that is running, let&rsquo;s look at some dashboards.</p>
 <blockquote>
@@ -365,7 +365,7 @@ Select 'Istio Mesh Dashboard' in Grafana.
 <i class="fa fa-terminal"></i>
 Send that terminal job to the background:
 </blockquote>
-<pre><code>^Z
+<pre tabindex="0"><code>^Z
 [1]+  Stopped                 curl -s -o /dev/null $GATEWAY_URL
 bg                                                     
 [1]+ curl -s -o /dev/null $GATEWAY_URL &amp;
@@ -373,7 +373,7 @@ bg
 <i class="fa fa-terminal"></i>
 Now, send load to the user profile service:
 </blockquote>
-<pre><code>GATEWAY_URL=$(oc get route istio-demogateway-$(oc project -q) --template='http://{{.spec.host}}')
+<pre tabindex="0"><code>GATEWAY_URL=$(oc get route istio-demogateway-$(oc project -q) --template=&#39;http://{{.spec.host}}&#39;)
 while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><p>The mesh dashboard should dynamically update.  It should look like this now:</p>
 <p><img src="../images/grafana-istio-mesh-updated.png" width="1024"><br/>
@@ -498,7 +498,7 @@ Hover over the Incoming Request Duration by Source under 'Service Workloads'.
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -758,7 +758,7 @@ Hover over the Incoming Request Duration by Source under 'Service Workloads'.
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -870,7 +870,7 @@ Hover over the Incoming Request Duration by Source under 'Service Workloads'.
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -880,7 +880,7 @@ Hover over the Incoming Request Duration by Source under 'Service Workloads'.
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -963,7 +963,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

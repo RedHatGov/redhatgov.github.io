@@ -341,9 +341,9 @@ Click on the line connecting our app-ui to the boards service.
 <i class="fa fa-terminal"></i>
 OK, let's try to run that same command again to snoop on traffic. Run the following:
 </blockquote>
-<pre><code>oc run curl-boards-2 -i --restart=Never --image=appropriate/curl --timeout=10s -- boards:8080/shareditems
+<pre tabindex="0"><code>oc run curl-boards-2 -i --restart=Never --image=appropriate/curl --timeout=10s -- boards:8080/shareditems
 </code></pre><p>You should get an output indicating that the job failed to pull data. This is because the traffic didn&rsquo;t come from a verifiable service known to the mesh and wasn&rsquo;t able to do a secure mTLS token handshake. Your output should look like this:</p>
-<pre><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+<pre tabindex="0"><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 curl: (56) Recv failure: Connection reset by peer
@@ -354,7 +354,7 @@ pod microservices-demo/curl-boards terminated (Error)
 <i class="fa fa-terminal"></i>
 Type the following in the CLI
 </blockquote>
-<pre><code>oc delete policy/default
+<pre tabindex="0"><code>oc delete policy/default
 oc delete dr --all
 </code></pre><h2 id="more-about-mtls-options">More About mTLS Options</h2>
 <p>mTLS in the service mesh isn&rsquo;t <em>just</em> an ON/OFF capability. We kept it basic for the lab, but you could have easily chosen specific services to enforce it on. PERMISSIVE mode is especially useful in a scenario where want to migrate your existing services’ traffic from plain text to mTLS. It allows a service to accept both plaintext traffic and mutual TLS traffic at the same time (without breaking live traffic).</p>
@@ -481,7 +481,7 @@ All of this is configurable via YAML (the control plane will update the Envoy si
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -741,7 +741,7 @@ All of this is configurable via YAML (the control plane will update the Envoy si
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -853,7 +853,7 @@ All of this is configurable via YAML (the control plane will update the Envoy si
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -863,7 +863,7 @@ All of this is configurable via YAML (the control plane will update the Envoy si
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -946,7 +946,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

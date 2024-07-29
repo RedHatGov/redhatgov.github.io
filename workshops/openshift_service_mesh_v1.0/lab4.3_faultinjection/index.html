@@ -326,9 +326,9 @@
 <i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
 </blockquote>
-<pre><code>cat ./istio-configuration/virtual-service-userprofile-503.yaml
+<pre tabindex="0"><code>cat ./istio-configuration/virtual-service-userprofile-503.yaml
 </code></pre><p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>...
   http:
   - fault:
       abort:
@@ -344,12 +344,12 @@ View the virtual service in your favorite editor or via bash:
 <i class="fa fa-terminal"></i>
 Deploy the routing rule:
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-503.yaml
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-503.yaml
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 If you aren't already (from previous labs) - Send load to the user profile service:
 </blockquote>
-<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><br>
 <p>Inspect the change in Kiali.</p>
 <blockquote>
@@ -393,9 +393,9 @@ Refresh the brower a couple of times.
 <i class="fa fa-terminal"></i>
 View the virtual service in your favorite editor or via bash:
 </blockquote>
-<pre><code>cat ./istio-configuration/virtual-service-userprofile-delay.yaml
+<pre tabindex="0"><code>cat ./istio-configuration/virtual-service-userprofile-delay.yaml
 </code></pre><p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>...
   http:
   - fault:
       delay:
@@ -411,12 +411,12 @@ View the virtual service in your favorite editor or via bash:
 <i class="fa fa-terminal"></i>
 Deploy the routing rule:
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-delay.yaml
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-delay.yaml
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 If you aren't already - Send load to the user profile service:
 </blockquote>
-<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><br>
 <blockquote>
 <i class="fa fa-desktop"></i>
@@ -437,7 +437,7 @@ From the Graph view right click on the userprofile service (the triangle shape).
 <i class="fa fa-terminal"></i>
 Revert the changes you made before ending this lab.
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v3.yaml
 </code></pre><br>
 <h2 id="summary">Summary</h2>
 <p>Congratulations, you configured fault injection with Istio!</p>
@@ -547,7 +547,7 @@ Revert the changes you made before ending this lab.
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -807,7 +807,7 @@ Revert the changes you made before ending this lab.
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -919,7 +919,7 @@ Revert the changes you made before ending this lab.
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -929,7 +929,7 @@ Revert the changes you made before ending this lab.
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1012,7 +1012,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

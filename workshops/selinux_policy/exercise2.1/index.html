@@ -329,10 +329,10 @@
 <p>Create a policy directory, and generate an initial policy.  Use <code>sepolicy generate</code> to generate a policy for the app that we want to enable.</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/src
-mkdir policy
-cd policy
-sepolicy generate --init /usr/local/sbin/testapp</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd ~/src
+</span></span><span style="display:flex;"><span>mkdir policy
+</span></span><span style="display:flex;"><span>cd policy
+</span></span><span style="display:flex;"><span>sepolicy generate --init /usr/local/sbin/testapp</span></span></code></pre></div>
 </div>
 <div class="paragraph">
 <p>Note the last few lines in the output from <code>sepolicy generate</code>:</p>
@@ -348,7 +348,7 @@ sepolicy generate --init /usr/local/sbin/testapp</code></pre></div>
 </div>
 </div>
 <div class="paragraph">
-<p>You will need all of these files to customize the policy, for the application.</p>
+<p>You will need all of these files to customize the policy for the application.</p>
 </div>
 <div class="olist arabic">
 <div class="title">SELinux Policy Source Compnents</div>
@@ -374,7 +374,7 @@ sepolicy generate --init /usr/local/sbin/testapp</code></pre></div>
 <p>Now, compile and load the SELinux policy framework, by running the <code>testapp.sh</code> script.  The script needs to be run with <strong>root</strong> privileges, since it changes the running SELinux configuration:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ./testapp.sh</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ./testapp.sh</span></span></code></pre></div>
 </div>
 <div class="paragraph">
 <p>The first 9 lines of the output show the policy compilation, the loading of the policy into memory, and the automatic generation of a manpage for the policy:</p>
@@ -384,9 +384,6 @@ sepolicy generate --init /usr/local/sbin/testapp</code></pre></div>
 <pre class="highlight"><code class="language-bash" data-lang="bash">Building and Loading Policy
 + make -f /usr/share/selinux/devel/Makefile testapp.pp
 Compiling targeted testapp module
-/usr/bin/checkmodule:  loading policy configuration from tmp/testapp.tmp
-/usr/bin/checkmodule:  policy configuration loaded
-/usr/bin/checkmodule:  writing binary representation (version 19) to tmp/testapp.mod
 Creating targeted testapp.pp policy package
 rm tmp/testapp.mod tmp/testapp.mod.fc
 + /usr/sbin/semodule -i testapp.pp
@@ -400,45 +397,51 @@ rm tmp/testapp.mod tmp/testapp.mod.fc
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">+ /sbin/restorecon -F -R -v /usr/local/sbin/testapp
+Relabeled /usr/local/sbin/testapp from system_u:object_r:bin_t:s0 to system_u:object_r:testapp_exec_t:s0
++ /sbin/restorecon -F -R -v /var/run/testapp.pid
+Relabeled /run/testapp.pid from system_u:object_r:var_run_t:s0 to system_u:object_r:testapp_var_run_t:s0
 ++ pwd
 + pwd=/home/ec2-user/src/policy
-+ rpmbuild --define '_sourcedir /home/ec2-user/src/policy' --define '_specdir /home/ec2-user/src/policy' --define '_builddir /home/ec2-user/src/policy' --define '_srcrpmdir /home/ec2-user/src/policy' --define '_rpmdir /home/ec2-user/src/policy' --define '_buildrootdir /home/ec2-user/src/policy/.build' -ba testapp_selinux.spec
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.8GjK3r
++ rpmbuild --define &#39;_sourcedir /home/ec2-user/src/policy&#39; --define &#39;_specdir /home/ec2-user/src/policy&#39; --define &#39;_builddir /home/ec2-user/src/policy&#39; --define &#39;_srcrpmdir /home/ec2-user/src/policy&#39; --define &#39;_rpmdir /home/ec2-user/src/policy&#39; --define &#39;_buildrootdir /home/ec2-user/src/policy/.build&#39; -ba testapp_selinux.spec
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.apQ8LZ
 + umask 022
 + cd /home/ec2-user/src/policy
-+ '[' /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64 '!=' / ']'
-+ rm -rf /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64
-++ dirname /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64
++ &#39;[&#39; /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64 &#39;!=&#39; / &#39;]&#39;
++ rm -rf /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64
+++ dirname /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64
 + mkdir -p /home/ec2-user/src/policy/.build
-+ mkdir /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64
-+ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/usr/share/selinux/packages
-+ install -m 644 /home/ec2-user/src/policy/testapp.pp /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/usr/share/selinux/packages
-+ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/usr/share/selinux/devel/include/contrib
-+ install -m 644 /home/ec2-user/src/policy/testapp.if /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/usr/share/selinux/devel/include/contrib/
-+ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/usr/share/man/man8/
-+ install -m 644 /home/ec2-user/src/policy/testapp_selinux.8 /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/usr/share/man/man8/testapp_selinux.8
-+ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64/etc/selinux/targeted/contexts/users/
++ mkdir /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64
++ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/usr/share/selinux/packages
++ install -m 644 /home/ec2-user/src/policy/testapp.pp /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/usr/share/selinux/packages
++ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/usr/share/selinux/devel/include/contrib
++ install -m 644 /home/ec2-user/src/policy/testapp.if /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/usr/share/selinux/devel/include/contrib/
++ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/usr/share/man/man8/
++ install -m 644 /home/ec2-user/src/policy/testapp_selinux.8 /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/usr/share/man/man8/testapp_selinux.8
++ install -d /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64/etc/selinux/targeted/contexts/users/
 + /usr/lib/rpm/check-buildroot
-+ /usr/lib/rpm/redhat/brp-compress
-+ /usr/lib/rpm/redhat/brp-strip /usr/bin/strip
-+ /usr/lib/rpm/redhat/brp-strip-comment-note /usr/bin/strip /usr/bin/objdump
-+ /usr/lib/rpm/redhat/brp-strip-static-archive /usr/bin/strip
-+ /usr/lib/rpm/brp-python-bytecompile /usr/bin/python 1
-+ /usr/lib/rpm/redhat/brp-python-hardlink
-+ /usr/lib/rpm/redhat/brp-java-repack-jars
-Processing files: testapp_selinux-1.0-1.el7.noarch
-Provides: testapp_selinux = 1.0-1.el7
++ /usr/lib/rpm/redhat/brp-ldconfig
+/sbin/ldconfig: Warning: ignoring configuration file that cannot be opened: /etc/ld.so.conf: No such file or directory
++ /usr/lib/rpm/brp-compress
++ /usr/lib/rpm/brp-strip /usr/bin/strip
++ /usr/lib/rpm/brp-strip-comment-note /usr/bin/strip /usr/bin/objdump
++ /usr/lib/rpm/brp-strip-static-archive /usr/bin/strip
++ /usr/lib/rpm/brp-python-bytecompile &#39;&#39; 1
++ /usr/lib/rpm/brp-python-hardlink
++ PYTHON3=/usr/libexec/platform-python
++ /usr/lib/rpm/redhat/brp-mangle-shebangs
+Processing files: testapp_selinux-1.0-1.el8.noarch
+Provides: testapp_selinux = 1.0-1.el8
 Requires(interp): /bin/sh /bin/sh
 Requires(rpmlib): rpmlib(CompressedFileNames) &lt;= 3.0.4-1 rpmlib(FileDigests) &lt;= 4.6.0-1 rpmlib(PayloadFilesHavePrefix) &lt;= 4.0-1
-Requires(post): /bin/sh policycoreutils selinux-policy-base &gt;= 3.13.1-229
+Requires(post): /bin/sh policycoreutils selinux-policy-base &gt;= 3.14.3-139
 Requires(postun): /bin/sh policycoreutils
-Checking for unpackaged file(s): /usr/lib/rpm/check-files /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64
-Wrote: /home/ec2-user/src/policy/testapp_selinux-1.0-1.el7.src.rpm
-Wrote: /home/ec2-user/src/policy/noarch/testapp_selinux-1.0-1.el7.noarch.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.aqm3qv
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64
+Wrote: /home/ec2-user/src/policy/testapp_selinux-1.0-1.el8.src.rpm
+Wrote: /home/ec2-user/src/policy/noarch/testapp_selinux-1.0-1.el8.noarch.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.ql2Cxs
 + umask 022
 + cd /home/ec2-user/src/policy
-+ /usr/bin/rm -rf /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el7.x86_64
++ /usr/bin/rm -rf /home/ec2-user/src/policy/.build/testapp_selinux-1.0-1.el8.x86_64
 + exit 0</code></pre>
 </div>
 </div>
@@ -449,9 +452,9 @@ Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.aqm3qv
 <p>If we reload the application, the newly compiled and loaded policy module will be attached to it:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl stop testapp
-sudo systemctl start testapp
-ps -efZ | grep testapp | grep -v grep</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl stop testapp
+</span></span><span style="display:flex;"><span>sudo systemctl start testapp
+</span></span><span style="display:flex;"><span>ps -efZ | grep testapp | grep -v grep</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -466,7 +469,7 @@ ps -efZ | grep testapp | grep -v grep</code></pre></div>
 </div>
 <div class="paragraph">
 <p>To see those rules, type this:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sesearch -T -s init_t -t testapp_exec_t</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sesearch -T -s init_t -t testapp_exec_t</span></span></code></pre></div></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -582,7 +585,7 @@ ps -efZ | grep testapp | grep -v grep</code></pre></div>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -842,7 +845,7 @@ ps -efZ | grep testapp | grep -v grep</code></pre></div>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -954,7 +957,7 @@ ps -efZ | grep testapp | grep -v grep</code></pre></div>
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -964,7 +967,7 @@ ps -efZ | grep testapp | grep -v grep</code></pre></div>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1051,7 +1054,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

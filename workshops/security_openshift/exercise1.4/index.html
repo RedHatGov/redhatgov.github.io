@@ -321,7 +321,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/skopeo.png" alt="skopeo">
+<img src="/workshops/security_openshift/images/skopeo.png" alt="skopeo"/>
 </div>
 </div>
 <div class="paragraph">
@@ -330,7 +330,7 @@ and image repositories.</p>
 </div>
 <div class="paragraph">
 <p>Skopeo is able to inspect a repository on a Docker registry and fetch images
-layers. By inspect I mean it fetches the repository&#8217;s manifest and it is able
+layers. By inspect I mean it fetches the repository’s manifest and it is able
 to show you a docker inspect-like json output about a whole repository or a
 tag.</p>
 </div>
@@ -366,7 +366,7 @@ make it look better.</p>
 <div class="listingblock">
 <div class="title">inspect fedora on Docker Hub</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://docker.io/fedora | jq '.'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://docker.io/fedora | jq &#39;.&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -375,7 +375,7 @@ make it look better.</p>
 <div class="listingblock">
 <div class="title">parse Digest</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://docker.io/fedora | jq '.Digest'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://docker.io/fedora | jq &#39;.Digest&#39;</code></pre>
 </div>
 </div>
 </div>
@@ -448,17 +448,17 @@ your image, or offer suggestions on other images that may also be needed.</p>
 <div class="listingblock">
 <div class="title">Mongodb image with Kubernetes labels</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://centos/mongodb-26-centos7 | jq '.'
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://centos/mongodb-26-centos7 | jq &#39;.&#39;
 
-skopeo inspect docker://centos/mongodb-26-centos7 | jq '.Labels'</code></pre>
+skopeo inspect docker://centos/mongodb-26-centos7 | jq &#39;.Labels&#39;</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Wildfly image with Kubernetes labels</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://openshift/wildfly-101-centos7  | jq '.'
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo inspect docker://openshift/wildfly-101-centos7  | jq &#39;.&#39;
 
-skopeo inspect docker://openshift/wildfly-101-centos7 | jq '.Labels'</code></pre>
+skopeo inspect docker://openshift/wildfly-101-centos7 | jq &#39;.Labels&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -507,7 +507,7 @@ skopeo inspect docker://openshift/wildfly-101-centos7 | jq '.Labels'</code></pre
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

@@ -317,20 +317,7 @@
   </ul>
 </nav>
 
-    <div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#anchor-1">Configuring the registries</a>
-<ul class="sectlevel2">
-<li><a href="#_node_1">Node 1</a></li>
-<li><a href="#_testing_the_registries">Testing the registries</a></li>
-<li><a href="#_node_2">Node 2</a></li>
-<li><a href="#_testing_the_registries_2">Testing the registries</a></li>
-<li><a href="#_configuring_and_testing_the_bastion">Configuring and testing the bastion</a></li>
-</ul>
-</li>
-</ul>
-</div>
+    
 <div class="paragraph">
 <p>During this module you will configure both nodes to host secure container registries.
 The registry software runs in a container and listens on port 5000. Configuring the
@@ -352,14 +339,14 @@ configured and running, the <code>curl</code> command can be used to test basic 
 </div>
 </div>
 <div class="paragraph">
-<p>You&#8217;ll be asked to confirm the key fingerprint, the first time that you login. Please answer <code>yes</code>.</p>
+<p>You’ll be asked to confirm the key fingerprint, the first time that you login. Please answer <code>yes</code>.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>The authenticity of host 'node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span> (10.0.2.88)' can't be established.
+<pre>The authenticity of host &#39;node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span> (10.0.2.88)&#39; can&#39;t be established.
 ECDSA key fingerprint is SHA256:t019FDEhEgp1uhivEZy1gwqaNaXM75tOem4MHpmLRaw.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added 'node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>,10.0.2.88' (ECDSA) to the list of known hosts.
+Warning: Permanently added &#39;node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>,10.0.2.88&#39; (ECDSA) to the list of known hosts.
 Last login: Tue Jan 12 02:10:26 2021 from 10.0.2.245
 [ec2-user@ip-10-0-2-88 ~]$</pre>
 </div>
@@ -389,7 +376,7 @@ grep ^FQDN myserver.cnf</code></pre>
 <pre>Generating a RSA private key
 ........................................................++++
 .......................................++++
-writing new private key to 'myserver.key'
+writing new private key to &#39;myserver.key&#39;
 -----
 Signature ok
 subject=C = CH, O = Summit, CN = node1-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
@@ -439,7 +426,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>{"repositories":[]}</pre>
+<pre>{&#34;repositories&#34;:[]}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -462,14 +449,14 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You&#8217;ll be asked to confirm the key fingerprint, the first time that you login. Please answer <code>yes</code>.</p>
+<p>You’ll be asked to confirm the key fingerprint, the first time that you login. Please answer <code>yes</code>.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>The authenticity of host 'jajcs.node2.0.rhnaps.io (10.0.2.88)' can't be established.
+<pre>The authenticity of host &#39;jajcs.node2.0.rhnaps.io (10.0.2.88)&#39; can&#39;t be established.
 ECDSA key fingerprint is SHA256:t019FDEhEgp1uhivEZy1gwqaNaXM75tOem4MHpmLRaw.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added 'jajcs.node2.0.rhnaps.io,10.0.2.88' (ECDSA) to the list of known hosts.
+Warning: Permanently added &#39;jajcs.node2.0.rhnaps.io,10.0.2.88&#39; (ECDSA) to the list of known hosts.
 Last login: Tue Jan 12 02:10:26 2021 from 10.0.2.245
 [ec2-user@ip-10-0-2-88 ~]$</pre>
 </div>
@@ -499,7 +486,7 @@ grep ^FQDN myserver.cnf</code></pre>
 <pre>Generating a RSA private key
 ........................................................++++
 .......................................++++
-writing new private key to 'myserver.key'
+writing new private key to &#39;myserver.key&#39;
 -----
 Signature ok
 subject=C = CH, O = Summit, CN = node2-<span class="userid">0</span>.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>
@@ -549,7 +536,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>{"repositories":[]}</pre>
+<pre>{&#34;repositories&#34;:[]}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -573,7 +560,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>{"repositories":[]}</pre>
+<pre>{&#34;repositories&#34;:[]}</pre>
 </div>
 </div>
 <div class="listingblock">
@@ -583,7 +570,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>{"repositories":[]}</pre>
+<pre>{&#34;repositories&#34;:[]}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -689,7 +676,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -949,7 +936,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -1061,7 +1048,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1071,7 +1058,7 @@ curl  --user user:password -k https://localhost:5000/v2/_catalog</pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1158,7 +1145,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

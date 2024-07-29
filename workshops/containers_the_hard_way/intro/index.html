@@ -317,11 +317,11 @@
 <h2 id="_what_is_a_container">What is a container?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>It is a simple question without a simple answer. Search the internet for this question and you&#8217;ll find an endless stream of blog posts explaining how containers differ from virtual machines. That&#8217;s great, but that doesn&#8217;t answer my question. What is a container? Does anybody really understand what is happening on their server what they <code>podman run</code>?</p>
+<p>It is a simple question without a simple answer. Search the internet for this question and you’ll find an endless stream of blog posts explaining how containers differ from virtual machines. That’s great, but that doesn’t answer my question. What is a container? Does anybody really understand what is happening on their server what they <code>podman run</code>?</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/containers_the_hard_way/images/afraid_to_ask_andy.jpg" alt="afraid to ask andy" width="500">
+<img src="/workshops/containers_the_hard_way/images/afraid_to_ask_andy.jpg" alt="afraid to ask andy" width="500"/>
 </div>
 </div>
 <div class="paragraph">
@@ -330,7 +330,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_so_really_what_is_it">So really&#8230;&#8203; What is it?</h2>
+<h2 id="_so_really_what_is_it">So really…​ What is it?</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A container is a sandboxed runtime environment that exists on a Linux system. The sandbox is constructed using utilities that exist in the Linux Kernel. Applications running in this sandbox share a Kernel with their host, but certain parts of the Kernel that store machine state are abstracted through namespaces. Namespaces allow the isolated environment to have a different state than the host even though they are sharing a Kernel.</p>
@@ -346,34 +346,34 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/containers_the_hard_way/images/container_stack.png" alt="container stack" width="500">
+<img src="/workshops/containers_the_hard_way/images/container_stack.png" alt="container stack" width="500"/>
 </div>
 </div>
 <div class="paragraph">
 <p>In Figure 2 above, the sandboxed container environment can be seen as the blue box. The orange boxes are the Kernel Namespaces and they are as follows:</p>
 </div>
 <div class="paragraph">
-<p><strong>cgroups</strong><br>
-cgroups allow limits to be placed on a process and its children. Primarily, these are used for limiting CPU and RAM usage. We won&#8217;t dive deep into cgroups as they are technically optional for containers. However, you will be using them in production.</p>
+<p><strong>cgroups</strong><br/>
+cgroups allow limits to be placed on a process and its children. Primarily, these are used for limiting CPU and RAM usage. We won’t dive deep into cgroups as they are technically optional for containers. However, you will be using them in production.</p>
 </div>
 <div class="paragraph">
-<p><strong>PID and IPC Namespaces</strong><br>
-The PID namespace allows a process and its children to run in a new process tree that maps back to the host process tree. The new PID namespace starts with PID 1 which will map to a much higher PID in the host&#8217;s native PID namespace. The Inter-Process Communication (IPC) Namespace limits the processes ability to share memory.</p>
+<p><strong>PID and IPC Namespaces</strong><br/>
+The PID namespace allows a process and its children to run in a new process tree that maps back to the host process tree. The new PID namespace starts with PID 1 which will map to a much higher PID in the host’s native PID namespace. The Inter-Process Communication (IPC) Namespace limits the processes ability to share memory.</p>
 </div>
 <div class="paragraph">
-<p><strong>Network and UTS Namespaces</strong><br>
-The Network Namespace allows a new network stack to exist in the sandbox. This means our sandboxed environment can have its own network interfaces, routing tables, DNS lookup servers, IP addresses, subnets&#8230;&#8203; you name it! The Unix Time Sharing (UTS) Namespace exists solely for storing the system&#8217;s hostname. Seriously. A whole namespace to store one string. This namespace has a long history and has changed quite a bit along the way. It exists the way it is for historical reasons.</p>
+<p><strong>Network and UTS Namespaces</strong><br/>
+The Network Namespace allows a new network stack to exist in the sandbox. This means our sandboxed environment can have its own network interfaces, routing tables, DNS lookup servers, IP addresses, subnets…​ you name it! The Unix Time Sharing (UTS) Namespace exists solely for storing the system’s hostname. Seriously. A whole namespace to store one string. This namespace has a long history and has changed quite a bit along the way. It exists the way it is for historical reasons.</p>
 </div>
 <div class="paragraph">
-<p><strong>Mount Namespace</strong><br>
-The Mount Namespace is the part of the Kernel that stores the mount table. When our sandboxed environment runs in a new Mount Namespace, it can mount filesystems not present on the host. This is very important, as you&#8217;ll see.</p>
+<p><strong>Mount Namespace</strong><br/>
+The Mount Namespace is the part of the Kernel that stores the mount table. When our sandboxed environment runs in a new Mount Namespace, it can mount filesystems not present on the host. This is very important, as you’ll see.</p>
 </div>
 <div class="paragraph">
-<p><strong>User Namespace</strong><br>
+<p><strong>User Namespace</strong><br/>
 The User Namespaces allow our sandboxed environment to have its own set of user and group IDs that will map to very high, unique, user and group IDs back on the host system. They also allow the root user in the sandbox to be mapped to another user on the host.</p>
 </div>
 <div class="paragraph">
-<p><strong>seccomp</strong><br>
+<p><strong>seccomp</strong><br/>
 The seccomp utility, while not actually a namespace, acts as a filter for Kernel calls. This allows us to drop Kernel capabilities in our sandboxed environment. For example, we could drop the <code>CAP_NET_RAW</code> kernel capability and processes in our sandbox will not be able to ping. Utilizing seccomp is also not strictly vital to containers and will not be discussed in further detail in this workshop.</p>
 </div>
 <div class="paragraph">
@@ -385,17 +385,17 @@ The seccomp utility, while not actually a namespace, acts as a filter for Kernel
 <h2 id="_setup_for_containers_the_hard_way">Setup for Containers the Hard Way</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To work through this workshop, you will need access to a RHEL 8 machine. Don&#8217;t worry, though, we have one prepared for you.</p>
+<p>To work through this workshop, you will need access to a RHEL 8 machine. Don’t worry, though, we have one prepared for you.</p>
 </div>
 <div class="paragraph">
 <p><strong>Note:</strong> Your instructor may have different directions for connecting the workshop environment.</p>
 </div>
 <div class="paragraph">
-<p>In this lab, we will use the RHEL 8 Lab Environments on: [lab.redhat.com][1]. This site has a handful of great RHEL 8 scenarios. We won&#8217;t be running through and of them today, but check them out sometime.
+<p>In this lab, we will use the RHEL 8 Lab Environments on: [lab.redhat.com][1]. This site has a handful of great RHEL 8 scenarios. We won’t be running through and of them today, but check them out sometime.
 Navigate to the RHEL 8 labs, and start the <code>Deploying Containers Using Podman</code> scenario by clicked <code>Start Scenario</code> and then <code>Start Scenario</code> again.</p>
 </div>
 <div class="paragraph">
-<p>This will open a screen with lab instructions on the left and terminals on the right. You can minimize the provided directions, we won&#8217;t be using them today.
+<p>This will open a screen with lab instructions on the left and terminals on the right. You can minimize the provided directions, we won’t be using them today.
 On the right, note that you have access to two terminals. You can open another tab with the + button.</p>
 </div>
 </div>
@@ -408,7 +408,7 @@ On the right, note that you have access to two terminals. You can open another t
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo "hello, world!"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo &#34;hello, world!&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -530,7 +530,7 @@ On the right, note that you have access to two terminals. You can open another t
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -790,7 +790,7 @@ On the right, note that you have access to two terminals. You can open another t
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -902,7 +902,7 @@ On the right, note that you have access to two terminals. You can open another t
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -912,7 +912,7 @@ On the right, note that you have access to two terminals. You can open another t
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -994,7 +994,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

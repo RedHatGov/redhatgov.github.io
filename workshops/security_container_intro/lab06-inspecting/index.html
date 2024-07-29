@@ -317,19 +317,7 @@
   </ul>
 </nav>
 
-    <div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_podman_inspect">Podman inspect</a>
-<ul class="sectlevel2">
-<li><a href="#_podman_diff">Podman diff</a></li>
-<li><a href="#_podman_live_mounts">Podman live mounts</a></li>
-<li><a href="#_working_with_skopeo">Working with Skopeo</a></li>
-<li><a href="#_inspecting_images">Inspecting images</a></li>
-</ul>
-</li>
-</ul>
-</div>
+    
 <div class="paragraph">
 <p>Container images can easily be pulled from any public registry and run on a container host but is this good practice? Can you trust this image and what are its contents? A better practice would be to inspect the image before running it.</p>
 </div>
@@ -374,7 +362,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Next, enter the container&#8217;s namespace, create some data then <code>exit</code> back to the host.</p>
+<p>Next, enter the container’s namespace, create some data then <code>exit</code> back to the host.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -418,7 +406,7 @@ sudo cat /var/lib/containers/storage/overlay/$MOUNTED/merged/tmp/date.txt</code>
 </div>
 </div>
 <div class="paragraph">
-<p>How might you search this container&#8217;s file system for all programs that are owned by root and have the SETUID bit set?</p>
+<p>How might you search this container’s file system for all programs that are owned by root and have the SETUID bit set?</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -439,7 +427,7 @@ check
 </div>
 </div>
 <div class="paragraph">
-<p>Un-mount the container when you&#8217;re finished.</p>
+<p>Un-mount the container when you’re finished.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -484,11 +472,11 @@ many layers does the <code>ubi</code> image contain?</p>
 <div class="literalblock">
 <div class="content">
 <pre>{
-    "Name": "registry.access.redhat.com/ubi8/ubi",
-    "Digest": "sha256:1f0e6e1f451ff020b3b44c1c4c34d85db5ffa0fc1bb0490d6a32957a7a06b67f"
+    &#34;Name&#34;: &#34;registry.access.redhat.com/ubi8/ubi&#34;,
+    &#34;Digest&#34;: &#34;sha256:1f0e6e1f451ff020b3b44c1c4c34d85db5ffa0fc1bb0490d6a32957a7a06b67f&#34;
 ,
-    "RepoTags": [
-        "8.1",
+    &#34;RepoTags&#34;: [
+        &#34;8.1&#34;,
         ...
         ...
         ...
@@ -614,7 +602,7 @@ Storing signatures</pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -874,7 +862,7 @@ Storing signatures</pre>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -986,7 +974,7 @@ Storing signatures</pre>
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -996,7 +984,7 @@ Storing signatures</pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1083,7 +1071,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

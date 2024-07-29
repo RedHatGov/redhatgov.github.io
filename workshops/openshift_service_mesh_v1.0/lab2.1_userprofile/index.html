@@ -335,9 +335,9 @@ In the browser, navigate to the 'Profile' section in the header.
 <i class="fa fa-desktop"></i>
 Navigate to the 'UserProfile' class in your browser:
 </blockquote>
-<pre><code>https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/json/UserProfile.java
+<pre tabindex="0"><code>https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/json/UserProfile.java
 </code></pre><p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>...
     }
     public UserProfile(String id, String firstname, String lastname, String aboutme) {
         this.id = id;
@@ -354,9 +354,9 @@ Navigate to the 'UserProfile' class in your browser:
 <i class="fa fa-terminal"></i>
 Navigate to the 'UserProfileService' interface in your browser:
 </blockquote>
-<pre><code>https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
+<pre tabindex="0"><code>https://github.com/RedHatGov/openshift-microservices/blob/workshop-stable/code/userprofile/src/main/java/org/microservices/demo/service/UserProfileService.java
 </code></pre><p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>...
     /**
      * return a specific profile
      * @param id
@@ -373,9 +373,9 @@ Navigate to the 'UserProfileService' interface in your browser:
 <i class="fa fa-terminal"></i>
 Verify the base image used to build the application:
 </blockquote>
-<pre><code>cat ./openshift-configuration/userprofile-build.yaml | grep -A 4 sourceStrategy
+<pre tabindex="0"><code>cat ./openshift-configuration/userprofile-build.yaml | grep -A 4 sourceStrategy
 </code></pre><p>Output (snippet):</p>
-<pre><code>      sourceStrategy:
+<pre tabindex="0"><code>      sourceStrategy:
         from:
           kind: ImageStreamTag
           name: java:11
@@ -386,7 +386,7 @@ Verify the base image used to build the application:
 <i class="fa fa-terminal"></i>
 Create the build:
 </blockquote>
-<pre><code>oc new-app -f ./openshift-configuration/userprofile-build.yaml \
+<pre tabindex="0"><code>oc new-app -f ./openshift-configuration/userprofile-build.yaml \
   -p APPLICATION_NAME=userprofile \
   -p APPLICATION_CODE_URI=https://github.com/RedHatGov/openshift-microservices.git \
   -p APPLICATION_CODE_BRANCH=workshop-stable \
@@ -395,15 +395,15 @@ Create the build:
 <i class="fa fa-terminal"></i>
 Start the build:
 </blockquote>
-<pre><code>oc start-build userprofile-1.0
+<pre tabindex="0"><code>oc start-build userprofile-1.0
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Follow the build:
 </blockquote>
-<pre><code>oc logs -f bc/userprofile-1.0
+<pre tabindex="0"><code>oc logs -f bc/userprofile-1.0
 </code></pre><p>The builder will compile the source code and use the base image to create your deployable image artifact.  You should eventually see a successful build.</p>
 <p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>...
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
@@ -417,9 +417,9 @@ Follow the build:
 <i class="fa fa-terminal"></i>
 Verify the image was created:
 </blockquote>
-<pre><code>oc get is userprofile
+<pre tabindex="0"><code>oc get is userprofile
 </code></pre><p>Output:</p>
-<pre><code>NAME          IMAGE REPOSITORY                                                                  TAGS     UPDATED
+<pre tabindex="0"><code>NAME          IMAGE REPOSITORY                                                                  TAGS     UPDATED
 userprofile   image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile   1.0   3 minutes ago
 </code></pre><style>
 
@@ -520,7 +520,7 @@ userprofile   image-registry.openshift-image-registry.svc:5000/microservices-dem
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -780,7 +780,7 @@ userprofile   image-registry.openshift-image-registry.svc:5000/microservices-dem
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -892,7 +892,7 @@ userprofile   image-registry.openshift-image-registry.svc:5000/microservices-dem
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -902,7 +902,7 @@ userprofile   image-registry.openshift-image-registry.svc:5000/microservices-dem
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -985,7 +985,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

@@ -317,20 +317,7 @@
   </ul>
 </nav>
 
-    <div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_namespaced">!Namespaced</a>
-<ul class="sectlevel2">
-<li><a href="#_warmup_exercise">Warmup Exercise</a></li>
-<li><a href="#_bind_mounts_and_labeling">Bind Mounts and Labeling</a></li>
-<li><a href="#_private_mounts">Private Mounts</a></li>
-<li><a href="#_shared_mounts">Shared Mounts</a></li>
-<li><a href="#_read_only_containers">Read-Only Containers</a></li>
-</ul>
-</li>
-</ul>
-</div>
+    
 <div class="paragraph">
 <p>In this section, we’ll cover the basics of SELinux and containers. SELinux policy prevents a lot of break out situations where the other security mechanisms fail. By default, <code>podman</code> processes are labeled with <code>container_runtime_t</code> and they are prevented from doing (almost) all SELinux operations.  But processes within containers do not know that they are running within a container.  SELinux-aware applications are going to attempt to do SELinux operations, especially if they are running as root. With RHEL, we write an SELinux policy that says that the container process running as <code>container_runtime_t</code> can only read/write files with the <code>container_file_t</code> label.</p>
 </div>
@@ -433,7 +420,7 @@ id -Z</code></pre>
 <p>As you learned above, bind mounts allow a container to mount a directory on the host for general application usage. This lab will help you understand how selinux behaves in different bind mounting scenarios.</p>
 </div>
 <div class="paragraph">
-<p>On the bastion, let&#8217;s create a directory named <code>/data</code>. Make note of the file permissions. Could a container read or write to this directory?</p>
+<p>On the bastion, let’s create a directory named <code>/data</code>. Make note of the file permissions. Could a container read or write to this directory?</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -558,7 +545,7 @@ SELinux is preventing /usr/bin/bash from write access on the directory data.
 </div>
 </div>
 <div class="paragraph">
-<p>Take sealerts&#8217;s suggestion of changing the label type of the <code>/data</code> directory to <code>container_file_t</code>:</p>
+<p>Take sealerts’s suggestion of changing the label type of the <code>/data</code> directory to <code>container_file_t</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -648,7 +635,7 @@ date &gt; /data/date.txt</code></pre>
 <div class="sect2">
 <h3 id="_private_mounts">Private Mounts</h3>
 <div class="paragraph">
-<p>Now you&#8217;ll let podman create the SELinux labels. To change a label in the container context, you can add either of two suffixes <code>:z</code> or <code>:Z</code> to the volume mount. These suffixes tell podman to relabel file objects on the shared volumes. The <code>:Z</code> option tells podman to label the content with a private unshared label.</p>
+<p>Now you’ll let podman create the SELinux labels. To change a label in the container context, you can add either of two suffixes <code>:z</code> or <code>:Z</code> to the volume mount. These suffixes tell podman to relabel file objects on the shared volumes. The <code>:Z</code> option tells podman to label the content with a private unshared label.</p>
 </div>
 <div class="paragraph">
 <p>Repeat the scenario above but instead add the <code>:Z</code> option to bind mount the <code>/private</code> directory then try to create a file in the <code>/private</code> directory from the container’s namespace.</p>
@@ -780,7 +767,7 @@ exit</code></pre>
 <p>Imagine a scenario where an application gets compromised. The first thing the bad guy wants to do is to write an exploit into the container, so the next time the application starts up, it starts up with the exploit in place. If the container was read-only it would prevent leaving a backdoor in place and be forced to start the cycle from the beginning.</p>
 </div>
 <div class="paragraph">
-<p>Container engines added a read-only feature but it presents challenges since many applications need to write to temporary directories like <code>/run</code> or <code>/tmp</code> and when these directories are read-only, the apps fail. Red Hat’s approach leverages <code>tmpfs</code>. It&#8217;s a nice solution to this problem because it eliminates data exposure on the host. As a recommended practice, run all applications in production in this mode and only allow write operations to known directories.</p>
+<p>Container engines added a read-only feature but it presents challenges since many applications need to write to temporary directories like <code>/run</code> or <code>/tmp</code> and when these directories are read-only, the apps fail. Red Hat’s approach leverages <code>tmpfs</code>. It’s a nice solution to this problem because it eliminates data exposure on the host. As a recommended practice, run all applications in production in this mode and only allow write operations to known directories.</p>
 </div>
 <div class="paragraph">
 <p>To experiment with this feature, run a read-only container and specify a few writable file systems using the <code>--tmpfs</code> option:</p>
@@ -800,7 +787,7 @@ exit</code></pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mkdir: cannot create directory '/newdir': Read-only file system</pre>
+<pre>mkdir: cannot create directory &#39;/newdir&#39;: Read-only file system</pre>
 </div>
 </div>
 <div class="listingblock">
@@ -811,7 +798,7 @@ exit</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We&#8217;ve covered a lot of ground here on Dan&#8217;s favorite topic. You should feel good.</p>
+<p>We’ve covered a lot of ground here on Dan’s favorite topic. You should feel good.</p>
 </div>
 <div class="paragraph">
 <style>
@@ -913,7 +900,7 @@ exit</code></pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1173,7 +1160,7 @@ exit</code></pre>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -1285,7 +1272,7 @@ exit</code></pre>
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1295,7 +1282,7 @@ exit</code></pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1382,7 +1369,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

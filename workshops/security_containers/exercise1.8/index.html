@@ -321,7 +321,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_containers/images/selinux.png" alt="selinux">
+<img src="/workshops/security_containers/images/selinux.png" alt="selinux"/>
 </div>
 </div>
 </div>
@@ -336,7 +336,7 @@
 <h2 id="_exercise_description">Exercise Description</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s move on to Security Enhanced Linux (SELinux). We will cover SELinux basics, Docker SELinux security policy and the "SELinux Coloring Book."</p>
+<p>Let’s move on to Security Enhanced Linux (SELinux). We will cover SELinux basics, Docker SELinux security policy and the &#34;SELinux Coloring Book.&#34;</p>
 </div>
 </div>
 </div>
@@ -370,7 +370,7 @@ the <code>svirt_sandbox_file_t</code> label.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">echo "SELINUX" &gt; data/file1.txt</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">echo &#34;SELINUX&#34; &gt; data/file1.txt</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -442,7 +442,7 @@ notifying the system that you expect these files to be consumed by containers:</
 <div class="listingblock">
 <div class="title">Append text</div>
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">sudo podman run -v $(pwd)/data:/data fedora sh -c 'echo "Thank You For Attending" &gt;&gt; /data/file1.txt'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo podman run -v $(pwd)/data:/data fedora sh -c &#39;echo &#34;Thank You For Attending&#34; &gt;&gt; /data/file1.txt&#39;</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -464,7 +464,7 @@ notifying the system that you expect these files to be consumed by containers:</
 </div>
 <div class="paragraph">
 <p>The libvirt security policy is a series of SELinux policies that defines two
-methods of isolating virtual machines. Generally, virtual machines are prevented from accessing specific parts of the network. Specifically, individual virtual machines are denied access to each other&#8217;s resources.</p>
+methods of isolating virtual machines. Generally, virtual machines are prevented from accessing specific parts of the network. Specifically, individual virtual machines are denied access to each other’s resources.</p>
 </div>
 <div class="paragraph">
 <p>Red Hat extends the libvirt-SELinux model to containers. The Container SELinux role
@@ -513,14 +513,14 @@ time).</p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse18837bf4cc4411285f561fa946afce91" class="collapsed">
+      <a data-toggle="collapse" href="#collapse5d1ce48e5f4d2bd3991bda08a8b0656d" class="collapsed">
       
         SELinux Coloring Book
       </a>
     </h4>
   </div>
   
-  <div id="collapse18837bf4cc4411285f561fa946afce91" class="panel-collapse collapse ">
+  <div id="collapse5d1ce48e5f4d2bd3991bda08a8b0656d" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="paragraph">
@@ -539,7 +539,7 @@ dog are process types:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_containers/images/selinux1.png" alt="Processes">
+<img src="/workshops/security_containers/images/selinux1.png" alt="Processes"/>
 </div>
 </div>
 <div class="paragraph">
@@ -558,7 +558,7 @@ And I want to add types to the food;</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_containers/images/selinux2.png" alt="Objects">
+<img src="/workshops/security_containers/images/selinux2.png" alt="Objects"/>
 </div>
 </div>
 <div class="paragraph">
@@ -578,7 +578,7 @@ this rule in policy.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_containers/images/selinux3.png" alt="Objects">
+<img src="/workshops/security_containers/images/selinux3.png" alt="Objects"/>
 </div>
 </div>
 <div class="paragraph">
@@ -590,7 +590,7 @@ cat_chow and the dog to eat food labeled dog_chow.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_containers/images/selinux4.png" alt="Objects">
+<img src="/workshops/security_containers/images/selinux4.png" alt="Objects"/>
 </div>
 </div>
 <div class="paragraph">
@@ -599,7 +599,7 @@ dog process tried to eat the cat_chow, the kernel would prevent it.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_containers/images/selinux7.png" alt="Stopped by Kernel">
+<img src="/workshops/security_containers/images/selinux7.png" alt="Stopped by Kernel"/>
 </div>
 </div>
 
@@ -727,7 +727,7 @@ Mailing List</a>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -987,7 +987,7 @@ Mailing List</a>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -1099,7 +1099,7 @@ Mailing List</a>
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1109,7 +1109,7 @@ Mailing List</a>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1197,7 +1197,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

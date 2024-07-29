@@ -303,7 +303,7 @@
     
     
     <li class="previous">
-      <a href="/workshops/selinux_policy/exercise1.2/">&larr; Previous: Exercise 1.2 - SELinux Contexts</a>
+      <a href="/workshops/selinux_policy/exercise1.4/">&larr; Previous: Exercise 1.4 - Troubleshooting</a>
     </li>
     
     
@@ -324,42 +324,56 @@
 <p>In this exercise, we are going to download the code for the example application that we are going to write policy for, and build and install it onto our test system.</p>
 </div>
 <div class="sect2">
-<h3 id="_step_1_change_directories">Step 1: Change directories</h3>
+<h3 id="_step_1_exit_root_shell">Step 1: Exit root shell</h3>
+<div class="paragraph">
+<p>If you haven’t already, exit the root shell we started in Section 1.  Running <code>whoami</code> should not return <code>root</code>:</p>
+</div>
+<div class="paragraph">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>whoami</span></span></code></pre></div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">ec2-user</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_change_directories">Step 2: Change directories</h3>
 <div class="paragraph">
 <p>Create a <code>src</code> directory, in your home directory.</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~
-mkdir src
-cd src</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd ~
+</span></span><span style="display:flex;"><span>mkdir src
+</span></span><span style="display:flex;"><span>cd src</span></span></code></pre></div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_2_check_out_the_source_code_to_the_example_application_from_github">Step 2: Check out the source code to the example application from GitHub</h3>
+<h3 id="_step_3_check_out_the_source_code_to_the_example_application_from_github">Step 3: Check out the source code to the example application from GitHub</h3>
 <div class="paragraph">
 <p>Download the latest code release</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/ajacocks/selinuxlab.git
-cd selinuxlab</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/ajacocks/selinuxlab.git
+</span></span><span style="display:flex;"><span>cd selinuxlab</span></span></code></pre></div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_3_deploy_the_lab_application_with_ansible">Step 3: Deploy the lab application, with Ansible</h3>
+<h3 id="_step_4_deploy_the_lab_application_with_ansible">Step 4: Deploy the lab application, with Ansible</h3>
 <div class="paragraph">
 <p>Now, use Ansible to deploy the test application</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ansible-playbook setup-testapp.yml</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ansible-playbook setup-testapp.yml</span></span></code></pre></div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_4_application_and_service_info">Step 4: Application and Service Info</h3>
+<h3 id="_step_5_application_and_service_info">Step 5: Application and Service Info</h3>
 <div class="paragraph">
 <p>Take a look at the application, and the associated service, that you just installed</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -l /usr/local/sbin/testapp</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls -l /usr/local/sbin/testapp</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -367,7 +381,7 @@ cd selinuxlab</code></pre></div>
 </div>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl status testapp</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl status testapp</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -378,17 +392,16 @@ cd selinuxlab</code></pre></div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_5_start_and_enable_the_service">Step 5: Start and enable the service</h3>
+<h3 id="_step_6_start_and_enable_the_service">Step 6: Start and enable the service</h3>
 <div class="paragraph">
-<p>Now, let&#8217;s file up the application</p>
+<p>Now, let’s fire up the application</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl enable testapp
-sudo systemctl start testapp</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl enable --now testapp</span></span></code></pre></div>
 </div>
 <div class="paragraph">
 <p>We can see that the app has been launched by systemd:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl status testapp</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl status testapp</span></span></code></pre></div></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -405,7 +418,7 @@ Feb 20 20:20:06 ip-10-0-2-80.ec2.internal testapp[8497]: daemon ttl 999924</code
 </div>
 <div class="paragraph">
 <p>And, we can also see that the app is running <strong>unconfined</strong>, which means that it is running without an SELinux policy, and can take any action that it wants to:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ps -efZ | grep testapp | grep -v grep</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ps -efZ | grep testapp | grep -v grep</span></span></code></pre></div></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -512,7 +525,7 @@ Feb 20 20:20:06 ip-10-0-2-80.ec2.internal testapp[8497]: daemon ttl 999924</code
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -772,7 +785,7 @@ Feb 20 20:20:06 ip-10-0-2-80.ec2.internal testapp[8497]: daemon ttl 999924</code
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -884,7 +897,7 @@ Feb 20 20:20:06 ip-10-0-2-80.ec2.internal testapp[8497]: daemon ttl 999924</code
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -894,7 +907,7 @@ Feb 20 20:20:06 ip-10-0-2-80.ec2.internal testapp[8497]: daemon ttl 999924</code
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -958,7 +971,7 @@ window.onclick = function(event) {
     
     
     <li class="previous">
-      <a href="/workshops/selinux_policy/exercise1.2/">&larr; Previous: Exercise 1.2 - SELinux Contexts</a>
+      <a href="/workshops/selinux_policy/exercise1.4/">&larr; Previous: Exercise 1.4 - Troubleshooting</a>
     </li>
     
     
@@ -981,7 +994,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

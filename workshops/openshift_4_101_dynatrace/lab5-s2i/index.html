@@ -328,23 +328,23 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsecdb555e0fe2c6fdd76dbcea20e7e3ab2" class="collapsed">
+      <a data-toggle="collapse" href="#collapseee3406b8c37aecd7def71a407e0cdb56" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsecdb555e0fe2c6fdd76dbcea20e7e3ab2" class="panel-collapse collapse ">
+  <div id="collapseee3406b8c37aecd7def71a407e0cdb56" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-project metro-map
-$ oc new-app --name<span style="color:#f92672">=</span>dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir<span style="color:#f92672">=</span>dc-metro-map
-$ oc expose service dc-metro-map
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc new-project metro-map
+</span></span><span style="display:flex;"><span>$ oc new-app --name<span style="color:#f92672">=</span>dc-metro-map https://github.com/RedHatGov/openshift-workshops.git --context-dir<span style="color:#f92672">=</span>dc-metro-map
+</span></span><span style="display:flex;"><span>$ oc expose service dc-metro-map
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -451,25 +451,25 @@ Scroll to the bottom and click "Create"
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse70c0688f8dd01883e3bcef2da1a96cae" class="collapsed">
+      <a data-toggle="collapse" href="#collapse7c672af06b6df64420bceddff9219c42" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse70c0688f8dd01883e3bcef2da1a96cae" class="panel-collapse collapse ">
+  <div id="collapse7c672af06b6df64420bceddff9219c42" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get builds
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get builds
+</span></span></code></pre></div><blockquote>
 Note the name of your build from the above command output and use it to see the logs with:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc logs builds/<span style="color:#f92672">[</span>BUILD_NAME<span style="color:#f92672">]</span>
-</code></pre></div><p>The console will print out the full log for your build.  Note, you could pipe this to more or less for easier viewing in the CLI.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc logs builds/<span style="color:#f92672">[</span>BUILD_NAME<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>The console will print out the full log for your build.  Note, you could pipe this to more or less for easier viewing in the CLI.</p>
 
     </div>
   </div>
@@ -513,21 +513,21 @@ Click on "Topology", the "node"/"dc-metro-map" icon, and then on "View logs"
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsea50884c4b9d7fb95a491491eccfbe0ef" class="collapsed">
+      <a data-toggle="collapse" href="#collapse5063e6c3ec761dc3140668a72392b1ab" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsea50884c4b9d7fb95a491491eccfbe0ef" class="panel-collapse collapse ">
+  <div id="collapse5063e6c3ec761dc3140668a72392b1ab" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get routes
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get routes
+</span></span></code></pre></div><blockquote>
 Copy the HOST/PORT and paste into your favorite web browser:
 </blockquote>
 
@@ -684,7 +684,7 @@ Click the arrow, at the top right corner of the "dc-metro-map" icon, to launch a
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -944,7 +944,7 @@ Click the arrow, at the top right corner of the "dc-metro-map" icon, to launch a
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -1056,7 +1056,7 @@ Click the arrow, at the top right corner of the "dc-metro-map" icon, to launch a
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1066,7 +1066,7 @@ Click the arrow, at the top right corner of the "dc-metro-map" icon, to launch a
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1149,7 +1149,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

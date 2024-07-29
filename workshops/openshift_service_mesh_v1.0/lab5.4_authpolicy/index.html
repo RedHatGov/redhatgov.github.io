@@ -325,10 +325,10 @@
 <blockquote>
 <i class="fa fa-terminal"></i> Apply a new authentication policy and service entry with the following commands:
 </blockquote>
-<pre><code> sed &quot;s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|&quot; ./istio-configuration/policy-boards-jwt.yaml | oc apply -f -
- sed &quot;s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|&quot; ./istio-configuration/serviceentry-keycloak.yaml | oc apply -f -
+<pre tabindex="0"><code> sed &#34;s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|&#34; ./istio-configuration/policy-boards-jwt.yaml | oc apply -f -
+ sed &#34;s|keycloak-sso-shared.apps.cluster.domain.com|$SSO_SVC|&#34; ./istio-configuration/serviceentry-keycloak.yaml | oc apply -f -
 </code></pre><p>The policy specifies the requirements for traffic to the boards service to have a JWT with specific properties. It looks like this:</p>
-<pre><code>apiVersion: authentication.istio.io/v1alpha1
+<pre tabindex="0"><code>apiVersion: authentication.istio.io/v1alpha1
 kind: Policy
 metadata:
   name: boards-jwt
@@ -337,8 +337,8 @@ spec:
   - name: boards
   origins:
   - jwt:
-      issuer: &quot;https://keycloak-sso-shared.apps.leonardo.nub3s.io/auth/realms/microservices-demo&quot;
-      jwksUri: &quot;https://keycloak-sso-shared.apps.leonardo.nub3s.io/auth/realms/microservices-demo/protocol/openid-connect/certs&quot;
+      issuer: &#34;https://keycloak-sso-shared.apps.leonardo.nub3s.io/auth/realms/microservices-demo&#34;
+      jwksUri: &#34;https://keycloak-sso-shared.apps.leonardo.nub3s.io/auth/realms/microservices-demo/protocol/openid-connect/certs&#34;
       triggerRules:
       - excludedPaths:
         - exact: /health_check
@@ -380,9 +380,9 @@ You might need to refresh the page a few times before it takes effect
 <blockquote>
 <i class="fa fa-terminal"></i> Apply an authorization policy with the following command:
 </blockquote>
-<pre><code>sed &quot;s|microservices-demo|$PROJECT_NAME|&quot; ./istio-configuration/authorization-boards-shared-lockdown.yaml | oc apply -f -
+<pre tabindex="0"><code>sed &#34;s|microservices-demo|$PROJECT_NAME|&#34; ./istio-configuration/authorization-boards-shared-lockdown.yaml | oc apply -f -
 </code></pre><p>That configuration looks like this:</p>
-<pre><code>apiVersion: security.istio.io/v1beta1
+<pre tabindex="0"><code>apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: boards-shared-lockdown
@@ -395,23 +395,23 @@ spec:
   rules:
   - from:
     - source:
-        requestPrincipals: [&quot;*&quot;]
+        requestPrincipals: [&#34;*&#34;]
     to:
     - operation:
-        methods: [&quot;POST&quot;]
-        paths: [&quot;*/shareditems&quot;]
+        methods: [&#34;POST&#34;]
+        paths: [&#34;*/shareditems&#34;]
     when:
     - key: request.auth.claims[realm_access_roles]
-      values: [&quot;cool-kids&quot;]
+      values: [&#34;cool-kids&#34;]
   - from:
     - source:
-        requestPrincipals: [&quot;*&quot;]
+        requestPrincipals: [&#34;*&#34;]
     to:
     - operation:
-        methods: [&quot;GET&quot;]
+        methods: [&#34;GET&#34;]
     when:
     - key: request.auth.claims[scope]
-      values: [&quot;openid&quot;]
+      values: [&#34;openid&#34;]
 </code></pre><p>An authorization policy includes a selector and a list of rules. The selector specifies the <strong>target</strong> that the policy applies to - in this case our boards microservice. While the rules specify <strong>who</strong> (from) is allowed to do <strong>what</strong> (to) under <strong>which</strong> (when) conditions - in this case any source can POST as long as they have the &ldquo;cool-kids&rdquo; role listed in their JWT payload.</p>
 <p>So, now that we&rsquo;ve applied it, let&rsquo;s try to access your boards service when you&rsquo;re not in the cool kids club.</p>
 <br>
@@ -436,10 +436,10 @@ spec:
 <blockquote>
 <i class="fa fa-terminal"></i> Now let's put things back to normal:
 </blockquote>
-<pre><code>oc delete authorizationpolicy/boards-shared-lockdown
-</code></pre><pre><code>oc delete policy/boards-jwt
-</code></pre><pre><code>oc delete serviceentry/keycloak-egress
-</code></pre><pre><code>SSO_SVC=$(oc get route keycloak-alt --template='{{.spec.host}}')
+<pre tabindex="0"><code>oc delete authorizationpolicy/boards-shared-lockdown
+</code></pre><pre tabindex="0"><code>oc delete policy/boards-jwt
+</code></pre><pre tabindex="0"><code>oc delete serviceentry/keycloak-egress
+</code></pre><pre tabindex="0"><code>SSO_SVC=$(oc get route keycloak-alt --template=&#39;{{.spec.host}}&#39;)
 oc set env dc/app-ui FAKE_USER=true SSO_SVC_HOST=$SSO_SVC
 </code></pre><h2 id="how-it-works">How it Works</h2>
 <p>Our app-ui microservice gets the JWT from the Keycloak SSO whenever a user logs in. If logged in, the JWT is always passed (in the request header) from the app-ui to any services it calls. All our services have Envoy sidecar proxies running and are seeing the traffic, including the JWT in app-ui request headers. So the configuration we applied is used to inform sidecar proxies to follow the policies we set. When we weren&rsquo;t logged in there was no JWT to pass along so our call requests failed. Only after we were logged in with as a valid user did we pass along a valid JWT. And each user&rsquo;s JWT was different, so the <em>when</em> conditions only matched for theterminator, allowing him able to POST to the shared board.</p>
@@ -564,7 +564,7 @@ If you have used RBAC prior to 1.4 of Istio you might have noticed that it&rsquo
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -824,7 +824,7 @@ If you have used RBAC prior to 1.4 of Istio you might have noticed that it&rsquo
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -936,7 +936,7 @@ If you have used RBAC prior to 1.4 of Istio you might have noticed that it&rsquo
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -946,7 +946,7 @@ If you have used RBAC prior to 1.4 of Istio you might have noticed that it&rsquo
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1029,7 +1029,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

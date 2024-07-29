@@ -321,7 +321,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/scc-node.png" alt="scc node">
+<img src="/workshops/security_openshift/images/scc-node.png" alt="scc node"/>
 </div>
 </div>
 <div class="paragraph">
@@ -411,14 +411,14 @@ the following:</p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse5c9b5a05b64d0beff65802e6eb44dd28" class="collapsed">
+      <a data-toggle="collapse" href="#collapse56f4dd371a394840aba67f33178b5a93" class="collapsed">
       
         Restricted SCC
       </a>
     </h4>
   </div>
   
-  <div id="collapse5c9b5a05b64d0beff65802e6eb44dd28" class="panel-collapse collapse ">
+  <div id="collapse56f4dd371a394840aba67f33178b5a93" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
@@ -456,7 +456,7 @@ Settings:
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Linux Capabilities to be dropped.</td>
 </tr>
@@ -468,7 +468,7 @@ Settings:
 <td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>SELinux options</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 
     </div>
@@ -487,7 +487,7 @@ Settings:
 </div>
 <div class="paragraph">
 <p>As most people at this workshop are security minded people we will skip over
-<strong>adding</strong> permissions and capabilities to containers, let&#8217;s look at how tighten
+<strong>adding</strong> permissions and capabilities to containers, let’s look at how tighten
 things up. We will look at <strong>dropping</strong> certain Linux Capabilities in this SCC
 file.</p>
 </div>
@@ -527,7 +527,7 @@ requiredDropCapabilities:
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -537,7 +537,7 @@ Insert, then cut and paste <code>control + v</code>, then escape and write the f
 <code>:wq</code>.
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -592,14 +592,14 @@ Insert, then cut and paste <code>control + v</code>, then escape and write the f
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse992b7ae0f9cb3883ac79778e69b8679e" class="collapsed">
+      <a data-toggle="collapse" href="#collapse7e7bfefdc03b697fd1bcfd4614f76b80" class="collapsed">
       
         drop-capabilities result
       </a>
     </h4>
   </div>
   
-  <div id="collapse992b7ae0f9cb3883ac79778e69b8679e" class="panel-collapse collapse ">
+  <div id="collapse7e7bfefdc03b697fd1bcfd4614f76b80" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
@@ -637,7 +637,7 @@ Settings:
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Linux Capabilities to be dropped.</td>
 </tr>
@@ -645,7 +645,7 @@ Settings:
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>Linux Capabilities are allowed, currently none.</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 
     </div>
@@ -667,7 +667,7 @@ Settings:
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/seccomp-int.png" alt="seccomp int">
+<img src="/workshops/security_openshift/images/seccomp-int.png" alt="seccomp int"/>
 </div>
 </div>
 <div class="paragraph">
@@ -698,11 +698,11 @@ greater control over the security of workloads running in Kubernetes.</p>
 be made, rather than a full filter specification.</p>
 </div>
 <div class="paragraph">
-<p>&lt;div class="alert alert-warning"&gt;</p>
+<p>&lt;div class=&#34;alert alert-warning&#34;&gt;</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>&lt;span class="pficon pficon-warning-triangle-o"&gt;&lt;/span&gt;</pre>
+<pre>&lt;span class=&#34;pficon pficon-warning-triangle-o&#34;&gt;&lt;/span&gt;</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -736,7 +736,7 @@ be made, rather than a full filter specification.</p>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>profile applies to all containers in the pod that do not override</td>
 </tr>
@@ -744,7 +744,7 @@ be made, rather than a full filter specification.</p>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>container-specific profile override</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
@@ -752,7 +752,7 @@ be made, rather than a full filter specification.</p>
 <div class="sect3">
 <h4 id="_unconfined_profile">Unconfined profile</h4>
 <div class="paragraph">
-<p>Here&#8217;s an example of a pod that uses the unconfined profile:</p>
+<p>Here’s an example of a pod that uses the unconfined profile:</p>
 </div>
 <div class="listingblock">
 <div class="title">unconfined</div>
@@ -771,17 +771,17 @@ spec:
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Use Kubernetes Pods metadata lables to define the Seccomp profile. This one is using a unconfined profile.</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_custom_restrictive_profile">Custom restrictive profile</h4>
 <div class="paragraph">
-<p>Here&#8217;s an example of a Pod that uses a profile called <code>example-explorer-profile</code>. This is a sample program that only can set permissions on files and move them to diffrent locations.</p>
+<p>Here’s an example of a Pod that uses a profile called <code>example-explorer-profile</code>. This is a sample program that only can set permissions on files and move them to diffrent locations.</p>
 </div>
 <div class="listingblock">
 <div class="title">custom restricted</div>
@@ -796,12 +796,12 @@ spec:
   containers:
     - name: explorer
       image: gcr.io/google_containers/explorer:1.0
-      args: ["-port=8080"]
+      args: [&#34;-port=8080&#34;]
       ports:
         - containerPort: 8080
           protocol: TCP
       volumeMounts:
-        - mountPath: "/mount/test-volume"
+        - mountPath: &#34;/mount/test-volume&#34;
           name: test-volume
   volumes:
     - name: test-volume
@@ -810,11 +810,11 @@ spec:
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>This refers to a custom file policy that resides on the localhost and will apply <code>syscall</code> restrictions to the Pod/containers via <code>Secccomp</code>.</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -828,765 +828,765 @@ spec:
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse8898bfed4baa34391b3b70407ba09050" class="collapsed">
+      <a data-toggle="collapse" href="#collapse170fce730681b0867fa085787ddf0ac3" class="collapsed">
       
         Default Docker Seccomp Profile
       </a>
     </h4>
   </div>
   
-  <div id="collapse8898bfed4baa34391b3b70407ba09050" class="panel-collapse collapse ">
+  <div id="collapse170fce730681b0867fa085787ddf0ac3" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">{
-  "defaultAction": "SCMP_ACT_ERRNO",
-  "archMap": [
+  &#34;defaultAction&#34;: &#34;SCMP_ACT_ERRNO&#34;,
+  &#34;archMap&#34;: [
     {
-      "architecture": "SCMP_ARCH_X86_64",
-      "subArchitectures": [
-        "SCMP_ARCH_X86",
-        "SCMP_ARCH_X32"
+      &#34;architecture&#34;: &#34;SCMP_ARCH_X86_64&#34;,
+      &#34;subArchitectures&#34;: [
+        &#34;SCMP_ARCH_X86&#34;,
+        &#34;SCMP_ARCH_X32&#34;
       ]
     },
     {
-      "architecture": "SCMP_ARCH_AARCH64",
-      "subArchitectures": [
-        "SCMP_ARCH_ARM"
+      &#34;architecture&#34;: &#34;SCMP_ARCH_AARCH64&#34;,
+      &#34;subArchitectures&#34;: [
+        &#34;SCMP_ARCH_ARM&#34;
       ]
     },
     {
-      "architecture": "SCMP_ARCH_MIPS64",
-      "subArchitectures": [
-        "SCMP_ARCH_MIPS",
-        "SCMP_ARCH_MIPS64N32"
+      &#34;architecture&#34;: &#34;SCMP_ARCH_MIPS64&#34;,
+      &#34;subArchitectures&#34;: [
+        &#34;SCMP_ARCH_MIPS&#34;,
+        &#34;SCMP_ARCH_MIPS64N32&#34;
       ]
     },
     {
-      "architecture": "SCMP_ARCH_MIPS64N32",
-      "subArchitectures": [
-        "SCMP_ARCH_MIPS",
-        "SCMP_ARCH_MIPS64"
+      &#34;architecture&#34;: &#34;SCMP_ARCH_MIPS64N32&#34;,
+      &#34;subArchitectures&#34;: [
+        &#34;SCMP_ARCH_MIPS&#34;,
+        &#34;SCMP_ARCH_MIPS64&#34;
       ]
     },
     {
-      "architecture": "SCMP_ARCH_MIPSEL64",
-      "subArchitectures": [
-        "SCMP_ARCH_MIPSEL",
-        "SCMP_ARCH_MIPSEL64N32"
+      &#34;architecture&#34;: &#34;SCMP_ARCH_MIPSEL64&#34;,
+      &#34;subArchitectures&#34;: [
+        &#34;SCMP_ARCH_MIPSEL&#34;,
+        &#34;SCMP_ARCH_MIPSEL64N32&#34;
       ]
     },
     {
-      "architecture": "SCMP_ARCH_MIPSEL64N32",
-      "subArchitectures": [
-        "SCMP_ARCH_MIPSEL",
-        "SCMP_ARCH_MIPSEL64"
+      &#34;architecture&#34;: &#34;SCMP_ARCH_MIPSEL64N32&#34;,
+      &#34;subArchitectures&#34;: [
+        &#34;SCMP_ARCH_MIPSEL&#34;,
+        &#34;SCMP_ARCH_MIPSEL64&#34;
       ]
     },
     {
-      "architecture": "SCMP_ARCH_S390X",
-      "subArchitectures": [
-        "SCMP_ARCH_S390"
+      &#34;architecture&#34;: &#34;SCMP_ARCH_S390X&#34;,
+      &#34;subArchitectures&#34;: [
+        &#34;SCMP_ARCH_S390&#34;
       ]
     }
   ],
-  "syscalls": [
+  &#34;syscalls&#34;: [
     {
-      "names": [
-        "accept",
-        "accept4",
-        "access",
-        "adjtimex",
-        "alarm",
-        "alarm",
-        "bind",
-        "brk",
-        "capget",
-        "capset",
-        "chdir",
-        "chmod",
-        "chown",
-        "chown32",
-        "clock_getres",
-        "clock_gettime",
-        "clock_nanosleep",
-        "close",
-        "connect",
-        "copy_file_range",
-        "creat",
-        "dup",
-        "dup2",
-        "dup3",
-        "epoll_create",
-        "epoll_create1",
-        "epoll_ctl",
-        "epoll_ctl_old",
-        "epoll_pwait",
-        "epoll_wait",
-        "epoll_wait_old",
-        "eventfd",
-        "eventfd2",
-        "execve",
-        "execveat",
-        "exit",
-        "exit_group",
-        "faccessat",
-        "fadvise64",
-        "fadvise64_64",
-        "fallocate",
-        "fanotify_mark",
-        "fchdir",
-        "fchmod",
-        "fchmodat",
-        "fchown",
-        "fchown32",
-        "fchownat",
-        "fcntl",
-        "fcntl64",
-        "fdatasync",
-        "fgetxattr",
-        "flistxattr",
-        "flock",
-        "fork",
-        "fremovexattr",
-        "fsetxattr",
-        "fstat",
-        "fstat64",
-        "fstatat64",
-        "fstatfs",
-        "fstatfs64",
-        "fsync",
-        "ftruncate",
-        "ftruncate64",
-        "futex",
-        "futimesat",
-        "getcpu",
-        "getcwd",
-        "getdents",
-        "getdents64",
-        "getegid",
-        "getegid32",
-        "geteuid",
-        "geteuid32",
-        "getgid",
-        "getgid32",
-        "getgroups",
-        "getgroups32",
-        "getitimer",
-        "getpeername",
-        "getpgid",
-        "getpgrp",
-        "getpid",
-        "getppid",
-        "getpriority",
-        "getrandom",
-        "getresgid",
-        "getresgid32",
-        "getresuid",
-        "getresuid32",
-        "getrlimit",
-        "get_robust_list",
-        "getrusage",
-        "getsid",
-        "getsockname",
-        "getsockopt",
-        "get_thread_area",
-        "gettid",
-        "gettimeofday",
-        "getuid",
-        "getuid32",
-        "getxattr",
-        "inotify_add_watch",
-        "inotify_init",
-        "inotify_init1",
-        "inotify_rm_watch",
-        "io_cancel",
-        "ioctl",
-        "io_destroy",
-        "io_getevents",
-        "ioprio_get",
-        "ioprio_set",
-        "io_setup",
-        "io_submit",
-        "ipc",
-        "kill",
-        "lchown",
-        "lchown32",
-        "lgetxattr",
-        "link",
-        "linkat",
-        "listen",
-        "listxattr",
-        "llistxattr",
-        "_llseek",
-        "lremovexattr",
-        "lseek",
-        "lsetxattr",
-        "lstat",
-        "lstat64",
-        "madvise",
-        "memfd_create",
-        "mincore",
-        "mkdir",
-        "mkdirat",
-        "mknod",
-        "mknodat",
-        "mlock",
-        "mlock2",
-        "mlockall",
-        "mmap",
-        "mmap2",
-        "mprotect",
-        "mq_getsetattr",
-        "mq_notify",
-        "mq_open",
-        "mq_timedreceive",
-        "mq_timedsend",
-        "mq_unlink",
-        "mremap",
-        "msgctl",
-        "msgget",
-        "msgrcv",
-        "msgsnd",
-        "msync",
-        "munlock",
-        "munlockall",
-        "munmap",
-        "nanosleep",
-        "newfstatat",
-        "_newselect",
-        "open",
-        "openat",
-        "pause",
-        "pipe",
-        "pipe2",
-        "poll",
-        "ppoll",
-        "prctl",
-        "pread64",
-        "preadv",
-        "preadv2",
-        "prlimit64",
-        "pselect6",
-        "pwrite64",
-        "pwritev",
-        "pwritev2",
-        "read",
-        "readahead",
-        "readlink",
-        "readlinkat",
-        "readv",
-        "recv",
-        "recvfrom",
-        "recvmmsg",
-        "recvmsg",
-        "remap_file_pages",
-        "removexattr",
-        "rename",
-        "renameat",
-        "renameat2",
-        "restart_syscall",
-        "rmdir",
-        "rt_sigaction",
-        "rt_sigpending",
-        "rt_sigprocmask",
-        "rt_sigqueueinfo",
-        "rt_sigreturn",
-        "rt_sigsuspend",
-        "rt_sigtimedwait",
-        "rt_tgsigqueueinfo",
-        "sched_getaffinity",
-        "sched_getattr",
-        "sched_getparam",
-        "sched_get_priority_max",
-        "sched_get_priority_min",
-        "sched_getscheduler",
-        "sched_rr_get_interval",
-        "sched_setaffinity",
-        "sched_setattr",
-        "sched_setparam",
-        "sched_setscheduler",
-        "sched_yield",
-        "seccomp",
-        "select",
-        "semctl",
-        "semget",
-        "semop",
-        "semtimedop",
-        "send",
-        "sendfile",
-        "sendfile64",
-        "sendmmsg",
-        "sendmsg",
-        "sendto",
-        "setfsgid",
-        "setfsgid32",
-        "setfsuid",
-        "setfsuid32",
-        "setgid",
-        "setgid32",
-        "setgroups",
-        "setgroups32",
-        "setitimer",
-        "setpgid",
-        "setpriority",
-        "setregid",
-        "setregid32",
-        "setresgid",
-        "setresgid32",
-        "setresuid",
-        "setresuid32",
-        "setreuid",
-        "setreuid32",
-        "setrlimit",
-        "set_robust_list",
-        "setsid",
-        "setsockopt",
-        "set_thread_area",
-        "set_tid_address",
-        "setuid",
-        "setuid32",
-        "setxattr",
-        "shmat",
-        "shmctl",
-        "shmdt",
-        "shmget",
-        "shutdown",
-        "sigaltstack",
-        "signalfd",
-        "signalfd4",
-        "sigreturn",
-        "socket",
-        "socketcall",
-        "socketpair",
-        "splice",
-        "stat",
-        "stat64",
-        "statfs",
-        "statfs64",
-        "symlink",
-        "symlinkat",
-        "sync",
-        "sync_file_range",
-        "syncfs",
-        "sysinfo",
-        "syslog",
-        "tee",
-        "tgkill",
-        "time",
-        "timer_create",
-        "timer_delete",
-        "timerfd_create",
-        "timerfd_gettime",
-        "timerfd_settime",
-        "timer_getoverrun",
-        "timer_gettime",
-        "timer_settime",
-        "times",
-        "tkill",
-        "truncate",
-        "truncate64",
-        "ugetrlimit",
-        "umask",
-        "uname",
-        "unlink",
-        "unlinkat",
-        "utime",
-        "utimensat",
-        "utimes",
-        "vfork",
-        "vmsplice",
-        "wait4",
-        "waitid",
-        "waitpid",
-        "write",
-        "writev"
+      &#34;names&#34;: [
+        &#34;accept&#34;,
+        &#34;accept4&#34;,
+        &#34;access&#34;,
+        &#34;adjtimex&#34;,
+        &#34;alarm&#34;,
+        &#34;alarm&#34;,
+        &#34;bind&#34;,
+        &#34;brk&#34;,
+        &#34;capget&#34;,
+        &#34;capset&#34;,
+        &#34;chdir&#34;,
+        &#34;chmod&#34;,
+        &#34;chown&#34;,
+        &#34;chown32&#34;,
+        &#34;clock_getres&#34;,
+        &#34;clock_gettime&#34;,
+        &#34;clock_nanosleep&#34;,
+        &#34;close&#34;,
+        &#34;connect&#34;,
+        &#34;copy_file_range&#34;,
+        &#34;creat&#34;,
+        &#34;dup&#34;,
+        &#34;dup2&#34;,
+        &#34;dup3&#34;,
+        &#34;epoll_create&#34;,
+        &#34;epoll_create1&#34;,
+        &#34;epoll_ctl&#34;,
+        &#34;epoll_ctl_old&#34;,
+        &#34;epoll_pwait&#34;,
+        &#34;epoll_wait&#34;,
+        &#34;epoll_wait_old&#34;,
+        &#34;eventfd&#34;,
+        &#34;eventfd2&#34;,
+        &#34;execve&#34;,
+        &#34;execveat&#34;,
+        &#34;exit&#34;,
+        &#34;exit_group&#34;,
+        &#34;faccessat&#34;,
+        &#34;fadvise64&#34;,
+        &#34;fadvise64_64&#34;,
+        &#34;fallocate&#34;,
+        &#34;fanotify_mark&#34;,
+        &#34;fchdir&#34;,
+        &#34;fchmod&#34;,
+        &#34;fchmodat&#34;,
+        &#34;fchown&#34;,
+        &#34;fchown32&#34;,
+        &#34;fchownat&#34;,
+        &#34;fcntl&#34;,
+        &#34;fcntl64&#34;,
+        &#34;fdatasync&#34;,
+        &#34;fgetxattr&#34;,
+        &#34;flistxattr&#34;,
+        &#34;flock&#34;,
+        &#34;fork&#34;,
+        &#34;fremovexattr&#34;,
+        &#34;fsetxattr&#34;,
+        &#34;fstat&#34;,
+        &#34;fstat64&#34;,
+        &#34;fstatat64&#34;,
+        &#34;fstatfs&#34;,
+        &#34;fstatfs64&#34;,
+        &#34;fsync&#34;,
+        &#34;ftruncate&#34;,
+        &#34;ftruncate64&#34;,
+        &#34;futex&#34;,
+        &#34;futimesat&#34;,
+        &#34;getcpu&#34;,
+        &#34;getcwd&#34;,
+        &#34;getdents&#34;,
+        &#34;getdents64&#34;,
+        &#34;getegid&#34;,
+        &#34;getegid32&#34;,
+        &#34;geteuid&#34;,
+        &#34;geteuid32&#34;,
+        &#34;getgid&#34;,
+        &#34;getgid32&#34;,
+        &#34;getgroups&#34;,
+        &#34;getgroups32&#34;,
+        &#34;getitimer&#34;,
+        &#34;getpeername&#34;,
+        &#34;getpgid&#34;,
+        &#34;getpgrp&#34;,
+        &#34;getpid&#34;,
+        &#34;getppid&#34;,
+        &#34;getpriority&#34;,
+        &#34;getrandom&#34;,
+        &#34;getresgid&#34;,
+        &#34;getresgid32&#34;,
+        &#34;getresuid&#34;,
+        &#34;getresuid32&#34;,
+        &#34;getrlimit&#34;,
+        &#34;get_robust_list&#34;,
+        &#34;getrusage&#34;,
+        &#34;getsid&#34;,
+        &#34;getsockname&#34;,
+        &#34;getsockopt&#34;,
+        &#34;get_thread_area&#34;,
+        &#34;gettid&#34;,
+        &#34;gettimeofday&#34;,
+        &#34;getuid&#34;,
+        &#34;getuid32&#34;,
+        &#34;getxattr&#34;,
+        &#34;inotify_add_watch&#34;,
+        &#34;inotify_init&#34;,
+        &#34;inotify_init1&#34;,
+        &#34;inotify_rm_watch&#34;,
+        &#34;io_cancel&#34;,
+        &#34;ioctl&#34;,
+        &#34;io_destroy&#34;,
+        &#34;io_getevents&#34;,
+        &#34;ioprio_get&#34;,
+        &#34;ioprio_set&#34;,
+        &#34;io_setup&#34;,
+        &#34;io_submit&#34;,
+        &#34;ipc&#34;,
+        &#34;kill&#34;,
+        &#34;lchown&#34;,
+        &#34;lchown32&#34;,
+        &#34;lgetxattr&#34;,
+        &#34;link&#34;,
+        &#34;linkat&#34;,
+        &#34;listen&#34;,
+        &#34;listxattr&#34;,
+        &#34;llistxattr&#34;,
+        &#34;_llseek&#34;,
+        &#34;lremovexattr&#34;,
+        &#34;lseek&#34;,
+        &#34;lsetxattr&#34;,
+        &#34;lstat&#34;,
+        &#34;lstat64&#34;,
+        &#34;madvise&#34;,
+        &#34;memfd_create&#34;,
+        &#34;mincore&#34;,
+        &#34;mkdir&#34;,
+        &#34;mkdirat&#34;,
+        &#34;mknod&#34;,
+        &#34;mknodat&#34;,
+        &#34;mlock&#34;,
+        &#34;mlock2&#34;,
+        &#34;mlockall&#34;,
+        &#34;mmap&#34;,
+        &#34;mmap2&#34;,
+        &#34;mprotect&#34;,
+        &#34;mq_getsetattr&#34;,
+        &#34;mq_notify&#34;,
+        &#34;mq_open&#34;,
+        &#34;mq_timedreceive&#34;,
+        &#34;mq_timedsend&#34;,
+        &#34;mq_unlink&#34;,
+        &#34;mremap&#34;,
+        &#34;msgctl&#34;,
+        &#34;msgget&#34;,
+        &#34;msgrcv&#34;,
+        &#34;msgsnd&#34;,
+        &#34;msync&#34;,
+        &#34;munlock&#34;,
+        &#34;munlockall&#34;,
+        &#34;munmap&#34;,
+        &#34;nanosleep&#34;,
+        &#34;newfstatat&#34;,
+        &#34;_newselect&#34;,
+        &#34;open&#34;,
+        &#34;openat&#34;,
+        &#34;pause&#34;,
+        &#34;pipe&#34;,
+        &#34;pipe2&#34;,
+        &#34;poll&#34;,
+        &#34;ppoll&#34;,
+        &#34;prctl&#34;,
+        &#34;pread64&#34;,
+        &#34;preadv&#34;,
+        &#34;preadv2&#34;,
+        &#34;prlimit64&#34;,
+        &#34;pselect6&#34;,
+        &#34;pwrite64&#34;,
+        &#34;pwritev&#34;,
+        &#34;pwritev2&#34;,
+        &#34;read&#34;,
+        &#34;readahead&#34;,
+        &#34;readlink&#34;,
+        &#34;readlinkat&#34;,
+        &#34;readv&#34;,
+        &#34;recv&#34;,
+        &#34;recvfrom&#34;,
+        &#34;recvmmsg&#34;,
+        &#34;recvmsg&#34;,
+        &#34;remap_file_pages&#34;,
+        &#34;removexattr&#34;,
+        &#34;rename&#34;,
+        &#34;renameat&#34;,
+        &#34;renameat2&#34;,
+        &#34;restart_syscall&#34;,
+        &#34;rmdir&#34;,
+        &#34;rt_sigaction&#34;,
+        &#34;rt_sigpending&#34;,
+        &#34;rt_sigprocmask&#34;,
+        &#34;rt_sigqueueinfo&#34;,
+        &#34;rt_sigreturn&#34;,
+        &#34;rt_sigsuspend&#34;,
+        &#34;rt_sigtimedwait&#34;,
+        &#34;rt_tgsigqueueinfo&#34;,
+        &#34;sched_getaffinity&#34;,
+        &#34;sched_getattr&#34;,
+        &#34;sched_getparam&#34;,
+        &#34;sched_get_priority_max&#34;,
+        &#34;sched_get_priority_min&#34;,
+        &#34;sched_getscheduler&#34;,
+        &#34;sched_rr_get_interval&#34;,
+        &#34;sched_setaffinity&#34;,
+        &#34;sched_setattr&#34;,
+        &#34;sched_setparam&#34;,
+        &#34;sched_setscheduler&#34;,
+        &#34;sched_yield&#34;,
+        &#34;seccomp&#34;,
+        &#34;select&#34;,
+        &#34;semctl&#34;,
+        &#34;semget&#34;,
+        &#34;semop&#34;,
+        &#34;semtimedop&#34;,
+        &#34;send&#34;,
+        &#34;sendfile&#34;,
+        &#34;sendfile64&#34;,
+        &#34;sendmmsg&#34;,
+        &#34;sendmsg&#34;,
+        &#34;sendto&#34;,
+        &#34;setfsgid&#34;,
+        &#34;setfsgid32&#34;,
+        &#34;setfsuid&#34;,
+        &#34;setfsuid32&#34;,
+        &#34;setgid&#34;,
+        &#34;setgid32&#34;,
+        &#34;setgroups&#34;,
+        &#34;setgroups32&#34;,
+        &#34;setitimer&#34;,
+        &#34;setpgid&#34;,
+        &#34;setpriority&#34;,
+        &#34;setregid&#34;,
+        &#34;setregid32&#34;,
+        &#34;setresgid&#34;,
+        &#34;setresgid32&#34;,
+        &#34;setresuid&#34;,
+        &#34;setresuid32&#34;,
+        &#34;setreuid&#34;,
+        &#34;setreuid32&#34;,
+        &#34;setrlimit&#34;,
+        &#34;set_robust_list&#34;,
+        &#34;setsid&#34;,
+        &#34;setsockopt&#34;,
+        &#34;set_thread_area&#34;,
+        &#34;set_tid_address&#34;,
+        &#34;setuid&#34;,
+        &#34;setuid32&#34;,
+        &#34;setxattr&#34;,
+        &#34;shmat&#34;,
+        &#34;shmctl&#34;,
+        &#34;shmdt&#34;,
+        &#34;shmget&#34;,
+        &#34;shutdown&#34;,
+        &#34;sigaltstack&#34;,
+        &#34;signalfd&#34;,
+        &#34;signalfd4&#34;,
+        &#34;sigreturn&#34;,
+        &#34;socket&#34;,
+        &#34;socketcall&#34;,
+        &#34;socketpair&#34;,
+        &#34;splice&#34;,
+        &#34;stat&#34;,
+        &#34;stat64&#34;,
+        &#34;statfs&#34;,
+        &#34;statfs64&#34;,
+        &#34;symlink&#34;,
+        &#34;symlinkat&#34;,
+        &#34;sync&#34;,
+        &#34;sync_file_range&#34;,
+        &#34;syncfs&#34;,
+        &#34;sysinfo&#34;,
+        &#34;syslog&#34;,
+        &#34;tee&#34;,
+        &#34;tgkill&#34;,
+        &#34;time&#34;,
+        &#34;timer_create&#34;,
+        &#34;timer_delete&#34;,
+        &#34;timerfd_create&#34;,
+        &#34;timerfd_gettime&#34;,
+        &#34;timerfd_settime&#34;,
+        &#34;timer_getoverrun&#34;,
+        &#34;timer_gettime&#34;,
+        &#34;timer_settime&#34;,
+        &#34;times&#34;,
+        &#34;tkill&#34;,
+        &#34;truncate&#34;,
+        &#34;truncate64&#34;,
+        &#34;ugetrlimit&#34;,
+        &#34;umask&#34;,
+        &#34;uname&#34;,
+        &#34;unlink&#34;,
+        &#34;unlinkat&#34;,
+        &#34;utime&#34;,
+        &#34;utimensat&#34;,
+        &#34;utimes&#34;,
+        &#34;vfork&#34;,
+        &#34;vmsplice&#34;,
+        &#34;wait4&#34;,
+        &#34;waitid&#34;,
+        &#34;waitpid&#34;,
+        &#34;write&#34;,
+        &#34;writev&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {},
-      "excludes": {}
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {},
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "personality"
+      &#34;names&#34;: [
+        &#34;personality&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [
         {
-          "index": 0,
-          "value": 0,
-          "valueTwo": 0,
-          "op": "SCMP_CMP_EQ"
+          &#34;index&#34;: 0,
+          &#34;value&#34;: 0,
+          &#34;valueTwo&#34;: 0,
+          &#34;op&#34;: &#34;SCMP_CMP_EQ&#34;
         }
       ],
-      "comment": "",
-      "includes": {},
-      "excludes": {}
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {},
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "personality"
+      &#34;names&#34;: [
+        &#34;personality&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [
         {
-          "index": 0,
-          "value": 8,
-          "valueTwo": 0,
-          "op": "SCMP_CMP_EQ"
+          &#34;index&#34;: 0,
+          &#34;value&#34;: 8,
+          &#34;valueTwo&#34;: 0,
+          &#34;op&#34;: &#34;SCMP_CMP_EQ&#34;
         }
       ],
-      "comment": "",
-      "includes": {},
-      "excludes": {}
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {},
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "personality"
+      &#34;names&#34;: [
+        &#34;personality&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [
         {
-          "index": 0,
-          "value": 131072,
-          "valueTwo": 0,
-          "op": "SCMP_CMP_EQ"
+          &#34;index&#34;: 0,
+          &#34;value&#34;: 131072,
+          &#34;valueTwo&#34;: 0,
+          &#34;op&#34;: &#34;SCMP_CMP_EQ&#34;
         }
       ],
-      "comment": "",
-      "includes": {},
-      "excludes": {}
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {},
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "personality"
+      &#34;names&#34;: [
+        &#34;personality&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [
         {
-          "index": 0,
-          "value": 131080,
-          "valueTwo": 0,
-          "op": "SCMP_CMP_EQ"
+          &#34;index&#34;: 0,
+          &#34;value&#34;: 131080,
+          &#34;valueTwo&#34;: 0,
+          &#34;op&#34;: &#34;SCMP_CMP_EQ&#34;
         }
       ],
-      "comment": "",
-      "includes": {},
-      "excludes": {}
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {},
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "personality"
+      &#34;names&#34;: [
+        &#34;personality&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [
         {
-          "index": 0,
-          "value": 4294967295,
-          "valueTwo": 0,
-          "op": "SCMP_CMP_EQ"
+          &#34;index&#34;: 0,
+          &#34;value&#34;: 4294967295,
+          &#34;valueTwo&#34;: 0,
+          &#34;op&#34;: &#34;SCMP_CMP_EQ&#34;
         }
       ],
-      "comment": "",
-      "includes": {},
-      "excludes": {}
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {},
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "sync_file_range2"
+      &#34;names&#34;: [
+        &#34;sync_file_range2&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "arches": [
-          "ppc64le"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;arches&#34;: [
+          &#34;ppc64le&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "arm_fadvise64_64",
-        "arm_sync_file_range",
-        "sync_file_range2",
-        "breakpoint",
-        "cacheflush",
-        "set_tls"
+      &#34;names&#34;: [
+        &#34;arm_fadvise64_64&#34;,
+        &#34;arm_sync_file_range&#34;,
+        &#34;sync_file_range2&#34;,
+        &#34;breakpoint&#34;,
+        &#34;cacheflush&#34;,
+        &#34;set_tls&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "arches": [
-          "arm",
-          "arm64"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;arches&#34;: [
+          &#34;arm&#34;,
+          &#34;arm64&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "arch_prctl"
+      &#34;names&#34;: [
+        &#34;arch_prctl&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "arches": [
-          "amd64",
-          "x32"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;arches&#34;: [
+          &#34;amd64&#34;,
+          &#34;x32&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "modify_ldt"
+      &#34;names&#34;: [
+        &#34;modify_ldt&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "arches": [
-          "amd64",
-          "x32",
-          "x86"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;arches&#34;: [
+          &#34;amd64&#34;,
+          &#34;x32&#34;,
+          &#34;x86&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "s390_pci_mmio_read",
-        "s390_pci_mmio_write",
-        "s390_runtime_instr"
+      &#34;names&#34;: [
+        &#34;s390_pci_mmio_read&#34;,
+        &#34;s390_pci_mmio_write&#34;,
+        &#34;s390_runtime_instr&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "arches": [
-          "s390",
-          "s390x"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;arches&#34;: [
+          &#34;s390&#34;,
+          &#34;s390x&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "open_by_handle_at"
+      &#34;names&#34;: [
+        &#34;open_by_handle_at&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "caps": [
-          "CAP_DAC_READ_SEARCH"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;caps&#34;: [
+          &#34;CAP_DAC_READ_SEARCH&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "bpf",
-        "clone",
-        "fanotify_init",
-        "lookup_dcookie",
-        "mount",
-        "name_to_handle_at",
-        "perf_event_open",
-        "setdomainname",
-        "sethostname",
-        "setns",
-        "umount",
-        "umount2",
-        "unshare"
+      &#34;names&#34;: [
+        &#34;bpf&#34;,
+        &#34;clone&#34;,
+        &#34;fanotify_init&#34;,
+        &#34;lookup_dcookie&#34;,
+        &#34;mount&#34;,
+        &#34;name_to_handle_at&#34;,
+        &#34;perf_event_open&#34;,
+        &#34;setdomainname&#34;,
+        &#34;sethostname&#34;,
+        &#34;setns&#34;,
+        &#34;umount&#34;,
+        &#34;umount2&#34;,
+        &#34;unshare&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "caps": [
-          "CAP_SYS_ADMIN"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;caps&#34;: [
+          &#34;CAP_SYS_ADMIN&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "clone"
+      &#34;names&#34;: [
+        &#34;clone&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [
         {
-          "index": 0,
-          "value": 2080505856,
-          "valueTwo": 0,
-          "op": "SCMP_CMP_MASKED_EQ"
+          &#34;index&#34;: 0,
+          &#34;value&#34;: 2080505856,
+          &#34;valueTwo&#34;: 0,
+          &#34;op&#34;: &#34;SCMP_CMP_MASKED_EQ&#34;
         }
       ],
-      "comment": "",
-      "includes": {},
-      "excludes": {
-        "caps": [
-          "CAP_SYS_ADMIN"
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {},
+      &#34;excludes&#34;: {
+        &#34;caps&#34;: [
+          &#34;CAP_SYS_ADMIN&#34;
         ],
-        "arches": [
-          "s390",
-          "s390x"
+        &#34;arches&#34;: [
+          &#34;s390&#34;,
+          &#34;s390x&#34;
         ]
       }
     },
     {
-      "names": [
-        "clone"
+      &#34;names&#34;: [
+        &#34;clone&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [
         {
-          "index": 1,
-          "value": 2080505856,
-          "valueTwo": 0,
-          "op": "SCMP_CMP_MASKED_EQ"
+          &#34;index&#34;: 1,
+          &#34;value&#34;: 2080505856,
+          &#34;valueTwo&#34;: 0,
+          &#34;op&#34;: &#34;SCMP_CMP_MASKED_EQ&#34;
         }
       ],
-      "comment": "s390 parameter ordering for clone is different",
-      "includes": {
-        "arches": [
-          "s390",
-          "s390x"
+      &#34;comment&#34;: &#34;s390 parameter ordering for clone is different&#34;,
+      &#34;includes&#34;: {
+        &#34;arches&#34;: [
+          &#34;s390&#34;,
+          &#34;s390x&#34;
         ]
       },
-      "excludes": {
-        "caps": [
-          "CAP_SYS_ADMIN"
+      &#34;excludes&#34;: {
+        &#34;caps&#34;: [
+          &#34;CAP_SYS_ADMIN&#34;
         ]
       }
     },
     {
-      "names": [
-        "reboot"
+      &#34;names&#34;: [
+        &#34;reboot&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "caps": [
-          "CAP_SYS_BOOT"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;caps&#34;: [
+          &#34;CAP_SYS_BOOT&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "chroot"
+      &#34;names&#34;: [
+        &#34;chroot&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "caps": [
-          "CAP_SYS_CHROOT"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;caps&#34;: [
+          &#34;CAP_SYS_CHROOT&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "delete_module",
-        "init_module",
-        "finit_module",
-        "query_module"
+      &#34;names&#34;: [
+        &#34;delete_module&#34;,
+        &#34;init_module&#34;,
+        &#34;finit_module&#34;,
+        &#34;query_module&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "caps": [
-          "CAP_SYS_MODULE"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;caps&#34;: [
+          &#34;CAP_SYS_MODULE&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "acct"
+      &#34;names&#34;: [
+        &#34;acct&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "caps": [
-          "CAP_SYS_PACCT"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;caps&#34;: [
+          &#34;CAP_SYS_PACCT&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "kcmp",
-        "process_vm_readv",
-        "process_vm_writev",
-        "ptrace"
+      &#34;names&#34;: [
+        &#34;kcmp&#34;,
+        &#34;process_vm_readv&#34;,
+        &#34;process_vm_writev&#34;,
+        &#34;ptrace&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "caps": [
-          "CAP_SYS_PTRACE"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;caps&#34;: [
+          &#34;CAP_SYS_PTRACE&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "iopl",
-        "ioperm"
+      &#34;names&#34;: [
+        &#34;iopl&#34;,
+        &#34;ioperm&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "caps": [
-          "CAP_SYS_RAWIO"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;caps&#34;: [
+          &#34;CAP_SYS_RAWIO&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "settimeofday",
-        "stime",
-        "clock_settime"
+      &#34;names&#34;: [
+        &#34;settimeofday&#34;,
+        &#34;stime&#34;,
+        &#34;clock_settime&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "caps": [
-          "CAP_SYS_TIME"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;caps&#34;: [
+          &#34;CAP_SYS_TIME&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     },
     {
-      "names": [
-        "vhangup"
+      &#34;names&#34;: [
+        &#34;vhangup&#34;
       ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [],
-      "comment": "",
-      "includes": {
-        "caps": [
-          "CAP_SYS_TTY_CONFIG"
+      &#34;action&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+      &#34;args&#34;: [],
+      &#34;comment&#34;: &#34;&#34;,
+      &#34;includes&#34;: {
+        &#34;caps&#34;: [
+          &#34;CAP_SYS_TTY_CONFIG&#34;
         ]
       },
-      "excludes": {}
+      &#34;excludes&#34;: {}
     }
   ]
 }</code></pre>
@@ -1660,7 +1660,7 @@ Design</a></p>
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

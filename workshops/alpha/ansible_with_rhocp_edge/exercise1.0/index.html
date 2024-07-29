@@ -329,19 +329,19 @@
 <p>First, in order to manage remote systems - we need to set up our dependencies:</p>
 </div>
 <div class="paragraph">
-<p>Define your inventory.  Inventories are crucial to Ansible, as they define remote machines on which you will run commands or your playbook(s).  Use the Code Ready Workspaces editor (Eclipse Che) to create a file called <code>hosts</code> by selecting [File] &#8594; [New File] &#8594; hosts (no .txt extention) file in /projects; then, click [Ok]</p>
+<p>Define your inventory.  Inventories are crucial to Ansible, as they define remote machines on which you will run commands or your playbook(s).  Use the Code Ready Workspaces editor (Eclipse Che) to create a file called <code>hosts</code> by selecting [File] → [New File] → hosts (no .txt extention) file in /projects; then, click [Ok]</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/ansible_hosts.gif" alt="ansible hosts" height="500">
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/ansible_hosts.gif" alt="ansible hosts" height="500"/>
 </div>
-<div class="title">Figure 1: Creating the Ansible inventory file called "hosts"</div>
+<div class="title">Figure 1: Creating the Ansible inventory file called &#34;hosts&#34;</div>
 </div>
 <div class="exampleblock">
 <div class="content">
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -349,7 +349,7 @@
 The <strong>workshopname</strong>, in the example below, will be provided to you by your instructor.  The <strong>#</strong> should be replaced by your student number.
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>For example, a recent workshop student used:
@@ -367,19 +367,19 @@ The <strong>workshopname</strong>, in the example below, will be provided to you
 </div>
 </div>
 <div class="paragraph">
-<p>When complete, select "[File] &#8594; [Save]" to write out the content.</p>
+<p>When complete, select &#34;[File] → [Save]&#34; to write out the content.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/alpha/ansible_with_rhocp_edge/images/ansible_hosts_save.gif" alt="ansible hosts save" height="500">
+<img src="/workshops/alpha/ansible_with_rhocp_edge/images/ansible_hosts_save.gif" alt="ansible hosts save" height="500"/>
 </div>
-<div class="title">Figure 2: Saving the Ansible inventory file called "hosts"</div>
+<div class="title">Figure 2: Saving the Ansible inventory file called &#34;hosts&#34;</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_1_test_the_edge_host_response">Step 1: Test the edge host response</h3>
 <div class="paragraph">
-<p>Let&#8217;s start with something basic - pinging a host.  The <code>ping</code> module tests the responsiveness of our edge host from the Code Ready Workspaces Terminal.</p>
+<p>Let’s start with something basic - pinging a host.  The <code>ping</code> module tests the responsiveness of our edge host from the Code Ready Workspaces Terminal.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -390,18 +390,18 @@ The <strong>workshopname</strong>, in the example below, will be provided to you
 <div class="sect2">
 <h3 id="_step_2_run_a_linux_command">Step 2: Run a Linux command</h3>
 <div class="paragraph">
-<p>Now let&#8217;s see how we can run a Linux command and format the output, using the <code>command</code> module.</p>
+<p>Now let’s see how we can run a Linux command and format the output, using the <code>command</code> module.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible edge --module-name command --args "uname -m" --one-line</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible edge --module-name command --args &#34;uname -m&#34; --one-line</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_3_review_the_setup_module">Step 3: Review the setup module</h3>
 <div class="paragraph">
-<p>Take a look at your edge node&#8217;s configuration.  The <code>setup</code> module displays Ansible facts (and a lot of them) about an endpoint.</p>
+<p>Take a look at your edge node’s configuration.  The <code>setup</code> module displays Ansible facts (and a lot of them) about an endpoint.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -412,7 +412,7 @@ The <strong>workshopname</strong>, in the example below, will be provided to you
 <div class="content">
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -420,11 +420,11 @@ The <strong>workshopname</strong>, in the example below, will be provided to you
 Like many Linux commands, <strong>ansible</strong> allows for long-form and short-form command-line arguments.  For example:
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible edge --module-name command --args "uname -m" --one-line --become</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible edge --module-name command --args &#34;uname -m&#34; --one-line --become</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -432,7 +432,7 @@ Like many Linux commands, <strong>ansible</strong> allows for long-form and shor
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible edge -m command -a "uname -m" -o -b</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible edge -m command -a &#34;uname -m&#34; -o -b</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -444,14 +444,14 @@ Like many Linux commands, <strong>ansible</strong> allows for long-form and shor
 <div class="sect2">
 <h3 id="_step_4_install_a_package_on_the_edge">Step 4:  Install a package on the edge.</h3>
 <div class="paragraph">
-<p>For this example, we will use the 'skopeo' package; which, provides a way inspect, copy, and sync (plus more) containers repositories.</p>
+<p>For this example, we will use the &#39;skopeo&#39; package; which, provides a way inspect, copy, and sync (plus more) containers repositories.</p>
 </div>
 <div class="paragraph">
-<p>Now, let&#8217;s install 'skopeo', using the Ansible <code>package</code> module.</p>
+<p>Now, let’s install &#39;skopeo&#39;, using the Ansible <code>package</code> module.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible edge -m package -a "name=skopeo state=present" -b</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible edge -m package -a &#34;name=skopeo state=present&#34; -b</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -554,7 +554,7 @@ Like many Linux commands, <strong>ansible</strong> allows for long-form and shor
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -814,7 +814,7 @@ Like many Linux commands, <strong>ansible</strong> allows for long-form and shor
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -926,7 +926,7 @@ Like many Linux commands, <strong>ansible</strong> allows for long-form and shor
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -936,7 +936,7 @@ Like many Linux commands, <strong>ansible</strong> allows for long-form and shor
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1023,7 +1023,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

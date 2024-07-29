@@ -319,14 +319,14 @@
 
     <h2 id="step-1---create-a-new-project-space">Step 1 - Create a New Project Space</h2>
 <p>In the Wetty terminal, create a new project.</p>
-<pre><code class="language-terminal" data-lang="terminal">oc new-project gochat-s2i-user<span class="userid">YOUR#</span>
+<pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc new-project gochat-s2i-user<span class="userid">YOUR#</span>
 
 </code></pre><h2 id="step-2---create-the-golang-s2i-builder-image">Step 2 - Create the Golang S2I Builder Image</h2>
 <p>Create a new build for the Golang S2I builder image</p>
-<pre><code class="language-terminal" data-lang="terminal">cd ~
-</code></pre><pre><code class="language-terminal" data-lang="terminal">oc new-build golang-s2i/ --to=golang-s2i
+<pre tabindex="0"><code class="language-terminal" data-lang="terminal">cd ~
+</code></pre><pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc new-build golang-s2i/ --to=golang-s2i
 </code></pre><p>Start the new build for the Golang S2I builder image</p>
-<pre><code class="language-terminal" data-lang="terminal">oc start-build golang-s2i --from-dir=golang-s2i/
+<pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc start-build golang-s2i --from-dir=golang-s2i/
 </code></pre><h2 id="step-3---import-yaml-template-in-to-openshift">Step 3 - Import YAML Template in to OpenShift</h2>
 <p>In the OpenShift WebUI, on the catalog page, seclect Import YAML/JSON
 <div class="panel-group">
@@ -336,17 +336,17 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse48781342b8ef8c48fb2b54edfb3c63f9" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3b118d092849163359ad6c5a63650259" class="collapsed">
       
         Import YAML/JSON
       </a>
     </h4>
   </div>
   
-  <div id="collapse48781342b8ef8c48fb2b54edfb3c63f9" class="panel-collapse collapse ">
+  <div id="collapse3b118d092849163359ad6c5a63650259" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/import_yaml_json.png" width="600" /></p>
+       <img src="../images/import_yaml_json.png" width="600" />
 
     </div>
   </div>
@@ -367,161 +367,161 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse67bac97790c72c2661fabb8ec6b7f790" class="collapsed">
+      <a data-toggle="collapse" href="#collapsef9d7b662e6dc96dc5610eb5f27f87a5b" class="collapsed">
       
         Golang Template
       </a>
     </h4>
   </div>
   
-  <div id="collapse67bac97790c72c2661fabb8ec6b7f790" class="panel-collapse collapse ">
+  <div id="collapsef9d7b662e6dc96dc5610eb5f27f87a5b" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Template
-<span style="color:#66d9ef">labels</span>:
-  <span style="color:#66d9ef">template</span>: golang
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">annotations</span>:
-    <span style="color:#66d9ef">description</span>: A basic builder for Golang applications
-    <span style="color:#66d9ef">iconClass</span>: icon-go-gopher
-    <span style="color:#66d9ef">openshift.io/display-name</span>: Golang
-    <span style="color:#66d9ef">openshift.io/long-description</span>: This template defines resources needed to develop
-      a Golang application, including a build configuration, application deployment
-      configuration, and database deployment configuration.
-    <span style="color:#66d9ef">openshift.io/provider-display-name</span>: Community
-    <span style="color:#66d9ef">template.openshift.io/bindable</span>: <span style="color:#e6db74">&#34;false&#34;</span>
-    <span style="color:#66d9ef">tags</span>: golang
-  <span style="color:#66d9ef">creationTimestamp</span>: <span style="color:#66d9ef">null</span>
-  <span style="color:#66d9ef">name</span>: golang
-<span style="color:#66d9ef">objects</span>:
-- <span style="color:#66d9ef">apiVersion</span>: v1
-  <span style="color:#66d9ef">kind</span>: ImageStream
-  <span style="color:#66d9ef">metadata</span>:
-    <span style="color:#66d9ef">annotations</span>:
-      <span style="color:#66d9ef">description</span>: Keeps track of changes in the application image
-    <span style="color:#66d9ef">name</span>: ${APPLICATION_NAME}
-- <span style="color:#66d9ef">apiVersion</span>: v1
-  <span style="color:#66d9ef">kind</span>: BuildConfig
-  <span style="color:#66d9ef">metadata</span>:
-    <span style="color:#66d9ef">annotations</span>:
-      <span style="color:#66d9ef">description</span>: Defines how to build the application
-    <span style="color:#66d9ef">name</span>: ${APPLICATION_NAME}
-  <span style="color:#66d9ef">spec</span>:
-    <span style="color:#66d9ef">output</span>:
-      <span style="color:#66d9ef">to</span>:
-        <span style="color:#66d9ef">kind</span>: ImageStreamTag
-        <span style="color:#66d9ef">name</span>: ${APPLICATION_NAME}:latest
-    <span style="color:#66d9ef">source</span>:
-      <span style="color:#66d9ef">contextDir</span>: ${APP_CONTEXT_DIR}
-      <span style="color:#66d9ef">git</span>:
-        <span style="color:#66d9ef">ref</span>: ${APP_SOURCE_REPOSITORY_REF}
-        <span style="color:#66d9ef">uri</span>: ${APP_SOURCE_REPOSITORY_URL}
-      <span style="color:#66d9ef">type</span>: Git
-    <span style="color:#66d9ef">strategy</span>:
-      <span style="color:#66d9ef">sourceStrategy</span>:
-        <span style="color:#66d9ef">from</span>:
-          <span style="color:#66d9ef">kind</span>: ImageStreamTag
-          <span style="color:#66d9ef">name</span>: golang-s2i:latest
-      <span style="color:#66d9ef">type</span>: Source
-    <span style="color:#66d9ef">triggers</span>:
-    - <span style="color:#66d9ef">type</span>: ImageChange
-    - <span style="color:#66d9ef">type</span>: ConfigChange
-    - <span style="color:#66d9ef">github</span>:
-        <span style="color:#66d9ef">secret</span>: ${APP_GITHUB_WEBHOOK_SECRET}
-      <span style="color:#66d9ef">type</span>: GitHub
-- <span style="color:#66d9ef">apiVersion</span>: v1
-  <span style="color:#66d9ef">kind</span>: DeploymentConfig
-  <span style="color:#66d9ef">metadata</span>:
-    <span style="color:#66d9ef">annotations</span>:
-      <span style="color:#66d9ef">description</span>: Defines how to deploy the application server
-    <span style="color:#66d9ef">name</span>: ${APPLICATION_NAME}
-  <span style="color:#66d9ef">spec</span>:
-    <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">selector</span>:
-      <span style="color:#66d9ef">name</span>: ${APPLICATION_NAME}
-    <span style="color:#66d9ef">strategy</span>:
-      <span style="color:#66d9ef">type</span>: Rolling
-    <span style="color:#66d9ef">template</span>:
-      <span style="color:#66d9ef">metadata</span>:
-        <span style="color:#66d9ef">labels</span>:
-          <span style="color:#66d9ef">name</span>: ${APPLICATION_NAME}
-        <span style="color:#66d9ef">name</span>: ${APPLICATION_NAME}
-      <span style="color:#66d9ef">spec</span>:
-        <span style="color:#66d9ef">containers</span>:
-        - <span style="color:#66d9ef">env</span>:
-          - <span style="color:#66d9ef">name</span>: ARGS
-            <span style="color:#66d9ef">value</span>: ${APP_ARGS}
-          <span style="color:#66d9ef">image</span>: ${APPLICATION_NAME}
-          <span style="color:#66d9ef">name</span>: ${APPLICATION_NAME}
-          <span style="color:#66d9ef">ports</span>:
-          - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">8080</span>
-    <span style="color:#66d9ef">triggers</span>:
-    - <span style="color:#66d9ef">imageChangeParams</span>:
-        <span style="color:#66d9ef">automatic</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">containerNames</span>:
-        - ${APPLICATION_NAME}
-        <span style="color:#66d9ef">from</span>:
-          <span style="color:#66d9ef">kind</span>: ImageStreamTag
-          <span style="color:#66d9ef">name</span>: ${APPLICATION_NAME}:latest
-      <span style="color:#66d9ef">type</span>: ImageChange
-    - <span style="color:#66d9ef">type</span>: ConfigChange
-- <span style="color:#66d9ef">apiVersion</span>: v1
-  <span style="color:#66d9ef">kind</span>: Service
-  <span style="color:#66d9ef">metadata</span>:
-    <span style="color:#66d9ef">annotations</span>:
-      <span style="color:#66d9ef">description</span>: Exposes and load balances the application pods
-    <span style="color:#66d9ef">name</span>: ${APPLICATION_NAME}
-  <span style="color:#66d9ef">spec</span>:
-    <span style="color:#66d9ef">ports</span>:
-    - <span style="color:#66d9ef">name</span>: web
-      <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
-      <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">8080</span>
-    <span style="color:#66d9ef">selector</span>:
-      <span style="color:#66d9ef">name</span>: ${APPLICATION_NAME}
-- <span style="color:#66d9ef">apiVersion</span>: v1
-  <span style="color:#66d9ef">id</span>: ${APPLICATION_NAME}
-  <span style="color:#66d9ef">kind</span>: Route
-  <span style="color:#66d9ef">metadata</span>:
-    <span style="color:#66d9ef">annotations</span>:
-      <span style="color:#66d9ef">description</span>: Route for application<span style="color:#e6db74">&#39;s http service.
-</span><span style="color:#e6db74">    labels:
-</span><span style="color:#e6db74">      application: ${APPLICATION_NAME}
-</span><span style="color:#e6db74">    name: ${APPLICATION_NAME}
-</span><span style="color:#e6db74">  spec:
-</span><span style="color:#e6db74">    host: ${APPLICATION_DOMAIN}
-</span><span style="color:#e6db74">    to:
-</span><span style="color:#e6db74">      name: ${APPLICATION_NAME}
-</span><span style="color:#e6db74">parameters:
-</span><span style="color:#e6db74">- description: The URL of the repository with your Golang application code
-</span><span style="color:#e6db74">  name: APP_SOURCE_REPOSITORY_URL
-</span><span style="color:#e6db74">  displayName: Application Source URL
-</span><span style="color:#e6db74">- description: Set this to a branch name, tag or other ref of your repository if you
-</span><span style="color:#e6db74">    are not using the default branch
-</span><span style="color:#e6db74">  name: APP_SOURCE_REPOSITORY_REF
-</span><span style="color:#e6db74">  displayName: Application Source Branch
-</span><span style="color:#e6db74">- description: Set this to the relative path to your project if it is not in the root
-</span><span style="color:#e6db74">    of your repository
-</span><span style="color:#e6db74">  name: APP_CONTEXT_DIR
-</span><span style="color:#e6db74">  displayName: Application Source Directory
-</span><span style="color:#e6db74">- description: A secret string used to configure the GitHub webhook for the app repo
-</span><span style="color:#e6db74">  from: &#39;</span>[a-zA-Z0<span style="color:#ae81ff">-9</span>]{<span style="color:#ae81ff">40</span>}<span style="color:#e6db74">&#39;
-</span><span style="color:#e6db74">  generate: expression
-</span><span style="color:#e6db74">  name: APP_GITHUB_WEBHOOK_SECRET
-</span><span style="color:#e6db74">  displayName: Application GitHub Web Hook Secret
-</span><span style="color:#e6db74">- description: The name for the application.
-</span><span style="color:#e6db74">  name: APPLICATION_NAME
-</span><span style="color:#e6db74">  required: true
-</span><span style="color:#e6db74">  value: golang-app
-</span><span style="color:#e6db74">  displayName: Application Name
-</span><span style="color:#e6db74">- description: &#39;</span>Custom hostname for service routes.  Leave blank for default hostname,
-    <span style="color:#66d9ef">e.g.</span>: &lt;application-name&gt;.&lt;project&gt;.&lt;default-domain-suffix&gt;&#39;
-  <span style="color:#66d9ef">name</span>: APPLICATION_DOMAIN
-  <span style="color:#66d9ef">displayName</span>: Application Domain
-- <span style="color:#66d9ef">description</span>: Command line arguments to provide to the Golang application
-  <span style="color:#66d9ef">name</span>: APP_ARGS
-  <span style="color:#66d9ef">displayName</span>: Application Command Line Arguments
-</code></pre></div>
+       <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Template</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>: <span style="color:#ae81ff">golang</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">description</span>: <span style="color:#ae81ff">A basic builder for Golang applications</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">iconClass</span>: <span style="color:#ae81ff">icon-go-gopher</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">openshift.io/display-name</span>: <span style="color:#ae81ff">Golang</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">openshift.io/long-description</span>: <span style="color:#ae81ff">This template defines resources needed to develop</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">a Golang application, including a build configuration, application deployment</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">configuration, and database deployment configuration.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">openshift.io/provider-display-name</span>: <span style="color:#ae81ff">Community</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">template.openshift.io/bindable</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">tags</span>: <span style="color:#ae81ff">golang</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">creationTimestamp</span>: <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">golang</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">objects</span>:
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ImageStream</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Keeps track of changes in the application image</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">BuildConfig</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Defines how to build the application</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">output</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">to</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ImageStreamTag</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">source</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">contextDir</span>: <span style="color:#ae81ff">${APP_CONTEXT_DIR}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">git</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ref</span>: <span style="color:#ae81ff">${APP_SOURCE_REPOSITORY_REF}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uri</span>: <span style="color:#ae81ff">${APP_SOURCE_REPOSITORY_URL}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">type</span>: <span style="color:#ae81ff">Git</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">strategy</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">sourceStrategy</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">from</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ImageStreamTag</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">golang-s2i:latest</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">type</span>: <span style="color:#ae81ff">Source</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">triggers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ImageChange</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ConfigChange</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">github</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">secret</span>: <span style="color:#ae81ff">${APP_GITHUB_WEBHOOK_SECRET}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">type</span>: <span style="color:#ae81ff">GitHub</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">DeploymentConfig</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Defines how to deploy the application server</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">strategy</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">type</span>: <span style="color:#ae81ff">Rolling</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ARGS</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">value</span>: <span style="color:#ae81ff">${APP_ARGS}</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">image</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">triggers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">imageChangeParams</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">automatic</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">containerNames</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">from</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ImageStreamTag</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}:latest</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ImageChange</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ConfigChange</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Exposes and load balances the application pods</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">web</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">id</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Route</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Route for application&#39;s http service.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">application</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">host</span>: <span style="color:#ae81ff">${APPLICATION_DOMAIN}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">to</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${APPLICATION_NAME}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">parameters</span>:
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">description</span>: <span style="color:#ae81ff">The URL of the repository with your Golang application code</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">APP_SOURCE_REPOSITORY_URL</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">displayName</span>: <span style="color:#ae81ff">Application Source URL</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Set this to a branch name, tag or other ref of your repository if you</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">are not using the default branch</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">APP_SOURCE_REPOSITORY_REF</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">displayName</span>: <span style="color:#ae81ff">Application Source Branch</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Set this to the relative path to your project if it is not in the root</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">of your repository</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">APP_CONTEXT_DIR</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">displayName</span>: <span style="color:#ae81ff">Application Source Directory</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">description</span>: <span style="color:#ae81ff">A secret string used to configure the GitHub webhook for the app repo</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">from</span>: <span style="color:#e6db74">&#39;[a-zA-Z0-9]{40}&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">generate</span>: <span style="color:#ae81ff">expression</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">APP_GITHUB_WEBHOOK_SECRET</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">displayName</span>: <span style="color:#ae81ff">Application GitHub Web Hook Secret</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">description</span>: <span style="color:#ae81ff">The name for the application.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">APPLICATION_NAME</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">required</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">value</span>: <span style="color:#ae81ff">golang-app</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">displayName</span>: <span style="color:#ae81ff">Application Name</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#39;Custom hostname for service routes.  Leave blank for default hostname,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    e.g.: &lt;application-name&gt;.&lt;project&gt;.&lt;default-domain-suffix&gt;&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">APPLICATION_DOMAIN</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">displayName</span>: <span style="color:#ae81ff">Application Domain</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Command line arguments to provide to the Golang application</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">APP_ARGS</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">displayName</span>: <span style="color:#ae81ff">Application Command Line Arguments</span>
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -538,17 +538,17 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsea2a3613879c4ecdb9f8b20c105f3c529" class="collapsed">
+      <a data-toggle="collapse" href="#collapsefa2eca167eaceec4a82f77d89dcaadbe" class="collapsed">
       
         Configure Import YAML/JSON
       </a>
     </h4>
   </div>
   
-  <div id="collapsea2a3613879c4ecdb9f8b20c105f3c529" class="panel-collapse collapse ">
+  <div id="collapsefa2eca167eaceec4a82f77d89dcaadbe" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/import_config.png" width="700" /></p>
+       <img src="../images/import_config.png" width="700" />
 
     </div>
   </div>
@@ -567,17 +567,17 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse11f0e04d346924cf9d7f226728655bf2" class="collapsed">
+      <a data-toggle="collapse" href="#collapseef49f28af3f7cf1be3552c3175922076" class="collapsed">
       
         Add Template
       </a>
     </h4>
   </div>
   
-  <div id="collapse11f0e04d346924cf9d7f226728655bf2" class="panel-collapse collapse ">
+  <div id="collapseef49f28af3f7cf1be3552c3175922076" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/add_template.png" width="400" /></p>
+       <img src="../images/add_template.png" width="400" />
 
     </div>
   </div>
@@ -597,17 +597,17 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse5333d7b429b5174599385c49eaf53b96" class="collapsed">
+      <a data-toggle="collapse" href="#collapse81cac5af9185144d99d2e8e2b54540d2" class="collapsed">
       
         Select Template
       </a>
     </h4>
   </div>
   
-  <div id="collapse5333d7b429b5174599385c49eaf53b96" class="panel-collapse collapse ">
+  <div id="collapse81cac5af9185144d99d2e8e2b54540d2" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/select_from_project.png" width="600" /></p>
+       <img src="../images/select_from_project.png" width="600" />
 
     </div>
   </div>
@@ -625,17 +625,17 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse8909cdb1ad14b2fdd8c92add43a17dca" class="collapsed">
+      <a data-toggle="collapse" href="#collapsedae65372d6c8a17756af7cb545e934ec" class="collapsed">
       
         Really Select Template
       </a>
     </h4>
   </div>
   
-  <div id="collapse8909cdb1ad14b2fdd8c92add43a17dca" class="panel-collapse collapse ">
+  <div id="collapsedae65372d6c8a17756af7cb545e934ec" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/golang_template.png" width="600" /></p>
+       <img src="../images/golang_template.png" width="600" />
 
     </div>
   </div>
@@ -652,12 +652,12 @@
 <p>In the <strong>Application Source URL</strong> field, enter <a href="https://github.com/kevensen/openshift-gochat-client.git">https://github.com/kevensen/openshift-gochat-client.git</a></p>
 <p>In the <strong>Application Name</strong> field, enter <strong>gochat-client</strong></p>
 <p>In the <strong>Application Command Line Arguments</strong> field, enter the following:</p>
-<pre><code class="language-terminal" data-lang="terminal">-host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr -insecure
+<pre tabindex="0"><code class="language-terminal" data-lang="terminal">-host :8080 -chatServer gochat-server.gochat-server.svc.cluster.local:8080 -templatePath /opt/app-root/gopath/src/github.com/kevensen/openshift-gochat-client/templates -logtostderr -insecure
 </code></pre><p>Click <strong>Create</strong></p>
 <h2 id="step-10---annotate-the-service-account-to-use-openshift-authorization">Step 10 - Annotate the Service Account to Use OpenShift Authorization</h2>
 <p>As in the previous lab, we must annotate the service account for the Gochat Client to communicate to the OpenShift API for user credential verification.</p>
-<pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirectreference.1='{&quot;kind&quot;:&quot;OAuthRedirectReference&quot;,&quot;apiVersion&quot;:&quot;v1&quot;,&quot;reference&quot;:{&quot;kind&quot;:&quot;Route&quot;,&quot;name&quot;:&quot;gochat-client&quot;}}' --overwrite
-</code></pre><pre><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirecturi.1=auth/callback/openshift --overwrite
+<pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirectreference.1=&#39;{&#34;kind&#34;:&#34;OAuthRedirectReference&#34;,&#34;apiVersion&#34;:&#34;v1&#34;,&#34;reference&#34;:{&#34;kind&#34;:&#34;Route&#34;,&#34;name&#34;:&#34;gochat-client&#34;}}&#39; --overwrite
+</code></pre><pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc annotate sa/default serviceaccounts.openshift.io/oauth-redirecturi.1=auth/callback/openshift --overwrite
 </code></pre><h2 id="step-11---sign-in-to-the-app">Step 11 - Sign in to the App</h2>
 <p>Click the blue &ldquo;Login&rdquo; button.
 <div class="panel-group">
@@ -694,17 +694,17 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse25334dab422259edec074ef48abe1742" class="collapsed">
+      <a data-toggle="collapse" href="#collapsec7de9cf6870f4812de3e9c44da5d5129" class="collapsed">
       
         OpenShift WebUI Login
       </a>
     </h4>
   </div>
   
-  <div id="collapse25334dab422259edec074ef48abe1742" class="panel-collapse collapse ">
+  <div id="collapsec7de9cf6870f4812de3e9c44da5d5129" class="panel-collapse collapse ">
   
     <div class="panel-body">
-       <p><img src="../images/webui.png" width="1000" /></p>
+       <img src="../images/webui.png" width="1000" />
 
     </div>
   </div>
@@ -841,7 +841,7 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1101,7 +1101,7 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -1213,7 +1213,7 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1223,7 +1223,7 @@ Log in to the app with your OpenShift credentials.  The workshop moderator will 
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1306,7 +1306,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

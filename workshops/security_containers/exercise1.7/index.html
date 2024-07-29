@@ -380,27 +380,27 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">{
-    "defaultAction": "SCMP_ACT_ALLOW",
-    "architectures": [
-        "SCMP_ARCH_X86_64",
-        "SCMP_ARCH_X86",
-        "SCMP_ARCH_X32"
+    &#34;defaultAction&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+    &#34;architectures&#34;: [
+        &#34;SCMP_ARCH_X86_64&#34;,
+        &#34;SCMP_ARCH_X86&#34;,
+        &#34;SCMP_ARCH_X32&#34;
     ],
-    "syscalls": [
+    &#34;syscalls&#34;: [
         {
-            "name": "chmod",
-            "action": "SCMP_ACT_ERRNO",
-            "args": []
+            &#34;name&#34;: &#34;chmod&#34;,
+            &#34;action&#34;: &#34;SCMP_ACT_ERRNO&#34;,
+            &#34;args&#34;: []
         },
         {
-            "name": "chown",
-            "action": "SCMP_ACT_ERRNO",
-            "args": []
+            &#34;name&#34;: &#34;chown&#34;,
+            &#34;action&#34;: &#34;SCMP_ACT_ERRNO&#34;,
+            &#34;args&#34;: []
         },
         {
-            "name": "chown32",
-            "action": "SCMP_ACT_ERRNO",
-            "args": []
+            &#34;name&#34;: &#34;chown32&#34;,
+            &#34;action&#34;: &#34;SCMP_ACT_ERRNO&#34;,
+            &#34;args&#34;: []
         }
     ]
 }</code></pre>
@@ -411,15 +411,15 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">"syscalls": [
+<pre class="highlight"><code class="language-bash" data-lang="bash">&#34;syscalls&#34;: [
         {
-            "name": "chmod",                <i class="conum" data-value="1"></i><b>(1)</b>
-            "action": "SCMP_ACT_ERRNO",     <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+            &#34;name&#34;: &#34;chmod&#34;,                <i class="conum" data-value="1"></i><b>(1)</b>
+            &#34;action&#34;: &#34;SCMP_ACT_ERRNO&#34;,     <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td><strong>chmod</strong>:  is the command and system call which may change the access permissions to file system objects (files and directories). It may also alter special mode flags. The request is filtered by the umask. The name is an abbreviation of change mode.</td>
 </tr>
@@ -427,7 +427,7 @@
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td><strong>SCMP_ACT_ERRNO</strong>: Basically this blocks the chmod syscall. Man page: The thread will receive a return value of errno when it calls a syscall that matches the filter rule.</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
@@ -493,7 +493,7 @@
 <div class="sect2">
 <h3 id="_step_1_run_fedora">Step 1. Run Fedora</h3>
 <div class="paragraph">
-<p>Let&#8217;s run a instance of Fedora and use the same <code>1_chmod.json</code> profile to try and limit the <code>chmod</code> command inside the container.</p>
+<p>Let’s run a instance of Fedora and use the same <code>1_chmod.json</code> profile to try and limit the <code>chmod</code> command inside the container.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -527,20 +527,20 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseeb2619956e9acdb78a222bead5c9100f" class="collapsed">
+      <a data-toggle="collapse" href="#collapsec6991928573d6dcc9e57b840af85c780" class="collapsed">
       
         Result
       </a>
     </h4>
   </div>
   
-  <div id="collapseeb2619956e9acdb78a222bead5c9100f" class="panel-collapse collapse ">
+  <div id="collapsec6991928573d6dcc9e57b840af85c780" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">stat("/etc/hosts", {st_mode=S_IFREG|0644, st_size=174, ...}) = 0
-fchmodat(AT_FDCWD, "/etc/hosts", 0400)  = 0
+<pre class="highlight"><code class="language-bash" data-lang="bash">stat(&#34;/etc/hosts&#34;, {st_mode=S_IFREG|0644, st_size=174, ...}) = 0
+fchmodat(AT_FDCWD, &#34;/etc/hosts&#34;, 0400)  = 0
 +++ exited with 0 +++</code></pre>
 </div>
 </div>
@@ -567,14 +567,14 @@ fchmodat(AT_FDCWD, "/etc/hosts", 0400)  = 0
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse8287504d40b392995412a9340f50f868" class="collapsed">
+      <a data-toggle="collapse" href="#collapse4a46d62432b37685c7d294424d26c655" class="collapsed">
       
         Seccomp Profile
       </a>
     </h4>
   </div>
   
-  <div id="collapse8287504d40b392995412a9340f50f868" class="panel-collapse collapse ">
+  <div id="collapse4a46d62432b37685c7d294424d26c655" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="paragraph">
@@ -584,22 +584,22 @@ fchmodat(AT_FDCWD, "/etc/hosts", 0400)  = 0
 <div class="title">2_chmod_fedora.json</div>
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">{
-    "defaultAction": "SCMP_ACT_ALLOW",
-    "architectures": [
-        "SCMP_ARCH_X86_64",
-        "SCMP_ARCH_X86",
-        "SCMP_ARCH_X32"
+    &#34;defaultAction&#34;: &#34;SCMP_ACT_ALLOW&#34;,
+    &#34;architectures&#34;: [
+        &#34;SCMP_ARCH_X86_64&#34;,
+        &#34;SCMP_ARCH_X86&#34;,
+        &#34;SCMP_ARCH_X32&#34;
     ],
-    "syscalls": [
+    &#34;syscalls&#34;: [
         {
-            "name": "fchmodat",
-            "action": "SCMP_ACT_ERRNO",
-            "args": []
+            &#34;name&#34;: &#34;fchmodat&#34;,
+            &#34;action&#34;: &#34;SCMP_ACT_ERRNO&#34;,
+            &#34;args&#34;: []
         },
         {
-            "name": "fchownat",
-            "action": "SCMP_ACT_ERRNO",
-            "args": []
+            &#34;name&#34;: &#34;fchownat&#34;,
+            &#34;action&#34;: &#34;SCMP_ACT_ERRNO&#34;,
+            &#34;args&#34;: []
         }
     ]
 }</code></pre>
@@ -624,10 +624,10 @@ fchmodat(AT_FDCWD, "/etc/hosts", 0400)  = 0
 <div class="sect2">
 <h3 id="_step_4_create_a_seccomp_profile_with_syscall_mapping">Step 4. Create a seccomp profile with syscall mapping</h3>
 <div class="paragraph">
-<p>We have now found the correct syscall to add to our seccomp profile. Let&#8217;s create a seccomp profile with our new syscall mapping. Now we can create a seccomp profile called <code>2_chmod_fedora.json</code> using vim, or your favorite editor. You can copy and paste the seccomp profile above into this profile.</p>
+<p>We have now found the correct syscall to add to our seccomp profile. Let’s create a seccomp profile with our new syscall mapping. Now we can create a seccomp profile called <code>2_chmod_fedora.json</code> using vim, or your favorite editor. You can copy and paste the seccomp profile above into this profile.</p>
 </div>
 <div class="paragraph">
-<p>Now that you have your new profile created, let&#8217;s run the container again and see if our new seccomp profile blocks <code>chmod</code> &amp; <code>chown</code> from working.</p>
+<p>Now that you have your new profile created, let’s run the container again and see if our new seccomp profile blocks <code>chmod</code> &amp; <code>chown</code> from working.</p>
 </div>
 <div class="listingblock">
 <div class="title">chmod</div>
@@ -643,19 +643,19 @@ fchmodat(AT_FDCWD, "/etc/hosts", 0400)  = 0
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsea1b10be9667b6029af5bef985a9839f8" class="collapsed">
+      <a data-toggle="collapse" href="#collapse379ce5a577a5828a2d9b1941aac38a1a" class="collapsed">
       
         Chmod Result
       </a>
     </h4>
   </div>
   
-  <div id="collapsea1b10be9667b6029af5bef985a9839f8" class="panel-collapse collapse ">
+  <div id="collapse379ce5a577a5828a2d9b1941aac38a1a" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">chmod: changing permissions of '/etc/hosts': Operation not permitted</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">chmod: changing permissions of &#39;/etc/hosts&#39;: Operation not permitted</code></pre>
 </div>
 </div>
 
@@ -681,19 +681,19 @@ fchmodat(AT_FDCWD, "/etc/hosts", 0400)  = 0
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseb929fe3dcdb0bdd986a77cc33d4f9610" class="collapsed">
+      <a data-toggle="collapse" href="#collapse40eb259a8de59ce873562eebbced1c19" class="collapsed">
       
         Chown Result
       </a>
     </h4>
   </div>
   
-  <div id="collapseb929fe3dcdb0bdd986a77cc33d4f9610" class="panel-collapse collapse ">
+  <div id="collapse40eb259a8de59ce873562eebbced1c19" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">chown: changing ownership of '/etc/hosts': Operation not permitted</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">chown: changing ownership of &#39;/etc/hosts&#39;: Operation not permitted</code></pre>
 </div>
 </div>
 
@@ -712,12 +712,12 @@ fchmodat(AT_FDCWD, "/etc/hosts", 0400)  = 0
 <h2 id="_section_3_limiting_network_syscalls">Section 3: Limiting Network Syscalls</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Docker presents the socket syscall to containers by default, this may not be a capability you want your containers to have in certain situations. Let&#8217;s look at another example where we use the powerful networking tool, <a href="https://linux.die.net/man/1/nc">Netcat</a>. Netcat is used for just about anything under the sun involving TCP or UDP. It can open TCP connections, send UDP packets, listen on arbitrary TCP and UDP ports, do port scanning, and deal with both IPv4 and IPv6.</p>
+<p>Docker presents the socket syscall to containers by default, this may not be a capability you want your containers to have in certain situations. Let’s look at another example where we use the powerful networking tool, <a href="https://linux.die.net/man/1/nc">Netcat</a>. Netcat is used for just about anything under the sun involving TCP or UDP. It can open TCP connections, send UDP packets, listen on arbitrary TCP and UDP ports, do port scanning, and deal with both IPv4 and IPv6.</p>
 </div>
 <div class="sect2">
 <h3 id="_step_1_run_a_container_with_netcat_installed">Step 1. Run a container with Netcat installed.</h3>
 <div class="paragraph">
-<p>Let&#8217;s run a container with Netcat installed in it and listen for local traffic on port 999.</p>
+<p>Let’s run a container with Netcat installed in it and listen for local traffic on port 999.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -736,7 +736,7 @@ exit <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Netcat successfully connected. Use <code>Control + C</code> to exit Netcat.</td>
 </tr>
@@ -744,7 +744,7 @@ exit <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td><code>exit</code> to exit the container.</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>We were able to bind to the localhost and listen for traffic on port 999. In Step 2 we will disable networking in this container.</p>
@@ -835,24 +835,24 @@ exit <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsedfb4fb6830e841c41e5880c33fd5cdec" class="collapsed">
+      <a data-toggle="collapse" href="#collapsedf17a7df2a5dd2ea3bf600026c46e741" class="collapsed">
       
         Seccomp Profile
       </a>
     </h4>
   </div>
   
-  <div id="collapsedfb4fb6830e841c41e5880c33fd5cdec" class="panel-collapse collapse ">
+  <div id="collapsedf17a7df2a5dd2ea3bf600026c46e741" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">{
-   "defaultAction":"SCMP_ACT_ALLOW",
-   "syscalls":[
+   &#34;defaultAction&#34;:&#34;SCMP_ACT_ALLOW&#34;,
+   &#34;syscalls&#34;:[
       {
-         "name":"socket",
-         "action":"SCMP_ACT_ERRNO"
+         &#34;name&#34;:&#34;socket&#34;,
+         &#34;action&#34;:&#34;SCMP_ACT_ERRNO&#34;
       }
    ]
 }</code></pre>
@@ -871,7 +871,7 @@ exit <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 <div class="sect2">
 <h3 id="_step_5_test_the_new_seccomp_profile">Step 5. Test the new seccomp profile</h3>
 <div class="paragraph">
-<p>Now that you have your new profile created, let&#8217;s run the container again and see if our new seccomp profile blocks Netcat from working.</p>
+<p>Now that you have your new profile created, let’s run the container again and see if our new seccomp profile blocks Netcat from working.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -887,11 +887,11 @@ Ncat: Unable to open any listening sockets. QUITTING. <i class="conum" data-valu
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Netcat is blocked from connecting to a network socket, via the seccomp profile.</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
@@ -1004,7 +1004,7 @@ exit</code></pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1264,7 +1264,7 @@ exit</code></pre>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -1376,7 +1376,7 @@ exit</code></pre>
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1386,7 +1386,7 @@ exit</code></pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1473,7 +1473,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

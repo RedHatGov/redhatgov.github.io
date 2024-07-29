@@ -342,7 +342,7 @@
 <blockquote>
 <p>On Linux or Mac, in your terminal, ssh to 192.168.1.90 on port 22</p>
 </blockquote>
-<pre><code>$ ssh student<span class="userid">1</span>@192.168.1.90
+<pre tabindex="0"><code>$ ssh student<span class="userid">1</span>@192.168.1.90
 </code></pre><p>If on Windows, run putty, enter <strong>192.168.1.90</strong> as the host and <strong>22</strong> as the port.</p>
 <p>You will get asked if you are sure you want to connect. Type <strong>yes</strong> and hit enter.</p>
 <p>Login with your <strong>student<span class="userid">1</span></strong> credentials.</p>
@@ -350,13 +350,13 @@
 <blockquote>
 <p>Source your student<span class="userid">1</span>rc file</p>
 </blockquote>
-<pre><code>$ source student<span class="userid">1</span>rc
+<pre tabindex="0"><code>$ source student<span class="userid">1</span>rc
 </code></pre><blockquote>
 <p>Verify that you are connected by running openstack server list</p>
 </blockquote>
-<pre><code>$ openstack server list
+<pre tabindex="0"><code>$ openstack server list
 </code></pre><p>You should see the two instances you created in the previous lab.</p>
-<pre><code>(overcloud) [student1@bastion ~]$ openstack server list
+<pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ openstack server list
 +--------------------------------------+-------------------+--------+-------------------------------------+-----------------+---------+
 | ID                                   | Name              | Status | Networks                            | Image           | Flavor  |
 +--------------------------------------+-------------------+--------+-------------------------------------+-----------------+---------+
@@ -367,17 +367,17 @@
 <blockquote>
 <p>First we&rsquo;ll download the image using curl</p>
 </blockquote>
-<pre><code>$ curl -o ~/cirros.img http://192.168.0.8/images/cirros.img
-</code></pre><pre><code>(overcloud) [student1@bastion ~]$ curl -o ~/cirros.img http://192.168.0.8/images/cirros.img
+<pre tabindex="0"><code>$ curl -o ~/cirros.img http://192.168.0.8/images/cirros.img
+</code></pre><pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ curl -o ~/cirros.img http://192.168.0.8/images/cirros.img
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100 44.0M  100 44.0M    0     0   103M      0 --:--:-- --:--:-- --:--:--  103M
 </code></pre><blockquote>
 <p>Upload the cirros test image to glance</p>
 </blockquote>
-<pre><code>
+<pre tabindex="0"><code>
 $ openstack image create --disk-format raw --container-format bare --private --min-disk 1 --min-ram 64 --file ~/cirros.img student<span class="userid">1</span>-cirros-cli
-</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack image create --disk-format raw --container-format bare --private --min-disk 1 --min-ram 64 --file ~/cirros.img student1-cirros-cli
+</code></pre><pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ openstack image create --disk-format raw --container-format bare --private --min-disk 1 --min-ram 64 --file ~/cirros.img student1-cirros-cli
 +------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Field            | Value                                                                                                                                                                                                                                             |
 +------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -391,7 +391,7 @@ $ openstack image create --disk-format raw --container-format bare --private --m
 | min_ram          | 64                                                                                                                                                                                                                                                |
 | name             | student1-cirros-cli                                                                                                                                                                                                                               |
 | owner            | b32431890c454e55920e7bc50b6ddba3                                                                                                                                                                                                                  |
-| properties       | direct_url='rbd://fcd7abfc-9f3e-11e9-8480-52540035d3ce/images/8ac9ad11-8de3-477c-96f7-184f784ed629/snap', locations='[{u'url': u'rbd://fcd7abfc-9f3e-11e9-8480-52540035d3ce/images/8ac9ad11-8de3-477c-96f7-184f784ed629/snap', u'metadata': {}}]' |
+| properties       | direct_url=&#39;rbd://fcd7abfc-9f3e-11e9-8480-52540035d3ce/images/8ac9ad11-8de3-477c-96f7-184f784ed629/snap&#39;, locations=&#39;[{u&#39;url&#39;: u&#39;rbd://fcd7abfc-9f3e-11e9-8480-52540035d3ce/images/8ac9ad11-8de3-477c-96f7-184f784ed629/snap&#39;, u&#39;metadata&#39;: {}}]&#39; |
 | protected        | False                                                                                                                                                                                                                                             |
 | schema           | /v2/schemas/image                                                                                                                                                                                                                                 |
 | size             | 46137344                                                                                                                                                                                                                                          |
@@ -405,8 +405,8 @@ $ openstack image create --disk-format raw --container-format bare --private --m
 <blockquote>
 <p>Run openstack image list to see the available images</p>
 </blockquote>
-<pre><code>$ openstack image list
-</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack image list
+<pre tabindex="0"><code>$ openstack image list
+</code></pre><pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ openstack image list
 +--------------------------------------+---------------------+--------+
 | ID                                   | Name                | Status |
 +--------------------------------------+---------------------+--------+
@@ -422,8 +422,8 @@ $ openstack image create --disk-format raw --container-format bare --private --m
 <blockquote>
 <p>Run the following command to see the existing flavors</p>
 </blockquote>
-<pre><code>$ openstack flavor list
-</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack flavor list
+<pre tabindex="0"><code>$ openstack flavor list
+</code></pre><pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ openstack flavor list
 +----+-------------+-------+------+-----------+-------+-----------+
 | ID | Name        |   RAM | Disk | Ephemeral | VCPUs | Is Public |
 +----+-------------+-------+------+-----------+-------+-----------+
@@ -441,8 +441,8 @@ $ openstack image create --disk-format raw --container-format bare --private --m
 <blockquote>
 <p>List the existing floating IP addresses</p>
 </blockquote>
-<pre><code>$ openstack floating ip list
-</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack floating ip list
+<pre tabindex="0"><code>$ openstack floating ip list
+</code></pre><pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ openstack floating ip list
 +--------------------------------------+---------------------+------------------+--------------------------------------+--------------------------------------+----------------------------------+
 | ID                                   | Floating IP Address | Fixed IP Address | Port                                 | Floating Network                     | Project                          |
 +--------------------------------------+---------------------+------------------+--------------------------------------+--------------------------------------+----------------------------------+
@@ -454,8 +454,8 @@ $ openstack image create --disk-format raw --container-format bare --private --m
 <blockquote>
 <p>First create the network</p>
 </blockquote>
-<pre><code>$ openstack network create private-b
-</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack network create private-b
+<pre tabindex="0"><code>$ openstack network create private-b
+</code></pre><pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ openstack network create private-b
 +---------------------------+--------------------------------------+
 | Field                     | Value                                |
 +---------------------------+--------------------------------------+
@@ -490,8 +490,8 @@ $ openstack image create --disk-format raw --container-format bare --private --m
 </code></pre><blockquote>
 <p>Then let&rsquo;s create the private-b subnet</p>
 </blockquote>
-<pre><code>$ openstack subnet create --network private-b --subnet-range 172.16.1.0/24 --dns-nameserver 192.168.0.4 private-b-subnet
-</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack subnet create --network private-b --subnet-range 172.16.1.0/24 --dns-nameserver 192.168.0.4 private-b-subnet
+<pre tabindex="0"><code>$ openstack subnet create --network private-b --subnet-range 172.16.1.0/24 --dns-nameserver 192.168.0.4 private-b-subnet
+</code></pre><pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ openstack subnet create --network private-b --subnet-range 172.16.1.0/24 --dns-nameserver 192.168.0.4 private-b-subnet
 +-------------------+--------------------------------------+
 | Field             | Value                                |
 +-------------------+--------------------------------------+
@@ -520,8 +520,8 @@ $ openstack image create --disk-format raw --container-format bare --private --m
 </code></pre><blockquote>
 <p>List the Neutron Networks and Subnets</p>
 </blockquote>
-<pre><code>$ openstack network list &amp;&amp; openstack subnet list
-</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack network list &amp;&amp; openstack subnet list
+<pre tabindex="0"><code>$ openstack network list &amp;&amp; openstack subnet list
+</code></pre><pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ openstack network list &amp;&amp; openstack subnet list
 +--------------------------------------+-----------+--------------------------------------+
 | ID                                   | Name      | Subnets                              |
 +--------------------------------------+-----------+--------------------------------------+
@@ -541,8 +541,8 @@ $ openstack image create --disk-format raw --container-format bare --private --m
 <p>Run the following command to boot a nova instance using the m1.tiny flavor, and the newest cirros image that we uploaded earlier in this lab.<br>
 We will also attach it to the new <strong>private-b</strong> network</p>
 </blockquote>
-<pre><code>$ openstack server create --image student<span class="userid">1</span>-cirros-cli --flavor m1.tiny --key-name student<span class="userid">1</span> --network private-b student<span class="userid">1</span>-cirros-cli-1
-</code></pre><pre><code>(overcloud) [student1@bastion ~]$ openstack server create --image student1-cirros-cli --flavor m1.tiny --key-name student1 --network private-b student1-cirros-cli-1
+<pre tabindex="0"><code>$ openstack server create --image student<span class="userid">1</span>-cirros-cli --flavor m1.tiny --key-name student<span class="userid">1</span> --network private-b student<span class="userid">1</span>-cirros-cli-1
+</code></pre><pre tabindex="0"><code>(overcloud) [student1@bastion ~]$ openstack server create --image student1-cirros-cli --flavor m1.tiny --key-name student1 --network private-b student1-cirros-cli-1
 +-----------------------------+------------------------------------------------------------+
 | Field                       | Value                                                      |
 +-----------------------------+------------------------------------------------------------+
@@ -568,7 +568,7 @@ We will also attach it to the new <strong>private-b</strong> network</p>
 | progress                    | 0                                                          |
 | project_id                  | b32431890c454e55920e7bc50b6ddba3                           |
 | properties                  |                                                            |
-| security_groups             | name='default'                                             |
+| security_groups             | name=&#39;default&#39;                                             |
 | status                      | BUILD                                                      |
 | updated                     | 2019-07-13T20:33:27Z                                       |
 | user_id                     | 1ae2f6781ade4af384fe770c135847b3                           |
@@ -577,8 +577,8 @@ We will also attach it to the new <strong>private-b</strong> network</p>
 </code></pre><blockquote>
 <p>You can watch openstack server list to see it go through the provisioning process and become active</p>
 </blockquote>
-<pre><code>$ watch openstack server list
-</code></pre><pre><code>Every 2.0s: openstack server list                                                                                                                                                                                      Sat Jul 13 16:39:03 2019
+<pre tabindex="0"><code>$ watch openstack server list
+</code></pre><pre tabindex="0"><code>Every 2.0s: openstack server list                                                                                                                                                                                      Sat Jul 13 16:39:03 2019
 
 +--------------------------------------+-----------------------+--------+-------------------------------------+---------------------+---------+
 | ID                                   | Name                  | Status | Networks                            | Image               | Flavor  |
@@ -600,7 +600,7 @@ We will also attach it to the new <strong>private-b</strong> network</p>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -670,7 +670,7 @@ We will also attach it to the new <strong>private-b</strong> network</p>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -736,7 +736,7 @@ We will also attach it to the new <strong>private-b</strong> network</p>
 
     return false;
   });
--->
+
 </script>
 
 
@@ -779,7 +779,7 @@ We will also attach it to the new <strong>private-b</strong> network</p>
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

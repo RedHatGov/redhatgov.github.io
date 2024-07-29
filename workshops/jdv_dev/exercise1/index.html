@@ -348,7 +348,7 @@
 <ul>
 <li>In the location where you downloaded the installer, run the following command</li>
 </ul>
-<pre><code>java -jar jboss-dv-6.3.0-1-installer.jar
+<pre tabindex="0"><code>java -jar jboss-dv-6.3.0-1-installer.jar
 </code></pre><ul>
 <li>Follow the default prompts with the following exceptions below</li>
 </ul>
@@ -373,12 +373,12 @@
 <ul>
 <li>In <code>$JBOSS_HOME/bin</code> directory run the following</li>
 </ul>
-<pre><code>./standalone.sh
+<pre tabindex="0"><code>./standalone.sh
 </code></pre><img src="../images/1-jdv-run.png" width="640px">
 <div class="alert alert-info">
 <p><span class="pficon pficon-info"></span></p>
 <p>If you are connecting to this server from machines other than <code>localhost</code>.  You need to allow outside connections like this</p>
-<pre><code>./standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
+<pre tabindex="0"><code>./standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
 </code></pre></div>
 <ul>
 <li>Verify your installation by going to http://localhost:9990/console and logging in as <code>admin/Password1!</code></li>
@@ -391,7 +391,7 @@
 <ul>
 <li>In the location where you downloaded the installer, run the following command</li>
 </ul>
-<pre><code>java -jar devstudio-11.0.0.GA-installer-standalone.jar
+<pre tabindex="0"><code>java -jar devstudio-11.0.0.GA-installer-standalone.jar
 </code></pre><ul>
 <li>
 <p>Follow the default prompts with the following exceptions</p>
@@ -410,7 +410,7 @@
 <p>Launch JBDS with the following command in the <code>$STUDIO_HOME</code> directory</p>
 </li>
 </ul>
-<pre><code>./devstudio
+<pre tabindex="0"><code>./devstudio
 </code></pre><ul>
 <li>On startup select ok add the datavirt server install you specified during installation</li>
 </ul>
@@ -418,17 +418,17 @@
 <div class="alert alert-info">
 <p><span class="pficon pficon-info"></span></p>
 <p>For Linux and/or Mac users running via the command prompt, if you see the following errors:</p>
-<pre><code>(Red Hat JBoss Developer Studio:23670): Gtk-WARNING **: Negative content width -5 (allocation 1, extents 3x3) while allocating gadget (node toolbar, owner GtkToolbar)
+<pre tabindex="0"><code>(Red Hat JBoss Developer Studio:23670): Gtk-WARNING **: Negative content width -5 (allocation 1, extents 3x3) while allocating gadget (node toolbar, owner GtkToolbar)
 </code></pre><p>You need a tweak to the launcher to force usage of GTK2 instead of GTK3.<br>
 Either create a wrapper script like this</p>
-<pre><code>#!/bin/bash
+<pre tabindex="0"><code>#!/bin/bash
 export SWT_GTK3=0
 
 $STUDIO_HOME/./devstudio
 </code></pre><p>or edit
 <code>$STUDIO_HOME/studio/devstudio.ini</code>
 and add</p>
-<pre><code>--launcher.GTK_version
+<pre tabindex="0"><code>--launcher.GTK_version
 2
 </code></pre><p>at the very beginning of the file</p>
 </div>
@@ -517,7 +517,7 @@ and add</p>
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

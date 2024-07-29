@@ -321,7 +321,7 @@
 <h2 id="_section_1_running_the_playbook">Section 1: Running the Playbook</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We are now going to run your brand spankin' new playbook on your two web nodes.  To do this,
+<p>We are now going to run your brand spankin&#39; new playbook on your two web nodes.  To do this,
  you are going to use the <code>ansible-playbook</code> command.</p>
 </div>
 <div class="sect2">
@@ -353,7 +353,7 @@
 <div class="ulist NOTE">
 <ul class="NOTE">
 <li>
-<p><strong>--syntax-check</strong> If you run into any issues with your playbook running properly; you know, from that copy/pasting that you didn&#8217;t do because we said "<em>don&#8217;t do that</em>"; you could use this option to help find those issues like so&#8230;&#8203;</p>
+<p><strong>--syntax-check</strong> If you run into any issues with your playbook running properly; you know, from that copy/pasting that you didn’t do because we said &#34;<em>don’t do that</em>&#34;; you could use this option to help find those issues like so…​</p>
 </li>
 </ul>
 </div>
@@ -362,7 +362,7 @@
 <pre class="highlight"><code class="language-bash" data-lang="bash">ansible-playbook -i ../hosts install_apache.yml --syntax-check --private-key=~/.ssh/<span class="prefix">example</span>-tower</code></pre>
 </div>
 </div>
-<hr>
+<hr/>
 <div class="paragraph">
 <p>Now, run your playbook as specified in <strong>Step 1</strong></p>
 </div>
@@ -371,13 +371,13 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/ansible_tower_azure/images/stdout_1.png" alt="stdout 1" height="328">
+<img src="/workshops/ansible_tower_azure/images/stdout_1.png" alt="stdout 1" height="328"/>
 </div>
 <div class="title">Figure 1: apache_basic playbook stdout</div>
 </div>
 <div class="paragraph">
 <p>Notice that the play and each task is named, so that you can understand the action being performed and the node it is being performed upon.
-You also may notice a task in there that you didn&#8217;t write;  &lt;cough&gt; <code>setup</code> &lt;cough&gt;.  This is because the <code>setup</code> module
+You also may notice a task in there that you didn’t write;  &lt;cough&gt; <code>setup</code> &lt;cough&gt;.  This is because the <code>setup</code> module
 runs by default.  To turn if off, you can specify <a href="http://docs.ansible.com/ansible/latest/playbooks_variables.html#turning-off-facts">gather_facts: false</a> in your play definition like this:</p>
 </div>
 <div class="listingblock">
@@ -393,10 +393,10 @@ runs by default.  To turn if off, you can specify <a href="http://docs.ansible.c
 <div class="sect2">
 <h3 id="_step_2_remove_apache">Step 2: Remove Apache</h3>
 <div class="paragraph">
-<p>Now, let&#8217;s experiment a little.
-We would like you to reverse what you&#8217;ve done (i.e. stop and uninstall apache on your web nodes).
-So, edit your playbook and then when you&#8217;re finished, rerun it - as described in <strong>Step 1</strong>.
-For this exercise we aren&#8217;t going to show you line by line, but we will give you a few hints.</p>
+<p>Now, let’s experiment a little.
+We would like you to reverse what you’ve done (i.e. stop and uninstall apache on your web nodes).
+So, edit your playbook and then when you’re finished, rerun it - as described in <strong>Step 1</strong>.
+For this exercise we aren’t going to show you line by line, but we will give you a few hints.</p>
 </div>
 <div class="ulist NOTE">
 <ul class="NOTE">
@@ -408,7 +408,7 @@ those tasks should be in now?</p>
 <p>If <code>started</code> makes sure a service is started, then what option ensures it is stopped?</p>
 </li>
 <li>
-<p>If <code>present</code> makes sure a package is installed, then what option ensures it is removed?  Er&#8230;&#8203; starts with an <strong>ab</strong>, ends with a <strong>sent</strong></p>
+<p>If <code>present</code> makes sure a package is installed, then what option ensures it is removed?  Er…​ starts with an <strong>ab</strong>, ends with a <strong>sent</strong></p>
 </li>
 </ul>
 </div>
@@ -617,7 +617,7 @@ function setupWorkshop() {
 <td align=right><b>Domain: </b></td>
 <td><span class="domain"></span></td>
 <td rowspan=3>
-<img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" onload=loadVariables()>
+<img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" onload=loadVariables()>
 </td>
 </tr>
 <tr>
@@ -679,7 +679,7 @@ function setupWorkshop() {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

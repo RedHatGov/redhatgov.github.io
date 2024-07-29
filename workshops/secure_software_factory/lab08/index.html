@@ -319,7 +319,7 @@
 
     <h1 id="static-application-security-testing">Static Application Security Testing</h1>
 <p>Next we will add a Code Analysis Stage into the pipeline.</p>
-<p><img src="../images/pipeline_sonar.png" width="900" /></p>
+<img src="../images/pipeline_sonar.png" width="900" />
 <p>We will leverage the Maven Sonar plugin to run SonarQube scanning against our source code.</p>
 <p>SonarQube is an open source static code analysis tool that we can use to automate running security scans against your source code to further improve the security of your application.  Every time you check-in code, SonarQube will scan the quality and perform a threat analysis of that code.</p>
 <p>We leverage the sonarqube maven plugin and specify the maven goal &ldquo;sonar:sonar&rdquo; to run our project leveraging the sonarqube api.</p>
@@ -338,12 +338,12 @@
 <br>
 # Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
+<img src="../images/pipeline_actions_edit.png" width="900" />
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre><code>    stage('Code Analysis') {
+<pre tabindex="0"><code>    stage(&#39;Code Analysis&#39;) {
       steps {
         script {
-          sh &quot;${mvnCmd} sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true&quot;
+          sh &#34;${mvnCmd} sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true&#34;
         }
       }
     }
@@ -353,14 +353,14 @@
 <p><img src="../images/sonarqube-analysis.png" width="900"><br/></p>
 <h1 id="test-your-pipeline">Test Your Pipeline</h1>
 <p>If you&rsquo;d like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
-<pre><code>  }
+<pre tabindex="0"><code>  }
 }
 </code></pre><p>Save your Jenkinsfile.</p>
 <p>Go back to Builds &gt; Pipelines</p>
 <p>Click Start Pipeline</p>
 <h1 id="delete-brackets">Delete Brackets</h1>
 <p>Please delete the brackets you just added once testing is complete. We can add them later if you&rsquo;d like to test your pipeline as you go along.</p>
-<pre><code>  }
+<pre tabindex="0"><code>  }
 }
 </code></pre><p>Click Save</p>
 <style>
@@ -462,7 +462,7 @@
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -722,7 +722,7 @@
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -834,7 +834,7 @@
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -844,7 +844,7 @@
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -927,7 +927,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

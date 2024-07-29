@@ -399,14 +399,14 @@ When you are done, scroll to the bottom and click 'Create'
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse6dc6679b28b42f5b14b999d15a34142e" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3a0aa5144f11cd4b1052f37fb2e84426" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse6dc6679b28b42f5b14b999d15a34142e" class="panel-collapse collapse ">
+  <div id="collapse3a0aa5144f11cd4b1052f37fb2e84426" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
@@ -416,26 +416,26 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get bc/dc-metro-map -o yaml | grep github-webhook
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get bc/dc-metro-map -o yaml | grep github-webhook
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> ...which returns the name of the secret that we need to find:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">name: dc-metro-map-github-webhook-secret
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>name: dc-metro-map-github-webhook-secret
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> Now that you have the name of the secret, you can get its value:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -o jq -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
-$ chmod <span style="color:#ae81ff">0755</span> jq
-$ SECRET<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>oc get secrets dc-metro-map-github-webhook-secret -o json | ./jq <span style="color:#e6db74">&#34;.data.WebHookSecretKey&#34;</span> | base64 -di<span style="color:#e6db74">`</span>
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ curl -o jq -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+</span></span><span style="display:flex;"><span>$ chmod <span style="color:#ae81ff">0755</span> jq
+</span></span><span style="display:flex;"><span>$ SECRET<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>oc get secrets dc-metro-map-github-webhook-secret -o json | ./jq <span style="color:#e6db74">&#34;.data.WebHookSecretKey&#34;</span> | base64 -di<span style="color:#e6db74">`</span>
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> Last, we can get the URL for the webhook, this way:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe bc/dc-metro-map | awk <span style="color:#e6db74">&#39;/github$/{print $2}&#39;</span> | sed <span style="color:#e6db74">&#34;s/&lt;secret&gt;/</span><span style="color:#e6db74">${</span>SECRET<span style="color:#e6db74">}</span><span style="color:#e6db74">/&#34;</span>
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe bc/dc-metro-map | awk <span style="color:#e6db74">&#39;/github$/{print $2}&#39;</span> | sed <span style="color:#e6db74">&#34;s/&lt;secret&gt;/</span><span style="color:#e6db74">${</span>SECRET<span style="color:#e6db74">}</span><span style="color:#e6db74">/&#34;</span>
+</span></span></code></pre></div><blockquote>
 ... which results in the information that we need:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://api.alexocp43.redhatgov.io:6443/apis/build.openshift.io/v1/namespaces/cicd-1/buildconfigs/dc-metro-map/webhooks/1234abcd5678efgh/github
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>https://api.alexocp43.redhatgov.io:6443/apis/build.openshift.io/v1/namespaces/cicd-1/buildconfigs/dc-metro-map/webhooks/1234abcd5678efgh/github
+</span></span></code></pre></div><blockquote>
 Copy the "Webhook Generic" URL to the clipboard, so that we can use it in GitHub.
 </blockquote>
 
@@ -566,14 +566,14 @@ Click the "Add webhook" button
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse47104cf1ebd75bfbed2671f3ffa677a1" class="collapsed">
+      <a data-toggle="collapse" href="#collapse4c684719295e613e63e09b847d425fcb" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse47104cf1ebd75bfbed2671f3ffa677a1" class="panel-collapse collapse ">
+  <div id="collapse4c684719295e613e63e09b847d425fcb" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <h3 id="terminal-access">Terminal access</h3>
@@ -583,9 +583,9 @@ https://console-openshift-console.apps.<span class="prefix">example</span>.<span
 <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc rollout undo dc/dc-metro-map
-$ oc get pods -w
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc rollout undo dc/dc-metro-map
+</span></span><span style="display:flex;"><span>$ oc get pods -w
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -742,7 +742,7 @@ Click on 'Actions', and then 'Rebuild', from the menu, in the upper right corner
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1002,7 +1002,7 @@ Click on 'Actions', and then 'Rebuild', from the menu, in the upper right corner
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -1114,7 +1114,7 @@ Click on 'Actions', and then 'Rebuild', from the menu, in the upper right corner
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1124,7 +1124,7 @@ Click on 'Actions', and then 'Rebuild', from the menu, in the upper right corner
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1207,7 +1207,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

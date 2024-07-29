@@ -321,29 +321,29 @@
 <p>Connecting your OpenShift clusters to Dynatrace to take advantage of the dedicated OpenShift overview page
 requires that you run an ActiveGate in your environment (version 1.163+).</p>
 <p>See <a href="https://www.dynatrace.com/support/help/technology-support/cloud-platforms/openshift/monitoring/monitor-openshift-clusters-with-dynatrace/">https://www.dynatrace.com/support/help/technology-support/cloud-platforms/openshift/monitoring/monitor-openshift-clusters-with-dynatrace/</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc project dynatrace
-oc apply -f https://www.dynatrace.com/support/help/codefiles/kubernetes/kubernetes-monitoring-service-account.yaml
-
-serviceaccount/dynatrace-monitoring created
-clusterrole.rbac.authorization.k8s.io/dynatrace-monitoring-cluster created
-clusterrolebinding.rbac.authorization.k8s.io/dynatrace-monitoring-cluster created
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc config view --minify -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.clusters[0].cluster.server}&#39;</span>
-
-https://api.ocp4.local:6443
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc project dynatrace
+</span></span><span style="display:flex;"><span>oc apply -f https://www.dynatrace.com/support/help/codefiles/kubernetes/kubernetes-monitoring-service-account.yaml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>serviceaccount/dynatrace-monitoring created
+</span></span><span style="display:flex;"><span>clusterrole.rbac.authorization.k8s.io/dynatrace-monitoring-cluster created
+</span></span><span style="display:flex;"><span>clusterrolebinding.rbac.authorization.k8s.io/dynatrace-monitoring-cluster created
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc config view --minify -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.clusters[0].cluster.server}&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>https://api.ocp4.local:6443
+</span></span></code></pre></div><blockquote>
 Get the Bearer token for the OpenShift cluster using the following command:
 <p>Copy the secret returned by the following command:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc get secret <span style="color:#66d9ef">$(</span>oc get sa dynatrace-monitoring -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.secrets[1].name}&#39;</span> -n dynatrace<span style="color:#66d9ef">)</span> <span style="color:#ae81ff">\ </span>
--o yaml | grep token
-
-echo <span style="color:#e6db74">&#34;&lt;token&gt;&#34;</span> | base64 --decode
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc get secret <span style="color:#66d9ef">$(</span>oc get sa dynatrace-monitoring -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.secrets[1].name}&#39;</span> -n dynatrace<span style="color:#66d9ef">)</span> <span style="color:#ae81ff">\ </span>
+</span></span><span style="display:flex;"><span>-o yaml | grep token
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;&lt;token&gt;&#34;</span> | base64 --decode
+</span></span></code></pre></div><blockquote>
 The result of the command above is the Bearer token that you'll use to connect your OpenShift cluster to Dynatrace.
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#oc get secret $(oc get sa dynatrace-monitoring -o jsonpath=&#39;{.secrets[1].name}&#39; -n dynatrace) -o jsonpath=&#39;{.data.token}&#39; -n dynatrace | base64 --decode</span>
-<span style="color:#75715e">#oc get secret $(oc get sa dynatrace-monitoring -o jsonpath=&#39;{.secrets[1].name}&#39; -n dynatrace) -o yaml | grep token</span>
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#oc get secret $(oc get sa dynatrace-monitoring -o jsonpath=&#39;{.secrets[1].name}&#39; -n dynatrace) -o jsonpath=&#39;{.data.token}&#39; -n dynatrace | base64 --decode</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#oc get secret $(oc get sa dynatrace-monitoring -o jsonpath=&#39;{.secrets[1].name}&#39; -n dynatrace) -o yaml | grep token</span>
+</span></span></code></pre></div><blockquote>
 Connect your OpenShift cluster to Dynatrace 
 You'll need the Bearer token and the Kubernetes API URL mentioned above to set up the connection to the Kubernetes API.
 <p>Go to Settings &gt; Cloud and virtualization &gt; Kubernetes.
@@ -455,7 +455,7 @@ Click on "Install a new Environment ActiveGate"
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -715,7 +715,7 @@ Click on "Install a new Environment ActiveGate"
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -827,7 +827,7 @@ Click on "Install a new Environment ActiveGate"
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -837,7 +837,7 @@ Click on "Install a new Environment ActiveGate"
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -920,7 +920,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

@@ -324,10 +324,9 @@
 <blockquote>
 <p>Navigate to Network -&gt; Network Topology using the second level navigation tabs.</p>
 </blockquote>
-<figure>
-    <img src="../images/lab2-neutron-network-topology-1.png"/> <figcaption>
-            <h4>Lab 2 Figure 1: Neutron Network Topology</h4>
-        </figcaption>
+<figure><img src="../images/lab2-neutron-network-topology-1.png"><figcaption>
+      <h4>Lab 2 Figure 1: Neutron Network Topology</h4>
+    </figcaption>
 </figure>
 
 <p>There are two ways to view the project network layout.</p>
@@ -345,10 +344,9 @@
 Enter <strong>private-a</strong> as the <strong>Network Name</strong><br>
 Leave <strong>Enable Admin State</strong> and <strong>Create Subnet</strong> checked and click <strong>Next</strong></p>
 </blockquote>
-<figure>
-    <img src="../images/lab2-neutron-create-network-1.png"/> <figcaption>
-            <h4>Lab 2 Figure 2: Create Neutron Network</h4>
-        </figcaption>
+<figure><img src="../images/lab2-neutron-create-network-1.png"><figcaption>
+      <h4>Lab 2 Figure 2: Create Neutron Network</h4>
+    </figcaption>
 </figure>
 
 <h2 id="next-we-will-create-a-subnet">Next We Will Create a Subnet</h2>
@@ -359,10 +357,9 @@ Leave <strong>IPV4</strong> as the <strong>IP Version</strong><br>
 Leave <strong>Gateway IP</strong> blank and make sure <strong>Disable Gateway</strong> is not checked<br>
 Click <strong>Next</strong></p>
 </blockquote>
-<figure>
-    <img src="../images/lab2-neutron-create-network-2.png"/> <figcaption>
-            <h4>Lab 2 Figure 3: Create Neutron Subnet</h4>
-        </figcaption>
+<figure><img src="../images/lab2-neutron-create-network-2.png"><figcaption>
+      <h4>Lab 2 Figure 3: Create Neutron Subnet</h4>
+    </figcaption>
 </figure>
 
 <div class="alert alert-info">
@@ -377,10 +374,9 @@ Leave <strong>Allocation Pools</strong> empty (we&rsquo;ll use the entire range)
 Enter <strong>192.168.0.4</strong> in <strong>DNS Name Servers</strong><br>
 Leave <strong>Host Routes</strong> empty and click <strong>Create</strong></p>
 </blockquote>
-<figure>
-    <img src="../images/lab2-neutron-create-network-3.png"/> <figcaption>
-            <h4>Lab 2 Figure 4: Enter Neutron Subnet Details</h4>
-        </figcaption>
+<figure><img src="../images/lab2-neutron-create-network-3.png"><figcaption>
+      <h4>Lab 2 Figure 4: Enter Neutron Subnet Details</h4>
+    </figcaption>
 </figure>
 
 <div class="alert alert-success">
@@ -389,10 +385,9 @@ Leave <strong>Host Routes</strong> empty and click <strong>Create</strong></p>
 <p>Note that the success and error messages in Horizon only show briefly and then they disappear.</p>
 <p>If this is not the case, let the instructor know now</p>
 </div>
-<figure>
-    <img src="../images/lab2-neutron-create-network-4.png"/> <figcaption>
-            <h4>Lab 2 Figure 5: Neutron Network Topology Showing New Network private-a</h4>
-        </figcaption>
+<figure><img src="../images/lab2-neutron-create-network-4.png"><figcaption>
+      <h4>Lab 2 Figure 5: Neutron Network Topology Showing New Network private-a</h4>
+    </figcaption>
 </figure>
 
 <h1 id="lets-tie-these-2-networks-together-with-a-neutron-router-for-layer-3-communication">Let&rsquo;s Tie these 2 Networks Together with a Neutron Router for Layer 3 Communication</h1>
@@ -409,10 +404,9 @@ Select <strong>public</strong> network for <strong>External Network</strong> and
 <p><span class="pficon pficon-info"></span></p>
 <p>Note that you may need to scroll down to see the public network in the External Network drop down.</p>
 </div>
-<figure>
-    <img src="../images/lab2-neutron-create-router-1.png"/> <figcaption>
-            <h4>Lab 2 Figure 6: Create Neutron Router</h4>
-        </figcaption>
+<figure><img src="../images/lab2-neutron-create-router-1.png"><figcaption>
+      <h4>Lab 2 Figure 6: Create Neutron Router</h4>
+    </figcaption>
 </figure>
 
 <div class="alert alert-success">
@@ -420,10 +414,9 @@ Select <strong>public</strong> network for <strong>External Network</strong> and
 <p>You should see a green success box in the upper right corner of the screen that says <strong>Success: Router router-public was successfully created.</strong> Your network topology should now show 2 networks, public and private-a and 1 router connected to the public network.</p>
 <p>If this is not the case, let the instructor know now</p>
 </div>
-<figure>
-    <img src="../images/lab2-neutron-create-router-2.png"/> <figcaption>
-            <h4>Lab 2 Figure 7: Neutron Network Topology Showing New Router router-public</h4>
-        </figcaption>
+<figure><img src="../images/lab2-neutron-create-router-2.png"><figcaption>
+      <h4>Lab 2 Figure 7: Neutron Network Topology Showing New Router router-public</h4>
+    </figcaption>
 </figure>
 
 <h2 id="lastly-lets-add-an-interface-for-the-private-a-network-to-router-public">Lastly Let&rsquo;s Add an Interface for the private-a Network to router-public</h2>
@@ -432,20 +425,18 @@ Select <strong>public</strong> network for <strong>External Network</strong> and
 You should see a box pop up with information about the router
 Click <strong>Add Interface</strong></p>
 </blockquote>
-<figure>
-    <img src="../images/lab2-neutron-create-router-4.png"/> <figcaption>
-            <h4>Lab 2 Figure 8: Router Information Box with Add Interface Button</h4>
-        </figcaption>
+<figure><img src="../images/lab2-neutron-create-router-4.png"><figcaption>
+      <h4>Lab 2 Figure 8: Router Information Box with Add Interface Button</h4>
+    </figcaption>
 </figure>
 
 <blockquote>
 <p>Select <strong>private-a</strong> as the <strong>Subnet</strong><br>
 Leave <strong>IP Address</strong> blank and click <strong>Submit</strong></p>
 </blockquote>
-<figure>
-    <img src="../images/lab2-neutron-create-router-5.png"/> <figcaption>
-            <h4>Lab 2 Figure 9: Add Interface Options</h4>
-        </figcaption>
+<figure><img src="../images/lab2-neutron-create-router-5.png"><figcaption>
+      <h4>Lab 2 Figure 9: Add Interface Options</h4>
+    </figcaption>
 </figure>
 
 <div class="alert alert-success">
@@ -455,10 +446,9 @@ Leave <strong>IP Address</strong> blank and click <strong>Submit</strong></p>
 <p>If you navigate back to our network topology, it should now show 2 networks, public and private-a and 1 router connected to both the public and private-a networks.</p>
 <p>If this is not the case, let the instructor know now</p>
 </div>
-<figure>
-    <img src="../images/lab2-neutron-create-router-6.png"/> <figcaption>
-            <h4>Lab 2 Figure 10: Neutron Network Topology Showing router-public Attached to Both Networks</h4>
-        </figcaption>
+<figure><img src="../images/lab2-neutron-create-router-6.png"><figcaption>
+      <h4>Lab 2 Figure 10: Neutron Network Topology Showing router-public Attached to Both Networks</h4>
+    </figcaption>
 </figure>
 
 <h1 id="summary">Summary</h1>
@@ -476,7 +466,7 @@ Leave <strong>IP Address</strong> blank and click <strong>Submit</strong></p>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -546,7 +536,7 @@ Leave <strong>IP Address</strong> blank and click <strong>Submit</strong></p>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -612,7 +602,7 @@ Leave <strong>IP Address</strong> blank and click <strong>Submit</strong></p>
 
     return false;
   });
--->
+
 </script>
 
 
@@ -655,7 +645,7 @@ Leave <strong>IP Address</strong> blank and click <strong>Submit</strong></p>
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

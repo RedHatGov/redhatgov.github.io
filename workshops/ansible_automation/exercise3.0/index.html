@@ -326,7 +326,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible localhost -m package -a "name=scap-security-guide state=present" -b</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible localhost -m package -a &#34;name=scap-security-guide state=present&#34; -b</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -334,7 +334,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ansible localhost -m file -a "path=/var/lib/awx/projects/openscap-ospp state=directory mode=0755 owner=awx group=awx" -b</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">ansible localhost -m file -a &#34;path=/var/lib/awx/projects/openscap-ospp state=directory mode=0755 owner=awx group=awx&#34; -b</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -351,13 +351,13 @@
 <div class="sect2">
 <h3 id="_step_2_select_projects">Step 2: Select Projects</h3>
 <div class="paragraph">
-<p>Click the Projects tab, in the Ansible Tower UI. <span class="image"><img src="/workshops/ansible_automation/images/at_projects_icon.png" alt="PROJECTS"></span></p>
+<p>Click the Projects tab, in the Ansible Tower UI. <span class="image"><img src="/workshops/ansible_automation/images/at_projects_icon.png" alt="PROJECTS"/></span></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_3_click_add">Step 3: Click Add</h3>
 <div class="paragraph">
-<p>Next, Select    <span class="image"><img src="/workshops/ansible_automation/images/at_add.png" alt="Add" width="35" height="25"></span></p>
+<p>Next, Select    <span class="image"><img src="/workshops/ansible_automation/images/at_add.png" alt="Add" width="35" height="25"/></span></p>
 </div>
 </div>
 <div class="sect2">
@@ -367,8 +367,8 @@
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -399,7 +399,7 @@
 </table>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/ansible_automation/images/section3.0-ospp_project.png" alt="Cred_Detail" width="900">
+<img src="/workshops/ansible_automation/images/section3.0-ospp_project.png" alt="Cred_Detail" width="900"/>
 </div>
 <div class="title">Figure 1: Defining a Project</div>
 </div>
@@ -407,7 +407,7 @@
 <div class="sect2">
 <h3 id="_step_5_save">Step 5: Save</h3>
 <div class="paragraph">
-<p>Select   SAVE   <span class="image"><img src="/workshops/ansible_automation/images/at_save.png" alt="Save" width="35" height="25"></span></p>
+<p>Select   SAVE   <span class="image"><img src="/workshops/ansible_automation/images/at_save.png" alt="Save" width="35" height="25"/></span></p>
 </div>
 </div>
 <div class="sect2">
@@ -419,7 +419,7 @@
 <div class="sect2">
 <h3 id="_step_7_add_the_job_template">Step 7: Add the job template</h3>
 <div class="paragraph">
-<p>Click ADD <span class="image"><img src="/workshops/ansible_automation/images/at_add.png" alt="Add" width="35" height="25"></span>, and select <code>JOB TEMPLATE</code></p>
+<p>Click ADD <span class="image"><img src="/workshops/ansible_automation/images/at_add.png" alt="Add" width="35" height="25"/></span>, and select <code>JOB TEMPLATE</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -429,8 +429,8 @@
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -479,7 +479,7 @@
 </table>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/ansible_automation/images/section3.0-ospp_template.png" alt="Cred_Detail" width="900">
+<img src="/workshops/ansible_automation/images/section3.0-ospp_template.png" alt="Cred_Detail" width="900"/>
 </div>
 <div class="title">Figure 2: Defining a Job</div>
 </div>
@@ -487,10 +487,10 @@
 <div class="sect2">
 <h3 id="_step_9_save_the_template_and_run_it">Step 9: Save the template and run it</h3>
 <div class="paragraph">
-<p>Click SAVE <span class="image"><img src="/workshops/ansible_automation/images/at_save.png" alt="Save"></span>, to store your new template, and we are ready to run it.</p>
+<p>Click SAVE <span class="image"><img src="/workshops/ansible_automation/images/at_save.png" alt="Save"/></span>, to store your new template, and we are ready to run it.</p>
 </div>
 <div class="paragraph">
-<p>Click  the rocketship icon <span class="image"><img src="/workshops/ansible_automation/images/at_launch_icon.png" alt="Add" width="35" height="25"></span> next to the <code>RHEL8 OSPP Job Template</code> entry, to launch the job.</p>
+<p>Click  the rocketship icon <span class="image"><img src="/workshops/ansible_automation/images/at_launch_icon.png" alt="Add" width="35" height="25"/></span> next to the <code>RHEL8 OSPP Job Template</code> entry, to launch the job.</p>
 </div>
 <div class="paragraph">
 <p>View what the job looks like as it is executing, as well as what the SCAP results look like, when uploaded to your second node, in the panel, below.</p>
@@ -503,18 +503,18 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse6152164e7541085af0104573b505679b" class="collapsed">
+      <a data-toggle="collapse" href="#collapse3c6d32c746eb1a9d445c53f098f0d983" class="collapsed">
       
         Job Status
       </a>
     </h4>
   </div>
   
-  <div id="collapse6152164e7541085af0104573b505679b" class="panel-collapse collapse ">
+  <div id="collapse3c6d32c746eb1a9d445c53f098f0d983" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="paragraph">
-<p><span class="image"><img src="/workshops/ansible_automation/images/section3.0-ospp_job_status.png" alt="Job Status" width="1024"></span></p>
+<p><span class="image"><img src="/workshops/ansible_automation/images/section3.0-ospp_job_status.png" alt="Job Status" width="1024"/></span></p>
 </div>
 
     </div>
@@ -625,7 +625,7 @@
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -885,7 +885,7 @@
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -997,7 +997,7 @@
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1007,7 +1007,7 @@
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1090,7 +1090,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

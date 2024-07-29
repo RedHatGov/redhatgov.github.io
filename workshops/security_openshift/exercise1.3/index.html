@@ -321,7 +321,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/selinux.png" alt="selinux">
+<img src="/workshops/security_openshift/images/selinux.png" alt="selinux"/>
 </div>
 </div>
 <div class="paragraph">
@@ -395,7 +395,7 @@ cd  selinux
 
 mkdir data
 
-echo "SELINUX" &gt; data/file1.txt
+echo &#34;SELINUX&#34; &gt; data/file1.txt
 
 cat data/file1.txt</code></pre>
 </div>
@@ -470,7 +470,7 @@ notifying the system that you expect these files to be consumed by containers:</
 <div class="listingblock">
 <div class="title">append text</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker run -v $(pwd)/data:/data fedora sh -c 'echo "REDHAT" &gt;&gt; /data/file1.txt'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker run -v $(pwd)/data:/data fedora sh -c &#39;echo &#34;REDHAT&#34; &gt;&gt; /data/file1.txt&#39;</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -542,14 +542,14 @@ time). The category system isolates containers from one another.</p>
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse90a40c17b31514c783f6a5af8179fe27" class="collapsed">
+      <a data-toggle="collapse" href="#collapse1710fae6a9c41f845f46672260516775" class="collapsed">
       
         SELinux Coloring Book
       </a>
     </h4>
   </div>
   
-  <div id="collapse90a40c17b31514c783f6a5af8179fe27" class="panel-collapse collapse ">
+  <div id="collapse1710fae6a9c41f845f46672260516775" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="paragraph">
@@ -568,7 +568,7 @@ dog are process types:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/selinux1.png" alt="Processes">
+<img src="/workshops/security_openshift/images/selinux1.png" alt="Processes"/>
 </div>
 </div>
 <div class="paragraph">
@@ -587,7 +587,7 @@ And I want to add types to the food;</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/selinux2.png" alt="Objects">
+<img src="/workshops/security_openshift/images/selinux2.png" alt="Objects"/>
 </div>
 </div>
 <div class="paragraph">
@@ -607,7 +607,7 @@ this rule in policy.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/selinux3.png" alt="Objects">
+<img src="/workshops/security_openshift/images/selinux3.png" alt="Objects"/>
 </div>
 </div>
 <div class="paragraph">
@@ -619,7 +619,7 @@ cat_chow and the dog to eat food labeled dog_chow.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/selinux4.png" alt="Objects">
+<img src="/workshops/security_openshift/images/selinux4.png" alt="Objects"/>
 </div>
 </div>
 <div class="paragraph">
@@ -628,7 +628,7 @@ dog process tried to eat the cat_chow, the kernel would prevent it.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_openshift/images/selinux7.png" alt="Stopped by Kernel">
+<img src="/workshops/security_openshift/images/selinux7.png" alt="Stopped by Kernel"/>
 </div>
 </div>
 
@@ -700,7 +700,7 @@ NSA Mailing List</a></p>
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

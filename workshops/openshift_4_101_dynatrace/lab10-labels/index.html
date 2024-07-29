@@ -329,49 +329,49 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsec56ab609e8fbff8859d94a5500e9fd12" class="collapsed">
+      <a data-toggle="collapse" href="#collapse89a0ea0f0ad8826134f11b9ffbfb9fc9" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsec56ab609e8fbff8859d94a5500e9fd12" class="panel-collapse collapse ">
+  <div id="collapse89a0ea0f0ad8826134f11b9ffbfb9fc9" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and try the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
-$ oc describe pod/&lt;POD NAME&gt; | grep Labels: --context<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
-Namespace:    demo-1
-Priority:     <span style="color:#ae81ff">0</span>
-Node:         ip-10-0-132-38.us-east-2.compute.internal/10.0.132.38
-Start Time:   Tue, <span style="color:#ae81ff">14</span> Apr <span style="color:#ae81ff">2020</span> 17:41:58 +0000
-Labels:       app<span style="color:#f92672">=</span>dc-metro-map
-              deploymentconfig<span style="color:#f92672">=</span>dc-metro-map
-              pod-template-hash<span style="color:#f92672">=</span>7bc46bf89d
-Annotations:  k8s.v1.cni.cncf.io/networks-status:
-                <span style="color:#f92672">[{</span>
-</code></pre></div><p>You can see the Labels automatically added contain the app, deployment, and deploymentconfig.  Let&rsquo;s add a new label to this pod.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span><span style="display:flex;"><span>$ oc describe pod/&lt;POD NAME&gt; | grep Labels: --context<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>Namespace:    demo-1
+</span></span><span style="display:flex;"><span>Priority:     <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>Node:         ip-10-0-132-38.us-east-2.compute.internal/10.0.132.38
+</span></span><span style="display:flex;"><span>Start Time:   Tue, <span style="color:#ae81ff">14</span> Apr <span style="color:#ae81ff">2020</span> 17:41:58 +0000
+</span></span><span style="display:flex;"><span>Labels:       app<span style="color:#f92672">=</span>dc-metro-map
+</span></span><span style="display:flex;"><span>              deploymentconfig<span style="color:#f92672">=</span>dc-metro-map
+</span></span><span style="display:flex;"><span>              pod-template-hash<span style="color:#f92672">=</span>7bc46bf89d
+</span></span><span style="display:flex;"><span>Annotations:  k8s.v1.cni.cncf.io/networks-status:
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">[{</span>
+</span></span></code></pre></div><p>You can see the Labels automatically added contain the app, deployment, and deploymentconfig.  Let&rsquo;s add a new label to this pod.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Add a label
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc label pod/&lt;POD NAME&gt; testdate<span style="color:#f92672">=</span>4.14.2020 testedby<span style="color:#f92672">=</span>mylastname
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc label pod/&lt;POD NAME&gt; testdate<span style="color:#f92672">=</span>4.14.2020 testedby<span style="color:#f92672">=</span>mylastname
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> Look at the labels
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe pod/&lt;POD NAME&gt; | grep Labels: --context<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
-Namespace:    demo-1
-Priority:     <span style="color:#ae81ff">0</span>
-Node:         ip-10-0-132-38.us-east-2.compute.internal/10.0.132.38
-Start Time:   Tue, <span style="color:#ae81ff">14</span> Apr <span style="color:#ae81ff">2020</span> 17:41:58 +0000
-Labels:       app<span style="color:#f92672">=</span>dc-metro-map
-              deploymentconfig<span style="color:#f92672">=</span>dc-metro-map
-              pod-template-hash<span style="color:#f92672">=</span>7bc46bf89d
-              testdate<span style="color:#f92672">=</span>4.14.2020
-              testedby<span style="color:#f92672">=</span>mylastname
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe pod/&lt;POD NAME&gt; | grep Labels: --context<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>Namespace:    demo-1
+</span></span><span style="display:flex;"><span>Priority:     <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>Node:         ip-10-0-132-38.us-east-2.compute.internal/10.0.132.38
+</span></span><span style="display:flex;"><span>Start Time:   Tue, <span style="color:#ae81ff">14</span> Apr <span style="color:#ae81ff">2020</span> 17:41:58 +0000
+</span></span><span style="display:flex;"><span>Labels:       app<span style="color:#f92672">=</span>dc-metro-map
+</span></span><span style="display:flex;"><span>              deploymentconfig<span style="color:#f92672">=</span>dc-metro-map
+</span></span><span style="display:flex;"><span>              pod-template-hash<span style="color:#f92672">=</span>7bc46bf89d
+</span></span><span style="display:flex;"><span>              testdate<span style="color:#f92672">=</span>4.14.2020
+</span></span><span style="display:flex;"><span>              testedby<span style="color:#f92672">=</span>mylastname
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -520,7 +520,7 @@ Select Workloads -> Pods -> dc-metro-map (Running POD), then scroll down to "Lab
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -780,7 +780,7 @@ Select Workloads -> Pods -> dc-metro-map (Running POD), then scroll down to "Lab
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -892,7 +892,7 @@ Select Workloads -> Pods -> dc-metro-map (Running POD), then scroll down to "Lab
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -902,7 +902,7 @@ Select Workloads -> Pods -> dc-metro-map (Running POD), then scroll down to "Lab
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -985,7 +985,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

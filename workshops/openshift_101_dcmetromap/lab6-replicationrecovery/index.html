@@ -328,25 +328,25 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsec6b7a5ea3409de97f4b66837c750626e" class="collapsed">
+      <a data-toggle="collapse" href="#collapse8f774a7febf11de023d340ae4cde4234" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsec6b7a5ea3409de97f4b66837c750626e" class="panel-collapse collapse ">
+  <div id="collapse8f774a7febf11de023d340ae4cde4234" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and try the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc scale --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span> dc/dc-metro-map
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc scale --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span> dc/dc-metro-map
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> Check out the new pods:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
-</code></pre></div><p>Notice that you now have 4 unique pods availble to inspect.  If you want go ahead and inspect them, using &lsquo;oc describe pod/<POD NAME>&rsquo;, you can see that each have their own IP address and logs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span></code></pre></div><p>Notice that you now have 4 unique pods availble to inspect.  If you want go ahead and inspect them, using &lsquo;oc describe pod/<POD NAME>&rsquo;, you can see that each have their own IP address and logs.</p>
 
     </div>
   </div>
@@ -399,28 +399,28 @@ Notice that you now have 4 unique webapp pods available to inspect.  If you want
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsea592e5619c37674d2250899f90f0ed87" class="collapsed">
+      <a data-toggle="collapse" href="#collapse17be8bd3c9f4ec2fd214f2c2173fe94f" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsea592e5619c37674d2250899f90f0ed87" class="panel-collapse collapse ">
+  <div id="collapse17be8bd3c9f4ec2fd214f2c2173fe94f" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Choose a random pod and delete it:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
-$ oc delete pod/PODNAME
-$ oc get pods -w
-</code></pre></div><p>If you&rsquo;re fast enough you&rsquo;ll see the pod you deleted go &ldquo;Terminating&rdquo; and you&rsquo;ll also see a new pod immediately get created and transition from &ldquo;Pending&rdquo; to &ldquo;Running&rdquo;.  If you weren&rsquo;t fast enough you can see that your old pod is gone and a new pod is in the list with an age of only a few seconds.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span><span style="display:flex;"><span>$ oc delete pod/PODNAME
+</span></span><span style="display:flex;"><span>$ oc get pods -w
+</span></span></code></pre></div><p>If you&rsquo;re fast enough you&rsquo;ll see the pod you deleted go &ldquo;Terminating&rdquo; and you&rsquo;ll also see a new pod immediately get created and transition from &ldquo;Pending&rdquo; to &ldquo;Running&rdquo;.  If you weren&rsquo;t fast enough you can see that your old pod is gone and a new pod is in the list with an age of only a few seconds.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i>  You can see the more details about your replication controller with:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe rc
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe rc
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -477,38 +477,38 @@ Quickly switch back to the Overview
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse308612c980500fa293cad5ede5225ec4" class="collapsed">
+      <a data-toggle="collapse" href="#collapse4259ced397e22ccb9804c7e6630687bb" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse308612c980500fa293cad5ede5225ec4" class="panel-collapse collapse ">
+  <div id="collapse4259ced397e22ccb9804c7e6630687bb" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Choose a running pod and shell into it:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
-$ oc exec PODNAME -it /bin/bash
-</code></pre></div><p>You are now executing a bash shell running in the container of the pod.  Let&rsquo;s kill our webapp and see what happens.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span><span style="display:flex;"><span>$ oc exec PODNAME -it /bin/bash
+</span></span></code></pre></div><p>You are now executing a bash shell running in the container of the pod.  Let&rsquo;s kill our webapp and see what happens.</p>
 <blockquote>
 <i class="fa fa-info-circle"></i> If we had multiple containers in the pod we could use "-c CONTAINER_NAME" to select the right one
 </blockquote>
 <blockquote>
 <i class="fa fa-terminal"></i> Choose a running pod and shell into its container:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pkill -9 node
-</code></pre></div><p>This will kick you out off the container with an error like &ldquo;Error executing command in container&rdquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pkill -9 node
+</span></span></code></pre></div><p>This will kick you out off the container with an error like &ldquo;Error executing command in container&rdquo;</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Do it again - shell in and execute the same command to kill node
 </blockquote>
 <blockquote>
 <i class="fa fa-terminal"></i> Watch for the container restart
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods -w
-</code></pre></div><p>If a container dies multiple times quickly, OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn&rsquo;t waste resources trying to restart containers that are continuously crashing.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods -w
+</span></span></code></pre></div><p>If a container dies multiple times quickly, OpenShift is going to put the pod in a CrashBackOff state.  This ensures the system doesn&rsquo;t waste resources trying to restart containers that are continuously crashing.</p>
 
     </div>
   </div>
@@ -663,7 +663,7 @@ Go back to the pods list
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -923,7 +923,7 @@ Go back to the pods list
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -1035,7 +1035,7 @@ Go back to the pods list
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1045,7 +1045,7 @@ Go back to the pods list
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1128,7 +1128,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

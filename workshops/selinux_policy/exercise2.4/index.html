@@ -310,7 +310,7 @@
     
     
     <li class="next">
-      <a href="/workshops/selinux_policy/wrapup/">Next: Wrapup &rarr;</a>
+      <a href="/workshops/selinux_policy/exercise2.5/">Next: Exercise 2.5 - Tips &amp; Tricks &rarr;</a>
     </li>
     
     
@@ -331,22 +331,22 @@
 <div class="sect2">
 <h3 id="_step_1_check_for_avc_denials">Step 1: Check for AVC denials</h3>
 <div class="paragraph">
-<p>Let&#8217;s again restart our app, to get an updated list of denials.</p>
+<p>Let’s again restart our app, to get an updated list of denials.</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">systemctl restart testapp</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl restart testapp</span></span></code></pre></div>
 </div>
 <div class="paragraph">
 <p>We only have a few denials left, and you will see that they all (probably!) reference <code>/etc/resolv.conf</code> or to <code>/etc/hosts</code>.</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -m AVC -ts recent | egrep <span style="color:#e6db74">&#39;^type=AVC&#39;</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m AVC -ts recent | egrep <span style="color:#e6db74">&#39;^type=AVC&#39;</span></span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1553195947.854:3270): avc:  denied  { getattr } for  pid=4651 comm="testapp" path="/etc/resolv.conf" dev="dm-0" ino=9311517 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
-type=AVC msg=audit(1553195947.854:3271): avc:  denied  { open } for  pid=4651 comm="testapp" path="/etc/hosts" dev="dm-0" ino=8389746 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
-type=AVC msg=audit(1553195947.854:3271): avc:  denied  { read } for  pid=4651 comm="testapp" name="hosts" dev="dm-0" ino=8389746 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1553195947.854:3270): avc:  denied  { getattr } for  pid=4651 comm=&#34;testapp&#34; path=&#34;/etc/resolv.conf&#34; dev=&#34;dm-0&#34; ino=9311517 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
+type=AVC msg=audit(1553195947.854:3271): avc:  denied  { open } for  pid=4651 comm=&#34;testapp&#34; path=&#34;/etc/hosts&#34; dev=&#34;dm-0&#34; ino=8389746 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1
+type=AVC msg=audit(1553195947.854:3271): avc:  denied  { read } for  pid=4651 comm=&#34;testapp&#34; name=&#34;hosts&#34; dev=&#34;dm-0&#34; ino=8389746 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:net_conf_t:s0 tclass=file permissive=1</code></pre>
 </div>
 </div>
 </div>
@@ -382,34 +382,34 @@ type=AVC msg=audit(1553195947.854:3271): avc:  denied  { read } for  pid=4651 co
 ##              &lt;li&gt;sysnet_use_portmap()&lt;/li&gt;
 ##      &lt;/ul&gt;
 ## &lt;/desc&gt;
-## &lt;param name="domain"&gt;
+## &lt;param name=&#34;domain&#34;&gt;
 ##      &lt;summary&gt;
 ##      Domain allowed access.
 ##      &lt;/summary&gt;
 ## &lt;/param&gt;
 #
-interface(`sysnet_read_config',`
+interface(`sysnet_read_config&#39;,`
         gen_require(`
                 type net_conf_t;
-        ')
+        &#39;)
 
         files_search_etc($1)
         allow $1 net_conf_t:file read_file_perms;
 
-        ifdef(`distro_debian',`
+        ifdef(`distro_debian&#39;,`
                 files_search_pids($1)
                 allow $1 net_conf_t:dir list_dir_perms;
                 read_files_pattern($1, net_conf_t, net_conf_t)
-        ')
+        &#39;)
 
-        ifdef(`distro_redhat',`
+        ifdef(`distro_redhat&#39;,`
         files_search_all_pids($1)
         init_search_pid_dirs($1)
                 allow $1 net_conf_t:dir list_dir_perms;
                 allow $1 net_conf_t:lnk_file read_lnk_file_perms;
                 read_files_pattern($1, net_conf_t, net_conf_t)
-        ')
-')</code></pre>
+        &#39;)
+&#39;)</code></pre>
 </div>
 </div>
 </div>
@@ -427,15 +427,15 @@ interface(`sysnet_read_config',`
 <p>And compile your policy, and restart the service:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./testapp.sh
-systemctl restart testapp</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ./testapp.sh
+</span></span><span style="display:flex;"><span>sudo systemctl restart testapp</span></span></code></pre></div>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;and last, check to see if there are still any AVC denials:</p>
+<p>…​and last, check to see if there are still any AVC denials:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">systemctl restart testapp
-ausearch -m AVC -ts recent | wc -l</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl restart testapp
+</span></span><span style="display:flex;"><span>sudo ausearch -m AVC -ts recent -p <span style="color:#66d9ef">$(</span>systemctl show testapp --property<span style="color:#f92672">=</span>MainPID | cut -d<span style="color:#f92672">=</span> -f2<span style="color:#66d9ef">)</span> | wc -l</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -443,7 +443,7 @@ ausearch -m AVC -ts recent | wc -l</code></pre></div>
 </div>
 </div>
 <div class="paragraph">
-<p>Ah, well! Let&#8217;s try to handle those last AVCs.</p>
+<p>Ah, well! Let’s try to handle those last AVCs.</p>
 </div>
 </div>
 </div>
@@ -454,41 +454,41 @@ ausearch -m AVC -ts recent | wc -l</code></pre></div>
 <div class="sect2">
 <h3 id="_step_1_check_for_avc_denials_2">Step 1: Check for AVC denials</h3>
 <div class="paragraph">
-<p>Let&#8217;s get an updated list of denials:</p>
+<p>Let’s get an updated list of denials:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -m AVC -ts recent | egrep <span style="color:#e6db74">&#39;^type=AVC&#39;</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m AVC -ts recent -p <span style="color:#66d9ef">$(</span>systemctl show testapp --property<span style="color:#f92672">=</span>MainPID | cut -d<span style="color:#f92672">=</span> -f2<span style="color:#66d9ef">)</span> | egrep <span style="color:#e6db74">&#39;^type=AVC&#39;</span></span></span></code></pre></div>
 </div>
 <div class="paragraph">
 <p>The last few denials should reference <code>openssl</code> and <code>pki</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">ausearch -m AVC -ts recent
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo ausearch -m AVC -ts recent
 ----
 time-&gt;Tue Jun 29 15:36:12 2021
-type=PROCTITLE msg=audit(1624980972.923:10134): proctitle="/usr/local/sbin/testapp"
-type=PATH msg=audit(1624980972.923:10134): item=0 name="/etc/pki/tls/openssl.cnf" inode=5283193 dev=103:02 mode=0100644 ouid=0 ogid=0 rdev=00:00 obj=system_u:object_r:cert_t:s0 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0
-type=CWD msg=audit(1624980972.923:10134): cwd="/"
-type=SYSCALL msg=audit(1624980972.923:10134): arch=c000003e syscall=257 success=yes exit=3 a0=ffffff9c a1=15c12a0 a2=0 a3=0 items=1 ppid=63073 pid=63074 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
-type=AVC msg=audit(1624980972.923:10134): avc:  denied  { open } for  pid=63074 comm="testapp" path="/etc/pki/tls/openssl.cnf" dev="nvme0n1p2" ino=5283193 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:cert_t:s0 tclass=file permissive=1
-type=AVC msg=audit(1624980972.923:10134): avc:  denied  { read } for  pid=63074 comm="testapp" name="openssl.cnf" dev="nvme0n1p2" ino=5283193 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:cert_t:s0 tclass=file permissive=1
-type=AVC msg=audit(1624980972.923:10134): avc:  denied  { search } for  pid=63074 comm="testapp" name="pki" dev="nvme0n1p2" ino=8410010 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:cert_t:s0 tclass=dir permissive=1
+type=PROCTITLE msg=audit(1624980972.923:10134): proctitle=&#34;/usr/local/sbin/testapp&#34;
+type=PATH msg=audit(1624980972.923:10134): item=0 name=&#34;/etc/pki/tls/openssl.cnf&#34; inode=5283193 dev=103:02 mode=0100644 ouid=0 ogid=0 rdev=00:00 obj=system_u:object_r:cert_t:s0 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0
+type=CWD msg=audit(1624980972.923:10134): cwd=&#34;/&#34;
+type=SYSCALL msg=audit(1624980972.923:10134): arch=c000003e syscall=257 success=yes exit=3 a0=ffffff9c a1=15c12a0 a2=0 a3=0 items=1 ppid=63073 pid=63074 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=&#34;testapp&#34; exe=&#34;/usr/local/sbin/testapp&#34; subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1624980972.923:10134): avc:  denied  { open } for  pid=63074 comm=&#34;testapp&#34; path=&#34;/etc/pki/tls/openssl.cnf&#34; dev=&#34;nvme0n1p2&#34; ino=5283193 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:cert_t:s0 tclass=file permissive=1
+type=AVC msg=audit(1624980972.923:10134): avc:  denied  { read } for  pid=63074 comm=&#34;testapp&#34; name=&#34;openssl.cnf&#34; dev=&#34;nvme0n1p2&#34; ino=5283193 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:cert_t:s0 tclass=file permissive=1
+type=AVC msg=audit(1624980972.923:10134): avc:  denied  { search } for  pid=63074 comm=&#34;testapp&#34; name=&#34;pki&#34; dev=&#34;nvme0n1p2&#34; ino=8410010 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:cert_t:s0 tclass=dir permissive=1
 ----
 time-&gt;Tue Jun 29 15:36:12 2021
-type=PROCTITLE msg=audit(1624980972.923:10135): proctitle="/usr/local/sbin/testapp"
-type=SYSCALL msg=audit(1624980972.923:10135): arch=c000003e syscall=5 success=yes exit=0 a0=3 a1=7ffcd2c0c890 a2=7ffcd2c0c890 a3=7fa695266e80 items=0 ppid=63073 pid=63074 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="testapp" exe="/usr/local/sbin/testapp" subj=system_u:system_r:testapp_t:s0 key=(null)
-type=AVC msg=audit(1624980972.923:10135): avc:  denied  { getattr } for  pid=63074 comm="testapp" path="/etc/pki/tls/openssl.cnf" dev="nvme0n1p2" ino=5283193 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:cert_t:s0 tclass=file permissive=1</code></pre>
+type=PROCTITLE msg=audit(1624980972.923:10135): proctitle=&#34;/usr/local/sbin/testapp&#34;
+type=SYSCALL msg=audit(1624980972.923:10135): arch=c000003e syscall=5 success=yes exit=0 a0=3 a1=7ffcd2c0c890 a2=7ffcd2c0c890 a3=7fa695266e80 items=0 ppid=63073 pid=63074 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=&#34;testapp&#34; exe=&#34;/usr/local/sbin/testapp&#34; subj=system_u:system_r:testapp_t:s0 key=(null)
+type=AVC msg=audit(1624980972.923:10135): avc:  denied  { getattr } for  pid=63074 comm=&#34;testapp&#34; path=&#34;/etc/pki/tls/openssl.cnf&#34; dev=&#34;nvme0n1p2&#34; ino=5283193 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:cert_t:s0 tclass=file permissive=1</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_2_find_an_interface">Step 2: Find an interface</h3>
 <div class="paragraph">
-<p>Let&#8217;s search for an interface, referencing <code>ssl certificate</code> and <code>read</code> as that&#8217;s what&#8217;s being reported:</p>
+<p>Let’s search for an interface, referencing <code>ssl certificate</code> and <code>read</code> as that’s what’s being reported:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">find /usr/share/selinux/devel/include -type f -name <span style="color:#e6db74">&#34;*.if&#34;</span> -exec grep -iH <span style="color:#e6db74">&#39;ssl certificate&#39;</span> <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span> | grep -i read</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>find /usr/share/selinux/devel/include -type f -name <span style="color:#e6db74">&#34;*.if&#34;</span> -exec grep -iH <span style="color:#e6db74">&#39;ssl certificate&#39;</span> <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span> | grep -i read</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -500,7 +500,7 @@ type=AVC msg=audit(1624980972.923:10135): avc:  denied  { getattr } for  pid=630
 </div>
 </div>
 <div class="paragraph">
-<p>From the list above, we aren&#8217;t touching <code>home directories</code>, so the others are involved with reading SSL certificates. Let&#8217;s open <code>miscfiles.if</code> and see what we can find, that matches the most basic, <code>Read generic SSL certificates</code>:</p>
+<p>From the list above, we aren’t touching <code>home directories</code>, so the others are involved with reading SSL certificates. Let’s open <code>miscfiles.if</code> and see what we can find, that matches the most basic, <code>Read generic SSL certificates</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -508,14 +508,14 @@ type=AVC msg=audit(1624980972.923:10135): avc:  denied  { getattr } for  pid=630
 ## &lt;summary&gt;
 ##      Read generic SSL certificates.
 ## &lt;/summary&gt;
-## &lt;param name="domain"&gt;
+## &lt;param name=&#34;domain&#34;&gt;
 ##      &lt;summary&gt;
 ##      Domain allowed access.
 ##      &lt;/summary&gt;
 ## &lt;/param&gt;
 ## &lt;rolecap/&gt;
 #
-interface(`miscfiles_read_generic_certs',`</code></pre>
+interface(`miscfiles_read_generic_certs&#39;,`</code></pre>
 </div>
 </div>
 </div>
@@ -533,25 +533,25 @@ interface(`miscfiles_read_generic_certs',`</code></pre>
 <div class="sect2">
 <h3 id="_step_4_recompile_the_policy">Step 4: Recompile the policy</h3>
 <div class="paragraph">
-<p>Now, let&#8217;s recompile the policy, and reload it into memory.</p>
+<p>Now, let’s recompile the policy, and reload it into memory.</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./testapp.sh</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ./testapp.sh</span></span></code></pre></div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_5_restart_the_application">Step 5: Restart the application</h3>
 <div class="paragraph">
-<p>To see if that fixed the problem, let&#8217;s restart the application:</p>
+<p>To see if that fixed the problem, let’s restart the application:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">systemctl restart testapp</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl restart testapp</span></span></code></pre></div>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;and see if there are any AVC messages left:</p>
+<p>…​and see if there are any AVC messages left:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -m AVC -ts recent | egrep <span style="color:#e6db74">&#39;tcp|udp&#39;</span> | wc -l</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m AVC -ts recent | egrep <span style="color:#e6db74">&#39;tcp|udp&#39;</span> | wc -l</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -559,7 +559,7 @@ interface(`miscfiles_read_generic_certs',`</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Fantastic, we&#8217;ve knocked them all out.</p>
+<p>Fantastic, we’ve knocked them all out.</p>
 </div>
 </div>
 </div>
@@ -581,7 +581,7 @@ interface(`miscfiles_read_generic_certs',`</code></pre>
 <p>Once we do that, the final version of your policy should look like this:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat testapp.te</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat testapp.te</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -596,7 +596,7 @@ type testapp_t;
 type testapp_exec_t;
 init_daemon_domain(testapp_t, testapp_exec_t)
 
-permissive testapp_t;
+#permissive testapp_t;
 
 type testapp_var_run_t;
 files_pid_file(testapp_var_run_t)
@@ -636,25 +636,25 @@ sysnet_read_config(testapp_t)</code></pre>
 <div class="sect2">
 <h3 id="_step_3_recompile_and_reload_the_policy">Step 3: Recompile and reload the policy</h3>
 <div class="paragraph">
-<p>Now, let&#8217;s recompile the policy, and reload it into memory.</p>
+<p>Now, let’s recompile the policy, and reload it into memory.</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./testapp.sh</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ./testapp.sh</span></span></code></pre></div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_4_restart_the_application">Step 4: Restart the application</h3>
 <div class="paragraph">
-<p>To see if that fixed the problem, let&#8217;s restart the application:</p>
+<p>To see if that fixed the problem, let’s restart the application:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">systemctl restart testapp</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl restart testapp</span></span></code></pre></div>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;and see if there are any AVC messages left:</p>
+<p>…​and see if there are any AVC messages left:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ausearch -m AVC -ts recent | egrep <span style="color:#e6db74">&#39;tcp|udp&#39;</span> | wc -l</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m AVC -ts recent | egrep <span style="color:#e6db74">&#39;tcp|udp&#39;</span> | wc -l</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -662,16 +662,13 @@ sysnet_read_config(testapp_t)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>And we are done.</p>
+<p>Additionally, you can confirm that there aren’t any domains in permissive mode:</p>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_end_result">End Result</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>This is the conclusion of the SELinux policy workshop.  Please ask any questions that you have left, and thanks so much for coming!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo semanage permissive -l</span></span></code></pre></div>
+</div>
+<div class="paragraph">
+<p>And we are done.</p>
 </div>
 <div class="paragraph">
 <style>
@@ -773,7 +770,7 @@ sysnet_read_config(testapp_t)</code></pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1033,7 +1030,7 @@ sysnet_read_config(testapp_t)</code></pre>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -1145,7 +1142,7 @@ sysnet_read_config(testapp_t)</code></pre>
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1155,7 +1152,7 @@ sysnet_read_config(testapp_t)</code></pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1202,6 +1199,7 @@ window.onclick = function(event) {
 </div>
 </div>
 </div>
+</div>
 
 
     
@@ -1225,7 +1223,7 @@ window.onclick = function(event) {
     
     
     <li class="next">
-      <a href="/workshops/selinux_policy/wrapup/">Next: Wrapup &rarr;</a>
+      <a href="/workshops/selinux_policy/exercise2.5/">Next: Exercise 2.5 - Tips &amp; Tricks &rarr;</a>
     </li>
     
     
@@ -1241,7 +1239,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

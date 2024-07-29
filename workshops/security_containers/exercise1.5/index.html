@@ -321,7 +321,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_containers/images/namespaces.png" alt="namespaces">
+<img src="/workshops/security_containers/images/namespaces.png" alt="namespaces"/>
 </div>
 </div>
 </div>
@@ -342,7 +342,7 @@
 <p>PID namespaces enable processes in different containers to have the same PID (process identifier). This means each container can have its own init (PID1) process that manages various system initialization tasks, as well as the container life cycle.</p>
 </div>
 <div class="paragraph">
-<p>Also, each container has its unique /proc directory. Note that from within the container, you can only monitor those processes running inside this container. In other words, the container is only aware of its native processes and can not "see" the processes running in different parts of the system. It is the host operating system that is aware of processes running inside of the container, but assigns them different PID numbers.</p>
+<p>Also, each container has its unique /proc directory. Note that from within the container, you can only monitor those processes running inside this container. In other words, the container is only aware of its native processes and can not &#34;see&#34; the processes running in different parts of the system. It is the host operating system that is aware of processes running inside of the container, but assigns them different PID numbers.</p>
 </div>
 </div>
 </div>
@@ -350,7 +350,7 @@
 <h2 id="_section_1_launching_a_container">Section 1: Launching a container</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Launch a container in it&#8217;s own namespace and see what process it can see from inside the container.</p>
+<p>Launch a container in it’s own namespace and see what process it can see from inside the container.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -365,14 +365,14 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse10b5f71423bcb12f7e7c6a5f9f01139f" class="collapsed">
+      <a data-toggle="collapse" href="#collapsed977a41fede90d22a6ab39f5bc940168" class="collapsed">
       
         Result
       </a>
     </h4>
   </div>
   
-  <div id="collapse10b5f71423bcb12f7e7c6a5f9f01139f" class="panel-collapse collapse ">
+  <div id="collapsed977a41fede90d22a6ab39f5bc940168" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
@@ -384,11 +384,11 @@
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>The only process we can see is just our last command <code>ps aux</code>.</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 
     </div>
@@ -511,7 +511,7 @@
 <p>Network namespaces provide isolation of network controllers, system resources associated with networking, firewall and routing tables. This allows container to use separate virtual network stack, loopback device and process space. You can add virtual or real devices to the container, assign them their own IP Addresses and even full iptables rules.</p>
 </div>
 <div class="paragraph">
-<p>Network namespaces allow containers to be created with unique IP address and interfaces. Let&#8217;s run a container and examine the default container network interface.</p>
+<p>Network namespaces allow containers to be created with unique IP address and interfaces. Let’s run a container and examine the default container network interface.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -526,14 +526,14 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsef006917b314f462473e0c75886e27d9d" class="collapsed">
+      <a data-toggle="collapse" href="#collapsece811346c8d39dc916bfb4241c52dc6a" class="collapsed">
       
         Result
       </a>
     </h4>
   </div>
   
-  <div id="collapsef006917b314f462473e0c75886e27d9d" class="panel-collapse collapse ">
+  <div id="collapsece811346c8d39dc916bfb4241c52dc6a" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
@@ -555,7 +555,7 @@
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Loopback</td>
 </tr>
@@ -563,7 +563,7 @@
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>eth0</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 
     </div>
@@ -575,7 +575,7 @@
 
 </div>
 <div class="paragraph">
-<p>By default a container&#8217;s network is isolated with it&#8217;s own IP and interface. By changing the namespace to host by using the <code>--net</code> flag, the process will have access to the host machines network interface.</p>
+<p>By default a container’s network is isolated with it’s own IP and interface. By changing the namespace to host by using the <code>--net</code> flag, the process will have access to the host machines network interface.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -590,14 +590,14 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseca63f838c68f061164106554b1be2e35" class="collapsed">
+      <a data-toggle="collapse" href="#collapse2b9138188cf5a73e07ec40ea41b4d7e4" class="collapsed">
       
         Result
       </a>
     </h4>
   </div>
   
-  <div id="collapseca63f838c68f061164106554b1be2e35" class="panel-collapse collapse ">
+  <div id="collapse2b9138188cf5a73e07ec40ea41b4d7e4" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
@@ -625,7 +625,7 @@
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Loopback</td>
 </tr>
@@ -637,7 +637,7 @@
 <td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>cni-podman0</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p><strong>--net=container:NAME_or_ID</strong>: This puts the container’s processes inside of the network stack that has already been created inside of another container. The new container’s processes will be confined to their own filesystem and process list and resource limits, but will share the same IP address and port numbers as the first container, and processes on the two containers will be able to connect to each other over the loopback interface.</p>
@@ -673,7 +673,7 @@ Note: --net="host" gives the container full access to local system services such
 <p>Containers have a default security model that enforces isolation at the kernel level for process separation as well as network separation between containers. Sometimes you may need to debug a application or container and need to attach or share a containers namespace. Sharing namespaces should only be done in certain situations that require it, but for development it may be appropriate for debugging.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s examine how we can share the networking namespace between containers. We will launch a nginx container that will bind to port 80 inside it&#8217;s container network interface.</p>
+<p>Let’s examine how we can share the networking namespace between containers. We will launch a nginx container that will bind to port 80 inside it’s container network interface.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -724,7 +724,7 @@ Note: --net="host" gives the container full access to local system services such
 
 </div>
 <div class="paragraph">
-<p>Now let&#8217;s use the <code>--net=container:</code> flag to attach to the <code>http</code> containers network interface and try the curl command again.</p>
+<p>Now let’s use the <code>--net=container:</code> flag to attach to the <code>http</code> containers network interface and try the curl command again.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -739,14 +739,14 @@ Note: --net="host" gives the container full access to local system services such
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse891c31456330882e723f940188056a50" class="collapsed">
+      <a data-toggle="collapse" href="#collapse23a1be0e0f30ab17fcb7441420fc3b8c" class="collapsed">
       
         Result
       </a>
     </h4>
   </div>
   
-  <div id="collapse891c31456330882e723f940188056a50" class="panel-collapse collapse ">
+  <div id="collapse23a1be0e0f30ab17fcb7441420fc3b8c" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
@@ -770,9 +770,9 @@ successfully installed and working. Further
 configuration is required.&lt;/p&gt;
 
 &lt;p&gt;For online documentation and support please refer to
-&lt;a href="http://nginx.org/"&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+&lt;a href=&#34;http://nginx.org/&#34;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
 Commercial support is available at
-&lt;a href="http://nginx.com/"&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&#34;http://nginx.com/&#34;&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;
 &lt;/body&gt;
@@ -781,11 +781,11 @@ Commercial support is available at
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Welcome to nginx! This is the default Nginx message and shows that we were able to share a namespace to connect to this container.</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 
     </div>
@@ -812,14 +812,14 @@ Commercial support is available at
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsed59d2054ec92cd87cbc1ca3ffe5de118" class="collapsed">
+      <a data-toggle="collapse" href="#collapse5ed77f2e27826985e2c3cdb7f07e70e2" class="collapsed">
       
         Result
       </a>
     </h4>
   </div>
   
-  <div id="collapsed59d2054ec92cd87cbc1ca3ffe5de118" class="panel-collapse collapse ">
+  <div id="collapse5ed77f2e27826985e2c3cdb7f07e70e2" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="listingblock">
@@ -832,7 +832,7 @@ Commercial support is available at
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Nginx master process</td>
 </tr>
@@ -840,7 +840,7 @@ Commercial support is available at
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>Nginx worker process</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 
     </div>
@@ -952,7 +952,7 @@ Commercial support is available at
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1212,7 +1212,7 @@ Commercial support is available at
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -1324,7 +1324,7 @@ Commercial support is available at
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1334,7 +1334,7 @@ Commercial support is available at
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1420,7 +1420,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

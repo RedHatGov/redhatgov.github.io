@@ -324,7 +324,7 @@
 <li>Duration: 15 mins</li>
 <li>Audience: API Owners, Product Managers, Developers, Architects</li>
 </ul>
-<p><br>&lt;img src=&rdquo;../images/agenda-04.png &ldquo;Login&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&quot;../images/agenda-04.png &ldquo;Login&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
 <h2 id="overview">Overview</h2>
 <p>Once you have APIs deployed in your environment, it becomes critically important to manage who may use them, and for what purpose. You also need to begin to track usage of these different users to know who is or is not succeeding in their usage. For this reason, in this lab, you will be adding management capabilities to the API to give you control and visibility of it&rsquo;s usage.</p>
 <h3 id="why-red-hat">Why Red Hat?</h3>
@@ -411,8 +411,8 @@
 </li>
 <li>
 <p>Type in the <em>Pattern</em> text box the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/locations
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/locations
+</span></span></code></pre></div></li>
 <li>
 <p>Select <strong>locations_all</strong> as Method from the combo box.</p>
 <p><br><img src="../images/07b-getall-rule.png" width="900" /><br><br></p>
@@ -424,7 +424,7 @@
 <ol>
 <li>
 <p>Scroll down and expand the <strong>POLICIES</strong> section to define the allowed methods on our exposed API.</p>
-<p><br>&lt;img src=&rdquo;../images/policies-01.png &ldquo;Policies&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&quot;../images/policies-01.png &ldquo;Policies&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
 <p><em>The default policy in the Policy Chain is APIcast. This is the main policy and most of the times you want to keep it</em>.</p>
 </li>
 <li>
@@ -434,34 +434,34 @@
 </li>
 <li>
 <p>Click in the <strong>CORS</strong> link to add the policy.</p>
-<p><br>&lt;img src=&rdquo;../images/policies-03.png &ldquo;CORS&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&quot;../images/policies-03.png &ldquo;CORS&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Put your mouse over the right side of the policy name to enable the reorder of the chain. Drag and drop the CORS policy to the top of the chain.</p>
-<p><br>&lt;img src=&rdquo;../images/policies-04.png &ldquo;Chain Order&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&quot;../images/policies-04.png &ldquo;Chain Order&rdquo; width=&ldquo;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Now <strong>CORS</strong> policy will be executed before the <strong>APIcast</strong>. Click the <strong>CORS</strong> link to edit the policy.</p>
-<p><br>&lt;img src=&rdquo;../images/policies-05.png &ldquo;Cors Configuration&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&quot;../images/policies-05.png &ldquo;Cors Configuration&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>In the <em>Edit Policy</em> section, click the green <strong>+</strong> button to add the allowed headers.</p>
-<p><br>&lt;img src=&rdquo;../images/policies-06.png &ldquo;Add Allow Headers&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&quot;../images/policies-06.png &ldquo;Add Allow Headers&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Type <strong>Authorization</strong> in the <em>Allowed headers</em> field.</p>
-<p><br>&lt;img src=&rdquo;../images/policies-07.png &ldquo;Add Authorization Header&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&quot;../images/policies-07.png &ldquo;Add Authorization Header&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Tick the <strong>allow_credentials</strong> checkbox and fill in with a star (<strong>*</strong>) the <em>allow_origin</em> text box.</p>
-<p><br>&lt;img src=&rdquo;../images/policies-08.png &ldquo;Allow Origin&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&quot;../images/policies-08.png &ldquo;Allow Origin&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Click twice the green <strong>+</strong> button under <em>ALLOW_METHODS</em> to enable two combo boxes for the CORS allowed methods.</p>
 </li>
 <li>
 <p>Select <strong>GET</strong> from the first box and <strong>OPTIONS</strong> from the second box.</p>
-<p><br>&lt;img src=&rdquo;../images/policies-09.png &ldquo;Allow Methods&rdquo;&rdquo; width=&quot;900&rdquo; /&gt;<br><br></p>
+<p><br>&lt;img src=&quot;../images/policies-09.png &ldquo;Allow Methods&rdquo;&quot; width=&ldquo;900&rdquo; /&gt;<br><br></p>
 </li>
 <li>
 <p>Click the <strong>Submit</strong> button to save the policy configuration.</p>
@@ -473,26 +473,26 @@
 <p>Scroll back to the top of the page. Fill in the information for accessing your API:</p>
 <ul>
 <li>
-<p>Private Base URL: <strong><a href="http://location-service.international.svc">http://location-service.international.svc</a>:8080</strong></p>
+<p>Private Base URL: <strong><a href="http://location-service.international.svc:8080">http://location-service.international.svc:8080</a></strong></p>
 </li>
 <li>
-<p>Staging Public Base URL: <strong><a href="https://location-userX-api-staging.amp.apps.ocp-ai.redhatgov.io">https://location-userX-api-staging.amp.apps.ocp-ai.redhatgov.io</a>:443</strong></p>
+<p>Staging Public Base URL: <strong><a href="https://location-userX-api-staging.amp.apps.ocp-ai.redhatgov.io:443">https://location-userX-api-staging.amp.apps.ocp-ai.redhatgov.io:443</a></strong></p>
 </li>
 <li>
-<p>Production Public Base URL: <strong><a href="https://location-userX-api.amp.apps.ocp-ai.redhatgov.io">https://location-userX-api.amp.apps.ocp-ai.redhatgov.io</a>:443</strong></p>
+<p>Production Public Base URL: <strong><a href="https://location-userX-api.amp.apps.ocp-ai.redhatgov.io:443">https://location-userX-api.amp.apps.ocp-ai.redhatgov.io:443</a></strong></p>
 </li>
 </ul>
 <p><em>Remember to replace the X with your user number</em>.</p>
 <p><em>We are using the internal API service, as we are deploying our services inside the same OpenShift cluster</em>.</p>
-<p><br>&lt;img src=&rdquo;../images/07-baseurl-configuration.png)</p>
+<p><br>&lt;img src=&quot;../images/07-baseurl-configuration.png)</p>
 </li>
 <li>
 <p>Scroll down to the <strong>API Test GET request</strong>.</p>
 </li>
 <li>
 <p>Type in the textbox:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/locations
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/locations
+</span></span></code></pre></div></li>
 <li>
 <p>Click on the <strong>Update the Staging Environment</strong> to save the changes and check the connection between client, gateway and API.</p>
 <p><br><img src="../images/08-update-staging.png" width="900" /><br><br></p>
@@ -562,7 +562,7 @@
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

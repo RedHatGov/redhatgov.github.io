@@ -329,35 +329,35 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapsedb169deb1b9a5b8e5b76369cac2464b9" class="collapsed">
+      <a data-toggle="collapse" href="#collapse84a9ab480470b043feb3ece11712285a" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapsedb169deb1b9a5b8e5b76369cac2464b9" class="panel-collapse collapse ">
+  <div id="collapse84a9ab480470b043feb3ece11712285a" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and try the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc get pods
-$ oc describe pod/&lt;POD NAME&gt; | more
-</code></pre></div><p>You can see the Labels automatically added contain the app, deployment, and deploymentconfig.  Let&rsquo;s add a new label to this pod.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc get pods
+</span></span><span style="display:flex;"><span>$ oc describe pod/&lt;POD NAME&gt; | more
+</span></span></code></pre></div><p>You can see the Labels automatically added contain the app, deployment, and deploymentconfig.  Let&rsquo;s add a new label to this pod.</p>
 <blockquote>
 <i class="fa fa-terminal"></i> Add a label
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc label pod/&lt;POD NAME&gt; testdate<span style="color:#f92672">=</span>4.30.2018 testedby<span style="color:#f92672">=</span>mylastname
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc label pod/&lt;POD NAME&gt; testdate<span style="color:#f92672">=</span>4.30.2018 testedby<span style="color:#f92672">=</span>mylastname
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-terminal"></i> Look at the labels
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe pod/&lt;POD NAME&gt; | more
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe pod/&lt;POD NAME&gt; | more
+</span></span></code></pre></div><blockquote>
 <i class="fa fa-info-circle"></i> Here's a handy way to search through all objects and look at all the labels:<br/>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe all | grep -i <span style="color:#e6db74">&#34;labels:&#34;</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc describe all | grep -i <span style="color:#e6db74">&#34;labels:&#34;</span>
+</span></span></code></pre></div>
     </div>
   </div>
 </div>
@@ -519,7 +519,7 @@ If you see "More labels..", then click that link
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -779,7 +779,7 @@ If you see "More labels..", then click that link
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -891,7 +891,7 @@ If you see "More labels..", then click that link
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -901,7 +901,7 @@ If you see "More labels..", then click that link
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -984,7 +984,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

@@ -324,7 +324,7 @@
 <p>Before we start playing with PID namespaces, it is good to have some background on how PIDs in Linux work.</p>
 </div>
 <div class="paragraph">
-<p>Every process that runs on a Linux system gets a Process ID (PID). This exists as a 32-bit integer. Numbering starts at 1 and increments until there are none left. PIDs can be reused once the process terminates. If you run out of PIDs, you&#8217;ll have a bad time.</p>
+<p>Every process that runs on a Linux system gets a Process ID (PID). This exists as a 32-bit integer. Numbering starts at 1 and increments until there are none left. PIDs can be reused once the process terminates. If you run out of PIDs, you’ll have a bad time.</p>
 </div>
 <div class="paragraph">
 <p>Processes are structured in a Tree Structure. Every process has a parent except the first process. Typically the init system (SystemD) will be PID 1 and has no parent.
@@ -372,7 +372,7 @@ The <code>-S</code> flag informs <code>pstree</code> to show us where new namesp
 <p>If you have any questions here, ask your instructor as being able to understand the process tree is fairly important.</p>
 </div>
 <div class="paragraph">
-<p>Now&#8230;&#8203; Let&#8217;s play with some PIDs.</p>
+<p>Now…​ Let’s play with some PIDs.</p>
 </div>
 </div>
 </div>
@@ -380,10 +380,10 @@ The <code>-S</code> flag informs <code>pstree</code> to show us where new namesp
 <h2 id="_exercise_2_2_pid_and_ipc_namespaces">Exercise 2.2 - PID and IPC Namespaces</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The PID namespace allows a process and its children to run in a new process tree that maps back to the host process tree. The new PID namespace starts with PID 1 which will map to a much higher PID in the host&#8217;s native PID namespace. The Inter-Process Communication (IPC) Namespace limits the processes ability to share memory.</p>
+<p>The PID namespace allows a process and its children to run in a new process tree that maps back to the host process tree. The new PID namespace starts with PID 1 which will map to a much higher PID in the host’s native PID namespace. The Inter-Process Communication (IPC) Namespace limits the processes ability to share memory.</p>
 </div>
 <div class="paragraph">
-<p>First, let&#8217;s take note of our current PID.</p>
+<p>First, let’s take note of our current PID.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -396,7 +396,7 @@ The <code>-S</code> flag informs <code>pstree</code> to show us where new namesp
 </div>
 </div>
 <div class="paragraph">
-<p>Ok, so our current Bash shell has a PID of 7128. Let&#8217;s make a new PID namespace.</p>
+<p>Ok, so our current Bash shell has a PID of 7128. Let’s make a new PID namespace.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -404,17 +404,17 @@ The <code>-S</code> flag informs <code>pstree</code> to show us where new namesp
 </div>
 </div>
 <div class="paragraph">
-<p>That&#8217;s a lof more flags this time.
-- <code>m</code> creates a new mount namespace (you&#8217;ll see why)
+<p>That’s a lof more flags this time.
+- <code>m</code> creates a new mount namespace (you’ll see why)
 - <code>i</code> creates a new IPC namespace
 - <code>p</code> creates a new PID namespace
 - <code>f</code> tells unshare to fork after creating the new namespaces and before starting Bash</p>
 </div>
 <div class="paragraph">
-<p>It is very important that we fork anytime we create a new PID namespace. The reason is because a new PID table is created, but the current process is still in the old namespace. If we run a Bash shell, it will not be able to look up its own PID. If that sounds bad, its because it is! Don&#8217;t believe me? Try running that unshare command without the f option. Use the exit command to leave the broken Bash shell when you are done.</p>
+<p>It is very important that we fork anytime we create a new PID namespace. The reason is because a new PID table is created, but the current process is still in the old namespace. If we run a Bash shell, it will not be able to look up its own PID. If that sounds bad, its because it is! Don’t believe me? Try running that unshare command without the f option. Use the exit command to leave the broken Bash shell when you are done.</p>
 </div>
 <div class="paragraph">
-<p>Now let&#8217;s inspect the current PID.</p>
+<p>Now let’s inspect the current PID.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -444,7 +444,7 @@ root         4  0.0  0.0      0     0 ?        I&lt;   Feb05   0:00 [rcu_par_gp]
 </div>
 </div>
 <div class="paragraph">
-<p>Wait a minute&#8230;&#8203; Why is ps reporting that systemd is PID 1? It looks like ps is referencing the native PID namespace. Indeed it is!
+<p>Wait a minute…​ Why is ps reporting that systemd is PID 1? It looks like ps is referencing the native PID namespace. Indeed it is!
 The Linux Kernel uses the /proc pseudo filesystem to report raw data on processes. Since we created a new PID namespace, we need to mount a new /proc that matches this new namespace.</p>
 </div>
 <div class="listingblock">
@@ -469,7 +469,7 @@ root        26  0.0  0.0   7296   736 pts/0    S+   03:21   0:00 head -n5</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now that&#8217;s more like it!</p>
+<p>Now that’s more like it!</p>
 </div>
 <div class="paragraph">
 <p>On the terminal that is in the new namespaces, type <code>exit</code> to return to the native namespaces.</p>
@@ -574,7 +574,7 @@ root        26  0.0  0.0   7296   736 pts/0    S+   03:21   0:00 head -n5</pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -834,7 +834,7 @@ root        26  0.0  0.0   7296   736 pts/0    S+   03:21   0:00 head -n5</pre>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -946,7 +946,7 @@ root        26  0.0  0.0   7296   736 pts/0    S+   03:21   0:00 head -n5</pre>
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -956,7 +956,7 @@ root        26  0.0  0.0   7296   736 pts/0    S+   03:21   0:00 head -n5</pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1042,7 +1042,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

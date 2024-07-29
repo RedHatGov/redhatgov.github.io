@@ -288,7 +288,7 @@
 <h2 id="_workshop_description">Workshop Description</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Writing your own SELinux policies doesn&#8217;t have to be a terrifying prospect!  This workshop will walk you through the process of creating a custom policy for a source-compiled application, using the advanced tooling present in Red Hat Enterprise Linux.</p>
+<p>Writing your own SELinux policies doesn’t have to be a terrifying prospect!  This workshop will walk you through the process of creating a custom policy for a source-compiled application, using the advanced tooling present in Red Hat Enterprise Linux.</p>
 </div>
 </div>
 </div>
@@ -341,7 +341,7 @@
 <h2 id="_overview">Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The SELinux policy workshop is meant for anyone who needs to create application policies for applications that lack them. Some previous experience with SELinux is expected, but you don&#8217;t have to be a master. Also, knowledge of RHEL and general Linux functionality is required. We are going to start with a short overview and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.</p>
+<p>The SELinux policy workshop is meant for anyone who needs to create application policies for applications that lack them. Some previous experience with SELinux is expected, but you don’t have to be a master. Also, knowledge of RHEL and general Linux functionality is required. We are going to start with a short overview and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.</p>
 </div>
 </div>
 </div>
@@ -355,32 +355,32 @@
 <p>Participate. We are going to cut you loose with SELinux, in just a little while. Have questions. Have opinions.</p>
 </div>
 <div class="paragraph">
-<p>Bring a laptop.  It doesn&#8217;t matter what OS it runs, but you will need either the Firefox or Chrome web browser installed. If, for some reason, you don&#8217;t have a laptop, let your instructor know, or try to find someone to share with.</p>
+<p>Bring a laptop.  It doesn’t matter what OS it runs, but you will need either the Firefox or Chrome web browser installed. If, for some reason, you don’t have a laptop, let your instructor know, or try to find someone to share with.</p>
 </div>
 <div class="admonitionblock important">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>When we want you to type something in, we&#8217;ll use a frame like this:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /etc/hosts</code></pre></div></p>
+<p>When we want you to type something in, we’ll use a frame like this:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /etc/hosts</span></span></code></pre></div></p>
 </div>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="admonitionblock important">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>When we want to show you the output from a command, we&#8217;ll use a different frame, like this one:</p>
+<p>When we want to show you the output from a command, we’ll use a different frame, like this one:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -390,7 +390,7 @@
 </div>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -416,13 +416,25 @@
 
 <ul>
   <li>
-    <a href="/workshops/selinux_policy/exercise1.1/">Exercise 1.1 - Introduction to SELinux</a>
+    <a href="/workshops/selinux_policy/exercise1.1/">Exercise 1.1 - SELinux policy in RHEL</a>
   </li>
 </ul>
 
 <ul>
   <li>
     <a href="/workshops/selinux_policy/exercise1.2/">Exercise 1.2 - SELinux Contexts</a>
+  </li>
+</ul>
+
+<ul>
+  <li>
+    <a href="/workshops/selinux_policy/exercise1.3/">Exercise 1.3 - Altering behavior</a>
+  </li>
+</ul>
+
+<ul>
+  <li>
+    <a href="/workshops/selinux_policy/exercise1.4/">Exercise 1.4 - Troubleshooting</a>
   </li>
 </ul>
 
@@ -453,6 +465,12 @@
 <ul>
   <li>
     <a href="/workshops/selinux_policy/exercise2.4/">Exercise 2.4 - Finishing the Policy</a>
+  </li>
+</ul>
+
+<ul>
+  <li>
+    <a href="/workshops/selinux_policy/exercise2.5/">Exercise 2.5 - Tips &amp; Tricks</a>
   </li>
 </ul>
 
@@ -564,7 +582,7 @@
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -824,7 +842,7 @@
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -936,7 +954,7 @@
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -946,7 +964,7 @@
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -999,7 +1017,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

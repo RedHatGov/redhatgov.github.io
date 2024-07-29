@@ -319,48 +319,48 @@
 
     <h1 id="add-promote-to-stage">Add Promote to Stage</h1>
 <p>Enter the Promote to STAGE below into your pipeline.</p>
-<p><img src="../images/pipeline_promote.png" width="900" /></p>
+<img src="../images/pipeline_promote.png" width="900" />
 <p>We set an approval to promote to the application to the Stage Project.  The approval process is a good feature for various gates of your deployments.  We also set a 15 minute timeout on the approval.  You also tag the tasks image with latest and the version from the pom file.</p>
 <br>
 # Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
+<img src="../images/pipeline_actions_edit.png" width="900" />
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre><code>    stage('Promote to STAGE?') {
+<pre tabindex="0"><code>    stage(&#39;Promote to STAGE?&#39;) {
       steps {
-        timeout(time:15, unit:'MINUTES') {
-            input message: &quot;Promote to STAGE?&quot;, ok: &quot;Promote&quot;
+        timeout(time:15, unit:&#39;MINUTES&#39;) {
+            input message: &#34;Promote to STAGE?&#34;, ok: &#34;Promote&#34;
         }
 
         script {
           openshift.withCluster() {
-            openshift.tag(&quot;${env.DEV_PROJECT}/tasks:latest&quot;, &quot;${env.STAGE_PROJECT}/tasks:${version}&quot;)
+            openshift.tag(&#34;${env.DEV_PROJECT}/tasks:latest&#34;, &#34;${env.STAGE_PROJECT}/tasks:${version}&#34;)
           }
         }
       }
     }
 </code></pre><h1 id="add-deploy-stage">Add Deploy Stage</h1>
 <p>Add the Deploy Stage into your pipeline.</p>
-<p><img src="../images/pipeline_deploy_stage.png" width="900" /></p>
+<img src="../images/pipeline_deploy_stage.png" width="900" />
 <p>If the deployment config for the application already exists in the Stage Project or Environment the deployment config , service, and route are deleted.  This allows for the pipeline to be rerun.</p>
 <p>The new-app is recreated in the Stage Environment from the image that you tagged in the previous stage.  The image also has a route created for with the svc.expose command.</p>
 <br>
 # Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
+<img src="../images/pipeline_actions_edit.png" width="900" />
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre><code>    stage('Deploy STAGE') {
+<pre tabindex="0"><code>    stage(&#39;Deploy STAGE&#39;) {
       steps {
         script {
           openshift.withCluster() {
             openshift.withProject(env.STAGE_PROJECT) {
-              if (openshift.selector('dc', 'tasks').exists()) {
-                openshift.selector('dc', 'tasks').delete()
-                openshift.selector('svc', 'tasks').delete()
-                openshift.selector('route', 'tasks').delete()
+              if (openshift.selector(&#39;dc&#39;, &#39;tasks&#39;).exists()) {
+                openshift.selector(&#39;dc&#39;, &#39;tasks&#39;).delete()
+                openshift.selector(&#39;svc&#39;, &#39;tasks&#39;).delete()
+                openshift.selector(&#39;route&#39;, &#39;tasks&#39;).delete()
               }
 
-              openshift.newApp(&quot;tasks:${version}&quot;).narrow(&quot;svc&quot;).expose()
+              openshift.newApp(&#34;tasks:${version}&#34;).narrow(&#34;svc&#34;).expose()
             }
           }
         }
@@ -468,7 +468,7 @@
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -728,7 +728,7 @@
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -840,7 +840,7 @@
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -850,7 +850,7 @@
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -933,7 +933,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

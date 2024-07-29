@@ -321,7 +321,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="/workshops/security_containers/images/file.png" alt="file">
+<img src="/workshops/security_containers/images/file.png" alt="file"/>
 </div>
 </div>
 </div>
@@ -336,7 +336,7 @@
 <h2 id="_exercise_description">Exercise Description</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you&#8217;ve gotten a sense of how Cockpit works, we are going to start
+<p>Now that you’ve gotten a sense of how Cockpit works, we are going to start
 digging in at the command line on Container security. You can use either the
 Terminal in Cockpit from your browser, a SSH terminal or Terminal client like
 PuTTy. The choice is yours.</p>
@@ -380,18 +380,18 @@ verifying downloads. For example, this Dockerfile snippet fro the official Node.
                         114F43EE0176B71C7BC219DD50A3051F888C628D
 ENV NODE_VERSION 0.10.38
 ENV NPM_VERSION 2.10.0
-RUN curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/node-v\
-$NODE_VERSION-linux-x64.tar.gz" \ <i class="conum" data-value="2"></i><b>(2)</b>
-&amp;&amp; curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/\
-SHASUMS256.txt.asc" \ <i class="conum" data-value="3"></i><b>(3)</b>
+RUN curl -SLO &#34;http://nodejs.org/dist/v$NODE_VERSION/node-v\
+$NODE_VERSION-linux-x64.tar.gz&#34; \ <i class="conum" data-value="2"></i><b>(2)</b>
+&amp;&amp; curl -SLO &#34;http://nodejs.org/dist/v$NODE_VERSION/\
+SHASUMS256.txt.asc&#34; \ <i class="conum" data-value="3"></i><b>(3)</b>
 &amp;&amp; gpg --verify SHASUMS256.txt.asc \ <i class="conum" data-value="4"></i><b>(4)</b>
-&amp;&amp; grep " node-v$NODE_VERSION-linux-x64.tar.gz\$" \
+&amp;&amp; grep &#34; node-v$NODE_VERSION-linux-x64.tar.gz\$&#34; \
             SHASUMS256.txt.asc | sha256sum -c - <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Gets the GNU Privacy Guard (GPG) keys used to sign the Node.js download.
 Here, we do have to trust that these are the correct keys. Downloads the
@@ -415,7 +415,7 @@ the checksum matches the tarball by using the sha256sum tool.</td>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
 <td>Tests that the checksum matches the tarball by using the sha256sum tool.</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -465,7 +465,7 @@ new file called <code>Dockerfile</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -474,7 +474,7 @@ Copy the text below. Type <code>vim Dockerfile</code>, Press <code>i</code> for 
 paste <code>control + v</code>, then escape and write the file <code>esc</code>, <code>:wq</code>.
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="title">Dockerfile Redis with verified software download</div>
@@ -485,7 +485,7 @@ paste <code>control + v</code>, then escape and write the file <code>esc</code>,
 RUN cd /tmp &amp;&amp; \
     curl -sSL -o redis.tar.gz \
     http://download.redis.io/releases/redis-5.0.1.tar.gz &amp;&amp; \
-    echo "32a3accc9ac63896eeb7a3bf27ab667b095ba30a *redis.tar.gz" | sha1sum -c -
+    echo &#34;32a3accc9ac63896eeb7a3bf27ab667b095ba30a *redis.tar.gz&#34; | sha1sum -c -
 
 RUN cd /tmp &amp;&amp; \
     tar xvzf redis.tar.gz &amp;&amp; \
@@ -497,19 +497,19 @@ RUN cd /tmp &amp;&amp; \
     mkdir -p /etc/redis &amp;&amp; \
     cp -f *.conf /etc/redis &amp;&amp; \
     rm -rf /tmp/redis-5.0.1* &amp;&amp; \
-    sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf &amp;&amp; \
-    sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf &amp;&amp; \
-    sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf &amp;&amp; \
-    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
+    sed -i &#39;s/^\(bind .*\)$/# \1/&#39; /etc/redis/redis.conf &amp;&amp; \
+    sed -i &#39;s/^\(daemonize .*\)$/# \1/&#39; /etc/redis/redis.conf &amp;&amp; \
+    sed -i &#39;s/^\(dir .*\)$/# \1\ndir \/data/&#39; /etc/redis/redis.conf &amp;&amp; \
+    sed -i &#39;s/^\(logfile .*\)$/# \1/&#39; /etc/redis/redis.conf
 
 # Define mountable directories.
-VOLUME ["/data"]
+VOLUME [&#34;/data&#34;]
 
 # Define working directory.
 WORKDIR /data
 
 # Define default command.
-CMD ["redis-server", "/etc/redis/redis.conf"]
+CMD [&#34;redis-server&#34;, &#34;/etc/redis/redis.conf&#34;]
 
 # Expose ports.
 EXPOSE 6379</code></pre>
@@ -565,14 +565,14 @@ Storing signatures
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapseccec3b3573a222f5c9def6a9e7ea9d85" class="collapsed">
+      <a data-toggle="collapse" href="#collapsefa4bd49e2de4d901afa54df4c8a97656" class="collapsed">
       
         Result
       </a>
     </h4>
   </div>
   
-  <div id="collapseccec3b3573a222f5c9def6a9e7ea9d85" class="panel-collapse collapse ">
+  <div id="collapsefa4bd49e2de4d901afa54df4c8a97656" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <div class="paragraph">
@@ -587,30 +587,30 @@ Storing signatures
 11:C 10 Nov 2018 16:53:04.041 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/re
 dis.conf
                 _._
-           _.-``__ ''-._
-      _.-``    `.  `_.  ''-._           Redis 5.0.1 (00000000/0) 64 bit
-  .-`` .-```.  ```\/    _.,_ ''-._
- (    '      ,       .-`  | `,    )     Running in standalone mode
- |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
- |    `-._   `._    /     _.-'    |     PID: 11
-  `-._    `-._  `-./  _.-'    _.-'
- |`-._`-._    `-.__.-'    _.-'_.-'|
- |    `-._`-._        _.-'_.-'    |           http://redis.io
-  `-._    `-._`-.__.-'_.-'    _.-'
- |`-._`-._    `-.__.-'    _.-'_.-'|
- |    `-._`-._        _.-'_.-'    |
-  `-._    `-._`-.__.-'_.-'    _.-'
-      `-._    `-.__.-'    _.-'
-          `-._        _.-'
-              `-.__.-'
+           _.-``__ &#39;&#39;-._
+      _.-``    `.  `_.  &#39;&#39;-._           Redis 5.0.1 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ &#39;&#39;-._
+ (    &#39;      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|&#39;` _.-&#39;|     Port: 6379
+ |    `-._   `._    /     _.-&#39;    |     PID: 11
+  `-._    `-._  `-./  _.-&#39;    _.-&#39;
+ |`-._`-._    `-.__.-&#39;    _.-&#39;_.-&#39;|
+ |    `-._`-._        _.-&#39;_.-&#39;    |           http://redis.io
+  `-._    `-._`-.__.-&#39;_.-&#39;    _.-&#39;
+ |`-._`-._    `-.__.-&#39;    _.-&#39;_.-&#39;|
+ |    `-._`-._        _.-&#39;_.-&#39;    |
+  `-._    `-._`-.__.-&#39;_.-&#39;    _.-&#39;
+      `-._    `-.__.-&#39;    _.-&#39;
+          `-._        _.-&#39;
+              `-.__.-&#39;
 
 11:M 10 Nov 2018 16:53:04.043 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value o
 f 128.
 11:M 10 Nov 2018 16:53:04.043 # Server initialized
-11:M 10 Nov 2018 16:53:04.043 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overc
-ommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+11:M 10 Nov 2018 16:53:04.043 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add &#39;vm.overc
+ommit_memory = 1&#39; to /etc/sysctl.conf and then reboot or run the command &#39;sysctl vm.overcommit_memory=1&#39; for this to take effect.
 11:M 10 Nov 2018 16:53:04.043 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage iss
-ues with Redis. To fix this issue run the command 'echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in o
+ues with Redis. To fix this issue run the command &#39;echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled&#39; as root, and add it to your /etc/rc.local in o
 rder to retain the setting after a reboot. Redis must be restarted after THP is disabled.
 11:M 10 Nov 2018 16:53:04.043 * Ready to accept connections</code></pre>
 </div>
@@ -736,7 +736,7 @@ rder to retain the setting after a reboot. Redis must be restarted after THP is 
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -996,7 +996,7 @@ rder to retain the setting after a reboot. Redis must be restarted after THP is 
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -1108,7 +1108,7 @@ rder to retain the setting after a reboot. Redis must be restarted after THP is 
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1118,7 +1118,7 @@ rder to retain the setting after a reboot. Redis must be restarted after THP is 
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1204,7 +1204,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

@@ -328,9 +328,9 @@
 <i class="fa fa-terminal"></i>
 View the destination rule in your favorite editor or via bash:
 </blockquote>
-<pre><code>cat ./istio-configuration/destinationrule-circuitbreaking.yaml
+<pre tabindex="0"><code>cat ./istio-configuration/destinationrule-circuitbreaking.yaml
 </code></pre><p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>...
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL
@@ -349,24 +349,24 @@ View the destination rule in your favorite editor or via bash:
 <i class="fa fa-terminal"></i>
 Deploy this circuit breaking rule:
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/destinationrule-circuitbreaking.yaml
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/destinationrule-circuitbreaking.yaml
 </code></pre><br>
 <h2 id="trip-the-circuit-breaker">Trip the Circuit Breaker</h2>
 <blockquote>
 <i class="fa fa-terminal"></i>
 First, route traffic evenly between v1 and v3 of the user profile service.
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-50-50.yaml
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Send load to the user profile service:
 </blockquote>
-<pre><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre tabindex="0"><code>while true; do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 In another tab in terminal, kill the server running version 3 of the user profile service:
 </blockquote>
-<pre><code>USERPROFILE_POD=$(oc get pod -l deploymentconfig=userprofile,version=3.0 -o jsonpath='{.items[0].metadata.name}')
+<pre tabindex="0"><code>USERPROFILE_POD=$(oc get pod -l deploymentconfig=userprofile,version=3.0 -o jsonpath=&#39;{.items[0].metadata.name}&#39;)
 oc exec $USERPROFILE_POD -- kill 1
 </code></pre><br>
 <p>Inspect the change in Kiali.</p>
@@ -390,7 +390,7 @@ Switch to the 'Versioned app graph' view and change to 'Last 1m'.  Change the 'N
 <i class="fa fa-terminal"></i>
 Revert the changes you made before ending this lab.
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/destinationrules-all.yaml
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/destinationrules-all.yaml
 </code></pre><br>
 <h2 id="summary">Summary</h2>
 <p>Congratulations, you configured circuit breaking in Istio!</p>
@@ -498,7 +498,7 @@ Revert the changes you made before ending this lab.
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -758,7 +758,7 @@ Revert the changes you made before ending this lab.
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -870,7 +870,7 @@ Revert the changes you made before ending this lab.
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -880,7 +880,7 @@ Revert the changes you made before ending this lab.
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -963,7 +963,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

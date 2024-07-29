@@ -326,21 +326,21 @@
 <i class="fa fa-terminal"></i>
 Send load to the application user interface:
 </blockquote>
-<pre><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL; done
+<pre tabindex="0"><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL; done
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Send load to the user profile service:
 </blockquote>
-<pre><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre tabindex="0"><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><br>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Now let's open the Kiali console.  Retrieve the endpoint for Kiali:
 </blockquote>
-<pre><code>KIALI_CONSOLE=$(oc get route kiali -n istio-system --template='https://{{.spec.host}}')
+<pre tabindex="0"><code>KIALI_CONSOLE=$(oc get route kiali -n istio-system --template=&#39;https://{{.spec.host}}&#39;)
 echo $KIALI_CONSOLE
 </code></pre><p>Output:</p>
-<pre><code>https://kiali-istio-system.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/
+<pre tabindex="0"><code>https://kiali-istio-system.apps.<span class="prefix">example</span>.<span class="domain">redhatgov.io</span>/
 </code></pre><br>
 <blockquote>
 <i class="fa fa-desktop"></i>
@@ -495,7 +495,7 @@ Navigate to the 'Traffic' tab and you should see the inbound and outbound calls 
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -755,7 +755,7 @@ Navigate to the 'Traffic' tab and you should see the inbound and outbound calls 
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -867,7 +867,7 @@ Navigate to the 'Traffic' tab and you should see the inbound and outbound calls 
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -877,7 +877,7 @@ Navigate to the 'Traffic' tab and you should see the inbound and outbound calls 
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -960,7 +960,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

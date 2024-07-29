@@ -331,20 +331,20 @@
 <div class="sect2">
 <h3 id="_step_1_check_for_avc_denials">Step 1: Check for AVC denials</h3>
 <div class="paragraph">
-<p>Let&#8217;s restart our app, to get an updated list of denials.</p>
+<p>Let’s restart our app, to get an updated list of denials.</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl restart testapp</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl restart testapp</span></span></code></pre></div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s start with one of the denials that will be present in the audit search results, related to connecting on TCP port 80:</p>
+<p>Let’s start with one of the denials that will be present in the audit search results, related to connecting on TCP port 80:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ausearch -m AVC -ts recent | grep <span style="color:#e6db74">&#39;dest=80&#39;</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m AVC -ts recent | grep <span style="color:#e6db74">&#39;dest=80&#39;</span></span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1553181380.518:2594): avc:  denied  { name_connect } for  pid=31221 comm="testapp" dest=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:http_port_t:s0 tclass=tcp_socket permissive=1</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1553181380.518:2594): avc:  denied  { name_connect } for  pid=31221 comm=&#34;testapp&#34; dest=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:object_r:http_port_t:s0 tclass=tcp_socket permissive=1</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -354,10 +354,10 @@
 <div class="sect2">
 <h3 id="_step_2_interpret_avc_messages">Step 2: Interpret AVC messages</h3>
 <div class="paragraph">
-<p>In the message above, you can see that the system has attempted to connect to a remote host on port 80.  This is something that we want to allow.  So, let&#8217;s search for an interface that would allow this kind of connection.  Since networking is controlled by the kernel, we will search in the kernel directory for interface files related to networking:</p>
+<p>In the message above, you can see that the system has attempted to connect to a remote host on port 80.  This is something that we want to allow.  So, let’s search for an interface that would allow this kind of connection.  Since networking is controlled by the kernel, we will search in the kernel directory for interface files related to networking:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls /usr/share/selinux/devel/include/kernel/*.if | grep net</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls /usr/share/selinux/devel/include/kernel/*.if | grep net</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -366,7 +366,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Since this isn&#8217;t an unlabeled network, let&#8217;s look in <code>corenetwork.if</code>.  Since this is a <code>name_connect</code> action, let&#8217;s look for connect and http.  Using those criteria, we find:</p>
+<p>Since this isn’t an unlabeled network, let’s look in <code>corenetwork.if</code>.  Since this is a <code>name_connect</code> action, let’s look for connect and http.  Using those criteria, we find:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -374,19 +374,19 @@
 ## &lt;summary&gt;
 ##      Make a TCP connection to the http port.
 ## &lt;/summary&gt;
-## &lt;param name="domain"&gt;
+## &lt;param name=&#34;domain&#34;&gt;
 ##      &lt;summary&gt;
 ##      Domain allowed access.
 ##      &lt;/summary&gt;
 ## &lt;/param&gt;
 #
-interface(`corenet_tcp_connect_http_port',`
+interface(`corenet_tcp_connect_http_port&#39;,`
         gen_require(`
                 type http_port_t;
-        ')
+        &#39;)
 
         allow $1 http_port_t:tcp_socket name_connect;
-')</code></pre>
+&#39;)</code></pre>
 </div>
 </div>
 </div>
@@ -404,15 +404,15 @@ interface(`corenet_tcp_connect_http_port',`
 <p>And compile your policy, and restart the service:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ./testapp.sh
-sudo systemctl restart testapp</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ./testapp.sh
+</span></span><span style="display:flex;"><span>sudo systemctl restart testapp</span></span></code></pre></div>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;and last, check to see if there is still an AVC denial:</p>
+<p>…​and last, check to see if there is still an AVC denial:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl restart testapp
-sudo ausearch -m AVC -ts recent | grep <span style="color:#e6db74">&#39;dest=80&#39;</span> | wc -l</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl restart testapp
+</span></span><span style="display:flex;"><span>sudo ausearch -m AVC -ts recent | grep <span style="color:#e6db74">&#39;dest=80&#39;</span> | wc -l</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -421,6 +421,12 @@ sudo ausearch -m AVC -ts recent | grep <span style="color:#e6db74">&#39;dest=80&
 </div>
 <div class="paragraph">
 <p>Yes!  Another AVC denial fixed.</p>
+</div>
+<div class="paragraph">
+<p>If you <code>ausearch</code> still shows AVCs above, you can alternatively limit the query to the testapp’s current PID; this should confirm the policy is in effect:</p>
+</div>
+<div class="paragraph">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m AVC -ts recent -p <span style="color:#66d9ef">$(</span>systemctl show testapp --property<span style="color:#f92672">=</span>MainPID | cut -d<span style="color:#f92672">=</span> -f2<span style="color:#66d9ef">)</span> | grep <span style="color:#e6db74">&#39;dest=80&#39;</span> | wc -l</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -431,37 +437,37 @@ sudo ausearch -m AVC -ts recent | grep <span style="color:#e6db74">&#39;dest=80&
 <div class="sect2">
 <h3 id="_step_1_take_a_shortcut">Step 1: Take a Shortcut!</h3>
 <div class="paragraph">
-<p>Now, we&#8217;re going to move on, temporarily, from interfaces to allow/deny settings, in the <code>testapp.te</code> file.  We have several AVC denials around TCP and UDP socket system calls, that SELinux is blocking.</p>
+<p>Now, we’re going to move on, temporarily, from interfaces to allow/deny settings, in the <code>testapp.te</code> file.  We have several AVC denials around TCP and UDP socket system calls, that SELinux is blocking.</p>
 </div>
 <div class="paragraph">
 <p>The AVCs in question are here (there will likely be more, on your host, but they are all in the same sategory):</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ausearch -m AVC -ts recent | egrep <span style="color:#e6db74">&#39;tcp|udp&#39;</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m AVC -ts recent | egrep <span style="color:#e6db74">&#39;tcp|udp&#39;</span></span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1553190979.189:2931): avc:  denied  { create } for  pid=2042 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
-type=AVC msg=audit(1553190979.189:2932): avc:  denied  { connect } for  pid=2042 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
-type=AVC msg=audit(1553190979.379:2933): avc:  denied  { getopt } for  pid=2042 comm="testapp" laddr=10.0.2.5 lport=60848 faddr=5.9.243.187 fport=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
-type=AVC msg=audit(1553190979.379:2934): avc:  denied  { getattr } for  pid=2042 comm="testapp" laddr=10.0.2.5 lport=60848 faddr=5.9.243.187 fport=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
-type=AVC msg=audit(1553191083.531:2965): avc:  denied  { create } for  pid=2042 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
-type=AVC msg=audit(1553191083.531:2966): avc:  denied  { connect } for  pid=2042 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
-type=AVC msg=audit(1553191083.548:2967): avc:  denied  { getattr } for  pid=2042 comm="testapp" path="socket:[314409]" dev="sockfs" ino=314409 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1553190979.189:2931): avc:  denied  { create } for  pid=2042 comm=&#34;testapp&#34; scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
+type=AVC msg=audit(1553190979.189:2932): avc:  denied  { connect } for  pid=2042 comm=&#34;testapp&#34; scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
+type=AVC msg=audit(1553190979.379:2933): avc:  denied  { getopt } for  pid=2042 comm=&#34;testapp&#34; laddr=10.0.2.5 lport=60848 faddr=5.9.243.187 fport=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
+type=AVC msg=audit(1553190979.379:2934): avc:  denied  { getattr } for  pid=2042 comm=&#34;testapp&#34; laddr=10.0.2.5 lport=60848 faddr=5.9.243.187 fport=80 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=tcp_socket permissive=1
+type=AVC msg=audit(1553191083.531:2965): avc:  denied  { create } for  pid=2042 comm=&#34;testapp&#34; scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
+type=AVC msg=audit(1553191083.531:2966): avc:  denied  { connect } for  pid=2042 comm=&#34;testapp&#34; scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
+type=AVC msg=audit(1553191083.548:2967): avc:  denied  { getattr } for  pid=2042 comm=&#34;testapp&#34; path=&#34;socket:[314409]&#34; dev=&#34;sockfs&#34; ino=314409 scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_2_let_audit2why_interpret_for_you">Step 2: Let <code>audit2why</code> interpret for you</h3>
 <div class="paragraph">
-<p>Next, let&#8217;s ask the system to convert an AVC to English, for us:</p>
+<p>Next, let’s ask the system to convert an AVC to English, for us:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ausearch -m AVC | egrep <span style="color:#e6db74">&#39;udp&#39;</span> | head -1 | audit2why</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m AVC | egrep <span style="color:#e6db74">&#39;udp&#39;</span> | head -1 | audit2why</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1553112150.906:909): avc:  denied  { create } for  pid=9772 comm="testapp" scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
+<pre class="highlight"><code class="language-bash" data-lang="bash">type=AVC msg=audit(1553112150.906:909): avc:  denied  { create } for  pid=9772 comm=&#34;testapp&#34; scontext=system_u:system_r:testapp_t:s0 tcontext=system_u:system_r:testapp_t:s0 tclass=udp_socket permissive=1
 
 	Was caused by:
 		Missing type enforcement (TE) allow rule.
@@ -470,16 +476,16 @@ type=AVC msg=audit(1553191083.548:2967): avc:  denied  { getattr } for  pid=2042
 </div>
 </div>
 <div class="paragraph">
-<p>You can see that, in this case, <code>audit2why</code> wasn&#8217;t significantly helpful, other than telling us that we need to add a new <code>allow</code> statement to our <code>testapp.te</code> file.</p>
+<p>You can see that, in this case, <code>audit2why</code> wasn’t significantly helpful, other than telling us that we need to add a new <code>allow</code> statement to our <code>testapp.te</code> file.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_3_use_audit2allow_to_suggest_changes">Step 3: Use <code>audit2allow</code> to suggest changes</h3>
 <div class="paragraph">
-<p>So, now we&#8217;ll take the advice that <code>audit2why</code> gave us, and let <code>audit2allow</code> generate some policy allow statements.  You always have to be careful with <code>audit2allow</code>, since it will generate rules for anything that you feed it, and won&#8217;t necessarily pick the most optimal solution.</p>
+<p>So, now we’ll take the advice that <code>audit2why</code> gave us, and let <code>audit2allow</code> generate some policy allow statements.  You always have to be careful with <code>audit2allow</code>, since it will generate rules for anything that you feed it, and won’t necessarily pick the most optimal solution.</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ausearch -m AVC -ts recent | egrep <span style="color:#e6db74">&#39;tcp|udp&#39;</span> | audit2allow</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m AVC -ts recent | egrep <span style="color:#e6db74">&#39;tcp|udp&#39;</span> | audit2allow</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -495,7 +501,7 @@ allow testapp_t self:udp_socket { connect create getattr setopt };</code></pre>
 <p>The file should now look like this:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat ~/src/policy/testapp.te</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat ~/src/policy/testapp.te</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -544,31 +550,31 @@ miscfiles_read_localization(testapp_t)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Keeping things in alphabetic order doesn&#8217;t make any difference to SELinux, but makes the file easier to read.</p>
+<p>Keeping things in alphabetic order doesn’t make any difference to SELinux, but makes the file easier to read.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_4_recompile_and_reload_the_policy">Step 4: Recompile and reload the policy</h3>
 <div class="paragraph">
-<p>Now, let&#8217;s recompile the policy, and reload it into memory.</p>
+<p>Now, let’s recompile the policy, and reload it into memory.</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ./testapp.sh</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ./testapp.sh</span></span></code></pre></div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_step_5_restart_the_application">Step 5: Restart the application</h3>
 <div class="paragraph">
-<p>To see if that fixed the problem, let&#8217;s restart the application:</p>
+<p>To see if that fixed the problem, let’s restart the application:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl restart testapp</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl restart testapp</span></span></code></pre></div>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;and see if there are any AVC messages about TCP or UDP:</p>
+<p>…​and see if there are any AVC messages about TCP or UDP:</p>
 </div>
 <div class="paragraph">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ausearch -m AVC -ts recent | egrep <span style="color:#e6db74">&#39;tcp|udp&#39;</span> | wc -l</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m AVC -ts recent -p <span style="color:#66d9ef">$(</span>systemctl show testapp --property<span style="color:#f92672">=</span>MainPID | cut -d<span style="color:#f92672">=</span> -f2<span style="color:#66d9ef">)</span> | egrep <span style="color:#e6db74">&#39;tcp|udp&#39;</span> | wc -l</span></span></code></pre></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -585,7 +591,7 @@ miscfiles_read_localization(testapp_t)</code></pre>
 <h2 id="_end_result">End Result</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>At this point, we&#8217;re down to only a few more AVC denials to handle.  Hopefully, you&#8217;re getting a handle on how to find appropriate interfaces and allow rules, for SELinux.</p>
+<p>At this point, we’re down to only a few more AVC denials to handle.  Hopefully, you’re getting a handle on how to find appropriate interfaces and allow rules, for SELinux.</p>
 </div>
 <div class="paragraph">
 <style>
@@ -687,7 +693,7 @@ miscfiles_read_localization(testapp_t)</code></pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -947,7 +953,7 @@ miscfiles_read_localization(testapp_t)</code></pre>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -1059,7 +1065,7 @@ miscfiles_read_localization(testapp_t)</code></pre>
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -1069,7 +1075,7 @@ miscfiles_read_localization(testapp_t)</code></pre>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1155,7 +1161,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

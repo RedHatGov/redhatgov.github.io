@@ -334,19 +334,17 @@
 <blockquote>
 <p>Navigate to Network -&gt; Security Groups using the second level navigation tabs</p>
 </blockquote>
-<figure>
-    <img src="../images/lab4-security-groups-1.png"/> <figcaption>
-            <h4>Lab 4 Figure 1: Security Group Listing</h4>
-        </figcaption>
+<figure><img src="../images/lab4-security-groups-1.png"><figcaption>
+      <h4>Lab 4 Figure 1: Security Group Listing</h4>
+    </figcaption>
 </figure>
 
 <blockquote>
 <p>Click <strong>Manage Rules</strong> on the right hand side of the row for default security group</p>
 </blockquote>
-<figure>
-    <img src="../images/lab4-security-groups-2.png"/> <figcaption>
-            <h4>Lab 4 Figure 2: Viewing Rules for default Security Group</h4>
-        </figcaption>
+<figure><img src="../images/lab4-security-groups-2.png"><figcaption>
+      <h4>Lab 4 Figure 2: Viewing Rules for default Security Group</h4>
+    </figcaption>
 </figure>
 
 <h2 id="now-lets-add-two-rules-to-the-default-security-group-for-icmp-and-ssh">Now Let&rsquo;s Add Two Rules to the default Security Group for ICMP and SSH</h2>
@@ -358,10 +356,9 @@ Leave <strong>Remote</strong> set to <strong>CIDR</strong>
 Enter <strong>192.168.0.0/23</strong> for <strong>CIDR</strong> (this is our external network)<br>
 Click <strong>Add</strong></p>
 </blockquote>
-<figure>
-    <img src="../images/lab4-security-groups-3.png"/> <figcaption>
-            <h4>Lab 4 Figure 3: Add ICMP Rule to default Security Group</h4>
-        </figcaption>
+<figure><img src="../images/lab4-security-groups-3.png"><figcaption>
+      <h4>Lab 4 Figure 3: Add ICMP Rule to default Security Group</h4>
+    </figcaption>
 </figure>
 
 <div class="alert alert-success">
@@ -376,10 +373,9 @@ Leave <strong>Remote</strong> set to <strong>CIDR</strong>
 Enter <strong>192.168.0.0/23</strong> for <strong>CIDR</strong> (this is our external network)<br>
 Click <strong>Add</strong></p>
 </blockquote>
-<figure>
-    <img src="../images/lab4-security-groups-4.png"/> <figcaption>
-            <h4>Lab 4 Figure 4: Add SSH Rule to default Security Group</h4>
-        </figcaption>
+<figure><img src="../images/lab4-security-groups-4.png"><figcaption>
+      <h4>Lab 4 Figure 4: Add SSH Rule to default Security Group</h4>
+    </figcaption>
 </figure>
 
 <div class="alert alert-success">
@@ -388,20 +384,18 @@ Click <strong>Add</strong></p>
 <p>If you did not see a success message, let the intstructor know now</p>
 </div>
 <p>If we now look at the Manage Rules screen for the default security group, we will see our two new rules for ICMP and SSH ingress traffic allowed only from 192.168.0.0/23 CIDR.</p>
-<figure>
-    <img src="../images/lab4-security-groups-5.png"/> <figcaption>
-            <h4>Lab 4 Figure 5: Manage Rules Screen Showing Two New Rules for ICMP and SSH in the default Security Group</h4>
-        </figcaption>
+<figure><img src="../images/lab4-security-groups-5.png"><figcaption>
+      <h4>Lab 4 Figure 5: Manage Rules Screen Showing Two New Rules for ICMP and SSH in the default Security Group</h4>
+    </figcaption>
 </figure>
 
 <h1 id="now-we-will-create-a-new-security-group-for-web-servers">Now We will Create a New Security Group for Web Servers</h1>
 <blockquote>
 <p>Navigate to Network -&gt; Security Groups using the second level navigation tabs</p>
 </blockquote>
-<figure>
-    <img src="../images/lab4-security-groups-1.png"/> <figcaption>
-            <h4>Lab 4 Figure 1: Security Group Listing</h4>
-        </figcaption>
+<figure><img src="../images/lab4-security-groups-1.png"><figcaption>
+      <h4>Lab 4 Figure 1: Security Group Listing</h4>
+    </figcaption>
 </figure>
 
 <blockquote>
@@ -410,10 +404,9 @@ Enter <strong>web-server</strong> for the <strong>Name</strong><br>
 <strong>Description</strong> is optional, but as you can see below, I used it to describe the purpose of this security group<br>
 Click <strong>Create Security Group</strong></p>
 </blockquote>
-<figure>
-    <img src="../images/lab4-security-groups-6.png"/> <figcaption>
-            <h4>Lab 4 Figure 6: Create a New Security Group</h4>
-        </figcaption>
+<figure><img src="../images/lab4-security-groups-6.png"><figcaption>
+      <h4>Lab 4 Figure 6: Create a New Security Group</h4>
+    </figcaption>
 </figure>
 
 <div class="alert alert-success">
@@ -421,10 +414,9 @@ Click <strong>Create Security Group</strong></p>
 <p>You should see a green box appear in the upper right corner of the screen that says &ldquo;Success: Successfully created security group: web-server&rdquo;</p>
 <p>If you did not see a success message, let the intstructor know now</p>
 </div>
-<figure>
-    <img src="../images/lab4-security-groups-7.png"/> <figcaption>
-            <h4>Lab 4 Figure 7: Security Group Listing Showing New web-server Group</h4>
-        </figcaption>
+<figure><img src="../images/lab4-security-groups-7.png"><figcaption>
+      <h4>Lab 4 Figure 7: Security Group Listing Showing New web-server Group</h4>
+    </figcaption>
 </figure>
 
 <h2 id="now-lets-add-two-rules-to-the-web-server-security-group-for-http-and-https">Now Let&rsquo;s Add Two Rules to the web-server Security Group for HTTP and HTTPS</h2>
@@ -436,10 +428,9 @@ Leave <strong>Remote</strong> set to <strong>CIDR</strong>
 Leave <strong>0.0.0.0/0</strong> for <strong>CIDR</strong><br>
 Click <strong>Add</strong></p>
 </blockquote>
-<figure>
-    <img src="../images/lab4-security-groups-8.png"/> <figcaption>
-            <h4>Lab 4 Figure 8: Add HTTP Rule to web-server Security Group</h4>
-        </figcaption>
+<figure><img src="../images/lab4-security-groups-8.png"><figcaption>
+      <h4>Lab 4 Figure 8: Add HTTP Rule to web-server Security Group</h4>
+    </figcaption>
 </figure>
 
 <div class="alert alert-success">
@@ -454,10 +445,9 @@ Leave <strong>Remote</strong> set to <strong>CIDR</strong>
 Enter <strong>0.0.0.0/0</strong> for <strong>CIDR</strong> <br>
 Click <strong>Add</strong></p>
 </blockquote>
-<figure>
-    <img src="../images/lab4-security-groups-9.png"/> <figcaption>
-            <h4>Lab 4 Figure 9: Add HTTPS Rule to web-server Security Group</h4>
-        </figcaption>
+<figure><img src="../images/lab4-security-groups-9.png"><figcaption>
+      <h4>Lab 4 Figure 9: Add HTTPS Rule to web-server Security Group</h4>
+    </figcaption>
 </figure>
 
 <div class="alert alert-success">
@@ -466,10 +456,9 @@ Click <strong>Add</strong></p>
 <p>If you did not see a success message, let the intstructor know now</p>
 </div>
 <p>If we now look at the Manage Rules screen for the web-server security group, we will see our two new rules for HTTP and HTTPS ingress traffic allowed from all sources.</p>
-<figure>
-    <img src="../images/lab4-security-groups-10.png"/> <figcaption>
-            <h4>Lab 4 Figure 10: Manage Rules Screen Showing Two New Rules for HTTP and HTTPS in the web-server Security Group</h4>
-        </figcaption>
+<figure><img src="../images/lab4-security-groups-10.png"><figcaption>
+      <h4>Lab 4 Figure 10: Manage Rules Screen Showing Two New Rules for HTTP and HTTPS in the web-server Security Group</h4>
+    </figcaption>
 </figure>
 
 <h1 id="summary">Summary</h1>
@@ -485,7 +474,7 @@ Click <strong>Add</strong></p>
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -555,7 +544,7 @@ Click <strong>Add</strong></p>
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -621,7 +610,7 @@ Click <strong>Add</strong></p>
 
     return false;
   });
--->
+
 </script>
 
 
@@ -664,7 +653,7 @@ Click <strong>Add</strong></p>
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

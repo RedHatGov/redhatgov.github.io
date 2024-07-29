@@ -321,21 +321,21 @@
 <p>When implementing continuous delivery for your software one very useful technique is called Blue/Green deployments.  It addresses the desire to minimize downtime during the release of a new version of an application to production.  Essentially, it involves running two production versions of your app side-by-side and then switching the routing from the last stable version to the new version once it is verified.  Using OpenShift, this can be very seamless because using containers we can easily and rapidly deploy a duplicate infrastructure to support alternate versions and modify routes as a service.  In this lab, we will walk through a simple Blue/Green workflow with an simple web application on OpenShift.</p>
 <h2 id="before-starting">Before starting</h2>
 <p>Before we get started with the Blue/Green deployment lab, lets clean up some of the projects from the previous lab.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc delete all -l app<span style="color:#f92672">=</span>jenkins-ephemeral
-$ oc delete all -l app<span style="color:#f92672">=</span>nodejs-helloworld-sample
-$ oc delete project cicd-<span class="userid">YOUR#</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc delete all -l app<span style="color:#f92672">=</span>jenkins-ephemeral
+</span></span><span style="display:flex;"><span>$ oc delete all -l app<span style="color:#f92672">=</span>nodejs-helloworld-sample
+</span></span><span style="display:flex;"><span>$ oc delete project cicd-<span class="userid">YOUR#</span>
 
-</code></pre></div><h2 id="lets-deploy-an-application">Lets deploy an application</h2>
+</span></span></code></pre></div><h2 id="lets-deploy-an-application">Lets deploy an application</h2>
 <p>To demonstrate Blue/Green deployments, we&rsquo;ll use a simple application that renders a colored box as an example. Using your GitHub account, please fork the following <a href="https://github.com/RedHatGov/openshift-workshops">https://github.com/RedHatGov/openshift-workshops</a> <a href="https://github.com/RedHatGov/openshift-workshops">project</a>.</p>
 <p>You should be comfortable deploying an app at this point, but here are the steps anyway:</p>
 <blockquote>
 <p><i class="fa fa-terminal"></i> Goto the terminal and type these commands:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-project bluegreen-<span class="userid">YOUR#</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc new-project bluegreen-<span class="userid">YOUR#</span>
 
-$ oc new-app --name<span style="color:#f92672">=</span>green <span style="color:#f92672">[</span>your-project-repo-url<span style="color:#f92672">]</span> --context-dir<span style="color:#f92672">=</span>dc-metro-map
-$ oc expose service green
-</code></pre></div><p>Note that we exposed this application using a route named &ldquo;green&rdquo;. Wait for the application to become available, then navigate to your application and validate it deployed correctly.</p>
+</span></span><span style="display:flex;"><span>$ oc new-app --name<span style="color:#f92672">=</span>green <span style="color:#f92672">[</span>your-project-repo-url<span style="color:#f92672">]</span> --context-dir<span style="color:#f92672">=</span>dc-metro-map
+</span></span><span style="display:flex;"><span>$ oc expose service green
+</span></span></code></pre></div><p>Note that we exposed this application using a route named &ldquo;green&rdquo;. Wait for the application to become available, then navigate to your application and validate it deployed correctly.</p>
 <h2 id="release-a-new-version-of-our-app-and-test-it-in-the-same-environment">Release a new version of our app and test it in the same environment</h2>
 <p>What we&rsquo;ll do next is create a new version of the application called &ldquo;blue&rdquo;. The quickest way to make a change to the code is directly in the GitHub web interface. In GitHub, edit the dc-metro-map/views/dcmetro.jade file in your repo.</p>
 <p><img src="../images/ocp-lab-bluegreen-editgithub.png" width="900"><br/></p>
@@ -344,8 +344,8 @@ $ oc expose service green
 <blockquote>
 <p><i class="fa fa-terminal"></i> Goto the terminal and type these commands:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc new-app --name<span style="color:#f92672">=</span>blue <span style="color:#f92672">[</span>your-project-repo-url<span style="color:#f92672">]</span> --context-dir<span style="color:#f92672">=</span>dc-metro-map
-</code></pre></div><p>Wait for the &ldquo;blue&rdquo; application to become avialable before proceeding.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc new-app --name<span style="color:#f92672">=</span>blue <span style="color:#f92672">[</span>your-project-repo-url<span style="color:#f92672">]</span> --context-dir<span style="color:#f92672">=</span>dc-metro-map
+</span></span></code></pre></div><p>Wait for the &ldquo;blue&rdquo; application to become avialable before proceeding.</p>
 <h2 id="switch-from-green-to-blue">Switch from Green to Blue</h2>
 <p>Now that we are satisfied with our change we can do the Green/Blue switch.  With OpenShift services and routes, this is super simple.  Follow the steps below to make the switch:</p>
 <div class="panel-group">
@@ -355,21 +355,21 @@ $ oc expose service green
   <div class="panel-heading">
     <h4 class="panel-title">
       
-      <a data-toggle="collapse" href="#collapse670f4cba23d6c52ea622100cb206b642" class="collapsed">
+      <a data-toggle="collapse" href="#collapse70c013b3de9bf8431047b56238a0f42e" class="collapsed">
       
         CLI Steps
       </a>
     </h4>
   </div>
   
-  <div id="collapse670f4cba23d6c52ea622100cb206b642" class="panel-collapse collapse ">
+  <div id="collapse70c013b3de9bf8431047b56238a0f42e" class="panel-collapse collapse ">
   
     <div class="panel-body">
        <blockquote>
 <i class="fa fa-terminal"></i> Goto the terminal and type the following:
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc edit route green
-</code></pre></div><p>This will bring up the Route configuration yaml. Edit the element spec: to: name and change it&rsquo;s value from &ldquo;green&rdquo; to &ldquo;blue&rdquo;.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ oc edit route green
+</span></span></code></pre></div><p>This will bring up the Route configuration yaml. Edit the element spec: to: name and change it&rsquo;s value from &ldquo;green&rdquo; to &ldquo;blue&rdquo;.</p>
 
     </div>
   </div>
@@ -518,7 +518,7 @@ $ oc expose service green
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -778,7 +778,7 @@ $ oc expose service green
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -890,7 +890,7 @@ $ oc expose service green
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -900,7 +900,7 @@ $ oc expose service green
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -983,7 +983,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

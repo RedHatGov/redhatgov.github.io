@@ -325,13 +325,13 @@
 <i class="fa fa-terminal"></i>
 Verify the annotation in the 'userprofile' file:
 </blockquote>
-<pre><code>cat ./openshift-configuration/userprofile-deploy-all.yaml | grep -B 1 sidecar.istio.io/inject
+<pre tabindex="0"><code>cat ./openshift-configuration/userprofile-deploy-all.yaml | grep -B 1 sidecar.istio.io/inject
 </code></pre><p>Output:</p>
-<pre><code>    annotations:
-      sidecar.istio.io/inject: &quot;true&quot;
+<pre tabindex="0"><code>    annotations:
+      sidecar.istio.io/inject: &#34;true&#34;
   --
     annotations:
-      sidecar.istio.io/inject: &quot;true&quot;
+      sidecar.istio.io/inject: &#34;true&#34;
 </code></pre><p>The annotation appears twice for the userprofile and PostgreSQL services.</p>
 <br>
 <p>Before deploying the service, you need a reference to the local image you built in the previous lab.</p>
@@ -339,35 +339,35 @@ Verify the annotation in the 'userprofile' file:
 <i class="fa fa-terminal"></i>
 Run the following commands:
 </blockquote>
-<pre><code>USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template='{{.status.dockerImageRepository}}')
+<pre tabindex="0"><code>USER_PROFILE_IMAGE_URI=$(oc get is userprofile --template=&#39;{{.status.dockerImageRepository}}&#39;)
 echo $USER_PROFILE_IMAGE_URI
 </code></pre><p>Output (sample):</p>
-<pre><code>image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile
+<pre tabindex="0"><code>image-registry.openshift-image-registry.svc:5000/microservices-demo/userprofile
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Deploy the service using this image URI:
 </blockquote>
-<pre><code>sed &quot;s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|&quot; ./openshift-configuration/userprofile-deploy-all.yaml | oc create -f -
+<pre tabindex="0"><code>sed &#34;s|%USER_PROFILE_IMAGE_URI%|$USER_PROFILE_IMAGE_URI|&#34; ./openshift-configuration/userprofile-deploy-all.yaml | oc create -f -
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Watch the deployment of the user profile:
 </blockquote>
-<pre><code>oc get pods -l deploymentconfig=userprofile --watch
+<pre tabindex="0"><code>oc get pods -l deploymentconfig=userprofile --watch
 </code></pre><p>
 <i class="fa fa-info-circle"></i>
 The userprofile service may error and restart if the PostgreSQL pod is not running yet.
 </p>
 <p>Output:</p>
-<pre><code>userprofile-xxxxxxxxxx-xxxxx              2/2     Running		    0          2m55s
+<pre tabindex="0"><code>userprofile-xxxxxxxxxx-xxxxx              2/2     Running		    0          2m55s
 </code></pre><br>
 <p>Similar to the other microservices, the user profile service runs the application and the Istio proxy.</p>
 <blockquote>
 <i class="fa fa-terminal"></i>
 Print the containers in the 'userprofile' pod:
 </blockquote>
-<pre><code>oc get pods -l deploymentconfig=userprofile -o jsonpath='{.items[*].spec.containers[*].name}{&quot;\n&quot;}'
+<pre tabindex="0"><code>oc get pods -l deploymentconfig=userprofile -o jsonpath=&#39;{.items[*].spec.containers[*].name}{&#34;\n&#34;}&#39;
 </code></pre><p>Output:</p>
-<pre><code>userprofile istio-proxy
+<pre tabindex="0"><code>userprofile istio-proxy
 </code></pre><br>
 <h2 id="access-application">Access Application</h2>
 <p>The user profile service is deployed!  Let&rsquo;s test this in the browser.</p>
@@ -480,7 +480,7 @@ Navigate to the 'Profile' section in the header.
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -740,7 +740,7 @@ Navigate to the 'Profile' section in the header.
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -852,7 +852,7 @@ Navigate to the 'Profile' section in the header.
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -862,7 +862,7 @@ Navigate to the 'Profile' section in the header.
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -945,7 +945,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

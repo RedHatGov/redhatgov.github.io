@@ -320,29 +320,29 @@
     <h1 id="add-archive-stage">Add Archive Stage</h1>
 <p>Archiving the built and tested application into a trusted repository is important to making sure you are building with trusted parts.  You assume this application is built properly and all the previous stages have passed.  With that confidence, your built and tested application should be immutable in a trusted repository.  The repository will version or audit any changes to the application, configuration, and dependencies.</p>
 <p>Add Archive Stage Steps into your pipeline.</p>
-<p><img src="../images/pipeline_nexus.png" width="900" /></p>
+<img src="../images/pipeline_nexus.png" width="900" />
 <p>We leveraged the maven nexus plugin for this deployment.  The mvn deploy step is the last step in the maven lifecycle.  The built application is archived into the nexus repository.  We can see it later once we run the pipeline.</p>
 <p>The &ldquo;-P nexus3&rdquo; option activates the nexus3 profile defined in the configuration/cicd-settings-nexus3.xml</p>
 <br>
 # Append to Jenkins Pipeline Configuration
 <p>In Builds &gt; Pipelines &gt; tasks-pipeline &gt; Actions &gt; Edit</p>
-<p><img src="../images/pipeline_actions_edit.png" width="900" /></p>
+<img src="../images/pipeline_actions_edit.png" width="900" />
 <p>Append the text below to the bottom of the Jenkins Pipeline Configuration.  Please make sure to append to the beginning of the next line.</p>
-<pre><code>    stage('Archive App') {
+<pre tabindex="0"><code>    stage(&#39;Archive App&#39;) {
       steps {
-        sh &quot;${mvnCmd} deploy -DskipTests=true -P nexus3&quot;
+        sh &#34;${mvnCmd} deploy -DskipTests=true -P nexus3&#34;
       }
     }
 </code></pre><h1 id="test-your-pipeline">Test Your Pipeline</h1>
 <p>If you&rsquo;d like to do a test of first pipeline stage, add the following brackets at the end of your Jenkinsfile. Make sure to append to the beginning of the last line.</p>
-<pre><code>  }
+<pre tabindex="0"><code>  }
 }
 </code></pre><p>Save your Jenkinsfile.</p>
 <p>Go back to Builds &gt; Pipelines</p>
 <p>Click Start Pipeline</p>
 <h1 id="delete-brackets">Delete Brackets</h1>
 <p>Please delete the brackets you just added once testing is complete. We can add them later if you&rsquo;d like to test your pipeline as you go along.</p>
-<pre><code>  }
+<pre tabindex="0"><code>  }
 }
 </code></pre><p>Click Save
 <style>
@@ -444,7 +444,7 @@
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -704,7 +704,7 @@
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -816,7 +816,7 @@
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -826,7 +826,7 @@
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -909,7 +909,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

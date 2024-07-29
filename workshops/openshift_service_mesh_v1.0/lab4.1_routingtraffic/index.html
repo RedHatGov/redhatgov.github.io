@@ -327,9 +327,9 @@
 <i class="fa fa-terminal"></i>
 View the destination rules in your favorite editor or via bash:
 </blockquote>
-<pre><code>cat ./istio-configuration/destinationrules-all.yaml
+<pre tabindex="0"><code>cat ./istio-configuration/destinationrules-all.yaml
 </code></pre><p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>...
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
@@ -355,9 +355,9 @@ spec:
 <i class="fa fa-terminal"></i>
 View the virtual services in your favorite editor or via bash:
 </blockquote>
-<pre><code>cat ./istio-configuration/virtual-services-all-v2.yaml
+<pre tabindex="0"><code>cat ./istio-configuration/virtual-services-all-v2.yaml
 </code></pre><p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>...
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -378,15 +378,15 @@ spec:
 <i class="fa fa-terminal"></i>
 Let's deploy these routing rules:
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/destinationrules-all.yaml 
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/destinationrules-all.yaml 
 oc apply -f ./istio-configuration/virtual-services-all-v2.yaml
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Verify the destination rules:
 </blockquote>
-<pre><code>oc get dr
+<pre tabindex="0"><code>oc get dr
 </code></pre><p>Output:</p>
-<pre><code>NAME                     HOST                     AGE
+<pre tabindex="0"><code>NAME                     HOST                     AGE
 app-ui                   app-ui                   24m
 boards                   boards                   24m
 boards-mongodb           boards-mongodb           24m
@@ -396,9 +396,9 @@ userprofile-postgresql   userprofile-postgresql   16m
 <i class="fa fa-terminal"></i>
 Verify the virtual services:
 </blockquote>
-<pre><code>oc get vs
+<pre tabindex="0"><code>oc get vs
 </code></pre><p>Output (sample):</p>
-<pre><code>NAME                     GATEWAYS                       HOSTS                      AGE
+<pre tabindex="0"><code>NAME                     GATEWAYS                       HOSTS                      AGE
 app-ui                                                  [app-ui]                   25m
 boards                                                  [boards]                   25m
 boards-mongodb                                          [boards-mongodb]           25m
@@ -420,7 +420,7 @@ Navigate to the 'Profile' section in the header.
 <i class="fa fa-terminal"></i>
 Send load to the user profile service:
 </blockquote>
-<pre><code>for ((i=1;i&lt;=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre tabindex="0"><code>for ((i=1;i&lt;=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><br>
 <blockquote>
 <i class="fa fa-desktop"></i>
@@ -444,9 +444,9 @@ Switch to the 'Versioned app graph' view and change to 'Last 1m'.
 <i class="fa fa-terminal"></i>
 View the modified virtual service in your favorite editor or via bash:
 </blockquote>
-<pre><code>cat ./istio-configuration/virtual-service-userprofile-v1.yaml
+<pre tabindex="0"><code>cat ./istio-configuration/virtual-service-userprofile-v1.yaml
 </code></pre><p>Output:</p>
-<pre><code>apiVersion: networking.istio.io/v1alpha3
+<pre tabindex="0"><code>apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: userprofile
@@ -463,14 +463,14 @@ spec:
 <i class="fa fa-terminal"></i>
 Deploy the change:
 </blockquote>
-<pre><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v1.yaml
+<pre tabindex="0"><code>oc apply -f ./istio-configuration/virtual-service-userprofile-v1.yaml
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Verify the change:
 </blockquote>
-<pre><code>oc describe vs userprofile
+<pre tabindex="0"><code>oc describe vs userprofile
 </code></pre><p>Output (snippet):</p>
-<pre><code>...
+<pre tabindex="0"><code>...
 Spec:
   Hosts:
     userprofile
@@ -491,7 +491,7 @@ In the application UI, navigate to the 'Profile' section in the header.
 <i class="fa fa-terminal"></i>
 Let's send 100 user profile requests to generate traffic
 </blockquote>
-<pre><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre tabindex="0"><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><blockquote>
 <i class="fa fa-desktop"></i>
 Now in Kiali, navigate to 'Graph' in the left navigation bar.
@@ -612,7 +612,7 @@ Switch to the 'Versioned app graph' view and change to 'Last 1m'.
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -872,7 +872,7 @@ Switch to the 'Versioned app graph' view and change to 'Last 1m'.
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -984,7 +984,7 @@ Switch to the 'Versioned app graph' view and change to 'Last 1m'.
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -994,7 +994,7 @@ Switch to the 'Versioned app graph' view and change to 'Last 1m'.
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1077,7 +1077,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

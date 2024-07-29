@@ -325,7 +325,7 @@
 <i class="fa fa-terminal"></i>
 Open the Jaeger console.  Retrieve the endpoint for Jaeger:
 </blockquote>
-<pre><code>JAEGER_CONSOLE=$(oc get route jaeger -n istio-system --template='https://{{.spec.host}}')
+<pre tabindex="0"><code>JAEGER_CONSOLE=$(oc get route jaeger -n istio-system --template=&#39;https://{{.spec.host}}&#39;)
 echo $JAEGER_CONSOLE
 </code></pre><p><i class="fa fa-info-circle"></i> Click 'Allow selected permissions' if prompted to authorized access.</p>
 <blockquote>
@@ -341,7 +341,7 @@ Navigate to this URL in the browser.  Login with the same credentials you were p
 <i class="fa fa-terminal"></i>
 Send load to the application user interface:
 </blockquote>
-<pre><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL; done
+<pre tabindex="0"><code>for ((i=1;i&lt;=100;i++)); do curl -s -o /dev/null $GATEWAY_URL; done
 </code></pre><br>
 Let's inspect the traces.  
 <blockquote>
@@ -382,12 +382,12 @@ Expand the two lowest spans in the tree like this:
 <i class="fa fa-terminal"></i>
 Verify the app-ui pod IP:
 </blockquote>
-<pre><code>oc get pods -l deploymentconfig=app-ui -o jsonpath='{.items[*].status.podIP}{&quot;\n&quot;}'
+<pre tabindex="0"><code>oc get pods -l deploymentconfig=app-ui -o jsonpath=&#39;{.items[*].status.podIP}{&#34;\n&#34;}&#39;
 </code></pre><blockquote>
 <i class="fa fa-terminal"></i>
 Verify the boards pod IP:
 </blockquote>
-<pre><code>oc get pods -l deploymentconfig=boards -o jsonpath='{.items[*].status.podIP}{&quot;\n&quot;}'
+<pre tabindex="0"><code>oc get pods -l deploymentconfig=boards -o jsonpath=&#39;{.items[*].status.podIP}{&#34;\n&#34;}&#39;
 </code></pre><p>The pod IPs should match to the process IPs in the spans you expanded.</p>
 <br>
 <h2 id="debug-user-profile">Debug User Profile</h2>
@@ -396,7 +396,7 @@ Verify the boards pod IP:
 <i class="fa fa-terminal"></i>
 Send load to the user profile service:
 </blockquote>
-<pre><code>for ((i=1;i&lt;=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
+<pre tabindex="0"><code>for ((i=1;i&lt;=5;i++)); do curl -s -o /dev/null $GATEWAY_URL/profile; done
 </code></pre><p><i class="fa fa-info-circle"></i> Wait for this to complete as the profile service is slow.</p>
 <br>
 Inspect the traces.  
@@ -427,7 +427,7 @@ Select one of the fast traces to start, and expand the lowest span.
 <i class="fa fa-terminal"></i>
 Verify the userprofile-v1 pod IP:
 </blockquote>
-<pre><code>oc get pods -l deploymentconfig=userprofile,version=1.0 -o jsonpath='{.items[*].status.podIP}{&quot;\n&quot;}'
+<pre tabindex="0"><code>oc get pods -l deploymentconfig=userprofile,version=1.0 -o jsonpath=&#39;{.items[*].status.podIP}{&#34;\n&#34;}&#39;
 </code></pre><p>The pod IP should match to the process IP in the span you expanded.</p>
 <br>
 <blockquote>
@@ -443,7 +443,7 @@ Now, select one of the slow traces and expand the lowest span.
 <i class="fa fa-terminal"></i>
 Verify the userprofile-v2 pod IP:
 </blockquote>
-<pre><code>oc get pods -l deploymentconfig=userprofile,version=2.0 -o jsonpath='{.items[*].status.podIP}{&quot;\n&quot;}'
+<pre tabindex="0"><code>oc get pods -l deploymentconfig=userprofile,version=2.0 -o jsonpath=&#39;{.items[*].status.podIP}{&#34;\n&#34;}&#39;
 </code></pre><p>The pod IP should match to the process IP in the span you expanded.</p>
 <br>
 <p>At this point, it is really clear that there is a performance issue directly in the version 2 source.  Although the example was simplistic, distributed tracing is incredibly helpful when you have a complicated network of service calls in your mesh.</p>
@@ -547,7 +547,7 @@ Verify the userprofile-v2 pod IP:
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-        <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+        <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -807,7 +807,7 @@ Verify the userprofile-v2 pod IP:
 
 <script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 <script type="text/javascript">
-<!--
+
   
   var Cookies2 = Cookies.noConflict();
 
@@ -919,7 +919,7 @@ Verify the userprofile-v2 pod IP:
 
     return false;
   });
--->
+
 </script>
 
 <hr>
@@ -929,7 +929,7 @@ Verify the userprofile-v2 pod IP:
         <td class="text-right"><b>Domain</b></td>
         <td><span class="domain"></span></td>
         <td rowspan="3">
-          <img src="https://marketing-outfit-prod-images.s3-us-west-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" alt="Red Hat Logo" />
+          <img src="/images/Logo-Red_Hat-C-Standard-RGB-small.png" alt="Red Hat Logo" />
         </td>
       </tr>
       <tr>
@@ -1012,7 +1012,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2023 Red Hat, Inc.
+        Copyright &copy; 2024 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">
