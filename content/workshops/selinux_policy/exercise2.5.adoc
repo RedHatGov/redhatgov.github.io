@@ -18,39 +18,50 @@ This is the conclusion of the SELinux policy workshop.  Here's some closing tips
 Please ask any questions that you have left, and thanks so much for coming!
 
 * Set a folder's context to mimic another:
-[source,bash] 
-----
+{{< highlight bash >}}
 mkdir -p /var/new_www/html
 matchpathcon /var/www/html /var/new_www/html
 semanage fcontext -a -e /var/www /var/new_www
 restorecon -Rv /var/
-----
-* List ports associated with all service domains:
-[source,bash] 
-----
-semanage port -l
-----
+{{< /highlight >}}
 
-And then, add a port to an existing service's domain, such as httpd:
+* List ports associated with all service domains:
+{{< highlight bash >}}
+semanage port -l
+{{< /highlight >}}
 [source,bash] 
 ----
-semanage port -a -t http_port_t -p tcp 8888
+hi_reserved_port_t             tcp      512-1023
+hi_reserved_port_t             udp      512-1023
+howl_port_t                    tcp      5335
+howl_port_t                    udp      5353
+hplip_port_t                   tcp      1782, 2207, 2208, 8290, 8292, 9100, 9101, 9102, 9220, 9221, 9222, 9280, 9281, 9282, 9290, 9291, 50000, 50002
+http_cache_port_t              tcp      8080, 8118, 8123, 10001-10010
+http_cache_port_t              udp      3130
+http_port_t                    tcp      80, 81, 443, 488, 8008, 8009, 8443
+i18n_input_port_t              tcp      9010
+ibm_dt_2_port_t                tcp      1792
+ibm_dt_2_port_t                udp      1792
+imaze_port_t                   tcp      5323
+imaze_port_t                   udp      5323
 ----
+And then, add a port to an existing service's domain, such as httpd:
+{{< highlight bash >}}
+semanage port -a -t http_port_t -p tcp 8888
+{{< /highlight >}}
 
 * Cause entire system to be re-labeled at next boot:
-[source,bash] 
-----
+{{< highlight bash >}}
 fixfiles onboot
-----
+{{< /highlight >}}
 or
-----
+{{< highlight bash >}}
 touch /.autorelabel
-----
+{{< /highlight >}}
 * Get detail reports of access errors (requires optional *setroubleshoot* package):
-[source,bash] 
-----
+{{< highlight bash >}}
 sealert -l "*"
-----
+{{< /highlight >}}
 
 
 {{< importPartial "footer/footer.html" >}}
