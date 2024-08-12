@@ -584,6 +584,14 @@
   </url><url>
     <loc>/workshops/containers_101/setup/</loc>
   </url><url>
+    <loc>/workshops/openshift_service_mesh/lab1.2_installing_backup_303242/</loc>
+  </url><url>
+    <loc>/workshops/openshift_service_mesh/lab1.2_installing_base_303242/</loc>
+  </url><url>
+    <loc>/workshops/openshift_service_mesh/lab1.2_installing_local_303242/</loc>
+  </url><url>
+    <loc>/workshops/openshift_service_mesh/lab1.2_installing_remote_303242/</loc>
+  </url><url>
     <loc>/workshops/openshift_service_mesh_v1.0/lab1.3_installing/</loc>
   </url><url>
     <loc>/workshops/rhel_8/setup/</loc>
@@ -625,6 +633,8 @@
     <loc>/workshops/cloudforms41/wrapup/</loc>
   </url><url>
     <loc>/workshops/jdv_dev/wrapup/</loc>
+  </url><url>
+    <loc>/workshops/</loc>
   </url><url>
     <loc>/workshops/</loc>
   </url><url>

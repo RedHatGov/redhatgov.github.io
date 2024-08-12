@@ -4,7 +4,7 @@
     <title>Red Hat | Public Sector</title>
     <link>/</link>
     <description>Recent content on Red Hat | Public Sector</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -1854,6 +1854,34 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/workshops/containers_101/setup/</guid>
       <description>What you will learn: Red Hat Web Console - Terminal This lab provides a quick tour of the browser based Terminal via the Red Hat Web Console. To help you get familiar with lab environment along with some key terminology we will use in subsequent lab content.&#xA;Accessing Red Hat Enterprise Linux Web Console (cockpit) Use this URL to access the Web Console node, just change the workshop name (if applicable).</description>
+    </item>
+    <item>
+      <title>Setup</title>
+      <link>/workshops/openshift_service_mesh/lab1.2_installing_backup_303242/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/workshops/openshift_service_mesh/lab1.2_installing_backup_303242/</guid>
+      <description>Setup You will conduct these labs in an OpenShift cluster. First, test you have access to your cluster via console and CLI.&#xA;OpenShift Navigate to the console URI provided by your instructor and login with the username/password provided. For example:&#xA;http://console-openshift-console.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com Once logged in, you should see the following:&#xA;OpenShift Welcome&#xA;You will use the OpenShift &amp;lsquo;oc&amp;rsquo; CLI to execute commands for the majority of this lab.&#xA;Login using API endpoint and remember to add the &#39;--insecure-skip-tls-verify=true&#39; flag For example:</description>
+    </item>
+    <item>
+      <title>Setup</title>
+      <link>/workshops/openshift_service_mesh/lab1.2_installing_base_303242/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/workshops/openshift_service_mesh/lab1.2_installing_base_303242/</guid>
+      <description>Setup You will conduct these labs in an OpenShift cluster. First, test you have access to your cluster via console and CLI.&#xA;OpenShift Navigate to the console URI provided by your instructor and login with the username/password provided. For example:&#xA;http://console-openshift-console.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com Once logged in, you should see the following:&#xA;OpenShift Welcome&#xA;You will use the OpenShift &amp;lsquo;oc&amp;rsquo; CLI to execute commands for the majority of this lab.&#xA;Login using API endpoint and remember to add the &#39;--insecure-skip-tls-verify=true&#39; flag For example:</description>
+    </item>
+    <item>
+      <title>Setup</title>
+      <link>/workshops/openshift_service_mesh/lab1.2_installing_local_303242/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/workshops/openshift_service_mesh/lab1.2_installing_local_303242/</guid>
+      <description>Setup You will conduct these labs in an OpenShift cluster. First, test you have access to your cluster via console and CLI.&#xA;OpenShift Navigate to the console URI provided by your instructor and login with the username/password provided. For example:&#xA;http://console-openshift-console.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com Once logged in, you should see the following:&#xA;OpenShift Welcome&#xA;You will use the OpenShift &amp;lsquo;oc&amp;rsquo; CLI to execute commands for the majority of this lab.&#xA;Login using API endpoint and remember to add the &#39;--insecure-skip-tls-verify=true&#39; flag For example:</description>
+    </item>
+    <item>
+      <title>Setup</title>
+      <link>/workshops/openshift_service_mesh/lab1.2_installing_remote_303242/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/workshops/openshift_service_mesh/lab1.2_installing_remote_303242/</guid>
+      <description>Setup You will conduct these labs in an OpenShift cluster. First, test you have access to your cluster via console and CLI.&#xA;OpenShift Navigate to the console URI provided by your instructor and login with the username/password provided. For example:&#xA;http://console-openshift-console.apps.cluster-naa-xxxx.naa-xxxx.example.opentlc.com Once logged in, you should see the following:&#xA;OpenShift Welcome&#xA;You will use the OpenShift &amp;lsquo;oc&amp;rsquo; CLI to execute commands for the majority of this lab.&#xA;Login using API endpoint and remember to add the &#39;--insecure-skip-tls-verify=true&#39; flag For example:</description>
     </item>
     <item>
       <title>Setup</title>

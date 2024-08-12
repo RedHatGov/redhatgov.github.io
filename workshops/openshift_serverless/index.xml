@@ -4,7 +4,7 @@
     <title>OpenShift Serverless on Red Hat | Public Sector</title>
     <link>/workshops/openshift_serverless/</link>
     <description>Recent content in OpenShift Serverless on Red Hat | Public Sector</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <atom:link href="/workshops/openshift_serverless/index.xml" rel="self" type="application/rss+xml" />
   </channel>
