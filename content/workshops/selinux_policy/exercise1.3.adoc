@@ -128,9 +128,7 @@ semanage boolean -l -C
 ----
 SELinux boolean                State  Default Description
 
-cups_execmem                   (on   ,   on)  Allow cups execmem/execstack
-virt_sandbox_use_all_caps      (on   ,   on)  Allow sandbox containers to use all capabilities
-virt_use_nfs                   (on   ,   on)  Allow confined virtual guests to manage nfs files
+httpd_enable_homedirs          (on   ,   on)  Allow httpd to read home directories
 ----
 
 

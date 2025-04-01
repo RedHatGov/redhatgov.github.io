@@ -15,7 +15,6 @@ layout: lab
 
 = Workshop Lab Setup
 
-image::tower.002.png['Tower']
 
 == What you will learn: Cockpit (Browser-based Admin Interface)
 
@@ -33,25 +32,25 @@ Use this URL to access the Cockpit node, just change the workshop name (if appli
 
 The login screen looks like this:
 
-image::selinux-cockpit-login-filled.png[caption="Figure 1: ", title='Cockpit Login Screen', 500]
+image::RHEL9.5-cockpit-login-ec2-user.png[caption="Figure 1: ", title='Cockpit Login Screen', 500]
 
 After logging in, you should see the main screen:
 
-image::selinux-cockpit-system.png[caption="Figure 2: ", title='Cockpit System Panel', 500]
+image::RHEL9.5-cockpit-overview.png[caption="Figure 2: ", title='Cockpit System Panel', 500]
 
-Now, let's do a quick tour of the tabs, in Cockpit, that we will be using, in this workshop.
+Now, let's do a quick tour of Cockpit tabs that we will be using in this workshop.
 
 First, click on the `SELinux` link, in the panel on the left side of the screen.  You should see a panel like this:
 
-image::selinux-cockpit-selinux.png[caption="Figure 3: ", title='Cockpit SELinux Panel', 500]
+image::RHEL9.5-cockpit-selinux.png[caption="Figure 3: ", title='Cockpit SELinux Panel', 500]
 
 In this panel, you can enable or disable the enforcement of the SELinux policy, by placing the whole system in `permissive` or `enforcing` mode.  We will talk further about this, later on in the workshop.  Also, in the lower section of the window, we can review SELinux Access Control Errors, also known as `AVCs`.  Again, we will discuss that later.
 
 The last part of cockpit that we need to review is the `Terminal` panel.  Please click on the `Terminal` link, in the panel on the left:
 
-image::selinux-cockpit-terminal.png[caption="Figure 4: ", title='Cockpit Terminal Panel', 500]
+image::RHEL9.5-cockpit-terminal.png[caption="Figure 4: ", title='Cockpit Terminal Panel', 500]
 
-This is where we will be doing most of our work, in this workshop.  You can copy and paste from the panel, using the UNIX/X11 standard of highlighting text to copy it, and clicking the middle button of your mouse to paste it.  Go ahead and try it out!
+This is where we will be doing most of our work in this workshop.  You can copy and paste from the panel, using the UNIX/X11 standard of highlighting text to copy it, and clicking the middle button of your mouse to paste it.  Go ahead and try it out!
 
 [IMPORTANT]
 Be sure you can log in to your instances.  If you can't log in start shouting, loudly, and waving your hands!

@@ -41,7 +41,7 @@ type=AVC msg=audit(1553195947.854:3271): avc:  denied  { read } for  pid=4651 co
 
 === Step 2: Interpret AVC messages
 
-From the AVCs that we have, it seems clear that the application wants to try to resolve some hostnames to IP addresses.  Most applications that access the network will need to be able to read system network configuration, and the interface for that is in `/usr/share/selinux/devel/include/system/sysnetwork.if` and is called `sysnet_read_config`.
+Among the AVCs we see, it seems clear that the application wants to try to resolve some hostnames to IP addresses.  Most applications that access the network will need to be able to read system network configuration, and the interface for that is in `/usr/share/selinux/devel/include/system/sysnetwork.if` and is called `sysnet_read_config`.
 
 [source,bash]
 -----
