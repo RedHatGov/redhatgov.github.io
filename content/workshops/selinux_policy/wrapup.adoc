@@ -27,7 +27,7 @@ This *Participant Guide* will remain available.  Please take advantage of it by 
 
 Thank you for your time and participation!
 
-= Resources
+== Resources
 
 === Fun Stuff
     ** https://stopdisablingselinux.com/
@@ -38,12 +38,14 @@ Thank you for your time and participation!
     ** https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/using_selinux/configuring-selinux-for-applications-and-services-with-non-standard-configurations_using-selinux#customizing-the-selinux-policy-for-the-apache-http-server-in-a-non-standard-configuration_configuring-selinux-for-applications-and-services-with-non-standard-configurations[Real-world configuration examples]
     ** https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/using_selinux/troubleshooting-problems-related-to-selinux_using-selinux#identifying-selinux-denials_troubleshooting-problems-related-to-selinux[Troubleshooting SELinux denials]
 
-=== Knowledge Articles
+=== Knowledge Articles, blogs and other resources
+    ** https://www.redhat.com/en/blog/selinux-and-rhel-technical-exploration-security-hardening[SELinux and RHEL: A technical exploration of security hardening]
     ** https://access.redhat.com/articles/6964380[SELinux as a security pillar of an operating system - Real-world benefits and examples]
     ** https://access.redhat.com/articles/2191331[Basic SELinux Troubleshooting in CLI]
     ** https://access.redhat.com/articles/6999267[Quick start to write a custom SELinux policy]
     ** https://access.redhat.com/articles/7047896[SELinux hardening with Ansible (makes note of several booleans)]
     ** https://www.redhat.com/sysadmin/change-selinux-settings-boolean[How to modify SELinux settings with booleans]
+    ** https://access.redhat.com/compliance[Red Hat Product Compliance portal]
 
 
 image::redhat.svg[]

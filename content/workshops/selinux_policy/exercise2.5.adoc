@@ -12,7 +12,7 @@ layout: lab
 = Exercise 2.5 - Tips & Tricks
 
 
-= Tips & tricks
+== Tips & tricks
 
 This is the conclusion of the SELinux policy workshop.  Here's some closing tips to help you work with SELinux.
 Please ask any questions that you have left, and thanks so much for coming!
