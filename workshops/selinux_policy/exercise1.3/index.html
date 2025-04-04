@@ -449,9 +449,7 @@ httpd_read_user_content        (off  ,  off)  Allow httpd to read user content
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">SELinux boolean                State  Default Description
 
-cups_execmem                   (on   ,   on)  Allow cups execmem/execstack
-virt_sandbox_use_all_caps      (on   ,   on)  Allow sandbox containers to use all capabilities
-virt_use_nfs                   (on   ,   on)  Allow confined virtual guests to manage nfs files</code></pre>
+httpd_enable_homedirs          (on   ,   on)  Allow httpd to read home directories</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1023,7 +1021,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2024 Red Hat, Inc.
+        Copyright &copy; 2025 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

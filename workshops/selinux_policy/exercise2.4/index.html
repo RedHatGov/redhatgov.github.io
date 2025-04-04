@@ -353,7 +353,7 @@ type=AVC msg=audit(1553195947.854:3271): avc:  denied  { read } for  pid=4651 co
 <div class="sect2">
 <h3 id="_step_2_interpret_avc_messages">Step 2: Interpret AVC messages</h3>
 <div class="paragraph">
-<p>From the AVCs that we have, it seems clear that the application wants to try to resolve some hostnames to IP addresses.  Most applications that access the network will need to be able to read system network configuration, and the interface for that is in <code>/usr/share/selinux/devel/include/system/sysnetwork.if</code> and is called <code>sysnet_read_config</code>.</p>
+<p>Among the AVCs we see, it seems clear that the application wants to try to resolve some hostnames to IP addresses.  Most applications that access the network will need to be able to read system network configuration, and the interface for that is in <code>/usr/share/selinux/devel/include/system/sysnetwork.if</code> and is called <code>sysnet_read_config</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1239,7 +1239,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2024 Red Hat, Inc.
+        Copyright &copy; 2025 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

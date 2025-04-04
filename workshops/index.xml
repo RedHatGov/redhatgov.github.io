@@ -530,7 +530,7 @@
       <link>/workshops/selinux_policy/exercise1.4/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/workshops/selinux_policy/exercise1.4/</guid>
-      <description>Exercise Description Let’s look at some techniques for examing SELinux, as these are useful for troubleshooting. We’ll build on this in Section 2 of the workshop.&#xA;Step 1: Changing modes for specific domains You can also set individual SELinux domains (like httpd_t, which controls web server access control) to permissve mode:&#xA;semanage permissive -a httpd_t semanage permissive -l Builtin Permissive Types Customized Permissive Types httpd_t And again, we can change it back:</description>
+      <description>Exercise Description Let’s look at some techniques for examining SELinux, as these are useful for troubleshooting. We’ll build on this in Section 2 of the workshop.&#xA;Step 1: Changing modes for specific domains You can also set individual SELinux domains (like httpd_t, which controls web server access control) to permissve mode:&#xA;semanage permissive -a httpd_t semanage permissive -l Builtin Permissive Types Customized Permissive Types httpd_t And again, we can change it back:</description>
     </item>
     <item>
       <title>Exercise 1.4 - Working with a Container Registry</title>
@@ -810,7 +810,7 @@
       <link>/workshops/selinux_policy/exercise2.5/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/workshops/selinux_policy/exercise2.5/</guid>
-      <description>Tips &amp;amp; tricks This is the conclusion of the SELinux policy workshop. Here’s some closing tips to help you work with SELinux. Please ask any questions that you have left, and thanks so much for coming!&#xA;Set a folder’s context to mimic another:&#xA;mkdir -p /var/new_www/html matchpathcon /var/www/html /var/new_www/html semanage fcontext -a -e /var/www /var/new_www restorecon -Rv /var/ List ports associated with all service domains:&#xA;semanage port -l And then, add a port to an existing service’s domain, such as httpd:</description>
+      <description>Tips &amp;amp; tricks This is the conclusion of the SELinux policy workshop. Here’s some closing tips to help you work with SELinux. Please ask any questions that you have left, and thanks so much for coming!&#xA;Set a folder’s context to mimic another: mkdir -p /var/new_www/html matchpathcon /var/www/html /var/new_www/html semanage fcontext -a -e /var/www /var/new_www restorecon -Rv /var/&#xA;List ports associated with all service domains: semanage port -l&#xA;hi_reserved_port_t tcp 512-1023 hi_reserved_port_t udp 512-1023 howl_port_t tcp 5335 howl_port_t udp 5353 hplip_port_t tcp 1782, 2207, 2208, 8290, 8292, 9100, 9101, 9102, 9220, 9221, 9222, 9280, 9281, 9282, 9290, 9291, 50000, 50002 http_cache_port_t tcp 8080, 8118, 8123, 10001-10010 http_cache_port_t udp 3130 http_port_t tcp 80, 81, 443, 488, 8008, 8009, 8443 i18n_input_port_t tcp 9010 ibm_dt_2_port_t tcp 1792 ibm_dt_2_port_t udp 1792 imaze_port_t tcp 5323 imaze_port_t udp 5323 And then, add a port to an existing service’s domain, such as httpd: semanage port -a -t http_port_t -p tcp 8888</description>
     </item>
     <item>
       <title>Exercise 3 - Network and UTS Namespaces</title>

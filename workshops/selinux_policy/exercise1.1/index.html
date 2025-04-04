@@ -330,16 +330,15 @@
 <p>The SELinux policy is highly configurable. Starting with Red Hat Enterprise Linux 5, Red Hat defaulted to the <strong>targeted policy</strong>. The goal of this policy is to lock down all processes that listen for network connections and pretty much all processes that start at boot.  Under the targeted policy, every subject and object runs in the unconfined_t domain except for the specific targeted daemons. Objects that are in the unconfined_t domain have no restrictions and fall back to using standard Linux security, that is, DAC. The daemons secured by the targeted policy run in their own domains and are restricted via type enforcement in every operation they perform on the system. This way daemons that are exploited or compromised in any way are contained and can only cause limited damage.</p>
 </div>
 <div class="paragraph">
-<p>For example, the http and ntp daemons are both protected in the default targeted policy, and run in the httpd_t and ntpd_t domains, respectively. The ssh daemon, however, is not protected in this policy, and consequently runs in the unconfined_t domain.  The targeted daemons include most common system daemons (dhcpd, httpd, mysqld, named, nscd, ntpd, portmap, postgres, snmpd, squid, syslogd, and winbind) and the list grows with each RHEL generation.</p>
-</div>
-<div class="paragraph">
-<p>Refer to the following sample output, which illustrates the various domains for the daemons mentioned above:</p>
+<p>Targeted policy has expanded and evolved over the years to provide coverage for nearly every system service and utility.  As example ps output shows below, systemd, auditd, chronyd, NetworkManager and sshd each run in a unique domain:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code>user_u:system_r:httpd_t         25129 ?        00:00:00 httpd
-user_u:system_r:ntpd_t          25176 ?        00:00:00 ntpd
-system_u:system_r:unconfined_t         25245 ? 00:00:00 sshd</code></pre>
+<pre class="highlight"><code>system_u:system_r:init_t:s0           1 ?        00:00:02 systemd
+system_u:system_r:auditd_t:s0       663 ?        00:00:00 auditd
+system_u:system_r:chronyd_t:s0      713 ?        00:00:00 chronyd
+system_u:system_r:NetworkManager_t:s0 735 ?      00:00:15 NetworkManager
+system_u:system_r:sshd_t:s0-s0:c0.c1023 1114 ?   00:00:00 sshd</code></pre>
 </div>
 </div>
 <div class="sect3">
@@ -372,14 +371,14 @@ system_u:system_r:unconfined_t         25245 ? 00:00:00 sshd</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_additional_reminders">Additional reminders</h3>
+<h3 id="_important_reminders">Important reminders</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>SELinux policy is consulted after normal DAC controls.  So if DAC permissions already deny a particular access to a file, no further evaluations are done.</p>
+<p><strong>SELinux policy is consulted after normal DAC controls.</strong>  So if DAC permissions already deny a particular access to a file, no further evaluations are done.</p>
 </li>
 <li>
-<p>SELinux is a &#34;default deny&#34; system.  Thus, that which is not explicitly permitted is denied.</p>
+<p><strong>SELinux is a &#34;default deny&#34; system.</strong>  Thus, that which is not explicitly permitted is denied.</p>
 </li>
 </ul>
 </div>
@@ -969,7 +968,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2024 Red Hat, Inc.
+        Copyright &copy; 2025 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">

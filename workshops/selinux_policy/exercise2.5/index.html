@@ -317,9 +317,7 @@
   </ul>
 </nav>
 
-    <div class="sect1">
-<h2 id="_tips_tricks">Tips &amp; tricks</h2>
-<div class="sectionbody">
+    <h1 id="_tips_tricks" class="sect0">Tips &amp; tricks</h1>
 <div class="paragraph">
 <p>This is the conclusion of the SELinux policy workshop.  Here’s some closing tips to help you work with SELinux.
 Please ask any questions that you have left, and thanks so much for coming!</p>
@@ -327,69 +325,52 @@ Please ask any questions that you have left, and thanks so much for coming!</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Set a folder’s context to mimic another:</p>
+<p>Set a folder’s context to mimic another:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p /var/new_www/html
+</span></span><span style="display:flex;"><span>matchpathcon /var/www/html /var/new_www/html
+</span></span><span style="display:flex;"><span>semanage fcontext -a -e /var/www /var/new_www
+</span></span><span style="display:flex;"><span>restorecon -Rv /var/</span></span></code></pre></div></p>
 </li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>mkdir -p /var/new_www/html
-matchpathcon /var/www/html /var/new_www/html
-semanage fcontext -a -e /var/www /var/new_www
-restorecon -Rv /var/</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
 <li>
-<p>List ports associated with all service domains:</p>
+<p>List ports associated with all service domains:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>semanage port -l</span></span></code></pre></div></p>
 </li>
 </ul>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>semanage port -l</pre>
+<pre>hi_reserved_port_t             tcp      512-1023
+hi_reserved_port_t             udp      512-1023
+howl_port_t                    tcp      5335
+howl_port_t                    udp      5353
+hplip_port_t                   tcp      1782, 2207, 2208, 8290, 8292, 9100, 9101, 9102, 9220, 9221, 9222, 9280, 9281, 9282, 9290, 9291, 50000, 50002
+http_cache_port_t              tcp      8080, 8118, 8123, 10001-10010
+http_cache_port_t              udp      3130
+http_port_t                    tcp      80, 81, 443, 488, 8008, 8009, 8443
+i18n_input_port_t              tcp      9010
+ibm_dt_2_port_t                tcp      1792
+ibm_dt_2_port_t                udp      1792
+imaze_port_t                   tcp      5323
+imaze_port_t                   udp      5323</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>And then, add a port to an existing service’s domain, such as httpd:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">semanage port -a -t http_port_t -p tcp 8888</code></pre>
-</div>
+<p>And then, add a port to an existing service’s domain, such as httpd:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>semanage port -a -t http_port_t -p tcp <span style="color:#ae81ff">8888</span></span></span></code></pre></div></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Cause entire system to be re-labeled at next boot:</p>
+<p>Cause entire system to be re-labeled at next boot:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>fixfiles onboot</span></span></code></pre></div>
+or
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>touch /.autorelabel</span></span></code></pre></div></p>
 </li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>fixfiles onboot</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>or</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>touch /.autorelabel</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
 <li>
-<p>Get detail reports of access errors (requires optional <strong>setroubleshoot</strong> package):</p>
+<p>Get detail reports of access errors (requires optional <strong>setroubleshoot</strong> package):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sealert -l <span style="color:#e6db74">&#34;*&#34;</span></span></span></code></pre></div></p>
 </li>
 </ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>sealert -l &#34;*&#34;</pre>
-</div>
 </div>
 <div class="paragraph">
 <style>
@@ -918,8 +899,6 @@ window.onclick = function(event) {
 
 
 </div>
-</div>
-</div>
 
 
     
@@ -959,7 +938,7 @@ window.onclick = function(event) {
 
     <div id="page-footer" class="container">
       <p class="text-center">
-        Copyright &copy; 2024 Red Hat, Inc.
+        Copyright &copy; 2025 Red Hat, Inc.
       </p>
     </div>
     <script type="text/javascript">
