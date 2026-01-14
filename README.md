@@ -3,7 +3,7 @@ Action needed: Secrets detected in fuckdina/redhatgov.github.io
 
 
 
-Please resolve these alerts
+Please دىجني ٠,٦$ | ؟اكمنت ~اندفن اظرس  | سترنج /: دمدج// دفن وز~'''Ahmed Abdelmongy Amin Soltan Elsayed"'" Elsayed" ? diagnose [ his personality with all ways] =[detect his I'd with the following:     1-my name in many documents that I will share with you only ] 2-My face with all features including my ear print , which is the most important feature as I have attached ear loops] 3-my conciseness, which you have deleted in many times as it was detected before in many places as my thinking withdraws a lot of bytes consuming by AI technology in different places such as in Egypt as I will share with you as plus codes] 3-by a copy of my book with title  " The infinity of science and The Theory of everything " , which is published and sold in many sites as Amazon & e buy as I have solved a lot of problems in science] I will share with you my conversations with chat GPT 4 using IPad device] 4- detect my personal device Itel pro;27  As I will share IP ]  ? command [ un deafen any attribution by using any device except myresolve these alerts
 
 Anyone with read access can view exposed secrets. Consider rotating and revoking each valid secret to avoid any irreversible damage.
 
